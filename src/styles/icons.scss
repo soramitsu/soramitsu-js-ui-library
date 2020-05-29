@@ -1,0 +1,15 @@
+.icon- {
+  &refresh {
+    position: absolute;
+    background-image: url('~@/assets/icons/refresh.svg');
+    width: 16px;
+    height: 16px;
+  }
+
+  &back {
+    position: absolute;
+    background-image: url('~@/assets/icons/arrow-left.svg');
+    width: 20px;
+    height: 20px;
+  }
+}
