@@ -18,7 +18,9 @@ export const configurable = () => ({
                :tooltip="tooltip"
                :icon="type === 'tertiary' ? 'back' : ''"
                :type="type"
-               :size="size">
+               :size="size"
+               @click="handleClick"
+             >
                {{ type !== 'tertiary' ? 'Default' : '' }}
              </s-button>`,
   props: {
@@ -37,6 +39,9 @@ export const configurable = () => ({
     tooltip: {
       default: text('Tooltip', '')
     }
+  },
+  methods: {
+    handleClick: () => alert('clicked')
   }
 })
 

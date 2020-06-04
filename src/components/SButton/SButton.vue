@@ -175,7 +175,7 @@ export default class SButton extends Vue {
   }
   background-color: $gray;
   border-color: $gray;
-  &:hover, &:active, &:focus, &:disabled { // TODO: ask about disabled
+  &:hover, &:active, &:focus, &:disabled { // TODO: ux designers will create this state
     background-color: $gray;
     border-color: $gray;
   }

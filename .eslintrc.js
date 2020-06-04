@@ -13,7 +13,16 @@ module.exports = {
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    '@typescript-eslint/explicit-function-return-type': ['off'],
+    'vue/html-closing-bracket-newline': ['error', {
+      singleline: 'never',
+      multiline: 'always'
+    }],
+    '@typescript-eslint/no-explicit-any': ['off'],
+    '@typescript-eslint/no-use-before-define': ['off'],
+    '@typescript-eslint/no-unused-vars': ['off'],
+    '@typescript-eslint/no-empty-function': ['off']
   },
   overrides: [
     {
