@@ -5,6 +5,8 @@
       :size="computedSize"
       :class="computedClasses"
       :disabled="disabled"
+      :loading="isLoading"
+      :autofocus="autofocus"
       :circle="type === ButtonTypes.TERTIARY"
       @click="handleClick"
     >
@@ -24,7 +26,7 @@ export default class SButton extends Vue {
   readonly ButtonTypes = ButtonTypes
 
   /**
-   * Type of button. Possible values: "primary", "secondary", "tertiary".
+   * Type of button. Possible values: "primary", "secondary", "tertiary", "delete".
    * By default it's set to "primary"
    */
   @Prop({ default: ButtonTypes.PRIMARY }) readonly type!: string
@@ -42,13 +44,21 @@ export default class SButton extends Vue {
    */
   @Prop({ default: false }) readonly disabled!: boolean
   /**
+   * Loading state. Only "tertiary" button cannot have this state
+   *
+   * If you use `loading` state for one button, for instance, [Send][Cancel], and "send" button sent
+   * request to back-end side, you should use `loading` state ONLY for "send" button and apply this flag
+   * to "cancel" button `disabled` state. So, if "send" has `loading` state, "cancel" should be `disabled`
+   */
+  @Prop({ default: false }) readonly loading!: boolean
+  /**
+   * Autofocus property, same as native button's `autofocus`
+   */
+  @Prop({ default: false }) readonly autofocus!: boolean
+  /**
    * Tooltip
    */
   @Prop({ default: '' }) readonly tooltip!: string
-  /**
-   * Error
-   */
-  @Prop({ default: '' }) readonly error!: string
 
   get computedSize (): string {
     if (this.size === ButtonSize.BIG ||
@@ -73,6 +83,9 @@ export default class SButton extends Vue {
     if ((Object.values(ButtonTypes) as Array<string>).includes(this.type)) {
       cssClasses.push(this.type)
     }
+    if (this.isLoading) {
+      cssClasses.push('loading')
+    }
     return cssClasses
   }
 
@@ -84,6 +97,13 @@ export default class SButton extends Vue {
     return `icon-${this.icon}`
   }
 
+  get isLoading (): boolean {
+    if (this.type === ButtonTypes.TERTIARY) {
+      return false
+    }
+    return this.loading
+  }
+
   handleClick (): void {
     this.$emit('click')
   }
@@ -93,44 +113,93 @@ export default class SButton extends Vue {
 <style lang="scss">
 @import "~@/styles/variables.scss";
 
+.loading {
+  padding: 12px 17.5px;
+  > :not(i) {
+    color: transparent;
+  }
+  i {
+    position: absolute;
+    left: 43%;
+  }
+}
+
+.big {
+  height: $big-size;
+}
+
+.medium {
+  height: $medium-size;
+}
+
+.small {
+  height: $small-size;
+}
+
 .primary {
   &:disabled {
     background-color: $pink-disabled;
     border-color: $pink-disabled;
+    &:hover {
+      background-color: $pink-disabled;
+      border-color: $pink-disabled;
+    }
   }
 }
 
 .secondary {
-  color: $black;
-  &:disabled {
-    color: $gray3;
-    border-color: $gray1;
-  }
   &:hover, &:active, &:focus {
     color: $black;
     background-color: $gray;
     border-color: $gray9;
   }
+  &:disabled {
+    color: $gray3;
+    border-color: $gray1;
+    &:hover {
+      color: $gray3;
+      border-color: $gray1;
+    }
+  }
 }
 
 .tertiary {
-  color: $black;
+  &.big {
+    width: $big-size;
+  }
+  &.medium {
+    width: $medium-size;
+  }
+  &.small {
+    width: $small-size;
+  }
   background-color: $gray;
   border-color: $gray;
   &:hover, &:active, &:focus, &:disabled { // TODO: ask about disabled
-    color: $black;
+    background-color: $gray;
+    border-color: $gray;
+  }
+  &:disabled:hover {
     background-color: $gray;
     border-color: $gray;
   }
 }
 
+.delete {
+  color: $error;
+  border-color: $error;
+  &:disabled {
+    color: $pink-disabled;
+    border-color: $pink-disabled;
+    &:hover {
+      color: $pink-disabled;
+      border-color: $pink-disabled;
+    }
+  }
+}
+
 button > span > i {
   top: -10px;
-  left: -10px; // TODO: need to set relative paddings
+  left: -10px;
 }
-// red secondary - delete button. only secondary can be delete button
-// add loading state for primary secondary
-// disabled without focus
-// fix size, big 48, medium and small ...
-// fix colors name like primary, secondary etc.
 </style>

@@ -1,11 +1,10 @@
+import { Size } from '@/types/size'
+
 export enum ButtonTypes {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
-  TERTIARY = 'tertiary'
+  TERTIARY = 'tertiary',
+  DELETE = 'delete'
 }
 
-export enum ButtonSize {
-  BIG = 'big',
-  MEDIUM = 'medium',
-  SMALL = 'small'
-}
+export const ButtonSize = Size

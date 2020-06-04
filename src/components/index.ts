@@ -2,6 +2,9 @@ import '@/plugins'
 import '@/styles/common.scss'
 import '@/styles/icons.scss'
 
-import { SButton, ButtonSize, ButtonTypes } from './SButton'
+import { SButton, SButtonGroup } from './SButton'
 
-export { SButton, ButtonSize, ButtonTypes }
+export {
+  SButton,
+  SButtonGroup
+}
