@@ -11,7 +11,6 @@
     "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook"
   },
   "dependencies": {
-    "@storybook/addon-a11y": "^5.3.19",
     "core-js": "^3.6.4",
     "element-ui": "^2.13.2",
     "vue": "^2.6.11",
@@ -19,11 +18,12 @@
     "vue-property-decorator": "^8.4.1"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^5.3.19",
     "@storybook/addon-actions": ">=5.3.0",
     "@storybook/addon-docs": ">=5.3.0",
-    "@storybook/addon-knobs": ">=5.3.0",
-    "@storybook/addon-links": ">=5.3.0",
-    "@storybook/addon-notes": ">=5.3.0",
+    "@storybook/addon-essentials": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-storysource": "^5.3.19",
     "@storybook/theming": "^5.3.19",
     "@storybook/vue": ">=5.3.0",
     "@types/jest": "^25.2.3",
