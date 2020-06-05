@@ -1,0 +1,19 @@
+@import "~@/styles/variables.scss";
+
+$--color-primary: $red;
+$--color-danger: $error;
+$--border-color-base: $gray1;
+$--color-text-regular: $black;
+
+/* Button */
+$--button-hover-tint-percent: 12.4%; // $red-mouse-on
+
+/* Menu
+--------------------------*/
+// $--menu-background-color: $transparent;
+// $--menu-item-hover-fill: $white;
+
+/* icon font path, required */
+$--font-path: "~element-ui/lib/theme-chalk/fonts";
+
+@import "~element-ui/packages/theme-chalk/src/index";

@@ -1,0 +1,43 @@
+$error: #F0000B;
+$red: #D0021B;
+$red-mouse-on: #D62137;
+$pink-default: #FEF0F1;
+$pink-mouse-on: #FEE6E7;
+$pink-disabled: #F6CCD1;
+$black: #2D2926;
+$gray11: #53565A;
+$gray9: #75787B;
+$gray3: #C8C9C7;
+$gray1: #D9D9D6;
+$gray-mouse-on: #F0F0F0;
+$gray: #F5F5F5;
+$white: #FFF;
+
+$big-size: 56px;
+$medium-size: 48px;
+$small-size: 32px;
+
+@font-face {
+  font-family: "SoraB";
+  src: url("~@/assets/fonts/Sora-Bold.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SoraEB";
+  src: url("~@/assets/fonts/Sora-ExtraBold.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SoraSB";
+  src: url("~@/assets/fonts/Sora-SemiBold.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Sora";
+  src: url("~@/assets/fonts/Sora-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+}
