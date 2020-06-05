@@ -2,12 +2,14 @@
   <el-tooltip :content="tooltip" placement="right" :disabled="!tooltip">
     <el-button
       :type="computedType"
+      :native-type="nativeType"
       :size="computedSize"
       :class="computedClasses"
       :disabled="disabled"
       :loading="isLoading"
       :autofocus="autofocus"
       :circle="type === ButtonTypes.TERTIARY"
+      :icon="elementIcon"
       @click="handleClick"
     >
       <i v-if="availableIcon" :class="[availableIcon]"></i>
@@ -19,7 +21,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
-import { ButtonTypes, ButtonSize } from './consts'
+import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
 
 @Component
 export default class SButton extends Vue {
@@ -59,6 +61,13 @@ export default class SButton extends Vue {
    * Tooltip
    */
   @Prop({ default: '' }) readonly tooltip!: string
+  /**
+   * Button's native type. Possible values: "button", "submit", "reset".
+   * By default it's set to "button"
+   */
+  @Prop({ default: ButtonNativeTypes.BUTTON }) readonly nativeType!: string
+
+  elementIcon = ''
 
   get computedSize (): string {
     if (this.size === ButtonSize.BIG ||
@@ -93,7 +102,12 @@ export default class SButton extends Vue {
     if (!this.icon) {
       return ''
     }
+    if (this.icon.startsWith('el-')) {
+      this.elementIcon = this.icon
+      return ''
+    }
     // TODO: add checks for invalid icons
+    this.elementIcon = ''
     return `icon-${this.icon}`
   }
 

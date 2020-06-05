@@ -7,4 +7,10 @@ export enum ButtonTypes {
   DELETE = 'delete'
 }
 
+export enum ButtonNativeTypes {
+  BUTTON = 'button',
+  SUBMIT = 'submit',
+  RESET = 'reset'
+}
+
 export const ButtonSize = Size
