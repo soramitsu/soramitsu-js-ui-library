@@ -1,0 +1,32 @@
+@import "~@/styles/variables.scss";
+
+[class^="el-"]:not(i):not([class*='el-icon']),
+[class*="el-"]:not(i):not([class*='el-icon']) {
+  font-family: 'Sora', sans-serif !important;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+button > span {
+  position: relative;
+}
+
+// TODO: move to separate file and import to storybook
+.sbdocs.sbdocs-preview div[id^='story--'] > * {
+  height: auto !important;
+}
