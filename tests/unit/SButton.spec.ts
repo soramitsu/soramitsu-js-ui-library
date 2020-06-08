@@ -1,13 +1,14 @@
 import { shallowMount } from '@vue/test-utils'
 
-import { SButton } from '@/components/SButton'
+import { SButton } from '@/components'
+import { ButtonTypes } from '@/components/SButton'
 
 describe('SButton.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
+  it('renders props.type when passed', () => {
+    const type = ButtonTypes.PRIMARY
     const wrapper = shallowMount(SButton, {
-      propsData: { msg }
+      propsData: { type: ButtonTypes.PRIMARY }
     })
-    expect(wrapper.text()).toMatch(msg)
+    expect((wrapper.element.firstChild as any).className).toContain(type)
   })
 })
