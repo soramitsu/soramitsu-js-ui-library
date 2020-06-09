@@ -31,20 +31,20 @@ export default class SButton extends Vue {
    * Type of button. Possible values: "primary", "secondary", "tertiary", "delete".
    * By default it's set to "primary"
    */
-  @Prop({ default: ButtonTypes.PRIMARY }) readonly type!: string
+  @Prop({ default: ButtonTypes.PRIMARY, type: String }) readonly type!: string
   /**
    * Size of button. Possible values: "big", "medium", "small".
    * By default it's set to "big"
    */
-  @Prop({ default: ButtonSize.BIG }) readonly size!: string
+  @Prop({ default: ButtonSize.BIG, type: String }) readonly size!: string
   /**
    * Icon name from icon collection of this library
    */
-  @Prop({ default: '' }) readonly icon!: string
+  @Prop({ default: '', type: String }) readonly icon!: string
   /**
    * Disable state
    */
-  @Prop({ default: false }) readonly disabled!: boolean
+  @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
   /**
    * Loading state. Only "tertiary" button cannot have this state
    *
@@ -52,20 +52,20 @@ export default class SButton extends Vue {
    * request to back-end side, you should use `loading` state ONLY for "send" button and apply this flag
    * to "cancel" button `disabled` state. So, if "send" has `loading` state, "cancel" should be `disabled`
    */
-  @Prop({ default: false }) readonly loading!: boolean
+  @Prop({ default: false, type: Boolean }) readonly loading!: boolean
   /**
    * Autofocus property, same as native button's `autofocus`
    */
-  @Prop({ default: false }) readonly autofocus!: boolean
+  @Prop({ default: false, type: Boolean }) readonly autofocus!: boolean
   /**
    * Tooltip
    */
-  @Prop({ default: '' }) readonly tooltip!: string
+  @Prop({ default: '', type: String }) readonly tooltip!: string
   /**
    * Button's native type. Possible values: "button", "submit", "reset".
    * By default it's set to "button"
    */
-  @Prop({ default: ButtonNativeTypes.BUTTON }) readonly nativeType!: string
+  @Prop({ default: ButtonNativeTypes.BUTTON, type: String }) readonly nativeType!: string
 
   elementIcon = ''
 
