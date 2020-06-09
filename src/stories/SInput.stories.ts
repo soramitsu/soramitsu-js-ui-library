@@ -1,6 +1,6 @@
 import { text, boolean, withKnobs, number, select } from '@storybook/addon-knobs'
 
-import { SInput } from '@/components'
+import { SInput, SJsonInput } from '@/components'
 import { InputType } from '@/components/SInput'
 
 export default {
@@ -152,4 +152,37 @@ export const withTextLimit = () => ({
   data: () => ({
     input: 'Here is an example of limited text'
   })
+})
+
+export const jsonInput = () => ({
+  components: { SJsonInput },
+  template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+               <s-json-input :json="json"></s-json-input>
+             </el-row>`,
+  props: {
+    json: {
+      default: {
+        object: {
+          a: 'String',
+          b: [
+            1, 2, 3
+          ],
+          c: 55,
+          e: false
+        },
+        array: [
+          1,
+          2,
+          3,
+          -4,
+          -3,
+          -2
+        ],
+        boolean: false,
+        null: null,
+        number: 21,
+        string: 'Hi liquor-tree user!'
+      }
+    }
+  }
 })
