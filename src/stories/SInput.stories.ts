@@ -101,6 +101,30 @@ export const disabled = () => ({
   }
 })
 
+export const focused = () => ({
+  components: { SInput },
+  template: `<el-col>
+               <el-row
+                 v-for="item in items"
+                 :key="item.type"
+                 style="padding-bottom: 20px;"
+               >
+                 <s-input
+                   ref="input"
+                   class="focused"
+                   v-model="item.model"
+                   :type="item.type"
+                   :placeholder="item.placeholder"
+                 />
+               </el-row>
+             </el-col>`,
+  props: {
+    items: {
+      default: () => differentTypesData
+    }
+  }
+})
+
 export const password = () => ({
   components: { SInput },
   template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
