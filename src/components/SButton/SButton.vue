@@ -151,7 +151,7 @@ export default class SButton extends Vue {
 }
 
 .primary {
-  &:hover {
+  &:hover, &:active, &:focus {
     background-color: $color-main-hover;
     border-color: $color-main-hover;
   }

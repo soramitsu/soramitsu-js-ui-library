@@ -16,10 +16,12 @@ $color-error: #F0000B;
 // Basic colors
 $color-basic-black: #2D2926;
 $color-basic-white: #FFF;
-
+// Size
 $size-big: 56px;
 $size-medium: 40px;
 $size-small: 32px;
+
+$border-radius-default: 4px;
 
 @font-face {
   font-family: "SoraB";
@@ -46,4 +48,12 @@ $size-small: 32px;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("~@/assets/fonts/JetBrainsMono-Regular.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 $font-family-default: 'Sora', sans-serif !important;
+$font-family-mono: 'JetBrainsMono', monospace !important;
