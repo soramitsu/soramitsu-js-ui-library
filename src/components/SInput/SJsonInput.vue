@@ -1,33 +1,77 @@
 <template>
-  <div class="json-viewer">
+  <div
+    class="s-json-input"
+    :class="computedClasses"
+  >
     <v-jsoneditor
-      v-model="value"
+      v-model="model"
       :options="options"
       :plus="false"
-      height="400px"
-      @error="onError"
+      :height="height"
+      @error="handleError"
     >
     </v-jsoneditor>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Inject, Ref } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { isEmpty } from 'lodash'
 
 @Component
 export default class SJsonInput extends Vue {
-  @Prop({ default: '' }) readonly json!: any
+  /**
+   * Value of JSON input. Could be used with `v-model`
+   */
+  @Prop({ type: Object }) readonly value!: object
+  /**
+   * Height of JSON input component. Minimum value should be around `"150px"`
+   */
+  @Prop({ type: String, default: '' }) readonly height!: string
+  /**
+   * Disabled state
+   */
+  @Prop({ type: Boolean, default: false }) readonly disabled!: boolean
+  /**
+   * Autocomplete dictionary. For now it doesn't work for some reasons
+   */
+  @Prop({ type: Array }) readonly dictionary!: Array<string>
 
-  value = this.json
-
+  model = this.value
   options = {
-    onChange: (e) => {
-      console.log(e)
-    },
-    mode: 'code'
+    // https://github.com/josdejong/jsoneditor/blob/master/docs/api.md#configuration-options
+    mode: 'code',
+    mainMenuBar: false,
+    statusBar: true,
+    autocomplete: {
+      caseSensitive: false,
+      getOptions: () => {
+        return isEmpty(this.dictionary) ? null : this.dictionary
+      }
+    }
   }
 
-  onError (): void {}
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.disabled) {
+      cssClasses.push('disabled')
+    }
+    return cssClasses
+  }
+
+  handleError (error: string): void {
+    this.$emit('error', error)
+  }
+
+  @Watch('value')
+  private handlePropChange (value: object): void {
+    this.model = value
+  }
+
+  @Watch('model')
+  private handleValueChange (value: object): void {
+    this.$emit('change', value)
+  }
 }
 </script>
 
@@ -45,21 +89,28 @@ $color-ide-boolean: #0000FF;
   background-position: 2px center;
 }
 
-.json-viewer {
+.s-json-input {
   width: 100%;
   border: 1px solid $color-neutral-border;
   border-radius: $border-radius-default;
+  &.disabled {
+    .ace-jsoneditor {
+      pointer-events: none;
+      .ace_cursor {
+        display: none !important;
+      }
+      .ace_scroller,
+      .ace_gutter-active-line {
+        background-color: $color-neutral-placeholder;
+      }
+    }
+  }
+  // TODO: think about hover and focus
 }
+
 .jsoneditor {
   border: none;
   font-family: $font-family-mono;
-  .jsoneditor-outer.has-main-menu-bar {
-    margin-top: 0;
-    padding-top: 0;
-  }
-  .jsoneditor-menu {
-    display: none;
-  }
   .ace-jsoneditor {
     .ace_fold {
       border: none;
