@@ -60,8 +60,9 @@ export default class SJsonInput extends Vue {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     .jsoneditor-parse-error-icon {
-      @extend .icon-error;
-      pointer-events: none; // If full error message will be needed, then it should be removed
+      // If full error message will be needed, then it should be removed
+      display: none !important;
+      pointer-events: none;
     }
   }
   .jsoneditor-statusbar,
