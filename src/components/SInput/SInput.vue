@@ -157,11 +157,11 @@ export default class SInput extends Vue {
 .s-input {
   font-family: $font-family-default;
   width: 100%;
-  min-height: $big-size;
+  min-height: $size-big;
   position: relative;
   .placeholder {
     // TODO: ask about animation
-    color: $gray9;
+    color: $color-neutral-secondary;
     font-size: 12px;
     padding: 0 15px;
     padding-top: 5px;
@@ -171,7 +171,7 @@ export default class SInput extends Vue {
     position: absolute;
     z-index: 1;
     width: calc(100% - 15px);
-    background-color: $gray;
+    background-color: $color-neutral-placeholder;
     pointer-events: none;
   }
   .el-input,
@@ -179,11 +179,11 @@ export default class SInput extends Vue {
     height: 100%;
     > input,
     > textarea {
-      height: $big-size;
-      border: 1px solid $gray;
-      background-color: $gray;
+      height: $size-big;
+      border: 1px solid $color-neutral-placeholder;
+      background-color: $color-neutral-placeholder;
       &::placeholder {
-        color: $gray9;
+        color: $color-neutral-secondary;
         opacity: 1; // Firefox
       }
     }
@@ -198,34 +198,34 @@ export default class SInput extends Vue {
     .placeholder,
     .el-input > input,
     .el-textarea > textarea {
-      background-color: $gray-mouse-on;
+      background-color: $color-neutral-hover;
     }
     .el-input > input,
     .el-textarea > textarea {
-      border-color: $gray-mouse-on;
+      border-color: $color-neutral-hover;
     }
   }
   &.focused {
     .placeholder,
     .el-input > input,
     .el-textarea > textarea {
-      background-color: $white;
+      background-color: $color-basic-white;
     }
     .el-input > input,
     .el-textarea > textarea {
-      border-color: $gray1;
+      border-color: $color-neutral-border;
     }
   }
   &.disabled {
     .placeholder,
     .el-input > input,
     .el-textarea > textarea {
-      color: $gray9;
-      background-color: $gray;
+      color: $color-neutral-secondary;
+      background-color: $color-neutral-placeholder;
     }
     .el-input > input,
     .el-textarea > textarea {
-      border-color: $gray1;
+      border-color: $color-neutral-border;
     }
   }
   .placeholder + .el-input > input {

@@ -41,7 +41,7 @@ export default class SJsonInput extends Vue {
 }
 .json-viewer {
   width: 100%;
-  border: 1px solid $gray;
+  border: 1px solid $color-neutral-placeholder;
   border-radius: 4px;
 }
 .jsoneditor {
@@ -77,10 +77,15 @@ export default class SJsonInput extends Vue {
     margin-top: 0;
     padding-top: 0;
   }
+  .ace-jsoneditor {
+    .ace_marker-layer .ace_active-line {
+      background-color: #F1F3F4;
+    }
+  }
   .ace_tooltip {
-    background: $black; // TODO: fix el-tooltip colors, when tooltip component will be created
-    border-color: $black;
-    color: $white;
+    background: $color-basic-black; // TODO: fix el-tooltip colors, when tooltip component will be created
+    border-color: $color-basic-black;
+    color: $color-basic-white;
     border-radius: 4px;
     padding: 10px;
     font-size: 12px;

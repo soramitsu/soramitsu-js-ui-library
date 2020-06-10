@@ -155,10 +155,37 @@ export const withTextLimit = () => ({
 })
 
 export const jsonInput = () => ({
-  components: { SJsonInput },
-  template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { SJsonInput, SInput },
+  template: `<el-col>
+             <el-row style="padding-bottom: 20px;">
+               <s-input
+                 v-model="network"
+                 placeholder="Network name"
+               />
+             </el-row>
+             <el-row style="padding-bottom: 20px;">
+               <s-input
+                 v-model="createPassword"
+                 placeholder="Create password"
+                 show-password
+               />
+             </el-row>
+             <el-row style="padding-bottom: 20px;">
+               <s-input
+                 v-model="repeatPassword"
+                 placeholder="Repeat password"
+                 show-password
+               />
+             </el-row>
+             <el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-json-input :json="json"></s-json-input>
-             </el-row>`,
+             </el-row>
+             </el-col>`,
+  data: () => ({
+    network: 'Example',
+    createPassword: '123456',
+    repeatPassword: '123456'
+  }),
   props: {
     json: {
       default: {
