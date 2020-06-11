@@ -15,12 +15,13 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
 import { ElTooltip, TooltipEffect } from 'element-ui/types/tooltip'
+import { PopoverPlacement } from 'element-ui/types/popover'
 
 @Component
 export default class STooltip extends Vue {
   @Prop({ default: 'dark', type: String }) readonly theme!: TooltipEffect
   @Prop({ default: '', type: String }) readonly content!: string
-  @Prop({ default: 'right', type: String }) readonly placement!: string
+  @Prop({ default: 'right', type: String }) readonly placement!: PopoverPlacement
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
 }
 </script>
@@ -30,11 +31,11 @@ export default class STooltip extends Vue {
 
 .el-tooltip__popper {
   &.is-dark {
-    background-color: $black;
+    background-color: $color-basic-black;
   }
   &.is-light {
-    color: $black;
+    color: $color-basic-black;
   }
-  border-color: $black;
+  border-color: $color-basic-black;
 }
 </style>
