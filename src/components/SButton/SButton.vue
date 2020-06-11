@@ -139,75 +139,79 @@ export default class SButton extends Vue {
 }
 
 .big {
-  height: $big-size;
+  height: $size-big;
 }
 
 .medium {
-  height: $medium-size;
+  height: $size-medium;
 }
 
 .small {
-  height: $small-size;
+  height: $size-small;
 }
 
 .primary {
+  &:hover, &:active, &:focus {
+    background-color: $color-main-hover;
+    border-color: $color-main-hover;
+  }
   &:disabled {
-    background-color: $pink-disabled;
-    border-color: $pink-disabled;
+    background-color: $color-main-inactive;
+    border-color: $color-main-inactive;
     &:hover {
-      background-color: $pink-disabled;
-      border-color: $pink-disabled;
+      background-color: $color-main-inactive;
+      border-color: $color-main-inactive;
     }
   }
 }
 
 .secondary {
   &:hover, &:active, &:focus {
-    color: $black;
-    background-color: $gray;
-    border-color: $gray9;
+    color: $color-basic-black;
+    background-color: $color-neutral-placeholder;
+    border-color: $color-neutral-secondary;
   }
   &:disabled {
-    color: $gray3;
-    border-color: $gray1;
+    color: $color-neutral-inactive;
+    border-color: $color-neutral-border;
     &:hover {
-      color: $gray3;
-      border-color: $gray1;
+      color: $color-neutral-inactive;
+      border-color: $color-neutral-border;
     }
   }
 }
 
 .tertiary {
   &.big {
-    width: $big-size;
+    width: $size-big;
   }
   &.medium {
-    width: $medium-size;
+    width: $size-medium;
   }
   &.small {
-    width: $small-size;
+    width: $size-small;
   }
-  background-color: $gray;
-  border-color: $gray;
+  background-color: $color-neutral-placeholder;
+  border-color: $color-neutral-placeholder;
   &:hover, &:active, &:focus, &:disabled { // TODO: ux designers will create this state
-    background-color: $gray;
-    border-color: $gray;
+    background-color: $color-neutral-placeholder;
+    border-color: $color-neutral-placeholder;
   }
   &:disabled:hover {
-    background-color: $gray;
-    border-color: $gray;
+    background-color: $color-neutral-placeholder;
+    border-color: $color-neutral-placeholder;
   }
 }
 
 .delete {
-  color: $error;
-  border-color: $error;
+  color: $color-error;
+  border-color: $color-error;
   &:disabled {
-    color: $pink-disabled;
-    border-color: $pink-disabled;
+    color: $color-main-inactive;
+    border-color: $color-main-inactive;
     &:hover {
-      color: $pink-disabled;
-      border-color: $pink-disabled;
+      color: $color-main-inactive;
+      border-color: $color-main-inactive;
     }
   }
 }

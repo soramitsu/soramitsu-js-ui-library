@@ -1,21 +1,27 @@
-$error: #F0000B;
-$red: #D0021B;
-$red-mouse-on: #D62137;
-$pink-default: #FEF0F1;
-$pink-mouse-on: #FEE6E7;
-$pink-disabled: #F6CCD1;
-$black: #2D2926;
-$gray11: #53565A;
-$gray9: #75787B;
-$gray3: #C8C9C7;
-$gray1: #D9D9D6;
-$gray-mouse-on: #F0F0F0;
-$gray: #F5F5F5;
-$white: #FFF;
+// Main colors
+$color-main-brand: #D0021B;
+$color-main-hover: #E75264;
+$color-main-inactive: #F6CCD1;
+$color-main-hover-light: #FEE6E7;
+$color-main-base: #FFF9FA;
+// Neutral colors
+$color-neutral-primary: #53565A;
+$color-neutral-secondary: #75787B;
+$color-neutral-inactive: #C8C9C7;
+$color-neutral-border: #D9D9D6;
+$color-neutral-hover: #F0F0F0;
+$color-neutral-placeholder: #F1F3F4;
+// UI events colors
+$color-error: #F0000B;
+// Basic colors
+$color-basic-black: #2D2926;
+$color-basic-white: #FFF;
+// Size
+$size-big: 56px;
+$size-medium: 40px;
+$size-small: 32px;
 
-$big-size: 56px;
-$medium-size: 48px;
-$small-size: 32px;
+$border-radius-default: 4px;
 
 @font-face {
   font-family: "SoraB";
@@ -42,4 +48,12 @@ $small-size: 32px;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "JetBrainsMono";
+  src: url("~@/assets/fonts/JetBrainsMono-Regular.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 $font-family-default: 'Sora', sans-serif !important;
+$font-family-mono: 'JetBrainsMono', monospace !important;
