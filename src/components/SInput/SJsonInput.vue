@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash/isEmpty'
 
 @Component
 export default class SJsonInput extends Vue {
