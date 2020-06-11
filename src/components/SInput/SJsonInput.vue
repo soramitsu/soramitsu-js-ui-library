@@ -25,7 +25,10 @@ export default class SJsonInput extends Vue {
    */
   @Prop({ type: Object }) readonly value!: object
   /**
-   * Height of JSON input component. Minimum value should be around `"150px"`
+   * Height of JSON input component. Minimum value should be around `"150px"`.
+   *
+   * In this context, the value of the height property must match the valid value of the
+   * **CSS height** property. For instance, `"auto"`, `"200px"`, `"100vh"` etc.
    */
   @Prop({ type: String, default: '' }) readonly height!: string
   /**
