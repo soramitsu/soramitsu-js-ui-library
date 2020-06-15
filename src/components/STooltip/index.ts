@@ -1,3 +1,4 @@
 import STooltip from './STooltip.vue'
+import { TooltipTheme, TooltipPlacement } from './consts'
 
-export { STooltip }
+export { STooltip, TooltipPlacement, TooltipTheme }
