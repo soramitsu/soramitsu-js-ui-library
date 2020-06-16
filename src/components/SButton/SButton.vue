@@ -1,5 +1,5 @@
 <template>
-  <el-tooltip :content="tooltip" placement="right" :disabled="!tooltip">
+  <s-tooltip :content="tooltip" placement="right" :disabled="!tooltip">
     <el-button
       :type="computedType"
       :native-type="nativeType"
@@ -15,15 +15,18 @@
       <i v-if="availableIcon" :class="[availableIcon]"></i>
       <slot></slot>
     </el-button>
-  </el-tooltip>
+  </s-tooltip>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
+import { STooltip } from '@/components/STooltip'
 import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
 
-@Component
+@Component({
+  components: { STooltip }
+})
 export default class SButton extends Vue {
   readonly ButtonTypes = ButtonTypes
 
