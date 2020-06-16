@@ -34,7 +34,7 @@ export default class STooltip extends Vue {
    */
   @Prop({ default: TooltipTheme.DARK, type: String }) readonly theme!: TooltipEffect
   /**
-   * Content of the tooltip. You can also use a content slot
+   * Content of the tooltip
    */
   @Prop({ default: '', type: String }) readonly content!: string
   /**
