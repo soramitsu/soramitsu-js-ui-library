@@ -66,12 +66,12 @@ export default class SJsonInput extends Vue {
     this.$emit('error', error)
   }
 
-  @Watch('value')
+  @Watch('value', { deep: true })
   private handlePropChange (value: object): void {
     this.model = value
   }
 
-  @Watch('model')
+  @Watch('model', { deep: true })
   private handleValueChange (value: object): void {
     this.$emit('change', value)
   }

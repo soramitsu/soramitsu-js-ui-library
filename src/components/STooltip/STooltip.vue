@@ -3,6 +3,7 @@
     :effect="theme"
     :content="content"
     :placement="placement"
+    v-model="model"
     :disabled="disabled"
     :value="value"
     :offset="offset"
@@ -12,15 +13,13 @@
     :manual="manual"
     :hide-after="closeDelay"
     :tabindex="tabindex"
-    @change="handleChange"
   >
     <slot></slot>
-    <slot name="content"></slot>
   </el-tooltip>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import { TooltipEffect } from 'element-ui/types/tooltip'
 import { PopoverPlacement } from 'element-ui/types/popover'
 
@@ -98,7 +97,15 @@ export default class STooltip extends Vue {
    */
   @Prop({ default: 0, type: Number }) readonly tabindex!: number
 
-  handleChange (value: boolean): void {
+  model = this.value
+
+  @Watch('value')
+  private handlePropChange (value: boolean): void {
+    this.model = value
+  }
+
+  @Watch('model')
+  private handleValueChange (value: boolean): void {
     this.$emit('change', value)
   }
 }

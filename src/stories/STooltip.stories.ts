@@ -15,16 +15,19 @@ export const configurable = () => ({
   template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-tooltip
                  :theme="theme"
-                 :value="value"
+                 v-model="model"
                  :content="content"
                  :disabled="disabled"
                  :offset="offset"
                  :openDelay="openDelay"
-                 :manual="manual"
+                 @change="handleChange"
                >
                  <s-button style="margin: 40px">Custom tooltip</s-button>
                </s-tooltip>
              </el-row>`,
+  data: () => ({
+    model: false
+  }),
   props: {
     theme: {
       default: select('Theme', Object.values(TooltipTheme), TooltipTheme.DARK)
@@ -35,17 +38,16 @@ export const configurable = () => ({
     disabled: {
       default: boolean('Disabled', false)
     },
-    value: {
-      default: boolean('Value', false)
-    },
     offset: {
       default: number('Offset', 0)
     },
     openDelay: {
       default: number('Open delay', 0)
-    },
-    manual: {
-      default: boolean('Manual', false)
+    }
+  },
+  methods: {
+    handleChange (value) {
+      console.log('displayed', value)
     }
   }
 })
