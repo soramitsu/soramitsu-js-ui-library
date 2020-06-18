@@ -1,9 +1,9 @@
 import '../plugins'
 import '../styles'
 
-import { SButton, SButtonGroup } from './SButton'
-import { SInput, SJsonInput } from './SInput'
-import { STooltip } from './STooltip'
+import { SButton, SButtonGroup } from './Button'
+import { SInput, SJsonInput } from './Input'
+import { STooltip } from './Tooltip'
 
 export {
   SButton,

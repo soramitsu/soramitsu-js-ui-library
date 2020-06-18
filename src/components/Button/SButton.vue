@@ -21,7 +21,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
-import { STooltip } from '@/components/STooltip'
+import { STooltip } from '@/components'
 import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
 
 @Component({
