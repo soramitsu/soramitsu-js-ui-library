@@ -1,6 +1,6 @@
 {
   "name": "soramitsu-js-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "publishConfig": {
     "registry": "https://nexus.iroha.tech/repository/npm-soramitsu-private/"
@@ -9,6 +9,7 @@
   "scripts": {
     "build": "vue-cli-service build --dest lib --target lib ./src/index.ts",
     "test:unit": "vue-cli-service test:unit",
+    "test:all": "yarn test:unit",
     "lint": "vue-cli-service lint",
     "storybook:build": "vue-cli-service storybook:build -c config/storybook",
     "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook"
@@ -16,6 +17,8 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "element-ui": "^2.13.2",
+    "lodash": "^4.17.15",
+    "v-jsoneditor": "^1.4.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.1"
@@ -30,6 +33,7 @@
     "@storybook/theming": "^5.3.19",
     "@storybook/vue": ">=5.3.0",
     "@types/jest": "^25.2.3",
+    "@types/lodash": "^4.14.155",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "@vue/cli-plugin-babel": "~4.3.0",

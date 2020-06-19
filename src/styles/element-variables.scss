@@ -1,17 +1,14 @@
 @import "~@/styles/variables.scss";
 
-$--color-primary: $red;
-$--color-danger: $error;
-$--border-color-base: $gray1;
-$--color-text-regular: $black;
-
-/* Button */
-$--button-hover-tint-percent: 12.4%; // $red-mouse-on
+$--color-primary: $color-main-brand;
+$--color-danger: $color-error;
+$--border-color-base: $color-neutral-border;
+$--color-text-regular: $color-basic-black;
 
 /* Menu
 --------------------------*/
 // $--menu-background-color: $transparent;
-// $--menu-item-hover-fill: $white;
+// $--menu-item-hover-fill: $color-basic-white;
 
 /* icon font path, required */
 $--font-path: "~element-ui/lib/theme-chalk/fonts";
