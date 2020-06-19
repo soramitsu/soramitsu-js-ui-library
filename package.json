@@ -9,6 +9,7 @@
   "scripts": {
     "build": "vue-cli-service build --dest lib --target lib ./src/index.ts",
     "test:unit": "vue-cli-service test:unit",
+    "test:all": "yarn test:unit",
     "lint": "vue-cli-service lint",
     "storybook:build": "vue-cli-service storybook:build -c config/storybook",
     "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook"
