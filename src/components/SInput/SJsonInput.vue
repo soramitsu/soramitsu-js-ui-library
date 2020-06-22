@@ -79,7 +79,7 @@ export default class SJsonInput extends Vue {
 </script>
 
 <style lang="scss">
-@import "~@/styles/variables.scss";
+@import "../../styles/variables.scss";
 
 $color-ide-variable: #0451A5;
 $color-ide-string: #A31515;

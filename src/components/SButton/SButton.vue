@@ -128,7 +128,7 @@ export default class SButton extends Vue {
 </script>
 
 <style lang="scss">
-@import "~@/styles/variables.scss";
+@import "../../styles/variables.scss";
 
 .loading {
   padding: 12px 17.5px;
