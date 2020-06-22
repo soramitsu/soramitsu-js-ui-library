@@ -107,9 +107,12 @@ $color-ide-boolean: #0000FF;
 }
 
 .jsoneditor {
-  border: none;
+  border: none !important;
   font-family: $font-family-mono;
   .ace-jsoneditor {
+    *, textarea.jsoneditor-text * {
+      font-family: $font-family-mono;
+    }
     .ace_fold {
       border: none;
       background: none;
@@ -166,7 +169,7 @@ $color-ide-boolean: #0000FF;
       @extend .icon-error;
     }
   }
-  .ace_editor,
+  .ace_editor .ace_content,
   .ace_gutter .ace_gutter-cell {
     font-family: $font-family-mono;
   }
