@@ -1,6 +1,6 @@
 import { text, withKnobs, boolean } from '@storybook/addon-knobs'
 
-import { SJsonInput } from '@/components'
+import { SJsonInput } from '../components'
 
 export default {
   component: SJsonInput,

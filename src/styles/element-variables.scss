@@ -1,4 +1,4 @@
-@import "~@/styles/variables.scss";
+@import "./variables.scss";
 
 $--color-primary: $color-main-brand;
 $--color-danger: $color-error;
@@ -13,4 +13,4 @@ $--color-text-regular: $color-basic-black;
 /* icon font path, required */
 $--font-path: "~element-ui/lib/theme-chalk/fonts";
 
-@import "~element-ui/packages/theme-chalk/src/index";
+@import "../../node_modules/element-ui/packages/theme-chalk/src/index";

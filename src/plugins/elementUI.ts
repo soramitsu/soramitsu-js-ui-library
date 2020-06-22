@@ -41,10 +41,8 @@ import {
   Tooltip,
   Upload
 } from 'element-ui'
-import lang from 'element-ui/lib/locale/lang/en'
-import locale from 'element-ui/lib/locale'
-
-import '@/styles/element-variables.scss'
+// import lang from 'element-ui/lib/locale/lang/en'
+// import locale from 'element-ui/lib/locale'
 
 Vue.use(Dialog)
 Vue.use(Menu)
@@ -88,4 +86,4 @@ Vue.prototype.$prompt = MsgBox.prompt
 Vue.prototype.$alert = MsgBox.alert
 Vue.prototype.$message = Message
 Vue.prototype.$notify = Notification
-locale.use(lang)
+// locale.use(lang) // TODO: it will be used later
