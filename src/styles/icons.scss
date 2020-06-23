@@ -12,4 +12,10 @@
     width: 20px;
     height: 20px;
   }
+
+  &error {
+    background-image: url('~@/assets/icons/warning.svg');
+    background-repeat: no-repeat;
+    background-position: 2px center;
+  }
 }

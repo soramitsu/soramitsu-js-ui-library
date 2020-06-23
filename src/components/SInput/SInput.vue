@@ -152,7 +152,7 @@ export default class SInput extends Vue {
 </script>
 
 <style lang="scss">
-@import "~@/styles/variables.scss";
+@import "../../styles/variables.scss";
 
 .s-input {
   font-family: $font-family-default;

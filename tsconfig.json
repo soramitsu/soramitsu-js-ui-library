@@ -12,6 +12,7 @@
     "noImplicitAny": false,
     "resolveJsonModule": true,
     "sourceMap": true,
+    "declaration": true,
     "outDir": "./lib",
     "baseUrl": ".",
     "types": [

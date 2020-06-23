@@ -1,6 +1,5 @@
-import '@/plugins'
-import '@/styles/common.scss'
-import '@/styles/icons.scss'
+import '../plugins'
+import '../styles'
 
 import { SButton, SButtonGroup } from './SButton'
 import { SInput, SJsonInput } from './SInput'

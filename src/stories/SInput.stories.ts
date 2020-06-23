@@ -1,7 +1,7 @@
 import { text, boolean, withKnobs, number, select } from '@storybook/addon-knobs'
 
-import { SInput } from '@/components'
-import { InputType } from '@/components/SInput'
+import { SInput } from '../components'
+import { InputType } from '../components/SInput'
 
 export default {
   component: SInput,
