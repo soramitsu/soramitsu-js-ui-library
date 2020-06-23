@@ -1,7 +1,6 @@
 import vue from 'rollup-plugin-vue'
 import typescript from 'rollup-plugin-typescript2'
 import pkg from '../package.json'
-import css from 'rollup-plugin-css-porter'
 import scss from 'rollup-plugin-scss'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
@@ -36,7 +35,7 @@ export default {
         {
           src: 'src/styles/*',
           dest: 'lib/styles',
-          transform: (contents) => contents.toString().replace(/~@\/assets\//g, '~assets/')
+          transform: (content) => content.toString().replace(/~@\/assets\//g, '../assets/')
         }
       ]
     }),
@@ -54,7 +53,6 @@ export default {
       compileTemplate: true
     }),
     scss(),
-    css(),
     resolve(),
     terser(),
     del({
