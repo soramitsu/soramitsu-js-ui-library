@@ -25,6 +25,7 @@ export default {
     'vue'
   ],
   plugins: [
+    // Replace all imports for css bundle
     modify({
       find: '~@/assets/',
       replace: '~assets/'
@@ -35,6 +36,7 @@ export default {
         {
           src: 'src/styles/*',
           dest: 'lib/styles',
+          // Replace all imports for scss files which will be used as theming files
           transform: (content) => content.toString().replace(/~@\/assets\//g, '../assets/')
         }
       ]
