@@ -80,17 +80,12 @@ export default class SJsonInput extends Vue {
 
 <style lang="scss">
 @import "../../styles/variables.scss";
+@import "../../styles/icons.scss";
 
 $color-ide-variable: #0451A5;
 $color-ide-string: #A31515;
 $color-ide-number: #098658;
 $color-ide-boolean: #0000FF;
-
-.icon-error {
-  background-image: url('~@/assets/icons/warning.svg');
-  background-repeat: no-repeat;
-  background-position: 2px center;
-}
 
 .s-json-input {
   width: 100%;

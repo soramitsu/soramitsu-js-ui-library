@@ -1,15 +1,21 @@
 .icon- {
   &refresh {
     position: absolute;
-    background-image: url('../assets/icons/refresh.svg');
+    background-image: url('~@/assets/icons/refresh.svg');
     width: 16px;
     height: 16px;
   }
 
   &back {
     position: absolute;
-    background-image: url('../assets/icons/arrow-left.svg');
+    background-image: url('~@/assets/icons/arrow-left.svg');
     width: 20px;
     height: 20px;
+  }
+
+  &error {
+    background-image: url('~@/assets/icons/warning.svg');
+    background-repeat: no-repeat;
+    background-position: 2px center;
   }
 }
