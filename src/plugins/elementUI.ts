@@ -13,6 +13,7 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
+  Footer,
   Form,
   FormItem,
   Header,
@@ -45,6 +46,7 @@ import {
 // import locale from 'element-ui/lib/locale'
 
 Vue.use(Dialog)
+Vue.use(Footer)
 Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Submenu)
