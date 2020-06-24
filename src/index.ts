@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 import {
+  SAside,
   SButton,
   SButtonGroup,
   SInput,
@@ -10,6 +11,7 @@ import {
 import { Components } from './types/components'
 
 const elements = [
+  { component: SAside, name: Components.SAside },
   { component: SButton, name: Components.SButton },
   { component: SButtonGroup, name: Components.SButtonGroup },
   { component: SInput, name: Components.SInput },
@@ -28,6 +30,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export {
+  SAside,
   SButton,
   SButtonGroup,
   SInput,

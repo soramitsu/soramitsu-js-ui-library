@@ -1,7 +1,7 @@
 import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
 import { SButton, SButtonGroup } from '../components'
-import { ButtonSize, ButtonTypes } from '../components/SButton'
+import { ButtonSize, ButtonTypes } from '../components/Button'
 
 export default {
   component: SButton,

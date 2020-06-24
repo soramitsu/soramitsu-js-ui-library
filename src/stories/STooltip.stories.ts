@@ -1,7 +1,7 @@
 import { text, withKnobs, boolean, select, number } from '@storybook/addon-knobs'
 
 import { SButton, STooltip } from '../components'
-import { TooltipPlacement, TooltipTheme } from '../components/STooltip'
+import { TooltipPlacement, TooltipTheme } from '../components/Tooltip'
 
 export default {
   component: STooltip,

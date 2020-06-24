@@ -1,6 +1,7 @@
 export enum Components {
+  SAside = 'SAside',
   SButton = 'SButton',
-  SButtonGroup = 'MyButtonGroup',
+  SButtonGroup = 'SButtonGroup',
   SInput = 'SInput',
   SJsonInput = 'SJsonInput',
   STooltip = 'STooltip'
