@@ -16,12 +16,13 @@ export const configurable = () => ({
                :disabled="disabled"
                :loading="loading"
                :tooltip="tooltip"
-               :icon="type === 'tertiary' ? 'back' : ''"
+               :icon="type === 'action' ? 'back' : ''"
                :type="type"
                :size="size"
+               :alternative="alternative"
                @click="handleClick"
              >
-               {{ type !== 'tertiary' ? 'Default' : '' }}
+               {{ type !== 'action' ? 'Default' : '' }}
              </s-button>`,
   props: {
     disabled: {
@@ -36,6 +37,9 @@ export const configurable = () => ({
     size: {
       default: select('Size', Object.values(ButtonSize), ButtonSize.BIG)
     },
+    alternative: {
+      default: boolean('Alternative', false)
+    },
     tooltip: {
       default: text('Tooltip', '')
     }
@@ -48,7 +52,7 @@ export const configurable = () => ({
 export const differentTypesData = Object.values(ButtonTypes).map(type => {
   const label = type[0].toUpperCase() + type.slice(1)
   const data = { type } as any
-  if (type === ButtonTypes.TERTIARY) {
+  if (type === ButtonTypes.ACTION) {
     data.icon = 'back'
     data.tooltip = label
   } else {

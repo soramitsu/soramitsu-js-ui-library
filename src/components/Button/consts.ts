@@ -4,7 +4,7 @@ export enum ButtonTypes {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   TERTIARY = 'tertiary',
-  DELETE = 'delete'
+  ACTION = 'action'
 }
 
 export enum ButtonNativeTypes {
