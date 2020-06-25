@@ -30,7 +30,6 @@ import {
   Pagination,
   Radio,
   RadioGroup,
-  Row,
   Select,
   Submenu,
   Switch,
@@ -64,7 +63,6 @@ Vue.use(DatePicker)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Tag)
-Vue.use(Row)
 Vue.use(Col)
 Vue.use(Upload)
 Vue.use(Card)

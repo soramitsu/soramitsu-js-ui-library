@@ -1,5 +1,5 @@
 <template>
-  <s-container>
+  <s-container class="s-app">
     <s-aside v-if="!!this.$slots.aside">
       <slot name="aside" />
     </s-aside>
@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 
 import { SAside } from '../Aside'
 import { SContainer, ContainerDirection } from '../Container'
@@ -39,3 +39,9 @@ export default class SApp extends Vue {
   readonly ContainerDirection = ContainerDirection
 }
 </script>
+
+<style lang="scss">
+.s-app {
+  height: 100%;
+}
+</style>
