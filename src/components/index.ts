@@ -10,6 +10,7 @@ import { SFooter } from './Layout/Footer'
 import { SHeader } from './Layout/Header'
 import { SInput, SJsonInput } from './Input'
 import { SMain } from './Layout/Main'
+import { SMenu } from './Menu'
 import { SRow } from './Layout/Row'
 import { STooltip } from './Tooltip'
 
@@ -25,6 +26,7 @@ export {
   SInput,
   SJsonInput,
   SMain,
+  SMenu,
   SRow,
   STooltip
 }
