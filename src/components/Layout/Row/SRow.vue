@@ -11,9 +11,29 @@ import { RowJustify, RowAlignment } from './consts'
 
 @Component
 export default class SRow extends Vue {
-  @Prop({ type: Number }) readonly gutter!: number
+  /**
+   * Grid spacing.
+   *
+   * By default it's set to `0`
+   */
+  @Prop({ type: Number, default: 0 }) readonly gutter!: number
+  /**
+   * Horizontal alignment of the flex layout.
+   *
+   * By default it's set to `"start"`
+   */
   @Prop({ default: RowJustify.START, type: String }) readonly justify!: string
+  /**
+   * Flex flag which is used for the flex layout.
+   *
+   * By default it's set to `false`
+   */
   @Prop({ default: false, type: Boolean }) readonly flex!: boolean
+  /**
+   * Vertical alignment of the flex layout.
+   *
+   * By default it's set to `"top"`
+   */
   @Prop({ default: RowAlignment.TOP, type: String }) readonly align!: string
 
   get computedStyles (): object {
@@ -25,6 +45,9 @@ export default class SRow extends Vue {
     if (this.justify !== RowJustify.START) {
       styles.justifyContent = this.justify !== RowJustify.END ? this.justify : 'flex-end'
     }
+    if (this.align !== RowAlignment.TOP) {
+      styles.alignItems = this.align === RowAlignment.MIDDLE ? 'center' : 'flex-end'
+    }
     return styles
   }
 
@@ -33,15 +56,19 @@ export default class SRow extends Vue {
     if (this.flex) {
       cssClasses.push('row-flex')
     }
-    if (this.align !== RowAlignment.TOP) {
-      cssClasses.push(`row-align-${this.align}`)
-    }
     return cssClasses
   }
 }
 </script>
 
 <style lang="scss">
+@import "../../../styles/common.scss";
+
+.s-row {
+  position: relative;
+  box-sizing: border-box;
+  @include utils-clearfix;
+}
 .row-{
   &flex {
     display: flex;
@@ -50,34 +77,5 @@ export default class SRow extends Vue {
       display: none;
     }
   }
-  &align- {
-    &middle {
-      align-items: center;
-    }
-    &bottom {
-      align-items: flex-end;
-    }
-  }
 }
-
-@include when(justify-center) {
-      justify-content: center;
-    }
-    @include when(justify-end) {
-      justify-content: flex-end;
-    }
-    @include when(justify-space-between) {
-      justify-content: space-between;
-    }
-    @include when(justify-space-around) {
-      justify-content: space-around;
-    }
-
-    @include when(align-middle) {
-      align-items: center;
-    }
-    @include when(align-bottom) {
-      align-items: flex-end;
-    }
-
 </style>
