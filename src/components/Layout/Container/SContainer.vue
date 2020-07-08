@@ -13,6 +13,9 @@ import { ContainerDirection } from './consts'
 export default class SContainer extends Vue {
   /**
    * Layout direction property. Can be `"horizontal"` or `"vertical"`.
+   *
+   * By default it's set to `"vertical"` when nested with `s-header` or `s-footer`;
+   * `"horizontal"` otherwise
    */
   @Prop({ default: '', type: String }) readonly direction!: string
 

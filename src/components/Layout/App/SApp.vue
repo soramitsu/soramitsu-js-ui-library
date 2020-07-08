@@ -1,16 +1,16 @@
 <template>
   <s-container class="s-app">
-    <s-aside v-if="!!this.$slots.aside">
+    <s-aside v-if="this.$slots.aside">
       <slot name="aside" />
     </s-aside>
     <s-container>
-      <s-header v-if="!!this.$slots.header">
+      <s-header v-if="this.$slots.header">
         <slot name="header" />
       </s-header>
-      <s-main v-if="!!this.$slots.main">
+      <s-main v-if="this.$slots.main">
         <slot name="main" />
       </s-main>
-      <s-footer v-if="!!this.$slots.footer">
+      <s-footer v-if="this.$slots.footer">
         <slot name="footer" />
       </s-footer>
     </s-container>
