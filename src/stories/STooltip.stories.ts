@@ -1,7 +1,7 @@
 import { text, withKnobs, boolean, select, number } from '@storybook/addon-knobs'
 
-import { SButton, STooltip } from '../components'
-import { TooltipPlacement, TooltipTheme } from '../components/STooltip'
+import { SButton, STooltip, SRow, SMain } from '../components'
+import { TooltipPlacement, TooltipTheme } from '../components/Tooltip'
 
 export default {
   component: STooltip,
@@ -11,8 +11,8 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { STooltip, SButton },
-  template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { STooltip, SButton, SRow },
+  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-tooltip
                  :theme="theme"
                  v-model="model"
@@ -24,7 +24,7 @@ export const configurable = () => ({
                >
                  <s-button style="margin: 40px">Custom tooltip</s-button>
                </s-tooltip>
-             </el-row>`,
+             </s-row>`,
   data: () => ({
     model: false
   }),
@@ -70,14 +70,14 @@ export const differentPlacementData = [
   ]
 ]
 export const withDifferentPlacement = () => ({
-  components: { STooltip, SButton },
-  template: `<el-main style="padding: 40px 80px;">
-               <el-row v-for="placements in items" :key="placements[0]" style="padding-bottom: 20px;">
+  components: { STooltip, SButton, SRow, SMain },
+  template: `<s-main style="padding: 40px 80px;">
+               <s-row v-for="placements in items" :key="placements[0]" style="padding-bottom: 20px;">
                  <s-tooltip v-for="placement in placements" :key="placement" :placement="placement" :content="placement">
                    <s-button>{{ placement }}</s-button>
                  </s-tooltip>
-               </el-row>
-             </el-main>`,
+               </s-row>
+             </s-main>`,
   props: {
     items: {
       default: () => differentPlacementData
@@ -86,47 +86,47 @@ export const withDifferentPlacement = () => ({
 })
 
 export const withDifferentCustomization = () => ({
-  components: { STooltip, SButton },
-  template: `<el-main>
-               <el-row style="padding-bottom: 20px;">
+  components: { STooltip, SButton, SRow, SMain },
+  template: `<s-main>
+               <s-row style="padding-bottom: 20px;">
                  <s-tooltip content="Dark" theme="dark">
                    <s-button>Dark</s-button>
                  </s-tooltip>
                  <s-tooltip content="Light" theme="light">
                    <s-button>Light</s-button>
                  </s-tooltip>
-               </el-row>
-               <el-row style="padding-bottom: 20px;">
+               </s-row>
+               <s-row style="padding-bottom: 20px;">
                  <s-tooltip content="With arrow" :show-arrow="true">
                    <s-button>With arrow</s-button>
                  </s-tooltip>
                  <s-tooltip content="Without arrow" :show-arrow="false">
                    <s-button>Without arrow</s-button>
                  </s-tooltip>
-               </el-row>
-             </el-main>`
+               </s-row>
+             </s-main>`
 })
 
 export const withDifferentDelay = () => ({
-  components: { STooltip, SButton },
-  template: `<el-row style="padding-bottom: 20px;">
+  components: { STooltip, SButton, SRow },
+  template: `<s-row style="padding-bottom: 20px;">
                <s-tooltip content="Opened after 1 sec" theme="dark" :openDelay="1000">
                  <s-button>Before open</s-button>
                </s-tooltip>
                <s-tooltip content="Will close in 1 sec" theme="light" :closeDelay="1000">
                  <s-button>Before close</s-button>
                </s-tooltip>
-             </el-row>`
+             </s-row>`
 })
 
 export const withManualMode = () => ({
-  components: { STooltip, SButton },
-  template: `<el-row style="padding-bottom: 20px;">
+  components: { STooltip, SButton, SRow },
+  template: `<s-row style="padding-bottom: 20px;">
                <s-tooltip content="Dark" theme="dark" manual :value="true">
                  <s-button>Dark</s-button>
                </s-tooltip>
                <s-tooltip content="Light" theme="light" manual :value="true">
                  <s-button>Light</s-button>
                </s-tooltip>
-             </el-row>`
+             </s-row>`
 })

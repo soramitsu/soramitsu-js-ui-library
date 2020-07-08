@@ -6,13 +6,13 @@ import {
   ButtonGroup,
   Card,
   Checkbox,
-  Col,
   Container,
   DatePicker,
   Dialog,
   Dropdown,
   DropdownItem,
   DropdownMenu,
+  Footer,
   Form,
   FormItem,
   Header,
@@ -29,7 +29,6 @@ import {
   Pagination,
   Radio,
   RadioGroup,
-  Row,
   Select,
   Submenu,
   Switch,
@@ -45,6 +44,7 @@ import {
 // import locale from 'element-ui/lib/locale'
 
 Vue.use(Dialog)
+Vue.use(Footer)
 Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Submenu)
@@ -62,8 +62,6 @@ Vue.use(DatePicker)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Tag)
-Vue.use(Row)
-Vue.use(Col)
 Vue.use(Upload)
 Vue.use(Card)
 Vue.use(Container)
@@ -82,6 +80,10 @@ Vue.use(TabPane)
 Vue.use(Loading.directive)
 Vue.use(Checkbox)
 const MsgBox = MessageBox
+MsgBox.setDefaults({
+  cancelButtonText: 'Cancel',
+  confirmButtonText: 'OK'
+})
 Vue.prototype.$prompt = MsgBox.prompt
 Vue.prototype.$alert = MsgBox.alert
 Vue.prototype.$message = Message

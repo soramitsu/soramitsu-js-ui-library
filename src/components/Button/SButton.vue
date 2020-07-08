@@ -8,7 +8,7 @@
       :disabled="disabled"
       :loading="isLoading"
       :autofocus="autofocus"
-      :circle="type === ButtonTypes.TERTIARY"
+      :circle="type === ButtonTypes.ACTION"
       :icon="elementIcon"
       @click="handleClick"
     >
@@ -21,7 +21,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
-import { STooltip } from '@/components/STooltip'
+import { STooltip } from '../Tooltip'
 import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
 
 @Component({
@@ -31,13 +31,15 @@ export default class SButton extends Vue {
   readonly ButtonTypes = ButtonTypes
 
   /**
-   * Type of button. Possible values: "primary", "secondary", "tertiary", "delete".
-   * By default it's set to "primary"
+   * Type of button. Possible values: `"primary"`, `"secondary"`, `"tertiary"`, `"action"`.
+   *
+   * By default it's set to `"primary"`
    */
   @Prop({ default: ButtonTypes.PRIMARY, type: String }) readonly type!: string
   /**
-   * Size of button. Possible values: "big", "medium", "small".
-   * By default it's set to "big"
+   * Size of button. Possible values: `"big"`, `"medium"`, `"small"`.
+   *
+   * By default it's set to `"big"`
    */
   @Prop({ default: ButtonSize.BIG, type: String }) readonly size!: string
   /**
@@ -49,13 +51,20 @@ export default class SButton extends Vue {
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
   /**
-   * Loading state. Only "tertiary" button cannot have this state
+   * Loading state. Only `"tertiary"` and `"action"` button cannot have this state
    *
    * If you use `loading` state for one button, for instance, [Send][Cancel], and "send" button sent
    * request to back-end side, you should use `loading` state ONLY for "send" button and apply this flag
    * to "cancel" button `disabled` state. So, if "send" has `loading` state, "cancel" should be `disabled`
    */
   @Prop({ default: false, type: Boolean }) readonly loading!: boolean
+  /**
+   * Alternative view of button. Some button types like `"secondary"` have another view.
+   * If you set `alternative = true`, you will see the another view.
+   *
+   * `false` by default
+   */
+  @Prop({ default: false, type: Boolean }) readonly alternative!: boolean
   /**
    * Autofocus property, same as native button's `autofocus`
    */
@@ -98,6 +107,9 @@ export default class SButton extends Vue {
     if (this.isLoading) {
       cssClasses.push('loading')
     }
+    if (this.alternative) {
+      cssClasses.push('alternative')
+    }
     return cssClasses
   }
 
@@ -115,7 +127,7 @@ export default class SButton extends Vue {
   }
 
   get isLoading (): boolean {
-    if (this.type === ButtonTypes.TERTIARY) {
+    if (([ButtonTypes.TERTIARY, ButtonTypes.ACTION] as Array<string>).includes(this.type)) {
       return false
     }
     return this.loading
@@ -158,26 +170,29 @@ export default class SButton extends Vue {
     background-color: $color-main-hover;
     border-color: $color-main-hover;
   }
-  &:disabled {
+  &:disabled, &:disabled:hover {
     background-color: $color-main-inactive;
     border-color: $color-main-inactive;
-    &:hover {
-      background-color: $color-main-inactive;
-      border-color: $color-main-inactive;
-    }
   }
 }
 
 .secondary {
   &:hover, &:active, &:focus {
-    color: $color-basic-black;
-    background-color: $color-neutral-placeholder;
-    border-color: $color-neutral-secondary;
+    color: $color-main-brand;
+    background-color: $color-basic-white;
+    border-color: $color-main-brand;
   }
-  &:disabled {
+  &:disabled, &:disabled:hover {
     color: $color-neutral-inactive;
     border-color: $color-neutral-border;
-    &:hover {
+  }
+  &.alternative {
+    &:hover, &:active, &:focus {
+      color: $color-basic-black;
+      background-color: $color-neutral-hover;
+      border-color: $color-neutral-hover;
+    }
+    &:disabled, &:disabled:hover {
       color: $color-neutral-inactive;
       border-color: $color-neutral-border;
     }
@@ -185,6 +200,18 @@ export default class SButton extends Vue {
 }
 
 .tertiary {
+  color: $color-basic-black;
+  border: none;
+  &:hover, &:active, &:focus {
+    color: $color-main-brand;
+    background-color: $color-basic-white;
+  }
+  &:disabled, &:disabled:hover {
+    color: $color-neutral-inactive;
+  }
+}
+
+.action {
   &.big {
     width: $size-big;
   }
@@ -204,17 +231,16 @@ export default class SButton extends Vue {
     background-color: $color-neutral-placeholder;
     border-color: $color-neutral-placeholder;
   }
-}
-
-.delete {
-  color: $color-error;
-  border-color: $color-error;
-  &:disabled {
-    color: $color-main-inactive;
-    border-color: $color-main-inactive;
-    &:hover {
-      color: $color-main-inactive;
-      border-color: $color-main-inactive;
+  &.alternative {
+    background-color: $color-basic-white;
+    border-color: $color-neutral-border;
+    &:hover, &:active, &:focus, &:disabled { // TODO: ux designers will create this state
+      background-color: $color-basic-white;
+      border-color: $color-neutral-border;
+    }
+    &:disabled:hover {
+      background-color: $color-basic-white;
+      border-color: $color-neutral-border;
     }
   }
 }

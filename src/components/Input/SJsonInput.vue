@@ -175,7 +175,7 @@ $color-ide-boolean: #0000FF;
   }
   .ace_tooltip {
     font-family: $font-family-default;
-    background: $color-basic-black; // TODO: fix el-tooltip colors, when tooltip component will be created
+    background: $color-basic-black;
     border-color: $color-basic-black;
     color: $color-basic-white;
     border-radius: $border-radius-default;

@@ -1,7 +1,7 @@
 import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
-import { SButton, SButtonGroup } from '../components'
-import { ButtonSize, ButtonTypes } from '../components/SButton'
+import { SButton, SButtonGroup, SRow } from '../components'
+import { ButtonSize, ButtonTypes } from '../components/Button'
 
 export default {
   component: SButton,
@@ -16,12 +16,13 @@ export const configurable = () => ({
                :disabled="disabled"
                :loading="loading"
                :tooltip="tooltip"
-               :icon="type === 'tertiary' ? 'back' : ''"
+               :icon="type === 'action' ? 'back' : ''"
                :type="type"
                :size="size"
+               :alternative="alternative"
                @click="handleClick"
              >
-               {{ type !== 'tertiary' ? 'Default' : '' }}
+               {{ type !== 'action' ? 'Default' : '' }}
              </s-button>`,
   props: {
     disabled: {
@@ -36,6 +37,9 @@ export const configurable = () => ({
     size: {
       default: select('Size', Object.values(ButtonSize), ButtonSize.BIG)
     },
+    alternative: {
+      default: boolean('Alternative', false)
+    },
     tooltip: {
       default: text('Tooltip', '')
     }
@@ -48,7 +52,7 @@ export const configurable = () => ({
 export const differentTypesData = Object.values(ButtonTypes).map(type => {
   const label = type[0].toUpperCase() + type.slice(1)
   const data = { type } as any
-  if (type === ButtonTypes.TERTIARY) {
+  if (type === ButtonTypes.ACTION) {
     data.icon = 'back'
     data.tooltip = label
   } else {
@@ -57,8 +61,8 @@ export const differentTypesData = Object.values(ButtonTypes).map(type => {
   return data
 })
 export const withDifferentTypes = () => ({
-  components: { SButton },
-  template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { SButton, SRow },
+  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.type"
@@ -68,7 +72,7 @@ export const withDifferentTypes = () => ({
                >
                  {{ item.label }}
                </s-button>
-             </el-row>`,
+             </s-row>`,
   props: {
     items: {
       default: () => differentTypesData
@@ -79,8 +83,8 @@ export const withDifferentTypes = () => ({
 export const differentSizeData = Object.values(ButtonSize).map(size =>
   ({ size, label: size[0].toUpperCase() + size.slice(1) }))
 export const withDifferentSize = () => ({
-  components: { SButton },
-  template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { SButton, SRow },
+  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.size"
@@ -88,7 +92,7 @@ export const withDifferentSize = () => ({
                >
                  {{ item.label }}
                </s-button>
-             </el-row>`,
+             </s-row>`,
   props: {
     items: {
       default: () => differentSizeData
@@ -97,8 +101,8 @@ export const withDifferentSize = () => ({
 })
 
 export const disabled = () => ({
-  components: { SButton },
-  template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { SButton, SRow },
+  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.type"
@@ -109,7 +113,7 @@ export const disabled = () => ({
                >
                  {{ item.label }}
                </s-button>
-             </el-row>`,
+             </s-row>`,
   props: {
     items: {
       default: () => differentTypesData
@@ -118,8 +122,8 @@ export const disabled = () => ({
 })
 
 export const loading = () => ({
-  components: { SButton },
-  template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { SButton, SRow },
+  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.type"
@@ -130,7 +134,7 @@ export const loading = () => ({
                >
                  {{ item.label }}
                </s-button>
-             </el-row>`,
+             </s-row>`,
   props: {
     items: {
       default: () => differentTypesData
@@ -139,11 +143,11 @@ export const loading = () => ({
 })
 
 export const buttonGroup = () => ({
-  components: { SButton, SButtonGroup },
-  template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { SButton, SButtonGroup, SRow },
+  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button-group>
                  <s-button type="primary">Append</s-button>
                  <s-button type="delete">Remove</s-button>
                </s-button-group>
-             </el-row>`
+             </s-row>`
 })
