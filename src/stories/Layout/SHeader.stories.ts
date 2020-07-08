@@ -1,4 +1,4 @@
-import { SHeader } from '../components'
+import { SHeader } from '../../components'
 
 export default {
   component: SHeader,

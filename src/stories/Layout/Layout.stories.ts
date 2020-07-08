@@ -1,4 +1,4 @@
-import { SRow, SCol, SMain } from '../components'
+import { SRow, SCol, SMain } from '../../components'
 
 export default {
   title: 'Design System/Layout',
