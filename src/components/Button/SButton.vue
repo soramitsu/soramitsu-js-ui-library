@@ -123,7 +123,7 @@ export default class SButton extends Vue {
     }
     // TODO: add checks for invalid icons
     this.elementIcon = ''
-    return `icon-${this.icon}`
+    return `s-icon-${this.icon}`
   }
 
   get isLoading (): boolean {

@@ -166,7 +166,7 @@ $color-ide-boolean: #0000FF;
       background-color: $color-neutral-border;
     }
     .ace_gutter-cell.ace_error {
-      @extend .icon-error;
+      @extend .s-icon-error;
     }
   }
   .ace_editor .ace_content,
