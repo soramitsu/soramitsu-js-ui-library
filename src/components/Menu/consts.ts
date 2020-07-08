@@ -1,16 +1,9 @@
-import { Size } from '../../types/size'
-
-export enum ButtonTypes {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  TERTIARY = 'tertiary',
-  ACTION = 'action'
+export enum MenuMode {
+  HORIZONTAL = 'horizontal',
+  VERTICAL = 'vertical'
 }
 
-export enum ButtonNativeTypes {
-  BUTTON = 'button',
-  SUBMIT = 'submit',
-  RESET = 'reset'
+export enum MenuTrigger {
+  HOVER = 'hover',
+  CLICK = 'click'
 }
-
-export const ButtonSize = Size

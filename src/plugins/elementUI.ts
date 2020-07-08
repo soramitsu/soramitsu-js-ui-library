@@ -22,6 +22,7 @@ import {
   Main,
   Menu,
   MenuItem,
+  MenuItemGroup,
   Message,
   MessageBox,
   Notification,
@@ -47,6 +48,7 @@ Vue.use(Dialog)
 Vue.use(Footer)
 Vue.use(Menu)
 Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
 Vue.use(Submenu)
 Vue.use(Input)
 Vue.use(InputNumber)
