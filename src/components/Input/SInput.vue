@@ -31,10 +31,11 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
+import { Vue, Component, Prop, Ref, Inject } from 'vue-property-decorator'
+import { ElInput } from 'element-ui/types/input'
+import { ElForm } from 'element-ui/types/form'
 
 import { Autocomplete, InputType } from './consts'
-import { ElInput } from 'element-ui/types/input'
 
 @Component
 export default class SInput extends Vue {
@@ -106,6 +107,8 @@ export default class SInput extends Vue {
 
   @Ref('el-input') input!: ElInput
 
+  @Inject('elForm') elForm!: ElForm
+
   focused = false
 
   get computedClasses (): Array<string> {
@@ -113,7 +116,7 @@ export default class SInput extends Vue {
     if (this.focused) {
       cssClasses.push('focused')
     }
-    if (this.disabled) {
+    if (this.disabled || (this.elForm || {}).disabled) {
       cssClasses.push('disabled')
     }
     return cssClasses
