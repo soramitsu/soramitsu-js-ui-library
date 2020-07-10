@@ -103,7 +103,7 @@ export default class SButton extends Vue {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if (this.elForm.size || this.elFormItem.size) {
+    if ((this.elForm || this.elFormItem || {}).size) {
       cssClasses.push(this.elForm.size || this.elFormItem.size)
     } else if ((Object.values(ButtonSize) as Array<string>).includes(this.size)) {
       cssClasses.push(this.size)

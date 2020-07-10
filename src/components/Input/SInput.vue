@@ -231,8 +231,13 @@ export default class SInput extends Vue {
       border-color: $color-neutral-border;
     }
   }
-  .placeholder + .el-input > input {
-    padding-top: 12px;
+  .placeholder + .el-input {
+    > input {
+      padding-top: 12px;
+    }
+    .el-input__validateIcon {
+      padding-top: 11px;
+    }
   }
   .placeholder + .el-textarea > textarea {
     padding-top: 24px;

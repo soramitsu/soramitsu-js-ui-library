@@ -110,7 +110,6 @@ export const focused = () => ({
                  style="padding-bottom: 20px;"
                >
                  <s-input
-                   ref="input"
                    class="focused"
                    v-model="item.model"
                    :type="item.type"

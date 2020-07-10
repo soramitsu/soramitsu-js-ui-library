@@ -30,22 +30,59 @@ import { LabelPosition } from './consts'
 
 @Component
 export default class SFormItem extends Vue {
-  @Prop({ default: '' }) readonly prop!: string
-  @Prop() readonly label!: string
-  @Prop() readonly labelWidth!: string
-  @Prop({ default: false }) readonly required!: boolean
+  /**
+   * A key of `model` - form property.
+   * If you use the validation, then this property is required
+   */
+  @Prop({ type: String, default: '' }) readonly prop!: string
+  /**
+   * A label of the form item
+   */
+  @Prop({ type: String }) readonly label!: string
+  /**
+   * Width of a label. It can be any value of css width property
+   */
+  @Prop({ type: String }) readonly labelWidth!: string
+  /**
+   * The validation rule `required`.
+   *
+   * `false` by default
+   */
+  @Prop({ type: Boolean, default: false }) readonly required!: boolean
+  /**
+   * Validation rules of the form item.
+   * When you set rules object for form component, then you don't need this.
+   *
+   * For instance, `[{ required: true, message: 'Please input user name' }]`
+   */
   @Prop() readonly rules!: object
-  @Prop() readonly error!: string
-  @Prop({ default: true }) readonly showMessage!: boolean
-  @Prop({ default: false }) readonly inlineMessage!: boolean
-  @Prop() readonly size!: string
+  /**
+   * If `error` is set, the field will validate error and show this message immediately
+   */
+  @Prop({ type: String }) readonly error!: string
+  /**
+   * Show error message state of the form.
+   *
+   * `true` by default
+   */
+  @Prop({ type: Boolean, default: true }) readonly showMessage!: boolean
+  /**
+   * Display the error message inline with the form item.
+   *
+   * `false` by default
+   */
+  @Prop({ type: Boolean, default: false }) readonly inlineMessage!: boolean
+  /**
+   * Size of form items. Possible values: `"big"`, `"medium"`, `"small"`
+   */
+  @Prop({ type: String }) readonly size!: string // TODO: think about size for all items, not only for button
 
   @Ref('formItem') formItem!: ElFormItem
 
   @Inject('elForm') elForm!: ElForm
 
   get computedRules (): object {
-    const rules = (this.rules || this.elForm.rules[this.prop]) as any
+    const rules = (this.rules || (this.elForm.rules || {})[this.prop]) as any
     if (!rules) {
       return rules
     }
@@ -100,7 +137,7 @@ export default class SFormItem extends Vue {
         position: relative;
       }
     }
-    > [class^="s-input"] /* here will be also s-input-json */ {
+    > [class^="s-input"]:not(.disabled) {
       .placeholder {
         color: $color-error;
         background-color: $color-main-base;
