@@ -3,6 +3,7 @@ export enum Components {
   SAside = 'SAside',
   SButton = 'SButton',
   SButtonGroup = 'SButtonGroup',
+  SCard = 'SCard',
   SCol= 'SCol',
   SContainer = 'SContainer',
   SFooter = 'SFooter',
