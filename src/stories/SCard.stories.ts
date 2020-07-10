@@ -1,4 +1,4 @@
-import { text, withKnobs, boolean, select, number } from '@storybook/addon-knobs'
+import { text, withKnobs, select } from '@storybook/addon-knobs'
 
 import { SCard, SRow, SButton } from '../components'
 import { CardShadow } from '../components/Card'
