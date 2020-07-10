@@ -79,7 +79,7 @@ export default class SFormItem extends Vue {
 
   @Ref('formItem') formItem!: ElFormItem
 
-  @Inject('elForm') elForm!: ElForm
+  @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
 
   get computedRules (): object {
     const rules = (this.rules || (this.elForm.rules || {})[this.prop]) as any

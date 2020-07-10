@@ -107,7 +107,7 @@ export default class SInput extends Vue {
 
   @Ref('el-input') input!: ElInput
 
-  @Inject('elForm') elForm!: ElForm
+  @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
 
   focused = false
 
