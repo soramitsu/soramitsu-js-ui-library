@@ -20,7 +20,8 @@ import { ElSubmenu } from 'element-ui/types/submenu'
 
 @Component
 export default class SSubmenu extends Vue {
-  // popper-append-to-body=false --> https://github.com/ElemeFE/element/issues/17960
+  // TODO: An error is occurred due to this issue: https://github.com/ElemeFE/element/issues/17960
+  // To fix it, popper-append-to-body=false is set
 
   /**
    * Unique index of menu item
