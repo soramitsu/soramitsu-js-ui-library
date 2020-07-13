@@ -1,4 +1,4 @@
-import { SRow, SCol, SMain } from '../components'
+import { SRow, SCol, SMain } from '../../components'
 
 import { layoutStylesData } from './Layout.stories'
 

@@ -1,4 +1,4 @@
-import { SAside } from '../components'
+import { SAside } from '../../components'
 
 export default {
   component: SAside,

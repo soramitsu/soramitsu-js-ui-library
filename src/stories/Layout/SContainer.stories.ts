@@ -1,4 +1,4 @@
-import { SContainer } from '../components'
+import { SContainer } from '../../components'
 
 export default {
   component: SContainer,

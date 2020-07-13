@@ -1,4 +1,5 @@
-.icon- {
+/* TODO: fix icons due to external usage */
+.s-icon- {
   &refresh {
     position: absolute;
     background-image: url('~@/assets/icons/refresh.svg');
@@ -9,6 +10,24 @@
   &back {
     position: absolute;
     background-image: url('~@/assets/icons/arrow-left.svg');
+    width: 20px;
+    height: 20px;
+  }
+
+  &globe {
+    background-image: url('~@/assets/icons/globe.svg');
+    width: 20px;
+    height: 20px;
+  }
+
+  &activity {
+    background-image: url('~@/assets/icons/activity.svg');
+    width: 20px;
+    height: 20px;
+  }
+
+  &logout {
+    background-image: url('~@/assets/icons/log-out.svg');
     width: 20px;
     height: 20px;
   }

@@ -1,4 +1,4 @@
-import { SFooter } from '../components'
+import { SFooter } from '../../components'
 
 export default {
   component: SFooter,

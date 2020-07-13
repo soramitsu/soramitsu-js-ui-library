@@ -1,4 +1,4 @@
-import { SMain } from '../components'
+import { SMain } from '../../components'
 
 export default {
   component: SMain,

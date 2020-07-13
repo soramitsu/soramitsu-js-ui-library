@@ -1,4 +1,4 @@
-import { SApp } from '../components'
+import { SApp } from '../../components'
 
 export default {
   component: SApp,

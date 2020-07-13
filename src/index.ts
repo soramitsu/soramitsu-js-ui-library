@@ -12,7 +12,11 @@ import {
   SInput,
   SJsonInput,
   SMain,
+  SMenu,
+  SMenuItem,
+  SMenuItemGroup,
   SRow,
+  SSubmenu,
   STooltip
 } from './components'
 import { Components } from './types/components'
@@ -29,7 +33,11 @@ const elements = [
   { component: SInput, name: Components.SInput },
   { component: SJsonInput, name: Components.SJsonInput },
   { component: SMain, name: Components.SMain },
+  { component: SMenu, name: Components.SMenu },
+  { component: SMenuItem, name: Components.SMenuItem },
+  { component: SMenuItemGroup, name: Components.SMenuItemGroup },
   { component: SRow, name: Components.SRow },
+  { component: SSubmenu, name: Components.SSubmenu },
   { component: STooltip, name: Components.STooltip }
 ]
 
@@ -55,7 +63,11 @@ export {
   SInput,
   SJsonInput,
   SMain,
+  SMenu,
+  SMenuItem,
+  SMenuItemGroup,
   SRow,
+  SSubmenu,
   STooltip
 }
 export default SoramitsuElements

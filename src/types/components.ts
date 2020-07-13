@@ -10,6 +10,10 @@ export enum Components {
   SInput = 'SInput',
   SJsonInput = 'SJsonInput',
   SMain = 'SMain',
+  SMenu = 'SMenu',
+  SMenuItem = 'SMenuItem',
+  SMenuItemGroup = 'SMenuItemGroup',
   SRow = 'SRow',
+  SSubmenu = 'SSubmenu',
   STooltip = 'STooltip'
 }
