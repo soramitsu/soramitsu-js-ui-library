@@ -23,9 +23,6 @@ export const configurable = () => ({
                  </div>
                </s-card>
              </s-row>`,
-  data: () => ({
-    model: false
-  }),
   props: {
     shadow: {
       default: select('Shadow', Object.values(CardShadow), CardShadow.HOVER)
