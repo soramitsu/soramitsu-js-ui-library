@@ -1,5 +1,5 @@
 {
-  "name": "soramitsu-js-ui",
+  "name": "@soramitsu/soramitsu-js-ui",
   "version": "0.2.0",
   "private": false,
   "publishConfig": {
