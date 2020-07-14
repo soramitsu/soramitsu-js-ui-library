@@ -5,7 +5,7 @@
     :size="computedSize"
     :type="computedType"
     :placement="placement"
-    :trigger="trigger"
+    :trigger="computedTrigger"
     :hide-on-click="hideOnClick"
     :show-timeout="showTimeout"
     :hide-timeout="hideTimeout"
@@ -14,21 +14,27 @@
     @command="handleSelect"
     @visible-change="handleVisibleChange"
   >
-    <slot v-if="![DropdownType.BUTTON, DropdownType.ELLIPSIS].includes(type) || splitButton"></slot>
+    <span v-if="type === DropdownType.DEFAULT || splitButton">
+      <slot></slot>
+      <i v-if="!splitButton" class="el-icon-arrow-down el-icon--right"></i>
+    </span>
     <template v-else>
       <s-button
         v-if="type === DropdownType.BUTTON"
-        :type="buttonType"
+        :type="computedButtonType"
         :size="size"
       >
         <slot></slot>
         <i class="el-icon-arrow-down el-icon--right"></i>
       </s-button>
-      <s-tooltip>
-
-      </s-tooltip>
+      <el-tooltip v-else :disabled="willTooltipBeDisabled">
+        <i class="s-icon-more"></i>
+        <template slot="content">
+          <slot></slot>
+        </template>
+      </el-tooltip>
     </template>
-    <el-dropdown-menu>
+    <el-dropdown-menu :class="{'ellipsis': type === DropdownType.ELLIPSIS}">
       <slot name="menu"></slot>
     </el-dropdown-menu>
   </el-dropdown>
@@ -40,10 +46,12 @@ import { ElDropdown } from 'element-ui/types/dropdown'
 
 import { DropdownType, DropdownSize, DropdownPlacement, DropdownTrigger } from './consts'
 import { ButtonTypes } from '../Button'
-import { SButton, STooltip } from '../../components'
+import { SButton } from '../../components'
 
 @Component({
-  components: { SButton, STooltip }
+  components: {
+    SButton
+  }
 })
 export default class SDropdown extends Vue {
   readonly DropdownType = DropdownType
@@ -75,6 +83,7 @@ export default class SDropdown extends Vue {
   @Prop({ type: String, default: DropdownPlacement.BOTTOM_END }) readonly placement!: string
   /**
    * A trigger action of the dropdown component. Can be `"hover"` or `"click"`.
+   * When dropdown type is "ellipsis", `trigger = "click"`.
    *
    * By default, it's set to `"hover"`
    */
@@ -112,11 +121,23 @@ export default class SDropdown extends Vue {
 
   @Ref('dropdown') dropdown!: ElDropdown
 
+  willTooltipBeDisabled = false
+
   get computedType () {
     if (this.type === DropdownType.BUTTON) {
       return this.computedButtonType
     }
     return ''
+  }
+
+  get computedTrigger (): string {
+    if (this.type === DropdownType.ELLIPSIS) {
+      return DropdownTrigger.CLICK
+    }
+    if (!(Object.values(DropdownTrigger) as Array<string>).includes(this.trigger)) {
+      return DropdownTrigger.HOVER
+    }
+    return this.trigger
   }
 
   get computedSize (): string {
@@ -128,7 +149,8 @@ export default class SDropdown extends Vue {
   }
 
   get computedButtonType (): string {
-    if (this.buttonType === ButtonTypes.ACTION) {
+    if (this.buttonType === ButtonTypes.ACTION ||
+      !(Object.values(ButtonTypes) as Array<string>).includes(this.buttonType)) {
       console.warn(`"${this.buttonType}" button type is unsupported! Secondary button type is set.`)
       return ButtonTypes.SECONDARY
     }
@@ -136,13 +158,16 @@ export default class SDropdown extends Vue {
   }
 
   mounted (): void {
-    this.$nextTick(() => {
-      if (this.splitButton) {
+    if (this.splitButton) {
+      this.$nextTick(() => {
         this.dropdown.$children[0].$children.forEach(button => {
           button.$el.classList.add(this.size, this.computedButtonType)
         })
-      }
-    })
+      })
+    }
+    if (this.type === DropdownType.ELLIPSIS) {
+      this.$watch('$refs.dropdown.visible', (visible) => { this.willTooltipBeDisabled = visible })
+    }
   }
 
   handleClick (): void {
@@ -190,5 +215,12 @@ export default class SDropdown extends Vue {
       }
     }
   }
+  > i {
+    cursor: pointer;
+  }
+}
+.ellipsis.el-popper[x-placement^=bottom] {
+  margin-top: 25px;
+  margin-left: 12px;
 }
 </style>

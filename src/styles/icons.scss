@@ -24,6 +24,13 @@
     height: 20px;
   }
 
+  &more {
+    position: absolute;
+    background-image: url('~@/assets/icons/more-horizontal.svg');
+    width: 21px;
+    height: 20px;
+  }
+
   &back-small {
     position: absolute;
     background-image: url('~@/assets/icons/arrow-left.svg');
