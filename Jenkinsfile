@@ -1,4 +1,4 @@
-@Library('jenkins-library' ) _
+@Library('jenkins-library@feature/js-lib' ) _
 
 def pipeline = new org.js.LibPipeline(steps: this,
                                       libExamples: true,
