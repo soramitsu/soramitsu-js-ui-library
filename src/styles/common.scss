@@ -50,7 +50,7 @@ button > span {
       content: "";
     }
     #{$selector}::after {
-      clear: both
+      clear: both;
     }
   }
 }

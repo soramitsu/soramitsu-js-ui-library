@@ -19,7 +19,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
+import { ElForm } from 'element-ui/types/form'
+import { ElFormItem } from 'element-ui/types/form-item'
 
 import { STooltip } from '../Tooltip'
 import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
@@ -79,6 +81,9 @@ export default class SButton extends Vue {
    */
   @Prop({ default: ButtonNativeTypes.BUTTON, type: String }) readonly nativeType!: string
 
+  @Inject('elForm') elForm!: ElForm
+  @Inject('elFormItem') elFormItem!: ElFormItem
+
   elementIcon = ''
 
   get computedSize (): string {
@@ -98,7 +103,9 @@ export default class SButton extends Vue {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if ((Object.values(ButtonSize) as Array<string>).includes(this.size)) {
+    if ((this.elForm || this.elFormItem || {}).size) {
+      cssClasses.push(this.elForm.size || this.elFormItem.size)
+    } else if ((Object.values(ButtonSize) as Array<string>).includes(this.size)) {
       cssClasses.push(this.size)
     }
     if ((Object.values(ButtonTypes) as Array<string>).includes(this.type)) {

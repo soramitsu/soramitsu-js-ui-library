@@ -7,6 +7,7 @@ import { SButton, SButtonGroup } from './Button'
 import { SCol } from './Layout/Col'
 import { SContainer } from './Layout/Container'
 import { SFooter } from './Layout/Footer'
+import { SForm, SFormItem } from './Form'
 import { SHeader } from './Layout/Header'
 import { SInput, SJsonInput } from './Input'
 import { SMain } from './Layout/Main'
@@ -22,6 +23,8 @@ export {
   SCol,
   SContainer,
   SFooter,
+  SForm,
+  SFormItem,
   SHeader,
   SInput,
   SJsonInput,

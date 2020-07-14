@@ -6,6 +6,8 @@ export enum Components {
   SCol= 'SCol',
   SContainer = 'SContainer',
   SFooter = 'SFooter',
+  SForm = 'SForm',
+  SFormItem = 'SFormItem',
   SHeader = 'SHeader',
   SInput = 'SInput',
   SJsonInput = 'SJsonInput',
