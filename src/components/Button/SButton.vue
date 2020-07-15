@@ -160,18 +160,6 @@ export default class SButton extends Vue {
   }
 }
 
-.big {
-  height: $size-big;
-}
-
-.medium {
-  height: $size-medium;
-}
-
-.small {
-  height: $size-small;
-}
-
 .primary {
   &:hover, &:active, &:focus {
     background-color: $color-main-hover;
