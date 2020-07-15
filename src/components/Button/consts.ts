@@ -1,10 +1,10 @@
-import { Size } from '@/types/size'
+import { Size } from '../../types/size'
 
 export enum ButtonTypes {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   TERTIARY = 'tertiary',
-  DELETE = 'delete'
+  ACTION = 'action'
 }
 
 export enum ButtonNativeTypes {
