@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 
 import { SButton } from '@/components'
-import { ButtonTypes } from '@/components/SButton'
+import { ButtonTypes } from '@/components/Button'
 
 describe('SButton.vue', () => {
   it('renders props.type when passed', () => {

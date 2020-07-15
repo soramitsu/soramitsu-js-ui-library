@@ -1,4 +1,4 @@
-@import "~@/styles/variables.scss";
+@import "./variables.scss";
 
 [class^="el-"]:not(i):not([class*='el-icon']),
 [class*="el-"]:not(i):not([class*='el-icon']) {
@@ -29,4 +29,28 @@ button > span {
 // TODO: move to separate file and import to storybook
 .sbdocs.sbdocs-preview div[id^='story--'] > * {
   height: auto !important;
+}
+
+@mixin res($key, $map: $--breakpoints) {
+  @if map-has-key($map, $key) {
+    @media only screen and #{inspect(map-get($map, $key))} {
+      @content;
+    }
+  } @else {
+    @warn "Undefeined points: `#{$map}`";
+  }
+}
+
+@mixin utils-clearfix {
+  $selector: &;
+  @at-root {
+    #{$selector}::before,
+    #{$selector}::after {
+      display: table;
+      content: "";
+    }
+    #{$selector}::after {
+      clear: both;
+    }
+  }
 }

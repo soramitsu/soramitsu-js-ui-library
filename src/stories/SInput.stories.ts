@@ -1,7 +1,7 @@
 import { text, boolean, withKnobs, number, select } from '@storybook/addon-knobs'
 
-import { SInput } from '@/components'
-import { InputType } from '@/components/SInput'
+import { SInput, SRow, SCol } from '../components'
+import { InputType } from '../components/Input'
 
 export default {
   component: SInput,
@@ -56,9 +56,9 @@ export const differentTypesData = [InputType.TEXT, InputType.TEXTAREA].map(type 
   return data
 })
 export const filledAndReadonly = () => ({
-  components: { SInput },
-  template: `<el-col>
-               <el-row
+  components: { SInput, SCol, SRow },
+  template: `<s-col>
+               <s-row
                  v-for="item in items"
                  :key="item.type"
                  style="padding-bottom: 20px;"
@@ -69,8 +69,8 @@ export const filledAndReadonly = () => ({
                    :placeholder="item.placeholder"
                    readonly
                  />
-               </el-row>
-             </el-col>`,
+               </s-row>
+             </s-col>`,
   props: {
     items: {
       default: () => differentTypesData
@@ -79,9 +79,9 @@ export const filledAndReadonly = () => ({
 })
 
 export const disabled = () => ({
-  components: { SInput },
-  template: `<el-col>
-               <el-row
+  components: { SInput, SRow, SCol },
+  template: `<s-col>
+               <s-row
                  v-for="item in items"
                  :key="item.type"
                  style="padding-bottom: 20px;"
@@ -92,8 +92,8 @@ export const disabled = () => ({
                    :placeholder="item.placeholder"
                    disabled
                  />
-               </el-row>
-             </el-col>`,
+               </s-row>
+             </s-col>`,
   props: {
     items: {
       default: () => differentTypesData
@@ -102,22 +102,21 @@ export const disabled = () => ({
 })
 
 export const focused = () => ({
-  components: { SInput },
-  template: `<el-col>
-               <el-row
+  components: { SInput, SRow, SCol },
+  template: `<s-col>
+               <s-row
                  v-for="item in items"
                  :key="item.type"
                  style="padding-bottom: 20px;"
                >
                  <s-input
-                   ref="input"
                    class="focused"
                    v-model="item.model"
                    :type="item.type"
                    :placeholder="item.placeholder"
                  />
-               </el-row>
-             </el-col>`,
+               </s-row>
+             </s-col>`,
   props: {
     items: {
       default: () => differentTypesData
@@ -126,29 +125,29 @@ export const focused = () => ({
 })
 
 export const password = () => ({
-  components: { SInput },
-  template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { SInput, SRow },
+  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-input
                  v-model="input"
                  placeholder="Password"
                  show-password
                />
-             </el-row>`,
+             </s-row>`,
   data: () => ({
     input: 123456
   })
 })
 
 export const withTextLimit = () => ({
-  components: { SInput },
-  template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { SInput, SRow },
+  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-input
                  v-model="input"
                  placeholder="Limited text"
                  show-text-limit
                  maxlength="255"
                />
-             </el-row>`,
+             </s-row>`,
   data: () => ({
     input: 'Here is an example of limited text'
   })

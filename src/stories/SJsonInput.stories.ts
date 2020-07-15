@@ -1,6 +1,6 @@
 import { text, withKnobs, boolean } from '@storybook/addon-knobs'
 
-import { SJsonInput } from '@/components'
+import { SJsonInput, SRow } from '../components'
 
 export default {
   component: SJsonInput,
@@ -22,15 +22,15 @@ export const jsonData = {
   number: 21
 }
 export const configurable = () => ({
-  components: { SJsonInput },
-  template: `<el-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { SJsonInput, SRow },
+  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-json-input
                  v-model="json"
                  :height="height"
                  :disabled="disabled"
                >
                </s-json-input>
-             </el-row>`,
+             </s-row>`,
   data: () => ({
     json: jsonData
   }),

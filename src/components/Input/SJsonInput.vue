@@ -79,18 +79,13 @@ export default class SJsonInput extends Vue {
 </script>
 
 <style lang="scss">
-@import "~@/styles/variables.scss";
+@import "../../styles/variables.scss";
+@import "../../styles/icons.scss";
 
 $color-ide-variable: #0451A5;
 $color-ide-string: #A31515;
 $color-ide-number: #098658;
 $color-ide-boolean: #0000FF;
-
-.icon-error {
-  background-image: url('~@/assets/icons/warning.svg');
-  background-repeat: no-repeat;
-  background-position: 2px center;
-}
 
 .s-json-input {
   width: 100%;
@@ -112,9 +107,12 @@ $color-ide-boolean: #0000FF;
 }
 
 .jsoneditor {
-  border: none;
+  border: none !important;
   font-family: $font-family-mono;
   .ace-jsoneditor {
+    *, textarea.jsoneditor-text * {
+      font-family: $font-family-mono;
+    }
     .ace_fold {
       border: none;
       background: none;
@@ -168,16 +166,16 @@ $color-ide-boolean: #0000FF;
       background-color: $color-neutral-border;
     }
     .ace_gutter-cell.ace_error {
-      @extend .icon-error;
+      @extend .s-icon-error;
     }
   }
-  .ace_editor,
+  .ace_editor .ace_content,
   .ace_gutter .ace_gutter-cell {
     font-family: $font-family-mono;
   }
   .ace_tooltip {
     font-family: $font-family-default;
-    background: $color-basic-black; // TODO: fix el-tooltip colors, when tooltip component will be created
+    background: $color-basic-black;
     border-color: $color-basic-black;
     color: $color-basic-white;
     border-radius: $border-radius-default;
