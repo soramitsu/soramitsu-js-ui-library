@@ -81,8 +81,8 @@ export default class SButton extends Vue {
    */
   @Prop({ default: ButtonNativeTypes.BUTTON, type: String }) readonly nativeType!: string
 
-  @Inject('elForm') elForm!: ElForm
-  @Inject('elFormItem') elFormItem!: ElFormItem
+  @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
+  @Inject({ default: '', from: 'elFormItem' }) elFormItem!: ElFormItem
 
   elementIcon = ''
 
@@ -104,7 +104,7 @@ export default class SButton extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((this.elForm || this.elFormItem || {}).size) {
-      cssClasses.push(this.elForm.size || this.elFormItem.size)
+      cssClasses.push((this.elForm || this.elFormItem).size)
     } else if ((Object.values(ButtonSize) as Array<string>).includes(this.size)) {
       cssClasses.push(this.size)
     }

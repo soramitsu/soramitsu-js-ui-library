@@ -33,7 +33,7 @@ export default class SMenuItem extends Vue {
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
 
-  @Inject('sMenu') sMenu
+  @Inject({ default: '', from: 'sMenu' }) sMenu
 
   get computedStyles (): object {
     const styles = {} as any

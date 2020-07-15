@@ -46,7 +46,7 @@ export default class SSubmenu extends Vue {
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
 
-  @Inject('sMenu') sMenu
+  @Inject({ default: '', from: 'sMenu' }) sMenu
 
   @Ref('el-submenu') elSubmenu
 
