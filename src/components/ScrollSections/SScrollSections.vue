@@ -59,8 +59,9 @@ export default class SScrollSections extends Vue {
       if (this.$children.length === 0) {
         return
       }
-      this.handleInitialState()
+      this.menuItems = this.$children
       window.addEventListener('scroll', this.handleScroll)
+      this.handleInitialState()
     })
   }
 
@@ -79,20 +80,19 @@ export default class SScrollSections extends Vue {
   }
 
   private handleInitialState (): void {
-    this.menuItems = this.$children
     if (this.router && this.router.currentRoute.hash) {
       this.menuItems.forEach((sectionComponent: any) => {
         if (this.router.currentRoute.hash === `#${sectionComponent.section}`) {
           (sectionComponent.$el as HTMLElement).scrollIntoView()
-          this.activeSection = sectionComponent.section
         }
       })
     } else if (window.scrollY <= (this.menuItems[0].$el as HTMLElement).offsetTop) {
       this.activeSection = (this.menuItems[0] as any).section
       this.menuItems[0].$el.classList.add('active')
-      if (this.router) {
-        this.router.push({ hash: `#${this.activeSection}` })
+      if (!this.router) {
+        return
       }
+      this.router.push({ hash: `#${this.activeSection}` })
     }
   }
 
@@ -115,12 +115,12 @@ export default class SScrollSections extends Vue {
   }
 
   goTo (section: string): void {
-    if (this.router && this.router.currentRoute.hash !== `#${section}`) {
-      this.router.push({ hash: `#${section}` })
-      this.activeSection = section
-      const component = this.menuItems.filter((component: any) => component.section === section)[0] as any
-      (component.$el as HTMLElement).scrollIntoView({ behavior: 'smooth' })
+    if (!this.router || this.router.currentRoute.hash === `#${section}`) {
+      return
     }
+    this.router.push({ hash: `#${section}` })
+    const component = this.menuItems.filter((component: any) => component.section === section)[0] as any
+    (component.$el as HTMLElement).scrollIntoView({ behavior: 'smooth' })
   }
 }
 </script>
