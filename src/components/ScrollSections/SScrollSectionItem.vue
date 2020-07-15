@@ -19,9 +19,15 @@ export default class SScrollSectionItem extends Vue {
    */
   @Prop({ default: '', type: String, required: true }) readonly section!: string
   /**
-   * Title of scroll section item.
+   * Title of scroll section item. Slot `title` can be used as well
    */
   @Prop({ default: '', type: String }) readonly title!: string
+  /**
+   * Disabled state of scroll section item for menu.
+   *
+   * `false` by default
+   */
+  @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
 }
 </script>
 

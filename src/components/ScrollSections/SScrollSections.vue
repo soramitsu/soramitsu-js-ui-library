@@ -1,13 +1,14 @@
 <template>
-  <div
-    class="s-scroll-sections flex"
-  >
+  <div class="s-scroll-sections flex">
     <nav class="s-scroll-menu" v-if="menuItems.length > 0">
       <ul :style="computedStyles">
         <li class="s-scroll-item" v-for="item in menuItems" :key="item.section">
           <a
-            :href="!router ? '#' + item.section : null"
-            :class="{'active': item.section === activeSection}"
+            :href="!(router || item.disabled) ? '#' + item.section : null"
+            :class="{
+              'active': item.section === activeSection,
+              'disabled': item.disabled
+            }"
             @click="goTo(item.section)"
           >
             {{ item.title }}
@@ -154,6 +155,12 @@ export default class SScrollSections extends Vue {
       &.active {
         color: var(--s-menu-color-text-active);
         border-left: 2px solid var(--s-menu-color-text-active);
+      }
+      &.disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+        color: $color-neutral-inactive;
+        border-left: none;
       }
     }
   }
