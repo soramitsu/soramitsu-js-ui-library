@@ -24,6 +24,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import VueRouter from 'vue-router'
 
 @Component
 export default class SScrollSections extends Vue {
@@ -48,7 +49,7 @@ export default class SScrollSections extends Vue {
   /**
    * `VueRouter` instance from `vue-router`. If it's null, then routing will be unavailable while scrolling.
    */
-  @Prop({ type: Object }) readonly router!: any
+  @Prop({ type: Object }) readonly router!: VueRouter
 
   menuItems: Vue[] = []
   activeSection = ''
