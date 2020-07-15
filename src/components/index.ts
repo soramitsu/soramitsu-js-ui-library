@@ -5,6 +5,7 @@ import { SApp } from './Layout/App'
 import { SAside } from './Layout/Aside'
 import { SButton, SButtonGroup } from './Button'
 import { SCard } from './Card'
+import { SCheckbox } from './Checkbox'
 import { SCol } from './Layout/Col'
 import { SContainer } from './Layout/Container'
 import { SDropdown, SDropdownItem } from './Dropdown'
@@ -24,6 +25,7 @@ export {
   SButton,
   SButtonGroup,
   SCard,
+  SCheckbox,
   SCol,
   SContainer,
   SDropdown,
