@@ -22,7 +22,7 @@ export default class SHeader extends Vue {
 
 <style lang="scss">
 .el-header {
-  padding: 16px;
+  padding: 12px;
   box-shadow: 0px 0px 8px rgba(45, 41, 38, 0.2);
   font-size: 18px;
 }

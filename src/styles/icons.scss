@@ -7,11 +7,38 @@
     height: 16px;
   }
 
+  &plus-small {
+    position: absolute;
+    background-image: url('~@/assets/icons/plus.svg');
+    background-size: contain;
+    width: 12px;
+    height: 12px;
+    top: -6px;
+    left: -6px;
+  }
+
   &back {
     position: absolute;
     background-image: url('~@/assets/icons/arrow-left.svg');
     width: 20px;
     height: 20px;
+  }
+
+  &more {
+    position: absolute;
+    background-image: url('~@/assets/icons/more-horizontal.svg');
+    width: 21px;
+    height: 20px;
+  }
+
+  &back-small {
+    position: absolute;
+    background-image: url('~@/assets/icons/arrow-left.svg');
+    background-size: contain;
+    width: 12px;
+    height: 12px;
+    top: -6px;
+    left: -6px;
   }
 
   &globe {

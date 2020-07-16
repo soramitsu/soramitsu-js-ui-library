@@ -21,7 +21,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 
 import { SAside } from '../Aside'
-import { SContainer, ContainerDirection } from '../Container'
+import { SContainer } from '../Container'
 import { SFooter } from '../Footer'
 import { SHeader } from '../Header'
 import { SMain } from '../Main'
@@ -36,7 +36,7 @@ import { SMain } from '../Main'
   }
 })
 export default class SApp extends Vue {
-  readonly ContainerDirection = ContainerDirection
+  // TODO: add properties for header, footer, aside height
 }
 </script>
 
