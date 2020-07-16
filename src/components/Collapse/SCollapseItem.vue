@@ -45,6 +45,20 @@ export default class SCollapseItem extends Vue {
     &.is-active {
       border-bottom-color: transparent;
     }
+    .el-icon-arrow-right {
+      @extend .s-icon-arrow-top;
+      padding: 8px;
+      width: 32px;
+      height: 32px;
+      background-color: $color-neutral-placeholder;
+      border-radius: 50%;
+      &::before {
+        content: '';
+      }
+      &.is-active {
+        transform: rotate(180deg);
+      }
+    }
   }
   &content {
     color: $color-basic-black;
@@ -52,19 +66,5 @@ export default class SCollapseItem extends Vue {
 }
 .el-collapse-item.is-disabled .el-collapse-item__header {
   color: $color-neutral-inactive;
-}
-.el-icon-arrow-right {
-  @extend .s-icon-arrow-top;
-  padding: 8px;
-  width: 32px;
-  height: 32px;
-  background-color: $color-neutral-placeholder;
-  border-radius: 50%;
-  &::before {
-    content: '';
-  }
-  &.is-active {
-    transform: rotate(180deg);
-  }
 }
 </style>
