@@ -97,12 +97,15 @@ export default class SScrollSections extends Vue {
   }
 
   private handleScroll (): void {
-    const fromTop = window.scrollY
+    const fromTop = Math.round(window.scrollY)
     this.menuItems.forEach((sectionComponent, index) => {
       const section = sectionComponent.$el as HTMLElement
       const upperBound = section.offsetTop <= fromTop
       const lowerBound = section.offsetTop + section.offsetHeight > fromTop
-      if ((index === 0 && !upperBound) || (upperBound && lowerBound)) {
+      const underLowerBound = fromTop >= section.offsetTop + section.offsetHeight
+      if ((index === 0 && !upperBound) ||
+        (upperBound && lowerBound) ||
+        (index === this.menuItems.length - 1 && underLowerBound)) {
         this.activeSection = (sectionComponent as any).section
         section.classList.add('active')
         if (this.router && this.router.currentRoute.hash !== `#${this.activeSection}`) {
