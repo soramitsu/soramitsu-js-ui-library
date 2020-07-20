@@ -65,6 +65,10 @@ export default class SScrollSections extends Vue {
     })
   }
 
+  destroyed (): void {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
+
   get computedStyles (): object {
     const styles = {} as any
     if (this.textColor) {
