@@ -3,16 +3,16 @@
     class="s-input"
     :class="computedClasses"
   >
-    <span v-if="value" class="placeholder">{{ placeholder }}</span>
+    <span v-if="model" class="placeholder">{{ placeholder }}</span>
     <el-input
       ref="el-input"
-      :type="type"
+      :type="computedType"
       :placeholder="placeholder"
-      :value="value"
+      v-model="model"
       :disabled="disabled"
-      :show-password="showPassword"
+      :show-password="showPassword && isTextInput"
       :readonly="readonly"
-      :show-word-limit="showTextLimit"
+      :show-word-limit="showTextLimit && isTextOrTextareaInput"
       :maxlength="maxlength"
       :minlength="minlength"
       :autocomplete="autocomplete"
@@ -27,11 +27,15 @@
       @blur="handleBlur"
       @focus="handleFocus"
     />
+    <template v-if="type === InputType.TEXT_FILE">
+      <i class="s-icon-file"></i>
+      <input type="file" @change="handleTextFileChange">
+    </template>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref, Inject } from 'vue-property-decorator'
+import { Vue, Component, Prop, Ref, Inject, Watch } from 'vue-property-decorator'
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
@@ -39,6 +43,7 @@ import { Autocomplete, InputType } from './consts'
 
 @Component
 export default class SInput extends Vue {
+  readonly InputType = InputType
   /**
    * Type of input. It can be "text" or "textarea" or any native input type.
    * `"text"` by default
@@ -110,6 +115,25 @@ export default class SInput extends Vue {
   @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
 
   focused = false
+  model = this.value
+
+  @Watch('value', { deep: true })
+  private handlePropChange (value: string | number): void {
+    this.model = value
+  }
+
+  @Watch('model', { deep: true })
+  private handleValueChange (value: string | number): void {
+    this.$emit('change', value)
+  }
+
+  get isTextInput (): boolean {
+    return this.type === InputType.TEXT
+  }
+
+  get isTextOrTextareaInput (): boolean {
+    return [InputType.TEXT, InputType.TEXTAREA].includes(this.type as InputType)
+  }
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
@@ -119,7 +143,17 @@ export default class SInput extends Vue {
     if (this.disabled || (this.elForm || {}).disabled) {
       cssClasses.push('disabled')
     }
+    if (this.type === InputType.TEXT_FILE) {
+      cssClasses.push('text-file')
+    }
     return cssClasses
+  }
+
+  get computedType (): string {
+    if (this.type === InputType.TEXT_FILE) {
+      return InputType.TEXT
+    }
+    return this.type
   }
 
   handleInput (value: string | number): void {
@@ -138,6 +172,28 @@ export default class SInput extends Vue {
   handleFocus (event: Event): void {
     this.focused = true
     this.$emit('focus', event)
+  }
+
+  handleTextFileChange (event: any): void {
+    if (typeof window.FileReader !== 'function') {
+      throw new Error('The file API isn\'t supported on this browser.')
+    }
+    const input = event.target
+    if (!input) {
+      throw new Error('The browser does not properly implement the event object')
+    }
+    if (!input.files) {
+      throw new Error('This browser does not support the `files` property of the file input.')
+    }
+    if (!input.files[0]) {
+      return
+    }
+    const file = input.files[0]
+    const fr = new FileReader()
+    fr.onload = (event: ProgressEvent<FileReader>) => {
+      this.model = ((event.target || {}).result as string)
+    }
+    fr.readAsText(file)
   }
 
   public focus (): void {
@@ -241,6 +297,26 @@ export default class SInput extends Vue {
   }
   .placeholder + .el-textarea > textarea {
     padding-top: 24px;
+  }
+  &.text-file {
+    .el-input > input {
+      padding-right: 56px;
+    }
+    .s-icon-file {
+      top: 16px;
+      right: 16px;
+      z-index: 1;
+      + input {
+        cursor: pointer;
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: 0;
+        width: 56px;
+        height: 100%;
+        z-index: 2;
+      }
+    }
   }
 }
 

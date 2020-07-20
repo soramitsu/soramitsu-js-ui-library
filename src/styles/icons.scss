@@ -1,5 +1,12 @@
 /* TODO: fix icons due to external usage */
 .s-icon- {
+  &file {
+    position: absolute;
+    background-image: url('~@/assets/icons/file-upload.svg');
+    width: 24px;
+    height: 24px;
+  }
+
   &refresh {
     position: absolute;
     background-image: url('~@/assets/icons/refresh.svg');
