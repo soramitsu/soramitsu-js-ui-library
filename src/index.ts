@@ -19,6 +19,8 @@ import {
   SMenuItem,
   SMenuItemGroup,
   SRow,
+  SScrollSectionItem,
+  SScrollSections,
   SSubmenu,
   STooltip
 } from './components'
@@ -43,6 +45,8 @@ const elements = [
   { component: SMenuItem, name: Components.SMenuItem },
   { component: SMenuItemGroup, name: Components.SMenuItemGroup },
   { component: SRow, name: Components.SRow },
+  { component: SScrollSectionItem, name: Components.SScrollSectionItem },
+  { component: SScrollSections, name: Components.SScrollSections },
   { component: SSubmenu, name: Components.SSubmenu },
   { component: STooltip, name: Components.STooltip }
 ]
@@ -76,6 +80,8 @@ export {
   SMenuItem,
   SMenuItemGroup,
   SRow,
+  SScrollSectionItem,
+  SScrollSections,
   SSubmenu,
   STooltip
 }

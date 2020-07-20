@@ -15,6 +15,7 @@ import { SInput, SJsonInput } from './Input'
 import { SMain } from './Layout/Main'
 import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
 import { SRow } from './Layout/Row'
+import { SScrollSectionItem, SScrollSections } from './ScrollSections'
 import { STooltip } from './Tooltip'
 
 export {
@@ -38,6 +39,8 @@ export {
   SMenuItem,
   SMenuItemGroup,
   SRow,
+  SScrollSectionItem,
+  SScrollSections,
   SSubmenu,
   STooltip
 }

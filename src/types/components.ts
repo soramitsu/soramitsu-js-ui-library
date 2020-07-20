@@ -17,6 +17,8 @@ export enum Components {
   SMenuItem = 'SMenuItem',
   SMenuItemGroup = 'SMenuItemGroup',
   SRow = 'SRow',
+  SScrollSectionItem = 'SScrollSectionItem',
+  SScrollSections = 'SScrollSections',
   SSubmenu = 'SSubmenu',
   STooltip = 'STooltip'
 }
