@@ -221,6 +221,7 @@ export default class SInput extends Vue {
   .placeholder {
     // TODO: ask about animation
     color: $color-neutral-secondary;
+    text-align: left;
     font-size: 12px;
     padding: 0 15px;
     padding-top: 5px;
