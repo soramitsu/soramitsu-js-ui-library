@@ -4,6 +4,7 @@ export enum Components {
   SButton = 'SButton',
   SButtonGroup = 'SButtonGroup',
   SCard = 'SCard',
+  SCheckbox = 'SCheckbox',
   SCol= 'SCol',
   SContainer = 'SContainer',
   SFooter = 'SFooter',
