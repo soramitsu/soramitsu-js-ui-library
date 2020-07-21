@@ -45,8 +45,7 @@ import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
 import { ElDropdown } from 'element-ui/types/dropdown'
 
 import { DropdownType, DropdownSize, DropdownPlacement, DropdownTrigger } from './consts'
-import { ButtonTypes } from '../Button'
-import { SButton } from '../../components'
+import { ButtonTypes, SButton } from '../Button'
 
 @Component({
   components: {
