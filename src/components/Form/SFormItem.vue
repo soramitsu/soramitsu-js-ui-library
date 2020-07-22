@@ -13,9 +13,7 @@
   >
     <slot slot="label" name="label"></slot>
     <slot></slot>
-    <slot slot="error" name="error">
-      <i v-if="isError" class="s-icon-error"></i>
-    </slot>
+    <i v-if="errorState" class="s-icon-error"></i>
   </el-form-item>
 </template>
 
@@ -81,6 +79,16 @@ export default class SFormItem extends Vue {
 
   @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
 
+  errorState = false
+
+  mounted (): void {
+    this.$nextTick(() => {
+      this.$watch('$refs.formItem.validateState', (state) => {
+        this.errorState = state === 'error'
+      }, { deep: true })
+    })
+  }
+
   get computedRules (): object {
     const rules = (this.rules || (this.elForm.rules || {})[this.prop]) as any
     if (!rules) {
@@ -113,7 +121,6 @@ export default class SFormItem extends Vue {
 
 <style lang="scss">
 @import "../../styles/variables.scss";
-@import "../../styles/icons.scss";
 
 .el-form-item {
   margin-bottom: 26px;
@@ -123,53 +130,58 @@ export default class SFormItem extends Vue {
       width: 100%;
     }
   }
-}
-.is-error {
-  > .el-form-item__content {
-    > .el-form-item__error {
-      padding-top: 8px;
-      color: $color-basic-black;
-      &::before {
-        @extend .s-icon-error;
-        content: '000';
-        background-repeat: no-repeat;
-        color: transparent;
+  &.is-error {
+    margin-bottom: 6px;
+    > .el-form-item__content {
+      > .el-form-item__error {
         position: relative;
+        padding-top: 8px;
+        color: $color-basic-black;
+        &::before {
+          content: '000';
+          color: transparent;
+        }
+      }
+      > [class^="s-input"]:not(.disabled) {
+        .placeholder {
+          color: $color-error;
+          background-color: $color-main-base;
+        }
+        input, textarea {
+          background-color: $color-main-base;
+          &::placeholder {
+            color: $color-error;
+          }
+        }
+        &:hover {
+          .placeholder,
+          .el-input > input,
+          .el-textarea > textarea {
+            background-color: $color-main-hover-light;
+          }
+          .el-input > input,
+          .el-textarea > textarea {
+            border-color: $color-error;
+          }
+        }
+        &.focused {
+          .placeholder,
+          .el-input > input,
+          .el-textarea > textarea {
+            background-color: $color-basic-white;
+          }
+          .el-input > input,
+          .el-textarea > textarea {
+            border-color: $color-error;
+          }
+        }
       }
     }
-    > [class^="s-input"]:not(.disabled) {
-      .placeholder {
-        color: $color-error;
-        background-color: $color-main-base;
-      }
-      input, textarea {
-        background-color: $color-main-base;
-        &::placeholder {
-          color: $color-error;
-        }
-      }
-      &:hover {
-        .placeholder,
-        .el-input > input,
-        .el-textarea > textarea {
-          background-color: $color-main-hover-light;
-        }
-        .el-input > input,
-        .el-textarea > textarea {
-          border-color: $color-error;
-        }
-      }
-      &.focused {
-        .placeholder,
-        .el-input > input,
-        .el-textarea > textarea {
-          background-color: $color-basic-white;
-        }
-        .el-input > input,
-        .el-textarea > textarea {
-          border-color: $color-error;
-        }
-      }
+    .s-icon-error {
+      position: absolute;
+      width: 21px;
+      height: 21px;
+      background-position: 4px bottom;
     }
   }
 }
