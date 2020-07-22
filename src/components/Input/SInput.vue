@@ -218,6 +218,9 @@ export default class SInput extends Vue {
   width: 100%;
   min-height: $size-big;
   position: relative;
+  .el-input__suffix {
+    z-index: 1;
+  }
   .placeholder {
     // TODO: ask about animation
     color: $color-neutral-secondary;
