@@ -14,6 +14,13 @@
     height: 16px;
   }
 
+  &create {
+    position: absolute;
+    background-image: url('~@/assets/icons/create.svg');
+    width: 16px;
+    height: 16px;
+  }
+
   &plus-small {
     position: absolute;
     background-image: url('~@/assets/icons/plus.svg');
