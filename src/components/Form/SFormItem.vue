@@ -136,10 +136,10 @@ export default class SFormItem extends Vue {
       > .el-form-item__error {
         position: relative;
         padding-top: 8px;
+        padding-left: 30px;
         color: $color-basic-black;
         &::before {
-          content: '000';
-          color: transparent;
+          content: '';
         }
       }
       > [class^="s-input"]:not(.disabled) {
