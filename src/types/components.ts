@@ -6,6 +6,8 @@ export enum Components {
   SCard = 'SCard',
   SCheckbox = 'SCheckbox',
   SCol= 'SCol',
+  SCollapse = 'SCollapse',
+  SCollapseItem = 'SCollapseItem',
   SContainer = 'SContainer',
   SFooter = 'SFooter',
   SForm = 'SForm',

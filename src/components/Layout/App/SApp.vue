@@ -7,6 +7,7 @@
       <s-header v-if="this.$slots.header">
         <slot name="header" />
       </s-header>
+      <slot></slot>
       <s-main v-if="this.$slots.main">
         <slot name="main" />
       </s-main>

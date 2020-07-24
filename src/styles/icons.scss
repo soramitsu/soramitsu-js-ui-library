@@ -64,4 +64,10 @@
     background-repeat: no-repeat;
     background-position: 2px center;
   }
+
+  &arrow-top {
+    background-image: url('~@/assets/icons/arrow-top.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 }
