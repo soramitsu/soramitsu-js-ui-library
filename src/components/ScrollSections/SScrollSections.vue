@@ -1,6 +1,6 @@
 <template>
   <div class="s-scroll-sections flex">
-    <nav class="s-scroll-menu" v-if="menuItems.length > 0">
+    <nav class="s-scroll-menu" v-if="menuItems.length > 0" :style="computedFlex.menu">
       <ul :style="computedStyles">
         <li class="s-scroll-item" v-for="item in menuItems" :key="item.section">
           <a
@@ -16,9 +16,10 @@
         </li>
       </ul>
     </nav>
-    <div class="s-scroll-content">
+    <div class="s-scroll-content" :style="computedFlex.sections">
       <slot></slot>
     </div>
+    <div v-if="computedFlex.empty" class="s-empty-block" :style="computedFlex.empty"></div>
   </div>
 </template>
 
@@ -47,9 +48,34 @@ export default class SScrollSections extends Vue {
    */
   @Prop({ default: '#D0021B', type: String }) readonly hoverColor!: string
   /**
-   * `VueRouter` instance from `vue-router`. If it's null, then routing will be unavailable while scrolling.
+   * `VueRouter` instance from `vue-router`. If it's null, then routing will be unavailable while scrolling
    */
   @Prop({ type: Object }) readonly router!: VueRouter
+  /**
+   * If the parent flag is set, then the parent component will be used for scrolling events and calculations,
+   * otherwise - the `window` object.
+   *
+   * `false` by default
+   */
+  @Prop({ type: Boolean, default: false }) readonly parent!: boolean
+  /**
+   * Top offset if there are other elements on the layout above it.
+   *
+   * By default, it's set to `0`
+   */
+  @Prop({ type: Number, default: 0 }) readonly topOffset!: number
+  /**
+   * Flex size numbers for each element of scroll sections component.
+   *
+   * For instance, `{ main: 4, menu: 1, sections: 2 }`.
+   * `main` - size of all scroll sections component.
+   * If menu size is not set, then it will be calculated based on menu and sections size.
+   * `menu` - size of the menu.
+   * `sections` - size of the sections part.
+   *
+   * `{ menu: 1, sections: 2 }` by default
+   */
+  @Prop({ type: Object, default: { menu: 1, sections: 2 } }) readonly flexSize!: any
 
   menuItems: Vue[] = []
   activeSection = ''
@@ -59,14 +85,18 @@ export default class SScrollSections extends Vue {
       if (this.$children.length === 0) {
         return
       }
-      this.menuItems = this.$children
-      window.addEventListener('scroll', this.handleScroll)
+      let children = this.$children
+      while (!children.every((item: any) => item.section)) {
+        children = children[0].$children
+      }
+      this.menuItems = children
+      this.scrollableParent.addEventListener('scroll', this.handleScroll)
       this.handleInitialState()
     })
   }
 
   destroyed (): void {
-    window.removeEventListener('scroll', this.handleScroll)
+    this.scrollableParent.removeEventListener('scroll', this.handleScroll)
   }
 
   get computedStyles (): object {
@@ -83,6 +113,23 @@ export default class SScrollSections extends Vue {
     return styles
   }
 
+  get computedFlex (): object {
+    const flexObject = { menu: {}, sections: {} } as any
+    if (!this.flexSize) {
+      return flexObject
+    }
+    if (this.flexSize.main && this.flexSize.main > this.flexSize.menu + this.flexSize.sections) {
+      flexObject.empty = { flex: this.flexSize.main - (this.flexSize.menu + this.flexSize.sections) }
+    }
+    flexObject.menu.flex = this.flexSize.menu
+    flexObject.sections.flex = this.flexSize.sections
+    return flexObject
+  }
+
+  get scrollableParent (): any {
+    return this.parent ? this.$parent.$el : window
+  }
+
   private handleInitialState (): void {
     if (this.router && this.router.currentRoute.hash) {
       this.menuItems.forEach((sectionComponent: any) => {
@@ -90,7 +137,11 @@ export default class SScrollSections extends Vue {
           (sectionComponent.$el as HTMLElement).scrollIntoView()
         }
       })
-    } else if (window.scrollY <= (this.menuItems[0].$el as HTMLElement).offsetTop) {
+      let scrollY = this.scrollableParent.scrollY || this.scrollableParent.scrollTop
+      if (this.topOffset) {
+        scrollY += this.topOffset
+      }
+    } else if (scrollY <= (this.menuItems[0].$el as HTMLElement).offsetTop) {
       this.activeSection = (this.menuItems[0] as any).section
       this.menuItems[0].$el.classList.add('active')
       if (!this.router) {
@@ -101,7 +152,11 @@ export default class SScrollSections extends Vue {
   }
 
   private handleScroll (): void {
-    const fromTop = Math.round(window.scrollY)
+    let scrollY = this.scrollableParent.scrollY || this.scrollableParent.scrollTop
+    if (this.topOffset) {
+      scrollY += this.topOffset
+    }
+    const fromTop = Math.round(scrollY)
     this.menuItems.forEach((sectionComponent, index) => {
       const section = sectionComponent.$el as HTMLElement
       const upperBound = section.offsetTop <= fromTop
@@ -141,7 +196,6 @@ export default class SScrollSections extends Vue {
 }
 .s-scroll-menu {
   font-weight: 600;
-  flex: 1;
   ul {
     position: sticky;
     top: 0;
@@ -172,8 +226,5 @@ export default class SScrollSections extends Vue {
       }
     }
   }
-}
-.s-scroll-content {
-  flex: 2;
 }
 </style>
