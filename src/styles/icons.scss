@@ -14,6 +14,13 @@
     height: 16px;
   }
 
+  &refresh-red {
+    position: absolute;
+    background-image: url('~@/assets/icons/refresh-red.svg');
+    width: 16px;
+    height: 16px;
+  }
+
   &create {
     position: absolute;
     background-image: url('~@/assets/icons/create.svg');
