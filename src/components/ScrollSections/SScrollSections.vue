@@ -227,4 +227,7 @@ export default class SScrollSections extends Vue {
     }
   }
 }
+.s-scroll-content {
+  padding-bottom: 90%;
+}
 </style>

@@ -38,7 +38,7 @@ export default class SScrollSectionItem extends Vue {
     margin-top: 10px;
   }
   &:last-child {
-    margin-bottom: 120%;
+    margin-bottom: 10px;
   }
   .title {
     font-weight: bold;
