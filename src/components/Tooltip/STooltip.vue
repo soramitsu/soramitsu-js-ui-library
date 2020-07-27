@@ -14,6 +14,7 @@
     :hide-after="closeDelay"
     :tabindex="tabindex"
   >
+    <slot slot="content" name="content"></slot>
     <slot></slot>
   </el-tooltip>
 </template>
@@ -34,7 +35,7 @@ export default class STooltip extends Vue {
    */
   @Prop({ default: TooltipTheme.DARK, type: String }) readonly theme!: TooltipEffect
   /**
-   * Content of the tooltip
+   * Content of the tooltip. You can set content from `content` slot as well
    */
   @Prop({ default: '', type: String }) readonly content!: string
   /**

@@ -6,6 +6,8 @@ import {
   ButtonGroup,
   Card,
   Checkbox,
+  Collapse,
+  CollapseItem,
   Container,
   DatePicker,
   Dialog,
@@ -44,6 +46,8 @@ import {
 // import lang from 'element-ui/lib/locale/lang/en'
 // import locale from 'element-ui/lib/locale'
 
+Vue.use(Collapse)
+Vue.use(CollapseItem)
 Vue.use(Dialog)
 Vue.use(Footer)
 Vue.use(Menu)

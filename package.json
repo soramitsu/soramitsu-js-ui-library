@@ -1,6 +1,6 @@
 {
   "name": "@soramitsu/soramitsu-js-ui",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": false,
   "publishConfig": {
     "registry": "https://nexus.iroha.tech/repository/npm-soramitsu-private/"
@@ -69,9 +69,11 @@
     "rollup-plugin-typescript2": "^0.25.2",
     "rollup-plugin-vue": "^5.1.4",
     "sass-loader": "^8.0.2",
+    "storybook-vue-router": "^1.0.7",
     "ts-jest": "^26.0.0",
     "typescript": "~3.8.3",
     "vue-cli-plugin-storybook": "~1.2.2",
+    "vue-router": "^3.3.4",
     "vue-template-compiler": "^2.6.11"
   },
   "postcss": {

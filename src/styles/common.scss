@@ -22,6 +22,18 @@ html {
   font-weight: bold;
 }
 
+.big {
+  height: $size-big;
+}
+
+.medium {
+  height: $size-medium;
+}
+
+.small {
+  height: $size-small;
+}
+
 button > span {
   position: relative;
 }

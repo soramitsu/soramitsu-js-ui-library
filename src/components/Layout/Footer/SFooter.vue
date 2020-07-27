@@ -10,13 +10,12 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 @Component
 export default class SFooter extends Vue {
   /**
-   * Height of a component. Default value is `"56px"`.
+   * Height of the footer component. Default value is `"56px"`.
    *
    * In this context, the value of the height property must match the valid value of the
    * **CSS height** property. For instance, `"auto"`, `"200px"`, `"100vh"` etc.
    */
   @Prop({ default: '56px', type: String }) readonly height!: string
-  // TODO: 56px is set because of big size right?
 }
 </script>
 

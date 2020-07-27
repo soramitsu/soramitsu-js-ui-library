@@ -160,18 +160,6 @@ export default class SButton extends Vue {
   }
 }
 
-.big {
-  height: $size-big;
-}
-
-.medium {
-  height: $size-medium;
-}
-
-.small {
-  height: $size-small;
-}
-
 .primary {
   &:hover, &:active, &:focus {
     background-color: $color-main-hover;
@@ -230,24 +218,16 @@ export default class SButton extends Vue {
   }
   background-color: $color-neutral-placeholder;
   border-color: $color-neutral-placeholder;
-  &:hover, &:active, &:focus, &:disabled { // TODO: ux designers will create this state
-    background-color: $color-neutral-placeholder;
-    border-color: $color-neutral-placeholder;
-  }
-  &:disabled:hover {
-    background-color: $color-neutral-placeholder;
-    border-color: $color-neutral-placeholder;
+  &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+    background-color: $color-neutral-hover;
+    border-color: $color-neutral-hover;
   }
   &.alternative {
     background-color: $color-basic-white;
     border-color: $color-neutral-border;
-    &:hover, &:active, &:focus, &:disabled { // TODO: ux designers will create this state
-      background-color: $color-basic-white;
-      border-color: $color-neutral-border;
-    }
-    &:disabled:hover {
-      background-color: $color-basic-white;
-      border-color: $color-neutral-border;
+    &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+      background-color: $color-neutral-placeholder;
+      border-color: $color-neutral-placeholder;
     }
   }
 }

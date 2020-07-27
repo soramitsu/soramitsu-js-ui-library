@@ -4,8 +4,13 @@ export enum Components {
   SButton = 'SButton',
   SButtonGroup = 'SButtonGroup',
   SCard = 'SCard',
+  SCheckbox = 'SCheckbox',
   SCol= 'SCol',
+  SCollapse = 'SCollapse',
+  SCollapseItem = 'SCollapseItem',
   SContainer = 'SContainer',
+  SDropdown = 'SDropdown',
+  SDropdownItem = 'SDropdownItem',
   SFooter = 'SFooter',
   SForm = 'SForm',
   SFormItem = 'SFormItem',
@@ -17,6 +22,8 @@ export enum Components {
   SMenuItem = 'SMenuItem',
   SMenuItemGroup = 'SMenuItemGroup',
   SRow = 'SRow',
+  SScrollSectionItem = 'SScrollSectionItem',
+  SScrollSections = 'SScrollSections',
   SSubmenu = 'SSubmenu',
   STooltip = 'STooltip'
 }

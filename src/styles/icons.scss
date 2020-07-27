@@ -1,5 +1,12 @@
 /* TODO: fix icons due to external usage */
 .s-icon- {
+  &file {
+    position: absolute;
+    background-image: url('~@/assets/icons/file-upload.svg');
+    width: 24px;
+    height: 24px;
+  }
+
   &refresh {
     position: absolute;
     background-image: url('~@/assets/icons/refresh.svg');
@@ -7,11 +14,52 @@
     height: 16px;
   }
 
+  &refresh-red {
+    position: absolute;
+    background-image: url('~@/assets/icons/refresh-red.svg');
+    width: 16px;
+    height: 16px;
+  }
+
+  &create {
+    position: absolute;
+    background-image: url('~@/assets/icons/create.svg');
+    width: 16px;
+    height: 16px;
+  }
+
+  &plus-small {
+    position: absolute;
+    background-image: url('~@/assets/icons/plus.svg');
+    background-size: contain;
+    width: 12px;
+    height: 12px;
+    top: -6px;
+    left: -6px;
+  }
+
   &back {
     position: absolute;
     background-image: url('~@/assets/icons/arrow-left.svg');
     width: 20px;
     height: 20px;
+  }
+
+  &more {
+    position: absolute;
+    background-image: url('~@/assets/icons/more-horizontal.svg');
+    width: 21px;
+    height: 20px;
+  }
+
+  &back-small {
+    position: absolute;
+    background-image: url('~@/assets/icons/arrow-left.svg');
+    background-size: contain;
+    width: 12px;
+    height: 12px;
+    top: -6px;
+    left: -6px;
   }
 
   &globe {
@@ -36,5 +84,11 @@
     background-image: url('~@/assets/icons/warning.svg');
     background-repeat: no-repeat;
     background-position: 2px center;
+  }
+
+  &arrow-top {
+    background-image: url('~@/assets/icons/arrow-top.svg');
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }

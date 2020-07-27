@@ -152,3 +152,21 @@ export const withTextLimit = () => ({
     input: 'Here is an example of limited text'
   })
 })
+
+export const textFileInput = () => ({
+  components: { SInput },
+  template: `<s-input
+               v-model="input"
+               type="text-file"
+               placeholder="Upload or input text"
+               :accept="accept"
+             />`,
+  data: () => ({
+    input: ''
+  }),
+  props: {
+    accept: {
+      default: text('Accept', '*/*')
+    }
+  }
+})
