@@ -16,7 +16,6 @@ export default class SFooter extends Vue {
    * **CSS height** property. For instance, `"auto"`, `"200px"`, `"100vh"` etc.
    */
   @Prop({ default: '56px', type: String }) readonly height!: string
-  // TODO: 56px is set because of big size right?
 }
 </script>
 
