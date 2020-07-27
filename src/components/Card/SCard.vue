@@ -48,6 +48,7 @@ export default class SCard extends Vue {
   .el-card__header {
     border-bottom-color: $color-basic-white;
     padding-bottom: 0;
+    text-align: left;
   }
   .el-card__body {
     padding: 18px 20px;

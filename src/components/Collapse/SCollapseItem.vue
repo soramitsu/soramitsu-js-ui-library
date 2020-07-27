@@ -33,7 +33,7 @@ export default class SCollapseItem extends Vue {
 
 <style lang="scss">
 @import "../../styles/variables.scss";
-@import "../../styles/icons.scss";
+// @import "../../styles/icons.scss";
 
 .el-collapse-item__ {
   &wrap {
@@ -45,18 +45,24 @@ export default class SCollapseItem extends Vue {
     &.is-active {
       border-bottom-color: transparent;
     }
+    // TODO: fix it. @extend doesn't work in the current implementation
     .el-icon-arrow-right {
-      @extend .s-icon-arrow-top;
-      padding: 8px;
+      // @extend .s-icon-arrow-top;
+      padding: 10px;
+      // padding: 8px;
       width: 32px;
       height: 32px;
       background-color: $color-neutral-placeholder;
       border-radius: 50%;
       &::before {
-        content: '';
+        // content: '';
+        color: $color-basic-black; // TODO: remove these lines
+        font-weight: bold;
       }
+      transform: rotate(90deg); // TODO: remove it
       &.is-active {
-        transform: rotate(180deg);
+        // transform: rotate(180deg);
+        transform: rotate(270deg);
       }
     }
   }

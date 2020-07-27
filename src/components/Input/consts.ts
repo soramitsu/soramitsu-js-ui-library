@@ -12,6 +12,7 @@ export enum InputType {
   DATE = 'date',
   DATETIME_LOCAL = 'datetime-local',
   EMAIL = 'email',
+  TEXT_FILE = 'text-file',
   FILE = 'file',
   HIDDEN = 'hidden',
   IMAGE = 'image',

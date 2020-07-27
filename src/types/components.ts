@@ -9,6 +9,8 @@ export enum Components {
   SCollapse = 'SCollapse',
   SCollapseItem = 'SCollapseItem',
   SContainer = 'SContainer',
+  SDropdown = 'SDropdown',
+  SDropdownItem = 'SDropdownItem',
   SFooter = 'SFooter',
   SForm = 'SForm',
   SFormItem = 'SFormItem',

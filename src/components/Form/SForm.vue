@@ -13,6 +13,7 @@
     :size="size"
     :label-position="labelPosition"
     @validate="handleValidate"
+    @focusout.native="updateIfFormValidated"
   >
     <slot></slot>
   </el-form>
@@ -90,8 +91,28 @@ export default class SForm extends Vue {
 
   @Ref('form') form!: ElForm
 
+  isDirty = false
+
   handleValidate (propNameIfSuccessOrError: string): void {
     this.$emit('validate', propNameIfSuccessOrError)
+  }
+
+  // TODO: think about event when we can change dirty state
+  updateIfFormValidated (): void {
+    const fields = (this.$refs.form as any).fields
+    if (fields.find((f) => f.validateState === 'validating')) {
+      setTimeout(() => { this.updateIfFormValidated() }, 100)
+    } else {
+      this.isDirty = !fields.reduce((acc, f) => {
+        const valid = (f.isRequired && f.validateState === 'success')
+        const notErroring = (!f.isRequired && f.validateState !== 'error')
+        return acc && (valid || notErroring)
+      }, true)
+    }
+  }
+
+  public get dirty (): boolean {
+    return this.isDirty
   }
 
   public validate (): Promise<boolean> {

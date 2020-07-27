@@ -27,7 +27,7 @@
         <slot></slot>
         <i class="el-icon-arrow-down el-icon--right"></i>
       </s-button>
-      <el-tooltip v-else :disabled="willTooltipBeDisabled">
+      <el-tooltip v-else :disabled="!this.$slots.default || willTooltipBeDisabled">
         <i class="s-icon-more"></i>
         <template slot="content">
           <slot></slot>

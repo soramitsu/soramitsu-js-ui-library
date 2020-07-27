@@ -1,8 +1,29 @@
 /* TODO: fix icons due to external usage */
 .s-icon- {
+  &file {
+    position: absolute;
+    background-image: url('~@/assets/icons/file-upload.svg');
+    width: 24px;
+    height: 24px;
+  }
+
   &refresh {
     position: absolute;
     background-image: url('~@/assets/icons/refresh.svg');
+    width: 16px;
+    height: 16px;
+  }
+
+  &refresh-red {
+    position: absolute;
+    background-image: url('~@/assets/icons/refresh-red.svg');
+    width: 16px;
+    height: 16px;
+  }
+
+  &create {
+    position: absolute;
+    background-image: url('~@/assets/icons/create.svg');
     width: 16px;
     height: 16px;
   }
