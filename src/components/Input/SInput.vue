@@ -21,6 +21,7 @@
       :min="min"
       :form="form"
       :label="label"
+      :accept="accept"
       :tabindex="tabindex"
       @input="handleInput"
       @change="handleChange"
@@ -29,7 +30,7 @@
     />
     <template v-if="type === InputType.TEXT_FILE">
       <i class="s-icon-file"></i>
-      <input type="file" @change="handleTextFileChange">
+      <input type="file" :accept="accept" @change="handleTextFileChange">
     </template>
   </div>
 </template>
@@ -73,6 +74,10 @@ export default class SInput extends Vue {
    * If this flag is enabled then user will see input limitation. `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly showTextLimit!: boolean
+  /**
+   * Accept property for `"file"` or `"text-file"` input type
+   */
+  @Prop({ default: '', type: String }) readonly accept!: string
   /**
    * Maxlength property of native input
    */
@@ -222,7 +227,7 @@ export default class SInput extends Vue {
     z-index: 1;
   }
   .placeholder {
-    // TODO: ask about animation
+    // TODO: add default animation from material-ui
     color: $color-neutral-secondary;
     text-align: left;
     font-size: 12px;
