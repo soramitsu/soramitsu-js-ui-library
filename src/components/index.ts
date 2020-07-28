@@ -9,6 +9,7 @@ import { SCheckbox } from './Checkbox'
 import { SCol } from './Layout/Col'
 import { SCollapse, SCollapseItem } from './Collapse'
 import { SContainer } from './Layout/Container'
+import { SDialog } from './Dialog'
 import { SDropdown, SDropdownItem } from './Dropdown'
 import { SFooter } from './Layout/Footer'
 import { SForm, SFormItem } from './Form'
@@ -31,6 +32,7 @@ export {
   SCollapse,
   SCollapseItem,
   SContainer,
+  SDialog,
   SDropdown,
   SDropdownItem,
   SFooter,
