@@ -80,7 +80,7 @@ export default class SJsonInput extends Vue {
 
 <style lang="scss">
 @import "../../styles/variables.scss";
-@import "../../styles/icons.scss";
+// @import "../../styles/icons.scss";
 
 $color-ide-variable: #0451A5;
 $color-ide-string: #A31515;
@@ -165,9 +165,9 @@ $color-ide-boolean: #0000FF;
     &-active-line {
       background-color: $color-neutral-border;
     }
-    .ace_gutter-cell.ace_error {
-      @extend .s-icon-error; // TODO: fix the path for icon
-    }
+    // .ace_gutter-cell.ace_error {
+    //   @extend .s-icon-error; // TODO: fix the path for icon
+    // }
   }
   .ace_editor .ace_content,
   .ace_gutter .ace_gutter-cell {
