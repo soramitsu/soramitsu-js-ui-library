@@ -31,6 +31,7 @@ import {
   STooltip
 } from './components'
 import { Components } from './types/components'
+import { Message, MessageBox, Notification } from './plugins/elementUI'
 
 const elements = [
   { component: SApp, name: Components.SApp },
@@ -73,7 +74,10 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(SoramitsuElements, {})
 }
 
-/* export {
+export {
+  Message,
+  MessageBox,
+  Notification,
   SApp,
   SAside,
   SButton,
@@ -102,5 +106,5 @@ if (typeof window !== 'undefined' && window.Vue) {
   SScrollSections,
   SSubmenu,
   STooltip
-} */
+}
 export default SoramitsuElements
