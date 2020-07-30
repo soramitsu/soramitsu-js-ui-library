@@ -11,6 +11,7 @@ import {
   SCollapse,
   SCollapseItem,
   SContainer,
+  SDialog,
   SDropdown,
   SDropdownItem,
   SFooter,
@@ -42,6 +43,7 @@ const elements = [
   { component: SCollapse, name: Components.SCollapse },
   { component: SCollapseItem, name: Components.SCollapseItem },
   { component: SContainer, name: Components.SContainer },
+  { component: SDialog, name: Components.SDialog },
   { component: SDropdown, name: Components.SDropdown },
   { component: SDropdownItem, name: Components.SDropdownItem },
   { component: SFooter, name: Components.SFooter },
@@ -71,7 +73,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(SoramitsuElements, {})
 }
 
-export {
+/* export {
   SApp,
   SAside,
   SButton,
@@ -82,6 +84,7 @@ export {
   SCollapse,
   SCollapseItem,
   SContainer,
+  SDialog,
   SDropdown,
   SDropdownItem,
   SFooter,
@@ -99,5 +102,5 @@ export {
   SScrollSections,
   SSubmenu,
   STooltip
-}
+} */
 export default SoramitsuElements

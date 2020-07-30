@@ -122,12 +122,12 @@ export default class SInput extends Vue {
   focused = false
   model = this.value
 
-  @Watch('value', { deep: true })
+  @Watch('value')
   private handlePropChange (value: string | number): void {
     this.model = value
   }
 
-  @Watch('model', { deep: true })
+  @Watch('model')
   private handleValueChange (value: string | number): void {
     this.$emit('change', value)
   }
