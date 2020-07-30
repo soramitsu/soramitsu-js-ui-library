@@ -73,7 +73,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(SoramitsuElements, {})
 }
 
-export {
+/* export {
   SApp,
   SAside,
   SButton,
@@ -102,5 +102,5 @@ export {
   SScrollSections,
   SSubmenu,
   STooltip
-}
+} */
 export default SoramitsuElements
