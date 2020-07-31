@@ -37,8 +37,14 @@ export default {
           src: 'src/styles/*',
           dest: 'lib/styles',
           // Replace all imports for scss files which will be used as theming files
-          transform: (content) => content.toString().replace(/~@\/assets\//g, '../assets/')
-        }
+          transform: (content) => {
+            return content.toString()
+              .replace(/~@\/assets\//g, '../assets/')
+              // Add scss styles from element-ui
+              .replace('../../node_modules/element-ui/packages/theme-chalk/src/index', './element-ui/index')
+          }
+        },
+        { src: 'node_modules/element-ui/packages/theme-chalk/src/*', dest: 'lib/styles/element-ui' }
       ]
     }),
     typescript({
@@ -58,7 +64,7 @@ export default {
     resolve(),
     terser(),
     del({
-      targets: ['lib/styles/index.d.ts', 'lib/plugins/'],
+      targets: ['lib/styles/index.d.ts'],
       hook: 'writeBundle'
     })
   ]
