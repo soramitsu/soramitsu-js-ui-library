@@ -26,7 +26,7 @@ import {
   MenuItem,
   MenuItemGroup,
   Message,
-  MessageBox,
+  MessageBox as MsgBox,
   Notification,
   Option,
   Pagination,
@@ -85,13 +85,18 @@ Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Loading.directive)
 Vue.use(Checkbox)
-const MsgBox = MessageBox
+const MessageBox = MsgBox
 MsgBox.setDefaults({
   cancelButtonText: 'Cancel',
   confirmButtonText: 'OK'
 })
-Vue.prototype.$prompt = MsgBox.prompt
-Vue.prototype.$alert = MsgBox.alert
+Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$message = Message
 Vue.prototype.$notify = Notification
 // locale.use(lang) // TODO: it will be used later
+export {
+  MessageBox,
+  Message,
+  Notification
+}
