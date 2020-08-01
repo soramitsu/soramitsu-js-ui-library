@@ -160,6 +160,7 @@ export const textFileInput = () => ({
                type="text-file"
                placeholder="Upload or input text"
                :accept="accept"
+               @change="(value) => handleChange(value, input)"
              />`,
   data: () => ({
     input: ''
@@ -167,6 +168,11 @@ export const textFileInput = () => ({
   props: {
     accept: {
       default: text('Accept', '*/*')
+    }
+  },
+  methods: {
+    handleChange: (value, input) => {
+      console.log(`v-model=${input}`, `@change=${value}`)
     }
   }
 })
