@@ -14,14 +14,18 @@ export const configurable = () => ({
   components: { SCheckbox, SRow },
   template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-checkbox
+                 v-model="checked"
                  :disabled="disabled"
                  :border="border"
                  :size="size"
                  :label="label"
-                 @change="hangleChange"
+                 @change="(value) => handleChange(value, checked)"
                >
                </s-checkbox>
              </s-row>`,
+  data: () => ({
+    checked: true
+  }),
   props: {
     disabled: {
       default: boolean('Disabled', false)
@@ -37,7 +41,9 @@ export const configurable = () => ({
     }
   },
   methods: {
-    hangleChange: (checked: boolean) => console.log(checked ? 'checked!' : 'unchecked!')
+    handleChange: (value: boolean, checked: boolean) => {
+      console.log(`v-model=${checked}`, `@change=${value}`)
+    }
   }
 })
 
