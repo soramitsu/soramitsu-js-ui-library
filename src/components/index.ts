@@ -3,6 +3,7 @@ import '../styles'
 
 import { SApp } from './Layout/App'
 import { SAside } from './Layout/Aside'
+import { SBreadcrumb, SBreadcrumbItem } from './Breadcrumb'
 import { SButton, SButtonGroup } from './Button'
 import { SCard } from './Card'
 import { SCheckbox } from './Checkbox'
@@ -24,6 +25,8 @@ import { STooltip } from './Tooltip'
 export {
   SApp,
   SAside,
+  SBreadcrumb,
+  SBreadcrumbItem,
   SButton,
   SButtonGroup,
   SCard,

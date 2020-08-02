@@ -3,6 +3,8 @@ import Vue from 'vue'
 import {
   SApp,
   SAside,
+  SBreadcrumb,
+  SBreadcrumbItem,
   SButton,
   SButtonGroup,
   SCard,
@@ -36,6 +38,8 @@ import { Message, MessageBox, Notification } from './plugins/elementUI'
 const elements = [
   { component: SApp, name: Components.SApp },
   { component: SAside, name: Components.SAside },
+  { component: SBreadcrumb, name: Components.SBreadcrumb },
+  { component: SBreadcrumbItem, name: Components.SBreadcrumbItem },
   { component: SButton, name: Components.SButton },
   { component: SButtonGroup, name: Components.SButtonGroup },
   { component: SCard, name: Components.SCard },
@@ -80,6 +84,8 @@ export {
   Notification,
   SApp,
   SAside,
+  SBreadcrumb,
+  SBreadcrumbItem,
   SButton,
   SButtonGroup,
   SCard,
