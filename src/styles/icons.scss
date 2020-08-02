@@ -52,6 +52,16 @@
     height: 20px;
   }
 
+  &more-small {
+    position: absolute;
+    background-image: url('~@/assets/icons/more-horizontal.svg');
+    background-size: contain;
+    width: 12px;
+    height: 12px;
+    top: -6px;
+    left: -6px;
+  }
+
   &back-small {
     position: absolute;
     background-image: url('~@/assets/icons/arrow-left.svg');
