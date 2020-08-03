@@ -155,14 +155,21 @@ export const withTextLimit = () => ({
 
 export const textFileInput = () => ({
   components: { SInput },
-  template: `<s-input
-               v-model="input"
-               type="text-file"
-               placeholder="Upload or input text"
-               :accept="accept"
-             />`,
+  template: `<div class="flex" style="flex: 1; flex-direction: column;">
+               <s-input
+                 v-model="vModelValue"
+                 type="text-file"
+                 placeholder="Upload or input text"
+                 :accept="accept"
+                 @change="(value) => changeValue = value"
+               />
+               <span style="margin-top: 40px;">
+                 v-model="{{ vModelValue }}", @change="{{ changeValue }}"
+               </span>
+             </div>`,
   data: () => ({
-    input: ''
+    vModelValue: '',
+    changeValue: ''
   }),
   props: {
     accept: {
