@@ -1,6 +1,8 @@
 export enum Components {
   SApp = 'SApp',
   SAside = 'SAside',
+  SBreadcrumb = 'SBreadcrumb',
+  SBreadcrumbItem = 'SBreadcrumbItem',
   SButton = 'SButton',
   SButtonGroup = 'SButtonGroup',
   SCard = 'SCard',

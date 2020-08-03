@@ -6,8 +6,7 @@ import { CardShadow } from '../components/Card'
 export default {
   component: SCard,
   title: 'Design System/Card',
-  decorators: [withKnobs],
-  excludeStories: /.*Data$/
+  decorators: [withKnobs]
 }
 
 export const configurable = () => ({

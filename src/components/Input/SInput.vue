@@ -30,7 +30,7 @@
     />
     <template v-if="type === InputType.TEXT_FILE">
       <i class="s-icon-file"></i>
-      <input type="file" :accept="accept" @change="handleTextFileChange">
+      <input :value="emptyValue" type="file" :accept="accept" @change="handleTextFileChange">
     </template>
   </div>
 </template>
@@ -45,6 +45,7 @@ import { Autocomplete, InputType } from './consts'
 @Component
 export default class SInput extends Vue {
   readonly InputType = InputType
+  readonly emptyValue = null
   /**
    * Type of input. It can be "text" or "textarea" or any native input type.
    * `"text"` by default
@@ -129,6 +130,7 @@ export default class SInput extends Vue {
 
   @Watch('model')
   private handleValueChange (value: string | number): void {
+    this.$emit('input', value)
     this.$emit('change', value)
   }
 
