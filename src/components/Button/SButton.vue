@@ -5,6 +5,7 @@
       :native-type="nativeType"
       :size="computedSize"
       :class="computedClasses"
+      :style="computedStyles"
       :disabled="disabled"
       :loading="isLoading"
       :autofocus="autofocus"
@@ -84,6 +85,7 @@ export default class SButton extends Vue {
   @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
   @Inject({ default: '', from: 'elFormItem' }) elFormItem!: ElFormItem
 
+  private iconLeftOffset = 0
   elementIcon = ''
 
   get computedSize (): string {
@@ -120,6 +122,14 @@ export default class SButton extends Vue {
     return cssClasses
   }
 
+  get computedStyles () {
+    const styles = {} as any
+    if (this.loading) {
+      styles['--s-button-loading-left'] = `${this.iconLeftOffset}px`
+    }
+    return styles
+  }
+
   get availableIcon (): string {
     if (!this.icon) {
       return ''
@@ -143,6 +153,16 @@ export default class SButton extends Vue {
   handleClick (): void {
     this.$emit('click')
   }
+
+  mounted (): void {
+    this.$watch('loading', (value) => {
+      if (!value) {
+        return
+      }
+      const el = this.$el.querySelector('span') as HTMLSpanElement
+      this.iconLeftOffset = el.offsetLeft + (el.offsetWidth / 2) - 10
+    }, { immediate: true })
+  }
 }
 </script>
 
@@ -151,12 +171,18 @@ export default class SButton extends Vue {
 
 .loading {
   padding: 12px 17.5px;
-  > :not(i) {
-    color: transparent;
-  }
   i {
     position: absolute;
-    left: 43%;
+    left: var(--s-button-loading-left);
+  }
+  &.small {
+    padding: 9px 15px;
+    i {
+      left: calc(var(--s-button-loading-left) + 2px);
+    }
+  }
+  > :not(i) {
+    color: transparent;
   }
 }
 
