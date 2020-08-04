@@ -33,6 +33,27 @@ export default class SCard extends Vue {
    * By default, it's set to `"hover"`
    */
   @Prop({ default: CardShadow.HOVER, type: String }) readonly shadow!: string
+  /**
+   * Clickable property of the Card component which means that the user can click on the card
+   *
+   * `false` by default
+   */
+  @Prop({ default: false, type: Boolean }) readonly clickable!: boolean
+
+  handleClick (): void {
+    if (!this.clickable) {
+      return
+    }
+    this.$emit('click')
+  }
+
+  mounted (): void {
+    this.$el.addEventListener('click', this.handleClick)
+  }
+
+  destroyed (): void {
+    this.$el.removeEventListener('click', this.handleClick)
+  }
 }
 </script>
 
