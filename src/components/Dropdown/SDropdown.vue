@@ -13,6 +13,7 @@
     @click="handleClick"
     @command="handleSelect"
     @visible-change="handleVisibleChange"
+    @click.native="handleVisibleEventChange"
   >
     <span v-if="type === DropdownType.DEFAULT || splitButton">
       <slot></slot>
@@ -77,9 +78,9 @@ export default class SDropdown extends Vue {
   /**
    * A placement of the popup menu. You can use any value from `DropdownPlacement` enum.
    *
-   * By default, it's set to `"bottom-end"`
+   * By default, it's set to `"bottom"`
    */
-  @Prop({ type: String, default: DropdownPlacement.BOTTOM_END }) readonly placement!: string
+  @Prop({ type: String, default: DropdownPlacement.BOTTOM }) readonly placement!: string
   /**
    * A trigger action of the dropdown component. Can be `"hover"` or `"click"`.
    * When dropdown type is "ellipsis", `trigger = "click"`.
@@ -179,6 +180,10 @@ export default class SDropdown extends Vue {
 
   handleVisibleChange (isAppear: boolean): void {
     this.$emit('visible-change', isAppear)
+  }
+
+  handleVisibleEventChange (event: MouseEvent): void {
+    event.stopPropagation()
   }
 }
 </script>
