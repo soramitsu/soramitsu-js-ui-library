@@ -1,6 +1,7 @@
 <template>
   <el-card
     class="s-card"
+    :class="{ clickable }"
     :header="header"
     :body-style="bodyStyle"
     :shadow="shadow"
@@ -63,6 +64,9 @@ export default class SCard extends Vue {
 .s-card {
   border-radius: 8px;
   border-color: $color-neutral-border;
+  &.clickable {
+    cursor: pointer;
+  }
   &:hover, &:focus {
     border-color: $color-basic-white;
   }
