@@ -1,6 +1,6 @@
-import { text, withKnobs, select } from '@storybook/addon-knobs'
+import { text, withKnobs, select, boolean } from '@storybook/addon-knobs'
 
-import { SCard, SRow, SButton } from '../components'
+import { SCard, SRow, SDropdown, SDropdownItem } from '../components'
 import { CardShadow } from '../components/Card'
 
 export default {
@@ -10,12 +10,21 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { SCard, SRow, SButton },
+  components: { SCard, SRow, SDropdown, SDropdownItem },
   template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
-               <s-card :shadow="shadow">
+               <s-card style="width: 80%;" :shadow="shadow" :clickable="clickable" @click="handleClick">
                  <template slot="header">
-                   <span>{{ header }}</span>
-                   <s-button type="tertiary" size="medium">Close</s-button>
+                   <div class="flex" style="justify-content: space-between; padding-right: 20px;">
+                     <span>{{ header }}</span>
+                     <s-dropdown type="ellipsis">
+                       Menu
+                       <template #menu>
+                         <s-dropdown-item>First</s-dropdown-item>
+                         <s-dropdown-item>Second</s-dropdown-item>
+                         <s-dropdown-item>Third</s-dropdown-item>
+                       </template>
+                     </s-dropdown>
+                   </div>
                  </template>
                  <div v-for="o in 4" :key="o" style="margin-bottom: 18px;">
                    {{'List item ' + o }}
@@ -28,6 +37,12 @@ export const configurable = () => ({
     },
     header: {
       default: text('Header', 'Card header')
+    },
+    clickable: {
+      default: boolean('Clickable', false)
     }
+  },
+  methods: {
+    handleClick: () => alert('Card component was clicked')
   }
 })
