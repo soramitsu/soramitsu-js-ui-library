@@ -202,17 +202,19 @@ export default class STable extends Vue {
   /**
    * Text for the summary row.
    *
-   * `"Sum"` by default
+   * `"Tot"` by default
    */
-  @Prop({ default: 'Sum', type: String }) readonly sumText!: string
+  @Prop({ default: 'Tot', type: String }) readonly sumText!: string
   /**
    * Custom summary method. `({ columns, data }) => string`
    */
   @Prop() readonly summaryMethod!: ({ columns, data }) => string
   /**
-   * Method that returns rowspan and colspan. `({ row, column, rowIndex, columnIndex }) => any`
+   * Method that returns rowspan and colspan.
+   *
+   * `({ row, column, rowIndex, columnIndex }) => Array<number> | { rowspan: number; colspan: number }`
    */
-  @Prop() readonly spanMethod!: ({ row, column, rowIndex, columnIndex }) => any
+  @Prop() readonly spanMethod!: ({ row, column, rowIndex, columnIndex }) => Array<number> | { rowspan: number; colspan: number }
   /**
    * Controls the behavior of master checkbox in multi-select tables
    * when only some rows are selected (but not all).
@@ -338,7 +340,11 @@ export default class STable extends Vue {
     this.table.clearSort()
   }
 
-  clearFilter (): void {
+  clearFilter (filterName: string): void {
+    (this.table as any).clearFilter(filterName)
+  }
+
+  clearFilters (): void {
     this.table.clearFilter()
   }
 
@@ -396,7 +402,7 @@ export default class STable extends Vue {
   background-color: $color-basic-white;
 }
 .el-table tr:last-child td {
-  border-color: $color-basic-white;
+  border-bottom-color: $color-basic-white;
 }
 .el-table__header {
   .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
@@ -433,5 +439,9 @@ export default class STable extends Vue {
       width: 2px;
     }
   }
+}
+.el-table__header-wrapper tbody td,
+.el-table__footer-wrapper tbody td {
+  background-color: $color-neutral-placeholder;
 }
 </style>
