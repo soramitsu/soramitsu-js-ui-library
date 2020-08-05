@@ -1,17 +1,17 @@
 <template>
   <s-container class="s-app">
-    <s-aside v-if="this.$slots.aside" :width="asideWidth">
+    <s-aside v-if="$slots.aside" :width="asideWidth">
       <slot name="aside" />
     </s-aside>
     <s-container>
-      <s-header v-if="this.$slots.header" :height="headerHeight">
+      <s-header v-if="$slots.header" :height="headerHeight">
         <slot name="header" />
       </s-header>
       <slot></slot>
-      <s-main v-if="this.$slots.main">
+      <s-main v-if="$slots.main">
         <slot name="main" />
       </s-main>
-      <s-footer v-if="this.$slots.footer" :height="footerHeight">
+      <s-footer v-if="$slots.footer" :height="footerHeight">
         <slot name="footer" />
       </s-footer>
     </s-container>
