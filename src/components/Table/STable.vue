@@ -67,7 +67,7 @@ export default class STable extends Vue {
   /**
    * Data of the table
    */
-  @Prop({ default: [], type: Array }) readonly data!: Array<any>
+  @Prop({ default: () => [], type: Array }) readonly data!: Array<any>
   /**
    * Table's height
    */
@@ -107,39 +107,39 @@ export default class STable extends Vue {
   /**
    * TODO
    */
-  @Prop() readonly rowClassName!: ({ row, rowIndex }) => Array<string> | string
+  @Prop() readonly rowClassName!: string | (({ row, rowIndex }) => string)
   /**
    * TODO
    */
-  @Prop() readonly rowStyle!: ({ row, rowIndex }) => object | object
+  @Prop() readonly rowStyle!: object | (({ row, rowIndex }) => object)
   /**
    * TODO
    */
-  @Prop() readonly cellClassName!: ({ row, column, rowIndex, columnIndex }) => Array<string> | string
+  @Prop() readonly cellClassName!: string | (({ row, column, rowIndex, columnIndex }) => string)
   /**
    * TODO
    */
-  @Prop() readonly cellStyle!: ({ row, column, rowIndex, columnIndex }) => object | object
+  @Prop() readonly cellStyle!: object | (({ row, column, rowIndex, columnIndex }) => object)
   /**
    * TODO
    */
-  @Prop() readonly headerRowClassName!: ({ row, rowIndex }) => object | object
+  @Prop() readonly headerRowClassName!: object | (({ row, rowIndex }) => object)
   /**
    * TODO
    */
-  @Prop() readonly headerRowStyle!: ({ row, rowIndex }) => object | object
+  @Prop() readonly headerRowStyle!: object | (({ row, rowIndex }) => object)
   /**
    * TODO
    */
-  @Prop() readonly headerCellClassName!: ({ row, column, rowIndex, columnIndex }) => Array<string> | string
+  @Prop() readonly headerCellClassName!: string | (({ row, column, rowIndex, columnIndex }) => string)
   /**
    * TODO
    */
-  @Prop() readonly headerCellStyle!: ({ row, column, rowIndex, columnIndex }) => object | object
+  @Prop() readonly headerCellStyle!: object | (({ row, column, rowIndex, columnIndex }) => object)
   /**
    * TODO
    */
-  @Prop() readonly rowRey!: ({ row }) => string | string
+  @Prop() readonly rowRey!: string | (({ row }) => string)
   /**
    * TODO
    */
@@ -151,7 +151,7 @@ export default class STable extends Vue {
   /**
    * TODO
    */
-  @Prop({ type: Array }) readonly expandRowKeys!: Array<any>
+  @Prop() readonly expandRowKeys!: Array<any>
   /**
    * TODO
    */
@@ -171,11 +171,11 @@ export default class STable extends Vue {
   /**
    * TODO
    */
-  @Prop({ default: 'Sum', type: String }) readonly summaryMethod!: ({ columns, data }) => string
+  @Prop() readonly summaryMethod!: ({ columns, data }) => string
   /**
    * TODO
    */
-  @Prop({ default: 'Sum', type: String }) readonly spanMethod!: ({ row, column, rowIndex, columnIndex }) => any
+  @Prop() readonly spanMethod!: ({ row, column, rowIndex, columnIndex }) => any
   /**
    * TODO
    */
@@ -269,5 +269,25 @@ export default class STable extends Vue {
 
 <style lang="scss">
 @import "../../styles/variables.scss";
-
+.el-table__header {
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+    height: 4px;
+    top: 7px;
+  }
+}
+.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: $color-neutral-hover;
+}
+.el-table__body {
+  tr {
+    &.hover-row {
+      > td,
+      &.current-row > td,
+      &.el-table__row--striped > td,
+      &.el-table__row--striped.current-row > td {
+        background-color: $color-neutral-hover;
+      }
+    }
+  }
+}
 </style>
