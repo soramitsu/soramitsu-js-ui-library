@@ -24,7 +24,7 @@
     :default-expand-all="defaultExpandAll"
     :expand-row-keys="expandRowKeys"
     :default-sort="defaultSort"
-    :tooltip-effect="tooltipEffect"
+    :tooltip-effect="tooltipTheme"
     :show-summary="showSummary"
     :sum-text="sumText"
     :summary-method="summaryMethod"
@@ -61,140 +61,186 @@ import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
 import { ElTable } from 'element-ui/types/table'
 
 import { TooltipTheme } from '../Tooltip'
-import { TableSize } from './consts'
+import { TableSize, SortDirection } from './consts'
 
 @Component
 export default class STable extends Vue {
   /**
-   * Data of the table
+   * Data of the table.
+   *
+   * By default it's set to an empty array
    */
   @Prop({ default: () => [], type: Array }) readonly data!: Array<any>
   /**
-   * Table's height
+   * Table's height. It can be `number` with a number of pixels.
+   * Also, it can be a string with CSS height value.
+   *
+   * `"auto"` by default
    */
   @Prop({ default: 'auto' }) readonly height!: string | number
   /**
-   * Table's max height
+   * Table's max height. It can be `number` with a number of pixels.
+   * Also, it can be a string with CSS height value
    */
   @Prop() readonly maxHeight!: string | number
   /**
-   * Table's stripe attribute
+   * Table's stripe attribute.
+   *
+   * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly stripe!: boolean
   /**
-   * Table's vertical border attribute
+   * Table's vertical border attribute.
+   *
+   * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly border!: boolean
   /**
-   * Table's size attribute
+   * Table's size attribute.
+   *
+   * `"big"` by default
    */
   @Prop({ default: TableSize.BIG, type: String }) readonly size!: string
   /**
-   * TODO
+   * Will width of column automatically be fit its container.
+   *
+   * `true` by default
    */
   @Prop({ default: true, type: Boolean }) readonly fit!: boolean
   /**
-   * TODO
+   * Will table header be visible.
+   *
+   * `true` by default
    */
   @Prop({ default: true, type: Boolean }) readonly showHeader!: boolean
   /**
-   * TODO
+   * Will selected row be highlighted.
+   *
+   * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly highlightCurrentRow!: boolean
   /**
-   * TODO
+   * A key of the current row. Can be `string` or `number`
    */
   @Prop() readonly currentRowKey!: string | number
   /**
-   * TODO
+   * Custom class names for the row. Can be `string` or `({ row, rowIndex }) => string`
    */
   @Prop() readonly rowClassName!: string | (({ row, rowIndex }) => string)
   /**
-   * TODO
+   * Custom styles for the row. Can be `object` or `({ row, rowIndex }) => object`
    */
   @Prop() readonly rowStyle!: object | (({ row, rowIndex }) => object)
   /**
-   * TODO
+   * Custom class names for the cell. Can be `string` or `({ row, column, rowIndex, columnIndex }) => string`
    */
   @Prop() readonly cellClassName!: string | (({ row, column, rowIndex, columnIndex }) => string)
   /**
-   * TODO
+   * Custom styles for the cell. Can be `object` or `({ row, column, rowIndex, columnIndex }) => object`
    */
   @Prop() readonly cellStyle!: object | (({ row, column, rowIndex, columnIndex }) => object)
   /**
-   * TODO
+   * Custom class names for the row header. Can be `string` or `({ row, rowIndex }) => string`
    */
-  @Prop() readonly headerRowClassName!: object | (({ row, rowIndex }) => object)
+  @Prop() readonly headerRowClassName!: string | (({ row, rowIndex }) => string)
   /**
-   * TODO
+   * Custom styles for the row header. Can be `object` or `({ row, rowIndex }) => object`
    */
   @Prop() readonly headerRowStyle!: object | (({ row, rowIndex }) => object)
   /**
-   * TODO
+   * Custom class names for the cell header. Can be `string` or `({ row, column, rowIndex, columnIndex }) => string`
    */
   @Prop() readonly headerCellClassName!: string | (({ row, column, rowIndex, columnIndex }) => string)
   /**
-   * TODO
+   * Custom styles for the cell header. Can be `object` or `({ row, column, rowIndex, columnIndex }) => object`
    */
   @Prop() readonly headerCellStyle!: object | (({ row, column, rowIndex, columnIndex }) => object)
   /**
-   * TODO
+   * A key of the row data, used for optimizing rendering.
+   * Required if `reserve-selection` is true or display tree data.
+   * When its type is `string`, multi-level access is supported,
+   * e.g. `user.info.id`, but `user.info[0].id` is not supported,
+   * in which case `({ row }) => string` should be used.
    */
   @Prop() readonly rowRey!: string | (({ row }) => string)
   /**
-   * TODO
+   * A message for an empty data array.
+   *
+   * By default it's set to `"No data"`
    */
   @Prop({ default: 'No data', type: String }) readonly emptyText!: string
   /**
-   * TODO
+   * Expand all rows by default.
+   * It works when the table has a column with `type="expand"` or contains tree structure data
    */
   @Prop({ default: false, type: Boolean }) readonly defaultExpandAll!: boolean
   /**
-   * TODO
+   * Set expanded rows by this property, prop's value is the keys of expand rows.
+   * You should set `row-key` before using this property
    */
   @Prop() readonly expandRowKeys!: Array<any>
   /**
-   * TODO
+   * Set the default sort column and order object.
+   *
+   * `prop` is used to set default sort column,
+   *
+   * `order` is used to set default sort order: `"ascending"`, `"descending"`
    */
   @Prop({ type: Object }) readonly defaultSort!: object
   /**
-   * TODO
+   * Tooltip theme property. Can be `"dark"` or `"light"`.
+   *
+   * `"dark"` by default
    */
-  @Prop({ default: TooltipTheme.DARK, type: String }) readonly tooltipEffect!: string
+  @Prop({ default: TooltipTheme.DARK, type: String }) readonly tooltipTheme!: string
   /**
-   * TODO
+   * Will summary row be shown.
+   *
+   * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly showSummary!: boolean
   /**
-   * TODO
+   * Text for the summary row.
+   *
+   * `"Sum"` by default
    */
   @Prop({ default: 'Sum', type: String }) readonly sumText!: string
   /**
-   * TODO
+   * Custom summary method. `({ columns, data }) => string`
    */
   @Prop() readonly summaryMethod!: ({ columns, data }) => string
   /**
-   * TODO
+   * Method that returns rowspan and colspan. `({ row, column, rowIndex, columnIndex }) => any`
    */
   @Prop() readonly spanMethod!: ({ row, column, rowIndex, columnIndex }) => any
   /**
-   * TODO
+   * Controls the behavior of master checkbox in multi-select tables
+   * when only some rows are selected (but not all).
+   *
+   * If `true`, all rows will be selected, else deselected.
+   *
+   * `true` by default
    */
   @Prop({ default: true, type: Boolean }) readonly selectOnIndeterminate!: boolean
   /**
-   * TODO
+   * Horizontal indentation of tree data.
+   *
+   * `16` by default
    */
   @Prop({ default: 16, type: Number }) readonly indent!: number
   /**
-   * TODO
+   * Will the data will be lazy loaded.
+   *
+   * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly lazy!: boolean
   /**
-   * TODO
+   * The method for loading child row data, only works when `lazy` is true.
+   * `(row, treeNode, resolve) => any`
    */
   @Prop() readonly load!: (row, treeNode, resolve) => any
   /**
-   * TODO
+   * A configuration for rendering nested data
    */
   @Prop({ type: Object }) readonly treeProps!: object
 
@@ -267,18 +313,48 @@ export default class STable extends Vue {
   handleExpandChange (row, ...args): void {
     this.$emit('expand-change', row, ...args)
   }
+
+  clearSelection (): void {
+    this.table.clearSelection()
+  }
+
+  toggleRowSelection (row: object, selected?: boolean): void {
+    this.table.toggleRowSelection(row, selected)
+  }
+
+  toggleAllSelection (): void {
+    this.table.toggleAllSelection()
+  }
+
+  toggleRowExpansion (row: object, expanded?: boolean): void {
+    this.table.toggleRowExpansion(row, expanded)
+  }
+
+  setCurrentRow (row?: object): void {
+    this.table.setCurrentRow(row)
+  }
+
+  clearSort (): void {
+    this.table.clearSort()
+  }
+
+  clearFilter (): void {
+    this.table.clearFilter()
+  }
+
+  doLayout (): void {
+    this.table.doLayout()
+  }
+
+  sort (prop: string, order: SortDirection): void {
+    this.table.sort(prop, order)
+  }
 }
 </script>
 
 <style lang="scss">
 @import "../../styles/variables.scss";
 
-.el-table__header {
-  .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
-    height: 4px;
-    top: 7px;
-  }
-}
 .el-table--enable-row-hover .el-table__body tr:hover > td {
   background-color: $color-neutral-hover;
   border-left: none;
@@ -318,5 +394,44 @@ export default class STable extends Vue {
 }
 .el-table:not(.el-table--border)::before {
   background-color: $color-basic-white;
+}
+.el-table tr:last-child td {
+  border-color: $color-basic-white;
+}
+.el-table__header {
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+    height: 4px;
+    top: 7px;
+  }
+}
+.el-table--medium {
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+    top: 5px;
+  }
+  .el-checkbox__inner {
+    height: 16px;
+    width: 16px;
+    &::after {
+      top: 0;
+      left: 4px;
+      height: 8px;
+      width: 4px;
+    }
+  }
+}
+.el-table--small {
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+    top: 4px;
+  }
+  .el-checkbox__inner {
+    height: 14px;
+    width: 14px;
+    &::after {
+      top: 1px;
+      left: 4px;
+      height: 6px;
+      width: 2px;
+    }
+  }
 }
 </style>
