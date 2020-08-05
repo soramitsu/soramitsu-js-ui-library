@@ -13,22 +13,22 @@ export default {
 export const tableData = [
   {
     date: '2016-05-03',
-    name: 'Tom',
+    amount: '1.56',
     address: 'No. 189, Grove St, Los Angeles'
   },
   {
     date: '2016-05-02',
-    name: 'Tom',
+    amount: '-99',
     address: 'No. 189, Grove St, Los Angeles'
   },
   {
     date: '2016-05-04',
-    name: 'Tom',
+    amount: '0',
     address: 'No. 189, Grove St, Los Angeles'
   },
   {
     date: '2016-05-01',
-    name: 'Tom',
+    amount: '55555',
     address: 'No. 189, Grove St, Los Angeles'
   }
 ]
@@ -46,7 +46,7 @@ export const configurable = () => ({
              >
                <s-table-column type="selection"></s-table-column>
                <s-table-column prop="date" label="Date" width="180"></s-table-column>
-               <s-table-column prop="name" label="Name" width="180"></s-table-column>
+               <s-table-column prop="amount" label="Amount" width="180"></s-table-column>
                <s-table-column prop="address" label="Address"></s-table-column>
                <s-table-column type="expand">Hello</s-table-column>
              </s-table>`,
@@ -73,4 +73,89 @@ export const configurable = () => ({
       default: boolean('Highlight current row', false)
     }
   }
+})
+
+export const withBorder = () => ({
+  components: { STable, STableColumn },
+  template: `<s-table
+               :data="tableData"
+               border
+             >
+               <s-table-column type="selection"></s-table-column>
+               <s-table-column prop="date" label="Date" width="180"></s-table-column>
+               <s-table-column prop="amount" label="Amount" width="180"></s-table-column>
+               <s-table-column prop="address" label="Address"></s-table-column>
+               <s-table-column type="expand">Hello</s-table-column>
+             </s-table>`,
+  data: () => ({
+    tableData: tableData
+  })
+})
+
+export const striped = () => ({
+  components: { STable, STableColumn },
+  template: `<s-table
+               :data="tableData"
+               stripe
+             >
+               <s-table-column type="selection"></s-table-column>
+               <s-table-column prop="date" label="Date" width="180"></s-table-column>
+               <s-table-column prop="amount" label="Amount" width="180"></s-table-column>
+               <s-table-column prop="address" label="Address"></s-table-column>
+               <s-table-column type="expand">Hello</s-table-column>
+             </s-table>`,
+  data: () => ({
+    tableData: tableData
+  })
+})
+
+export const withAllExpandedRows = () => ({
+  components: { STable, STableColumn },
+  template: `<s-table
+               :data="tableData"
+               default-expand-all
+             >
+               <s-table-column type="selection"></s-table-column>
+               <s-table-column prop="date" label="Date" width="180"></s-table-column>
+               <s-table-column prop="amount" label="Amount" width="180"></s-table-column>
+               <s-table-column prop="address" label="Address"></s-table-column>
+               <s-table-column type="expand">Hello</s-table-column>
+             </s-table>`,
+  data: () => ({
+    tableData: tableData
+  })
+})
+
+export const withTotalRow = () => ({
+  components: { STable, STableColumn },
+  template: `<s-table
+               :data="tableData"
+               show-total
+             >
+               <s-table-column type="selection"></s-table-column>
+               <s-table-column prop="date" label="Date" width="180"></s-table-column>
+               <s-table-column prop="amount" label="Amount" width="180"></s-table-column>
+               <s-table-column prop="address" label="Address"></s-table-column>
+               <s-table-column type="expand">Hello</s-table-column>
+             </s-table>`,
+  data: () => ({
+    tableData: tableData
+  })
+})
+
+export const withDefaultSort = () => ({
+  components: { STable, STableColumn },
+  template: `<s-table
+               :data="tableData"
+               :defaultSort="{ prop: 'amount', order: 'descending' }"
+             >
+               <s-table-column type="selection"></s-table-column>
+               <s-table-column sortable prop="date" label="Date" width="180"></s-table-column>
+               <s-table-column sortable prop="amount" label="Amount" width="180"></s-table-column>
+               <s-table-column prop="address" label="Address"></s-table-column>
+               <s-table-column type="expand">Hello</s-table-column>
+             </s-table>`,
+  data: () => ({
+    tableData: tableData
+  })
 })

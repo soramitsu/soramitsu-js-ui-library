@@ -25,9 +25,9 @@
     :expand-row-keys="expandRowKeys"
     :default-sort="defaultSort"
     :tooltip-effect="tooltipTheme"
-    :show-summary="showSummary"
-    :sum-text="sumText"
-    :summary-method="summaryMethod"
+    :show-summary="showTotal"
+    :sum-text="totalText"
+    :summary-method="totalMethod"
     :span-method="spanMethod"
     :select-on-indeterminate="selectOnIndeterminate"
     :indent="indent"
@@ -194,21 +194,21 @@ export default class STable extends Vue {
    */
   @Prop({ default: TooltipTheme.DARK, type: String }) readonly tooltipTheme!: string
   /**
-   * Will summary row be shown.
+   * Will total row be shown.
    *
    * `false` by default
    */
-  @Prop({ default: false, type: Boolean }) readonly showSummary!: boolean
+  @Prop({ default: false, type: Boolean }) readonly showTotal!: boolean
   /**
-   * Text for the summary row.
+   * Text for the total row.
    *
    * `"Tot"` by default
    */
-  @Prop({ default: 'Tot', type: String }) readonly sumText!: string
+  @Prop({ default: 'Tot', type: String }) readonly totalText!: string
   /**
-   * Custom summary method. `({ columns, data }) => string`
+   * Custom total method. `({ columns, data }) => string`
    */
-  @Prop() readonly summaryMethod!: ({ columns, data }) => string
+  @Prop() readonly totalMethod!: ({ columns, data }) => string
   /**
    * Method that returns rowspan and colspan.
    *
