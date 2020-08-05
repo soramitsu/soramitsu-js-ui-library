@@ -57,7 +57,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
+import { ElTable } from 'element-ui/types/table'
 
 import { TooltipTheme } from '../Tooltip'
 import { TableSize } from './consts'
@@ -197,6 +198,8 @@ export default class STable extends Vue {
    */
   @Prop({ type: Object }) readonly treeProps!: object
 
+  @Ref('table') table!: ElTable
+
   handleSelect (selection, row): void {
     this.$emit('select', selection, row)
   }
@@ -269,6 +272,7 @@ export default class STable extends Vue {
 
 <style lang="scss">
 @import "../../styles/variables.scss";
+
 .el-table__header {
   .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
     height: 4px;
@@ -277,6 +281,8 @@ export default class STable extends Vue {
 }
 .el-table--enable-row-hover .el-table__body tr:hover > td {
   background-color: $color-neutral-hover;
+  border-left: none;
+  border-right: none;
 }
 .el-table__body {
   tr {
@@ -286,8 +292,31 @@ export default class STable extends Vue {
       &.el-table__row--striped > td,
       &.el-table__row--striped.current-row > td {
         background-color: $color-neutral-hover;
+        border-left: none;
+        border-right: none;
       }
     }
   }
+}
+.el-table--border th:first-child .cell,
+.el-table--border td:first-child .cell {
+  padding-left: 13px;
+}
+.el-table thead {
+  color: $color-neutral-tertiary;
+}
+.el-table--group,
+.el-table--border,
+.el-table th.is-leaf,
+.el-table td,
+.el-table--border th {
+  border-color: $color-neutral-placeholder;
+}
+.el-table--group::after,
+.el-table--border::after {
+  background-color: $color-neutral-placeholder;
+}
+.el-table:not(.el-table--border)::before {
+  background-color: $color-basic-white;
 }
 </style>

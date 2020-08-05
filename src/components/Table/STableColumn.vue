@@ -37,9 +37,9 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
+import { ElTableColumn } from 'element-ui/types/table-column'
 
 import { ColumnFixedPosition, SortDirection, ColumnAlignment } from './consts'
-import { TableColumn } from 'element-ui'
 
 @Component
 export default class STableColumn extends Vue {
@@ -152,7 +152,7 @@ export default class STableColumn extends Vue {
    */
   @Prop({ type: Array }) readonly filteredValue!: Array<any>
 
-  @Ref('tableColumn') tableColumn!: TableColumn
+  @Ref('tableColumn') tableColumn!: ElTableColumn
 }
 </script>
 
