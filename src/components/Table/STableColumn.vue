@@ -44,111 +44,145 @@ import { ColumnFixedPosition, SortDirection, ColumnAlignment } from './consts'
 @Component
 export default class STableColumn extends Vue {
   /**
-   * TODO
+   * Type of the column. Can be `"selection"`, `"index"` or `"expand"`.
+   * If it's not defined, then it will be usual column without modifications
    */
   @Prop({ default: '', type: String }) readonly type!: string
   /**
-   * TODO
+   * Customize indices for each row. It works on columns with `type="index"`.
+   * Can be `number` or `(index: number) => number`
    */
   @Prop() readonly index!: number | ((index: number) => number)
   /**
-   * TODO
+   * Label of the column
    */
   @Prop({ default: '', type: String }) readonly label!: string
   /**
-   * TODO
+   * Column's key. If you need to use the `filter-change` event,
+   * you need this attribute to identify which column is being filtered
    */
   @Prop({ default: '', type: String }) readonly columnKey!: string
   /**
-   * TODO
+   * Name of the field
    */
   @Prop({ default: '', type: String }) readonly prop!: string
   /**
-   * TODO
+   * Column width in pixels. For instance, `width="80"`
    */
   @Prop({ default: '', type: String }) readonly width!: string
   /**
-   * TODO
+   * Column minimum width in pixels. Columns with `width` has a fixed width,
+   * while columns with `min-width` has a width that is distributed in proportion.
+   * For instance, `min-width="80"`
    */
   @Prop({ default: '', type: String }) readonly minWidth!: string
   /**
-   * TODO
+   * Will column be fixed at `"left"` or `"right"` position.
+   * If it's not defined, then it will be not fixed by default.
    */
   @Prop({ default: '', type: String }) readonly fixedPosition!: string
   /**
-   * TODO
+   * Render function for table header of this column.
+   * `(h, { column, $index }) => any`
    */
   @Prop() readonly renderHeader!: (h, { column, $index }) => any
   /**
-   * TODO
+   * Will column be sorted. Possible values: `true`, `false`, `"custom"`
+   * Remote sorting can be done by setting this attribute to `"custom"`
+   * and listening to the `sort-change` event of the Table component
    */
   @Prop({ default: false }) readonly sortable!: boolean | 'custom'
   /**
-   * TODO
+   * Sorting method like `Array.sort`, works when `sortable` is true.
+   * `(a, b) => number`
    */
   @Prop() readonly sortMethod!: (a, b) => number
   /**
-   * TODO
+   * Specify which property to sort by, works when `sortable` is true and `sort-method` is undefined.
+   * If set to an Array, the column will sequentially sort by the next property if the previous one is equal.
+   *
+   * Can be `string`, `Array<string>` or `(row, index) => string | Array<string>`
    */
   @Prop() readonly sortBy!: string | Array<string> | ((row, index) => string | Array<string>)
   /**
-   * TODO
+   * The order of the sorting strategies used when sorting the data,
+   * works when `sortable` is true.
+   * Accepts an array, as the user clicks on the header,
+   * the column is sorted in order of the elements in the array.
+   *
+   * The elements in the array need to be one of the following: `"ascending"`, `"descending"` and `null`.
+   *
+   * `[SortDirection.ASC, SortDirection.DESC, null]` is set by default
    */
   @Prop({ default: () => [SortDirection.ASC, SortDirection.DESC, null], type: Array }) readonly sortOrders!: Array<any>
   /**
-   * TODO
+   * Can column be resized. It works only when the table has `border` set to true.
+   *
+   * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly resizable!: boolean
   /**
-   * TODO
+   * A function that formats cell content. `(row, column, cellValue, index) => any`
    */
-  @Prop() readonly formatter!: (row, column, cellValue, index) => string
+  @Prop() readonly formatter!: (row, column, cellValue, index) => any
   /**
-   * TODO
+   * Will extra content be hidden and be replaced with a tooltip when hovering on the cell.
+   *
+   * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly showOverflowTooltip!: boolean
   /**
-   * TODO
+   * Alignment property of the table column. Can be `"left"`, `"center"` or `"right"`.
+   *
+   * `"left"` is set by default
    */
   @Prop({ default: ColumnAlignment.LEFT, type: String }) readonly align!: string
   /**
-   * TODO
+   * Alignment property of the column header. Can be `"left"`, `"center"` or `"right"`.
+   *
+   * `"left"` is set by default
    */
   @Prop({ default: ColumnAlignment.LEFT, type: String }) readonly headerAlign!: string
   /**
-   * TODO
+   * Class name of cells in the column
    */
   @Prop({ default: '', type: String }) readonly className!: string
   /**
-   * TODO
+   * Class name of the label of this column
    */
   @Prop({ default: '', type: String }) readonly labelClassName!: string
   /**
-   * TODO
+   * A function that determines if a certain row can be selected.
+   * It works when `type="selection"`. `(row, index) => boolean`
    */
   @Prop() readonly selectable!: (row, index) => boolean
   /**
-   * TODO
+   * Will selection be reserved after data refreshing.
+   * It works when `type="selection"`.
+   *
+   * `row-key` is required for this to work.
+   *
+   * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly reserveSelection!: boolean
   /**
-   * TODO
+   * TODO: create custom dropdown menu with filters
    */
   @Prop({ type: Array }) readonly filters!: Array<{ text; value }>
   /**
-   * TODO
+   * TODO: comment it when it'll be implemented
    */
   @Prop({ default: '', type: String }) readonly filterPlacement!: string
   /**
-   * TODO
+   * TODO: comment it when it'll be implemented
    */
-  @Prop({ default: true, type: Boolean }) readonly filterMultiple!: boolean
+  @Prop({ default: false, type: Boolean }) readonly filterMultiple!: boolean
   /**
-   * TODO
+   * TODO: comment it when it'll be implemented
    */
   @Prop() readonly filterMethod!: (value, row, column) => boolean
   /**
-   * TODO
+   * TODO: comment it when it'll be implemented
    */
   @Prop({ type: Array }) readonly filteredValue!: Array<any>
 
