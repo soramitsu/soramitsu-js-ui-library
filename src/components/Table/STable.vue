@@ -53,12 +53,14 @@
     @expand-change="handleExpandChange"
   >
     <slot></slot>
+    <slot slot="empty" name="empty"></slot>
   </el-table>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
 import { ElTable } from 'element-ui/types/table'
+import { ElTableColumn } from 'element-ui/types/table-column'
 
 import { TooltipTheme } from '../Tooltip'
 import { TableSize, SortDirection } from './consts'
@@ -248,51 +250,51 @@ export default class STable extends Vue {
 
   @Ref('table') table!: ElTable
 
-  handleSelect (selection, row): void {
+  handleSelect (selection: Array<any>, row: any): void {
     this.$emit('select', selection, row)
   }
 
-  handleSelectAll (selection): void {
+  handleSelectAll (selection: Array<any>): void {
     this.$emit('select-all', selection)
   }
 
-  handleSelectionChange (selection): void {
+  handleSelectionChange (selection: Array<any>): void {
     this.$emit('selection-change', selection)
   }
 
-  handleCellMouseEnter (row, column, cell, event): void {
+  handleCellMouseEnter (row: any, column: ElTableColumn, cell: HTMLElement, event: MouseEvent): void {
     this.$emit('cell-mouse-enter', row, column, cell, event)
   }
 
-  handleCellMouseLeave (row, column, cell, event): void {
+  handleCellMouseLeave (row: any, column: ElTableColumn, cell: HTMLElement, event: MouseEvent): void {
     this.$emit('cell-mouse-leave', row, column, cell, event)
   }
 
-  handleCellClick (row, column, cell, event): void {
+  handleCellClick (row: any, column: ElTableColumn, cell: HTMLElement, event: MouseEvent): void {
     this.$emit('cell-click', row, column, cell, event)
   }
 
-  handleCellDoubleClick (row, column, cell, event): void {
+  handleCellDoubleClick (row: any, column: ElTableColumn, cell: HTMLElement, event: MouseEvent): void {
     this.$emit('cell-double-click', row, column, cell, event)
   }
 
-  handleRowClick (row, column, event): void {
+  handleRowClick (row: any, column: ElTableColumn, event: MouseEvent): void {
     this.$emit('row-click', row, column, event)
   }
 
-  handleRowContextMenu (row, column, event): void {
+  handleRowContextMenu (row: any, column: ElTableColumn, event: MouseEvent): void {
     this.$emit('row-context-menu', row, column, event)
   }
 
-  handleRowDoubleClick (row, column, event): void {
+  handleRowDoubleClick (row: any, column: ElTableColumn, event: MouseEvent): void {
     this.$emit('row-double-click', row, column, event)
   }
 
-  handleHeaderClick (column, event): void {
+  handleHeaderClick (column: ElTableColumn, event: MouseEvent): void {
     this.$emit('header-click', column, event)
   }
 
-  handleHeaderContextMenu (column, event): void {
+  handleHeaderContextMenu (column: ElTableColumn, event: MouseEvent): void {
     this.$emit('header-context-menu', column, event)
   }
 
@@ -300,20 +302,21 @@ export default class STable extends Vue {
     this.$emit('sort-change', column, prop, order)
   }
 
-  handleFilterChange (filters): void {
-    this.$emit('filter-change', filters)
+  handleFilterChange (filterPanel: any): void {
+    const filterArray = Object.values(filterPanel)[0]
+    this.$emit('filter-change', filterArray)
   }
 
-  handleCurrentChange (currentRow, oldCurrentRow): void {
+  handleCurrentChange (currentRow: any, oldCurrentRow: any): void {
     this.$emit('current-change', currentRow, oldCurrentRow)
   }
 
-  handleHeaderDragend (newWidth, oldWidth, column, event): void {
+  handleHeaderDragend (newWidth: number, oldWidth: number, column: ElTableColumn, event: MouseEvent): void {
     this.$emit('header-dragend', newWidth, oldWidth, column, event)
   }
 
-  handleExpandChange (row, ...args): void {
-    this.$emit('expand-change', row, ...args)
+  handleExpandChange (row: any, expandedRows: Array<any>): void {
+    this.$emit('expand-change', row, expandedRows)
   }
 
   clearSelection (): void {
@@ -405,9 +408,15 @@ export default class STable extends Vue {
   border-bottom-color: $color-basic-white;
 }
 .el-table__header {
-  .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
-    height: 4px;
-    top: 7px;
+  label.el-checkbox.is-disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .el-checkbox__input {
+    &.is-indeterminate .el-checkbox__inner::before {
+      height: 4px;
+      top: 7px;
+    }
   }
 }
 .el-table--medium {
