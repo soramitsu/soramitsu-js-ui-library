@@ -75,7 +75,6 @@ export default class SCheckbox extends Vue {
   @Watch('model')
   private handleValueChange (value: string | number | boolean): void {
     this.$emit('input', value)
-    this.$emit('change', value)
   }
 
   get computedSize (): string {

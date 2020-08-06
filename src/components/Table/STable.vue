@@ -412,10 +412,21 @@ export default class STable extends Vue {
     cursor: not-allowed;
     pointer-events: none;
   }
-  .el-checkbox__input {
-    &.is-indeterminate .el-checkbox__inner::before {
-      height: 4px;
-      top: 7px;
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+    height: 4px;
+    top: 7px;
+  }
+}
+.el-table {
+  .el-checkbox__inner {
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
+    &::after {
+      border-width: 2px;
+      height: 10px;
+      left: 6px;
+      width: 5px;
     }
   }
 }
