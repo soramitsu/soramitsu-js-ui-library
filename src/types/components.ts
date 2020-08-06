@@ -1,6 +1,8 @@
 export enum Components {
   SApp = 'SApp',
   SAside = 'SAside',
+  SBreadcrumb = 'SBreadcrumb',
+  SBreadcrumbItem = 'SBreadcrumbItem',
   SButton = 'SButton',
   SButtonGroup = 'SButtonGroup',
   SCard = 'SCard',
@@ -26,5 +28,7 @@ export enum Components {
   SScrollSectionItem = 'SScrollSectionItem',
   SScrollSections = 'SScrollSections',
   SSubmenu = 'SSubmenu',
+  STable = 'STable',
+  STableColumn = 'STableColumn',
   STooltip = 'STooltip'
 }
