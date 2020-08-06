@@ -30,6 +30,8 @@ import {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STable,
+  STableColumn,
   STooltip
 } from './components'
 import { Components } from './types/components'
@@ -65,6 +67,8 @@ const elements = [
   { component: SScrollSectionItem, name: Components.SScrollSectionItem },
   { component: SScrollSections, name: Components.SScrollSections },
   { component: SSubmenu, name: Components.SSubmenu },
+  { component: STable, name: Components.STable },
+  { component: STableColumn, name: Components.STableColumn },
   { component: STooltip, name: Components.STooltip }
 ]
 
@@ -111,6 +115,8 @@ export {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STable,
+  STableColumn,
   STooltip
 }
 export default SoramitsuElements

@@ -28,5 +28,7 @@ export enum Components {
   SScrollSectionItem = 'SScrollSectionItem',
   SScrollSections = 'SScrollSections',
   SSubmenu = 'SSubmenu',
+  STable = 'STable',
+  STableColumn = 'STableColumn',
   STooltip = 'STooltip'
 }
