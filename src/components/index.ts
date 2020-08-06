@@ -20,6 +20,7 @@ import { SMain } from './Layout/Main'
 import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
 import { SRow } from './Layout/Row'
 import { SScrollSectionItem, SScrollSections } from './ScrollSections'
+import { STable, STableColumn } from './Table'
 import { STooltip } from './Tooltip'
 
 export {
@@ -52,5 +53,7 @@ export {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STable,
+  STableColumn,
   STooltip
 }
