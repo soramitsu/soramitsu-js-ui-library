@@ -3,6 +3,8 @@ import Vue from 'vue'
 import {
   SApp,
   SAside,
+  SBreadcrumb,
+  SBreadcrumbItem,
   SButton,
   SButtonGroup,
   SCard,
@@ -28,6 +30,8 @@ import {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STable,
+  STableColumn,
   STooltip
 } from './components'
 import { Components } from './types/components'
@@ -36,6 +40,8 @@ import { Message, MessageBox, Notification } from './plugins/elementUI'
 const elements = [
   { component: SApp, name: Components.SApp },
   { component: SAside, name: Components.SAside },
+  { component: SBreadcrumb, name: Components.SBreadcrumb },
+  { component: SBreadcrumbItem, name: Components.SBreadcrumbItem },
   { component: SButton, name: Components.SButton },
   { component: SButtonGroup, name: Components.SButtonGroup },
   { component: SCard, name: Components.SCard },
@@ -61,6 +67,8 @@ const elements = [
   { component: SScrollSectionItem, name: Components.SScrollSectionItem },
   { component: SScrollSections, name: Components.SScrollSections },
   { component: SSubmenu, name: Components.SSubmenu },
+  { component: STable, name: Components.STable },
+  { component: STableColumn, name: Components.STableColumn },
   { component: STooltip, name: Components.STooltip }
 ]
 
@@ -80,6 +88,8 @@ export {
   Notification,
   SApp,
   SAside,
+  SBreadcrumb,
+  SBreadcrumbItem,
   SButton,
   SButtonGroup,
   SCard,
@@ -105,6 +115,8 @@ export {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STable,
+  STableColumn,
   STooltip
 }
 export default SoramitsuElements

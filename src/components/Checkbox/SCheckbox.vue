@@ -1,7 +1,7 @@
 <template>
   <el-checkbox
     :class="computedClasses"
-    :value="value"
+    v-model="model"
     :label="label"
     :disabled="disabled"
     :border="border"
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
 import { CheckboxSize } from './consts'
 
@@ -64,6 +64,19 @@ export default class SCheckbox extends Vue {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly indeterminate!: boolean
+
+  model = this.value
+
+  @Watch('value')
+  private handlePropChange (value: string | number | boolean): void {
+    this.model = value
+  }
+
+  @Watch('model')
+  private handleValueChange (value: string | number | boolean): void {
+    this.$emit('input', value)
+    this.$emit('change', value)
+  }
 
   get computedSize (): string {
     if (this.size === CheckboxSize.BIG ||

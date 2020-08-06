@@ -3,6 +3,7 @@ import '../styles'
 
 import { SApp } from './Layout/App'
 import { SAside } from './Layout/Aside'
+import { SBreadcrumb, SBreadcrumbItem } from './Breadcrumb'
 import { SButton, SButtonGroup } from './Button'
 import { SCard } from './Card'
 import { SCheckbox } from './Checkbox'
@@ -19,11 +20,14 @@ import { SMain } from './Layout/Main'
 import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
 import { SRow } from './Layout/Row'
 import { SScrollSectionItem, SScrollSections } from './ScrollSections'
+import { STable, STableColumn } from './Table'
 import { STooltip } from './Tooltip'
 
 export {
   SApp,
   SAside,
+  SBreadcrumb,
+  SBreadcrumbItem,
   SButton,
   SButtonGroup,
   SCard,
@@ -49,5 +53,7 @@ export {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STable,
+  STableColumn,
   STooltip
 }

@@ -1,6 +1,7 @@
 <template>
   <el-card
     class="s-card"
+    :class="{ clickable }"
     :header="header"
     :body-style="bodyStyle"
     :shadow="shadow"
@@ -11,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
 import { CardShadow } from './consts'
 
@@ -33,6 +34,27 @@ export default class SCard extends Vue {
    * By default, it's set to `"hover"`
    */
   @Prop({ default: CardShadow.HOVER, type: String }) readonly shadow!: string
+  /**
+   * Clickable property of the Card component which means that the user can click on the card
+   *
+   * `false` by default
+   */
+  @Prop({ default: false, type: Boolean }) readonly clickable!: boolean
+
+  handleClick (): void {
+    if (!this.clickable) {
+      return
+    }
+    this.$emit('click')
+  }
+
+  mounted (): void {
+    this.$el.addEventListener('click', this.handleClick)
+  }
+
+  destroyed (): void {
+    this.$el.removeEventListener('click', this.handleClick)
+  }
 }
 </script>
 
@@ -42,6 +64,9 @@ export default class SCard extends Vue {
 .s-card {
   border-radius: 8px;
   border-color: $color-neutral-border;
+  &.clickable {
+    cursor: pointer;
+  }
   &:hover, &:focus {
     border-color: $color-basic-white;
   }
