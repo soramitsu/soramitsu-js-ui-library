@@ -62,6 +62,7 @@ export default class SCard extends Vue {
 @import "../../styles/variables.scss";
 
 .s-card {
+  color: $color-basic-black;
   border-radius: 8px;
   border-color: $color-neutral-border;
   &.clickable {

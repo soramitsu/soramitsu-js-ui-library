@@ -28,6 +28,42 @@
     height: 16px;
   }
 
+  &play {
+    position: absolute;
+    background-image: url('~@/assets/icons/play.svg');
+    width: 16px;
+    height: 16px;
+    left: -8px;
+    top: -8px;
+  }
+
+  &stop {
+    position: absolute;
+    background-image: url('~@/assets/icons/stop.svg');
+    width: 16px;
+    height: 16px;
+    left: -8px;
+    top: -8px;
+  }
+
+  &link-on {
+    position: absolute;
+    background-image: url('~@/assets/icons/link-on.svg');
+    width: 16px;
+    height: 16px;
+    left: -8px;
+    top: -8px;
+  }
+
+  &link-off {
+    position: absolute;
+    background-image: url('~@/assets/icons/link-off.svg');
+    width: 16px;
+    height: 16px;
+    left: -8px;
+    top: -8px;
+  }
+
   &plus-small {
     position: absolute;
     background-image: url('~@/assets/icons/plus.svg');
