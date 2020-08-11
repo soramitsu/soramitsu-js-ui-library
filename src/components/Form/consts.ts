@@ -1,4 +1,4 @@
-import { Size } from '../../types/size'
+import { Size } from '../../types'
 
 export enum LabelPosition {
   LEFT = 'left',

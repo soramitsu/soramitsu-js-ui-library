@@ -12,6 +12,7 @@ export enum Components {
   SCollapseItem = 'SCollapseItem',
   SContainer = 'SContainer',
   SDialog = 'SDialog',
+  SDivider = 'SDivider',
   SDropdown = 'SDropdown',
   SDropdownItem = 'SDropdownItem',
   SFooter = 'SFooter',

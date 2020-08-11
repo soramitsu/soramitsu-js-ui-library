@@ -11,6 +11,7 @@ import { SCol } from './Layout/Col'
 import { SCollapse, SCollapseItem } from './Collapse'
 import { SContainer } from './Layout/Container'
 import { SDialog } from './Dialog'
+import { SDivider } from './Divider'
 import { SDropdown, SDropdownItem } from './Dropdown'
 import { SFooter } from './Layout/Footer'
 import { SForm, SFormItem } from './Form'
@@ -37,6 +38,7 @@ export {
   SCollapseItem,
   SContainer,
   SDialog,
+  SDivider,
   SDropdown,
   SDropdownItem,
   SFooter,
