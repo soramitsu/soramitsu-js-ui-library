@@ -51,7 +51,7 @@ export default class SCollapse extends Vue {
 @import "../../styles/variables.scss";
 
 .el-collapse {
-  border-top-color: $color-neutral-hover;
-  border-bottom-color: $color-neutral-hover;
+  border-top-color: #F5F5F5;
+  border-bottom-color: #F5F5F5;
 }
 </style>

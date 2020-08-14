@@ -46,18 +46,19 @@ export default class SCollapseItem extends Vue {
 @import "../../styles/variables.scss";
 // @import "../../styles/icons.scss";
 
-.without-border .el-collapse-item__ {
-  &wrap, &header {
+.without-border {
+  > div > .el-collapse-item__header,
+  > .el-collapse-item__wrap {
     border: none;
   }
 }
 .el-collapse-item__ {
   &wrap {
-    border-bottom-color: $color-neutral-hover;
+    border-bottom-color: #F5F5F5;
   }
   &header {
     color: $color-basic-black;
-    border-bottom-color: $color-neutral-hover;
+    border-bottom-color: #F5F5F5;
     &.is-active {
       border-bottom-color: transparent;
     }
