@@ -37,7 +37,7 @@ export default class SScrollSectionItem extends Vue {
   @Inject({ default: '', from: 'sScrollSections' }) sScrollSections
 
   get withDivider (): boolean {
-    return this.sScrollSections?.withDivider
+    return !!(this.sScrollSections || {}).withDivider
   }
 }
 </script>
