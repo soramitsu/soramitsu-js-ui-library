@@ -26,6 +26,7 @@ export enum Components {
   SMenu = 'SMenu',
   SMenuItem = 'SMenuItem',
   SMenuItemGroup = 'SMenuItemGroup',
+  SPagination = 'SPagination',
   SRow = 'SRow',
   SScrollSectionItem = 'SScrollSectionItem',
   SScrollSections = 'SScrollSections',

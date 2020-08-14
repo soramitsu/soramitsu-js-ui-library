@@ -20,6 +20,7 @@ import { SIcon } from './Icon'
 import { SInput, SJsonInput } from './Input'
 import { SMain } from './Layout/Main'
 import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
+import { SPagination } from './Pagination'
 import { SRow } from './Layout/Row'
 import { SScrollSectionItem, SScrollSections } from './ScrollSections'
 import { STab, STabs } from './Tab'
@@ -54,6 +55,7 @@ export {
   SMenu,
   SMenuItem,
   SMenuItemGroup,
+  SPagination,
   SRow,
   SScrollSectionItem,
   SScrollSections,
