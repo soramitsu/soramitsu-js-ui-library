@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Provide } from 'vue-property-decorator'
 import VueRouter from 'vue-router'
 
 @Component
@@ -75,7 +75,15 @@ export default class SScrollSections extends Vue {
    *
    * `{ menu: 1, sections: 2 }` by default
    */
-  @Prop({ type: Object, default: { menu: 1, sections: 2 } }) readonly flexSize!: any
+  @Prop({ type: Object, default: () => ({ menu: 1, sections: 2 }) }) readonly flexSize!: any
+  /**
+   * Will dividers be displayed.
+   *
+   * `false` by default
+   */
+  @Prop({ default: false, type: Boolean }) readonly withDivider!: boolean
+
+  @Provide('sScrollSections') sScrollSections = this
 
   menuItems: Vue[] = []
   activeSection = ''
