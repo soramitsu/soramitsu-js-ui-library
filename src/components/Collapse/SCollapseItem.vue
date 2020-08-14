@@ -3,6 +3,7 @@
     :title="title"
     :name="name"
     :disabled="disabled"
+    :class="computedClasses"
   >
     <slot slot="title" name="title"></slot>
     <slot></slot>
@@ -10,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
 
 @Component
 export default class SCollapseItem extends Vue {
@@ -28,6 +29,16 @@ export default class SCollapseItem extends Vue {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
+
+  @Inject({ default: '', from: 'sCollapse' }) sCollapse
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (!(this.sCollapse || {}).withBorders) {
+      cssClasses.push('without-border')
+    }
+    return cssClasses
+  }
 }
 </script>
 
@@ -35,6 +46,11 @@ export default class SCollapseItem extends Vue {
 @import "../../styles/variables.scss";
 // @import "../../styles/icons.scss";
 
+.without-border .el-collapse-item__ {
+  &wrap, &header {
+    border: none;
+  }
+}
 .el-collapse-item__ {
   &wrap {
     border-bottom-color: $color-neutral-hover;
