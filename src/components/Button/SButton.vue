@@ -235,31 +235,60 @@ export default class SButton extends Vue {
 .action {
   &.big {
     width: $size-big;
+    i {
+      font-size: 20px;
+    }
   }
   &.medium {
     width: $size-medium;
+    i {
+      font-size: 18px;
+    }
   }
   &.small {
     width: $size-small;
+    i {
+      font-size: 16px;
+      margin-left: -2px;
+      margin-top: -2px;
+    }
   }
+  color: $color-basic-black;
   background-color: $color-neutral-placeholder;
   border-color: $color-neutral-placeholder;
   &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+    color: $color-basic-black;
     background-color: $color-neutral-hover;
     border-color: $color-neutral-hover;
+  }
+  &:disabled, &:disabled:hover {
+    color: $color-neutral-inactive;
   }
   &.alternative {
     background-color: $color-basic-white;
     border-color: $color-neutral-border;
     &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+      color: $color-basic-black;
       background-color: $color-neutral-placeholder;
       border-color: $color-neutral-placeholder;
+    }
+    &:disabled, &:disabled:hover {
+      color: $color-neutral-inactive;
     }
   }
 }
 
-button > span > i {
-  top: -10px;
-  left: -10px;
+button {
+  > span > i {
+    &[class^=s-icon-], &[class^=el-icon-] {
+      display: inline-block;
+      color: inherit;
+    }
+  }
+  &:not(.action) > span > i {
+    &[class^=s-icon-], &[class^=el-icon-] {
+      margin-right: 6px;
+    }
+  }
 }
 </style>
