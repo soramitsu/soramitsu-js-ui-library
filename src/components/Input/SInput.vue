@@ -29,7 +29,7 @@
       @focus="handleFocus"
     />
     <template v-if="type === InputType.TEXT_FILE">
-      <i class="s-icon-file"></i>
+      <i class="s-icon-file-upload"></i>
       <input :value="emptyValue" type="file" :accept="accept" @change="handleTextFileChange">
     </template>
   </div>
@@ -313,10 +313,12 @@ export default class SInput extends Vue {
     .el-input > input {
       padding-right: 56px;
     }
-    .s-icon-file {
+    .s-icon-file-upload {
       top: 16px;
       right: 16px;
+      font-size: 24px;
       z-index: 1;
+      position: absolute;
       + input {
         cursor: pointer;
         position: absolute;
