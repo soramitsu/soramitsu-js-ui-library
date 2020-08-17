@@ -179,9 +179,10 @@ export default class SFormItem extends Vue {
     }
     .s-icon-error {
       position: absolute;
-      width: 21px;
-      height: 21px;
-      background-position: 4px bottom;
+      bottom: 0;
+      left: 4px;
+      font-size: 16px;
+      color: $color-error;
     }
   }
 }
