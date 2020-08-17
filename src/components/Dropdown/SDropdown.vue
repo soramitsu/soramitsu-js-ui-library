@@ -29,7 +29,7 @@
         <i class="el-icon-arrow-down el-icon--right"></i>
       </s-button>
       <el-tooltip v-else :disabled="!this.$slots.default || willTooltipBeDisabled">
-        <i class="s-icon-more"></i>
+        <i class="s-icon-more-horizontal"></i>
         <template slot="content">
           <slot></slot>
         </template>
@@ -221,6 +221,9 @@ export default class SDropdown extends Vue {
   }
   > i {
     cursor: pointer;
+  }
+  .s-icon-more-horizontal {
+    font-size: 24px;
   }
 }
 .ellipsis.el-popper[x-placement^=bottom] {
