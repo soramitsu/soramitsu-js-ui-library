@@ -237,5 +237,9 @@ export default class SScrollSections extends Vue {
 }
 .s-scroll-content {
   padding-bottom: 90%;
+  color: $color-basic-black;
+  .title {
+    font-size: 16px;
+  }
 }
 </style>

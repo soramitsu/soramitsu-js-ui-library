@@ -29,6 +29,12 @@ export default class SCollapseItem extends Vue {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
+  /**
+   * Will bottom padding be hidden.
+   *
+   * `false` by default
+   */
+  @Prop({ default: false, type: Boolean }) readonly withoutPadding!: boolean
 
   @Inject({ default: '', from: 'sCollapse' }) sCollapse
 
@@ -36,6 +42,9 @@ export default class SCollapseItem extends Vue {
     const cssClasses: Array<string> = []
     if (!(this.sCollapse || {}).withBorders) {
       cssClasses.push('without-border')
+    }
+    if (this.withoutPadding) {
+      cssClasses.push('without-padding')
     }
     return cssClasses
   }
@@ -51,6 +60,9 @@ export default class SCollapseItem extends Vue {
   > .el-collapse-item__wrap {
     border: none;
   }
+}
+.without-padding > .el-collapse-item__wrap > .el-collapse-item__content {
+  padding-bottom: 0;
 }
 .el-collapse-item__ {
   &wrap {
