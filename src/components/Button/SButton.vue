@@ -26,6 +26,7 @@ import { ElFormItem } from 'element-ui/types/form-item'
 
 import { STooltip } from '../Tooltip'
 import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
+import { Icons } from '@/types'
 
 @Component({
   components: { STooltip }
@@ -138,8 +139,11 @@ export default class SButton extends Vue {
       this.elementIcon = this.icon
       return ''
     }
-    // TODO: add checks for invalid icons
     this.elementIcon = ''
+    if (!(Object.values(Icons) as Array<string>).includes(this.icon)) {
+      console.warn(`'${this.icon}' was not found`)
+      return ''
+    }
     return `s-icon-${this.icon}`
   }
 
