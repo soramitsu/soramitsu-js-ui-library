@@ -40,7 +40,7 @@ export default class SCollapseItem extends Vue {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if (!(this.sCollapse || {}).withBorders) {
+    if (!(this.sCollapse || {}).borders) {
       cssClasses.push('without-border')
     }
     if (this.withoutPadding) {

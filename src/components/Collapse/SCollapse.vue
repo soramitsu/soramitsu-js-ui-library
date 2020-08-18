@@ -29,13 +29,13 @@ export default class SCollapse extends Vue {
    *
    * `false` by default
    */
-  @Prop({ default: false, type: Boolean }) readonly withBorders!: boolean
+  @Prop({ default: false, type: Boolean }) readonly borders!: boolean
 
   @Provide('sCollapse') sCollapse = this
 
   get computedStyles (): object {
     const styles = {} as any
-    if (!this.withBorders) {
+    if (!this.borders) {
       styles.border = 'none'
     }
     return styles
