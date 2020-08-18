@@ -3,13 +3,18 @@
     <span v-if="title" class="title">{{ title }}</span>
     <slot v-if="this.$slots.title && !title" name="title"></slot>
     <slot></slot>
+    <s-divider v-if="withDivider" style="margin: 20px 0 0 0;"></s-divider>
   </section>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
 
-@Component
+import { SDivider } from '../Divider'
+
+@Component({
+  components: { SDivider }
+})
 export default class SScrollSectionItem extends Vue {
   /**
    * Required section property of scroll section item. It should be unique.
@@ -28,6 +33,12 @@ export default class SScrollSectionItem extends Vue {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
+
+  @Inject({ default: '', from: 'sScrollSections' }) sScrollSections
+
+  get withDivider (): boolean {
+    return !!(this.sScrollSections || {}).withDivider
+  }
 }
 </script>
 
@@ -39,6 +50,9 @@ export default class SScrollSectionItem extends Vue {
   }
   &:last-child {
     margin-bottom: 10px;
+    .el-divider.el-divider--horizontal {
+      height: 0;
+    }
   }
   .title {
     font-weight: bold;
