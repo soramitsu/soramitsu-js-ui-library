@@ -16,6 +16,7 @@ import { SDropdown, SDropdownItem } from './Dropdown'
 import { SFooter } from './Layout/Footer'
 import { SForm, SFormItem } from './Form'
 import { SHeader } from './Layout/Header'
+import { SIcon } from './Icon'
 import { SInput, SJsonInput } from './Input'
 import { SMain } from './Layout/Main'
 import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
@@ -45,6 +46,7 @@ export {
   SForm,
   SFormItem,
   SHeader,
+  SIcon,
   SInput,
   SJsonInput,
   SMain,

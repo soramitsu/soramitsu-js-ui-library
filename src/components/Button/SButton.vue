@@ -13,7 +13,7 @@
       :icon="elementIcon"
       @click="handleClick"
     >
-      <i v-if="availableIcon" :class="[availableIcon]"></i>
+      <s-icon v-if="availableIcon" :name="availableIcon" />
       <slot></slot>
     </el-button>
   </s-tooltip>
@@ -24,12 +24,12 @@ import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
 
+import { SIcon } from '../Icon'
 import { STooltip } from '../Tooltip'
 import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
-import { Icons } from '@/types'
 
 @Component({
-  components: { STooltip }
+  components: { SIcon, STooltip }
 })
 export default class SButton extends Vue {
   readonly ButtonTypes = ButtonTypes
@@ -140,11 +140,7 @@ export default class SButton extends Vue {
       return ''
     }
     this.elementIcon = ''
-    if (!(Object.values(Icons) as Array<string>).includes(this.icon)) {
-      console.warn(`'${this.icon}' was not found`)
-      return ''
-    }
-    return `s-icon-${this.icon}`
+    return this.icon
   }
 
   get isLoading (): boolean {
