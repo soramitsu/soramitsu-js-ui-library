@@ -1,6 +1,6 @@
 import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
-import { SButton, SButtonGroup, SRow } from '../components'
+import { SButton, SButtonGroup, SRow, SCol, SMain } from '../components'
 import { ButtonSize, ButtonTypes } from '../components/Button'
 
 export default {
@@ -137,6 +137,37 @@ export const loading = () => ({
              </s-row>`,
   props: {
     items: {
+      default: () => differentTypesData
+    }
+  }
+})
+
+export const withIcon = () => ({
+  components: { SButton, SRow, SCol, SMain },
+  template: `<s-main>
+               <s-row :gutter="20">
+                 <s-col :span="3" v-for="item in differentTypesData" :key="item.type" style="padding-bottom: 20px;">
+                   <s-button size="big" icon="refresh" :type="item.type" :tooltip="item.tooltip">
+                     {{ item.label }}
+                   </s-button>
+                 </s-col>
+                 <s-col :span="3" v-for="item in differentTypesData" :key="item.type + 'Disabled'" style="padding-bottom: 20px;">
+                   <s-button size="big" icon="refresh" :type="item.type" :tooltip="item.tooltip" disabled>
+                     {{ item.label }}
+                   </s-button>
+                 </s-col>
+                 <s-col :span="4" v-for="item in differentSizeData" :key="item.size">
+                   <s-button :size="item.size" icon="refresh">
+                     {{ item.label }}
+                   </s-button>
+                 </s-col>
+               </s-row>
+             </s-main>`,
+  props: {
+    differentSizeData: {
+      default: () => differentSizeData
+    },
+    differentTypesData: {
       default: () => differentTypesData
     }
   }
