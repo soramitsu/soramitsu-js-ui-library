@@ -226,8 +226,4 @@ export default class SDropdown extends Vue {
     font-size: 24px;
   }
 }
-.ellipsis.el-popper[x-placement^=bottom] {
-  margin-top: 25px;
-  margin-left: 12px;
-}
 </style>
