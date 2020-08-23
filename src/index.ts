@@ -37,7 +37,7 @@ import {
   STooltip
 } from './components'
 import { Components } from './types/components'
-import { Message, MessageBox, Notification } from './plugins/elementUI'
+import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 
 const elements = [
   { component: SApp, name: Components.SApp },
@@ -87,6 +87,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export {
+  Loading,
   Message,
   MessageBox,
   Notification,
