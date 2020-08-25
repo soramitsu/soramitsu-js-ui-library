@@ -168,5 +168,8 @@ export default class SDialog extends Vue {
     font-size: 16px;
     color: $color-basic-black;
   }
+  > * {
+    word-break: break-word;
+  }
 }
 </style>

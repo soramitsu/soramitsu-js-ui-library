@@ -25,6 +25,13 @@ $size-small: 32px;
 $border-radius-default: 4px;
 // Fonts
 @font-face {
+  font-family: "soramitsu-icons";
+  src: url("~@/assets/fonts/soramitsu-icons.woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
   font-family: "SoraB";
   src: url("~@/assets/fonts/Sora-Bold.otf");
   font-weight: normal;

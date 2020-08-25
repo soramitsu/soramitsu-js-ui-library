@@ -1,3 +1,3 @@
-import { Size } from '../../types/size'
+import { Size } from '../../types'
 
 export const CheckboxSize = Size

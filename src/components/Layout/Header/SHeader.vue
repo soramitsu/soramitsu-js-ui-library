@@ -24,5 +24,6 @@ export default class SHeader extends Vue {
   padding: 12px;
   box-shadow: 0px 0px 8px rgba(45, 41, 38, 0.2);
   font-size: 18px;
+  z-index: 1;
 }
 </style>

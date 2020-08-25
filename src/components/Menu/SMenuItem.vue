@@ -1,7 +1,6 @@
 <template>
   <el-menu-item
     class="flex"
-    :style="computedStyles"
     :index="index"
     :route="route"
     :disabled="disabled"
@@ -13,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import { ElMenuItem } from 'element-ui/types/menu-item'
 
 @Component
@@ -33,16 +32,6 @@ export default class SMenuItem extends Vue {
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
 
-  @Inject({ default: '', from: 'sMenu' }) sMenu
-
-  get computedStyles (): object {
-    const styles = {} as any
-    if (this.sMenu.activeHoverColor) {
-      styles['--s-menu-color-hover'] = this.sMenu.activeHoverColor
-    }
-    return styles
-  }
-
   handleClick (instance: ElMenuItem): void {
     this.$emit('click', instance)
   }
@@ -57,9 +46,16 @@ export default class SMenuItem extends Vue {
   &.is-active {
     background-color: var(--s-menu-color-hover) !important;
     border-bottom-color: var(--s-menu-color-hover) !important;
+    i {
+      color: var(--s-menu-text-color-active);
+    }
   }
   [class^=s-icon-] {
     margin-right: 12px;
+    font-size: 20px;
+  }
+  i {
+    color: var(--s-menu-text-color);
   }
 }
 </style>
