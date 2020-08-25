@@ -30,6 +30,8 @@ export enum Components {
   SScrollSectionItem = 'SScrollSectionItem',
   SScrollSections = 'SScrollSections',
   SSubmenu = 'SSubmenu',
+  STab = 'STab',
+  STabs = 'STabs',
   STable = 'STable',
   STableColumn = 'STableColumn',
   STooltip = 'STooltip'

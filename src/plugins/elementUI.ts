@@ -96,12 +96,14 @@ MsgBox.setDefaults({
   cancelButtonText: 'Cancel',
   confirmButtonText: 'OK'
 })
+Vue.prototype.$loading = Loading.service
 Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$message = Message
 Vue.prototype.$notify = Notification
 // locale.use(lang) // TODO: it will be used later
 export {
+  Loading,
   MessageBox,
   Message,
   Notification

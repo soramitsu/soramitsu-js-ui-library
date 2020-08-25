@@ -32,12 +32,14 @@ import {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STab,
+  STabs,
   STable,
   STableColumn,
   STooltip
 } from './components'
 import { Components } from './types/components'
-import { Message, MessageBox, Notification } from './plugins/elementUI'
+import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 
 const elements = [
   { component: SApp, name: Components.SApp },
@@ -71,6 +73,8 @@ const elements = [
   { component: SScrollSectionItem, name: Components.SScrollSectionItem },
   { component: SScrollSections, name: Components.SScrollSections },
   { component: SSubmenu, name: Components.SSubmenu },
+  { component: STab, name: Components.STab },
+  { component: STabs, name: Components.STabs },
   { component: STable, name: Components.STable },
   { component: STableColumn, name: Components.STableColumn },
   { component: STooltip, name: Components.STooltip }
@@ -87,6 +91,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export {
+  Loading,
   Message,
   MessageBox,
   Notification,
@@ -121,6 +126,8 @@ export {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STab,
+  STabs,
   STable,
   STableColumn,
   STooltip

@@ -22,6 +22,7 @@ import { SMain } from './Layout/Main'
 import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
 import { SRow } from './Layout/Row'
 import { SScrollSectionItem, SScrollSections } from './ScrollSections'
+import { STab, STabs } from './Tab'
 import { STable, STableColumn } from './Table'
 import { STooltip } from './Tooltip'
 
@@ -57,6 +58,8 @@ export {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STab,
+  STabs,
   STable,
   STableColumn,
   STooltip

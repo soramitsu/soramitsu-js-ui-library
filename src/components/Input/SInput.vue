@@ -121,7 +121,20 @@ export default class SInput extends Vue {
   @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
 
   focused = false
+  autofill = false
   model = this.value
+
+  mounted (): void {
+    this.$el.addEventListener('animationstart', this.changeAutofillValue)
+  }
+
+  destroyed (): void {
+    this.$el.removeEventListener('animationstart', this.changeAutofillValue)
+  }
+
+  private changeAutofillValue (e: any): void {
+    this.autofill = e.animationName === 'onAutoFillStart'
+  }
 
   @Watch('value')
   private handlePropChange (value: string | number): void {
@@ -152,6 +165,9 @@ export default class SInput extends Vue {
     }
     if (this.type === InputType.TEXT_FILE) {
       cssClasses.push('text-file')
+    }
+    if (this.autofill) {
+      cssClasses.push('autofill')
     }
     return cssClasses
   }
@@ -298,6 +314,26 @@ export default class SInput extends Vue {
       border-color: $color-neutral-border;
     }
   }
+  &.autofill {
+    .placeholder {
+      background-color: transparent !important;
+    }
+  }
+  .el-input > input {
+    &:-webkit-autofill {
+      color: $color-basic-black !important;
+      animation-name: onAutoFillStart; // Expose a hook for JavaScript when auto fill is shown
+    }
+    &:not(:-webkit-autofill) {
+      animation-name: onAutoFillCancel; // Expose a hook for JS onAutoFillCancel
+    }
+    &:-internal-autofill-selected {
+      animation-name: onAutoFillStart;
+    }
+    &:not(:-internal-autofill-selected) {
+      animation-name: onAutoFillCancel;
+    }
+  }
   .placeholder + .el-input {
     > input {
       padding-top: 12px;
@@ -332,5 +368,12 @@ export default class SInput extends Vue {
     }
   }
 }
-
+@keyframes onAutoFillStart {
+  from {/**/}
+  to {/**/}
+}
+@keyframes onAutoFillCancel {
+  from {/**/}
+  to {/**/}
+}
 </style>
