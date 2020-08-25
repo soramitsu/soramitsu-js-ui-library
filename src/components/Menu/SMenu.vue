@@ -2,6 +2,7 @@
   <el-menu
     class="s-menu"
     ref="el-menu"
+    :style="computedStyles"
     :mode="mode"
     :collapse="collapse"
     :background-color="backgroundColor"
@@ -22,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref, Provide } from 'vue-property-decorator'
+import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
 import { ElMenu } from 'element-ui/types/menu'
 
 import { MenuMode, MenuTrigger } from './consts'
@@ -101,7 +102,19 @@ export default class SMenu extends Vue {
 
   @Ref('el-menu') elMenu!: ElMenu
 
-  @Provide('sMenu') sMenu = this
+  get computedStyles (): object {
+    const styles = {} as any
+    if (this.activeHoverColor) {
+      styles['--s-menu-color-hover'] = this.activeHoverColor
+    }
+    if (this.textColor) {
+      styles['--s-menu-text-color'] = this.textColor
+    }
+    if (this.activeTextColor) {
+      styles['--s-menu-text-color-active'] = this.activeTextColor
+    }
+    return styles
+  }
 
   open (index: string): void {
     this.elMenu.open(index)

@@ -1,7 +1,5 @@
 <template>
   <el-submenu
-    ref="el-submenu"
-    :style="computedStyles"
     :index="index"
     :popper-class="popperClass"
     :show-timeout="showTimeout"
@@ -15,8 +13,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Inject, Ref } from 'vue-property-decorator'
-import { ElSubmenu } from 'element-ui/types/submenu'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class SSubmenu extends Vue {
@@ -45,18 +42,6 @@ export default class SSubmenu extends Vue {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
-
-  @Inject({ default: '', from: 'sMenu' }) sMenu
-
-  @Ref('el-submenu') elSubmenu
-
-  get computedStyles (): object {
-    const styles = {} as any
-    if (this.sMenu.activeHoverColor) {
-      styles['--s-menu-color-hover'] = this.sMenu.activeHoverColor
-    }
-    return styles
-  }
 }
 </script>
 
@@ -78,10 +63,17 @@ export default class SSubmenu extends Vue {
   border-radius: 6px;
   [class^=s-icon-] {
     margin-right: 12px;
+    font-size: 20px;
+  }
+  i {
+    color: var(--s-menu-text-color);
   }
   .is-active > & {
     border-bottom-color: transparent !important;
     background-color: var(--s-menu-color-hover) !important;
+    i {
+      color: var(--s-menu-text-color-active);
+    }
   }
   &:not(.is-disabled):hover {
     background-color: var(--s-menu-color-hover) !important;

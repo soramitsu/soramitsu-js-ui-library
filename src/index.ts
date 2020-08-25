@@ -14,12 +14,14 @@ import {
   SCollapseItem,
   SContainer,
   SDialog,
+  SDivider,
   SDropdown,
   SDropdownItem,
   SFooter,
   SForm,
   SFormItem,
   SHeader,
+  SIcon,
   SInput,
   SJsonInput,
   SMain,
@@ -30,12 +32,14 @@ import {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STab,
+  STabs,
   STable,
   STableColumn,
   STooltip
 } from './components'
 import { Components } from './types/components'
-import { Message, MessageBox, Notification } from './plugins/elementUI'
+import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 
 const elements = [
   { component: SApp, name: Components.SApp },
@@ -51,12 +55,14 @@ const elements = [
   { component: SCollapseItem, name: Components.SCollapseItem },
   { component: SContainer, name: Components.SContainer },
   { component: SDialog, name: Components.SDialog },
+  { component: SDivider, name: Components.SDivider },
   { component: SDropdown, name: Components.SDropdown },
   { component: SDropdownItem, name: Components.SDropdownItem },
   { component: SFooter, name: Components.SFooter },
   { component: SForm, name: Components.SForm },
   { component: SFormItem, name: Components.SFormItem },
   { component: SHeader, name: Components.SHeader },
+  { component: SIcon, name: Components.SIcon },
   { component: SInput, name: Components.SInput },
   { component: SJsonInput, name: Components.SJsonInput },
   { component: SMain, name: Components.SMain },
@@ -67,6 +73,8 @@ const elements = [
   { component: SScrollSectionItem, name: Components.SScrollSectionItem },
   { component: SScrollSections, name: Components.SScrollSections },
   { component: SSubmenu, name: Components.SSubmenu },
+  { component: STab, name: Components.STab },
+  { component: STabs, name: Components.STabs },
   { component: STable, name: Components.STable },
   { component: STableColumn, name: Components.STableColumn },
   { component: STooltip, name: Components.STooltip }
@@ -83,6 +91,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export {
+  Loading,
   Message,
   MessageBox,
   Notification,
@@ -99,12 +108,14 @@ export {
   SCollapseItem,
   SContainer,
   SDialog,
+  SDivider,
   SDropdown,
   SDropdownItem,
   SFooter,
   SForm,
   SFormItem,
   SHeader,
+  SIcon,
   SInput,
   SJsonInput,
   SMain,
@@ -115,6 +126,8 @@ export {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STab,
+  STabs,
   STable,
   STableColumn,
   STooltip

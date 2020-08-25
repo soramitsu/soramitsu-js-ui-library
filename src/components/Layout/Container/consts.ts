@@ -1,4 +1,3 @@
-export enum ContainerDirection {
-  VERTICAL = 'vertical',
-  HORIZONTAL = 'horizontal'
-}
+import { Direction } from '../../../types'
+
+export const ContainerDirection = Direction

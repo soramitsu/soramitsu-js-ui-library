@@ -13,7 +13,7 @@
       :icon="elementIcon"
       @click="handleClick"
     >
-      <i v-if="availableIcon" :class="[availableIcon]"></i>
+      <s-icon v-if="availableIcon" :name="availableIcon" />
       <slot></slot>
     </el-button>
   </s-tooltip>
@@ -24,11 +24,12 @@ import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
 
+import { SIcon } from '../Icon'
 import { STooltip } from '../Tooltip'
 import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
 
 @Component({
-  components: { STooltip }
+  components: { SIcon, STooltip }
 })
 export default class SButton extends Vue {
   readonly ButtonTypes = ButtonTypes
@@ -138,9 +139,8 @@ export default class SButton extends Vue {
       this.elementIcon = this.icon
       return ''
     }
-    // TODO: add checks for invalid icons
     this.elementIcon = ''
-    return `s-icon-${this.icon}`
+    return this.icon
   }
 
   get isLoading (): boolean {
@@ -235,31 +235,60 @@ export default class SButton extends Vue {
 .action {
   &.big {
     width: $size-big;
+    i {
+      font-size: 20px;
+    }
   }
   &.medium {
     width: $size-medium;
+    i {
+      font-size: 18px;
+    }
   }
   &.small {
     width: $size-small;
+    i {
+      font-size: 16px;
+      margin-left: -2px;
+      margin-top: -2px;
+    }
   }
+  color: $color-basic-black;
   background-color: $color-neutral-placeholder;
   border-color: $color-neutral-placeholder;
   &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+    color: $color-basic-black;
     background-color: $color-neutral-hover;
     border-color: $color-neutral-hover;
+  }
+  &:disabled, &:disabled:hover {
+    color: $color-neutral-inactive;
   }
   &.alternative {
     background-color: $color-basic-white;
     border-color: $color-neutral-border;
     &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+      color: $color-basic-black;
       background-color: $color-neutral-placeholder;
       border-color: $color-neutral-placeholder;
+    }
+    &:disabled, &:disabled:hover {
+      color: $color-neutral-inactive;
     }
   }
 }
 
-button > span > i {
-  top: -10px;
-  left: -10px;
+button {
+  > span > i {
+    &[class^=s-icon-], &[class^=el-icon-] {
+      display: inline-block;
+      color: inherit;
+    }
+  }
+  &:not(.action) > span > i {
+    &[class^=s-icon-], &[class^=el-icon-] {
+      margin-right: 6px;
+    }
+  }
 }
 </style>

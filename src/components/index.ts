@@ -11,15 +11,18 @@ import { SCol } from './Layout/Col'
 import { SCollapse, SCollapseItem } from './Collapse'
 import { SContainer } from './Layout/Container'
 import { SDialog } from './Dialog'
+import { SDivider } from './Divider'
 import { SDropdown, SDropdownItem } from './Dropdown'
 import { SFooter } from './Layout/Footer'
 import { SForm, SFormItem } from './Form'
 import { SHeader } from './Layout/Header'
+import { SIcon } from './Icon'
 import { SInput, SJsonInput } from './Input'
 import { SMain } from './Layout/Main'
 import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
 import { SRow } from './Layout/Row'
 import { SScrollSectionItem, SScrollSections } from './ScrollSections'
+import { STab, STabs } from './Tab'
 import { STable, STableColumn } from './Table'
 import { STooltip } from './Tooltip'
 
@@ -37,12 +40,14 @@ export {
   SCollapseItem,
   SContainer,
   SDialog,
+  SDivider,
   SDropdown,
   SDropdownItem,
   SFooter,
   SForm,
   SFormItem,
   SHeader,
+  SIcon,
   SInput,
   SJsonInput,
   SMain,
@@ -53,6 +58,8 @@ export {
   SScrollSectionItem,
   SScrollSections,
   SSubmenu,
+  STab,
+  STabs,
   STable,
   STableColumn,
   STooltip

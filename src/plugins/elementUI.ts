@@ -13,6 +13,7 @@ import {
   Container,
   DatePicker,
   Dialog,
+  Divider,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -53,6 +54,7 @@ Vue.use(BreadcrumbItem)
 Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Dialog)
+Vue.use(Divider)
 Vue.use(Footer)
 Vue.use(Menu)
 Vue.use(MenuItem)
@@ -94,12 +96,14 @@ MsgBox.setDefaults({
   cancelButtonText: 'Cancel',
   confirmButtonText: 'OK'
 })
+Vue.prototype.$loading = Loading.service
 Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$message = Message
 Vue.prototype.$notify = Notification
 // locale.use(lang) // TODO: it will be used later
 export {
+  Loading,
   MessageBox,
   Message,
   Notification
