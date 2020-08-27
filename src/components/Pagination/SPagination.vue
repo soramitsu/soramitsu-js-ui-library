@@ -114,7 +114,8 @@ export default class SPagination extends Vue {
 
   private reRenderPaginationItems (): void {
     if (this.totalItem && this.total) {
-      this.totalItem.textContent = `1—${this.pageSizeModel} of ${this.total}`
+      const upperNumber = this.pageSizeModel * this.currentPageModel
+      this.totalItem.textContent = `${upperNumber - this.pageSizeModel + 1}—${upperNumber > this.total ? this.total : upperNumber} of ${this.total}`
     }
     if (this.sizesItem && !this.sizesLabelItem) {
       const itemsPerPageText = document.createElement('span')
