@@ -77,6 +77,14 @@ export default class SPagination extends Vue {
    */
   @Prop({ default: '', type: String }) readonly popperClass!: string
   /**
+   * Custom class name for the total element of the pagination component
+   */
+  @Prop({ default: '', type: String }) readonly totalClass!: string
+  /**
+   * Custom class name for the sizes element of the pagination component
+   */
+  @Prop({ default: '', type: String }) readonly sizesClass!: string
+  /**
    * Text of the previous button
    */
   @Prop({ default: '', type: String }) readonly prevText!: string
@@ -110,6 +118,12 @@ export default class SPagination extends Vue {
     const items = Array.from(this.pagination.$el.childNodes) as Array<any>
     this.totalItem = items.find(item => item.className === 'el-pagination__total')
     this.sizesItem = items.find(item => item.className === 'el-pagination__sizes')
+    if (this.totalItem && this.totalClass) {
+      (this.totalItem as Element).classList.add(this.totalClass)
+    }
+    if (this.sizesItem && this.sizesClass) {
+      (this.sizesItem as Element).classList.add(this.sizesClass)
+    }
   }
 
   private reRenderPaginationItems (): void {
