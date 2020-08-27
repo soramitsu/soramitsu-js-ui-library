@@ -1,51 +1,178 @@
 <template>
   <el-pagination
     ref="pagination"
-    :page-sizes="[100, 200, 300, 400]"
-    :page-size="100"
-    layout="total, sizes, prev, pager, next"
-    :total="400"
+    :page-sizes="pageSizes"
+    :page-size.sync="pageSizeModel"
+    :layout="layout"
+    :total="total"
+    :small="small"
+    :background="background"
+    :current-page.sync="currentPageModel"
+    :popper-class="popperClass"
+    :prev-text="prevText"
+    :next-text="nextText"
+    :disabled="disabled"
+    :hide-on-single-page="hideOnSinglePage"
+    @size-change="handleSizeChange"
+    @current-change="handleCurrentChange"
+    @prev-click="handlePrevClick"
+    @next-click="handleNextClick"
   >
+    <slot v-if="willBeSlotEnabled"></slot>
   </el-pagination>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
+import { Vue, Component, Prop, Ref, Watch } from 'vue-property-decorator'
 import { ElPagination } from 'element-ui/types/pagination'
 import cloneDeep from 'lodash/fp/cloneDeep'
 
 @Component
 export default class SPagination extends Vue {
   /**
-   * Divider direction property. Can be `"horizontal"` or `"vertical"`.
+   * Will pagination component be small.
    *
-   * By default it's set to `"horizontal"`
+   * `false` by default
    */
-  @Prop({ default: '', type: String }) readonly direction!: string
+  @Prop({ default: false, type: Boolean }) readonly small!: boolean
   /**
-   * Position of the content. Can be `"left"`, `"right"` or `"center"`.
+   * Will pagination component buttons have background.
    *
-   * By default it's set to `"center"`
+   * `false` by default
    */
-  @Prop({ default: '', type: String }) readonly contentPosition!: string
+  @Prop({ default: false, type: Boolean }) readonly background!: boolean
+  /**
+   * Items count of each page. It supports the .sync modifier.
+   *
+   * By default it's set to `10`
+   */
+  @Prop({ default: 10, type: Number }) readonly pageSize!: number
+  /**
+   * Total items count of the pagination component
+   */
+  @Prop({ type: Number }) readonly total!: number
+  /**
+   * Current page number. It supports the .sync modifier.
+   *
+   * By default it's set to `1`
+   */
+  @Prop({ default: 1, type: Number }) readonly currentPage!: number
+  /**
+   * Layout of the pagination component, which contains elements separated by comma.
+   * It should also be ordered as you want to see these elements. List of available items:
+   *
+   * `"sizes, prev, pager, next, jumper, total, slot"`
+   *
+   * By default it's set to `"total, sizes, pager, prev, next"`
+   */
+  @Prop({ default: 'total, sizes, pager, prev, next', type: String }) readonly layout!: string
+  /**
+   * A list of available page size (items count per page).
+   *
+   * By default it's set to `[10, 20, 30, 40, 50, 100]`
+   */
+  @Prop({ default: () => [10, 20, 30, 40, 50, 100], type: Array }) readonly pageSizes!: Array<number>
+  /**
+   * Custom class name for the page size Select's dropdown
+   */
+  @Prop({ default: '', type: String }) readonly popperClass!: string
+  /**
+   * Text of the previous button
+   */
+  @Prop({ default: '', type: String }) readonly prevText!: string
+  /**
+   * Text of the next button
+   */
+  @Prop({ default: '', type: String }) readonly nextText!: string
+  /**
+   * Disabled state of the pagination component.
+   *
+   * `false` by default
+   */
+  @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
+  /**
+   * Will it be hidden when there's only one page.
+   *
+   * `false` by default
+   */
+  @Prop({ default: false, type: Boolean }) readonly hideOnSinglePage!: boolean
 
-  @Ref('pagination') pagination!: ElPagination
+  @Ref('pagination') pagination!: any
 
-  private getChildItemsArray (): Array<Node> {
-    return Array.from(this.pagination.$el.childNodes)
+  totalItem!: any
+  sizesItem!: any
+  sizesLabelItem!: any
+
+  pageSizeModel = this.pageSize
+  currentPageModel = this.currentPage
+
+  private initPaginationItems (): void {
+    const items = Array.from(this.pagination.$el.childNodes) as Array<any>
+    this.totalItem = items.find(item => item.className === 'el-pagination__total')
+    this.sizesItem = items.find(item => item.className === 'el-pagination__sizes')
+  }
+
+  private reRenderPaginationItems (): void {
+    if (this.totalItem && this.total) {
+      this.totalItem.textContent = `1—${this.pageSizeModel} of ${this.total}`
+    }
+    if (this.sizesItem && !this.sizesLabelItem) {
+      const itemsPerPageText = document.createElement('span')
+      itemsPerPageText.textContent = 'Rows per page'
+      itemsPerPageText.classList.add('per-page-text')
+      this.pagination.$el.insertBefore(itemsPerPageText, this.sizesItem)
+    }
+  }
+
+  @Watch('pageSize')
+  private handlePageSizePropChange (value: number): void {
+    this.pageSizeModel = value
+  }
+
+  @Watch('pageSizeModel')
+  private handlePageSizeValueChange (value: number): void {
+    this.$emit('update:page-size', value)
+  }
+
+  @Watch('currentPage')
+  private handleCurrentPagePropChange (value: number): void {
+    this.currentPageModel = value
+  }
+
+  @Watch('currentPageModel')
+  private handleCurrentPageValueChange (value: number): void {
+    this.$emit('update:current-page', value)
+  }
+
+  get willBeSlotEnabled (): boolean {
+    return this.layout.includes('slot')
   }
 
   mounted (): void {
-    const [total, itemsPerPage, prevButton, pages, nextButton] = this.getChildItemsArray()
-    console.log(itemsPerPage)
-    total.textContent = '1—10 of 400'
-    const itemsPerPageText = document.createElement('span')
-    itemsPerPageText.textContent = 'Rows per page'
-    itemsPerPageText.classList.add('per-page-text')
-    this.pagination.$el.insertBefore(itemsPerPageText, itemsPerPage)
-    this.pagination.$el.replaceChild(pages, prevButton)
-    this.pagination.$el.replaceChild(prevButton, nextButton)
-    this.pagination.$el.appendChild(nextButton)
+    this.initPaginationItems()
+    this.reRenderPaginationItems()
+    this.sizesLabelItem = (Array.from(this.pagination.$el.childNodes) as Array<any>)
+      .find(item => item.className === 'per-page-text')
+  }
+
+  updated (): void {
+    this.reRenderPaginationItems()
+  }
+
+  handleSizeChange (newSize: number): void {
+    this.$emit('size-change', newSize)
+  }
+
+  handleCurrentChange (newCurrent: number): void {
+    this.$emit('current-change', newCurrent)
+  }
+
+  handlePrevClick (newCurrent: number): void {
+    this.$emit('prev-click', newCurrent)
+  }
+
+  handleNextClick (newCurrent: number): void {
+    this.$emit('next-click', newCurrent)
   }
 }
 </script>
@@ -59,6 +186,91 @@ export default class SPagination extends Vue {
   }
   button:disabled {
     color: $color-neutral-inactive;
+  }
+  .el-pagination__sizes {
+    .el-select .el-input {
+      width: 65px;
+      .el-select__caret, .el-input__inner {
+        color: $color-basic-black;
+        font-weight: bold;
+      }
+      .el-select__caret {
+        margin-right: 6px;
+      }
+      .el-input__inner {
+        border-radius: 8px;
+        padding-right: 20px;
+        padding-left: 5px;
+        background-color: $color-neutral-placeholder;
+        border-color: $color-neutral-placeholder;
+      }
+      &.is-disabled {
+        .el-select__caret, .el-input__inner {
+          color: $color-neutral-inactive;
+        }
+      }
+    }
+  }
+  .el-pagination__editor.el-input {
+    .el-input__inner {
+      border-radius: 8px;
+      background-color: $color-neutral-placeholder;
+      border-color: $color-neutral-placeholder;
+      color: $color-basic-black;
+    }
+    &.is-disabled .el-input__inner {
+      color: $color-neutral-inactive;
+    }
+  }
+  .el-pagination__total, .per-page-text, .el-pagination__jump {
+    color: $color-neutral-secondary;
+  }
+  .el-pager li {
+    color: $color-basic-black;
+    &.btn-quicknext, &.btn-quickprev {
+      color: $color-basic-black;
+    }
+    &:not(.disabled) {
+      &:hover, &.active {
+        color: $color-main-brand;
+      }
+    }
+    &.disabled {
+      color: $color-neutral-inactive;
+    }
+  }
+  &.is-background {
+    .el-pager li {
+      background-color: $color-neutral-placeholder;
+      &.disabled {
+        color: $color-neutral-inactive;
+      }
+    }
+    .btn-prev, .btn-next {
+      background-color: $color-neutral-placeholder;
+      &:disabled {
+        color: $color-neutral-inactive;
+        background-color: $color-neutral-placeholder;
+      }
+      &:not(:disabled):hover {
+        color: $color-main-brand;
+      }
+    }
+  }
+  &.el-pagination--small {
+    .el-pagination__editor {
+      height: 22px;
+    }
+    .el-pagination__sizes .el-select .el-input {
+      .el-input__inner {
+        height: 22px !important;
+        font-size: 12px;
+      }
+      .el-select__caret {
+        font-size: 12px;
+        line-height: 23px;
+      }
+    }
   }
 }
 </style>
