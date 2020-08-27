@@ -56,3 +56,26 @@ export const configurable = () => ({
     handleNextClick: (newCurrent: number) => console.log(`@next-click=${newCurrent}`)
   }
 })
+
+export const small = () => ({
+  components: { SRow, SPagination },
+  template: `<s-row class="flex" style="flex: 1; flex-direction: column;">
+               <s-pagination :total="400" small></s-pagination>
+             </s-row>`
+})
+
+export const withBackground = () => ({
+  components: { SRow, SPagination },
+  template: `<s-row class="flex" style="flex: 1; flex-direction: column;">
+               <s-pagination :total="400" background></s-pagination>
+             </s-row>`
+})
+
+export const disabled = () => ({
+  components: { SRow, SPagination },
+  template: `<s-row class="flex" style="flex: 1; flex-direction: column;">
+               <s-pagination :total="400" disabled></s-pagination>
+               <s-pagination :total="400" small disabled></s-pagination>
+               <s-pagination :total="400" background disabled></s-pagination>
+             </s-row>`
+})
