@@ -39,10 +39,12 @@ import {
   STableColumn,
   STooltip
 } from './components'
+import { Numeric } from './directives'
 import { Components } from './types/components'
+import { Directives } from './types/directives'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 
-const elements = [
+const components = [
   { component: SApp, name: Components.SApp },
   { component: SAside, name: Components.SAside },
   { component: SBreadcrumb, name: Components.SBreadcrumb },
@@ -82,9 +84,14 @@ const elements = [
   { component: STooltip, name: Components.STooltip }
 ]
 
+const directives = [
+  { directive: Numeric, name: Directives.Numeric }
+]
+
 const SoramitsuElements = {
   install (vue: typeof Vue): void {
-    elements.forEach(el => vue.component(el.name, el.component))
+    components.forEach(el => vue.component(el.name, el.component))
+    directives.forEach(item => vue.directive(item.name, item.directive))
   }
 }
 
