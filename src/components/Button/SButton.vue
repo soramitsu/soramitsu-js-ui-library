@@ -223,9 +223,10 @@ export default class SButton extends Vue {
 .tertiary {
   color: $color-basic-black;
   border: none;
+  background-color: transparent;
   &:hover, &:active, &:focus {
     color: $color-main-brand;
-    background-color: $color-basic-white;
+    background-color: transparent;
   }
   &:disabled, &:disabled:hover {
     color: $color-neutral-inactive;
