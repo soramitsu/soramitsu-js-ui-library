@@ -11,7 +11,7 @@ const onDigitKeyPress = (e: any) => {
 }
 
 const onNumberKeyPress = (e: any) => {
-  if (!KeyValues.isNumber(e.key)) {
+  if (!KeyValues.isNumber(e.key) || (!KeyValues.isDigit(e.key) && e.target.value.includes('.'))) {
     e.preventDefault()
   } else {
     return true
