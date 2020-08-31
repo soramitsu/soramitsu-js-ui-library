@@ -33,7 +33,6 @@ import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
 })
 export default class SButton extends Vue {
   readonly ButtonTypes = ButtonTypes
-
   /**
    * Type of button. Possible values: `"primary"`, `"secondary"`, `"tertiary"`, `"action"`.
    *
@@ -82,6 +81,10 @@ export default class SButton extends Vue {
    * By default it's set to "button"
    */
   @Prop({ default: ButtonNativeTypes.BUTTON, type: String }) readonly nativeType!: string
+  /**
+   * Button tabindex
+   */
+  @Prop({ default: '0', type: String }) readonly tabindex!: string
 
   @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
   @Inject({ default: '', from: 'elFormItem' }) elFormItem!: ElFormItem
@@ -155,6 +158,7 @@ export default class SButton extends Vue {
   }
 
   mounted (): void {
+    this.$el.setAttribute('tabindex', this.tabindex)
     this.$watch('loading', (value) => {
       if (!value) {
         return
@@ -223,9 +227,10 @@ export default class SButton extends Vue {
 .tertiary {
   color: $color-basic-black;
   border: none;
+  background-color: transparent;
   &:hover, &:active, &:focus {
     color: $color-main-brand;
-    background-color: $color-basic-white;
+    background-color: transparent;
   }
   &:disabled, &:disabled:hover {
     color: $color-neutral-inactive;

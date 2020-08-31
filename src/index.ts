@@ -28,6 +28,7 @@ import {
   SMenu,
   SMenuItem,
   SMenuItemGroup,
+  SPagination,
   SRow,
   SScrollSectionItem,
   SScrollSections,
@@ -38,10 +39,12 @@ import {
   STableColumn,
   STooltip
 } from './components'
+import { Float, Integer } from './directives'
 import { Components } from './types/components'
+import { Directives } from './types/directives'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 
-const elements = [
+const components = [
   { component: SApp, name: Components.SApp },
   { component: SAside, name: Components.SAside },
   { component: SBreadcrumb, name: Components.SBreadcrumb },
@@ -69,6 +72,7 @@ const elements = [
   { component: SMenu, name: Components.SMenu },
   { component: SMenuItem, name: Components.SMenuItem },
   { component: SMenuItemGroup, name: Components.SMenuItemGroup },
+  { component: SPagination, name: Components.SPagination },
   { component: SRow, name: Components.SRow },
   { component: SScrollSectionItem, name: Components.SScrollSectionItem },
   { component: SScrollSections, name: Components.SScrollSections },
@@ -80,9 +84,15 @@ const elements = [
   { component: STooltip, name: Components.STooltip }
 ]
 
+const directives = [
+  { directive: Float, name: Directives.Float },
+  { directive: Integer, name: Directives.Integer }
+]
+
 const SoramitsuElements = {
   install (vue: typeof Vue): void {
-    elements.forEach(el => vue.component(el.name, el.component))
+    components.forEach(el => vue.component(el.name, el.component))
+    directives.forEach(item => vue.directive(item.name, item.directive))
   }
 }
 
@@ -122,6 +132,7 @@ export {
   SMenu,
   SMenuItem,
   SMenuItemGroup,
+  SPagination,
   SRow,
   SScrollSectionItem,
   SScrollSections,
