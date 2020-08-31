@@ -126,7 +126,7 @@ export default class SPagination extends Vue {
     }
   }
 
-  private reRenderPaginationItems (): void {
+  private renderPaginationItems (): void {
     if (this.totalItem && this.total) {
       const upperNumber = this.pageSizeModel * this.currentPageModel
       this.totalItem.textContent = `${upperNumber - this.pageSizeModel + 1}—${upperNumber > this.total ? this.total : upperNumber} of ${this.total}`
@@ -165,13 +165,13 @@ export default class SPagination extends Vue {
 
   mounted (): void {
     this.initPaginationItems()
-    this.reRenderPaginationItems()
+    this.renderPaginationItems()
     this.sizesLabelItem = (Array.from(this.pagination.$el.childNodes) as Array<any>)
       .find(item => item.className === 'per-page-text')
   }
 
   updated (): void {
-    this.reRenderPaginationItems()
+    this.renderPaginationItems()
   }
 
   handleSizeChange (newSize: number): void {

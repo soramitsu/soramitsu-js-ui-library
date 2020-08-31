@@ -1,3 +1,4 @@
 export enum Directives {
-  Numeric = 'Numeric'
+  Float = 'Float',
+  Integer = 'Integer'
 }

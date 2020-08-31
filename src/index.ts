@@ -39,7 +39,7 @@ import {
   STableColumn,
   STooltip
 } from './components'
-import { Numeric } from './directives'
+import { Float, Integer } from './directives'
 import { Components } from './types/components'
 import { Directives } from './types/directives'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
@@ -85,7 +85,8 @@ const components = [
 ]
 
 const directives = [
-  { directive: Numeric, name: Directives.Numeric }
+  { directive: Float, name: Directives.Float },
+  { directive: Integer, name: Directives.Integer }
 ]
 
 const SoramitsuElements = {
