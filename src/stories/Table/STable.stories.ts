@@ -48,7 +48,12 @@ export const configurable = () => ({
                <s-table-column prop="date" label="Date" width="180"></s-table-column>
                <s-table-column prop="amount" label="Amount" width="180"></s-table-column>
                <s-table-column prop="address" label="Address"></s-table-column>
-               <s-table-column type="expand">Hello</s-table-column>
+               <s-table-column label="Index" width="80">
+                 <template slot-scope="scope">
+                   <span>{{ scope.$index }}</span>
+                 </template>
+               </s-table-column>
+               <s-table-column type="expand">Expanded!</s-table-column>
              </s-table>`,
   data: () => ({
     tableData: tableData

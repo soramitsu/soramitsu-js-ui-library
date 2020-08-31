@@ -1,6 +1,5 @@
 <template>
   <el-table-column
-    ref="tableColumn"
     :type="type"
     :index="index"
     :label="label"
@@ -29,15 +28,13 @@
     :filter-method="filterMethod"
     :filtered-value="filteredValue"
   >
-    <!-- TODO: fix scoped slots with { row, column, $index } data or add possibility to use it -->
-    <slot slot="header" name="header"></slot>
-    <slot></slot>
+    <slot v-for="(_, name) in $slots" :name="name" :slot="name" />
+    <template v-for="(_, name) in $scopedSlots" :slot="name" slot-scope="slotData"><slot :name="name" v-bind="slotData" /></template>
   </el-table-column>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
-import { ElTableColumn } from 'element-ui/types/table-column'
 
 import { ColumnFixedPosition, SortDirection, ColumnAlignment } from './consts'
 
@@ -185,8 +182,6 @@ export default class STableColumn extends Vue {
    * TODO: comment it when it'll be implemented
    */
   @Prop({ type: Array }) readonly filteredValue!: Array<any>
-
-  @Ref('tableColumn') tableColumn!: ElTableColumn
 }
 </script>
 
