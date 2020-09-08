@@ -52,7 +52,6 @@ export default class SDatePicker extends Vue {
    * `"year"`/`"month"`/`"date"`/`"dates"`/`"datetime"`/`"week"`/`"datetimerange"`/`"daterange"`/`"monthrange"`
    */
   @Prop({ type: String, default: PickerTypes.DATE }) readonly type!: string
-
   /**
    * Input type of the datepicker component. Available values: `"input"`, `"select"`.
    * `"input"` can be set only when `type` is not range. Otherwise, `"select"` will be set automatically.

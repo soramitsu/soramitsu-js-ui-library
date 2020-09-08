@@ -24,6 +24,7 @@ import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
 import { SPagination } from './Pagination'
 import { SRow } from './Layout/Row'
 import { SScrollSectionItem, SScrollSections } from './ScrollSections'
+import { SSelect, SOption, SOptionGroup } from './Select'
 import { STab, STabs } from './Tab'
 import { STable, STableColumn } from './Table'
 import { STooltip } from './Tooltip'
@@ -57,10 +58,13 @@ export {
   SMenu,
   SMenuItem,
   SMenuItemGroup,
+  SOption,
+  SOptionGroup,
   SPagination,
   SRow,
   SScrollSectionItem,
   SScrollSections,
+  SSelect,
   SSubmenu,
   STab,
   STabs,
