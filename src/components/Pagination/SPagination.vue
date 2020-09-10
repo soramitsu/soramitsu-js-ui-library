@@ -77,13 +77,13 @@ export default class SPagination extends Vue {
    */
   @Prop({ default: '', type: String }) readonly popperClass!: string
   /**
-   * Custom class name for the total element of the pagination component
+   * Styles object for the total element of the pagination component
    */
-  @Prop({ default: '', type: String }) readonly totalClass!: string
+  @Prop() readonly totalStyle!: object
   /**
-   * Custom class name for the sizes element of the pagination component
+   * Styles object for the sizes element of the pagination component
    */
-  @Prop({ default: '', type: String }) readonly sizesClass!: string
+  @Prop() readonly sizesStyle!: object
   /**
    * Text of the previous button
    */
@@ -118,11 +118,15 @@ export default class SPagination extends Vue {
     const items = Array.from(this.pagination.$el.childNodes) as Array<any>
     this.totalItem = items.find(item => item.className === 'el-pagination__total')
     this.sizesItem = items.find(item => item.className === 'el-pagination__sizes')
-    if (this.totalItem && this.totalClass) {
-      (this.totalItem as Element).classList.add(this.totalClass)
+    if (this.totalItem && this.totalStyle) {
+      for (const styleProp in this.totalStyle) {
+        (this.totalItem as HTMLElement).style[styleProp] = this.totalStyle[styleProp]
+      }
     }
-    if (this.sizesItem && this.sizesClass) {
-      (this.sizesItem as Element).classList.add(this.sizesClass)
+    if (this.sizesItem && this.sizesStyle) {
+      for (const styleProp in this.sizesStyle) {
+        (this.sizesItem as HTMLElement).style[styleProp] = this.sizesStyle[styleProp]
+      }
     }
   }
 
@@ -239,6 +243,7 @@ export default class SPagination extends Vue {
   }
   .el-pagination__total, .per-page-text, .el-pagination__jump {
     color: $color-neutral-secondary;
+    font-weight: normal;
   }
   .el-pager li {
     color: $color-basic-black;
