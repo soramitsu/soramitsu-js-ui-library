@@ -10,6 +10,7 @@ import { SCheckbox } from './Checkbox'
 import { SCol } from './Layout/Col'
 import { SCollapse, SCollapseItem } from './Collapse'
 import { SContainer } from './Layout/Container'
+import { SDatePicker } from './DatePicker'
 import { SDialog } from './Dialog'
 import { SDivider } from './Divider'
 import { SDropdown, SDropdownItem } from './Dropdown'
@@ -23,6 +24,7 @@ import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
 import { SPagination } from './Pagination'
 import { SRow } from './Layout/Row'
 import { SScrollSectionItem, SScrollSections } from './ScrollSections'
+import { SSelect, SOption, SOptionGroup } from './Select'
 import { STab, STabs } from './Tab'
 import { STable, STableColumn } from './Table'
 import { STooltip } from './Tooltip'
@@ -40,6 +42,7 @@ export {
   SCollapse,
   SCollapseItem,
   SContainer,
+  SDatePicker,
   SDialog,
   SDivider,
   SDropdown,
@@ -55,10 +58,13 @@ export {
   SMenu,
   SMenuItem,
   SMenuItemGroup,
+  SOption,
+  SOptionGroup,
   SPagination,
   SRow,
   SScrollSectionItem,
   SScrollSections,
+  SSelect,
   SSubmenu,
   STab,
   STabs,
