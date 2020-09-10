@@ -12,7 +12,6 @@
       :clearable="clearable"
       :multiple-limit="multipleLimit"
       :no-data-text="noDataText"
-      @change="handleChange"
       @blur="handleBlur"
       @focus="handleFocus"
       @visible-change="handleVisibleChange"
@@ -149,6 +148,9 @@ export default class SSelect extends Vue {
     if (this.disabled) {
       cssClasses.push('disabled')
     }
+    if ((!this.multiple && this.model) || (this.multiple && this.model.length !== 0)) {
+      cssClasses.push('has-value')
+    }
     return cssClasses
   }
 
@@ -157,10 +159,6 @@ export default class SSelect extends Vue {
       return false
     }
     return !!(this.model && this.model.length !== 0 && this.placeholder)
-  }
-
-  handleChange (selected: any): void {
-    this.$emit('change', selected)
   }
 
   handleBlur (event: Event): void {
@@ -197,6 +195,7 @@ export default class SSelect extends Vue {
 
 <style lang="scss">
 @import "../../styles/variables.scss";
+@import "../../styles/icons.scss";
 
 .s-select {
   font-family: $font-family-default;
@@ -204,6 +203,13 @@ export default class SSelect extends Vue {
   position: relative;
   .el-select {
     width: 100%;
+    i.el-icon-arrow-up {
+      font-family: $icons-font;
+      font-size: 16px;
+      &:before {
+        content: $s-icon-chevron-top;
+      }
+    }
     .el-input {
       &.is-focus .el-input__inner {
         border-color: $color-neutral-placeholder;
@@ -302,20 +308,41 @@ export default class SSelect extends Vue {
       .el-input__inner {
         border-radius: 8px;
         padding-left: 12px;
+        font-weight: bold;
         &:hover {
           border-color: $color-neutral-inactive;
         }
         &::placeholder {
           color: $color-neutral-tertiary;
+          font-weight: bold;
         }
         &:focus {
           border-color: $color-neutral-inactive;
         }
       }
+      .el-select__caret {
+        color: $color-neutral-tertiary;
+      }
     }
     &.focused {
-      .el-select .el-input__inner {
-        border-color: $color-neutral-inactive;
+      .el-select {
+        .el-input__inner {
+          color: $color-basic-black;
+          border-color: $color-neutral-inactive;
+          &::placeholder {
+            color: $color-basic-black;
+          }
+        }
+        .el-select__caret {
+          color: $color-basic-black;
+        }
+      }
+    }
+    &.has-value {
+      .el-select {
+        .el-select__caret {
+          color: $color-basic-black;
+        }
       }
     }
     &.disabled {
@@ -336,7 +363,10 @@ export default class SSelect extends Vue {
   }
 }
 .el-select-dropdown__item {
-  &.hover, &:hover {
+  &.hover {
+    background-color: transparent;
+  }
+  &:hover {
     background-color: $color-neutral-placeholder;
   }
   &.is-disabled {
@@ -348,7 +378,6 @@ export default class SSelect extends Vue {
     padding-left: 16px;
     vertical-align: top;
     color: $color-basic-black;
-    font-weight: normal;
   }
   &::before {
     font-family: "element-icons";
@@ -362,7 +391,11 @@ export default class SSelect extends Vue {
     border-radius: 4px;
   }
   &.selected {
+    font-weight: normal;
     &.hover {
+      background-color: transparent;
+    }
+    &:hover {
       background-color: $color-neutral-placeholder;
     }
     &::before {
