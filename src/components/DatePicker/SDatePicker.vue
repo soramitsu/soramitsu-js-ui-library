@@ -52,7 +52,6 @@ export default class SDatePicker extends Vue {
    * `"year"`/`"month"`/`"date"`/`"dates"`/`"datetime"`/`"week"`/`"datetimerange"`/`"daterange"`/`"monthrange"`
    */
   @Prop({ type: String, default: PickerTypes.DATE }) readonly type!: string
-
   /**
    * Input type of the datepicker component. Available values: `"input"`, `"select"`.
    * `"input"` can be set only when `type` is not range. Otherwise, `"select"` will be set automatically.
@@ -190,9 +189,12 @@ export default class SDatePicker extends Vue {
     this.$emit('change', value)
   }
 
+  get isRange (): boolean {
+    return ([PickerTypes.DATETIMERANGE, PickerTypes.DATERANGE, PickerTypes.MONTHRANGE] as Array<string>).includes(this.type)
+  }
+
   get isInputType (): boolean {
-    return !([PickerTypes.DATETIMERANGE, PickerTypes.DATERANGE, PickerTypes.MONTHRANGE] as Array<string>).includes(this.type) &&
-      this.inputType === InputTypes.INPUT
+    return !this.isRange && this.inputType === InputTypes.INPUT
   }
 
   get willHaveClearButton (): boolean {
@@ -221,7 +223,7 @@ export default class SDatePicker extends Vue {
     if (this.disabled) {
       cssClasses.push('disabled')
     }
-    if (this.model) {
+    if ((!this.isRange && this.model) || (this.isRange && this.model.length !== 0)) {
       cssClasses.push('has-value')
     }
     return cssClasses
@@ -339,6 +341,9 @@ export default class SDatePicker extends Vue {
   }
   &.select {
     .el-date-editor {
+      .el-input__inner, .el-range-input, .el-range-separator {
+        font-weight: bold;
+      }
       &.el-input__inner, & .el-input__inner {
         border-radius: 8px;
         padding-left: 12px;
@@ -347,6 +352,7 @@ export default class SDatePicker extends Vue {
         }
         &::placeholder, .el-range-input::placeholder {
           color: $color-neutral-tertiary;
+          font-weight: bold;
         }
       }
     }
@@ -365,6 +371,7 @@ export default class SDatePicker extends Vue {
       top: 30%;
       pointer-events: none;
       color: $color-neutral-tertiary;
+      transition: transform .3s;
     }
     &.has-value {
       .s-icon-chevron-bottom {
