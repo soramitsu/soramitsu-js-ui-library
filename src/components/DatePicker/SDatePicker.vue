@@ -24,7 +24,6 @@
       prefix-icon="-"
       :clear-icon="clearIcon"
       :validate-event="validateEvent"
-      @change="handleChange"
       @blur="handleBlur"
       @focus="handleFocus"
     >
@@ -227,10 +226,6 @@ export default class SDatePicker extends Vue {
       cssClasses.push('has-value')
     }
     return cssClasses
-  }
-
-  handleChange (value: any): void {
-    this.$emit('change', value)
   }
 
   handleBlur (component: any): void {
