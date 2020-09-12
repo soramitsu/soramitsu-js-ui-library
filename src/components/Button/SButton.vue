@@ -1,5 +1,5 @@
 <template>
-  <s-tooltip :content="tooltip" placement="right" :disabled="!tooltip">
+  <s-tooltip :content="tooltip" :disabled="!tooltip" :placement="tooltipPlacement">
     <el-button
       :type="computedType"
       :native-type="nativeType"
@@ -23,9 +23,10 @@
 import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
+import { PopoverPlacement } from 'element-ui/types/popover'
 
 import { SIcon } from '../Icon'
-import { STooltip } from '../Tooltip'
+import { STooltip, TooltipPlacement } from '../Tooltip'
 import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
 
 @Component({
@@ -85,6 +86,12 @@ export default class SButton extends Vue {
    * Button tabindex
    */
   @Prop({ default: '0', type: String }) readonly tabindex!: string
+  /**
+   * Placement of the tooltip. You can use any value from the `TooltipPlacement` enum.
+   *
+   * `"top"` by default
+   */
+  @Prop({ default: TooltipPlacement.TOP, type: String }) readonly tooltipPlacement!: PopoverPlacement
 
   @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
   @Inject({ default: '', from: 'elFormItem' }) elFormItem!: ElFormItem
