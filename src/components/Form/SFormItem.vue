@@ -13,7 +13,7 @@
   >
     <slot slot="label" name="label"></slot>
     <slot></slot>
-    <i v-if="errorState" class="s-icon-error"></i>
+    <i v-if="willMessageBeShown && errorState" class="s-icon-error"></i>
   </el-form-item>
 </template>
 
@@ -87,6 +87,10 @@ export default class SFormItem extends Vue {
         this.errorState = state === 'error'
       }, { deep: true })
     })
+  }
+
+  get willMessageBeShown (): boolean {
+    return this.showMessage && this.elForm?.showMessage
   }
 
   get computedRules (): object {
