@@ -90,7 +90,7 @@ export default class SFormItem extends Vue {
   }
 
   get willMessageBeShown (): boolean {
-    return this.showMessage && this.elForm?.showMessage
+    return this.showMessage && (this.elForm || {}).showMessage
   }
 
   get computedRules (): object {
