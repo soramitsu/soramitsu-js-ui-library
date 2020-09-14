@@ -4,7 +4,8 @@ export enum ButtonTypes {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   TERTIARY = 'tertiary',
-  ACTION = 'action'
+  ACTION = 'action',
+  LINK = 'link'
 }
 
 export enum ButtonNativeTypes {

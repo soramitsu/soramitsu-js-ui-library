@@ -35,7 +35,7 @@ import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
 export default class SButton extends Vue {
   readonly ButtonTypes = ButtonTypes
   /**
-   * Type of button. Possible values: `"primary"`, `"secondary"`, `"tertiary"`, `"action"`.
+   * Type of button. Possible values: `"primary"`, `"secondary"`, `"tertiary"`, `"action"`, `"link"`.
    *
    * By default it's set to `"primary"`
    */
@@ -55,7 +55,7 @@ export default class SButton extends Vue {
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
   /**
-   * Loading state. Only `"tertiary"` and `"action"` button cannot have this state
+   * Loading state. Only `"link"` and `"action"` button cannot have this state
    *
    * If you use `loading` state for one button, for instance, [Send][Cancel], and "send" button sent
    * request to back-end side, you should use `loading` state ONLY for "send" button and apply this flag
@@ -154,7 +154,7 @@ export default class SButton extends Vue {
   }
 
   get isLoading (): boolean {
-    if (([ButtonTypes.TERTIARY, ButtonTypes.ACTION] as Array<string>).includes(this.type)) {
+    if (([ButtonTypes.LINK, ButtonTypes.ACTION] as Array<string>).includes(this.type)) {
       return false
     }
     return this.loading
@@ -227,11 +227,12 @@ export default class SButton extends Vue {
     &:disabled, &:disabled:hover {
       color: $color-neutral-inactive;
       border-color: $color-neutral-border;
+      background-color: $color-basic-white;
     }
   }
 }
 
-.tertiary {
+.link {
   color: $color-basic-black;
   border: none;
   background-color: transparent;
@@ -241,6 +242,22 @@ export default class SButton extends Vue {
   }
   &:disabled, &:disabled:hover {
     color: $color-neutral-inactive;
+  }
+}
+
+.tertiary {
+  color: $color-basic-black;
+  border-color: $color-neutral-placeholder;
+  background-color: $color-neutral-placeholder;
+  &:hover, &:active, &:focus {
+    color: $color-main-brand;
+    background-color: $color-neutral-placeholder;
+    border-color: $color-neutral-placeholder;
+  }
+  &:disabled, &:disabled:hover {
+    color: $color-neutral-inactive;
+    background-color: $color-neutral-placeholder;
+    border-color: $color-neutral-placeholder;
   }
 }
 
