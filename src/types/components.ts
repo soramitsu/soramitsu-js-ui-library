@@ -30,6 +30,7 @@ export enum Components {
   SOption = 'SOption',
   SOptionGroup = 'SOptionGroup',
   SPagination = 'SPagination',
+  SRadio = 'SRadio',
   SRow = 'SRow',
   SScrollSectionItem = 'SScrollSectionItem',
   SScrollSections = 'SScrollSections',

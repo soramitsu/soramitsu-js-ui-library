@@ -50,16 +50,20 @@ export const disabled = () => ({
   components: { SCheckbox, SRow, SCol },
   template: `<s-row :gutter="20" style="flex: 1;">
                <s-col :span="6">
-                 <s-checkbox disabled size="big">
+                 <s-checkbox v-model="first" disabled size="big">
                    Checkbox
                  </s-checkbox>
                </s-col>
                <s-col :span="6">
-                 <s-checkbox disabled border size="big">
+                 <s-checkbox v-model="second" disabled border size="big">
                    Checkbox
                  </s-checkbox>
                </s-col>
-             </s-row>`
+             </s-row>`,
+  data: () => ({
+    first: true,
+    second: false
+  })
 })
 
 export const differentSizeData = Object.values(CheckboxSize).map(size =>
@@ -69,12 +73,12 @@ export const differentSize = () => ({
   template: `<s-row :gutter="20" style="flex: 1;">
                <template v-for="item in items">
                  <s-col :span="6" style="height: 56px; margin-bottom: 20px;">
-                   <s-checkbox :size="item.size">
+                   <s-checkbox :size="item.size" :value="false">
                      {{ item.label }}
                    </s-checkbox>
                  </s-col>
                  <s-col :span="6" style="height: 56px; margin-bottom: 20px;">
-                   <s-checkbox border :size="item.size">
+                   <s-checkbox border :size="item.size" :value="true">
                      {{ item.label }}
                    </s-checkbox>
                  </s-col>
