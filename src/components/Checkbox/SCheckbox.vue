@@ -176,8 +176,11 @@ export default class SCheckbox extends Vue {
     }
   }
   &.is-checked {
-    &.is-disabled > .el-checkbox__inner::after {
-      border-color: $color-neutral-inactive;
+    &.is-disabled > .el-checkbox__inner {
+      background-color: $color-neutral-placeholder;
+      &::after {
+        border-color: $color-neutral-inactive;
+      }
     }
     & + .el-checkbox__label {
       color: $color-basic-black;
