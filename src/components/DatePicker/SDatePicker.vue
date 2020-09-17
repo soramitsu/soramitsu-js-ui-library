@@ -26,6 +26,7 @@
       :validate-event="validateEvent"
       @blur="handleBlur"
       @focus="handleFocus"
+      @change="handleChange"
     >
       <slot name="range-separator" slot="range-separator"></slot>
     </el-date-picker>
@@ -180,6 +181,7 @@ export default class SDatePicker extends Vue {
   @Watch('value')
   private handlePropChange (value: any): void {
     this.model = value
+    this.focused = false
   }
 
   @Watch('model')
@@ -239,6 +241,10 @@ export default class SDatePicker extends Vue {
     }
     this.focused = true
     this.$emit('focus', component)
+  }
+
+  handleChange (values: any): void {
+    this.focused = false
   }
 
   public focus (): void {
@@ -351,6 +357,14 @@ export default class SDatePicker extends Vue {
         }
       }
     }
+    .s-icon-chevron-bottom {
+      position: absolute;
+      right: 10px;
+      top: 30%;
+      pointer-events: none;
+      color: $color-neutral-tertiary;
+      transition: transform .3s;
+    }
     &.focused {
       .el-date-editor.el-input__inner,
       .el-date-editor .el-input__inner {
@@ -359,14 +373,6 @@ export default class SDatePicker extends Vue {
       &:not(.disabled) .s-icon-chevron-bottom {
         transform: rotate(180deg);
       }
-    }
-    .s-icon-chevron-bottom {
-      position: absolute;
-      right: 10px;
-      top: 30%;
-      pointer-events: none;
-      color: $color-neutral-tertiary;
-      transition: transform .3s;
     }
     &.has-value {
       .s-icon-chevron-bottom {

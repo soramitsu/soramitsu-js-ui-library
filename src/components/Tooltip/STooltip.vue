@@ -1,5 +1,6 @@
 <template>
   <el-tooltip
+    ref="tooltip"
     :effect="theme"
     :content="content"
     :placement="placement"
@@ -20,9 +21,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
 import { TooltipEffect } from 'element-ui/types/tooltip'
 import { PopoverPlacement } from 'element-ui/types/popover'
+import debounce from 'throttle-debounce/debounce'
 
 import { TooltipTheme, TooltipPlacement } from './consts'
 
@@ -98,6 +100,8 @@ export default class STooltip extends Vue {
    */
   @Prop({ default: 0, type: Number }) readonly tabindex!: number
 
+  @Ref('tooltip') tooltip!: any
+
   model = this.value
 
   @Watch('value')
@@ -108,6 +112,14 @@ export default class STooltip extends Vue {
   @Watch('model')
   private handleValueChange (value: boolean): void {
     this.$emit('change', value)
+  }
+
+  mounted (): void {
+    const tooltip = this.tooltip
+    if (!tooltip) {
+      return
+    }
+    tooltip.debounceClose = debounce(30, tooltip.handleClosePopper)
   }
 }
 </script>

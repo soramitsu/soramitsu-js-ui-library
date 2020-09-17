@@ -28,12 +28,12 @@
         <slot></slot>
         <i class="el-icon-arrow-down el-icon--right"></i>
       </s-button>
-      <el-tooltip v-else :disabled="!this.$slots.default || willTooltipBeDisabled">
+      <s-tooltip v-else :disabled="!this.$slots.default || willTooltipBeDisabled">
         <i class="s-icon-more-horizontal"></i>
         <template slot="content">
           <slot></slot>
         </template>
-      </el-tooltip>
+      </s-tooltip>
     </template>
     <el-dropdown-menu :class="{'ellipsis': type === DropdownType.ELLIPSIS}">
       <slot name="menu"></slot>
@@ -47,10 +47,12 @@ import { ElDropdown } from 'element-ui/types/dropdown'
 
 import { DropdownType, DropdownSize, DropdownPlacement, DropdownTrigger } from './consts'
 import { ButtonTypes, SButton } from '../Button'
+import { STooltip } from '../Tooltip'
 
 @Component({
   components: {
-    SButton
+    SButton,
+    STooltip
   }
 })
 export default class SDropdown extends Vue {
