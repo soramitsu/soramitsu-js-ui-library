@@ -67,7 +67,7 @@ export const configurable = () => ({
       default: text('Width', '50%')
     },
     top: {
-      default: text('Top', '30vh')
+      default: text('Top', 'auto')
     }
   },
   methods: {

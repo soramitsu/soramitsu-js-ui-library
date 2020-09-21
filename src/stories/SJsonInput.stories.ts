@@ -28,6 +28,7 @@ export const configurable = () => ({
                  v-model="json"
                  :height="height"
                  :disabled="disabled"
+                 :readonly="readonly"
                >
                </s-json-input>
              </s-row>`,
@@ -40,6 +41,9 @@ export const configurable = () => ({
     },
     disabled: {
       default: boolean('Disabled', false)
+    },
+    readonly: {
+      default: boolean('Readonly', false)
     }
   }
 })

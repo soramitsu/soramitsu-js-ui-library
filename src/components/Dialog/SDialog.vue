@@ -1,10 +1,11 @@
 <template>
   <el-dialog
+    ref="dialog"
     :visible.sync="model"
     :title="title"
     :width="width"
     :fullscreen="fullscreen"
-    :top="top"
+    :top="computedTop"
     :show-close="showClose"
     :modal="modal"
     :modal-append-to-body="modalAppendToBody"
@@ -27,7 +28,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
+import elementResizeDetectorMaker from 'element-resize-detector'
 
 @Component
 export default class SDialog extends Vue {
@@ -55,12 +57,13 @@ export default class SDialog extends Vue {
    */
   @Prop({ default: false, type: Boolean }) readonly fullscreen!: boolean
   /**
-   * Margin top of the dialog component. Default value is `"30vh"`.
+   * Margin top of the dialog component. Default value is `"auto"`.
+   * It means that top margin will be automatically calculated based on dialog height/browser window size.
    *
-   * In this context, the value of the width property must match the valid value of the
-   * **CSS width** property. For instance, `"auto"`, `"200px"`, `"15vh"` etc.
+   * Also, the value of the top property can be **CSS top** property.
+   * For instance, `"10%"`, `"200px"`, `"15vh"` etc.
    */
-  @Prop({ default: '30vh', type: String }) readonly top!: string
+  @Prop({ default: 'auto', type: String }) readonly top!: string
   /**
    * Background dimming state of the dialog component.
    *
@@ -128,7 +131,12 @@ export default class SDialog extends Vue {
    */
   @Prop({ type: Function }) readonly beforeClose!: (done: boolean) => {}
 
+  @Ref('dialog') dialog!: any
+
+  readonly erd = elementResizeDetectorMaker()
+
   model = this.visible
+  computedTop = this.top
 
   @Watch('visible')
   private handlePropChange (value: boolean): void {
@@ -138,6 +146,45 @@ export default class SDialog extends Vue {
   @Watch('model')
   private handleValueChange (value: boolean): void {
     this.$emit('update:visible', value)
+  }
+
+  mounted (): void {
+    this.$nextTick(() => {
+      const wrapper = (this.dialog || {}).$el as HTMLElement
+      if (!wrapper) {
+        return
+      }
+      this.erd.listenTo(wrapper, this.computeTop)
+      this.erd.listenTo(wrapper.children[0], this.computeTop)
+    })
+  }
+
+  destroyed (): void {
+    this.$nextTick(() => {
+      const wrapper = (this.dialog || {}).$el as HTMLElement
+      if (!wrapper) {
+        return
+      }
+      this.erd.uninstall(wrapper)
+      this.erd.uninstall(wrapper.children[0])
+    })
+  }
+
+  computeTop (): void {
+    if (this.top !== 'auto') {
+      this.computedTop = this.top
+      return
+    }
+    const wrapper = (this.dialog || {}).$el as HTMLElement
+    if (!wrapper || !wrapper.clientHeight) {
+      this.computedTop = this.top
+      return
+    }
+    const dialog = wrapper.children[0] as HTMLElement
+    const top = wrapper.clientHeight - dialog.clientHeight > 0
+      ? Math.floor((wrapper.clientHeight - dialog.clientHeight) / 2)
+      : 0
+    this.computedTop = `${top}px`
   }
 
   handleOpen (): void {
