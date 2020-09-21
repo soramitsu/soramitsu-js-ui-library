@@ -4,19 +4,19 @@
     :class="computedClasses"
   >
     <v-jsoneditor
+      ref="jsoneditor"
       v-model="model"
       :options="options"
       :plus="false"
       :height="height"
       @error="handleError"
-    >
-    </v-jsoneditor>
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
-import isEmpty from 'lodash/isEmpty'
+import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
+import isEmpty from 'lodash/fp/isEmpty'
 
 @Component
 export default class SJsonInput extends Vue {
@@ -32,13 +32,23 @@ export default class SJsonInput extends Vue {
    */
   @Prop({ type: String, default: '' }) readonly height!: string
   /**
-   * Disabled state
+   * Disabled state.
+   *
+   * `false` by default
    */
   @Prop({ type: Boolean, default: false }) readonly disabled!: boolean
+  /**
+   * Readonly state.
+   *
+   * `false` by default
+   */
+  @Prop({ type: Boolean, default: false }) readonly readonly!: boolean
   /**
    * Autocomplete dictionary. For now it doesn't work for some reasons
    */
   @Prop({ type: Array }) readonly dictionary!: Array<string>
+
+  @Ref('jsoneditor') jsoneditor!: any
 
   model = this.value
   options = {
@@ -59,11 +69,21 @@ export default class SJsonInput extends Vue {
     if (this.disabled) {
       cssClasses.push('disabled')
     }
+    if (this.readonly) {
+      cssClasses.push('readonly')
+    }
     return cssClasses
   }
 
   handleError (error: string): void {
-    this.$emit('error', error)
+    if (!this.readonly) {
+      this.$emit('error', error)
+      return
+    }
+    if (!this.jsoneditor) {
+      return
+    }
+    this.jsoneditor.editor.set(this.value)
   }
 
   @Watch('value', { deep: true })
@@ -73,7 +93,14 @@ export default class SJsonInput extends Vue {
 
   @Watch('model', { deep: true })
   private handleValueChange (value: object): void {
-    this.$emit('change', value)
+    if (!this.readonly) {
+      this.$emit('input', value)
+      this.$emit('change', value)
+    }
+    if (!this.jsoneditor) {
+      return
+    }
+    this.jsoneditor.editor.set(this.value)
   }
 }
 </script>
@@ -101,6 +128,14 @@ $color-ide-boolean: #0000FF;
       .ace_gutter-active-line {
         background-color: $color-neutral-placeholder;
       }
+    }
+  }
+  &.readonly .jsoneditor {
+    .ace_gutter .ace_gutter-cell.ace_error {
+      background-image: none;
+    }
+    .ace_tooltip {
+      display: none !important;
     }
   }
   // TODO: think about hover and focus

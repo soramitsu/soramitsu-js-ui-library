@@ -1,6 +1,6 @@
 {
   "name": "@soramitsu/soramitsu-js-ui",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": false,
   "publishConfig": {
     "registry": "https://nexus.iroha.tech/repository/npm-soramitsu-private/"
@@ -49,6 +49,7 @@
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/eslint-config-typescript": "^5.0.2",
     "@vue/test-utils": "1.0.0-beta.31",
+    "element-resize-detector": "^1.2.1",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
@@ -70,6 +71,7 @@
     "rollup-plugin-vue": "^5.1.4",
     "sass-loader": "^8.0.2",
     "storybook-vue-router": "^1.0.7",
+    "throttle-debounce": "^1.0.1",
     "ts-jest": "^26.0.0",
     "typescript": "~3.8.3",
     "vue-cli-plugin-storybook": "~1.2.2",
