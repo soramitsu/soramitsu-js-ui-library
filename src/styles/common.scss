@@ -23,15 +23,15 @@ html {
 }
 
 .big {
-  height: $size-big;
+  height: $s-size-big;
 }
 
 .medium {
-  height: $size-medium;
+  height: $s-size-medium;
 }
 
 .small {
-  height: $size-small;
+  height: $s-size-small;
 }
 
 button > span {
@@ -70,25 +70,25 @@ button > span {
 .el-message-box {
   .el-message-box__header {
     .el-message-box__title {
-      color: $color-basic-black;
+      color: $s-color-basic-black;
       font-size: 16px;
     }
   }
   .el-message-box__btns {
     button.el-button.el-button--default.el-button--small {
-      height: $size-medium;
+      height: $s-size-medium;
       font-size: 14px;
       border-radius: 4px;
       &:hover, &:active, &:focus {
-        color: $color-main-brand;
-        background-color: $color-basic-white;
-        border-color: $color-main-brand;
+        color: $s-color-main-brand;
+        background-color: $s-color-basic-white;
+        border-color: $s-color-main-brand;
       }
       &.el-button--primary {
         &:hover, &:active, &:focus {
-          color: $color-basic-white;
-          background-color: $color-main-hover;
-          border-color: $color-main-hover;
+          color: $s-color-basic-white;
+          background-color: $s-color-main-hover;
+          border-color: $s-color-main-hover;
         }
       }
     }

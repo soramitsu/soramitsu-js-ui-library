@@ -206,85 +206,85 @@ export default class SButton extends Vue {
 
 .s-primary {
   &:hover, &:active, &:focus {
-    background-color: $color-main-hover;
-    border-color: $color-main-hover;
+    background-color: $s-color-main-hover;
+    border-color: $s-color-main-hover;
   }
   &:disabled, &:disabled:hover {
-    background-color: $color-main-inactive;
-    border-color: $color-main-inactive;
+    background-color: $s-color-main-inactive;
+    border-color: $s-color-main-inactive;
   }
 }
 
 .s-secondary {
   &:hover, &:active, &:focus {
-    color: $color-main-brand;
-    background-color: $color-basic-white;
-    border-color: $color-main-brand;
+    color: $s-color-main-brand;
+    background-color: $s-color-basic-white;
+    border-color: $s-color-main-brand;
   }
   &:disabled, &:disabled:hover {
-    color: $color-neutral-inactive;
-    border-color: $color-neutral-border;
+    color: $s-color-neutral-inactive;
+    border-color: $s-color-neutral-border;
   }
   &.s-alternative {
     &:hover, &:active, &:focus {
-      color: $color-basic-black;
-      background-color: $color-neutral-hover;
-      border-color: $color-neutral-hover;
+      color: $s-color-basic-black;
+      background-color: $s-color-neutral-hover;
+      border-color: $s-color-neutral-hover;
     }
     &:disabled, &:disabled:hover {
-      color: $color-neutral-inactive;
-      border-color: $color-neutral-border;
-      background-color: $color-basic-white;
+      color: $s-color-neutral-inactive;
+      border-color: $s-color-neutral-border;
+      background-color: $s-color-basic-white;
     }
   }
 }
 
 .s-link {
-  color: $color-basic-black;
+  color: $s-color-basic-black;
   border: none;
   background-color: transparent;
   &:hover, &:active, &:focus {
-    color: $color-main-brand;
+    color: $s-color-main-brand;
     background-color: transparent;
   }
   &:disabled, &:disabled:hover {
-    color: $color-neutral-inactive;
+    color: $s-color-neutral-inactive;
   }
 }
 
 .s-tertiary {
-  color: $color-basic-black;
-  border-color: $color-neutral-placeholder;
-  background-color: $color-neutral-placeholder;
+  color: $s-color-basic-black;
+  border-color: $s-color-neutral-placeholder;
+  background-color: $s-color-neutral-placeholder;
   &:hover, &:active, &:focus {
-    color: $color-main-brand;
-    background-color: $color-neutral-placeholder;
-    border-color: $color-neutral-placeholder;
+    color: $s-color-main-brand;
+    background-color: $s-color-neutral-placeholder;
+    border-color: $s-color-neutral-placeholder;
   }
   &:disabled, &:disabled:hover {
-    color: $color-neutral-inactive;
-    background-color: $color-neutral-placeholder;
-    border-color: $color-neutral-placeholder;
+    color: $s-color-neutral-inactive;
+    background-color: $s-color-neutral-placeholder;
+    border-color: $s-color-neutral-placeholder;
   }
 }
 
 .s-action {
   &.big {
-    width: $size-big;
+    width: $s-size-big;
     padding: 12px;
     i {
       font-size: 20px;
     }
   }
   &.medium {
-    width: $size-medium;
+    width: $s-size-medium;
     padding: 10px;
     i {
       font-size: 18px;
     }
   }
   &.small {
-    width: $size-small;
+    width: $s-size-small;
     padding: 9px;
     i {
       font-size: 16px;
@@ -292,28 +292,28 @@ export default class SButton extends Vue {
       margin-top: -2px;
     }
   }
-  color: $color-basic-black;
-  background-color: $color-neutral-placeholder;
-  border-color: $color-neutral-placeholder;
+  color: $s-color-basic-black;
+  background-color: $s-color-neutral-placeholder;
+  border-color: $s-color-neutral-placeholder;
   border-radius: 8px;
   &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
-    color: $color-basic-black;
-    background-color: $color-neutral-hover;
-    border-color: $color-neutral-hover;
+    color: $s-color-basic-black;
+    background-color: $s-color-neutral-hover;
+    border-color: $s-color-neutral-hover;
   }
   &:disabled, &:disabled:hover {
-    color: $color-neutral-inactive;
+    color: $s-color-neutral-inactive;
   }
   &.s-alternative {
-    background-color: $color-basic-white;
-    border-color: $color-neutral-border;
+    background-color: $s-color-basic-white;
+    border-color: $s-color-neutral-border;
     &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
-      color: $color-basic-black;
-      background-color: $color-neutral-placeholder;
-      border-color: $color-neutral-placeholder;
+      color: $s-color-basic-black;
+      background-color: $s-color-neutral-placeholder;
+      border-color: $s-color-neutral-placeholder;
     }
     &:disabled, &:disabled:hover {
-      color: $color-neutral-inactive;
+      color: $s-color-neutral-inactive;
     }
   }
 }

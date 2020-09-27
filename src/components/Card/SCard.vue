@@ -62,17 +62,17 @@ export default class SCard extends Vue {
 @import "../../styles/variables.scss";
 
 .s-card {
-  color: $color-basic-black;
+  color: $s-color-basic-black;
   border-radius: 8px;
-  border-color: $color-neutral-border;
+  border-color: $s-color-neutral-border;
   &.clickable {
     cursor: pointer;
   }
   &:hover, &:focus {
-    border-color: $color-basic-white;
+    border-color: $s-color-basic-white;
   }
   .el-card__header {
-    border-bottom-color: $color-basic-white;
+    border-bottom-color: $s-color-basic-white;
     padding-bottom: 0;
     text-align: left;
   }

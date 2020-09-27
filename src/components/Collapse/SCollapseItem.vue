@@ -69,7 +69,7 @@ export default class SCollapseItem extends Vue {
     border-bottom-color: #F5F5F5;
   }
   &header {
-    color: $color-basic-black;
+    color: $s-color-basic-black;
     border-bottom-color: #F5F5F5;
     &.is-active {
       border-bottom-color: transparent;
@@ -81,7 +81,7 @@ export default class SCollapseItem extends Vue {
       padding: 8px;
       width: 32px;
       height: 32px;
-      background-color: $color-neutral-placeholder;
+      background-color: $s-color-neutral-placeholder;
       border-radius: 50%;
       &.is-active {
         transform: rotate(180deg);
@@ -89,10 +89,10 @@ export default class SCollapseItem extends Vue {
     }
   }
   &content {
-    color: $color-basic-black;
+    color: $s-color-basic-black;
   }
 }
 .el-collapse-item.is-disabled .el-collapse-item__header {
-  color: $color-neutral-inactive;
+  color: $s-color-neutral-inactive;
 }
 </style>

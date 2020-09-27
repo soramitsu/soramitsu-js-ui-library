@@ -28,9 +28,9 @@ export default class SBreadcrumbItem extends Vue {
 <style lang="scss">
 @import "../../styles/variables.scss";
 .el-breadcrumb__inner {
-  color: $color-neutral-secondary;
+  color: $s-color-neutral-secondary;
   &.is-link {
-    color: $color-neutral-secondary;
+    color: $s-color-neutral-secondary;
     font-weight: normal;
   }
 }

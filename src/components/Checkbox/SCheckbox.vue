@@ -155,7 +155,7 @@ export default class SCheckbox extends Vue {
   }
 }
 .el-checkbox__inner {
-  border-color: $color-neutral-inactive;
+  border-color: $s-color-neutral-inactive;
   border-radius: 4px;
   width: 20px;
   height: 20px;
@@ -169,21 +169,21 @@ export default class SCheckbox extends Vue {
 .el-checkbox__input {
   &.is-disabled {
     .el-checkbox__inner {
-      background-color: $color-neutral-placeholder;
+      background-color: $s-color-neutral-placeholder;
     }
     & + span.el-checkbox__label {
-      color: $color-neutral-inactive;
+      color: $s-color-neutral-inactive;
     }
   }
   &.is-checked {
     &.is-disabled > .el-checkbox__inner {
-      background-color: $color-neutral-placeholder;
+      background-color: $s-color-neutral-placeholder;
       &::after {
-        border-color: $color-neutral-inactive;
+        border-color: $s-color-neutral-inactive;
       }
     }
     & + .el-checkbox__label {
-      color: $color-basic-black;
+      color: $s-color-basic-black;
     }
   }
 }

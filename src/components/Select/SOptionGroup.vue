@@ -26,9 +26,9 @@ export default class SOptionGroup extends Vue {
 @import "../../styles/variables.scss";
 
 .el-select-group__wrap:not(:last-of-type)::after {
-  background-color: $color-neutral-hover;
+  background-color: $s-color-neutral-hover;
 }
 .el-select-group__title {
-  color: $color-neutral-tertiary;
+  color: $s-color-neutral-tertiary;
 }
 </style>

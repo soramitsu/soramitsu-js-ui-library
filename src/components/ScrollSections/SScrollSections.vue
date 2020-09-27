@@ -229,7 +229,7 @@ export default class SScrollSections extends Vue {
       &.disabled {
         cursor: not-allowed;
         pointer-events: none;
-        color: $color-neutral-inactive;
+        color: $s-color-neutral-inactive;
         border-left: none;
       }
     }
@@ -237,7 +237,7 @@ export default class SScrollSections extends Vue {
 }
 .s-scroll-content {
   padding-bottom: 90%;
-  color: $color-basic-black;
+  color: $s-color-basic-black;
   .title {
     font-size: 16px;
   }

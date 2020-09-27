@@ -239,14 +239,14 @@ export default class SInput extends Vue {
 .s-input {
   font-family: $font-family-default;
   width: 100%;
-  min-height: $size-big;
+  min-height: $s-size-big;
   position: relative;
   .el-input__suffix {
     z-index: 1;
   }
   .placeholder {
     // TODO: add default animation from material-ui
-    color: $color-neutral-secondary;
+    color: $s-color-neutral-secondary;
     text-align: left;
     font-size: 12px;
     padding: 0 15px;
@@ -257,7 +257,7 @@ export default class SInput extends Vue {
     position: absolute;
     z-index: 1;
     width: calc(100% - 15px);
-    background-color: $color-neutral-placeholder;
+    background-color: $s-color-neutral-placeholder;
     pointer-events: none;
   }
   .el-input,
@@ -265,11 +265,11 @@ export default class SInput extends Vue {
     height: 100%;
     > input,
     > textarea {
-      height: $size-big;
-      border: 1px solid $color-neutral-placeholder;
-      background-color: $color-neutral-placeholder;
+      height: $s-size-big;
+      border: 1px solid $s-color-neutral-placeholder;
+      background-color: $s-color-neutral-placeholder;
       &::placeholder {
-        color: $color-neutral-secondary;
+        color: $s-color-neutral-secondary;
         opacity: 1; // Firefox
       }
     }
@@ -284,34 +284,34 @@ export default class SInput extends Vue {
     .placeholder,
     .el-input > input,
     .el-textarea > textarea {
-      background-color: $color-neutral-hover;
+      background-color: $s-color-neutral-hover;
     }
     .el-input > input,
     .el-textarea > textarea {
-      border-color: $color-neutral-hover;
+      border-color: $s-color-neutral-hover;
     }
   }
   &.focused {
     .placeholder,
     .el-input > input,
     .el-textarea > textarea {
-      background-color: $color-basic-white;
+      background-color: $s-color-basic-white;
     }
     .el-input > input,
     .el-textarea > textarea {
-      border-color: $color-neutral-border;
+      border-color: $s-color-neutral-border;
     }
   }
   &.disabled {
     .placeholder,
     .el-input > input,
     .el-textarea > textarea {
-      color: $color-neutral-secondary;
-      background-color: $color-neutral-placeholder;
+      color: $s-color-neutral-secondary;
+      background-color: $s-color-neutral-placeholder;
     }
     .el-input > input,
     .el-textarea > textarea {
-      border-color: $color-neutral-border;
+      border-color: $s-color-neutral-border;
     }
   }
   &.autofill {
@@ -321,7 +321,7 @@ export default class SInput extends Vue {
   }
   .el-input > input {
     &:-webkit-autofill {
-      color: $color-basic-black !important;
+      color: $s-color-basic-black !important;
       animation-name: onAutoFillStart; // Expose a hook for JavaScript when auto fill is shown
     }
     &:not(:-webkit-autofill) {

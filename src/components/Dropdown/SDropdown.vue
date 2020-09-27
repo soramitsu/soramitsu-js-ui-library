@@ -201,11 +201,11 @@ export default class SDropdown extends Vue {
     .el-dropdown__caret-button {
       &.secondary {
         &::before {
-          background-color: $color-neutral-border;
+          background-color: $s-color-neutral-border;
         }
         &:hover, &:active, &:focus {
           &::before {
-            background-color: $color-main-brand;
+            background-color: $s-color-main-brand;
           }
         }
       }

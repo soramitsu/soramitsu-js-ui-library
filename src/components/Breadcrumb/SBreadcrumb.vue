@@ -19,7 +19,7 @@ export default class SBreadcrumb extends Vue {
 <style lang="scss">
 @import "../../styles/variables.scss";
 .el-breadcrumb__separator {
-  color: $color-neutral-secondary;
+  color: $s-color-neutral-secondary;
   font-weight: normal;
 }
 </style>

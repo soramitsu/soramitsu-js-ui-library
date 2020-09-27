@@ -141,42 +141,42 @@ export default class SFormItem extends Vue {
         position: relative;
         padding-top: 8px;
         padding-left: 30px;
-        color: $color-basic-black;
+        color: $s-color-basic-black;
         &::before {
           content: '';
         }
       }
       > [class^="s-input"]:not(.disabled) {
         .placeholder {
-          color: $color-error;
-          background-color: $color-main-base;
+          color: $s-color-error;
+          background-color: $s-color-main-base;
         }
         input, textarea {
-          background-color: $color-main-base;
+          background-color: $s-color-main-base;
           &::placeholder {
-            color: $color-error;
+            color: $s-color-error;
           }
         }
         &:hover {
           .placeholder,
           .el-input > input,
           .el-textarea > textarea {
-            background-color: $color-main-hover-light;
+            background-color: $s-color-main-hover-light;
           }
           .el-input > input,
           .el-textarea > textarea {
-            border-color: $color-error;
+            border-color: $s-color-error;
           }
         }
         &.focused {
           .placeholder,
           .el-input > input,
           .el-textarea > textarea {
-            background-color: $color-basic-white;
+            background-color: $s-color-basic-white;
           }
           .el-input > input,
           .el-textarea > textarea {
-            border-color: $color-error;
+            border-color: $s-color-error;
           }
         }
       }
@@ -186,7 +186,7 @@ export default class SFormItem extends Vue {
       bottom: 0;
       left: 4px;
       font-size: 16px;
-      color: $color-error;
+      color: $s-color-error;
     }
   }
 }

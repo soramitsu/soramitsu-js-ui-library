@@ -201,16 +201,16 @@ export default class SPagination extends Vue {
 
 .el-pagination {
   .btn-prev, .btn-next {
-    color: $color-basic-black;
+    color: $s-color-basic-black;
   }
   button:disabled {
-    color: $color-neutral-inactive;
+    color: $s-color-neutral-inactive;
   }
   .el-pagination__sizes {
     .el-select .el-input {
       width: 65px;
       .el-select__caret, .el-input__inner {
-        color: $color-basic-black;
+        color: $s-color-basic-black;
         font-weight: bold;
       }
       .el-select__caret {
@@ -220,12 +220,12 @@ export default class SPagination extends Vue {
         border-radius: 8px;
         padding-right: 20px;
         padding-left: 5px;
-        background-color: $color-neutral-placeholder;
-        border-color: $color-neutral-placeholder;
+        background-color: $s-color-neutral-placeholder;
+        border-color: $s-color-neutral-placeholder;
       }
       &.is-disabled {
         .el-select__caret, .el-input__inner {
-          color: $color-neutral-inactive;
+          color: $s-color-neutral-inactive;
         }
       }
     }
@@ -233,47 +233,47 @@ export default class SPagination extends Vue {
   .el-pagination__editor.el-input {
     .el-input__inner {
       border-radius: 8px;
-      background-color: $color-neutral-placeholder;
-      border-color: $color-neutral-placeholder;
-      color: $color-basic-black;
+      background-color: $s-color-neutral-placeholder;
+      border-color: $s-color-neutral-placeholder;
+      color: $s-color-basic-black;
     }
     &.is-disabled .el-input__inner {
-      color: $color-neutral-inactive;
+      color: $s-color-neutral-inactive;
     }
   }
   .el-pagination__total, .per-page-text, .el-pagination__jump {
-    color: $color-neutral-secondary;
+    color: $s-color-neutral-secondary;
     font-weight: normal;
   }
   .el-pager li {
-    color: $color-basic-black;
+    color: $s-color-basic-black;
     &.btn-quicknext, &.btn-quickprev {
-      color: $color-basic-black;
+      color: $s-color-basic-black;
     }
     &:not(.disabled) {
       &:hover, &.active {
-        color: $color-main-brand;
+        color: $s-color-main-brand;
       }
     }
     &.disabled {
-      color: $color-neutral-inactive;
+      color: $s-color-neutral-inactive;
     }
   }
   &.is-background {
     .el-pager li {
-      background-color: $color-neutral-placeholder;
+      background-color: $s-color-neutral-placeholder;
       &.disabled {
-        color: $color-neutral-inactive;
+        color: $s-color-neutral-inactive;
       }
     }
     .btn-prev, .btn-next {
-      background-color: $color-neutral-placeholder;
+      background-color: $s-color-neutral-placeholder;
       &:disabled {
-        color: $color-neutral-inactive;
-        background-color: $color-neutral-placeholder;
+        color: $s-color-neutral-inactive;
+        background-color: $s-color-neutral-placeholder;
       }
       &:not(:disabled):hover {
-        color: $color-main-brand;
+        color: $s-color-main-brand;
       }
     }
   }

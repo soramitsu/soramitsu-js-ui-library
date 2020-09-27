@@ -79,7 +79,7 @@ export default class SRadio extends Vue {
 .el-radio {
   &.big {
     @extend .big;
-    line-height: $size-big;
+    line-height: $s-size-big;
     &.is-bordered {
       padding-top: 18px;
     }
@@ -95,7 +95,7 @@ export default class SRadio extends Vue {
   }
   &.medium {
     @extend .medium;
-    line-height: $size-medium;
+    line-height: $s-size-medium;
     > .el-radio__input .el-radio__inner {
       width: 16px;
       height: 16px;
@@ -108,7 +108,7 @@ export default class SRadio extends Vue {
   }
   &.small {
     @extend .small;
-    line-height: $size-small;
+    line-height: $s-size-small;
     &.is-bordered {
       padding-top: 9px;
     }
@@ -128,33 +128,33 @@ export default class SRadio extends Vue {
   &.is-bordered {
     line-height: 0;
     &.is-disabled {
-      border-color: $color-neutral-border;
+      border-color: $s-color-neutral-border;
     }
   }
   > .el-radio__input {
     .el-radio__inner {
-      background-color: $color-basic-white;
+      background-color: $s-color-basic-white;
       &::after {
-        background-color: $color-main-brand;
+        background-color: $s-color-main-brand;
       }
     }
     &.is-checked .el-radio__inner {
-      background-color: $color-basic-white;
+      background-color: $s-color-basic-white;
     }
     &.is-disabled {
       .el-radio__inner {
-        background-color: $color-neutral-placeholder;
-        border-color: $color-neutral-border;
+        background-color: $s-color-neutral-placeholder;
+        border-color: $s-color-neutral-border;
       }
       &.is-checked .el-radio__inner {
-        background-color: $color-neutral-placeholder;
-        border-color: $color-neutral-border;
+        background-color: $s-color-neutral-placeholder;
+        border-color: $s-color-neutral-border;
         &::after {
-          background-color: $color-neutral-inactive;
+          background-color: $s-color-neutral-inactive;
         }
       }
       & + span.el-radio__label {
-        color: $color-neutral-inactive;
+        color: $s-color-neutral-inactive;
       }
     }
   }

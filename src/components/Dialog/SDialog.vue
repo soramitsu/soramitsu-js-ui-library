@@ -213,7 +213,7 @@ export default class SDialog extends Vue {
   .el-dialog__title {
     font-weight: bold;
     font-size: 16px;
-    color: $color-basic-black;
+    color: $s-color-basic-black;
   }
   > * {
     word-break: break-word;
