@@ -9,7 +9,7 @@
       :disabled="disabled"
       :loading="isLoading"
       :autofocus="autofocus"
-      :circle="type === ButtonTypes.ACTION"
+      :circle="type === ButtonTypes.ACTION && rounded"
       :icon="elementIcon"
       @click="handleClick"
     >
@@ -40,6 +40,12 @@ export default class SButton extends Vue {
    * By default it's set to `"primary"`
    */
   @Prop({ default: ButtonTypes.PRIMARY, type: String }) readonly type!: string
+  /**
+   * Rounded property for `type="action"` buttons.
+   *
+   * By default it's set to `false`
+   */
+  @Prop({ default: false, type: Boolean }) readonly rounded!: boolean
   /**
    * Size of button. Possible values: `"big"`, `"medium"`, `"small"`.
    *
@@ -116,19 +122,20 @@ export default class SButton extends Vue {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
+    // TODO: change to `s-${size}`
     if ((this.elForm || this.elFormItem || {}).size) {
       cssClasses.push((this.elForm || this.elFormItem).size)
     } else if ((Object.values(ButtonSize) as Array<string>).includes(this.size)) {
       cssClasses.push(this.size)
     }
     if ((Object.values(ButtonTypes) as Array<string>).includes(this.type)) {
-      cssClasses.push(this.type)
+      cssClasses.push(`s-${this.type}`)
     }
     if (this.isLoading) {
-      cssClasses.push('loading')
+      cssClasses.push('s-loading')
     }
     if (this.alternative) {
-      cssClasses.push('alternative')
+      cssClasses.push('s-alternative')
     }
     return cssClasses
   }
@@ -180,7 +187,7 @@ export default class SButton extends Vue {
 <style lang="scss">
 @import "../../styles/variables.scss";
 
-.loading {
+.s-loading {
   padding: 12px 17.5px;
   i {
     position: absolute;
@@ -197,7 +204,7 @@ export default class SButton extends Vue {
   }
 }
 
-.primary {
+.s-primary {
   &:hover, &:active, &:focus {
     background-color: $color-main-hover;
     border-color: $color-main-hover;
@@ -208,7 +215,7 @@ export default class SButton extends Vue {
   }
 }
 
-.secondary {
+.s-secondary {
   &:hover, &:active, &:focus {
     color: $color-main-brand;
     background-color: $color-basic-white;
@@ -218,7 +225,7 @@ export default class SButton extends Vue {
     color: $color-neutral-inactive;
     border-color: $color-neutral-border;
   }
-  &.alternative {
+  &.s-alternative {
     &:hover, &:active, &:focus {
       color: $color-basic-black;
       background-color: $color-neutral-hover;
@@ -232,7 +239,7 @@ export default class SButton extends Vue {
   }
 }
 
-.link {
+.s-link {
   color: $color-basic-black;
   border: none;
   background-color: transparent;
@@ -245,7 +252,7 @@ export default class SButton extends Vue {
   }
 }
 
-.tertiary {
+.s-tertiary {
   color: $color-basic-black;
   border-color: $color-neutral-placeholder;
   background-color: $color-neutral-placeholder;
@@ -261,21 +268,24 @@ export default class SButton extends Vue {
   }
 }
 
-.action {
+.s-action {
   &.big {
     width: $size-big;
+    padding: 12px;
     i {
       font-size: 20px;
     }
   }
   &.medium {
     width: $size-medium;
+    padding: 10px;
     i {
       font-size: 18px;
     }
   }
   &.small {
     width: $size-small;
+    padding: 9px;
     i {
       font-size: 16px;
       margin-left: -2px;
@@ -285,6 +295,7 @@ export default class SButton extends Vue {
   color: $color-basic-black;
   background-color: $color-neutral-placeholder;
   border-color: $color-neutral-placeholder;
+  border-radius: 8px;
   &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
     color: $color-basic-black;
     background-color: $color-neutral-hover;
@@ -293,7 +304,7 @@ export default class SButton extends Vue {
   &:disabled, &:disabled:hover {
     color: $color-neutral-inactive;
   }
-  &.alternative {
+  &.s-alternative {
     background-color: $color-basic-white;
     border-color: $color-neutral-border;
     &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
@@ -314,7 +325,7 @@ button {
       color: inherit;
     }
   }
-  &:not(.action) > span > i {
+  &:not(.s-action) > span > i {
     &[class^=s-icon-], &[class^=el-icon-] {
       margin-right: 6px;
     }

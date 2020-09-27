@@ -19,6 +19,7 @@ export const configurable = () => ({
                :icon="type === 'action' ? 'back' : ''"
                :type="type"
                :size="size"
+               :rounded="rounded"
                :alternative="alternative"
                @click="handleClick"
              >
@@ -36,6 +37,9 @@ export const configurable = () => ({
     },
     size: {
       default: select('Size', Object.values(ButtonSize), ButtonSize.BIG)
+    },
+    rounded: {
+      default: boolean('Rounded', false)
     },
     alternative: {
       default: boolean('Alternative', false)
