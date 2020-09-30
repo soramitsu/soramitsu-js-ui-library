@@ -163,7 +163,7 @@ export default class SDropdown extends Vue {
     if (this.splitButton) {
       this.$nextTick(() => {
         this.dropdown.$children[0].$children.forEach(button => {
-          button.$el.classList.add(this.size, this.computedButtonType)
+          button.$el.classList.add(`s-${this.size}`, `s-${this.computedButtonType}`)
         })
       })
     }
@@ -199,7 +199,7 @@ export default class SDropdown extends Vue {
       float: left;
     }
     .el-dropdown__caret-button {
-      &.secondary {
+      &.s-secondary {
         &::before {
           background-color: $s-color-neutral-border;
         }
@@ -209,7 +209,7 @@ export default class SDropdown extends Vue {
           }
         }
       }
-      &.tertiary {
+      &.s-tertiary, &.s-link {
         &::before {
           background-color: transparent;
         }

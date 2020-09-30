@@ -67,10 +67,10 @@ export default class SJsonInput extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.disabled) {
-      cssClasses.push('disabled')
+      cssClasses.push('s-disabled')
     }
     if (this.readonly) {
-      cssClasses.push('readonly')
+      cssClasses.push('s-readonly')
     }
     return cssClasses
   }
@@ -118,7 +118,7 @@ $color-ide-boolean: #0000FF;
   width: 100%;
   border: 1px solid $s-color-neutral-border;
   border-radius: $s-border-radius-default;
-  &.disabled {
+  &.s-disabled {
     .ace-jsoneditor {
       pointer-events: none;
       .ace_cursor {
@@ -130,7 +130,7 @@ $color-ide-boolean: #0000FF;
       }
     }
   }
-  &.readonly .jsoneditor {
+  &.s-readonly .jsoneditor {
     .ace_gutter .ace_gutter-cell.ace_error {
       background-image: none;
     }

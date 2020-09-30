@@ -3,7 +3,7 @@
     class="s-input"
     :class="computedClasses"
   >
-    <span v-if="model" class="placeholder">{{ placeholder }}</span>
+    <span v-if="model" class="s-placeholder">{{ placeholder }}</span>
     <el-input
       ref="el-input"
       :type="computedType"
@@ -158,16 +158,16 @@ export default class SInput extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.focused) {
-      cssClasses.push('focused')
+      cssClasses.push('s-focused')
     }
     if (this.disabled || (this.elForm || {}).disabled) {
-      cssClasses.push('disabled')
+      cssClasses.push('s-disabled')
     }
     if (this.type === InputType.TEXT_FILE) {
-      cssClasses.push('text-file')
+      cssClasses.push('s-text-file')
     }
     if (this.autofill) {
-      cssClasses.push('autofill')
+      cssClasses.push('s-autofill')
     }
     return cssClasses
   }
@@ -244,7 +244,7 @@ export default class SInput extends Vue {
   .el-input__suffix {
     z-index: 1;
   }
-  .placeholder {
+  .s-placeholder {
     // TODO: add default animation from material-ui
     color: $s-color-neutral-secondary;
     text-align: left;
@@ -281,7 +281,7 @@ export default class SInput extends Vue {
     }
   }
   &:hover {
-    .placeholder,
+    .s-placeholder,
     .el-input > input,
     .el-textarea > textarea {
       background-color: $s-color-neutral-hover;
@@ -291,8 +291,8 @@ export default class SInput extends Vue {
       border-color: $s-color-neutral-hover;
     }
   }
-  &.focused {
-    .placeholder,
+  &.s-focused {
+    .s-placeholder,
     .el-input > input,
     .el-textarea > textarea {
       background-color: $s-color-basic-white;
@@ -302,8 +302,8 @@ export default class SInput extends Vue {
       border-color: $s-color-neutral-border;
     }
   }
-  &.disabled {
-    .placeholder,
+  &.s-disabled {
+    .s-placeholder,
     .el-input > input,
     .el-textarea > textarea {
       color: $s-color-neutral-secondary;
@@ -314,8 +314,8 @@ export default class SInput extends Vue {
       border-color: $s-color-neutral-border;
     }
   }
-  &.autofill {
-    .placeholder {
+  &.s-autofill {
+    .s-placeholder {
       background-color: transparent !important;
     }
   }
@@ -334,7 +334,7 @@ export default class SInput extends Vue {
       animation-name: onAutoFillCancel;
     }
   }
-  .placeholder + .el-input {
+  .s-placeholder + .el-input {
     > input {
       padding-top: 12px;
     }
@@ -342,10 +342,10 @@ export default class SInput extends Vue {
       padding-top: 11px;
     }
   }
-  .placeholder + .el-textarea > textarea {
+  .s-placeholder + .el-textarea > textarea {
     padding-top: 24px;
   }
-  &.text-file {
+  &.s-text-file {
     .el-input > input {
       padding-right: 56px;
     }

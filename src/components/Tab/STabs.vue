@@ -97,7 +97,7 @@ export default class STabs extends Vue {
     const cssClasses: Array<string> = []
     if (this.type === TabsType.ROUNDED &&
       ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
-      cssClasses.push('rounded')
+      cssClasses.push('s-rounded')
     }
     return cssClasses
   }
@@ -165,7 +165,7 @@ export default class STabs extends Vue {
       border-bottom-color: $s-color-neutral-border;
     }
   }
-  &.rounded {
+  &.s-rounded {
     .el-tabs__header {
       width: fit-content;
     }

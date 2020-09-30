@@ -41,10 +41,10 @@ export default class SCollapseItem extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if (!(this.sCollapse || {}).borders) {
-      cssClasses.push('without-border')
+      cssClasses.push('s-without-border')
     }
     if (this.withoutPadding) {
-      cssClasses.push('without-padding')
+      cssClasses.push('s-without-padding')
     }
     return cssClasses
   }
@@ -55,13 +55,13 @@ export default class SCollapseItem extends Vue {
 @import "../../styles/variables.scss";
 @import "../../styles/icons.scss";
 
-.without-border {
+.s-without-border {
   > div > .el-collapse-item__header,
   > .el-collapse-item__wrap {
     border: none;
   }
 }
-.without-padding > .el-collapse-item__wrap > .el-collapse-item__content {
+.s-without-padding > .el-collapse-item__wrap > .el-collapse-item__content {
   padding-bottom: 0;
 }
 .el-collapse-item__ {

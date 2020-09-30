@@ -1,6 +1,6 @@
 <template>
   <div class="s-date-picker" :class="computedClasses">
-    <span v-if="willPlaceholderBeShown" class="placeholder">{{ placeholder }}</span>
+    <span v-if="willPlaceholderBeShown" class="s-placeholder">{{ placeholder }}</span>
     <el-date-picker
       ref="picker"
       v-model="model"
@@ -212,20 +212,16 @@ export default class SDatePicker extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
-      if (!this.isInputType) {
-        cssClasses.push(InputTypes.SELECT)
-      } else {
-        cssClasses.push(this.inputType)
-      }
+      cssClasses.push(`s-${!this.isInputType ? InputTypes.SELECT : this.inputType}-type`)
     }
     if (this.focused) {
-      cssClasses.push('focused')
+      cssClasses.push('s-focused')
     }
     if (this.disabled) {
-      cssClasses.push('disabled')
+      cssClasses.push('s-disabled')
     }
     if ((!this.isRange && this.model) || (this.isRange && this.model.length !== 0)) {
-      cssClasses.push('has-value')
+      cssClasses.push('s-has-value')
     }
     return cssClasses
   }
@@ -277,12 +273,12 @@ export default class SDatePicker extends Vue {
       border-color: $s-color-neutral-border;
     }
   }
-  &.has-value {
+  &.s-has-value {
     .el-date-editor .el-range-separator {
       color: $s-color-basic-black;
     }
   }
-  &.input {
+  &.s-input-type {
     min-height: $s-size-big;
     .el-input__inner {
       height: $s-size-big;
@@ -294,11 +290,11 @@ export default class SDatePicker extends Vue {
       .el-input__inner {
         border-color: $s-color-neutral-hover;
       }
-      .el-input__inner, .placeholder {
+      .el-input__inner, .s-placeholder {
         background-color: $s-color-neutral-hover;
       }
     }
-    .placeholder + .el-date-editor {
+    .s-placeholder + .el-date-editor {
       > .el-input__inner {
         padding-top: 12px;
       }
@@ -306,25 +302,25 @@ export default class SDatePicker extends Vue {
         padding-top: 11px;
       }
     }
-    &.focused {
+    &.s-focused {
       .el-input__inner {
         border-color: $s-color-neutral-border;
       }
-      .el-input__inner, .placeholder {
+      .el-input__inner, .s-placeholder {
         background-color: $s-color-basic-white;
       }
     }
-    &.disabled {
+    &.s-disabled {
       .el-input__inner {
         border-color: $s-color-neutral-border;
       }
-      .el-input__inner, .placeholder {
+      .el-input__inner, .s-placeholder {
         color: $s-color-neutral-secondary;
         background-color: $s-color-neutral-placeholder;
       }
     }
   }
-  .placeholder {
+  .s-placeholder {
     // TODO: add default animation from material-ui
     color: $s-color-neutral-secondary;
     text-align: left;
@@ -340,7 +336,7 @@ export default class SDatePicker extends Vue {
     background-color: $s-color-neutral-placeholder;
     pointer-events: none;
   }
-  &.select {
+  &.s-select-type {
     .el-date-editor {
       .el-input__inner, .el-range-input, .el-range-separator {
         font-weight: bold;
@@ -365,7 +361,7 @@ export default class SDatePicker extends Vue {
       color: $s-color-neutral-tertiary;
       transition: transform .3s;
     }
-    &.focused {
+    &.s-focused {
       .el-date-editor.el-input__inner,
       .el-date-editor .el-input__inner {
         border-color: $s-color-neutral-inactive;
@@ -374,12 +370,12 @@ export default class SDatePicker extends Vue {
         transform: rotate(180deg);
       }
     }
-    &.has-value {
+    &.s-has-value {
       .s-icon-chevron-bottom {
         color: $s-color-basic-black;
       }
     }
-    &.disabled {
+    &.s-disabled {
       .el-date-editor.el-input__inner,
       .el-date-editor .el-input__inner {
         color: $s-color-neutral-inactive;

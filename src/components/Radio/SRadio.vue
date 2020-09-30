@@ -65,7 +65,7 @@ export default class SRadio extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((Object.values(RadioSize) as Array<string>).includes(this.size)) {
-      cssClasses.push(this.size)
+      cssClasses.push(`s-${this.size}`)
     }
     return cssClasses
   }
@@ -77,8 +77,8 @@ export default class SRadio extends Vue {
 @import "../../styles/common.scss";
 
 .el-radio {
-  &.big {
-    @extend .big;
+  &.s-big {
+    @extend .s-big;
     line-height: $s-size-big;
     &.is-bordered {
       padding-top: 18px;
@@ -93,8 +93,8 @@ export default class SRadio extends Vue {
       }
     }
   }
-  &.medium {
-    @extend .medium;
+  &.s-medium {
+    @extend .s-medium;
     line-height: $s-size-medium;
     > .el-radio__input .el-radio__inner {
       width: 16px;
@@ -106,8 +106,8 @@ export default class SRadio extends Vue {
       }
     }
   }
-  &.small {
-    @extend .small;
+  &.s-small {
+    @extend .s-small;
     line-height: $s-size-small;
     &.is-bordered {
       padding-top: 9px;

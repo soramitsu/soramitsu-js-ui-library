@@ -122,11 +122,10 @@ export default class SButton extends Vue {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    // TODO: change to `s-${size}`
     if ((this.elForm || this.elFormItem || {}).size) {
-      cssClasses.push((this.elForm || this.elFormItem).size)
+      cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
     } else if ((Object.values(ButtonSize) as Array<string>).includes(this.size)) {
-      cssClasses.push(this.size)
+      cssClasses.push(`s-${this.size}`)
     }
     if ((Object.values(ButtonTypes) as Array<string>).includes(this.type)) {
       cssClasses.push(`s-${this.type}`)
@@ -193,7 +192,7 @@ export default class SButton extends Vue {
     position: absolute;
     left: var(--s-button-loading-left);
   }
-  &.small {
+  &.s-small {
     padding: 9px 15px;
     i {
       left: calc(var(--s-button-loading-left) + 2px);
@@ -269,21 +268,21 @@ export default class SButton extends Vue {
 }
 
 .s-action {
-  &.big {
+  &.s-big {
     width: $s-size-big;
     padding: 12px;
     i {
       font-size: 20px;
     }
   }
-  &.medium {
+  &.s-medium {
     width: $s-size-medium;
     padding: 10px;
     i {
       font-size: 18px;
     }
   }
-  &.small {
+  &.s-small {
     width: $s-size-small;
     padding: 9px;
     i {

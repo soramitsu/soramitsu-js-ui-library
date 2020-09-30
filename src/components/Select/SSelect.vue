@@ -1,6 +1,6 @@
 <template>
   <div class="s-select" :class="computedClasses">
-    <span v-if="willPlaceholderBeShown" class="placeholder">{{ placeholder }}</span>
+    <span v-if="willPlaceholderBeShown" class="s-placeholder">{{ placeholder }}</span>
     <el-select
       ref="select"
       v-model="model"
@@ -140,16 +140,16 @@ export default class SSelect extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
-      cssClasses.push(this.inputType)
+      cssClasses.push(`s-${this.inputType}-type`)
     }
     if (this.focused) {
-      cssClasses.push('focused')
+      cssClasses.push('s-focused')
     }
     if (this.disabled) {
-      cssClasses.push('disabled')
+      cssClasses.push('s-disabled')
     }
     if ((!this.multiple && this.model) || (this.multiple && this.model.length !== 0)) {
-      cssClasses.push('has-value')
+      cssClasses.push('s-has-value')
     }
     return cssClasses
   }
@@ -225,7 +225,7 @@ export default class SSelect extends Vue {
       }
     }
   }
-  &.input {
+  &.s-input-type {
     .el-select {
       .el-input__inner {
         height: $s-size-big;
@@ -244,11 +244,11 @@ export default class SSelect extends Vue {
           background-color: $s-color-neutral-hover;
         }
       }
-      .placeholder {
+      .s-placeholder {
         background-color: $s-color-neutral-hover;
       }
     }
-    .placeholder + .el-select {
+    .s-placeholder + .el-select {
       .el-input__inner {
         padding-top: 12px;
       }
@@ -256,18 +256,18 @@ export default class SSelect extends Vue {
         padding-top: 11px;
       }
     }
-    &.focused {
+    &.s-focused {
       .el-select {
         .el-input__inner {
           border-color: $s-color-neutral-border;
           background-color: $s-color-basic-white;
         }
       }
-      .placeholder {
+      .s-placeholder {
         background-color: $s-color-basic-white;
       }
     }
-    &.disabled {
+    &.s-disabled {
       .el-select {
         .el-select__caret {
           color: $s-color-neutral-secondary;
@@ -281,13 +281,13 @@ export default class SSelect extends Vue {
           }
         }
       }
-      .placeholder {
+      .s-placeholder {
         color: $s-color-neutral-secondary;
         background-color: $s-color-neutral-placeholder;
       }
     }
   }
-  .placeholder {
+  .s-placeholder {
     // TODO: add default animation from material-ui
     color: $s-color-neutral-secondary;
     text-align: left;
@@ -303,7 +303,7 @@ export default class SSelect extends Vue {
     background-color: $s-color-neutral-placeholder;
     pointer-events: none;
   }
-  &.select {
+  &.s-select-type {
     .el-select {
       .el-input__inner {
         border-radius: 8px;
@@ -324,7 +324,7 @@ export default class SSelect extends Vue {
         color: $s-color-neutral-tertiary;
       }
     }
-    &.focused {
+    &.s-focused {
       .el-select {
         .el-input__inner {
           color: $s-color-basic-black;
@@ -338,14 +338,14 @@ export default class SSelect extends Vue {
         }
       }
     }
-    &.has-value {
+    &.s-has-value {
       .el-select {
         .el-select__caret {
           color: $s-color-basic-black;
         }
       }
     }
-    &.disabled {
+    &.s-disabled {
       .el-select {
         .el-input__inner {
           color: $s-color-neutral-inactive;
