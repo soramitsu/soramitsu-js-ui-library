@@ -97,7 +97,7 @@ export default class STabs extends Vue {
     const cssClasses: Array<string> = []
     if (this.type === TabsType.ROUNDED &&
       ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
-      cssClasses.push('rounded')
+      cssClasses.push('s-rounded')
     }
     return cssClasses
   }
@@ -136,41 +136,41 @@ export default class STabs extends Vue {
       }
     }
     &:not(.is-active) {
-      color: $color-basic-black;
+      color: $s-color-basic-black;
     }
   }
   .el-tab-pane {
-    color: $color-basic-black;
+    color: $s-color-basic-black;
   }
   .el-tabs__nav-wrap::after {
-    background-color: $color-neutral-placeholder;
+    background-color: $s-color-neutral-placeholder;
   }
   .el-tabs--card {
     > .el-tabs__header {
-      border-bottom-color: $color-neutral-hover;
+      border-bottom-color: $s-color-neutral-hover;
       .el-tabs__nav {
-        border-color: $color-neutral-hover;
+        border-color: $s-color-neutral-hover;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
       }
       .el-tabs__item {
-        border-left-color: $color-neutral-hover;
+        border-left-color: $s-color-neutral-hover;
       }
     }
   }
   .el-tabs--border-card {
-    border-color: $color-neutral-border;
+    border-color: $s-color-neutral-border;
     > .el-tabs__header {
-      background-color: $color-neutral-placeholder;
-      border-bottom-color: $color-neutral-border;
+      background-color: $s-color-neutral-placeholder;
+      border-bottom-color: $s-color-neutral-border;
     }
   }
-  &.rounded {
+  &.s-rounded {
     .el-tabs__header {
       width: fit-content;
     }
     .el-tabs__nav-wrap {
-      background-color: $color-neutral-placeholder;
+      background-color: $s-color-neutral-placeholder;
       border-radius: 8px;
       height: 32px;
       padding-top: 2px;
@@ -187,7 +187,7 @@ export default class STabs extends Vue {
           padding: 0 32px;
         }
         &.is-active {
-          color: $color-basic-black;
+          color: $s-color-basic-black;
           background-color: #FFFFFF;
           box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
           border-radius: 8px;

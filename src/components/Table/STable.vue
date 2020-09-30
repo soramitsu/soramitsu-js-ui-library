@@ -365,7 +365,7 @@ export default class STable extends Vue {
 @import "../../styles/variables.scss";
 
 .el-table--enable-row-hover .el-table__body tr:hover > td {
-  background-color: $color-neutral-hover;
+  background-color: $s-color-neutral-hover;
   border-left: none;
   border-right: none;
 }
@@ -376,7 +376,7 @@ export default class STable extends Vue {
       &.current-row > td,
       &.el-table__row--striped > td,
       &.el-table__row--striped.current-row > td {
-        background-color: $color-neutral-hover;
+        background-color: $s-color-neutral-hover;
         border-left: none;
         border-right: none;
       }
@@ -388,24 +388,24 @@ export default class STable extends Vue {
   padding-left: 13px;
 }
 .el-table thead {
-  color: $color-neutral-tertiary;
+  color: $s-color-neutral-tertiary;
 }
 .el-table--group,
 .el-table--border,
 .el-table th.is-leaf,
 .el-table td,
 .el-table--border th {
-  border-color: $color-neutral-placeholder;
+  border-color: $s-color-neutral-placeholder;
 }
 .el-table--group::after,
 .el-table--border::after {
-  background-color: $color-neutral-placeholder;
+  background-color: $s-color-neutral-placeholder;
 }
 .el-table:not(.el-table--border)::before {
-  background-color: $color-basic-white;
+  background-color: $s-color-basic-white;
 }
 .el-table tr:last-child td {
-  border-bottom-color: $color-basic-white;
+  border-bottom-color: $s-color-basic-white;
 }
 .el-table__header {
   label.el-checkbox.is-disabled {
@@ -462,6 +462,6 @@ export default class STable extends Vue {
 }
 .el-table__header-wrapper tbody td,
 .el-table__footer-wrapper tbody td {
-  background-color: $color-neutral-placeholder;
+  background-color: $s-color-neutral-placeholder;
 }
 </style>

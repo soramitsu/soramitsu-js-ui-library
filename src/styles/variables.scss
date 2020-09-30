@@ -1,28 +1,28 @@
 // Main colors
-$color-main-brand: #D0021B;
-$color-main-hover: #E75264;
-$color-main-inactive: #F6CCD1;
-$color-main-hover-light: #FEE6E7;
-$color-main-base: #FFF9FA;
+$s-color-main-brand: #D0021B !default;
+$s-color-main-hover: #E75264 !default;
+$s-color-main-inactive: #F6CCD1 !default;
+$s-color-main-hover-light: #FEE6E7 !default;
+$s-color-main-base: #FFF9FA !default;
 // Neutral colors
-$color-neutral-primary: #53565A;
-$color-neutral-secondary: #75787B;
-$color-neutral-tertiary: #909296;
-$color-neutral-inactive: #C8C9C7;
-$color-neutral-border: #D9D9D6;
-$color-neutral-hover: #F0F0F0;
-$color-neutral-placeholder: #F1F3F4;
+$s-color-neutral-primary: #53565A !default;
+$s-color-neutral-secondary: #75787B !default;
+$s-color-neutral-tertiary: #909296 !default;
+$s-color-neutral-inactive: #C8C9C7 !default;
+$s-color-neutral-border: #D9D9D6 !default;
+$s-color-neutral-hover: #F0F0F0 !default;
+$s-color-neutral-placeholder: #F1F3F4 !default;
 // UI events colors
-$color-error: #F0000B;
+$s-color-error: #F0000B !default;
 // Basic colors
-$color-basic-black: #2D2926;
-$color-basic-white: #FFF;
+$s-color-basic-black: #2D2926 !default;
+$s-color-basic-white: #FFF !default;
 // Size
-$size-big: 56px;
-$size-medium: 40px;
-$size-small: 32px;
+$s-size-big: 56px !default;
+$s-size-medium: 40px !default;
+$s-size-small: 32px !default;
 
-$border-radius-default: 4px;
+$s-border-radius-default: 4px !default;
 // Fonts
 @font-face {
   font-family: "soramitsu-icons";

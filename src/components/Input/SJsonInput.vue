@@ -67,10 +67,10 @@ export default class SJsonInput extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.disabled) {
-      cssClasses.push('disabled')
+      cssClasses.push('s-disabled')
     }
     if (this.readonly) {
-      cssClasses.push('readonly')
+      cssClasses.push('s-readonly')
     }
     return cssClasses
   }
@@ -116,9 +116,9 @@ $color-ide-boolean: #0000FF;
 
 .s-json-input {
   width: 100%;
-  border: 1px solid $color-neutral-border;
-  border-radius: $border-radius-default;
-  &.disabled {
+  border: 1px solid $s-color-neutral-border;
+  border-radius: $s-border-radius-default;
+  &.s-disabled {
     .ace-jsoneditor {
       pointer-events: none;
       .ace_cursor {
@@ -126,11 +126,11 @@ $color-ide-boolean: #0000FF;
       }
       .ace_scroller,
       .ace_gutter-active-line {
-        background-color: $color-neutral-placeholder;
+        background-color: $s-color-neutral-placeholder;
       }
     }
   }
-  &.readonly .jsoneditor {
+  &.s-readonly .jsoneditor {
     .ace_gutter .ace_gutter-cell.ace_error {
       background-image: none;
     }
@@ -151,11 +151,11 @@ $color-ide-boolean: #0000FF;
     .ace_fold {
       border: none;
       background: none;
-      color: $color-basic-black;
+      color: $s-color-basic-black;
       margin-top: -13px;
     }
     .ace_text-layer {
-      color: $color-basic-black;
+      color: $s-color-basic-black;
     }
     .ace_variable {
       color: $color-ide-variable;
@@ -176,10 +176,10 @@ $color-ide-boolean: #0000FF;
       border-top-right-radius: 3px;
       .ace_marker-layer {
         .ace_active-line {
-          background-color: $color-neutral-placeholder;
+          background-color: $s-color-neutral-placeholder;
         }
         .ace_selection {
-          background: $color-neutral-border;
+          background: $s-color-neutral-border;
         }
       }
     }
@@ -187,8 +187,8 @@ $color-ide-boolean: #0000FF;
   .jsoneditor-statusbar {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
-    background-color: $color-neutral-placeholder;
-    color: $color-neutral-secondary;
+    background-color: $s-color-neutral-placeholder;
+    color: $s-color-neutral-secondary;
     .jsoneditor-parse-error-icon {
       // If full error message will be needed, then it should be removed
       display: none !important;
@@ -196,9 +196,9 @@ $color-ide-boolean: #0000FF;
     }
   }
   .ace_gutter {
-    background-color: $color-neutral-placeholder;
+    background-color: $s-color-neutral-placeholder;
     &-active-line {
-      background-color: $color-neutral-border;
+      background-color: $s-color-neutral-border;
     }
     // .ace_gutter-cell.ace_error {
     //   @extend .s-icon-error; // TODO: fix the path for icon
@@ -210,10 +210,10 @@ $color-ide-boolean: #0000FF;
   }
   .ace_tooltip {
     font-family: $font-family-default;
-    background: $color-basic-black;
-    border-color: $color-basic-black;
-    color: $color-basic-white;
-    border-radius: $border-radius-default;
+    background: $s-color-basic-black;
+    border-color: $s-color-basic-black;
+    color: $s-color-basic-white;
+    border-radius: $s-border-radius-default;
     padding: 10px;
     font-size: 12px;
     line-height: 1.2;

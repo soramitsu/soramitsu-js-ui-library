@@ -1,6 +1,6 @@
 <template>
   <div class="s-select" :class="computedClasses">
-    <span v-if="willPlaceholderBeShown" class="placeholder">{{ placeholder }}</span>
+    <span v-if="willPlaceholderBeShown" class="s-placeholder">{{ placeholder }}</span>
     <el-select
       ref="select"
       v-model="model"
@@ -140,16 +140,16 @@ export default class SSelect extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
-      cssClasses.push(this.inputType)
+      cssClasses.push(`s-${this.inputType}-type`)
     }
     if (this.focused) {
-      cssClasses.push('focused')
+      cssClasses.push('s-focused')
     }
     if (this.disabled) {
-      cssClasses.push('disabled')
+      cssClasses.push('s-disabled')
     }
     if ((!this.multiple && this.model) || (this.multiple && this.model.length !== 0)) {
-      cssClasses.push('has-value')
+      cssClasses.push('s-has-value')
     }
     return cssClasses
   }
@@ -212,43 +212,43 @@ export default class SSelect extends Vue {
     }
     .el-input {
       &.is-focus .el-input__inner {
-        border-color: $color-neutral-placeholder;
+        border-color: $s-color-neutral-placeholder;
       }
       .el-input__inner {
         &::placeholder {
-          color: $color-neutral-secondary;
+          color: $s-color-neutral-secondary;
           opacity: 1; // Firefox
         }
       }
       .el-select__caret {
-        color: $color-neutral-secondary;
+        color: $s-color-neutral-secondary;
       }
     }
   }
-  &.input {
+  &.s-input-type {
     .el-select {
       .el-input__inner {
-        height: $size-big;
+        height: $s-size-big;
         padding: 0 15px;
-        border: 1px solid $color-neutral-placeholder;
-        background-color: $color-neutral-placeholder;
+        border: 1px solid $s-color-neutral-placeholder;
+        background-color: $s-color-neutral-placeholder;
         &:focus {
-          border-color: $color-neutral-placeholder;
+          border-color: $s-color-neutral-placeholder;
         }
       }
     }
     &:hover {
       .el-select {
         .el-input__inner {
-          border-color: $color-neutral-hover;
-          background-color: $color-neutral-hover;
+          border-color: $s-color-neutral-hover;
+          background-color: $s-color-neutral-hover;
         }
       }
-      .placeholder {
-        background-color: $color-neutral-hover;
+      .s-placeholder {
+        background-color: $s-color-neutral-hover;
       }
     }
-    .placeholder + .el-select {
+    .s-placeholder + .el-select {
       .el-input__inner {
         padding-top: 12px;
       }
@@ -256,40 +256,40 @@ export default class SSelect extends Vue {
         padding-top: 11px;
       }
     }
-    &.focused {
+    &.s-focused {
       .el-select {
         .el-input__inner {
-          border-color: $color-neutral-border;
-          background-color: $color-basic-white;
+          border-color: $s-color-neutral-border;
+          background-color: $s-color-basic-white;
         }
       }
-      .placeholder {
-        background-color: $color-basic-white;
+      .s-placeholder {
+        background-color: $s-color-basic-white;
       }
     }
-    &.disabled {
+    &.s-disabled {
       .el-select {
         .el-select__caret {
-          color: $color-neutral-secondary;
+          color: $s-color-neutral-secondary;
         }
         .el-input__inner, .el-input__inner:hover {
-          border-color: $color-neutral-border;
-          color: $color-neutral-secondary;
-          background-color: $color-neutral-placeholder;
+          border-color: $s-color-neutral-border;
+          color: $s-color-neutral-secondary;
+          background-color: $s-color-neutral-placeholder;
           &::placeholder {
-            color: $color-neutral-secondary;
+            color: $s-color-neutral-secondary;
           }
         }
       }
-      .placeholder {
-        color: $color-neutral-secondary;
-        background-color: $color-neutral-placeholder;
+      .s-placeholder {
+        color: $s-color-neutral-secondary;
+        background-color: $s-color-neutral-placeholder;
       }
     }
   }
-  .placeholder {
+  .s-placeholder {
     // TODO: add default animation from material-ui
-    color: $color-neutral-secondary;
+    color: $s-color-neutral-secondary;
     text-align: left;
     font-size: 12px;
     padding: 0 15px;
@@ -300,63 +300,63 @@ export default class SSelect extends Vue {
     position: absolute;
     z-index: 1;
     width: calc(100% - 15px);
-    background-color: $color-neutral-placeholder;
+    background-color: $s-color-neutral-placeholder;
     pointer-events: none;
   }
-  &.select {
+  &.s-select-type {
     .el-select {
       .el-input__inner {
         border-radius: 8px;
         padding-left: 12px;
         font-weight: bold;
         &:hover {
-          border-color: $color-neutral-inactive;
+          border-color: $s-color-neutral-inactive;
         }
         &::placeholder {
-          color: $color-neutral-tertiary;
+          color: $s-color-neutral-tertiary;
           font-weight: bold;
         }
         &:focus {
-          border-color: $color-neutral-inactive;
+          border-color: $s-color-neutral-inactive;
         }
       }
       .el-select__caret {
-        color: $color-neutral-tertiary;
+        color: $s-color-neutral-tertiary;
       }
     }
-    &.focused {
+    &.s-focused {
       .el-select {
         .el-input__inner {
-          color: $color-basic-black;
-          border-color: $color-neutral-inactive;
+          color: $s-color-basic-black;
+          border-color: $s-color-neutral-inactive;
           &::placeholder {
-            color: $color-basic-black;
+            color: $s-color-basic-black;
           }
         }
         .el-select__caret {
-          color: $color-basic-black;
+          color: $s-color-basic-black;
         }
       }
     }
-    &.has-value {
+    &.s-has-value {
       .el-select {
         .el-select__caret {
-          color: $color-basic-black;
+          color: $s-color-basic-black;
         }
       }
     }
-    &.disabled {
+    &.s-disabled {
       .el-select {
         .el-input__inner {
-          color: $color-neutral-inactive;
-          border-color: $color-neutral-border;
-          background-color: $color-basic-white;
+          color: $s-color-neutral-inactive;
+          border-color: $s-color-neutral-border;
+          background-color: $s-color-basic-white;
           &::placeholder {
-            color: $color-neutral-inactive;
+            color: $s-color-neutral-inactive;
           }
         }
         .el-select__caret {
-          color: $color-neutral-inactive;
+          color: $s-color-neutral-inactive;
         }
       }
     }
@@ -367,24 +367,24 @@ export default class SSelect extends Vue {
     background-color: transparent;
   }
   &:hover {
-    background-color: $color-neutral-placeholder;
+    background-color: $s-color-neutral-placeholder;
   }
   &.is-disabled {
-    color: $color-neutral-inactive;;
+    color: $s-color-neutral-inactive;;
   }
 }
 .el-select-dropdown.is-multiple .el-select-dropdown__item {
   > span {
     padding-left: 16px;
     vertical-align: top;
-    color: $color-basic-black;
+    color: $s-color-basic-black;
   }
   &::before {
     font-family: "element-icons";
     content: "\e6da";
-    color: $color-basic-white;
-    border: 1px solid $color-neutral-border;
-    background-color: $color-basic-white;
+    color: $s-color-basic-white;
+    border: 1px solid $s-color-neutral-border;
+    background-color: $s-color-basic-white;
     font-size: 16px;
     font-weight: bold;
     padding: 1px;
@@ -396,12 +396,12 @@ export default class SSelect extends Vue {
       background-color: transparent;
     }
     &:hover {
-      background-color: $color-neutral-placeholder;
+      background-color: $s-color-neutral-placeholder;
     }
     &::before {
-      color: $color-basic-white;
-      background-color: $color-main-brand;
-      border-color: $color-main-brand;
+      color: $s-color-basic-white;
+      background-color: $s-color-main-brand;
+      border-color: $s-color-main-brand;
     }
     &::after {
       content: '';

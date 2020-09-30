@@ -88,7 +88,7 @@ export default class SCheckbox extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((Object.values(CheckboxSize) as Array<string>).includes(this.size)) {
-      cssClasses.push(this.size)
+      cssClasses.push(`s-${this.size}`)
     }
     return cssClasses
   }
@@ -104,15 +104,15 @@ export default class SCheckbox extends Vue {
 @import "../../styles/common.scss";
 
 .el-checkbox {
-  &.big {
-    @extend .big;
+  &.s-big {
+    @extend .s-big;
     padding: 17px 0 9px 0;
     &.is-bordered {
       padding: 17px 20px 9px 15px;
     }
   }
-  &.medium {
-    @extend .medium;
+  &.s-medium {
+    @extend .s-medium;
     &, &.is-bordered {
       padding: 9px 15px 7px 10px;
       .el-checkbox__inner {
@@ -130,8 +130,8 @@ export default class SCheckbox extends Vue {
       padding: 9px 0 7px 0;
     }
   }
-  &.small {
-    @extend .small;
+  &.s-small {
+    @extend .s-small;
     border-radius: 4px;
     .el-checkbox__label {
       font-size: 12px;
@@ -155,7 +155,7 @@ export default class SCheckbox extends Vue {
   }
 }
 .el-checkbox__inner {
-  border-color: $color-neutral-inactive;
+  border-color: $s-color-neutral-inactive;
   border-radius: 4px;
   width: 20px;
   height: 20px;
@@ -169,21 +169,21 @@ export default class SCheckbox extends Vue {
 .el-checkbox__input {
   &.is-disabled {
     .el-checkbox__inner {
-      background-color: $color-neutral-placeholder;
+      background-color: $s-color-neutral-placeholder;
     }
     & + span.el-checkbox__label {
-      color: $color-neutral-inactive;
+      color: $s-color-neutral-inactive;
     }
   }
   &.is-checked {
     &.is-disabled > .el-checkbox__inner {
-      background-color: $color-neutral-placeholder;
+      background-color: $s-color-neutral-placeholder;
       &::after {
-        border-color: $color-neutral-inactive;
+        border-color: $s-color-neutral-inactive;
       }
     }
     & + .el-checkbox__label {
-      color: $color-basic-black;
+      color: $s-color-basic-black;
     }
   }
 }

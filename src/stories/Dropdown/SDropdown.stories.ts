@@ -81,7 +81,7 @@ export const differentTypes = () => ({
                  </s-dropdown>
                </s-col>
                <s-col :span="12" style="margin-bottom: 20px;"><span>Different button types</span></s-col>
-               <s-col :span="4" v-for="item in buttonTypesData" :key="item.buttonType + 'withoutSplit'" style="height: 56px; margin-bottom: 20px;">
+               <s-col :span="3" v-for="item in buttonTypesData" :key="item.buttonType + 'withoutSplit'" style="height: 56px; margin-bottom: 20px;">
                  <s-dropdown
                    :type="item.type"
                    :button-type="item.buttonType"
@@ -96,7 +96,7 @@ export const differentTypes = () => ({
                  </s-dropdown>
                </s-col>
                <s-col :span="12" style="margin-bottom: 20px;"><span>Different button types with splitted button</span></s-col>
-               <s-col :span="4" v-for="item in buttonTypesData" :key="item.buttonType" style="height: 56px; margin-bottom: 20px;">
+               <s-col :span="3" v-for="item in buttonTypesData" :key="item.buttonType" style="height: 56px; margin-bottom: 20px;">
                  <s-dropdown
                    :type="item.type"
                    split-button
