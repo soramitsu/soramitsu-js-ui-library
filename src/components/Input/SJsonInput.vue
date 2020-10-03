@@ -96,6 +96,7 @@ export default class SJsonInput extends Vue {
     if (!this.readonly) {
       this.$emit('input', value)
       this.$emit('change', value)
+      return
     }
     if (!this.jsoneditor) {
       return
