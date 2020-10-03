@@ -1,0 +1,140 @@
+@import "./variables";
+
+.s-loading {
+  padding: 12px 17.5px;
+  i {
+    position: absolute;
+    left: var(--s-button-loading-left);
+  }
+  &.s-small {
+    padding: 9px 15px;
+    i {
+      left: calc(var(--s-button-loading-left) + 2px);
+    }
+  }
+  > :not(i) {
+    color: transparent;
+  }
+}
+.s-primary {
+  &:hover, &:active, &:focus {
+    background-color: $s-color-main-hover;
+    border-color: $s-color-main-hover;
+  }
+  &:disabled, &:disabled:hover {
+    background-color: $s-color-main-inactive;
+    border-color: $s-color-main-inactive;
+  }
+}
+.s-secondary {
+  &:hover, &:active, &:focus {
+    color: $s-color-main-brand;
+    background-color: $s-color-basic-white;
+    border-color: $s-color-main-brand;
+  }
+  &:disabled, &:disabled:hover {
+    color: $s-color-neutral-inactive;
+    border-color: $s-color-neutral-border;
+  }
+  &.s-alternative {
+    &:hover, &:active, &:focus {
+      color: $s-color-basic-black;
+      background-color: $s-color-neutral-hover;
+      border-color: $s-color-neutral-hover;
+    }
+    &:disabled, &:disabled:hover {
+      color: $s-color-neutral-inactive;
+      border-color: $s-color-neutral-border;
+      background-color: $s-color-basic-white;
+    }
+  }
+}
+.s-link {
+  color: $s-color-basic-black;
+  border: none;
+  background-color: transparent;
+  &:hover, &:active, &:focus {
+    color: $s-color-main-brand;
+    background-color: transparent;
+  }
+  &:disabled, &:disabled:hover {
+    color: $s-color-neutral-inactive;
+  }
+}
+.s-tertiary {
+  color: $s-color-basic-black;
+  border-color: $s-color-neutral-placeholder;
+  background-color: $s-color-neutral-placeholder;
+  &:hover, &:active, &:focus {
+    color: $s-color-main-brand;
+    background-color: $s-color-neutral-placeholder;
+    border-color: $s-color-neutral-placeholder;
+  }
+  &:disabled, &:disabled:hover {
+    color: $s-color-neutral-inactive;
+    background-color: $s-color-neutral-placeholder;
+    border-color: $s-color-neutral-placeholder;
+  }
+}
+.s-action {
+  &.s-big {
+    width: $s-size-big;
+    padding: 12px;
+    i {
+      font-size: 20px;
+    }
+  }
+  &.s-medium {
+    width: $s-size-medium;
+    padding: 10px;
+    i {
+      font-size: 18px;
+    }
+  }
+  &.s-small {
+    width: $s-size-small;
+    padding: 9px;
+    i {
+      font-size: 16px;
+      margin-left: -2px;
+      margin-top: -2px;
+    }
+  }
+  color: $s-color-basic-black;
+  background-color: $s-color-neutral-placeholder;
+  border-color: $s-color-neutral-placeholder;
+  border-radius: 8px;
+  &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+    color: $s-color-basic-black;
+    background-color: $s-color-neutral-hover;
+    border-color: $s-color-neutral-hover;
+  }
+  &:disabled, &:disabled:hover {
+    color: $s-color-neutral-inactive;
+  }
+  &.s-alternative {
+    background-color: $s-color-basic-white;
+    border-color: $s-color-neutral-border;
+    &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+      color: $s-color-basic-black;
+      background-color: $s-color-neutral-placeholder;
+      border-color: $s-color-neutral-placeholder;
+    }
+    &:disabled, &:disabled:hover {
+      color: $s-color-neutral-inactive;
+    }
+  }
+}
+button {
+  > span > i {
+    &[class^=s-icon-], &[class^=el-icon-] {
+      display: inline-block;
+      color: inherit;
+    }
+  }
+  &:not(.s-action) > span > i {
+    &[class^=s-icon-], &[class^=el-icon-] {
+      margin-right: 6px;
+    }
+  }
+}

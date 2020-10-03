@@ -1,0 +1,220 @@
+@import "./variables";
+@import "./icons";
+
+.s-select {
+  font-family: $font-family-default;
+  width: 100%;
+  position: relative;
+  .el-select {
+    width: 100%;
+    i.el-icon-arrow-up {
+      font-family: $icons-font;
+      font-size: 16px;
+      &:before {
+        content: $s-icon-chevron-top;
+      }
+    }
+    .el-input {
+      &.is-focus .el-input__inner {
+        border-color: $s-color-neutral-placeholder;
+      }
+      .el-input__inner {
+        &::placeholder {
+          color: $s-color-neutral-secondary;
+          opacity: 1; // Firefox
+        }
+      }
+      .el-select__caret {
+        color: $s-color-neutral-secondary;
+      }
+    }
+  }
+  &.s-input-type {
+    .el-select {
+      .el-input__inner {
+        height: $s-size-big;
+        padding: 0 15px;
+        border: 1px solid $s-color-neutral-placeholder;
+        background-color: $s-color-neutral-placeholder;
+        &:focus {
+          border-color: $s-color-neutral-placeholder;
+        }
+      }
+    }
+    &:hover {
+      .el-select {
+        .el-input__inner {
+          border-color: $s-color-neutral-hover;
+          background-color: $s-color-neutral-hover;
+        }
+      }
+      .s-placeholder {
+        background-color: $s-color-neutral-hover;
+      }
+    }
+    .s-placeholder + .el-select {
+      .el-input__inner {
+        padding-top: 12px;
+      }
+      .el-input__validateIcon {
+        padding-top: 11px;
+      }
+    }
+    &.s-focused {
+      .el-select {
+        .el-input__inner {
+          border-color: $s-color-neutral-border;
+          background-color: $s-color-basic-white;
+        }
+      }
+      .s-placeholder {
+        background-color: $s-color-basic-white;
+      }
+    }
+    &.s-disabled {
+      .el-select {
+        .el-select__caret {
+          color: $s-color-neutral-secondary;
+        }
+        .el-input__inner, .el-input__inner:hover {
+          border-color: $s-color-neutral-border;
+          color: $s-color-neutral-secondary;
+          background-color: $s-color-neutral-placeholder;
+          &::placeholder {
+            color: $s-color-neutral-secondary;
+          }
+        }
+      }
+      .s-placeholder {
+        color: $s-color-neutral-secondary;
+        background-color: $s-color-neutral-placeholder;
+      }
+    }
+  }
+  .s-placeholder {
+    // TODO: add default animation from material-ui
+    color: $s-color-neutral-secondary;
+    text-align: left;
+    font-size: 12px;
+    padding: 0 15px;
+    padding-top: 5px;
+    top: 1px;
+    left: 1px;
+    border-top-left-radius: 4px;
+    position: absolute;
+    z-index: 1;
+    width: calc(100% - 15px);
+    background-color: $s-color-neutral-placeholder;
+    pointer-events: none;
+  }
+  &.s-select-type {
+    .el-select {
+      .el-input__inner {
+        border-radius: 8px;
+        padding-left: 12px;
+        font-weight: bold;
+        &:hover {
+          border-color: $s-color-neutral-inactive;
+        }
+        &::placeholder {
+          color: $s-color-neutral-tertiary;
+          font-weight: bold;
+        }
+        &:focus {
+          border-color: $s-color-neutral-inactive;
+        }
+      }
+      .el-select__caret {
+        color: $s-color-neutral-tertiary;
+      }
+    }
+    &.s-focused {
+      .el-select {
+        .el-input__inner {
+          color: $s-color-basic-black;
+          border-color: $s-color-neutral-inactive;
+          &::placeholder {
+            color: $s-color-basic-black;
+          }
+        }
+        .el-select__caret {
+          color: $s-color-basic-black;
+        }
+      }
+    }
+    &.s-has-value {
+      .el-select {
+        .el-select__caret {
+          color: $s-color-basic-black;
+        }
+      }
+    }
+    &.s-disabled {
+      .el-select {
+        .el-input__inner {
+          color: $s-color-neutral-inactive;
+          border-color: $s-color-neutral-border;
+          background-color: $s-color-basic-white;
+          &::placeholder {
+            color: $s-color-neutral-inactive;
+          }
+        }
+        .el-select__caret {
+          color: $s-color-neutral-inactive;
+        }
+      }
+    }
+  }
+}
+.el-select-dropdown__item {
+  &.hover {
+    background-color: transparent;
+  }
+  &:hover {
+    background-color: $s-color-neutral-placeholder;
+  }
+  &.is-disabled {
+    color: $s-color-neutral-inactive;;
+  }
+}
+.el-select-dropdown.is-multiple .el-select-dropdown__item {
+  > span {
+    padding-left: 16px;
+    vertical-align: top;
+    color: $s-color-basic-black;
+  }
+  &::before {
+    font-family: "element-icons";
+    content: "\e6da";
+    color: $s-color-basic-white;
+    border: 1px solid $s-color-neutral-border;
+    background-color: $s-color-basic-white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 1px;
+    border-radius: 4px;
+  }
+  &.selected {
+    font-weight: normal;
+    &.hover {
+      background-color: transparent;
+    }
+    &:hover {
+      background-color: $s-color-neutral-placeholder;
+    }
+    &::before {
+      color: $s-color-basic-white;
+      background-color: $s-color-main-brand;
+      border-color: $s-color-main-brand;
+    }
+    &::after {
+      content: '';
+    }
+  }
+}
+.el-select-group__wrap:not(:last-of-type)::after {
+  background-color: $s-color-neutral-hover;
+}
+.el-select-group__title {
+  color: $s-color-neutral-tertiary;
+}

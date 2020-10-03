@@ -24,45 +24,6 @@ $s-size-small: 32px !default;
 
 $s-border-radius-default: 4px !default;
 // Fonts
-@font-face {
-  font-family: "soramitsu-icons";
-  src: url("~@/assets/fonts/soramitsu-icons.woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-@font-face {
-  font-family: "SoraB";
-  src: url("~@/assets/fonts/Sora-Bold.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SoraEB";
-  src: url("~@/assets/fonts/Sora-ExtraBold.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SoraSB";
-  src: url("~@/assets/fonts/Sora-SemiBold.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Sora";
-  src: url("~@/assets/fonts/Sora-Regular.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "JetBrainsMono";
-  src: url("~@/assets/fonts/JetBrainsMono-Regular.woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
 $font-family-default: 'Sora', sans-serif !important;
 $font-family-mono: 'JetBrainsMono', monospace !important;
 // Responsive

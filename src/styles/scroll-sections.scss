@@ -1,0 +1,63 @@
+@import "./variables";
+
+.s-scroll-sections {
+  font-family: $font-family-default;
+  font-size: 14px;
+}
+.s-scroll-menu {
+  font-weight: 600;
+  ul {
+    position: sticky;
+    top: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .s-scroll-item {
+    text-decoration: none;
+    a {
+      display: block;
+      padding: 8px 16px;
+      text-decoration: none;
+      cursor: pointer;
+      color: var(--s-menu-color-text);
+      &:hover {
+        color: var(--s-menu-color-hover);
+      }
+      &.active {
+        color: var(--s-menu-color-text-active);
+        border-left: 2px solid var(--s-menu-color-text-active);
+      }
+      &.disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+        color: $s-color-neutral-inactive;
+        border-left: none;
+      }
+    }
+  }
+}
+.s-scroll-content {
+  padding-bottom: 90%;
+  color: $s-color-basic-black;
+  .title {
+    font-size: 16px;
+  }
+}
+.s-scroll-section-item {
+  padding: 10px 20px;
+  &:first-child {
+    margin-top: 10px;
+  }
+  &:last-child {
+    margin-bottom: 10px;
+    .el-divider.el-divider--horizontal {
+      height: 0;
+    }
+  }
+  .title {
+    font-weight: bold;
+    display: block;
+    padding-bottom: 12px;
+  }
+}

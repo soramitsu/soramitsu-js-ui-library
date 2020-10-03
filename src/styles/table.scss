@@ -1,0 +1,102 @@
+@import "./variables";
+
+.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: $s-color-neutral-hover;
+  border-left: none;
+  border-right: none;
+}
+.el-table__body {
+  tr {
+    &.hover-row {
+      > td,
+      &.current-row > td,
+      &.el-table__row--striped > td,
+      &.el-table__row--striped.current-row > td {
+        background-color: $s-color-neutral-hover;
+        border-left: none;
+        border-right: none;
+      }
+    }
+  }
+}
+.el-table--border th:first-child .cell,
+.el-table--border td:first-child .cell {
+  padding-left: 13px;
+}
+.el-table thead {
+  color: $s-color-neutral-tertiary;
+}
+.el-table--group,
+.el-table--border,
+.el-table th.is-leaf,
+.el-table td,
+.el-table--border th {
+  border-color: $s-color-neutral-placeholder;
+}
+.el-table--group::after,
+.el-table--border::after {
+  background-color: $s-color-neutral-placeholder;
+}
+.el-table:not(.el-table--border)::before {
+  background-color: $s-color-basic-white;
+}
+.el-table tr:last-child td {
+  border-bottom-color: $s-color-basic-white;
+}
+.el-table__header {
+  label.el-checkbox.is-disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+    height: 4px;
+    top: 7px;
+  }
+}
+.el-table {
+  .el-checkbox__inner {
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
+    &::after {
+      border-width: 2px;
+      height: 10px;
+      left: 6px;
+      width: 5px;
+    }
+  }
+}
+.el-table--medium {
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+    top: 5px;
+  }
+  .el-checkbox__inner {
+    height: 16px;
+    width: 16px;
+    &::after {
+      top: 0;
+      left: 4px;
+      height: 8px;
+      width: 4px;
+    }
+  }
+}
+.el-table--small {
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner::before {
+    top: 4px;
+  }
+  .el-checkbox__inner {
+    height: 14px;
+    width: 14px;
+    &::after {
+      top: 1px;
+      left: 4px;
+      height: 6px;
+      width: 2px;
+    }
+  }
+}
+.el-table__header-wrapper tbody td,
+.el-table__footer-wrapper tbody td {
+  background-color: $s-color-neutral-placeholder;
+}
