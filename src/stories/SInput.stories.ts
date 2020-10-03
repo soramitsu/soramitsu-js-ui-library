@@ -126,7 +126,7 @@ export const focused = () => ({
 
 export const password = () => ({
   components: { SInput, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-input
                  v-model="input"
                  placeholder="Password"
@@ -140,7 +140,7 @@ export const password = () => ({
 
 export const withTextLimit = () => ({
   components: { SInput, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-input
                  v-model="input"
                  placeholder="Limited text"
@@ -155,7 +155,7 @@ export const withTextLimit = () => ({
 
 export const textFileInput = () => ({
   components: { SInput },
-  template: `<div class="flex" style="flex: 1; flex-direction: column;">
+  template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
                <s-input
                  v-model="vModelValue"
                  type="text-file"

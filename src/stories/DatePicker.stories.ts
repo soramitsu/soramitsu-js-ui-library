@@ -12,7 +12,7 @@ export default {
 
 export const configurable = () => ({
   components: { SDatePicker },
-  template: `<div class="flex" style="flex: 1; flex-direction: column;">
+  template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
                <s-date-picker
                  v-model="vModelValue"
                  :unlink-panels="unlinkPanels"

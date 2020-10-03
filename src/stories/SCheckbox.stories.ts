@@ -12,7 +12,7 @@ export default {
 
 export const configurable = () => ({
   components: { SCheckbox },
-  template: `<div class="flex" style="flex: 1; flex-direction: column;">
+  template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
                <s-checkbox
                  v-model="vModelValue"
                  :disabled="disabled"

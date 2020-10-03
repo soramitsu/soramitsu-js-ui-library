@@ -12,7 +12,7 @@ export default {
 
 export const configurable = () => ({
   components: { STooltip, SButton, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-tooltip
                  :theme="theme"
                  v-model="model"

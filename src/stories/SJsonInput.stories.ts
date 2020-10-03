@@ -23,7 +23,7 @@ export const jsonData = {
 }
 export const configurable = () => ({
   components: { SJsonInput, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-json-input
                  v-model="json"
                  :height="height"

@@ -54,7 +54,7 @@ export const configurable = () => ({
 
 export const disabled = () => ({
   components: { SRadio, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-radio
                  v-for="item in items"
                  :key="item.label"
@@ -73,7 +73,7 @@ export const disabled = () => ({
 
 export const withBorders = () => ({
   components: { SRadio, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-radio
                  v-for="item in items"
                  :key="item.label"

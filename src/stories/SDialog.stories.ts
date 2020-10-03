@@ -11,7 +11,7 @@ export default {
 export const configurable = () => ({
   components: { SDialog, SRow, SButton },
   template: `<s-row
-               class="flex"
+               class="s-flex"
                style="flex: 1; justify-content: space-between; align-items: center; height: 400px;"
              >
                <s-button size="medium" @click="visible = true">Open Dialog</s-button>

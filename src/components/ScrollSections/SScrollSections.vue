@@ -1,5 +1,5 @@
 <template>
-  <div class="s-scroll-sections flex">
+  <div class="s-scroll-sections s-flex">
     <nav class="s-scroll-menu" v-if="menuItems.length > 0" :style="computedFlex.menu">
       <ul :style="computedStyles">
         <li class="s-scroll-item" v-for="item in menuItems" :key="item.section">

@@ -1,6 +1,6 @@
 <template>
   <el-menu-item
-    class="flex"
+    class="s-flex"
     :index="index"
     :route="route"
     :disabled="disabled"

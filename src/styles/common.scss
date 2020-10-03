@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import "./variables";
 
 [class^="el-"]:not(i):not([class*='el-icon']),
 [class*="el-"]:not(i):not([class*='el-icon']) {
@@ -14,11 +14,11 @@ html {
   margin: 0;
 }
 
-.flex {
+.s-flex {
   display: flex;
 }
 
-.bold {
+.s-bold {
   font-weight: bold;
 }
 

@@ -10,7 +10,7 @@ export default {
 
 export const configurable = () => ({
   components: { SRow, SPagination },
-  template: `<s-row class="flex" style="flex: 1; flex-direction: column;">
+  template: `<s-row class="s-flex" style="flex: 1; flex-direction: column;">
                <s-pagination
                  :total="total"
                  :layout="layout"
@@ -59,21 +59,21 @@ export const configurable = () => ({
 
 export const small = () => ({
   components: { SRow, SPagination },
-  template: `<s-row class="flex" style="flex: 1; flex-direction: column;">
+  template: `<s-row class="s-flex" style="flex: 1; flex-direction: column;">
                <s-pagination :total="400" small></s-pagination>
              </s-row>`
 })
 
 export const withBackground = () => ({
   components: { SRow, SPagination },
-  template: `<s-row class="flex" style="flex: 1; flex-direction: column;">
+  template: `<s-row class="s-flex" style="flex: 1; flex-direction: column;">
                <s-pagination :total="400" background></s-pagination>
              </s-row>`
 })
 
 export const disabled = () => ({
   components: { SRow, SPagination },
-  template: `<s-row class="flex" style="flex: 1; flex-direction: column;">
+  template: `<s-row class="s-flex" style="flex: 1; flex-direction: column;">
                <s-pagination :total="400" disabled></s-pagination>
                <s-pagination :total="400" small disabled></s-pagination>
                <s-pagination :total="400" background disabled></s-pagination>

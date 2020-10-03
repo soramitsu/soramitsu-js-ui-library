@@ -11,7 +11,7 @@ export default {
 
 export const configurable = () => ({
   components: { SRow, SDivider },
-  template: `<s-row class="flex" style="flex: 1; flex-direction: column;">
+  template: `<s-row class="s-flex" style="flex: 1; flex-direction: column;">
                <span>First text paragraph</span>
                <s-divider
                  :style="direction === 'vertical' ? { height: '56px' } : {}"

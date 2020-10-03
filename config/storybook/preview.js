@@ -20,7 +20,7 @@ addParameters({
 
 addDecorator(withA11y)
 addDecorator(() => ({
-  template: `<div class="flex" style="padding: 20px;">
+  template: `<div class="s-flex" style="padding: 20px;">
                <story/>
              </div>`
 }))

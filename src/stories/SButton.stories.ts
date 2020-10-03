@@ -66,7 +66,7 @@ export const differentTypesData = Object.values(ButtonTypes).map(type => {
 })
 export const withDifferentTypes = () => ({
   components: { SButton, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.type"
@@ -88,7 +88,7 @@ export const differentSizeData = Object.values(ButtonSize).map(size =>
   ({ size, label: size[0].toUpperCase() + size.slice(1) }))
 export const withDifferentSize = () => ({
   components: { SButton, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.size"
@@ -106,7 +106,7 @@ export const withDifferentSize = () => ({
 
 export const disabled = () => ({
   components: { SButton, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.type"
@@ -127,7 +127,7 @@ export const disabled = () => ({
 
 export const loading = () => ({
   components: { SButton, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.type"
@@ -179,7 +179,7 @@ export const withIcon = () => ({
 
 export const buttonGroup = () => ({
   components: { SButton, SButtonGroup, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button-group>
                  <s-button type="primary">Append</s-button>
                  <s-button type="delete">Remove</s-button>
