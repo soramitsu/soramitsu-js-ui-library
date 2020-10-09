@@ -5,7 +5,7 @@ import { TableSize } from '../../components/Table'
 
 export default {
   component: STable,
-  title: 'Design System/Table',
+  title: 'Design System/Components/Table',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }

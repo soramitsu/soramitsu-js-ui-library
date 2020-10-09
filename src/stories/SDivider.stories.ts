@@ -5,7 +5,7 @@ import { DividerDirection, ContentPosition } from '../components/Divider/consts'
 
 export default {
   component: SDivider,
-  title: 'Design System/Divider',
+  title: 'Design System/Components/Divider',
   decorators: [withKnobs]
 }
 

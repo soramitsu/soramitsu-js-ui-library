@@ -4,7 +4,7 @@ import { SDialog, SRow, SButton } from '../components'
 
 export default {
   component: SDialog,
-  title: 'Design System/Dialog',
+  title: 'Design System/Components/Dialog',
   decorators: [withKnobs]
 }
 

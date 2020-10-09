@@ -5,7 +5,7 @@ import { TabsPosition, TabsType } from '../../components/Tab'
 
 export default {
   component: STabs,
-  title: 'Design System/Tabs',
+  title: 'Design System/Components/Tabs',
   decorators: [withKnobs]
 }
 

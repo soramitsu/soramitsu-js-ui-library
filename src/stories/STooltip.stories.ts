@@ -5,7 +5,7 @@ import { TooltipPlacement, TooltipTheme } from '../components/Tooltip'
 
 export default {
   component: STooltip,
-  title: 'Design System/Tooltip',
+  title: 'Design System/Components/Tooltip',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }

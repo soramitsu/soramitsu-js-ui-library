@@ -5,7 +5,7 @@ import { Icons } from '../components/Icon'
 
 export default {
   component: SIcon,
-  title: 'Design System/Icon',
+  title: 'Design System/Components/Icon',
   decorators: [withKnobs]
 }
 

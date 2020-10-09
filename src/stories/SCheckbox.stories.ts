@@ -5,7 +5,7 @@ import { CheckboxSize } from '../components/Checkbox'
 
 export default {
   component: SCheckbox,
-  title: 'Design System/Checkbox',
+  title: 'Design System/Components/Checkbox',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }

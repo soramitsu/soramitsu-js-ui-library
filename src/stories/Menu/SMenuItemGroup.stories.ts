@@ -2,7 +2,7 @@ import { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from '../../compon
 
 export default {
   component: SMenuItemGroup,
-  title: 'Design System/Menu/MenuItemGroup',
+  title: 'Design System/Components/Menu/MenuItemGroup',
   excludeStories: /.*Data$/
 }
 

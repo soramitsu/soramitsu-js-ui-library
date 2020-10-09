@@ -4,7 +4,7 @@ import { SJsonInput, SRow } from '../components'
 
 export default {
   component: SJsonInput,
-  title: 'Design System/JSON Input',
+  title: 'Design System/Components/JSON Input',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }

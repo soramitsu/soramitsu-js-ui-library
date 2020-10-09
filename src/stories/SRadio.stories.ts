@@ -1,11 +1,11 @@
 import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 
-import { SRadio, SRow, SCol } from '../../components'
-import { RadioSize } from '../../components/Radio'
+import { SRadio, SRow, SCol } from '../components'
+import { RadioSize } from '../components/Radio'
 
 export default {
   component: SRadio,
-  title: 'Design System/Radio',
+  title: 'Design System/Components/Radio',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }

@@ -2,7 +2,7 @@ import { SBreadcrumb, SBreadcrumbItem } from '../../components'
 
 export default {
   component: SBreadcrumb,
-  title: 'Design System/Breadcrumb'
+  title: 'Design System/Components/Breadcrumb'
 }
 
 export const configurable = () => ({

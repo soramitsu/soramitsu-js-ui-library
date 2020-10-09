@@ -5,7 +5,7 @@ import { CardShadow } from '../components/Card'
 
 export default {
   component: SCard,
-  title: 'Design System/Card',
+  title: 'Design System/Components/Card',
   decorators: [withKnobs]
 }
 

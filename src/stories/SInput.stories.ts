@@ -5,7 +5,7 @@ import { InputType } from '../components/Input'
 
 export default {
   component: SInput,
-  title: 'Design System/Input',
+  title: 'Design System/Components/Input',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
@@ -110,7 +110,7 @@ export const focused = () => ({
                  style="padding-bottom: 20px;"
                >
                  <s-input
-                   class="focused"
+                   class="s-focused"
                    v-model="item.model"
                    :type="item.type"
                    :placeholder="item.placeholder"

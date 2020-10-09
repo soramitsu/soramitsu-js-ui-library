@@ -4,7 +4,7 @@ import { SPagination, SRow } from '../components'
 
 export default {
   component: SPagination,
-  title: 'Design System/Pagination',
+  title: 'Design System/Components/Pagination',
   decorators: [withKnobs]
 }
 

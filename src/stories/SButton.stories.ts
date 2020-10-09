@@ -5,7 +5,7 @@ import { ButtonSize, ButtonTypes } from '../components/Button'
 
 export default {
   component: SButton,
-  title: 'Design System/Button',
+  title: 'Design System/Components/Button',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
@@ -53,7 +53,7 @@ export const configurable = () => ({
   }
 })
 
-export const differentTypesData = Object.values(ButtonTypes).map(type => {
+export const differentTypeButtonsData = Object.values(ButtonTypes).map(type => {
   const label = type[0].toUpperCase() + type.slice(1)
   const data = { type } as any
   if (type === ButtonTypes.ACTION) {
@@ -79,7 +79,7 @@ export const withDifferentTypes = () => ({
              </s-row>`,
   props: {
     items: {
-      default: () => differentTypesData
+      default: () => differentTypeButtonsData
     }
   }
 })
@@ -120,7 +120,7 @@ export const disabled = () => ({
              </s-row>`,
   props: {
     items: {
-      default: () => differentTypesData
+      default: () => differentTypeButtonsData
     }
   }
 })
@@ -141,7 +141,7 @@ export const loading = () => ({
              </s-row>`,
   props: {
     items: {
-      default: () => differentTypesData
+      default: () => differentTypeButtonsData
     }
   }
 })
@@ -172,7 +172,7 @@ export const withIcon = () => ({
       default: () => differentSizeData
     },
     differentTypesData: {
-      default: () => differentTypesData
+      default: () => differentTypeButtonsData
     }
   }
 })
