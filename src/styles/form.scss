@@ -8,6 +8,9 @@
       width: 100%;
     }
   }
+  &__label {
+    color: var(--s-color-basic-black);
+  }
   &.is-error {
     margin-bottom: 6px;
     > .el-form-item__content {
@@ -15,42 +18,42 @@
         position: relative;
         padding-top: 8px;
         padding-left: 30px;
-        color: $s-color-basic-black;
+        color: var(--s-color-basic-black);
         &::before {
           content: '';
         }
       }
       > [class^="s-input"]:not(.disabled) {
-        .placeholder {
-          color: $s-color-error;
-          background-color: $s-color-main-base;
+        .s-placeholder {
+          color: var(--s-color-error);
+          background-color: var(--s-color-main-base);
         }
         input, textarea {
-          background-color: $s-color-main-base;
+          background-color: var(--s-color-main-base);
           &::placeholder {
-            color: $s-color-error;
+            color: var(--s-color-error);
           }
         }
         &:hover {
-          .placeholder,
+          .s-placeholder,
           .el-input > input,
           .el-textarea > textarea {
-            background-color: $s-color-main-hover-light;
+            background-color: var(--s-color-main-hover-light);
           }
           .el-input > input,
           .el-textarea > textarea {
-            border-color: $s-color-error;
+            border-color: var(--s-color-error);
           }
         }
         &.focused {
-          .placeholder,
+          .s-placeholder,
           .el-input > input,
           .el-textarea > textarea {
-            background-color: $s-color-basic-white;
+            background-color: var(--s-color-basic-white);
           }
           .el-input > input,
           .el-textarea > textarea {
-            border-color: $s-color-error;
+            border-color: var(--s-color-error);
           }
         }
       }
@@ -60,7 +63,13 @@
       bottom: 0;
       left: 4px;
       font-size: 16px;
-      color: $s-color-error;
+      color: var(--s-color-error);
+    }
+    .el-input__inner,
+    .el-input__inner:focus,
+    .el-textarea__inner,
+    .el-textarea__inner:focus {
+      border-color: var(--s-color-error);
     }
   }
 }

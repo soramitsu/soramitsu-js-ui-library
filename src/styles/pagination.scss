@@ -1,17 +1,31 @@
 @import "./variables";
 
 .el-pagination {
-  .btn-prev, .btn-next {
-    color: $s-color-basic-black;
+  &.is-background .el-pager li:not(.disabled) {
+    &.active {
+      background-color: var(--s-color-main-brand);
+      color: var(--s-color-basic-white);
+    }
+    &:hover {
+      color: var(--s-color-main-brand);
+    }
   }
-  button:disabled {
-    color: $s-color-neutral-inactive;
+  .btn-prev, .btn-next {
+    color: var(--s-color-basic-black);
+  }
+  button {
+    &:hover {
+      color: var(--s-color-main-brand);
+    }
+    &:disabled {
+      color: var(--s-color-neutral-inactive);
+    }
   }
   .el-pagination__sizes {
     .el-select .el-input {
       width: 65px;
       .el-select__caret, .el-input__inner {
-        color: $s-color-basic-black;
+        color: var(--s-color-basic-black);
         font-weight: bold;
       }
       .el-select__caret {
@@ -21,12 +35,12 @@
         border-radius: 8px;
         padding-right: 20px;
         padding-left: 5px;
-        background-color: $s-color-neutral-placeholder;
-        border-color: $s-color-neutral-placeholder;
+        background-color: var(--s-color-neutral-placeholder);
+        border-color: var(--s-color-neutral-placeholder);
       }
       &.is-disabled {
         .el-select__caret, .el-input__inner {
-          color: $s-color-neutral-inactive;
+          color: var(--s-color-neutral-inactive);
         }
       }
     }
@@ -34,47 +48,47 @@
   .el-pagination__editor.el-input {
     .el-input__inner {
       border-radius: 8px;
-      background-color: $s-color-neutral-placeholder;
-      border-color: $s-color-neutral-placeholder;
-      color: $s-color-basic-black;
+      background-color: var(--s-color-neutral-placeholder);
+      border-color: var(--s-color-neutral-placeholder);
+      color: var(--s-color-basic-black);
     }
     &.is-disabled .el-input__inner {
-      color: $s-color-neutral-inactive;
+      color: var(--s-color-neutral-inactive);
     }
   }
   .el-pagination__total, .per-page-text, .el-pagination__jump {
-    color: $s-color-neutral-secondary;
+    color: var(--s-color-neutral-secondary);
     font-weight: normal;
   }
   .el-pager li {
-    color: $s-color-basic-black;
+    color: var(--s-color-basic-black);
     &.btn-quicknext, &.btn-quickprev {
-      color: $s-color-basic-black;
+      color: var(--s-color-basic-black);
     }
     &:not(.disabled) {
       &:hover, &.active {
-        color: $s-color-main-brand;
+        color: var(--s-color-main-brand);
       }
     }
     &.disabled {
-      color: $s-color-neutral-inactive;
+      color: var(--s-color-neutral-inactive);
     }
   }
   &.is-background {
     .el-pager li {
-      background-color: $s-color-neutral-placeholder;
+      background-color: var(--s-color-neutral-placeholder);
       &.disabled {
-        color: $s-color-neutral-inactive;
+        color: var(--s-color-neutral-inactive);
       }
     }
     .btn-prev, .btn-next {
-      background-color: $s-color-neutral-placeholder;
+      background-color: var(--s-color-neutral-placeholder);
       &:disabled {
-        color: $s-color-neutral-inactive;
-        background-color: $s-color-neutral-placeholder;
+        color: var(--s-color-neutral-inactive);
+        background-color: var(--s-color-neutral-placeholder);
       }
       &:not(:disabled):hover {
-        color: $s-color-main-brand;
+        color: var(--s-color-main-brand);
       }
     }
   }
@@ -93,4 +107,7 @@
       }
     }
   }
+}
+.el-select-dropdown__item.selected {
+  color: var(--s-color-main-brand);
 }

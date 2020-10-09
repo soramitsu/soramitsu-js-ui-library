@@ -8,7 +8,7 @@ $color-ide-boolean: #0000FF;
 
 .s-json-input {
   width: 100%;
-  border: 1px solid $s-color-neutral-border;
+  border: 1px solid var(--s-color-neutral-border);
   border-radius: $s-border-radius-default;
   &.s-disabled {
     .ace-jsoneditor {
@@ -18,7 +18,7 @@ $color-ide-boolean: #0000FF;
       }
       .ace_scroller,
       .ace_gutter-active-line {
-        background-color: $s-color-neutral-placeholder;
+        background-color: var(--s-color-neutral-placeholder);
       }
     }
   }
@@ -43,11 +43,11 @@ $color-ide-boolean: #0000FF;
     .ace_fold {
       border: none;
       background: none;
-      color: $s-color-basic-black;
+      color: var(--s-color-basic-black);
       margin-top: -13px;
     }
     .ace_text-layer {
-      color: $s-color-basic-black;
+      color: var(--s-color-basic-black);
     }
     .ace_variable {
       color: $color-ide-variable;
@@ -68,10 +68,10 @@ $color-ide-boolean: #0000FF;
       border-top-right-radius: 3px;
       .ace_marker-layer {
         .ace_active-line {
-          background-color: $s-color-neutral-placeholder;
+          background-color: var(--s-color-neutral-placeholder);
         }
         .ace_selection {
-          background: $s-color-neutral-border;
+          background: var(--s-color-neutral-border);
         }
       }
     }
@@ -79,8 +79,8 @@ $color-ide-boolean: #0000FF;
   .jsoneditor-statusbar {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
-    background-color: $s-color-neutral-placeholder;
-    color: $s-color-neutral-secondary;
+    background-color: var(--s-color-neutral-placeholder);
+    color: var(--s-color-neutral-secondary);
     .jsoneditor-parse-error-icon {
       // If full error message will be needed, then it should be removed
       display: none !important;
@@ -88,9 +88,10 @@ $color-ide-boolean: #0000FF;
     }
   }
   .ace_gutter {
-    background-color: $s-color-neutral-placeholder;
+    background-color: var(--s-color-neutral-placeholder);
+    color: var(--s-color-basic-black);
     &-active-line {
-      background-color: $s-color-neutral-border;
+      background-color: var(--s-color-neutral-border);
     }
     // .ace_gutter-cell.ace_error {
     //   @extend .s-icon-error; // TODO: fix the path for icon
@@ -102,9 +103,9 @@ $color-ide-boolean: #0000FF;
   }
   .ace_tooltip {
     font-family: $font-family-default;
-    background: $s-color-basic-black;
-    border-color: $s-color-basic-black;
-    color: $s-color-basic-white;
+    background: var(--s-color-basic-black);
+    border-color: var(--s-color-basic-black);
+    color: var(--s-color-basic-white);
     border-radius: $s-border-radius-default;
     padding: 10px;
     font-size: 12px;

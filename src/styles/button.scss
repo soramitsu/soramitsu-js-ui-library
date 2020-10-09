@@ -17,63 +17,68 @@
   }
 }
 .s-primary {
+  background-color: var(--s-color-main-brand);
+  border-color: var(--s-color-main-brand);
   &:hover, &:active, &:focus {
-    background-color: $s-color-main-hover;
-    border-color: $s-color-main-hover;
+    background-color: var(--s-color-main-hover);
+    border-color: var(--s-color-main-hover);
   }
   &:disabled, &:disabled:hover {
-    background-color: $s-color-main-inactive;
-    border-color: $s-color-main-inactive;
+    background-color: var(--s-color-main-inactive);
+    border-color: var(--s-color-main-inactive);
   }
 }
 .s-secondary {
+  background-color: var(--s-color-basic-white);
+  color: var(--s-color-basic-black);
+  border-color: var(--s-color-neutral-border);
   &:hover, &:active, &:focus {
-    color: $s-color-main-brand;
-    background-color: $s-color-basic-white;
-    border-color: $s-color-main-brand;
+    color: var(--s-color-main-brand);
+    background-color: var(--s-color-basic-white);
+    border-color: var(--s-color-main-brand);
   }
   &:disabled, &:disabled:hover {
-    color: $s-color-neutral-inactive;
-    border-color: $s-color-neutral-border;
+    color: var(--s-color-neutral-inactive);
+    border-color: var(--s-color-neutral-border);
   }
   &.s-alternative {
     &:hover, &:active, &:focus {
-      color: $s-color-basic-black;
-      background-color: $s-color-neutral-hover;
-      border-color: $s-color-neutral-hover;
+      color: var(--s-color-basic-black);
+      background-color: var(--s-color-neutral-hover);
+      border-color: var(--s-color-neutral-hover);
     }
     &:disabled, &:disabled:hover {
-      color: $s-color-neutral-inactive;
-      border-color: $s-color-neutral-border;
-      background-color: $s-color-basic-white;
+      color: var(--s-color-neutral-inactive);
+      border-color: var(--s-color-neutral-border);
+      background-color: var(--s-color-basic-white);
     }
   }
 }
 .s-link {
-  color: $s-color-basic-black;
+  color: var(--s-color-basic-black);
   border: none;
   background-color: transparent;
   &:hover, &:active, &:focus {
-    color: $s-color-main-brand;
+    color: var(--s-color-main-brand);
     background-color: transparent;
   }
   &:disabled, &:disabled:hover {
-    color: $s-color-neutral-inactive;
+    color: var(--s-color-neutral-inactive);
   }
 }
 .s-tertiary {
-  color: $s-color-basic-black;
-  border-color: $s-color-neutral-placeholder;
-  background-color: $s-color-neutral-placeholder;
+  color: var(--s-color-basic-black);
+  border-color: var(--s-color-neutral-placeholder);
+  background-color: var(--s-color-neutral-placeholder);
   &:hover, &:active, &:focus {
-    color: $s-color-main-brand;
-    background-color: $s-color-neutral-placeholder;
-    border-color: $s-color-neutral-placeholder;
+    color: var(--s-color-main-brand);
+    background-color: var(--s-color-neutral-placeholder);
+    border-color: var(--s-color-neutral-placeholder);
   }
   &:disabled, &:disabled:hover {
-    color: $s-color-neutral-inactive;
-    background-color: $s-color-neutral-placeholder;
-    border-color: $s-color-neutral-placeholder;
+    color: var(--s-color-neutral-inactive);
+    background-color: var(--s-color-neutral-placeholder);
+    border-color: var(--s-color-neutral-placeholder);
   }
 }
 .s-action {
@@ -100,28 +105,28 @@
       margin-top: -2px;
     }
   }
-  color: $s-color-basic-black;
-  background-color: $s-color-neutral-placeholder;
-  border-color: $s-color-neutral-placeholder;
+  color: var(--s-color-basic-black);
+  background-color: var(--s-color-neutral-placeholder);
+  border-color: var(--s-color-neutral-placeholder);
   border-radius: 8px;
   &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
-    color: $s-color-basic-black;
-    background-color: $s-color-neutral-hover;
-    border-color: $s-color-neutral-hover;
+    color: var(--s-color-basic-black);
+    background-color: var(--s-color-neutral-hover);
+    border-color: var(--s-color-neutral-hover);
   }
   &:disabled, &:disabled:hover {
-    color: $s-color-neutral-inactive;
+    color: var(--s-color-neutral-inactive);
   }
   &.s-alternative {
-    background-color: $s-color-basic-white;
-    border-color: $s-color-neutral-border;
+    background-color: var(--s-color-basic-white);
+    border-color: var(--s-color-neutral-border);
     &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
-      color: $s-color-basic-black;
-      background-color: $s-color-neutral-placeholder;
-      border-color: $s-color-neutral-placeholder;
+      color: var(--s-color-basic-black);
+      background-color: var(--s-color-neutral-placeholder);
+      border-color: var(--s-color-neutral-placeholder);
     }
     &:disabled, &:disabled:hover {
-      color: $s-color-neutral-inactive;
+      color: var(--s-color-neutral-inactive);
     }
   }
 }
@@ -136,5 +141,14 @@ button {
     &[class^=s-icon-], &[class^=el-icon-] {
       margin-right: 6px;
     }
+  }
+}
+.el-button-group .el-button--plain {
+  color: var(--s-color-basic-black);
+  border-color: var(--s-color-neutral-border);
+  &:hover, &:active, &:focus {
+    color: var(--s-color-main-brand);
+    background-color: var(--s-color-basic-white);
+    border-color: var(--s-color-main-brand);
   }
 }

@@ -2,10 +2,11 @@
 
 .el-tooltip__popper {
   &.is-dark {
-    background-color: $s-color-basic-black;
+    background-color: var(--s-color-basic-black);
   }
   &.is-light {
-    color: $s-color-basic-black;
+    color: var(--s-color-basic-black);
+    border-color: var(--s-color-basic-black);
   }
-  border-color: $s-color-basic-black;
+  border-color: var(--s-color-basic-black);
 }

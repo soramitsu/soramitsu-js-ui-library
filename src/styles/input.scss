@@ -10,7 +10,7 @@
   }
   .s-placeholder {
     // TODO: add default animation from material-ui
-    color: $s-color-neutral-secondary;
+    color: var(--s-color-neutral-secondary);
     text-align: left;
     font-size: 12px;
     padding: 0 15px;
@@ -21,7 +21,7 @@
     position: absolute;
     z-index: 1;
     width: calc(100% - 15px);
-    background-color: $s-color-neutral-placeholder;
+    background-color: var(--s-color-neutral-placeholder);
     pointer-events: none;
   }
   .el-input,
@@ -30,10 +30,10 @@
     > input,
     > textarea {
       height: $s-size-big;
-      border: 1px solid $s-color-neutral-placeholder;
-      background-color: $s-color-neutral-placeholder;
+      border: 1px solid var(--s-color-neutral-placeholder);
+      background-color: var(--s-color-neutral-placeholder);
       &::placeholder {
-        color: $s-color-neutral-secondary;
+        color: var(--s-color-neutral-secondary);
         opacity: 1; // Firefox
       }
     }
@@ -48,34 +48,34 @@
     .s-placeholder,
     .el-input > input,
     .el-textarea > textarea {
-      background-color: $s-color-neutral-hover;
+      background-color: var(--s-color-neutral-hover);
     }
     .el-input > input,
     .el-textarea > textarea {
-      border-color: $s-color-neutral-hover;
+      border-color: var(--s-color-neutral-hover);
     }
   }
   &.s-focused {
     .s-placeholder,
     .el-input > input,
     .el-textarea > textarea {
-      background-color: $s-color-basic-white;
+      background-color: var(--s-color-basic-white);
     }
     .el-input > input,
     .el-textarea > textarea {
-      border-color: $s-color-neutral-border;
+      border-color: var(--s-color-neutral-border);
     }
   }
   &.s-disabled {
     .s-placeholder,
     .el-input > input,
     .el-textarea > textarea {
-      color: $s-color-neutral-secondary;
-      background-color: $s-color-neutral-placeholder;
+      color: var(--s-color-neutral-secondary);
+      background-color: var(--s-color-neutral-placeholder);
     }
     .el-input > input,
     .el-textarea > textarea {
-      border-color: $s-color-neutral-border;
+      border-color: var(--s-color-neutral-border);
     }
   }
   &.s-autofill {
@@ -85,7 +85,7 @@
   }
   .el-input > input {
     &:-webkit-autofill {
-      color: $s-color-basic-black !important;
+      color: var(--s-color-basic-black) !important;
       animation-name: onAutoFillStart; // Expose a hook for JavaScript when auto fill is shown
     }
     &:not(:-webkit-autofill) {
@@ -131,6 +131,9 @@
       }
     }
   }
+}
+.el-input__inner, .el-textarea__inner {
+  color: var(--s-color-basic-black);
 }
 @keyframes onAutoFillStart {
   from {/**/}

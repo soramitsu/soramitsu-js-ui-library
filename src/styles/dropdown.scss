@@ -1,6 +1,7 @@
 @import "./variables";
 
 .el-dropdown {
+  color: var(--s-color-basic-black);
   > .el-button-group {
     > .el-button {
       float: left;
@@ -8,11 +9,11 @@
     .el-dropdown__caret-button {
       &.s-secondary {
         &::before {
-          background-color: $s-color-neutral-border;
+          background-color: var(--s-color-neutral-border);
         }
         &:hover, &:active, &:focus {
           &::before {
-            background-color: $s-color-main-brand;
+            background-color: var(--s-color-main-brand);
           }
         }
       }
@@ -35,9 +36,15 @@
     font-size: 24px;
   }
 }
-.el-dropdown-menu__item:not(.is-disabled) {
-  &:hover, &:focus {
-    background-color: $s-color-neutral-placeholder;
-    color: $s-color-basic-black;
+.el-dropdown-menu__item {
+  color: var(--s-color-basic-black);
+  &:not(.is-disabled) {
+    &:hover, &:focus {
+      background-color: var(--s-color-neutral-placeholder);
+      color: var(--s-color-basic-black);
+    }
+  }
+  &.is-disabled {
+    color: var(--s-color-neutral-inactive);
   }
 }

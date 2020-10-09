@@ -1,7 +1,12 @@
 @import "./variables";
 
+.el-table,
+.el-table__header-wrapper tbody td,
+.el-table__footer-wrapper tbody td {
+  color: var(--s-color-basic-black);
+}
 .el-table--enable-row-hover .el-table__body tr:hover > td {
-  background-color: $s-color-neutral-hover;
+  background-color: var(--s-color-neutral-hover);
   border-left: none;
   border-right: none;
 }
@@ -12,7 +17,7 @@
       &.current-row > td,
       &.el-table__row--striped > td,
       &.el-table__row--striped.current-row > td {
-        background-color: $s-color-neutral-hover;
+        background-color: var(--s-color-neutral-hover);
         border-left: none;
         border-right: none;
       }
@@ -24,24 +29,24 @@
   padding-left: 13px;
 }
 .el-table thead {
-  color: $s-color-neutral-tertiary;
+  color: var(--s-color-neutral-tertiary);
 }
 .el-table--group,
 .el-table--border,
 .el-table th.is-leaf,
 .el-table td,
 .el-table--border th {
-  border-color: $s-color-neutral-placeholder;
+  border-color: var(--s-color-neutral-placeholder);
 }
 .el-table--group::after,
 .el-table--border::after {
-  background-color: $s-color-neutral-placeholder;
+  background-color: var(--s-color-neutral-placeholder);
 }
 .el-table:not(.el-table--border)::before {
-  background-color: $s-color-basic-white;
+  background-color: var(--s-color-basic-white);
 }
 .el-table tr:last-child td {
-  border-bottom-color: $s-color-basic-white;
+  border-bottom-color: var(--s-color-basic-white);
 }
 .el-table__header {
   label.el-checkbox.is-disabled {
@@ -98,5 +103,9 @@
 }
 .el-table__header-wrapper tbody td,
 .el-table__footer-wrapper tbody td {
-  background-color: $s-color-neutral-placeholder;
+  background-color: var(--s-color-neutral-placeholder);
+}
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: var(--s-color-main-brand);
+  border-color: var(--s-color-main-brand);
 }

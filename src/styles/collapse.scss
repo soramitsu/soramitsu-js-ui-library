@@ -19,7 +19,7 @@
     border-bottom-color: #F5F5F5;
   }
   &header {
-    color: $s-color-basic-black;
+    color: var(--s-color-basic-black);
     border-bottom-color: #F5F5F5;
     &.is-active {
       border-bottom-color: transparent;
@@ -31,17 +31,23 @@
       padding: 8px;
       width: 32px;
       height: 32px;
-      background-color: $s-color-neutral-placeholder;
+      background-color: var(--s-color-neutral-placeholder);
       border-radius: 50%;
       &.is-active {
         transform: rotate(180deg);
       }
+      &:hover, &:focus {
+        background-color: var(--s-color-neutral-hover);
+      }
     }
   }
   &content {
-    color: $s-color-basic-black;
+    color: var(--s-color-basic-black);
   }
 }
 .el-collapse-item.is-disabled .el-collapse-item__header {
-  color: $s-color-neutral-inactive;
+  color: var(--s-color-neutral-inactive);
+  .el-collapse-item__arrow.el-icon-arrow-right {
+    background-color: var(--s-color-neutral-hover);
+  }
 }

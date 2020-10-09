@@ -2,7 +2,7 @@
 
 [class^="el-"]:not(i):not([class*='el-icon']),
 [class*="el-"]:not(i):not([class*='el-icon']) {
-  font-family: 'Sora', sans-serif !important;
+  font-family: $font-family-default;
 }
 
 html {
@@ -12,6 +12,43 @@ html {
 *, *:before, *:after {
   box-sizing: border-box;
   margin: 0;
+}
+
+/* Typography */
+h1 {
+  font-family: $font-family-default;
+  font-weight: normal;
+  font-size: 36px;
+}
+
+h2 {
+  font-family: $font-family-default;
+  font-weight: normal;
+  font-size: 30px;
+}
+
+h3 {
+  font-family: $font-family-default;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+h4 {
+  font-family: $font-family-default;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+h5 {
+  font-family: $font-family-default;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+h6 {
+  font-family: $font-family-default;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .s-flex {
@@ -70,7 +107,7 @@ button > span {
 .el-message-box {
   .el-message-box__header {
     .el-message-box__title {
-      color: $s-color-basic-black;
+      color: var(--s-color-basic-black);
       font-size: 16px;
     }
   }
@@ -80,15 +117,15 @@ button > span {
       font-size: 14px;
       border-radius: 4px;
       &:hover, &:active, &:focus {
-        color: $s-color-main-brand;
-        background-color: $s-color-basic-white;
-        border-color: $s-color-main-brand;
+        color: var(--s-color-main-brand);
+        background-color: var(--s-color-basic-white);
+        border-color: var(--s-color-main-brand);
       }
       &.el-button--primary {
         &:hover, &:active, &:focus {
-          color: $s-color-basic-white;
-          background-color: $s-color-main-hover;
-          border-color: $s-color-main-hover;
+          color: var(--s-color-basic-white);
+          background-color: var(--s-color-main-hover);
+          border-color: var(--s-color-main-hover);
         }
       }
     }

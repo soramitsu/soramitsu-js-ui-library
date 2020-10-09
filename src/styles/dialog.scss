@@ -5,9 +5,12 @@
   .el-dialog__title {
     font-weight: bold;
     font-size: 16px;
-    color: $s-color-basic-black;
+    color: var(--s-color-basic-black);
   }
   > * {
     word-break: break-word;
+  }
+  .el-dialog__body {
+    color: var(--s-color-basic-black);
   }
 }

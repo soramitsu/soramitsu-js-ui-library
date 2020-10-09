@@ -31,7 +31,7 @@
       &.disabled {
         cursor: not-allowed;
         pointer-events: none;
-        color: $s-color-neutral-inactive;
+        color: var(--s-color-neutral-inactive);
         border-left: none;
       }
     }
@@ -39,7 +39,7 @@
 }
 .s-scroll-content {
   padding-bottom: 90%;
-  color: $s-color-basic-black;
+  color: var(--s-color-basic-black);
   .title {
     font-size: 16px;
   }
