@@ -5,7 +5,7 @@ $s-color-main-inactive: #F6CCD1 !default;
 $s-color-main-hover-light: #FEE6E7 !default;
 $s-color-main-base: #FFF9FA !default;
 // Neutral colors
-$s-color-neutral-primary: #53565A !default;
+$s-color-neutral-primary: #53565A !default; // TODO: not used
 $s-color-neutral-secondary: #75787B !default;
 $s-color-neutral-tertiary: #909296 !default;
 $s-color-neutral-inactive: #C8C9C7 !default;
@@ -53,3 +53,21 @@ $--breakpoints-spec: (
   'lg-and-down': (max-width: $--xl - 1),
   'xl-only' : (min-width: $--xl),
 );
+
+:root {
+  --s-color-main-brand: #{$s-color-main-brand};
+  --s-color-main-hover: #{$s-color-main-hover};
+  --s-color-main-inactive: #{$s-color-main-inactive};
+  --s-color-main-hover-light: #{$s-color-main-hover-light};
+  --s-color-main-base: #{$s-color-main-base};
+  --s-color-neutral-primary: #{$s-color-neutral-primary};
+  --s-color-neutral-secondary: #{$s-color-neutral-secondary};
+  --s-color-neutral-tertiary: #{$s-color-neutral-tertiary};
+  --s-color-neutral-inactive: #{$s-color-neutral-inactive};
+  --s-color-neutral-border: #{$s-color-neutral-border};
+  --s-color-neutral-hover: #{$s-color-neutral-hover};
+  --s-color-neutral-placeholder: #{$s-color-neutral-placeholder};
+  --s-color-error: #{$s-color-error};
+  --s-color-basic-black: #{$s-color-basic-black};
+  --s-color-basic-white: #{$s-color-basic-white};
+}
