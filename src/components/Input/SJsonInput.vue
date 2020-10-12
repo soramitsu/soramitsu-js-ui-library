@@ -67,10 +67,10 @@ export default class SJsonInput extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.disabled) {
-      cssClasses.push('disabled')
+      cssClasses.push('s-disabled')
     }
     if (this.readonly) {
-      cssClasses.push('readonly')
+      cssClasses.push('s-readonly')
     }
     return cssClasses
   }
@@ -96,6 +96,7 @@ export default class SJsonInput extends Vue {
     if (!this.readonly) {
       this.$emit('input', value)
       this.$emit('change', value)
+      return
     }
     if (!this.jsoneditor) {
       return
@@ -104,119 +105,3 @@ export default class SJsonInput extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-// @import "../../styles/icons.scss";
-
-$color-ide-variable: #0451A5;
-$color-ide-string: #A31515;
-$color-ide-number: #098658;
-$color-ide-boolean: #0000FF;
-
-.s-json-input {
-  width: 100%;
-  border: 1px solid $color-neutral-border;
-  border-radius: $border-radius-default;
-  &.disabled {
-    .ace-jsoneditor {
-      pointer-events: none;
-      .ace_cursor {
-        display: none !important;
-      }
-      .ace_scroller,
-      .ace_gutter-active-line {
-        background-color: $color-neutral-placeholder;
-      }
-    }
-  }
-  &.readonly .jsoneditor {
-    .ace_gutter .ace_gutter-cell.ace_error {
-      background-image: none;
-    }
-    .ace_tooltip {
-      display: none !important;
-    }
-  }
-  // TODO: think about hover and focus
-}
-
-.jsoneditor {
-  border: none !important;
-  font-family: $font-family-mono;
-  .ace-jsoneditor {
-    *, textarea.jsoneditor-text * {
-      font-family: $font-family-mono;
-    }
-    .ace_fold {
-      border: none;
-      background: none;
-      color: $color-basic-black;
-      margin-top: -13px;
-    }
-    .ace_text-layer {
-      color: $color-basic-black;
-    }
-    .ace_variable {
-      color: $color-ide-variable;
-    }
-    .ace_string {
-      color: $color-ide-string;
-    }
-    .ace_constant {
-      &.ace_numeric {
-        color: $color-ide-number;
-      }
-      &.ace_language {
-        color: $color-ide-boolean;
-      }
-    }
-    &.ace_editor {
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
-      .ace_marker-layer {
-        .ace_active-line {
-          background-color: $color-neutral-placeholder;
-        }
-        .ace_selection {
-          background: $color-neutral-border;
-        }
-      }
-    }
-  }
-  .jsoneditor-statusbar {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    background-color: $color-neutral-placeholder;
-    color: $color-neutral-secondary;
-    .jsoneditor-parse-error-icon {
-      // If full error message will be needed, then it should be removed
-      display: none !important;
-      pointer-events: none;
-    }
-  }
-  .ace_gutter {
-    background-color: $color-neutral-placeholder;
-    &-active-line {
-      background-color: $color-neutral-border;
-    }
-    // .ace_gutter-cell.ace_error {
-    //   @extend .s-icon-error; // TODO: fix the path for icon
-    // }
-  }
-  .ace_editor .ace_content,
-  .ace_gutter .ace_gutter-cell {
-    font-family: $font-family-mono;
-  }
-  .ace_tooltip {
-    font-family: $font-family-default;
-    background: $color-basic-black;
-    border-color: $color-basic-black;
-    color: $color-basic-white;
-    border-radius: $border-radius-default;
-    padding: 10px;
-    font-size: 12px;
-    line-height: 1.2;
-  }
-}
-</style>

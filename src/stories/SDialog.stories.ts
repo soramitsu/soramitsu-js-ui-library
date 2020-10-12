@@ -4,14 +4,14 @@ import { SDialog, SRow, SButton } from '../components'
 
 export default {
   component: SDialog,
-  title: 'Design System/Dialog',
+  title: 'Design System/Components/Dialog',
   decorators: [withKnobs]
 }
 
 export const configurable = () => ({
   components: { SDialog, SRow, SButton },
   template: `<s-row
-               class="flex"
+               class="s-flex"
                style="flex: 1; justify-content: space-between; align-items: center; height: 400px;"
              >
                <s-button size="medium" @click="visible = true">Open Dialog</s-button>

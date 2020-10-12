@@ -1,5 +1,6 @@
 import '../plugins'
 import '../styles'
+import '../styles/index.scss'
 
 import { SApp } from './Layout/App'
 import { SAside } from './Layout/Aside'

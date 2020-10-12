@@ -41,58 +41,12 @@ export default class SCollapseItem extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if (!(this.sCollapse || {}).borders) {
-      cssClasses.push('without-border')
+      cssClasses.push('s-without-border')
     }
     if (this.withoutPadding) {
-      cssClasses.push('without-padding')
+      cssClasses.push('s-without-padding')
     }
     return cssClasses
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-@import "../../styles/icons.scss";
-
-.without-border {
-  > div > .el-collapse-item__header,
-  > .el-collapse-item__wrap {
-    border: none;
-  }
-}
-.without-padding > .el-collapse-item__wrap > .el-collapse-item__content {
-  padding-bottom: 0;
-}
-.el-collapse-item__ {
-  &wrap {
-    border-bottom-color: #F5F5F5;
-  }
-  &header {
-    color: $color-basic-black;
-    border-bottom-color: #F5F5F5;
-    &.is-active {
-      border-bottom-color: transparent;
-    }
-    .el-icon-arrow-right {
-      font-family: 'soramitsu-icons' !important;
-      @extend .s-icon-chevron-top;
-      font-size: 16px;
-      padding: 8px;
-      width: 32px;
-      height: 32px;
-      background-color: $color-neutral-placeholder;
-      border-radius: 50%;
-      &.is-active {
-        transform: rotate(180deg);
-      }
-    }
-  }
-  &content {
-    color: $color-basic-black;
-  }
-}
-.el-collapse-item.is-disabled .el-collapse-item__header {
-  color: $color-neutral-inactive;
-}
-</style>

@@ -9,7 +9,7 @@
       :disabled="disabled"
       :loading="isLoading"
       :autofocus="autofocus"
-      :circle="type === ButtonTypes.ACTION"
+      :circle="type === ButtonTypes.ACTION && rounded"
       :icon="elementIcon"
       @click="handleClick"
     >
@@ -40,6 +40,12 @@ export default class SButton extends Vue {
    * By default it's set to `"primary"`
    */
   @Prop({ default: ButtonTypes.PRIMARY, type: String }) readonly type!: string
+  /**
+   * Rounded property for `type="action"` buttons.
+   *
+   * By default it's set to `false`
+   */
+  @Prop({ default: false, type: Boolean }) readonly rounded!: boolean
   /**
    * Size of button. Possible values: `"big"`, `"medium"`, `"small"`.
    *
@@ -117,18 +123,18 @@ export default class SButton extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((this.elForm || this.elFormItem || {}).size) {
-      cssClasses.push((this.elForm || this.elFormItem).size)
+      cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
     } else if ((Object.values(ButtonSize) as Array<string>).includes(this.size)) {
-      cssClasses.push(this.size)
+      cssClasses.push(`s-${this.size}`)
     }
     if ((Object.values(ButtonTypes) as Array<string>).includes(this.type)) {
-      cssClasses.push(this.type)
+      cssClasses.push(`s-${this.type}`)
     }
     if (this.isLoading) {
-      cssClasses.push('loading')
+      cssClasses.push('s-loading')
     }
     if (this.alternative) {
-      cssClasses.push('alternative')
+      cssClasses.push('s-alternative')
     }
     return cssClasses
   }
@@ -176,148 +182,3 @@ export default class SButton extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-
-.loading {
-  padding: 12px 17.5px;
-  i {
-    position: absolute;
-    left: var(--s-button-loading-left);
-  }
-  &.small {
-    padding: 9px 15px;
-    i {
-      left: calc(var(--s-button-loading-left) + 2px);
-    }
-  }
-  > :not(i) {
-    color: transparent;
-  }
-}
-
-.primary {
-  &:hover, &:active, &:focus {
-    background-color: $color-main-hover;
-    border-color: $color-main-hover;
-  }
-  &:disabled, &:disabled:hover {
-    background-color: $color-main-inactive;
-    border-color: $color-main-inactive;
-  }
-}
-
-.secondary {
-  &:hover, &:active, &:focus {
-    color: $color-main-brand;
-    background-color: $color-basic-white;
-    border-color: $color-main-brand;
-  }
-  &:disabled, &:disabled:hover {
-    color: $color-neutral-inactive;
-    border-color: $color-neutral-border;
-  }
-  &.alternative {
-    &:hover, &:active, &:focus {
-      color: $color-basic-black;
-      background-color: $color-neutral-hover;
-      border-color: $color-neutral-hover;
-    }
-    &:disabled, &:disabled:hover {
-      color: $color-neutral-inactive;
-      border-color: $color-neutral-border;
-      background-color: $color-basic-white;
-    }
-  }
-}
-
-.link {
-  color: $color-basic-black;
-  border: none;
-  background-color: transparent;
-  &:hover, &:active, &:focus {
-    color: $color-main-brand;
-    background-color: transparent;
-  }
-  &:disabled, &:disabled:hover {
-    color: $color-neutral-inactive;
-  }
-}
-
-.tertiary {
-  color: $color-basic-black;
-  border-color: $color-neutral-placeholder;
-  background-color: $color-neutral-placeholder;
-  &:hover, &:active, &:focus {
-    color: $color-main-brand;
-    background-color: $color-neutral-placeholder;
-    border-color: $color-neutral-placeholder;
-  }
-  &:disabled, &:disabled:hover {
-    color: $color-neutral-inactive;
-    background-color: $color-neutral-placeholder;
-    border-color: $color-neutral-placeholder;
-  }
-}
-
-.action {
-  &.big {
-    width: $size-big;
-    i {
-      font-size: 20px;
-    }
-  }
-  &.medium {
-    width: $size-medium;
-    i {
-      font-size: 18px;
-    }
-  }
-  &.small {
-    width: $size-small;
-    i {
-      font-size: 16px;
-      margin-left: -2px;
-      margin-top: -2px;
-    }
-  }
-  color: $color-basic-black;
-  background-color: $color-neutral-placeholder;
-  border-color: $color-neutral-placeholder;
-  &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
-    color: $color-basic-black;
-    background-color: $color-neutral-hover;
-    border-color: $color-neutral-hover;
-  }
-  &:disabled, &:disabled:hover {
-    color: $color-neutral-inactive;
-  }
-  &.alternative {
-    background-color: $color-basic-white;
-    border-color: $color-neutral-border;
-    &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
-      color: $color-basic-black;
-      background-color: $color-neutral-placeholder;
-      border-color: $color-neutral-placeholder;
-    }
-    &:disabled, &:disabled:hover {
-      color: $color-neutral-inactive;
-    }
-  }
-}
-
-button {
-  > span > i {
-    &[class^=s-icon-], &[class^=el-icon-] {
-      display: inline-block;
-      color: inherit;
-    }
-  }
-  &:not(.action) > span > i {
-    &[class^=s-icon-], &[class^=el-icon-] {
-      margin-right: 6px;
-    }
-  }
-}
-</style>

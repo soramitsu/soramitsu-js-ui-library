@@ -4,7 +4,7 @@ import { SDropdown, SDropdownItem } from '../../components'
 
 export default {
   component: SDropdownItem,
-  title: 'Design System/Dropdown/DropdownItem',
+  title: 'Design System/Components/Dropdown/DropdownItem',
   decorators: [withKnobs]
 }
 

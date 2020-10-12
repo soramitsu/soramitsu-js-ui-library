@@ -88,7 +88,7 @@ export default class SCheckbox extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((Object.values(CheckboxSize) as Array<string>).includes(this.size)) {
-      cssClasses.push(this.size)
+      cssClasses.push(`s-${this.size}`)
     }
     return cssClasses
   }
@@ -98,93 +98,3 @@ export default class SCheckbox extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-@import "../../styles/common.scss";
-
-.el-checkbox {
-  &.big {
-    @extend .big;
-    padding: 17px 0 9px 0;
-    &.is-bordered {
-      padding: 17px 20px 9px 15px;
-    }
-  }
-  &.medium {
-    @extend .medium;
-    &, &.is-bordered {
-      padding: 9px 15px 7px 10px;
-      .el-checkbox__inner {
-        height: 16px;
-        width: 16px;
-        &::after {
-          top: 0;
-          left: 4px;
-          height: 8px;
-          width: 4px;
-        }
-      }
-    }
-    & {
-      padding: 9px 0 7px 0;
-    }
-  }
-  &.small {
-    @extend .small;
-    border-radius: 4px;
-    .el-checkbox__label {
-      font-size: 12px;
-    }
-    &, &.is-bordered {
-      padding: 5px 15px 5px 10px;
-      .el-checkbox__inner {
-        height: 14px;
-        width: 14px;
-        &::after {
-          top: 1px;
-          left: 4px;
-          height: 6px;
-          width: 2px;
-        }
-      }
-    }
-    & {
-      padding: 5px 0;
-    }
-  }
-}
-.el-checkbox__inner {
-  border-color: $color-neutral-inactive;
-  border-radius: 4px;
-  width: 20px;
-  height: 20px;
-  &::after {
-    border-width: 2px;
-    height: 10px;
-    left: 6px;
-    width: 5px;
-  }
-}
-.el-checkbox__input {
-  &.is-disabled {
-    .el-checkbox__inner {
-      background-color: $color-neutral-placeholder;
-    }
-    & + span.el-checkbox__label {
-      color: $color-neutral-inactive;
-    }
-  }
-  &.is-checked {
-    &.is-disabled > .el-checkbox__inner {
-      background-color: $color-neutral-placeholder;
-      &::after {
-        border-color: $color-neutral-inactive;
-      }
-    }
-    & + .el-checkbox__label {
-      color: $color-basic-black;
-    }
-  }
-}
-</style>

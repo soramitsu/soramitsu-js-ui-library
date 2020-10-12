@@ -43,14 +43,3 @@ export default class SDropdownItem extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-
-.el-dropdown-menu__item:not(.is-disabled) {
-  &:hover, &:focus {
-    background-color: $color-neutral-placeholder;
-    color: $color-basic-black;
-  }
-}
-</style>

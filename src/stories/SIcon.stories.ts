@@ -5,7 +5,7 @@ import { Icons } from '../components/Icon'
 
 export default {
   component: SIcon,
-  title: 'Design System/Icon',
+  title: 'Design System/Components/Icon',
   decorators: [withKnobs]
 }
 
@@ -34,7 +34,7 @@ export const allIcons = () => ({
                    :span="3"
                    v-for="icon in icons"
                    :key="icon"
-                   class="flex"
+                   class="s-flex"
                    style="flex-direction: column; padding-bottom: 20px;"
                  >
                    <s-icon :name="icon" :size="18" />

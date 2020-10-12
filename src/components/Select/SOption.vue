@@ -25,8 +25,3 @@ export default class SOption extends Vue {
   @Prop({ type: Boolean, default: false }) readonly disabled!: boolean
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-
-</style>

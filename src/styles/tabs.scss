@@ -1,0 +1,92 @@
+@import "./variables";
+
+.s-tabs {
+  width: 100%;
+  .el-tabs__item {
+    font-weight: bold;
+    .el-icon-close {
+      &:before {
+        font-weight: bold;
+      }
+      &:hover {
+        background-color: transparent;
+        color: inherit;
+      }
+    }
+    &.is-active {
+      color: var(--s-color-main-brand);
+    }
+    &:not(.is-active) {
+      color: var(--s-color-basic-black);
+    }
+  }
+  .el-tab-pane {
+    color: var(--s-color-basic-black);
+  }
+  .el-tabs__nav-wrap::after {
+    background-color: var(--s-color-neutral-placeholder);
+  }
+  &.el-tabs--card {
+    > .el-tabs__header {
+      border-bottom-color: var(--s-color-neutral-hover);
+      .el-tabs__nav {
+        border-color: var(--s-color-neutral-hover);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+      .el-tabs__item {
+        border-left-color: var(--s-color-neutral-hover);
+      }
+    }
+  }
+  &.el-tabs--border-card {
+    border-color: var(--s-color-neutral-border);
+    > .el-tabs__header {
+      background-color: var(--s-color-neutral-placeholder);
+      border-bottom-color: var(--s-color-neutral-border);
+      .el-tabs__item {
+        &:hover, &.is-active {
+          color: var(--s-color-main-brand);
+        }
+      }
+    }
+  }
+  &.s-rounded {
+    .el-tabs__header {
+      width: fit-content;
+    }
+    .el-tabs__nav-wrap {
+      background-color: var(--s-color-neutral-placeholder);
+      border-radius: 8px;
+      height: 32px;
+      padding-top: 2px;
+      padding-left: 2px;
+      padding-right: 2px;
+      &::after, .el-tabs__active-bar {
+        height: 0;
+      }
+      .el-tabs__item {
+        padding: 0 32px;
+        height: 28px;
+        line-height: 28px;
+        &:nth-child(2), &:last-child {
+          padding: 0 32px;
+        }
+        &.is-active {
+          color: var(--s-color-basic-black);
+          background-color: var(--s-color-basic-white);
+          box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
+          border-radius: 8px;
+        }
+        &:focus.is-focus {
+          // TODO: make it more focusable
+          box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+  .el-tabs__active-bar {
+    background-color: var(--s-color-main-brand);
+  }
+}

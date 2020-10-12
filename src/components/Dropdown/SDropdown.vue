@@ -163,7 +163,7 @@ export default class SDropdown extends Vue {
     if (this.splitButton) {
       this.$nextTick(() => {
         this.dropdown.$children[0].$children.forEach(button => {
-          button.$el.classList.add(this.size, this.computedButtonType)
+          button.$el.classList.add(`s-${this.size}`, `s-${this.computedButtonType}`)
         })
       })
     }
@@ -189,43 +189,3 @@ export default class SDropdown extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-
-.el-dropdown {
-  > .el-button-group {
-    > .el-button {
-      float: left;
-    }
-    .el-dropdown__caret-button {
-      &.secondary {
-        &::before {
-          background-color: $color-neutral-border;
-        }
-        &:hover, &:active, &:focus {
-          &::before {
-            background-color: $color-main-brand;
-          }
-        }
-      }
-      &.tertiary {
-        &::before {
-          background-color: transparent;
-        }
-        &:hover, &:active, &:focus {
-          &::before {
-            background-color: transparent;
-          }
-        }
-      }
-    }
-  }
-  > i {
-    cursor: pointer;
-  }
-  .s-icon-more-horizontal {
-    font-size: 24px;
-  }
-}
-</style>

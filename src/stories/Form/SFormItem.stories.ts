@@ -4,7 +4,7 @@ import { SButton, SForm, SFormItem, SInput } from '../../components'
 
 export default {
   component: SFormItem,
-  title: 'Design System/Form/Form Item',
+  title: 'Design System/Components/Form/Form Item',
   decorators: [withKnobs]
 }
 

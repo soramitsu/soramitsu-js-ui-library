@@ -5,7 +5,7 @@ import { ButtonSize, ButtonTypes } from '../components/Button'
 
 export default {
   component: SButton,
-  title: 'Design System/Button',
+  title: 'Design System/Components/Button',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
@@ -19,6 +19,7 @@ export const configurable = () => ({
                :icon="type === 'action' ? 'back' : ''"
                :type="type"
                :size="size"
+               :rounded="rounded"
                :alternative="alternative"
                @click="handleClick"
              >
@@ -37,6 +38,9 @@ export const configurable = () => ({
     size: {
       default: select('Size', Object.values(ButtonSize), ButtonSize.BIG)
     },
+    rounded: {
+      default: boolean('Rounded', false)
+    },
     alternative: {
       default: boolean('Alternative', false)
     },
@@ -49,7 +53,7 @@ export const configurable = () => ({
   }
 })
 
-export const differentTypesData = Object.values(ButtonTypes).map(type => {
+export const differentTypeButtonsData = Object.values(ButtonTypes).map(type => {
   const label = type[0].toUpperCase() + type.slice(1)
   const data = { type } as any
   if (type === ButtonTypes.ACTION) {
@@ -62,7 +66,7 @@ export const differentTypesData = Object.values(ButtonTypes).map(type => {
 })
 export const withDifferentTypes = () => ({
   components: { SButton, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.type"
@@ -75,7 +79,7 @@ export const withDifferentTypes = () => ({
              </s-row>`,
   props: {
     items: {
-      default: () => differentTypesData
+      default: () => differentTypeButtonsData
     }
   }
 })
@@ -84,7 +88,7 @@ export const differentSizeData = Object.values(ButtonSize).map(size =>
   ({ size, label: size[0].toUpperCase() + size.slice(1) }))
 export const withDifferentSize = () => ({
   components: { SButton, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.size"
@@ -102,7 +106,7 @@ export const withDifferentSize = () => ({
 
 export const disabled = () => ({
   components: { SButton, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.type"
@@ -116,14 +120,14 @@ export const disabled = () => ({
              </s-row>`,
   props: {
     items: {
-      default: () => differentTypesData
+      default: () => differentTypeButtonsData
     }
   }
 })
 
 export const loading = () => ({
   components: { SButton, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
                  v-for="item in items"
                  :key="item.type"
@@ -137,7 +141,7 @@ export const loading = () => ({
              </s-row>`,
   props: {
     items: {
-      default: () => differentTypesData
+      default: () => differentTypeButtonsData
     }
   }
 })
@@ -168,14 +172,14 @@ export const withIcon = () => ({
       default: () => differentSizeData
     },
     differentTypesData: {
-      default: () => differentTypesData
+      default: () => differentTypeButtonsData
     }
   }
 })
 
 export const buttonGroup = () => ({
   components: { SButton, SButtonGroup, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button-group>
                  <s-button type="primary">Append</s-button>
                  <s-button type="delete">Remove</s-button>

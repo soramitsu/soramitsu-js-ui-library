@@ -5,14 +5,14 @@ import { CheckboxSize } from '../components/Checkbox'
 
 export default {
   component: SCheckbox,
-  title: 'Design System/Checkbox',
+  title: 'Design System/Components/Checkbox',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
 
 export const configurable = () => ({
   components: { SCheckbox },
-  template: `<div class="flex" style="flex: 1; flex-direction: column;">
+  template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
                <s-checkbox
                  v-model="vModelValue"
                  :disabled="disabled"

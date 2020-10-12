@@ -1,6 +1,6 @@
 <template>
   <div class="s-select" :class="computedClasses">
-    <span v-if="willPlaceholderBeShown" class="placeholder">{{ placeholder }}</span>
+    <span v-if="willPlaceholderBeShown" class="s-placeholder">{{ placeholder }}</span>
     <el-select
       ref="select"
       v-model="model"
@@ -140,16 +140,16 @@ export default class SSelect extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
-      cssClasses.push(this.inputType)
+      cssClasses.push(`s-${this.inputType}-type`)
     }
     if (this.focused) {
-      cssClasses.push('focused')
+      cssClasses.push('s-focused')
     }
     if (this.disabled) {
-      cssClasses.push('disabled')
+      cssClasses.push('s-disabled')
     }
     if ((!this.multiple && this.model) || (this.multiple && this.model.length !== 0)) {
-      cssClasses.push('has-value')
+      cssClasses.push('s-has-value')
     }
     return cssClasses
   }
@@ -192,220 +192,3 @@ export default class SSelect extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-@import "../../styles/icons.scss";
-
-.s-select {
-  font-family: $font-family-default;
-  width: 100%;
-  position: relative;
-  .el-select {
-    width: 100%;
-    i.el-icon-arrow-up {
-      font-family: $icons-font;
-      font-size: 16px;
-      &:before {
-        content: $s-icon-chevron-top;
-      }
-    }
-    .el-input {
-      &.is-focus .el-input__inner {
-        border-color: $color-neutral-placeholder;
-      }
-      .el-input__inner {
-        &::placeholder {
-          color: $color-neutral-secondary;
-          opacity: 1; // Firefox
-        }
-      }
-      .el-select__caret {
-        color: $color-neutral-secondary;
-      }
-    }
-  }
-  &.input {
-    .el-select {
-      .el-input__inner {
-        height: $size-big;
-        padding: 0 15px;
-        border: 1px solid $color-neutral-placeholder;
-        background-color: $color-neutral-placeholder;
-        &:focus {
-          border-color: $color-neutral-placeholder;
-        }
-      }
-    }
-    &:hover {
-      .el-select {
-        .el-input__inner {
-          border-color: $color-neutral-hover;
-          background-color: $color-neutral-hover;
-        }
-      }
-      .placeholder {
-        background-color: $color-neutral-hover;
-      }
-    }
-    .placeholder + .el-select {
-      .el-input__inner {
-        padding-top: 12px;
-      }
-      .el-input__validateIcon {
-        padding-top: 11px;
-      }
-    }
-    &.focused {
-      .el-select {
-        .el-input__inner {
-          border-color: $color-neutral-border;
-          background-color: $color-basic-white;
-        }
-      }
-      .placeholder {
-        background-color: $color-basic-white;
-      }
-    }
-    &.disabled {
-      .el-select {
-        .el-select__caret {
-          color: $color-neutral-secondary;
-        }
-        .el-input__inner, .el-input__inner:hover {
-          border-color: $color-neutral-border;
-          color: $color-neutral-secondary;
-          background-color: $color-neutral-placeholder;
-          &::placeholder {
-            color: $color-neutral-secondary;
-          }
-        }
-      }
-      .placeholder {
-        color: $color-neutral-secondary;
-        background-color: $color-neutral-placeholder;
-      }
-    }
-  }
-  .placeholder {
-    // TODO: add default animation from material-ui
-    color: $color-neutral-secondary;
-    text-align: left;
-    font-size: 12px;
-    padding: 0 15px;
-    padding-top: 5px;
-    top: 1px;
-    left: 1px;
-    border-top-left-radius: 4px;
-    position: absolute;
-    z-index: 1;
-    width: calc(100% - 15px);
-    background-color: $color-neutral-placeholder;
-    pointer-events: none;
-  }
-  &.select {
-    .el-select {
-      .el-input__inner {
-        border-radius: 8px;
-        padding-left: 12px;
-        font-weight: bold;
-        &:hover {
-          border-color: $color-neutral-inactive;
-        }
-        &::placeholder {
-          color: $color-neutral-tertiary;
-          font-weight: bold;
-        }
-        &:focus {
-          border-color: $color-neutral-inactive;
-        }
-      }
-      .el-select__caret {
-        color: $color-neutral-tertiary;
-      }
-    }
-    &.focused {
-      .el-select {
-        .el-input__inner {
-          color: $color-basic-black;
-          border-color: $color-neutral-inactive;
-          &::placeholder {
-            color: $color-basic-black;
-          }
-        }
-        .el-select__caret {
-          color: $color-basic-black;
-        }
-      }
-    }
-    &.has-value {
-      .el-select {
-        .el-select__caret {
-          color: $color-basic-black;
-        }
-      }
-    }
-    &.disabled {
-      .el-select {
-        .el-input__inner {
-          color: $color-neutral-inactive;
-          border-color: $color-neutral-border;
-          background-color: $color-basic-white;
-          &::placeholder {
-            color: $color-neutral-inactive;
-          }
-        }
-        .el-select__caret {
-          color: $color-neutral-inactive;
-        }
-      }
-    }
-  }
-}
-.el-select-dropdown__item {
-  &.hover {
-    background-color: transparent;
-  }
-  &:hover {
-    background-color: $color-neutral-placeholder;
-  }
-  &.is-disabled {
-    color: $color-neutral-inactive;;
-  }
-}
-.el-select-dropdown.is-multiple .el-select-dropdown__item {
-  > span {
-    padding-left: 16px;
-    vertical-align: top;
-    color: $color-basic-black;
-  }
-  &::before {
-    font-family: "element-icons";
-    content: "\e6da";
-    color: $color-basic-white;
-    border: 1px solid $color-neutral-border;
-    background-color: $color-basic-white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 1px;
-    border-radius: 4px;
-  }
-  &.selected {
-    font-weight: normal;
-    &.hover {
-      background-color: transparent;
-    }
-    &:hover {
-      background-color: $color-neutral-placeholder;
-    }
-    &::before {
-      color: $color-basic-white;
-      background-color: $color-main-brand;
-      border-color: $color-main-brand;
-    }
-    &::after {
-      content: '';
-    }
-  }
-}
-</style>

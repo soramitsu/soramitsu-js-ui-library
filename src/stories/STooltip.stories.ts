@@ -5,14 +5,14 @@ import { TooltipPlacement, TooltipTheme } from '../components/Tooltip'
 
 export default {
   component: STooltip,
-  title: 'Design System/Tooltip',
+  title: 'Design System/Components/Tooltip',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
 
 export const configurable = () => ({
   components: { STooltip, SButton, SRow },
-  template: `<s-row class="flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-tooltip
                  :theme="theme"
                  v-model="model"

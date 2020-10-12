@@ -3,7 +3,7 @@
     class="s-input"
     :class="computedClasses"
   >
-    <span v-if="model" class="placeholder">{{ placeholder }}</span>
+    <span v-if="model" class="s-placeholder">{{ placeholder }}</span>
     <el-input
       ref="el-input"
       :type="computedType"
@@ -158,16 +158,16 @@ export default class SInput extends Vue {
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.focused) {
-      cssClasses.push('focused')
+      cssClasses.push('s-focused')
     }
     if (this.disabled || (this.elForm || {}).disabled) {
-      cssClasses.push('disabled')
+      cssClasses.push('s-disabled')
     }
     if (this.type === InputType.TEXT_FILE) {
-      cssClasses.push('text-file')
+      cssClasses.push('s-text-file')
     }
     if (this.autofill) {
-      cssClasses.push('autofill')
+      cssClasses.push('s-autofill')
     }
     return cssClasses
   }
@@ -232,148 +232,3 @@ export default class SInput extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-
-.s-input {
-  font-family: $font-family-default;
-  width: 100%;
-  min-height: $size-big;
-  position: relative;
-  .el-input__suffix {
-    z-index: 1;
-  }
-  .placeholder {
-    // TODO: add default animation from material-ui
-    color: $color-neutral-secondary;
-    text-align: left;
-    font-size: 12px;
-    padding: 0 15px;
-    padding-top: 5px;
-    top: 1px;
-    left: 1px;
-    border-top-left-radius: 4px;
-    position: absolute;
-    z-index: 1;
-    width: calc(100% - 15px);
-    background-color: $color-neutral-placeholder;
-    pointer-events: none;
-  }
-  .el-input,
-  .el-textarea {
-    height: 100%;
-    > input,
-    > textarea {
-      height: $size-big;
-      border: 1px solid $color-neutral-placeholder;
-      background-color: $color-neutral-placeholder;
-      &::placeholder {
-        color: $color-neutral-secondary;
-        opacity: 1; // Firefox
-      }
-    }
-    > textarea {
-      padding-top: 12px;
-    }
-    [class^="el-input__count"] {
-      background-color: transparent;
-    }
-  }
-  &:hover {
-    .placeholder,
-    .el-input > input,
-    .el-textarea > textarea {
-      background-color: $color-neutral-hover;
-    }
-    .el-input > input,
-    .el-textarea > textarea {
-      border-color: $color-neutral-hover;
-    }
-  }
-  &.focused {
-    .placeholder,
-    .el-input > input,
-    .el-textarea > textarea {
-      background-color: $color-basic-white;
-    }
-    .el-input > input,
-    .el-textarea > textarea {
-      border-color: $color-neutral-border;
-    }
-  }
-  &.disabled {
-    .placeholder,
-    .el-input > input,
-    .el-textarea > textarea {
-      color: $color-neutral-secondary;
-      background-color: $color-neutral-placeholder;
-    }
-    .el-input > input,
-    .el-textarea > textarea {
-      border-color: $color-neutral-border;
-    }
-  }
-  &.autofill {
-    .placeholder {
-      background-color: transparent !important;
-    }
-  }
-  .el-input > input {
-    &:-webkit-autofill {
-      color: $color-basic-black !important;
-      animation-name: onAutoFillStart; // Expose a hook for JavaScript when auto fill is shown
-    }
-    &:not(:-webkit-autofill) {
-      animation-name: onAutoFillCancel; // Expose a hook for JS onAutoFillCancel
-    }
-    &:-internal-autofill-selected {
-      animation-name: onAutoFillStart;
-    }
-    &:not(:-internal-autofill-selected) {
-      animation-name: onAutoFillCancel;
-    }
-  }
-  .placeholder + .el-input {
-    > input {
-      padding-top: 12px;
-    }
-    .el-input__validateIcon {
-      padding-top: 11px;
-    }
-  }
-  .placeholder + .el-textarea > textarea {
-    padding-top: 24px;
-  }
-  &.text-file {
-    .el-input > input {
-      padding-right: 56px;
-    }
-    .s-icon-file-upload {
-      top: 16px;
-      right: 16px;
-      font-size: 24px;
-      z-index: 1;
-      position: absolute;
-      + input {
-        cursor: pointer;
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: 0;
-        width: 56px;
-        height: 100%;
-        z-index: 2;
-      }
-    }
-  }
-}
-@keyframes onAutoFillStart {
-  from {/**/}
-  to {/**/}
-}
-@keyframes onAutoFillCancel {
-  from {/**/}
-  to {/**/}
-}
-</style>

@@ -5,7 +5,7 @@ import { InputTypes } from '../../components/Select'
 
 export default {
   component: SSelect,
-  title: 'Design System/Select',
+  title: 'Design System/Components/Select',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
