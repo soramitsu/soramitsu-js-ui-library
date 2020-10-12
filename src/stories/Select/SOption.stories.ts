@@ -4,7 +4,7 @@ import { SSelect, SRow, SCol, SOption } from '../../components'
 
 export default {
   component: SOption,
-  title: 'Design System/Select/Option',
+  title: 'Design System/Components/Select/Option',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }

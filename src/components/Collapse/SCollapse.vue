@@ -46,12 +46,3 @@ export default class SCollapse extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-
-.el-collapse {
-  border-top-color: #F5F5F5;
-  border-bottom-color: #F5F5F5;
-}
-</style>

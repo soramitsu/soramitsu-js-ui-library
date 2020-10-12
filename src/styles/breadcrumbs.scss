@@ -1,0 +1,27 @@
+@import "./variables";
+
+.el-breadcrumb__separator {
+  color: var(--s-color-neutral-secondary);
+  font-weight: normal;
+}
+.el-breadcrumb__inner {
+  color: var(--s-color-neutral-secondary);
+  &.is-link {
+    color: var(--s-color-neutral-secondary);
+    font-weight: normal;
+    &:hover {
+      color: var(--s-color-main-brand);
+    }
+  }
+  a:hover {
+    color: var(--s-color-main-brand);
+  }
+}
+.el-breadcrumb__item:last-child {
+  pointer-events: none;
+  .el-breadcrumb__inner {
+    &, &:hover, & a, & a:hover {
+      color: var(--s-color-basic-black);
+    }
+  }
+}

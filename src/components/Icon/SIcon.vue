@@ -1,5 +1,5 @@
 <template>
-  <i v-if="computedClass" :class="computedClass" :style="computedStyles"></i>
+  <i v-if="computedClass" :class="computedClass" :style="computedStyles" />
 </template>
 
 <script lang="ts">

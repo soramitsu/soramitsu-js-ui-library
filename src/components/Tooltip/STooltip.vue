@@ -123,17 +123,3 @@ export default class STooltip extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-
-.el-tooltip__popper {
-  &.is-dark {
-    background-color: $color-basic-black;
-  }
-  &.is-light {
-    color: $color-basic-black;
-  }
-  border-color: $color-basic-black;
-}
-</style>

@@ -24,17 +24,3 @@ export default class SBreadcrumbItem extends Vue {
   @Prop({ default: false, type: Boolean }) readonly replace!: boolean
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-.el-breadcrumb__inner {
-  color: $color-neutral-secondary;
-  &.is-link {
-    color: $color-neutral-secondary;
-    font-weight: normal;
-  }
-}
-.el-breadcrumb__item:last-child {
-  pointer-events: none;
-}
-</style>

@@ -1,0 +1,70 @@
+<Meta title="Design System/Intro/How to use" />
+
+# 1. Add `.npmrc` and `.yarnrc` files to the project
+
+`.npmrc` should looks like:
+
+```
+@soramitsu:registry=https://nexus.iroha.tech/repository/npm-group/
+```
+
+`.yarnrc` should looks like:
+
+```
+"@soramitsu:registry" "https://nexus.iroha.tech/repository/npm-group/"
+```
+
+If you want to run project locally, then you should run the following command:
+```
+npm login --registry="https://nexus.iroha.tech/repository/npm-group/"
+```
+* If this command fails, please contact DevOps team
+
+# 2. Add as a dependency to the project
+
+Add `"@soramitsu/soramitsu-js-ui": "^0.3.4"` in `package.json` file (`"dependencies"` section)
+
+OR RUN
+
+`yarn add "@soramitsu/soramitsu-js-ui"`
+
+# 3. Add components with styles to the project
+
+For instance, `soramitsuUI.ts`:
+
+```
+import Vue from 'vue'
+import SoramitsuElements, { Message, MessageBox, Notification } from '@soramitsu/soramitsu-js-ui'
+import '@soramitsu/soramitsu-js-ui/lib/styles'
+
+Vue.use(SoramitsuElements)
+Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$message = Message
+Vue.prototype.$notify = Notification
+
+```
+
+# 4. Add all required styles
+
+The previous section added not all required styles. To fix it you should add imports into `scss` file.
+
+For instance, `soramitsu-variables.scss`:
+
+```
+@import '../../node_modules/@soramitsu/soramitsu-js-ui/lib/styles/index';
+```
+
+If you want to customise some colors, borders, paddings, size, etc. - you can override scss variables.
+
+For instance, `soramitsu-variables.scss`:
+
+```
+// Main colors
+$s-color-main-brand: #ED145B;
+// Basic colors
+$s-color-basic-black: #0D0248;
+
+@import '../../node_modules/@soramitsu/soramitsu-js-ui/lib/styles/index';
+
+```

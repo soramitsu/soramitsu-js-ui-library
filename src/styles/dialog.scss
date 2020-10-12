@@ -1,0 +1,16 @@
+@import "./variables";
+
+.el-dialog {
+  border-radius: 8px;
+  .el-dialog__title {
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--s-color-basic-black);
+  }
+  > * {
+    word-break: break-word;
+  }
+  .el-dialog__body {
+    color: var(--s-color-basic-black);
+  }
+}

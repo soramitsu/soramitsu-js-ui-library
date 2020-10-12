@@ -41,23 +41,3 @@ export default class SScrollSectionItem extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-.s-scroll-section-item {
-  padding: 10px 20px;
-  &:first-child {
-    margin-top: 10px;
-  }
-  &:last-child {
-    margin-bottom: 10px;
-    .el-divider.el-divider--horizontal {
-      height: 0;
-    }
-  }
-  .title {
-    font-weight: bold;
-    display: block;
-    padding-bottom: 12px;
-  }
-}
-</style>

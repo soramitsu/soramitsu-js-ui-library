@@ -5,7 +5,7 @@ import { SScrollSectionItem, SScrollSections } from '../../components'
 
 export default {
   component: SScrollSections,
-  title: 'Design System/Scroll Sections',
+  title: 'Design System/Components/Scroll Sections',
   decorators: [StoryRouter({}, { initialEntry: '/' }), withKnobs]
 }
 

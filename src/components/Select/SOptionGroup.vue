@@ -21,14 +21,3 @@ export default class SOptionGroup extends Vue {
   @Prop({ type: Boolean, default: false }) readonly disabled!: boolean
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-
-.el-select-group__wrap:not(:last-of-type)::after {
-  background-color: $color-neutral-hover;
-}
-.el-select-group__title {
-  color: $color-neutral-tertiary;
-}
-</style>

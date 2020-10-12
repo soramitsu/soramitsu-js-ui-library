@@ -2,7 +2,7 @@ import { SMenu, SMenuItem } from '../../components'
 
 export default {
   component: SMenuItem,
-  title: 'Design System/Menu/MenuItem'
+  title: 'Design System/Components/Menu/MenuItem'
 }
 
 export const defaultUsage = () => ({

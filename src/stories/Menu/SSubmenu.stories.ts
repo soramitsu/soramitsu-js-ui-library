@@ -2,7 +2,7 @@ import { SAside, SMenu, SMenuItem, SSubmenu } from '../../components'
 
 export default {
   component: SSubmenu,
-  title: 'Design System/Menu/Submenu'
+  title: 'Design System/Components/Menu/Submenu'
 }
 
 export const defaultUsage = () => ({

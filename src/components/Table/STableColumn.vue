@@ -184,7 +184,3 @@ export default class STableColumn extends Vue {
   @Prop({ type: Array }) readonly filteredValue!: Array<any>
 }
 </script>
-
-<style lang="scss">
-
-</style>
