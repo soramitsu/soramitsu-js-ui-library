@@ -1,5 +1,5 @@
 <template>
-  <div class="s-scroll-sections flex">
+  <div class="s-scroll-sections s-flex">
     <nav class="s-scroll-menu" v-if="menuItems.length > 0" :style="computedFlex.menu">
       <ul :style="computedStyles">
         <li class="s-scroll-item" v-for="item in menuItems" :key="item.section">
@@ -194,52 +194,3 @@ export default class SScrollSections extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-
-.s-scroll-sections {
-  font-family: $font-family-default;
-  font-size: 14px;
-}
-.s-scroll-menu {
-  font-weight: 600;
-  ul {
-    position: sticky;
-    top: 0;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .s-scroll-item {
-    text-decoration: none;
-    a {
-      display: block;
-      padding: 8px 16px;
-      text-decoration: none;
-      cursor: pointer;
-      color: var(--s-menu-color-text);
-      &:hover {
-        color: var(--s-menu-color-hover);
-      }
-      &.active {
-        color: var(--s-menu-color-text-active);
-        border-left: 2px solid var(--s-menu-color-text-active);
-      }
-      &.disabled {
-        cursor: not-allowed;
-        pointer-events: none;
-        color: $s-color-neutral-inactive;
-        border-left: none;
-      }
-    }
-  }
-}
-.s-scroll-content {
-  padding-bottom: 90%;
-  color: $s-color-basic-black;
-  .title {
-    font-size: 16px;
-  }
-}
-</style>

@@ -15,11 +15,3 @@ export default class SBreadcrumb extends Vue {
   @Prop({ default: '/', type: String }) readonly separator!: string
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-.el-breadcrumb__separator {
-  color: $s-color-neutral-secondary;
-  font-weight: normal;
-}
-</style>

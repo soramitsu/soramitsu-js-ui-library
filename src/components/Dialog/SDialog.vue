@@ -204,19 +204,3 @@ export default class SDialog extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-
-.el-dialog {
-  border-radius: 8px;
-  .el-dialog__title {
-    font-weight: bold;
-    font-size: 16px;
-    color: $s-color-basic-black;
-  }
-  > * {
-    word-break: break-word;
-  }
-}
-</style>

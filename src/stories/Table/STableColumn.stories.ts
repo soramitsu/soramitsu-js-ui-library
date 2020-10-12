@@ -7,7 +7,7 @@ import { tableData } from './STable.stories'
 
 export default {
   component: STableColumn,
-  title: 'Design System/Table/Table Column',
+  title: 'Design System/Components/Table/Table Column',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }

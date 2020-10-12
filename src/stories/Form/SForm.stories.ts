@@ -5,7 +5,7 @@ import { LabelPosition } from '../../components/Form'
 
 export default {
   component: SForm,
-  title: 'Design System/Form',
+  title: 'Design System/Components/Form',
   decorators: [withKnobs]
 }
 

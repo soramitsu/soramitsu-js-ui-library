@@ -5,7 +5,7 @@ $s-color-main-inactive: #F6CCD1 !default;
 $s-color-main-hover-light: #FEE6E7 !default;
 $s-color-main-base: #FFF9FA !default;
 // Neutral colors
-$s-color-neutral-primary: #53565A !default;
+$s-color-neutral-primary: #53565A !default; // TODO: not used
 $s-color-neutral-secondary: #75787B !default;
 $s-color-neutral-tertiary: #909296 !default;
 $s-color-neutral-inactive: #C8C9C7 !default;
@@ -24,45 +24,6 @@ $s-size-small: 32px !default;
 
 $s-border-radius-default: 4px !default;
 // Fonts
-@font-face {
-  font-family: "soramitsu-icons";
-  src: url("~@/assets/fonts/soramitsu-icons.woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-@font-face {
-  font-family: "SoraB";
-  src: url("~@/assets/fonts/Sora-Bold.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SoraEB";
-  src: url("~@/assets/fonts/Sora-ExtraBold.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SoraSB";
-  src: url("~@/assets/fonts/Sora-SemiBold.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Sora";
-  src: url("~@/assets/fonts/Sora-Regular.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "JetBrainsMono";
-  src: url("~@/assets/fonts/JetBrainsMono-Regular.woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
 $font-family-default: 'Sora', sans-serif !important;
 $font-family-mono: 'JetBrainsMono', monospace !important;
 // Responsive
@@ -92,3 +53,21 @@ $--breakpoints-spec: (
   'lg-and-down': (max-width: $--xl - 1),
   'xl-only' : (min-width: $--xl),
 );
+
+:root {
+  --s-color-main-brand: #{$s-color-main-brand};
+  --s-color-main-hover: #{$s-color-main-hover};
+  --s-color-main-inactive: #{$s-color-main-inactive};
+  --s-color-main-hover-light: #{$s-color-main-hover-light};
+  --s-color-main-base: #{$s-color-main-base};
+  --s-color-neutral-primary: #{$s-color-neutral-primary};
+  --s-color-neutral-secondary: #{$s-color-neutral-secondary};
+  --s-color-neutral-tertiary: #{$s-color-neutral-tertiary};
+  --s-color-neutral-inactive: #{$s-color-neutral-inactive};
+  --s-color-neutral-border: #{$s-color-neutral-border};
+  --s-color-neutral-hover: #{$s-color-neutral-hover};
+  --s-color-neutral-placeholder: #{$s-color-neutral-placeholder};
+  --s-color-error: #{$s-color-error};
+  --s-color-basic-black: #{$s-color-basic-black};
+  --s-color-basic-white: #{$s-color-basic-white};
+}

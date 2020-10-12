@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import "./variables";
 
 [class^="s-icon-"], [class*=" s-icon-"] {
   font-family: 'soramitsu-icons' !important;
@@ -9,7 +9,7 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: $s-color-basic-black;
+  color: var(--s-color-basic-black);
 }
 $icons-font: 'soramitsu-icons' !important;
 /*_____________________________________________Icons variables_____________________________________________*/

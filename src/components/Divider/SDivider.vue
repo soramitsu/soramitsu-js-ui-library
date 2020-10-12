@@ -25,14 +25,3 @@ export default class SDivider extends Vue {
   @Prop({ default: ContentPosition.CENTER, type: String }) readonly contentPosition!: string
 }
 </script>
-
-<style lang="scss">
-@import "../../styles/variables.scss";
-
-.el-divider {
-  background-color: #F5F5F5;
-}
-.el-divider--horizontal {
-  margin: 20px 0;
-}
-</style>

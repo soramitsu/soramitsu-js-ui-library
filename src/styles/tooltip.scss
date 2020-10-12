@@ -1,0 +1,12 @@
+@import "./variables";
+
+.el-tooltip__popper {
+  &.is-dark {
+    background-color: var(--s-color-basic-black);
+  }
+  &.is-light {
+    color: var(--s-color-basic-black);
+    border-color: var(--s-color-basic-black);
+  }
+  border-color: var(--s-color-basic-black);
+}

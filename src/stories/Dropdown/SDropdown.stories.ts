@@ -6,7 +6,7 @@ import { ButtonTypes } from '../../components/Button'
 
 export default {
   component: SDropdown,
-  title: 'Design System/Dropdown',
+  title: 'Design System/Components/Dropdown',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
