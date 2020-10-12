@@ -172,6 +172,7 @@ $s-icon-trash-empty: "\e965";
 $s-icon-user: "\e967";
 $s-icon-video: "\e969";
 $s-icon-video-no: "\e968";
+$s-icon-wallet: "\e9a1";
 $s-icon-warning: "\e96c";
 $s-icon-wi-fi: "\e9a5";
 $s-icon-x: "\e9a6";
@@ -972,6 +973,11 @@ $s-icon-zoom-out: "\e96b";
 .s-icon-video-no {
   &:before {
     content: $s-icon-video-no;
+  }
+}
+.s-icon-wallet {
+  &:before {
+    content: $s-icon-wallet;
   }
 }
 .s-icon-warning, .s-icon-error {
