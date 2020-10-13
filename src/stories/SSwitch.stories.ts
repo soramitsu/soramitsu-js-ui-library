@@ -16,13 +16,10 @@ export const configurable = () => ({
                 v-model="modelValue"
                 :active-color="activeColor"
                 :inactive-color="inactiveColor"
-                :active-icon-class="activeIconСlass"
-                :inactive-icon-class="inactiveIconСlass"
                 :active-text="activeText"
                 :inactive-text="inactiveText"
                 :active-value="activeValue"
                 :inactive-value="inactiveValue"
-                :name="name"
                 :width="width"
                 :disabled="disabled"
                 @change="(value) => changeValue = value"
@@ -42,12 +39,6 @@ export const configurable = () => ({
     inactiveColor: {
       default: color('Inactive Background Color', 'rgb(246, 204, 209)')
     },
-    activeIconСlass: {
-      default: text('Active Icon Сlass', 's-switch-active')
-    },
-    inactiveIconСlass: {
-      default: text('Inactive Icon Сlass', 's-switch-inactive')
-    },
     activeText: {
       default: text('Active Text', '')
     },
@@ -59,9 +50,6 @@ export const configurable = () => ({
     },
     inactiveValue: {
       default: text('Inactive Value', 'Inactive Value')
-    },
-    name: {
-      default: text('Name', 'switch-example')
     },
     width: {
       default: number('Width', 40)
