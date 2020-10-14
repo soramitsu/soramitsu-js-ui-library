@@ -1,0 +1,10 @@
+@import "./variables";
+
+.s-switch {
+  .el-switch__label {
+    color: var(--s-color-basic-black);
+    &.is-active {
+      color: var(--s-color-main-brand);
+    }
+  }
+}
