@@ -1,24 +1,77 @@
 @import "./variables";
 
+@mixin slider-colors(
+  $background-color: --s-color-main-brand,
+  $border-color: $background-color,
+  $color: false
+) {
+  background-color: var($background-color);
+  border-color: var($border-color);
+
+  @if $color != false {
+    color: var($color);
+  }
+}
+
 .s-slider {
+  .el-slider__runway,
+  .disabled .el-slider__runway {
+    background-color: var(--s-color-neutral-placeholder);
+  }
   .el-slider {
-    &__bar {
-      background-color: var(--s-color-main-brand);
-    }
     &__button {
-      border-color: var(--s-color-main-brand);
+      @include slider-colors;
     }
     &__marks-text {
       color: var(--s-color-basic-black);
     }
   }
-  .disabled {
-    .el-slider {
-      &__bar {
-        background-color: var(--s-color-main-inactive);
+  .disabled .el-slider__button {
+    @include slider-colors(--s-color-main-inactive);
+  }
+  .el-input {
+    &__inner {
+      @include slider-colors(--s-color-neutral-placeholder);
+      &:hover:not([disabled]):not(:focus) {
+        @include slider-colors(--s-color-neutral-hover);
       }
-      &__button {
-        border-color: var(--s-color-main-inactive);
+      &:focus {
+        @include slider-colors(--s-color-basic-white, --s-color-neutral-border);
+      }
+    }
+    &-number {
+      &__decrease,
+      &__increase {
+        height: 100%;
+        top: 0;
+        color: var(--s-color-basic-white);
+        @include slider-colors($color: --s-color-basic-white);
+        &:hover:not(.is-disabled)
+          ~ .el-input
+          .el-input__inner:not(.is-disabled) {
+          border-color: var(--s-color-neutral-hover);
+        }
+        &.is-disabled {
+          @include slider-colors(
+            $background-color: --s-color-main-inactive,
+            $color: --s-color-basic-white
+          );
+        }
+      }
+      &__decrease {
+        left: 0;
+      }
+      &__increase {
+        right: 0;
+      }
+      &.is-disabled {
+        .el-input-number__decrease,
+        .el-input-number__increase {
+          @include slider-colors(
+            $background-color: --s-color-main-inactive,
+            $color: --s-color-basic-white
+          );
+        }
       }
     }
   }

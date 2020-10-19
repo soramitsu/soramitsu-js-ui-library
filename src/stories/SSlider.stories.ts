@@ -1,6 +1,13 @@
-import { text, number, boolean, object, withKnobs } from '@storybook/addon-knobs'
+import { text, number, boolean, select, object, withKnobs } from '@storybook/addon-knobs'
 
 import { SSlider } from '../components/Slider'
+
+enum InputSize {
+  LARGE = 'large',
+  MEDIUM = 'medium',
+  SMALL = 'small',
+  MINI = 'mini'
+}
 
 export default {
   component: SSlider,
@@ -92,8 +99,6 @@ export const withInitValue = () => ({
   })
 })
 
-// TODO: Сustomize input styles for disabled variant
-// TODO: Add select for input size variants
 export const withInput = () => ({
   components: { SSlider },
   template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
@@ -121,7 +126,7 @@ export const withInput = () => ({
       default: boolean('Show Input Controls', true)
     },
     inputSize: {
-      default: text('Size of the input box', 'small')
+      default: select('Size of the input box', Object.values(InputSize), InputSize.SMALL)
     },
     debounce: {
       default: number('Debounce delay when typing (in milliseconds)', 300)
