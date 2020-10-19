@@ -1,0 +1,25 @@
+@import "./variables";
+
+.s-slider {
+  .el-slider {
+    &__bar {
+      background-color: var(--s-color-main-brand);
+    }
+    &__button {
+      border-color: var(--s-color-main-brand);
+    }
+    &__marks-text {
+      color: var(--s-color-basic-black);
+    }
+  }
+  .disabled {
+    .el-slider {
+      &__bar {
+        background-color: var(--s-color-main-inactive);
+      }
+      &__button {
+        border-color: var(--s-color-main-inactive);
+      }
+    }
+  }
+}
