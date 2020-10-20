@@ -1,6 +1,28 @@
 @import "./variables";
 @import "./common";
 
+$radio-button-border-width: 1px;
+$radio-button-class: ".el-radio-button";
+
+@mixin radio-button-size(
+  $modifier: "mini",
+  $size: $s-size-small,
+  $font-size: $s-font-size-small
+) {
+  $radio-button-vertical-padding: #{($size - $font-size) / 2 - $radio-button-border-width};
+  #{$radio-button-class} {
+    &--#{$modifier} {
+      height: $size;
+      line-height: $size;
+      #{$radio-button-class}__inner {
+        padding-top: $radio-button-vertical-padding;
+        padding-bottom: $radio-button-vertical-padding;
+        font-size: $font-size;
+      }
+    }
+  }
+}
+
 .el-radio {
   color: var(--s-color-basic-black);
   &.s-big {
@@ -97,5 +119,48 @@
         color: var(--s-color-neutral-inactive);
       }
     }
+  }
+  &-button {
+    &:hover {
+      #{$radio-button-class}__inner {
+        border-color: var(--s-color-main-brand);
+      }
+    }
+    &.is-disabled {
+      #{$radio-button-class}__inner {
+        color: var(--s-color-neutral-inactive);
+      }
+    }
+    &.is-disabled,
+    &.is-disabled:hover {
+      #{$radio-button-class}__inner {
+        border-color: var(--s-color-neutral-border);
+      }
+    }
+    &.is-active {
+      &:hover {
+        #{$radio-button-class}__inner {
+          background-color: var(--s-color-main-hover);
+          border-color: var(--s-color-main-hover);
+        }
+      }
+      &.is-disabled {
+        #{$radio-button-class}__inner {
+          color: var(--s-color-basic-white);
+        }
+      }
+      &.is-disabled,
+      &.is-disabled:hover {
+        #{$radio-button-class}__inner {
+          background-color: var(--s-color-main-inactive);
+          border-color: var(--s-color-main-inactive);
+        }
+      }
+    }
+  }
+  &-group {
+    @include radio-button-size;
+    @include radio-button-size("small", $s-size-medium, $s-font-size-big);
+    @include radio-button-size("medium", $s-size-big, $s-font-size-big);
   }
 }

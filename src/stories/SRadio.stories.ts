@@ -3,6 +3,12 @@ import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 import { SRadio, SRadioGroup, SRow, SCol } from '../components'
 import { RadioSize } from '../components/Radio'
 
+enum RadioButtonSize {
+  MEDIUM = 'medium',
+  SMALL = 'small',
+  MINI = 'mini'
+}
+
 export default {
   component: SRadio,
   title: 'Design System/Components/Radio',
@@ -99,6 +105,8 @@ export const radioButtonGroup = () => ({
                   :key="item.label"
                   v-model="model"
                   :label="item.label"
+                  :size="size"
+                  :isRadioButton="true"
                 >
                   {{ item.title }}
                 </s-radio>
@@ -113,7 +121,7 @@ export const radioButtonGroup = () => ({
   }),
   props: {
     size: {
-      default: select('Size', Object.values(RadioSize), RadioSize.MEDIUM)
+      default: select('Size', Object.values(RadioButtonSize), RadioButtonSize.MEDIUM)
     },
     disabled: {
       default: boolean('Disabled', false)
