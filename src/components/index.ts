@@ -25,7 +25,7 @@ import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
 import { SPagination } from './Pagination'
 import { SSlider } from './Slider'
 import { SSwitch } from './Switch'
-import { SRadio } from './Radio'
+import { SRadio, SRadioGroup } from './Radio'
 import { SRow } from './Layout/Row'
 import { SScrollSectionItem, SScrollSections } from './ScrollSections'
 import { SSelect, SOption, SOptionGroup } from './Select'
@@ -66,6 +66,7 @@ export {
   SOptionGroup,
   SPagination,
   SRadio,
+  SRadioGroup,
   SRow,
   SScrollSectionItem,
   SScrollSections,
