@@ -16,16 +16,16 @@
     }
     .el-input {
       &.is-focus .el-input__inner {
-        border-color: var(--s-color-neutral-placeholder);
+        border-color: var(--s-color-base-border-primary);
       }
       .el-input__inner {
         &::placeholder {
-          color: var(--s-color-neutral-secondary);
+          color: var(--s-color-base-content-tertiary);
           opacity: 1; // Firefox
         }
       }
       .el-select__caret {
-        color: var(--s-color-neutral-secondary);
+        color: var(--s-color-base-content-tertiary);
       }
     }
   }
@@ -34,22 +34,22 @@
       .el-input__inner {
         height: $s-size-big;
         padding: 0 15px;
-        border: 1px solid var(--s-color-neutral-placeholder);
-        background-color: var(--s-color-neutral-placeholder);
+        border: 1px solid var(--s-color-base-background);
+        background-color: var(--s-color-base-background);
         &:focus {
-          border-color: var(--s-color-neutral-placeholder);
+          border-color: var(--s-color-base-border-primary);
         }
       }
     }
     &:hover {
       .el-select {
         .el-input__inner {
-          border-color: var(--s-color-neutral-hover);
-          background-color: var(--s-color-neutral-hover);
+          border-color: var(--s-color-base-background-hover);
+          background-color: var(--s-color-base-background-hover);
         }
       }
       .s-placeholder {
-        background-color: var(--s-color-neutral-hover);
+        background-color: var(--s-color-base-background-hover);
       }
     }
     .s-placeholder + .el-select {
@@ -63,37 +63,37 @@
     &.s-focused {
       .el-select {
         .el-input__inner {
-          border-color: var(--s-color-neutral-border);
-          background-color: var(--s-color-basic-white);
+          border-color: var(--s-color-base-border-primary);
+          background-color: var(--s-color-utility-surface);
         }
       }
       .s-placeholder {
-        background-color: var(--s-color-basic-white);
+        background-color: var(--s-color-utility-surface);
       }
     }
     &.s-disabled {
       .el-select {
         .el-select__caret {
-          color: var(--s-color-neutral-secondary);
+          color: var(--s-color-base-content-quaternary);
         }
         .el-input__inner, .el-input__inner:hover {
-          border-color: var(--s-color-neutral-border);
-          color: var(--s-color-neutral-secondary);
-          background-color: var(--s-color-neutral-placeholder);
+          border-color: var(--s-color-base-disabled);
+          color: var(--s-color-base-content-quaternary);
+          background-color: var(--s-color-base-disabled);
           &::placeholder {
-            color: var(--s-color-neutral-secondary);
+            color: var(--s-color-base-content-quaternary);
           }
         }
       }
       .s-placeholder {
-        color: var(--s-color-neutral-secondary);
-        background-color: var(--s-color-neutral-placeholder);
+        color: var(--s-color-base-content-quaternary);
+        background-color: var(--s-color-base-disabled);
       }
     }
   }
   .s-placeholder {
     // TODO: add default animation from material-ui
-    color: var(--s-color-neutral-secondary);
+    color: var(--s-color-base-content-tertiary);
     text-align: left;
     font-size: 12px;
     padding: 0 15px;
@@ -104,7 +104,7 @@
     position: absolute;
     z-index: 1;
     width: calc(100% - 15px);
-    background-color: var(--s-color-neutral-placeholder);
+    background-color: var(--s-color-base-background);
     pointer-events: none;
   }
   &.s-select-type {
@@ -114,53 +114,53 @@
         padding-left: 12px;
         font-weight: bold;
         &:hover {
-          border-color: var(--s-color-neutral-inactive);
+          border-color: var(--s-color-base-border-primary);
         }
         &::placeholder {
-          color: var(--s-color-neutral-tertiary);
+          color: var(--s-color-base-content-tertiary);
           font-weight: bold;
         }
         &:focus {
-          border-color: var(--s-color-neutral-inactive);
+          border-color: var(--s-color-base-border-primary);
         }
       }
       .el-select__caret {
-        color: var(--s-color-neutral-tertiary);
+        color: var(--s-color-base-content-tertiary);
       }
     }
     &.s-focused {
       .el-select {
         .el-input__inner {
-          color: var(--s-color-basic-black);
-          border-color: var(--s-color-neutral-inactive);
+          color: var(--s-color-base-content-primary);
+          border-color: var(--s-color-base-border-primary);
           &::placeholder {
-            color: var(--s-color-basic-black);
+            color: var(--s-color-base-content-primary);
           }
         }
         .el-select__caret {
-          color: var(--s-color-basic-black);
+          color: var(--s-color-base-content-primary);
         }
       }
     }
     &.s-has-value {
       .el-select {
         .el-select__caret {
-          color: var(--s-color-basic-black);
+          color: var(--s-color-base-content-primary);
         }
       }
     }
     &.s-disabled {
       .el-select {
         .el-input__inner {
-          color: var(--s-color-neutral-inactive);
-          border-color: var(--s-color-neutral-border);
-          background-color: var(--s-color-basic-white);
+          color: var(--s-color-base-content-quaternary);
+          border-color: var(--s-color-base-border-primary);
+          background-color: var(--s-color-utility-surface);
           &::placeholder {
-            color: var(--s-color-neutral-inactive);
+            color: var(--s-color-base-content-quaternary);
           }
         }
         .el-select__caret {
-          color: var(--s-color-neutral-inactive);
+          color: var(--s-color-base-content-quaternary);
         }
       }
     }
@@ -171,24 +171,24 @@
     background-color: transparent;
   }
   &:hover {
-    background-color: var(--s-color-neutral-placeholder);
+    background-color: var(--s-color-base-background-hover);
   }
   &.is-disabled {
-    color: var(--s-color-neutral-inactive);
+    color: var(--s-color-base-content-quaternary);
   }
 }
 .el-select-dropdown.is-multiple .el-select-dropdown__item {
   > span {
     padding-left: 16px;
     vertical-align: top;
-    color: var(--s-color-basic-black);
+    color: var(--s-color-base-content-primary);
   }
   &::before {
     font-family: "element-icons";
     content: "\e6da";
-    color: var(--s-color-basic-white);
-    border: 1px solid var(--s-color-neutral-border);
-    background-color: var(--s-color-basic-white);
+    color: var(--s-color-base-on-accent);
+    border: 1px solid var(--s-color-base-border-primary);
+    background-color: var(--s-color-utility-surface);
     font-size: 16px;
     font-weight: bold;
     padding: 1px;
@@ -200,12 +200,12 @@
       background-color: transparent;
     }
     &:hover {
-      background-color: var(--s-color-neutral-placeholder);
+      background-color: var(--s-color-base-background-hover);
     }
     &::before {
-      color: var(--s-color-basic-white);
-      background-color: var(--s-color-main-brand);
-      border-color: var(--s-color-main-brand);
+      color: var(--s-color-base-on-accent);
+      background-color: var(--s-color-theme-accent);
+      border-color: var(--s-color-theme-accent);
     }
     &::after {
       content: '';
@@ -213,8 +213,8 @@
   }
 }
 .el-select-group__wrap:not(:last-of-type)::after {
-  background-color: var(--s-color-neutral-hover);
+  background-color: var(--s-color-base-background-hover);
 }
 .el-select-group__title {
-  color: var(--s-color-neutral-tertiary);
+  color: var(--s-color-base-content-tertiary);
 }

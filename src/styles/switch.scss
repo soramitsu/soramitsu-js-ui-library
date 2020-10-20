@@ -2,9 +2,9 @@
 
 .s-switch {
   .el-switch__label {
-    color: var(--s-color-basic-black);
+    color: var(--s-color-base-content-primary);
     &.is-active {
-      color: var(--s-color-main-brand);
+      color: var(--s-color-theme-accent);
     }
   }
 }

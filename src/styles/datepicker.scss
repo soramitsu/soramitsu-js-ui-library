@@ -10,24 +10,24 @@
       width: 100%;
     }
     .el-range-separator {
-      color: var(--s-color-neutral-tertiary);
+      color: var(--s-color-base-content-tertiary);
     }
     .el-input__inner, .el-range-input {
       &::placeholder {
-        color: var(--s-color-neutral-secondary);
+        color: var(--s-color-base-content-tertiary);
         opacity: 1; // Firefox
       }
     }
     &.is-active {
-      border-color: var(--s-color-neutral-border);
+      border-color: var(--s-color-base-border-primary);
     }
   }
   &.s-has-value {
     .el-date-editor .el-range-separator {
-      color: var(--s-color-basic-black);
+      color: var(--s-color-base-content-primary);
     }
     .el-range-input {
-      color: var(--s-color-basic-black);
+      color: var(--s-color-base-content-primary);
     }
   }
   &.s-input-type {
@@ -35,15 +35,15 @@
     .el-input__inner {
       height: $s-size-big;
       padding: 0 15px;
-      border: 1px solid var(--s-color-neutral-placeholder);
-      background-color: var(--s-color-neutral-placeholder);
+      border: 1px solid var(--s-color-base-background);
+      background-color: var(--s-color-base-background);
     }
     &:hover {
       .el-input__inner {
-        border-color: var(--s-color-neutral-hover);
+        border-color: var(--s-color-base-background-hover);
       }
       .el-input__inner, .s-placeholder {
-        background-color: var(--s-color-neutral-hover);
+        background-color: var(--s-color-base-background-hover);
       }
     }
     .s-placeholder + .el-date-editor {
@@ -56,25 +56,25 @@
     }
     &.s-focused {
       .el-input__inner {
-        border-color: var(--s-color-neutral-border);
+        border-color: var(--s-color-base-border-primary);
       }
       .el-input__inner, .s-placeholder {
-        background-color: var(--s-color-basic-white);
+        background-color: var(--s-color-utility-surface);
       }
     }
     &.s-disabled {
       .el-input__inner {
-        border-color: var(--s-color-neutral-border);
+        border-color: var(--s-color-base-disabled);
       }
       .el-input__inner, .s-placeholder {
-        color: var(--s-color-neutral-secondary);
-        background-color: var(--s-color-neutral-placeholder);
+        color: var(--s-color-base-content-quaternary);
+        background-color: var(--s-color-base-disabled);
       }
     }
   }
   .s-placeholder {
     // TODO: add default animation from material-ui
-    color: var(--s-color-neutral-secondary);
+    color: var(--s-color-base-content-tertiary);
     text-align: left;
     font-size: 12px;
     padding: 0 15px;
@@ -85,7 +85,7 @@
     position: absolute;
     z-index: 1;
     width: calc(100% - 15px);
-    background-color: var(--s-color-neutral-placeholder);
+    background-color: var(--s-color-base-background);
     pointer-events: none;
   }
   &.s-select-type {
@@ -97,10 +97,10 @@
         border-radius: 8px;
         padding-left: 12px;
         &:hover {
-          border-color: var(--s-color-neutral-inactive);
+          border-color: var(--s-color-base-border-primary);
         }
         &::placeholder, .el-range-input::placeholder {
-          color: var(--s-color-neutral-tertiary);
+          color: var(--s-color-base-content-tertiary);
           font-weight: bold;
         }
       }
@@ -110,13 +110,13 @@
       right: 10px;
       top: 30%;
       pointer-events: none;
-      color: var(--s-color-neutral-tertiary);
+      color: var(--s-color-base-content-tertiary);
       transition: transform .3s;
     }
     &.s-focused {
       .el-date-editor.el-input__inner,
       .el-date-editor .el-input__inner {
-        border-color: var(--s-color-neutral-inactive);
+        border-color: var(--s-color-base-border-primary);
       }
       &:not(.disabled) .s-icon-chevron-bottom {
         transform: rotate(180deg);
@@ -124,31 +124,31 @@
     }
     &.s-has-value {
       .s-icon-chevron-bottom {
-        color: var(--s-color-basic-black);
+        color: var(--s-color-base-content-primary);
       }
     }
     &.s-disabled {
       .el-date-editor.el-input__inner,
       .el-date-editor .el-input__inner {
-        color: var(--s-color-neutral-inactive);
-        border-color: var(--s-color-neutral-border);
-        background-color: var(--s-color-basic-white);
+        color: var(--s-color-base-content-quaternary);
+        border-color: var(--s-color-base-disabled);
+        background-color: var(--s-color-utility-surface);
         &::placeholder {
-          color: var(--s-color-neutral-inactive);
+          color: var(--s-color-base-content-quaternary);
         }
         .el-range-input {
-          background-color: var(--s-color-basic-white);
-          color: var(--s-color-neutral-inactive);
+          background-color: var(--s-color-utility-surface);
+          color: var(--s-color-base-content-quaternary);
           &::placeholder {
-            color: var(--s-color-neutral-inactive);
+            color: var(--s-color-base-content-quaternary);
           }
         }
         .el-range-separator {
-          color: var(--s-color-neutral-inactive);
+          color: var(--s-color-base-content-quaternary);
         }
       }
       .s-icon-chevron-bottom {
-        color: var(--s-color-neutral-inactive);
+        color: var(--s-color-base-content-quaternary);
       }
     }
   }
@@ -162,7 +162,7 @@
 .el-date-range-picker__time-header > .el-icon-arrow-right,
 .el-year-table td .cell,
 .el-month-table td .cell {
-  color: var(--s-color-basic-black);
+  color: var(--s-color-base-content-primary);
 }
 .el-picker-panel__icon-btn:hover,
 .el-date-picker__header-label:hover,
@@ -173,101 +173,101 @@
 .el-month-table td.current:not(.disabled) .cell,
 .el-month-table td .cell:hover,
 .el-picker-panel__shortcut:hover {
-  color: var(--s-color-main-brand);
+  color: var(--s-color-theme-accent);
 }
 .el-picker-panel {
-  border-color: var(--s-color-neutral-hover);
+  border-color: var(--s-color-base-background-hover);
   .el-picker-panel__content {
     .el-date-table {
       td {
         &.available:hover, &.today span {
-          color: var(--s-color-main-brand);
+          color: var(--s-color-theme-accent);
         }
         &.next-month, &.prev-month {
-          color: var(--s-color-neutral-inactive);
+          color: var(--s-color-base-content-quaternary);
         }
         &.current:not(.disabled), &.selected, &.start-date, &.end-date {
           span {
-            background-color: var(--s-color-main-brand);
-            color: var(--s-color-basic-white);
+            background-color: var(--s-color-theme-accent);
+            color: var(--s-color-utility-surface);
           }
         }
       }
       th {
-        border-bottom-color: var(--s-color-neutral-hover);
+        border-bottom-color: var(--s-color-base-background-hover);
       }
     }
     .el-month-table td {
       &.start-date, &.end-date {
         .cell {
-          background-color: var(--s-color-main-brand);
-          color: var(--s-color-basic-white);
+          background-color: var(--s-color-theme-accent);
+          color: var(--s-color-utility-surface);
         }
       }
     }
   }
   .el-picker-panel__footer {
-    border-top-color: var(--s-color-neutral-hover);
+    border-top-color: var(--s-color-base-background-hover);
     > .el-button {
       height: 32px;
       border-radius: 4px;
       &:hover, &:focus {
-        color: var(--s-color-main-brand);
+        color: var(--s-color-theme-accent);
       }
       &.is-plain {
         &:hover, &:focus {
-          border-color: var(--s-color-main-brand);
+          border-color: var(--s-color-theme-accent);
         }
       }
     }
   }
   div[x-arrow].popper__arrow {
-    border-bottom-color: var(--s-color-neutral-hover);
+    border-bottom-color: var(--s-color-base-background-hover);
   }
 }
 .el-time-panel {
   border-radius: 4px;
-  border-color: var(--s-color-neutral-hover);
+  border-color: var(--s-color-base-background-hover);
   .el-time-panel__footer {
-    border-top-color: var(--s-color-neutral-hover);
+    border-top-color: var(--s-color-base-background-hover);
     .confirm {
-      color: var(--s-color-main-brand);
+      color: var(--s-color-theme-accent);
     }
   }
   .el-time-spinner__item {
     &.active:not(.disabled) {
-      color: var(--s-color-basic-black);
+      color: var(--s-color-base-content-primary);
     }
     &:hover:not(.disabled):not(.active) {
-      background-color: var(--s-color-neutral-placeholder);
+      background-color: var(--s-color-base-background);
     }
   }
   .el-time-panel__content {
     &::after, &::before {
-      border-top-color: var(--s-color-neutral-hover);
-      border-bottom-color: var(--s-color-neutral-hover);
+      border-top-color: var(--s-color-base-background-hover);
+      border-bottom-color: var(--s-color-base-background-hover);
     }
   }
 }
 .el-date-table.is-week-mode .el-date-table__row {
   &.current, &:hover {
     div {
-      background-color: var(--s-color-main-hover-light);
+      background-color: var(--s-color-theme-secondary-hover);
     }
   }
 }
 .el-month-table td.in-range div {
-  background-color: var(--s-color-main-hover-light);
+  background-color: var(--s-color-theme-secondary-hover);
   &:hover {
-    background-color: var(--s-color-main-hover-light);
+    background-color: var(--s-color-theme-secondary-hover);
   }
 }
 .el-date-table td.in-range div {
-  background-color: var(--s-color-main-hover-light);
+  background-color: var(--s-color-theme-secondary-hover);
   &:hover {
-    background-color: var(--s-color-main-hover-light);
+    background-color: var(--s-color-theme-secondary-hover);
   }
 }
 .el-date-range-picker__content.is-left {
-  border-right-color: var(--s-color-neutral-hover);
+  border-right-color: var(--s-color-base-background-hover);
 }

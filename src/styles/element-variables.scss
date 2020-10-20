@@ -1,14 +1,16 @@
 @import "./variables";
 
-$--color-primary: $s-color-main-brand;
-$--color-danger: $s-color-error;
-$--border-color-base: $s-color-neutral-border;
-$--color-text-regular: $s-color-basic-black;
+$--color-primary: $s-color-theme-accent;
+$--color-danger: $s-color-status-error;
+$--color-success: $s-color-status-success;
+$--color-warning: $s-color-status-warning;
+$--border-color-base: $s-color-base-border-primary;
+$--color-text-regular: $s-color-base-content-primary;
 
 /* Menu
 --------------------------*/
 // $--menu-background-color: $transparent;
-// $--menu-item-hover-fill: $s-color-basic-white;
+// $--menu-item-hover-fill: $s-color-base-on-accent;
 
 /* icon font path, required */
 $--font-path: "~element-ui/lib/theme-chalk/fonts";

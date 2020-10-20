@@ -2,7 +2,7 @@
 @import "./common";
 
 .el-radio {
-  color: var(--s-color-basic-black);
+  color: var(--s-color-base-content-primary);
   &.s-big {
     @extend .s-big;
     line-height: $s-size-big;
@@ -52,49 +52,49 @@
     }
   }
   &.is-bordered {
-    border-color: var(--s-color-neutral-border);
+    border-color: var(--s-color-base-border-primary);
     line-height: 0;
     &.is-checked {
-      border-color: var(--s-color-main-brand);
+      border-color: var(--s-color-theme-accent);
     }
     &.is-disabled {
-      border-color: var(--s-color-neutral-border);
+      border-color: var(--s-color-base-border-primary);
     }
   }
   > .el-radio__input {
     .el-radio__inner {
-      border-color: var(--s-color-neutral-border);
-      background-color: var(--s-color-basic-white);
+      border-color: var(--s-color-base-border-primary);
+      background-color: var(--s-color-utility-surface);
       &:hover {
-        border-color: var(--s-color-main-brand);
+        border-color: var(--s-color-theme-accent);
       }
       &::after {
-        background-color: var(--s-color-main-brand);
+        background-color: var(--s-color-theme-accent);
       }
     }
     &.is-checked {
       .el-radio__inner {
-        background-color: var(--s-color-basic-white);
-        border-color: var(--s-color-main-brand);
+        background-color: var(--s-color-utility-surface);
+        border-color: var(--s-color-theme-accent);
       }
       + .el-radio__label {
-        color: var(--s-color-main-brand);
+        color: var(--s-color-theme-accent);
       }
     }
     &.is-disabled {
       .el-radio__inner {
-        background-color: var(--s-color-neutral-placeholder);
-        border-color: var(--s-color-neutral-border);
+        background-color: var(--ss-color-base-background);
+        border-color: var(--s-color-base-border-primary);
       }
       &.is-checked .el-radio__inner {
-        background-color: var(--s-color-neutral-placeholder);
-        border-color: var(--s-color-neutral-border);
+        background-color: var(--s-color-base-background);
+        border-color: var(--s-color-base-border-primary);
         &::after {
-          background-color: var(--s-color-neutral-inactive);
+          background-color: var(--s-color-base-content-quaternary);
         }
       }
       & + span.el-radio__label {
-        color: var(--s-color-neutral-inactive);
+        color: var(--s-color-base-content-quaternary);
       }
     }
   }
