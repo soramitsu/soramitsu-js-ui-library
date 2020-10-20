@@ -1,7 +1,6 @@
 <template>
   <div class="s-switch">
     <el-switch
-      ref="el-switch"
       v-model="model"
       :active-color="activeColor"
       :inactive-color="inactiveColor"
@@ -20,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref, Watch } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import { ElSwitch } from 'element-ui/types/switch'
 
 @Component

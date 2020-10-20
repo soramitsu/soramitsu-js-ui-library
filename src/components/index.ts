@@ -23,6 +23,7 @@ import { SInput, SJsonInput } from './Input'
 import { SMain } from './Layout/Main'
 import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
 import { SPagination } from './Pagination'
+import { SSlider } from './Slider'
 import { SSwitch } from './Switch'
 import { SRadio } from './Radio'
 import { SRow } from './Layout/Row'
@@ -69,6 +70,7 @@ export {
   SScrollSectionItem,
   SScrollSections,
   SSelect,
+  SSlider,
   SSubmenu,
   SSwitch,
   STab,
