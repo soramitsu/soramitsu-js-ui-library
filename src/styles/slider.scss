@@ -13,6 +13,16 @@
   }
 }
 
+@mixin slider-input-size($modifier: "mini", $size: $s-size-mini) {
+  .el-input-number--#{$modifier} {
+    line-height: $size;
+    .el-input__inner {
+      height: $size;
+      line-height: $size;
+    }
+  }
+}
+
 .s-slider {
   .el-slider__runway,
   .disabled .el-slider__runway {
@@ -26,8 +36,13 @@
       color: var(--s-color-basic-black);
     }
   }
-  .disabled .el-slider__button {
-    @include slider-colors(--s-color-main-inactive);
+  .disabled {
+    .el-slider__bar {
+      background-color: var(--s-color-neutral-border);
+    }
+    .el-slider__button {
+      @include slider-colors(--s-color-neutral-border);
+    }
   }
   .el-input {
     &__inner {
@@ -75,4 +90,8 @@
       }
     }
   }
+  @include slider-input-size;
+  @include slider-input-size("small", $s-size-small);
+  @include slider-input-size("medium", $s-size-medium);
+  @include slider-input-size("large", $s-size-big);
 }

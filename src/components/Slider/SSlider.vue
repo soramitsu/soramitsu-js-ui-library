@@ -1,7 +1,6 @@
 <template>
   <div class="s-slider">
     <el-slider
-      ref="el-slider"
       v-model="model"
       :min="min"
       :max="max"

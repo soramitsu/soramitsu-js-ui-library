@@ -24,7 +24,6 @@ export const configurable = () => ({
                 :min="min"
                 :max="max"
                 :show-tooltip="showTooltip"
-                :tooltip-class="tooltipClass"
                 :step="step"
                 :show-stops="showStops"
                 :disabled="disabled"
@@ -47,9 +46,6 @@ export const configurable = () => ({
     },
     showTooltip: {
       default: boolean('Show Tooltip', true)
-    },
-    tooltipClass: {
-      default: text('Custom class name for the tooltip', '')
     },
     step: {
       default: number('Step size', 1)
