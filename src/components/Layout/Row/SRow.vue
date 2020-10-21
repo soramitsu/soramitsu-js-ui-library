@@ -60,22 +60,3 @@ export default class SRow extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../../../styles/common.scss";
-
-.s-row {
-  position: relative;
-  box-sizing: border-box;
-  @include utils-clearfix;
-}
-.row-{
-  &flex {
-    display: flex;
-    &:before,
-    &:after {
-      display: none;
-    }
-  }
-}
-</style>

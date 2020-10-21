@@ -137,15 +137,3 @@ export default class SMenu extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-.s-menu {
-  padding: 20px 12px;
-  &:not(.el-menu--horizontal) > :not(:last-child) {
-    margin-bottom: 8px;
-  }
-  &.el-menu--horizontal > :not(:last-child) {
-    margin-right: 8px;
-  }
-}
-</style>

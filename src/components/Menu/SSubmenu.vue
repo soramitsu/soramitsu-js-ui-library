@@ -44,39 +44,3 @@ export default class SSubmenu extends Vue {
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
 }
 </script>
-
-<style lang="scss">
-.s-menu:not(.el-menu--horizontal) .is-opened .el-submenu__title {
-  margin-bottom: 8px;
-}
-.el-submenu {
-  .el-menu-item {
-    min-width: 0;
-  }
-  &.is-opened > .el-menu > :not(:last-child) {
-    margin-bottom: 8px;
-  }
-}
-.el-submenu__title {
-  display: flex;
-  align-items: center;
-  border-radius: 6px;
-  [class^=s-icon-] {
-    margin-right: 12px;
-    font-size: 20px;
-  }
-  i {
-    color: var(--s-menu-text-color);
-  }
-  .is-active > & {
-    border-bottom-color: transparent !important;
-    background-color: var(--s-menu-color-hover) !important;
-    i {
-      color: var(--s-menu-text-color-active);
-    }
-  }
-  &:not(.is-disabled):hover {
-    background-color: var(--s-menu-color-hover) !important;
-  }
-}
-</style>
