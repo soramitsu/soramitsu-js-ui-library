@@ -3,29 +3,29 @@
 .el-pagination {
   &.is-background .el-pager li:not(.disabled) {
     &.active {
-      background-color: var(--s-color-main-brand);
-      color: var(--s-color-basic-white);
+      background-color: var(--s-color-theme-accent);
+      color: var(--s-color-base-on-accent);
     }
     &:hover {
-      color: var(--s-color-main-brand);
+      color: var(--s-color-theme-accent);
     }
   }
   .btn-prev, .btn-next {
-    color: var(--s-color-basic-black);
+    color: var(--s-color-base-content-primary);
   }
   button {
     &:hover {
-      color: var(--s-color-main-brand);
+      color: var(--s-color-theme-accent);
     }
     &:disabled {
-      color: var(--s-color-neutral-inactive);
+      color: var(--s-color-base-content-quaternary);
     }
   }
   .el-pagination__sizes {
     .el-select .el-input {
       width: 65px;
       .el-select__caret, .el-input__inner {
-        color: var(--s-color-basic-black);
+        color: var(--s-color-base-content-primary);
         font-weight: bold;
       }
       .el-select__caret {
@@ -35,12 +35,12 @@
         border-radius: 8px;
         padding-right: 20px;
         padding-left: 5px;
-        background-color: var(--s-color-neutral-placeholder);
-        border-color: var(--s-color-neutral-placeholder);
+        background-color: var(--s-color-base-background);
+        border-color: var(--s-color-base-background);
       }
       &.is-disabled {
         .el-select__caret, .el-input__inner {
-          color: var(--s-color-neutral-inactive);
+          color: var(--s-color-base-content-quaternary);
         }
       }
     }
@@ -48,47 +48,47 @@
   .el-pagination__editor.el-input {
     .el-input__inner {
       border-radius: 8px;
-      background-color: var(--s-color-neutral-placeholder);
-      border-color: var(--s-color-neutral-placeholder);
-      color: var(--s-color-basic-black);
+      background-color: var(--s-color-base-background);
+      border-color: var(--s-color-base-background);
+      color: var(--s-color-base-content-primary);
     }
     &.is-disabled .el-input__inner {
-      color: var(--s-color-neutral-inactive);
+      color: var(--s-color-base-content-quaternary);
     }
   }
   .el-pagination__total, .per-page-text, .el-pagination__jump {
-    color: var(--s-color-neutral-secondary);
+    color: var(--s-color-base-content-tertiary);
     font-weight: normal;
   }
   .el-pager li {
-    color: var(--s-color-basic-black);
+    color: var(--s-color-base-content-primary);
     &.btn-quicknext, &.btn-quickprev {
-      color: var(--s-color-basic-black);
+      color: var(--s-color-base-content-primary);
     }
     &:not(.disabled) {
       &:hover, &.active {
-        color: var(--s-color-main-brand);
+        color: var(--s-color-theme-accent);
       }
     }
     &.disabled {
-      color: var(--s-color-neutral-inactive);
+      color: var(--s-color-base-content-quaternary);
     }
   }
   &.is-background {
     .el-pager li {
-      background-color: var(--s-color-neutral-placeholder);
+      background-color: var(--s-color-base-background);
       &.disabled {
-        color: var(--s-color-neutral-inactive);
+        color: var(--s-color-base-content-quaternary);
       }
     }
     .btn-prev, .btn-next {
-      background-color: var(--s-color-neutral-placeholder);
+      background-color: var(--s-color-base-background);
       &:disabled {
-        color: var(--s-color-neutral-inactive);
-        background-color: var(--s-color-neutral-placeholder);
+        color: var(--s-color-base-content-quaternary);
+        background-color: var(--s-color-base-background);
       }
       &:not(:disabled):hover {
-        color: var(--s-color-main-brand);
+        color: var(--s-color-theme-accent);
       }
     }
   }
@@ -109,5 +109,5 @@
   }
 }
 .el-select-dropdown__item.selected {
-  color: var(--s-color-main-brand);
+  color: var(--s-color-theme-accent);
 }

@@ -1,5 +1,5 @@
 .el-divider {
-  background-color: #F5F5F5; // TODO: ask about possibility to override it
+  background-color: var(--s-color-base-border-secondary);
 }
 .el-divider--horizontal {
   margin: 20px 0;

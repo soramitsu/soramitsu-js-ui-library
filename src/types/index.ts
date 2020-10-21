@@ -9,20 +9,31 @@ export enum Direction {
   VERTICAL = 'vertical'
 }
 
-export enum CSSColors {
-  MainBrand = '--s-color-main-brand',
-  MainHover = '--s-color-main-hover',
-  MainInactive = '--s-color-main-inactive',
-  MainHoverLight = '--s-color-main-hover-light',
-  MainBase = '--s-color-main-base',
-  NeutralPrimary = '--s-color-neutral-primary',
-  NeutralSecondary = '--s-color-neutral-secondary',
-  NeutralTertiary = '--s-color-neutral-tertiary',
-  NeutralInactive = '--s-color-neutral-inactive',
-  NeutralBorder = '--s-color-neutral-border',
-  NeutralHover = '--s-color-neutral-hover',
-  NeutralPlaceholder = '--s-color-neutral-placeholder',
-  Error = '--s-color-error',
-  BasicBlack = '--s-color-basic-black',
-  BasicWhite = '--s-color-basic-white'
+export enum Colors {
+  ThemeAccent = '--s-color-theme-accent',
+  ThemeAccentHover = '--s-color-theme-accent-hover',
+  ThemeAccentPressed = '--s-color-theme-accent-pressed',
+  ThemeAccentFocused = '--s-color-theme-accent-focused',
+  ThemeSecondaryHover = '--s-color-theme-secondary-hover',
+  BaseContentPrimary = '--s-color-base-content-primary',
+  BaseContentSecondary = '--s-color-base-content-secondary',
+  BaseContentTertiary = '--s-color-base-content-tertiary',
+  BaseContentQuaternary = '--s-color-base-content-quaternary',
+  BaseBackground = '--s-color-base-background',
+  BaseDarkBackground = '--s-color-base-dark-background',
+  BaseBorderPrimary = '--s-color-base-border-primary',
+  BaseBorderSecondary = '--s-color-base-border-secondary',
+  BaseBackgroundHover = '--s-color-base-background-hover',
+  BaseDisabled = '--s-color-base-disabled',
+  BaseOnDisabled = '--s-color-base-on-disabled',
+  BaseOnAccent = '--s-color-base-on-accent',
+  UtilityBody = '--s-color-utility-body',
+  UtilitySurface = '--s-color-utility-surface',
+  UtilityOverlay = '--s-color-utility-overlay',
+  StatusSuccess = '--s-color-status-success',
+  StatusWarning = '--s-color-status-warning',
+  StatusError = '--s-color-status-error',
+  StatusSuccessBackground = '--s-color-status-success-background',
+  StatusWarningBackground = '--s-color-status-warning-background',
+  StatusErrorBackground = '--s-color-status-error-background'
 }

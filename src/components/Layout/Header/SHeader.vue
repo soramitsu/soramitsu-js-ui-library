@@ -1,5 +1,5 @@
 <template>
-  <el-header :height="height">
+  <el-header :height="height" class="s-header">
     <slot></slot>
   </el-header>
 </template>
@@ -18,12 +18,3 @@ export default class SHeader extends Vue {
   @Prop({ default: '56px', type: String }) readonly height!: string
 }
 </script>
-
-<style lang="scss">
-.el-header {
-  padding: 12px;
-  box-shadow: 0px 0px 8px rgba(45, 41, 38, 0.2);
-  font-size: 18px;
-  z-index: 1;
-}
-</style>

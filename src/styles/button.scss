@@ -17,68 +17,79 @@
   }
 }
 .s-primary {
-  background-color: var(--s-color-main-brand);
-  border-color: var(--s-color-main-brand);
-  &:hover, &:active, &:focus {
-    background-color: var(--s-color-main-hover);
-    border-color: var(--s-color-main-hover);
+  background-color: var(--s-color-theme-accent);
+  border-color: var(--s-color-theme-accent);
+  color: var(--s-color-base-on-accent);
+  &:hover {
+    background-color: var(--s-color-theme-accent-hover);
+    border-color: var(--s-color-theme-accent-hover);
+  }
+  &:active {
+    background-color: var(--s-color-theme-accent-pressed);
+    border-color: var(--s-color-theme-accent-pressed);
+  }
+  &:focus {
+    background-color: var(--s-color-theme-accent-focused);
+    border-color: var(--s-color-theme-accent-focused);
   }
   &:disabled, &:disabled:hover {
-    background-color: var(--s-color-main-inactive);
-    border-color: var(--s-color-main-inactive);
+    color: var(--s-color-base-content-quaternary);
+    background-color: var(--s-color-base-disabled);
+    border-color: var(--s-color-base-disabled);
   }
 }
 .s-secondary {
-  background-color: var(--s-color-basic-white);
-  color: var(--s-color-basic-black);
-  border-color: var(--s-color-neutral-border);
+  background-color: var(--s-color-base-on-accent);
+  color: var(--s-color-base-content-primary);
+  border-color: var(--s-color-base-border-primary);
   &:hover, &:active, &:focus {
-    color: var(--s-color-main-brand);
-    background-color: var(--s-color-basic-white);
-    border-color: var(--s-color-main-brand);
+    color: var(--s-color-theme-accent);
+    background-color: var(--s-color-base-on-accent);
+    border-color: var(--s-color-theme-accent);
   }
   &:disabled, &:disabled:hover {
-    color: var(--s-color-neutral-inactive);
-    border-color: var(--s-color-neutral-border);
+    color: var(--s-color-base-content-quaternary);
+    background-color: var(--s-color-base-disabled);
+    border-color: var(--s-color-base-disabled);
   }
   &.s-alternative {
     &:hover, &:active, &:focus {
-      color: var(--s-color-basic-black);
-      background-color: var(--s-color-neutral-hover);
-      border-color: var(--s-color-neutral-hover);
+      color: var(--s-color-base-content-primary);
+      background-color: var(--s-color-base-background);
+      border-color: var(--s-color-base-background);
     }
     &:disabled, &:disabled:hover {
-      color: var(--s-color-neutral-inactive);
-      border-color: var(--s-color-neutral-border);
-      background-color: var(--s-color-basic-white);
+      color: var(--s-color-base-content-quaternary);
+      background-color: var(--s-color-base-disabled);
+      border-color: var(--s-color-base-disabled);
     }
   }
 }
 .s-link {
-  color: var(--s-color-basic-black);
+  color: var(--s-color-base-content-primary);
   border: none;
   background-color: transparent;
   &:hover, &:active, &:focus {
-    color: var(--s-color-main-brand);
+    color: var(--s-color-theme-accent);
     background-color: transparent;
   }
   &:disabled, &:disabled:hover {
-    color: var(--s-color-neutral-inactive);
+    color: var(--s-color-base-content-quaternary);
   }
 }
 .s-tertiary {
-  color: var(--s-color-basic-black);
-  border-color: var(--s-color-neutral-placeholder);
-  background-color: var(--s-color-neutral-placeholder);
+  color: var(--s-color-base-content-primary);
+  border-color: var(--s-color-base-background);
+  background-color: var(--s-color-base-background);
   &:hover, &:active, &:focus {
-    color: var(--s-color-main-brand);
-    background-color: var(--s-color-neutral-placeholder);
-    border-color: var(--s-color-neutral-placeholder);
+    color: var(--s-color-theme-accent);
+    background-color: var(--s-color-base-background);
+    border-color: var(--s-color-base-background);
   }
   &:disabled, &:disabled:hover {
-    color: var(--s-color-neutral-inactive);
-    background-color: var(--s-color-neutral-placeholder);
-    border-color: var(--s-color-neutral-placeholder);
+    color: var(--s-color-base-content-quaternary);
+    background-color: var(--s-color-base-disabled);
+    border-color: var(--s-color-base-disabled);
   }
 }
 .s-action {
@@ -105,28 +116,28 @@
       margin-top: -2px;
     }
   }
-  color: var(--s-color-basic-black);
-  background-color: var(--s-color-neutral-placeholder);
-  border-color: var(--s-color-neutral-placeholder);
+  color: var(--s-color-base-content-primary);
+  background-color: var(--s-color-base-background);
+  border-color: var(--s-color-base-background);
   border-radius: 8px;
   &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
-    color: var(--s-color-basic-black);
-    background-color: var(--s-color-neutral-hover);
-    border-color: var(--s-color-neutral-hover);
+    color: var(--s-color-base-content-primary);
+    background-color: var(--s-color-base-background-hover);
+    border-color: var(--s-color-base-background-hover);
   }
   &:disabled, &:disabled:hover {
-    color: var(--s-color-neutral-inactive);
+    color: var(--s-color-base-content-quaternary);
   }
   &.s-alternative {
-    background-color: var(--s-color-basic-white);
-    border-color: var(--s-color-neutral-border);
+    background-color: var(--s-color-base-on-accent);
+    border-color: var(--s-color-base-border-primary);
     &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
-      color: var(--s-color-basic-black);
-      background-color: var(--s-color-neutral-placeholder);
-      border-color: var(--s-color-neutral-placeholder);
+      color: var(--s-color-base-content-primary);
+      background-color: var(--s-color-base-background);
+      border-color: var(--s-color-base-background);
     }
     &:disabled, &:disabled:hover {
-      color: var(--s-color-neutral-inactive);
+      color: var(--s-color-base-content-quaternary);
     }
   }
 }
@@ -144,11 +155,11 @@ button {
   }
 }
 .el-button-group .el-button--plain {
-  color: var(--s-color-basic-black);
-  border-color: var(--s-color-neutral-border);
+  color: var(--s-color-base-content-primary);
+  border-color: var(--s-color-base-border-primary);
   &:hover, &:active, &:focus {
-    color: var(--s-color-main-brand);
-    background-color: var(--s-color-basic-white);
-    border-color: var(--s-color-main-brand);
+    color: var(--s-color-theme-accent);
+    background-color: var(--s-color-base-on-accent);
+    border-color: var(--s-color-theme-accent);
   }
 }

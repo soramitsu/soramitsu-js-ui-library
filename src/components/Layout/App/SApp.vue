@@ -60,9 +60,3 @@ export default class SApp extends Vue {
   @Prop({ default: '56px', type: String }) readonly footerHeight!: string
 }
 </script>
-
-<style lang="scss">
-.s-app {
-  height: 100%;
-}
-</style>

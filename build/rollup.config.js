@@ -7,7 +7,6 @@ import commonjs from 'rollup-plugin-commonjs'
 import copy from 'rollup-plugin-copy'
 import { terser } from 'rollup-plugin-terser'
 import del from 'rollup-plugin-delete'
-import modify from 'rollup-plugin-modify'
 
 export default {
   input: 'src/index.ts',
@@ -25,11 +24,6 @@ export default {
     'vue'
   ],
   plugins: [
-    // Replace all imports for css bundle
-    modify({
-      find: '~@/assets/',
-      replace: '~assets/'
-    }),
     copy({
       targets: [
         { src: 'src/assets/*', dest: 'lib/assets' },
@@ -57,14 +51,14 @@ export default {
     }),
     commonjs(),
     vue({
-      css: true,
+      css: false,
       compileTemplate: true
     }),
     scss(),
     resolve(),
     terser(),
     del({
-      targets: ['lib/styles/index.d.ts'],
+      targets: ['lib/styles/index.d.ts', 'lib/soramitsu-js-ui.esm.css'],
       hook: 'writeBundle'
     })
   ]
