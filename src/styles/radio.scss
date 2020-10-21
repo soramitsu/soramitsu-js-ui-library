@@ -1,8 +1,9 @@
 @import "./variables";
 @import "./common";
 
-$radio-button-border-width: 1px;
 $radio-button-class: ".el-radio-button";
+$radio-button-border-width: 1px;
+$radio-button-border-color: var(--s-color-main-brand);
 
 @mixin radio-button-size(
   $modifier: "small",
@@ -123,7 +124,32 @@ $radio-button-class: ".el-radio-button";
   &-button {
     &:hover {
       #{$radio-button-class}__inner {
-        border-color: var(--s-color-main-brand);
+        border-color: $radio-button-border-color;
+      }
+      &:not(:first-child):not(.is-disabled) {
+        #{$radio-button-class}__inner {
+          &:before {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    &:not(:first-child):not(.is-disabled) {
+      #{$radio-button-class}__inner {
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          display: block;
+          opacity: 0;
+          background-color: $radio-button-border-color;
+          height: calc(100% + #{$radio-button-border-width * 2});
+          width: $radio-button-border-width;
+          left: -#{$radio-button-border-width};
+          top: -#{$radio-button-border-width};
+          transition: inherit;
+          transition-property: opacity;
+        }
       }
     }
     &.is-disabled {
