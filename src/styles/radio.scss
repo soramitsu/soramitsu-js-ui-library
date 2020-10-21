@@ -1,6 +1,29 @@
 @import "./variables";
 @import "./common";
 
+$radio-button-class: ".el-radio-button";
+$radio-button-border-width: 1px;
+$radio-button-border-color: var(--s-color-main-brand);
+
+@mixin radio-button-size(
+  $modifier: "small",
+  $size: $s-size-small,
+  $font-size: $s-font-size-small
+) {
+  $radio-button-vertical-padding: #{($size - $font-size) / 2 - $radio-button-border-width};
+  #{$radio-button-class} {
+    &--#{$modifier} {
+      height: $size;
+      line-height: $size;
+      #{$radio-button-class}__inner {
+        padding-top: $radio-button-vertical-padding;
+        padding-bottom: $radio-button-vertical-padding;
+        font-size: $font-size;
+      }
+    }
+  }
+}
+
 .el-radio {
   color: var(--s-color-base-content-primary);
   &.s-big {
@@ -96,6 +119,93 @@
       & + span.el-radio__label {
         color: var(--s-color-base-content-quaternary);
       }
+    }
+  }
+  &-button {
+    &:hover {
+      #{$radio-button-class}__inner {
+        border-color: $radio-button-border-color;
+        color: var(--s-color-main-brand);
+      }
+      &:not(:first-child):not(.is-disabled) {
+        #{$radio-button-class}__inner {
+          &:before {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    &:not(:first-child):not(.is-disabled) {
+      #{$radio-button-class}__inner {
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          display: block;
+          opacity: 0;
+          background-color: $radio-button-border-color;
+          height: calc(100% + #{$radio-button-border-width * 2});
+          width: $radio-button-border-width;
+          left: -#{$radio-button-border-width};
+          top: -#{$radio-button-border-width};
+          transition: inherit;
+          transition-property: opacity;
+        }
+      }
+    }
+    &.is-disabled {
+      #{$radio-button-class}__inner {
+        color: var(--s-color-neutral-inactive);
+      }
+    }
+    &.is-disabled,
+    &.is-disabled:hover {
+      #{$radio-button-class}__inner {
+        border-color: var(--s-color-neutral-border);
+      }
+    }
+    &.is-active {
+      &:hover {
+        #{$radio-button-class}__inner {
+          background-color: var(--s-color-main-hover);
+          border-color: var(--s-color-main-hover);
+        }
+      }
+      &.is-disabled {
+        #{$radio-button-class}__inner {
+          color: var(--s-color-basic-white);
+        }
+      }
+      &.is-disabled,
+      &.is-disabled:hover {
+        #{$radio-button-class}__inner {
+          background-color: var(--s-color-main-inactive);
+          border-color: var(--s-color-main-inactive);
+        }
+      }
+    }
+  }
+  &-group {
+    @include radio-button-size;
+    @include radio-button-size("medium", $s-size-medium, $s-font-size-big);
+    @include radio-button-size("big", $s-size-big, $s-font-size-big);
+    #{$radio-button-class} {
+      &__inner {
+        background-color: var(--s-color-basic-white);
+        border-color: var(--s-color-neutral-border);
+        color: var(--s-color-basic-black);
+      }
+      #{$radio-button-class}__inner {
+        box-shadow: none;
+      }
+    }
+    .is-disabled #{$radio-button-class}__inner {
+      background-color: var(--s-color-basic-white);
+    }
+    .is-active #{$radio-button-class}__inner {
+      background-color: var(--s-color-main-brand);
+      border-color: var(--s-color-main-brand);
+      color: var(--s-color-basic-white);
     }
   }
 }
