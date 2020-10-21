@@ -29,6 +29,8 @@
 import { Vue, Component, Prop, Ref, Watch } from 'vue-property-decorator'
 import { ElSlider } from 'element-ui/types/slider'
 
+import { SliderInputSize } from './consts'
+
 @Component
 export default class SSlider extends Vue {
   /**
@@ -68,9 +70,9 @@ export default class SSlider extends Vue {
    */
   @Prop({ default: true, type: Boolean }) readonly showInputControls!: boolean
   /**
-   * Size of the input box
+   * Size of the input box. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`
    */
-  @Prop({ default: 'small', type: String }) readonly inputSize!: 'large' | 'medium' | 'small' | 'mini'
+  @Prop({ default: SliderInputSize.SMALL, type: String }) readonly inputSize!: string
   /**
    * Debounce delay when typing, in milliseconds, works when show-input is true
    */

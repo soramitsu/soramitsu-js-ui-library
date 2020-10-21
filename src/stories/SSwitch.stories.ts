@@ -1,4 +1,4 @@
-import { color, text, number, boolean, withKnobs } from '@storybook/addon-knobs'
+import { text, number, boolean, withKnobs } from '@storybook/addon-knobs'
 
 import { SSwitch } from '../components/Switch'
 
@@ -14,8 +14,6 @@ export const configurable = () => ({
   template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
               <s-switch
                 v-model="modelValue"
-                :active-color="activeColor"
-                :inactive-color="inactiveColor"
                 :active-text="activeText"
                 :inactive-text="inactiveText"
                 :active-value="activeValue"
@@ -33,12 +31,6 @@ export const configurable = () => ({
     changeValue: true
   }),
   props: {
-    activeColor: {
-      default: color('Active Background Color', 'rgb(208, 2, 27)')
-    },
-    inactiveColor: {
-      default: color('Inactive Background Color', 'rgb(246, 204, 209)')
-    },
     activeText: {
       default: text('Active Text', '')
     },
