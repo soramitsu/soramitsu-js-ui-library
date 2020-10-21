@@ -2,8 +2,6 @@
   <div class="s-switch">
     <el-switch
       v-model="model"
-      :active-color="activeColor"
-      :inactive-color="inactiveColor"
       :active-icon-class="activeIconСlass"
       :inactive-icon-class="inactiveIconСlass"
       :active-text="activeText"
@@ -28,14 +26,6 @@ export default class SSwitch extends Vue {
    * Value of switch
    */
   @Prop({ default: false }) readonly value!: boolean | string | number
-  /**
-   * Background color when in on state
-   */
-  @Prop({ default: '#d0021b', type: String }) readonly activeColor!: string
-  /**
-   * Background color when in off state
-   */
-  @Prop({ default: '#f6ccd1', type: String }) readonly inactiveColor!: string
   /**
    * Class name of the icon displayed when in on state, overrides active-text
    */

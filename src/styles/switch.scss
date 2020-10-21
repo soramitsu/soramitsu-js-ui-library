@@ -1,10 +1,47 @@
 @import "./variables";
 
+$switch-class: ".el-switch";
+
 .s-switch {
-  .el-switch__label {
-    color: var(--s-color-basic-black);
-    &.is-active {
-      color: var(--s-color-main-brand);
+  #{$switch-class} {
+    &__label {
+      color: var(--s-color-basic-black);
+      &.is-active {
+        color: var(--s-color-main-brand);
+      }
+    }
+    &__core {
+      border-color: var(--s-color-neutral-border);
+      background-color: var(--s-color-neutral-border);
+      &:after {
+        background-color: var(--s-color-basic-white);
+      }
+    }
+    &:hover,
+    &.is-checked:hover {
+      #{$switch-class}__core {
+        background-color: var(--s-color-main-hover);
+        border-color: var(--s-color-main-hover);
+      }
+    }
+    &.is-disabled {
+      opacity: 1;
+      #{$switch-class}__core {
+        background-color: var(--s-color-neutral-placeholder);
+        border-color: var(--s-color-neutral-placeholder);
+      }
+    }
+    &.is-checked {
+      #{$switch-class}__core {
+        background-color: var(--s-color-main-brand);
+        border-color: var(--s-color-main-brand);
+      }
+      &.is-disabled {
+        #{$switch-class}__core {
+          background-color: var(--s-color-main-inactive);
+          border-color: var(--s-color-main-inactive);
+        }
+      }
     }
   }
 }

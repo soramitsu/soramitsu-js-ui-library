@@ -35,6 +35,9 @@
     &__marks-text {
       color: var(--s-color-basic-black);
     }
+    &__bar {
+      background-color: var(--s-color-main-brand);
+    }
   }
   .disabled {
     .el-slider__bar {
