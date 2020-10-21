@@ -1,13 +1,6 @@
 import { text, number, boolean, select, object, withKnobs } from '@storybook/addon-knobs'
 
-import { SSlider } from '../components/Slider'
-
-enum InputSize {
-  LARGE = 'large',
-  MEDIUM = 'medium',
-  SMALL = 'small',
-  MINI = 'mini'
-}
+import { SSlider, SliderInputSize } from '../components/Slider'
 
 export default {
   component: SSlider,
@@ -122,7 +115,7 @@ export const withInput = () => ({
       default: boolean('Show Input Controls', true)
     },
     inputSize: {
-      default: select('Size of the input box', Object.values(InputSize), InputSize.SMALL)
+      default: select('Size of the input box', Object.values(SliderInputSize), SliderInputSize.SMALL)
     },
     debounce: {
       default: number('Debounce delay when typing (in milliseconds)', 300)

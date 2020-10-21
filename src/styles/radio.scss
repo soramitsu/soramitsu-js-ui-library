@@ -5,7 +5,7 @@ $radio-button-border-width: 1px;
 $radio-button-class: ".el-radio-button";
 
 @mixin radio-button-size(
-  $modifier: "mini",
+  $modifier: "small",
   $size: $s-size-small,
   $font-size: $s-font-size-small
 ) {
@@ -160,7 +160,7 @@ $radio-button-class: ".el-radio-button";
   }
   &-group {
     @include radio-button-size;
-    @include radio-button-size("small", $s-size-medium, $s-font-size-big);
-    @include radio-button-size("medium", $s-size-big, $s-font-size-big);
+    @include radio-button-size("medium", $s-size-medium, $s-font-size-big);
+    @include radio-button-size("big", $s-size-big, $s-font-size-big);
   }
 }

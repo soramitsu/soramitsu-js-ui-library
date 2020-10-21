@@ -11,6 +11,8 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
+import { RadioSize } from './consts'
+
 @Component
 export default class SRadio extends Vue {
   /**
@@ -18,11 +20,11 @@ export default class SRadio extends Vue {
    */
   @Prop() readonly value!: string | number | boolean
   /**
-   * Size of the radio item. Possible values: `"medium"`, `"small"`, `"mini"`.
+   * Size of the radio item. Possible values: `"big"`, `"medium"`, `"small"`
    *
    * By default it's set to `"medium"`
    */
-  @Prop({ default: 'medium', type: String }) readonly size!: 'medium' | 'small' | 'mini'
+  @Prop({ default: RadioSize.MEDIUM, type: String }) readonly size!: string
   /**
    * Whether the nesting radios are disabled.
    */

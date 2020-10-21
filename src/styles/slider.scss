@@ -93,5 +93,5 @@
   @include slider-input-size;
   @include slider-input-size("small", $s-size-small);
   @include slider-input-size("medium", $s-size-medium);
-  @include slider-input-size("large", $s-size-big);
+  @include slider-input-size("big", $s-size-big);
 }
