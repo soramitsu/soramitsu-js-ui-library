@@ -1,7 +1,7 @@
 @import "./variables";
 
 @mixin slider-colors(
-  $background-color: --s-color-main-brand,
+  $background-color: --s-color-theme-accent,
   $border-color: $background-color,
   $color: false
 ) {
@@ -26,35 +26,35 @@
 .s-slider {
   .el-slider__runway,
   .disabled .el-slider__runway {
-    background-color: var(--s-color-neutral-placeholder);
+    background-color: var(--s-color-base-background);
   }
   .el-slider {
     &__button {
       @include slider-colors;
     }
     &__marks-text {
-      color: var(--s-color-basic-black);
+      color: var(--s-color-base-content-primary);
     }
     &__bar {
-      background-color: var(--s-color-main-brand);
+      background-color: var(--s-color-theme-accent);
     }
   }
   .disabled {
     .el-slider__bar {
-      background-color: var(--s-color-neutral-border);
+      background-color: var(--s-color-base-border-primary);
     }
     .el-slider__button {
-      @include slider-colors(--s-color-neutral-border);
+      @include slider-colors(--s-color-base-border-primary);
     }
   }
   .el-input {
     &__inner {
-      @include slider-colors(--s-color-neutral-placeholder);
+      @include slider-colors(--s-color-base-background);
       &:hover:not([disabled]):not(:focus) {
-        @include slider-colors(--s-color-neutral-hover);
+        @include slider-colors(--s-color-base-background-hover);
       }
       &:focus {
-        @include slider-colors(--s-color-basic-white, --s-color-neutral-border);
+        @include slider-colors(--s-color-utility-surface, --s-color-base-border-primary);
       }
     }
     &-number {
@@ -62,17 +62,17 @@
       &__increase {
         height: 100%;
         top: 0;
-        color: var(--s-color-basic-white);
-        @include slider-colors($color: --s-color-basic-white);
+        color: var(--s-color-base-on-accent);
+        @include slider-colors($color: --s-color-base-on-accent);
         &:hover:not(.is-disabled)
           ~ .el-input
           .el-input__inner:not(.is-disabled) {
-          border-color: var(--s-color-neutral-hover);
+          border-color: var(--s-color-base-background-hover);
         }
         &.is-disabled {
           @include slider-colors(
-            $background-color: --s-color-main-inactive,
-            $color: --s-color-basic-white
+            $background-color: --s-color-base-content-quaternary,
+            $color: --s-color-base-on-accent
           );
         }
       }
@@ -86,8 +86,8 @@
         .el-input-number__decrease,
         .el-input-number__increase {
           @include slider-colors(
-            $background-color: --s-color-main-inactive,
-            $color: --s-color-basic-white
+            $background-color: --s-color-base-content-quaternary,
+            $color: --s-color-base-on-accent
           );
         }
       }
