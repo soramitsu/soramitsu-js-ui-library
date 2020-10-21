@@ -189,10 +189,15 @@ $radio-button-border-color: var(--s-color-main-brand);
     @include radio-button-size;
     @include radio-button-size("medium", $s-size-medium, $s-font-size-big);
     @include radio-button-size("big", $s-size-big, $s-font-size-big);
-    #{$radio-button-class}__inner {
-      background-color: var(--s-color-basic-white);
-      border-color: var(--s-color-neutral-border);
-      color: var(--s-color-basic-black);
+    #{$radio-button-class} {
+      &__inner {
+        background-color: var(--s-color-basic-white);
+        border-color: var(--s-color-neutral-border);
+        color: var(--s-color-basic-black);
+      }
+      #{$radio-button-class}__inner {
+        box-shadow: none;
+      }
     }
     .is-disabled #{$radio-button-class}__inner {
       background-color: var(--s-color-basic-white);
