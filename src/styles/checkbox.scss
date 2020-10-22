@@ -2,13 +2,13 @@
 @import "./common";
 
 .el-checkbox {
-  color: var(--s-color-basic-black);
+  color: var(--s-color-base-content-primary);
   &.is-bordered {
     &, &.is-disabled {
-      border-color: var(--s-color-neutral-border);
+      border-color: var(--s-color-base-border-primary);
     }
     &.is-checked {
-      border-color: var(--s-color-main-brand);
+      border-color: var(--s-color-theme-accent);
     }
   }
   &.s-big {
@@ -62,7 +62,7 @@
   }
 }
 .el-checkbox__inner {
-  border-color: var(--s-color-neutral-inactive);
+  border-color: var(--s-color-base-border-primary);
   border-radius: 4px;
   width: 20px;
   height: 20px;
@@ -73,36 +73,36 @@
     width: 5px;
   }
   &:hover {
-    border-color: var(--s-color-main-brand);
+    border-color: var(--s-color-theme-accent);
   }
 }
 .el-checkbox__input {
   &.is-disabled {
     .el-checkbox__inner {
-      background-color: var(--s-color-neutral-placeholder);
-      border-color: var(--s-color-neutral-border);
+      background-color: var(--s-color-base-disabled);
+      border-color: var(--s-color-base-border-primary);
     }
     & + span.el-checkbox__label {
-      color: var(--s-color-neutral-inactive);
+      color: var(--s-color-base-content-quaternary);
     }
   }
   &.is-focus > .el-checkbox__inner {
-    border-color: var(--s-color-main-brand);
+    border-color: var(--s-color-theme-accent);
   }
   &.is-checked {
     > .el-checkbox__inner {
-      background-color: var(--s-color-main-brand);
-      border-color: var(--s-color-main-brand);
+      background-color: var(--s-color-theme-accent);
+      border-color: var(--s-color-theme-accent);
     }
     &.is-disabled > .el-checkbox__inner {
-      background-color: var(--s-color-neutral-placeholder);
-      border-color: var(--s-color-neutral-border);
+      background-color: var(--s-color-base-disabled);
+      border-color: var(--s-color-base-border-primary);
       &::after {
-        border-color: var(--s-color-neutral-inactive);
+        border-color: var(--s-color-base-content-quaternary);
       }
     }
     & + .el-checkbox__label {
-      color: var(--s-color-basic-black);
+      color: var(--s-color-base-content-primary);
     }
   }
 }

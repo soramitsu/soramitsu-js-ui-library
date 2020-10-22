@@ -107,7 +107,7 @@ button > span {
 .el-message-box {
   .el-message-box__header {
     .el-message-box__title {
-      color: var(--s-color-basic-black);
+      color: var(--s-color-base-content-primary);
       font-size: 16px;
     }
   }
@@ -117,15 +117,25 @@ button > span {
       font-size: 14px;
       border-radius: 4px;
       &:hover, &:active, &:focus {
-        color: var(--s-color-main-brand);
-        background-color: var(--s-color-basic-white);
-        border-color: var(--s-color-main-brand);
+        color: var(--s-color-theme-accent);
+        background-color: var(--s-color-base-on-accent);
+        border-color: var(--s-color-theme-accent);
       }
       &.el-button--primary {
         &:hover, &:active, &:focus {
-          color: var(--s-color-basic-white);
-          background-color: var(--s-color-main-hover);
-          border-color: var(--s-color-main-hover);
+          color: var(--s-color-base-on-accent);
+        }
+        &:hover {
+          background-color: var(--s-color-theme-accent-hover);
+          border-color: var(--s-color-theme-accent-hover);
+        }
+        &:active {
+          background-color: var(--s-color-theme-accent-pressed);
+          border-color: var(--s-color-theme-accent-pressed);
+        }
+        &:focus {
+          background-color: var(--s-color-theme-accent-focused);
+          border-color: var(--s-color-theme-accent-focused);
         }
       }
     }

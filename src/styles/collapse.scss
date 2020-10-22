@@ -2,8 +2,8 @@
 @import "./icons";
 
 .el-collapse {
-  border-top-color: #F5F5F5; // TODO: ask about possibility to override it
-  border-bottom-color: #F5F5F5;
+  border-top-color: var(--s-color-base-border-secondary);
+  border-bottom-color: var(--s-color-base-border-secondary);
 }
 .s-without-border {
   > div > .el-collapse-item__header,
@@ -16,11 +16,11 @@
 }
 .el-collapse-item__ {
   &wrap {
-    border-bottom-color: #F5F5F5;
+    border-bottom-color: var(--s-color-base-border-secondary);
   }
   &header {
-    color: var(--s-color-basic-black);
-    border-bottom-color: #F5F5F5;
+    color: var(--s-color-base-content-primary);
+    border-bottom-color: var(--s-color-base-border-secondary);
     &.is-active {
       border-bottom-color: transparent;
     }
@@ -31,23 +31,23 @@
       padding: 8px;
       width: 32px;
       height: 32px;
-      background-color: var(--s-color-neutral-placeholder);
+      background-color: var(--s-color-base-background);
       border-radius: 50%;
       &.is-active {
         transform: rotate(180deg);
       }
       &:hover, &:focus {
-        background-color: var(--s-color-neutral-hover);
+        background-color: var(--s-color-base-background-hover);
       }
     }
   }
   &content {
-    color: var(--s-color-basic-black);
+    color: var(--s-color-base-content-primary);
   }
 }
 .el-collapse-item.is-disabled .el-collapse-item__header {
-  color: var(--s-color-neutral-inactive);
+  color: var(--s-color-base-content-quaternary);
   .el-collapse-item__arrow.el-icon-arrow-right {
-    background-color: var(--s-color-neutral-hover);
+    background-color: var(--s-color-base-disabled);
   }
 }

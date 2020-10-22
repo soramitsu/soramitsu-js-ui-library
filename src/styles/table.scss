@@ -3,10 +3,10 @@
 .el-table,
 .el-table__header-wrapper tbody td,
 .el-table__footer-wrapper tbody td {
-  color: var(--s-color-basic-black);
+  color: var(--s-color-base-content-primary);
 }
 .el-table--enable-row-hover .el-table__body tr:hover > td {
-  background-color: var(--s-color-neutral-hover);
+  background-color: var(--s-color-base-background-hover);
   border-left: none;
   border-right: none;
 }
@@ -17,7 +17,7 @@
       &.current-row > td,
       &.el-table__row--striped > td,
       &.el-table__row--striped.current-row > td {
-        background-color: var(--s-color-neutral-hover);
+        background-color: var(--s-color-base-background-hover);
         border-left: none;
         border-right: none;
       }
@@ -29,24 +29,24 @@
   padding-left: 13px;
 }
 .el-table thead {
-  color: var(--s-color-neutral-tertiary);
+  color: var(--s-color-base-content-tertiary);
 }
 .el-table--group,
 .el-table--border,
 .el-table th.is-leaf,
 .el-table td,
 .el-table--border th {
-  border-color: var(--s-color-neutral-placeholder);
+  border-color: var(--s-color-base-border-secondary);
 }
 .el-table--group::after,
 .el-table--border::after {
-  background-color: var(--s-color-neutral-placeholder);
+  background-color: var(--s-color-base-background);
 }
 .el-table:not(.el-table--border)::before {
-  background-color: var(--s-color-basic-white);
+  background-color: var(--s-color-base-on-accent);
 }
 .el-table tr:last-child td {
-  border-bottom-color: var(--s-color-basic-white);
+  border-bottom-color: var(--s-color-base-on-accent);
 }
 .el-table__header {
   label.el-checkbox.is-disabled {
@@ -103,9 +103,9 @@
 }
 .el-table__header-wrapper tbody td,
 .el-table__footer-wrapper tbody td {
-  background-color: var(--s-color-neutral-placeholder);
+  background-color: var(--s-color-base-background);
 }
 .el-checkbox__input.is-indeterminate .el-checkbox__inner {
-  background-color: var(--s-color-main-brand);
-  border-color: var(--s-color-main-brand);
+  background-color: var(--s-color-theme-accent);
+  border-color: var(--s-color-theme-accent);
 }

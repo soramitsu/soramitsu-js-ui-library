@@ -1,5 +1,5 @@
 <template>
-  <el-footer :height="height">
+  <el-footer :height="height" class="s-footer">
     <slot></slot>
   </el-footer>
 </template>
@@ -18,11 +18,3 @@ export default class SFooter extends Vue {
   @Prop({ default: '56px', type: String }) readonly height!: string
 }
 </script>
-
-<style lang="scss">
-.el-footer {
-  padding: 16px;
-  box-shadow: 0px 0px 8px rgba(45, 41, 38, 0.2);
-  font-size: 18px;
-}
-</style>

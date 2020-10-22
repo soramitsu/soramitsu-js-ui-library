@@ -37,25 +37,3 @@ export default class SMenuItem extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-.el-menu-item {
-  align-items: center;
-  border-radius: 6px;
-  &:not(.is-disabled):hover,
-  &.is-active {
-    background-color: var(--s-menu-color-hover) !important;
-    border-bottom-color: var(--s-menu-color-hover) !important;
-    i {
-      color: var(--s-menu-text-color-active);
-    }
-  }
-  [class^=s-icon-] {
-    margin-right: 12px;
-    font-size: 20px;
-  }
-  i {
-    color: var(--s-menu-text-color);
-  }
-}
-</style>

@@ -1,6 +1,6 @@
 import { withKnobs } from '@storybook/addon-knobs'
 
-import { CSSColors } from '../../types'
+import { Colors } from '../../types'
 import { SRow, SButton, SInput, SCol, SDivider } from '../../components'
 import { differentTypeButtonsData } from '../SButton.stories'
 
@@ -10,7 +10,7 @@ export default {
   excludeStories: /.*Data$/
 }
 
-export const colorsData = Object.values(CSSColors).map(color => ({
+export const colorsData = Object.values(Colors).map(color => ({
   label: color,
   value: getComputedStyle(document.documentElement).getPropertyValue(color)
 }))

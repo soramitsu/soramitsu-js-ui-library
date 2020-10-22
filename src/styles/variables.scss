@@ -1,22 +1,36 @@
-// Main colors
-$s-color-main-brand: #D0021B !default;
-$s-color-main-hover: #E75264 !default;
-$s-color-main-inactive: #F6CCD1 !default;
-$s-color-main-hover-light: #FEE6E7 !default;
-$s-color-main-base: #FFF9FA !default;
-// Neutral colors
-$s-color-neutral-primary: #53565A !default; // TODO: not used
-$s-color-neutral-secondary: #75787B !default;
-$s-color-neutral-tertiary: #909296 !default;
-$s-color-neutral-inactive: #C8C9C7 !default;
-$s-color-neutral-border: #D9D9D6 !default;
-$s-color-neutral-hover: #F0F0F0 !default;
-$s-color-neutral-placeholder: #F1F3F4 !default;
-// UI events colors
-$s-color-error: #F0000B !default;
-// Basic colors
-$s-color-basic-black: #2D2926 !default;
-$s-color-basic-white: #FFF !default;
+// Primary theme colors
+$s-color-theme-accent: #D0021B !default; // Primary button, links
+$s-color-theme-accent-hover: #D51252 !default; // Primary button hover
+$s-color-theme-accent-pressed: #C00F4A !default; // Primary button pressed
+$s-color-theme-accent-focused: #AA0E42 !default; // Primary button focused
+// Secondary theme colors
+$s-color-theme-secondary-hover: #F3CCDA !default; // Datepicker values
+// Base content colors
+$s-color-base-content-primary: #2D2926 !default;
+$s-color-base-content-secondary: #53565A !default; // not used
+$s-color-base-content-tertiary: #75787B !default;
+$s-color-base-content-quaternary: #A3A4A8 !default;
+// Base misc colors
+$s-color-base-background: #F5F7F8 !default;
+$s-color-base-dark-background: #4E4E4E !default; // not used
+$s-color-base-border-primary: #DDE0E1 !default;
+$s-color-base-border-secondary: #ECEFF0 !default;
+$s-color-base-background-hover: #ECEFF0 !default;
+$s-color-base-disabled: #F5F7F8 !default;
+$s-color-base-on-disabled: #75787B !default; // not used
+$s-color-base-on-accent: #FFFFFF !default;
+// Utility colors
+$s-color-utility-body: #FFFFFF !default; // not used
+$s-color-utility-surface: #FFFFFF !default;
+$s-color-utility-overlay: rgba(0, 0, 0, 0.45) !default; // not used
+// Status colors
+$s-color-status-success: #009900 !default; // not used
+$s-color-status-warning: #FF9900 !default; // not used
+$s-color-status-error: #FF0000 !default;
+$s-color-status-success-background: #CCEDCC !default; // not used
+$s-color-status-warning-background: #FFE3B8 !default; // not used
+$s-color-status-error-background: #FFF9FA !default;
+
 // Size
 $s-size-big: 56px !default;
 $s-size-medium: 40px !default;
@@ -60,19 +74,30 @@ $--breakpoints-spec: (
 );
 
 :root {
-  --s-color-main-brand: #{$s-color-main-brand};
-  --s-color-main-hover: #{$s-color-main-hover};
-  --s-color-main-inactive: #{$s-color-main-inactive};
-  --s-color-main-hover-light: #{$s-color-main-hover-light};
-  --s-color-main-base: #{$s-color-main-base};
-  --s-color-neutral-primary: #{$s-color-neutral-primary};
-  --s-color-neutral-secondary: #{$s-color-neutral-secondary};
-  --s-color-neutral-tertiary: #{$s-color-neutral-tertiary};
-  --s-color-neutral-inactive: #{$s-color-neutral-inactive};
-  --s-color-neutral-border: #{$s-color-neutral-border};
-  --s-color-neutral-hover: #{$s-color-neutral-hover};
-  --s-color-neutral-placeholder: #{$s-color-neutral-placeholder};
-  --s-color-error: #{$s-color-error};
-  --s-color-basic-black: #{$s-color-basic-black};
-  --s-color-basic-white: #{$s-color-basic-white};
+  --s-color-theme-accent: #{$s-color-theme-accent};
+  --s-color-theme-accent-hover: #{$s-color-theme-accent-hover};
+  --s-color-theme-accent-pressed: #{$s-color-theme-accent-pressed};
+  --s-color-theme-accent-focused: #{$s-color-theme-accent-focused};
+  --s-color-theme-secondary-hover: #{$s-color-theme-secondary-hover};
+  --s-color-base-content-primary: #{$s-color-base-content-primary};
+  --s-color-base-content-secondary: #{$s-color-base-content-secondary};
+  --s-color-base-content-tertiary: #{$s-color-base-content-tertiary};
+  --s-color-base-content-quaternary: #{$s-color-base-content-quaternary};
+  --s-color-base-background: #{$s-color-base-background};
+  --s-color-base-dark-background: #{$s-color-base-dark-background};
+  --s-color-base-border-primary: #{$s-color-base-border-primary};
+  --s-color-base-border-secondary: #{$s-color-base-border-secondary};
+  --s-color-base-background-hover: #{$s-color-base-background-hover};
+  --s-color-base-disabled: #{$s-color-base-disabled};
+  --s-color-base-on-disabled: #{$s-color-base-on-disabled};
+  --s-color-base-on-accent: #{$s-color-base-on-accent};
+  --s-color-utility-body: #{$s-color-utility-body};
+  --s-color-utility-surface: #{$s-color-utility-surface};
+  --s-color-utility-overlay: #{$s-color-utility-overlay};
+  --s-color-status-success: #{$s-color-status-success};
+  --s-color-status-warning: #{$s-color-status-warning};
+  --s-color-status-error: #{$s-color-status-error};
+  --s-color-status-success-background: #{$s-color-status-success-background};
+  --s-color-status-warning-background: #{$s-color-status-warning-background};
+  --s-color-status-error-background: #{$s-color-status-error-background};
 }

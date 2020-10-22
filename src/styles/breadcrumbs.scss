@@ -1,27 +1,27 @@
 @import "./variables";
 
 .el-breadcrumb__separator {
-  color: var(--s-color-neutral-secondary);
+  color: var(--s-color-base-content-tertiary);
   font-weight: normal;
 }
 .el-breadcrumb__inner {
-  color: var(--s-color-neutral-secondary);
+  color: var(--s-color-base-content-tertiary);
   &.is-link {
-    color: var(--s-color-neutral-secondary);
+    color: var(--s-color-base-content-tertiary);
     font-weight: normal;
     &:hover {
-      color: var(--s-color-main-brand);
+      color: var(--s-color-theme-accent);
     }
   }
   a:hover {
-    color: var(--s-color-main-brand);
+    color: var(--s-color-theme-accent);
   }
 }
 .el-breadcrumb__item:last-child {
   pointer-events: none;
   .el-breadcrumb__inner {
     &, &:hover, & a, & a:hover {
-      color: var(--s-color-basic-black);
+      color: var(--s-color-base-content-primary);
     }
   }
 }

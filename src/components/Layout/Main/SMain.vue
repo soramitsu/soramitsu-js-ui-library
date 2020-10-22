@@ -1,5 +1,5 @@
 <template>
-  <el-main>
+  <el-main class="s-main">
     <slot></slot>
   </el-main>
 </template>
@@ -11,9 +11,3 @@ import { Vue, Component } from 'vue-property-decorator'
 export default class SMain extends Vue {
 }
 </script>
-
-<style lang="scss">
-.el-main {
-  padding: 32px;
-}
-</style>
