@@ -1,5 +1,15 @@
 <template>
-  <el-radio
+  <el-radio-button v-if="isRadioButton"
+    :class="computedClasses"
+    v-model="model"
+    :label="label"
+    :disabled="disabled"
+    :border="border"
+    :name="name"
+  >
+    <slot></slot>
+  </el-radio-button>
+  <el-radio v-else
     :class="computedClasses"
     v-model="model"
     :label="label"
@@ -27,6 +37,10 @@ export default class SRadio extends Vue {
    */
   @Prop() readonly label!: string | number | boolean
   /**
+   * Change redio element to radio button
+   */
+  @Prop({ default: false, type: Boolean }) readonly isRadioButton!: boolean
+  /**
    * Disabled state of the radio component.
    *
    * `false` by default
@@ -41,7 +55,7 @@ export default class SRadio extends Vue {
   /**
    * Native name property
    */
-  @Prop({ default: '', type: String }) readonly name!: boolean
+  @Prop({ default: '', type: String }) readonly name!: string
   /**
    * Size of the radio item. Possible values: `"big"`, `"medium"`, `"small"`.
    *
