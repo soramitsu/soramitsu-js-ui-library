@@ -16,10 +16,3 @@ export default class SMenuItemGroup extends Vue {
   @Prop({ default: '', type: String }) readonly title!: string
 }
 </script>
-
-<style lang="scss">
-.el-menu-item-group > ul > .el-menu-item:not(:last-child),
-.el-menu-item-group__title {
-  margin-bottom: 8px;
-}
-</style>

@@ -1,9 +1,9 @@
 @import "./variables";
 
 .s-card {
-  color: var(--s-color-basic-black);
+  color: var(--s-color-base-content-primary);
   border-radius: 8px;
-  border-color: var(--s-color-neutral-border);
+  border-color: var(--s-color-base-border-primary);
   &.s-clickable {
     cursor: pointer;
   }
