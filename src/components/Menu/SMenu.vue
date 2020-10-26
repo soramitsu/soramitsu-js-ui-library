@@ -6,6 +6,7 @@
     :mode="mode"
     :collapse="collapse"
     :background-color="backgroundColor"
+    :box-shadow="boxShadow"
     :text-color="textColor"
     :active-text-color="activeTextColor"
     :default-active="defaultActive"
@@ -48,6 +49,10 @@ export default class SMenu extends Vue {
    * By default it's set to `"#2D2926"`
    */
   @Prop({ default: '#2D2926', type: String }) readonly backgroundColor!: string
+  /**
+   * Menu shadow if it exists
+   */
+  @Prop({ default: 'none', type: String }) readonly boxShadow!: string
   /**
    * Text color of menu in hex format.
    *
@@ -104,6 +109,9 @@ export default class SMenu extends Vue {
 
   get computedStyles (): object {
     const styles = {} as any
+    if (this.boxShadow) {
+      styles['--s-menu-box-shadow'] = this.boxShadow
+    }
     if (this.activeHoverColor) {
       styles['--s-menu-color-hover'] = this.activeHoverColor
     }

@@ -1,6 +1,7 @@
 $margin-bottom-menu-item: 8px;
 
 .s-menu {
+  box-shadow: var(--s-menu-box-shadow);
   padding: 20px 12px;
   &:not(.el-menu--horizontal) > :not(:last-child) {
     margin-bottom: $margin-bottom-menu-item;
