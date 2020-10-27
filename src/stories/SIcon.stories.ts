@@ -21,7 +21,7 @@ export const configurable = () => ({
       default: select('Name', Object.values(Icons), Icons.Activity)
     },
     size: {
-      default: number('Content position', 16)
+      default: number('Icon Size', 16)
     }
   }
 })
