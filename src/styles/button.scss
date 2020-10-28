@@ -120,24 +120,28 @@
   background-color: var(--s-color-base-background);
   border-color: var(--s-color-base-background);
   border-radius: 8px;
-  &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+  &:hover, &:active, &:focus {
     color: var(--s-color-base-content-primary);
     background-color: var(--s-color-base-background-hover);
     border-color: var(--s-color-base-background-hover);
   }
   &:disabled, &:disabled:hover {
     color: var(--s-color-base-content-quaternary);
+    background-color: var(--s-color-base-disabled);
+    border-color: var(--s-color-base-disabled);
   }
   &.s-alternative {
     background-color: var(--s-color-base-on-accent);
     border-color: var(--s-color-base-border-primary);
-    &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+    &:hover, &:active, &:focus {
       color: var(--s-color-base-content-primary);
       background-color: var(--s-color-base-background);
       border-color: var(--s-color-base-background);
     }
     &:disabled, &:disabled:hover {
       color: var(--s-color-base-content-quaternary);
+      background-color: var(--s-color-base-disabled);
+      border-color: var(--s-color-base-disabled);
     }
   }
 }
