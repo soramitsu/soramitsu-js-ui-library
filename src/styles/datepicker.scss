@@ -252,20 +252,20 @@
 .el-date-table.is-week-mode .el-date-table__row {
   &.current, &:hover {
     div {
-      background-color: var(--s-color-theme-secondary-hover);
+      background-color: var(--s-color-base-background-hover);
     }
   }
 }
 .el-month-table td.in-range div {
-  background-color: var(--s-color-theme-secondary-hover);
+  background-color: var(--s-color-base-background-hover);
   &:hover {
-    background-color: var(--s-color-theme-secondary-hover);
+    background-color: var(--s-color-base-background-hover);
   }
 }
 .el-date-table td.in-range div {
-  background-color: var(--s-color-theme-secondary-hover);
+  background-color: var(--s-color-base-background-hover);
   &:hover {
-    background-color: var(--s-color-theme-secondary-hover);
+    background-color: var(--s-color-base-background-hover);
   }
 }
 .el-date-range-picker__content.is-left {
