@@ -1,6 +1,6 @@
 import { withKnobs } from '@storybook/addon-knobs'
 
-import { Colors } from '../../types'
+import { AccentColors, ContentColors, MiscColors, SecondaryColors, StatusColors, TertiaryButtonColors, UtilityColors } from '../../types'
 import { SRow, SButton, SInput, SCol, SDivider } from '../../components'
 import { differentTypeButtonsData } from '../SButton.stories'
 
@@ -10,10 +10,20 @@ export default {
   excludeStories: /.*Data$/
 }
 
-export const colorsData = Object.values(Colors).map(color => ({
-  label: color,
-  value: getComputedStyle(document.documentElement).getPropertyValue(color)
-}))
+const getColorsData = (colors) => Object.values(colors).map(color => {
+  const value = getComputedStyle(document.documentElement).getPropertyValue(`--s-color-${color}`)
+  const isRgb = value.includes('rgb')
+  return { label: color, value, isRgb }
+})
+export const colorsSectionsData = [
+  { title: 'Theme / Accent', colors: getColorsData(AccentColors) },
+  { title: 'Theme / Secondary', colors: getColorsData(SecondaryColors) },
+  { title: 'Base / Content', colors: getColorsData(ContentColors) },
+  { title: 'Base / Misc.', colors: getColorsData(MiscColors) },
+  { title: 'Utility', colors: getColorsData(UtilityColors) },
+  { title: 'Status', colors: getColorsData(StatusColors) },
+  { title: 'Button / Tertiary', colors: getColorsData(TertiaryButtonColors) }
+]
 export const themeInputsData = [
   'text',
   'textarea',
@@ -25,13 +35,22 @@ export const configurable = () => ({
              <s-row>
                <s-col
                  class="s-flex"
-                 style="align-items: center;"
-                 v-for="color in colors"
-                 :key="color.label"
-                 :span="4"
+                 style="flex-direction: column;"
+                 v-for="section in sections"
+                 :key="section.title"
+                 :lg="4" :md="4" :sm="6" :xs="12"
                >
-                 <span style="padding-right: 10px;">{{ color.label }}</span>
-                 <el-color-picker size="small" v-model="color.value" @change="(value) => handleColorChange(color.label, value)" />
+                 <span style="padding-right: 10px; font-weight: bold;">{{ section.title }}</span>
+                 <div v-for="color in section.colors" :key="color.label" class="s-flex" style="align-items: center;">
+                   <span style="padding-right: 10px;">{{ color.label }}</span>
+                   <el-color-picker
+                     style="flex: 1; text-align: right; padding-right: 20%;"
+                     :show-alpha="color.isRgb"
+                     size="small"
+                     v-model="color.value"
+                     @change="(value) => handleColorChange(color.label, value)"
+                   />
+                 </div>
                </s-col>
              </s-row>
              <s-divider />
@@ -59,7 +78,7 @@ export const configurable = () => ({
              <h4>You can also check another components, these colors are applied to the whole library</h4>
              </div>`,
   data: () => ({
-    colors: colorsData,
+    sections: colorsSectionsData,
     buttons: differentTypeButtonsData,
     inputs: themeInputsData
   }),
