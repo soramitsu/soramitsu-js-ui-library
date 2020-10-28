@@ -7,10 +7,16 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
-import { DividerDirection, ContentPosition } from './consts'
+import { DividerDirection, ContentPosition, DividerType } from './consts'
 
 @Component
 export default class SDivider extends Vue {
+  /**
+   * Divider type property. Can be `"primary"` or `"secondary"`.
+   *
+   * By default it's set to `"secondary"`
+   */
+  @Prop({ default: DividerType.SECONDARY, type: String }) readonly type!: string
   /**
    * Divider direction property. Can be `"horizontal"` or `"vertical"`.
    *
@@ -23,5 +29,13 @@ export default class SDivider extends Vue {
    * By default it's set to `"center"`
    */
   @Prop({ default: ContentPosition.CENTER, type: String }) readonly contentPosition!: string
+
+  mounted (): void {
+    this.$watch('type', (value) => {
+      const el = this.$el as Element
+      el.classList.remove('s-divider-primary', 's-divider-secondary')
+      el.classList.add(`s-divider-${this.type}`)
+    }, { immediate: true })
+  }
 }
 </script>
