@@ -1,7 +1,7 @@
 @import "./variables";
 
 .el-form-item {
-  margin-bottom: 26px;
+  margin-bottom: 12px;
   &__content {
     line-height: 20px;
     > button {
@@ -12,9 +12,10 @@
     color: var(--s-color-base-content-primary);
   }
   &.is-error {
-    margin-bottom: 6px;
+    margin-bottom: 0;
     > .el-form-item__content {
       > .el-form-item__error {
+        margin-bottom: 6px;
         position: relative;
         padding-top: 8px;
         padding-left: 30px;
@@ -23,7 +24,7 @@
           content: '';
         }
       }
-      > [class^="s-input"]:not(.disabled) {
+      > [class^="s-input"]:not(.s-disabled) {
         .s-placeholder {
           color: var(--s-color-status-error);
           background-color: var(--s-color-status-error-background);
@@ -45,7 +46,7 @@
             border-color: var(--s-color-status-error);
           }
         }
-        &.focused {
+        &.s-focused {
           .s-placeholder,
           .el-input > input,
           .el-textarea > textarea {
@@ -60,7 +61,7 @@
     }
     .s-icon-error {
       position: absolute;
-      bottom: 0;
+      bottom: 6px;
       left: 4px;
       font-size: 16px;
       color: var(--s-color-status-error);

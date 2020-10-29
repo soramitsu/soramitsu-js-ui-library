@@ -35,10 +35,10 @@ $color-ide-boolean: #0000FF;
 
 .jsoneditor {
   border: none !important;
-  font-family: $font-family-mono;
+  font-family: $s-font-family-mono;
   .ace-jsoneditor {
     *, textarea.jsoneditor-text * {
-      font-family: $font-family-mono;
+      font-family: $s-font-family-mono;
     }
     .ace_fold {
       border: none;
@@ -99,10 +99,10 @@ $color-ide-boolean: #0000FF;
   }
   .ace_editor .ace_content,
   .ace_gutter .ace_gutter-cell {
-    font-family: $font-family-mono;
+    font-family: $s-font-family-mono;
   }
   .ace_tooltip {
-    font-family: $font-family-default;
+    font-family: $s-font-family-default;
     background: var(--s-color-base-content-primary);
     border-color: var(--s-color-base-content-primary);
     color: var(--s-color-base-on-accent);

@@ -107,17 +107,17 @@ $radio-button-border-color: var(--s-color-theme-accent);
     &.is-disabled {
       .el-radio__inner {
         background-color: var(--ss-color-base-background);
-        border-color: var(--s-color-base-border-primary);
+        border-color: var(--s-color-base-on-disabled);
       }
       &.is-checked .el-radio__inner {
         background-color: var(--s-color-base-background);
-        border-color: var(--s-color-base-border-primary);
+        border-color: var(--s-color-base-on-disabled);
         &::after {
-          background-color: var(--s-color-base-content-quaternary);
+          background-color: var(--s-color-base-on-disabled);
         }
       }
       & + span.el-radio__label {
-        color: var(--s-color-base-content-quaternary);
+        color: var(--s-color-base-on-disabled);
       }
     }
   }
@@ -156,13 +156,13 @@ $radio-button-border-color: var(--s-color-theme-accent);
     }
     &.is-disabled {
       #{$radio-button-class}__inner {
-        color: var(--s-color-base-content-quaternary);
+        color: var(--s-color-base-on-disabled);
       }
     }
     &.is-disabled,
     &.is-disabled:hover {
       #{$radio-button-class}__inner {
-        border-color: var(--s-color-base-border-primary);
+        border-color: var(--s-color-base-on-disabled);
       }
     }
     &.is-active {
@@ -180,8 +180,8 @@ $radio-button-border-color: var(--s-color-theme-accent);
       &.is-disabled,
       &.is-disabled:hover {
         #{$radio-button-class}__inner {
-          background-color: var(--s-color-base-content-quaternary);
-          border-color: var(--s-color-base-content-quaternary);
+          background-color: var(--s-color-base-on-disabled);
+          border-color: var(--s-color-base-on-disabled);
         }
       }
     }

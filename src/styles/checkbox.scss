@@ -4,7 +4,7 @@
 .el-checkbox {
   color: var(--s-color-base-content-primary);
   &.is-bordered {
-    &, &.is-disabled {
+    &, &.is-disabled, &.is-disabled.is-checked {
       border-color: var(--s-color-base-border-primary);
     }
     &.is-checked {
@@ -83,7 +83,7 @@
       border-color: var(--s-color-base-border-primary);
     }
     & + span.el-checkbox__label {
-      color: var(--s-color-base-content-quaternary);
+      color: var(--s-color-base-on-disabled);
     }
   }
   &.is-focus > .el-checkbox__inner {
@@ -98,7 +98,7 @@
       background-color: var(--s-color-base-disabled);
       border-color: var(--s-color-base-border-primary);
       &::after {
-        border-color: var(--s-color-base-content-quaternary);
+        border-color: var(--s-color-base-on-disabled);
       }
     }
     & + .el-checkbox__label {

@@ -2,7 +2,7 @@
 
 [class^="el-"]:not(i):not([class*='el-icon']),
 [class*="el-"]:not(i):not([class*='el-icon']) {
-  font-family: $font-family-default;
+  font-family: $s-font-family-default;
 }
 
 html {
@@ -16,37 +16,37 @@ html {
 
 /* Typography */
 h1 {
-  font-family: $font-family-default;
+  font-family: $s-font-family-default;
   font-weight: normal;
   font-size: 36px;
 }
 
 h2 {
-  font-family: $font-family-default;
+  font-family: $s-font-family-default;
   font-weight: normal;
   font-size: 30px;
 }
 
 h3 {
-  font-family: $font-family-default;
+  font-family: $s-font-family-default;
   font-weight: normal;
   font-size: 24px;
 }
 
 h4 {
-  font-family: $font-family-default;
+  font-family: $s-font-family-default;
   font-weight: normal;
   font-size: 18px;
 }
 
 h5 {
-  font-family: $font-family-default;
+  font-family: $s-font-family-default;
   font-weight: bold;
   font-size: 16px;
 }
 
 h6 {
-  font-family: $font-family-default;
+  font-family: $s-font-family-default;
   font-weight: bold;
   font-size: 14px;
 }

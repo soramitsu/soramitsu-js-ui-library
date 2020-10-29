@@ -10,30 +10,95 @@ export enum Direction {
 }
 
 export enum Colors {
-  ThemeAccent = '--s-color-theme-accent',
-  ThemeAccentHover = '--s-color-theme-accent-hover',
-  ThemeAccentPressed = '--s-color-theme-accent-pressed',
-  ThemeAccentFocused = '--s-color-theme-accent-focused',
-  ThemeSecondaryHover = '--s-color-theme-secondary-hover',
-  BaseContentPrimary = '--s-color-base-content-primary',
-  BaseContentSecondary = '--s-color-base-content-secondary',
-  BaseContentTertiary = '--s-color-base-content-tertiary',
-  BaseContentQuaternary = '--s-color-base-content-quaternary',
-  BaseBackground = '--s-color-base-background',
-  BaseDarkBackground = '--s-color-base-dark-background',
-  BaseBorderPrimary = '--s-color-base-border-primary',
-  BaseBorderSecondary = '--s-color-base-border-secondary',
-  BaseBackgroundHover = '--s-color-base-background-hover',
-  BaseDisabled = '--s-color-base-disabled',
-  BaseOnDisabled = '--s-color-base-on-disabled',
-  BaseOnAccent = '--s-color-base-on-accent',
-  UtilityBody = '--s-color-utility-body',
-  UtilitySurface = '--s-color-utility-surface',
-  UtilityOverlay = '--s-color-utility-overlay',
-  StatusSuccess = '--s-color-status-success',
-  StatusWarning = '--s-color-status-warning',
-  StatusError = '--s-color-status-error',
-  StatusSuccessBackground = '--s-color-status-success-background',
-  StatusWarningBackground = '--s-color-status-warning-background',
-  StatusErrorBackground = '--s-color-status-error-background'
+  ThemeAccent = 'theme-accent',
+  ThemeAccentHover = 'theme-accent-hover',
+  ThemeAccentPressed = 'theme-accent-pressed',
+  ThemeAccentFocused = 'theme-accent-focused',
+  ThemeSecondary = 'theme-secondary',
+  ThemeSecondaryHover = 'theme-secondary-hover',
+  ThemeSecondaryPressed = 'theme-secondary-pressed',
+  ThemeSecondaryFocused = 'theme-secondary-focused',
+  BaseContentPrimary = 'base-content-primary',
+  BaseContentSecondary = 'base-content-secondary',
+  BaseContentTertiary = 'base-content-tertiary',
+  BaseContentQuaternary = 'base-content-quaternary',
+  BaseBackground = 'base-background',
+  BaseDarkBackground = 'base-dark-background',
+  BaseBorderPrimary = 'base-border-primary',
+  BaseBorderSecondary = 'base-border-secondary',
+  BaseBackgroundHover = 'base-background-hover',
+  BaseDisabled = 'base-disabled',
+  BaseOnDisabled = 'base-on-disabled',
+  BaseOnAccent = 'base-on-accent',
+  UtilityBody = 'utility-body',
+  UtilitySurface = 'utility-surface',
+  UtilityOverlay = 'utility-overlay',
+  StatusSuccess = 'status-success',
+  StatusWarning = 'status-warning',
+  StatusError = 'status-error',
+  StatusSuccessBackground = 'status-success-background',
+  StatusWarningBackground = 'status-warning-background',
+  StatusErrorBackground = 'status-error-background',
+  ButtonTertiaryColor = 'button-tertiary-color',
+  ButtonTertiaryColorActive = 'button-tertiary-color-active',
+  ButtonTertiaryBackground = 'button-tertiary-background',
+  ButtonTertiaryBackgroundHover = 'button-tertiary-background-hover',
+  ButtonTertiaryBackgroundPressed = 'button-tertiary-background-pressed',
+  ButtonTertiaryBackgroundFocused = 'button-tertiary-background-focused'
+}
+
+export enum AccentColors {
+  ThemeAccent = Colors.ThemeAccent,
+  ThemeAccentHover = Colors.ThemeAccentHover,
+  ThemeAccentPressed = Colors.ThemeAccentPressed,
+  ThemeAccentFocused = Colors.ThemeAccentFocused
+}
+
+export enum SecondaryColors {
+  ThemeSecondary = Colors.ThemeSecondary,
+  ThemeSecondaryHover = Colors.ThemeSecondaryHover,
+  ThemeSecondaryPressed = Colors.ThemeSecondaryPressed,
+  ThemeSecondaryFocused = Colors.ThemeSecondaryFocused
+}
+
+export enum ContentColors {
+  BaseContentPrimary = Colors.BaseContentPrimary,
+  BaseContentSecondary = Colors.BaseContentSecondary,
+  BaseContentTertiary = Colors.BaseContentTertiary,
+  BaseContentQuaternary = Colors.BaseContentQuaternary
+}
+
+export enum MiscColors {
+  BaseBackground = Colors.BaseBackground,
+  BaseDarkBackground = Colors.BaseDarkBackground,
+  BaseBorderPrimary = Colors.BaseBorderPrimary,
+  BaseBorderSecondary = Colors.BaseBorderSecondary,
+  BaseBackgroundHover = Colors.BaseBackgroundHover,
+  BaseDisabled = Colors.BaseDisabled,
+  BaseOnDisabled = Colors.BaseOnDisabled,
+  BaseOnAccent = Colors.BaseOnAccent
+}
+
+export enum UtilityColors {
+  UtilityBody = Colors.UtilityBody,
+  UtilitySurface = Colors.UtilitySurface,
+  UtilityOverlay = Colors.UtilityOverlay
+}
+
+export enum StatusColors {
+  StatusSuccess = Colors.StatusSuccess,
+  StatusWarning = Colors.StatusWarning,
+  StatusError = Colors.StatusError,
+  StatusSuccessBackground = Colors.StatusSuccessBackground,
+  StatusWarningBackground = Colors.StatusWarningBackground,
+  StatusErrorBackground = Colors.StatusErrorBackground
+}
+
+export enum TertiaryButtonColors {
+  ButtonTertiaryColor = Colors.ButtonTertiaryColor,
+  ButtonTertiaryColorActive = Colors.ButtonTertiaryColorActive,
+  ButtonTertiaryBackground = Colors.ButtonTertiaryBackground,
+  ButtonTertiaryBackgroundHover = Colors.ButtonTertiaryBackgroundHover,
+  ButtonTertiaryBackgroundPressed = Colors.ButtonTertiaryBackgroundPressed,
+  ButtonTertiaryBackgroundFocused = Colors.ButtonTertiaryBackgroundFocused
 }

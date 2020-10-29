@@ -37,9 +37,9 @@ export default class SButton extends Vue {
   /**
    * Type of button. Possible values: `"primary"`, `"secondary"`, `"tertiary"`, `"action"`, `"link"`.
    *
-   * By default it's set to `"primary"`
+   * By default it's set to `"secondary"`
    */
-  @Prop({ default: ButtonTypes.PRIMARY, type: String }) readonly type!: string
+  @Prop({ default: ButtonTypes.SECONDARY, type: String }) readonly type!: string
   /**
    * Rounded property for `type="action"` buttons.
    *
@@ -49,9 +49,9 @@ export default class SButton extends Vue {
   /**
    * Size of button. Possible values: `"big"`, `"medium"`, `"small"`.
    *
-   * By default it's set to `"big"`
+   * By default it's set to `"medium"`
    */
-  @Prop({ default: ButtonSize.BIG, type: String }) readonly size!: string
+  @Prop({ default: ButtonSize.MEDIUM, type: String }) readonly size!: string
   /**
    * Icon name from icon collection of this library
    */
