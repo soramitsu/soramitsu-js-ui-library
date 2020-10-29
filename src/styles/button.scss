@@ -1,11 +1,11 @@
 @import "./variables";
 
-$s-color-button-tertiary-color: var(--s-color-base-content-primary);
-$s-color-button-tertiary-color-active: var(--s-color-theme-accent);
-$s-color-button-tertiary-background: var(--s-color-base-background);
-$s-color-button-tertiary-background-hover: var(--s-color-base-background);
-$s-color-button-tertiary-background-pressed: var(--s-color-base-background);
-$s-color-button-tertiary-background-focused: var(--s-color-base-background);
+$s-color-button-tertiary-color: var(--s-color-base-content-primary) !default;
+$s-color-button-tertiary-color-active: var(--s-color-theme-accent) !default;
+$s-color-button-tertiary-background: var(--s-color-base-background) !default;
+$s-color-button-tertiary-background-hover: var(--s-color-base-background) !default;
+$s-color-button-tertiary-background-pressed: var(--s-color-base-background) !default;
+$s-color-button-tertiary-background-focused: var(--s-color-base-background) !default;
 
 :root {
   --s-color-button-tertiary-color: #{$s-color-button-tertiary-color};
