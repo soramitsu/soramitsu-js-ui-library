@@ -16,6 +16,11 @@ export default {
       file: 'lib/soramitsu-js-ui.esm.js',
       format: 'esm',
       sourcemap: true
+    }, {
+      name: 'SoramitsuJsUiUmd',
+      format: 'umd',
+      file: 'lib/soramitsu-js-ui.umd.js',
+      sourcemap: true
     }
   ],
   external: [
