@@ -1,5 +1,4 @@
 @import "./variables";
-@import "./icons";
 
 .el-collapse {
   border-top-color: var(--s-color-base-border-secondary);
@@ -25,7 +24,7 @@
       border-bottom-color: transparent;
     }
     .el-icon-arrow-right {
-      font-family: 'soramitsu-icons' !important;
+      font-family: $s-font-family-icons;
       @extend .s-icon-chevron-bottom;
       font-size: 16px;
       padding: 8px;
