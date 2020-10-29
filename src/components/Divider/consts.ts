@@ -6,4 +6,9 @@ export enum ContentPosition {
   CENTER = 'center'
 }
 
+export enum DividerType {
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary'
+}
+
 export const DividerDirection = Direction
