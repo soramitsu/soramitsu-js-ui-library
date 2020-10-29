@@ -59,9 +59,6 @@
       background-color: var(--s-color-base-background);
       border-radius: 8px;
       height: 32px;
-      padding-top: 2px;
-      padding-left: 2px;
-      padding-right: 2px;
       &::after, .el-tabs__active-bar {
         height: 0;
       }
@@ -75,12 +72,13 @@
         &.is-active {
           color: var(--s-color-base-content-primary);
           background-color: var(--s-color-base-on-accent);
-          box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
+          box-shadow: $s-shadow-surface;
           border-radius: 8px;
+          margin: 2px;
         }
         &:focus.is-focus {
           // TODO: make it more focusable
-          box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
+          box-shadow: $s-shadow-surface;
           border-radius: 8px;
         }
       }

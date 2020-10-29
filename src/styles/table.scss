@@ -109,3 +109,12 @@
   background-color: var(--s-color-theme-accent);
   border-color: var(--s-color-theme-accent);
 }
+.el-table__expand-icon {
+  > .el-icon.el-icon-arrow-right {
+    font-family: $s-font-family-icons;
+    @extend .s-icon-chevron-bottom;
+  }
+  &--expanded {
+    transform: rotate(180deg);
+  }
+}

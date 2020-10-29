@@ -1,5 +1,21 @@
 @import "./variables";
 
+$s-color-button-tertiary-color: var(--s-color-base-content-primary) !default;
+$s-color-button-tertiary-color-active: var(--s-color-theme-accent) !default;
+$s-color-button-tertiary-background: var(--s-color-base-background) !default;
+$s-color-button-tertiary-background-hover: var(--s-color-base-background) !default;
+$s-color-button-tertiary-background-pressed: var(--s-color-base-background) !default;
+$s-color-button-tertiary-background-focused: var(--s-color-base-background) !default;
+
+:root {
+  --s-color-button-tertiary-color: #{$s-color-button-tertiary-color};
+  --s-color-button-tertiary-color-active: #{$s-color-button-tertiary-color-active};
+  --s-color-button-tertiary-background: #{$s-color-button-tertiary-background};
+  --s-color-button-tertiary-background-hover: #{$s-color-button-tertiary-background-hover};
+  --s-color-button-tertiary-background-pressed: #{$s-color-button-tertiary-background-pressed};
+  --s-color-button-tertiary-background-focused: #{$s-color-button-tertiary-background-focused};
+}
+
 .s-loading {
   padding: 12px 17.5px;
   i {
@@ -78,13 +94,23 @@
   }
 }
 .s-tertiary {
-  color: var(--s-color-base-content-primary);
-  border-color: var(--s-color-base-background);
-  background-color: var(--s-color-base-background);
+  color: var(--s-color-button-tertiary-color);
+  border-color: var(--s-color-button-tertiary-background);
+  background-color: var(--s-color-button-tertiary-background);
   &:hover, &:active, &:focus {
-    color: var(--s-color-theme-accent);
-    background-color: var(--s-color-base-background);
-    border-color: var(--s-color-base-background);
+    color: var(--s-color-button-tertiary-color-active);
+  }
+  &:hover {
+    background-color: var(--s-color-button-tertiary-background-hover);
+    border-color: var(--s-color-button-tertiary-background-hover);
+  }
+  &:active {
+    background-color: var(--s-color-button-tertiary-background-pressed);
+    border-color: var(--s-color-button-tertiary-background-pressed);
+  }
+  &:focus {
+    background-color: var(--s-color-button-tertiary-background-focused);
+    border-color: var(--s-color-button-tertiary-background-focused);
   }
   &:disabled, &:disabled:hover {
     color: var(--s-color-base-content-quaternary);
@@ -120,24 +146,28 @@
   background-color: var(--s-color-base-background);
   border-color: var(--s-color-base-background);
   border-radius: 8px;
-  &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+  &:hover, &:active, &:focus {
     color: var(--s-color-base-content-primary);
     background-color: var(--s-color-base-background-hover);
     border-color: var(--s-color-base-background-hover);
   }
   &:disabled, &:disabled:hover {
     color: var(--s-color-base-content-quaternary);
+    background-color: var(--s-color-base-disabled);
+    border-color: var(--s-color-base-disabled);
   }
   &.s-alternative {
     background-color: var(--s-color-base-on-accent);
     border-color: var(--s-color-base-border-primary);
-    &:hover, &:active, &:focus, &:disabled, &:disabled:hover {
+    &:hover, &:active, &:focus {
       color: var(--s-color-base-content-primary);
       background-color: var(--s-color-base-background);
       border-color: var(--s-color-base-background);
     }
     &:disabled, &:disabled:hover {
       color: var(--s-color-base-content-quaternary);
+      background-color: var(--s-color-base-disabled);
+      border-color: var(--s-color-base-disabled);
     }
   }
 }

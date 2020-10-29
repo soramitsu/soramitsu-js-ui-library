@@ -4,7 +4,10 @@ $s-color-theme-accent-hover: #D51252 !default; // Primary button hover
 $s-color-theme-accent-pressed: #C00F4A !default; // Primary button pressed
 $s-color-theme-accent-focused: #AA0E42 !default; // Primary button focused
 // Secondary theme colors
-$s-color-theme-secondary-hover: #F3CCDA !default; // Datepicker values
+$s-color-theme-secondary: #F4E0E8 !default;
+$s-color-theme-secondary-hover: #F3CCDA !default;
+$s-color-theme-secondary-pressed: #F1C0D2 !default;
+$s-color-theme-secondary-focused: #EDABC3 !default;
 // Base content colors
 $s-color-base-content-primary: #2D2926 !default;
 $s-color-base-content-secondary: #53565A !default; // not used
@@ -17,19 +20,27 @@ $s-color-base-border-primary: #DDE0E1 !default;
 $s-color-base-border-secondary: #ECEFF0 !default;
 $s-color-base-background-hover: #ECEFF0 !default;
 $s-color-base-disabled: #F5F7F8 !default;
-$s-color-base-on-disabled: #75787B !default; // not used
+$s-color-base-on-disabled: #75787B !default;
 $s-color-base-on-accent: #FFFFFF !default;
 // Utility colors
-$s-color-utility-body: #FFFFFF !default; // not used
+$s-color-utility-body: #FFFFFF !default;
 $s-color-utility-surface: #FFFFFF !default;
-$s-color-utility-overlay: rgba(0, 0, 0, 0.45) !default; // not used
+$s-color-utility-overlay: rgba(0, 0, 0, 0.45) !default;
 // Status colors
-$s-color-status-success: #009900 !default; // not used
-$s-color-status-warning: #FF9900 !default; // not used
+$s-color-status-success: #009900 !default;
+$s-color-status-warning: #FF9900 !default;
 $s-color-status-error: #FF0000 !default;
-$s-color-status-success-background: #CCEDCC !default; // not used
-$s-color-status-warning-background: #FFE3B8 !default; // not used
+$s-color-status-success-background: #CCEDCC !default;
+$s-color-status-warning-background: #FFE3B8 !default;
 $s-color-status-error-background: #FFF9FA !default;
+// Shadow
+// TODO: use it and discuss colors of these shadows
+$s-shadow-surface: 0px 1px 4px rgba(13, 2, 72, 0.35) !default;
+$s-shadow-tooltip: 0px 1px 4px rgba(13, 2, 72, 0.35) !default;
+$s-shadow-tab: 0px 1px 1px rgba(0, 0, 0, 0.1) !default;
+$s-shadow-dropdown: 0px 4px 8px rgba(19, 19, 19, 0.15) !default;
+$s-shadow-mobile-tap-bar: 0px -4px 8px rgba(19, 19, 19, 0.15) !default;
+$s-shadow-mobile-side-menu: -4px 4px 8px rgba(19, 19, 19, 0.15) !default;
 
 // Size
 $s-size-big: 56px !default;
@@ -39,8 +50,9 @@ $s-size-mini: 24px !default;
 
 $s-border-radius-default: 4px !default;
 // Fonts
-$font-family-default: 'Sora', sans-serif !important;
-$font-family-mono: 'JetBrainsMono', monospace !important;
+$s-font-family-default: 'Sora', sans-serif !important;
+$s-font-family-mono: 'JetBrainsMono', monospace !important;
+$s-font-family-icons: 'soramitsu-icons' !important;
 // Font sizes
 $s-font-size-big: 14px !default;
 $s-font-size-small: 12px !default;
@@ -78,7 +90,10 @@ $--breakpoints-spec: (
   --s-color-theme-accent-hover: #{$s-color-theme-accent-hover};
   --s-color-theme-accent-pressed: #{$s-color-theme-accent-pressed};
   --s-color-theme-accent-focused: #{$s-color-theme-accent-focused};
+  --s-color-theme-secondary: #{$s-color-theme-secondary};
   --s-color-theme-secondary-hover: #{$s-color-theme-secondary-hover};
+  --s-color-theme-secondary-pressed: #{$s-color-theme-secondary-pressed};
+  --s-color-theme-secondary-focused: #{$s-color-theme-secondary-focused};
   --s-color-base-content-primary: #{$s-color-base-content-primary};
   --s-color-base-content-secondary: #{$s-color-base-content-secondary};
   --s-color-base-content-tertiary: #{$s-color-base-content-tertiary};
