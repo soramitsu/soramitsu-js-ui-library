@@ -29,7 +29,7 @@
         <i class="el-icon-arrow-down el-icon--right"></i>
       </s-button>
       <s-tooltip v-else :disabled="!this.$slots.default || willTooltipBeDisabled">
-        <i class="s-icon-more-horizontal"></i>
+        <s-icon :name="icon" />
         <template slot="content">
           <slot></slot>
         </template>
@@ -47,11 +47,13 @@ import { ElDropdown } from 'element-ui/types/dropdown'
 
 import { DropdownType, DropdownSize, DropdownPlacement, DropdownTrigger } from './consts'
 import { ButtonTypes, SButton } from '../Button'
+import { Icons, SIcon } from '../Icon'
 import { STooltip } from '../Tooltip'
 
 @Component({
   components: {
     SButton,
+    SIcon,
     STooltip
   }
 })
@@ -63,6 +65,12 @@ export default class SDropdown extends Vue {
    * By default, it's set to `"default"`
    */
   @Prop({ type: String, default: DropdownType.DEFAULT }) readonly type!: string
+  /**
+   * An icon for dropdown with `type="ellipsis"`.
+   *
+   * By default, it's set to `"more-horizontal"`
+   */
+  @Prop({ type: String, default: Icons.MoreHorizontal }) readonly icon!: string
   /**
    * Button type of dropdown component. It can be used with `type="button"`.
    * Possible values: `"primary"`, `"secondary"`, `"tertiary"`.
