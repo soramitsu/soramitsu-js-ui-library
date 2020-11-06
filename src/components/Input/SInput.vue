@@ -3,7 +3,7 @@
     class="s-input"
     :class="computedClasses"
   >
-    <span v-if="model && size !== inputSize.SMALL" class="s-placeholder">{{ placeholder }}</span>
+    <span v-if="model && isSmallInput" class="s-placeholder">{{ placeholder }}</span>
     <el-input
       ref="el-input"
       :type="computedType"
@@ -23,7 +23,7 @@
       :label="label"
       :accept="accept"
       :tabindex="tabindex"
-      :prefix-icon="size === inputSize.SMALL && prefix"
+      :prefix-icon="isSmallInput && prefix"
       :suffix-icon="suffix"
       @input="handleInput"
       @change="handleChange"
@@ -118,7 +118,7 @@ export default class SInput extends Vue {
    */
   @Prop({ default: '', type: String }) readonly tabindex!: string
   /**
-   * Icon prefix
+   * Icon prefix, works only with small input
    */
   @Prop({ default: '', type: String }) readonly prefix!: string
   /**
@@ -137,7 +137,6 @@ export default class SInput extends Vue {
   focused = false
   autofill = false
   model = this.value
-  inputSize = InputSize
 
   mounted (): void {
     this.$el.addEventListener('animationstart', this.changeAutofillValue)
@@ -168,6 +167,10 @@ export default class SInput extends Vue {
 
   get isTextOrTextareaInput (): boolean {
     return [InputType.TEXT, InputType.TEXTAREA].includes(this.type as InputType)
+  }
+
+  get isSmallInput (): boolean {
+    return this.type === InputType.TEXT && this.size === InputSize.SMALL
   }
 
   get computedClasses (): Array<string> {
