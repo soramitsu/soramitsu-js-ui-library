@@ -29,3 +29,8 @@ export enum InputType {
   URL = 'url',
   WEEK = 'week'
 }
+
+export enum InputSize {
+  SMALL = 'small',
+  MEDIUM = 'medium'
+}

@@ -55,6 +55,18 @@
       border-color: var(--s-color-base-background-hover);
     }
   }
+  &.s-size-small {
+    min-height: $s-size-medium;
+
+    .el-input,
+    .el-textarea {
+      height: 100%;
+      > input,
+      > textarea {
+        height: $s-size-medium;
+      }
+    }
+  }
   &.s-focused {
     .s-placeholder,
     .el-input > input,

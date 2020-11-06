@@ -1,7 +1,7 @@
 import { text, boolean, withKnobs, number, select } from '@storybook/addon-knobs'
 
 import { SInput, SRow, SCol } from '../components'
-import { InputType } from '../components/Input'
+import { InputType, InputSize } from '../components/Input'
 
 export default {
   component: SInput,
@@ -21,6 +21,9 @@ export const configurable = () => ({
                :readonly="readonly"
                :show-text-limit="showTextLimit"
                :maxlength="maxlength"
+               :size="size"
+               :prefix="prefix"
+               :suffix="prefix"
              />`,
   data: () => ({
     input: ''
@@ -29,8 +32,17 @@ export const configurable = () => ({
     type: {
       default: select('Type', Object.values(InputType), InputType.TEXT)
     },
+    size: {
+      default: select('Size', Object.values(InputSize), InputSize.MEDIUM)
+    },
     placeholder: {
       default: text('Placeholder', 'Placeholder')
+    },
+    prefix: {
+      default: text('Prefix icon', 'el-icon-search')
+    },
+    suffix: {
+      default: text('Suffix icon', 'el-icon-search')
     },
     disabled: {
       default: boolean('Disabled', false)

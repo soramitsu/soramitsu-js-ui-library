@@ -3,7 +3,7 @@
     class="s-input"
     :class="computedClasses"
   >
-    <span v-if="model" class="s-placeholder">{{ placeholder }}</span>
+    <span v-if="model && size !== inputSize.SMALL" class="s-placeholder">{{ placeholder }}</span>
     <el-input
       ref="el-input"
       :type="computedType"
@@ -23,6 +23,8 @@
       :label="label"
       :accept="accept"
       :tabindex="tabindex"
+      :prefix-icon="size === inputSize.SMALL && prefix"
+      :suffix-icon="suffix"
       @input="handleInput"
       @change="handleChange"
       @blur="handleBlur"
@@ -40,7 +42,7 @@ import { Vue, Component, Prop, Ref, Inject, Watch } from 'vue-property-decorator
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
-import { Autocomplete, InputType } from './consts'
+import { Autocomplete, InputSize, InputType } from './consts'
 
 @Component
 export default class SInput extends Vue {
@@ -115,6 +117,18 @@ export default class SInput extends Vue {
    * Input tabindex
    */
   @Prop({ default: '', type: String }) readonly tabindex!: string
+  /**
+   * Icon prefix
+   */
+  @Prop({ default: '', type: String }) readonly prefix!: string
+  /**
+   * Icon suffix
+   */
+  @Prop({ default: '', type: String }) readonly suffix!: string
+  /**
+   * Field size, "medium" by default
+   */
+  @Prop({ default: InputSize.MEDIUM, type: String }) readonly size!: InputSize
 
   @Ref('el-input') input!: ElInput
 
@@ -123,6 +137,7 @@ export default class SInput extends Vue {
   focused = false
   autofill = false
   model = this.value
+  inputSize = InputSize
 
   mounted (): void {
     this.$el.addEventListener('animationstart', this.changeAutofillValue)
@@ -169,7 +184,20 @@ export default class SInput extends Vue {
     if (this.autofill) {
       cssClasses.push('s-autofill')
     }
+    if (this.size) {
+      cssClasses.push(this.sizeClass)
+    }
     return cssClasses
+  }
+
+  get sizeClass (): string {
+    switch (this.size) {
+      case InputSize.SMALL:
+        return 's-size-small'
+      case InputSize.MEDIUM:
+      default:
+        return ''
+    }
   }
 
   get computedType (): string {
