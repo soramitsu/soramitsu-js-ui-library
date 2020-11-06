@@ -23,7 +23,7 @@ export const configurable = () => ({
                :maxlength="maxlength"
                :size="size"
                :prefix="prefix"
-               :suffix="prefix"
+               :suffix="suffix"
              />`,
   data: () => ({
     input: ''
