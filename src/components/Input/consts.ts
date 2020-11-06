@@ -31,6 +31,6 @@ export enum InputType {
 }
 
 export enum InputSize {
-  SMALL = 'small',
-  MEDIUM = 'medium'
+  MEDIUM = 'medium',
+  BIG = 'BIG'
 }

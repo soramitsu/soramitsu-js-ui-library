@@ -3,7 +3,7 @@
     class="s-input"
     :class="computedClasses"
   >
-    <span v-if="model && isSmallInput" class="s-placeholder">{{ placeholder }}</span>
+    <span v-if="model && isMediumInput" class="s-placeholder">{{ placeholder }}</span>
     <el-input
       ref="el-input"
       :type="computedType"
@@ -23,7 +23,7 @@
       :label="label"
       :accept="accept"
       :tabindex="tabindex"
-      :prefix-icon="isSmallInput && prefix"
+      :prefix-icon="isMediumInput && prefix"
       :suffix-icon="suffix"
       @input="handleInput"
       @change="handleChange"
@@ -118,7 +118,7 @@ export default class SInput extends Vue {
    */
   @Prop({ default: '', type: String }) readonly tabindex!: string
   /**
-   * Icon prefix, works only with small input
+   * Icon prefix, works only with medium input
    */
   @Prop({ default: '', type: String }) readonly prefix!: string
   /**
@@ -126,9 +126,9 @@ export default class SInput extends Vue {
    */
   @Prop({ default: '', type: String }) readonly suffix!: string
   /**
-   * Field size, "medium" by default
+   * Field size, "big" by default
    */
-  @Prop({ default: InputSize.MEDIUM, type: String }) readonly size!: InputSize
+  @Prop({ default: InputSize.BIG, type: String }) readonly size!: InputSize
 
   @Ref('el-input') input!: ElInput
 
@@ -169,8 +169,8 @@ export default class SInput extends Vue {
     return [InputType.TEXT, InputType.TEXTAREA].includes(this.type as InputType)
   }
 
-  get isSmallInput (): boolean {
-    return this.type === InputType.TEXT && this.size === InputSize.SMALL
+  get isMediumInput (): boolean {
+    return this.type === InputType.TEXT && this.size === InputSize.MEDIUM
   }
 
   get computedClasses (): Array<string> {
@@ -195,9 +195,9 @@ export default class SInput extends Vue {
 
   get sizeClass (): string {
     switch (this.size) {
-      case InputSize.SMALL:
-        return 's-size-small'
       case InputSize.MEDIUM:
+        return 's-size-medium'
+      case InputSize.BIG:
       default:
         return ''
     }

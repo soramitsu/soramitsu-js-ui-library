@@ -33,7 +33,7 @@ export const configurable = () => ({
       default: select('Type', Object.values(InputType), InputType.TEXT)
     },
     size: {
-      default: select('Size', Object.values(InputSize), InputSize.MEDIUM)
+      default: select('Size', Object.values(InputSize), InputSize.BIG)
     },
     placeholder: {
       default: text('Placeholder', 'Placeholder')
