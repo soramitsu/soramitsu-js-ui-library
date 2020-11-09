@@ -11,7 +11,7 @@
     :modal-append-to-body="modalAppendToBody"
     :append-to-body="appendToBody"
     :lock-scroll="lockScroll"
-    :custom-class="customClass"
+    :class="computedClasses"
     :close-on-click-modal="closeOnClickModal"
     :close-on-press-escape="closeOnEsc"
     :before-close="beforeClose"
@@ -30,6 +30,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
 import elementResizeDetectorMaker from 'element-resize-detector'
+import { BorderRadius } from './consts'
 
 @Component
 export default class SDialog extends Vue {
@@ -91,6 +92,12 @@ export default class SDialog extends Vue {
    */
   @Prop({ default: true, type: Boolean }) readonly lockScroll!: boolean
   /**
+   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
+   *
+   * By default it's set to `"small"`
+   */
+  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
+  /**
    * Custom CSS class for the dialog component
    */
   @Prop({ default: '', type: String }) readonly customClass!: string
@@ -146,6 +153,25 @@ export default class SDialog extends Vue {
   @Watch('model')
   private handleValueChange (value: boolean): void {
     this.$emit('update:visible', value)
+  }
+
+  get computedBorderRadius (): string {
+    if (this.borderRadius === BorderRadius.SMALL ||
+      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      return ''
+    }
+    return this.borderRadius
+  }
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    if (this.customClass) {
+      cssClasses.push(this.customClass)
+    }
+    return cssClasses
   }
 
   mounted (): void {
