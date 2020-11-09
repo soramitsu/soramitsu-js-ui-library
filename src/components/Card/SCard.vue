@@ -1,7 +1,7 @@
 <template>
   <el-card
     class="s-card"
-    :class="{ 's-clickable': clickable }"
+    :class="computedClasses"
     :header="header"
     :body-style="bodyStyle"
     :shadow="shadow"
@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
-import { CardShadow } from './consts'
+import { CardShadow, BorderRadius } from './consts'
 
 @Component
 export default class SCard extends Vue {
@@ -39,7 +39,32 @@ export default class SCard extends Vue {
    *
    * `false` by default
    */
+  /**
+   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
+   *
+   * By default it's set to `"small"`
+   */
+  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   @Prop({ default: false, type: Boolean }) readonly clickable!: boolean
+
+  get computedBorderRadius (): string {
+    if (this.borderRadius === BorderRadius.SMALL ||
+      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      return ''
+    }
+    return this.borderRadius
+  }
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    if (this.clickable) {
+      cssClasses.push('s-clickable')
+    }
+    return cssClasses
+  }
 
   handleClick (): void {
     if (!this.clickable) {

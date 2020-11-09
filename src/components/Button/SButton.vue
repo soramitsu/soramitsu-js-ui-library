@@ -119,7 +119,7 @@ export default class SButton extends Vue {
     return this.size
   }
 
-  get computedBrderRadius (): string {
+  get computedBorderRadius (): string {
     if (this.borderRadius === BorderRadius.SMALL ||
       !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
       return ''

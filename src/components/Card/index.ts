@@ -1,4 +1,4 @@
 import SCard from './SCard.vue'
-import { CardShadow } from './consts'
+import { CardShadow, BorderRadius } from './consts'
 
-export { SCard, CardShadow }
+export { SCard, CardShadow, BorderRadius }

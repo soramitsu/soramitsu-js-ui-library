@@ -99,7 +99,7 @@ export default class STabs extends Vue {
     return this.type !== TabsType.ROUNDED ? this.type : ''
   }
 
-  get computedBrderRadius (): string {
+  get computedBorderRadius (): string {
     if (this.borderRadius === BorderRadius.SMALL ||
       !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
       return ''
