@@ -27,7 +27,7 @@ import { PopoverPlacement } from 'element-ui/types/popover'
 
 import { SIcon } from '../Icon'
 import { STooltip, TooltipPlacement } from '../Tooltip'
-import { ButtonTypes, ButtonSize, ButtonNativeTypes } from './consts'
+import { ButtonTypes, ButtonSize, ButtonNativeTypes, BorderRadius } from './consts'
 
 @Component({
   components: { SIcon, STooltip }
@@ -52,6 +52,12 @@ export default class SButton extends Vue {
    * By default it's set to `"medium"`
    */
   @Prop({ default: ButtonSize.MEDIUM, type: String }) readonly size!: string
+  /**
+   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
+   *
+   * By default it's set to `"small"`
+   */
+  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Icon name from icon collection of this library
    */
@@ -113,6 +119,14 @@ export default class SButton extends Vue {
     return this.size
   }
 
+  get computedBrderRadius (): string {
+    if (this.borderRadius === BorderRadius.SMALL ||
+      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      return ''
+    }
+    return this.borderRadius
+  }
+
   get computedType (): string {
     if (this.type === ButtonTypes.PRIMARY) {
       return this.type
@@ -126,6 +140,9 @@ export default class SButton extends Vue {
       cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
     } else if ((Object.values(ButtonSize) as Array<string>).includes(this.size)) {
       cssClasses.push(`s-${this.size}`)
+    }
+    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if ((Object.values(ButtonTypes) as Array<string>).includes(this.type)) {
       cssClasses.push(`s-${this.type}`)

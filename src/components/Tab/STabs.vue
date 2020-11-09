@@ -22,7 +22,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
-import { TabsType, TabsPosition } from './consts'
+import { TabsType, TabsPosition, BorderRadius } from './consts'
 
 @Component
 export default class STabs extends Vue {
@@ -38,6 +38,12 @@ export default class STabs extends Vue {
    * `"rounded"` works only when position is `"top"` or `"bottom"`
    */
   @Prop({ type: String, default: '' }) readonly type!: string
+  /**
+   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
+   *
+   * By default it's set to `"small"`
+   */
+  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Will tabs be closable.
    *
@@ -93,11 +99,22 @@ export default class STabs extends Vue {
     return this.type !== TabsType.ROUNDED ? this.type : ''
   }
 
+  get computedBrderRadius (): string {
+    if (this.borderRadius === BorderRadius.SMALL ||
+      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      return ''
+    }
+    return this.borderRadius
+  }
+
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.type === TabsType.ROUNDED &&
       ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
       cssClasses.push('s-rounded')
+    }
+    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses
   }

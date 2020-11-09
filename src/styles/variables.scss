@@ -48,7 +48,15 @@ $s-size-medium: 40px !default;
 $s-size-small: 32px !default;
 $s-size-mini: 24px !default;
 
+// TODO: check do we need this default radius or not
 $s-border-radius-default: 4px !default;
+
+$s-border-radius-base: 4px;
+$s-border-radius-mini: $s-border-radius-base !default;
+$s-border-radius-small: $s-border-radius-base * 2 !default;
+$s-border-radius-medium: $s-border-radius-base * 3 !default;
+$s-border-radius-big: $s-border-radius-base * 4 !default;
+
 // Fonts
 $s-font-family-default: 'Sora', sans-serif !important;
 $s-font-family-mono: 'JetBrainsMono', monospace !important;
@@ -115,4 +123,8 @@ $--breakpoints-spec: (
   --s-color-status-success-background: #{$s-color-status-success-background};
   --s-color-status-warning-background: #{$s-color-status-warning-background};
   --s-color-status-error-background: #{$s-color-status-error-background};
+  --s-border-radius-mini: #{$s-border-radius-mini};
+  --s-border-radius-small: #{$s-border-radius-small};
+  --s-border-radius-medium: #{$s-border-radius-medium};
+  --s-border-radius-big: #{$s-border-radius-big};
 }

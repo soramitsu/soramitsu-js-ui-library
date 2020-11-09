@@ -1,7 +1,43 @@
 @import "./variables";
 
+@mixin tabs-border-radius(
+  $suffix: "big",
+  $border-radius: var(--s-border-radius-big)
+) {
+  &.s-border-radius {
+    &-#{$suffix} {
+      border-radius: 0;
+      &.el-tabs--card {
+        > .el-tabs__header {
+          .el-tabs__nav {
+            border-top-left-radius: $border-radius;
+            border-top-right-radius: $border-radius;
+          }
+        }
+      }
+      &.s-rounded {
+        .el-tabs__nav-wrap {
+          border-radius: $border-radius;
+          .el-tabs__item {
+            &.is-active {
+              border-radius: $border-radius;
+            }
+            &:focus.is-focus {
+              border-radius: $border-radius;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .s-tabs {
   width: 100%;
+  @include tabs-border-radius;
+  @include tabs-border-radius("medium", var(--s-border-radius-medium));
+  @include tabs-border-radius("small", var(--s-border-radius-small));
+  @include tabs-border-radius("mini", var(--s-border-radius-mini));
   .el-tabs__item {
     font-weight: bold;
     .el-icon-close {
@@ -31,8 +67,6 @@
       border-bottom-color: var(--s-color-base-background-hover);
       .el-tabs__nav {
         border-color: var(--s-color-base-background-hover);
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
       }
       .el-tabs__item {
         border-left-color: var(--s-color-base-background-hover);
@@ -45,7 +79,8 @@
       background-color: var(--s-color-base-background);
       border-bottom-color: var(--s-color-base-border-primary);
       .el-tabs__item {
-        &:hover, &.is-active {
+        &:hover,
+        &.is-active {
           color: var(--s-color-theme-accent);
         }
       }
@@ -57,29 +92,28 @@
     }
     .el-tabs__nav-wrap {
       background-color: var(--s-color-base-background);
-      border-radius: 8px;
       height: 32px;
-      &::after, .el-tabs__active-bar {
+      &::after,
+      .el-tabs__active-bar {
         height: 0;
       }
       .el-tabs__item {
         padding: 0 32px;
         height: 28px;
         line-height: 28px;
-        &:nth-child(2), &:last-child {
+        &:nth-child(2),
+        &:last-child {
           padding: 0 32px;
         }
         &.is-active {
           color: var(--s-color-base-content-primary);
           background-color: var(--s-color-base-on-accent);
           box-shadow: $s-shadow-surface;
-          border-radius: 8px;
           margin: 2px;
         }
         &:focus.is-focus {
           // TODO: make it more focusable
           box-shadow: $s-shadow-surface;
-          border-radius: 8px;
         }
       }
     }

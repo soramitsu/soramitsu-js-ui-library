@@ -1,3 +1,5 @@
+import { SizeExtended } from '../../types'
+
 export enum TabsType {
   ROUNDED = 'rounded',
   CARD = 'card',
@@ -10,3 +12,5 @@ export enum TabsPosition {
   RIGHT = 'right',
   LEFT = 'left'
 }
+
+export const BorderRadius = SizeExtended

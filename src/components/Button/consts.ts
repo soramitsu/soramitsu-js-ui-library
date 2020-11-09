@@ -1,4 +1,4 @@
-import { Size } from '../../types'
+import { Size, SizeExtended } from '../../types'
 
 export enum ButtonTypes {
   PRIMARY = 'primary',
@@ -15,3 +15,4 @@ export enum ButtonNativeTypes {
 }
 
 export const ButtonSize = Size
+export const BorderRadius = SizeExtended
