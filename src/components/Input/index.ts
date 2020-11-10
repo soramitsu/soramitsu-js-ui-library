@@ -1,5 +1,5 @@
 import SInput from './SInput.vue'
 import SJsonInput from './SJsonInput.vue'
-import { Autocomplete, InputType, InputSize } from './consts'
+import { Autocomplete, InputType, InputSize, BorderRadius } from './consts'
 
-export { SInput, SJsonInput, Autocomplete, InputType, InputSize }
+export { SInput, SJsonInput, Autocomplete, InputType, InputSize, BorderRadius }

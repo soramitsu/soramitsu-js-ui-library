@@ -42,7 +42,7 @@ import { Vue, Component, Prop, Ref, Inject, Watch } from 'vue-property-decorator
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
-import { Autocomplete, InputSize, InputType } from './consts'
+import { Autocomplete, InputSize, InputType, BorderRadius } from './consts'
 
 @Component
 export default class SInput extends Vue {
@@ -65,6 +65,12 @@ export default class SInput extends Vue {
    * Disable state
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
+  /**
+   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
+   *
+   * By default it's set to `"mini"`
+   */
+  @Prop({ default: BorderRadius.MINI, type: String }) readonly borderRadius!: string
   /**
    * Show password flag. `false` by default
    */
@@ -173,6 +179,14 @@ export default class SInput extends Vue {
     return this.type === InputType.TEXT && this.size === InputSize.MEDIUM
   }
 
+  get computedBorderRadius (): string {
+    if (this.borderRadius === BorderRadius.SMALL ||
+      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      return ''
+    }
+    return this.borderRadius
+  }
+
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.focused) {
@@ -180,6 +194,9 @@ export default class SInput extends Vue {
     }
     if (this.disabled || (this.elForm || {}).disabled) {
       cssClasses.push('s-disabled')
+    }
+    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.type === InputType.TEXT_FILE) {
       cssClasses.push('s-text-file')
