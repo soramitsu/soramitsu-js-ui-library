@@ -12,6 +12,7 @@
       :clearable="clearable"
       :multiple-limit="multipleLimit"
       :no-data-text="noDataText"
+      :popper-class="computedPopperClass"
       @blur="handleBlur"
       @focus="handleFocus"
       @visible-change="handleVisibleChange"
@@ -27,7 +28,7 @@
 import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
 
 import { Autocomplete } from '../Input'
-import { InputTypes } from './consts'
+import { InputTypes, BorderRadius } from './consts'
 
 @Component
 export default class SSelect extends Vue {
@@ -65,6 +66,10 @@ export default class SSelect extends Vue {
    */
   @Prop({ type: String, default: 'No data' }) readonly noDataText!: string
   /**
+   * Custom class name for the page size Select's dropdown
+   */
+  @Prop({ default: '', type: String }) readonly popperClass!: string
+  /**
    * Name attribute for input
    */
   @Prop({ type: String, default: '' }) readonly name!: string
@@ -78,6 +83,12 @@ export default class SSelect extends Vue {
    * `false` by default
    */
   @Prop({ type: Boolean, default: false }) readonly disabled!: boolean
+  /**
+   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
+   *
+   * By default it's set to `"small"`
+   */
+  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Loading state of the select component.
    *
@@ -137,10 +148,32 @@ export default class SSelect extends Vue {
     this.$nextTick(this.updateInputValue)
   }
 
+  get computedBorderRadius (): string {
+    if (this.borderRadius === BorderRadius.SMALL ||
+      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      return ''
+    }
+    return this.borderRadius
+  }
+
+  get computedPopperClass (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.popperClass) {
+      cssClasses.push(this.popperClass)
+    }
+    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses
+  }
+
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
       cssClasses.push(`s-${this.inputType}-type`)
+    }
+    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.focused) {
       cssClasses.push('s-focused')

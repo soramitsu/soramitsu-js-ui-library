@@ -1,6 +1,6 @@
 import SSelect from './SSelect.vue'
 import SOption from './SOption.vue'
 import SOptionGroup from './SOptionGroup.vue'
-import { InputTypes } from './consts'
+import { InputTypes, BorderRadius } from './consts'
 
-export { SSelect, SOption, SOptionGroup, InputTypes }
+export { SSelect, SOption, SOptionGroup, InputTypes, BorderRadius }

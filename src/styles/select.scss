@@ -1,10 +1,31 @@
 @import "./variables";
 @import "./icons";
 
+@mixin select-border-radius(
+  $suffix: "big",
+  $border-radius: var(--s-border-radius-big)
+) {
+  &.s-border-radius {
+    &-#{$suffix} {
+      border-radius: 0;
+      .s-placeholder {
+        border-top-left-radius: $border-radius;
+      }
+      .el-input__inner {
+        border-radius: $border-radius;
+      }
+    }
+  }
+}
+
 .s-select {
   font-family: $s-font-family-default;
   width: 100%;
   position: relative;
+  @include select-border-radius;
+  @include select-border-radius("medium", var(--s-border-radius-medium));
+  @include select-border-radius("small", var(--s-border-radius-small));
+  @include select-border-radius("mini", var(--s-border-radius-mini));
   .el-select {
     width: 100%;
     i.el-icon-arrow-up {
@@ -76,7 +97,8 @@
         .el-select__caret {
           color: var(--s-color-base-content-quaternary);
         }
-        .el-input__inner, .el-input__inner:hover {
+        .el-input__inner,
+        .el-input__inner:hover {
           border-color: var(--s-color-base-disabled);
           color: var(--s-color-base-content-quaternary);
           background-color: var(--s-color-base-disabled);
@@ -100,7 +122,6 @@
     padding-top: 5px;
     top: 1px;
     left: 1px;
-    border-top-left-radius: 4px;
     position: absolute;
     z-index: 1;
     width: calc(100% - 15px);
@@ -110,7 +131,6 @@
   &.s-select-type {
     .el-select {
       .el-input__inner {
-        border-radius: 8px;
         padding-left: 12px;
         font-weight: bold;
         &:hover {
@@ -192,7 +212,7 @@
     font-size: 16px;
     font-weight: bold;
     padding: 1px;
-    border-radius: 4px;
+    border-radius: var(--s-border-radius-mini);
   }
   &.selected {
     font-weight: normal;
@@ -208,7 +228,7 @@
       border-color: var(--s-color-theme-accent);
     }
     &::after {
-      content: '';
+      content: "";
     }
   }
 }
