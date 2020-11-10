@@ -18,7 +18,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
-import { CheckboxSize } from './consts'
+import { CheckboxSize, BorderRadius } from './consts'
 
 @Component
 export default class SCheckbox extends Vue {
@@ -42,6 +42,12 @@ export default class SCheckbox extends Vue {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly border!: boolean
+  /**
+   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
+   *
+   * By default it's set to `"mini"`
+   */
+  @Prop({ default: BorderRadius.MINI, type: String }) readonly borderRadius!: string
   /**
    * Checked state of the checkbox item.
    *
@@ -85,10 +91,21 @@ export default class SCheckbox extends Vue {
     return this.size
   }
 
+  get computedBorderRadius (): string {
+    if (this.borderRadius === BorderRadius.MINI ||
+      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      return ''
+    }
+    return this.borderRadius
+  }
+
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((Object.values(CheckboxSize) as Array<string>).includes(this.size)) {
       cssClasses.push(`s-${this.size}`)
+    }
+    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses
   }

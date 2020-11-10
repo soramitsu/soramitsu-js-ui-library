@@ -1,4 +1,4 @@
 import SCheckbox from './SCheckbox.vue'
-import { CheckboxSize } from './consts'
+import { CheckboxSize, BorderRadius } from './consts'
 
-export { SCheckbox, CheckboxSize }
+export { SCheckbox, CheckboxSize, BorderRadius }

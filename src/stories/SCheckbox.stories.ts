@@ -1,7 +1,7 @@
 import { text, withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { SCheckbox, SRow, SCol } from '../components'
-import { CheckboxSize } from '../components/Checkbox'
+import { CheckboxSize, BorderRadius } from '../components/Checkbox'
 
 export default {
   component: SCheckbox,
@@ -17,6 +17,7 @@ export const configurable = () => ({
                  v-model="vModelValue"
                  :disabled="disabled"
                  :border="border"
+                 :borderRadius="borderRadius"
                  :size="size"
                  :label="label"
                  @change="(value) => changeValue = value"
@@ -36,6 +37,9 @@ export const configurable = () => ({
     },
     border: {
       default: boolean('Border', false)
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.MINI)
     },
     label: {
       default: text('Label', 'Checkbox')
@@ -86,5 +90,28 @@ export const differentSize = () => ({
              </s-row>`,
   data: () => ({
     items: differentSizeData
+  })
+}
+)
+export const differentBorderRadiusData = Object.values(BorderRadius).map(borderRadius =>
+  ({ borderRadius, label: borderRadius[0].toUpperCase() + borderRadius.slice(1) }))
+export const differentBorderRadius = () => ({
+  components: { SCheckbox, SRow, SCol },
+  template: `<s-row :gutter="20" style="flex: 1;">
+               <template v-for="item in items">
+                 <s-col :span="6" style="height: 56px; margin-bottom: 20px;">
+                   <s-checkbox :borderRadius="item.borderRadius" :value="false">
+                     {{ item.label }}
+                   </s-checkbox>
+                 </s-col>
+                 <s-col :span="6" style="height: 56px; margin-bottom: 20px;">
+                   <s-checkbox border :borderRadius="item.borderRadius" :value="true">
+                     {{ item.label }}
+                   </s-checkbox>
+                 </s-col>
+               </template>
+             </s-row>`,
+  data: () => ({
+    items: differentBorderRadiusData
   })
 })

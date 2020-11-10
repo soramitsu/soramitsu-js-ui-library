@@ -1,10 +1,33 @@
 @import "./variables";
 @import "./common";
 
+@mixin checkbox-border-radius(
+  $suffix: "big",
+  $border-radius: var(--s-border-radius-big)
+) {
+  &.s-border-radius {
+    &-#{$suffix} {
+      border-radius: 0;
+      &.is-bordered {
+        border-radius: $border-radius;
+      }
+      .el-checkbox__inner {
+        border-radius: $border-radius;
+      }
+    }
+  }
+}
+
 .el-checkbox {
   color: var(--s-color-base-content-primary);
+  @include checkbox-border-radius;
+  @include checkbox-border-radius("medium", var(--s-border-radius-medium));
+  @include checkbox-border-radius("small", var(--s-border-radius-small));
+  @include checkbox-border-radius("mini", var(--s-border-radius-mini));
   &.is-bordered {
-    &, &.is-disabled, &.is-disabled.is-checked {
+    &,
+    &.is-disabled,
+    &.is-disabled.is-checked {
       border-color: var(--s-color-base-border-primary);
     }
     &.is-checked {
@@ -20,7 +43,8 @@
   }
   &.s-medium {
     @extend .s-medium;
-    &, &.is-bordered {
+    &,
+    &.is-bordered {
       padding: 9px 15px 7px 10px;
       .el-checkbox__inner {
         height: 16px;
@@ -39,11 +63,11 @@
   }
   &.s-small {
     @extend .s-small;
-    border-radius: 4px;
     .el-checkbox__label {
       font-size: 12px;
     }
-    &, &.is-bordered {
+    &,
+    &.is-bordered {
       padding: 5px 15px 5px 10px;
       .el-checkbox__inner {
         height: 14px;
@@ -63,7 +87,6 @@
 }
 .el-checkbox__inner {
   border-color: var(--s-color-base-border-primary);
-  border-radius: 4px;
   width: 20px;
   height: 20px;
   &::after {
