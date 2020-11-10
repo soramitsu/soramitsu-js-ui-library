@@ -1,18 +1,37 @@
 @import "./variables";
 
+@mixin date-picker-border-radius(
+  $suffix: "big",
+  $border-radius: var(--s-border-radius-big)
+) {
+  &.s-border-radius {
+    &-#{$suffix} {
+      border-radius: 0;
+      .s-placeholder {
+        border-top-left-radius: $border-radius;
+      }
+      & .el-input__inner {
+        border-radius: $border-radius;
+      }
+    }
+  }
+}
+
 .s-date-picker {
   font-family: $s-font-family-default;
   width: 100%;
   position: relative;
   .el-date-editor {
     width: 100%;
-    &.el-input, &.el-input__inner {
+    &.el-input,
+    &.el-input__inner {
       width: 100%;
     }
     .el-range-separator {
       color: var(--s-color-base-content-tertiary);
     }
-    .el-input__inner, .el-range-input {
+    .el-input__inner,
+    .el-range-input {
       &::placeholder {
         color: var(--s-color-base-content-tertiary);
         opacity: 1; // Firefox
@@ -22,6 +41,10 @@
       border-color: var(--s-color-base-border-primary);
     }
   }
+  @include date-picker-border-radius;
+  @include date-picker-border-radius("medium", var(--s-border-radius-medium));
+  @include date-picker-border-radius("small", var(--s-border-radius-small));
+  @include date-picker-border-radius("mini", var(--s-border-radius-mini));
   &.s-has-value {
     .el-date-editor .el-range-separator {
       color: var(--s-color-base-content-primary);
@@ -42,7 +65,8 @@
       .el-input__inner {
         border-color: var(--s-color-base-background-hover);
       }
-      .el-input__inner, .s-placeholder {
+      .el-input__inner,
+      .s-placeholder {
         background-color: var(--s-color-base-background-hover);
       }
     }
@@ -58,7 +82,8 @@
       .el-input__inner {
         border-color: var(--s-color-base-border-primary);
       }
-      .el-input__inner, .s-placeholder {
+      .el-input__inner,
+      .s-placeholder {
         background-color: var(--s-color-utility-surface);
       }
     }
@@ -66,7 +91,8 @@
       .el-input__inner {
         border-color: var(--s-color-base-disabled);
       }
-      .el-input__inner, .s-placeholder {
+      .el-input__inner,
+      .s-placeholder {
         color: var(--s-color-base-content-quaternary);
         background-color: var(--s-color-base-disabled);
       }
@@ -81,7 +107,6 @@
     padding-top: 5px;
     top: 1px;
     left: 1px;
-    border-top-left-radius: 4px;
     position: absolute;
     z-index: 1;
     width: calc(100% - 15px);
@@ -90,16 +115,19 @@
   }
   &.s-select-type {
     .el-date-editor {
-      .el-input__inner, .el-range-input, .el-range-separator {
+      .el-input__inner,
+      .el-range-input,
+      .el-range-separator {
         font-weight: bold;
       }
-      &.el-input__inner, & .el-input__inner {
-        border-radius: 8px;
+      &.el-input__inner,
+      & .el-input__inner {
         padding-left: 12px;
         &:hover {
           border-color: var(--s-color-base-border-primary);
         }
-        &::placeholder, .el-range-input::placeholder {
+        &::placeholder,
+        .el-range-input::placeholder {
           color: var(--s-color-base-content-tertiary);
           font-weight: bold;
         }
@@ -111,7 +139,7 @@
       top: 30%;
       pointer-events: none;
       color: var(--s-color-base-content-tertiary);
-      transition: transform .3s;
+      transition: transform 0.3s;
     }
     &.s-focused {
       .el-date-editor.el-input__inner,
@@ -180,13 +208,18 @@
   .el-picker-panel__content {
     .el-date-table {
       td {
-        &.available:hover, &.today span {
+        &.available:hover,
+        &.today span {
           color: var(--s-color-theme-accent);
         }
-        &.next-month, &.prev-month {
+        &.next-month,
+        &.prev-month {
           color: var(--s-color-base-content-quaternary);
         }
-        &.current:not(.disabled), &.selected, &.start-date, &.end-date {
+        &.current:not(.disabled),
+        &.selected,
+        &.start-date,
+        &.end-date {
           span {
             background-color: var(--s-color-theme-accent);
             color: var(--s-color-utility-surface);
@@ -198,7 +231,8 @@
       }
     }
     .el-month-table td {
-      &.start-date, &.end-date {
+      &.start-date,
+      &.end-date {
         .cell {
           background-color: var(--s-color-theme-accent);
           color: var(--s-color-utility-surface);
@@ -208,14 +242,18 @@
   }
   .el-picker-panel__footer {
     border-top-color: var(--s-color-base-background-hover);
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
     > .el-button {
       height: 32px;
-      border-radius: 4px;
-      &:hover, &:focus {
+      border-radius: var(--s-border-radius-mini);
+      &:hover,
+      &:focus {
         color: var(--s-color-theme-accent);
       }
       &.is-plain {
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           border-color: var(--s-color-theme-accent);
         }
       }
@@ -226,7 +264,6 @@
   }
 }
 .el-time-panel {
-  border-radius: 4px;
   border-color: var(--s-color-base-background-hover);
   .el-time-panel__footer {
     border-top-color: var(--s-color-base-background-hover);
@@ -243,14 +280,16 @@
     }
   }
   .el-time-panel__content {
-    &::after, &::before {
+    &::after,
+    &::before {
       border-top-color: var(--s-color-base-background-hover);
       border-bottom-color: var(--s-color-base-background-hover);
     }
   }
 }
 .el-date-table.is-week-mode .el-date-table__row {
-  &.current, &:hover {
+  &.current,
+  &:hover {
     div {
       background-color: var(--s-color-base-background-hover);
     }

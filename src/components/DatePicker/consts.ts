@@ -1,4 +1,4 @@
-import { Size } from '../../types'
+import { Size, SizeExtended } from '../../types'
 
 export enum PickerTypes {
   YEAR = 'year',
@@ -24,3 +24,4 @@ export enum InputTypes {
 }
 
 export const PickerSize = Size
+export const BorderRadius = SizeExtended
