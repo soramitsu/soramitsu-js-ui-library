@@ -1,6 +1,7 @@
-import { withKnobs, number, text, boolean } from '@storybook/addon-knobs'
+import { withKnobs, number, text, boolean, select } from '@storybook/addon-knobs'
 
 import { SPagination, SRow } from '../components'
+import { BorderRadius } from '../components/Pagination'
 
 export default {
   component: SPagination,
@@ -17,6 +18,7 @@ export const configurable = () => ({
                  :disabled="disabled"
                  :small="small"
                  :background="background"
+                 :borderRadius="borderRadius"
                  :prev-text="prevText"
                  :next-text="nextText"
                  @size-change="handleSizeChange"
@@ -41,6 +43,9 @@ export const configurable = () => ({
     },
     background: {
       default: boolean('Background', false)
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
     },
     prevText: {
       default: text('Prev text', '')

@@ -7,6 +7,7 @@
     :total="total"
     :small="small"
     :background="background"
+    :class="computedClasses"
     :current-page.sync="currentPageModel"
     :popper-class="popperClass"
     :prev-text="prevText"
@@ -26,6 +27,7 @@
 import { Vue, Component, Prop, Ref, Watch } from 'vue-property-decorator'
 import { ElPagination } from 'element-ui/types/pagination'
 import cloneDeep from 'lodash/fp/cloneDeep'
+import { BorderRadius } from './consts'
 
 @Component
 export default class SPagination extends Vue {
@@ -41,6 +43,12 @@ export default class SPagination extends Vue {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly background!: boolean
+  /**
+   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
+   *
+   * By default it's set to `"small"`
+   */
+  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Items count of each page. It supports the .sync modifier.
    *
@@ -165,6 +173,22 @@ export default class SPagination extends Vue {
 
   get willBeSlotEnabled (): boolean {
     return this.layout.includes('slot')
+  }
+
+  get computedBorderRadius (): string {
+    if (this.borderRadius === BorderRadius.SMALL ||
+      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      return ''
+    }
+    return this.borderRadius
+  }
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses
   }
 
   mounted (): void {

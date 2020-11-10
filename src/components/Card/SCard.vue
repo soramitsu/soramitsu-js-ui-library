@@ -35,16 +35,16 @@ export default class SCard extends Vue {
    */
   @Prop({ default: CardShadow.HOVER, type: String }) readonly shadow!: string
   /**
-   * Clickable property of the Card component which means that the user can click on the card
-   *
-   * `false` by default
-   */
-  /**
    * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
    *
    * By default it's set to `"small"`
    */
   @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
+  /**
+   * Clickable property of the Card component which means that the user can click on the card
+   *
+   * `false` by default
+   */
   @Prop({ default: false, type: Boolean }) readonly clickable!: boolean
 
   get computedBorderRadius (): string {
