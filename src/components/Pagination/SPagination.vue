@@ -9,7 +9,7 @@
     :background="background"
     :class="computedClasses"
     :current-page.sync="currentPageModel"
-    :popper-class="popperClass"
+    :popper-class="computedPopperClass"
     :prev-text="prevText"
     :next-text="nextText"
     :disabled="disabled"
@@ -181,6 +181,17 @@ export default class SPagination extends Vue {
       return ''
     }
     return this.borderRadius
+  }
+
+  get computedPopperClass (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.popperClass) {
+      cssClasses.push(this.popperClass)
+    }
+    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses
   }
 
   get computedClasses (): Array<string> {

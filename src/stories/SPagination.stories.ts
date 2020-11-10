@@ -19,6 +19,7 @@ export const configurable = () => ({
                  :small="small"
                  :background="background"
                  :borderRadius="borderRadius"
+                 :popperClass="borderRadius"
                  :prev-text="prevText"
                  :next-text="nextText"
                  @size-change="handleSizeChange"
