@@ -77,20 +77,14 @@ export const configurable = () => ({
              </s-row>
              <s-divider />
              <s-row>
+               <h6 style="margin-bottom: 10px">Border Radius</h6>
                <s-col class="s-flex" :span="12" style="justify-content: space-between;">
                <div class="s-flex" v-for="button in borderRadiusButtons" :key="button.borderRadius">
-                  <s-button
-                    size="medium"
-                    type="primary"
-                    :borderRadius="button.label"
-                    style="margin-left: 15px; margin-right: 5px;"
-                    >
-                    {{ button.label }} (px)
-                  </s-button>
                   <s-input
                     type="number"
-                    style="margin-right: 15px;"
-                    :placeholder="button.borderRadius"
+                    :placeholder="button.label + ' (px)'"
+                    :borderRadius="button.label"
+                    style="margin-right: 10px; margin-right: 10px;"
                     @change="(value) => handleBorderRadiusChange(button.label, value)"
                   />
                </div>
