@@ -131,7 +131,7 @@ button > span {
     button.el-button.el-button--default.el-button--small {
       height: $s-size-medium;
       font-size: 14px;
-      border-radius: var(--s-border-radius-mini);;
+      border-radius: var(--s-border-radius-mini);
       &:hover, &:active, &:focus {
         color: var(--s-color-theme-accent);
         background-color: var(--s-color-base-on-accent);

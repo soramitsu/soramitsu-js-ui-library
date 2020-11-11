@@ -1,6 +1,6 @@
 import { withKnobs } from '@storybook/addon-knobs'
 
-import { AccentColors, ContentColors, MiscColors, SecondaryColors, StatusColors, TertiaryButtonColors, UtilityColors } from '../../types'
+import { AccentColors, ContentColors, MiscColors, SecondaryColors, StatusColors, TertiaryButtonColors, UtilityColors, SizeExtended } from '../../types'
 import { SRow, SButton, SInput, SCol, SDivider } from '../../components'
 import { differentTypeButtonsData } from '../SButton.stories'
 
@@ -9,6 +9,12 @@ export default {
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
+
+const getRadiusData = (SizeExtended) => Object.values(SizeExtended).map(borderRadius => {
+  const varPrefix = 'border-radius-'
+  const value = getComputedStyle(document.documentElement).getPropertyValue(`--s-${varPrefix}${borderRadius}`)
+  return { label: varPrefix + borderRadius, value }
+})
 
 const getColorsData = (colors) => Object.values(colors).map(color => {
   const value = getComputedStyle(document.documentElement).getPropertyValue(`--s-color-${color}`)
@@ -69,6 +75,25 @@ export const configurable = () => ({
                </s-col>
              </s-row>
              <s-divider />
+             <s-row>
+               <s-col class="s-flex" :span="12" style="justify-content: space-between;">
+               <div v-for="button in borderRadiusButtons" :key="button.borderRadius">
+                  <s-button
+                    size="medium"
+                    type="primary"
+                    :borderRadius="button.borderRadius"
+                  >
+                    {{ button.label }}
+                  </s-button>
+                  <el-input
+                    ref="el-input"
+                    v-model="button.borderRadius"
+                    @change="(value) => handleBorderRadiusChange(button.label, value)"
+                  />
+               </div>
+               </s-col>
+             </s-row>
+             <s-divider />
              <s-row :gutter="20">
                <s-col v-for="input in inputs" :key="input" :span="4">
                  <s-input :placeholder="input" :type="input" />
@@ -80,11 +105,15 @@ export const configurable = () => ({
   data: () => ({
     sections: colorsSectionsData,
     buttons: differentTypeButtonsData,
+    borderRadiusButtons: getRadiusData(SizeExtended),
     inputs: themeInputsData
   }),
   methods: {
     handleColorChange: (label: string, color: string) => {
       document.documentElement.style.setProperty(label, color)
+    },
+    handleBorderRadiusChange: (label: string, value: string) => {
+      document.documentElement.style.setProperty(label, value)
     }
   }
 })

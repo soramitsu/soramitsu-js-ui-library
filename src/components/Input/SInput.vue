@@ -23,7 +23,7 @@
       :label="label"
       :accept="accept"
       :tabindex="tabindex"
-      :prefix-icon="isMediumInput && prefix"
+      :prefix-icon="(isMediumInput && prefix) ? prefix : ''"
       :suffix-icon="suffix"
       @input="handleInput"
       @change="handleChange"
