@@ -10,16 +10,17 @@ export default {
   excludeStories: /.*Data$/
 }
 
-const getRadiusData = (SizeExtended) => Object.values(SizeExtended).map(borderRadius => {
-  const varPrefix = 'border-radius-'
-  const value = getComputedStyle(document.documentElement).getPropertyValue(`--s-${varPrefix}${borderRadius}`)
-  return { label: varPrefix + borderRadius, value }
+const borderRadiusPropertyPrefix = '--s-border-radius-'
+const getRadiusData = (SizeExtended) => Object.values(SizeExtended).map(borderRadiusPropertyName => {
+  const value = getComputedStyle(document.documentElement).getPropertyValue(`${borderRadiusPropertyPrefix}${borderRadiusPropertyName}`)
+  return { label: borderRadiusPropertyName, value }
 })
 
-const getColorsData = (colors) => Object.values(colors).map(color => {
-  const value = getComputedStyle(document.documentElement).getPropertyValue(`--s-color-${color}`)
+const colorPropertyPrefix = '--s-color-'
+const getColorsData = (colors) => Object.values(colors).map(colorPropertyName => {
+  const value = getComputedStyle(document.documentElement).getPropertyValue(`${colorPropertyPrefix}${colorPropertyName}`)
   const isRgb = value.includes('rgb')
-  return { label: color, value, isRgb }
+  return { label: colorPropertyName, value, isRgb }
 })
 export const colorsSectionsData = [
   { title: 'Theme / Accent', colors: getColorsData(AccentColors) },
@@ -110,10 +111,10 @@ export const configurable = () => ({
   }),
   methods: {
     handleColorChange: (label: string, color: string) => {
-      document.documentElement.style.setProperty(label, color)
+      document.documentElement.style.setProperty(`${colorPropertyPrefix}${label}`, color)
     },
-    handleBorderRadiusChange: (label: string, value: string) => {
-      document.documentElement.style.setProperty(label, value)
+    handleBorderRadiusChange: (label: string, borderRadius: string) => {
+      document.documentElement.style.setProperty(`${borderRadiusPropertyPrefix}${label}`, borderRadius)
     }
   }
 })

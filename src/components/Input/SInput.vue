@@ -3,7 +3,7 @@
     class="s-input"
     :class="computedClasses"
   >
-    <span v-if="model && isMediumInput" class="s-placeholder">{{ placeholder }}</span>
+    <span v-if="model && !isMediumInput" class="s-placeholder">{{ placeholder }}</span>
     <el-input
       ref="el-input"
       :type="computedType"
