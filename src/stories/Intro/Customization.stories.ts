@@ -10,10 +10,11 @@ export default {
   excludeStories: /.*Data$/
 }
 
-const getColorsData = (colors) => Object.values(colors).map(color => {
-  const value = getComputedStyle(document.documentElement).getPropertyValue(`--s-color-${color}`)
+const colorPropertyPrefix = '--s-color-'
+const getColorsData = (colors) => Object.values(colors).map(colorPropertyName => {
+  const value = getComputedStyle(document.documentElement).getPropertyValue(`${colorPropertyPrefix}${colorPropertyName}`)
   const isRgb = value.includes('rgb')
-  return { label: color, value, isRgb }
+  return { label: colorPropertyName, value, isRgb }
 })
 export const colorsSectionsData = [
   { title: 'Theme / Accent', colors: getColorsData(AccentColors) },
@@ -84,7 +85,7 @@ export const configurable = () => ({
   }),
   methods: {
     handleColorChange: (label: string, color: string) => {
-      document.documentElement.style.setProperty(label, color)
+      document.documentElement.style.setProperty(`${colorPropertyPrefix}${label}`, color)
     }
   }
 })
