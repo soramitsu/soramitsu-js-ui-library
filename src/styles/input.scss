@@ -1,10 +1,35 @@
 @import "./variables";
 
+@mixin input-border-radius(
+  $suffix: "big",
+  $border-radius: var(--s-border-radius-big)
+) {
+  &.s-border-radius {
+    &-#{$suffix} {
+      border-radius: 0;
+      .s-placeholder {
+        border-top-left-radius: $border-radius;
+      }
+      .el-input,
+      .el-textarea {
+        > input,
+        > textarea {
+          border-radius: $border-radius;
+        }
+      }
+    }
+  }
+}
+
 .s-input {
   font-family: $s-font-family-default;
   width: 100%;
   min-height: $s-size-big;
   position: relative;
+  @include input-border-radius;
+  @include input-border-radius("medium", var(--s-border-radius-medium));
+  @include input-border-radius("small", var(--s-border-radius-small));
+  @include input-border-radius("mini", var(--s-border-radius-mini));
   .el-input__suffix {
     z-index: 1;
   }
@@ -17,7 +42,6 @@
     padding-top: 5px;
     top: 1px;
     left: 1px;
-    border-top-left-radius: inherit;
     position: absolute;
     z-index: 1;
     width: calc(100% - 15px);
@@ -26,13 +50,11 @@
   }
   .el-input,
   .el-textarea {
-    border-radius: inherit;
     height: 100%;
     > input,
     > textarea {
       height: $s-size-big;
       border: 1px solid var(--s-color-base-background);
-      border-radius: inherit;
       background-color: var(--s-color-base-background);
       &::placeholder {
         color: var(--s-color-base-content-tertiary);
