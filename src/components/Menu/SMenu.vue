@@ -1,7 +1,7 @@
 <template>
   <el-menu
-    class="s-menu"
     ref="el-menu"
+    :class="computedClasses"
     :style="computedStyles"
     :mode="mode"
     :collapse="collapse"
@@ -27,7 +27,7 @@
 import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
 import { ElMenu } from 'element-ui/types/menu'
 
-import { MenuMode, MenuTrigger } from './consts'
+import { MenuMode, MenuTrigger, BorderRadius } from './consts'
 
 @Component
 export default class SMenu extends Vue {
@@ -53,6 +53,12 @@ export default class SMenu extends Vue {
    * Menu shadow if it exists
    */
   @Prop({ default: 'none', type: String }) readonly boxShadow!: string
+  /**
+   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
+   *
+   * By default it's set to `"small"`
+   */
+  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Text color of menu in hex format.
    *
@@ -106,6 +112,14 @@ export default class SMenu extends Vue {
   @Prop({ default: true, type: Boolean }) readonly collapseTransition!: boolean
 
   @Ref('el-menu') elMenu!: ElMenu
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = ['s-menu']
+    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses
+  }
 
   get computedStyles (): object {
     const styles = {} as any
