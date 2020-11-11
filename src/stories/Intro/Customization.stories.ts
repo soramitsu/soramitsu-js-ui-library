@@ -78,17 +78,19 @@ export const configurable = () => ({
              <s-divider />
              <s-row>
                <s-col class="s-flex" :span="12" style="justify-content: space-between;">
-               <div v-for="button in borderRadiusButtons" :key="button.borderRadius">
+               <div class="s-flex" v-for="button in borderRadiusButtons" :key="button.borderRadius">
                   <s-button
                     size="medium"
                     type="primary"
-                    :borderRadius="button.borderRadius"
-                  >
-                    {{ button.label }}
+                    :borderRadius="button.label"
+                    style="margin-left: 15px; margin-right: 5px;"
+                    >
+                    {{ button.label }} (px)
                   </s-button>
-                  <el-input
-                    ref="el-input"
-                    v-model="button.borderRadius"
+                  <s-input
+                    type="number"
+                    style="margin-right: 15px;"
+                    :placeholder="button.borderRadius"
                     @change="(value) => handleBorderRadiusChange(button.label, value)"
                   />
                </div>
@@ -114,7 +116,7 @@ export const configurable = () => ({
       document.documentElement.style.setProperty(`${colorPropertyPrefix}${label}`, color)
     },
     handleBorderRadiusChange: (label: string, borderRadius: string) => {
-      document.documentElement.style.setProperty(`${borderRadiusPropertyPrefix}${label}`, borderRadius)
+      document.documentElement.style.setProperty(`${borderRadiusPropertyPrefix}${label}`, `${+borderRadius > 0 ? borderRadius : '0'}px`)
     }
   }
 })
