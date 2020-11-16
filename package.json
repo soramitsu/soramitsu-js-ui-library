@@ -11,7 +11,7 @@
   "unpkg": "./lib/soramitsu-js-ui.min.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "build": "rm -rf lib && rollup -c ./build/rollup.config.js",
+    "build": "rollup -c ./build/rollup.config.js",
     "test:unit": "vue-cli-service test:unit",
     "test:all": "yarn test:unit",
     "lint": "vue-cli-service lint",
