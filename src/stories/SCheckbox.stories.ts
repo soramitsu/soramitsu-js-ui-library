@@ -1,7 +1,7 @@
 import { text, withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { SCheckbox, SRow, SCol } from '../components'
-import { CheckboxSize, BorderRadius } from '../components/Checkbox'
+import { Size, BorderRadius } from '../types'
 
 export default {
   component: SCheckbox,
@@ -45,7 +45,7 @@ export const configurable = () => ({
       default: text('Label', 'Checkbox')
     },
     size: {
-      default: select('Size', Object.values(CheckboxSize), CheckboxSize.MEDIUM)
+      default: select('Size', Object.values(Size), Size.MEDIUM)
     }
   }
 })
@@ -70,7 +70,7 @@ export const disabled = () => ({
   })
 })
 
-export const differentSizeData = Object.values(CheckboxSize).map(size =>
+export const differentSizeData = Object.values(Size).map(size =>
   ({ size, label: size[0].toUpperCase() + size.slice(1) }))
 export const differentSize = () => ({
   components: { SCheckbox, SRow, SCol },

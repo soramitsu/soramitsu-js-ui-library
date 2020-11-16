@@ -1,7 +1,8 @@
 import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
 import { SButton, SButtonGroup, SRow, SCol, SMain } from '../components'
-import { ButtonSize, ButtonTypes, BorderRadius } from '../components/Button'
+import { Size, BorderRadius } from '../types'
+import { ButtonTypes } from '../components/Button'
 
 export default {
   component: SButton,
@@ -37,7 +38,7 @@ export const configurable = () => ({
       default: select('Type', Object.values(ButtonTypes), ButtonTypes.PRIMARY)
     },
     size: {
-      default: select('Size', Object.values(ButtonSize), ButtonSize.BIG)
+      default: select('Size', Object.values(Size), Size.BIG)
     },
     borderRadius: {
       default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
@@ -88,7 +89,7 @@ export const withDifferentTypes = () => ({
   }
 })
 
-export const differentSizeData = Object.values(ButtonSize).map(size =>
+export const differentSizeData = Object.values(Size).map(size =>
   ({ size, label: size[0].toUpperCase() + size.slice(1) }))
 export const withDifferentSize = () => ({
   components: { SButton, SRow },

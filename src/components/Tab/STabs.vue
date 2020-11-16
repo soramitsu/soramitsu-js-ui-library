@@ -20,12 +20,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 
-import { TabsType, TabsPosition, BorderRadius } from './consts'
+import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import { BorderRadius } from '../../types'
+import { TabsType, TabsPosition } from './consts'
 
 @Component
-export default class STabs extends Vue {
+export default class STabs extends Mixins(StandardPropsMixin) {
   /**
    * Name of the selected tab. Can be used with `v-model`.
    *
@@ -99,21 +101,13 @@ export default class STabs extends Vue {
     return this.type !== TabsType.ROUNDED ? this.type : ''
   }
 
-  get computedBorderRadius (): string {
-    if (this.borderRadius === BorderRadius.SMALL ||
-      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
-      return ''
-    }
-    return this.borderRadius
-  }
-
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.type === TabsType.ROUNDED &&
       ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
       cssClasses.push('s-rounded')
     }
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses

@@ -28,12 +28,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 import elementResizeDetectorMaker from 'element-resize-detector'
-import { BorderRadius } from './consts'
+
+import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import { BorderRadius } from '../../types'
 
 @Component
-export default class SDialog extends Vue {
+export default class SDialog extends Mixins(StandardPropsMixin) {
   /**
    * Visibility of the dialog component.
    *
@@ -155,17 +157,9 @@ export default class SDialog extends Vue {
     this.$emit('update:visible', value)
   }
 
-  get computedBorderRadius (): string {
-    if (this.borderRadius === BorderRadius.SMALL ||
-      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
-      return ''
-    }
-    return this.borderRadius
-  }
-
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.customClass) {

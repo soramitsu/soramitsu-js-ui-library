@@ -4,7 +4,7 @@ export enum Size {
   SMALL = 'small'
 }
 
-export enum SizeExtended {
+export enum BorderRadius {
   BIG = 'big',
   MEDIUM = 'medium',
   SMALL = 'small',

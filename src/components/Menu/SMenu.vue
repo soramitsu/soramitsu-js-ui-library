@@ -24,13 +24,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref } from 'vue-property-decorator'
 import { ElMenu } from 'element-ui/types/menu'
 
-import { MenuMode, MenuTrigger, BorderRadius } from './consts'
+import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import { BorderRadius } from '../../types'
+import { MenuMode, MenuTrigger } from './consts'
 
 @Component
-export default class SMenu extends Vue {
+export default class SMenu extends Mixins(StandardPropsMixin) {
   /**
    * Mode of menu. Possible values: `"horizontal"`, `"vertical"`.
    *
@@ -115,7 +117,7 @@ export default class SMenu extends Vue {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = ['s-menu']
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses

@@ -1,5 +1,5 @@
 import SButton from './SButton.vue'
 import SButtonGroup from './SButtonGroup.vue'
-import { ButtonTypes, ButtonSize, ButtonNativeTypes, BorderRadius } from './consts'
+import { ButtonTypes, ButtonNativeTypes } from './consts'
 
-export { SButton, SButtonGroup, ButtonTypes, ButtonSize, ButtonNativeTypes, BorderRadius }
+export { SButton, SButtonGroup, ButtonTypes, ButtonNativeTypes }

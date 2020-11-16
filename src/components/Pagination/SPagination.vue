@@ -24,13 +24,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref, Watch } from 'vue-property-decorator'
 import { ElPagination } from 'element-ui/types/pagination'
 import cloneDeep from 'lodash/fp/cloneDeep'
-import { BorderRadius } from './consts'
+
+import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import { BorderRadius } from '../../types'
 
 @Component
-export default class SPagination extends Vue {
+export default class SPagination extends Mixins(StandardPropsMixin) {
   /**
    * Will pagination component be small.
    *
@@ -175,20 +177,12 @@ export default class SPagination extends Vue {
     return this.layout.includes('slot')
   }
 
-  get computedBorderRadius (): string {
-    if (this.borderRadius === BorderRadius.SMALL ||
-      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
-      return ''
-    }
-    return this.borderRadius
-  }
-
   get computedPopperClass (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.popperClass) {
       cssClasses.push(this.popperClass)
     }
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses
@@ -196,7 +190,7 @@ export default class SPagination extends Vue {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses

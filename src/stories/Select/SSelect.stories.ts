@@ -1,7 +1,8 @@
 import { text, withKnobs, boolean, number, select } from '@storybook/addon-knobs'
 
 import { SSelect, SRow, SCol, SOption } from '../../components'
-import { InputTypes, BorderRadius } from '../../components/Select'
+import { BorderRadius } from '../../types'
+import { InputTypes } from '../../components/Select'
 
 export default {
   component: SSelect,

@@ -1,7 +1,8 @@
 import { text, boolean, withKnobs, number, select } from '@storybook/addon-knobs'
 
 import { SInput, SRow, SCol } from '../components'
-import { InputType, InputSize, BorderRadius } from '../components/Input'
+import { BorderRadius } from '../types'
+import { InputType, InputSize } from '../components/Input'
 
 export default {
   component: SInput,

@@ -1,6 +1,6 @@
 import { withKnobs } from '@storybook/addon-knobs'
 
-import { AccentColors, ContentColors, MiscColors, SecondaryColors, StatusColors, TertiaryButtonColors, UtilityColors, SizeExtended } from '../../types'
+import { AccentColors, ContentColors, MiscColors, SecondaryColors, StatusColors, TertiaryButtonColors, UtilityColors, BorderRadius } from '../../types'
 import { SRow, SButton, SInput, SCol, SDivider } from '../../components'
 import { differentTypeButtonsData } from '../SButton.stories'
 
@@ -11,7 +11,7 @@ export default {
 }
 
 const borderRadiusPropertyPrefix = '--s-border-radius-'
-const getRadiusData = (SizeExtended) => Object.values(SizeExtended).map(borderRadiusPropertyName => {
+const getRadiusData = (BorderRadius) => Object.values(BorderRadius).map(borderRadiusPropertyName => {
   const value = getComputedStyle(document.documentElement).getPropertyValue(`${borderRadiusPropertyPrefix}${borderRadiusPropertyName}`)
   return { label: borderRadiusPropertyName, value }
 })
@@ -102,7 +102,7 @@ export const configurable = () => ({
   data: () => ({
     sections: colorsSectionsData,
     buttons: differentTypeButtonsData,
-    borderRadiusButtons: getRadiusData(SizeExtended),
+    borderRadiusButtons: getRadiusData(BorderRadius),
     inputs: themeInputsData
   }),
   methods: {

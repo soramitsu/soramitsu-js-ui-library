@@ -3,7 +3,7 @@
     <el-button
       :type="computedType"
       :native-type="nativeType"
-      :size="computedSize"
+      :size="getComponentSize(size)"
       :class="computedClasses"
       :style="computedStyles"
       :disabled="disabled"
@@ -20,19 +20,21 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Inject } from 'vue-property-decorator'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
 import { PopoverPlacement } from 'element-ui/types/popover'
 
+import StandardPropsMixin from '../../mixins/StandardPropsMixin'
 import { SIcon } from '../Icon'
 import { STooltip, TooltipPlacement } from '../Tooltip'
-import { ButtonTypes, ButtonSize, ButtonNativeTypes, BorderRadius } from './consts'
+import { Size, BorderRadius } from '../../types'
+import { ButtonTypes, ButtonNativeTypes } from './consts'
 
 @Component({
   components: { SIcon, STooltip }
 })
-export default class SButton extends Vue {
+export default class SButton extends Mixins(StandardPropsMixin) {
   readonly ButtonTypes = ButtonTypes
   /**
    * Type of button. Possible values: `"primary"`, `"secondary"`, `"tertiary"`, `"action"`, `"link"`.
@@ -51,7 +53,7 @@ export default class SButton extends Vue {
    *
    * By default it's set to `"medium"`
    */
-  @Prop({ default: ButtonSize.MEDIUM, type: String }) readonly size!: string
+  @Prop({ default: Size.MEDIUM, type: String }) readonly size!: string
   /**
    * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
    *
@@ -111,22 +113,6 @@ export default class SButton extends Vue {
   private iconLeftOffset = 0
   elementIcon = ''
 
-  get computedSize (): string {
-    if (this.size === ButtonSize.BIG ||
-      !(Object.values(ButtonSize) as Array<string>).includes(this.size)) {
-      return ''
-    }
-    return this.size
-  }
-
-  get computedBorderRadius (): string {
-    if (this.borderRadius === BorderRadius.SMALL ||
-      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
-      return ''
-    }
-    return this.borderRadius
-  }
-
   get computedType (): string {
     if (this.type === ButtonTypes.PRIMARY) {
       return this.type
@@ -138,10 +124,10 @@ export default class SButton extends Vue {
     const cssClasses: Array<string> = []
     if ((this.elForm || this.elFormItem || {}).size) {
       cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
-    } else if ((Object.values(ButtonSize) as Array<string>).includes(this.size)) {
+    } else if (this.isStandardSize(this.size)) {
       cssClasses.push(`s-${this.size}`)
     }
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if ((Object.values(ButtonTypes) as Array<string>).includes(this.type)) {

@@ -12,12 +12,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Component, Mixins, Prop } from 'vue-property-decorator'
 
-import { CardShadow, BorderRadius } from './consts'
+import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import { CardShadow } from './consts'
+import { BorderRadius } from '../../types'
 
 @Component
-export default class SCard extends Vue {
+export default class SCard extends Mixins(StandardPropsMixin) {
   /**
    * Header of the card. Also it can be set by slot#header
    */
@@ -47,17 +49,9 @@ export default class SCard extends Vue {
    */
   @Prop({ default: false, type: Boolean }) readonly clickable!: boolean
 
-  get computedBorderRadius (): string {
-    if (this.borderRadius === BorderRadius.SMALL ||
-      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
-      return ''
-    }
-    return this.borderRadius
-  }
-
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.clickable) {

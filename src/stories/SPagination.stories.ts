@@ -1,7 +1,7 @@
 import { withKnobs, number, text, boolean, select } from '@storybook/addon-knobs'
 
 import { SPagination, SRow } from '../components'
-import { BorderRadius } from '../components/Pagination'
+import { BorderRadius } from '../types'
 
 export default {
   component: SPagination,

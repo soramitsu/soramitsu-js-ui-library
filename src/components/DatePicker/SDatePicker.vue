@@ -35,12 +35,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 
-import { PickerTypes, PickerSize, PickerAlignment, InputTypes, BorderRadius } from './consts'
+import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import { Size, BorderRadius } from '../../types'
+import { PickerTypes, PickerAlignment, InputTypes } from './consts'
 
 @Component
-export default class SDatePicker extends Vue {
+export default class SDatePicker extends Mixins(StandardPropsMixin) {
   /**
    * Value of date picker component. Can be used with `v-model`.
    * Can be date object / array with date objects for date range picker
@@ -96,7 +98,7 @@ export default class SDatePicker extends Vue {
    * TODO: ask design team
    * `"medium"` by default
    */
-  // @Prop({ type: String, default: PickerSize.MEDIUM }) readonly size!: string
+  // @Prop({ type: String, default: Size.MEDIUM }) readonly size!: string
   /**
    * Placeholder in non-range mode
    */
@@ -215,20 +217,12 @@ export default class SDatePicker extends Vue {
     return !!(this.model && this.placeholder)
   }
 
-  get computedBorderRadius (): string {
-    if (this.borderRadius === BorderRadius.SMALL ||
-      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
-      return ''
-    }
-    return this.borderRadius
-  }
-
   get computedPopperClass (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.popperClass) {
       cssClasses.push(this.popperClass)
     }
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses
@@ -239,7 +233,7 @@ export default class SDatePicker extends Vue {
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
       cssClasses.push(`s-${!this.isInputType ? InputTypes.SELECT : this.inputType}-type`)
     }
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.focused) {

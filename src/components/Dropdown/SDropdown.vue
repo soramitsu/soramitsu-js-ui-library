@@ -2,7 +2,8 @@
   <el-dropdown
     ref="dropdown"
     :split-button="splitButton"
-    :size="computedSize"
+    :size="getComponentSize(size)"
+    :class="computedClasses"
     :type="computedType"
     :placement="placement"
     :trigger="computedTrigger"
@@ -35,20 +36,22 @@
         </template>
       </s-tooltip>
     </template>
-    <el-dropdown-menu :class="{'ellipsis': type === DropdownType.ELLIPSIS}">
+    <el-dropdown-menu :class="computedPopperClass">
       <slot name="menu"></slot>
     </el-dropdown-menu>
   </el-dropdown>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref } from 'vue-property-decorator'
 import { ElDropdown } from 'element-ui/types/dropdown'
 
-import { DropdownType, DropdownSize, DropdownPlacement, DropdownTrigger } from './consts'
+import StandardPropsMixin from '../../mixins/StandardPropsMixin'
 import { ButtonTypes, SButton } from '../Button'
 import { Icons, SIcon } from '../Icon'
 import { STooltip } from '../Tooltip'
+import { Size, BorderRadius } from '../../types'
+import { DropdownType, DropdownPlacement, DropdownTrigger } from './consts'
 
 @Component({
   components: {
@@ -57,7 +60,7 @@ import { STooltip } from '../Tooltip'
     STooltip
   }
 })
-export default class SDropdown extends Vue {
+export default class SDropdown extends Mixins(StandardPropsMixin) {
   readonly DropdownType = DropdownType
   /**
    * A type of the dropdown component. Possible values: `"default"`, `"button"`, `"ellipsis"`.
@@ -84,7 +87,13 @@ export default class SDropdown extends Vue {
    *
    * By default, it's set to `"big"`
    */
-  @Prop({ type: String, default: DropdownSize.BIG }) readonly size!: string
+  @Prop({ type: String, default: Size.BIG }) readonly size!: string
+  /**
+   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
+   *
+   * By default it's set to `"small"`
+   */
+  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * A placement of the popup menu. You can use any value from `DropdownPlacement` enum.
    *
@@ -133,6 +142,25 @@ export default class SDropdown extends Vue {
 
   willTooltipBeDisabled = false
 
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.isStandardBorderRadius(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses
+  }
+
+  get computedPopperClass (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.type === DropdownType.ELLIPSIS) {
+      cssClasses.push('ellipsis')
+    }
+    if (this.isStandardBorderRadius(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses
+  }
+
   get computedType () {
     if (this.type === DropdownType.BUTTON) {
       return this.computedButtonType
@@ -148,14 +176,6 @@ export default class SDropdown extends Vue {
       return DropdownTrigger.HOVER
     }
     return this.trigger
-  }
-
-  get computedSize (): string {
-    if (this.size === DropdownSize.BIG ||
-      !(Object.values(DropdownSize) as Array<string>).includes(this.size)) {
-      return ''
-    }
-    return this.size
   }
 
   get computedButtonType (): string {

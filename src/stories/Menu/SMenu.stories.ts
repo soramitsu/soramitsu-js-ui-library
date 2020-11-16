@@ -1,6 +1,6 @@
 import { select } from '@storybook/addon-knobs'
 import { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from '../../components'
-import { BorderRadius } from '../../components/Menu'
+import { BorderRadius } from '../../types'
 
 export default {
   component: SMenu,

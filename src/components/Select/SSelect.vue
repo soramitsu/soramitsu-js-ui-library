@@ -25,13 +25,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 
+import StandardPropsMixin from '../../mixins/StandardPropsMixin'
 import { Autocomplete } from '../Input'
-import { InputTypes, BorderRadius } from './consts'
+import { BorderRadius } from '../../types'
+import { InputTypes } from './consts'
 
 @Component
-export default class SSelect extends Vue {
+export default class SSelect extends Mixins(StandardPropsMixin) {
   /**
    * Selected value. Can be used with `v-model`
    */
@@ -148,20 +150,12 @@ export default class SSelect extends Vue {
     this.$nextTick(this.updateInputValue)
   }
 
-  get computedBorderRadius (): string {
-    if (this.borderRadius === BorderRadius.SMALL ||
-      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
-      return ''
-    }
-    return this.borderRadius
-  }
-
   get computedPopperClass (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.popperClass) {
       cssClasses.push(this.popperClass)
     }
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses
@@ -172,7 +166,7 @@ export default class SSelect extends Vue {
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
       cssClasses.push(`s-${this.inputType}-type`)
     }
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.focused) {

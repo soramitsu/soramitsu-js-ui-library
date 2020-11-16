@@ -1,7 +1,8 @@
 import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { SDatePicker, SRow, SCol } from '../components'
-import { PickerAlignment, PickerTypes, InputTypes, BorderRadius } from '../components/DatePicker'
+import { BorderRadius } from '../types'
+import { PickerAlignment, PickerTypes, InputTypes } from '../components/DatePicker'
 
 export default {
   component: SDatePicker,

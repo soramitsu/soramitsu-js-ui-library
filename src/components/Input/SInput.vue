@@ -38,14 +38,16 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref, Inject, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref, Inject, Watch } from 'vue-property-decorator'
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
-import { Autocomplete, InputSize, InputType, BorderRadius } from './consts'
+import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import { BorderRadius } from '../../types'
+import { Autocomplete, InputSize, InputType } from './consts'
 
 @Component
-export default class SInput extends Vue {
+export default class SInput extends Mixins(StandardPropsMixin) {
   readonly InputType = InputType
   readonly emptyValue = null
   /**
@@ -179,14 +181,6 @@ export default class SInput extends Vue {
     return this.type === InputType.TEXT && this.size === InputSize.MEDIUM
   }
 
-  get computedBorderRadius (): string {
-    if (this.borderRadius === BorderRadius.SMALL ||
-      !(Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
-      return ''
-    }
-    return this.borderRadius
-  }
-
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if (this.focused) {
@@ -195,7 +189,7 @@ export default class SInput extends Vue {
     if (this.disabled || (this.elForm || {}).disabled) {
       cssClasses.push('s-disabled')
     }
-    if ((Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)) {
+    if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.type === InputType.TEXT_FILE) {

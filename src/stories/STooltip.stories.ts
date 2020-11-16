@@ -1,6 +1,7 @@
 import { text, withKnobs, boolean, select, number } from '@storybook/addon-knobs'
 
 import { SButton, STooltip, SRow, SMain } from '../components'
+import { Size, BorderRadius } from '../types'
 import { TooltipPlacement, TooltipTheme } from '../components/Tooltip'
 
 export default {
@@ -18,6 +19,7 @@ export const configurable = () => ({
                  v-model="model"
                  :content="content"
                  :disabled="disabled"
+                 :borderRadius="borderRadius"
                  :offset="offset"
                  :openDelay="openDelay"
                  @change="handleChange"
@@ -37,6 +39,9 @@ export const configurable = () => ({
     },
     disabled: {
       default: boolean('Disabled', false)
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
     },
     offset: {
       default: number('Offset', 0)

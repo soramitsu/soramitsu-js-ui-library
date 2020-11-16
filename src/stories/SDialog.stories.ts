@@ -1,7 +1,7 @@
 import { text, withKnobs, boolean, select } from '@storybook/addon-knobs'
 
 import { SDialog, SRow, SButton } from '../components'
-import { BorderRadius } from '../components/Dialog'
+import { BorderRadius } from '../types'
 
 export default {
   component: SDialog,

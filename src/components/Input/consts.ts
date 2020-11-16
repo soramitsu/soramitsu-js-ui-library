@@ -1,5 +1,3 @@
-import { SizeExtended } from '../../types'
-
 export enum Autocomplete {
   OFF = 'off',
   ON = 'on'
@@ -36,5 +34,3 @@ export enum InputSize {
   MEDIUM = 'medium',
   BIG = 'big'
 }
-
-export const BorderRadius = SizeExtended

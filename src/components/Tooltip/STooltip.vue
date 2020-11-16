@@ -11,6 +11,7 @@
     :transition="animation"
     :visible-arrow="showArrow"
     :open-delay="openDelay"
+    :popper-class="computedPopperClass"
     :manual="manual"
     :hide-after="closeDelay"
     :tabindex="tabindex"
@@ -21,15 +22,17 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 import { TooltipEffect } from 'element-ui/types/tooltip'
 import { PopoverPlacement } from 'element-ui/types/popover'
 import debounce from 'throttle-debounce/debounce'
 
+import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import { BorderRadius } from '../../types'
 import { TooltipTheme, TooltipPlacement } from './consts'
 
 @Component
-export default class STooltip extends Vue {
+export default class STooltip extends Mixins(StandardPropsMixin) {
   /**
    * Theme of the tooltip. Supported values: `"dark"` or `"light"`.
    *
@@ -59,6 +62,12 @@ export default class STooltip extends Vue {
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
   /**
+   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
+   *
+   * By default it's set to `"small"`
+   */
+  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
+  /**
    * Offset of the tooltip.
    *
    * `0` by default
@@ -81,6 +90,10 @@ export default class STooltip extends Vue {
    */
   @Prop({ default: 0, type: Number }) readonly openDelay!: number
   /**
+   * Custom class name for tooltip's popper
+   */
+  @Prop({ type: String }) readonly popperClass!: string
+  /**
    * Manual mode of the tooltip. `Mouseenter` and `mouseleave` won't have
    * effects if set to true.
    *
@@ -101,6 +114,14 @@ export default class STooltip extends Vue {
   @Prop({ default: 0, type: Number }) readonly tabindex!: number
 
   @Ref('tooltip') tooltip!: any
+
+  get computedPopperClass (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.isStandardBorderRadius(this.borderRadius)) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses
+  }
 
   model = this.value
 
