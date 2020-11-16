@@ -9,7 +9,7 @@ $color-ide-boolean: #0000FF;
 .s-json-input {
   width: 100%;
   border: 1px solid var(--s-color-base-border-primary);
-  border-radius: $s-border-radius-default;
+  border-radius: var(--s-border-radius-mini);
   &.s-disabled {
     .ace-jsoneditor {
       pointer-events: none;
@@ -106,7 +106,7 @@ $color-ide-boolean: #0000FF;
     background: var(--s-color-base-content-primary);
     border-color: var(--s-color-base-content-primary);
     color: var(--s-color-base-on-accent);
-    border-radius: $s-border-radius-default;
+    border-radius: var(--s-border-radius-mini);
     padding: 10px;
     font-size: 12px;
     line-height: 1.2;

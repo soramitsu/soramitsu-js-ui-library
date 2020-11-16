@@ -48,9 +48,6 @@ $s-size-medium: 40px !default;
 $s-size-small: 32px !default;
 $s-size-mini: 24px !default;
 
-// TODO: check do we need this default radius or not
-$s-border-radius-default: 4px !default;
-
 $s-border-radius-base: 4px;
 $s-border-radius-mini: $s-border-radius-base !default;
 $s-border-radius-small: $s-border-radius-base * 2 !default;

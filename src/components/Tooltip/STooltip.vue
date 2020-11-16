@@ -117,6 +117,9 @@ export default class STooltip extends Mixins(StandardPropsMixin) {
 
   get computedPopperClass (): Array<string> {
     const cssClasses: Array<string> = []
+    if (this.popperClass) {
+      cssClasses.push(this.popperClass)
+    }
     if (this.isStandardBorderRadius(this.borderRadius)) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }

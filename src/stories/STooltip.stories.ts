@@ -1,7 +1,7 @@
 import { text, withKnobs, boolean, select, number } from '@storybook/addon-knobs'
 
 import { SButton, STooltip, SRow, SMain } from '../components'
-import { Size, BorderRadius } from '../types'
+import { BorderRadius } from '../types'
 import { TooltipPlacement, TooltipTheme } from '../components/Tooltip'
 
 export default {

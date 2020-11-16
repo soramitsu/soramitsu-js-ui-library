@@ -1,5 +1,3 @@
-import { Size } from '../../types'
-
 export enum DropdownType {
   DEFAULT = 'default',
   BUTTON = 'button',
