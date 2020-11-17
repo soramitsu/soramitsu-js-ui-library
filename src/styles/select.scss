@@ -1,6 +1,3 @@
-@import "./variables";
-@import "./icons";
-
 @mixin select-border-radius(
   $suffix: "big",
   $border-radius: var(--s-border-radius-big)

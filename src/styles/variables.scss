@@ -10,7 +10,7 @@ $s-color-theme-secondary-pressed: #F1C0D2 !default;
 $s-color-theme-secondary-focused: #EDABC3 !default;
 // Base content colors
 $s-color-base-content-primary: #2D2926 !default;
-$s-color-base-content-secondary: #53565A !default; // not used
+$s-color-base-content-secondary: #53565A !default;
 $s-color-base-content-tertiary: #75787B !default;
 $s-color-base-content-quaternary: #A3A4A8 !default;
 // Base misc colors
@@ -91,6 +91,7 @@ $--breakpoints-spec: (
 );
 
 :root {
+  // Colors
   --s-color-theme-accent: #{$s-color-theme-accent};
   --s-color-theme-accent-hover: #{$s-color-theme-accent-hover};
   --s-color-theme-accent-pressed: #{$s-color-theme-accent-pressed};
@@ -120,8 +121,16 @@ $--breakpoints-spec: (
   --s-color-status-success-background: #{$s-color-status-success-background};
   --s-color-status-warning-background: #{$s-color-status-warning-background};
   --s-color-status-error-background: #{$s-color-status-error-background};
+  // Border Radius
   --s-border-radius-mini: #{$s-border-radius-mini};
   --s-border-radius-small: #{$s-border-radius-small};
   --s-border-radius-medium: #{$s-border-radius-medium};
   --s-border-radius-big: #{$s-border-radius-big};
+  // Shadows
+  --s-shadow-surface: #{$s-shadow-surface};
+  --s-shadow-tooltip: #{$s-shadow-tooltip};
+  --s-shadow-tab: #{$s-shadow-tab};
+  --s-shadow-dropdown: #{$s-shadow-dropdown};
+  --s-shadow-mobile-tap-bar: #{$s-shadow-mobile-tap-bar};
+  --s-shadow-mobile-side-menu: #{$s-shadow-mobile-side-menu};
 }
