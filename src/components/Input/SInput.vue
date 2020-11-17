@@ -42,12 +42,11 @@ import { Component, Mixins, Prop, Ref, Inject, Watch } from 'vue-property-decora
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
-import StandardPropsMixin from '../../mixins/StandardPropsMixin'
-import { BorderRadius } from '../../types'
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { Autocomplete, InputSize, InputType } from './consts'
 
 @Component
-export default class SInput extends Mixins(StandardPropsMixin) {
+export default class SInput extends Mixins(BorderRadiusMixin) {
   readonly InputType = InputType
   readonly emptyValue = null
   /**
@@ -67,12 +66,6 @@ export default class SInput extends Mixins(StandardPropsMixin) {
    * Disable state
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
-  /**
-   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
-   *
-   * By default it's set to `"mini"`
-   */
-  @Prop({ default: BorderRadius.MINI, type: String }) readonly borderRadius!: string
   /**
    * Show password flag. `false` by default
    */
@@ -189,7 +182,7 @@ export default class SInput extends Mixins(StandardPropsMixin) {
     if (this.disabled || (this.elForm || {}).disabled) {
       cssClasses.push('s-disabled')
     }
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.type === InputType.TEXT_FILE) {

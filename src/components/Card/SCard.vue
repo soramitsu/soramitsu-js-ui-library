@@ -14,12 +14,11 @@
 <script lang="ts">
 import { Component, Mixins, Prop } from 'vue-property-decorator'
 
-import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { CardShadow } from './consts'
-import { BorderRadius } from '../../types'
 
 @Component
-export default class SCard extends Mixins(StandardPropsMixin) {
+export default class SCard extends Mixins(BorderRadiusMixin) {
   /**
    * Header of the card. Also it can be set by slot#header
    */
@@ -37,12 +36,6 @@ export default class SCard extends Mixins(StandardPropsMixin) {
    */
   @Prop({ default: CardShadow.HOVER, type: String }) readonly shadow!: string
   /**
-   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
-   *
-   * By default it's set to `"small"`
-   */
-  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
-  /**
    * Clickable property of the Card component which means that the user can click on the card
    *
    * `false` by default
@@ -51,7 +44,7 @@ export default class SCard extends Mixins(StandardPropsMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.clickable) {

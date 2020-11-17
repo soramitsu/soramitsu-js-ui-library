@@ -22,12 +22,11 @@
 <script lang="ts">
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 
-import StandardPropsMixin from '../../mixins/StandardPropsMixin'
-import { BorderRadius } from '../../types'
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { TabsType, TabsPosition } from './consts'
 
 @Component
-export default class STabs extends Mixins(StandardPropsMixin) {
+export default class STabs extends Mixins(BorderRadiusMixin) {
   /**
    * Name of the selected tab. Can be used with `v-model`.
    *
@@ -40,12 +39,6 @@ export default class STabs extends Mixins(StandardPropsMixin) {
    * `"rounded"` works only when position is `"top"` or `"bottom"`
    */
   @Prop({ type: String, default: '' }) readonly type!: string
-  /**
-   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
-   *
-   * By default it's set to `"small"`
-   */
-  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Will tabs be closable.
    *
@@ -107,7 +100,7 @@ export default class STabs extends Mixins(StandardPropsMixin) {
       ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
       cssClasses.push('s-rounded')
     }
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses

@@ -6,7 +6,7 @@
     :disabled="disabled"
     :border="border"
     :checked="checked"
-    :size="getComponentSize(size)"
+    :size="getComponentSize"
     :name="name"
     :indeterminate="indeterminate"
     @change="handleChange"
@@ -18,11 +18,11 @@
 <script lang="ts">
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 
-import StandardPropsMixin from '../../mixins/StandardPropsMixin'
-import { Size, BorderRadius } from '../../types'
+import SizeMixin from '../../mixins/SizeMixin'
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 
 @Component
-export default class SCheckbox extends Mixins(StandardPropsMixin) {
+export default class SCheckbox extends Mixins(SizeMixin, BorderRadiusMixin) {
   /**
    * Value of the checkbox item. Can be `string / number / boolean`
    */
@@ -44,23 +44,11 @@ export default class SCheckbox extends Mixins(StandardPropsMixin) {
    */
   @Prop({ default: false, type: Boolean }) readonly border!: boolean
   /**
-   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
-   *
-   * By default it's set to `"mini"`
-   */
-  @Prop({ default: BorderRadius.MINI, type: String }) readonly borderRadius!: string
-  /**
    * Checked state of the checkbox item.
    *
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly checked!: boolean
-  /**
-   * Size of the checkbox item. Possible values: `"big"`, `"medium"`, `"small"`.
-   *
-   * By default it's set to `"medium"`
-   */
-  @Prop({ default: Size.MEDIUM, type: String }) readonly size!: string
   /**
    * Native name property of the checkbox item
    */
@@ -86,10 +74,10 @@ export default class SCheckbox extends Mixins(StandardPropsMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if (this.isStandardSize(this.size)) {
+    if (this.isStandardSize) {
       cssClasses.push(`s-${this.size}`)
     }
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses

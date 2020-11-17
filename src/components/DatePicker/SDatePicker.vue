@@ -37,12 +37,13 @@
 <script lang="ts">
 import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 
-import StandardPropsMixin from '../../mixins/StandardPropsMixin'
-import { Size, BorderRadius } from '../../types'
+// TODO: ask do we need size prop for the component?
+// Prev comment => TODO: ask design team
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { PickerTypes, PickerAlignment, InputTypes } from './consts'
 
 @Component
-export default class SDatePicker extends Mixins(StandardPropsMixin) {
+export default class SDatePicker extends Mixins(BorderRadiusMixin) {
   /**
    * Value of date picker component. Can be used with `v-model`.
    * Can be date object / array with date objects for date range picker
@@ -94,12 +95,6 @@ export default class SDatePicker extends Mixins(StandardPropsMixin) {
    */
   @Prop({ type: Boolean, default: true }) readonly clearable!: boolean
   /**
-   * Size of the date picker input
-   * TODO: ask design team
-   * `"medium"` by default
-   */
-  // @Prop({ type: String, default: Size.MEDIUM }) readonly size!: string
-  /**
    * Placeholder in non-range mode
    */
   @Prop({ type: String, default: '' }) readonly placeholder!: string
@@ -123,12 +118,6 @@ export default class SDatePicker extends Mixins(StandardPropsMixin) {
    * `"left"` is set by default
    */
   @Prop({ type: String, default: PickerAlignment.LEFT }) readonly align!: string
-  /**
-   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
-   *
-   * By default it's set to `"small"`
-   */
-  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Custom class name for date picker's dropdown
    */
@@ -217,15 +206,15 @@ export default class SDatePicker extends Mixins(StandardPropsMixin) {
     return !!(this.model && this.placeholder)
   }
 
-  get computedPopperClass (): Array<string> {
+  get computedPopperClass (): string {
     const cssClasses: Array<string> = []
     if (this.popperClass) {
       cssClasses.push(this.popperClass)
     }
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
-    return cssClasses
+    return cssClasses.join(' ')
   }
 
   get computedClasses (): Array<string> {
@@ -233,7 +222,7 @@ export default class SDatePicker extends Mixins(StandardPropsMixin) {
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
       cssClasses.push(`s-${!this.isInputType ? InputTypes.SELECT : this.inputType}-type`)
     }
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.focused) {

@@ -2,7 +2,7 @@
   <el-dropdown
     ref="dropdown"
     :split-button="splitButton"
-    :size="getComponentSize(size)"
+    :size="getComponentSize"
     :class="computedClasses"
     :type="computedType"
     :placement="placement"
@@ -46,11 +46,11 @@
 import { Component, Mixins, Prop, Ref } from 'vue-property-decorator'
 import { ElDropdown } from 'element-ui/types/dropdown'
 
-import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import SizeMixin from '../../mixins/SizeMixin'
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { ButtonTypes, SButton } from '../Button'
 import { Icons, SIcon } from '../Icon'
 import { STooltip } from '../Tooltip'
-import { Size, BorderRadius } from '../../types'
 import { DropdownType, DropdownPlacement, DropdownTrigger } from './consts'
 
 @Component({
@@ -60,7 +60,7 @@ import { DropdownType, DropdownPlacement, DropdownTrigger } from './consts'
     STooltip
   }
 })
-export default class SDropdown extends Mixins(StandardPropsMixin) {
+export default class SDropdown extends Mixins(SizeMixin, BorderRadiusMixin) {
   readonly DropdownType = DropdownType
   /**
    * A type of the dropdown component. Possible values: `"default"`, `"button"`, `"ellipsis"`.
@@ -81,19 +81,6 @@ export default class SDropdown extends Mixins(StandardPropsMixin) {
    * By default, it's set to `"secondary"`
    */
   @Prop({ type: String, default: ButtonTypes.SECONDARY }) readonly buttonType!: string
-  /**
-   * A size of the dropdown items. Possible values: `"big"`, `"medium"`, `"small"`.
-   * It affects on the button size if `type="button"` as well.
-   *
-   * By default, it's set to `"big"`
-   */
-  @Prop({ type: String, default: Size.BIG }) readonly size!: string
-  /**
-   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
-   *
-   * By default it's set to `"small"`
-   */
-  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * A placement of the popup menu. You can use any value from `DropdownPlacement` enum.
    *
@@ -144,7 +131,7 @@ export default class SDropdown extends Mixins(StandardPropsMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses
@@ -155,7 +142,7 @@ export default class SDropdown extends Mixins(StandardPropsMixin) {
     if (this.type === DropdownType.ELLIPSIS) {
       cssClasses.push('ellipsis')
     }
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses

@@ -3,7 +3,7 @@
     <el-button
       :type="computedType"
       :native-type="nativeType"
-      :size="getComponentSize(size)"
+      :size="getComponentSize"
       :class="computedClasses"
       :style="computedStyles"
       :disabled="disabled"
@@ -25,16 +25,16 @@ import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
 import { PopoverPlacement } from 'element-ui/types/popover'
 
-import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import SizeMixin from '../../mixins/SizeMixin'
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { SIcon } from '../Icon'
 import { STooltip, TooltipPlacement } from '../Tooltip'
-import { Size, BorderRadius } from '../../types'
 import { ButtonTypes, ButtonNativeTypes } from './consts'
 
 @Component({
   components: { SIcon, STooltip }
 })
-export default class SButton extends Mixins(StandardPropsMixin) {
+export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin) {
   readonly ButtonTypes = ButtonTypes
   /**
    * Type of button. Possible values: `"primary"`, `"secondary"`, `"tertiary"`, `"action"`, `"link"`.
@@ -48,18 +48,6 @@ export default class SButton extends Mixins(StandardPropsMixin) {
    * By default it's set to `false`
    */
   @Prop({ default: false, type: Boolean }) readonly rounded!: boolean
-  /**
-   * Size of button. Possible values: `"big"`, `"medium"`, `"small"`.
-   *
-   * By default it's set to `"medium"`
-   */
-  @Prop({ default: Size.MEDIUM, type: String }) readonly size!: string
-  /**
-   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
-   *
-   * By default it's set to `"small"`
-   */
-  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Icon name from icon collection of this library
    */
@@ -124,10 +112,10 @@ export default class SButton extends Mixins(StandardPropsMixin) {
     const cssClasses: Array<string> = []
     if ((this.elForm || this.elFormItem || {}).size) {
       cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
-    } else if (this.isStandardSize(this.size)) {
+    } else if (this.isStandardSize) {
       cssClasses.push(`s-${this.size}`)
     }
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if ((Object.values(ButtonTypes) as Array<string>).includes(this.type)) {

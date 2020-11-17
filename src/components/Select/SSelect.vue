@@ -27,13 +27,12 @@
 <script lang="ts">
 import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 
-import StandardPropsMixin from '../../mixins/StandardPropsMixin'
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { Autocomplete } from '../Input'
-import { BorderRadius } from '../../types'
 import { InputTypes } from './consts'
 
 @Component
-export default class SSelect extends Mixins(StandardPropsMixin) {
+export default class SSelect extends Mixins(BorderRadiusMixin) {
   /**
    * Selected value. Can be used with `v-model`
    */
@@ -85,12 +84,6 @@ export default class SSelect extends Mixins(StandardPropsMixin) {
    * `false` by default
    */
   @Prop({ type: Boolean, default: false }) readonly disabled!: boolean
-  /**
-   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
-   *
-   * By default it's set to `"small"`
-   */
-  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Loading state of the select component.
    *
@@ -150,15 +143,15 @@ export default class SSelect extends Mixins(StandardPropsMixin) {
     this.$nextTick(this.updateInputValue)
   }
 
-  get computedPopperClass (): Array<string> {
+  get computedPopperClass (): string {
     const cssClasses: Array<string> = []
     if (this.popperClass) {
       cssClasses.push(this.popperClass)
     }
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
-    return cssClasses
+    return cssClasses.join(' ')
   }
 
   get computedClasses (): Array<string> {
@@ -166,7 +159,7 @@ export default class SSelect extends Mixins(StandardPropsMixin) {
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
       cssClasses.push(`s-${this.inputType}-type`)
     }
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.focused) {

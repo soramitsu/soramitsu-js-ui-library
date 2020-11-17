@@ -27,12 +27,11 @@ import { TooltipEffect } from 'element-ui/types/tooltip'
 import { PopoverPlacement } from 'element-ui/types/popover'
 import debounce from 'throttle-debounce/debounce'
 
-import StandardPropsMixin from '../../mixins/StandardPropsMixin'
-import { BorderRadius } from '../../types'
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { TooltipTheme, TooltipPlacement } from './consts'
 
 @Component
-export default class STooltip extends Mixins(StandardPropsMixin) {
+export default class STooltip extends Mixins(BorderRadiusMixin) {
   /**
    * Theme of the tooltip. Supported values: `"dark"` or `"light"`.
    *
@@ -61,12 +60,6 @@ export default class STooltip extends Mixins(StandardPropsMixin) {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
-  /**
-   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
-   *
-   * By default it's set to `"small"`
-   */
-  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Offset of the tooltip.
    *
@@ -115,15 +108,15 @@ export default class STooltip extends Mixins(StandardPropsMixin) {
 
   @Ref('tooltip') tooltip!: any
 
-  get computedPopperClass (): Array<string> {
+  get computedPopperClass (): string {
     const cssClasses: Array<string> = []
     if (this.popperClass) {
       cssClasses.push(this.popperClass)
     }
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
-    return cssClasses
+    return cssClasses.join(' ')
   }
 
   model = this.value

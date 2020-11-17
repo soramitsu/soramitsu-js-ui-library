@@ -27,12 +27,11 @@
 import { Component, Mixins, Prop, Ref } from 'vue-property-decorator'
 import { ElMenu } from 'element-ui/types/menu'
 
-import StandardPropsMixin from '../../mixins/StandardPropsMixin'
-import { BorderRadius } from '../../types'
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { MenuMode, MenuTrigger } from './consts'
 
 @Component
-export default class SMenu extends Mixins(StandardPropsMixin) {
+export default class SMenu extends Mixins(BorderRadiusMixin) {
   /**
    * Mode of menu. Possible values: `"horizontal"`, `"vertical"`.
    *
@@ -55,12 +54,6 @@ export default class SMenu extends Mixins(StandardPropsMixin) {
    * Menu shadow if it exists
    */
   @Prop({ default: 'none', type: String }) readonly boxShadow!: string
-  /**
-   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
-   *
-   * By default it's set to `"small"`
-   */
-  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Text color of menu in hex format.
    *
@@ -117,7 +110,7 @@ export default class SMenu extends Mixins(StandardPropsMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = ['s-menu']
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses

@@ -28,11 +28,10 @@ import { Component, Mixins, Prop, Ref, Watch } from 'vue-property-decorator'
 import { ElPagination } from 'element-ui/types/pagination'
 import cloneDeep from 'lodash/fp/cloneDeep'
 
-import StandardPropsMixin from '../../mixins/StandardPropsMixin'
-import { BorderRadius } from '../../types'
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 
 @Component
-export default class SPagination extends Mixins(StandardPropsMixin) {
+export default class SPagination extends Mixins(BorderRadiusMixin) {
   /**
    * Will pagination component be small.
    *
@@ -45,12 +44,6 @@ export default class SPagination extends Mixins(StandardPropsMixin) {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly background!: boolean
-  /**
-   * Border radius of button. Possible values: `"big"`, `"medium"`, `"small"`, `"mini"`.
-   *
-   * By default it's set to `"small"`
-   */
-  @Prop({ default: BorderRadius.SMALL, type: String }) readonly borderRadius!: string
   /**
    * Items count of each page. It supports the .sync modifier.
    *
@@ -177,20 +170,20 @@ export default class SPagination extends Mixins(StandardPropsMixin) {
     return this.layout.includes('slot')
   }
 
-  get computedPopperClass (): Array<string> {
+  get computedPopperClass (): string {
     const cssClasses: Array<string> = []
     if (this.popperClass) {
       cssClasses.push(this.popperClass)
     }
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
-    return cssClasses
+    return cssClasses.join(' ')
   }
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if (this.isStandardBorderRadius(this.borderRadius)) {
+    if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses
