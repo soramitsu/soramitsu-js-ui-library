@@ -22,12 +22,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 
-import { RadioSize } from './consts'
+import SizeMixin from '../../mixins/SizeMixin'
 
 @Component
-export default class SRadio extends Vue {
+export default class SRadio extends Mixins(SizeMixin) {
   /**
    * Binding value of the radio component. Can be `string` / `number` / `boolean`
    */
@@ -56,12 +56,6 @@ export default class SRadio extends Vue {
    * Native name property
    */
   @Prop({ default: '', type: String }) readonly name!: string
-  /**
-   * Size of the radio item. Possible values: `"big"`, `"medium"`, `"small"`.
-   *
-   * By default it's set to `"medium"`
-   */
-  @Prop({ default: RadioSize.MEDIUM, type: String }) readonly size!: string
 
   model = this.value
 
@@ -78,7 +72,7 @@ export default class SRadio extends Vue {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if ((Object.values(RadioSize) as Array<string>).includes(this.size)) {
+    if (this.isStandardSize) {
       cssClasses.push(`s-${this.size}`)
     }
     return cssClasses

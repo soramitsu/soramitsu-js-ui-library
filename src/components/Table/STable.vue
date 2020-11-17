@@ -6,7 +6,7 @@
     :max-height="maxHeight"
     :stripe="stripe"
     :border="border"
-    :size="size"
+    :size="getComponentSize"
     :fit="fit"
     :show-header="showHeader"
     :highlight-current-row="highlightCurrentRow"
@@ -58,15 +58,16 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref } from 'vue-property-decorator'
 import { ElTable } from 'element-ui/types/table'
 import { ElTableColumn } from 'element-ui/types/table-column'
 
+import SizeMixin from '../../mixins/SizeMixin'
 import { TooltipTheme } from '../Tooltip'
-import { TableSize, SortDirection } from './consts'
+import { SortDirection } from './consts'
 
 @Component
-export default class STable extends Vue {
+export default class STable extends Mixins(SizeMixin) {
   /**
    * Data of the table.
    *
@@ -97,12 +98,6 @@ export default class STable extends Vue {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly border!: boolean
-  /**
-   * Table's size attribute.
-   *
-   * `"big"` by default
-   */
-  @Prop({ default: TableSize.BIG, type: String }) readonly size!: string
   /**
    * Will width of column automatically be fit its container.
    *

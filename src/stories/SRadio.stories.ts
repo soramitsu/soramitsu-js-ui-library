@@ -1,7 +1,7 @@
 import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { SRadio, SRadioGroup, SRow, SCol } from '../components'
-import { RadioSize } from '../components/Radio'
+import { Size } from '../types'
 
 export default {
   component: SRadio,
@@ -41,7 +41,7 @@ export const configurable = () => ({
   }),
   props: {
     size: {
-      default: select('Size', Object.values(RadioSize), RadioSize.MEDIUM)
+      default: select('Size', Object.values(Size), Size.MEDIUM)
     },
     disabled: {
       default: boolean('Disabled', false)
@@ -115,7 +115,7 @@ export const radioButtonGroup = () => ({
   }),
   props: {
     size: {
-      default: select('Size', Object.values(RadioSize), RadioSize.MEDIUM)
+      default: select('Size', Object.values(Size), Size.MEDIUM)
     },
     disabled: {
       default: boolean('Disabled', false)
