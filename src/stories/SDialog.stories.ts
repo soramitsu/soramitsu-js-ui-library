@@ -1,6 +1,7 @@
-import { text, withKnobs, boolean } from '@storybook/addon-knobs'
+import { text, withKnobs, boolean, select } from '@storybook/addon-knobs'
 
 import { SDialog, SRow, SButton } from '../components'
+import { BorderRadius } from '../types'
 
 export default {
   component: SDialog,
@@ -22,6 +23,7 @@ export const configurable = () => ({
                  :width="width"
                  :fullscreen="fullscreen"
                  :top="top"
+                 :borderRadius="borderRadius"
                  :show-close="showClose"
                  :close-on-click-modal="closeOnClickModal"
                  :close-on-esc="closeOnEsc"
@@ -50,6 +52,9 @@ export const configurable = () => ({
     },
     fullscreen: {
       default: boolean('fullscreen', false)
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
     },
     showClose: {
       default: boolean('Show close', true)

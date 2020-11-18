@@ -1,6 +1,7 @@
-import { text, withKnobs, boolean, number } from '@storybook/addon-knobs'
+import { text, withKnobs, boolean, number, select } from '@storybook/addon-knobs'
 
 import { SSelect, SRow, SCol, SOption } from '../../components'
+import { BorderRadius } from '../../types'
 import { InputTypes } from '../../components/Select'
 
 export default {
@@ -25,6 +26,7 @@ export const configurable = () => ({
                  <s-select
                    v-model="model"
                    :disabled="disabled"
+                   :borderRadius="borderRadius"
                    :loading="loading"
                    :multiple="multiple"
                    :input-type="item.inputType"
@@ -34,6 +36,7 @@ export const configurable = () => ({
                    :multiple-text-prefix="multipleTextPrefix"
                    :loading-text="loadingText"
                    :no-data-text="noDataText"
+                   :popperClass="borderRadius"
                    @change="handleChange"
                  >
                    <s-option
@@ -53,6 +56,9 @@ export const configurable = () => ({
   props: {
     disabled: {
       default: boolean('Disabled', false)
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
     },
     loading: {
       default: boolean('Loading', false)

@@ -11,7 +11,7 @@
     :modal-append-to-body="modalAppendToBody"
     :append-to-body="appendToBody"
     :lock-scroll="lockScroll"
-    :custom-class="customClass"
+    :class="computedClasses"
     :close-on-click-modal="closeOnClickModal"
     :close-on-press-escape="closeOnEsc"
     :before-close="beforeClose"
@@ -28,11 +28,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 import elementResizeDetectorMaker from 'element-resize-detector'
 
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
+
 @Component
-export default class SDialog extends Vue {
+export default class SDialog extends Mixins(BorderRadiusMixin) {
   /**
    * Visibility of the dialog component.
    *
@@ -146,6 +148,17 @@ export default class SDialog extends Vue {
   @Watch('model')
   private handleValueChange (value: boolean): void {
     this.$emit('update:visible', value)
+  }
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    if (this.customClass) {
+      cssClasses.push(this.customClass)
+    }
+    return cssClasses
   }
 
   mounted (): void {

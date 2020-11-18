@@ -1,7 +1,7 @@
 import { text, withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { STable, STableColumn } from '../../components'
-import { TableSize } from '../../components/Table'
+import { Size } from '../../types'
 
 export default {
   component: STable,
@@ -72,7 +72,7 @@ export const configurable = () => ({
       default: boolean('Show header', true)
     },
     size: {
-      default: select('Size', Object.values(TableSize), TableSize.BIG)
+      default: select('Size', Object.values(Size), Size.BIG)
     },
     highlightCurrentRow: {
       default: boolean('Highlight current row', false)

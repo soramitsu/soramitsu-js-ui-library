@@ -1,6 +1,6 @@
 import STable from './STable.vue'
 import STableColumn from './STableColumn.vue'
-import { ColumnAlignment, ColumnFixedPosition, ColumnType, SortDirection, TableSize } from './consts'
+import { ColumnAlignment, ColumnFixedPosition, ColumnType, SortDirection } from './consts'
 
 export {
   STable,
@@ -8,6 +8,5 @@ export {
   ColumnAlignment,
   ColumnFixedPosition,
   ColumnType,
-  SortDirection,
-  TableSize
+  SortDirection
 }

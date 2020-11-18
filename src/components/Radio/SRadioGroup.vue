@@ -1,7 +1,7 @@
 <template>
   <el-radio-group
     v-model="model"
-    :size="size"
+    :size="computedSize"
     :disabled="disabled"
   >
     <slot></slot>
@@ -9,22 +9,16 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 
-import { RadioSize } from './consts'
+import SizeMixin from '../../mixins/SizeMixin'
 
 @Component
-export default class SRadio extends Vue {
+export default class SRadio extends Mixins(SizeMixin) {
   /**
    * Binding value of the radio group. Can be `string` / `number` / `boolean`
    */
   @Prop() readonly value!: string | number | boolean
-  /**
-   * Size of the radio item. Possible values: `"big"`, `"medium"`, `"small"`
-   *
-   * By default it's set to `"medium"`
-   */
-  @Prop({ default: RadioSize.MEDIUM, type: String }) readonly size!: string
   /**
    * Whether the nesting radios are disabled.
    */

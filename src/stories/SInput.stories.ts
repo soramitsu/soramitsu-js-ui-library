@@ -1,6 +1,7 @@
 import { text, boolean, withKnobs, number, select } from '@storybook/addon-knobs'
 
 import { SInput, SRow, SCol } from '../components'
+import { BorderRadius } from '../types'
 import { InputType, InputSize } from '../components/Input'
 
 export default {
@@ -17,6 +18,7 @@ export const configurable = () => ({
                :type="type"
                :placeholder="placeholder"
                :disabled="disabled"
+               :borderRadius="borderRadius"
                :show-password="showPassword"
                :readonly="readonly"
                :show-text-limit="showTextLimit"
@@ -46,6 +48,9 @@ export const configurable = () => ({
     },
     disabled: {
       default: boolean('Disabled', false)
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.MINI)
     },
     showPassword: {
       default: boolean('Show password', false)

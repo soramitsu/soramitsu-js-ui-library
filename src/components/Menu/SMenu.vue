@@ -1,7 +1,7 @@
 <template>
   <el-menu
-    class="s-menu"
     ref="el-menu"
+    :class="computedClasses"
     :style="computedStyles"
     :mode="mode"
     :collapse="collapse"
@@ -24,13 +24,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref } from 'vue-property-decorator'
 import { ElMenu } from 'element-ui/types/menu'
 
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { MenuMode, MenuTrigger } from './consts'
 
 @Component
-export default class SMenu extends Vue {
+export default class SMenu extends Mixins(BorderRadiusMixin) {
   /**
    * Mode of menu. Possible values: `"horizontal"`, `"vertical"`.
    *
@@ -106,6 +107,14 @@ export default class SMenu extends Vue {
   @Prop({ default: true, type: Boolean }) readonly collapseTransition!: boolean
 
   @Ref('el-menu') elMenu!: ElMenu
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = ['s-menu']
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses
+  }
 
   get computedStyles (): object {
     const styles = {} as any
