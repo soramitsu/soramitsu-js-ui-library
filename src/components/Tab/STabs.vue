@@ -20,12 +20,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { TabsType, TabsPosition } from './consts'
 
 @Component
-export default class STabs extends Vue {
+export default class STabs extends Mixins(BorderRadiusMixin) {
   /**
    * Name of the selected tab. Can be used with `v-model`.
    *
@@ -98,6 +99,9 @@ export default class STabs extends Vue {
     if (this.type === TabsType.ROUNDED &&
       ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
       cssClasses.push('s-rounded')
+    }
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses
   }

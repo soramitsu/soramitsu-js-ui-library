@@ -73,7 +73,8 @@ export default class SFormItem extends Vue {
   /**
    * Size of form items. Possible values: `"big"`, `"medium"`, `"small"`
    */
-  @Prop({ type: String }) readonly size!: string // TODO: think about size for all items, not only for button
+  // TODO: think about size for all items, not only for button
+  @Prop({ type: String }) readonly size!: string
 
   @Ref('formItem') formItem!: ElFormItem
 

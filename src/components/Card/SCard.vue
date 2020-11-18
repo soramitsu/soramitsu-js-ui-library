@@ -1,7 +1,7 @@
 <template>
   <el-card
     class="s-card"
-    :class="{ 's-clickable': clickable }"
+    :class="computedClasses"
     :header="header"
     :body-style="bodyStyle"
     :shadow="shadow"
@@ -12,12 +12,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Component, Mixins, Prop } from 'vue-property-decorator'
 
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { CardShadow } from './consts'
 
 @Component
-export default class SCard extends Vue {
+export default class SCard extends Mixins(BorderRadiusMixin) {
   /**
    * Header of the card. Also it can be set by slot#header
    */
@@ -40,6 +41,17 @@ export default class SCard extends Vue {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly clickable!: boolean
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    if (this.clickable) {
+      cssClasses.push('s-clickable')
+    }
+    return cssClasses
+  }
 
   handleClick (): void {
     if (!this.clickable) {

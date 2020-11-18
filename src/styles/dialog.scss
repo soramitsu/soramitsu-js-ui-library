@@ -1,5 +1,26 @@
 .el-dialog {
-  border-radius: 8px;
+  &__wrapper {
+    &.s-border-radius {
+      &-big,
+      &-medium,
+      &-small,
+      &-mini {
+        border-radius: 0;
+      }
+    }
+  }
+  .s-border-radius-big & {
+    border-radius: var(--s-border-radius-big);
+  }
+  .s-border-radius-medium & {
+    border-radius: var(--s-border-radius-medium);
+  }
+  .s-border-radius-small & {
+    border-radius: var(--s-border-radius-small);
+  }
+  .s-border-radius-mini & {
+    border-radius: var(--s-border-radius-mini);
+  }
   .el-dialog__title {
     font-weight: bold;
     font-size: 16px;

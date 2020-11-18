@@ -12,6 +12,7 @@
       :clearable="clearable"
       :multiple-limit="multipleLimit"
       :no-data-text="noDataText"
+      :popper-class="computedPopperClass"
       @blur="handleBlur"
       @focus="handleFocus"
       @visible-change="handleVisibleChange"
@@ -24,13 +25,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { Autocomplete } from '../Input'
 import { InputTypes } from './consts'
 
 @Component
-export default class SSelect extends Vue {
+export default class SSelect extends Mixins(BorderRadiusMixin) {
   /**
    * Selected value. Can be used with `v-model`
    */
@@ -64,6 +66,10 @@ export default class SSelect extends Vue {
    * `"No data"` is set by default
    */
   @Prop({ type: String, default: 'No data' }) readonly noDataText!: string
+  /**
+   * Custom class name for the page size Select's dropdown
+   */
+  @Prop({ default: '', type: String }) readonly popperClass!: string
   /**
    * Name attribute for input
    */
@@ -137,10 +143,24 @@ export default class SSelect extends Vue {
     this.$nextTick(this.updateInputValue)
   }
 
+  get computedPopperClass (): string {
+    const cssClasses: Array<string> = []
+    if (this.popperClass) {
+      cssClasses.push(this.popperClass)
+    }
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses.join(' ')
+  }
+
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
       cssClasses.push(`s-${this.inputType}-type`)
+    }
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.focused) {
       cssClasses.push('s-focused')

@@ -1,6 +1,7 @@
-import { text, withKnobs, select, boolean } from '@storybook/addon-knobs'
+import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { SDatePicker, SRow, SCol } from '../components'
+import { BorderRadius } from '../types'
 import { PickerAlignment, PickerTypes, InputTypes } from '../components/DatePicker'
 
 export default {
@@ -21,6 +22,8 @@ export const configurable = () => ({
                  :disabled="disabled"
                  :clearable="clearable"
                  :align="align"
+                 :borderRadius="borderRadius"
+                 :popperClass="borderRadius"
                  :input-type="inputType"
                  placeholder="Select date"
                  start-placeholder="From"
@@ -60,6 +63,9 @@ export const configurable = () => ({
     },
     align: {
       default: select('Align', Object.values(PickerAlignment), PickerAlignment.LEFT)
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.MINI)
     }
   },
   methods: {

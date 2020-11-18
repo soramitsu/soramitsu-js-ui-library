@@ -1,5 +1,3 @@
-import { Size } from '../../types'
-
 export enum PickerTypes {
   YEAR = 'year',
   MONTH = 'month',
@@ -22,5 +20,3 @@ export enum InputTypes {
   INPUT = 'input',
   SELECT = 'select'
 }
-
-export const PickerSize = Size

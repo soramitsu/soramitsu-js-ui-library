@@ -4,6 +4,13 @@ export enum Size {
   SMALL = 'small'
 }
 
+export enum BorderRadius {
+  BIG = 'big',
+  MEDIUM = 'medium',
+  SMALL = 'small',
+  MINI = 'mini'
+}
+
 export enum Direction {
   HORIZONTAL = 'horizontal',
   VERTICAL = 'vertical'

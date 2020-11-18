@@ -1,7 +1,8 @@
 import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
 import { SButton, SButtonGroup, SRow, SCol, SMain } from '../components'
-import { ButtonSize, ButtonTypes } from '../components/Button'
+import { Size, BorderRadius } from '../types'
+import { ButtonTypes } from '../components/Button'
 
 export default {
   component: SButton,
@@ -19,6 +20,7 @@ export const configurable = () => ({
                :icon="type === 'action' ? 'back' : ''"
                :type="type"
                :size="size"
+               :borderRadius="borderRadius"
                :rounded="rounded"
                :alternative="alternative"
                @click="handleClick"
@@ -36,7 +38,10 @@ export const configurable = () => ({
       default: select('Type', Object.values(ButtonTypes), ButtonTypes.PRIMARY)
     },
     size: {
-      default: select('Size', Object.values(ButtonSize), ButtonSize.BIG)
+      default: select('Size', Object.values(Size), Size.BIG)
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
     },
     rounded: {
       default: boolean('Rounded', false)
@@ -84,7 +89,7 @@ export const withDifferentTypes = () => ({
   }
 })
 
-export const differentSizeData = Object.values(ButtonSize).map(size =>
+export const differentSizeData = Object.values(Size).map(size =>
   ({ size, label: size[0].toUpperCase() + size.slice(1) }))
 export const withDifferentSize = () => ({
   components: { SButton, SRow },
@@ -100,6 +105,26 @@ export const withDifferentSize = () => ({
   props: {
     items: {
       default: () => differentSizeData
+    }
+  }
+})
+
+export const differentBorderRadiusData = Object.values(BorderRadius).map(borderRadius =>
+  ({ borderRadius, label: borderRadius[0].toUpperCase() + borderRadius.slice(1) }))
+export const withDifferentBorderRadius = () => ({
+  components: { SButton, SRow },
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
+               <s-button
+                 v-for="item in items"
+                 :key="item.borderRadius"
+                 :borderRadius="item.borderRadius"
+               >
+                 {{ item.label }}
+               </s-button>
+             </s-row>`,
+  props: {
+    items: {
+      default: () => differentBorderRadiusData
     }
   }
 })

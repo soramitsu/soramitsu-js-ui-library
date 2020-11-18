@@ -1,5 +1,3 @@
-import { Size } from '../../types'
-
 export enum ButtonTypes {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
@@ -13,5 +11,3 @@ export enum ButtonNativeTypes {
   SUBMIT = 'submit',
   RESET = 'reset'
 }
-
-export const ButtonSize = Size
