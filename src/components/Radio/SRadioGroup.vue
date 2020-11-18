@@ -1,7 +1,7 @@
 <template>
   <el-radio-group
     v-model="model"
-    :size="getComponentSize"
+    :size="computedSize"
     :disabled="disabled"
   >
     <slot></slot>

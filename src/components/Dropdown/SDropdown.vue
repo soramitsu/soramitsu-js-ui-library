@@ -2,7 +2,7 @@
   <el-dropdown
     ref="dropdown"
     :split-button="splitButton"
-    :size="getComponentSize"
+    :size="computedSize"
     :class="computedClasses"
     :type="computedType"
     :placement="placement"

@@ -8,7 +8,7 @@ export default class BorderRadiusMixin extends Vue {
    *
    * By default it's set to `"small"`
    */
-  @Prop({ default: BorderRadius.SMALL }) borderRadius!: any
+  @Prop({ default: BorderRadius.SMALL }) borderRadius!: string
 
   get isStandardBorderRadius (): boolean {
     return (Object.values(BorderRadius) as Array<string>).includes(this.borderRadius)

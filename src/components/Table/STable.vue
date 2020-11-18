@@ -6,7 +6,7 @@
     :max-height="maxHeight"
     :stripe="stripe"
     :border="border"
-    :size="getComponentSize"
+    :size="computedSize"
     :fit="fit"
     :show-header="showHeader"
     :highlight-current-row="highlightCurrentRow"

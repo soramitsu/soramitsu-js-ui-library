@@ -3,7 +3,7 @@
     <el-button
       :type="computedType"
       :native-type="nativeType"
-      :size="getComponentSize"
+      :size="computedSize"
       :class="computedClasses"
       :style="computedStyles"
       :disabled="disabled"

@@ -6,7 +6,7 @@
     :disabled="disabled"
     :border="border"
     :checked="checked"
-    :size="getComponentSize"
+    :size="computedSize"
     :name="name"
     :indeterminate="indeterminate"
     @change="handleChange"

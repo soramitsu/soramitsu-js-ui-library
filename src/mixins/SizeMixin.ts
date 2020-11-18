@@ -8,13 +8,13 @@ export default class SizeMixin extends Vue {
    *
    * By default it's set to `"medium"`
    */
-  @Prop({ default: Size.MEDIUM }) readonly size!: any
+  @Prop({ default: Size.MEDIUM }) readonly size!: string
 
   get isStandardSize (): boolean {
     return (Object.values(Size) as Array<string>).includes(this.size)
   }
 
-  get getComponentSize (): Size | string {
+  get computedSize (): Size | string {
     if (this.size === Size.BIG || !this.isStandardSize) {
       return ''
     }
