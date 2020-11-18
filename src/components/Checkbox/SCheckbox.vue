@@ -16,12 +16,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 
-import { CheckboxSize } from './consts'
+import SizeMixin from '../../mixins/SizeMixin'
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 
 @Component
-export default class SCheckbox extends Vue {
+export default class SCheckbox extends Mixins(SizeMixin, BorderRadiusMixin) {
   /**
    * Value of the checkbox item. Can be `string / number / boolean`
    */
@@ -49,12 +50,6 @@ export default class SCheckbox extends Vue {
    */
   @Prop({ default: false, type: Boolean }) readonly checked!: boolean
   /**
-   * Size of the checkbox item. Possible values: `"big"`, `"medium"`, `"small"`.
-   *
-   * By default it's set to `"medium"`
-   */
-  @Prop({ default: CheckboxSize.MEDIUM, type: String }) readonly size!: string
-  /**
    * Native name property of the checkbox item
    */
   @Prop({ default: '', type: String }) readonly name!: string
@@ -77,18 +72,13 @@ export default class SCheckbox extends Vue {
     this.$emit('input', value)
   }
 
-  get computedSize (): string {
-    if (this.size === CheckboxSize.BIG ||
-      !(Object.values(CheckboxSize) as Array<string>).includes(this.size)) {
-      return ''
-    }
-    return this.size
-  }
-
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if ((Object.values(CheckboxSize) as Array<string>).includes(this.size)) {
+    if (this.isStandardSize) {
       cssClasses.push(`s-${this.size}`)
+    }
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses
   }

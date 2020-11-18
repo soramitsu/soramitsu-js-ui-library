@@ -7,8 +7,9 @@
     :total="total"
     :small="small"
     :background="background"
+    :class="computedClasses"
     :current-page.sync="currentPageModel"
-    :popper-class="popperClass"
+    :popper-class="computedPopperClass"
     :prev-text="prevText"
     :next-text="nextText"
     :disabled="disabled"
@@ -23,12 +24,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref, Watch } from 'vue-property-decorator'
 import { ElPagination } from 'element-ui/types/pagination'
 import cloneDeep from 'lodash/fp/cloneDeep'
 
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
+
 @Component
-export default class SPagination extends Vue {
+export default class SPagination extends Mixins(BorderRadiusMixin) {
   /**
    * Will pagination component be small.
    *
@@ -165,6 +168,25 @@ export default class SPagination extends Vue {
 
   get willBeSlotEnabled (): boolean {
     return this.layout.includes('slot')
+  }
+
+  get computedPopperClass (): string {
+    const cssClasses: Array<string> = []
+    if (this.popperClass) {
+      cssClasses.push(this.popperClass)
+    }
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses.join(' ')
+  }
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses
   }
 
   mounted (): void {

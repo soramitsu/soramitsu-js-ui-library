@@ -1,6 +1,7 @@
 import { boolean, select, withKnobs } from '@storybook/addon-knobs'
 
 import { STabs, STab } from '../../components'
+import { BorderRadius } from '../../types'
 import { TabsPosition, TabsType } from '../../components/Tab'
 
 export default {
@@ -14,6 +15,7 @@ export const defaultUsage = () => ({
   template: `<s-tabs
                v-model="activeName"
                :type="type"
+               :borderRadius="borderRadius"
                :position="position"
                :closable="closable"
                :addable="addable"
@@ -29,6 +31,9 @@ export const defaultUsage = () => ({
   props: {
     type: {
       default: select('Type', [...Object.values(TabsType), '––'], '––')
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
     },
     position: {
       default: select('Position', Object.values(TabsPosition), TabsPosition.TOP)

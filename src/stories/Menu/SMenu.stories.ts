@@ -1,4 +1,6 @@
+import { select } from '@storybook/addon-knobs'
 import { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from '../../components'
+import { BorderRadius } from '../../types'
 
 export default {
   component: SMenu,
@@ -11,6 +13,7 @@ export const basicMenu = () => ({
   template: `<s-aside width="220px">
                <s-menu
                  default-active="1"
+                 :borderRadius="borderRadius"
                  @open="handleOpen"
                  @select="handleSelect"
                  @close="handleClose">
@@ -36,6 +39,11 @@ export const basicMenu = () => ({
                  </s-menu-item-group>
                </s-menu>
              </s-aside>`,
+  props: {
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
+    }
+  },
   methods: {
     handleOpen (key: string, keyPath: Array<string>): void {
       console.log('handleOpen', key, keyPath)
@@ -54,6 +62,7 @@ export const sideBar = () => ({
   template: `<s-aside width="220px">
                <s-menu
                  default-active="2"
+                 :borderRadius="borderRadius"
                  @open="handleOpen"
                  @select="handleSelect"
                  @close="handleClose">
@@ -89,6 +98,11 @@ export const sideBar = () => ({
                  </s-menu-item>
                </s-menu>
              </s-aside>`,
+  props: {
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
+    }
+  },
   methods: {
     handleOpen (key: string, keyPath: Array<string>): void {
       console.log('handleOpen', key, keyPath)
@@ -107,6 +121,7 @@ export const topBar = () => ({
   template: `<s-menu
                default-active="4"
                mode="horizontal"
+               :borderRadius="borderRadius"
                @select="handleSelect">
                <s-menu-item index="1">Navigator One</s-menu-item>
                <s-submenu index="2">
@@ -124,6 +139,11 @@ export const topBar = () => ({
                <s-menu-item index="3" disabled>Navigator Three</s-menu-item>
                <s-menu-item index="4">Navigator Four</s-menu-item>
              </s-menu>`,
+  props: {
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
+    }
+  },
   methods: {
     handleSelect (key: string, keyPath: Array<string>): void {
       console.log('handleSelect', key, keyPath)

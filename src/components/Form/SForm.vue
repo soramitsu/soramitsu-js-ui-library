@@ -81,6 +81,7 @@ export default class SForm extends Vue {
   /**
    * Size of form items. Possible values: `"big"`, `"medium"`, `"small"`
    */
+  // TODO: play with Form size setting
   @Prop({ type: String }) readonly size!: string
   /**
    * Disabled form state. You can disable all form's elements using this property.

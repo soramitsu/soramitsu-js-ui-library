@@ -1,5 +1,3 @@
-import { Size } from '../../types'
-
 export enum DropdownType {
   DEFAULT = 'default',
   BUTTON = 'button',
@@ -19,5 +17,3 @@ export enum DropdownTrigger {
   HOVER = 'hover',
   CLICK = 'click'
 }
-
-export const DropdownSize = Size

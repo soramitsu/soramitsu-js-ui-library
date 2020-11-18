@@ -11,6 +11,7 @@
     :transition="animation"
     :visible-arrow="showArrow"
     :open-delay="openDelay"
+    :popper-class="computedPopperClass"
     :manual="manual"
     :hide-after="closeDelay"
     :tabindex="tabindex"
@@ -21,15 +22,16 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 import { TooltipEffect } from 'element-ui/types/tooltip'
 import { PopoverPlacement } from 'element-ui/types/popover'
 import debounce from 'throttle-debounce/debounce'
 
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { TooltipTheme, TooltipPlacement } from './consts'
 
 @Component
-export default class STooltip extends Vue {
+export default class STooltip extends Mixins(BorderRadiusMixin) {
   /**
    * Theme of the tooltip. Supported values: `"dark"` or `"light"`.
    *
@@ -81,6 +83,10 @@ export default class STooltip extends Vue {
    */
   @Prop({ default: 0, type: Number }) readonly openDelay!: number
   /**
+   * Custom class name for tooltip's popper
+   */
+  @Prop({ type: String }) readonly popperClass!: string
+  /**
    * Manual mode of the tooltip. `Mouseenter` and `mouseleave` won't have
    * effects if set to true.
    *
@@ -101,6 +107,17 @@ export default class STooltip extends Vue {
   @Prop({ default: 0, type: Number }) readonly tabindex!: number
 
   @Ref('tooltip') tooltip!: any
+
+  get computedPopperClass (): string {
+    const cssClasses: Array<string> = []
+    if (this.popperClass) {
+      cssClasses.push(this.popperClass)
+    }
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses.join(' ')
+  }
 
   model = this.value
 

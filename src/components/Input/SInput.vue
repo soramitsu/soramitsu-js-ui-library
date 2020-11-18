@@ -23,7 +23,7 @@
       :label="label"
       :accept="accept"
       :tabindex="tabindex"
-      :prefix-icon="isMediumInput && prefix"
+      :prefix-icon="(isMediumInput && prefix) ? prefix : ''"
       :suffix-icon="suffix"
       @input="handleInput"
       @change="handleChange"
@@ -38,14 +38,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref, Inject, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref, Inject, Watch } from 'vue-property-decorator'
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { Autocomplete, InputSize, InputType } from './consts'
 
 @Component
-export default class SInput extends Vue {
+export default class SInput extends Mixins(BorderRadiusMixin) {
   readonly InputType = InputType
   readonly emptyValue = null
   /**
@@ -180,6 +181,9 @@ export default class SInput extends Vue {
     }
     if (this.disabled || (this.elForm || {}).disabled) {
       cssClasses.push('s-disabled')
+    }
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.type === InputType.TEXT_FILE) {
       cssClasses.push('s-text-file')

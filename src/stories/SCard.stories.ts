@@ -1,6 +1,7 @@
 import { text, withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { SCard, SRow, SDropdown, SDropdownItem } from '../components'
+import { BorderRadius } from '../types'
 import { CardShadow } from '../components/Card'
 
 export default {
@@ -12,11 +13,11 @@ export default {
 export const configurable = () => ({
   components: { SCard, SRow, SDropdown, SDropdownItem },
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
-               <s-card style="width: 80%;" :shadow="shadow" :clickable="clickable" @click="handleClick">
+               <s-card style="width: 80%;" :shadow="shadow" :borderRadius="borderRadius" :clickable="clickable" @click="handleClick">
                  <template slot="header">
                    <div class="s-flex" style="justify-content: space-between; padding-right: 20px;">
                      <span>{{ header }}</span>
-                     <s-dropdown type="ellipsis">
+                     <s-dropdown type="ellipsis" :borderRadius="borderRadius">
                        Menu
                        <template #menu>
                          <s-dropdown-item>First</s-dropdown-item>
@@ -37,6 +38,9 @@ export const configurable = () => ({
     },
     header: {
       default: text('Header', 'Card header')
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
     },
     clickable: {
       default: boolean('Clickable', false)

@@ -1,4 +1,3 @@
-import { Size } from '../../types'
 import { TooltipPlacement } from '../Tooltip'
 
 export enum ColumnType {
@@ -23,5 +22,4 @@ export enum ColumnAlignment {
   RIGHT = 'right'
 }
 
-export const TableSize = Size
 export const ColumnFilterPlacement = TooltipPlacement

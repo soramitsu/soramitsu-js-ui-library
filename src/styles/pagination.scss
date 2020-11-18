@@ -1,3 +1,26 @@
+@mixin pagination-border-radius(
+  $suffix: "big",
+  $border-radius: var(--s-border-radius-big)
+) {
+  &.s-border-radius {
+    &-#{$suffix} {
+      border-radius: 0;
+      .el-pagination__sizes {
+        .el-select .el-input {
+          .el-input__inner {
+            border-radius: $border-radius;
+          }
+        }
+      }
+      .el-pagination__editor.el-input {
+        .el-input__inner {
+          border-radius: $border-radius;
+        }
+      }
+    }
+  }
+}
+
 .el-pagination {
   &.is-background .el-pager li:not(.disabled) {
     &.active {
@@ -8,7 +31,8 @@
       color: var(--s-color-theme-accent);
     }
   }
-  .btn-prev, .btn-next {
+  .btn-prev,
+  .btn-next {
     color: var(--s-color-base-content-primary);
   }
   button {
@@ -19,10 +43,15 @@
       color: var(--s-color-base-content-quaternary);
     }
   }
+  @include pagination-border-radius;
+  @include pagination-border-radius("medium", var(--s-border-radius-medium));
+  @include pagination-border-radius("small", var(--s-border-radius-small));
+  @include pagination-border-radius("mini", var(--s-border-radius-mini));
   .el-pagination__sizes {
     .el-select .el-input {
       width: 65px;
-      .el-select__caret, .el-input__inner {
+      .el-select__caret,
+      .el-input__inner {
         color: var(--s-color-base-content-primary);
         font-weight: bold;
       }
@@ -30,14 +59,14 @@
         margin-right: 6px;
       }
       .el-input__inner {
-        border-radius: 8px;
         padding-right: 20px;
         padding-left: 5px;
         background-color: var(--s-color-base-background);
         border-color: var(--s-color-base-background);
       }
       &.is-disabled {
-        .el-select__caret, .el-input__inner {
+        .el-select__caret,
+        .el-input__inner {
           color: var(--s-color-base-content-quaternary);
         }
       }
@@ -45,7 +74,6 @@
   }
   .el-pagination__editor.el-input {
     .el-input__inner {
-      border-radius: 8px;
       background-color: var(--s-color-base-background);
       border-color: var(--s-color-base-background);
       color: var(--s-color-base-content-primary);
@@ -54,17 +82,21 @@
       color: var(--s-color-base-content-quaternary);
     }
   }
-  .el-pagination__total, .per-page-text, .el-pagination__jump {
+  .el-pagination__total,
+  .per-page-text,
+  .el-pagination__jump {
     color: var(--s-color-base-content-tertiary);
     font-weight: normal;
   }
   .el-pager li {
     color: var(--s-color-base-content-primary);
-    &.btn-quicknext, &.btn-quickprev {
+    &.btn-quicknext,
+    &.btn-quickprev {
       color: var(--s-color-base-content-primary);
     }
     &:not(.disabled) {
-      &:hover, &.active {
+      &:hover,
+      &.active {
         color: var(--s-color-theme-accent);
       }
     }
@@ -79,7 +111,8 @@
         color: var(--s-color-base-content-quaternary);
       }
     }
-    .btn-prev, .btn-next {
+    .btn-prev,
+    .btn-next {
       background-color: var(--s-color-base-background);
       &:disabled {
         color: var(--s-color-base-content-quaternary);

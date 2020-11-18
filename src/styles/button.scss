@@ -143,7 +143,6 @@ $s-color-button-tertiary-background-focused: var(--s-color-base-background) !def
   color: var(--s-color-base-content-primary);
   background-color: var(--s-color-base-background);
   border-color: var(--s-color-base-background);
-  border-radius: 8px;
   &:hover, &:active, &:focus {
     color: var(--s-color-base-content-primary);
     background-color: var(--s-color-base-background-hover);

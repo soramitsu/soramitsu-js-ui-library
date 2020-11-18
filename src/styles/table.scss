@@ -60,7 +60,7 @@
   .el-checkbox__inner {
     height: 20px;
     width: 20px;
-    border-radius: 4px;
+    border-radius: var(--s-border-radius-mini);
     &::after {
       border-width: 2px;
       height: 10px;

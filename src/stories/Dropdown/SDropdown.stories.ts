@@ -1,7 +1,8 @@
 import { number, withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { SCol, SDropdown, SDropdownItem, SRow } from '../../components'
-import { DropdownPlacement, DropdownSize, DropdownTrigger, DropdownType } from '../../components/Dropdown'
+import { Size, BorderRadius } from '../../types'
+import { DropdownPlacement, DropdownTrigger, DropdownType } from '../../components/Dropdown'
 import { ButtonTypes } from '../../components/Button'
 
 export default {
@@ -15,7 +16,8 @@ export const configurable = () => ({
   components: { SDropdown, SDropdownItem },
   template: `<s-dropdown
                type="button"
-               size="big"
+               :size="size"
+               :borderRadius="borderRadius"
                :buttonType="buttonType"
                :placement="placement"
                :hide-on-click="hideOnClick"
@@ -34,6 +36,12 @@ export const configurable = () => ({
   props: {
     buttonType: {
       default: select('Button Type', Object.values(ButtonTypes), ButtonTypes.SECONDARY)
+    },
+    size: {
+      default: select('Size', Object.values(Size), Size.BIG)
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
     },
     placement: {
       default: select('Placement', Object.values(DropdownPlacement), DropdownPlacement.BOTTOM_END)
@@ -126,7 +134,7 @@ export const differentTypes = () => ({
   }
 })
 
-export const differentSizeData = Object.values(DropdownSize).map(size => {
+export const differentSizeData = Object.values(Size).map(size => {
   const data = { size, type: DropdownType.BUTTON, buttonType: ButtonTypes.PRIMARY } as any
   data.label = size[0].toUpperCase() + size.slice(1)
   return data

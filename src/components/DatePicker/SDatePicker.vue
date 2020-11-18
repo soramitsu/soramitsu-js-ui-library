@@ -1,5 +1,5 @@
 <template>
-  <div class="s-date-picker" :class="computedClasses">
+  <div :class="computedClasses">
     <span v-if="willPlaceholderBeShown" class="s-placeholder">{{ placeholder }}</span>
     <el-date-picker
       ref="picker"
@@ -15,7 +15,7 @@
       :end-placeholder="endPlaceholder"
       :format="format"
       :align="align"
-      :popper-class="popperClass"
+      :popper-class="computedPopperClass"
       :picker-options="pickerOptions"
       :range-separator="rangeSeparator"
       :default-value="defaultValue"
@@ -35,12 +35,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 
-import { PickerTypes, PickerSize, PickerAlignment, InputTypes } from './consts'
+// TODO: ask do we need size prop for the component?
+// Prev comment => TODO: ask design team
+import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
+import { PickerTypes, PickerAlignment, InputTypes } from './consts'
 
 @Component
-export default class SDatePicker extends Vue {
+export default class SDatePicker extends Mixins(BorderRadiusMixin) {
   /**
    * Value of date picker component. Can be used with `v-model`.
    * Can be date object / array with date objects for date range picker
@@ -91,12 +94,6 @@ export default class SDatePicker extends Vue {
    * `true` by default
    */
   @Prop({ type: Boolean, default: true }) readonly clearable!: boolean
-  /**
-   * Size of the date picker input
-   * TODO: ask design team
-   * `"medium"` by default
-   */
-  // @Prop({ type: String, default: PickerSize.MEDIUM }) readonly size!: string
   /**
    * Placeholder in non-range mode
    */
@@ -209,10 +206,24 @@ export default class SDatePicker extends Vue {
     return !!(this.model && this.placeholder)
   }
 
-  get computedClasses (): Array<string> {
+  get computedPopperClass (): string {
     const cssClasses: Array<string> = []
+    if (this.popperClass) {
+      cssClasses.push(this.popperClass)
+    }
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    return cssClasses.join(' ')
+  }
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = ['s-date-picker']
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
       cssClasses.push(`s-${!this.isInputType ? InputTypes.SELECT : this.inputType}-type`)
+    }
+    if (this.isStandardBorderRadius) {
+      cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.focused) {
       cssClasses.push('s-focused')
