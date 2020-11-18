@@ -121,6 +121,11 @@ $--breakpoints-spec: (
   --s-color-status-success-background: #{$s-color-status-success-background};
   --s-color-status-warning-background: #{$s-color-status-warning-background};
   --s-color-status-error-background: #{$s-color-status-error-background};
+  // Size
+  --s-size-mini: #{$s-size-mini};
+  --s-size-small: #{$s-size-small};
+  --s-size-medium: #{$s-size-medium};
+  --s-size-big: #{$s-size-big};
   // Border Radius
   --s-border-radius-mini: #{$s-border-radius-mini};
   --s-border-radius-small: #{$s-border-radius-small};
