@@ -41,7 +41,7 @@ $margin-bottom-menu-item: 8px;
   }
   [class^="s-icon-"] {
     margin-right: 12px;
-    font-size: 20px;
+    font-size: var(--s-icon-font-size-medium);
   }
   i {
     color: var(--s-menu-text-color);
@@ -67,7 +67,7 @@ $margin-bottom-menu-item: 8px;
   align-items: center;
   [class^="s-icon-"] {
     margin-right: 12px;
-    font-size: 20px;
+    font-size: var(--s-icon-font-size-medium);
   }
   i {
     color: var(--s-menu-text-color);

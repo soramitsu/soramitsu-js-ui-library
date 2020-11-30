@@ -49,7 +49,7 @@
     cursor: pointer;
   }
   .s-icon-more-horizontal {
-    font-size: 24px;
+    font-size: var(--s-icon-font-size-big);
   }
 }
 .el-dropdown-menu__item {

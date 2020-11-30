@@ -5,7 +5,7 @@ $radio-button-border-color: var(--s-color-theme-accent);
 @mixin radio-button-size(
   $modifier: "small",
   $size: $s-size-small,
-  $font-size: $s-font-size-small
+  $font-size: var(--s-font-size-mini)
 ) {
   $radio-button-vertical-padding: #{($size - $font-size) / 2 - $radio-button-border-width};
   #{$radio-button-class} {
@@ -59,7 +59,7 @@ $radio-button-border-color: var(--s-color-theme-accent);
       padding-top: 9px;
     }
     > .el-radio__label {
-      font-size: 12px;
+      font-size: var(--s-font-size-mini);
     }
     > .el-radio__input .el-radio__inner {
       width: 14px;
@@ -185,8 +185,8 @@ $radio-button-border-color: var(--s-color-theme-accent);
   }
   &-group {
     @include radio-button-size;
-    @include radio-button-size("medium", $s-size-medium, $s-font-size-big);
-    @include radio-button-size("big", $s-size-big, $s-font-size-big);
+    @include radio-button-size("medium", $s-size-medium, var(--s-font-size-small));
+    @include radio-button-size("big", $s-size-big, var(--s-font-size-small));
     #{$radio-button-class} {
       &__inner {
         background-color: var(--s-color-utility-surface);
