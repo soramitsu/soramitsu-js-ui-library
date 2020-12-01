@@ -105,7 +105,7 @@ $color-ide-boolean: #0000FF;
     color: var(--s-color-base-on-accent);
     border-radius: var(--s-border-radius-mini);
     padding: 10px;
-    font-size: 12px;
+    font-size: var(--s-font-size-mini);
     line-height: 1.2;
   }
 }

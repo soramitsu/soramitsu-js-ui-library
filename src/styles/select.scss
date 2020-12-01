@@ -27,7 +27,7 @@
     width: 100%;
     i.el-icon-arrow-up {
       font-family: $icons-font;
-      font-size: 16px;
+      font-size: var(--s-icon-font-size-mini);
       &:before {
         content: $s-icon-chevron-top;
       }
@@ -114,7 +114,7 @@
     // TODO: add default animation from material-ui
     color: var(--s-color-base-content-tertiary);
     text-align: left;
-    font-size: 12px;
+    font-size: var(--s-font-size-mini);
     padding: 0 15px;
     padding-top: 5px;
     top: 1px;
@@ -206,7 +206,7 @@
     color: var(--s-color-base-on-accent);
     border: 1px solid var(--s-color-base-border-primary);
     background-color: var(--s-color-utility-surface);
-    font-size: 16px;
+    font-size: var(--s-icon-font-size-mini);
     font-weight: bold;
     padding: 1px;
     border-radius: var(--s-border-radius-mini);

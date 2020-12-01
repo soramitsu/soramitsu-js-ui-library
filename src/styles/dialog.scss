@@ -23,7 +23,7 @@
   }
   .el-dialog__title {
     font-weight: bold;
-    font-size: 16px;
+    font-size: var(--s-heading5-font-size);
     color: var(--s-color-base-content-primary);
   }
   > * {

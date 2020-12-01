@@ -61,7 +61,7 @@
   &.s-small {
     @extend .s-small;
     .el-checkbox__label {
-      font-size: 12px;
+      font-size: var(--s-font-size-mini);
     }
     &,
     &.is-bordered {

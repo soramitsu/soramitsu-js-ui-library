@@ -24,7 +24,7 @@
     .el-icon-arrow-right {
       font-family: $s-font-family-icons;
       @extend .s-icon-chevron-bottom;
-      font-size: 16px;
+      font-size: var(--s-icon-font-size-mini);
       padding: 8px;
       width: 32px;
       height: 32px;
