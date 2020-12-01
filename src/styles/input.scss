@@ -35,7 +35,7 @@
     // TODO: add default animation from material-ui
     color: var(--s-color-base-content-tertiary);
     text-align: left;
-    font-size: 12px;
+    font-size: var(--s-font-size-mini);
     padding: 0 15px;
     padding-top: 5px;
     top: 1px;
@@ -150,7 +150,7 @@
     .s-icon-file-upload {
       top: 16px;
       right: 16px;
-      font-size: 24px;
+      font-size: var(--s-icon-font-size-big);
       z-index: 1;
       position: absolute;
       + input {

@@ -13,40 +13,40 @@ html {
 }
 
 /* Typography */
-h1 {
+h1, h2, h3, h4, h5, h6 {
   font-family: $s-font-family-default;
+}
+
+h1, h2, h3, h4 {
   font-weight: normal;
-  font-size: 36px;
+}
+
+h5, h6 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: var(--s-heading1-font-size);
 }
 
 h2 {
-  font-family: $s-font-family-default;
-  font-weight: normal;
-  font-size: 30px;
+  font-size: var(--s-heading2-font-size);
 }
 
 h3 {
-  font-family: $s-font-family-default;
-  font-weight: normal;
-  font-size: 24px;
+  font-size: var(--s-heading3-font-size);
 }
 
 h4 {
-  font-family: $s-font-family-default;
-  font-weight: normal;
-  font-size: 18px;
+  font-size: var(--s-heading4-font-size);
 }
 
 h5 {
-  font-family: $s-font-family-default;
-  font-weight: bold;
-  font-size: 16px;
+  font-size: var(--s-heading5-font-size);
 }
 
 h6 {
-  font-family: $s-font-family-default;
-  font-weight: bold;
-  font-size: 14px;
+  font-size: var(--s-heading6-font-size);
 }
 
 .s-flex {
@@ -58,15 +58,35 @@ h6 {
 }
 
 .s-big {
-  height: $s-size-big;
+  height: var(--s-size-big);
 }
 
 .s-medium {
-  height: $s-size-medium;
+  height: var(--s-size-medium);
 }
 
 .s-small {
-  height: $s-size-small;
+  height: var(--s-size-small);
+}
+
+.s-mini {
+  height: var(--s-size-mini);
+}
+
+.s-border-radius-big {
+  border-radius: var(--s-border-radius-big);
+}
+
+.s-border-radius-medium {
+  border-radius: var(--s-border-radius-medium);
+}
+
+.s-border-radius-small {
+  border-radius: var(--s-border-radius-small);
+}
+
+.s-border-radius-mini {
+  border-radius: var(--s-border-radius-mini);
 }
 
 .s-border-radius-big {
@@ -122,13 +142,13 @@ button > span {
   .el-message-box__header {
     .el-message-box__title {
       color: var(--s-color-base-content-primary);
-      font-size: 16px;
+      font-size: var(--s-heading5-font-size);
     }
   }
   .el-message-box__btns {
     button.el-button.el-button--default.el-button--small {
       height: $s-size-medium;
-      font-size: 14px;
+      font-size: var(--s-font-size-small);
       border-radius: var(--s-border-radius-mini);
       &:hover, &:active, &:focus {
         color: var(--s-color-theme-accent);

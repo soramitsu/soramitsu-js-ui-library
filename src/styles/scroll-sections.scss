@@ -1,6 +1,6 @@
 .s-scroll-sections {
   font-family: $s-font-family-default;
-  font-size: 14px;
+  font-size: var(--s-font-size-small)
 }
 .s-scroll-menu {
   font-weight: 600;
@@ -39,7 +39,7 @@
   padding-bottom: 90%;
   color: var(--s-color-base-content-primary);
   .title {
-    font-size: 16px;
+    font-size: var(--s-heading5-font-size);
   }
 }
 .s-scroll-section-item {

@@ -59,8 +59,20 @@ $s-font-family-default: 'Sora', sans-serif !important;
 $s-font-family-mono: 'JetBrainsMono', monospace !important;
 $s-font-family-icons: 'soramitsu-icons' !important;
 // Font sizes
-$s-font-size-big: 14px !default;
-$s-font-size-small: 12px !default;
+$s-font-size-mini: 12px !default;
+$s-font-size-small: 14px !default;
+// Icons font sizes
+$s-icon-font-size-mini: 16px !default;
+$s-icon-font-size-small: 18px !default;
+$s-icon-font-size-medium: 20px !default;
+$s-icon-font-size-big: 24px !default;
+// Font heading sizes
+$s-heading1-font-size: 36px !default;
+$s-heading2-font-size: 30px !default;
+$s-heading3-font-size: 24px !default;
+$s-heading4-font-size: 18px !default;
+$s-heading5-font-size: 16px !default;
+$s-heading6-font-size: 14px !default;
 
 // Responsive
 $--sm: 640px !default;
@@ -121,6 +133,21 @@ $--breakpoints-spec: (
   --s-color-status-success-background: #{$s-color-status-success-background};
   --s-color-status-warning-background: #{$s-color-status-warning-background};
   --s-color-status-error-background: #{$s-color-status-error-background};
+  // Font Sizes
+  --s-font-size-mini: #{$s-font-size-mini};
+  --s-font-size-small: #{$s-font-size-small};
+  // Icons font sizes
+  --s-icon-font-size-mini: #{$s-icon-font-size-mini};
+  --s-icon-font-size-small: #{$s-icon-font-size-small};
+  --s-icon-font-size-medium: #{$s-icon-font-size-medium};
+  --s-icon-font-size-big: #{$s-icon-font-size-big};
+  // Heading Font Sizes
+  --s-heading1-font-size: #{$s-heading1-font-size};
+  --s-heading2-font-size: #{$s-heading2-font-size};
+  --s-heading3-font-size: #{$s-heading3-font-size};
+  --s-heading4-font-size: #{$s-heading4-font-size};
+  --s-heading5-font-size: #{$s-heading5-font-size};
+  --s-heading6-font-size: #{$s-heading6-font-size};
   // Size
   --s-size-mini: #{$s-size-mini};
   --s-size-small: #{$s-size-small};

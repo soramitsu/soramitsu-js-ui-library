@@ -130,10 +130,10 @@
     .el-pagination__sizes .el-select .el-input {
       .el-input__inner {
         height: 22px !important;
-        font-size: 12px;
+        font-size: var(--s-font-size-mini);
       }
       .el-select__caret {
-        font-size: 12px;
+        font-size: var(--s-font-size-mini);
         line-height: 23px;
       }
     }
