@@ -11,3 +11,8 @@ export enum ButtonNativeTypes {
   SUBMIT = 'submit',
   RESET = 'reset'
 }
+
+export enum ButtonIconPosition {
+  LEFT = 'left',
+  RIGHT = 'right'
+}
