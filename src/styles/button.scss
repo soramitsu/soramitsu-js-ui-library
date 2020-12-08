@@ -161,9 +161,16 @@ button {
       color: inherit;
     }
   }
-  &:not(.s-action) > span > i {
-    &[class^=s-icon-], &[class^=el-icon-] {
-      margin-right: 6px;
+  &:not(.s-action).s-i-position {
+    &-left > span > i {
+      &[class^=s-icon-], &[class^=el-icon-] {
+        margin-right: 6px;
+      }
+    }
+    &-right > span > i {
+      &[class^=s-icon-], &[class^=el-icon-] {
+        margin-left: 6px;
+      }
     }
   }
 }
