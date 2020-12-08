@@ -100,6 +100,7 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin) {
 
   private iconLeftOffset = 0
   elementIcon = ''
+  pressed = false
 
   get computedType (): string {
     if (this.type === ButtonTypes.PRIMARY) {
@@ -126,6 +127,9 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin) {
     }
     if (this.alternative) {
       cssClasses.push('s-alternative')
+    }
+    if (this.pressed) {
+      cssClasses.push('s-pressed')
     }
     return cssClasses
   }
@@ -159,6 +163,10 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin) {
 
   handleClick (): void {
     this.$emit('click')
+    this.pressed = true
+    setTimeout(() => {
+      this.pressed = false
+    }, 500)
   }
 
   mounted (): void {
