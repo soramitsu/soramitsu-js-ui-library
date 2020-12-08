@@ -178,7 +178,12 @@ export default class SSelect extends Mixins(BorderRadiusMixin) {
     if (this.inputType !== InputTypes.INPUT) {
       return false
     }
-    return !!(this.model && this.model.length !== 0 && this.placeholder)
+    return !!(
+      this.model !== null &&
+      this.model !== undefined &&
+      (!Array.isArray(this.model) || this.model.length !== 0) &&
+      this.placeholder
+    )
   }
 
   handleBlur (event: Event): void {
