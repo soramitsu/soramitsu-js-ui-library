@@ -2,7 +2,7 @@ import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
 import { SButton, SButtonGroup, SRow, SCol, SMain } from '../components'
 import { Size, BorderRadius } from '../types'
-import { ButtonTypes } from '../components/Button'
+import { ButtonTypes, ButtonIconPosition } from '../components/Button'
 
 export default {
   component: SButton,
@@ -176,17 +176,17 @@ export const withIcon = () => ({
   template: `<s-main>
                <s-row :gutter="20">
                  <s-col :span="6" v-for="item in differentTypesData" :key="item.type" style="padding-bottom: 20px;">
-                   <s-button size="big" icon="refresh" :type="item.type" :tooltip="item.tooltip">
+                   <s-button size="big" icon="refresh" :icon-position="iconPosition" :type="item.type" :tooltip="item.tooltip">
                      {{ item.label }}
                    </s-button>
                  </s-col>
                  <s-col :span="6" v-for="item in differentTypesData" :key="item.type + 'Disabled'" style="padding-bottom: 20px;">
-                   <s-button size="big" icon="refresh" :type="item.type" :tooltip="item.tooltip" disabled>
+                   <s-button size="big" icon="refresh" :icon-position="iconPosition" :type="item.type" :tooltip="item.tooltip" disabled>
                      {{ item.label }}
                    </s-button>
                  </s-col>
                  <s-col :span="4" v-for="item in differentSizeData" :key="item.size">
-                   <s-button :size="item.size" icon="refresh">
+                   <s-button :size="item.size" icon="refresh" :icon-position="iconPosition">
                      {{ item.label }}
                    </s-button>
                  </s-col>
@@ -198,6 +198,9 @@ export const withIcon = () => ({
     },
     differentTypesData: {
       default: () => differentTypeButtonsData
+    },
+    iconPosition: {
+      default: select('IconPosition', Object.values(ButtonIconPosition), ButtonIconPosition.LEFT)
     }
   }
 })
