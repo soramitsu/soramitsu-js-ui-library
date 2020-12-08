@@ -13,8 +13,9 @@
       :icon="elementIcon"
       @click="handleClick"
     >
-      <s-icon v-if="availableIcon" :name="availableIcon" />
+      <s-icon v-if="availableIcon && iconPosition === IconPosition.LEFT" :name="availableIcon" />
       <slot></slot>
+      <s-icon v-if="availableIcon && iconPosition === IconPosition.RIGHT" :name="availableIcon" />
     </el-button>
   </s-tooltip>
 </template>
@@ -29,12 +30,13 @@ import SizeMixin from '../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { SIcon } from '../Icon'
 import { STooltip, TooltipPlacement } from '../Tooltip'
-import { ButtonTypes, ButtonNativeTypes } from './consts'
+import { ButtonTypes, ButtonNativeTypes, ButtonIconPosition } from './consts'
 
 @Component({
   components: { SIcon, STooltip }
 })
 export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin) {
+  readonly IconPosition = ButtonIconPosition
   readonly ButtonTypes = ButtonTypes
   /**
    * Type of button. Possible values: `"primary"`, `"secondary"`, `"tertiary"`, `"action"`, `"link"`.
@@ -52,6 +54,12 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin) {
    * Icon name from icon collection of this library
    */
   @Prop({ default: '', type: String }) readonly icon!: string
+  /**
+   * Icon position within the text. Possible values: `"left"`, `"right"`.
+   *
+   * By default it's set to `"left"`
+   */
+  @Prop({ default: ButtonIconPosition.LEFT, type: String }) readonly iconPosition!: string
   /**
    * Disable state
    */
@@ -121,6 +129,9 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin) {
     }
     if ((Object.values(ButtonTypes) as Array<string>).includes(this.type)) {
       cssClasses.push(`s-${this.type}`)
+    }
+    if ((Object.values(ButtonIconPosition) as Array<string>).includes(this.iconPosition)) {
+      cssClasses.push(`s-i-position-${this.iconPosition}`)
     }
     if (this.isLoading) {
       cssClasses.push('s-loading')
