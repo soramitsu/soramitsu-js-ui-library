@@ -18,7 +18,7 @@ export const configurable = () => ({
                :type="type"
                :placeholder="placeholder"
                :disabled="disabled"
-               :borderRadius="borderRadius"
+               :border-radius="borderRadius"
                :show-password="showPassword"
                :readonly="readonly"
                :show-text-limit="showTextLimit"
