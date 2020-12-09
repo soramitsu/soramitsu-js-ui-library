@@ -23,7 +23,7 @@ export const configurable = () => ({
                  :width="width"
                  :fullscreen="fullscreen"
                  :top="top"
-                 :borderRadius="borderRadius"
+                 :border-radius="borderRadius"
                  :show-close="showClose"
                  :close-on-click-modal="closeOnClickModal"
                  :close-on-esc="closeOnEsc"

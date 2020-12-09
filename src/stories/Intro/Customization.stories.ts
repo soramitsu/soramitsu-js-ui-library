@@ -83,7 +83,7 @@ export const configurable = () => ({
                   <s-input
                     type="number"
                     :placeholder="button.label + ' (px)'"
-                    :borderRadius="button.label"
+                    :border-radius="button.label"
                     style="margin-right: 10px; margin-right: 10px;"
                     @change="(value) => handleBorderRadiusChange(button.label, value)"
                   />

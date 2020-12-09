@@ -19,7 +19,7 @@ export const configurable = () => ({
                  v-model="model"
                  :content="content"
                  :disabled="disabled"
-                 :borderRadius="borderRadius"
+                 :border-radius="borderRadius"
                  :offset="offset"
                  :openDelay="openDelay"
                  @change="handleChange"
