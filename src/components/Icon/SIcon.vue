@@ -42,7 +42,7 @@ export default class SIcon extends Vue {
   get computedStyles () {
     const styles = {} as any
     if (this.size) {
-      styles.fontSize = typeof this.size === 'number' ? `${this.size}px` : this.size
+      styles.fontSize = !isNaN(+this.size) ? `${this.size}px` : this.size
     }
     return styles
   }
