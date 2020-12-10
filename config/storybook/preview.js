@@ -2,6 +2,8 @@ import { addParameters, addDecorator } from '@storybook/vue'
 import { withA11y } from '@storybook/addon-a11y'
 import { DocsPage } from '@storybook/addon-docs/blocks'
 
+import mainStore from '../../src/store'
+
 addParameters({
   options: {
     showRoots: true
@@ -22,5 +24,6 @@ addDecorator(withA11y)
 addDecorator(() => ({
   template: `<div class="s-flex" style="padding: 20px;">
                <story/>
-             </div>`
+             </div>`,
+  store: mainStore
 }))

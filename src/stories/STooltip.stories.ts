@@ -32,7 +32,7 @@ export const configurable = () => ({
   }),
   props: {
     theme: {
-      default: select('Theme', Object.values(TooltipTheme), TooltipTheme.DARK)
+      default: select('Theme', Object.values(TooltipTheme), TooltipTheme.AUTO)
     },
     content: {
       default: text('Content', 'Custom tooltip')
