@@ -50,6 +50,8 @@ import {
 import { Float, Integer } from './directives'
 import { Components } from './types/components'
 import { Directives } from './types/directives'
+import { modules, Modules } from './store'
+import { setTheme } from './utils'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 
 const components = [
@@ -106,7 +108,13 @@ const directives = [
 ]
 
 const SoramitsuElements = {
-  install (vue: typeof Vue): void {
+  install (vue: typeof Vue, options?: any): void {
+    // TODO: maybe we'll need error message about storage here
+    if (options && options.store) {
+      Object.values(Modules).forEach(molude => {
+        options.store.registerModule(molude, modules[molude])
+      })
+    }
     components.forEach(el => vue.component(el.name, el.component))
     directives.forEach(item => vue.directive(item.name, item.directive))
   }
@@ -117,6 +125,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export {
+  setTheme,
   Loading,
   Message,
   MessageBox,
