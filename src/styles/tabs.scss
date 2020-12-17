@@ -91,6 +91,7 @@
     .el-tabs__nav-wrap {
       background-color: var(--s-color-base-background);
       height: 32px;
+      padding: 2px;
       &::after,
       .el-tabs__active-bar {
         height: 0;
@@ -107,7 +108,6 @@
           color: var(--s-color-base-content-primary);
           background-color: var(--s-color-base-on-accent);
           box-shadow: $s-shadow-surface;
-          margin: 2px;
         }
         &:focus.is-focus {
           // TODO: make it more focusable
