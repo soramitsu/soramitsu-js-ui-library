@@ -13,7 +13,7 @@ export const basicMenu = () => ({
   template: `<s-aside width="220px">
                <s-menu
                  default-active="1"
-                 :borderRadius="borderRadius"
+                 :border-radius="borderRadius"
                  @open="handleOpen"
                  @select="handleSelect"
                  @close="handleClose">
@@ -62,7 +62,7 @@ export const sideBar = () => ({
   template: `<s-aside width="220px">
                <s-menu
                  default-active="2"
-                 :borderRadius="borderRadius"
+                 :border-radius="borderRadius"
                  @open="handleOpen"
                  @select="handleSelect"
                  @close="handleClose">
@@ -121,7 +121,7 @@ export const topBar = () => ({
   template: `<s-menu
                default-active="4"
                mode="horizontal"
-               :borderRadius="borderRadius"
+               :border-radius="borderRadius"
                @select="handleSelect">
                <s-menu-item index="1">Navigator One</s-menu-item>
                <s-submenu index="2">

@@ -1,6 +1,7 @@
 export enum TooltipTheme {
   DARK = 'dark',
-  LIGHT = 'light'
+  LIGHT = 'light',
+  AUTO = 'auto'
 }
 
 export enum TooltipPlacement {

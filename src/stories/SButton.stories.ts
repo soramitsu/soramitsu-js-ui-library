@@ -20,7 +20,7 @@ export const configurable = () => ({
                :icon="type === 'action' ? 'back' : ''"
                :type="type"
                :size="size"
-               :borderRadius="borderRadius"
+               :border-radius="borderRadius"
                :rounded="rounded"
                :alternative="alternative"
                @click="handleClick"
@@ -117,7 +117,7 @@ export const withDifferentBorderRadius = () => ({
                <s-button
                  v-for="item in items"
                  :key="item.borderRadius"
-                 :borderRadius="item.borderRadius"
+                 :border-radius="item.borderRadius"
                >
                  {{ item.label }}
                </s-button>
