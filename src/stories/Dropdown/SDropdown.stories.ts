@@ -17,7 +17,7 @@ export const configurable = () => ({
   template: `<s-dropdown
                type="button"
                :size="size"
-               :borderRadius="borderRadius"
+               :border-radius="borderRadius"
                :buttonType="buttonType"
                :placement="placement"
                :hide-on-click="hideOnClick"

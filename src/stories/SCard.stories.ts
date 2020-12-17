@@ -13,11 +13,11 @@ export default {
 export const configurable = () => ({
   components: { SCard, SRow, SDropdown, SDropdownItem },
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
-               <s-card style="width: 80%;" :shadow="shadow" :borderRadius="borderRadius" :clickable="clickable" @click="handleClick">
+               <s-card style="width: 80%;" :shadow="shadow" :border-radius="borderRadius" :clickable="clickable" @click="handleClick">
                  <template slot="header">
                    <div class="s-flex" style="justify-content: space-between; padding-right: 20px;">
                      <span>{{ header }}</span>
-                     <s-dropdown type="ellipsis" :borderRadius="borderRadius">
+                     <s-dropdown type="ellipsis" :border-radius="borderRadius">
                        Menu
                        <template #menu>
                          <s-dropdown-item>First</s-dropdown-item>

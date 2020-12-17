@@ -19,7 +19,7 @@ export const configurable = () => ({
                  v-model="model"
                  :content="content"
                  :disabled="disabled"
-                 :borderRadius="borderRadius"
+                 :border-radius="borderRadius"
                  :offset="offset"
                  :openDelay="openDelay"
                  @change="handleChange"
@@ -32,7 +32,7 @@ export const configurable = () => ({
   }),
   props: {
     theme: {
-      default: select('Theme', Object.values(TooltipTheme), TooltipTheme.DARK)
+      default: select('Theme', Object.values(TooltipTheme), TooltipTheme.AUTO)
     },
     content: {
       default: text('Content', 'Custom tooltip')

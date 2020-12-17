@@ -1,7 +1,7 @@
 <template>
   <el-tooltip
     ref="tooltip"
-    :effect="theme"
+    :effect="computedTheme"
     :content="content"
     :placement="placement"
     v-model="model"
@@ -23,21 +23,24 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Getter } from 'vuex-class'
 import { TooltipEffect } from 'element-ui/types/tooltip'
 import { PopoverPlacement } from 'element-ui/types/popover'
 import debounce from 'throttle-debounce/debounce'
 
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
+import { Theme } from '../../utils/Theme'
 import { TooltipTheme, TooltipPlacement } from './consts'
 
 @Component
 export default class STooltip extends Mixins(BorderRadiusMixin) {
   /**
-   * Theme of the tooltip. Supported values: `"dark"` or `"light"`.
+   * Theme of the tooltip. Supported values: `"dark"`, `"light"`, or `"auto"`.
+   * `"auto"` means that it will be managed with theming controller by `setTheme` function
    *
-   * `"dark"` by default
+   * `"auto"` is set by default
    */
-  @Prop({ default: TooltipTheme.DARK, type: String }) readonly theme!: TooltipEffect
+  @Prop({ default: TooltipTheme.AUTO, type: String }) readonly theme!: string
   /**
    * Content of the tooltip. You can set content from `content` slot as well
    */
@@ -108,6 +111,8 @@ export default class STooltip extends Mixins(BorderRadiusMixin) {
 
   @Ref('tooltip') tooltip!: any
 
+  @Getter libraryTheme!: Theme
+
   get computedPopperClass (): string {
     const cssClasses: Array<string> = []
     if (this.popperClass) {
@@ -137,6 +142,17 @@ export default class STooltip extends Mixins(BorderRadiusMixin) {
       return
     }
     tooltip.debounceClose = debounce(30, tooltip.handleClosePopper)
+  }
+
+  get computedTheme (): string {
+    if (this.theme === TooltipTheme.AUTO) {
+      if (this.libraryTheme) {
+        return this.libraryTheme
+      } else {
+        throw new Error('Please provide a storage for the ui-library')
+      }
+    }
+    return this.theme
   }
 }
 </script>

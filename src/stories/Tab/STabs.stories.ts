@@ -15,7 +15,7 @@ export const defaultUsage = () => ({
   template: `<s-tabs
                v-model="activeName"
                :type="type"
-               :borderRadius="borderRadius"
+               :border-radius="borderRadius"
                :position="position"
                :closable="closable"
                :addable="addable"
