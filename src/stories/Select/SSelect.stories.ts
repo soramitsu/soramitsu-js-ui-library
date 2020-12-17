@@ -26,11 +26,7 @@ export const configurable = () => ({
                  <s-select
                    v-model="model"
                    :disabled="disabled"
-<<<<<<< HEAD
-                   :borderRadius="borderRadius"
-=======
                    :border-radius="borderRadius"
->>>>>>> develop
                    :loading="loading"
                    :multiple="multiple"
                    :input-type="item.inputType"
@@ -40,11 +36,7 @@ export const configurable = () => ({
                    :multiple-text-prefix="multipleTextPrefix"
                    :loading-text="loadingText"
                    :no-data-text="noDataText"
-<<<<<<< HEAD
-                   :popperClass="borderRadius"
-=======
                    :popper-class="borderRadius"
->>>>>>> develop
                    @change="handleChange"
                  >
                    <s-option
