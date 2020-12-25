@@ -161,7 +161,6 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
   private handleValueChange (value: string | number): void {
     this.$emit('input', value)
     this.$emit('change', value)
-    this.$emit('paste', value)
   }
 
   get isTextInput (): boolean {
