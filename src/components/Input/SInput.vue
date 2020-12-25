@@ -27,6 +27,7 @@
       :suffix-icon="suffix"
       @input="handleInput"
       @change="handleChange"
+      @paste="handlePaste"
       @blur="handleBlur"
       @focus="handleFocus"
     />
@@ -160,6 +161,7 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
   private handleValueChange (value: string | number): void {
     this.$emit('input', value)
     this.$emit('change', value)
+    this.$emit('paste', value)
   }
 
   get isTextInput (): boolean {
@@ -220,6 +222,10 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
 
   handleChange (value: string | number): void {
     this.$emit('change', value)
+  }
+
+  handlePaste (value: string | number): void {
+    this.$emit('paste', value)
   }
 
   handleBlur (event: Event): void {
