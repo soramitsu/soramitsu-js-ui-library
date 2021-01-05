@@ -37,6 +37,7 @@ $margin-bottom-menu-item: 8px;
 }
 .el-menu-item {
   align-items: center;
+  user-select: none;
   &:not(.is-disabled):hover,
   &.is-active {
     background-color: var(--s-menu-color-hover) !important;
@@ -60,6 +61,7 @@ $margin-bottom-menu-item: 8px;
   margin-bottom: $margin-bottom-menu-item;
 }
 .el-submenu {
+  user-select: none;
   .el-menu-item {
     min-width: 0;
   }
