@@ -32,6 +32,10 @@ export default class SIcon extends Vue {
     if (this.name.startsWith('el-icon')) {
       return this.name
     }
+    // Check loading state of icons font
+    if (!((document || {}) as any).fonts.check('1em soramitsu-icons')) {
+      return ''
+    }
     if (!(Object.values(Icons) as Array<string>).includes(this.name)) {
       console.warn(`'${this.name}' was not found`)
       return ''
