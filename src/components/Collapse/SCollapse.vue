@@ -31,17 +31,26 @@ export default class SCollapse extends Vue {
    *
    * `false` by default
    */
-  @Prop({ default: false, type: Boolean }) readonly borders!: boolean | BorderTypes
+  @Prop({ default: false, type: Boolean }) readonly borders!: boolean
+  /**
+   * Type of borders
+   *
+   * `false` by default
+   */
+  @Prop({ default: BorderTypes.INTERNAL, type: String }) readonly bordersType!: BorderTypes
 
   @Provide('sCollapse') sCollapse = this
 
   get computedStyles (): object {
     const styles = {} as any
-    if (!this.borders || this.borders === BorderTypes.INTERNAL) {
+    if (!this.borders) {
       styles.border = 'none'
-    } else if (this.borders === BorderTypes.TOP) {
+    }
+    if (this.bordersType === BorderTypes.INTERNAL) {
+      styles.border = 'none'
+    } else if (this.bordersType === BorderTypes.TOP) {
       styles.borderBottom = 'none'
-    } else if (this.borders === BorderTypes.BOTTOM) {
+    } else if (this.bordersType === BorderTypes.BOTTOM) {
       styles.borderTop = 'none'
     }
     return styles

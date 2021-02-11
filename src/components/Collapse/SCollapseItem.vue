@@ -13,6 +13,8 @@
 <script lang="ts">
 import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
 
+import { BorderTypes } from './consts'
+
 @Component
 export default class SCollapseItem extends Vue {
   /**
@@ -40,7 +42,7 @@ export default class SCollapseItem extends Vue {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if (!(this.sCollapse || {}).borders) {
+    if (!this.sCollapse?.borders || this.sCollapse?.bordersType === BorderTypes.EXTERNAL) {
       cssClasses.push('s-without-border')
     }
     if (this.withoutPadding) {
