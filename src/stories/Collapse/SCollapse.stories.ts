@@ -1,6 +1,8 @@
-import { withKnobs, boolean } from '@storybook/addon-knobs'
+import { withKnobs, boolean, select } from '@storybook/addon-knobs'
 
 import { SCollapse, SCollapseItem } from '../../components'
+
+import { BorderTypes } from '../../components/Collapse'
 
 export default {
   component: SCollapse,
@@ -34,7 +36,7 @@ export const configurable = () => ({
       default: boolean('Accordion', false)
     },
     borders: {
-      default: boolean('Borders', true)
+      default: select('Label Position', [true as any, false as any, ...Object.values(BorderTypes)], true)
     }
   },
   methods: {
