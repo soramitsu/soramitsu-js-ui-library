@@ -29,7 +29,7 @@
       width: 32px;
       height: 32px;
       background-color: var(--s-color-base-background);
-      border-radius: $s-border-radius-small;
+      border-radius: var(--s-border-radius-small);
       &.is-active {
         transform: scale(1, -1);
       }
