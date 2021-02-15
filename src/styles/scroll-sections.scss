@@ -48,7 +48,7 @@
   }
   &:last-child {
     margin-bottom: 10px;
-    .el-divider.el-divider--horizontal {
+    > .el-divider.el-divider--horizontal {
       height: 0;
     }
   }
