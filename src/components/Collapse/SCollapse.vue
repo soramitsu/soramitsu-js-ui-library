@@ -35,7 +35,7 @@ export default class SCollapse extends Vue {
   /**
    * Type of borders
    *
-   * `false` by default
+   * `internal` by default
    */
   @Prop({ default: BorderTypes.INTERNAL, type: String }) readonly bordersType!: BorderTypes
 
@@ -43,10 +43,7 @@ export default class SCollapse extends Vue {
 
   get computedStyles (): object {
     const styles = {} as any
-    if (!this.borders) {
-      styles.border = 'none'
-    }
-    if (this.bordersType === BorderTypes.INTERNAL) {
+    if (!this.borders || this.bordersType === BorderTypes.INTERNAL) {
       styles.border = 'none'
     } else if (this.bordersType === BorderTypes.TOP) {
       styles.borderBottom = 'none'

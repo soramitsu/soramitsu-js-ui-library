@@ -39,7 +39,7 @@ export const configurable = () => ({
       default: boolean('Borders', true)
     },
     bordersType: {
-      default: select('Borders Type', Object.values(BorderTypes), BorderTypes.ALL)
+      default: select('Borders Type', Object.values(BorderTypes), BorderTypes.INTERNAL)
     }
   },
   methods: {
