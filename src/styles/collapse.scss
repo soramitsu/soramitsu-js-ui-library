@@ -11,6 +11,12 @@
 .s-without-padding > .el-collapse-item__wrap > .el-collapse-item__content {
   padding-bottom: 0;
 }
+.el-collapse-item:last-child {
+  margin-bottom: 0;
+  .el-collapse-item__header {
+    border: none;
+  }
+}
 .el-collapse-item__ {
   &wrap {
     border-bottom-color: var(--s-color-base-border-secondary);
@@ -29,11 +35,12 @@
       width: 32px;
       height: 32px;
       background-color: var(--s-color-base-background);
-      border-radius: 50%;
+      border-radius: var(--s-border-radius-small);
       &.is-active {
-        transform: rotate(180deg);
+        transform: scale(1, -1);
       }
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         background-color: var(--s-color-base-background-hover);
       }
     }

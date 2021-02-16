@@ -1,6 +1,8 @@
-import { withKnobs, boolean } from '@storybook/addon-knobs'
+import { withKnobs, boolean, select } from '@storybook/addon-knobs'
 
 import { SCollapse, SCollapseItem } from '../../components'
+
+import { BorderTypes } from '../../components/Collapse'
 
 export default {
   component: SCollapse,
@@ -10,7 +12,7 @@ export default {
 
 export const configurable = () => ({
   components: { SCollapse, SCollapseItem },
-  template: `<s-collapse :accordion="accordion" :borders="borders" @change="handleChange" style="flex: 1;">
+  template: `<s-collapse :accordion="accordion" :borders="borders" :borders-type="bordersType" @change="handleChange" style="flex: 1;">
                <s-collapse-item title="Consistency" name="1">
                  <div>Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;</div>
                  <div>Consistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.</div>
@@ -35,6 +37,9 @@ export const configurable = () => ({
     },
     borders: {
       default: boolean('Borders', true)
+    },
+    bordersType: {
+      default: select('Borders Type', Object.values(BorderTypes), BorderTypes.INTERNAL)
     }
   },
   methods: {

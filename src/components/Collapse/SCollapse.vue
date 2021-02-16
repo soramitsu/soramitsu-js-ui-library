@@ -12,6 +12,8 @@
 <script lang="ts">
 import { Vue, Component, Prop, Provide } from 'vue-property-decorator'
 
+import { BorderTypes } from './consts'
+
 @Component
 export default class SCollapse extends Vue {
   /**
@@ -30,13 +32,23 @@ export default class SCollapse extends Vue {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly borders!: boolean
+  /**
+   * Type of borders
+   *
+   * `internal` by default
+   */
+  @Prop({ default: BorderTypes.INTERNAL, type: String }) readonly bordersType!: BorderTypes
 
   @Provide('sCollapse') sCollapse = this
 
   get computedStyles (): object {
     const styles = {} as any
-    if (!this.borders) {
+    if (!this.borders || this.bordersType === BorderTypes.INTERNAL) {
       styles.border = 'none'
+    } else if (this.bordersType === BorderTypes.TOP) {
+      styles.borderBottom = 'none'
+    } else if (this.bordersType === BorderTypes.BOTTOM) {
+      styles.borderTop = 'none'
     }
     return styles
   }
