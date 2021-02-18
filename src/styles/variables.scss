@@ -35,8 +35,7 @@ $s-color-status-warning-background: #FFE3B8 !default;
 $s-color-status-error-background: #FFF9FA !default;
 // Shadow
 // TODO: use it and discuss colors of these shadows
-$s-shadow-surface: 0px 3px 1px 0px rgb(0 0 0 / 4%),
-  0px 3px 8px 0px rgb(0 0 0 / 12%) !default;
+$s-shadow-surface: 0px 3px 1px 0px rgb(0 0 0 / 4%), 0px 3px 8px 0px rgb(0 0 0 / 12%) !default;
 $s-shadow-tooltip: 0px 1px 4px rgba(13, 2, 72, 0.35) !default;
 $s-shadow-tab: 0px 1px 1px rgba(0, 0, 0, 0.1) !default;
 $s-shadow-dropdown: 0px 4px 8px rgba(19, 19, 19, 0.15) !default;
