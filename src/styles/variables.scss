@@ -1,41 +1,42 @@
 // Primary theme colors
-$s-color-theme-accent: #D0021B !default; // Primary button, links
-$s-color-theme-accent-hover: #C6021A !default; // Primary button hover
-$s-color-theme-accent-pressed: #BB0218 !default; // Primary button pressed
-$s-color-theme-accent-focused: #B10217 !default; // Primary button focused
+$s-color-theme-accent: #d0021b !default; // Primary button, links
+$s-color-theme-accent-hover: #c6021a !default; // Primary button hover
+$s-color-theme-accent-pressed: #bb0218 !default; // Primary button pressed
+$s-color-theme-accent-focused: #b10217 !default; // Primary button focused
 // Secondary theme colors
-$s-color-theme-secondary: #FAE6E8 !default;
-$s-color-theme-secondary-hover: #F6CCD1 !default;
-$s-color-theme-secondary-pressed: #F1B3BB !default;
-$s-color-theme-secondary-focused: #EC9AA4 !default;
+$s-color-theme-secondary: #fae6e8 !default;
+$s-color-theme-secondary-hover: #f6ccd1 !default;
+$s-color-theme-secondary-pressed: #f1b3bb !default;
+$s-color-theme-secondary-focused: #ec9aa4 !default;
 // Base content colors
-$s-color-base-content-primary: #2D2926 !default;
-$s-color-base-content-secondary: #53565A !default;
-$s-color-base-content-tertiary: #75787B !default;
-$s-color-base-content-quaternary: #A3A4A8 !default;
+$s-color-base-content-primary: #2d2926 !default;
+$s-color-base-content-secondary: #53565a !default;
+$s-color-base-content-tertiary: #75787b !default;
+$s-color-base-content-quaternary: #a3a4a8 !default;
 // Base misc colors
-$s-color-base-background: #F5F7F8 !default;
-$s-color-base-dark-background: #4E4E4E !default; // not used
-$s-color-base-border-primary: #DDE0E1 !default;
-$s-color-base-border-secondary: #ECEFF0 !default;
-$s-color-base-background-hover: #ECEFF0 !default;
-$s-color-base-disabled: #F5F7F8 !default;
-$s-color-base-on-disabled: #75787B !default;
-$s-color-base-on-accent: #FFFFFF !default;
+$s-color-base-background: #f5f7f8 !default;
+$s-color-base-dark-background: #4e4e4e !default; // not used
+$s-color-base-border-primary: #dde0e1 !default;
+$s-color-base-border-secondary: #eceff0 !default;
+$s-color-base-background-hover: #eceff0 !default;
+$s-color-base-disabled: #f5f7f8 !default;
+$s-color-base-on-disabled: #75787b !default;
+$s-color-base-on-accent: #ffffff !default;
 // Utility colors
-$s-color-utility-body: #FFFFFF !default;
-$s-color-utility-surface: #FFFFFF !default;
+$s-color-utility-body: #ffffff !default;
+$s-color-utility-surface: #ffffff !default;
 $s-color-utility-overlay: rgba(0, 0, 0, 0.45) !default;
 // Status colors
 $s-color-status-success: #009900 !default;
-$s-color-status-warning: #FF9900 !default;
-$s-color-status-error: #FF0000 !default;
-$s-color-status-success-background: #CCEDCC !default;
-$s-color-status-warning-background: #FFE3B8 !default;
-$s-color-status-error-background: #FFF9FA !default;
+$s-color-status-warning: #ff9900 !default;
+$s-color-status-error: #ff0000 !default;
+$s-color-status-success-background: #ccedcc !default;
+$s-color-status-warning-background: #ffe3b8 !default;
+$s-color-status-error-background: #fff9fa !default;
 // Shadow
 // TODO: use it and discuss colors of these shadows
-$s-shadow-surface: 0px 1px 4px rgba(13, 2, 72, 0.35) !default;
+$s-shadow-surface: 0px 3px 1px 0px rgb(0 0 0 / 4%),
+  0px 3px 8px 0px rgb(0 0 0 / 12%) !default;
 $s-shadow-tooltip: 0px 1px 4px rgba(13, 2, 72, 0.35) !default;
 $s-shadow-tab: 0px 1px 1px rgba(0, 0, 0, 0.1) !default;
 $s-shadow-dropdown: 0px 4px 8px rgba(19, 19, 19, 0.15) !default;
@@ -55,9 +56,9 @@ $s-border-radius-medium: $s-border-radius-base * 3 !default;
 $s-border-radius-big: $s-border-radius-base * 4 !default;
 
 // Fonts
-$s-font-family-default: 'Sora', sans-serif !important;
-$s-font-family-mono: 'JetBrainsMono', monospace !important;
-$s-font-family-icons: 'soramitsu-icons' !important;
+$s-font-family-default: "Sora", sans-serif !important;
+$s-font-family-mono: "JetBrainsMono", monospace !important;
+$s-font-family-icons: "soramitsu-icons" !important;
 // Font sizes
 $s-font-size-mini: 12px !default;
 $s-font-size-small: 14px !default;
@@ -81,25 +82,51 @@ $--lg: 1200px !default;
 $--xl: 1920px !default;
 
 $--breakpoints: (
-  'xs' : (max-width: $--sm - 1),
-  'sm' : (min-width: $--sm),
-  'md' : (min-width: $--md),
-  'lg' : (min-width: $--lg),
-  'xl' : (min-width: $--xl)
+  "xs": (
+    max-width: $--sm - 1,
+  ),
+  "sm": (
+    min-width: $--sm,
+  ),
+  "md": (
+    min-width: $--md,
+  ),
+  "lg": (
+    min-width: $--lg,
+  ),
+  "xl": (
+    min-width: $--xl,
+  ),
 );
 
 $--breakpoints-spec: (
-  'xs-only' : (max-width: $--sm - 1),
-  'sm-and-up' : (min-width: $--sm),
-  'sm-only': "(min-width: #{$--sm}) and (max-width: #{$--md - 1})",
-  'sm-and-down': (max-width: $--md - 1),
-  'md-and-up' : (min-width: $--md),
-  'md-only': "(min-width: #{$--md}) and (max-width: #{$--lg - 1})",
-  'md-and-down': (max-width: $--lg - 1),
-  'lg-and-up' : (min-width: $--lg),
-  'lg-only': "(min-width: #{$--lg}) and (max-width: #{$--xl - 1})",
-  'lg-and-down': (max-width: $--xl - 1),
-  'xl-only' : (min-width: $--xl),
+  "xs-only": (
+    max-width: $--sm - 1,
+  ),
+  "sm-and-up": (
+    min-width: $--sm,
+  ),
+  "sm-only": "(min-width: #{$--sm}) and (max-width: #{$--md - 1})",
+  "sm-and-down": (
+    max-width: $--md - 1,
+  ),
+  "md-and-up": (
+    min-width: $--md,
+  ),
+  "md-only": "(min-width: #{$--md}) and (max-width: #{$--lg - 1})",
+  "md-and-down": (
+    max-width: $--lg - 1,
+  ),
+  "lg-and-up": (
+    min-width: $--lg,
+  ),
+  "lg-only": "(min-width: #{$--lg}) and (max-width: #{$--xl - 1})",
+  "lg-and-down": (
+    max-width: $--xl - 1,
+  ),
+  "xl-only": (
+    min-width: $--xl,
+  ),
 );
 
 :root {

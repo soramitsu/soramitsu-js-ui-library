@@ -14,8 +14,8 @@
         }
       }
       &.s-rounded {
-        .el-tabs__nav-wrap {
-          border-radius: $border-radius;
+        .el-tabs__nav {
+          border-radius: calc(#{$border-radius} + 1px);
           .el-tabs__item {
             &.is-active {
               border-radius: $border-radius;
@@ -85,14 +85,23 @@
     }
   }
   &.s-rounded {
+    height: 32px;
+    padding-top: 32px;
+    margin-bottom: 20px;
+    position: relative;
     .el-tabs__header {
+      position: absolute;
       width: fit-content;
+      top: 0;
     }
     .el-tabs__nav-wrap {
-      background-color: var(--s-color-base-background);
-      height: 32px;
+      margin: -20px;
       .el-tabs__nav-scroll {
+        padding: 20px;
+      }
+      .el-tabs__nav {
         padding: 2px;
+        background-color: var(--s-color-base-background);
       }
       &::after,
       .el-tabs__active-bar {
@@ -102,9 +111,9 @@
         padding: 0 32px;
         height: 28px;
         line-height: 28px;
-        &:nth-child(2),
-        &:last-child {
-          padding: 0 32px;
+        transition: 200ms;
+        &:not(:last-child) {
+          margin-right: 2px;
         }
         &.is-active {
           color: var(--s-color-base-content-primary);
@@ -116,6 +125,9 @@
           box-shadow: $s-shadow-surface;
         }
       }
+    }
+    .el-tabs__content {
+      margin-top: 20px;
     }
   }
   .el-tabs__active-bar {
