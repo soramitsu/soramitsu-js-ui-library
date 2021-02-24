@@ -59,6 +59,13 @@
   }
   &.s-input-type {
     .el-select {
+      .el-input {
+        &--prefix {
+          .el-input__inner{
+            padding-left: 44px;
+          }
+        }
+      }
       .el-input__inner {
         height: $s-size-big;
         padding: 0 15px;
