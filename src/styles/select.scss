@@ -45,6 +45,16 @@
       .el-select__caret {
         color: var(--s-color-base-content-tertiary);
       }
+      &--prefix {
+        .el-input__prefix {
+          bottom: 0;
+          left: 12px;
+          width: $s-size-mini;
+          height: $s-size-mini;
+          margin: auto;
+          overflow: hidden;
+        }
+      }
     }
   }
   &.s-input-type {
@@ -71,8 +81,19 @@
       }
     }
     .s-placeholder + .el-select {
-      .el-input__inner {
-        padding-top: 12px;
+      .el-input {
+        &--prefix {
+          .el-input__inner{
+            padding-left: 44px;
+          }
+
+          .el-input__prefix {
+            top: 12px;
+          }
+        }
+        .el-input__inner{
+          padding-top: 12px;
+        }
       }
       .el-input__validateIcon {
         padding-top: 11px;
@@ -127,18 +148,25 @@
   }
   &.s-select-type {
     .el-select {
-      .el-input__inner {
-        padding-left: 12px;
-        font-weight: bold;
-        &:hover {
-          border-color: var(--s-color-base-border-primary);
+      .el-input {
+        &.el-input--prefix {
+          .el-input__inner {
+            padding-left: 44px;
+          }
         }
-        &::placeholder {
-          color: var(--s-color-base-content-tertiary);
+        .el-input__inner {
+          padding-left: 12px;
           font-weight: bold;
-        }
-        &:focus {
-          border-color: var(--s-color-base-border-primary);
+          &:hover {
+            border-color: var(--s-color-base-border-primary);
+          }
+          &::placeholder {
+            color: var(--s-color-base-content-tertiary);
+            font-weight: bold;
+          }
+          &:focus {
+            border-color: var(--s-color-base-border-primary);
+          }
         }
       }
       .el-select__caret {

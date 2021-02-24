@@ -18,6 +18,7 @@
       @visible-change="handleVisibleChange"
       @clear="handleClear"
     >
+      <slot name="prefix" slot="prefix"></slot>
       <slot name="empty" slot="empty"></slot>
       <slot></slot>
     </el-select>
