@@ -5,7 +5,7 @@
     :label="label"
     :column-key="columnKey"
     :prop="prop"
-    :width="width"
+    :width="computedWidth"
     :min-width="minWidth"
     :fixed="fixedPosition || false"
     :render-header="renderHeader"
@@ -18,7 +18,7 @@
     :show-overflow-tooltip="showOverflowTooltip"
     :align="align"
     :header-align="headerAlign"
-    :class-name="headerAlign"
+    :class-name="className"
     :label-class-name="labelClassName"
     :selectable="selectable"
     :reserve-selection="reserveSelection"
@@ -34,9 +34,11 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
+import { Vue, Component, Prop, Ref, Inject } from 'vue-property-decorator'
 
-import { ColumnFixedPosition, SortDirection, ColumnAlignment } from './consts'
+import { Size } from '@/types'
+
+import { SortDirection, ColumnAlignment } from './consts'
 
 @Component
 export default class STableColumn extends Vue {
@@ -143,7 +145,7 @@ export default class STableColumn extends Vue {
   /**
    * Class name of cells in the column
    */
-  @Prop({ default: '', type: String }) readonly className!: string
+  @Prop({ default: undefined, type: String || undefined }) readonly className!: string | undefined
   /**
    * Class name of the label of this column
    */
@@ -182,5 +184,18 @@ export default class STableColumn extends Vue {
    * TODO: comment it when it'll be implemented
    */
   @Prop({ type: Array }) readonly filteredValue!: Array<any>
+
+  @Inject({ default: '', from: 'sTable' }) sTable
+
+  get computedWidth () {
+    console.log(typeof this.sTable)
+    const tableBorder = (this.sTable || {}).border
+    const size = (this.sTable || {}).size
+    return !this.width && this.type === 'selection' && !tableBorder && size ? ({
+      [Size.SMALL]: '30px',
+      [Size.MEDIUM]: '32px',
+      [Size.BIG]: '36px'
+    }[size]) : this.width
+  }
 }
 </script>

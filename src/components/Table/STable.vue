@@ -58,7 +58,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref, Provide } from 'vue-property-decorator'
 import { ElTable } from 'element-ui/types/table'
 import { ElTableColumn } from 'element-ui/types/table-column'
 
@@ -353,5 +353,7 @@ export default class STable extends Mixins(SizeMixin) {
   sort (prop: string, order: SortDirection): void {
     this.table.sort(prop, order)
   }
+
+  @Provide('sTable') sTable = this
 }
 </script>
