@@ -27,9 +27,9 @@
       :suffix-icon="suffix"
       @input="handleInput"
       @change="handleChange"
-      @paste="handlePaste"
       @blur="handleBlur"
       @focus="handleFocus"
+      @paste.native="handlePaste"
     />
     <template v-if="type === InputType.TEXT_FILE">
       <i class="s-icon-file-upload"></i>
@@ -211,7 +211,10 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
     this.$emit('change', value)
   }
 
-  handlePaste (value: string | number): void {
+  handlePaste (event: ClipboardEvent): void {
+    if (!event || !event.clipboardData) return
+
+    const value = event.clipboardData.getData('text')
     this.$emit('paste', value)
   }
 
