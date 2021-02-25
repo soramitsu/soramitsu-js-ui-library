@@ -245,7 +245,9 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
     const file = input.files[0]
     const fr = new FileReader()
     fr.onload = (event: ProgressEvent<FileReader>) => {
-      this.handleInput((event.target || {}).result as string)
+      const result = (event.target || {}).result as string
+      this.handleInput(result)
+      this.handleChange(result)
     }
     fr.readAsText(file)
   }
