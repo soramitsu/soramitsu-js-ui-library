@@ -116,3 +116,7 @@
     transform: rotate(180deg);
   }
 }
+.el-table__expanded-cell[class*=cell] {
+  padding: 8px 16px;
+  background: var(--s-color-base-background);
+}
