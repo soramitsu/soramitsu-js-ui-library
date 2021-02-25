@@ -21,8 +21,7 @@ import { Float } from '../../directives'
 const DEFAULT_VALUE = ''
 
 const isNumberLikeValue = (value: any): boolean => {
-  const numberValue = +value
-  return typeof numberValue === 'number' && !isNaN(numberValue)
+  return Number.isFinite(Number(value))
 }
 
 @Component({
