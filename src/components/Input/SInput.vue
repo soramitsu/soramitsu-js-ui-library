@@ -3,12 +3,12 @@
     class="s-input"
     :class="computedClasses"
   >
-    <span v-if="model && !isMediumInput" class="s-placeholder">{{ placeholder }}</span>
+    <span v-if="value && !isMediumInput" class="s-placeholder">{{ placeholder }}</span>
     <el-input
       ref="el-input"
+      :value="value"
       :type="computedType"
       :placeholder="placeholder"
-      v-model="model"
       :disabled="disabled"
       :show-password="showPassword && isTextInput"
       :readonly="readonly"
@@ -138,7 +138,6 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
 
   focused = false
   autofill = false
-  model = this.value
 
   mounted (): void {
     this.$el.addEventListener('animationstart', this.changeAutofillValue)
@@ -150,17 +149,6 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
 
   private changeAutofillValue (e: any): void {
     this.autofill = e.animationName === 'onAutoFillStart'
-  }
-
-  @Watch('value')
-  private handlePropChange (value: string | number): void {
-    this.model = value
-  }
-
-  @Watch('model')
-  private handleValueChange (value: string | number): void {
-    this.$emit('input', value)
-    this.$emit('change', value)
   }
 
   get isTextInput (): boolean {
@@ -254,7 +242,7 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
     const file = input.files[0]
     const fr = new FileReader()
     fr.onload = (event: ProgressEvent<FileReader>) => {
-      this.model = ((event.target || {}).result as string)
+      this.handleInput((event.target || {}).result as string)
     }
     fr.readAsText(file)
   }
