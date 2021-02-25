@@ -48,6 +48,9 @@ $s-size-medium: 40px !default;
 $s-size-small: 32px !default;
 $s-size-mini: 24px !default;
 
+// Padding
+$s-padding-input: 16px;
+
 $s-border-radius-base: 4px;
 $s-border-radius-mini: $s-border-radius-base !default;
 $s-border-radius-small: $s-border-radius-base * 2 !default;
@@ -153,6 +156,8 @@ $--breakpoints-spec: (
   --s-size-small: #{$s-size-small};
   --s-size-medium: #{$s-size-medium};
   --s-size-big: #{$s-size-big};
+  // Padding
+  --s-padding-input: #{$s-padding-input};
   // Border Radius
   --s-border-radius-mini: #{$s-border-radius-mini};
   --s-border-radius-small: #{$s-border-radius-small};
