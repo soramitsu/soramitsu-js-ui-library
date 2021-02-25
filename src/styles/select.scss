@@ -15,6 +15,10 @@
   }
 }
 
+$select-prefix-margin-right: 8px;
+$select-prefix-width: $s-size-mini;
+$select-prefix-height: $s-size-mini;
+
 .s-select {
   font-family: $s-font-family-default;
   width: 100%;
@@ -48,9 +52,9 @@
       &--prefix {
         .el-input__prefix {
           bottom: 0;
-          left: 12px;
-          width: $s-size-mini;
-          height: $s-size-mini;
+          left: $s-padding-input;
+          width: $select-prefix-width;
+          height: $select-prefix-height;
           margin: auto;
           overflow: hidden;
         }
@@ -62,7 +66,7 @@
       .el-input {
         &--prefix {
           .el-input__inner {
-            padding-left: 44px;
+            padding-left: $s-padding-input + $select-prefix-width + $select-prefix-margin-right;
           }
         }
       }
@@ -91,7 +95,7 @@
       .el-input {
         &--prefix {
           .el-input__inner{
-            padding-left: 44px;
+            padding-left: $s-padding-input + $select-prefix-width + $select-prefix-margin-right;
           }
 
           .el-input__prefix {
@@ -158,11 +162,10 @@
       .el-input {
         &.el-input--prefix {
           .el-input__inner {
-            padding-left: 44px;
+            padding-left: $s-padding-input + $select-prefix-width + $select-prefix-margin-right;
           }
         }
         .el-input__inner {
-          padding-left: 12px;
           font-weight: bold;
           &:hover {
             border-color: var(--s-color-base-border-primary);
