@@ -1,11 +1,13 @@
 .s-card {
+  margin: 1px;
   color: var(--s-color-base-content-primary);
-  border-color: var(--s-color-base-border-primary);
+  border: none;
+  box-shadow: 0 0 0 1px var(--s-color-base-border-primary);
   &.s-clickable {
     cursor: pointer;
   }
-  &:hover, &:focus {
-    border-color: transparent;
+  &.el-card.is-hover-shadow:hover, &.el-card.is-hover-shadow:focus {
+    box-shadow: $s-shadow-card
   }
   .el-card__header {
     border-bottom-color: transparent;
