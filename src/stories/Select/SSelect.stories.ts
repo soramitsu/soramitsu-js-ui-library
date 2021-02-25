@@ -39,7 +39,6 @@ export const configurable = () => ({
                    :popper-class="borderRadius"
                    @change="handleChange"
                  >
-                   <div slot="prefix">123</div>
                    <s-option
                      v-for="option in options"
                      :key="option.value"
