@@ -16,6 +16,7 @@ import { Component, Mixins, Prop } from 'vue-property-decorator'
 
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { CardShadow } from './consts'
+import { BorderRadius } from '@/types'
 
 @Component
 export default class SCard extends Mixins(BorderRadiusMixin) {
@@ -41,6 +42,8 @@ export default class SCard extends Mixins(BorderRadiusMixin) {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly clickable!: boolean
+
+  @Prop({ default: BorderRadius.MEDIUM }) borderRadius!: string
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
