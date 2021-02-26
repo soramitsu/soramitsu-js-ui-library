@@ -1,9 +1,9 @@
-import DialogMixin from './DialogMixin'
+import SDialogMixin from './SDialogMixin'
 import BorderRadiusMixin from './BorderRadiusMixin'
 import SizeMixin from './SizeMixin'
 
 export {
-  DialogMixin,
+  SDialogMixin,
   BorderRadiusMixin,
   SizeMixin
 }

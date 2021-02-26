@@ -1,7 +1,7 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
 @Component
-export default class DialogMixin extends Vue {
+export default class SDialogMixin extends Vue {
   /**
    * Dialog visibility
    *
