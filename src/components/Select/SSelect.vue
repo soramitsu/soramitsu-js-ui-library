@@ -7,6 +7,7 @@
       :placeholder="placeholder"
       :disabled="disabled"
       :loading="loading"
+      :size="size"
       :multiple="multiple"
       :loading-text="loadingText"
       :clearable="clearable"
@@ -26,14 +27,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
+import { ElForm } from 'element-ui/types/form'
+import { ElFormItem } from 'element-ui/types/form-item'
 
+import SizeMixin from '../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { Autocomplete } from '../Input'
 import { InputTypes } from './consts'
 
 @Component
-export default class SSelect extends Mixins(BorderRadiusMixin) {
+export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin) {
   /**
    * Selected value. Can be used with `v-model`
    */
@@ -113,6 +117,9 @@ export default class SSelect extends Mixins(BorderRadiusMixin) {
 
   @Ref('select') select!: any
 
+  @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
+  @Inject({ default: '', from: 'elFormItem' }) elFormItem!: ElFormItem
+
   model = this.value
   focused = false
 
@@ -157,6 +164,11 @@ export default class SSelect extends Mixins(BorderRadiusMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
+    if ((this.elForm || this.elFormItem || {}).size) {
+      cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
+    } else if (this.isStandardSize) {
+      cssClasses.push(`s-${this.size}`)
+    }
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
       cssClasses.push(`s-${this.inputType}-type`)
     }
