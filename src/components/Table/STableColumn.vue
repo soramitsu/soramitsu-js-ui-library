@@ -145,7 +145,7 @@ export default class STableColumn extends Vue {
   /**
    * Class name of cells in the column
    */
-  @Prop({ default: undefined, type: String || undefined }) readonly className!: string | undefined
+  @Prop({ type: String }) readonly className!: string
   /**
    * Class name of the label of this column
    */
@@ -188,7 +188,6 @@ export default class STableColumn extends Vue {
   @Inject({ default: '', from: 'sTable' }) sTable
 
   get computedWidth () {
-    console.log(typeof this.sTable)
     const tableBorder = (this.sTable || {}).border
     const size = (this.sTable || {}).size
     return !this.width && this.type === 'selection' && !tableBorder && size ? ({
