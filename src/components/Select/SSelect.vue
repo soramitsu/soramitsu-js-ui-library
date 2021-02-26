@@ -7,7 +7,7 @@
       :placeholder="placeholder"
       :disabled="disabled"
       :loading="loading"
-      :size="size"
+      :size="inputType === 'select' ? size : undefined"
       :multiple="multiple"
       :loading-text="loadingText"
       :clearable="clearable"
@@ -164,10 +164,12 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
-    if ((this.elForm || this.elFormItem || {}).size) {
-      cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
-    } else if (this.isStandardSize) {
-      cssClasses.push(`s-${this.size}`)
+    if (this.inputType === 'select') {
+      if ((this.elForm || this.elFormItem || {}).size) {
+        cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
+      } else if (this.isStandardSize) {
+        cssClasses.push(`s-${this.size}`)
+      }
     }
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
       cssClasses.push(`s-${this.inputType}-type`)
