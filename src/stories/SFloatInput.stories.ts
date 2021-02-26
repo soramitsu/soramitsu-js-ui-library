@@ -4,7 +4,7 @@ import { SFloatInput, SRow } from '../components'
 
 export default {
   component: SFloatInput,
-  title: 'Design System/Components/Float Input',
+  title: 'Design System/Components/Input/Float',
   decorators: [withKnobs]
 }
 
