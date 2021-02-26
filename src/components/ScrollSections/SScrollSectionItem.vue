@@ -3,7 +3,7 @@
     <span v-if="title" class="title">{{ title }}</span>
     <slot v-if="this.$slots.title && !title" name="title"></slot>
     <slot></slot>
-    <s-divider v-if="withDivider" style="margin: 20px 0 0 0;"></s-divider>
+    <s-divider v-if="withDivider" type="primary" style="margin: 20px 0 0 0;"></s-divider>
   </section>
 </template>
 

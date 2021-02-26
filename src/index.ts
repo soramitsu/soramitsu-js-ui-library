@@ -54,6 +54,7 @@ import { Directives } from './types/directives'
 import { modules, Modules } from './store'
 import { setTheme } from './utils'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
+import { SDialogMixin } from './mixins'
 
 const components = [
   { component: SApp, name: Components.SApp },
@@ -177,6 +178,7 @@ export {
   STabs,
   STable,
   STableColumn,
-  STooltip
+  STooltip,
+  SDialogMixin
 }
 export default SoramitsuElements

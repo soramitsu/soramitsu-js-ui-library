@@ -5,7 +5,7 @@
     :label="label"
     :column-key="columnKey"
     :prop="prop"
-    :width="width"
+    :width="computedWidth"
     :min-width="minWidth"
     :fixed="fixedPosition || false"
     :render-header="renderHeader"
@@ -18,7 +18,7 @@
     :show-overflow-tooltip="showOverflowTooltip"
     :align="align"
     :header-align="headerAlign"
-    :class-name="headerAlign"
+    :class-name="className"
     :label-class-name="labelClassName"
     :selectable="selectable"
     :reserve-selection="reserveSelection"
@@ -34,9 +34,11 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
+import { Vue, Component, Prop, Ref, Inject } from 'vue-property-decorator'
 
-import { ColumnFixedPosition, SortDirection, ColumnAlignment } from './consts'
+import { Size } from '@/types'
+
+import { SortDirection, ColumnAlignment } from './consts'
 
 @Component
 export default class STableColumn extends Vue {
@@ -66,13 +68,13 @@ export default class STableColumn extends Vue {
   /**
    * Column width in pixels. For instance, `width="80"`
    */
-  @Prop({ default: '', type: String }) readonly width!: string
+  @Prop({ type: String }) readonly width!: string
   /**
    * Column minimum width in pixels. Columns with `width` has a fixed width,
    * while columns with `min-width` has a width that is distributed in proportion.
    * For instance, `min-width="80"`
    */
-  @Prop({ default: '', type: String }) readonly minWidth!: string
+  @Prop({ type: String }) readonly minWidth!: string
   /**
    * Will column be fixed at `"left"` or `"right"` position.
    * If it's not defined, then it will be not fixed by default.
@@ -143,7 +145,7 @@ export default class STableColumn extends Vue {
   /**
    * Class name of cells in the column
    */
-  @Prop({ default: '', type: String }) readonly className!: string
+  @Prop({ type: String }) readonly className!: string
   /**
    * Class name of the label of this column
    */
@@ -182,5 +184,24 @@ export default class STableColumn extends Vue {
    * TODO: comment it when it'll be implemented
    */
   @Prop({ type: Array }) readonly filteredValue!: Array<any>
+
+  @Inject({ default: '', from: 'sTable' }) sTable
+
+  get computedWidth () {
+    const tableBorder = (this.sTable || {}).border
+    const size = (this.sTable || {}).size
+    if (!this.width && this.type === 'selection' && size) {
+      return !tableBorder ? ({
+        [Size.SMALL]: '30',
+        [Size.MEDIUM]: '32',
+        [Size.BIG]: '36'
+      }[size]) : ({
+        [Size.SMALL]: '42',
+        [Size.MEDIUM]: '44',
+        [Size.BIG]: '48'
+      }[size])
+    }
+    return this.width
+  }
 }
 </script>
