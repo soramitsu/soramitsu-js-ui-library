@@ -68,13 +68,13 @@ export default class STableColumn extends Vue {
   /**
    * Column width in pixels. For instance, `width="80"`
    */
-  @Prop({ default: '', type: String }) readonly width!: string
+  @Prop({ type: String }) readonly width!: string
   /**
    * Column minimum width in pixels. Columns with `width` has a fixed width,
    * while columns with `min-width` has a width that is distributed in proportion.
    * For instance, `min-width="80"`
    */
-  @Prop({ default: '', type: String }) readonly minWidth!: string
+  @Prop({ type: String }) readonly minWidth!: string
   /**
    * Will column be fixed at `"left"` or `"right"` position.
    * If it's not defined, then it will be not fixed by default.
@@ -190,11 +190,18 @@ export default class STableColumn extends Vue {
   get computedWidth () {
     const tableBorder = (this.sTable || {}).border
     const size = (this.sTable || {}).size
-    return !this.width && this.type === 'selection' && !tableBorder && size ? ({
-      [Size.SMALL]: '30px',
-      [Size.MEDIUM]: '32px',
-      [Size.BIG]: '36px'
-    }[size]) : this.width
+    if (!this.width && this.type === 'selection' && size) {
+      return !tableBorder ? ({
+        [Size.SMALL]: '30',
+        [Size.MEDIUM]: '32',
+        [Size.BIG]: '36'
+      }[size]) : ({
+        [Size.SMALL]: '42',
+        [Size.MEDIUM]: '44',
+        [Size.BIG]: '48'
+      }[size])
+    }
+    return this.width
   }
 }
 </script>
