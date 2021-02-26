@@ -1,5 +1,5 @@
 <template>
-  <el-option :value="value" :label="label" :disabled="disabled">
+  <el-option :value="value" :label="label" :disabled="disabled" class="s-option">
     <slot></slot>
   </el-option>
 </template>

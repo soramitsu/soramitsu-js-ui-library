@@ -22,6 +22,7 @@ export enum Components {
   SHeader = 'SHeader',
   SIcon = 'SIcon',
   SInput = 'SInput',
+  SFloatInput = 'SFloatInput',
   SJsonInput = 'SJsonInput',
   SMain = 'SMain',
   SMenu = 'SMenu',
