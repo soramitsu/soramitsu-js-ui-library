@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Ref, Inject, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref, Inject } from 'vue-property-decorator'
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
