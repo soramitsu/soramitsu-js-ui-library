@@ -27,6 +27,15 @@ $select-prefix-height: $s-size-mini;
   @include select-border-radius("medium", var(--s-border-radius-medium));
   @include select-border-radius("small", var(--s-border-radius-small));
   @include select-border-radius("mini", var(--s-border-radius-mini));
+  &.s-big .el-input__inner {
+    height: $s-size-big;
+  }
+  &.s-medium .el-input__inner {
+    height: $s-size-medium;
+  }
+  &.s-small .el-input__inner {
+    height: $s-size-small;
+  }
   .el-select {
     width: 100%;
     i.el-icon-arrow-up {

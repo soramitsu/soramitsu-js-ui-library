@@ -1,7 +1,7 @@
 import { text, withKnobs, boolean, number, select } from '@storybook/addon-knobs'
 
 import { SSelect, SRow, SCol, SOption } from '../../components'
-import { BorderRadius } from '../../types'
+import { Size, BorderRadius } from '../../types'
 import { InputTypes } from '../../components/Select'
 
 export default {
@@ -28,6 +28,7 @@ export const configurable = () => ({
                    :disabled="disabled"
                    :border-radius="borderRadius"
                    :loading="loading"
+                   :size="size"
                    :multiple="multiple"
                    :input-type="item.inputType"
                    :clearable="clearable"
@@ -62,6 +63,9 @@ export const configurable = () => ({
     },
     loading: {
       default: boolean('Loading', false)
+    },
+    size: {
+      default: select('Size', Object.values(Size), Size.BIG)
     },
     multiple: {
       default: boolean('Multiple', false)

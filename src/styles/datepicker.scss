@@ -15,10 +15,30 @@
   }
 }
 
+$date-picker-padding: 8px;
+
 .s-date-picker {
   font-family: $s-font-family-default;
   width: 100%;
   position: relative;
+  &.s-big .el-input__inner {
+    height: $s-size-big;
+    .el-range-separator {
+      line-height: $s-size-big - $date-picker-padding;
+    }
+  }
+  &.s-medium .el-input__inner {
+    height: $s-size-medium;
+    .el-range-separator {
+      line-height: $s-size-medium - $date-picker-padding;
+    }
+  }
+  &.s-small .el-input__inner {
+    height: $s-size-small;
+    .el-range-separator {
+      line-height: $s-size-small - $date-picker-padding;
+    }
+  }
   .el-date-editor {
     width: 100%;
     &.el-input,
@@ -52,9 +72,7 @@
     }
   }
   &.s-input-type {
-    min-height: $s-size-big;
     .el-input__inner {
-      height: $s-size-big;
       padding: 0 15px;
       border: 1px solid var(--s-color-base-background);
       background-color: var(--s-color-base-background);
@@ -134,7 +152,7 @@
     .s-icon-chevron-bottom {
       position: absolute;
       right: 10px;
-      top: 30%;
+      top: calc(50% - 8px);
       pointer-events: none;
       color: var(--s-color-base-content-tertiary);
       transition: transform 0.3s;

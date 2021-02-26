@@ -24,6 +24,7 @@ import {
   SHeader,
   SIcon,
   SInput,
+  SFloatInput,
   SJsonInput,
   SMain,
   SMenu,
@@ -53,6 +54,7 @@ import { Directives } from './types/directives'
 import { modules, Modules } from './store'
 import { setTheme } from './utils'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
+import { SDialogMixin } from './mixins'
 
 const components = [
   { component: SApp, name: Components.SApp },
@@ -78,6 +80,7 @@ const components = [
   { component: SHeader, name: Components.SHeader },
   { component: SIcon, name: Components.SIcon },
   { component: SInput, name: Components.SInput },
+  { component: SFloatInput, name: Components.SFloatInput },
   { component: SJsonInput, name: Components.SJsonInput },
   { component: SMain, name: Components.SMain },
   { component: SMenu, name: Components.SMenu },
@@ -153,6 +156,7 @@ export {
   SHeader,
   SIcon,
   SInput,
+  SFloatInput,
   SJsonInput,
   SMain,
   SMenu,
@@ -174,6 +178,7 @@ export {
   STabs,
   STable,
   STableColumn,
-  STooltip
+  STooltip,
+  SDialogMixin
 }
 export default SoramitsuElements
