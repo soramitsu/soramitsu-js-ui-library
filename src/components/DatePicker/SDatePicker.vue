@@ -8,6 +8,7 @@
       :unlink-panels="unlinkPanels"
       :readonly="readonly"
       :disabled="disabled"
+      :size="size"
       :editable="editable"
       :clearable="willHaveClearButton"
       :placeholder="placeholder"
@@ -35,15 +36,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
+import { ElForm } from 'element-ui/types/form'
+import { ElFormItem } from 'element-ui/types/form-item'
 
 // TODO: ask do we need size prop for the component?
 // Prev comment => TODO: ask design team
+import SizeMixin from '../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { PickerTypes, PickerAlignment, InputTypes } from './consts'
 
 @Component
-export default class SDatePicker extends Mixins(BorderRadiusMixin) {
+export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin) {
   /**
    * Value of date picker component. Can be used with `v-model`.
    * Can be date object / array with date objects for date range picker
@@ -172,6 +176,9 @@ export default class SDatePicker extends Mixins(BorderRadiusMixin) {
 
   @Ref('picker') picker!: any
 
+  @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
+  @Inject({ default: '', from: 'elFormItem' }) elFormItem!: ElFormItem
+
   model = this.value
   focused = false
 
@@ -219,6 +226,11 @@ export default class SDatePicker extends Mixins(BorderRadiusMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = ['s-date-picker']
+    if ((this.elForm || this.elFormItem || {}).size) {
+      cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
+    } else if (this.isStandardSize) {
+      cssClasses.push(`s-${this.size}`)
+    }
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
       cssClasses.push(`s-${!this.isInputType ? InputTypes.SELECT : this.inputType}-type`)
     }
