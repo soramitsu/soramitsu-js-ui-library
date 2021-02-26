@@ -116,6 +116,11 @@
   border-color: var(--s-color-theme-accent);
 }
 .el-table__expand-icon {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
   > .el-icon.el-icon-arrow-right {
     font-family: $s-font-family-icons;
     @extend .s-icon-chevron-bottom;
