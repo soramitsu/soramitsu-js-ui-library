@@ -19,7 +19,7 @@ import { SFooter } from './Layout/Footer'
 import { SForm, SFormItem } from './Form'
 import { SHeader } from './Layout/Header'
 import { SIcon } from './Icon'
-import { SInput, SJsonInput } from './Input'
+import { SInput, SFloatInput, SJsonInput } from './Input'
 import { SMain } from './Layout/Main'
 import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
 import { SPagination } from './Pagination'
@@ -57,6 +57,7 @@ export {
   SHeader,
   SIcon,
   SInput,
+  SFloatInput,
   SJsonInput,
   SMain,
   SMenu,
