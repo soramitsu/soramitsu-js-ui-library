@@ -1,6 +1,7 @@
 <template>
   <s-input
     v-float
+    :placeholder="placeholder"
     :value="value"
     :maxlength="maxlength"
     v-bind="$attrs"
@@ -34,6 +35,7 @@ const isNumberLikeValue = (value: any): boolean => {
 })
 export default class SFloatInput extends Vue {
   @Prop({ type: String, default: DEFAULT_VALUE }) readonly value!: string
+  @Prop({ default: '0.0', type: String }) readonly placeholder!: string
   @Prop({
     type: Number,
     default: undefined,
