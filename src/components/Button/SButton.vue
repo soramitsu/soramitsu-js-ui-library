@@ -172,8 +172,8 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin) {
     return this.loading
   }
 
-  handleClick (): void {
-    this.$emit('click')
+  handleClick (event): void {
+    this.$emit('click', event)
     this.pressed = true
     setTimeout(() => {
       this.pressed = false
