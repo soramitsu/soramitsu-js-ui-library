@@ -49,10 +49,10 @@
   background-color: var(--s-color-base-background);
 }
 .el-table:not(.el-table--border)::before {
-  background-color: var(--s-color-base-on-accent);
+  display: none
 }
 .el-table tr:last-child td {
-  border-bottom-color: var(--s-color-base-on-accent);
+  border-bottom: none;
 }
 .el-table__header {
   label.el-checkbox.is-disabled {
