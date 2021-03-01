@@ -30,7 +30,9 @@
       @blur="handleBlur"
       @focus="handleFocus"
       @paste.native="handlePaste"
-    />
+    >
+      <slot slot="suffix" name="suffix"></slot>
+    </el-input>
     <template v-if="type === InputType.TEXT_FILE">
       <i class="s-icon-file-upload"></i>
       <input :value="emptyValue" type="file" :accept="accept" @change="handleTextFileChange">
