@@ -189,6 +189,7 @@ export default class SScrollSections extends Vue {
       return
     }
     this.router.push({ hash: `#${section}` })
+    this.$emit('section-click', section)
     const component = this.menuItems.filter((component: any) => component.section === section)[0] as any
     (component.$el as HTMLElement).scrollIntoView({ behavior: 'smooth' })
   }
