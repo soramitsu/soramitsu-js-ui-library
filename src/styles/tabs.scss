@@ -99,6 +99,9 @@
     .el-tabs__nav-wrap {
       background-color: var(--s-color-base-background);
       height: 32px;
+      .el-tabs__nav {
+        display: flex;
+      }
       .el-tabs__nav-scroll {
         padding: 2px;
       }
@@ -133,6 +136,9 @@
     .el-tabs__nav-wrap {
       background-color: var(--s-color-base-background);
       height: 32px;
+      .el-tabs__nav {
+        display: flex;
+      }
       &::after,
       .el-tabs__active-bar {
         height: 0;
