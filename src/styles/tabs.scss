@@ -130,12 +130,13 @@
     }
   }
   &.s-accent-rounded {
+    $height: 32px;
     .el-tabs__header {
       width: fit-content;
     }
     .el-tabs__nav-wrap {
       background-color: var(--s-color-base-background);
-      height: 32px;
+      height: $height;
       .el-tabs__nav {
         display: flex;
       }
@@ -145,8 +146,8 @@
       }
       .el-tabs__item {
         padding: 0 18px;
-        height: 32px;
-        line-height: 32px;
+        height: $height;
+        line-height: $height;
         transition: 200ms;
         &.is-active {
           color: var(--s-color-base-on-accent);
