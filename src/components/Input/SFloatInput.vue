@@ -58,7 +58,9 @@ export default class SFloatInput extends Vue {
       ? DEFAULT_VALUE
       : this.trimNeedlessSymbols(this.value)
 
-    this.onInput(preparedValue)
+    if (preparedValue !== this.value) {
+      this.onInput(preparedValue)
+    }
 
     this.$emit('blur', event)
   }
