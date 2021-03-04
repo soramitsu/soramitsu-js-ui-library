@@ -69,7 +69,7 @@ export default class SFloatInput extends Vue {
     this.$emit('input', value)
   }
 
-  private trimNeedlessSymbols = (value: string): string => {
+  private trimNeedlessSymbols (value: string): string {
     // Trim zeros in the beginning
     if (value.indexOf('0') === 0 && value.indexOf('.') !== 1) {
       value = value.replace(/^0+/, '')
@@ -86,10 +86,10 @@ export default class SFloatInput extends Vue {
     return value
   }
 
-  private formatNumberField = (value: string, decimals: number): string => {
+  private formatNumberField (value: string, decimals: number): string {
     if (!['string', 'number'].includes(typeof value)) return value
 
-    let formatted = String(value)
+    let formatted = String(value).replace(/[^\d.]/g, '')
 
     if (formatted.indexOf('.') === 0) {
       formatted = '0' + formatted
@@ -104,7 +104,7 @@ export default class SFloatInput extends Vue {
     return formatted
   }
 
-  private valueMaxLength = (value: string, decimals: number) => {
+  private valueMaxLength (value: string, decimals: number) {
     if (value.length === 0 || decimals === undefined) return undefined
 
     const fpIndex = value.indexOf('.')
