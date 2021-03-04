@@ -26,6 +26,14 @@
           }
         }
       }
+      &.s-accent-rounded {
+        .el-tabs__nav-wrap {
+          border-radius: $border-radius;
+          .el-tabs__item {
+            border-radius: $border-radius;
+          }
+        }
+      }
     }
   }
 }
@@ -96,6 +104,9 @@
     .el-tabs__nav-wrap {
       background-color: var(--s-color-base-background);
       height: 32px;
+      .el-tabs__nav {
+        display: flex;
+      }
       .el-tabs__nav-scroll {
         padding: 2px;
       }
@@ -119,6 +130,41 @@
         &:focus.is-focus {
           // TODO: make it more focusable
           box-shadow: $s-shadow-surface;
+        }
+      }
+    }
+  }
+  &.s-accent-rounded {
+    $height: 32px;
+    .el-tabs__header {
+      height: $height;
+      width: fit-content;
+      margin-bottom: 20px;
+    }
+    .el-tabs__nav-wrap {
+      background-color: var(--s-color-base-background);
+      height: $height;
+      .el-tabs__nav {
+        display: flex;
+      }
+      &::after,
+      .el-tabs__active-bar {
+        height: 0;
+      }
+      .el-tabs__item {
+        padding: 0 18px;
+        height: $height;
+        line-height: $height;
+        transition: 200ms;
+        &.is-active {
+          color: var(--s-color-base-on-accent);
+          background-color: var(--s-color-theme-accent);
+          i {
+            color: var(--s-color-base-on-accent);
+          }
+        }
+        i {
+          line-height: $height;
         }
       }
     }
