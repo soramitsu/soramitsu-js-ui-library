@@ -21,10 +21,13 @@
   .s-border-radius-mini & {
     border-radius: var(--s-border-radius-mini);
   }
+  .el-dialog__header .el-dialog__title {
+    @include font-weight(700, true);
+  }
   .el-dialog__title {
-    font-weight: bold;
     font-size: var(--s-heading5-font-size);
     color: var(--s-color-base-content-primary);
+    font-feature-settings: var(--s-font-feature-settings-heading);
   }
   > * {
     word-break: break-word;
