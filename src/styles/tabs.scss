@@ -132,7 +132,9 @@
   &.s-accent-rounded {
     $height: 32px;
     .el-tabs__header {
+      height: $height;
       width: fit-content;
+      margin-bottom: 20px;
     }
     .el-tabs__nav-wrap {
       background-color: var(--s-color-base-background);
@@ -152,6 +154,12 @@
         &.is-active {
           color: var(--s-color-base-on-accent);
           background-color: var(--s-color-theme-accent);
+          i {
+            color: var(--s-color-base-on-accent);
+          }
+        }
+        i {
+          line-height: $height;
         }
       }
     }
