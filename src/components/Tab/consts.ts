@@ -1,5 +1,6 @@
 export enum TabsType {
   ROUNDED = 'rounded',
+  ACCENT_ROUNDED = 'accent-rounded',
   CARD = 'card',
   BORDER_CARD = 'border-card'
 }
