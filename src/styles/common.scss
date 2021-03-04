@@ -5,6 +5,7 @@
 
 html {
   box-sizing: border-box;
+  font-feature-settings: var(--s-font-feature-settings-common);
 }
 
 *, *:before, *:after {
@@ -22,7 +23,8 @@ h1, h2, h3, h4 {
 }
 
 h5, h6 {
-  font-weight: bold;
+  font-weight: normal;
+  @include font-weight(700, true);
 }
 
 h1 {

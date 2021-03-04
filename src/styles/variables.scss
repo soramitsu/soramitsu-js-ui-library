@@ -76,6 +76,27 @@ $s-heading3-font-size: 24px !default;
 $s-heading4-font-size: 18px !default;
 $s-heading5-font-size: 16px !default;
 $s-heading6-font-size: 14px !default;
+// Font Line Height
+$s-line-height-base: 1.4;
+$s-line-height-mini: 1.2;
+$s-line-height-small: 1.3;
+$s-line-height-medium: 1.5;
+$s-line-height-big: 1.8;
+// Letter Spacing
+$s-letter-spacing-mini: -0.04em;
+$s-letter-spacing-small: -0.02em;
+$s-letter-spacing-medium: -0.01em;
+$s-letter-spacing-big: 0.01em;
+$s-letter-spacing-type: 0.06em;
+// Font Feature Settings
+$s-font-feature-settings-common: "tnum" on, "lnum" on, "case" on, "salt" on, "ss01" on;
+$s-font-feature-settings-heading: "tnum" on, "lnum" on, "salt" on, "case" on;
+$s-font-feature-settings-caps-heading: "tnum" on, "lnum" on, "case" on;
+$s-font-feature-settings-caps: "case" on;
+$s-font-feature-settings-singleline: "salt" on, "case" on;
+$s-font-feature-settings-card-title: "tnum" on, "lnum" on, "ss01" on;
+$s-font-feature-settings-input: "tnum" on, "lnum" on;
+$s-font-feature-settings-button: "tnum" on, "lnum" on, "salt" on;
 
 // Responsive
 $--sm: 640px !default;
@@ -151,6 +172,27 @@ $--breakpoints-spec: (
   --s-heading4-font-size: #{$s-heading4-font-size};
   --s-heading5-font-size: #{$s-heading5-font-size};
   --s-heading6-font-size: #{$s-heading6-font-size};
+  // Font Line Height
+  --s-line-height-base: #{$s-line-height-base};
+  --s-line-height-mini: #{$s-line-height-mini};
+  --s-line-height-small: #{$s-line-height-small};
+  --s-line-height-medium: #{$s-line-height-medium};
+  --s-line-height-big: #{$s-line-height-big};
+  // Letter Spacing
+  --s-letter-spacing-mini: #{$s-letter-spacing-mini};
+  --s-letter-spacing-small: #{$s-letter-spacing-small};
+  --s-letter-spacing-medium: #{$s-letter-spacing-medium};
+  --s-letter-spacing-big: #{$s-letter-spacing-big};
+  --s-letter-spacing-type: #{$s-letter-spacing-type};
+  // Font Feature Settings
+  --s-font-feature-settings-common: #{$s-font-feature-settings-common};
+  --s-font-feature-settings-heading: #{$s-font-feature-settings-heading};
+  --s-font-feature-settings-caps-heading: #{$s-font-feature-settings-caps-heading};
+  --s-font-feature-settings-caps: #{$s-font-feature-settings-caps};
+  --s-font-feature-settings-singleline: #{$s-font-feature-settings-singleline};
+  --s-font-feature-settings-card-title: #{$s-font-feature-settings-card-title};
+  --s-font-feature-settings-input: #{$s-font-feature-settings-input};
+  --s-font-feature-settings-button: #{$s-font-feature-settings-button};
   // Size
   --s-size-mini: #{$s-size-mini};
   --s-size-small: #{$s-size-small};
@@ -170,4 +212,25 @@ $--breakpoints-spec: (
   --s-shadow-dropdown: #{$s-shadow-dropdown};
   --s-shadow-mobile-tap-bar: #{$s-shadow-mobile-tap-bar};
   --s-shadow-mobile-side-menu: #{$s-shadow-mobile-side-menu};
+}
+
+// Mixin for font-weight (temporarily solution)
+@mixin font-weight($fontWeight: 400, $important: false) {
+  @if $fontWeight == 400 and $important == false {
+    font-family: "Sora", sans-serif;
+  } @else if $fontWeight == 400 and $important == true {
+    font-family: "Sora", sans-serif !important;
+  } @else if $fontWeight == 500 and $important == false {
+    font-family: "SoraSB", sans-serif;
+  } @else if $fontWeight == 500 and $important == true {
+    font-family: "SoraSB", sans-serif !important;
+  } @else if $fontWeight == 600 and $important == false {
+    font-family: "SoraB", sans-serif;
+  } @else if $fontWeight == 600 and $important == true {
+    font-family: "SoraB", sans-serif !important;
+  } @else if $fontWeight == 700 and $important == false {
+    font-family: "SoraEB", sans-serif;
+  } @else if $fontWeight == 700 and $important == true {
+    font-family: "SoraEB", sans-serif !important;
+  }
 }
