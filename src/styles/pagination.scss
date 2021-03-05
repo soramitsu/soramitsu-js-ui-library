@@ -53,7 +53,7 @@
       .el-select__caret,
       .el-input__inner {
         color: var(--s-color-base-content-primary);
-        font-weight: bold;
+        @include font-weight(700);
       }
       .el-select__caret {
         margin-right: 6px;
@@ -86,10 +86,11 @@
   .per-page-text,
   .el-pagination__jump {
     color: var(--s-color-base-content-tertiary);
-    font-weight: normal;
+    @include font-weight(400);
   }
   .el-pager li {
     color: var(--s-color-base-content-primary);
+    @include font-weight(700);
     &.btn-quicknext,
     &.btn-quickprev {
       color: var(--s-color-base-content-primary);
@@ -139,6 +140,11 @@
     }
   }
 }
-.el-select-dropdown__item.selected {
-  color: var(--s-color-theme-accent);
+.el-select-dropdown {
+  &__item.selected {
+    color: var(--s-color-theme-accent);
+  }
+  .el-select-dropdown__item.selected {
+    @include font-weight(700, true);
+  }
 }

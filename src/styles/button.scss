@@ -153,6 +153,10 @@ $s-color-button-tertiary-background-focused: var(--s-color-base-background) !def
       @include disabled;
     }
   }
+  span {
+    font-feature-settings: var(--s-font-feature-settings-heading);
+    @include font-weight(700, true);
+  }
 }
 button {
   > span > i {

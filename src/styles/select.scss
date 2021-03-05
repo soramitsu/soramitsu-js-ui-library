@@ -174,13 +174,13 @@ $select-prefix-height: $s-size-mini;
           }
         }
         .el-input__inner {
-          font-weight: bold;
+          @include font-weight(700);
           &:hover {
             border-color: var(--s-color-base-border-primary);
           }
           &::placeholder {
             color: var(--s-color-base-content-tertiary);
-            font-weight: bold;
+            @include font-weight(700);
           }
           &:focus {
             border-color: var(--s-color-base-border-primary);
@@ -253,12 +253,12 @@ $select-prefix-height: $s-size-mini;
     border: 1px solid var(--s-color-base-border-primary);
     background-color: var(--s-color-utility-surface);
     font-size: var(--s-icon-font-size-mini);
-    font-weight: bold;
+    @include font-weight(700);
     padding: 1px;
     border-radius: var(--s-border-radius-mini);
   }
   &.selected {
-    font-weight: normal;
+    @include font-weight(400);
     &.hover {
       background-color: transparent;
     }

@@ -44,8 +44,12 @@
   @include tabs-border-radius("medium", var(--s-border-radius-medium));
   @include tabs-border-radius("small", var(--s-border-radius-small));
   @include tabs-border-radius("mini", var(--s-border-radius-mini));
+  .el-tabs__header {
+    .el-tabs__item {
+      @include font-weight(600, true);
+    }
+  }
   .el-tabs__item {
-    font-weight: bold;
     .el-icon-close {
       &:before {
         font-weight: bold;
