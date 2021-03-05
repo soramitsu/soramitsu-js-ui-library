@@ -86,11 +86,10 @@
   .per-page-text,
   .el-pagination__jump {
     color: var(--s-color-base-content-tertiary);
-    font-weight: normal;
+    @include font-weight(400);
   }
   .el-pager li {
     color: var(--s-color-base-content-primary);
-    font-weight: normal;
     @include font-weight(700);
     &.btn-quicknext,
     &.btn-quickprev {
@@ -146,7 +145,6 @@
     color: var(--s-color-theme-accent);
   }
   .el-select-dropdown__item.selected {
-    font-weight: normal;
     @include font-weight(700, true);
   }
 }

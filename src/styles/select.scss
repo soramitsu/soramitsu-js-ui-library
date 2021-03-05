@@ -258,7 +258,7 @@ $select-prefix-height: $s-size-mini;
     border-radius: var(--s-border-radius-mini);
   }
   &.selected {
-    font-weight: normal;
+    @include font-weight(400);
     &.hover {
       background-color: transparent;
     }

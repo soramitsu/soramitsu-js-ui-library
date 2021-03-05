@@ -1,12 +1,12 @@
 .el-breadcrumb__separator {
   color: var(--s-color-base-content-tertiary);
-  font-weight: normal;
+  @include font-weight(400);
 }
 .el-breadcrumb__inner {
   color: var(--s-color-base-content-tertiary);
   &.is-link {
     color: var(--s-color-base-content-tertiary);
-    font-weight: normal;
+    @include font-weight(400);
     &:hover {
       color: var(--s-color-theme-accent);
     }
