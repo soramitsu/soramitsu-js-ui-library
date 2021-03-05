@@ -15,12 +15,12 @@ html {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  @include font-weight(400);
+  font-family: $s-font-family-default;
   font-feature-settings: var(--s-font-feature-settings-heading);
 }
 
 h1, h2, h3, h4 {
-  font-family: $s-font-family-default;
+  @include font-weight(400);
 }
 
 h1, h2 {
