@@ -155,7 +155,6 @@ $s-color-button-tertiary-background-focused: var(--s-color-base-background) !def
   }
   span {
     font-feature-settings: var(--s-font-feature-settings-heading);
-    font-weight: normal;
     @include font-weight(700, true);
   }
 }

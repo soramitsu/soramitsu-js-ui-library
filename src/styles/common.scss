@@ -15,7 +15,7 @@ html {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: normal;
+  @include font-weight(400);
   font-feature-settings: var(--s-font-feature-settings-heading);
 }
 

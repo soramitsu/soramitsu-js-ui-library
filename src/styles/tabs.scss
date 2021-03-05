@@ -46,7 +46,6 @@
   @include tabs-border-radius("mini", var(--s-border-radius-mini));
   .el-tabs__header {
     .el-tabs__item {
-      font-weight: normal;
       @include font-weight(600, true);
     }
   }
