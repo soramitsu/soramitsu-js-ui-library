@@ -216,21 +216,9 @@ $--breakpoints-spec: (
 
 // Mixin for font-weight (temporarily solution)
 @mixin font-weight($fontWeight: 400, $important: false) {
-  @if $fontWeight == 400 and $important == false {
-    font-family: "Sora", sans-serif;
-  } @else if $fontWeight == 400 and $important == true {
-    font-family: "Sora", sans-serif !important;
-  } @else if $fontWeight == 500 and $important == false {
-    font-family: "SoraSB", sans-serif;
-  } @else if $fontWeight == 500 and $important == true {
-    font-family: "SoraSB", sans-serif !important;
-  } @else if $fontWeight == 600 and $important == false {
-    font-family: "SoraB", sans-serif;
-  } @else if $fontWeight == 600 and $important == true {
-    font-family: "SoraB", sans-serif !important;
-  } @else if $fontWeight == 700 and $important == false {
-    font-family: "SoraEB", sans-serif;
-  } @else if $fontWeight == 700 and $important == true {
-    font-family: "SoraEB", sans-serif !important;
+  @if $important == false {
+    font-weight: $fontWeight;
+  } @else {
+    font-weight: $fontWeight !important;
   }
 }

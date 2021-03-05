@@ -6,28 +6,9 @@
   font-display: block;
 }
 @font-face {
-  font-family: "SoraB";
-  src: url("~@/assets/fonts/Sora-Bold.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SoraEB";
-  src: url("~@/assets/fonts/Sora-ExtraBold.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SoraSB";
-  src: url("~@/assets/fonts/Sora-SemiBold.otf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
   font-family: "Sora";
-  src: url("~@/assets/fonts/Sora-Regular.otf");
-  font-weight: normal;
-  font-style: normal;
+  src: url("~@/assets/fonts/Sora-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 1 999;
 }
 @font-face {
   font-family: "JetBrainsMono";
