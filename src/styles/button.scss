@@ -39,6 +39,7 @@ $s-color-button-tertiary-background-focused: var(--s-color-base-background) !def
   }
 }
 .el-button {
+  font-weight: 700;
   &.s-primary {
     background-color: var(--s-color-theme-accent);
     border-color: var(--s-color-theme-accent);
