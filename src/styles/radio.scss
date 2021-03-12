@@ -23,6 +23,9 @@ $radio-button-border-color: var(--s-color-theme-accent);
 
 .el-radio {
   color: var(--s-color-base-content-primary);
+  &__label {
+    line-height: var(--s-line-height-big);
+  }
   &.s-big {
     @extend .s-big;
     line-height: $s-size-big;

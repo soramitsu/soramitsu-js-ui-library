@@ -55,6 +55,9 @@
   border-bottom: none;
 }
 .el-table__header {
+  thead th .cell {
+    @include font-weight(700, true);
+  }
   label.el-checkbox.is-disabled {
     cursor: not-allowed;
     pointer-events: none;
