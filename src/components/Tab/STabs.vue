@@ -38,7 +38,7 @@ export default class STabs extends Mixins(BorderRadiusMixin) {
    *
    * `"rounded"` works only when position is `"top"` or `"bottom"`
    */
-  @Prop({ type: String, default: '' }) readonly type!: string
+  @Prop({ type: String, default: '' }) readonly type!: TabsType
   /**
    * Will tabs be closable.
    *
@@ -88,10 +88,9 @@ export default class STabs extends Mixins(BorderRadiusMixin) {
   }
 
   get computedType (): string {
-    if (!(Object.values(TabsType) as Array<string>).includes(this.type)) {
-      return ''
-    }
-    return this.type !== TabsType.ROUNDED ? this.type : ''
+    if (!(Object.values(TabsType) as Array<string>).includes(this.type)) return ''
+    if ([TabsType.ROUNDED, TabsType.ACCENT_ROUNDED].includes(this.type)) return ''
+    return this.type
   }
 
   get computedClasses (): Array<string> {
@@ -99,6 +98,10 @@ export default class STabs extends Mixins(BorderRadiusMixin) {
     if (this.type === TabsType.ROUNDED &&
       ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
       cssClasses.push('s-rounded')
+    }
+    if (this.type === TabsType.ACCENT_ROUNDED &&
+      ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
+      cssClasses.push('s-accent-rounded')
     }
     if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)

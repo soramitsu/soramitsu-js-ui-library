@@ -134,7 +134,7 @@ $date-picker-padding: 8px;
       .el-input__inner,
       .el-range-input,
       .el-range-separator {
-        font-weight: bold;
+        @include font-weight(700, true);
       }
       &.el-input__inner,
       & .el-input__inner {
@@ -145,7 +145,7 @@ $date-picker-padding: 8px;
         &::placeholder,
         .el-range-input::placeholder {
           color: var(--s-color-base-content-tertiary);
-          font-weight: bold;
+          @include font-weight(700, true);
         }
       }
     }

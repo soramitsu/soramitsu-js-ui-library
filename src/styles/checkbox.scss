@@ -21,6 +21,9 @@
   @include checkbox-border-radius("medium", var(--s-border-radius-medium));
   @include checkbox-border-radius("small", var(--s-border-radius-small));
   @include checkbox-border-radius("mini", var(--s-border-radius-mini));
+  &__label {
+    line-height: var(--s-line-height-big);
+  }
   &.is-bordered {
     &,
     &.is-disabled,
