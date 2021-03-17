@@ -69,9 +69,9 @@ export default class SMenu extends Mixins(BorderRadiusMixin) {
   /**
    * Active hover color of menu in hex format.
    *
-   * By default it's set to `"#575451"`
+   * By default it's set to `"#4E4E4E"`
    */
-  @Prop({ default: '#575451', type: String }) readonly activeHoverColor!: string
+  @Prop({ default: '#4E4E4E', type: String }) readonly activeHoverColor!: string
   /**
    * Index of currently active menu
    */
