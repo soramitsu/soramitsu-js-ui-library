@@ -39,6 +39,14 @@ $s-color-button-tertiary-background-focused: var(--s-color-base-background) !def
   }
 }
 .el-button {
+  &.s-medium {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  &.s-small {
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
   &.s-primary {
     background-color: var(--s-color-theme-accent);
     border-color: var(--s-color-theme-accent);
@@ -119,18 +127,16 @@ $s-color-button-tertiary-background-focused: var(--s-color-base-background) !def
     }
     &.s-medium {
       width: $s-size-medium;
-      padding: 10px;
+      padding: 7px;
       i {
         font-size: var(--s-icon-font-size-small);
       }
     }
     &.s-small {
       width: $s-size-small;
-      padding: 9px;
+      padding: 3px;
       i {
         font-size: var(--s-icon-font-size-mini);
-        margin-left: -2px;
-        margin-top: -2px;
       }
     }
     color: var(--s-color-base-content-primary);
@@ -156,6 +162,11 @@ $s-color-button-tertiary-background-focused: var(--s-color-base-background) !def
   span {
     font-feature-settings: var(--s-font-feature-settings-heading);
     @include font-weight(700, true);
+  }
+  &:not(.s-action) > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 button {

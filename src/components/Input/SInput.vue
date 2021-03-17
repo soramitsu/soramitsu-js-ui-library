@@ -34,7 +34,7 @@
       <slot slot="suffix" name="suffix"></slot>
     </el-input>
     <template v-if="type === InputType.TEXT_FILE">
-      <i class="s-icon-file-upload"></i>
+      <s-icon name="file-file-upload-24" />
       <input :value="emptyValue" type="file" :accept="accept" @change="handleTextFileChange">
     </template>
   </div>
@@ -45,10 +45,13 @@ import { Component, Mixins, Prop, Ref, Inject } from 'vue-property-decorator'
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
+import { SIcon } from '../Icon'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { Autocomplete, InputSize, InputType } from './consts'
 
-@Component
+@Component({
+  components: { SIcon }
+})
 export default class SInput extends Mixins(BorderRadiusMixin) {
   readonly InputType = InputType
   readonly emptyValue = null

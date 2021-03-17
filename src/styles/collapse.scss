@@ -29,7 +29,7 @@
     }
     .el-icon-arrow-right {
       font-family: $s-font-family-icons;
-      @extend .s-icon-chevron-bottom;
+      @extend .s-icon-chevron-down-rounded-16;
       font-size: var(--s-icon-font-size-mini);
       padding: 8px;
       width: 32px;
