@@ -49,7 +49,7 @@ import { ElDropdown } from 'element-ui/types/dropdown'
 import SizeMixin from '../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { ButtonTypes, SButton } from '../Button'
-import { Icons, SIcon } from '../Icon'
+import { Icons24, SIcon } from '../Icon'
 import { STooltip } from '../Tooltip'
 import { DropdownType, DropdownPlacement, DropdownTrigger } from './consts'
 
@@ -73,7 +73,7 @@ export default class SDropdown extends Mixins(SizeMixin, BorderRadiusMixin) {
    *
    * By default, it's set to `"more-horizontal"`
    */
-  @Prop({ type: String, default: Icons.MoreHorizontal }) readonly icon!: string
+  @Prop({ type: String, default: Icons24.BasicMoreHorizontal }) readonly icon!: string
   /**
    * Button type of dropdown component. It can be used with `type="button"`.
    * Possible values: `"primary"`, `"secondary"`, `"tertiary"`.

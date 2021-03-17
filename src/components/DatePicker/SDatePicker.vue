@@ -31,7 +31,7 @@
     >
       <slot name="range-separator" slot="range-separator"></slot>
     </el-date-picker>
-    <i v-if="!isInputType" class="s-icon-chevron-bottom"></i>
+    <s-icon v-if="!isInputType" name="chevron-down-rounded-16" />
   </div>
 </template>
 
@@ -42,11 +42,14 @@ import { ElFormItem } from 'element-ui/types/form-item'
 
 // TODO: ask do we need size prop for the component?
 // Prev comment => TODO: ask design team
+import { SIcon } from '../Icon'
 import SizeMixin from '../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { PickerTypes, PickerAlignment, InputTypes } from './consts'
 
-@Component
+@Component({
+  components: { SIcon }
+})
 export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin) {
   /**
    * Value of date picker component. Can be used with `v-model`.

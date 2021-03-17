@@ -1,5 +1,5 @@
 import { select } from '@storybook/addon-knobs'
-import { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from '../../components'
+import { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu, SIcon } from '../../components'
 import { BorderRadius } from '../../types'
 
 export default {
@@ -9,7 +9,7 @@ export default {
 }
 
 export const basicMenu = () => ({
-  components: { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu },
+  components: { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu, SIcon },
   template: `<s-aside width="220px">
                <s-menu
                  default-active="1"
@@ -19,21 +19,21 @@ export const basicMenu = () => ({
                  @close="handleClose">
                  <s-menu-item-group>
                    <s-menu-item index="1">
-                     <i class="s-icon-globe"></i>
+                     <s-icon name="basic-globe-24" />
                      <span>Iroha networks</span>
                    </s-menu-item>
                    <s-menu-item index="2">
-                     <i class="s-icon-activity"></i>
+                     <s-icon name="basic-globe-24" />
                      <span>Monitoring</span>
                    </s-menu-item>
                    <s-menu-item index="3">
-                     <i class="s-icon-activity"></i>
+                     <s-icon name="basic-globe-24" />
                      <span>Logs</span>
                    </s-menu-item>
                  </s-menu-item-group>
                  <s-menu-item-group>
                    <s-menu-item index="4">
-                     <i class="s-icon-logout"></i>
+                     <s-icon name="basic-globe-24" />
                      <span>Log out</span>
                    </s-menu-item>
                  </s-menu-item-group>
@@ -58,7 +58,7 @@ export const basicMenu = () => ({
 })
 
 export const sideBar = () => ({
-  components: { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu },
+  components: { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu, SIcon },
   template: `<s-aside width="220px">
                <s-menu
                  default-active="2"
@@ -68,7 +68,7 @@ export const sideBar = () => ({
                  @close="handleClose">
                  <s-submenu index="1">
                    <template slot="title">
-                     <i class="s-icon-globe"></i>
+                     <s-icon name="basic-globe-24" />
                      <span>Navigator One</span>
                    </template>
                    <s-menu-item-group title="Group One">
@@ -85,15 +85,15 @@ export const sideBar = () => ({
                    </s-submenu>
                  </s-submenu>
                  <s-menu-item index="2">
-                   <i class="s-icon-activity"></i>
+                   <s-icon name="basic-globe-24" />
                    <span>Navigator Two</span>
                  </s-menu-item>
                  <s-menu-item index="3" disabled>
-                   <i class="s-icon-globe"></i>
+                   <s-icon name="basic-globe-24" />
                    <span>Navigator Three</span>
                  </s-menu-item>
                  <s-menu-item index="4">
-                   <i class="s-icon-activity"></i>
+                   <s-icon name="basic-globe-24" />
                    <span>Navigator Four</span>
                  </s-menu-item>
                </s-menu>

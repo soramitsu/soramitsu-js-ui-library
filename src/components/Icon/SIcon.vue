@@ -4,8 +4,9 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import last from 'lodash/fp/last'
 
-import { Icons } from './consts'
+import { Icons16, Icons24, StatusIcons } from './consts'
 
 @Component
 export default class SIcon extends Vue {
@@ -38,7 +39,10 @@ export default class SIcon extends Vue {
     if (this.name.startsWith('el-icon')) {
       return this.name
     }
-    if (!(Object.values(Icons) as Array<string>).includes(this.name)) {
+    const is16Size = (Object.values(Icons16) as Array<string>).includes(this.name)
+    const is24Size = (Object.values(Icons24) as Array<string>).includes(this.name)
+    const isStatusIcon = (Object.values(StatusIcons) as Array<string>).includes(this.name)
+    if (!(is16Size || is24Size || isStatusIcon)) {
       console.warn(`'${this.name}' was not found`)
       return ''
     }
@@ -49,6 +53,9 @@ export default class SIcon extends Vue {
     const styles = {} as any
     if (this.size) {
       styles.fontSize = !isNaN(+this.size) ? `${this.size}px` : this.size
+    } else if (this.name.includes('16') || this.name.includes('24')) {
+      const words = this.name.split('-')
+      styles.fontSize = `${last(words)}px`
     }
     if (!this.visible) {
       styles.color = 'transparent'
