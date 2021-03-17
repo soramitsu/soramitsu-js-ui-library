@@ -5,7 +5,9 @@
     cursor: pointer;
   }
   &:hover, &:focus {
-    border-color: transparent;
+    &:not(.is-never-shadow):not(.is-always-shadow) {
+      border-color: transparent;
+    }
   }
   .el-card__header {
     border-bottom-color: transparent;
