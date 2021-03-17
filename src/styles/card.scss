@@ -4,8 +4,11 @@
   &.s-clickable {
     cursor: pointer;
   }
+  &.is-always-shadow {
+    border-color: transparent;
+  }
   &:hover, &:focus {
-    &:not(.is-never-shadow):not(.is-always-shadow) {
+    &.is-hover-shadow {
       border-color: transparent;
     }
   }
