@@ -4,8 +4,13 @@
   &.s-clickable {
     cursor: pointer;
   }
-  &:hover, &:focus {
+  &.is-always-shadow {
     border-color: transparent;
+  }
+  &:hover, &:focus {
+    &.is-hover-shadow {
+      border-color: transparent;
+    }
   }
   .el-card__header {
     border-bottom-color: transparent;
