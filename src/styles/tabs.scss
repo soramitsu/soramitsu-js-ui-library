@@ -108,12 +108,12 @@
         height: 0;
       }
       .el-tabs__item {
-        padding: 0 32px;
+        padding: 0 28px;
         height: 28px;
         line-height: 28px;
         transition: 200ms;
         &:not(:last-child) {
-          margin-right: 2px;
+          margin-right: 8px;
         }
         &.is-active {
           color: var(--s-color-base-content-primary);
