@@ -13,7 +13,7 @@
   >
     <slot slot="label" name="label"></slot>
     <slot></slot>
-    <i v-if="willMessageBeShown && errorState" class="s-icon-error"></i>
+    <s-icon v-if="willMessageBeShown && errorState" name="status-error" />
   </el-form-item>
 </template>
 
@@ -21,12 +21,13 @@
 import { Vue, Component, Prop, Ref, Inject } from 'vue-property-decorator'
 import { ElFormItem } from 'element-ui/types/form-item'
 import { ElForm } from 'element-ui/types/form'
-import cloneDeep from 'lodash/cloneDeep'
 import isArray from 'lodash/isArray'
 
-import { LabelPosition } from './consts'
+import { SIcon } from '../Icon'
 
-@Component
+@Component({
+  components: { SIcon }
+})
 export default class SFormItem extends Vue {
   /**
    * A key of `model` - form property.

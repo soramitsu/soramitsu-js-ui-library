@@ -126,7 +126,7 @@
   top: 0;
   > .el-icon.el-icon-arrow-right {
     font-family: $s-font-family-icons;
-    @extend .s-icon-chevron-bottom;
+    @extend .s-icon-chevron-down-rounded-16;
   }
   &--expanded {
     transform: rotate(180deg);

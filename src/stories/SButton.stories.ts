@@ -17,7 +17,7 @@ export const configurable = () => ({
                :disabled="disabled"
                :loading="loading"
                :tooltip="tooltip"
-               :icon="type === 'action' ? 'back' : ''"
+               :icon="type === 'action' ? 'arrow-left-16' : ''"
                :type="type"
                :size="size"
                :border-radius="borderRadius"
@@ -62,7 +62,7 @@ export const differentTypeButtonsData = Object.values(ButtonTypes).map(type => {
   const label = type[0].toUpperCase() + type.slice(1)
   const data = { type } as any
   if (type === ButtonTypes.ACTION) {
-    data.icon = 'back'
+    data.icon = 'refresh-16'
     data.tooltip = label
   } else {
     data.label = label
@@ -171,22 +171,22 @@ export const loading = () => ({
   }
 })
 
-export const withIcon = () => ({
+const withIcon = (icon: string) => ({
   components: { SButton, SRow, SCol, SMain },
   template: `<s-main>
                <s-row :gutter="20">
                  <s-col :span="6" v-for="item in differentTypesData" :key="item.type" style="padding-bottom: 20px;">
-                   <s-button size="big" icon="refresh" :icon-position="iconPosition" :type="item.type" :tooltip="item.tooltip">
+                   <s-button size="big" :icon="icon" :icon-position="iconPosition" :type="item.type" :tooltip="item.tooltip">
                      {{ item.label }}
                    </s-button>
                  </s-col>
                  <s-col :span="6" v-for="item in differentTypesData" :key="item.type + 'Disabled'" style="padding-bottom: 20px;">
-                   <s-button size="big" icon="refresh" :icon-position="iconPosition" :type="item.type" :tooltip="item.tooltip" disabled>
+                   <s-button size="big" :icon="icon" :icon-position="iconPosition" :type="item.type" :tooltip="item.tooltip" disabled>
                      {{ item.label }}
                    </s-button>
                  </s-col>
                  <s-col :span="4" v-for="item in differentSizeData" :key="item.size">
-                   <s-button :size="item.size" icon="refresh" :icon-position="iconPosition">
+                   <s-button :size="item.size" :icon="icon" :icon-position="iconPosition">
                      {{ item.label }}
                    </s-button>
                  </s-col>
@@ -202,8 +202,15 @@ export const withIcon = () => ({
     iconPosition: {
       default: select('IconPosition', Object.values(ButtonIconPosition), ButtonIconPosition.LEFT)
     }
-  }
+  },
+  data: () => ({
+    icon
+  })
 })
+
+export const withIcon16 = withIcon('refresh-16')
+
+export const withIcon24 = withIcon('arrows-swap-24')
 
 export const buttonGroup = () => ({
   components: { SButton, SButtonGroup, SRow },
