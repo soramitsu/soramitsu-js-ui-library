@@ -42,7 +42,7 @@ $select-prefix-height: $s-size-mini;
       font-family: $icons-font;
       font-size: var(--s-icon-font-size-mini);
       &:before {
-        content: $s-icon-chevron-top;
+        content: $s-icon-chevron-top-16;
       }
     }
     .el-input {

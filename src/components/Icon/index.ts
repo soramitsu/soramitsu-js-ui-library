@@ -1,4 +1,4 @@
 import SIcon from './SIcon.vue'
-import { Icons } from './consts'
+import { Icons16, Icons24 } from './consts'
 
-export { SIcon, Icons }
+export { SIcon, Icons16, Icons24 }

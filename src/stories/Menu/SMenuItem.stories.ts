@@ -1,4 +1,4 @@
-import { SMenu, SMenuItem } from '../../components'
+import { SMenu, SMenuItem, SIcon } from '../../components'
 
 export default {
   component: SMenuItem,
@@ -6,10 +6,10 @@ export default {
 }
 
 export const defaultUsage = () => ({
-  components: { SMenu, SMenuItem },
+  components: { SMenu, SMenuItem, SIcon },
   template: `<s-menu>
                <s-menu-item index="1">
-                 <i class="s-icon-globe"></i>
+                 <s-icon name="basic-globe-24" />
                  <span>Menu Item</span>
                </s-menu-item>
              </s-menu>`
