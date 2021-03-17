@@ -35,7 +35,7 @@ export default class SCard extends Mixins(BorderRadiusMixin) {
    *
    * By default, it's set to `"hover"`
    */
-  @Prop({ default: CardShadow.HOVER, type: String }) readonly shadow!: string
+  @Prop({ default: CardShadow.NEVER, type: String }) readonly shadow!: string
   /**
    * Clickable property of the Card component which means that the user can click on the card
    *
