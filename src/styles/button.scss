@@ -166,6 +166,7 @@ $s-color-button-tertiary-background-focused: var(--s-color-base-background) !def
   &:not(.s-action) > span {
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 }
 button {
