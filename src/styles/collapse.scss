@@ -48,6 +48,9 @@
   &content {
     color: var(--s-color-base-content-primary);
   }
+  &arrow {
+    margin: 0 0 0 auto
+  }
 }
 .el-collapse-item.is-disabled .el-collapse-item__header {
   color: var(--s-color-base-content-quaternary);
