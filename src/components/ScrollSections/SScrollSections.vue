@@ -87,20 +87,17 @@ export default class SScrollSections extends Vue {
 
   menuItems: Vue[] = []
   activeSection = ''
+  isComponentDestroyed = false
 
   mounted (): void {
-    this.$nextTick(() => {
-      if (this.$children.length === 0) {
-        return
+    const setState = () => {
+      this.setState()
+      if (!this.isComponentDestroyed) {
+        window.requestAnimationFrame(setState)
       }
-      let children = this.$children
-      while (!children.every((item: any) => item.section)) {
-        children = children[0].$children
-      }
-      this.menuItems = children
-      this.scrollableParent.addEventListener('scroll', this.handleScroll)
-      this.handleInitialState()
-    })
+    }
+    setState()
+    this.scrollableParent.addEventListener('scroll', this.handleScroll)
   }
 
   destroyed (): void {
@@ -138,7 +135,29 @@ export default class SScrollSections extends Vue {
     return this.parent ? this.$parent.$el : window
   }
 
-  private handleInitialState (): void {
+  private setState (): void {
+    if (this.$children.length === 0) {
+      return
+    }
+    function findScrollSectionItems (children: Vue[]) {
+      return children.map((component: Vue) => {
+        if (component && component.$options && (component.$options as any)._componentTag === 's-scroll-section-item') {
+          return [component]
+        } else if (component && component.$children && component.$children.length) {
+          return findScrollSectionItems(component.$children)
+        }
+        return null
+      }).filter(component => component !== null).flat()
+    }
+    const menuItems = findScrollSectionItems(this.$children)
+    const isChanged = menuItems.length !== this.menuItems.length || menuItems.some((item: Vue, index: number) => item !== this.menuItems[index])
+    if (isChanged) {
+      this.menuItems = menuItems
+      this.handleState()
+    }
+  }
+
+  private handleState (): void {
     if (this.router && this.router.currentRoute.hash) {
       this.menuItems.forEach((sectionComponent: any) => {
         if (this.router.currentRoute.hash === `#${sectionComponent.section}`) {

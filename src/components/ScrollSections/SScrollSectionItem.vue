@@ -1,7 +1,7 @@
 <template>
   <section :id="section" class="s-scroll-section-item">
-    <span v-if="title" class="title">{{ title }}</span>
-    <slot v-if="this.$slots.title && !title" name="title"></slot>
+    <span v-if="title && !this.$slots.title" class="title">{{ title }}</span>
+    <slot v-if="this.$slots.title" name="title"></slot>
     <slot></slot>
     <s-divider v-if="withDivider" type="primary" style="margin: 20px 0 0 0;"></s-divider>
   </section>
