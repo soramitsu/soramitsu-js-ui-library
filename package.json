@@ -3,7 +3,7 @@
   "version": "0.8.3",
   "private": false,
   "publishConfig": {
-    "registry": "https://nexus.iroha.tech/repository/npm-soramitsu-private/"
+    "registry": "https://nexus.iroha.tech/repository/npm-soramitsu/"
   },
   "author": "Stefan Popov <popov@soramitsu.co.jp>",
   "main": "./lib/soramitsu-js-ui.umd.js",
