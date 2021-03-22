@@ -3,6 +3,7 @@
   @include font-weight(400);
 }
 .el-breadcrumb__inner {
+  font-size: var(--s-icon-font-size-mini);
   color: var(--s-color-base-content-tertiary);
   &.is-link {
     color: var(--s-color-base-content-tertiary);
