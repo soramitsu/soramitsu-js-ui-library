@@ -3,8 +3,15 @@
   "version": "0.8.3",
   "private": false,
   "publishConfig": {
-    "registry": "https://nexus.iroha.tech/repository/npm-soramitsu-private/"
+    "registry": "https://nexus.iroha.tech/repository/npm-soramitsu/"
   },
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
   "author": "Stefan Popov <popov@soramitsu.co.jp>",
   "main": "./lib/soramitsu-js-ui.umd.js",
   "module": "./lib/soramitsu-js-ui.esm.js",
