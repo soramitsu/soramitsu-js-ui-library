@@ -99,9 +99,9 @@ export default class SDialog extends Mixins(BorderRadiusMixin) {
   /**
    * Will close button be shown.
    *
-   * `true` by default
+   * `false` by default
    */
-  @Prop({ default: true, type: Boolean }) readonly showClose!: boolean
+  @Prop({ default: false, type: Boolean }) readonly showClose!: boolean
   /**
    * Can the dialog component be closed by clicking on the background mask.
    *
