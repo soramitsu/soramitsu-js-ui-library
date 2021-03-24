@@ -3,7 +3,6 @@
     v-float
     :placeholder="placeholder"
     :value="value"
-    :maxlength="maxlength"
     v-bind="$attrs"
     v-on="{
       ...$listeners,
@@ -25,6 +24,8 @@ const isNumberLikeValue = (value: any): boolean => {
   return Number.isFinite(Number(value))
 }
 
+const decimalsValidator = x => x === undefined || x >= 0
+
 @Component({
   components: {
     SInput
@@ -35,20 +36,16 @@ const isNumberLikeValue = (value: any): boolean => {
 })
 export default class SFloatInput extends Vue {
   @Prop({ type: String, default: DEFAULT_VALUE }) readonly value!: string
-  @Prop({ default: '0.0', type: String }) readonly placeholder!: string
-  @Prop({
-    type: Number,
-    default: undefined,
-    validator: x => x === undefined || x >= 0
-  }) readonly decimals!: number
-
-  get maxlength (): any {
-    return this.valueMaxLength(this.value, this.decimals)
-  }
+  @Prop({ type: String, default: '0.0' }) readonly placeholder!: string
+  @Prop({ type: Number, default: undefined, validator: decimalsValidator }) readonly decimals!: number
+  @Prop({ type: [String, Number], default: undefined, validator: isNumberLikeValue }) readonly max!: string | number
 
   handleInput (value: string): void {
-    const formatted = this.formatNumberField(value, this.decimals)
-    const newValue = isNumberLikeValue(formatted) ? formatted : DEFAULT_VALUE
+    const newValue = [
+      (v) => this.formatNumberField(v, this.decimals),
+      (v) => isNumberLikeValue(v) ? v : DEFAULT_VALUE,
+      (v) => this.checkValueForExtremum(v)
+    ].reduce((buffer, rule) => rule(buffer), value)
 
     this.onInput(newValue)
   }
@@ -110,6 +107,13 @@ export default class SFloatInput extends Vue {
     const fpIndex = value.indexOf('.')
 
     return fpIndex !== -1 ? fpIndex + 1 + decimals : undefined
+  }
+
+  private checkValueForExtremum (value: string): string {
+    if (!value) return value
+    if (this.max && (+value > +this.max)) return String(this.max)
+
+    return value
   }
 }
 </script>

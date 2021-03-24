@@ -1,4 +1,4 @@
-import { number, withKnobs } from '@storybook/addon-knobs'
+import { number, text, withKnobs } from '@storybook/addon-knobs'
 
 import { SFloatInput, SRow } from '../components'
 
@@ -14,6 +14,7 @@ export const configurable = () => ({
                <s-float-input
                  v-model="model"
                  :decimals="decimals"
+                 :max="max"
                />
              </s-row>`,
   data: () => ({
@@ -22,6 +23,9 @@ export const configurable = () => ({
   props: {
     decimals: {
       default: number('Decimals', 18)
+    },
+    max: {
+      default: text('Max', '10000')
     }
   }
 })
