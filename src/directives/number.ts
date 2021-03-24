@@ -2,6 +2,8 @@ import { DirectiveOptions } from 'vue'
 
 import { KeyValues } from '../utils/KeyValues'
 
+const textSelected = (e: any) => e.target.selectionStart !== e.target.selectionEnd
+
 const onDigitKeyPress = (e: any) => {
   if (!KeyValues.isDigit(e.key)) {
     e.preventDefault()
@@ -11,7 +13,9 @@ const onDigitKeyPress = (e: any) => {
 }
 
 const onNumberKeyPress = (e: any) => {
-  if (!KeyValues.isNumber(e.key) || (!KeyValues.isDigit(e.key) && e.target.value.includes('.'))) {
+  if (
+    !KeyValues.isNumber(e.key) ||
+    (!KeyValues.isDigit(e.key) && e.target.value.includes('.') && !textSelected(e))) {
     e.preventDefault()
   } else {
     return true

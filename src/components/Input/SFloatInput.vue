@@ -21,6 +21,7 @@ import { Float } from '../../directives'
 const DEFAULT_VALUE = ''
 
 const isNumberLikeValue = (value: any): boolean => {
+  console.log(value)
   return Number.isFinite(Number(value))
 }
 
@@ -42,7 +43,8 @@ export default class SFloatInput extends Vue {
 
   handleInput (value: string): void {
     const newValue = [
-      (v) => this.formatNumberField(v, this.decimals),
+      (v) => this.checkValueLeadingPoint(v),
+      (v) => this.checkValueDecimals(v, this.decimals),
       (v) => isNumberLikeValue(v) ? v : DEFAULT_VALUE,
       (v) => this.checkValueForExtremum(v)
     ].reduce((buffer, rule) => rule(buffer), value)
@@ -83,30 +85,34 @@ export default class SFloatInput extends Vue {
     return value
   }
 
-  private formatNumberField (value: string, decimals: number): string {
-    if (!['string', 'number'].includes(typeof value)) return value
-
-    let formatted = String(value).replace(/[^\d.]/g, '')
-
-    if (formatted.indexOf('.') === 0) {
-      formatted = '0' + formatted
-    }
-
-    const lengthLimit = this.valueMaxLength(formatted, decimals)
-
-    if (lengthLimit && formatted.length > lengthLimit) {
-      formatted = formatted.slice(0, lengthLimit)
-    }
-
-    return formatted
-  }
-
   private valueMaxLength (value: string, decimals: number) {
     if (value.length === 0 || decimals === undefined) return undefined
 
     const fpIndex = value.indexOf('.')
 
     return fpIndex !== -1 ? fpIndex + 1 + decimals : undefined
+  }
+
+  private checkValueLeadingPoint (value: string): string {
+    if (!['string', 'number'].includes(typeof value)) return value
+
+    const formatted = String(value).replace(/[^\d.]/g, '')
+
+    if (formatted.indexOf('.') === 0) {
+      return '0' + formatted
+    }
+
+    return formatted
+  }
+
+  private checkValueDecimals (value: string, decimals: number) {
+    const lengthLimit = this.valueMaxLength(value, decimals)
+
+    if (lengthLimit && value.length > lengthLimit) {
+      return value.slice(0, lengthLimit)
+    }
+
+    return value
   }
 
   private checkValueForExtremum (value: string): string {
