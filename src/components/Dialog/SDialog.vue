@@ -22,7 +22,9 @@
     @closed="handleAfterClosed"
   >
     <slot slot="title" name="title"></slot>
-    <slot></slot>
+    <div :key="contentKey">
+      <slot></slot>
+    </div>
     <slot slot="footer" name="footer"></slot>
   </el-dialog>
 </template>
@@ -132,6 +134,12 @@ export default class SDialog extends Mixins(BorderRadiusMixin) {
    * `(done: boolean) => {}`
    */
   @Prop({ type: Function }) readonly beforeClose!: (done: boolean) => {}
+  /**
+   * Key for dialog content.
+   * If you need force rerender of table content (for instance, columns were changed)
+   * or something else in the dialog, you should set some condition value here.
+   */
+  @Prop({ default: '', type: [String, Number] }) readonly contentKey!: string | number
 
   @Ref('dialog') dialog!: any
 
