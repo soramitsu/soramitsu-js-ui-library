@@ -22,7 +22,7 @@
     @closed="handleAfterClosed"
   >
     <slot slot="title" name="title"></slot>
-    <slot></slot>
+    <slot :key="contentKey"></slot>
     <slot slot="footer" name="footer"></slot>
   </el-dialog>
 </template>
@@ -132,6 +132,12 @@ export default class SDialog extends Mixins(BorderRadiusMixin) {
    * `(done: boolean) => {}`
    */
   @Prop({ type: Function }) readonly beforeClose!: (done: boolean) => {}
+  /**
+   * Key for dialog content.
+   *
+   * `` by default
+   */
+  @Prop({ default: '', type: String || Number }) readonly contentKey!: string | number
 
   @Ref('dialog') dialog!: any
 
