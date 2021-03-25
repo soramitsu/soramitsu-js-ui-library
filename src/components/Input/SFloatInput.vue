@@ -26,6 +26,19 @@ const isNumberLikeValue = (value: any): boolean => {
 
 const decimalsValidator = x => x === undefined || x >= 0
 
+const getNumberParts = (a: string | number): Array<number> => {
+  const [int, dec] = String(a).split('.')
+
+  return [int, dec].map(p => isNumberLikeValue(p) ? +p : 0)
+}
+
+const isGreater = (a: string | number, b: string | number): boolean => {
+  const [aInt, aDec] = getNumberParts(a)
+  const [bInt, bDec] = getNumberParts(b)
+
+  return aInt > bInt || (aInt === bInt && aDec > bDec)
+}
+
 @Component({
   components: {
     SInput
@@ -42,7 +55,8 @@ export default class SFloatInput extends Vue {
 
   handleInput (value: string): void {
     const newValue = [
-      (v) => this.formatNumberField(v, this.decimals),
+      (v) => this.checkValueLeadingPoint(v),
+      (v) => this.checkValueDecimals(v, this.decimals),
       (v) => isNumberLikeValue(v) ? v : DEFAULT_VALUE,
       (v) => this.checkValueForExtremum(v)
     ].reduce((buffer, rule) => rule(buffer), value)
@@ -71,34 +85,12 @@ export default class SFloatInput extends Vue {
     if (value.indexOf('0') === 0 && value.indexOf('.') !== 1) {
       value = value.replace(/^0+/, '')
     }
-    // add leading zero before floating point
-    if (value.indexOf('.') === 0) {
-      value = '0' + value
-    }
     // Trim dot in the end
     if (value.indexOf('.') === value.length - 1) {
       value = value.slice(0, -1)
     }
 
     return value
-  }
-
-  private formatNumberField (value: string, decimals: number): string {
-    if (!['string', 'number'].includes(typeof value)) return value
-
-    let formatted = String(value).replace(/[^\d.]/g, '')
-
-    if (formatted.indexOf('.') === 0) {
-      formatted = '0' + formatted
-    }
-
-    const lengthLimit = this.valueMaxLength(formatted, decimals)
-
-    if (lengthLimit && formatted.length > lengthLimit) {
-      formatted = formatted.slice(0, lengthLimit)
-    }
-
-    return formatted
   }
 
   private valueMaxLength (value: string, decimals: number) {
@@ -109,9 +101,31 @@ export default class SFloatInput extends Vue {
     return fpIndex !== -1 ? fpIndex + 1 + decimals : undefined
   }
 
+  private checkValueLeadingPoint (value: string): string {
+    if (!['string', 'number'].includes(typeof value)) return value
+
+    const formatted = String(value).replace(/[^\d.]/g, '')
+
+    if (formatted.indexOf('.') === 0) {
+      return '0' + formatted
+    }
+
+    return formatted
+  }
+
+  private checkValueDecimals (value: string, decimals: number) {
+    const lengthLimit = this.valueMaxLength(value, decimals)
+
+    if (lengthLimit && value.length > lengthLimit) {
+      return value.slice(0, lengthLimit)
+    }
+
+    return value
+  }
+
   private checkValueForExtremum (value: string): string {
     if (!value) return value
-    if (this.max && (+value > +this.max)) return String(this.max)
+    if (isNumberLikeValue(this.max) && isGreater(value, this.max)) return String(this.max)
 
     return value
   }
