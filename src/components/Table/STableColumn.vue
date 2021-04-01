@@ -192,9 +192,9 @@ export default class STableColumn extends Vue {
     const size = (this.sTable || {}).size
     if (!this.width && this.type === 'selection' && size) {
       return !tableBorder ? ({
-        [Size.SMALL]: '30',
-        [Size.MEDIUM]: '32',
-        [Size.BIG]: '36'
+        [Size.SMALL]: '46',
+        [Size.MEDIUM]: '48',
+        [Size.BIG]: '52'
       }[size]) : ({
         [Size.SMALL]: '42',
         [Size.MEDIUM]: '44',

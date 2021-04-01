@@ -274,7 +274,9 @@ export default class STable extends Mixins(SizeMixin) {
   }
 
   handleRowClick (row: any, column: ElTableColumn, event: MouseEvent): void {
-    this.$emit('row-click', row, column, event)
+    if (column.type !== 'selection') {
+      this.$emit('row-click', row, column, event)
+    }
   }
 
   handleRowContextMenu (row: any, column: ElTableColumn, event: MouseEvent): void {
