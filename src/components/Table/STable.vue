@@ -117,7 +117,7 @@ export default class STable extends Mixins(SizeMixin) {
    */
   @Prop({ default: false, type: Boolean }) readonly highlightCurrentRow!: boolean
   /**
-   * A key of the current row. Can be `string` or `number`
+   * A key of the row. Can be 'Function(row)', `string` or `number`
    */
   @Prop({ type: [Function, String, Number] }) readonly rowKey!: ((row: any) => string | number) | string | number
   /**
