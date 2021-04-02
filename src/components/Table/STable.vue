@@ -19,7 +19,7 @@
     :header-row-style="headerRowStyle"
     :header-cell-class-name="headerCellClassName"
     :header-cell-style="headerCellStyle"
-    :row-key="rowRey"
+    :row-key="rowKey"
     :empty-text="emptyText"
     :default-expand-all="defaultExpandAll"
     :expand-row-keys="expandRowKeys"
@@ -116,6 +116,10 @@ export default class STable extends Mixins(SizeMixin) {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly highlightCurrentRow!: boolean
+  /**
+   * A key of the current row. Can be `string` or `number`
+   */
+  @Prop({ type: [Function, String, Number] }) readonly rowKey!: ((row: any) => string | number) | string | number
   /**
    * A key of the current row. Can be `string` or `number`
    */
