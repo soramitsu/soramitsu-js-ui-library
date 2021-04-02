@@ -43,6 +43,7 @@ export const configurable = () => ({
                :border="border"
                :show-header="showHeader"
                :highlight-current-row="highlightCurrentRow"
+               @row-click="alert('click')"
              >
                <s-table-column type="selection"></s-table-column>
                <s-table-column prop="date" label="Date" width="180"></s-table-column>
@@ -76,6 +77,11 @@ export const configurable = () => ({
     },
     highlightCurrentRow: {
       default: boolean('Highlight current row', false)
+    }
+  },
+  methods: {
+    alert (message: string) {
+      alert(message)
     }
   }
 })
