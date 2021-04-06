@@ -182,6 +182,9 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
     if (this.type === InputType.TEXT_FILE) {
       cssClasses.push('s-text-file')
     }
+    if (this.type === InputType.TEXTAREA) {
+      cssClasses.push('s-textarea')
+    }
     if (this.autofill) {
       cssClasses.push('s-autofill')
     }
