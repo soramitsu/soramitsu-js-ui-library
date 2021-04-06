@@ -112,7 +112,7 @@
       border-color: var(--s-color-base-disabled);
     }
   }
-  &.s-autofill {
+  &:not(.s-textarea) {
     .s-placeholder {
       background-color: transparent !important;
     }
