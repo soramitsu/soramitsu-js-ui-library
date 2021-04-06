@@ -6,7 +6,7 @@
     <v-jsoneditor
       ref="jsoneditor"
       v-model="model"
-      :options="options"
+      :options="computedOptions"
       :plus="false"
       :height="height"
       @error="handleError"
@@ -32,6 +32,10 @@ export default class SJsonInput extends Vue {
    */
   @Prop({ type: String, default: '' }) readonly height!: string
   /**
+   * Options for v-jsoneditor.
+   */
+  @Prop({ type: Object, default: () => {} }) readonly options!: object
+  /**
    * Disabled state.
    *
    * `false` by default
@@ -51,7 +55,7 @@ export default class SJsonInput extends Vue {
   @Ref('jsoneditor') jsoneditor!: any
 
   model = this.value
-  options = {
+  defultOptions = {
     // https://github.com/josdejong/jsoneditor/blob/master/docs/api.md#configuration-options
     mode: 'code',
     mainMenuBar: false,
@@ -61,6 +65,13 @@ export default class SJsonInput extends Vue {
       getOptions: () => {
         return isEmpty(this.dictionary) ? null : this.dictionary
       }
+    }
+  }
+
+  get computedOptions () {
+    return {
+      ...this.defultOptions,
+      ...this.options
     }
   }
 
