@@ -5,7 +5,7 @@ $font-size-layout: 18px;
   height: 100%;
 }
 .s-header {
-  padding: 12px;
+  padding: 8px;
   box-shadow: $box-shadow-layout;
   font-size: $font-size-layout;
   z-index: 1;
@@ -23,7 +23,7 @@ $font-size-layout: 18px;
   box-sizing: border-box;
   @include utils-clearfix;
 }
-.row-{
+.row- {
   &flex {
     display: flex;
     &:before,
