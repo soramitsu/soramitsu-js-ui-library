@@ -38,11 +38,19 @@ $select-prefix-height: $s-size-mini;
   }
   .el-select {
     width: 100%;
+    .el-input__suffix {
+      right: 16px;
+    }
     i.el-icon-arrow-up {
+      display: flex;
+      align-items: center;
+      width: var(--s-icon-font-size-big);
       font-family: $icons-font;
-      font-size: var(--s-icon-font-size-mini);
+      font-size: var(--s-icon-font-size-big);
       &:before {
-        content: $s-icon-chevron-top-16;
+        content: $s-icon-arrows-chevron-top-rounded-24;
+        margin-bottom: 2px;
+        color: var(--s-color-base-content-primary);
       }
     }
     .el-input {
