@@ -30,7 +30,7 @@ import { SRow } from './Layout/Row'
 import { SScrollSectionItem, SScrollSections } from './ScrollSections'
 import { SSelect, SOption, SOptionGroup } from './Select'
 import { STab, STabs } from './Tab'
-import { STable, STableColumn } from './Table'
+import { STable, SHierarchicalTable, STableColumn } from './Table'
 import { STooltip } from './Tooltip'
 
 export {
@@ -78,6 +78,7 @@ export {
   STab,
   STabs,
   STable,
+  SHierarchicalTable,
   STableColumn,
   STooltip
 }

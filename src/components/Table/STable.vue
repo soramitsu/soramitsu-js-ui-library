@@ -1,5 +1,6 @@
 <template>
   <el-table
+    :class="computedClasses"
     ref="table"
     :data="data"
     :height="height"
@@ -358,6 +359,14 @@ export default class STable extends Mixins(SizeMixin) {
 
   sort (prop: string, order: SortDirection): void {
     this.table.sort(prop, order)
+  }
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.isStandardSize) {
+      cssClasses.push(`s-${this.size}`)
+    }
+    return cssClasses
   }
 
   @Provide('sTable') sTable = this

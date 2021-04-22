@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref, Inject } from 'vue-property-decorator'
+import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
 
 import { Size } from '@/types'
 
