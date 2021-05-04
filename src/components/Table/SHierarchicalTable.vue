@@ -6,8 +6,11 @@
       :key="level.name"
       :data="level.content"
       :size="computedSize"
-      @select="handleSelect"
-      @select-all="handleSelectAll"
+      :border="false"
+      @select="levelIndex === (data.length - 1) ? handleSelect : null"
+      @select-all="levelIndex === (data.length - 1) ? handleSelectAll : null"
+      @selection-change="levelIndex === (data.length - 1) ? handleSelectionChange : null"
+      @row-click="row => $emit('row-click', row, level)"
     >
       <s-table-column
         v-if="levelIndex === (data.length - 1)"
@@ -20,7 +23,7 @@
         <template slot-scope="{ row }">
           <slot
             :name="level.name"
-            :data="{ name: level.name, value: row }"
+            :value="row"
           >
             {{ row }}
           </slot>
@@ -57,6 +60,10 @@ export default class SHierarchicalTable extends Mixins(SizeMixin) {
 
   handleSelectAll (selection: Array<any>): void {
     this.$emit('select-all', selection)
+  }
+
+  handleSelectionChange (selection: Array<any>): void {
+    this.$emit('selection-change', selection)
   }
 
   @Provide('sHierarchicalTable') sHierarchicalTable = this

@@ -1,6 +1,7 @@
-import { withKnobs } from '@storybook/addon-knobs'
+import { withKnobs, select } from '@storybook/addon-knobs'
 
 import { SHierarchicalTable } from '../../components'
+import { Size } from '../../types'
 
 export default {
   component: SHierarchicalTable,
@@ -49,12 +50,18 @@ export const configurable = () => ({
   components: { SHierarchicalTable },
   template: `<s-hierarchical-table
                :data="tableData"
+               :size="size"
              >
                <template slot="date" slot-scope="{ value }">
-                 {{ value }} - test
+                 <b>{{ value }}</b>
                </template>
              </s-hierarchical-table>`,
   data: () => ({
     tableData: tableData
-  })
+  }),
+  props: {
+    size: {
+      default: select('Size', Object.values(Size), Size.BIG)
+    }
+  }
 })
