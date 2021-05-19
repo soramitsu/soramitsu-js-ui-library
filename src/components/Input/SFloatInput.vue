@@ -47,19 +47,21 @@ export default class SFloatInput extends Vue {
   @Prop({ type: [String, Number], default: undefined, validator: isNumberLikeValue }) readonly max!: string | number
 
   created () {
-    // Set delimiters' symbols
-    this.locale = navigator.language
-    const decimalDelimiter = Number(1.1).toLocaleString(this.locale).substring(1, 2)
-    if (decimalDelimiter !== this.delimiters.decimal) {
-      this.delimiters.decimal = decimalDelimiter
-      this.delimiters.thousand = decimalDelimiter === '.' ? ',' : '.'
+    if (this.isLocaleString) {
+      // Set delimiters' symbols
+      this.locale = navigator.language
+      const decimalDelimiter = Number(1.1).toLocaleString(this.locale).substring(1, 2)
+      if (decimalDelimiter !== this.delimiters.decimal) {
+        this.delimiters.decimal = decimalDelimiter
+        this.delimiters.thousand = decimalDelimiter === '.' ? ',' : '.'
+      }
     }
   }
 
   handleInput (value: string): void {
     const newValue = [
       (v) => this.formatNumberField(v, this.decimals),
-      (v) => isNumberLikeValue(this.isLocaleString ? v.replace(new RegExp(this.delimiters.thousand, 'g'), '') : v) ? v : DEFAULT_VALUE,
+      (v) => isNumberLikeValue(this.formatToNumber(v)) ? v : DEFAULT_VALUE,
       (v) => this.checkValueForExtremum(v)
     ].reduce((buffer, rule) => rule(buffer), value)
 
@@ -80,6 +82,11 @@ export default class SFloatInput extends Vue {
 
   onInput (value: string): void {
     this.$emit('input', value)
+  }
+
+  private formatToNumber (value: string) {
+    if (!this.isLocaleString) return value
+    return value.replace(new RegExp('\\' + this.delimiters.thousand, 'g'), '').replace(/,/g, '.')
   }
 
   private trimNeedlessSymbols (value: string): string {
@@ -104,10 +111,12 @@ export default class SFloatInput extends Vue {
 
     let formatted = String(value).replace(new RegExp('[^\\d' + this.delimiters.decimal + ']', 'g'), '')
     const decimalDelimiterIndex = formatted.indexOf(this.delimiters.decimal)
+
     // Add prefix zero if needed
     if (decimalDelimiterIndex === 0) {
       formatted = '0' + formatted
     }
+
     // Avoid several decimal delimiters
     if ((value.match(new RegExp(this.delimiters.decimal, 'g')) || []).length > 1) {
       formatted = formatted.substring(0, decimalDelimiterIndex + 1) + formatted.substring(decimalDelimiterIndex + 1).replace(this.delimiters.decimal, '')
@@ -146,11 +155,11 @@ export default class SFloatInput extends Vue {
 
     const fpIndex = value.indexOf(this.delimiters.decimal)
 
-    return fpIndex !== -1 ? fpIndex + 1 + decimals + (value.match(new RegExp(this.delimiters.thousand, 'g')) || []).length : undefined
+    return fpIndex !== -1 ? fpIndex + 1 + decimals + (value.match(new RegExp('\\' + this.delimiters.thousand, 'g')) || []).length : undefined
   }
 
   private checkValueForExtremum (value: string): string {
-    const cleanValue = this.isLocaleString ? value.replace(new RegExp(this.delimiters.thousand, 'g'), '') : value
+    const cleanValue = this.isLocaleString ? this.formatToNumber(value) : value
     if (!cleanValue) return cleanValue
     if (this.max && (+cleanValue > +this.max)) return this.isLocaleString ? this.formatToLocaleString(String(this.max)) : String(this.max)
 
