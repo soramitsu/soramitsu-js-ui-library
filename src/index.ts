@@ -45,6 +45,7 @@ import {
   STab,
   STabs,
   STable,
+  SHierarchicalTable,
   STableColumn,
   STooltip
 } from './components'
@@ -101,6 +102,7 @@ const components = [
   { component: STab, name: Components.STab },
   { component: STabs, name: Components.STabs },
   { component: STable, name: Components.STable },
+  { component: SHierarchicalTable, name: Components.SHierarchicalTable },
   { component: STableColumn, name: Components.STableColumn },
   { component: STooltip, name: Components.STooltip }
 ]
@@ -177,6 +179,7 @@ export {
   STab,
   STabs,
   STable,
+  SHierarchicalTable,
   STableColumn,
   STooltip,
   SDialogMixin
