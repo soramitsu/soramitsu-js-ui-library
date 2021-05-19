@@ -1,15 +1,19 @@
 <template>
   <div class="s-hierarchical-table">
     <s-table
-      class="s-hierarchical-table-level"
+      :class="{
+        's-hierarchical-table-level': true,
+        's-hierarchical-table-level--last': levelIndex === data.length - 1
+      }"
       v-for="(level, levelIndex) in data"
       :key="level.name"
       :data="level.content"
       :size="computedSize"
       :border="false"
-      @select="levelIndex === (data.length - 1) ? handleSelect : null"
-      @select-all="levelIndex === (data.length - 1) ? handleSelectAll : null"
-      @selection-change="levelIndex === (data.length - 1) ? handleSelectionChange : null"
+      :row-class-name="({ row }) => getRowClassName({ row, levelIndex })"
+      @select="handleSelect"
+      @select-all="handleSelectAll"
+      @selection-change="handleSelectionChange"
       @row-click="row => $emit('row-click', row, level)"
     >
       <s-table-column
@@ -18,11 +22,11 @@
       />
       <s-table-column
         prop="value"
-        :label="level.label"
+        :label="level.name"
       >
         <template slot-scope="{ row }">
           <slot
-            :name="level.name"
+            :name="level.id"
             :value="row"
           >
             {{ row }}
@@ -53,6 +57,12 @@ export default class SHierarchicalTable extends Mixins(SizeMixin) {
    * By default it's set to an empty array
    */
   @Prop({ default: () => [], type: Array }) readonly data!: Array<any>
+  /**
+   * Path of the table.
+   *
+   * By default it's set to an empty array
+   */
+  @Prop({ default: () => [], type: Array }) readonly path!: Array<any>
 
   handleSelect (selection: Array<any>, row: any): void {
     this.$emit('select', selection, row)
@@ -66,18 +76,14 @@ export default class SHierarchicalTable extends Mixins(SizeMixin) {
     this.$emit('selection-change', selection)
   }
 
+  getRowClassName ({ levelIndex, row }) {
+    const classes = ['s-hierarchical-table-row']
+    if (this.path[levelIndex] === row) {
+      classes.push('s-hierarchical-table-row--active')
+    }
+    return classes.join(' ')
+  }
+
   @Provide('sHierarchicalTable') sHierarchicalTable = this
 }
 </script>
-
-<style lang="scss" scoped>
-.s-hierarchical-table {
-  display: flex;
-  width: 100%;
-  background: var(--s-color-base-background);
-  &-level:not(:last-child) {
-    margin-right: 16px;
-    border-right: 1px solid var(--s-color-base-border-primary)
-  }
-}
-</style>
