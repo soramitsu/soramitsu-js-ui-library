@@ -139,3 +139,47 @@
   line-height: 22.4px;
   background: var(--s-color-base-background);
 }
+.s-hierarchical-table {
+  display: flex;
+  width: 100%;
+  background: var(--s-color-base-background);
+  &-level:not(&-level--last) {
+    margin-right: 16px;
+    border-right: 1px solid var(--s-color-base-border-primary)
+  }
+  .s-hierarchical-table-level {
+    .el-table__body {
+      display: block;
+    }
+    td {
+      padding: 0;
+    }
+    &:not(.s-hierarchical-table-level--last) {
+      .s-hierarchical-table-row {
+        cursor: pointer;
+        .cell {
+          margin: 4px;
+          padding-top: 3px;
+          padding-bottom: 3px;
+          border-radius: var(--s-border-radius-mini);
+          transition: background 200ms;
+        }
+        &--active .cell, &:hover .cell {
+          background: var(--s-color-base-border-primary);
+        }
+      }
+    }
+    &.s-hierarchical-table-level--last {
+      .s-hierarchical-table-row {
+        .cell {
+          margin: 4px 0;
+          padding-top: 3px;
+          padding-bottom: 3px;
+        }
+      }
+    }
+  }
+  .el-table--enable-row-hover.s-hierarchical-table-level:not(.s-hierarchical-table-level--last) .el-table__body tr.s-hierarchical-table-row:hover > td {
+    background: transparent;
+  }
+}
