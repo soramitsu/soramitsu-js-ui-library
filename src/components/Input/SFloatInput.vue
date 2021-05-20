@@ -34,7 +34,6 @@ const decimalsValidator = x => x === undefined || x >= 0
   }
 })
 export default class SFloatInput extends Vue {
-  locale = ''
   delimiters = {
     thousand: ',',
     decimal: '.'
@@ -49,8 +48,7 @@ export default class SFloatInput extends Vue {
   created () {
     if (this.isLocaleString) {
       // Set delimiters' symbols
-      this.locale = navigator.language
-      const decimalDelimiter = Number(1.1).toLocaleString(this.locale).substring(1, 2)
+      const decimalDelimiter = Number(1.1).toLocaleString(navigator.language).substring(1, 2)
       if (decimalDelimiter !== this.delimiters.decimal) {
         this.delimiters.decimal = decimalDelimiter
         this.delimiters.thousand = decimalDelimiter === '.' ? ',' : '.'
