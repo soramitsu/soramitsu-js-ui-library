@@ -34,26 +34,15 @@ const decimalsValidator = x => x === undefined || x >= 0
   }
 })
 export default class SFloatInput extends Vue {
-  delimiters = {
-    thousand: ',',
-    decimal: '.'
-  }
-
   @Prop({ type: String, default: DEFAULT_VALUE }) readonly value!: string
   @Prop({ type: String, default: '0.0' }) readonly placeholder!: string
-  @Prop({ type: Boolean, default: false }) readonly isLocaleString!: boolean
+  @Prop({ type: Boolean, default: false }) readonly isLocaleString?: boolean
+  @Prop({ type: Object, default: () => {} }) readonly delimiters?: object
   @Prop({ type: Number, default: undefined, validator: decimalsValidator }) readonly decimals!: number
   @Prop({ type: [String, Number], default: undefined, validator: isNumberLikeValue }) readonly max!: string | number
 
-  created () {
-    if (this.isLocaleString) {
-      // Set delimiters' symbols
-      const decimalDelimiter = Number(1.1).toLocaleString(navigator.language).substring(1, 2)
-      if (decimalDelimiter !== this.delimiters.decimal) {
-        this.delimiters.decimal = decimalDelimiter
-        this.delimiters.thousand = decimalDelimiter === '.' ? ',' : '.'
-      }
-    }
+  get delimitersConfig (): any {
+    return this.isLocaleString && this.delimiters ? this.delimiters : { thousand: ',', decimal: '.' }
   }
 
   handleInput (value: string): void {
@@ -84,20 +73,20 @@ export default class SFloatInput extends Vue {
 
   private formatToNumber (value: string) {
     if (!this.isLocaleString) return value
-    return value.replace(new RegExp('\\' + this.delimiters.thousand, 'g'), '').replace(/,/g, '.')
+    return value.replace(new RegExp('\\' + this.delimitersConfig.thousand, 'g'), '').replace(/,/g, '.')
   }
 
   private trimNeedlessSymbols (value: string): string {
     // Trim zeros in the beginning
-    if (value.indexOf('0') === 0 && value.indexOf(this.delimiters.decimal) !== 1) {
+    if (value.indexOf('0') === 0 && value.indexOf(this.delimitersConfig.decimal) !== 1) {
       value = value.replace(/^0+/, '')
     }
     // add leading zero before floating point
-    if (value.indexOf(this.delimiters.decimal) === 0) {
+    if (value.indexOf(this.delimitersConfig.decimal) === 0) {
       value = '0' + value
     }
     // Trim dot in the end
-    if (value.indexOf(this.delimiters.decimal) === value.length - 1) {
+    if (value.indexOf(this.delimitersConfig.decimal) === value.length - 1) {
       value = value.slice(0, -1)
     }
 
@@ -107,8 +96,8 @@ export default class SFloatInput extends Vue {
   private formatNumberField (value: string, decimals: number): string {
     if (!['string', 'number'].includes(typeof value)) return value
 
-    let formatted = String(value).replace(new RegExp('[^\\d' + this.delimiters.decimal + ']', 'g'), '')
-    const decimalDelimiterIndex = formatted.indexOf(this.delimiters.decimal)
+    let formatted = String(value).replace(new RegExp('[^\\d' + this.delimitersConfig.decimal + ']', 'g'), '')
+    const decimalDelimiterIndex = formatted.indexOf(this.delimitersConfig.decimal)
 
     // Add prefix zero if needed
     if (decimalDelimiterIndex === 0) {
@@ -116,8 +105,8 @@ export default class SFloatInput extends Vue {
     }
 
     // Avoid several decimal delimiters
-    if ((value.match(new RegExp(this.delimiters.decimal, 'g')) || []).length > 1) {
-      formatted = formatted.substring(0, decimalDelimiterIndex + 1) + formatted.substring(decimalDelimiterIndex + 1).replace(this.delimiters.decimal, '')
+    if ((value.match(new RegExp(this.delimitersConfig.decimal, 'g')) || []).length > 1) {
+      formatted = formatted.substring(0, decimalDelimiterIndex + 1) + formatted.substring(decimalDelimiterIndex + 1).replace(this.delimitersConfig.decimal, '')
     }
     if (this.isLocaleString) {
       formatted = this.formatToLocaleString(formatted)
@@ -132,28 +121,28 @@ export default class SFloatInput extends Vue {
   }
 
   private formatToLocaleString (formatted: string): string {
-    const splittedValue = formatted.replace(this.delimiters.thousand, '').split(this.delimiters.decimal)
+    const splittedValue = formatted.replace(this.delimitersConfig.thousand, '').split(this.delimitersConfig.decimal)
 
     if (splittedValue[0].length > 3) {
       const reversedValue = splittedValue[0].split('').reverse()
       splittedValue[0] = reversedValue.reduce((prev, current, index) => {
         prev += current
         if (++index % 3 === 0 && index !== reversedValue.length) {
-          prev += this.delimiters.thousand
+          prev += this.delimitersConfig.thousand
         }
         return prev
       }).split('').reverse().join('')
     }
 
-    return splittedValue.join(this.delimiters.decimal)
+    return splittedValue.join(this.delimitersConfig.decimal)
   }
 
   private valueMaxLength (value: string, decimals: number) {
     if (value.length === 0 || decimals === undefined) return undefined
 
-    const fpIndex = value.indexOf(this.delimiters.decimal)
+    const fpIndex = value.indexOf(this.delimitersConfig.decimal)
 
-    return fpIndex !== -1 ? fpIndex + 1 + decimals + (value.match(new RegExp('\\' + this.delimiters.thousand, 'g')) || []).length : undefined
+    return fpIndex !== -1 ? fpIndex + 1 + decimals + (value.match(new RegExp('\\' + this.delimitersConfig.thousand, 'g')) || []).length : undefined
   }
 
   private checkValueForExtremum (value: string): string {

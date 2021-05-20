@@ -1,4 +1,4 @@
-import { boolean, number, text, withKnobs } from '@storybook/addon-knobs'
+import { boolean, number, text, object, withKnobs } from '@storybook/addon-knobs'
 
 import { SFloatInput, SRow } from '../components'
 
@@ -13,8 +13,9 @@ export const configurable = () => ({
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-float-input
                  v-model="model"
-                 :isLocaleString="isLocaleString"
                  :decimals="decimals"
+                 :isLocaleString="isLocaleString"
+                 :delimiters="delimiters"
                  :max="max"
                />
              </s-row>`,
@@ -30,6 +31,15 @@ export const configurable = () => ({
     },
     isLocaleString: {
       default: boolean('Is Locale String', true)
+    },
+    delimiters: {
+      default: object(
+        'Delimiters',
+        {
+          thousand: '.',
+          decimal: ','
+        }
+      )
     }
   }
 })
