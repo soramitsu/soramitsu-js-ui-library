@@ -1,4 +1,4 @@
-import { boolean, number, text, object, withKnobs } from '@storybook/addon-knobs'
+import { number, text, object, withKnobs } from '@storybook/addon-knobs'
 
 import { SFloatInput, SRow } from '../components'
 
@@ -14,7 +14,6 @@ export const configurable = () => ({
                <s-float-input
                  v-model="model"
                  :decimals="decimals"
-                 :isLocaleString="isLocaleString"
                  :delimiters="delimiters"
                  :max="max"
                />
@@ -29,15 +28,12 @@ export const configurable = () => ({
     max: {
       default: text('Max', '90000000')
     },
-    isLocaleString: {
-      default: boolean('Is Locale String', true)
-    },
     delimiters: {
       default: object(
         'Delimiters',
         {
-          thousand: '.',
-          decimal: ','
+          thousand: ',',
+          decimal: '.'
         }
       )
     }
