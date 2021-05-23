@@ -1,6 +1,6 @@
 <template>
   <s-input
-    :placeholder="placeholder"
+    :placeholder="placeholderValue"
     :value="formatted"
     v-bind="$attrs"
     v-on="{
@@ -40,10 +40,14 @@ const decimalsValidator = x => x === undefined || x >= 0
 })
 export default class SFloatInput extends Vue {
   @Prop({ type: String, default: DEFAULT_VALUE }) readonly value!: string
-  @Prop({ type: String, default: '0.0' }) readonly placeholder!: string
+  @Prop({ type: String }) readonly placeholder!: string
   @Prop({ type: Object, default: () => {} }) readonly delimiters?: object
   @Prop({ type: Number, default: undefined, validator: decimalsValidator }) readonly decimals!: number
   @Prop({ type: [String, Number], default: undefined, validator: isNumberLikeValue }) readonly max!: string | number
+
+  get placeholderValue (): string {
+    return this.placeholder || '0'.concat(this.delimitersConfig.decimal, '0')
+  }
 
   get delimitersConfig (): any {
     return this.delimiters || DEFAULT_DELIMITERS
