@@ -15,6 +15,7 @@
       @select-all="handleSelectAll"
       @selection-change="handleSelectionChange"
       @row-click="row => $emit('row-click', row, level)"
+      :empty-text="emptyText"
     >
       <s-table-column
         v-if="levelIndex === (data.length - 1)"
@@ -63,6 +64,12 @@ export default class SHierarchicalTable extends Mixins(SizeMixin) {
    * By default it's set to an empty array
    */
   @Prop({ default: () => [], type: Array }) readonly path!: Array<any>
+  /**
+   * A message for an empty data array.
+   *
+   * By default it's set to `"No data"`
+   */
+  @Prop({ default: 'No data', type: String }) readonly emptyText!: string
 
   handleSelect (selection: Array<any>, row: any): void {
     this.$emit('select', selection, row)
