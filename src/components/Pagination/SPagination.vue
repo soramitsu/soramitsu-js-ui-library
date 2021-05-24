@@ -107,6 +107,12 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly hideOnSinglePage!: boolean
+  /**
+   * Text for 'Rows per page'
+   *
+   * `Per page text` by default
+   */
+  @Prop({ default: 'Rows per page', type: String }) readonly perPageText!: string
 
   @Ref('pagination') pagination!: any
 
@@ -140,7 +146,7 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
     }
     if (this.sizesItem && !this.sizesLabelItem) {
       const itemsPerPageText = document.createElement('span')
-      itemsPerPageText.textContent = 'Rows per page'
+      itemsPerPageText.textContent = this.perPageText
       itemsPerPageText.classList.add('per-page-text')
       this.pagination.$el.insertBefore(itemsPerPageText, this.sizesItem)
     }
