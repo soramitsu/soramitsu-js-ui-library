@@ -103,9 +103,6 @@ $select-prefix-height: $s-size-mini;
           background-color: var(--s-color-base-background-hover);
         }
       }
-      .s-placeholder {
-        background-color: var(--s-color-base-background-hover);
-      }
     }
     .s-placeholder + .el-select {
       .el-input {
@@ -133,9 +130,6 @@ $select-prefix-height: $s-size-mini;
           background-color: var(--s-color-utility-surface);
         }
       }
-      .s-placeholder {
-        background-color: var(--s-color-utility-surface);
-      }
     }
     &.s-disabled {
       .el-select {
@@ -154,7 +148,6 @@ $select-prefix-height: $s-size-mini;
       }
       .s-placeholder {
         color: var(--s-color-base-content-quaternary);
-        background-color: var(--s-color-base-disabled);
       }
     }
   }
@@ -170,7 +163,6 @@ $select-prefix-height: $s-size-mini;
     position: absolute;
     z-index: 1;
     width: calc(100% - 15px);
-    background-color: var(--s-color-base-background);
     pointer-events: none;
   }
   &.s-select-type {
