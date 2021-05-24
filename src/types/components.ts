@@ -43,6 +43,7 @@ export enum Components {
   STab = 'STab',
   STabs = 'STabs',
   STable = 'STable',
+  SHierarchicalTable = 'SHierarchicalTable',
   STableColumn = 'STableColumn',
   STooltip = 'STooltip'
 }
