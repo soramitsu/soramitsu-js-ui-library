@@ -41,28 +41,25 @@ const decimalsValidator = x => x === undefined || x >= 0
 export default class SFloatInput extends Vue {
   @Prop({ type: String, default: DEFAULT_VALUE }) readonly value!: string
   @Prop({ type: String }) readonly placeholder!: string
-  @Prop({ type: Object, default: () => {} }) readonly delimiters?: object
   @Prop({ type: Number, default: undefined, validator: decimalsValidator }) readonly decimals!: number
+  @Prop({ type: Boolean, default: false }) readonly hasLocaleString?: boolean
+  @Prop({ type: Object, default: () => DEFAULT_DELIMITERS }) readonly delimiters?: any
   @Prop({ type: [String, Number], default: undefined, validator: isNumberLikeValue }) readonly max!: string | number
 
   get placeholderValue (): string {
-    return this.placeholder || '0'.concat(this.delimitersConfig.decimal, '0')
-  }
-
-  get delimitersConfig (): any {
-    return this.delimiters || DEFAULT_DELIMITERS
+    return this.placeholder || '0'.concat(this.delimiters.decimal, '0')
   }
 
   get formatted (): string {
-    return this.delimiters ? this.toLocaleString() : this.value
+    return this.hasLocaleString ? this.toLocaleString() : this.value
   }
 
   handleInput (value: string): void {
-    if (this.delimiters) {
+    if (this.hasLocaleString) {
       // Cleanup value's format
-      value = value.replace(new RegExp('\\' + this.delimitersConfig.thousand, 'g'), '')
-      if (this.delimitersConfig.decimal !== DEFAULT_DECIMAL_DELIMITER) {
-        value = value.replace(this.delimitersConfig.decimal, DEFAULT_DECIMAL_DELIMITER)
+      value = value.replace(new RegExp('\\' + this.delimiters.thousand, 'g'), '')
+      if (this.delimiters.decimal !== DEFAULT_DECIMAL_DELIMITER) {
+        value = value.replace(this.delimiters.decimal, DEFAULT_DECIMAL_DELIMITER)
       }
     }
     const newValue = [
@@ -145,7 +142,7 @@ export default class SFloatInput extends Vue {
           if (index === lastIndex && integerReversed[lastIndex] === '-') {
             return prev
           }
-          prev += this.delimitersConfig.thousand
+          prev += this.delimiters.thousand
         }
         return prev
       }).split('').reverse().join('')
@@ -154,7 +151,7 @@ export default class SFloatInput extends Vue {
     let localeString = integer
 
     if (hasDecimalDelimiter) {
-      localeString += this.delimitersConfig.decimal
+      localeString += this.delimiters.decimal
     }
 
     if (decimal) {
