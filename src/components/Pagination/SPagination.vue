@@ -108,11 +108,17 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
    */
   @Prop({ default: false, type: Boolean }) readonly hideOnSinglePage!: boolean
   /**
-   * Text for 'Rows per page'
+   * Text for 'Rows per page' text
    *
    * `Per page text` by default
    */
   @Prop({ default: 'Rows per page', type: String }) readonly perPageText!: string
+  /**
+   * Text for 'Total' text
+   *
+   * `Total` by default
+   */
+  @Prop({ default: 'Total', type: String }) readonly totalText!: string
 
   @Ref('pagination') pagination!: any
 
@@ -140,9 +146,13 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
   }
 
   private renderPaginationItems (): void {
-    if (this.totalItem && this.total) {
-      const upperNumber = this.pageSizeModel * this.currentPageModel
-      this.totalItem.textContent = `${upperNumber - this.pageSizeModel + 1}—${upperNumber > this.total ? this.total : upperNumber} of ${this.total}`
+    if (this.totalItem) {
+      if (this.total) {
+        const upperNumber = this.pageSizeModel * this.currentPageModel
+        this.totalItem.textContent = `${upperNumber - this.pageSizeModel + 1}—${upperNumber > this.total ? this.total : upperNumber} of ${this.total}`
+      } else {
+        this.totalItem.textContent = `${this.totalText} ${this.total}`
+      }
     }
     if (this.sizesItem && !this.sizesLabelItem) {
       const itemsPerPageText = document.createElement('span')
