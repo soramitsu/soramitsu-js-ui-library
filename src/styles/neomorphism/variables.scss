@@ -1,38 +1,38 @@
 // Brand
-$neo-brand-pinky: #ED145B; // Some texts, brand stuff
-$neo-brand-blue: #0D0248; // Brand stuff
+$neo-brand-pinky: #ED145B !default; // Some texts, brand stuff
+$neo-brand-blue: #0D0248 !default; // Brand stuff
 // Theme Primary
-$neo-color-theme-accent: #F8087B;
-$neo-color-theme-accent-hover: #F754A3;
-$neo-color-theme-accent-pressed: #bf065f;
-$neo-color-theme-accent-focused: #ab0555;
+$neo-color-theme-accent: #F8087B !default;
+$neo-color-theme-accent-hover: #F754A3 !default;
+$neo-color-theme-accent-pressed: #bf065f !default;
+$neo-color-theme-accent-focused: #ab0555 !default;
 // Theme Secondary
-$neo-color-theme-secondary: #44E5B2;
-$neo-color-theme-secondary-hover: #24DAA0;
+$neo-color-theme-secondary: #44E5B2 !default;
+$neo-color-theme-secondary-hover: #24DAA0 !default;
 // Base: Content
-$neo-color-base-content-primary: #2A171F; // Main text and icons
-$neo-color-base-content-secondary: #A19A9D; // Secondary text
-$neo-color-base-content-tertiary: #D5CDD0; // Hint and placeholder text
-$neo-color-base-content-quaternary: #75787b; // Text
+$neo-color-base-content-primary: #2A171F !default; // Main text and icons
+$neo-color-base-content-secondary: #A19A9D !default; // Secondary text
+$neo-color-base-content-tertiary: #D5CDD0 !default; // Hint and placeholder text
+$neo-color-base-content-quaternary: #75787b !default; // Text
 // Base: Background
-$neo-color-base-background: #FAF4F8; // Interactive elements background: controls, text field
-$neo-color-base-background-hover: #F7F3F4;
-$neo-color-base-background-dark: #2E2E36; // Dark background
+$neo-color-base-background: #FAF4F8 !default; // Interactive elements background: controls, text field
+$neo-color-base-background-hover: #F7F3F4 !default;
+$neo-color-base-background-dark: #2E2E36 !default; // Dark background
 // Base: Border
-$neo-color-base-border-primary: #F7F3F4; // High emphasis border/divider
-$neo-color-base-border-secondary: #EDE4E7; // Low emphasis border/divider
+$neo-color-base-border-primary: #F7F3F4 !default; // High emphasis border/divider
+$neo-color-base-border-secondary: #EDE4E7 !default; // Low emphasis border/divider
 // Base: Misc
-$neo-color-base-disabled: #FDF7FB; // Disabled state
-$neo-color-base-on-disabled: #A19A9D; // Text on disabled element
-$neo-color-base-on-accent: #FFFFFF; // Text on dark/accent backgrounds
+$neo-color-base-disabled: #FDF7FB !default; // Disabled state
+$neo-color-base-on-disabled: #A19A9D !default; // Text on disabled element
+$neo-color-base-on-accent: #FFFFFF !default; // Text on dark/accent backgrounds
 // Utility
-$neo-color-utility-body: #F7F3F4;
-$neo-color-utility-surface: #FDF7FB;
-$neo-color-utility-overlay: rgba(0, 0, 0, 0.45);
+$neo-color-utility-body: #F7F3F4 !default;
+$neo-color-utility-surface: #FDF7FB !default;
+$neo-color-utility-overlay: rgba(0, 0, 0, 0.45) !default;
 // Statuses
-$neo-color-status-success: #34AD87; // Success text and icon
-$neo-color-status-success-background: #B9EBDB; // Success state background
-$neo-color-status-warning: #479AEF; // Warning text and icon
-$neo-color-status-warning-background: #C6E2FF; // Warning state background
-$neo-color-status-error: #F754A3; // Error text and icon
-$neo-color-status-error-background: #FFD8EB; // Error state background
+$neo-color-status-success: #34AD87 !default; // Success text and icon
+$neo-color-status-success-background: #B9EBDB !default; // Success state background
+$neo-color-status-warning: #479AEF !default; // Warning text and icon
+$neo-color-status-warning-background: #C6E2FF !default; // Warning state background
+$neo-color-status-error: #F754A3 !default; // Error text and icon
+$neo-color-status-error-background: #FFD8EB !default; // Error state background

@@ -1,8 +1,9 @@
 import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
-import { SButton, SButtonGroup, SRow, SCol, SMain } from '../components'
+import { SButton, SButtonGroup, SRow, SCol, SMain, DesignSystemProvider } from '../components'
 import { Size, BorderRadius } from '../types'
 import { ButtonTypes, ButtonIconPosition } from '../components/Button'
+import { DesignSystemTypes } from '../components/DesignSystem'
 
 export default {
   component: SButton,
@@ -12,8 +13,10 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { SButton },
-  template: `<s-button
+  components: { SButton, DesignSystemProvider },
+  template: `
+            <design-system-provider :value="designSystem">
+              <s-button
                :disabled="disabled"
                :loading="loading"
                :tooltip="tooltip"
@@ -24,10 +27,14 @@ export const configurable = () => ({
                :rounded="rounded"
                :alternative="alternative"
                @click="handleClick"
-             >
+              >
                {{ type !== 'action' ? 'Default' : '' }}
-             </s-button>`,
+              </s-button>
+            </design-system-provider>`,
   props: {
+    designSystem: {
+      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+    },
     disabled: {
       default: boolean('Disabled', false)
     },
