@@ -44,7 +44,7 @@ export default {
           }
         },
         { src: 'node_modules/element-ui/packages/theme-chalk/src/*', dest: 'lib/styles/element-ui' },
-        { src: 'src/styles/neomorphism/*', dest: 'lib/styles/neomorphism' }
+        { src: 'src/styles/neumorphism/*', dest: 'lib/styles/neumorphism' }
       ]
     }),
     typescript({
