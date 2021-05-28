@@ -36,3 +36,33 @@ $neo-color-status-warning: #479AEF !default; // Warning text and icon
 $neo-color-status-warning-background: #C6E2FF !default; // Warning state background
 $neo-color-status-error: #F754A3 !default; // Error text and icon
 $neo-color-status-error-background: #FFD8EB !default; // Error state background
+
+:root {
+  --neo-color-theme-accent: #{$neo-color-theme-accent};
+  --neo-color-theme-accent-hover: #{$neo-color-theme-accent-hover};
+  --neo-color-theme-accent-pressed: #{$neo-color-theme-accent-pressed};
+  --neo-color-theme-accent-focused: #{$neo-color-theme-accent-focused};
+  --neo-color-theme-secondary: #{$neo-color-theme-secondary};
+  --neo-color-theme-secondary-hover: #{$neo-color-theme-secondary-hover};
+  --neo-color-base-content-primary: #{$neo-color-base-content-primary};
+  --neo-color-base-content-secondary: #{$neo-color-base-content-secondary};
+  --neo-color-base-content-tertiary: #{$neo-color-base-content-tertiary};
+  --neo-color-base-content-quaternary: #{$neo-color-base-content-quaternary};
+  --neo-color-base-background: #{$neo-color-base-background};
+  --neo-color-base-background-hover: #{$neo-color-base-background-hover};
+  --neo-color-base-background-dark: #{$neo-color-base-background-dark};
+  --neo-color-base-border-primary: #{$neo-color-base-border-primary};
+  --neo-color-base-border-secondary: #{$neo-color-base-border-secondary};
+  --neo-color-base-disabled: #{$neo-color-base-disabled};
+  --neo-color-base-on-disabled: #{$neo-color-base-on-disabled};
+  --neo-color-base-on-accent: #{$neo-color-base-on-accent};
+  --neo-color-utility-body: #{$neo-color-utility-body};
+  --neo-color-utility-surface: #{$neo-color-utility-surface};
+  --neo-color-utility-overlay: #{$neo-color-utility-overlay};
+  --neo-color-status-success: #{$neo-color-status-success};
+  --neo-color-status-success-background: #{$neo-color-status-success-background};
+  --neo-color-status-warning: #{$neo-color-status-warning};
+  --neo-color-status-warning-background: #{$neo-color-status-warning-background};
+  --neo-color-status-error: #{$neo-color-status-error};
+  --neo-color-status-error-background: #{$neo-color-status-error-background};
+}

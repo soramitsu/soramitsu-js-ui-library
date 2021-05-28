@@ -3,32 +3,32 @@ $neo-button-border-width: 2px !default;
 $neo-button-border-style: solid !default;
 $neo-button-transition: all 0.25s ease-in-out !default;
 
-$neo-button-background-color-disabled: $neo-color-utility-surface !default;
-$neo-button-border-color-disabled: $neo-color-utility-body !default;
+$neo-button-background-color-disabled: var(--neo-color-utility-surface) !default;
+$neo-button-border-color-disabled: var(--neo-color-utility-body) !default;
 $neo-button-box-shadow-disabled: -1px -1px 5px rgba(255, 255, 255, 0.6) !default;
-$neo-button-text-color-disabled: $neo-color-base-content-tertiary !default;
+$neo-button-text-color-disabled: var(--neo-color-base-content-tertiary) !default;
 
 // Primary button: common
 $neo-button-primary-border-width: $neo-button-border-width !default;
 $neo-button-primary-border-width-alternative: 0px !default;
 $neo-button-primary-border-style: $neo-button-border-style !default;
 // Primary button: background colors
-$neo-button-primary-background-color: $neo-color-theme-accent !default;
-$neo-button-primary-background-color-hover: $neo-color-theme-accent-hover !default;
-$neo-button-primary-background-color-pressed: $neo-color-theme-accent-pressed !default;
-$neo-button-primary-background-color-alternative: $neo-color-theme-secondary !default;
-$neo-button-primary-background-color-alternative-active: $neo-color-theme-secondary-hover !default;
+$neo-button-primary-background-color: var(--neo-color-theme-accent) !default;
+$neo-button-primary-background-color-hover: var(--neo-color-theme-accent-hover) !default;
+$neo-button-primary-background-color-pressed: var(--neo-color-theme-accent-pressed) !default;
+$neo-button-primary-background-color-alternative: var(--neo-color-theme-secondary) !default;
+$neo-button-primary-background-color-alternative-active: var(--neo-color-theme-secondary-hover) !default;
 // Primary button: text colors
-$neo-button-primary-text-color: $neo-color-base-on-accent !default;
+$neo-button-primary-text-color: var(--neo-color-base-on-accent) !default;
 $neo-button-primary-text-color-hover: $neo-button-primary-text-color !default;
 $neo-button-primary-text-color-pressed: $neo-button-primary-text-color !default;
 // Primary button: border colors
-$neo-button-primary-border-color: $neo-color-base-border-secondary !default;
-$neo-button-primary-border-color-hover: $neo-color-utility-surface !default;
+$neo-button-primary-border-color: var(--neo-color-base-border-secondary) !default;
+$neo-button-primary-border-color-hover: var(--neo-color-utility-surface) !default;
 $neo-button-primary-border-color-pressed: $neo-button-primary-border-color-hover !default;
 // Primary button: box-shadow
-$neo-button-primary-box-shadow: 1px 1px 5px $neo-color-base-on-accent, -1px -1px 5px $neo-color-base-on-accent !default;
-$neo-button-primary-box-shadow-hover: 1px 1px 5px rgba(255, 255, 255, 0.7), -1px -1px 5px $neo-color-base-on-accent, 0px 0px 20px rgba(247, 84, 163, 0.5) !default;
+$neo-button-primary-box-shadow: 1px 1px 5px var(--neo-color-base-on-accent), -1px -1px 5px var(--neo-color-base-on-accent) !default;
+$neo-button-primary-box-shadow-hover: 1px 1px 5px rgba(255, 255, 255, 0.7), -1px -1px 5px var(--neo-color-base-on-accent), 0px 0px 20px rgba(247, 84, 163, 0.5) !default;
 $neo-button-primary-box-shadow-pressed: $neo-button-primary-box-shadow-hover !default;
 $neo-button-primary-box-shadow-alternative: none !default;
 
@@ -36,15 +36,15 @@ $neo-button-primary-box-shadow-alternative: none !default;
 $neo-button-secondary-border-width: 0px !default;
 $neo-button-secondary-border-style: $neo-button-border-style !default;
 // Secondary button: background colors
-$neo-button-secondary-background-color: $neo-color-base-content-tertiary !default;
-$neo-button-secondary-background-color-active: $neo-color-base-content-secondary !default;
-$neo-button-secondary-background-color-alternative: $neo-color-utility-body !default;
-$neo-button-secondary-background-color-alternative-active: $neo-color-base-content-tertiary !default;
+$neo-button-secondary-background-color: var(--neo-color-base-content-tertiary) !default;
+$neo-button-secondary-background-color-active: var(--neo-color-base-content-secondary) !default;
+$neo-button-secondary-background-color-alternative: var(--neo-color-utility-body) !default;
+$neo-button-secondary-background-color-alternative-active: var(--neo-color-base-content-tertiary) !default;
 // Secondary button: text colors
-$neo-button-secondary-text-color: $neo-color-base-on-accent !default;
+$neo-button-secondary-text-color: var(--neo-color-base-on-accent) !default;
 $neo-button-secondary-text-color-active: $neo-button-secondary-text-color !default;
-$neo-button-secondary-text-color-alternative: $neo-color-base-content-tertiary !default;
-$neo-button-secondary-text-color-alternative-active: $neo-color-base-on-accent !default;
+$neo-button-secondary-text-color-alternative: var(--neo-color-base-content-tertiary) !default;
+$neo-button-secondary-text-color-alternative-active: var(--neo-color-base-on-accent) !default;
 // Secondary button: border colors
 $neo-button-secondary-border-color: transparent !default;
 $neo-button-secondary-border-color-active: $neo-button-secondary-border-color !default;
@@ -57,12 +57,12 @@ $neo-button-secondary-box-shadow-alternative: -1px -1px 1px rgba(0, 0, 0, 0.02),
 $neo-button-tertiary-border-width: 0px !default;
 $neo-button-tertiary-border-style: $neo-button-border-style !default;
 // Tertiary button: background colors
-$neo-button-tertiary-background-color: $neo-color-utility-surface !default;
+$neo-button-tertiary-background-color: var(--neo-color-utility-surface) !default;
 $neo-button-tertiary-background-color-active: $neo-button-tertiary-background-color !default;
-$neo-button-tertiary-background-color-alternative: $neo-color-utility-body !default;
+$neo-button-tertiary-background-color-alternative: var(--neo-color-utility-body) !default;
 // Tertiary button: text colors
-$neo-button-tertiary-text-color: $neo-color-base-content-secondary !default;
-$neo-button-tertiary-text-color-active: $neo-color-base-content-primary !default;
+$neo-button-tertiary-text-color: var(--neo-color-base-content-secondary) !default;
+$neo-button-tertiary-text-color-active: var(--neo-color-base-content-primary) !default;
 // Tertiary button: border colors
 $neo-button-tertiary-border-color: transparent !default;
 $neo-button-tertiary-border-color-active: $neo-button-tertiary-border-color !default;
@@ -74,16 +74,16 @@ $neo-button-tertiary-box-shadow-active: $neo-button-tertiary-box-shadow !default
 $neo-button-action-border-width: 0px !default;
 $neo-button-action-border-style: $neo-button-border-style !default;
 // Action button: background colors
-$neo-button-action-background-color: $neo-color-utility-body !default;
+$neo-button-action-background-color: var(--neo-color-utility-body) !default;
 $neo-button-action-background-color-hover: $neo-button-action-background-color !default;
 $neo-button-action-background-color-pressed: $neo-button-action-background-color !default;
 $neo-button-action-background-color-alternative: transparent !default;
 // Action button: text colors
-$neo-button-action-text-color: $neo-color-base-content-tertiary !default;
-$neo-button-action-text-color-hover: $neo-color-base-content-secondary !default;
-$neo-button-action-text-color-pressed: $neo-color-theme-accent !default;
-$neo-button-action-text-color-alternative: $neo-color-base-content-tertiary !default;
-$neo-button-action-text-color-alternative-active: $neo-color-base-content-secondary !default;
+$neo-button-action-text-color: var(--neo-color-base-content-tertiary) !default;
+$neo-button-action-text-color-hover: var(--neo-color-base-content-secondary) !default;
+$neo-button-action-text-color-pressed: var(--neo-color-theme-accent) !default;
+$neo-button-action-text-color-alternative: var(--neo-color-base-content-tertiary) !default;
+$neo-button-action-text-color-alternative-active: var(--neo-color-base-content-secondary) !default;
 // Action button: border colors
 $neo-button-action-border-color: transparent !default;
 $neo-button-action-border-color-hover: $neo-button-action-border-color !default;
