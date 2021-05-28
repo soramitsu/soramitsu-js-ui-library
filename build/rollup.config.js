@@ -33,17 +33,19 @@ export default {
       targets: [
         { src: 'src/assets/*', dest: 'lib/assets' },
         {
-          src: 'src/styles/*',
+          src: 'src/styles/*.scss',
           dest: 'lib/styles',
           // Replace all imports for scss files which will be used as theming files
-          transform: (content) => {
+          transform: (content, filename) => {
+            console.log(filename)
             return content.toString()
               .replace(/~@\/assets\//g, '../assets/')
               // Add scss styles from element-ui
               .replace('../../node_modules/element-ui/packages/theme-chalk/src/index', './element-ui/index')
           }
         },
-        { src: 'node_modules/element-ui/packages/theme-chalk/src/*', dest: 'lib/styles/element-ui' }
+        { src: 'node_modules/element-ui/packages/theme-chalk/src/*', dest: 'lib/styles/element-ui' },
+        { src: 'src/styles/neomorphism/*', dest: 'lib/styles/neomorphism' }
       ]
     }),
     typescript({
