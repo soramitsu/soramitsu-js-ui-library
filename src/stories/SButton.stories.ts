@@ -1,6 +1,6 @@
 import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
-import { SButton, SButtonGroup, SRow, SCol, SMain, DesignSystemProvider } from '../components'
+import { SButton, SButtonGroup, SRow, SCol, SMain, SDesignSystemProvider } from '../components'
 import { Size, BorderRadius } from '../types'
 import { ButtonTypes, ButtonIconPosition } from '../components/Button'
 import { DesignSystemTypes } from '../components/DesignSystem'
@@ -13,9 +13,9 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { SButton, DesignSystemProvider },
+  components: { SButton, SDesignSystemProvider },
   template: `
-            <design-system-provider :value="designSystem">
+            <s-design-system-provider :value="designSystem">
               <s-button
                :disabled="disabled"
                :loading="loading"
@@ -30,7 +30,7 @@ export const configurable = () => ({
               >
                {{ type !== 'action' ? 'Default' : '' }}
               </s-button>
-            </design-system-provider>`,
+            </s-design-system-provider>`,
   props: {
     designSystem: {
       default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
@@ -77,9 +77,9 @@ export const differentTypeButtonsData = Object.values(ButtonTypes).map(type => {
   return data
 })
 export const withDifferentTypes = () => ({
-  components: { SButton, SRow, DesignSystemProvider },
+  components: { SButton, SRow, SDesignSystemProvider },
   template: `
-            <design-system-provider :value="designSystem">
+            <s-design-system-provider :value="designSystem">
               <s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                 <s-button
                   v-for="item in items"
@@ -91,7 +91,7 @@ export const withDifferentTypes = () => ({
                   {{ item.label }}
                 </s-button>
               </s-row>
-            <design-system-provider />`,
+            <s-design-system-provider />`,
   props: {
     designSystem: {
       default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)

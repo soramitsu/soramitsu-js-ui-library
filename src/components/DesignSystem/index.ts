@@ -1,9 +1,9 @@
-import DesignSystemProvider from './DesignSystemProvider.vue'
+import SDesignSystemProvider from './SDesignSystemProvider.vue'
 import DesignSystemInject from './DesignSystemInject'
 import { DesignSystemTypes, DesignSystemProvideKey } from './consts'
 
 export {
-  DesignSystemProvider,
+  SDesignSystemProvider,
   DesignSystemProvideKey,
   DesignSystemInject,
   DesignSystemTypes
