@@ -38,6 +38,8 @@ $neo-color-status-error: #F754A3 !default; // Error text and icon
 $neo-color-status-error-background: #FFD8EB !default; // Error state background
 
 :root {
+  --neo-brand-pinky: #{neo-brand-pinky};
+  --neo-brand-blue: #{neo-brand-blue};
   --neo-color-theme-accent: #{$neo-color-theme-accent};
   --neo-color-theme-accent-hover: #{$neo-color-theme-accent-hover};
   --neo-color-theme-accent-pressed: #{$neo-color-theme-accent-pressed};

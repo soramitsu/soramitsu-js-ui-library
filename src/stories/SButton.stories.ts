@@ -61,9 +61,7 @@ export const configurable = () => ({
     }
   },
   methods: {
-    handleClick: () => {
-      // alert('clicked')
-    }
+    handleClick: () => alert('clicked')
   }
 })
 
