@@ -36,8 +36,7 @@ export default {
           src: 'src/styles/*.scss',
           dest: 'lib/styles',
           // Replace all imports for scss files which will be used as theming files
-          transform: (content, filename) => {
-            console.log(filename)
+          transform: (content) => {
             return content.toString()
               .replace(/~@\/assets\//g, '../assets/')
               // Add scss styles from element-ui
