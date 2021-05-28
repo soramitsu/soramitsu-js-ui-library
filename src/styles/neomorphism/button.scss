@@ -1,7 +1,6 @@
 // Neo button common variables
 $neo-button-border-width: 2px !default;
 $neo-button-border-style: solid !default;
-$neo-button-border-radius: 32px !default;
 $neo-button-transition: all 0.25s ease-in-out !default;
 
 $neo-button-background-color-disabled: $neo-color-utility-surface !default;
@@ -11,13 +10,15 @@ $neo-button-text-color-disabled: $neo-color-base-content-tertiary !default;
 
 // Primary button: common
 $neo-button-primary-border-width: $neo-button-border-width !default;
+$neo-button-primary-border-width-alternative: 0px !default;
 $neo-button-primary-border-style: $neo-button-border-style !default;
-$neo-button-primary-border-radius: $neo-button-border-radius !default;
 $neo-button-primary-transition: $neo-button-transition !default;
 // Primary button: background colors
 $neo-button-primary-background-color: $neo-color-theme-accent !default;
 $neo-button-primary-background-color-hover: $neo-color-theme-accent-hover !default;
 $neo-button-primary-background-color-pressed: $neo-color-theme-accent-pressed !default;
+$neo-button-primary-background-color-alternative: $neo-color-theme-secondary !default;
+$neo-button-primary-background-color-alternative-active: $neo-color-theme-secondary-hover !default;
 // Primary button: text colors
 $neo-button-primary-text-color: $neo-color-base-on-accent !default;
 $neo-button-primary-text-color-hover: $neo-button-primary-text-color !default;
@@ -30,20 +31,24 @@ $neo-button-primary-border-color-pressed: $neo-button-primary-border-color-hover
 $neo-button-primary-box-shadow: 1px 1px 5px $neo-color-base-on-accent, -1px -1px 5px $neo-color-base-on-accent !default;
 $neo-button-primary-box-shadow-hover: 1px 1px 5px rgba(255, 255, 255, 0.7), -1px -1px 5px $neo-color-base-on-accent, 0px 0px 20px rgba(247, 84, 163, 0.5) !default;
 $neo-button-primary-box-shadow-pressed: $neo-button-primary-box-shadow-hover !default;
+$neo-button-primary-box-shadow-alternative: none !default;
 
 // Secondary button: common
 $neo-button-secondary-border-width: 0px !default;
 $neo-button-secondary-border-style: $neo-button-border-style !default;
-$neo-button-secondary-border-radius: $neo-button-border-radius !default;
 $neo-button-secondary-transition: $neo-button-transition !default;
 // Secondary button: background colors
 $neo-button-secondary-background-color: $neo-color-base-content-tertiary !default;
 $neo-button-secondary-background-color-hover: $neo-color-base-content-secondary !default;
 $neo-button-secondary-background-color-pressed: $neo-button-secondary-background-color-hover !default;
+$neo-button-secondary-background-color-alternative: $neo-color-utility-body !default;
+$neo-button-secondary-background-color-alternative-active: $neo-color-base-content-tertiary !default;
 // Secondary button: text colors
 $neo-button-secondary-text-color: $neo-color-base-on-accent !default;
 $neo-button-secondary-text-color-hover: $neo-button-secondary-text-color !default;
 $neo-button-secondary-text-color-pressed: $neo-button-secondary-text-color !default;
+$neo-button-secondary-text-color-alternative: $neo-color-base-content-tertiary !default;
+$neo-button-secondary-text-color-alternative-active: $neo-color-base-on-accent !default;
 // Secondary button: border colors
 $neo-button-secondary-border-color: transparent !default;
 $neo-button-secondary-border-color-hover: $neo-button-secondary-border-color !default;
@@ -52,16 +57,17 @@ $neo-button-secondary-border-color-pressed: $neo-button-secondary-border-color !
 $neo-button-secondary-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1), inset 1px 1px 1px rgba(0, 0, 0, 0.1) !default;
 $neo-button-secondary-box-shadow-hover: $neo-button-secondary-box-shadow !default;
 $neo-button-secondary-box-shadow-pressed: $neo-button-secondary-box-shadow !default;
+$neo-button-secondary-box-shadow-alternative: -1px -1px 1px rgba(0, 0, 0, 0.02), 1px 1px 3px rgba(0, 0, 0, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.8) !default;
 
 // Tertiary button: common
 $neo-button-tertiary-border-width: 0px !default;
 $neo-button-tertiary-border-style: $neo-button-border-style !default;
-$neo-button-tertiary-border-radius: $neo-button-border-radius !default;
 $neo-button-tertiary-transition: $neo-button-transition !default;
 // Tertiary button: background colors
 $neo-button-tertiary-background-color: $neo-color-utility-surface !default;
 $neo-button-tertiary-background-color-hover: $neo-button-tertiary-background-color !default;
 $neo-button-tertiary-background-color-pressed: $neo-button-tertiary-background-color !default;
+$neo-button-tertiary-background-color-alternative: $neo-color-utility-body !default;
 // Tertiary button: text colors
 $neo-button-tertiary-text-color: $neo-color-base-content-secondary !default;
 $neo-button-tertiary-text-color-hover: $neo-color-base-content-primary !default;
@@ -75,26 +81,56 @@ $neo-button-tertiary-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), inset 1px 1px 2
 $neo-button-tertiary-box-shadow-hover: $neo-button-tertiary-box-shadow !default;
 $neo-button-tertiary-box-shadow-pressed: $neo-button-tertiary-box-shadow !default;
 
-@mixin disabled ($border-width: $neo-button-border-width) {
+// Action button: common
+$neo-button-action-border-width: 0px !default;
+$neo-button-action-border-style: $neo-button-border-style !default;
+$neo-button-action-transition: $neo-button-transition !default;
+// Action button: background colors
+$neo-button-action-background-color: $neo-color-utility-body !default;
+$neo-button-action-background-color-hover: $neo-button-action-background-color !default;
+$neo-button-action-background-color-pressed: $neo-button-action-background-color !default;
+$neo-button-action-background-color-alternative: transparent !default;
+// Action button: text colors
+$neo-button-action-text-color: $neo-color-base-content-tertiary !default;
+$neo-button-action-text-color-hover: $neo-color-base-content-secondary !default;
+$neo-button-action-text-color-pressed: $neo-color-theme-accent !default;
+$neo-button-action-text-color-alternative: $neo-color-base-content-tertiary !default;
+$neo-button-action-text-color-alternative-active: $neo-color-base-content-secondary !default;
+// Action button: border colors
+$neo-button-action-border-color: transparent !default;
+$neo-button-action-border-color-hover: $neo-button-action-border-color !default;
+$neo-button-action-border-color-pressed: $neo-button-action-border-color !default;
+$neo-button-action-border-color-alternative: transparent !default;
+// Action button: box-shadow
+$neo-button-action-box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.02), 1px 1px 3px rgba(0, 0, 0, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.8) !default;
+$neo-button-action-box-shadow-hover: $neo-button-action-box-shadow !default;
+$neo-button-action-box-shadow-pressed: 1px 1px 2px #FFFFFF, inset 1px 1px 2px rgba(0, 0, 0, 0.1) !default;
+$neo-button-action-box-shadow-alternative: none !default;
+
+@mixin disabled (
+  $border-width: $neo-button-border-width,
+  $background-color: $neo-button-background-color-disabled,
+  $box-shadow: $neo-button-box-shadow-disabled
+) {
   &:disabled, &:disabled:hover {
     color: $neo-button-text-color-disabled;
-    background-color: $neo-button-background-color-disabled;
+    background-color: $background-color;
     border-color: $neo-button-border-color-disabled;
-    box-shadow: $neo-button-box-shadow-disabled;
+    box-shadow: $box-shadow;
     border-width: $border-width;
   }
 }
 
 .el-button.neomorphic {
+  transition: $neo-button-transition;
+
   &.s-primary {
     background: $neo-button-primary-background-color;
     border-color: $neo-button-primary-border-color;
-    border-radius: $neo-button-primary-border-radius;
     border-style: $neo-button-primary-border-style;
     border-width: $neo-button-primary-border-width;
     box-shadow: $neo-button-primary-box-shadow;
     color: $neo-button-primary-text-color;
-    transition: $neo-button-primary-transition;
 
     &:hover, &:focus, &.focusing {
       background: $neo-button-primary-background-color-hover;
@@ -109,17 +145,27 @@ $neo-button-tertiary-box-shadow-pressed: $neo-button-tertiary-box-shadow !defaul
       box-shadow: $neo-button-primary-box-shadow-pressed;
     }
     @include disabled;
+
+    &.s-alternative {
+      background: $neo-button-primary-background-color-alternative;
+      border-width: $neo-button-primary-border-width-alternative;
+      box-shadow: $neo-button-primary-box-shadow-alternative;
+
+      &:hover, &:focus, &.focusing, &:active, &.s-pressed {
+        background: $neo-button-primary-background-color-alternative-active;
+      }
+
+      @include disabled($neo-button-primary-border-width-alternative);
+    }
   }
 
   &.s-secondary {
     background: $neo-button-secondary-background-color;
     border-color: $neo-button-secondary-border-color;
-    border-radius: $neo-button-secondary-border-radius;
     border-style: $neo-button-secondary-border-style;
     border-width: $neo-button-secondary-border-width;
     box-shadow: $neo-button-secondary-box-shadow;
     color: $neo-button-secondary-text-color;
-    transition: $neo-button-secondary-transition;
 
     &:hover, &:focus, &.focusing {
       background: $neo-button-secondary-background-color-hover;
@@ -133,18 +179,28 @@ $neo-button-tertiary-box-shadow-pressed: $neo-button-tertiary-box-shadow !defaul
       color: $neo-button-secondary-text-color-pressed;
       box-shadow: $neo-button-secondary-box-shadow-pressed;
     }
-    @include disabled;
+    @include disabled($neo-button-secondary-border-width);
+
+    &.s-alternative {
+      background: $neo-button-secondary-background-color-alternative;
+      box-shadow: $neo-button-secondary-box-shadow-alternative;
+      color: $neo-button-secondary-text-color-alternative;
+
+      &:hover, &:focus, &.focusing, &:active, &.s-pressed {
+        background: $neo-button-secondary-background-color-alternative-active;
+        color: $neo-button-secondary-text-color-alternative-active;
+      }
+      @include disabled($neo-button-secondary-border-width);
+    }
   }
 
   &.s-tertiary {
     background: $neo-button-tertiary-background-color;
     border-color: $neo-button-tertiary-border-color;
-    border-radius: $neo-button-tertiary-border-radius;
     border-style: $neo-button-tertiary-border-style;
     border-width: $neo-button-tertiary-border-width;
     box-shadow: $neo-button-tertiary-box-shadow;
     color: $neo-button-tertiary-text-color;
-    transition: $neo-button-tertiary-transition;
 
     &:hover, &:focus, &.focusing {
       background: $neo-button-tertiary-background-color-hover;
@@ -158,6 +214,48 @@ $neo-button-tertiary-box-shadow-pressed: $neo-button-tertiary-box-shadow !defaul
       color: $neo-button-tertiary-text-color-pressed;
       box-shadow: $neo-button-tertiary-box-shadow-pressed;
     }
-    @include disabled(0);
+    @include disabled($neo-button-tertiary-border-width);
+
+    &.s-alternative {
+      background: $neo-button-tertiary-background-color-alternative;
+
+      @include disabled($neo-button-tertiary-border-width);
+    }
+  }
+
+  &.s-action {
+    background: $neo-button-action-background-color;
+    border-color: $neo-button-action-border-color;
+    border-style: $neo-button-action-border-style;
+    border-width: $neo-button-action-border-width;
+    box-shadow: $neo-button-action-box-shadow;
+    color: $neo-button-action-text-color;
+
+    &:hover, &:focus, &.focusing {
+      background: $neo-button-action-background-color-hover;
+      border-color: $neo-button-action-border-color-hover;
+      color: $neo-button-action-text-color-hover;
+      box-shadow: $neo-button-action-box-shadow-hover;
+    }
+    &:active, &.s-pressed {
+      background: $neo-button-action-background-color-pressed;
+      border-color: $neo-button-action-border-color-pressed;
+      color: $neo-button-action-text-color-pressed;
+      box-shadow: $neo-button-action-box-shadow-pressed;
+    }
+    @include disabled($neo-button-action-border-width, $neo-button-action-background-color, $neo-button-action-box-shadow-pressed);
+    &.s-alternative {
+      color: $neo-button-action-text-color-alternative;
+
+      &, &:hover, &:focus, &.focusing, &:active, &.s-pressed {
+        background-color: $neo-button-action-background-color-alternative;
+        border-color: $neo-button-action-border-color-alternative;
+        box-shadow: $neo-button-action-box-shadow-alternative;
+      }
+      &:hover, &:focus, &.focusing, &:active, &.s-pressed {
+        color: $neo-button-action-text-color-alternative-active;
+      }
+      @include disabled($neo-button-action-border-width, $neo-button-action-background-color-alternative, $neo-button-action-box-shadow-alternative);
+    }
   }
 }

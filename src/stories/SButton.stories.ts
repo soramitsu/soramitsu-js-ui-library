@@ -20,7 +20,7 @@ export const configurable = () => ({
                :disabled="disabled"
                :loading="loading"
                :tooltip="tooltip"
-               :icon="type === 'action' ? 'arrow-left-16' : ''"
+               :icon="type === 'action' ? 'arrows-swap-24' : ''"
                :type="type"
                :size="size"
                :border-radius="borderRadius"
@@ -61,7 +61,9 @@ export const configurable = () => ({
     }
   },
   methods: {
-    handleClick: () => alert('clicked')
+    handleClick: () => {
+      // alert('clicked')
+    }
   }
 })
 
@@ -77,19 +79,25 @@ export const differentTypeButtonsData = Object.values(ButtonTypes).map(type => {
   return data
 })
 export const withDifferentTypes = () => ({
-  components: { SButton, SRow },
-  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
-               <s-button
-                 v-for="item in items"
-                 :key="item.type"
-                 :type="item.type"
-                 :tooltip="item.tooltip"
-                 :icon="item.icon"
-               >
-                 {{ item.label }}
-               </s-button>
-             </s-row>`,
+  components: { SButton, SRow, DesignSystemProvider },
+  template: `
+            <design-system-provider :value="designSystem">
+              <s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
+                <s-button
+                  v-for="item in items"
+                  :key="item.type"
+                  :type="item.type"
+                  :tooltip="item.tooltip"
+                  :icon="item.icon"
+                >
+                  {{ item.label }}
+                </s-button>
+              </s-row>
+            <design-system-provider />`,
   props: {
+    designSystem: {
+      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+    },
     items: {
       default: () => differentTypeButtonsData
     }
