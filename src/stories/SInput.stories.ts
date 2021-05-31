@@ -1,8 +1,9 @@
 import { text, boolean, withKnobs, number, select } from '@storybook/addon-knobs'
 
-import { SInput, SRow, SCol } from '../components'
+import { SInput, SRow, SCol, SDesignSystemProvider } from '../components'
 import { BorderRadius } from '../types'
 import { InputType, InputSize } from '../components/Input'
+import { DesignSystemTypes } from '../utils/DesignSystem'
 
 export default {
   component: SInput,
@@ -12,8 +13,10 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { SInput },
-  template: `<s-input
+  components: { SInput, SDesignSystemProvider },
+  template: `
+            <s-design-system-provider :value="designSystem">
+              <s-input
                v-model="input"
                :type="type"
                :placeholder="placeholder"
@@ -26,11 +29,32 @@ export const configurable = () => ({
                :size="size"
                :prefix="prefix"
                :suffix="suffix"
-             />`,
+              >
+                <div v-if="top" slot="top">{{ top }}</div>
+                <div v-if="bottom" slot="bottom">{{ bottom }}</div>
+                <div v-if="left" slot="left">{{ left }}</div>
+                <div v-if="right" slot="right">{{ right }}</div>
+              </s-input>
+            </s-design-system-provider>`,
   data: () => ({
     input: ''
   }),
   props: {
+    designSystem: {
+      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+    },
+    top: {
+      default: text('Top slot content', '')
+    },
+    bottom: {
+      default: text('Bottom slot content', '')
+    },
+    left: {
+      default: text('Left slot content', '')
+    },
+    right: {
+      default: text('Right slot content', '')
+    },
     type: {
       default: select('Type', Object.values(InputType), InputType.TEXT)
     },
