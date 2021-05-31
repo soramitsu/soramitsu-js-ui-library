@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref, Inject } from 'vue-property-decorator'
+import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
 
 import { Size } from '@/types'
 
@@ -190,16 +190,14 @@ export default class STableColumn extends Vue {
   get computedWidth () {
     const tableBorder = (this.sTable || {}).border
     const size = (this.sTable || {}).size
-    if (!this.width && this.type === 'selection' && size) {
+    if (!this.width && this.type === 'selection') {
       return !tableBorder ? ({
         [Size.SMALL]: '46',
-        [Size.MEDIUM]: '48',
-        [Size.BIG]: '52'
-      }[size]) : ({
+        [Size.MEDIUM]: '48'
+      }[size] || '52') : ({
         [Size.SMALL]: '42',
-        [Size.MEDIUM]: '44',
-        [Size.BIG]: '48'
-      }[size])
+        [Size.MEDIUM]: '44'
+      }[size] || '48')
     }
     return this.width
   }
