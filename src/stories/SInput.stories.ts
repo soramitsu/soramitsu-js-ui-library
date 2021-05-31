@@ -29,7 +29,12 @@ export const configurable = () => ({
                :size="size"
                :prefix="prefix"
                :suffix="suffix"
-              />
+              >
+                <div v-if="top" slot="top">{{ top }}</div>
+                <div v-if="bottom" slot="bottom">{{ bottom }}</div>
+                <div v-if="left" slot="left">{{ left }}</div>
+                <div v-if="right" slot="right">{{ right }}</div>
+              </s-input>
             </s-design-system-provider>`,
   data: () => ({
     input: ''
@@ -37,6 +42,18 @@ export const configurable = () => ({
   props: {
     designSystem: {
       default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+    },
+    top: {
+      default: text('Top slot content', '')
+    },
+    bottom: {
+      default: text('Bottom slot content', '')
+    },
+    left: {
+      default: text('Left slot content', '')
+    },
+    right: {
+      default: text('Right slot content', '')
     },
     type: {
       default: select('Type', Object.values(InputType), InputType.TEXT)

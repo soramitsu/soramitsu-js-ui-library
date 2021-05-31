@@ -3,38 +3,48 @@
     class="s-input"
     :class="computedClasses"
   >
-    <slot name="label">
-      <span v-if="value && !isMediumInput" class="s-placeholder">{{ placeholder }}</span>
-    </slot>
-    <el-input
-      ref="el-input"
-      :value="value"
-      :type="computedType"
-      :placeholder="placeholder"
-      :disabled="disabled"
-      :show-password="showPassword && isTextInput"
-      :readonly="readonly"
-      :show-word-limit="showTextLimit && isTextOrTextareaInput"
-      :maxlength="maxlength"
-      :minlength="minlength"
-      :autocomplete="autocomplete"
-      :name="name"
-      :max="max"
-      :min="min"
-      :form="form"
-      :label="label"
-      :accept="accept"
-      :tabindex="tabindex"
-      :prefix-icon="prefix"
-      :suffix-icon="suffix"
-      @input="handleInput"
-      @change="handleChange"
-      @blur="handleBlur"
-      @focus="handleFocus"
-      @paste.native="handlePaste"
-    >
-      <slot slot="suffix" name="suffix"></slot>
-    </el-input>
+    <slot name="top" />
+
+    <div class="s-input__content">
+      <slot name="left" />
+
+      <div class="s-input__input">
+        <span v-if="value && !isMediumInput && !$slots.top" class="s-placeholder">{{ placeholder }}</span>
+        <el-input
+          ref="el-input"
+          :value="value"
+          :type="computedType"
+          :placeholder="placeholder"
+          :disabled="disabled"
+          :show-password="showPassword && isTextInput"
+          :readonly="readonly"
+          :show-word-limit="showTextLimit && isTextOrTextareaInput"
+          :maxlength="maxlength"
+          :minlength="minlength"
+          :autocomplete="autocomplete"
+          :name="name"
+          :max="max"
+          :min="min"
+          :form="form"
+          :label="label"
+          :accept="accept"
+          :tabindex="tabindex"
+          :prefix-icon="prefix"
+          :suffix-icon="suffix"
+          @input="handleInput"
+          @change="handleChange"
+          @blur="handleBlur"
+          @focus="handleFocus"
+          @paste.native="handlePaste"
+        >
+          <slot slot="suffix" name="suffix"></slot>
+        </el-input>
+      </div>
+      <slot name="right" />
+    </div>
+
+    <slot name="bottom"/>
+
     <template v-if="type === InputType.TEXT_FILE">
       <s-icon name="file-file-upload-24" />
       <input :value="emptyValue" type="file" :accept="accept" @change="handleTextFileChange">
@@ -199,6 +209,9 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
     }
     if (this.prefix) {
       cssClasses.push('s-input--prefix')
+    }
+    if (this.suffix) {
+      cssClasses.push('s-input--suffix')
     }
     return cssClasses
   }

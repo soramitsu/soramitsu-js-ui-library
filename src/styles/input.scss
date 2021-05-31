@@ -16,9 +16,7 @@ $input-padding-left: $s-padding-input - $input-border-width;
 
 .s-input {
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
 
   background-color: var(--s-color-base-background);
   border-color: var(--s-color-base-background);
@@ -35,6 +33,17 @@ $input-padding-left: $s-padding-input - $input-border-width;
   @include input-border-radius("small", var(--s-border-radius-small));
   @include input-border-radius("mini", var(--s-border-radius-mini));
 
+  &__content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__input {
+    flex: 1;
+    position: relative;
+  }
+
   &.s-size-medium {
     min-height: $s-size-medium;
   }
@@ -48,7 +57,7 @@ $input-padding-left: $s-padding-input - $input-border-width;
     z-index: 1;
     pointer-events: none;
     position: absolute;
-    top: $s-padding-input / 2;
+    top: -3px;
 
     & + .el-input, & + .el-textarea {
       padding-top: $s-padding-input;
@@ -85,12 +94,25 @@ $input-padding-left: $s-padding-input - $input-border-width;
     }
   }
 
+  &--suffix:not(.s-textarea) {
+    .s-placeholder {
+      padding-right: $input-icon-width + $s-padding-input / 2;
+    }
+  }
+
   .el-input, .el-textarea {
     font-size: inherit;
     position: unset;
 
     [class^="el-input__count"] {
       background-color: transparent;
+    }
+
+    &.is-disabled {
+      .el-input__inner {
+        background-color: transparent;
+        color: inherit;
+      }
     }
 
     &__inner {
@@ -115,12 +137,12 @@ $input-padding-left: $s-padding-input - $input-border-width;
 
     &__prefix {
       z-index: 1;
-      left: $input-padding-left;
+      left: 0;
     }
 
     &__suffix {
       z-index: 1;
-      right: $input-padding-left;
+      right: 0;
     }
 
     &--prefix {
