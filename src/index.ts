@@ -54,7 +54,9 @@ import { Float, Integer } from './directives'
 import { Components } from './types/components'
 import { Directives } from './types/directives'
 import { modules, Modules } from './store'
-import { setTheme } from './utils'
+import { setTheme, setDesignSystem } from './utils'
+import { DesignSystemTypes } from './utils/DesignSystem'
+import { Themes } from './utils/Theme'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 import { SDialogMixin } from './mixins'
 
@@ -133,6 +135,9 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export {
   setTheme,
+  Themes,
+  setDesignSystem,
+  DesignSystemTypes,
   Loading,
   Message,
   MessageBox,
