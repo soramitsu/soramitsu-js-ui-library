@@ -14,3 +14,10 @@ export default class SDesignSystemProvider extends Vue {
   @Provide(DesignSystemProvideKey) designSystem = this
 }
 </script>
+
+<style lang="scss" scoped>
+.design-system-provider {
+  flex: 1;
+  width: 100%;
+}
+</style>

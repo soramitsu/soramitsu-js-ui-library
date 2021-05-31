@@ -1,0 +1,41 @@
+$neu-input-border-width: 0 !default;
+$neu-input-background: var(--neu-color-base-background);
+$neu-input-box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.02), 1px 1px 3px rgba(0, 0, 0, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.8);
+$neu-input-box-shadow-active: 1px 1px 2px #FFFFFF, inset 1px 1px 2px rgba(0, 0, 0, 0.1);
+$neu-input-color: var(--neu-color-base-content-primary);
+$neu-input-color-disabled: var(--neu-color-base-content-secondary);
+$neu-input-placeholder-color: var(--neu-color-base-content-secondary);
+
+.s-input.neumorphic {
+  border-width: $neu-input-border-width;
+  box-shadow: $neu-input-box-shadow;
+  color: $neu-input-color;
+
+  .el-input, .el-textarea {
+    &__inner {
+      color: $neu-input-color;
+    }
+  }
+
+  & .s-placeholder {
+    color: $neu-input-placeholder-color;
+  }
+
+  &, &:hover, &.s-focused, &.s-disabled {
+    background: $neu-input-background;
+  }
+
+  &.s-focused, &.s-disabled {
+    box-shadow: $neu-input-box-shadow-active;
+  }
+
+  &.s-disabled {
+    .s-placeholder {
+      color: $neu-input-placeholder-color;
+    }
+
+    .el-input__inner {
+      color: $neu-input-color-disabled;
+    }
+  }
+}

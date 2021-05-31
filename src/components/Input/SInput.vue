@@ -3,7 +3,9 @@
     class="s-input"
     :class="computedClasses"
   >
-    <span v-if="value && !isMediumInput" class="s-placeholder">{{ placeholder }}</span>
+    <slot name="label">
+      <span v-if="value && !isMediumInput" class="s-placeholder">{{ placeholder }}</span>
+    </slot>
     <el-input
       ref="el-input"
       :value="value"
@@ -23,7 +25,7 @@
       :label="label"
       :accept="accept"
       :tabindex="tabindex"
-      :prefix-icon="(isMediumInput && prefix) ? prefix : ''"
+      :prefix-icon="prefix"
       :suffix-icon="suffix"
       @input="handleInput"
       @change="handleChange"
@@ -46,13 +48,14 @@ import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
 import { SIcon } from '../Icon'
+import { DesignSystemInject } from '../DesignSystem'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { Autocomplete, InputSize, InputType } from './consts'
 
 @Component({
   components: { SIcon }
 })
-export default class SInput extends Mixins(BorderRadiusMixin) {
+export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject) {
   readonly InputType = InputType
   readonly emptyValue = null
   /**
@@ -170,6 +173,9 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
     if (this.focused) {
       cssClasses.push('s-focused')
     }
@@ -190,6 +196,9 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
     }
     if (this.size) {
       cssClasses.push(this.sizeClass)
+    }
+    if (this.prefix) {
+      cssClasses.push('s-input--prefix')
     }
     return cssClasses
   }
