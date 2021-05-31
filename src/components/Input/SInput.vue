@@ -3,40 +3,51 @@
     class="s-input"
     :class="computedClasses"
   >
-    <span v-if="value && !isMediumInput" class="s-placeholder">{{ placeholder }}</span>
-    <el-input
-      ref="el-input"
-      :value="value"
-      :type="computedType"
-      :placeholder="placeholder"
-      :disabled="disabled"
-      :show-password="showPassword && isTextInput"
-      :readonly="readonly"
-      :show-word-limit="showTextLimit && isTextOrTextareaInput"
-      :maxlength="maxlength"
-      :minlength="minlength"
-      :autocomplete="autocomplete"
-      :name="name"
-      :max="max"
-      :min="min"
-      :form="form"
-      :label="label"
-      :accept="accept"
-      :tabindex="tabindex"
-      :prefix-icon="(isMediumInput && prefix) ? prefix : ''"
-      :suffix-icon="suffix"
-      @input="handleInput"
-      @change="handleChange"
-      @blur="handleBlur"
-      @focus="handleFocus"
-      @paste.native="handlePaste"
-    >
-      <slot slot="suffix" name="suffix"></slot>
-    </el-input>
-    <template v-if="type === InputType.TEXT_FILE">
-      <s-icon name="file-file-upload-24" />
-      <input :value="emptyValue" type="file" :accept="accept" @change="handleTextFileChange">
-    </template>
+    <slot name="top" />
+
+    <div class="s-input__content">
+      <slot name="left" />
+
+      <div class="s-input__input">
+        <span v-if="value && !isMediumInput && !$slots.top" class="s-placeholder">{{ placeholder }}</span>
+        <el-input
+          ref="el-input"
+          :value="value"
+          :type="computedType"
+          :placeholder="placeholder"
+          :disabled="disabled"
+          :show-password="showPassword && isTextInput"
+          :readonly="readonly"
+          :show-word-limit="showTextLimit && isTextOrTextareaInput"
+          :maxlength="maxlength"
+          :minlength="minlength"
+          :autocomplete="autocomplete"
+          :name="name"
+          :max="max"
+          :min="min"
+          :form="form"
+          :label="label"
+          :accept="accept"
+          :tabindex="tabindex"
+          :prefix-icon="prefix"
+          :suffix-icon="suffix"
+          @input="handleInput"
+          @change="handleChange"
+          @blur="handleBlur"
+          @focus="handleFocus"
+          @paste.native="handlePaste"
+        >
+          <slot slot="suffix" name="suffix"></slot>
+        </el-input>
+        <template v-if="type === InputType.TEXT_FILE">
+          <s-icon name="file-file-upload-24" />
+          <input :value="emptyValue" type="file" :accept="accept" @change="handleTextFileChange">
+        </template>
+      </div>
+      <slot name="right" />
+    </div>
+
+    <slot name="bottom"/>
   </div>
 </template>
 
@@ -46,13 +57,14 @@ import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
 import { SIcon } from '../Icon'
+import { DesignSystemInject } from '../DesignSystem'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { Autocomplete, InputSize, InputType } from './consts'
 
 @Component({
   components: { SIcon }
 })
-export default class SInput extends Mixins(BorderRadiusMixin) {
+export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject) {
   readonly InputType = InputType
   readonly emptyValue = null
   /**
@@ -170,6 +182,9 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
     if (this.focused) {
       cssClasses.push('s-focused')
     }
@@ -190,6 +205,12 @@ export default class SInput extends Mixins(BorderRadiusMixin) {
     }
     if (this.size) {
       cssClasses.push(this.sizeClass)
+    }
+    if (this.prefix) {
+      cssClasses.push('s-input--prefix')
+    }
+    if (this.suffix) {
+      cssClasses.push('s-input--suffix')
     }
     return cssClasses
   }

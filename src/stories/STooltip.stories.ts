@@ -135,3 +135,20 @@ export const withManualMode = () => ({
                </s-tooltip>
              </s-row>`
 })
+
+export const withDifferentContent = () => ({
+  components: { STooltip, SButton, SRow },
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
+               <s-button style="margin: 40px" :tooltip="content" @click="handleClick">Click</s-button>
+             </s-row>`,
+  data: () => ({
+    content: 'Click'
+  }),
+  methods: {
+    async handleClick () {
+      (this as any).content = 'Clicked!'
+      await new Promise((resolve) => setTimeout(resolve, 400));
+      (this as any).content = 'Click'
+    }
+  }
+})

@@ -26,6 +26,7 @@ import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
 import { PopoverPlacement } from 'element-ui/types/popover'
 
+import { DesignSystemInject } from '../DesignSystem'
 import SizeMixin from '../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { SIcon } from '../Icon'
@@ -35,7 +36,7 @@ import { ButtonTypes, ButtonNativeTypes, ButtonIconPosition } from './consts'
 @Component({
   components: { SIcon, STooltip }
 })
-export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin) {
+export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, DesignSystemInject) {
   readonly IconPosition = ButtonIconPosition
   readonly ButtonTypes = ButtonTypes
   /**
@@ -119,6 +120,9 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
     if ((this.elForm || this.elFormItem || {}).size) {
       cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
     } else if (this.isStandardSize) {

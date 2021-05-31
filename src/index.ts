@@ -14,6 +14,7 @@ import {
   SCollapseItem,
   SContainer,
   SDatePicker,
+  SDesignSystemProvider,
   SDialog,
   SDivider,
   SDropdown,
@@ -53,7 +54,9 @@ import { Float, Integer } from './directives'
 import { Components } from './types/components'
 import { Directives } from './types/directives'
 import { modules, Modules } from './store'
-import { setTheme } from './utils'
+import { setTheme, setDesignSystem } from './utils'
+import { DesignSystemTypes } from './utils/DesignSystem'
+import { Themes } from './utils/Theme'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 import { SDialogMixin } from './mixins'
 
@@ -71,6 +74,7 @@ const components = [
   { component: SCollapseItem, name: Components.SCollapseItem },
   { component: SContainer, name: Components.SContainer },
   { component: SDatePicker, name: Components.SDatePicker },
+  { component: SDesignSystemProvider, name: Components.SDesignSystemProvider },
   { component: SDialog, name: Components.SDialog },
   { component: SDivider, name: Components.SDivider },
   { component: SDropdown, name: Components.SDropdown },
@@ -131,6 +135,9 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export {
   setTheme,
+  Themes,
+  setDesignSystem,
+  DesignSystemTypes,
   Loading,
   Message,
   MessageBox,
@@ -148,6 +155,7 @@ export {
   SCollapseItem,
   SContainer,
   SDatePicker,
+  SDesignSystemProvider,
   SDialog,
   SDivider,
   SDropdown,
