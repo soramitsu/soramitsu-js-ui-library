@@ -17,6 +17,7 @@ $input-padding-left: $s-padding-input - $input-border-width;
 .s-input {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   background-color: var(--s-color-base-background);
   border-color: var(--s-color-base-background);
@@ -177,11 +178,11 @@ $input-padding-left: $s-padding-input - $input-border-width;
       padding-right: 56px;
     }
     .s-icon-file-file-upload-24 {
-      top: 16px;
-      right: 16px;
+      right: 0;
       font-size: var(--s-icon-font-size-big);
-      z-index: 1;
+      z-index: 2;
       position: absolute;
+      cursor: pointer;
       + input {
         cursor: pointer;
         position: absolute;
@@ -190,7 +191,7 @@ $input-padding-left: $s-padding-input - $input-border-width;
         right: 0;
         width: 56px;
         height: 100%;
-        z-index: 2;
+        z-index: 1;
       }
     }
   }

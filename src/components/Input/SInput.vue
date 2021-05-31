@@ -39,16 +39,15 @@
         >
           <slot slot="suffix" name="suffix"></slot>
         </el-input>
+        <template v-if="type === InputType.TEXT_FILE">
+          <s-icon name="file-file-upload-24" />
+          <input :value="emptyValue" type="file" :accept="accept" @change="handleTextFileChange">
+        </template>
       </div>
       <slot name="right" />
     </div>
 
     <slot name="bottom"/>
-
-    <template v-if="type === InputType.TEXT_FILE">
-      <s-icon name="file-file-upload-24" />
-      <input :value="emptyValue" type="file" :accept="accept" @change="handleTextFileChange">
-    </template>
   </div>
 </template>
 
