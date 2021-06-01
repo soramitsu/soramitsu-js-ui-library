@@ -95,6 +95,11 @@ $neu-button-action-box-shadow-hover: $neu-button-action-box-shadow !default;
 $neu-button-action-box-shadow-pressed: 1px 1px 2px #FFFFFF, inset 1px 1px 2px rgba(0, 0, 0, 0.1) !default;
 $neu-button-action-box-shadow-alternative: none !default;
 
+$neu-button-padding-big: 7px 13px !default;
+$neu-button-padding-medium: 5px 13px !default;
+$neu-button-padding-small: 4px 6px !default;
+$neu-button-padding-mini: 3px 6px !default;
+
 @mixin disabled (
   $border-width: $neu-button-border-width,
   $background-color: $neu-button-background-color-disabled,
@@ -109,8 +114,25 @@ $neu-button-action-box-shadow-alternative: none !default;
   }
 }
 
+@mixin size ($suffix: 'big', $padding) {
+  &.s-#{$suffix} {
+    padding: $padding;
+    height: var(--neu-size-#{$suffix});
+
+    &.is-circle {
+      width: var(--neu-size-#{$suffix});
+      padding: 7px;
+    }
+  }
+}
+
 .el-button.neumorphic {
   transition: $neu-button-transition;
+
+  @include size('big', $neu-button-padding-big);
+  @include size('medium', $neu-button-padding-medium);
+  @include size('small', $neu-button-padding-small);
+  @include size('mini', $neu-button-padding-mini);
 
   &.s-primary {
     background: $neu-button-primary-background-color;

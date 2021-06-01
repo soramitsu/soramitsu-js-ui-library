@@ -20,7 +20,12 @@ export const configurable = () => ({
                  :hasLocaleString="hasLocaleString"
                  :delimiters="delimiters"
                  :max="max"
-               />
+               >
+                <div v-if="top" slot="top">{{ top }}</div>
+                <div v-if="bottom" slot="bottom">{{ bottom }}</div>
+                <div v-if="left" slot="left">{{ left }}</div>
+                <div v-if="right" slot="right">{{ right }}</div>
+               </s-float-input>
               </s-row>
             </s-design-system-provider>`,
   data: () => ({
@@ -47,6 +52,18 @@ export const configurable = () => ({
           decimal: '.'
         }
       )
+    },
+    top: {
+      default: text('Top slot content', '')
+    },
+    bottom: {
+      default: text('Bottom slot content', '')
+    },
+    left: {
+      default: text('Left slot content', '')
+    },
+    right: {
+      default: text('Right slot content', '')
     }
   }
 })
