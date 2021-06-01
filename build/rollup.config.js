@@ -33,7 +33,7 @@ export default {
       targets: [
         { src: 'src/assets/*', dest: 'lib/assets' },
         {
-          src: 'src/styles/*.scss',
+          src: 'src/styles/*.(scss|ts)',
           dest: 'lib/styles',
           // Replace all imports for scss files which will be used as theming files
           transform: (content) => {
