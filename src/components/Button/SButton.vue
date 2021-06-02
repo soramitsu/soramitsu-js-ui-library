@@ -9,7 +9,7 @@
       :disabled="disabled"
       :loading="isLoading"
       :autofocus="autofocus"
-      :circle="type === ButtonTypes.ACTION && rounded"
+      :circle="isRounded"
       :icon="elementIcon"
       @click="handleClick"
     >
@@ -134,7 +134,7 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, Design
     if ((Object.values(ButtonTypes) as Array<string>).includes(this.type)) {
       cssClasses.push(`s-${this.type}`)
     }
-    if ((Object.values(ButtonIconPosition) as Array<string>).includes(this.iconPosition)) {
+    if (!!this.availableIcon && (Object.values(ButtonIconPosition) as Array<string>).includes(this.iconPosition)) {
       cssClasses.push(`s-i-position-${this.iconPosition}`)
     }
     if (this.isLoading) {
@@ -169,8 +169,14 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, Design
     return this.icon
   }
 
+  get isRounded (): boolean {
+    if (([ButtonTypes.LINK, ButtonTypes.ACTION] as Array<string>).includes(this.type)) return false
+
+    return this.rounded
+  }
+
   get isLoading (): boolean {
-    if (([ButtonTypes.LINK, ButtonTypes.ACTION] as Array<string>).includes(this.type)) {
+    if (([ButtonTypes.LINK, ButtonTypes.ACTION] as Array<string>).includes(this.type) || this.isRounded) {
       return false
     }
     return this.loading
