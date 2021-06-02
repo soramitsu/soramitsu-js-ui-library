@@ -37,7 +37,10 @@
           @focus="handleFocus"
           @paste.native="handlePaste"
         >
+          <slot slot="prefix" name="prefix"></slot>
           <slot slot="suffix" name="suffix"></slot>
+          <slot slot="prepend" name="prepend"></slot>
+          <slot slot="append" name="append"></slot>
         </el-input>
         <template v-if="type === InputType.TEXT_FILE">
           <s-icon name="file-file-upload-24" />
