@@ -1,8 +1,9 @@
 import { text, withKnobs, select, boolean } from '@storybook/addon-knobs'
 
-import { SCard, SRow, SDropdown, SDropdownItem } from '../components'
-import { BorderRadius } from '../types'
+import { SCard, SRow, SDropdown, SDropdownItem, SDesignSystemProvider } from '../components'
+import { BorderRadius, Status, Size } from '../types'
 import { CardShadow } from '../components/Card'
+import { DesignSystemTypes } from '../utils/DesignSystem'
 
 export default {
   component: SCard,
@@ -11,10 +12,12 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { SCard, SRow, SDropdown, SDropdownItem },
-  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
-               <s-card style="width: 80%;" :shadow="shadow" :border-radius="borderRadius" :clickable="clickable" @click="handleClick">
-                 <template slot="header">
+  components: { SCard, SRow, SDropdown, SDropdownItem, SDesignSystemProvider },
+  template: `
+            <s-design-system-provider :value="designSystem">
+              <s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
+               <s-card style="width: 80%;" :shadow="shadow" :border-radius="borderRadius" :clickable="clickable" :pressed="pressed" :primary="primary" :status="status" :size="size" @click="handleClick">
+                 <template slot="header" v-if="header">
                    <div class="s-flex" style="justify-content: space-between; padding-right: 20px;">
                      <span>{{ header }}</span>
                      <s-dropdown type="ellipsis" :border-radius="borderRadius">
@@ -31,19 +34,35 @@ export const configurable = () => ({
                    {{'List item ' + o }}
                  </div>
                </s-card>
-             </s-row>`,
+              </s-row>
+            </s-design-system-provider>`,
   props: {
+    designSystem: {
+      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+    },
     shadow: {
       default: select('Shadow', Object.values(CardShadow), CardShadow.HOVER)
     },
     header: {
-      default: text('Header', 'Card header')
+      default: text('Header', 'Card header', undefined)
     },
     borderRadius: {
       default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
     },
+    status: {
+      default: select('Status', Object.values(Status), Status.DEFAULT)
+    },
+    size: {
+      default: select('Size', Object.values(Size), Size.BIG)
+    },
     clickable: {
       default: boolean('Clickable', false)
+    },
+    primary: {
+      default: boolean('Primary', false)
+    },
+    pressed: {
+      default: boolean('Pressed', false)
     }
   },
   methods: {

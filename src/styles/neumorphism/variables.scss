@@ -36,11 +36,19 @@ $neu-color-status-warning: #479AEF !default; // Warning text and icon
 $neu-color-status-warning-background: #C6E2FF !default; // Warning state background
 $neu-color-status-error: #F754A3 !default; // Error text and icon
 $neu-color-status-error-background: #FFD8EB !default; // Error state background
-
+// Sizes
 $neu-size-big: 46px !default;
 $neu-size-medium: 42px !default;
 $neu-size-small: 32px !default;
 $neu-size-mini: 24px !default;
+// Shadows
+$neu-shadow-color-dark: rgba(0, 0, 0, 0.1) !default;
+$neu-shadow-color-dark-light: rgba(0, 0, 0, 0.02) !default;
+$neu-shadow-color-light: rgba(255, 255, 255, 1) !default;
+$neu-shadow-color-light-dark: rgba(255, 255, 255, 0.8) !default;
+$neu-shadow-surface: 1px 1px 5px $neu-shadow-color-dark, inset 1px 1px 1px $neu-shadow-color-dark !default; // container
+$neu-shadow-element: -1px -1px 1px $neu-shadow-color-dark-light, 1px 1px 3px $neu-shadow-color-dark, inset 1px 1px 2px $neu-shadow-color-light-dark !default; // input, card
+$neu-shadow-element-pressed: 1px 1px 2px $neu-shadow-color-light, inset 1px 1px 2px $neu-shadow-color-dark !default;
 
 :root {
   --neu-brand-pinky: #{neu-brand-pinky};
@@ -76,4 +84,11 @@ $neu-size-mini: 24px !default;
   --neu-size-medium: #{$neu-size-medium};
   --neu-size-small: #{$neu-size-small};
   --neu-size-mini: #{$neu-size-mini};
+  --neu-shadow-surface: #{$neu-shadow-surface};
+  --neu-shadow-element: #{$neu-shadow-element};
+  --neu-shadow-element-pressed: #{$neu-shadow-element-pressed};
+  --neu-shadow-color-dark: #{$neu-shadow-color-dark};
+  --neu-shadow-color-dark-light: #{$neu-shadow-color-dark-light};
+  --neu-shadow-color-light: #{$neu-shadow-color-light};
+  --neu-shadow-color-light-dark: #{$neu-shadow-color-light-dark};
 }

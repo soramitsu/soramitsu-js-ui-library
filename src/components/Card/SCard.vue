@@ -14,12 +14,15 @@
 <script lang="ts">
 import { Component, Mixins, Prop } from 'vue-property-decorator'
 
+import { DesignSystemInject } from '../DesignSystem'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
+import SizeMixin from '../../mixins/SizeMixin'
+import StatusMixin from '../../mixins/StatusMixin'
 import { CardShadow } from './consts'
 import { BorderRadius } from '@/types'
 
 @Component
-export default class SCard extends Mixins(BorderRadiusMixin) {
+export default class SCard extends Mixins(BorderRadiusMixin, SizeMixin, StatusMixin, DesignSystemInject) {
   /**
    * Header of the card. Also it can be set by slot#header
    */
@@ -44,14 +47,37 @@ export default class SCard extends Mixins(BorderRadiusMixin) {
   @Prop({ default: false, type: Boolean }) readonly clickable!: boolean
 
   @Prop({ default: BorderRadius.MEDIUM }) borderRadius!: string
+  /**
+   * Does card should looks like it's under surface (inner shadow)
+   */
+  @Prop({ default: false, type: Boolean }) readonly pressed!: boolean
+  /**
+   * Should it be a main card (app content wrapper)
+   */
+  @Prop({ default: false, type: Boolean }) readonly primary!: boolean
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
+    if (this.statusClass) {
+      cssClasses.push(this.statusClass)
+    }
+    if (this.isStandardSize) {
+      cssClasses.push(`s-size-${this.size}`)
+    }
     if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if (this.clickable) {
       cssClasses.push('s-clickable')
+    }
+    if (this.primary) {
+      cssClasses.push('s-primary')
+    }
+    if (this.pressed) {
+      cssClasses.push('s-pressed')
     }
     return cssClasses
   }

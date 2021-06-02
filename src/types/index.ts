@@ -1,7 +1,8 @@
 export enum Size {
   BIG = 'big',
   MEDIUM = 'medium',
-  SMALL = 'small'
+  SMALL = 'small',
+  MINI = 'mini'
 }
 
 export enum BorderRadius {
@@ -9,6 +10,13 @@ export enum BorderRadius {
   MEDIUM = 'medium',
   SMALL = 'small',
   MINI = 'mini'
+}
+
+export enum Status {
+  DEFAULT = 'default',
+  SUCCESS = 'success',
+  WARNING = 'warning',
+  ERROR = 'error',
 }
 
 export enum Direction {
