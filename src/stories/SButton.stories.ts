@@ -1,6 +1,6 @@
 import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
-import { SButton, SButtonGroup, SRow, SCol, SMain, SDesignSystemProvider } from '../components'
+import { SButton, SButtonGroup, SRow, SCol, SMain, SIcon, SDesignSystemProvider } from '../components'
 import { Size, BorderRadius } from '../types'
 import { ButtonTypes, ButtonIconPosition } from '../components/Button'
 import { DesignSystemTypes } from '../utils/DesignSystem'
@@ -13,14 +13,13 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { SButton, SDesignSystemProvider },
+  components: { SButton, SIcon, SDesignSystemProvider },
   template: `
             <s-design-system-provider :value="designSystem">
               <s-button
                :disabled="disabled"
                :loading="loading"
                :tooltip="tooltip"
-               :icon="type === 'action' ? 'arrows-swap-24' : ''"
                :type="type"
                :size="size"
                :border-radius="borderRadius"
@@ -28,7 +27,8 @@ export const configurable = () => ({
                :alternative="alternative"
                @click="handleClick"
               >
-               {{ type !== 'action' ? 'Default' : '' }}
+                <span v-if="content">{{ content }}</span>
+                <s-icon v-else :name="icon"/>
               </s-button>
             </s-design-system-provider>`,
   props: {
@@ -58,6 +58,12 @@ export const configurable = () => ({
     },
     tooltip: {
       default: text('Tooltip', '')
+    },
+    content: {
+      default: text('Button text', 'Default')
+    },
+    icon: {
+      default: text('Button icon', 'arrows-swap-24')
     }
   },
   methods: {

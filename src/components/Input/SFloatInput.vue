@@ -8,7 +8,11 @@
       input: handleInput,
       blur: onBlur
     }"
-  />
+  >
+    <template v-for="(_, scopedSlotName) in $scopedSlots" v-slot:[scopedSlotName]="slotData">
+      <slot :name="scopedSlotName" v-bind="slotData" />
+    </template>
+  </s-input>
 </template>
 
 <script lang="ts">

@@ -37,6 +37,11 @@ $neu-color-status-warning-background: #C6E2FF !default; // Warning state backgro
 $neu-color-status-error: #F754A3 !default; // Error text and icon
 $neu-color-status-error-background: #FFD8EB !default; // Error state background
 
+$neu-size-big: 46px !default;
+$neu-size-medium: 42px !default;
+$neu-size-small: 32px !default;
+$neu-size-mini: 24px !default;
+
 :root {
   --neu-brand-pinky: #{neu-brand-pinky};
   --neu-brand-blue: #{neu-brand-blue};
@@ -67,4 +72,8 @@ $neu-color-status-error-background: #FFD8EB !default; // Error state background
   --neu-color-status-warning-background: #{$neu-color-status-warning-background};
   --neu-color-status-error: #{$neu-color-status-error};
   --neu-color-status-error-background: #{$neu-color-status-error-background};
+  --neu-size-big: #{$neu-size-big};
+  --neu-size-medium: #{$neu-size-medium};
+  --neu-size-small: #{$neu-size-small};
+  --neu-size-mini: #{$neu-size-mini};
 }
