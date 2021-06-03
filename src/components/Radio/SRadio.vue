@@ -1,7 +1,8 @@
 <template>
   <component :is="radioComponent"
-    v-model="model"
+    class="s-radio"
     :class="computedClasses"
+    v-model="model"
     :label="label"
     :disabled="disabled"
     :border="border"
@@ -14,10 +15,11 @@
 <script lang="ts">
 import { Component, Mixins, Prop, ModelSync } from 'vue-property-decorator'
 
+import { DesignSystemInject } from '../DesignSystem'
 import SizeMixin from '../../mixins/SizeMixin'
 
 @Component
-export default class SRadio extends Mixins(SizeMixin) {
+export default class SRadio extends Mixins(SizeMixin, DesignSystemInject) {
   /**
    * Value of the radio component. Can be `string` / `number` / `boolean`
    */
@@ -53,6 +55,9 @@ export default class SRadio extends Mixins(SizeMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
     if (this.isStandardSize) {
       cssClasses.push(`s-${this.size}`)
     }
