@@ -28,12 +28,13 @@ import { TooltipEffect } from 'element-ui/types/tooltip'
 import { PopoverPlacement } from 'element-ui/types/popover'
 import debounce from 'throttle-debounce/debounce'
 
+import { DesignSystemInject } from '../DesignSystem'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { Theme } from '../../utils/Theme'
 import { TooltipTheme, TooltipPlacement } from './consts'
 
 @Component
-export default class STooltip extends Mixins(BorderRadiusMixin) {
+export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInject) {
   /**
    * Theme of the tooltip. Supported values: `"dark"`, `"light"`, or `"auto"`.
    * `"auto"` means that it will be managed with theming controller by `setTheme` function
@@ -115,6 +116,9 @@ export default class STooltip extends Mixins(BorderRadiusMixin) {
 
   get computedPopperClass (): string {
     const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
     if (this.popperClass) {
       cssClasses.push(this.popperClass)
     }
