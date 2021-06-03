@@ -19,16 +19,15 @@
     .el-tabs {
       &__nav-wrap {
         background-color: var(--neu-color-base-background);
-        // box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8), -1px -1px 1px rgba(0, 0, 0, 0.02), 1px 1px 3px rgba(0, 0, 0, 0.1);
-        filter: drop-shadow(1px 1px 2px rgba(0,0,0,.1));
-        box-shadow: inset 1px 1px 2px #fff;
+        filter: drop-shadow(1px 1px 2px $neu-shadow-color-dark);
+        box-shadow: inset 1px 1px 2px $neu-shadow-color-light;
 
         .el-tabs__item {
           &.is-active {
             &, &:focus.is-focus {
               color: var(--neu-color-theme-accent);
               background-color: var(--neu-color-utility-surface);
-              box-shadow: 1px 1px 2px #FFFFFF, inset 1px 1px 2px rgba(0, 0, 0, 0.1);
+              box-shadow: 1px 1px 2px $neu-shadow-color-light, inset 1px 1px 2px $neu-shadow-color-dark;
             }
           }
           &:not(.is-active) {

@@ -97,10 +97,9 @@ export const radioButtonGroup = () => ({
                 <s-radio
                   v-for="item in items"
                   :key="item.label"
-                  v-model="model"
                   :label="item.label"
                   :size="size"
-                  :isRadioButton="true"
+                  :isRadioButton="isRadioButton"
                 >
                   {{ item.title }}
                 </s-radio>
@@ -119,6 +118,9 @@ export const radioButtonGroup = () => ({
     },
     disabled: {
       default: boolean('Disabled', false)
+    },
+    isRadioButton: {
+      default: boolean('Is radio buttons', true)
     }
   }
 })
