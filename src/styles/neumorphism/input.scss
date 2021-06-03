@@ -6,13 +6,18 @@ $neu-input-color: var(--neu-color-base-content-primary) !default;
 $neu-input-color-disabled: var(--neu-color-base-content-secondary) !default;
 $neu-input-placeholder-color: var(--neu-color-base-content-secondary) !default;
 $neu-input-placeholder-offset: -2px !default;
-$neu-input-padding: 8px 16px !default;
+$neu-input-padding: $s-basic-spacing $s-basic-spacing * 2 !default;
 
 .s-input.neumorphic {
   border-width: $neu-input-border-width;
   box-shadow: $neu-input-box-shadow;
   color: $neu-input-color;
   padding: $neu-input-padding;
+
+  &.s-size-small {
+    padding-top: $s-basic-spacing / 2;
+    padding-bottom: $s-basic-spacing / 2;
+  }
 
   .el-input, .el-textarea {
     &__inner {

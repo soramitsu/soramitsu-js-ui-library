@@ -49,6 +49,10 @@ $input-padding-left: $s-padding-input - $input-border-width;
     min-height: $s-size-medium;
   }
 
+  &.s-size-small {
+    min-height: $s-size-small;
+  }
+
   .s-placeholder {
     // TODO: add default animation from material-ui
     color: var(--s-color-base-content-tertiary);

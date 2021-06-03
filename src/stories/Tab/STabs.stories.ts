@@ -1,8 +1,9 @@
 import { boolean, select, withKnobs } from '@storybook/addon-knobs'
 
-import { STabs, STab } from '../../components'
+import { STabs, STab, SDesignSystemProvider } from '../../components'
 import { BorderRadius } from '../../types'
 import { TabsPosition, TabsType } from '../../components/Tab'
+import { DesignSystemTypes } from '../../utils/DesignSystem'
 
 export default {
   component: STabs,
@@ -11,8 +12,10 @@ export default {
 }
 
 export const defaultUsage = () => ({
-  components: { STabs, STab },
-  template: `<s-tabs
+  components: { STabs, STab, SDesignSystemProvider },
+  template: `
+            <s-design-system-provider :value="designSystem">
+              <s-tabs
                v-model="activeName"
                :type="type"
                :border-radius="borderRadius"
@@ -20,15 +23,19 @@ export const defaultUsage = () => ({
                :closable="closable"
                :addable="addable"
                :editable="editable"
-             >
+              >
                <s-tab label="First tab" name="first">First</s-tab>
                <s-tab label="Second tab" name="second">Second</s-tab>
                <s-tab label="Third tab" name="third">Third</s-tab>
-             </s-tabs>`,
+              </s-tabs>
+            </s-design-system-provider>`,
   data: () => ({
     activeName: 'first'
   }),
   props: {
+    designSystem: {
+      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+    },
     type: {
       default: select('Type', [...Object.values(TabsType), '––'], '––')
     },
