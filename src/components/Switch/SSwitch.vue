@@ -1,5 +1,5 @@
 <template>
-  <div class="s-switch">
+  <div class="s-switch" :class="computedClasses">
     <el-switch
       v-model="model"
       :active-icon-class="activeIconСlass"
@@ -17,11 +17,11 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
-import { ElSwitch } from 'element-ui/types/switch'
+import { Mixins, Component, Prop, Watch } from 'vue-property-decorator'
+import { DesignSystemInject } from '../DesignSystem'
 
 @Component
-export default class SSwitch extends Vue {
+export default class SSwitch extends Mixins(DesignSystemInject) {
   /**
    * Value of switch
    */
@@ -77,6 +77,14 @@ export default class SSwitch extends Vue {
 
   handleChange (value: boolean | string | number): void {
     this.$emit('change', value)
+  }
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
+    return cssClasses
   }
 }
 </script>

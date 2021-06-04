@@ -27,8 +27,8 @@ $neu-button-primary-border-color: var(--neu-color-base-border-secondary) !defaul
 $neu-button-primary-border-color-hover: var(--neu-color-utility-surface) !default;
 $neu-button-primary-border-color-pressed: $neu-button-primary-border-color-hover !default;
 // Primary button: box-shadow
-$neu-button-primary-box-shadow: 1px 1px 5px var(--neu-color-base-on-accent), -1px -1px 5px var(--neu-color-base-on-accent) !default;
-$neu-button-primary-box-shadow-hover: 1px 1px 5px rgba(255, 255, 255, 0.7), -1px -1px 5px var(--neu-color-base-on-accent), 0px 0px 20px rgba(247, 84, 163, 0.5) !default;
+$neu-button-primary-box-shadow: 1px 1px 5px var(--neu-shadow-color-light), -1px -1px 5px var(--neu-shadow-color-light) !default;
+$neu-button-primary-box-shadow-hover: 1px 1px 5px rgba(255, 255, 255, 0.7), -1px -1px 5px var(--neu-shadow-color-light), 0px 0px 20px rgba(247, 84, 163, 0.5) !default;
 $neu-button-primary-box-shadow-pressed: $neu-button-primary-box-shadow-hover !default;
 $neu-button-primary-box-shadow-alternative: none !default;
 
@@ -49,9 +49,9 @@ $neu-button-secondary-text-color-alternative-active: var(--neu-color-base-on-acc
 $neu-button-secondary-border-color: transparent !default;
 $neu-button-secondary-border-color-active: $neu-button-secondary-border-color !default;
 // Secondary button: box-shadow
-$neu-button-secondary-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1), inset 1px 1px 1px rgba(0, 0, 0, 0.1) !default;
+$neu-button-secondary-box-shadow: $neu-shadow-surface !default;
 $neu-button-secondary-box-shadow-active: $neu-button-secondary-box-shadow !default;
-$neu-button-secondary-box-shadow-alternative: -1px -1px 1px rgba(0, 0, 0, 0.02), 1px 1px 3px rgba(0, 0, 0, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.8) !default;
+$neu-button-secondary-box-shadow-alternative: $neu-shadow-element !default;
 
 // Tertiary button: common
 $neu-button-tertiary-border-width: 0px !default;
@@ -67,7 +67,7 @@ $neu-button-tertiary-text-color-active: var(--neu-color-base-content-primary) !d
 $neu-button-tertiary-border-color: transparent !default;
 $neu-button-tertiary-border-color-active: $neu-button-tertiary-border-color !default;
 // Tertiary button: box-shadow
-$neu-button-tertiary-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), inset 1px 1px 2px #FFFFFF !default;
+$neu-button-tertiary-box-shadow: 1px 1px 2px var(--neu-shadow-color-dark), inset 1px 1px 2px var(--neu-shadow-color-ligh) !default;
 $neu-button-tertiary-box-shadow-active: $neu-button-tertiary-box-shadow !default;
 
 // Action button: common
@@ -90,9 +90,9 @@ $neu-button-action-border-color-hover: $neu-button-action-border-color !default;
 $neu-button-action-border-color-pressed: $neu-button-action-border-color !default;
 $neu-button-action-border-color-alternative: transparent !default;
 // Action button: box-shadow
-$neu-button-action-box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.02), 1px 1px 3px rgba(0, 0, 0, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.8) !default;
+$neu-button-action-box-shadow: var(--neu-shadow-element) !default;
 $neu-button-action-box-shadow-hover: $neu-button-action-box-shadow !default;
-$neu-button-action-box-shadow-pressed: 1px 1px 2px #FFFFFF, inset 1px 1px 2px rgba(0, 0, 0, 0.1) !default;
+$neu-button-action-box-shadow-pressed: var(--neu-shadow-element-pressed) !default;
 $neu-button-action-box-shadow-alternative: none !default;
 
 $neu-button-padding-big: 7px 13px !default;
@@ -128,6 +128,7 @@ $neu-button-padding-mini: 3px 6px !default;
 
 .el-button.neumorphic {
   transition: $neu-button-transition;
+  text-transform: uppercase;
 
   @include size('big', $neu-button-padding-big);
   @include size('medium', $neu-button-padding-medium);
