@@ -128,6 +128,7 @@ $neu-button-padding-mini: 3px 6px !default;
 
 .el-button.neumorphic {
   transition: $neu-button-transition;
+  text-transform: uppercase;
 
   @include size('big', $neu-button-padding-big);
   @include size('medium', $neu-button-padding-medium);
