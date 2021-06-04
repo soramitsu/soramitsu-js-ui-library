@@ -22,11 +22,12 @@
 <script lang="ts">
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 
+import { DesignSystemInject } from '../DesignSystem'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { TabsType, TabsPosition } from './consts'
 
 @Component
-export default class STabs extends Mixins(BorderRadiusMixin) {
+export default class STabs extends Mixins(BorderRadiusMixin, DesignSystemInject) {
   /**
    * Name of the selected tab. Can be used with `v-model`.
    *
@@ -95,6 +96,9 @@ export default class STabs extends Mixins(BorderRadiusMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
     if (this.type === TabsType.ROUNDED &&
       ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
       cssClasses.push('s-rounded')

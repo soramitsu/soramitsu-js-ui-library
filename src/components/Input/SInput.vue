@@ -9,7 +9,7 @@
       <slot name="left" />
 
       <div class="s-input__input">
-        <span v-if="value && !isMediumInput && !$slots.top" class="s-placeholder">{{ placeholder }}</span>
+        <span v-if="value && isBigInput && !$slots.top" class="s-placeholder">{{ placeholder }}</span>
         <el-input
           ref="el-input"
           :value="value"
@@ -179,8 +179,8 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
     return [InputType.TEXT, InputType.TEXTAREA].includes(this.type as InputType)
   }
 
-  get isMediumInput (): boolean {
-    return this.type === InputType.TEXT && this.size === InputSize.MEDIUM
+  get isBigInput (): boolean {
+    return this.type === InputType.TEXT && this.size === InputSize.BIG
   }
 
   get computedClasses (): Array<string> {
@@ -207,7 +207,7 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
       cssClasses.push('s-autofill')
     }
     if (this.size) {
-      cssClasses.push(this.sizeClass)
+      cssClasses.push(`s-size-${this.size}`)
     }
     if (this.prefix) {
       cssClasses.push('s-input--prefix')
@@ -216,16 +216,6 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
       cssClasses.push('s-input--suffix')
     }
     return cssClasses
-  }
-
-  get sizeClass (): string {
-    switch (this.size) {
-      case InputSize.MEDIUM:
-        return 's-size-medium'
-      case InputSize.BIG:
-      default:
-        return ''
-    }
   }
 
   get computedType (): string {
