@@ -97,7 +97,7 @@ export const withDifferentTypes = () => ({
                   {{ item.label }}
                 </s-button>
               </s-row>
-            <s-design-system-provider />`,
+            </s-design-system-provider>`,
   props: {
     designSystem: {
       default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)

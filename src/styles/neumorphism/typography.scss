@@ -1,0 +1,64 @@
+.s-typography {
+  &-input {
+    &-text {
+      font-size: var(--s-font-size-mini);
+      line-height: var(--s-line-height-medium);
+      font-weight: 300;
+
+      &--mini {
+        font-size: var(--s-font-size-extra-mini);
+        line-height: var(--s-line-height-medium);
+        font-weight: 300;
+      }
+    }
+    &-field {
+      font-size: var(--s-font-size-medium);
+      line-height: var(--s-line-height-medium);
+      font-weight: 400;
+
+      &--large {
+        font-size: var(--s-font-size-large);
+        line-height: var(--s-line-height-small);
+        font-weight: 800;
+      }
+    }
+  }
+  &-button {
+    &--mini {
+      font-size: var(--s-font-size-mini);
+      line-height: var(--s-line-height-extra-small);
+      font-weight: 800;
+    }
+    &--small {
+      font-size: var(--s-font-size-small);
+      line-height: var(--s-line-height-small);
+      font-weight: 800;
+    }
+    &--medium {
+      font-size: var(--s-font-size-medium);
+      line-height: var(--s-line-height-reset);
+      font-weight: 800;
+    }
+    &--big {
+      font-size: var(--s-font-size-big);
+      line-height: var(--s-line-height-small);
+      font-weight: 800;
+    }
+    &--large {
+      font-size: var(--s-font-size-large);
+      line-height: var(--s-line-height-reset);
+      font-weight: 800;
+    }
+  }
+  &-text {
+    font-size: var(--s-font-size-extra-small);
+    line-height: var(--s-line-height-base);
+    font-weight: 300;
+
+    &--mini {
+      font-size: var(--s-font-size-extra-mini);
+      line-height: var(--s-line-height-mini);
+      font-weight: 300;
+    }
+  }
+}

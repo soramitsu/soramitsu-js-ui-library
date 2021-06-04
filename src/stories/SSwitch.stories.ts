@@ -1,6 +1,7 @@
-import { text, number, boolean, withKnobs } from '@storybook/addon-knobs'
+import { text, number, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
-import { SSwitch } from '../components/Switch'
+import { SSwitch, SDesignSystemProvider } from '../components'
+import { DesignSystemTypes } from '../utils/DesignSystem'
 
 export default {
   component: SSwitch,
@@ -10,8 +11,10 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { SSwitch },
-  template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
+  components: { SSwitch, SDesignSystemProvider },
+  template: `
+          <s-design-system-provider :value="designSystem">
+            <div class="s-flex" style="flex: 1; flex-direction: column;">
               <s-switch
                 v-model="modelValue"
                 :active-text="activeText"
@@ -25,12 +28,16 @@ export const configurable = () => ({
               <span style="margin-top: 20px;">
                 v-model="{{ modelValue }}", @change="{{ changeValue }}"
               </span>
-            </div>`,
+            </div>
+          </s-design-system-provider>`,
   data: () => ({
     modelValue: true,
     changeValue: true
   }),
   props: {
+    designSystem: {
+      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+    },
     activeText: {
       default: text('Active Text', '')
     },

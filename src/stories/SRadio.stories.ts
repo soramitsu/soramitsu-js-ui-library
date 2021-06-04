@@ -1,7 +1,8 @@
 import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 
-import { SRadio, SRadioGroup, SRow, SCol } from '../components'
+import { SRadio, SRadioGroup, SRow, SCol, SDesignSystemProvider } from '../components'
 import { Size } from '../types'
+import { DesignSystemTypes } from '../utils/DesignSystem'
 
 export default {
   component: SRadio,
@@ -16,8 +17,10 @@ export const radioData = [
 ]
 
 export const configurable = () => ({
-  components: { SRadio, SRow, SCol },
-  template: `<s-row style="flex: 1;" :gutter="20">
+  components: { SRadio, SRow, SCol, SDesignSystemProvider },
+  template: `
+          <s-design-system-provider :value="designSystem">
+            <s-row style="flex: 1;" :gutter="20">
               <s-col v-for="item in items" :key="item.label" :span="6">
                 <s-radio
                   v-model="vModelValue"
@@ -33,13 +36,17 @@ export const configurable = () => ({
               <s-col :span="12" style="margin-top: 20px;">
                 <span>v-model="{{ vModelValue }}", @change="{{ changeValue }}"</span>
               </s-col>
-            </s-row>`,
+            </s-row>
+          </s-design-system-provider>`,
   data: () => ({
     vModelValue: 'first',
     changeValue: '',
     items: radioData
   }),
   props: {
+    designSystem: {
+      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+    },
     size: {
       default: select('Size', Object.values(Size), Size.MEDIUM)
     },
@@ -97,10 +104,9 @@ export const radioButtonGroup = () => ({
                 <s-radio
                   v-for="item in items"
                   :key="item.label"
-                  v-model="model"
                   :label="item.label"
                   :size="size"
-                  :isRadioButton="true"
+                  :isRadioButton="isRadioButton"
                 >
                   {{ item.title }}
                 </s-radio>
@@ -119,6 +125,9 @@ export const radioButtonGroup = () => ({
     },
     disabled: {
       default: boolean('Disabled', false)
+    },
+    isRadioButton: {
+      default: boolean('Is radio buttons', true)
     }
   }
 })
