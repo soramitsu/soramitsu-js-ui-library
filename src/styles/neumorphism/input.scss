@@ -1,10 +1,10 @@
 $neu-input-border-width: 0 !default;
-$neu-input-background: var(--neu-color-base-background) !default;
-$neu-input-box-shadow: var(--neu-shadow-element) !default;
-$neu-input-box-shadow-active: var(--neu-shadow-element-pressed) !default;
-$neu-input-color: var(--neu-color-base-content-primary) !default;
-$neu-input-color-disabled: var(--neu-color-base-content-secondary) !default;
-$neu-input-placeholder-color: var(--neu-color-base-content-secondary) !default;
+$neu-input-background: var(--s-color-base-background) !default;
+$neu-input-box-shadow: var(--s-shadow-element) !default;
+$neu-input-box-shadow-active: var(--s-shadow-element-pressed) !default;
+$neu-input-color: var(--s-color-base-content-primary) !default;
+$neu-input-color-disabled: var(--s-color-base-content-secondary) !default;
+$neu-input-placeholder-color: var(--s-color-base-content-secondary) !default;
 $neu-input-placeholder-offset: -2px !default;
 $neu-input-padding: $s-basic-spacing $s-basic-spacing * 2 !default;
 
