@@ -148,6 +148,12 @@ $input-padding-left: $s-padding-input - $input-border-width;
     &__suffix {
       z-index: 1;
       right: 0;
+
+      &-inner {
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
     }
 
     &--prefix {

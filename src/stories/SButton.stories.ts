@@ -17,6 +17,7 @@ export const configurable = () => ({
   template: `
             <s-design-system-provider :value="designSystem">
               <s-button
+               :class="typography"
                :disabled="disabled"
                :loading="loading"
                :tooltip="tooltip"
@@ -61,6 +62,9 @@ export const configurable = () => ({
     },
     content: {
       default: text('Button text', 'Default')
+    },
+    typography: {
+      default: text('Typographic css class', 's-typography-button--large')
     },
     icon: {
       default: text('Button icon', 'arrows-swap-24')
