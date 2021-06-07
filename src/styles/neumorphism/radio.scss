@@ -15,7 +15,7 @@
 }
 
 .s-radio.neumorphic {
-  color: var(--neu-color-base-content-primary);
+  color: var(--s-color-base-content-primary);
 
   &.s-big,
   &.s-medium,
@@ -35,27 +35,27 @@
   > .el-radio__input {
     &.is-checked {
       .el-radio__inner {
-        border-color: var(--neu-color-base-border-secondary);
-        background-color: var(--neu-color-base-background);
+        border-color: var(--s-color-base-border-secondary);
+        background-color: var(--s-color-base-background);
       }
   
       & + .el-radio__label {
-        color: var(--neu-color-theme-accent);
+        color: var(--s-color-theme-accent);
       }
     }
     &.is-disabled {
       .el-radio__inner {
-        border-color: var(--neu-color-base-border-secondary);
-        background-color: var(--neu-color-base-background);
+        border-color: var(--s-color-base-border-secondary);
+        background-color: var(--s-color-base-background);
       }
 
       & + .el-radio__label {
-        color: var(--neu-color-base-on-disabled);
+        color: var(--s-color-base-on-disabled);
       }
     }
     &.is-disabled.is-checked {
       .el-radio__inner {
-        border-color: var(--neu-color-base-border-secondary);
+        border-color: var(--s-color-base-border-secondary);
       }
     }
   }
@@ -63,16 +63,16 @@
   > .el-radio__input {
     .el-radio__inner {
       border-width: 1px;
-      border-color: var(--neu-color-base-border-secondary);
+      border-color: var(--s-color-base-border-secondary);
       box-shadow: 1px 1px 2px #FFFFFF, inset 1px 1px 2px rgba(0, 0, 0, 0.1);
-      background-color: var(--neu-color-base-background);
+      background-color: var(--s-color-base-background);
 
       &:hover {
-        border-color: var(--neu-color-base-border-secondary);
+        border-color: var(--s-color-base-border-secondary);
       }
 
       &::after {
-        background-color: var(--neu-color-theme-accent);
+        background-color: var(--s-color-theme-accent);
         box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.02), 1px 1px 3px rgba(0, 0, 0, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.8);
       }
     }

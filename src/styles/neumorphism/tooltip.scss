@@ -1,7 +1,7 @@
 $neu-tooltip-max-width: 236px !default;
 $neu-tooltip-padding: 6px 8px !default;
 $neu-tooltip-line-height: $s-line-height-base !default;
-$neu-tooltip-background-color:  var(--neu-color-base-content-secondary) !default;
+$neu-tooltip-background-color:  var(--s-color-base-content-secondary) !default;
 
 .el-tooltip__popper.neumorphic {
   max-width: $neu-tooltip-max-width;
@@ -11,7 +11,7 @@ $neu-tooltip-background-color:  var(--neu-color-base-content-secondary) !default
   &.is-light {
     background-color: $neu-tooltip-background-color;
     border-color: $neu-tooltip-background-color;
-    color: var(--neu-color-utility-body);
+    color: var(--s-color-utility-body);
 
     .popper__arrow {
       border-bottom-color: $neu-tooltip-background-color;

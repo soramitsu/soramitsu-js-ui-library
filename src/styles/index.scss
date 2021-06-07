@@ -1,3 +1,4 @@
+// @import "./neumorphism/theme-variables"; // uncomment to preview components with neu variables
 @import "./variables";
 @import "./neumorphism/index.scss";
 @import "./element-variables";
@@ -27,3 +28,6 @@
 @import "./tabs";
 @import "./table";
 @import "./tooltip";
+@import "./typography.scss";
+@import "./root";
+@import "./neumorphism/index";

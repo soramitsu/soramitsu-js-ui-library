@@ -4,41 +4,41 @@ $switch-circle-size: 18px;
 .s-switch.neumorphic {
   #{$switch-class} {
     &__label {
-      color: var(--neu-color-base-content-primary);
+      color: var(--s-color-base-content-primary);
       &.is-active {
-        color: var(--neu-color-theme-accent);
+        color: var(--s-color-theme-accent);
       }
     }
     &__core {
-      background-color: var(--neu-color-base-background);
+      background-color: var(--s-color-base-background);
       border: none;
       box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.02), 1px 1px 3px rgba(0, 0, 0, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.8);
 
       &::after {
         width: $switch-circle-size;
         height: $switch-circle-size;
-        background-color: var(--neu-color-base-content-secondary);
+        background-color: var(--s-color-base-content-secondary);
       }
     }
 
     &.is-disabled {
       #{$switch-class}__core {
-        background-color: var(--neu-color-base-disabled);
+        background-color: var(--s-color-base-disabled);
       }
     }
 
     &.is-checked {
       #{$switch-class}__core {
-        background-color: var(--neu-color-theme-accent);
+        background-color: var(--s-color-theme-accent);
         &::after {
           margin-left: -$switch-circle-size - 1;
-          background-color: var(--neu-color-base-on-accent);
+          background-color: var(--s-color-base-on-accent);
         }
       }
 
       &.is-disabled {
         #{$switch-class}__core {
-          background-color: var(--neu-color-base-content-quaternary);
+          background-color: var(--s-color-base-content-quaternary);
         }
       }
     }
@@ -46,10 +46,10 @@ $switch-circle-size: 18px;
     &:hover:not(.is-disabled),
     &.is-checked:hover:not(.is-disabled) {
       #{$switch-class}__core {
-        background-color: var(--neu-color-theme-accent-hover);
+        background-color: var(--s-color-theme-accent-hover);
 
         &::after {
-          background-color: var(--neu-color-base-on-accent);
+          background-color: var(--s-color-base-on-accent);
         }
       }
     }
