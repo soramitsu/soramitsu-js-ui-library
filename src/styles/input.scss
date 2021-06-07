@@ -11,8 +11,8 @@
 
 $input-icon-width: 18px;
 $input-border-width: 1px;
-$input-padding-top: $s-padding-input / 2 - $input-border-width;
-$input-padding-left: $s-padding-input - $input-border-width;
+$input-padding-top: $s-basic-spacing * 2 - $input-border-width;
+$input-padding-left: $s-basic-spacing * 2 - $input-border-width;
 
 .s-input {
   display: flex;
@@ -65,7 +65,7 @@ $input-padding-left: $s-padding-input - $input-border-width;
     top: -3px;
 
     & + .el-input, & + .el-textarea {
-      padding-top: $s-padding-input;
+      padding-top: $s-basic-spacing * 2;
 
       .el-input__validateIcon {
         padding-top: 11px;
@@ -95,13 +95,13 @@ $input-padding-left: $s-padding-input - $input-border-width;
 
   &--prefix:not(.s-textarea) {
     .s-placeholder {
-      padding-left: $input-icon-width + $s-padding-input / 2;
+      padding-left: $input-icon-width + $s-basic-spacing;
     }
   }
 
   &--suffix:not(.s-textarea) {
     .s-placeholder {
-      padding-right: $input-icon-width + $s-padding-input / 2;
+      padding-right: $input-icon-width + $s-basic-spacing;
     }
   }
 
@@ -158,12 +158,12 @@ $input-padding-left: $s-padding-input - $input-border-width;
 
     &--prefix {
       .el-input__inner {
-        padding-left: $input-icon-width + $s-padding-input / 2;
+        padding-left: $input-icon-width + $s-basic-spacing;
       }
     }
     &--suffix {
       .el-input__inner {
-        padding-right: $input-icon-width + $s-padding-input / 2;
+        padding-right: $input-icon-width + $s-basic-spacing;
       }
     }
   }
