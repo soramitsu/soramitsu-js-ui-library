@@ -162,6 +162,16 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
     }
   }
 
+  @Watch('perPageText')
+  private handlePerPageTextChange () {
+    this.renderPaginationItems()
+  }
+
+  @Watch('totalText')
+  private handleTotalTextChange () {
+    this.renderPaginationItems()
+  }
+
   @Watch('pageSize')
   private handlePageSizePropChange (value: number): void {
     this.pageSizeModel = value
