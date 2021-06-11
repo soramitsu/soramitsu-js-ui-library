@@ -145,7 +145,7 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
     if (!tooltip) {
       return
     }
-    tooltip.debounceClose = debounce(30, tooltip.handleClosePopper)
+    tooltip.debounceClose = debounce(200, tooltip.handleClosePopper)
   }
 
   get computedTheme (): string {
