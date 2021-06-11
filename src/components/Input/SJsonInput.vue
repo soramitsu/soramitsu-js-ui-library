@@ -142,7 +142,6 @@ export default class SJsonInput extends Vue {
 
   handleStretchMousedown () {
     this.stretchStartHeight = (this.$el as any).offsetHeight
-    console.log(this.stretchStartHeight)
     document.addEventListener('mousemove', this.handleStretchMousemove)
     document.addEventListener('mouseup', this.handleStretchMouseup)
   }
