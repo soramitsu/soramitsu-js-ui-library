@@ -163,7 +163,7 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
   }
 
   @Watch('perPageText')
-  private handlePerPageTextChange (text) {
+  private handlePerPageTextChange () {
     this.renderPaginationItems()
   }
 
