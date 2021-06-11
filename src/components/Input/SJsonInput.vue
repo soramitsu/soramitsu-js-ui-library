@@ -8,7 +8,7 @@
       v-model="model"
       :options="computedOptions"
       :plus="false"
-      :height="`${localHeight}px`"
+      :height="height"
       @error="handleError"
     />
   </div>
@@ -55,7 +55,6 @@ export default class SJsonInput extends Vue {
   @Ref('jsoneditor') jsoneditor!: any
 
   model = this.value
-  localHeight = 300
   defultOptions = {
     // https://github.com/josdejong/jsoneditor/blob/master/docs/api.md#configuration-options
     mode: 'code',
@@ -114,12 +113,6 @@ export default class SJsonInput extends Vue {
       return
     }
     this.jsoneditor.editor.set(this.value)
-  }
-
-  mounted () {
-    setInterval(() => {
-      this.localHeight += 0.1
-    }, 16)
   }
 }
 </script>
