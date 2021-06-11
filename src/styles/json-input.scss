@@ -38,7 +38,7 @@ $footer-height: 26px;
     width: $footer-height;
     bottom: 0;
     right: 0;
-    cursor: pointer;
+    cursor: ns-resize;
   }
   // TODO: think about hover and focus
 }
@@ -46,6 +46,11 @@ $footer-height: 26px;
 .jsoneditor {
   border: none !important;
   font-family: $s-font-family-mono;
+  .jsoneditor-outer {
+    height: calc(100% - #{$footer-height});
+    margin-bottom: -1px !important;
+    padding-bottom: 1px !important;
+  }
   .ace-jsoneditor {
     *, textarea.jsoneditor-text * {
       font-family: $s-font-family-mono;
