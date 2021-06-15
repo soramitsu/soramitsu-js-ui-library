@@ -25,8 +25,6 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Ref, Watch } from 'vue-property-decorator'
-import { ElPagination } from 'element-ui/types/pagination'
-import cloneDeep from 'lodash/fp/cloneDeep'
 
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 
@@ -154,11 +152,13 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
         this.totalItem.textContent = `${this.totalText} ${this.total}`
       }
     }
-    if (this.sizesItem && !this.sizesLabelItem) {
-      const itemsPerPageText = document.createElement('span')
-      itemsPerPageText.textContent = this.perPageText
-      itemsPerPageText.classList.add('per-page-text')
-      this.pagination.$el.insertBefore(itemsPerPageText, this.sizesItem)
+    if (this.sizesItem) {
+      if (!this.sizesLabelItem) {
+        this.sizesLabelItem = document.createElement('span')
+        this.sizesLabelItem.classList.add('per-page-text')
+        this.pagination.$el.insertBefore(this.sizesLabelItem, this.sizesItem)
+      }
+      this.sizesLabelItem.textContent = this.perPageText
     }
   }
 
@@ -218,8 +218,6 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
   mounted (): void {
     this.initPaginationItems()
     this.renderPaginationItems()
-    this.sizesLabelItem = (Array.from(this.pagination.$el.childNodes) as Array<any>)
-      .find(item => item.className === 'per-page-text')
   }
 
   updated (): void {

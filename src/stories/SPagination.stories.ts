@@ -22,6 +22,8 @@ export const configurable = () => ({
                  :popper-class="borderRadius"
                  :prev-text="prevText"
                  :next-text="nextText"
+                 :per-page-text="perPageText"
+                 :total-text="totalText"
                  @size-change="handleSizeChange"
                  @current-change="handleCurrentChange"
                  @prev-click="handlePrevClick"
@@ -53,6 +55,12 @@ export const configurable = () => ({
     },
     nextText: {
       default: text('Next text', '')
+    },
+    perPageText: {
+      default: text('Per page text', '')
+    },
+    totalText: {
+      default: text('Total text', '')
     }
   },
   methods: {
