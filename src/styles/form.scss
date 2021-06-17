@@ -23,37 +23,17 @@
         }
       }
       > [class^="s-input"]:not(.s-disabled) {
-        .s-placeholder {
-          color: var(--s-color-status-error);
-          background-color: var(--s-color-status-error-background);
-        }
+        background-color: var(--s-color-status-error-background);
+        border-color: var(--s-color-status-error);
+
         input, textarea {
-          background-color: var(--s-color-status-error-background);
           &::placeholder {
             color: var(--s-color-status-error);
           }
         }
-        &:hover {
-          .s-placeholder,
-          .el-input > input,
-          .el-textarea > textarea {
-            background-color: var(--s-color-status-error-background);
-          }
-          .el-input > input,
-          .el-textarea > textarea {
-            border-color: var(--s-color-status-error);
-          }
-        }
+
         &.s-focused {
-          .s-placeholder,
-          .el-input > input,
-          .el-textarea > textarea {
-            background-color: var(--s-color-base-on-accent);
-          }
-          .el-input > input,
-          .el-textarea > textarea {
-            border-color: var(--s-color-status-error);
-          }
+          background-color: var(--s-color-base-on-accent);
         }
       }
     }
