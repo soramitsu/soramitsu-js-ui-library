@@ -26,6 +26,10 @@
         background-color: var(--s-color-status-error-background);
         border-color: var(--s-color-status-error);
 
+        .s-placeholder {
+          color: var(--s-color-status-error);
+        }
+
         input, textarea {
           &::placeholder {
             color: var(--s-color-status-error);
