@@ -147,7 +147,6 @@ export default class SJsonInput extends Vue {
       return
     }
     aceEditor.resize()
-    aceEditor.renderer.updateFull()
   }
 
   handleStretchMousedown () {
