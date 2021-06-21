@@ -142,11 +142,10 @@ export default class SJsonInput extends Vue {
 
   @Watch('computedHeight')
   private handleComputedHeightChange (): void {
-    const aceEditor = this.jsoneditor?.editor?.aceEditor
-    if (!aceEditor) {
+    if (!this.jsoneditor || !this.jsoneditor.editor || !this.jsoneditor.editor.aceEditor) {
       return
     }
-    aceEditor.resize()
+    this.jsoneditor.editor.aceEditor.resize()
   }
 
   handleStretchMousedown () {
