@@ -160,7 +160,6 @@ $s-color-button-tertiary-background-focused: var(--s-color-base-background) !def
     }
   }
   span {
-    font-feature-settings: var(--s-font-feature-settings-heading);
     @include font-weight(700, true);
   }
   &:not(.s-action) > span {
