@@ -140,6 +140,16 @@ export default class SJsonInput extends Vue {
     this.jsoneditor.editor.set(this.value)
   }
 
+  @Watch('computedHeight')
+  private handleComputedHeightChange (): void {
+    const aceEditor = this.jsoneditor?.editor?.aceEditor
+    if (!aceEditor) {
+      return
+    }
+    aceEditor.resize()
+    aceEditor.renderer.updateFull()
+  }
+
   handleStretchMousedown () {
     this.stretchStartHeight = (this.$el as any).offsetHeight
     document.addEventListener('mousemove', this.handleStretchMousemove)
