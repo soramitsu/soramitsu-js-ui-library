@@ -24,7 +24,7 @@ $input-padding-left: $s-basic-spacing * 2 - $input-border-width;
   border-style: solid;
   border-width: $input-border-width;
   font-family: $s-font-family-default;
-  min-height: $s-size-big;
+  height: $s-size-big;
   padding: $input-padding-top $input-padding-left;
   position: relative;
   width: 100%;
@@ -46,11 +46,11 @@ $input-padding-left: $s-basic-spacing * 2 - $input-border-width;
   }
 
   &.s-size-medium {
-    min-height: $s-size-medium;
+    height: $s-size-medium;
   }
 
   &.s-size-small {
-    min-height: $s-size-small;
+    height: $s-size-small;
   }
 
   .s-placeholder {
