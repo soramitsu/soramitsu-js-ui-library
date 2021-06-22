@@ -105,6 +105,15 @@ $s-letter-spacing-medium: -0.01em !default;
 $s-letter-spacing-big: 0.01em !default;
 $s-letter-spacing-large: 0.03em !default;
 $s-letter-spacing-extra-large: 0.06em !default;
+// Font Feature Settings
+$s-font-feature-settings-common: "tnum" on, "lnum" on, "case" on, "salt" on, "ss01" on !default;
+$s-font-feature-settings-heading: "tnum" on, "lnum" on, "salt" on, "case" on !default;
+$s-font-feature-settings-caps-heading: "tnum" on, "lnum" on, "case" on !default;
+$s-font-feature-settings-caps: "case" on !default;
+$s-font-feature-settings-singleline: "salt" on, "case" on !default;
+$s-font-feature-settings-card-title: "tnum" on, "lnum" on, "ss01" on !default;
+$s-font-feature-settings-input: "tnum" on, "lnum" on !default;
+$s-font-feature-settings-button: "tnum" on, "lnum" on, "salt" on !default;
 
 // Responsive
 $--sm: 640px !default;
