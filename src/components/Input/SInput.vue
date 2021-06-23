@@ -36,6 +36,7 @@
           @blur="handleBlur"
           @focus="handleFocus"
           @paste.native="handlePaste"
+          @keypress.enter.native="handleEnter"
         >
           <slot slot="prefix" name="prefix"></slot>
           <slot slot="suffix" name="suffix"></slot>
@@ -248,6 +249,10 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
   handleFocus (event: Event): void {
     this.focused = true
     this.$emit('focus', event)
+  }
+
+  handleEnter (event: Event): void {
+    (event.target as any).blur()
   }
 
   handleTextFileChange (event: any): void {
