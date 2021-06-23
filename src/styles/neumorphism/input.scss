@@ -13,10 +13,17 @@ $neu-input-padding: $s-basic-spacing $s-basic-spacing * 2 !default;
   box-shadow: $neu-input-box-shadow;
   color: $neu-input-color;
   padding: $neu-input-padding;
+  height: initial;
+  min-height: $s-size-big;
 
   &.s-size-small {
     padding-top: $s-basic-spacing / 2;
     padding-bottom: $s-basic-spacing / 2;
+    min-height: $s-size-small;
+  }
+
+  &.s-size-medium {
+    min-height: $s-size-medium;
   }
 
   .el-input, .el-textarea {
