@@ -68,14 +68,14 @@
   --s-letter-spacing-large: #{$s-letter-spacing-large};
   --s-letter-spacing-extra-large: #{$s-letter-spacing-extra-large};
   // Font Feature Settings
-  --s-font-feature-settings-common: #{$s-font-feature-settings-common};
-  --s-font-feature-settings-heading: #{$s-font-feature-settings-heading};
-  --s-font-feature-settings-caps-heading: #{$s-font-feature-settings-caps-heading};
-  --s-font-feature-settings-caps: #{$s-font-feature-settings-caps};
-  --s-font-feature-settings-singleline: #{$s-font-feature-settings-singleline};
-  --s-font-feature-settings-card-title: #{$s-font-feature-settings-card-title};
-  --s-font-feature-settings-input: #{$s-font-feature-settings-input};
-  --s-font-feature-settings-button: #{$s-font-feature-settings-button};
+  --s-font-feature-settings-common: "tnum" on, "lnum" on, "case" on, "salt" on, "ss01" on; // $s-font-feature-settings-common
+  --s-font-feature-settings-heading: "tnum" on, "lnum" on, "salt" on, "case" on; // $s-font-feature-settings-heading
+  --s-font-feature-settings-caps-heading: "tnum" on, "lnum" on, "case" on; // $s-font-feature-settings-caps-heading
+  --s-font-feature-settings-caps: "case" on; // $s-font-feature-settings-caps
+  --s-font-feature-settings-singleline: "salt" on, "case" on; // $s-font-feature-settings-singleline
+  --s-font-feature-settings-card-title: "tnum" on, "lnum" on, "ss01" on; // $s-font-feature-settings-card-title
+  --s-font-feature-settings-input: "tnum" on, "lnum" on; // $s-font-feature-settings-input
+  --s-font-feature-settings-button: "tnum" on, "lnum" on, "salt" on; // $s-font-feature-settings-button
   // Size
   --s-size-mini: #{$s-size-mini};
   --s-size-small: #{$s-size-small};
