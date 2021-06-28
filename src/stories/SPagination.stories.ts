@@ -24,6 +24,7 @@ export const configurable = () => ({
                  :next-text="nextText"
                  :per-page-text="perPageText"
                  :total-text="totalText"
+                 :of-text="ofText"
                  @size-change="handleSizeChange"
                  @current-change="handleCurrentChange"
                  @prev-click="handlePrevClick"
@@ -57,10 +58,13 @@ export const configurable = () => ({
       default: text('Next text', '')
     },
     perPageText: {
-      default: text('Per page text', '')
+      default: text('Per page text', 'Rows per page')
     },
     totalText: {
-      default: text('Total text', '')
+      default: text('Total text', 'Total')
+    },
+    ofText: {
+      default: text('Of text', 'of')
     }
   },
   methods: {

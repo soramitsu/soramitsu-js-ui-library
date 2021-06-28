@@ -108,7 +108,7 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
   /**
    * Text for 'Rows per page' text
    *
-   * `Per page text` by default
+   * `Rows per page` by default
    */
   @Prop({ default: 'Rows per page', type: String }) readonly perPageText!: string
   /**
@@ -117,6 +117,12 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
    * `Total` by default
    */
   @Prop({ default: 'Total', type: String }) readonly totalText!: string
+  /**
+   * Text for 'of' text
+   *
+   * `of` by default
+   */
+  @Prop({ default: 'of', type: String }) readonly ofText!: string
 
   @Ref('pagination') pagination!: any
 
@@ -147,7 +153,7 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
     if (this.totalItem) {
       if (this.total) {
         const upperNumber = this.pageSizeModel * this.currentPageModel
-        this.totalItem.textContent = `${upperNumber - this.pageSizeModel + 1}—${upperNumber > this.total ? this.total : upperNumber} of ${this.total}`
+        this.totalItem.textContent = `${upperNumber - this.pageSizeModel + 1}—${upperNumber > this.total ? this.total : upperNumber} ${this.ofText} ${this.total}`
       } else {
         this.totalItem.textContent = `${this.totalText} ${this.total}`
       }
@@ -169,6 +175,11 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
 
   @Watch('totalText')
   private handleTotalTextChange () {
+    this.renderPaginationItems()
+  }
+
+  @Watch('ofText')
+  private handleOfTextChange () {
     this.renderPaginationItems()
   }
 
