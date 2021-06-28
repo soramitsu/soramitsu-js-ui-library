@@ -1,0 +1,94 @@
+// Brand
+$neu-brand-pinky: #ED145B !default; // Some texts, brand stuff
+$neu-brand-blue: #0D0248 !default; // Brand stuff
+// Theme Primary
+$neu-color-theme-accent: #F8087B !default;
+$neu-color-theme-accent-hover: #F754A3 !default;
+$neu-color-theme-accent-pressed: #E44592 !default;
+$neu-color-theme-accent-focused: #F24197 !default;
+// Theme Secondary
+$neu-color-theme-secondary: #44E5B2 !default;
+$neu-color-theme-secondary-hover: #24DAA0 !default;
+// Base: Content
+$neu-color-base-content-primary: #2A171F !default; // Main text and icons
+$neu-color-base-content-secondary: #A19A9D !default; // Secondary text
+$neu-color-base-content-tertiary: #D5CDD0 !default; // Hint and placeholder text
+$neu-color-base-content-quaternary: #75787b !default; // Text
+// Base: Background
+$neu-color-base-background: #FAF4F8 !default; // Interactive elements background: controls, text field
+$neu-color-base-background-hover: #F7F3F4 !default;
+$neu-color-base-background-dark: #2E2E36 !default; // Dark background
+// Base: Border
+$neu-color-base-border-primary: #F7F3F4 !default; // High emphasis border/divider
+$neu-color-base-border-secondary: #EDE4E7 !default; // Low emphasis border/divider
+// Base: Misc
+$neu-color-base-disabled: #FDF7FB !default; // Disabled state
+$neu-color-base-on-disabled: #A19A9D !default; // Text on disabled element
+$neu-color-base-on-accent: #FFFFFF !default; // Text on dark/accent backgrounds
+// Utility
+$neu-color-utility-body: #F7F3F4 !default;
+$neu-color-utility-surface: #FDF7FB !default;
+$neu-color-utility-overlay: rgba(0, 0, 0, 0.45) !default;
+// Statuses
+$neu-color-status-success: #34AD87 !default; // Success text and icon
+$neu-color-status-success-background: #B9EBDB !default; // Success state background
+$neu-color-status-warning: #479AEF !default; // Warning text and icon
+$neu-color-status-warning-background: #C6E2FF !default; // Warning state background
+$neu-color-status-error: #F754A3 !default; // Error text and icon
+$neu-color-status-error-background: #FFD8EB !default; // Error state background
+// Sizes
+$neu-size-big: 46px !default;
+$neu-size-medium: 42px !default;
+$neu-size-small: 32px !default;
+$neu-size-mini: 24px !default;
+// Shadows
+$neu-shadow-color-dark: rgba(0, 0, 0, 0.1) !default;
+$neu-shadow-color-dark-light: rgba(0, 0, 0, 0.02) !default;
+$neu-shadow-color-light: rgba(255, 255, 255, 1) !default;
+$neu-shadow-color-light-dark: rgba(255, 255, 255, 0.8) !default;
+$neu-shadow-surface: 1px 1px 5px $neu-shadow-color-dark, inset 1px 1px 1px $neu-shadow-color-dark !default; // container
+$neu-shadow-element: -1px -1px 1px $neu-shadow-color-dark-light, 1px 1px 3px $neu-shadow-color-dark, inset 1px 1px 2px $neu-shadow-color-light-dark !default; // input, card
+$neu-shadow-element-pressed: 1px 1px 2px $neu-shadow-color-light, inset 1px 1px 2px $neu-shadow-color-dark !default;
+
+:root {
+  --neu-brand-pinky: #{neu-brand-pinky};
+  --neu-brand-blue: #{neu-brand-blue};
+  --neu-color-theme-accent: #{$neu-color-theme-accent};
+  --neu-color-theme-accent-hover: #{$neu-color-theme-accent-hover};
+  --neu-color-theme-accent-pressed: #{$neu-color-theme-accent-pressed};
+  --neu-color-theme-accent-focused: #{$neu-color-theme-accent-focused};
+  --neu-color-theme-secondary: #{$neu-color-theme-secondary};
+  --neu-color-theme-secondary-hover: #{$neu-color-theme-secondary-hover};
+  --neu-color-base-content-primary: #{$neu-color-base-content-primary};
+  --neu-color-base-content-secondary: #{$neu-color-base-content-secondary};
+  --neu-color-base-content-tertiary: #{$neu-color-base-content-tertiary};
+  --neu-color-base-content-quaternary: #{$neu-color-base-content-quaternary};
+  --neu-color-base-background: #{$neu-color-base-background};
+  --neu-color-base-background-hover: #{$neu-color-base-background-hover};
+  --neu-color-base-background-dark: #{$neu-color-base-background-dark};
+  --neu-color-base-border-primary: #{$neu-color-base-border-primary};
+  --neu-color-base-border-secondary: #{$neu-color-base-border-secondary};
+  --neu-color-base-disabled: #{$neu-color-base-disabled};
+  --neu-color-base-on-disabled: #{$neu-color-base-on-disabled};
+  --neu-color-base-on-accent: #{$neu-color-base-on-accent};
+  --neu-color-utility-body: #{$neu-color-utility-body};
+  --neu-color-utility-surface: #{$neu-color-utility-surface};
+  --neu-color-utility-overlay: #{$neu-color-utility-overlay};
+  --neu-color-status-success: #{$neu-color-status-success};
+  --neu-color-status-success-background: #{$neu-color-status-success-background};
+  --neu-color-status-warning: #{$neu-color-status-warning};
+  --neu-color-status-warning-background: #{$neu-color-status-warning-background};
+  --neu-color-status-error: #{$neu-color-status-error};
+  --neu-color-status-error-background: #{$neu-color-status-error-background};
+  --neu-size-big: #{$neu-size-big};
+  --neu-size-medium: #{$neu-size-medium};
+  --neu-size-small: #{$neu-size-small};
+  --neu-size-mini: #{$neu-size-mini};
+  --neu-shadow-surface: #{$neu-shadow-surface};
+  --neu-shadow-element: #{$neu-shadow-element};
+  --neu-shadow-element-pressed: #{$neu-shadow-element-pressed};
+  --neu-shadow-color-dark: #{$neu-shadow-color-dark};
+  --neu-shadow-color-dark-light: #{$neu-shadow-color-dark-light};
+  --neu-shadow-color-light: #{$neu-shadow-color-light};
+  --neu-shadow-color-light-dark: #{$neu-shadow-color-light-dark};
+}
