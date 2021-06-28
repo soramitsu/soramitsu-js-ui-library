@@ -18,6 +18,7 @@
       @focus="handleFocus"
       @visible-change="handleVisibleChange"
       @clear="handleClear"
+      :filterable="filterable"
     >
       <slot name="prefix" slot="prefix"></slot>
       <slot name="empty" slot="empty"></slot>
@@ -114,6 +115,12 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin) {
    * `false` by default
    */
   @Prop({ type: Boolean, default: false }) readonly clearable!: boolean
+  /**
+   * Filterable state of the select component.
+   *
+   * `false` by default
+   */
+  @Prop({ type: Boolean, default: false }) readonly filterable!: boolean
 
   @Ref('select') select!: any
 
