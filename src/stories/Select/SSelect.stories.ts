@@ -39,6 +39,7 @@ export const configurable = () => ({
                    :no-data-text="noDataText"
                    :popper-class="borderRadius"
                    @change="handleChange"
+                   :filterable="filterable"
                  >
                    <s-option
                      v-for="option in options"
@@ -87,6 +88,9 @@ export const configurable = () => ({
     },
     noDataText: {
       default: text('No data text', 'No data')
+    },
+    filterable: {
+      default: boolean('Filterable', false)
     }
   },
   methods: {
