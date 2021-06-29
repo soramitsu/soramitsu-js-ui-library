@@ -14,6 +14,14 @@ $s-font-family-mono-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/JetBrain
 $s-font-family-icons-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/soramitsu-icons-1.0.0.ttf' !default;
 ```
 
+## Additional plugins setup
+```
+import Vue from 'vue'
+import SoramitsuElements, { VJsoneditor } from '@soramitsu/soramitsu-js-ui'
+
+Vue.use(SoramitsuElements, { plugins: [VJsoneditor] })
+```
+
 
 ### Compiles and hot-reloads storybook with components for development
 ```
