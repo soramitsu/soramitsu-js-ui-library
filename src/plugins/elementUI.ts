@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 import Element, {
   Loading,
   Message,
@@ -8,14 +10,14 @@ import Element, {
 import i18n from '../lang'
 
 const ElementUIPlugin = {
-  install: (Vue) => {
-    Vue.use(Loading.directive)
-    Vue.use(Element, { i18n: (key, value) => i18n.t(key, value) })
-    Vue.prototype.$loading = Loading.service
-    Vue.prototype.$prompt = MessageBox.prompt
-    Vue.prototype.$alert = MessageBox.alert
-    Vue.prototype.$message = Message
-    Vue.prototype.$notify = Notification
+  install: (vue: typeof Vue) => {
+    vue.use(Loading.directive)
+    vue.use(Element, { i18n: (key, value) => i18n.t(key, value) })
+    vue.prototype.$loading = Loading.service
+    vue.prototype.$prompt = MessageBox.prompt
+    vue.prototype.$alert = MessageBox.alert
+    vue.prototype.$message = Message
+    vue.prototype.$notify = Notification
   }
 }
 

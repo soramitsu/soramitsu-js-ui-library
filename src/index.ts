@@ -116,8 +116,6 @@ const components = [
   { component: STooltip, name: Components.STooltip }
 ]
 
-const plugins = [VJsoneditor]
-
 const directives = [
   { directive: Float, name: Directives.Float },
   { directive: Integer, name: Directives.Integer }
@@ -125,9 +123,9 @@ const directives = [
 
 const SoramitsuElements = {
   install (vue: typeof Vue, options?: any): void {
-    const pluginsToInstall = options && options.plugins ? options.plugins : plugins
-
-    pluginsToInstall.forEach(plugin => vue.use(plugin))
+    if (options && options.plugins) {
+      options.plugins.forEach(plugin => vue.use(plugin))
+    }
 
     // TODO: maybe we'll need error message about storage here
     if (options && options.store) {
