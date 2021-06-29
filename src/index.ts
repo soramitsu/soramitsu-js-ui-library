@@ -1,6 +1,10 @@
 import Vue from 'vue'
 
 import {
+  VJsoneditor
+} from './plugins'
+
+import {
   SApp,
   SAside,
   SBreadcrumb,
@@ -50,6 +54,7 @@ import {
   STableColumn,
   STooltip
 } from './components'
+
 import { Float, Integer } from './directives'
 import { Components } from './types/components'
 import { Directives } from './types/directives'
@@ -111,6 +116,8 @@ const components = [
   { component: STooltip, name: Components.STooltip }
 ]
 
+const plugins = [VJsoneditor]
+
 const directives = [
   { directive: Float, name: Directives.Float },
   { directive: Integer, name: Directives.Integer }
@@ -118,6 +125,10 @@ const directives = [
 
 const SoramitsuElements = {
   install (vue: typeof Vue, options?: any): void {
+    const pluginsToInstall = options && options.plugins ? options.plugins : plugins
+
+    pluginsToInstall.forEach(plugin => vue.use(plugin))
+
     // TODO: maybe we'll need error message about storage here
     if (options && options.store) {
       Object.values(Modules).forEach(molude => {
@@ -138,6 +149,7 @@ export {
   Themes,
   setDesignSystem,
   DesignSystemTypes,
+  VJsoneditor,
   Loading,
   Message,
   MessageBox,

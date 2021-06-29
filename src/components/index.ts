@@ -1,6 +1,8 @@
-import '../plugins'
-import '../styles'
+import Vue from 'vue'
+
 import '../styles/index.scss'
+
+import { ElementUIPlugin } from '../plugins'
 
 import { SApp } from './Layout/App'
 import { SAside } from './Layout/Aside'
@@ -33,6 +35,8 @@ import { SSelect, SOption, SOptionGroup } from './Select'
 import { STab, STabs } from './Tab'
 import { STable, SHierarchicalTable, STableColumn } from './Table'
 import { STooltip } from './Tooltip'
+
+Vue.use(ElementUIPlugin)
 
 export {
   SApp,

@@ -65,8 +65,11 @@ $s-border-radius-big: $s-border-radius-base * 4 !default;
 
 // Fonts
 $s-font-family-default: 'Sora', sans-serif !important;
+$s-font-family-default-path: '~@/assets/fonts/Sora-VariableFont_wght.ttf' !default;
 $s-font-family-mono: 'JetBrainsMono', monospace !important;
+$s-font-family-mono-path: '~@/assets/fonts/JetBrainsMono-Regular.woff' !default;
 $s-font-family-icons: 'soramitsu-icons' !important;
+$s-font-family-icons-path: '~@/assets/fonts/soramitsu-icons-1.0.0.ttf' !default;
 // Font sizes
 $s-font-size-extra-mini: 11px !default;
 $s-font-size-mini: 12px !default;

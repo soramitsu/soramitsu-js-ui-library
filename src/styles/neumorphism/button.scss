@@ -151,17 +151,30 @@ $neu-button-padding-mini: 3px 6px !default;
     box-shadow: $neu-button-primary-box-shadow;
     color: $neu-button-primary-text-color;
 
+    i {
+      color: $neu-button-primary-text-color;
+    }
+
     &:hover, &:focus, &.focusing {
       background: $neu-button-primary-background-color-hover;
       border-color: $neu-button-primary-border-color-hover;
       color: $neu-button-primary-text-color-hover;
       box-shadow: $neu-button-primary-box-shadow-hover;
+
+      i {
+        color: $neu-button-primary-text-color-hover;
+      }
+  
     }
     &:active, &.s-pressed {
       background: $neu-button-primary-background-color-pressed;
       border-color: $neu-button-primary-border-color-pressed;
       color: $neu-button-primary-text-color-pressed;
       box-shadow: $neu-button-primary-box-shadow-pressed;
+
+      i {
+        color: $neu-button-primary-text-color-pressed;
+      }
     }
     @include disabled;
 

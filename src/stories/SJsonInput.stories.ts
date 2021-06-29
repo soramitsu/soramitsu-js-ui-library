@@ -1,6 +1,10 @@
+import Vue from 'vue'
 import { text, withKnobs, boolean } from '@storybook/addon-knobs'
 
 import { SJsonInput, SRow } from '../components'
+import { VJsoneditor } from '../plugins'
+
+Vue.use(VJsoneditor)
 
 export default {
   component: SJsonInput,

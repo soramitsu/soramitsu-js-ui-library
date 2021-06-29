@@ -45,7 +45,7 @@ $footer-height: 26px;
 
 .jsoneditor {
   border: none !important;
-  font-family: $s-font-family-mono;
+  font-family: var(--s-font-family-mono);
   .jsoneditor-outer {
     height: calc(100% - #{$footer-height});
     margin-bottom: -1px !important;
@@ -53,7 +53,7 @@ $footer-height: 26px;
   }
   .ace-jsoneditor {
     *, textarea.jsoneditor-text * {
-      font-family: $s-font-family-mono;
+      font-family: var(--s-font-family-mono);
     }
     .ace_fold {
       border: none;
@@ -114,10 +114,10 @@ $footer-height: 26px;
   }
   .ace_editor .ace_content,
   .ace_gutter .ace_gutter-cell {
-    font-family: $s-font-family-mono;
+    font-family: var(--s-font-family-mono);
   }
   .ace_tooltip {
-    font-family: $s-font-family-default;
+    font-family: var(--s-font-family-default);
     background: var(--s-color-base-content-primary);
     border-color: var(--s-color-base-content-primary);
     color: var(--s-color-base-on-accent);
