@@ -5,6 +5,16 @@
 yarn install
 ```
 
+## Font variables setup
+Add font variables to your project
+
+```
+$s-font-family-default-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/Sora-VariableFont_wght.ttf' !default;
+$s-font-family-mono-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/JetBrainsMono-Regular.woff' !default;
+$s-font-family-icons-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/soramitsu-icons-1.0.0.ttf' !default;
+```
+
+
 ### Compiles and hot-reloads storybook with components for development
 ```
 yarn storybook:serve
