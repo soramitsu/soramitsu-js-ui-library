@@ -141,6 +141,8 @@ export {
   Themes,
   setDesignSystem,
   DesignSystemTypes,
+  Components,
+  Directives,
   Loading,
   Message,
   MessageBox,
