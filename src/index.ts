@@ -85,6 +85,7 @@ const libraryComponentsMap = {
   [Components.SFormItem]: SFormItem,
   [Components.SHeader]: SHeader,
   [Components.SIcon]: SIcon,
+  [Components.SInput]: SInput,
   [Components.SFloatInput]: SFloatInput,
   [Components.SJsonInput]: SJsonInput,
   [Components.SMain]: SMain,
