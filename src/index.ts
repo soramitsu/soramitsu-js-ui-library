@@ -86,7 +86,7 @@ const libraryComponentsMap = {
   [Components.SHeader]: SHeader,
   [Components.SIcon]: SIcon,
   [Components.SFloatInput]: SFloatInput,
-  [Components.SJsonInput]: SJsonInput,
+  // [Components.SJsonInput]: SJsonInput, // dont register global, just for test
   [Components.SMain]: SMain,
   [Components.SMenu]: SMenu,
   [Components.SMenuItem]: SMenuItem,
