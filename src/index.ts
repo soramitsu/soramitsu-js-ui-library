@@ -50,6 +50,7 @@ import {
   STableColumn,
   STooltip
 } from './components'
+
 import { Float, Integer } from './directives'
 import { Components } from './types/components'
 import { Directives } from './types/directives'
@@ -60,61 +61,59 @@ import { Themes } from './utils/Theme'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 import { SDialogMixin } from './mixins'
 
-const components = [
-  { component: SApp, name: Components.SApp },
-  { component: SAside, name: Components.SAside },
-  { component: SBreadcrumb, name: Components.SBreadcrumb },
-  { component: SBreadcrumbItem, name: Components.SBreadcrumbItem },
-  { component: SButton, name: Components.SButton },
-  { component: SButtonGroup, name: Components.SButtonGroup },
-  { component: SCard, name: Components.SCard },
-  { component: SCheckbox, name: Components.SCheckbox },
-  { component: SCol, name: Components.SCol },
-  { component: SCollapse, name: Components.SCollapse },
-  { component: SCollapseItem, name: Components.SCollapseItem },
-  { component: SContainer, name: Components.SContainer },
-  { component: SDatePicker, name: Components.SDatePicker },
-  { component: SDesignSystemProvider, name: Components.SDesignSystemProvider },
-  { component: SDialog, name: Components.SDialog },
-  { component: SDivider, name: Components.SDivider },
-  { component: SDropdown, name: Components.SDropdown },
-  { component: SDropdownItem, name: Components.SDropdownItem },
-  { component: SFooter, name: Components.SFooter },
-  { component: SForm, name: Components.SForm },
-  { component: SFormItem, name: Components.SFormItem },
-  { component: SHeader, name: Components.SHeader },
-  { component: SIcon, name: Components.SIcon },
-  { component: SInput, name: Components.SInput },
-  { component: SFloatInput, name: Components.SFloatInput },
-  { component: SJsonInput, name: Components.SJsonInput },
-  { component: SMain, name: Components.SMain },
-  { component: SMenu, name: Components.SMenu },
-  { component: SMenuItem, name: Components.SMenuItem },
-  { component: SMenuItemGroup, name: Components.SMenuItemGroup },
-  { component: SOption, name: Components.SOption },
-  { component: SOptionGroup, name: Components.SOptionGroup },
-  { component: SPagination, name: Components.SPagination },
-  { component: SRadio, name: Components.SRadio },
-  { component: SRadioGroup, name: Components.SRadioGroup },
-  { component: SRow, name: Components.SRow },
-  { component: SScrollSectionItem, name: Components.SScrollSectionItem },
-  { component: SScrollSections, name: Components.SScrollSections },
-  { component: SSelect, name: Components.SSelect },
-  { component: SSlider, name: Components.SSlider },
-  { component: SSubmenu, name: Components.SSubmenu },
-  { component: SSwitch, name: Components.SSwitch },
-  { component: STab, name: Components.STab },
-  { component: STabs, name: Components.STabs },
-  { component: STable, name: Components.STable },
-  { component: SHierarchicalTable, name: Components.SHierarchicalTable },
-  { component: STableColumn, name: Components.STableColumn },
-  { component: STooltip, name: Components.STooltip }
-]
+const libraryComponentsMap = {
+  [Components.SApp]: SApp,
+  [Components.SAside]: SAside,
+  [Components.SBreadcrumb]: SBreadcrumb,
+  [Components.SBreadcrumbItem]: SBreadcrumbItem,
+  [Components.SButton]: SButton,
+  [Components.SButtonGroup]: SButtonGroup,
+  [Components.SCard]: SCard,
+  [Components.SCheckbox]: SCheckbox,
+  [Components.SCol]: SCol,
+  [Components.SCollapse]: SCollapse,
+  [Components.SCollapseItem]: SCollapseItem,
+  [Components.SContainer]: SContainer,
+  [Components.SDatePicker]: SDatePicker,
+  [Components.SDesignSystemProvider]: SDesignSystemProvider,
+  [Components.SDialog]: SDialog,
+  [Components.SDivider]: SDivider,
+  [Components.SDropdown]: SDropdown,
+  [Components.SDropdownItem]: SDropdownItem,
+  [Components.SFooter]: SFooter,
+  [Components.SForm]: SForm,
+  [Components.SFormItem]: SFormItem,
+  [Components.SHeader]: SHeader,
+  [Components.SIcon]: SIcon,
+  [Components.SFloatInput]: SFloatInput,
+  [Components.SJsonInput]: SJsonInput,
+  [Components.SMain]: SMain,
+  [Components.SMenu]: SMenu,
+  [Components.SMenuItem]: SMenuItem,
+  [Components.SMenuItemGroup]: SMenuItemGroup,
+  [Components.SOption]: SOption,
+  [Components.SOptionGroup]: SOptionGroup,
+  [Components.SPagination]: SPagination,
+  [Components.SRadio]: SRadio,
+  [Components.SRadioGroup]: SRadioGroup,
+  [Components.SRow]: SRow,
+  [Components.SScrollSectionItem]: SScrollSectionItem,
+  [Components.SScrollSections]: SScrollSections,
+  [Components.SSlider]: SSlider,
+  [Components.SSubmenu]: SSubmenu,
+  [Components.SSwitch]: SSwitch,
+  [Components.STab]: STab,
+  [Components.STabs]: STabs,
+  [Components.STable]: STable,
+  [Components.SHierarchicalTable]: SHierarchicalTable,
+  [Components.STableColumn]: STableColumn,
+  [Components.STooltip]: STooltip
+}
 
-const directives = [
-  { directive: Float, name: Directives.Float },
-  { directive: Integer, name: Directives.Integer }
-]
+const libraryDirectivesMap = {
+  [Directives.Float]: Float,
+  [Directives.Integer]: Integer
+}
 
 const SoramitsuElements = {
   install (vue: typeof Vue, options?: any): void {
@@ -124,8 +123,12 @@ const SoramitsuElements = {
         options.store.registerModule(molude, modules[molude])
       })
     }
-    components.forEach(el => vue.component(el.name, el.component))
-    directives.forEach(item => vue.directive(item.name, item.directive))
+
+    const components: Array<string> = options && options.components ? options.components : Object.values(Components)
+    const directives: Array<string> = options && options.directives ? options.directives : Object.values(Directives)
+
+    components.forEach(item => vue.component(item, libraryComponentsMap[item]))
+    directives.forEach(item => vue.component(item, libraryDirectivesMap[item]))
   }
 }
 
@@ -138,6 +141,8 @@ export {
   Themes,
   setDesignSystem,
   DesignSystemTypes,
+  Components,
+  Directives,
   Loading,
   Message,
   MessageBox,

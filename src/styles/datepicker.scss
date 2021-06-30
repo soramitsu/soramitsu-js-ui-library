@@ -18,7 +18,7 @@
 $date-picker-padding: 8px;
 
 .s-date-picker {
-  font-family: $s-font-family-default;
+  font-family: var(--s-font-family-default);
   width: 100%;
   position: relative;
   &.s-big .el-input__inner {
