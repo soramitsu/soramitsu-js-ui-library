@@ -30,8 +30,13 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch, Ref } from 'vue-property-decorator'
 import isEmpty from 'lodash/fp/isEmpty'
+import VJsoneditor from 'v-jsoneditor'
 
-@Component
+@Component({
+  components: {
+    VJsoneditor
+  }
+})
 export default class SJsonInput extends Vue {
   /**
    * Value of JSON input. Could be used with `v-model`
