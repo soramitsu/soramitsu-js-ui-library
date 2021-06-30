@@ -20,7 +20,7 @@ $select-prefix-width: $s-size-mini;
 $select-prefix-height: $s-size-mini;
 
 .s-select {
-  font-family: $s-font-family-default;
+  font-family: var(--s-font-family-default);
   width: 100%;
   position: relative;
   @include select-border-radius;
@@ -45,7 +45,7 @@ $select-prefix-height: $s-size-mini;
       display: flex;
       align-items: center;
       width: var(--s-icon-font-size-big);
-      font-family: $icons-font;
+      font-family: var(--s-font-family-icons);
       font-size: var(--s-icon-font-size-big);
       &:before {
         content: $s-icon-arrows-chevron-top-rounded-24;

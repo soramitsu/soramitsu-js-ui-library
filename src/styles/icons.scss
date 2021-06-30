@@ -1,5 +1,5 @@
 [class^="s-icon-"], [class*=" s-icon-"] {
-  font-family: 'soramitsu-icons' !important;
+  font-family: var(--s-font-family-icons);
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -9,7 +9,6 @@
   -moz-osx-font-smoothing: grayscale;
   color: var(--s-color-base-content-primary);
 }
-$icons-font: 'soramitsu-icons' !important;
 /*_____________________________________________Icons variables_____________________________________________*/
 $s-icon-arrow-bottom-16: "\eb11";
 $s-icon-arrow-bottom-left-16: "\eb12";
