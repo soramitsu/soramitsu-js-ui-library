@@ -19,7 +19,7 @@ import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import SizeMixin from '../../mixins/SizeMixin'
 import StatusMixin from '../../mixins/StatusMixin'
 import { CardShadow } from './consts'
-import { BorderRadius } from '@/types'
+import { BorderRadius } from '../../types'
 
 @Component
 export default class SCard extends Mixins(BorderRadiusMixin, SizeMixin, StatusMixin, DesignSystemInject) {

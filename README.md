@@ -14,21 +14,6 @@ $s-font-family-mono-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/JetBrain
 $s-font-family-icons-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/soramitsu-icons-1.0.0.ttf' !default;
 ```
 
-## Custom components, directives setup
-Import "Components" enum from library, and pass the list of needed components to SoramitsuElements options
-
-Note: Without customization all library components and directives are registering global
-
-```
-import Vue from 'vue'
-import SoramitsuElements, { Components, Directives } from '@soramitsu/soramitsu-js-ui'
-
-Vue.use(SoramitsuElements, {
-  components: [Components.Button, Components.Input],
-  directives: [Directives.Float]
-})
-```
-
 ### Compiles and hot-reloads storybook with components for development
 ```
 yarn storybook:serve

@@ -1,5 +1,4 @@
 import Vue from 'vue'
-
 import {
   SApp,
   SAside,
@@ -50,86 +49,71 @@ import {
   STableColumn,
   STooltip
 } from './components'
-
 import { Float, Integer } from './directives'
 import { Components } from './types/components'
 import { Directives } from './types/directives'
-import { modules, Modules } from './store'
 import { setTheme, setDesignSystem } from './utils'
 import { DesignSystemTypes } from './utils/DesignSystem'
 import { Themes } from './utils/Theme'
+import { SoramitsuUIStorePlugin, ElementUIPlugin } from './plugins'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 import { SDialogMixin } from './mixins'
 
-const libraryComponentsMap = {
-  [Components.SApp]: SApp,
-  [Components.SAside]: SAside,
-  [Components.SBreadcrumb]: SBreadcrumb,
-  [Components.SBreadcrumbItem]: SBreadcrumbItem,
-  [Components.SButton]: SButton,
-  [Components.SButtonGroup]: SButtonGroup,
-  [Components.SCard]: SCard,
-  [Components.SCheckbox]: SCheckbox,
-  [Components.SCol]: SCol,
-  [Components.SCollapse]: SCollapse,
-  [Components.SCollapseItem]: SCollapseItem,
-  [Components.SContainer]: SContainer,
-  [Components.SDatePicker]: SDatePicker,
-  [Components.SDesignSystemProvider]: SDesignSystemProvider,
-  [Components.SDialog]: SDialog,
-  [Components.SDivider]: SDivider,
-  [Components.SDropdown]: SDropdown,
-  [Components.SDropdownItem]: SDropdownItem,
-  [Components.SFooter]: SFooter,
-  [Components.SForm]: SForm,
-  [Components.SFormItem]: SFormItem,
-  [Components.SHeader]: SHeader,
-  [Components.SIcon]: SIcon,
-  [Components.SInput]: SInput,
-  [Components.SFloatInput]: SFloatInput,
-  [Components.SJsonInput]: SJsonInput,
-  [Components.SMain]: SMain,
-  [Components.SMenu]: SMenu,
-  [Components.SMenuItem]: SMenuItem,
-  [Components.SMenuItemGroup]: SMenuItemGroup,
-  [Components.SOption]: SOption,
-  [Components.SOptionGroup]: SOptionGroup,
-  [Components.SPagination]: SPagination,
-  [Components.SRadio]: SRadio,
-  [Components.SRadioGroup]: SRadioGroup,
-  [Components.SRow]: SRow,
-  [Components.SScrollSectionItem]: SScrollSectionItem,
-  [Components.SScrollSections]: SScrollSections,
-  [Components.SSlider]: SSlider,
-  [Components.SSubmenu]: SSubmenu,
-  [Components.SSwitch]: SSwitch,
-  [Components.STab]: STab,
-  [Components.STabs]: STabs,
-  [Components.STable]: STable,
-  [Components.SHierarchicalTable]: SHierarchicalTable,
-  [Components.STableColumn]: STableColumn,
-  [Components.STooltip]: STooltip
-}
-
-const libraryDirectivesMap = {
-  [Directives.Float]: Float,
-  [Directives.Integer]: Integer
-}
-
+// used to install all library dependencies
 const SoramitsuElements = {
   install (vue: typeof Vue, options?: any): void {
-    // TODO: maybe we'll need error message about storage here
-    if (options && options.store) {
-      Object.values(Modules).forEach(molude => {
-        options.store.registerModule(molude, modules[molude])
-      })
-    }
-
-    const components: Array<string> = options && options.components ? options.components : Object.values(Components)
-    const directives: Array<string> = options && options.directives ? options.directives : Object.values(Directives)
-
-    components.forEach(item => vue.component(item, libraryComponentsMap[item]))
-    directives.forEach(item => vue.component(item, libraryDirectivesMap[item]))
+    vue.use(SoramitsuUIStorePlugin, options)
+    vue.use(ElementUIPlugin)
+    vue.directive(Directives.Float, Float)
+    vue.directive(Directives.Integer, Integer)
+    vue.use(SApp)
+    vue.use(SAside)
+    vue.use(SBreadcrumb)
+    vue.use(SBreadcrumbItem)
+    vue.use(SButton)
+    vue.use(SButtonGroup)
+    vue.use(SCard)
+    vue.use(SCheckbox)
+    vue.use(SCol)
+    vue.use(SCollapse)
+    vue.use(SCollapseItem)
+    vue.use(SContainer)
+    vue.use(SDatePicker)
+    vue.use(SDesignSystemProvider)
+    vue.use(SDialog)
+    vue.use(SDivider)
+    vue.use(SDropdown)
+    vue.use(SDropdownItem)
+    vue.use(SFooter)
+    vue.use(SForm)
+    vue.use(SFormItem)
+    vue.use(SHeader)
+    vue.use(SIcon)
+    vue.use(SInput)
+    vue.use(SFloatInput)
+    vue.use(SJsonInput)
+    vue.use(SMain)
+    vue.use(SMenu)
+    vue.use(SMenuItem)
+    vue.use(SMenuItemGroup)
+    vue.use(SOption)
+    vue.use(SOptionGroup)
+    vue.use(SPagination)
+    vue.use(SRadio)
+    vue.use(SRadioGroup)
+    vue.use(SRow)
+    vue.use(SScrollSectionItem)
+    vue.use(SScrollSections)
+    vue.use(SSelect)
+    vue.use(SSlider)
+    vue.use(SSubmenu)
+    vue.use(SSwitch)
+    vue.use(STab)
+    vue.use(STabs)
+    vue.use(STable)
+    vue.use(SHierarchicalTable)
+    vue.use(STableColumn)
+    vue.use(STooltip)
   }
 }
 
@@ -148,6 +132,7 @@ export {
   Message,
   MessageBox,
   Notification,
+  SDialogMixin,
   SApp,
   SAside,
   SBreadcrumb,
@@ -178,9 +163,9 @@ export {
   SMenu,
   SMenuItem,
   SMenuItemGroup,
-  SPagination,
   SOption,
   SOptionGroup,
+  SPagination,
   SRadio,
   SRadioGroup,
   SRow,
@@ -195,7 +180,6 @@ export {
   STable,
   SHierarchicalTable,
   STableColumn,
-  STooltip,
-  SDialogMixin
+  STooltip
 }
 export default SoramitsuElements

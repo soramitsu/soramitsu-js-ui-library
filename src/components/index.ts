@@ -1,90 +1,31 @@
-import Vue from 'vue'
-
-import '../styles/index.scss'
-
-import { ElementUIPlugin } from '../plugins'
-
-import { SApp } from './Layout/App'
-import { SAside } from './Layout/Aside'
-import { SBreadcrumb, SBreadcrumbItem } from './Breadcrumb'
-import { SButton, SButtonGroup } from './Button'
-import { SCard } from './Card'
-import { SCheckbox } from './Checkbox'
-import { SCol } from './Layout/Col'
-import { SCollapse, SCollapseItem } from './Collapse'
-import { SContainer } from './Layout/Container'
-import { SDatePicker } from './DatePicker'
-import { SDesignSystemProvider } from './DesignSystem'
-import { SDialog } from './Dialog'
-import { SDivider } from './Divider'
-import { SDropdown, SDropdownItem } from './Dropdown'
-import { SFooter } from './Layout/Footer'
-import { SForm, SFormItem } from './Form'
-import { SHeader } from './Layout/Header'
-import { SIcon } from './Icon'
-import { SInput, SFloatInput, SJsonInput } from './Input'
-import { SMain } from './Layout/Main'
-import { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
-import { SPagination } from './Pagination'
-import { SSlider } from './Slider'
-import { SSwitch } from './Switch'
-import { SRadio, SRadioGroup } from './Radio'
-import { SRow } from './Layout/Row'
-import { SScrollSectionItem, SScrollSections } from './ScrollSections'
-import { SSelect, SOption, SOptionGroup } from './Select'
-import { STab, STabs } from './Tab'
-import { STable, SHierarchicalTable, STableColumn } from './Table'
-import { STooltip } from './Tooltip'
-
-Vue.use(ElementUIPlugin)
-
-export {
-  SApp,
-  SAside,
-  SBreadcrumb,
-  SBreadcrumbItem,
-  SButton,
-  SButtonGroup,
-  SCard,
-  SCheckbox,
-  SCol,
-  SCollapse,
-  SCollapseItem,
-  SContainer,
-  SDatePicker,
-  SDesignSystemProvider,
-  SDialog,
-  SDivider,
-  SDropdown,
-  SDropdownItem,
-  SFooter,
-  SForm,
-  SFormItem,
-  SHeader,
-  SIcon,
-  SInput,
-  SFloatInput,
-  SJsonInput,
-  SMain,
-  SMenu,
-  SMenuItem,
-  SMenuItemGroup,
-  SOption,
-  SOptionGroup,
-  SPagination,
-  SRadio,
-  SRadioGroup,
-  SRow,
-  SScrollSectionItem,
-  SScrollSections,
-  SSelect,
-  SSlider,
-  SSubmenu,
-  SSwitch,
-  STab,
-  STabs,
-  STable,
-  SHierarchicalTable,
-  STableColumn,
-  STooltip
-}
+export { SApp } from './Layout/App'
+export { SAside } from './Layout/Aside'
+export { SBreadcrumb, SBreadcrumbItem } from './Breadcrumb'
+export { SButton, SButtonGroup } from './Button'
+export { SCard } from './Card'
+export { SCheckbox } from './Checkbox'
+export { SCol } from './Layout/Col'
+export { SCollapse, SCollapseItem } from './Collapse'
+export { SContainer } from './Layout/Container'
+export { SDatePicker } from './DatePicker'
+export { SDesignSystemProvider } from './DesignSystem'
+export { SDialog } from './Dialog'
+export { SDivider } from './Divider'
+export { SDropdown, SDropdownItem } from './Dropdown'
+export { SFooter } from './Layout/Footer'
+export { SForm, SFormItem } from './Form'
+export { SHeader } from './Layout/Header'
+export { SIcon } from './Icon'
+export { SInput, SFloatInput, SJsonInput } from './Input'
+export { SMain } from './Layout/Main'
+export { SMenu, SMenuItem, SMenuItemGroup, SSubmenu } from './Menu'
+export { SPagination } from './Pagination'
+export { SSlider } from './Slider'
+export { SSwitch } from './Switch'
+export { SRadio, SRadioGroup } from './Radio'
+export { SRow } from './Layout/Row'
+export { SScrollSectionItem, SScrollSections } from './ScrollSections'
+export { SSelect, SOption, SOptionGroup } from './Select'
+export { STab, STabs } from './Tab'
+export { STable, SHierarchicalTable, STableColumn } from './Table'
+export { STooltip } from './Tooltip'

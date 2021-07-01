@@ -1,6 +1,6 @@
 {
   "name": "@soramitsu/soramitsu-js-ui",
-  "version": "0.9.13",
+  "version": "0.9.14",
   "private": false,
   "publishConfig": {
     "registry": "https://nexus.iroha.tech/repository/npm-soramitsu/"
@@ -14,7 +14,7 @@
   ],
   "author": "Stefan Popov <popov@soramitsu.co.jp>",
   "main": "./lib/soramitsu-js-ui.umd.js",
-  "module": "./lib/soramitsu-js-ui.esm.js",
+  "module": "./src/index.ts",
   "unpkg": "./lib/soramitsu-js-ui.min.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
@@ -94,6 +94,7 @@
   },
   "files": [
     "lib/*",
+    "src/*",
     "*.json",
     "*.js"
   ],
