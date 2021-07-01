@@ -1,9 +1,9 @@
 declare module '*.vue' {
-  import Vue, { VueConstructor } from 'vue'
+  import Vue, { VueConstructor, PluginFunction } from 'vue'
 
-  type InstallFn = (vue: VueConstructor) => void
-  type VueConstructorOverride = VueConstructor<Vue> & { install: InstallFn }
+  type VueConstructorOverride = VueConstructor<Vue> & { install: PluginFunction<any> }
 
   const _default: VueConstructorOverride
+
   export default _default
 }

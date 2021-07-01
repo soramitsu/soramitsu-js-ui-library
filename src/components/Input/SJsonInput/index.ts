@@ -1,7 +1,7 @@
 import { VueConstructor } from 'vue'
 import { Components } from '../../../types/components'
 
-import SJsonInput from './SJsonInput/SJsonInput.vue'
+import SJsonInput from './SJsonInput.vue'
 
 SJsonInput.install = function (vue: VueConstructor) {
   vue.component(Components.SJsonInput, SJsonInput)

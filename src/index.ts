@@ -61,7 +61,7 @@ import { SDialogMixin } from './mixins'
 
 // used to install all library dependencies
 const SoramitsuElements = {
-  install (vue: typeof Vue, options?: any): void {
+  install (vue: any, options?: any): void {
     vue.use(SoramitsuUIStorePlugin, options)
     vue.use(ElementUIPlugin)
     vue.directive(Directives.Float, Float)
