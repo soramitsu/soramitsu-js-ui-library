@@ -18,8 +18,8 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
-import SInput from './SInput.vue'
-import { Float } from '../../directives'
+import SInput from '../SInput'
+import { Float } from '../../../directives'
 
 const DEFAULT_VALUE = ''
 const DEFAULT_DECIMAL_DELIMITER = '.'
@@ -39,7 +39,7 @@ const decimalsValidator = x => x === undefined || x >= 0
     SInput
   },
   directives: {
-    float: Float
+    float: Float as any // TODO: fix type
   }
 })
 export default class SFloatInput extends Vue {

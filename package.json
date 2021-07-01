@@ -14,7 +14,7 @@
   ],
   "author": "Stefan Popov <popov@soramitsu.co.jp>",
   "main": "./lib/soramitsu-js-ui.umd.js",
-  "module": "./src/index.ts",
+  "module": "./lib/soramitsu-js-ui.esm.js",
   "unpkg": "./lib/soramitsu-js-ui.min.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
@@ -102,6 +102,7 @@
     "react": "16.13.0",
     "react-dom": "16.13.0"
   },
+  "sideEffects": false,
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
