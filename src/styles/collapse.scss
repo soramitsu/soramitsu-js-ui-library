@@ -28,7 +28,14 @@
       border-bottom-color: transparent;
     }
     .el-icon-arrow-right {
+<<<<<<< HEAD
       font-family: var(--s-font-family-icons);
+=======
+      &,
+      &:before {
+        font-family: var(--s-font-family-icons);
+      }
+>>>>>>> develop
       @extend .s-icon-chevron-down-rounded-16;
       font-size: var(--s-icon-font-size-mini);
       padding: 8px;
