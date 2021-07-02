@@ -14,19 +14,30 @@ $s-font-family-mono-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/JetBrain
 $s-font-family-icons-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/soramitsu-icons-1.0.0.ttf' !default;
 ```
 
-## Custom components, directives setup
-Import "Components" enum from library, and pass the list of needed components to SoramitsuElements options
-
-Note: Without customization all library components and directives are registering global
-
+## Usage library in project
+### 1.Install all of library components:
 ```
-import Vue from 'vue'
-import SoramitsuElements, { Components, Directives } from '@soramitsu/soramitsu-js-ui'
+import Vue from 'vue
+import SoramitsuElements from '@soramitsu/soramitsu-js-ui'
 
-Vue.use(SoramitsuElements, {
-  components: [Components.Button, Components.Input],
-  directives: [Directives.Float]
-})
+const options = {
+  store // if u want to merge ui lib modules
+}
+
+Vue.use(SoramitsuElements, options)
+```
+### 2.Install only necessary components (to reduce vendors bundle size)
+```
+import Vue from 'vue
+import ElementUIPlugin from '@soramitsu/soramitsu-js-ui/src/plugins/elementUI'
+import SoramitsuUIStorePlugin from '@soramitsu/soramitsu-js-ui/src/plugins/soramitsuUIStore'
+import SButton from '@soramitsu/soramitsu-js-ui/src/components/Button/SButton'
+import SButton from '@soramitsu/soramitsu-js-ui/src/components/Input/SInput'
+
+Vue.use(ElementUIPlugin) // required
+Vue.use(SoramitsuUIStorePlugin, store) // optional
+Vue.use(SButton)
+Vue.use(SInput)
 ```
 
 ### Compiles and hot-reloads storybook with components for development

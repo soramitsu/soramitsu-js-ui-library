@@ -1,4 +1,2 @@
-import SRadio from './SRadio.vue'
-import SRadioGroup from './SRadioGroup.vue'
-
-export { SRadio, SRadioGroup }
+export { SRadio } from './SRadio'
+export { SRadioGroup } from './SRadioGroup'

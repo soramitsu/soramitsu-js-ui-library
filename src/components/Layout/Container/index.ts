@@ -1,4 +1,14 @@
-import SContainer from './SContainer.vue'
-import { ContainerDirection } from './consts'
+import { VueConstructor } from 'vue'
+import { Components, SFCWithInstall } from '../../../types/components'
 
-export { SContainer, ContainerDirection }
+import _SContainer from './SContainer.vue'
+
+const SContainer = _SContainer as SFCWithInstall<typeof _SContainer>
+
+SContainer.install = function (vue: VueConstructor) {
+  vue.component(Components.SContainer, SContainer)
+}
+
+export { SContainer }
+export { ContainerDirection } from './consts'
+export default SContainer

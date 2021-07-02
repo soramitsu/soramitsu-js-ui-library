@@ -1,9 +1,4 @@
-import SDesignSystemProvider from './SDesignSystemProvider.vue'
-import DesignSystemInject from './DesignSystemInject'
-import { DesignSystemProvideKey } from './consts'
 
-export {
-  SDesignSystemProvider,
-  DesignSystemProvideKey,
-  DesignSystemInject
-}
+export { default as DesignSystemInject } from './DesignSystemInject'
+export { SDesignSystemProvider } from './SDesignSystemProvider'
+export { DesignSystemProvideKey } from './consts'

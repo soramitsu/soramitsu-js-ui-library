@@ -1,7 +1,5 @@
-import SMenu from './SMenu.vue'
-import SMenuItem from './SMenuItem.vue'
-import SMenuItemGroup from './SMenuItemGroup.vue'
-import SSubmenu from './SSubmenu.vue'
-import { MenuMode, MenuTrigger } from './consts'
-
-export { SMenu, SMenuItem, SMenuItemGroup, SSubmenu, MenuMode, MenuTrigger }
+export { SMenu } from './SMenu'
+export { SMenuItem } from './SMenuItem'
+export { SMenuItemGroup } from './SMenuItemGroup'
+export { SSubmenu } from './SSubMenu'
+export { MenuMode, MenuTrigger } from './consts'

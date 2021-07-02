@@ -1,4 +1,2 @@
-import SCard from './SCard.vue'
-import { CardShadow } from './consts'
-
-export { SCard, CardShadow }
+export { SCard } from './SCard'
+export { CardShadow } from './consts'
