@@ -49,7 +49,6 @@ import {
   STableColumn,
   STooltip
 } from './components'
-
 import { Float, Integer } from './directives'
 import { Components } from './types/components'
 import { Directives } from './types/directives'
