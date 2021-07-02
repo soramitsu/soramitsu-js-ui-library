@@ -1,6 +1,4 @@
-import SSelect from './SSelect.vue'
-import SOption from './SOption.vue'
-import SOptionGroup from './SOptionGroup.vue'
-import { InputTypes } from './consts'
-
-export { SSelect, SOption, SOptionGroup, InputTypes }
+export { SSelect } from './SSelect'
+export { SOption } from './SOption'
+export { SOptionGroup } from './SOptionGroup'
+export { InputTypes } from './consts'

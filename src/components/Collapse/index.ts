@@ -1,5 +1,3 @@
-import SCollapse from './SCollapse.vue'
-import SCollapseItem from './SCollapseItem.vue'
-import { BorderTypes } from './consts'
-
-export { SCollapse, SCollapseItem, BorderTypes }
+export { SCollapse } from './SCollapse'
+export { SCollapseItem } from './SCollapseItem'
+export { BorderTypes } from './consts'

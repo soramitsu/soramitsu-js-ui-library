@@ -1,4 +1,2 @@
-import SBreadcrumb from './SBreadcrumb.vue'
-import SBreadcrumbItem from './SBreadcrumbItem.vue'
-
-export { SBreadcrumb, SBreadcrumbItem }
+export { SBreadcrumb } from './SBreadcrumb'
+export { SBreadcrumbItem } from './SBreadcrumbItem'

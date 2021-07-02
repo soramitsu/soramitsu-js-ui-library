@@ -1,3 +1,7 @@
+import Vue from 'vue'
+
+export type SFCWithInstall<T> = T & { install(vue: typeof Vue): void }
+
 export enum Components {
   SApp = 'SApp',
   SAside = 'SAside',
