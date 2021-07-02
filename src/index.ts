@@ -59,7 +59,7 @@ import { SoramitsuUIStorePlugin, ElementUIPlugin } from './plugins'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 import { SDialogMixin } from './mixins'
 
-// used to install all library dependencies
+// use to install all library dependencies
 const SoramitsuElements = {
   install (vue: typeof Vue, options?: any): void {
     vue.use(SoramitsuUIStorePlugin, options)
