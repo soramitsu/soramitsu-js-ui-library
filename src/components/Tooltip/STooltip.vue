@@ -24,7 +24,6 @@
 <script lang="ts">
 import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 import { Getter } from 'vuex-class'
-import { TooltipEffect } from 'element-ui/types/tooltip'
 import { PopoverPlacement } from 'element-ui/types/popover'
 import debounce from 'throttle-debounce/debounce'
 
