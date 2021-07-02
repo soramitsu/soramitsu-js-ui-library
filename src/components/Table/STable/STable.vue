@@ -64,7 +64,7 @@ import { ElTable } from 'element-ui/types/table'
 import { ElTableColumn } from 'element-ui/types/table-column'
 
 import SizeMixin from '../../../mixins/SizeMixin'
-import { TooltipTheme } from '../../Tooltip'
+import { TooltipTheme } from '../../Tooltip/consts'
 import { SortDirection } from '../consts'
 
 @Component

@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Component, Mixins, Prop } from 'vue-property-decorator'
 
-import { DesignSystemInject } from '../../DesignSystem'
+import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
 import SizeMixin from '../../../mixins/SizeMixin'
 import StatusMixin from '../../../mixins/StatusMixin'

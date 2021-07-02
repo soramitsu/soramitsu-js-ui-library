@@ -42,7 +42,7 @@ import { ElFormItem } from 'element-ui/types/form-item'
 
 // TODO: ask do we need size prop for the component?
 // Prev comment => TODO: ask design team
-import { SIcon } from '../../Icon'
+import { SIcon } from '../../Icon/SIcon'
 import SizeMixin from '../../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
 import { PickerTypes, PickerAlignment, InputTypes } from '../consts'

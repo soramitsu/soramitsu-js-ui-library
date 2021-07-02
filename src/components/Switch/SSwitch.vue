@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { Mixins, Component, Prop, Watch } from 'vue-property-decorator'
-import { DesignSystemInject } from '../DesignSystem'
+import DesignSystemInject from '../DesignSystem/DesignSystemInject'
 
 @Component
 export default class SSwitch extends Mixins(DesignSystemInject) {

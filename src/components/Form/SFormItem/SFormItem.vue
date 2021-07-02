@@ -23,7 +23,7 @@ import { ElFormItem } from 'element-ui/types/form-item'
 import { ElForm } from 'element-ui/types/form'
 import isArray from 'lodash/isArray'
 
-import { SIcon } from '../../Icon'
+import { SIcon } from '../../Icon/SIcon'
 
 @Component({
   components: { SIcon }

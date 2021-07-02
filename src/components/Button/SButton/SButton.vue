@@ -26,10 +26,10 @@ import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
 import { PopoverPlacement } from 'element-ui/types/popover'
 
-import { DesignSystemInject } from '../../DesignSystem'
+import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import SizeMixin from '../../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
-import { SIcon } from '../../Icon'
+import { SIcon } from '../../Icon/SIcon'
 import { STooltip, TooltipPlacement } from '../../Tooltip'
 import { ButtonTypes, ButtonNativeTypes, ButtonIconPosition } from '../consts'
 

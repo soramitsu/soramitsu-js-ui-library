@@ -48,8 +48,10 @@ import { ElDropdown } from 'element-ui/types/dropdown'
 
 import SizeMixin from '../../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
-import { ButtonTypes, SButton } from '../../Button'
-import { Icons24, SIcon } from '../../Icon'
+import { ButtonTypes } from '../../Button/consts'
+import { SButton } from '../../Button/SButton'
+import { Icons24 } from '../../Icon/consts'
+import { SIcon } from '../../Icon/SIcon'
 import { STooltip } from '../../Tooltip'
 import { DropdownType, DropdownPlacement, DropdownTrigger } from '../consts'
 

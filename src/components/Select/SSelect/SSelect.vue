@@ -34,7 +34,7 @@ import { ElFormItem } from 'element-ui/types/form-item'
 
 import SizeMixin from '../../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
-import { Autocomplete } from '../../Input'
+import { Autocomplete } from '../../Input/consts'
 import { InputTypes } from '../consts'
 
 @Component

@@ -42,8 +42,8 @@
 import { Component, Prop, Provide, Mixins } from 'vue-property-decorator'
 
 import SizeMixin from '../../../mixins/SizeMixin'
-import STable from '../STable/STable.vue'
-import STableColumn from '../STableColumn/STableColumn.vue'
+import STable from '../STable'
+import STableColumn from '../STableColumn'
 
 @Component({
   components: {

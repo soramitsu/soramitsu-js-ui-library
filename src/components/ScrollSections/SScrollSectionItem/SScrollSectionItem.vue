@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
 
-import { SDivider } from '../../Divider'
+import { SDivider } from '../../Divider/SDivider'
 
 @Component({
   components: { SDivider }

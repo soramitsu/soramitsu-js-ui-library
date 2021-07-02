@@ -60,8 +60,8 @@ import { Component, Mixins, Prop, Ref, Inject } from 'vue-property-decorator'
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
-import { SIcon } from '../../Icon'
-import { DesignSystemInject } from '../../DesignSystem'
+import { SIcon } from '../../Icon/SIcon'
+import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
 import { Autocomplete, InputSize, InputType } from '../consts'
 

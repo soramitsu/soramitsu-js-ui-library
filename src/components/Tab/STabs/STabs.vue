@@ -22,7 +22,7 @@
 <script lang="ts">
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 
-import { DesignSystemInject } from '../../DesignSystem'
+import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
 import { TabsType, TabsPosition } from '../consts'
 
