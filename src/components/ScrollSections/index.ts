@@ -1,4 +1,2 @@
-import SScrollSectionItem from './SScrollSectionItem.vue'
-import SScrollSections from './SScrollSections.vue'
-
-export { SScrollSectionItem, SScrollSections }
+export { SScrollSectionItem } from './SScrollSectionItem'
+export { SScrollSections } from './SScrollSections'

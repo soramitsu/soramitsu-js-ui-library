@@ -24,11 +24,10 @@
 <script lang="ts">
 import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 import { Getter } from 'vuex-class'
-import { TooltipEffect } from 'element-ui/types/tooltip'
 import { PopoverPlacement } from 'element-ui/types/popover'
 import debounce from 'throttle-debounce/debounce'
 
-import { DesignSystemInject } from '../DesignSystem'
+import DesignSystemInject from '../DesignSystem/DesignSystemInject'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { Theme } from '../../utils/Theme'
 import { TooltipTheme, TooltipPlacement } from './consts'

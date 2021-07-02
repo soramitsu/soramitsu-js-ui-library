@@ -26,8 +26,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Ref, Watch } from 'vue-property-decorator'
-import { ElSlider } from 'element-ui/types/slider'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
 import { SliderInputSize } from './consts'
 

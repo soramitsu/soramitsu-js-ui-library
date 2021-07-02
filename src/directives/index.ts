@@ -1,3 +1,1 @@
-import { Float, Integer } from './number'
-
-export { Float, Integer }
+export { Float, Integer } from './number'
