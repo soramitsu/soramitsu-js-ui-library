@@ -1,10 +1,13 @@
 import { VueConstructor } from 'vue'
-import { Components } from '../../../types/components'
+import { Components, SFCWithInstall } from '../../../types/components'
 
-import SCol from './SCol.vue'
+import _SCol from './SCol.vue'
+
+const SCol = _SCol as SFCWithInstall<typeof _SCol>
 
 SCol.install = function (vue: VueConstructor) {
   vue.component(Components.SCol, SCol)
 }
 
 export { SCol }
+export default SCol

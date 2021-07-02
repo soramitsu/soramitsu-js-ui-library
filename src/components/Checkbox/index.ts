@@ -1,10 +1,13 @@
 import { VueConstructor } from 'vue'
-import { Components } from '../../types/components'
+import { Components, SFCWithInstall } from '../../types/components'
 
-import SCheckbox from './SCheckbox.vue'
+import _SCheckbox from './SCheckbox.vue'
+
+const SCheckbox = _SCheckbox as SFCWithInstall<typeof _SCheckbox>
 
 SCheckbox.install = function (vue: VueConstructor) {
   vue.component(Components.SCheckbox, SCheckbox)
 }
 
 export { SCheckbox }
+export default SCheckbox

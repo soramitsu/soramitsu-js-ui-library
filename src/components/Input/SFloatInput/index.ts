@@ -1,7 +1,9 @@
 import { VueConstructor } from 'vue'
-import { Components } from '../../../types/components'
+import { Components, SFCWithInstall } from '../../../types/components'
 
-import SFloatInput from './SFloatInput.vue'
+import _SFloatInput from './SFloatInput.vue'
+
+const SFloatInput = _SFloatInput as SFCWithInstall<typeof _SFloatInput>
 
 SFloatInput.install = function (vue: VueConstructor) {
   vue.component(Components.SFloatInput, SFloatInput)

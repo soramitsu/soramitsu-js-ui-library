@@ -1,11 +1,14 @@
 import { VueConstructor } from 'vue'
-import { Components } from '../../types/components'
+import { Components, SFCWithInstall } from '../../types/components'
 
-import STooltip from './STooltip.vue'
-import { TooltipTheme, TooltipPlacement } from './consts'
+import _STooltip from './STooltip.vue'
+
+const STooltip = _STooltip as SFCWithInstall<typeof _STooltip>
 
 STooltip.install = function (vue: VueConstructor) {
   vue.component(Components.STooltip, STooltip)
 }
 
-export { STooltip, TooltipPlacement, TooltipTheme }
+export { STooltip }
+export { TooltipTheme, TooltipPlacement } from './consts'
+export default STooltip

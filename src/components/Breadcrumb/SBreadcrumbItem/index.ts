@@ -1,7 +1,9 @@
 import { VueConstructor } from 'vue'
-import { Components } from '../../../types/components'
+import { Components, SFCWithInstall } from '../../../types/components'
 
-import SBreadcrumbItem from './SBreadcrumbItem.vue'
+import _SBreadcrumbItem from './SBreadcrumbItem.vue'
+
+const SBreadcrumbItem = _SBreadcrumbItem as SFCWithInstall<typeof _SBreadcrumbItem>
 
 SBreadcrumbItem.install = function (vue: VueConstructor) {
   vue.component(Components.SBreadcrumbItem, SBreadcrumbItem)

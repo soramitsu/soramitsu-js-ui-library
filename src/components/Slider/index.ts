@@ -1,11 +1,14 @@
 import { VueConstructor } from 'vue'
-import { Components } from '../../types/components'
+import { Components, SFCWithInstall } from '../../types/components'
 
-import SSlider from './SSlider.vue'
-import { SliderInputSize } from './consts'
+import _SSlider from './SSlider.vue'
+
+const SSlider = _SSlider as SFCWithInstall<typeof _SSlider>
 
 SSlider.install = function (vue: VueConstructor) {
   vue.component(Components.SSlider, SSlider)
 }
 
-export { SSlider, SliderInputSize }
+export { SSlider }
+export { SliderInputSize } from './consts'
+export default SSlider

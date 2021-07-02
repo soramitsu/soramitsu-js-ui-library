@@ -1,10 +1,13 @@
 import { VueConstructor } from 'vue'
-import { Components } from '../../../types/components'
+import { Components, SFCWithInstall } from '../../../types/components'
 
-import SHeader from './SHeader.vue'
+import _SHeader from './SHeader.vue'
+
+const SHeader = _SHeader as SFCWithInstall<typeof _SHeader>
 
 SHeader.install = function (vue: VueConstructor) {
   vue.component(Components.SHeader, SHeader)
 }
 
 export { SHeader }
+export default SHeader
