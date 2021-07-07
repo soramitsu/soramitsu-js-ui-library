@@ -68,7 +68,7 @@ export const configurable = () => ({
       default: text('Prefix icon', 'el-icon-search')
     },
     suffix: {
-      default: text('Suffix icon', 'el-icon-search')
+      default: text('Suffix icon', 's-icon-clear-X-16')
     },
     disabled: {
       default: boolean('Disabled', false)

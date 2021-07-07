@@ -5,7 +5,7 @@ $neu-button-transition: all 0.25s ease-in-out !default;
 
 $neu-button-background-color-disabled: var(--s-color-utility-surface) !default;
 $neu-button-border-color-disabled: var(--s-color-utility-body) !default;
-$neu-button-box-shadow-disabled: -1px -1px 5px rgba(255, 255, 255, 0.6) !default;
+$neu-button-box-shadow-disabled: 1px 1px 5px var(--s-shadow-color-light), inset -5px -5px 5px rgba(255, 255, 255, 0.5), inset 1px 1px 10px var(--s-shadow-color-dark) !default;
 $neu-button-text-color-disabled: var(--s-color-base-content-tertiary) !default;
 
 // Primary button: common
@@ -49,7 +49,7 @@ $neu-button-secondary-text-color-alternative-active: var(--s-color-base-on-accen
 $neu-button-secondary-border-color: transparent !default;
 $neu-button-secondary-border-color-active: $neu-button-secondary-border-color !default;
 // Secondary button: box-shadow
-$neu-button-secondary-box-shadow: var(--s-shadow-surface) !default;
+$neu-button-secondary-box-shadow: -5px -5px 10px var(--s-shadow-color-light), 1px 1px 10px var(--s-shadow-color-dark), inset 1px 1px 2px var(--s-shadow-color-light-dark) !default;
 $neu-button-secondary-box-shadow-active: $neu-button-secondary-box-shadow !default;
 $neu-button-secondary-box-shadow-alternative: var(--s-shadow-element) !default;
 
@@ -57,17 +57,17 @@ $neu-button-secondary-box-shadow-alternative: var(--s-shadow-element) !default;
 $neu-button-tertiary-border-width: 0px !default;
 $neu-button-tertiary-border-style: $neu-button-border-style !default;
 // Tertiary button: background colors
-$neu-button-tertiary-background-color: var(--s-color-utility-surface) !default;
+$neu-button-tertiary-background-color: var(--s-color-utility-body) !default;
 $neu-button-tertiary-background-color-active: $neu-button-tertiary-background-color !default;
 $neu-button-tertiary-background-color-alternative: var(--s-color-utility-body) !default;
 // Tertiary button: text colors
-$neu-button-tertiary-text-color: var(--s-color-base-content-secondary) !default;
-$neu-button-tertiary-text-color-active: var(--s-color-base-content-primary) !default;
+$neu-button-tertiary-text-color: var(--s-color-base-content-tertiary) !default;
+$neu-button-tertiary-text-color-active: var(--s-color-base-content-secondary) !default;
 // Tertiary button: border colors
 $neu-button-tertiary-border-color: transparent !default;
 $neu-button-tertiary-border-color-active: $neu-button-tertiary-border-color !default;
 // Tertiary button: box-shadow
-$neu-button-tertiary-box-shadow: 1px 1px 2px var(--s-shadow-color-dark), inset 1px 1px 2px var(--s-shadow-color-light) !default;
+$neu-button-tertiary-box-shadow: $neu-button-secondary-box-shadow !default;
 $neu-button-tertiary-box-shadow-active: $neu-button-tertiary-box-shadow !default;
 
 // Action button: common
@@ -90,9 +90,9 @@ $neu-button-action-border-color-hover: $neu-button-action-border-color !default;
 $neu-button-action-border-color-pressed: $neu-button-action-border-color !default;
 $neu-button-action-border-color-alternative: transparent !default;
 // Action button: box-shadow
-$neu-button-action-box-shadow: var(--s-shadow-element) !default;
+$neu-button-action-box-shadow: $neu-button-secondary-box-shadow !default;
 $neu-button-action-box-shadow-hover: $neu-button-action-box-shadow !default;
-$neu-button-action-box-shadow-pressed: var(--s-shadow-element-pressed) !default;
+$neu-button-action-box-shadow-pressed: 1px 1px 5px var(--s-shadow-color-light), inset -5px -5px 5px rgba(255, 255, 255, 0.5), inset 1px 1px 10px var(--s-shadow-color-dark) !default;
 $neu-button-action-box-shadow-alternative: none !default;
 
 $neu-button-padding-big: 7px 13px !default;
