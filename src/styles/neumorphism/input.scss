@@ -1,6 +1,6 @@
 $neu-input-border-width: 0 !default;
 $neu-input-background: var(--s-color-base-background) !default;
-$neu-input-box-shadow: 1px 1px 5px var(--s-shadow-color-light), inset -5px -5px 5px rgba(255, 255, 255, 0.5), inset 1px 1px 10px var(--s-shadow-color-dark) !default;
+$neu-input-box-shadow: var(--s-shadow-inset) !default;
 $neu-input-box-shadow-active: $neu-input-box-shadow !default;
 $neu-input-color: var(--s-color-base-content-primary) !default;
 $neu-input-color-disabled: var(--s-color-base-content-secondary) !default;

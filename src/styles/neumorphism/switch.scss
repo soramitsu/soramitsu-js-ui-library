@@ -12,7 +12,7 @@ $switch-circle-size: 18px;
     &__core {
       background-color: var(--s-color-base-background);
       border: none;
-      box-shadow: -5px -5px 10px var(--s-shadow-color-light), 1px 1px 10px var(--s-shadow-color-dark), inset 1px 1px 2px var(--s-shadow-color-light-dark);
+      box-shadow: var(--s-shadow-inset);
 
       &::after {
         width: $switch-circle-size;
@@ -33,6 +33,7 @@ $switch-circle-size: 18px;
         &::after {
           margin-left: -$switch-circle-size - 1;
           background-color: var(--s-color-base-on-accent);
+          box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.7), -1px -1px 5px var(--s-shadow-color-light), 0px 0px 20px rgba(247, 84, 163, 0.5);
         }
       }
 

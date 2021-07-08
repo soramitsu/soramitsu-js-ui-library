@@ -40,6 +40,9 @@ $s-shadow-color-light: rgba(255, 255, 255, 1);
 $s-shadow-color-light-dark: rgba(255, 255, 255, 0.8);
 $s-shadow-element: -1px -1px 1px $s-shadow-color-dark-light, 1px 1px 3px $s-shadow-color-dark, inset 1px 1px 2px $s-shadow-color-light-dark; // input, card
 $s-shadow-element-pressed: 1px 1px 2px $s-shadow-color-light, inset 1px 1px 2px $s-shadow-color-dark;
+$s-shadow-inset: 1px 1px 5px $s-shadow-color-light, inset -5px -5px 5px rgba(255, 255, 255, 0.5), inset 1px 1px 10px $s-shadow-color-dark;
+$s-shadow-drop: -5px -5px 10px $s-shadow-color-light, 1px 1px 10px $s-shadow-color-dark, inset 1px 1px 2px $s-shadow-color-light-dark;
+
 // TODO: use it and discuss colors of these shadows
 $s-shadow-surface: 0px 1px 4px rgba(13, 2, 72, 0.35) !default;
 $s-shadow-tooltip: 0px 1px 4px rgba(13, 2, 72, 0.35) !default;
