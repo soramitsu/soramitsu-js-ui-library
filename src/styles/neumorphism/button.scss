@@ -51,7 +51,7 @@ $neu-button-secondary-border-color-active: $neu-button-secondary-border-color !d
 // Secondary button: box-shadow
 $neu-button-secondary-box-shadow: var(--s-shadow-drop) !default;
 $neu-button-secondary-box-shadow-active: $neu-button-secondary-box-shadow !default;
-$neu-button-secondary-box-shadow-alternative: var(--s-shadow-element) !default;
+$neu-button-secondary-box-shadow-alternative: $neu-button-secondary-box-shadow !default;
 
 // Tertiary button: common
 $neu-button-tertiary-border-width: 0px !default;
