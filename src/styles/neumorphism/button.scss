@@ -156,12 +156,18 @@ $neu-button-padding-mini: 3px 6px !default;
       border-color: $neu-button-primary-border-color-hover;
       color: $neu-button-primary-text-color-hover;
       box-shadow: $neu-button-primary-box-shadow-hover;
+      &.is-circle {
+        border-color: $neu-button-primary-background-color-hover;
+      }
     }
     &:active, &.s-pressed {
       background: $neu-button-primary-background-color-pressed;
       border-color: $neu-button-primary-border-color-pressed;
       color: $neu-button-primary-text-color-pressed;
       box-shadow: $neu-button-primary-box-shadow-pressed;
+      &.is-circle {
+        border-color: $neu-button-primary-background-color-pressed;
+      }
     }
     @include disabled;
 
@@ -175,6 +181,13 @@ $neu-button-padding-mini: 3px 6px !default;
       }
 
       @include disabled($neu-button-primary-border-width-alternative);
+    }
+
+    &.is-circle {
+      border-color: $neu-button-primary-background-color;
+      &:disabled, &:disabled:hover {
+        border-color: $neu-button-border-color-disabled;
+      }
     }
   }
 
