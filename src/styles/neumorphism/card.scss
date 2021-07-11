@@ -35,7 +35,7 @@
   }
 
   &.is-always-shadow, &.is-hover-shadow:hover, &.is-hover-shadow:focus {
-    box-shadow: var(--s-shadow-inset);
+    box-shadow: var(--s-shadow-element);
   }
 
   &.s-primary {

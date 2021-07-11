@@ -4,7 +4,7 @@ $neu-collapse-button-border-style: solid !default !default;
 $neu-collapse-button-background-color: var(--s-color-utility-body) !default;
 $neu-collapse-button-text-color: var(--s-color-base-content-tertiary) !default;
 $neu-collapse-button-border-color: transparent !default;
-$neu-collapse-button-box-shadow: var(--s-shadow-drop) !default;
+$neu-collapse-button-box-shadow: var(--s-shadow-element-pressed) !default;
 $neu-collapse-button-font-size: 28px !default;
 .el-collapse.neumorphic .el-icon-arrow-right {
   width: $neu-collapse-button-size;

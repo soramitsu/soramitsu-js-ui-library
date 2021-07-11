@@ -12,7 +12,7 @@ $switch-circle-size: 18px;
     &__core {
       background-color: var(--s-color-base-background);
       border: none;
-      box-shadow: var(--s-shadow-inset);
+      box-shadow: var(--s-shadow-element);
 
       &::after {
         width: $switch-circle-size;
