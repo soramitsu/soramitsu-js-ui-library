@@ -36,17 +36,13 @@
 
   &.is-always-shadow, &.is-hover-shadow:hover, &.is-hover-shadow:focus {
     box-shadow: var(--s-shadow-element);
-
-    &.s-pressed {
-      box-shadow: var(--s-shadow-element-pressed);
-    }
   }
 
   &.s-primary {
     background: var(--s-color-utility-surface);
 
     &.is-always-shadow, &.is-hover-shadow:hover, &.is-hover-shadow:focus {
-      box-shadow: var(--s-shadow-surface);
+      box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.9), 1px 1px 15px var(--s-shadow-color-dark), inset 1px 1px 10px var(--s-shadow-color-light);
     }
   }
 }

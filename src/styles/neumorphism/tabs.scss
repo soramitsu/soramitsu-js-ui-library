@@ -19,15 +19,14 @@
     .el-tabs {
       &__nav-wrap {
         background-color: var(--s-color-base-background);
-        filter: drop-shadow(1px 1px 2px var(--s-shadow-color-dark));
-        box-shadow: inset 1px 1px 2px var(--s-shadow-color-light);
+        box-shadow: var(--s-shadow-element-pressed);
 
         .el-tabs__item {
           &.is-active {
             &, &:focus.is-focus {
               color: var(--s-color-theme-accent);
               background-color: var(--s-color-utility-surface);
-              box-shadow: 1px 1px 2px var(--s-shadow-color-light), inset 1px 1px 2px var(--s-shadow-color-dark);
+              box-shadow: var(--s-shadow-element);
             }
           }
           &:not(.is-active) {

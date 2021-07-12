@@ -67,7 +67,7 @@ export const configurable = () => ({
                    v-for="button in buttons"
                    :key="button.type"
                    size="small"
-                   icon="refresh"
+                   icon="refresh-16"
                    :type="button.type"
                    :tooltip="button.tooltip"
                  >
