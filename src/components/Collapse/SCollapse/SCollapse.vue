@@ -1,5 +1,6 @@
 <template>
   <el-collapse
+    :class="computedClasses"
     :value="value"
     :accordion="accordion"
     :style="computedStyles"
@@ -10,12 +11,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Provide } from 'vue-property-decorator'
+import { Mixins, Component, Prop, Provide } from 'vue-property-decorator'
 
+import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import { BorderTypes } from '../consts'
 
 @Component
-export default class SCollapse extends Vue {
+export default class SCollapse extends Mixins(DesignSystemInject) {
   /**
    * Value of the collapse component. Can be `string / number / Array (non-accordion mode)`
    */
@@ -40,6 +42,14 @@ export default class SCollapse extends Vue {
   @Prop({ default: BorderTypes.INTERNAL, type: String }) readonly bordersType!: BorderTypes
 
   @Provide('sCollapse') sCollapse = this
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
+    return cssClasses
+  }
 
   get computedStyles (): object {
     const styles = {} as any

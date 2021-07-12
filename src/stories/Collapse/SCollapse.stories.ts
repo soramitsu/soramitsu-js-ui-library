@@ -1,8 +1,8 @@
 import { withKnobs, boolean, select } from '@storybook/addon-knobs'
 
-import { SCollapse, SCollapseItem } from '../../components'
-
+import { SCollapse, SCollapseItem, SDesignSystemProvider } from '../../components'
 import { BorderTypes } from '../../components/Collapse'
+import { DesignSystemTypes } from '../../utils/DesignSystem'
 
 export default {
   component: SCollapse,
@@ -11,8 +11,9 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { SCollapse, SCollapseItem },
-  template: `<s-collapse :accordion="accordion" :borders="borders" :borders-type="bordersType" @change="handleChange" style="flex: 1;">
+  components: { SCollapse, SCollapseItem, SDesignSystemProvider },
+  template: `<s-design-system-provider :value="designSystem">
+              <s-collapse :accordion="accordion" :borders="borders" :borders-type="bordersType" @change="handleChange" style="flex: 1;">
                <s-collapse-item title="Consistency" name="1">
                  <div>Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;</div>
                  <div>Consistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.</div>
@@ -30,8 +31,12 @@ export const configurable = () => ({
                  <div>Decision making: giving advices about operations is acceptable, but do not make decisions for the users;</div>
                  <div>Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</div>
                </s-collapse-item>
-             </s-collapse>`,
+             </s-collapse>
+             </s-design-system-provider>`,
   props: {
+    designSystem: {
+      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+    },
     accordion: {
       default: boolean('Accordion', false)
     },
