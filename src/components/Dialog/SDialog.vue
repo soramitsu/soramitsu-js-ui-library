@@ -33,10 +33,11 @@
 import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 import elementResizeDetectorMaker from 'element-resize-detector'
 
+import DesignSystemInject from '../DesignSystem/DesignSystemInject'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 
 @Component
-export default class SDialog extends Mixins(BorderRadiusMixin) {
+export default class SDialog extends Mixins(BorderRadiusMixin, DesignSystemInject) {
   /**
    * Visibility of the dialog component.
    *
@@ -160,6 +161,9 @@ export default class SDialog extends Mixins(BorderRadiusMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
     if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
