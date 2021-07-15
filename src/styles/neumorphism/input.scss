@@ -29,6 +29,11 @@ $neu-input-padding: $s-basic-spacing $s-basic-spacing * 2 !default;
   .el-input, .el-textarea {
     &__inner {
       color: $neu-input-color;
+      letter-spacing: var(--s-letter-spacing-small);
+
+      &::placeholder {
+        color: var(--s-color-base-content-primary);
+      }
     }
 
     &.is-disabled {
@@ -59,5 +64,10 @@ $neu-input-padding: $s-basic-spacing $s-basic-spacing * 2 !default;
     .s-placeholder {
       color: $neu-input-placeholder-color;
     }
+  }
+
+  .el-input__prefix {
+    color: var(--s-color-base-content-secondary);
+    font-size: var(--s-icon-font-size-mini);
   }
 }
