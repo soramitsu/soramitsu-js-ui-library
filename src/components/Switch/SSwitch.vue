@@ -18,9 +18,12 @@
 
 <script lang="ts">
 import { Mixins, Component, Prop, Watch } from 'vue-property-decorator'
+import ElSwitch from 'element-ui/lib/switch'
 import DesignSystemInject from '../DesignSystem/DesignSystemInject'
 
-@Component
+@Component({
+  components: { ElSwitch }
+})
 export default class SSwitch extends Mixins(DesignSystemInject) {
   /**
    * Value of switch

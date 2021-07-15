@@ -12,10 +12,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
+import ElCollapseItem from 'element-ui/lib/collapse-item'
 
 import { BorderTypes } from '../consts'
 
-@Component
+@Component({
+  components: { ElCollapseItem }
+})
 export default class SCollapseItem extends Vue {
   /**
    * Title for the panel of collapse item. Slot `title` can be used as well

@@ -13,9 +13,14 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import MenuItem from 'element-ui/lib/menu-item'
 import { ElMenuItem } from 'element-ui/types/menu-item'
 
-@Component
+@Component({
+  components: {
+    ElMenuItem: MenuItem
+  }
+})
 export default class SMenuItem extends Vue {
   /**
    * Unique index of menu item

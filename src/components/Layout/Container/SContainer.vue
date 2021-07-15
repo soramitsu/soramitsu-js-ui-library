@@ -6,10 +6,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import ElContainer from 'element-ui/lib/container'
 
 import { ContainerDirection } from './consts'
 
-@Component
+@Component({
+  components: { ElContainer }
+})
 export default class SContainer extends Vue {
   /**
    * Layout direction property. Can be `"horizontal"` or `"vertical"`.

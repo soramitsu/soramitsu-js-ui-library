@@ -57,6 +57,7 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Ref, Inject } from 'vue-property-decorator'
+import Input from 'element-ui/lib/input'
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
 
@@ -66,7 +67,10 @@ import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
 import { Autocomplete, InputSize, InputType } from '../consts'
 
 @Component({
-  components: { SIcon }
+  components: {
+    ElInput: Input,
+    SIcon
+  }
 })
 export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject) {
   readonly InputType = InputType
