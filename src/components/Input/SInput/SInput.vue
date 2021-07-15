@@ -44,8 +44,17 @@
           <slot slot="append" name="append"></slot>
         </el-input>
         <template v-if="type === InputType.TEXT_FILE">
-          <s-icon name="file-file-upload-24" />
-          <input :value="emptyValue" type="file" :accept="accept" @change="handleTextFileChange">
+          <s-icon
+            name="file-file-upload-24"
+            @click.native="handleFileIconClick"
+          />
+          <input
+            ref="file"
+            :value="emptyValue"
+            type="file"
+            :accept="accept"
+            @change="handleTextFileChange"
+          >
         </template>
       </div>
       <slot name="right" />
@@ -154,6 +163,7 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
   @Prop({ default: InputSize.BIG, type: String }) readonly size!: InputSize
 
   @Ref('el-input') input!: ElInput
+  @Ref('file') file!: HTMLElement
 
   @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
 
@@ -277,6 +287,10 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
       this.handleChange(result)
     }
     fr.readAsText(file)
+  }
+
+  handleFileIconClick () {
+    this.file.click()
   }
 
   public focus (): void {
