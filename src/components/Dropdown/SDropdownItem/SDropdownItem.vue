@@ -11,8 +11,11 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import ElDropdownItem from 'element-ui/lib/dropdown-item'
 
-@Component
+@Component({
+  components: { ElDropdownItem }
+})
 export default class SDropdownItem extends Vue {
   /**
    * A value of the dropdown item which will be returned from select method

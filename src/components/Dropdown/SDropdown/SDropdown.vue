@@ -44,6 +44,8 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Ref } from 'vue-property-decorator'
+import Dropdown from 'element-ui/lib/dropdown'
+import DropdownMenu from 'element-ui/lib/dropdown-menu'
 import { ElDropdown } from 'element-ui/types/dropdown'
 
 import SizeMixin from '../../../mixins/SizeMixin'
@@ -57,6 +59,8 @@ import { DropdownType, DropdownPlacement, DropdownTrigger } from '../consts'
 
 @Component({
   components: {
+    ElDropdown: Dropdown,
+    ElDropdownMenu: DropdownMenu,
     SButton,
     SIcon,
     STooltip

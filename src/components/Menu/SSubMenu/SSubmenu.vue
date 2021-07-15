@@ -14,8 +14,11 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import ElSubmenu from 'element-ui/lib/submenu'
 
-@Component
+@Component({
+  components: { ElSubmenu }
+})
 export default class SSubmenu extends Vue {
   // TODO: An error is occurred due to this issue: https://github.com/ElemeFE/element/issues/17960
   // To fix it, popper-append-to-body=false is set

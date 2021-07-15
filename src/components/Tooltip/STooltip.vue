@@ -26,13 +26,16 @@ import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 import { Getter } from 'vuex-class'
 import { PopoverPlacement } from 'element-ui/types/popover'
 import debounce from 'throttle-debounce/debounce'
+import ElTooltip from 'element-ui/lib/tooltip'
 
 import DesignSystemInject from '../DesignSystem/DesignSystemInject'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 import { Theme } from '../../utils/Theme'
 import { TooltipTheme, TooltipPlacement } from './consts'
 
-@Component
+@Component({
+  components: { ElTooltip }
+})
 export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInject) {
   /**
    * Theme of the tooltip. Supported values: `"dark"`, `"light"`, or `"auto"`.

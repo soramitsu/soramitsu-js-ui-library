@@ -6,8 +6,11 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import ElFooter from 'element-ui/lib/footer'
 
-@Component
+@Component({
+  components: { ElFooter }
+})
 export default class SFooter extends Vue {
   /**
    * Height of the footer component. Default value is `"56px"`.

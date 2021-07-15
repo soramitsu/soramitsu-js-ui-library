@@ -37,6 +37,7 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
+import ElDatePicker from 'element-ui/lib/date-picker'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
 
@@ -48,7 +49,7 @@ import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
 import { PickerTypes, PickerAlignment, InputTypes } from '../consts'
 
 @Component({
-  components: { SIcon }
+  components: { ElDatePicker, SIcon }
 })
 export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin) {
   /**
