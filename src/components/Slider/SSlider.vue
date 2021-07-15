@@ -27,10 +27,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import ElSlider from 'element-ui/lib/slider'
 
 import { SliderInputSize } from './consts'
 
-@Component
+@Component({
+  components: { ElSlider }
+})
 export default class SSlider extends Vue {
   /**
    * Binding value

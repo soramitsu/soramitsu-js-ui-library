@@ -25,12 +25,17 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Ref } from 'vue-property-decorator'
+import Menu from 'element-ui/lib/menu'
 import { ElMenu } from 'element-ui/types/menu'
 
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
 import { MenuMode, MenuTrigger } from '../consts'
 
-@Component
+@Component({
+  components: {
+    ElMenu: Menu
+  }
+})
 export default class SMenu extends Mixins(BorderRadiusMixin) {
   /**
    * Mode of menu. Possible values: `"horizontal"`, `"vertical"`.

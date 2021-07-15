@@ -29,6 +29,7 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
+import ElSelect from 'element-ui/lib/select'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
 
@@ -37,7 +38,9 @@ import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
 import { Autocomplete } from '../../Input/consts'
 import { InputTypes } from '../consts'
 
-@Component
+@Component({
+  components: { ElSelect }
+})
 export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin) {
   /**
    * Selected value. Can be used with `v-model`

@@ -6,8 +6,11 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import ElMain from 'element-ui/lib/main'
 
-@Component
+@Component({
+  components: { ElMain }
+})
 export default class SMain extends Vue {
 }
 </script>

@@ -21,11 +21,16 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
+import Form from 'element-ui/lib/form'
 import { ElForm } from 'element-ui/types/form'
 
 import { LabelPosition } from '../consts'
 
-@Component
+@Component({
+  components: {
+    ElForm: Form
+  }
+})
 export default class SForm extends Vue {
   /**
    * Data of a form

@@ -60,6 +60,7 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Ref, Provide } from 'vue-property-decorator'
+import Table from 'element-ui/lib/table'
 import { ElTable } from 'element-ui/types/table'
 import { ElTableColumn } from 'element-ui/types/table-column'
 
@@ -67,7 +68,11 @@ import SizeMixin from '../../../mixins/SizeMixin'
 import { TooltipTheme } from '../../Tooltip/consts'
 import { SortDirection } from '../consts'
 
-@Component
+@Component({
+  components: {
+    ElTable: Table
+  }
+})
 export default class STable extends Mixins(SizeMixin) {
   /**
    * Data of the table.

@@ -17,11 +17,14 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
+import ElCheckbox from 'element-ui/lib/checkbox'
 
 import SizeMixin from '../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 
-@Component
+@Component({
+  components: { ElCheckbox }
+})
 export default class SCheckbox extends Mixins(SizeMixin, BorderRadiusMixin) {
   /**
    * Value of the checkbox item. Can be `string / number / boolean`

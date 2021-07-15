@@ -19,6 +19,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Ref, Inject } from 'vue-property-decorator'
+import FormItem from 'element-ui/lib/form-item'
 import { ElFormItem } from 'element-ui/types/form-item'
 import { ElForm } from 'element-ui/types/form'
 import isArray from 'lodash/isArray'
@@ -26,7 +27,10 @@ import isArray from 'lodash/isArray'
 import { SIcon } from '../../Icon/SIcon'
 
 @Component({
-  components: { SIcon }
+  components: {
+    ElFormItem: FormItem,
+    SIcon
+  }
 })
 export default class SFormItem extends Vue {
   /**
