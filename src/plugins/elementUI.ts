@@ -22,6 +22,29 @@ import DropdownItem from 'element-ui/lib/dropdown-item'
 import Form from 'element-ui/lib/form'
 import FormItem from 'element-ui/lib/form-item'
 import Input from 'element-ui/lib/input'
+import Aside from 'element-ui/lib/aside'
+import Container from 'element-ui/lib/container'
+import Footer from 'element-ui/lib/footer'
+import Header from 'element-ui/lib/header'
+import Main from 'element-ui/lib/main'
+import Menu from 'element-ui/lib/menu'
+import MenuItem from 'element-ui/lib/menu-item'
+import MenuItemGroup from 'element-ui/lib/menu-item-group'
+import SubMenu from 'element-ui/lib/submenu'
+import Pagination from 'element-ui/lib/pagination'
+import Radio from 'element-ui/lib/radio'
+import RadioButton from 'element-ui/lib/radio-button'
+import RadioGroup from 'element-ui/lib/radio-group'
+import Option from 'element-ui/lib/option'
+import OptionGroup from 'element-ui/lib/option-group'
+import Select from 'element-ui/lib/select'
+import Slider from 'element-ui/lib/slider'
+import Switch from 'element-ui/lib/switch'
+import Tabs from 'element-ui/lib/tabs'
+import TabPane from 'element-ui/lib/tab-pane'
+import Table from 'element-ui/lib/table'
+import TableColumn from 'element-ui/lib/table-column'
+import Tooltip from 'element-ui/lib/tooltip'
 
 import ElementLocale from 'element-ui/lib/locale'
 import i18n from '../lang'
@@ -53,6 +76,29 @@ const ElementUIPlugin = {
     vue.use(Form)
     vue.use(FormItem)
     vue.use(Input)
+    vue.use(Aside)
+    vue.use(Container)
+    vue.use(Footer)
+    vue.use(Header)
+    vue.use(Main)
+    vue.use(Menu)
+    vue.use(MenuItem)
+    vue.use(MenuItemGroup)
+    vue.use(SubMenu)
+    vue.use(Pagination)
+    vue.use(Radio)
+    vue.use(RadioButton)
+    vue.use(RadioGroup)
+    vue.use(Option)
+    vue.use(OptionGroup)
+    vue.use(Select)
+    vue.use(Slider)
+    vue.use(Switch)
+    vue.use(Tabs)
+    vue.use(TabPane)
+    vue.use(Table)
+    vue.use(TableColumn)
+    vue.use(Tooltip)
   }
 }
 
