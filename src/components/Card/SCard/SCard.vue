@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop } from 'vue-property-decorator'
+import ElCard from 'element-ui/lib/card'
 
 import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
@@ -21,7 +22,9 @@ import StatusMixin from '../../../mixins/StatusMixin'
 import { CardShadow } from '../consts'
 import { BorderRadius } from '../../../types'
 
-@Component
+@Component({
+  components: { ElCard }
+})
 export default class SCard extends Mixins(BorderRadiusMixin, SizeMixin, StatusMixin, DesignSystemInject) {
   /**
    * Header of the card. Also it can be set by slot#header

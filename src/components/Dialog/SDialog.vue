@@ -31,12 +31,15 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
+import ElDialog from 'element-ui/lib/dialog'
 import elementResizeDetectorMaker from 'element-resize-detector'
 
 import DesignSystemInject from '../DesignSystem/DesignSystemInject'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 
-@Component
+@Component({
+  components: { ElDialog }
+})
 export default class SDialog extends Mixins(BorderRadiusMixin, DesignSystemInject) {
   /**
    * Visibility of the dialog component.

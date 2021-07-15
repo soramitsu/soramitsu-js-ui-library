@@ -7,8 +7,11 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import ElMenuItemGroup from 'element-ui/lib/menu-item-group'
 
-@Component
+@Component({
+  components: { ElMenuItemGroup }
+})
 export default class SMenuItemGroup extends Vue {
   /**
    * Title for group menu items

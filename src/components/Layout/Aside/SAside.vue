@@ -6,8 +6,11 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import ElAside from 'element-ui/lib/aside'
 
-@Component
+@Component({
+  components: { ElAside }
+})
 export default class SAside extends Vue {
   /**
    * Width of aside component. Default value is `"196px"`.
