@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Inject } from 'vue-property-decorator'
+import ElButton from 'element-ui/lib/button'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
 import { PopoverPlacement } from 'element-ui/types/popover'
@@ -34,7 +35,7 @@ import { STooltip, TooltipPlacement } from '../../Tooltip'
 import { ButtonTypes, ButtonNativeTypes, ButtonIconPosition } from '../consts'
 
 @Component({
-  components: { SIcon, STooltip }
+  components: { ElButton, SIcon, STooltip }
 })
 export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, DesignSystemInject) {
   readonly IconPosition = ButtonIconPosition

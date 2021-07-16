@@ -6,8 +6,11 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import ElOptionGroup from 'element-ui/lib/option-group'
 
-@Component
+@Component({
+  components: { ElOptionGroup }
+})
 export default class SOptionGroup extends Vue {
   /**
    * Label of the option group

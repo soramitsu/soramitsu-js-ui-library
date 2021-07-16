@@ -35,12 +35,15 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
+import ElTableColumn from 'element-ui/lib/table-column'
 
 import { Size } from '../../../types'
 
 import { SortDirection, ColumnAlignment } from '../consts'
 
-@Component
+@Component({
+  components: { ElTableColumn }
+})
 export default class STableColumn extends Vue {
   /**
    * Type of the column. Can be `"selection"`, `"index"` or `"expand"`.

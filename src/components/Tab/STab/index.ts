@@ -1,7 +1,7 @@
 import { VueConstructor } from 'vue'
 import { Components, SFCWithInstall } from '../../../types/components'
 
-import { TabPane } from 'element-ui'
+import TabPane from 'element-ui/lib/tab-pane'
 
 const STab = TabPane as SFCWithInstall<typeof TabPane>
 

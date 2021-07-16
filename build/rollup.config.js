@@ -8,6 +8,12 @@ import copy from 'rollup-plugin-copy'
 import { terser } from 'rollup-plugin-terser'
 import del from 'rollup-plugin-delete'
 
+const external = [
+  ...Object.keys(pkg.dependencies || {}),
+  'tslib',
+  'vue'
+]
+
 export default {
   input: 'src/index.ts',
   output: [
@@ -23,11 +29,10 @@ export default {
       sourcemap: true
     }
   ],
-  external: [
-    ...Object.keys(pkg.dependencies || {}),
-    'tslib',
-    'vue'
-  ],
+  external (id) {
+    return external.includes(id.split('/')[0]) ||
+      /element-ui\/lib\//.test(id)
+  },
   plugins: [
     copy({
       targets: [

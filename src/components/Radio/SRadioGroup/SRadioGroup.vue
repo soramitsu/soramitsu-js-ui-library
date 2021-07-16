@@ -10,10 +10,13 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, ModelSync } from 'vue-property-decorator'
+import ElRadioGroup from 'element-ui/lib/radio-group'
 
 import SizeMixin from '../../../mixins/SizeMixin'
 
-@Component
+@Component({
+  components: { ElRadioGroup }
+})
 export default class SRadio extends Mixins(SizeMixin) {
   /**
    * Whether the nesting radios are disabled.

@@ -43,7 +43,7 @@ $neu-button-secondary-background-color-alternative-active: var(--s-color-base-co
 // Secondary button: text colors
 $neu-button-secondary-text-color: var(--s-color-base-on-accent) !default;
 $neu-button-secondary-text-color-active: $neu-button-secondary-text-color !default;
-$neu-button-secondary-text-color-alternative: var(--s-color-base-content-tertiary) !default;
+$neu-button-secondary-text-color-alternative: var(--s-color-base-content-secondary) !default;
 $neu-button-secondary-text-color-alternative-active: var(--s-color-base-on-accent) !default;
 // Secondary button: border colors
 $neu-button-secondary-border-color: transparent !default;
@@ -59,15 +59,15 @@ $neu-button-tertiary-border-style: $neu-button-border-style !default;
 // Tertiary button: background colors
 $neu-button-tertiary-background-color: var(--s-color-utility-body) !default;
 $neu-button-tertiary-background-color-active: $neu-button-tertiary-background-color !default;
-$neu-button-tertiary-background-color-alternative: var(--s-color-utility-body) !default;
+$neu-button-tertiary-background-color-alternative: $neu-button-tertiary-background-color !default;
 // Tertiary button: text colors
-$neu-button-tertiary-text-color: var(--s-color-base-content-tertiary) !default;
-$neu-button-tertiary-text-color-active: var(--s-color-base-content-secondary) !default;
+$neu-button-tertiary-text-color: var(--s-color-base-content-secondary) !default;
+$neu-button-tertiary-text-color-active: var(--s-color-base-content-primary) !default;
 // Tertiary button: border colors
 $neu-button-tertiary-border-color: transparent !default;
 $neu-button-tertiary-border-color-active: $neu-button-tertiary-border-color !default;
 // Tertiary button: box-shadow
-$neu-button-tertiary-box-shadow: $neu-button-secondary-box-shadow !default;
+$neu-button-tertiary-box-shadow: var(--s-shadow-element) !default;
 $neu-button-tertiary-box-shadow-active: $neu-button-tertiary-box-shadow !default;
 
 // Action button: common
