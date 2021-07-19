@@ -61,8 +61,8 @@ $neu-button-tertiary-background-color: var(--s-color-utility-body) !default;
 $neu-button-tertiary-background-color-active: $neu-button-tertiary-background-color !default;
 $neu-button-tertiary-background-color-alternative: $neu-button-tertiary-background-color !default;
 // Tertiary button: text colors
-$neu-button-tertiary-text-color: var(--s-color-base-content-secondary) !default;
-$neu-button-tertiary-text-color-active: var(--s-color-base-content-primary) !default;
+$neu-button-tertiary-text-color: var(--s-color-base-content-tertiary) !default;
+$neu-button-tertiary-text-color-active: var(--s-color-base-content-secondary) !default;
 // Tertiary button: border colors
 $neu-button-tertiary-border-color: transparent !default;
 $neu-button-tertiary-border-color-active: $neu-button-tertiary-border-color !default;
