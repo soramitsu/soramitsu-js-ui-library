@@ -12,11 +12,14 @@
 
 <script lang="ts">
 import { Mixins, Component, Prop, Provide } from 'vue-property-decorator'
+import ElCollapse from 'element-ui/lib/collapse'
 
 import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import { BorderTypes } from '../consts'
 
-@Component
+@Component({
+  components: { ElCollapse }
+})
 export default class SCollapse extends Mixins(DesignSystemInject) {
   /**
    * Value of the collapse component. Can be `string / number / Array (non-accordion mode)`

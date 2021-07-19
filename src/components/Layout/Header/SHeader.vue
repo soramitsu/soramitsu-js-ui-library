@@ -6,8 +6,11 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import ElHeader from 'element-ui/lib/header'
 
-@Component
+@Component({
+  components: { ElHeader }
+})
 export default class SHeader extends Vue {
   /**
    * Height of the header component. Default value is `"56px"`.

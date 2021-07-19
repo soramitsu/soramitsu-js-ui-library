@@ -25,10 +25,13 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Ref, Watch } from 'vue-property-decorator'
+import ElPagination from 'element-ui/lib/pagination'
 
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
 
-@Component
+@Component({
+  components: { ElPagination }
+})
 export default class SPagination extends Mixins(BorderRadiusMixin) {
   /**
    * Will pagination component be small.

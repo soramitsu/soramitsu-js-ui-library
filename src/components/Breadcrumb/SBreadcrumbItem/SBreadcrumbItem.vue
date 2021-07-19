@@ -9,8 +9,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import ElBreadcrumbItem from 'element-ui/lib/breadcrumb-item'
 
-@Component
+@Component({
+  components: {
+    ElBreadcrumbItem
+  }
+})
 export default class SBreadcrumbItem extends Vue {
   /**
    * Target route of the link, same as to of `vue-router`

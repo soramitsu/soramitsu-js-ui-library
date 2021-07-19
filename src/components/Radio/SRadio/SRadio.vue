@@ -14,11 +14,15 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, ModelSync } from 'vue-property-decorator'
+import ElRadio from 'element-ui/lib/radio'
+import ElRadioButton from 'element-ui/lib/radio-button'
 
 import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import SizeMixin from '../../../mixins/SizeMixin'
 
-@Component
+@Component({
+  components: { ElRadio, ElRadioButton }
+})
 export default class SRadio extends Mixins(SizeMixin, DesignSystemInject) {
   /**
    * Value of the radio component. Can be `string` / `number` / `boolean`

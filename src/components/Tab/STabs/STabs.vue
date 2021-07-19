@@ -21,12 +21,15 @@
 
 <script lang="ts">
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
+import ElTabs from 'element-ui/lib/tabs'
 
 import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
 import { TabsType, TabsPosition } from '../consts'
 
-@Component
+@Component({
+  components: { ElTabs }
+})
 export default class STabs extends Mixins(BorderRadiusMixin, DesignSystemInject) {
   /**
    * Name of the selected tab. Can be used with `v-model`.

@@ -6,10 +6,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import ElDivider from 'element-ui/lib/divider'
 
 import { DividerDirection, ContentPosition, DividerType } from '../consts'
 
-@Component
+@Component({
+  components: { ElDivider }
+})
 export default class SDivider extends Vue {
   /**
    * Divider type property. Can be `"primary"` or `"secondary"`.
