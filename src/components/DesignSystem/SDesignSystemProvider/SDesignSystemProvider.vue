@@ -7,17 +7,17 @@
 <script lang="ts">
 import { Component, Vue, Prop, Provide, Watch } from 'vue-property-decorator'
 import { DesignSystemProvideKey } from '../consts'
-import { DesignSystemTypes } from '../../../utils/DesignSystem'
+import { DesignSystem } from '../../../utils/DesignSystem'
 
 @Component
 export default class SDesignSystemProvider extends Vue {
-  @Prop({ default: DesignSystemTypes.DEFAULT, type: String }) readonly value!: string
+  @Prop({ default: DesignSystem.DEFAULT, type: String }) readonly value!: string
   @Provide(DesignSystemProvideKey) providedObject = {
-    value: DesignSystemTypes.DEFAULT
+    value: DesignSystem.DEFAULT
   }
 
   @Watch('value', { immediate: true })
-  onValueChange (newValue: DesignSystemTypes) {
+  onValueChange (newValue: DesignSystem) {
     this.providedObject.value = newValue
   }
 }

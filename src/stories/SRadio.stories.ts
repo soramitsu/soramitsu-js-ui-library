@@ -2,7 +2,7 @@ import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { SRadio, SRadioGroup, SRow, SCol, SDesignSystemProvider } from '../components'
 import { Size } from '../types'
-import { DesignSystemTypes } from '../utils/DesignSystem'
+import { DesignSystem } from '../utils/DesignSystem'
 
 export default {
   component: SRadio,
@@ -45,7 +45,7 @@ export const configurable = () => ({
   }),
   props: {
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     size: {
       default: select('Size', Object.values(Size), Size.MEDIUM)
