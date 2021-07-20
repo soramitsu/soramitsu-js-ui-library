@@ -2,7 +2,7 @@ import { text, withKnobs, boolean, select } from '@storybook/addon-knobs'
 
 import { SDialog, SRow, SButton, SDesignSystemProvider } from '../components'
 import { BorderRadius } from '../types'
-import { DesignSystemTypes } from '../utils/DesignSystem'
+import { DesignSystem } from '../utils/DesignSystem'
 
 export default {
   component: SDialog,
@@ -48,7 +48,7 @@ export const configurable = () => ({
   }),
   props: {
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     modal: {
       default: boolean('Modal', true)

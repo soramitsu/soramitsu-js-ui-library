@@ -1,7 +1,7 @@
 import { number, text, boolean, object, select, withKnobs } from '@storybook/addon-knobs'
 
 import { SFloatInput, SRow, SDesignSystemProvider } from '../components'
-import { DesignSystemTypes } from '../utils/DesignSystem'
+import { DesignSystem } from '../utils/DesignSystem'
 
 export default {
   component: SFloatInput,
@@ -33,7 +33,7 @@ export const configurable = () => ({
   }),
   props: {
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     decimals: {
       default: number('Decimals', 18)

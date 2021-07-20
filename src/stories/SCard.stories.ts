@@ -3,7 +3,7 @@ import { text, withKnobs, select, boolean } from '@storybook/addon-knobs'
 import { SCard, SRow, SDropdown, SDropdownItem, SDesignSystemProvider } from '../components'
 import { BorderRadius, Status, Size } from '../types'
 import { CardShadow } from '../components/Card'
-import { DesignSystemTypes } from '../utils/DesignSystem'
+import { DesignSystem } from '../utils/DesignSystem'
 
 export default {
   component: SCard,
@@ -38,7 +38,7 @@ export const configurable = () => ({
             </s-design-system-provider>`,
   props: {
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     shadow: {
       default: select('Shadow', Object.values(CardShadow), CardShadow.HOVER)

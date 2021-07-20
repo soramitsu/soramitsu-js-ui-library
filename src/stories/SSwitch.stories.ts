@@ -1,7 +1,7 @@
 import { text, number, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
 import { SSwitch, SDesignSystemProvider } from '../components'
-import { DesignSystemTypes } from '../utils/DesignSystem'
+import { DesignSystem } from '../utils/DesignSystem'
 
 export default {
   component: SSwitch,
@@ -36,7 +36,7 @@ export const configurable = () => ({
   }),
   props: {
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     activeText: {
       default: text('Active Text', '')

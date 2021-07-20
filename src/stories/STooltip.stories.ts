@@ -3,7 +3,7 @@ import { text, withKnobs, boolean, select, number } from '@storybook/addon-knobs
 import { SButton, STooltip, SRow, SMain, SDesignSystemProvider } from '../components'
 import { BorderRadius } from '../types'
 import { TooltipPlacement, TooltipTheme } from '../components/Tooltip'
-import { DesignSystemTypes } from '../utils/DesignSystem'
+import { DesignSystem } from '../utils/DesignSystem'
 
 export default {
   component: STooltip,
@@ -39,7 +39,7 @@ export const configurable = () => ({
       default: select('Theme', Object.values(TooltipTheme), TooltipTheme.AUTO)
     },
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     content: {
       default: text('Content', 'Custom tooltip')
@@ -98,7 +98,7 @@ export const withDifferentPlacement = () => ({
       default: () => differentPlacementData
     },
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     }
   }
 })

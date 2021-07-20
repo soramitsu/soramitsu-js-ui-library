@@ -52,9 +52,10 @@ import {
 import { Float, Integer } from './directives'
 import { Components } from './types/components'
 import { Directives } from './types/directives'
-import { setTheme, setDesignSystem } from './utils'
-import { DesignSystemTypes } from './utils/DesignSystem'
-import { Themes } from './utils/Theme'
+import { setTheme, setDesignSystem, setLocale } from './utils'
+import { DesignSystem } from './utils/DesignSystem'
+import { Theme } from './utils/Theme'
+import { Locale } from './utils/Locale'
 import { SoramitsuUIStorePlugin, ElementUIPlugin } from './plugins'
 import { Loading, Message, MessageBox, Notification } from './plugins/elementUI'
 import { SDialogMixin } from './mixins'
@@ -123,9 +124,11 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export {
   setTheme,
-  Themes,
+  Theme,
   setDesignSystem,
-  DesignSystemTypes,
+  DesignSystem,
+  setLocale,
+  Locale,
   Components,
   Directives,
   Loading,
