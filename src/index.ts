@@ -122,12 +122,9 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(SoramitsuElements, {})
 }
 
-const Themes = Theme
-
 export {
   setTheme,
   Theme,
-  Themes,
   setDesignSystem,
   DesignSystem,
   setLocale,
