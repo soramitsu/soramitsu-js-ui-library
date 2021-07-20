@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import Theme from './Theme'
-import Locale from './Locale'
+import UiTheme from './UiTheme'
+import UiLocale from './UiLocale'
 
 const modules = {
-  Theme,
-  Locale
+  UiTheme,
+  UiLocale
 }
 
 Vue.use(Vuex)
@@ -21,8 +21,8 @@ export {
 }
 
 export enum Modules {
-  Theme = 'Theme',
-  Locale = 'Locale'
+  UiTheme = 'UiTheme',
+  UiLocale = 'UiLocale'
 }
 
 export default store
