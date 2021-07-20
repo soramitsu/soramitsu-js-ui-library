@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import Theme from './Theme'
+import LibraryTheme from './LibraryTheme'
+import LibraryLocale from './LibraryLocale'
 
 const modules = {
-  Theme
+  LibraryTheme,
+  LibraryLocale
 }
 
 Vue.use(Vuex)
@@ -19,7 +21,8 @@ export {
 }
 
 export enum Modules {
-  Theme = 'Theme'
+  LibraryTheme = 'LibraryTheme',
+  LibraryLocale = 'LibraryLocale'
 }
 
 export default store

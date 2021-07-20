@@ -6,7 +6,7 @@ import MessageBox from 'element-ui/lib/message-box'
 import Notification from 'element-ui/lib/notification'
 
 import ElementLocale from 'element-ui/lib/locale'
-import i18n from '../lang'
+import i18n from '../locale'
 
 const ElementUIPlugin = {
   install: (vue: typeof Vue) => {

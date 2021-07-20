@@ -2,7 +2,7 @@ import { withKnobs, boolean, select } from '@storybook/addon-knobs'
 
 import { SCollapse, SCollapseItem, SDesignSystemProvider } from '../../components'
 import { BorderTypes } from '../../components/Collapse'
-import { DesignSystemTypes } from '../../utils/DesignSystem'
+import { DesignSystem } from '../../utils/DesignSystem'
 
 export default {
   component: SCollapse,
@@ -35,7 +35,7 @@ export const configurable = () => ({
              </s-design-system-provider>`,
   props: {
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     accordion: {
       default: boolean('Accordion', false)

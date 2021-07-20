@@ -3,7 +3,7 @@ import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 import { SButton, SButtonGroup, SRow, SCol, SMain, SIcon, SDesignSystemProvider } from '../components'
 import { Size, BorderRadius } from '../types'
 import { ButtonTypes, ButtonIconPosition } from '../components/Button'
-import { DesignSystemTypes } from '../utils/DesignSystem'
+import { DesignSystem } from '../utils/DesignSystem'
 
 export default {
   component: SButton,
@@ -34,7 +34,7 @@ export const configurable = () => ({
             </s-design-system-provider>`,
   props: {
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     disabled: {
       default: boolean('Disabled', false)
@@ -104,7 +104,7 @@ export const withDifferentTypes = () => ({
             </s-design-system-provider>`,
   props: {
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     items: {
       default: () => differentTypeButtonsData

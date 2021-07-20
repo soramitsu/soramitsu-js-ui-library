@@ -3,7 +3,7 @@ import { text, boolean, withKnobs, number, select } from '@storybook/addon-knobs
 import { SInput, SRow, SCol, SDesignSystemProvider } from '../components'
 import { BorderRadius } from '../types'
 import { InputType, InputSize } from '../components/Input'
-import { DesignSystemTypes } from '../utils/DesignSystem'
+import { DesignSystem } from '../utils/DesignSystem'
 
 export default {
   component: SInput,
@@ -41,7 +41,7 @@ export const configurable = () => ({
   }),
   props: {
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     top: {
       default: text('Top slot content', '')

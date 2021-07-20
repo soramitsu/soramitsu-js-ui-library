@@ -4,8 +4,8 @@ import fromPairs from 'lodash/fp/fromPairs'
 import flow from 'lodash/fp/flow'
 import concat from 'lodash/fp/concat'
 
-import { Theme, Themes } from '../utils/Theme'
-import { DesignSystemTypes } from '../utils/DesignSystem'
+import { Theme } from '../utils/Theme'
+import { DesignSystem } from '../utils/DesignSystem'
 
 const types = flow(
   flatMap(x => [x + '_REQUEST', x + '_SUCCESS', x + '_FAILURE']),
@@ -17,29 +17,34 @@ const types = flow(
   fromPairs
 )([])
 
-function initialState () {
+type State = {
+  theme: Theme;
+  designSystem: DesignSystem;
+}
+
+function initialState (): State {
   return {
-    theme: Themes.LIGHT,
-    designSystem: DesignSystemTypes.DEFAULT
+    theme: Theme.LIGHT,
+    designSystem: DesignSystem.DEFAULT
   }
 }
 
 const state = initialState()
 
 const getters = {
-  libraryTheme (state) {
+  libraryTheme (state: State) {
     return state.theme
   },
-  libraryDesignSystem (state) {
+  libraryDesignSystem (state: State) {
     return state.designSystem
   }
 }
 
 const mutations = {
-  [types.CHANGE_THEME] (state, theme: Theme) {
+  [types.CHANGE_THEME] (state: State, theme: Theme) {
     state.theme = theme
   },
-  [types.SET_DESIGN_SYSTEM] (state, designSystem: DesignSystemTypes) {
+  [types.SET_DESIGN_SYSTEM] (state: State, designSystem: DesignSystem) {
     state.designSystem = designSystem
   }
 }
@@ -48,7 +53,7 @@ const actions = {
   changeTheme ({ commit }, { theme }) {
     commit(types.CHANGE_THEME, theme)
   },
-  setDesignSystem ({ commit }, designSystem: DesignSystemTypes) {
+  setDesignSystem ({ commit }, designSystem: DesignSystem) {
     commit(types.SET_DESIGN_SYSTEM, designSystem)
   }
 }

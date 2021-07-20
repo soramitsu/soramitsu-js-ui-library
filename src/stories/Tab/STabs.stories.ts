@@ -3,7 +3,7 @@ import { boolean, select, withKnobs } from '@storybook/addon-knobs'
 import { STabs, STab, SDesignSystemProvider } from '../../components'
 import { BorderRadius } from '../../types'
 import { TabsPosition, TabsType } from '../../components/Tab'
-import { DesignSystemTypes } from '../../utils/DesignSystem'
+import { DesignSystem } from '../../utils/DesignSystem'
 
 export default {
   component: STabs,
@@ -34,7 +34,7 @@ export const defaultUsage = () => ({
   }),
   props: {
     designSystem: {
-      default: select('Design System', Object.values(DesignSystemTypes), DesignSystemTypes.DEFAULT)
+      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     type: {
       default: select('Type', [...Object.values(TabsType), '––'], '––')

@@ -1,6 +1,4 @@
-export type Theme = 'dark' | 'light'
-
-export enum Themes {
+export enum Theme {
   DARK = 'dark',
   LIGHT = 'light'
 }

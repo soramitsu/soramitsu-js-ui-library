@@ -1,6 +1,6 @@
 export const DesignSystemProvideKey = 'designSystem'
 
-export enum DesignSystemTypes {
+export enum DesignSystem {
   DEFAULT = '',
   NEUMORPHIC = 'neumorphic'
 }
