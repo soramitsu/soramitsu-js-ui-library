@@ -5,7 +5,7 @@ import flow from 'lodash/fp/flow'
 import concat from 'lodash/fp/concat'
 
 import { Locale } from '../utils/Locale'
-import i18n from '@/locale'
+import i18n from '../locale'
 
 const types = flow(
   flatMap(x => [x + '_REQUEST', x + '_SUCCESS', x + '_FAILURE']),

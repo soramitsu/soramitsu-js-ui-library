@@ -39,6 +39,7 @@ export enum Components {
   SRadio = 'SRadio',
   SRadioGroup = 'SRadioGroup',
   SRow = 'SRow',
+  SScrollbar = 'SScrollbar',
   SScrollSectionItem = 'SScrollSectionItem',
   SScrollSections = 'SScrollSections',
   SSelect = 'SSelect',
