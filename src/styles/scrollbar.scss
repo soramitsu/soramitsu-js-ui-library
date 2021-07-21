@@ -1,0 +1,7 @@
+.el-scrollbar__thumb {
+  border-radius: 6px;
+  background-color: var(--s-color-base-content-tertiary);
+  &:hover {
+    background-color: var(--s-color-base-content-tertiary);
+  }
+}
