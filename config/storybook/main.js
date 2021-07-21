@@ -22,7 +22,7 @@ module.exports = {
     '@storybook/addon-knobs',
     '@storybook/addon-storysource'
   ],
-  webpackFinal: async (config) => {
+  webpackFinal: (config) => {
     const scssRule = config.module.rules.find(({ test }) => typeof test.test === 'function' && test.test('.scss'))
     // important to include scss to storybook build
     if (scssRule) {
