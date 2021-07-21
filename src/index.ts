@@ -36,6 +36,7 @@ import {
   SRadio,
   SRadioGroup,
   SRow,
+  SScrollbar,
   SScrollSectionItem,
   SScrollSections,
   SSelect,
@@ -103,6 +104,7 @@ const SoramitsuElements = {
     vue.use(SRadio)
     vue.use(SRadioGroup)
     vue.use(SRow)
+    vue.use(SScrollbar)
     vue.use(SScrollSectionItem)
     vue.use(SScrollSections)
     vue.use(SSelect)
@@ -172,6 +174,7 @@ export {
   SRadio,
   SRadioGroup,
   SRow,
+  SScrollbar,
   SScrollSectionItem,
   SScrollSections,
   SSelect,
