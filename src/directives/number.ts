@@ -1,6 +1,6 @@
 import { DirectiveOptions } from 'vue'
 
-import { KeyValues } from '../utils/KeyValues'
+import KeyValues from '../utils/KeyValues'
 
 const onDigitKeyPress = (e: any) => {
   if (!KeyValues.isDigit(e.key)) {

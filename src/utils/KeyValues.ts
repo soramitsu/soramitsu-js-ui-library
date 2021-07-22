@@ -1,4 +1,4 @@
-export class KeyValues {
+export default class KeyValues {
   private static readonly digits = /[0-9]/
   private static readonly numbers = /[0-9.]/
 

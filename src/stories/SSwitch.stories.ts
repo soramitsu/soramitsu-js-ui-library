@@ -1,7 +1,7 @@
 import { text, number, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
 import { SSwitch, SDesignSystemProvider } from '../components'
-import { DesignSystem } from '../utils/DesignSystem'
+import DesignSystem from '../types/DesignSystem'
 
 export default {
   component: SSwitch,

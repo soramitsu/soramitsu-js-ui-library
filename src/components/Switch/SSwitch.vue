@@ -19,6 +19,7 @@
 <script lang="ts">
 import { Mixins, Component, Prop, Watch } from 'vue-property-decorator'
 import ElSwitch from 'element-ui/lib/switch'
+
 import DesignSystemInject from '../DesignSystem/DesignSystemInject'
 
 @Component({
