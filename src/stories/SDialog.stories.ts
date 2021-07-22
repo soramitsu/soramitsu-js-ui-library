@@ -2,7 +2,7 @@ import { text, withKnobs, boolean, select } from '@storybook/addon-knobs'
 
 import { SDialog, SRow, SButton, SDesignSystemProvider } from '../components'
 import { BorderRadius } from '../types'
-import { DesignSystem } from '../utils/DesignSystem'
+import DesignSystem from '../types/DesignSystem'
 
 export default {
   component: SDialog,

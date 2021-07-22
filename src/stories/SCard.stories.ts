@@ -1,9 +1,9 @@
 import { text, withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { SCard, SRow, SDropdown, SDropdownItem, SDesignSystemProvider } from '../components'
-import { BorderRadius, Status, Size } from '../types'
 import { CardShadow } from '../components/Card'
-import { DesignSystem } from '../utils/DesignSystem'
+import { BorderRadius, Status, Size } from '../types'
+import DesignSystem from '../types/DesignSystem'
 
 export default {
   component: SCard,
