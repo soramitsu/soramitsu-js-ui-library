@@ -45,7 +45,7 @@ $select-prefix-height: $s-size-mini;
       display: flex;
       align-items: center;
       width: var(--s-icon-font-size-big);
-      font-family: var(--s-font-family-icons);
+      font-family: var(--s-font-family-icons) !important;
       font-size: var(--s-icon-font-size-big);
       &:before {
         content: $s-icon-arrows-chevron-top-rounded-24;

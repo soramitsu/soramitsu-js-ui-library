@@ -2,7 +2,7 @@ import { withKnobs, boolean, select } from '@storybook/addon-knobs'
 
 import { SCollapse, SCollapseItem, SDesignSystemProvider } from '../../components'
 import { BorderTypes } from '../../components/Collapse'
-import { DesignSystem } from '../../utils/DesignSystem'
+import DesignSystem from '../../types/DesignSystem'
 
 export default {
   component: SCollapse,

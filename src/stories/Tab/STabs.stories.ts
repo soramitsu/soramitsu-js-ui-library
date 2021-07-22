@@ -1,9 +1,9 @@
 import { boolean, select, withKnobs } from '@storybook/addon-knobs'
 
 import { STabs, STab, SDesignSystemProvider } from '../../components'
-import { BorderRadius } from '../../types'
 import { TabsPosition, TabsType } from '../../components/Tab'
-import { DesignSystem } from '../../utils/DesignSystem'
+import { BorderRadius } from '../../types'
+import DesignSystem from '../../types/DesignSystem'
 
 export default {
   component: STabs,

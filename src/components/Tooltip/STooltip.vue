@@ -30,7 +30,7 @@ import ElTooltip from 'element-ui/lib/tooltip'
 
 import DesignSystemInject from '../DesignSystem/DesignSystemInject'
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
-import { Theme } from '../../utils/Theme'
+import Theme from '../../types/Theme'
 import { TooltipTheme, TooltipPlacement } from './consts'
 
 @Component({

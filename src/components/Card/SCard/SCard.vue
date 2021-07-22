@@ -20,7 +20,6 @@ import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
 import SizeMixin from '../../../mixins/SizeMixin'
 import StatusMixin from '../../../mixins/StatusMixin'
 import { CardShadow } from '../consts'
-import { BorderRadius } from '../../../types'
 
 @Component({
   components: { ElCard }
@@ -48,8 +47,6 @@ export default class SCard extends Mixins(BorderRadiusMixin, SizeMixin, StatusMi
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly clickable!: boolean
-
-  @Prop({ default: BorderRadius.MEDIUM }) borderRadius!: string
   /**
    * Does card should looks like it's under surface (inner shadow)
    */

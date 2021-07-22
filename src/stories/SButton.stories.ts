@@ -1,9 +1,9 @@
 import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
 import { SButton, SButtonGroup, SRow, SCol, SMain, SIcon, SDesignSystemProvider } from '../components'
-import { Size, BorderRadius } from '../types'
 import { ButtonTypes, ButtonIconPosition } from '../components/Button'
-import { DesignSystem } from '../utils/DesignSystem'
+import { Size, BorderRadius } from '../types'
+import DesignSystem from '../types/DesignSystem'
 
 export default {
   component: SButton,

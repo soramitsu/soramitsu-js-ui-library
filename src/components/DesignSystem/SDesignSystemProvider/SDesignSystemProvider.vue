@@ -7,7 +7,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Provide, Watch } from 'vue-property-decorator'
 import { DesignSystemProvideKey } from '../consts'
-import { DesignSystem } from '../../../utils/DesignSystem'
+import DesignSystem from '../../../types/DesignSystem'
 
 @Component
 export default class SDesignSystemProvider extends Vue {

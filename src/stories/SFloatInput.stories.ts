@@ -1,7 +1,7 @@
 import { number, text, boolean, object, select, withKnobs } from '@storybook/addon-knobs'
 
 import { SFloatInput, SRow, SDesignSystemProvider } from '../components'
-import { DesignSystem } from '../utils/DesignSystem'
+import DesignSystem from '../types/DesignSystem'
 
 export default {
   component: SFloatInput,

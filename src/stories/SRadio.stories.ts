@@ -2,7 +2,7 @@ import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { SRadio, SRadioGroup, SRow, SCol, SDesignSystemProvider } from '../components'
 import { Size } from '../types'
-import { DesignSystem } from '../utils/DesignSystem'
+import DesignSystem from '../types/DesignSystem'
 
 export default {
   component: SRadio,

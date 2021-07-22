@@ -1,9 +1,9 @@
 import { text, boolean, withKnobs, number, select } from '@storybook/addon-knobs'
 
 import { SInput, SRow, SCol, SDesignSystemProvider } from '../components'
-import { BorderRadius } from '../types'
 import { InputType, InputSize } from '../components/Input'
-import { DesignSystem } from '../utils/DesignSystem'
+import { BorderRadius } from '../types'
+import DesignSystem from '../types/DesignSystem'
 
 export default {
   component: SInput,
