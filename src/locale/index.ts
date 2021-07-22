@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
-import { Locale } from '../utils/Locale'
+import Locale from '../types/Locale'
 
 import en from './en'
 import ja from './ja'

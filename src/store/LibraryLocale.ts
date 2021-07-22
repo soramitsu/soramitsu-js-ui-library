@@ -4,7 +4,7 @@ import fromPairs from 'lodash/fp/fromPairs'
 import flow from 'lodash/fp/flow'
 import concat from 'lodash/fp/concat'
 
-import { Locale } from '../utils/Locale'
+import Locale from '../types/Locale'
 import i18n from '../locale'
 
 const types = flow(

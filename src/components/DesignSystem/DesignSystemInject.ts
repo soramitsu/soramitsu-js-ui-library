@@ -1,6 +1,6 @@
 import { Component, Vue, Inject, Prop } from 'vue-property-decorator'
 import { DesignSystemProvideKey } from './consts'
-import { DesignSystem } from '../../utils/DesignSystem'
+import DesignSystem from '../../types/DesignSystem'
 
 @Component
 export default class DesignSystemInject extends Vue {

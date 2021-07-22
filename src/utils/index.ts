@@ -1,16 +1,16 @@
 import store from '../store'
-import { Theme } from './Theme'
-import { DesignSystem } from './DesignSystem'
-import { Locale } from './Locale'
+import Theme from '../types/Theme'
+import DesignSystem from '../types/DesignSystem'
+import Locale from '../types/Locale'
 
-export const setTheme = (theme: Theme) => {
-  store.dispatch('changeTheme', { theme })
+export const setTheme = async (theme: Theme) => {
+  await store.dispatch('setTheme', theme)
 }
 
-export const setDesignSystem = (designSystem: DesignSystem) => {
-  store.dispatch('setDesignSystem', designSystem)
+export const setDesignSystem = async (designSystem: DesignSystem) => {
+  await store.dispatch('setDesignSystem', designSystem)
 }
 
-export const setLocale = (locale: Locale) => {
-  store.dispatch('setLocale', locale)
+export const setLocale = async (locale: Locale) => {
+  await store.dispatch('setLocale', locale)
 }

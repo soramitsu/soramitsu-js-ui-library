@@ -7,6 +7,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import copy from 'rollup-plugin-copy'
 import { terser } from 'rollup-plugin-terser'
 import del from 'rollup-plugin-delete'
+import multiInput from 'rollup-plugin-multi-input'
 
 const external = [
   ...Object.keys(pkg.dependencies || {}),
@@ -15,20 +16,36 @@ const external = [
 ]
 
 export default {
-  input: 'src/index.ts',
-  output: [
-    {
-      name: 'SoramitsuJsUi',
-      file: 'lib/soramitsu-js-ui.esm.js',
-      format: 'esm',
-      sourcemap: true
-    }, {
-      name: 'SoramitsuJsUiUmd',
-      format: 'umd',
-      file: 'lib/soramitsu-js-ui.umd.js',
-      sourcemap: true
-    }
+  input: [
+    'src/index.ts',
+    'src/types/DesignSystem.ts',
+    'src/types/Locale.ts',
+    'src/types/Theme.ts',
+    'src/locale/index.ts',
+    'src/plugins/*.ts',
+    'src/store/index.ts',
+    'src/utils/*.ts',
+    'src/directives/index.ts',
+    'src/components/*/**/index.ts'
   ],
+  output: {
+    format: 'esm',
+    dir: 'lib'
+    // sourcemap: true We don't need it because of d.ts files
+  },
+  // output: [
+  //   {
+  //     name: 'SoramitsuJsUi',
+  //     file: 'lib/soramitsu-js-ui.esm.js',
+  //     format: 'esm',
+  //     sourcemap: true
+  //   }, {
+  //     name: 'SoramitsuJsUiUmd',
+  //     format: 'umd',
+  //     file: 'lib/soramitsu-js-ui.umd.js',
+  //     sourcemap: true
+  //   }
+  // ],
   external (id) {
     return external.includes(id.split('/')[0]) ||
       /element-ui\/lib\//.test(id)
@@ -52,6 +69,15 @@ export default {
         { src: 'src/styles/neumorphism/*', dest: 'lib/styles/neumorphism' }
       ]
     }),
+    multiInput({
+      relative: 'src/'
+      // transformOutputPath: (output, input) => {
+      //   if (input === 'src/index.ts') {
+      //     return output
+      //   }
+      //   return `components/${path.basename(output)}`
+      // }
+    }),
     typescript({
       typescript: require('typescript'),
       objectHashIgnoreUnknownHack: true,
@@ -69,7 +95,19 @@ export default {
     resolve(),
     terser(),
     del({
-      targets: ['lib/styles/index.d.ts', 'lib/soramitsu-js-ui.esm.css'],
+      targets: [
+        'lib/styles/index.d.ts',
+        // 'lib/soramitsu-js-ui.esm.css',
+        'bundle.css'
+        // 'lib/BorderRadiusMixin-**.js',
+        // 'lib/SizeMixin-**.js',
+        // 'lib/DesignSystem-**.js',
+        // 'lib/DesignSystemInject-**.js',
+        // 'lib/normalize-component-**.js',
+        // 'lib/components-**.js',
+        // 'lib/consts-**.js',
+        // 'lib/index-**.js'
+      ],
       hook: 'writeBundle'
     })
   ]
