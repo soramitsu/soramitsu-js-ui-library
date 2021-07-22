@@ -13,9 +13,9 @@
     }
   ],
   "author": "Stefan Popov <popov@soramitsu.co.jp>",
-  "main": "./lib/soramitsu-js-ui.umd.js",
-  "module": "./lib/soramitsu-js-ui.esm.js",
-  "unpkg": "./lib/soramitsu-js-ui.min.js",
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
+  "unpkg": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
     "build": "rm -rf lib && rollup -c ./build/rollup.config.js",
