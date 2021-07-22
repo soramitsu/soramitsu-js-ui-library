@@ -33,19 +33,6 @@ export default {
     dir: 'lib'
     // sourcemap: true We don't need it because of d.ts files
   },
-  // output: [
-  //   {
-  //     name: 'SoramitsuJsUi',
-  //     file: 'lib/soramitsu-js-ui.esm.js',
-  //     format: 'esm',
-  //     sourcemap: true
-  //   }, {
-  //     name: 'SoramitsuJsUiUmd',
-  //     format: 'umd',
-  //     file: 'lib/soramitsu-js-ui.umd.js',
-  //     sourcemap: true
-  //   }
-  // ],
   external (id) {
     return external.includes(id.split('/')[0]) ||
       /element-ui\/lib\//.test(id)
@@ -71,12 +58,6 @@ export default {
     }),
     multiInput({
       relative: 'src/'
-      // transformOutputPath: (output, input) => {
-      //   if (input === 'src/index.ts') {
-      //     return output
-      //   }
-      //   return `components/${path.basename(output)}`
-      // }
     }),
     typescript({
       typescript: require('typescript'),
@@ -97,8 +78,8 @@ export default {
     del({
       targets: [
         'lib/styles/index.d.ts',
-        // 'lib/soramitsu-js-ui.esm.css',
         'bundle.css'
+        // TODO: find a way how to remove this dependencies
         // 'lib/BorderRadiusMixin-**.js',
         // 'lib/SizeMixin-**.js',
         // 'lib/DesignSystem-**.js',
