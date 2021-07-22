@@ -34,15 +34,56 @@ For instance, `soramitsuUI.ts`:
 
 ```
 import Vue from 'vue'
-import SoramitsuElements, { Message, MessageBox, Notification } from '@soramitsu/soramitsu-js-ui'
-import '@soramitsu/soramitsu-js-ui/lib/styles'
 
-Vue.use(SoramitsuElements)
+import SoramitsuElements, {
+  Message,
+  MessageBox,
+  Notification,
+  setTheme,
+  setDesignSystem,
+  Theme,
+  DesignSystem
+} from '@soramitsu/soramitsu-js-ui'
+
+import store from '@/store'
+
+Vue.use(SoramitsuElements, { store })
 Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$message = Message
 Vue.prototype.$notify = Notification
 
+setTheme(Theme.LIGHT)
+setDesignSystem(DesignSystem.NEUMORPHIC)
+```
+
+You could also use direct components import:
+
+```
+import Vue from 'vue'
+
+import Theme from '@soramitsu/soramitsu-js-ui/lib/types/Theme'
+import DesignSystem from '@soramitsu/soramitsu-js-ui/lib/types/DesignSystem'
+import { setTheme, setDesignSystem } from '@soramitsu/soramitsu-js-ui/lib/utils'
+
+import ElementUIPlugin, { Message, MessageBox, Notification } from '@soramitsu/soramitsu-js-ui/lib/plugins/elementUI'
+import SoramitsuUIStorePlugin from '@soramitsu/soramitsu-js-ui/lib/plugins/soramitsuUIStore'
+
+import SButton from '@soramitsu/soramitsu-js-ui/lib/components/Button/SButton'
+
+import store from '@/store'
+
+Vue.use(ElementUIPlugin)
+Vue.use(SoramitsuUIStorePlugin, { store })
+Vue.use(SButton)
+
+Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$message = Message
+Vue.prototype.$notify = Notification
+
+setTheme(Theme.LIGHT)
+setDesignSystem(DesignSystem.NEUMORPHIC)
 ```
 
 # 4. Add element-ui types
@@ -56,7 +97,7 @@ The previous section added not all required styles. To fix it you should add imp
 For instance, `soramitsu-variables.scss`:
 
 ```
-@import '../../node_modules/@soramitsu/soramitsu-js-ui/lib/styles/index';
+@import '~@soramitsu/soramitsu-js-ui/lib/styles/index';
 ```
 
 If you want to customise some colors, borders, paddings, size, etc. - you can override scss variables.
@@ -69,6 +110,6 @@ $s-color-theme-accent: #ED145B;
 // Basic colors
 $s-color-base-content-primary: #0D0248;
 
-@import '../../node_modules/@soramitsu/soramitsu-js-ui/lib/styles/index';
+@import '~@soramitsu/soramitsu-js-ui/lib/styles/index';
 
 ```
