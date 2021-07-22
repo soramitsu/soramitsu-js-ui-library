@@ -2,12 +2,14 @@ import Vue from 'vue'
 import { addParameters, addDecorator } from '@storybook/vue'
 import { withA11y } from '@storybook/addon-a11y'
 import { DocsPage } from '@storybook/addon-docs/blocks'
+import ElColorPicker from 'element-ui/lib/color-picker'
 
 import '../../src/styles/index.scss'
 import mainStore from '../../src/store'
 import { ElementUIPlugin } from '../../src/plugins'
 
 Vue.use(ElementUIPlugin)
+Vue.use(ElColorPicker)
 
 addParameters({
   options: {

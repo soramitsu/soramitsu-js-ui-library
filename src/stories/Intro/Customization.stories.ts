@@ -37,7 +37,7 @@ export const themeInputsData = [
   'text-file'
 ]
 export const configurable = () => ({
-  components: { SRow, SCol, SButton, SInput, SDivider },
+  components: { SRow, SCol, SButton, SDivider, SInput },
   template: `<div style="flex: 1;">
              <s-row>
                <s-col
@@ -83,9 +83,10 @@ export const configurable = () => ({
                   <s-input
                     type="number"
                     :placeholder="button.label + ' (px)'"
+                    v-model="borderRadiusValues[button.label]"
                     :border-radius="button.label"
                     style="margin-right: 10px; margin-right: 10px;"
-                    @change="(value) => handleBorderRadiusChange(button.label, value)"
+                    @input="(value) => handleBorderRadiusChange(button.label, value)"
                   />
                </div>
                </s-col>
@@ -103,6 +104,12 @@ export const configurable = () => ({
     sections: colorsSectionsData,
     buttons: differentTypeButtonsData,
     borderRadiusButtons: getRadiusData(BorderRadius),
+    borderRadiusValues: {
+      [BorderRadius.BIG]: '16',
+      [BorderRadius.MEDIUM]: '12',
+      [BorderRadius.SMALL]: '8',
+      [BorderRadius.MINI]: '4'
+    },
     inputs: themeInputsData
   }),
   methods: {
