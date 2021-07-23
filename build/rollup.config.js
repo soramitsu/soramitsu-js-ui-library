@@ -26,7 +26,10 @@ export default {
     'src/store/index.ts',
     'src/utils/*.ts',
     'src/directives/index.ts',
-    'src/components/*/**/index.ts'
+    'src/components/*/**/index.ts',
+    'src/components/*/**/consts.ts',
+    'src/components/DesignSystem/DesignSystemInject.ts',
+    'src/mixins/*.ts'
   ],
   output: {
     format: 'esm',
@@ -78,16 +81,10 @@ export default {
     del({
       targets: [
         'lib/styles/index.d.ts',
+        'lib/normalize-component-**.js',
+        'lib/components-**.js',
+        'lib/index-**.js',
         'bundle.css'
-        // TODO: find a way how to remove this dependencies
-        // 'lib/BorderRadiusMixin-**.js',
-        // 'lib/SizeMixin-**.js',
-        // 'lib/DesignSystem-**.js',
-        // 'lib/DesignSystemInject-**.js',
-        // 'lib/normalize-component-**.js',
-        // 'lib/components-**.js',
-        // 'lib/consts-**.js',
-        // 'lib/index-**.js'
       ],
       hook: 'writeBundle'
     })
