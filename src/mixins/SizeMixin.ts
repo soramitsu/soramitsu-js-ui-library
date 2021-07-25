@@ -1,4 +1,5 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
+
 import { Size } from '../types'
 
 @Component
