@@ -6,12 +6,14 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Provide, Watch } from 'vue-property-decorator'
+
 import { DesignSystemProvideKey } from '../consts'
 import DesignSystem from '../../../types/DesignSystem'
 
 @Component
 export default class SDesignSystemProvider extends Vue {
   @Prop({ default: DesignSystem.DEFAULT, type: String }) readonly value!: string
+
   @Provide(DesignSystemProvideKey) providedObject = {
     value: DesignSystem.DEFAULT
   }

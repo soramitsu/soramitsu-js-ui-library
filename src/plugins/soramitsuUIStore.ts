@@ -1,4 +1,5 @@
 import Vue from 'vue'
+
 import { modules, Modules } from '../store'
 
 const SoramitsuUIStorePlugin = {
