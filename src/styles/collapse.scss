@@ -13,15 +13,20 @@
 }
 .el-collapse-item:last-child {
   margin-bottom: 0;
-  .el-collapse-item__header {
-    border: none;
+  .el-collapse-item {
+    &__header {
+      border: none;
+    }
+    &__wrap {
+      border-bottom: none;
+    }
   }
 }
-.el-collapse-item__ {
-  &wrap {
+.el-collapse-item {
+  &__wrap {
     border-bottom-color: var(--s-color-base-border-secondary);
   }
-  &header {
+  &__header {
     color: var(--s-color-base-content-primary);
     border-bottom-color: var(--s-color-base-border-secondary);
     &.is-active {
