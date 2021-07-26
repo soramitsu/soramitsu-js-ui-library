@@ -29,10 +29,10 @@ Vue.use(SoramitsuElements, options)
 ### 2.Install only necessary components (to reduce vendors bundle size)
 ```
 import Vue from 'vue
-import ElementUIPlugin from '@soramitsu/soramitsu-js-ui/src/plugins/elementUI'
-import SoramitsuUIStorePlugin from '@soramitsu/soramitsu-js-ui/src/plugins/soramitsuUIStore'
-import SButton from '@soramitsu/soramitsu-js-ui/src/components/Button/SButton'
-import SButton from '@soramitsu/soramitsu-js-ui/src/components/Input/SInput'
+import ElementUIPlugin from '@soramitsu/soramitsu-js-ui/lib/plugins/elementUI'
+import SoramitsuUIStorePlugin from '@soramitsu/soramitsu-js-ui/lib/plugins/soramitsuUIStore'
+import SButton from '@soramitsu/soramitsu-js-ui/lib/components/Button/SButton'
+import SButton from '@soramitsu/soramitsu-js-ui/lib/components/Input/SInput'
 
 Vue.use(ElementUIPlugin) // required
 Vue.use(SoramitsuUIStorePlugin, store) // optional
