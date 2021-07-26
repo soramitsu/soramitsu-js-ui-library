@@ -139,24 +139,26 @@ $s-color-button-tertiary-background-focused: var(--s-color-base-background) !def
         font-size: var(--s-icon-font-size-mini);
       }
     }
-    color: var(--s-color-base-content-primary);
-    background-color: var(--s-color-base-background);
-    border-color: var(--s-color-base-background);
-    &.focusing, &:hover, &.s-pressed {
+    &:not(.s-primary) {
       color: var(--s-color-base-content-primary);
-      background-color: var(--s-color-base-background-hover);
-      border-color: var(--s-color-base-background-hover);
-    }
-    @include disabled;
-    &.s-alternative {
-      background-color: var(--s-color-base-on-accent);
-      border-color: var(--s-color-base-border-primary);
+      background-color: var(--s-color-base-background);
+      border-color: var(--s-color-base-background);
       &.focusing, &:hover, &.s-pressed {
         color: var(--s-color-base-content-primary);
-        background-color: var(--s-color-base-background);
-        border-color: var(--s-color-base-background);
+        background-color: var(--s-color-base-background-hover);
+        border-color: var(--s-color-base-background-hover);
       }
       @include disabled;
+      &.s-alternative {
+        background-color: var(--s-color-base-on-accent);
+        border-color: var(--s-color-base-border-primary);
+        &.focusing, &:hover, &.s-pressed {
+          color: var(--s-color-base-content-primary);
+          background-color: var(--s-color-base-background);
+          border-color: var(--s-color-base-background);
+        }
+        @include disabled;
+      }
     }
   }
   span {
