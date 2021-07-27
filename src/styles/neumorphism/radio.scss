@@ -1,16 +1,24 @@
-@mixin inner-size ($size: 'big', $value: 32px) {
-  &.s-#{$size} {
+$radio-button-border-width: 1px;
+
+@mixin inner-size ($size-label: 'big', $size: var(--s-size-small)) {
+  $vertical-padding: calc(calc(var(--s-size-#{$size-label}) - #{$size} - #{$radio-button-border-width * 2}) / 2);
+  &.s-#{$size-label} {
     > .el-radio__input {
       .el-radio__inner {
-        width: $value;
-        height: $value;
+        width: $size;
+        height: $size;
 
         &::after {
-          width: $value - 10;
-          height: $value - 10;
+          $mark-size: calc(#{$size} - 10px);
+          width: $mark-size;
+          height: $mark-size;
         }
       }
     }
+  }
+  &.is-bordered.s-#{$size-label} {
+    padding-top: $vertical-padding;
+    padding-bottom: $vertical-padding;
   }
 }
 
@@ -27,7 +35,7 @@
     }
   }
 
-  @include inner-size('big', 32px);
+  @include inner-size;
   @include inner-size('medium', 28px);
   @include inner-size('small', 24px);
   @include inner-size('mini', 20px);
