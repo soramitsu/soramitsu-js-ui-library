@@ -10,7 +10,9 @@
     color: var(--s-color-base-content-primary);
   }
   &.is-error {
-    margin-bottom: 0;
+    &.with-message {
+      margin-bottom: 0;
+    }
     > .el-form-item__content {
       > .el-form-item__error {
         margin-bottom: 6px;

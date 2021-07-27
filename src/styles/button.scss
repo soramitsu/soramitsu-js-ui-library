@@ -189,13 +189,28 @@ button {
     }
   }
 }
-.el-button-group .el-button.el-button--plain {
-  color: var(--s-color-base-content-primary);
-  border-color: var(--s-color-base-border-primary);
-  background-color: var(--s-color-base-on-accent);
-  &.focusing, &:hover, &.s-pressed {
-    color: var(--s-color-theme-accent);
-    background-color: var(--s-color-base-on-accent);
-    border-color: var(--s-color-theme-accent);
+.el-button-group button.el-button {
+  &.el-button {
+    &--plain {
+      color: var(--s-color-base-content-primary);
+      border-color: var(--s-color-base-border-primary);
+      background-color: var(--s-color-base-on-accent);
+      &.focusing, &:hover, &.s-pressed {
+        color: var(--s-color-theme-accent);
+        background-color: var(--s-color-base-on-accent);
+        border-color: var(--s-color-theme-accent);
+      }
+    }
+    &--primary:first-child:hover {
+      border-right-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+  &:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 }

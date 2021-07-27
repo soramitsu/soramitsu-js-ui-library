@@ -5,6 +5,7 @@ import { DocsPage } from '@storybook/addon-docs/blocks'
 import ElColorPicker from 'element-ui/lib/color-picker'
 
 import '../../src/styles/index.scss'
+import './index.scss'
 import mainStore from '../../src/store'
 import { ElementUIPlugin } from '../../src/plugins'
 

@@ -16,7 +16,6 @@ export const configurable = () => ({
                :disabled="disabled"
                :inline="inline"
                :show-message="showMessage"
-               :status-icon="statusIcon"
                :rules="{
                  user: [
                    { required: true, message: 'Please input user name' },
@@ -54,9 +53,6 @@ export const configurable = () => ({
     },
     showMessage: {
       default: boolean('Show Message', true)
-    },
-    statusIcon: {
-      default: boolean('Status Icon', false)
     }
   }
 })
