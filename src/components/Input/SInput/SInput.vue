@@ -182,7 +182,7 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
     if (!this.isNeumorphic) {
       ['top', 'bottom', 'left', 'right'].forEach(slotName => {
         if (this.$slots[slotName]) {
-          console.warn(`Slot "${slotName}" is not available with used design system`)
+          console.warn(`[s-input] Slot "${slotName}" is not available with used design system`)
         }
       })
     }
