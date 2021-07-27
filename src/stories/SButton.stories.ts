@@ -26,10 +26,11 @@ export const configurable = () => ({
                :border-radius="borderRadius"
                :rounded="rounded"
                :alternative="alternative"
+               :primary="primary"
                @click="handleClick"
               >
-                <span v-if="content">{{ content }}</span>
-                <s-icon v-else :name="icon"/>
+                <s-icon v-if="isAction" :name="icon"/>
+                <span v-else>{{ content }}</span>
               </s-button>
             </s-design-system-provider>`,
   props: {
@@ -57,6 +58,9 @@ export const configurable = () => ({
     alternative: {
       default: boolean('Alternative', false)
     },
+    primary: {
+      default: boolean('Primary', false)
+    },
     tooltip: {
       default: text('Tooltip', '')
     },
@@ -72,6 +76,11 @@ export const configurable = () => ({
   },
   methods: {
     handleClick: () => alert('clicked')
+  },
+  computed: {
+    isAction: ({ type }) => {
+      return type === ButtonTypes.ACTION
+    }
   }
 })
 

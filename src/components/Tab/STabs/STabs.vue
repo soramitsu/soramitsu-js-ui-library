@@ -8,7 +8,7 @@
     :addable="addable"
     :editable="editable"
     :stretch="stretch"
-    :tab-position="position"
+    :tab-position="computedPosition"
     :before-leave="beforeLeave"
     @tab-click="handleClick"
     @tab-remove="handleRemove"
@@ -92,9 +92,20 @@ export default class STabs extends Mixins(BorderRadiusMixin, DesignSystemInject)
   }
 
   get computedType (): string {
+    // neu tabs implemented only with TabsType.ROUNDED type
+    if (this.isNeumorphic) return ''
     if (!(Object.values(TabsType) as Array<string>).includes(this.type)) return ''
     if ([TabsType.ROUNDED, TabsType.ACCENT_ROUNDED].includes(this.type)) return ''
     return this.type
+  }
+
+  get computedPosition (): string {
+    if (this.isNeumorphic && ([TabsPosition.LEFT, TabsPosition.RIGHT] as Array<string>).includes(this.position)) {
+      console.warn(`[s-tabs] "${this.position}" position is not available with used design system, "${TabsPosition.TOP}" is used instead`)
+      return TabsPosition.TOP
+    }
+
+    return this.position
   }
 
   get computedClasses (): Array<string> {
@@ -102,12 +113,10 @@ export default class STabs extends Mixins(BorderRadiusMixin, DesignSystemInject)
     if (this.designSystemClass) {
       cssClasses.push(this.designSystemClass)
     }
-    if (this.type === TabsType.ROUNDED &&
-      ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
+    // neu tabs implemented only with TabsType.ROUNDED type
+    if (this.isNeumorphic || (this.type === TabsType.ROUNDED && ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position))) {
       cssClasses.push('s-rounded')
-    }
-    if (this.type === TabsType.ACCENT_ROUNDED &&
-      ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
+    } else if (this.type === TabsType.ACCENT_ROUNDED && ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
       cssClasses.push('s-accent-rounded')
     }
     if (this.isStandardBorderRadius) {

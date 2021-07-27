@@ -3,10 +3,10 @@
     class="s-input"
     :class="computedClasses"
   >
-    <slot name="top" />
+    <slot v-if="isNeumorphic" name="top" />
 
     <div class="s-input__content">
-      <slot name="left" />
+      <slot v-if="isNeumorphic" name="left" />
 
       <div class="s-input__input">
         <span v-if="value && isBigInput && !$slots.top" class="s-placeholder">{{ placeholder }}</span>
@@ -57,15 +57,15 @@
           >
         </template>
       </div>
-      <slot name="right" />
+      <slot v-if="isNeumorphic" name="right" />
     </div>
 
-    <slot name="bottom"/>
+    <slot v-if="isNeumorphic" name="bottom"/>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Ref, Inject } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref, Inject, Watch } from 'vue-property-decorator'
 import Input from 'element-ui/lib/input'
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
@@ -176,6 +176,16 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
 
   mounted (): void {
     this.$el.addEventListener('animationstart', this.changeAutofillValue)
+  }
+
+  updated (): void {
+    if (!this.isNeumorphic) {
+      ['top', 'bottom', 'left', 'right'].forEach(slotName => {
+        if (this.$slots[slotName]) {
+          console.warn(`[s-input] Slot "${slotName}" is not available with used design system`)
+        }
+      })
+    }
   }
 
   destroyed (): void {
