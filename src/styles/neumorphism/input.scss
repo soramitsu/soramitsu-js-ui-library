@@ -32,7 +32,7 @@ $neu-input-padding: $s-basic-spacing $s-basic-spacing * 2 !default;
       letter-spacing: var(--s-letter-spacing-small);
 
       &::placeholder {
-        color: var(--s-color-base-content-primary);
+        color: var(--s-color-base-content-tertiary);
       }
     }
 
