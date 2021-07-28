@@ -22,13 +22,13 @@ npm login --registry="https://nexus.iroha.tech/repository/npm-group/"
 
 # 2. Add as a dependency to the project
 
-Add `"@soramitsu/soramitsu-js-ui": "^0.3.4"` in `package.json` file (`"dependencies"` section)
+Add `"@soramitsu/soramitsu-js-ui": "version"` in `package.json` file (`"dependencies"` section)
 
 OR RUN
 
 `yarn add "@soramitsu/soramitsu-js-ui"`
 
-# 3. Add components with styles to the project
+# 3. Add components with utilities to the project
 
 For instance, `soramitsuUI.ts`:
 
@@ -57,7 +57,7 @@ setTheme(Theme.LIGHT)
 setDesignSystem(DesignSystem.NEUMORPHIC)
 ```
 
-You could also use direct components import:
+You could also use direct components import to reduce vendors bundle size:
 
 ```
 import Vue from 'vue'
@@ -92,11 +92,16 @@ Add `"element-ui"` in `tsconfig.json` file (`"types"` section)
 
 # 5. Add all required styles
 
-The previous section added not all required styles. To fix it you should add imports into `scss` file.
+The previous sections added not all required styles. To fix it you should add imports into `scss` file.
+Also, you should add **Font variables**
 
 For instance, `soramitsu-variables.scss`:
 
 ```
+$s-font-family-default-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/Sora-VariableFont_wght.ttf' !default;
+$s-font-family-mono-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/JetBrainsMono-Regular.woff' !default;
+$s-font-family-icons-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/soramitsu-icons-1.0.0.ttf' !default;
+
 @import '~@soramitsu/soramitsu-js-ui/lib/styles/index';
 ```
 
@@ -109,6 +114,10 @@ For instance, `soramitsu-variables.scss`:
 $s-color-theme-accent: #ED145B;
 // Basic colors
 $s-color-base-content-primary: #0D0248;
+
+$s-font-family-default-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/Sora-VariableFont_wght.ttf' !default;
+$s-font-family-mono-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/JetBrainsMono-Regular.woff' !default;
+$s-font-family-icons-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/soramitsu-icons-1.0.0.ttf' !default;
 
 @import '~@soramitsu/soramitsu-js-ui/lib/styles/index';
 
