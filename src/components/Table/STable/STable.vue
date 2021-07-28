@@ -27,7 +27,7 @@
     :default-sort="defaultSort"
     :tooltip-effect="tooltipTheme"
     :show-summary="showTotal"
-    :sum-text="totalText"
+    sum-text=" "
     :summary-method="totalMethod"
     :span-method="spanMethod"
     :select-on-indeterminate="selectOnIndeterminate"
@@ -206,12 +206,6 @@ export default class STable extends Mixins(SizeMixin) {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly showTotal!: boolean
-  /**
-   * Text for the total row.
-   *
-   * `"Tot"` by default
-   */
-  @Prop({ default: 'Tot', type: String }) readonly totalText!: string
   /**
    * Custom total method. `({ columns, data }) => string`
    */

@@ -12,12 +12,14 @@
       border-color: transparent;
     }
   }
-  .el-card__header {
-    border-bottom-color: transparent;
-    padding-bottom: 0;
-    text-align: left;
-  }
-  .el-card__body {
-    padding: 18px 20px;
+  .el-card {
+    &__header {
+      border-bottom-color: transparent;
+      padding-bottom: 0;
+      text-align: left;
+    }
+    &__body {
+      padding: 18px 20px;
+    }
   }
 }

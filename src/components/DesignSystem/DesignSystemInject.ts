@@ -12,4 +12,8 @@ export default class DesignSystemInject extends Vue {
   get designSystemClass (): string {
     return this.useDesignSystem ? this.designSystem.value : ''
   }
+
+  get isNeumorphic (): boolean {
+    return this.designSystem.value === DesignSystem.NEUMORPHIC
+  }
 }

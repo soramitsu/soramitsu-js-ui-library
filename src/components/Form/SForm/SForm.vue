@@ -7,7 +7,6 @@
     :label-width="labelWidth"
     :show-message="showMessage"
     :inline-message="inlineMessage"
-    :status-icon="statusIcon"
     :validate-on-rule-change="validateOnRuleChange"
     :disabled="disabled"
     :size="size"
@@ -71,12 +70,6 @@ export default class SForm extends Vue {
    * `false` by default
    */
   @Prop({ type: Boolean, default: false }) readonly inlineMessage!: boolean
-  /**
-   * Display an icon indicating the validation result.
-   *
-   * `false` by default
-   */
-  @Prop({ type: Boolean, default: false }) readonly statusIcon!: boolean
   /**
    * Trigger validation when the `rules` property is changed.
    *

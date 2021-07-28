@@ -171,7 +171,7 @@ $neu-button-padding-mini: 3px 6px !default;
     }
     @include disabled;
 
-    &.s-alternative {
+    &.s-alternative:not(.s-action) {
       background: $neu-button-primary-background-color-alternative;
       border-width: $neu-button-primary-border-width-alternative;
       box-shadow: $neu-button-primary-box-shadow-alternative;
@@ -244,43 +244,45 @@ $neu-button-padding-mini: 3px 6px !default;
   }
 
   &.s-action {
-    background: $neu-button-action-background-color;
-    border-color: $neu-button-action-border-color;
-    border-style: $neu-button-action-border-style;
-    border-width: $neu-button-action-border-width;
-    box-shadow: $neu-button-action-box-shadow;
-    color: $neu-button-action-text-color;
-
     @include action-size('big');
     @include action-size('medium');
     @include action-size('small');
     @include action-size('mini');
 
-    &:hover, &:focus, &.focusing {
-      background: $neu-button-action-background-color-hover;
-      border-color: $neu-button-action-border-color-hover;
-      color: $neu-button-action-text-color-hover;
-      box-shadow: $neu-button-action-box-shadow-hover;
-    }
-    &:active, &.s-pressed {
-      background: $neu-button-action-background-color-pressed;
-      border-color: $neu-button-action-border-color-pressed;
-      color: $neu-button-action-text-color-pressed;
-      box-shadow: $neu-button-action-box-shadow-pressed;
-    }
-    @include disabled($neu-button-action-border-width, $neu-button-action-background-color, $neu-button-action-box-shadow-pressed);
-    &.s-alternative {
-      color: $neu-button-action-text-color-alternative;
+    &:not(.s-primary) {
+      background: $neu-button-action-background-color;
+      border-color: $neu-button-action-border-color;
+      border-style: $neu-button-action-border-style;
+      border-width: $neu-button-action-border-width;
+      box-shadow: $neu-button-action-box-shadow;
+      color: $neu-button-action-text-color;
 
-      &, &:hover, &:focus, &.focusing, &:active, &.s-pressed {
-        background-color: $neu-button-action-background-color-alternative;
-        border-color: $neu-button-action-border-color-alternative;
-        box-shadow: $neu-button-action-box-shadow-alternative;
+      &:hover, &:focus, &.focusing {
+        background: $neu-button-action-background-color-hover;
+        border-color: $neu-button-action-border-color-hover;
+        color: $neu-button-action-text-color-hover;
+        box-shadow: $neu-button-action-box-shadow-hover;
       }
-      &:hover, &:focus, &.focusing, &:active, &.s-pressed {
-        color: $neu-button-action-text-color-alternative-active;
+      &:active, &.s-pressed {
+        background: $neu-button-action-background-color-pressed;
+        border-color: $neu-button-action-border-color-pressed;
+        color: $neu-button-action-text-color-pressed;
+        box-shadow: $neu-button-action-box-shadow-pressed;
       }
-      @include disabled($neu-button-action-border-width, $neu-button-action-background-color-alternative, $neu-button-action-box-shadow-alternative);
+      @include disabled($neu-button-action-border-width, $neu-button-action-background-color, $neu-button-action-box-shadow-pressed);
+      &.s-alternative {
+        color: $neu-button-action-text-color-alternative;
+
+        &, &:hover, &:focus, &.focusing, &:active, &.s-pressed {
+          background-color: $neu-button-action-background-color-alternative;
+          border-color: $neu-button-action-border-color-alternative;
+          box-shadow: $neu-button-action-box-shadow-alternative;
+        }
+        &:hover, &:focus, &.focusing, &:active, &.s-pressed {
+          color: $neu-button-action-text-color-alternative-active;
+        }
+        @include disabled($neu-button-action-border-width, $neu-button-action-background-color-alternative, $neu-button-action-box-shadow-alternative);
+      }
     }
   }
 }
