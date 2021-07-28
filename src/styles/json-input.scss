@@ -46,7 +46,7 @@ $footer-height: 26px;
 .jsoneditor {
   border: none !important;
   font-family: var(--s-font-family-mono);
-  .jsoneditor-outer {
+  & &-outer {
     height: calc(100% - #{$footer-height});
     margin-bottom: -1px !important;
     padding-bottom: 1px !important;

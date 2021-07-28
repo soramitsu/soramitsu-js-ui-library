@@ -53,6 +53,12 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, Design
    */
   @Prop({ default: false, type: Boolean }) readonly rounded!: boolean
   /**
+   * Primary property for `type="action"` buttons.
+   *
+   * By default it's set to `false`
+   */
+  @Prop({ default: false, type: Boolean }) readonly primary!: boolean
+  /**
    * Icon name from icon collection of this library
    */
   @Prop({ default: '', type: String }) readonly icon!: string
@@ -144,6 +150,9 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, Design
     if (this.alternative) {
       cssClasses.push('s-alternative')
     }
+    if (this.primary) {
+      cssClasses.push('s-primary')
+    }
     if (this.pressed) {
       cssClasses.push('s-pressed')
     }
@@ -171,15 +180,14 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, Design
   }
 
   get isRounded (): boolean {
-    if (([ButtonTypes.LINK, ButtonTypes.ACTION] as Array<string>).includes(this.type)) return false
+    if (([ButtonTypes.ACTION] as Array<string>).includes(this.type)) return this.rounded
 
-    return this.rounded
+    return false
   }
 
   get isLoading (): boolean {
-    if (([ButtonTypes.LINK, ButtonTypes.ACTION] as Array<string>).includes(this.type) || this.isRounded) {
-      return false
-    }
+    if (([ButtonTypes.LINK, ButtonTypes.ACTION] as Array<string>).includes(this.type)) return false
+
     return this.loading
   }
 
