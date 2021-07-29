@@ -1,6 +1,7 @@
 <template>
   <el-form-item
     ref="formItem"
+    :class="computedClasses"
     :prop="prop"
     :label="label"
     :label-width="labelWidth"
@@ -97,6 +98,14 @@ export default class SFormItem extends Vue {
 
   get willMessageBeShown (): boolean {
     return this.showMessage && (this.elForm || {}).showMessage
+  }
+
+  get computedClasses (): Array<string> {
+    const cssClasses: Array<string> = []
+    if (this.willMessageBeShown) {
+      cssClasses.push('with-message')
+    }
+    return cssClasses
   }
 
   get computedRules (): object {
