@@ -27,9 +27,6 @@
       background-color: var(--s-color-theme-accent);
       color: var(--s-color-base-on-accent);
     }
-    &:hover {
-      color: var(--s-color-theme-accent);
-    }
   }
   .btn-prev,
   .btn-next {
@@ -41,6 +38,7 @@
     }
     &:disabled {
       color: var(--s-color-base-content-quaternary);
+      background-color: transparent;
     }
   }
   @include pagination-border-radius;

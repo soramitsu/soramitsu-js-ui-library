@@ -38,7 +38,6 @@ import { Vue, Component, Prop, Inject } from 'vue-property-decorator'
 import ElTableColumn from 'element-ui/lib/table-column'
 
 import { Size } from '../../../types'
-
 import { SortDirection, ColumnAlignment } from '../consts'
 
 @Component({

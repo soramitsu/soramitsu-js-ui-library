@@ -192,11 +192,6 @@ button > span {
   position: relative;
 }
 
-// TODO: move to separate file and import to storybook
-.sbdocs.sbdocs-preview div[id^='story--'] > * {
-  height: auto !important;
-}
-
 @mixin res($key, $map: $--breakpoints) {
   @if map-has-key($map, $key) {
     @media only screen and #{inspect(map-get($map, $key))} {
@@ -222,37 +217,39 @@ button > span {
 }
 
 .el-message-box {
-  .el-message-box__header {
-    .el-message-box__title {
-      color: var(--s-color-base-content-primary);
-      font-size: var(--s-heading5-font-size);
-    }
-  }
-  .el-message-box__btns {
-    button.el-button.el-button--default.el-button--small {
-      height: $s-size-medium;
-      font-size: var(--s-font-size-small);
-      border-radius: var(--s-border-radius-mini);
-      &:hover, &:active, &:focus {
-        color: var(--s-color-theme-accent);
-        background-color: var(--s-color-base-on-accent);
-        border-color: var(--s-color-theme-accent);
+  & & {
+    &__header {
+      .el-message-box__title {
+        color: var(--s-color-base-content-primary);
+        font-size: var(--s-heading5-font-size);
       }
-      &.el-button--primary {
+    }
+    &__btns {
+      button.el-button.el-button--default.el-button--small {
+        height: $s-size-medium;
+        font-size: var(--s-font-size-small);
+        border-radius: var(--s-border-radius-mini);
         &:hover, &:active, &:focus {
-          color: var(--s-color-base-on-accent);
+          color: var(--s-color-theme-accent);
+          background-color: var(--s-color-base-on-accent);
+          border-color: var(--s-color-theme-accent);
         }
-        &:hover {
-          background-color: var(--s-color-theme-accent-hover);
-          border-color: var(--s-color-theme-accent-hover);
-        }
-        &:active {
-          background-color: var(--s-color-theme-accent-pressed);
-          border-color: var(--s-color-theme-accent-pressed);
-        }
-        &:focus {
-          background-color: var(--s-color-theme-accent-focused);
-          border-color: var(--s-color-theme-accent-focused);
+        &.el-button--primary {
+          &:hover, &:active, &:focus {
+            color: var(--s-color-base-on-accent);
+          }
+          &:hover {
+            background-color: var(--s-color-theme-accent-hover);
+            border-color: var(--s-color-theme-accent-hover);
+          }
+          &:active {
+            background-color: var(--s-color-theme-accent-pressed);
+            border-color: var(--s-color-theme-accent-pressed);
+          }
+          &:focus {
+            background-color: var(--s-color-theme-accent-focused);
+            border-color: var(--s-color-theme-accent-focused);
+          }
         }
       }
     }

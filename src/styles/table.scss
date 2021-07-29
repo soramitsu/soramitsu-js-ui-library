@@ -127,7 +127,7 @@
   left: 0;
   top: 0;
   > .el-icon.el-icon-arrow-right {
-    font-family: var(--s-font-family-icons);
+    font-family: var(--s-font-family-icons) !important;
     @extend .s-icon-chevron-down-rounded-16;
   }
   &--expanded {
