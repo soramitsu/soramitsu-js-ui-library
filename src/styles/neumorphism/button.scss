@@ -32,9 +32,9 @@ $neu-button-primary-box-shadow-hover: 1px 1px 5px rgba(255, 255, 255, 0.7), -1px
 $neu-button-primary-box-shadow-pressed: $neu-button-primary-box-shadow-hover !default;
 $neu-button-primary-box-shadow-alternative: none !default;
 // Dark theme: Primary button: box-shadow
-$neu-button-primary-box-shadow--dark: 1px 1px 5px var(--s-shadow-color-light), -1px -1px 5px var(--s-shadow-color-light) !default;
-$neu-button-primary-box-shadow-hover--dark: 1px 1px 5px rgba(255, 255, 255, 0.7), -1px -1px 5px var(--s-shadow-color-light), 0px 0px 20px rgba(247, 84, 163, 0.5) !default;
-$neu-button-primary-box-shadow-pressed--dark: $neu-button-primary-box-shadow-hover !default;
+$neu-button-primary-box-shadow--dark: 1px 1px 5px var(--s-shadow-color-primary--dark), -1px -1px 5px var(--s-shadow-color-secondary--dark) !default;
+$neu-button-primary-box-shadow-hover--dark: $neu-button-primary-box-shadow--dark !default;
+$neu-button-primary-box-shadow-pressed--dark: $neu-button-primary-box-shadow--dark !default;
 $neu-button-primary-box-shadow-alternative--dark: none !default;
 
 :root {
@@ -42,10 +42,10 @@ $neu-button-primary-box-shadow-alternative--dark: none !default;
   --neu-button-primary-box-shadow-hover: #{$neu-button-primary-box-shadow-hover};
   --neu-button-primary-box-shadow-pressed: #{$neu-button-primary-box-shadow-pressed};
   --neu-button-primary-box-shadow-alternative: #{$neu-button-primary-box-shadow-alternative};
-  --neu-button-primary-box-shadow--dark: #{$neu-button-primary-box-shadow};
-  --neu-button-primary-box-shadow-hover--dark: #{$neu-button-primary-box-shadow-hover};
-  --neu-button-primary-box-shadow-pressed--dark: #{$neu-button-primary-box-shadow-pressed};
-  --neu-button-primary-box-shadow-alternative--dark: #{$neu-button-primary-box-shadow-alternative};
+  --neu-button-primary-box-shadow--dark: #{$neu-button-primary-box-shadow--dark};
+  --neu-button-primary-box-shadow-hover--dark: #{$neu-button-primary-box-shadow-hover--dark};
+  --neu-button-primary-box-shadow-pressed--dark: #{$neu-button-primary-box-shadow-pressed--dark};
+  --neu-button-primary-box-shadow-alternative--dark: #{$neu-button-primary-box-shadow-alternative--dark};
 }
 
 [design-system-theme="dark"] {
@@ -92,6 +92,21 @@ $neu-button-tertiary-border-color-active: $neu-button-tertiary-border-color !def
 // Tertiary button: box-shadow
 $neu-button-tertiary-box-shadow: var(--s-shadow-element) !default;
 $neu-button-tertiary-box-shadow-active: $neu-button-tertiary-box-shadow !default;
+// Dark Theme: Tertiary button: box-shadow
+$neu-button-tertiary-box-shadow--dark: var(--s-shadow-element-pressed--dark) !default;
+$neu-button-tertiary-box-shadow-active--dark: $neu-button-tertiary-box-shadow--dark !default;
+
+:root {
+  --neu-button-tertiary-box-shadow: #{$neu-button-tertiary-box-shadow};
+  --neu-button-tertiary-box-shadow-active: #{$neu-button-tertiary-box-shadow-active};
+  --neu-button-tertiary-box-shadow--dark: #{$neu-button-tertiary-box-shadow--dark};
+  --neu-button-tertiary-box-shadow-active--dark: #{$neu-button-tertiary-box-shadow-active--dark};
+}
+
+[design-system-theme="dark"] {
+  --neu-button-tertiary-box-shadow: #{$neu-button-tertiary-box-shadow--dark};
+  --neu-button-tertiary-box-shadow-active: #{$neu-button-tertiary-box-shadow-active--dark};
+}
 
 // Action button: common
 $neu-button-action-border-width: 0px !default;
@@ -248,14 +263,14 @@ $neu-button-padding-mini: 3px 6px !default;
     border-color: $neu-button-tertiary-border-color;
     border-style: $neu-button-tertiary-border-style;
     border-width: $neu-button-tertiary-border-width;
-    box-shadow: $neu-button-tertiary-box-shadow;
+    box-shadow: var(--neu-button-tertiary-box-shadow);
     color: $neu-button-tertiary-text-color;
 
     &:hover, &:focus, &.focusing, &:active, &.s-pressed {
       background: $neu-button-tertiary-background-color-active;
       border-color: $neu-button-tertiary-border-color-active;
       color: $neu-button-tertiary-text-color-active;
-      box-shadow: $neu-button-tertiary-box-shadow-active;
+      box-shadow: var(--neu-button-tertiary-box-shadow-active);
     }
     @include disabled($neu-button-tertiary-border-width);
 

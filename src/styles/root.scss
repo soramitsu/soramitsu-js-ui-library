@@ -59,6 +59,17 @@
   --s-color-status-success-background--dark: #{$s-color-status-success-background--dark};
   --s-color-status-warning-background--dark: #{$s-color-status-warning-background--dark};
   --s-color-status-error-background--dark: #{$s-color-status-error-background--dark};
+  --s-shadow-color-light--dark: #{$s-shadow-color-light--dark};
+  --s-shadow-color-light-darken--dark: #{$s-shadow-color-light-darken--dark};
+  --s-shadow-color-light-dark--dark: #{$s-shadow-color-light-dark--dark};
+  --s-shadow-color-dark--dark: #{$s-shadow-color-dark--dark};
+  --s-shadow-color-dark-lighten--dark: #{$s-shadow-color-dark-lighten--dark};
+  --s-shadow-color-dark-light--dark: #{$s-shadow-color-dark-light--dark};
+  --s-shadow-color-primary--dark: #{$s-shadow-color-primary--dark};
+  --s-shadow-color-secondary--dark: #{$s-shadow-color-secondary--dark};
+  --s-shadow-element--dark: #{$s-shadow-element--dark};
+  --s-shadow-element-pressed--dark: #{$s-shadow-element-pressed--dark};
+  --s-shadow-dialog--dark: #{s-shadow-dialog--dark};
   // Fonts
   --s-font-family-default: #{$s-font-family-default};
   --s-font-family-mono: #{$s-font-family-mono};
@@ -168,4 +179,14 @@
   --s-color-status-success-background: var(--s-color-status-success-background--dark);
   --s-color-status-warning-background: var(--s-color-status-warning-background--dark);
   --s-color-status-error-background: var(--s-color-status-error-background--dark);
+  // Shadows
+  --s-shadow-color-dark: var(--s-shadow-color-dark--dark);
+  --s-shadow-color-dark-lighten: var(--s-shadow-color-dark-lighten--dark);
+  --s-shadow-color-dark-light: var(--s-shadow-color-dark-light--dark);
+  --s-shadow-color-light: var(--s-shadow-color-light--dark);
+  --s-shadow-color-light-darken: var(--s-shadow-color-light-darken--dark);
+  --s-shadow-color-light-dark: var(--s-shadow-color-light-dark--dark);
+  --s-shadow-element: var(--s-shadow-element--dark);
+  --s-shadow-element-pressed: var(--s-shadow-element-pressed--dark);
+  --s-shadow-dialog: var(--s-shadow-dialog--dark);
 }

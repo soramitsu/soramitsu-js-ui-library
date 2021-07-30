@@ -1,3 +1,18 @@
+$neu-tab-shadow: var(--s-shadow-element);
+$neu-tab-shadow--dark: var(--s-shadow-element-pressed);
+$neu-tabs-shadow: var(--s-shadow-element-pressed);
+$neu-tabs-shadow--dark: var(--s-shadow-element);
+
+:root {
+  --neu-tab-shadow: #{$neu-tab-shadow};
+  --neu-tabs-shadow: #{$neu-tabs-shadow};
+}
+
+[design-system-theme="dark"] {
+  --neu-tab-shadow: #{$neu-tab-shadow--dark};
+  --neu-tabs-shadow: #{$neu-tabs-shadow--dark};
+}
+
 .s-tabs.neumorphic {
   .el-tabs {
     &__active-bar {
@@ -19,14 +34,14 @@
     .el-tabs {
       &__nav-wrap {
         background-color: var(--s-color-base-background);
-        box-shadow: var(--s-shadow-element-pressed);
+        box-shadow: var(--neu-tabs-shadow);
 
         .el-tabs__item {
           &.is-active {
             &, &:focus.is-focus {
               color: var(--s-color-theme-accent);
               background-color: var(--s-color-utility-surface);
-              box-shadow: var(--s-shadow-element);
+              box-shadow: var(--neu-tab-shadow);
             }
           }
           &:not(.is-active) {
