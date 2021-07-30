@@ -1,9 +1,8 @@
 import { text, withKnobs, boolean, select, number } from '@storybook/addon-knobs'
 
-import { SButton, STooltip, SRow, SMain, SDesignSystemProvider } from '../components'
+import { SButton, STooltip, SRow, SMain } from '../components'
 import { TooltipPlacement, TooltipTheme } from '../components/Tooltip'
 import { BorderRadius } from '../types'
-import DesignSystem from '../types/DesignSystem'
 
 export default {
   component: STooltip,
@@ -13,10 +12,8 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { STooltip, SButton, SRow, SDesignSystemProvider },
-  template: `
-            <s-design-system-provider :value="designSystem">
-              <s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { STooltip, SButton, SRow },
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-tooltip
                  :theme="theme"
                  v-model="model"
@@ -29,17 +26,13 @@ export const configurable = () => ({
                >
                  <s-button style="margin: 40px">Custom tooltip</s-button>
                </s-tooltip>
-              </s-row>
-            </s-design-system-provider>`,
+             </s-row>`,
   data: () => ({
     model: false
   }),
   props: {
     theme: {
       default: select('Theme', Object.values(TooltipTheme), TooltipTheme.AUTO)
-    },
-    designSystem: {
-      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     },
     content: {
       default: text('Content', 'Custom tooltip')
@@ -82,23 +75,17 @@ export const differentPlacementData = [
   ]
 ]
 export const withDifferentPlacement = () => ({
-  components: { STooltip, SButton, SRow, SMain, SDesignSystemProvider },
-  template: `
-            <s-design-system-provider :value="designSystem">
-              <s-main style="padding: 40px 80px;">
+  components: { STooltip, SButton, SRow, SMain },
+  template: `<s-main style="padding: 40px 80px;">
                <s-row v-for="placements in items" :key="placements[0]" style="padding-bottom: 20px;">
                  <s-tooltip v-for="placement in placements" :key="placement" :placement="placement" :content="placement">
                    <s-button>{{ placement }}</s-button>
                  </s-tooltip>
                </s-row>
-             </s-main>
-            </s-design-system-provider>`,
+             </s-main>`,
   props: {
     items: {
       default: () => differentPlacementData
-    },
-    designSystem: {
-      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
     }
   }
 })

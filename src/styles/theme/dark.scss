@@ -1,0 +1,37 @@
+// Primary theme colors
+$s-color-theme-accent--dark: #F24197 !default;
+$s-color-theme-accent-hover--dark: #F754A3 !default;
+$s-color-theme-accent-pressed--dark: #F754A3 !default; // ????
+$s-color-theme-accent-focused--dark: #F754A3 !default; // ????
+// Secondary theme colors
+$s-color-theme-secondary--dark: #24DAA0 !default;
+$s-color-theme-secondary-hover--dark: #44E5B2 !default;
+$s-color-theme-secondary-pressed--dark: rgba(#F1C0D2, .1) !default; // ????
+$s-color-theme-secondary-focused--dark: rgba(#EDABC3, .1) !default; // ????
+// Base content colors
+$s-color-base-content-primary--dark: #F0D7DC !default;
+$s-color-base-content-secondary--dark: #C29AB7 !default;
+$s-color-base-content-tertiary--dark: #9B6FA5 !default;
+$s-color-base-content-quaternary--dark: #9B6FA5 !default; // ????
+// Base misc colors
+$s-color-base-background--dark: #492067 !default;
+$s-color-base-dark-background--dark: #492067 !default; // not used
+$s-color-base-border-primary--dark: #693D81 !default; // ????
+$s-color-base-border-secondary--dark: #693D81 !default;
+$s-color-base-background-hover--dark: #693D81 !default; // ????
+$s-color-base-disabled--dark: rgba(#391057, .5) !default; // ????
+$s-color-base-on-disabled--dark: #5D2F73 !default; // ????
+$s-color-base-on-accent--dark: rgba(#391057, .5) !default;
+// Utility colors
+$s-color-utility-body--dark: #5D2F73 !default;
+$s-color-utility-surface--dark: #592D71 !default;
+$s-color-utility-overlay--dark: rgba(41, 0, 71, 0.9) !default;
+// Status colors
+$s-color-status-success--dark: #B9EBDB !default;
+$s-color-status-warning--dark: #C6E2FF !default;
+$s-color-status-error--dark: #FFD8EB !default;
+$s-color-status-success-background--dark: #34AD87 !default;
+$s-color-status-warning-background--dark: #479AEF !default;
+$s-color-status-error-background--dark: #F754A3 !default;
+
+// dropdown/date-picker/dialog/all popups: on acent
