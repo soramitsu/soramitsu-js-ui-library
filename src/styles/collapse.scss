@@ -25,10 +25,12 @@
 .el-collapse-item {
   &__wrap {
     border-bottom-color: var(--s-color-base-border-secondary);
+    background-color: transparent;
   }
   &__header {
     color: var(--s-color-base-content-primary);
     border-bottom-color: var(--s-color-base-border-secondary);
+    background-color: transparent;
     &.is-active {
       border-bottom-color: transparent;
     }
@@ -53,10 +55,10 @@
       }
     }
   }
-  &content {
+  &__content {
     color: var(--s-color-base-content-primary);
   }
-  &arrow {
+  &__arrow {
     margin: 0 0 0 auto;
   }
 }

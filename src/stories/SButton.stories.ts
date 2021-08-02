@@ -1,9 +1,8 @@
 import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
 
-import { SButton, SButtonGroup, SRow, SCol, SMain, SIcon, SDesignSystemProvider } from '../components'
+import { SButton, SButtonGroup, SRow, SCol, SMain, SIcon } from '../components'
 import { ButtonTypes, ButtonIconPosition } from '../components/Button'
 import { Size, BorderRadius } from '../types'
-import DesignSystem from '../types/DesignSystem'
 
 export default {
   component: SButton,
@@ -13,10 +12,8 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { SButton, SIcon, SDesignSystemProvider },
-  template: `
-            <s-design-system-provider :value="designSystem">
-              <s-button
+  components: { SButton, SIcon },
+  template: `<s-button
                :class="typography"
                :disabled="disabled"
                :loading="loading"
@@ -28,15 +25,11 @@ export const configurable = () => ({
                :alternative="alternative"
                :primary="primary"
                @click="handleClick"
-              >
-                <s-icon v-if="isAction" :name="icon"/>
-                <span v-else>{{ content }}</span>
-              </s-button>
-            </s-design-system-provider>`,
+             >
+               <s-icon v-if="isAction" :name="icon"/>
+               <span v-else>{{ content }}</span>
+             </s-button>`,
   props: {
-    designSystem: {
-      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
-    },
     disabled: {
       default: boolean('Disabled', false)
     },
@@ -96,25 +89,19 @@ export const differentTypeButtonsData = Object.values(ButtonTypes).map(type => {
   return data
 })
 export const withDifferentTypes = () => ({
-  components: { SButton, SRow, SDesignSystemProvider },
-  template: `
-            <s-design-system-provider :value="designSystem">
-              <s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
-                <s-button
-                  v-for="item in items"
-                  :key="item.type"
-                  :type="item.type"
-                  :tooltip="item.tooltip"
-                  :icon="item.icon"
-                >
-                  {{ item.label }}
-                </s-button>
-              </s-row>
-            </s-design-system-provider>`,
+  components: { SButton, SRow },
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
+               <s-button
+                 v-for="item in items"
+                 :key="item.type"
+                 :type="item.type"
+                 :tooltip="item.tooltip"
+                 :icon="item.icon"
+               >
+                 {{ item.label }}
+               </s-button>
+             </s-row>`,
   props: {
-    designSystem: {
-      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
-    },
     items: {
       default: () => differentTypeButtonsData
     }

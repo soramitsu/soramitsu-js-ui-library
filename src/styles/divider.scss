@@ -1,5 +1,11 @@
-.el-divider--horizontal {
-  margin: 20px 0;
+.el-divider {
+  &--horizontal {
+    margin: 20px 0;
+  }
+  &__text {
+    color: var(--s-color-base-content-primary);
+    background-color: var(--s-color-utility-body);
+  }
 }
 .s-divider {
   &-primary {

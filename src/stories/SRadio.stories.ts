@@ -2,7 +2,6 @@ import { withKnobs, select, boolean } from '@storybook/addon-knobs'
 
 import { SRadio, SRadioGroup, SRow, SCol, SDesignSystemProvider } from '../components'
 import { Size } from '../types'
-import DesignSystem from '../types/DesignSystem'
 
 export default {
   component: SRadio,
@@ -18,35 +17,29 @@ export const radioData = [
 
 export const configurable = () => ({
   components: { SRadio, SRow, SCol, SDesignSystemProvider },
-  template: `
-          <s-design-system-provider :value="designSystem">
-            <s-row style="flex: 1;" :gutter="20">
-              <s-col v-for="item in items" :key="item.label" :span="6">
-                <s-radio
-                  v-model="vModelValue"
-                  :label="item.label"
-                  :disabled="disabled"
-                  :size="size"
-                  :border="border"
-                  @change="(value) => changeValue = value"
-                >
-                  {{ item.title }}
-                </s-radio>
-              </s-col>
-              <s-col :span="12" style="margin-top: 20px;">
-                <span>v-model="{{ vModelValue }}", @change="{{ changeValue }}"</span>
-              </s-col>
-            </s-row>
-          </s-design-system-provider>`,
+  template: `<s-row style="flex: 1;" :gutter="20">
+               <s-col v-for="item in items" :key="item.label" :span="6">
+                 <s-radio
+                   v-model="vModelValue"
+                   :label="item.label"
+                   :disabled="disabled"
+                   :size="size"
+                   :border="border"
+                   @change="(value) => changeValue = value"
+                 >
+                   {{ item.title }}
+                 </s-radio>
+               </s-col>
+               <s-col :span="12" style="margin-top: 20px;">
+                 <span>v-model="{{ vModelValue }}", @change="{{ changeValue }}"</span>
+               </s-col>
+             </s-row>`,
   data: () => ({
     vModelValue: 'first',
     changeValue: '',
     items: radioData
   }),
   props: {
-    designSystem: {
-      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
-    },
     size: {
       default: select('Size', Object.values(Size), Size.MEDIUM)
     },
