@@ -49,5 +49,3 @@ $s-shadow-color-secondary--dark: #9B6FA5;
 $s-shadow-element--dark: 1px 1px 2px var(--s-shadow-color-light-darken--dark), inset -5px -5px 5px var(--s-shadow-color-light-dark--dark), inset 1px 1px 10px var(--s-shadow-color-dark--dark);
 $s-shadow-element-pressed--dark: -5px -5px 10px var(--s-shadow-color-dark-lighten--dark), 2px 2px 15px var(--s-color-base-background--dark), inset 1px 1px 2px var(--s-shadow-color-dark-lighten--dark);
 $s-shadow-dialog--dark: -10px -10px 30px var(--s-shadow-color-dark-lighten--dark), 20px 20px 60px var(--s-color-base-background--dark), inset 1px 1px 10px var(--s-shadow-color-dark-light--dark);
-
-// dropdown/date-picker/dialog/all popups: on acent
