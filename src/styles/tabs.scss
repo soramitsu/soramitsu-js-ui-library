@@ -124,11 +124,11 @@
         &.is-active {
           color: var(--s-color-base-content-primary);
           background-color: var(--s-color-base-on-accent);
-          box-shadow: $s-shadow-surface;
+          box-shadow: var(--s-shadow-surface);
         }
         &:focus.is-focus {
           // TODO: make it more focusable
-          box-shadow: $s-shadow-surface;
+          box-shadow: var(--s-shadow-surface);
         }
       }
     }

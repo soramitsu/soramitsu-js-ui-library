@@ -180,14 +180,16 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, Design
   }
 
   get isRounded (): boolean {
-    if (([ButtonTypes.ACTION] as Array<string>).includes(this.type)) return this.rounded
-
+    if (this.type === ButtonTypes.ACTION) {
+      return this.rounded
+    }
     return false
   }
 
   get isLoading (): boolean {
-    if (([ButtonTypes.LINK, ButtonTypes.ACTION] as Array<string>).includes(this.type)) return false
-
+    if (([ButtonTypes.LINK, ButtonTypes.ACTION] as Array<string>).includes(this.type)) {
+      return false
+    }
     return this.loading
   }
 
