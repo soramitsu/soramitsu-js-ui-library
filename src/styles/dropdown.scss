@@ -55,34 +55,7 @@
 .el-dropdown-menu.el-popper {
   background-color: var(--s-color-base-on-accent);
   border-color: var(--s-color-base-on-accent);
-  &[x-placement^="top"] .popper__arrow {
-    border-top-color: var(--s-color-base-on-accent);
-    border-bottom-color: transparent;
-    &::after {
-      border-top-color: inherit;
-    }
-  }
-  &[x-placement^="bottom"] .popper__arrow {
-    border-bottom-color: var(--s-color-base-on-accent);
-    &::after {
-      border-top-color: inherit;
-      border-bottom-color: var(--s-color-base-on-accent);
-    }
-  }
-  &[x-placement^="right"] .popper__arrow {
-    border-right-color: var(--s-color-base-on-accent);
-    border-bottom-color: transparent;
-    &::after {
-      border-right-color: inherit;
-    }
-  }
-  &[x-placement^="left"] .popper__arrow {
-    border-left-color: var(--s-color-base-on-accent);
-    border-bottom-color: transparent;
-    &::after {
-      border-left-color: inherit;
-    }
-  }
+  @include with-popper-arrows;
 }
 .el-dropdown-menu__item {
   color: var(--s-color-base-content-primary);
