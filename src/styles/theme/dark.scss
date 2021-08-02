@@ -1,0 +1,51 @@
+// Primary theme colors
+$s-color-theme-accent--dark: #F24197 !default;
+$s-color-theme-accent-hover--dark: #F754A3 !default;
+$s-color-theme-accent-pressed--dark: #F754A3 !default; // ????
+$s-color-theme-accent-focused--dark: #F754A3 !default; // ????
+// Secondary theme colors
+$s-color-theme-secondary--dark: #24DAA0 !default;
+$s-color-theme-secondary-hover--dark: #44E5B2 !default;
+$s-color-theme-secondary-pressed--dark: #44E5B2 !default; // ????
+$s-color-theme-secondary-focused--dark: #44E5B2 !default; // ????
+// Base content colors
+$s-color-base-content-primary--dark: #F0D7DC !default;
+$s-color-base-content-secondary--dark: #C29AB7 !default;
+$s-color-base-content-tertiary--dark: #9B6FA5 !default;
+$s-color-base-content-quaternary--dark: #9B6FA5 !default; // ????
+// Base misc colors
+$s-color-base-background--dark: #492067 !default;
+$s-color-base-dark-background--dark: #492067 !default; // not used
+$s-color-base-border-primary--dark: #693D81 !default; // ????
+$s-color-base-border-secondary--dark: #693D81 !default;
+$s-color-base-background-hover--dark: #693D81 !default; // ????
+$s-color-base-disabled--dark: rgba(#391057, .5) !default; // ????
+$s-color-base-on-disabled--dark: #5D2F73 !default; // ????
+$s-color-base-on-accent--dark: #391057 !default;
+// Utility colors
+$s-color-utility-body--dark: #5D2F73 !default;
+$s-color-utility-surface--dark: #592D71 !default;
+$s-color-utility-overlay--dark: rgba(41, 0, 71, 0.9) !default;
+// Status colors
+$s-color-status-success--dark: #B9EBDB !default;
+$s-color-status-warning--dark: #C6E2FF !default;
+$s-color-status-error--dark: #FFD8EB !default;
+$s-color-status-success-background--dark: #34AD87 !default;
+$s-color-status-warning-background--dark: #479AEF !default;
+$s-color-status-error-background--dark: #F754A3 !default;
+// Shadow
+// dark variations
+$s-shadow-color-dark--dark: rgba(41, 0, 71, 0.33);
+$s-shadow-color-dark-lighten--dark: rgba(155, 111, 165, 0.25);
+$s-shadow-color-dark-light--dark: rgba(155, 111, 165, 0.1);
+// light variations
+$s-shadow-color-light--dark: rgba(255, 255, 255, 1);
+$s-shadow-color-light-darken--dark: rgba(255, 255, 255, 0.1);
+$s-shadow-color-light-dark--dark: rgba(255, 255, 255, 0.05);
+// another variations
+$s-shadow-color-primary--dark: #391057;
+$s-shadow-color-secondary--dark: #9B6FA5;
+// element shadows
+$s-shadow-element--dark: 1px 1px 2px var(--s-shadow-color-light-darken--dark), inset -5px -5px 5px var(--s-shadow-color-light-dark--dark), inset 1px 1px 10px var(--s-shadow-color-dark--dark);
+$s-shadow-element-pressed--dark: -5px -5px 10px var(--s-shadow-color-dark-lighten--dark), 2px 2px 15px var(--s-color-base-background--dark), inset 1px 1px 2px var(--s-shadow-color-dark-lighten--dark);
+$s-shadow-dialog--dark: -10px -10px 30px var(--s-shadow-color-dark-lighten--dark), 20px 20px 60px var(--s-color-base-background--dark), inset 1px 1px 10px var(--s-shadow-color-dark-light--dark);

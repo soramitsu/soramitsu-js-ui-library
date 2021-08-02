@@ -1,6 +1,6 @@
 import { withKnobs } from '@storybook/addon-knobs'
 
-import { AccentColors, ContentColors, MiscColors, SecondaryColors, StatusColors, TertiaryButtonColors, UtilityColors, BorderRadius } from '../../types'
+import { AccentColors, ContentColors, MiscColors, SecondaryColors, StatusColors, TertiaryButtonColors, UtilityColors, BorderRadius, ColorPrefix } from '../../types'
 import { SRow, SButton, SInput, SCol, SDivider } from '../../components'
 import { differentTypeButtonsData } from '../SButton.stories'
 
@@ -16,9 +16,8 @@ const getRadiusData = (BorderRadius) => Object.values(BorderRadius).map(borderRa
   return { label: borderRadiusPropertyName, value }
 })
 
-const colorPropertyPrefix = '--s-color-'
 const getColorsData = (colors) => Object.values(colors).map(colorPropertyName => {
-  const value = getComputedStyle(document.documentElement).getPropertyValue(`${colorPropertyPrefix}${colorPropertyName}`)
+  const value = getComputedStyle(document.documentElement).getPropertyValue(`${ColorPrefix}${colorPropertyName}`)
   const isRgb = value.includes('rgb')
   return { label: colorPropertyName, value, isRgb }
 })
@@ -114,7 +113,7 @@ export const configurable = () => ({
   }),
   methods: {
     handleColorChange: (label: string, color: string) => {
-      document.documentElement.style.setProperty(`${colorPropertyPrefix}${label}`, color)
+      document.documentElement.style.setProperty(`${ColorPrefix}${label}`, color)
     },
     handleBorderRadiusChange: (label: string, borderRadius: string) => {
       document.documentElement.style.setProperty(`${borderRadiusPropertyPrefix}${label}`, `${+borderRadius > 0 ? borderRadius : '0'}px`)

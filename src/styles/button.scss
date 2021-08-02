@@ -4,6 +4,13 @@ $s-color-button-tertiary-background: var(--s-color-base-background) !default;
 $s-color-button-tertiary-background-hover: var(--s-color-base-background) !default;
 $s-color-button-tertiary-background-pressed: var(--s-color-base-background) !default;
 $s-color-button-tertiary-background-focused: var(--s-color-base-background) !default;
+// Dark theme
+$s-color-button-tertiary-color--dark: var(--s-color-base-content-primary--dark) !default;
+$s-color-button-tertiary-color-active--dark: var(--s-color-theme-accent--dark) !default;
+$s-color-button-tertiary-background--dark: var(--s-color-base-background--dark) !default;
+$s-color-button-tertiary-background-hover--dark: var(--s-color-base-background--dark) !default;
+$s-color-button-tertiary-background-pressed--dark: var(--s-color-base-background--dark) !default;
+$s-color-button-tertiary-background-focused--dark: var(--s-color-base-background--dark) !default;
 
 :root {
   --s-color-button-tertiary-color: #{$s-color-button-tertiary-color};
@@ -12,6 +19,21 @@ $s-color-button-tertiary-background-focused: var(--s-color-base-background) !def
   --s-color-button-tertiary-background-hover: #{$s-color-button-tertiary-background-hover};
   --s-color-button-tertiary-background-pressed: #{$s-color-button-tertiary-background-pressed};
   --s-color-button-tertiary-background-focused: #{$s-color-button-tertiary-background-focused};
+  --s-color-button-tertiary-color--dark: #{$s-color-button-tertiary-color--dark};
+  --s-color-button-tertiary-color-active--dark: #{$s-color-button-tertiary-color-active--dark};
+  --s-color-button-tertiary-background--dark: #{$s-color-button-tertiary-background--dark};
+  --s-color-button-tertiary-background-hover--dark: #{$s-color-button-tertiary-background-hover--dark};
+  --s-color-button-tertiary-background-pressed--dark: #{$s-color-button-tertiary-background-pressed--dark};
+  --s-color-button-tertiary-background-focused--dark: #{$s-color-button-tertiary-background-focused--dark};
+}
+
+[design-system-theme="dark"] {
+  --s-color-button-tertiary-color: var(--s-color-button-tertiary-color--dark);
+  --s-color-button-tertiary-color-active: var(--s-color-button-tertiary-color-active--dark);
+  --s-color-button-tertiary-background: var(--s-color-button-tertiary-background--dark);
+  --s-color-button-tertiary-background-hover: var(--s-color-button-tertiary-background-hover--dark);
+  --s-color-button-tertiary-background-pressed: var(--s-color-button-tertiary-background-pressed--dark);
+  --s-color-button-tertiary-background-focused: var(--s-color-button-tertiary-background-focused--dark);
 }
 
 @mixin disabled {

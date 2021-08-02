@@ -1,6 +1,17 @@
 $switch-class: ".el-switch";
 $switch-circle-size: 18px;
 
+$neu-switch-circle-shadow: 1px 1px 5px rgba(255, 255, 255, 0.7), -1px -1px 5px var(--s-shadow-color-light), 0px 0px 20px rgba(247, 84, 163, 0.5);
+$neu-switch-circle-shadow--dark: none;
+
+:root {
+  --neu-switch-circle-shadow: #{$neu-switch-circle-shadow};
+}
+
+[design-system-theme="dark"] {
+  --neu-switch-circle-shadow: #{$neu-switch-circle-shadow--dark};
+}
+
 .s-switch.neumorphic {
   #{$switch-class} {
     &__label {
@@ -33,7 +44,7 @@ $switch-circle-size: 18px;
         &::after {
           margin-left: -$switch-circle-size - 1;
           background-color: var(--s-color-base-on-accent);
-          box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.7), -1px -1px 5px var(--s-shadow-color-light), 0px 0px 20px rgba(247, 84, 163, 0.5);
+          box-shadow: var(--neu-switch-circle-shadow);
         }
       }
 

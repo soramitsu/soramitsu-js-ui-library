@@ -16,6 +16,7 @@ $margin-bottom-menu-item: 8px;
 }
 
 .s-menu {
+  border-right: none;
   box-shadow: var(--s-menu-box-shadow);
   padding: 20px 12px;
   @include menu-border-radius;
@@ -25,8 +26,11 @@ $margin-bottom-menu-item: 8px;
   &:not(.el-menu--horizontal) > :not(:last-child) {
     margin-bottom: $margin-bottom-menu-item;
   }
-  &.el-menu--horizontal > :not(:last-child) {
-    margin-right: $margin-bottom-menu-item;
+  &.el-menu--horizontal {
+    border-bottom: none;
+    > :not(:last-child) {
+      margin-right: $margin-bottom-menu-item;
+    }
   }
 }
 .el-menu--horizontal > .el-menu-item {

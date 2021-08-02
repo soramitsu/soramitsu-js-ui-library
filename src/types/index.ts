@@ -62,6 +62,8 @@ export enum Colors {
   ButtonTertiaryBackgroundFocused = 'button-tertiary-background-focused'
 }
 
+export const ColorPrefix = '--s-color-'
+
 export enum AccentColors {
   ThemeAccent = Colors.ThemeAccent,
   ThemeAccentHover = Colors.ThemeAccentHover,

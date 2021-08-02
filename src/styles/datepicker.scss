@@ -197,6 +197,17 @@ $date-picker-padding: 8px;
     }
   }
 }
+.el-picker-panel {
+  background-color: var(--s-color-base-on-accent);
+  @include with-popper-arrows;
+  &__sidebar {
+    background-color: var(--s-color-base-on-accent);
+    border-right-color: var(--s-color-base-border-secondary);
+  }
+  &__shortcut {
+    color: var(--s-color-base-content-primary);
+  }
+}
 .el-picker-panel__icon-btn,
 .el-date-picker__header-label,
 .el-date-table td,
