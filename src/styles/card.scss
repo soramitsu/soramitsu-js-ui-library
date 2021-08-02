@@ -1,6 +1,7 @@
 .s-card {
   color: var(--s-color-base-content-primary);
   border-color: var(--s-color-base-border-primary);
+  background-color: var(--s-color-base-background);
   &.s-clickable {
     cursor: pointer;
   }

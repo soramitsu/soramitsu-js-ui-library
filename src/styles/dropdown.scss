@@ -52,6 +52,11 @@
     font-size: var(--s-icon-font-size-big);
   }
 }
+.el-dropdown-menu.el-popper {
+  background-color: var(--s-color-base-on-accent);
+  border-color: var(--s-color-base-on-accent);
+  @include with-popper-arrows;
+}
 .el-dropdown-menu__item {
   color: var(--s-color-base-content-primary);
   &:not(.is-disabled) {

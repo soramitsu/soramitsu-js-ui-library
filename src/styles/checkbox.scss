@@ -6,9 +6,7 @@
     &-#{$suffix} {
       border-radius: 0;
       &.is-bordered {
-        border-radius: $border-radius;
-      }
-      .el-checkbox__inner {
+        // Only bordered checkbox container has border radius
         border-radius: $border-radius;
       }
     }
@@ -61,17 +59,25 @@
       padding: 9px 0 7px 0;
     }
   }
-  &.s-small {
+  &.s-small,
+  &.s-mini {
+    &,
+    &.is-bordered {
+      .el-checkbox__inner {
+        height: 14px;
+        width: 14px;
+      }
+    }
     @extend .s-small;
     .el-checkbox__label {
       font-size: var(--s-font-size-mini);
     }
+  }
+  &.s-small {
     &,
     &.is-bordered {
       padding: 5px 15px 5px 10px;
       .el-checkbox__inner {
-        height: 14px;
-        width: 14px;
         &::after {
           top: 1px;
           left: 4px;

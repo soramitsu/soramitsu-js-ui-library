@@ -24,7 +24,8 @@ type State = {
 
 function initialState (): State {
   return {
-    theme: Theme.LIGHT,
+    // "light" is set by default
+    theme: localStorage.getItem('libraryTheme') as Theme || Theme.LIGHT,
     designSystem: DesignSystem.DEFAULT
   }
 }
@@ -43,6 +44,7 @@ const getters = {
 const mutations = {
   [types.SET_THEME] (state: State, theme: Theme) {
     state.theme = theme
+    localStorage.setItem('libraryTheme', theme)
   },
   [types.SET_DESIGN_SYSTEM] (state: State, designSystem: DesignSystem) {
     state.designSystem = designSystem
@@ -50,8 +52,12 @@ const mutations = {
 }
 
 const actions = {
-  setTheme ({ commit }, theme: Theme) {
-    commit(types.SET_THEME, theme)
+  setTheme ({ commit, state: { theme } }, newTheme?: Theme) {
+    const computedTheme = newTheme || theme
+    if (!newTheme || theme !== newTheme) {
+      commit(types.SET_THEME, computedTheme)
+    }
+    document.documentElement.setAttribute('design-system-theme', computedTheme)
   },
   setDesignSystem ({ commit }, designSystem: DesignSystem) {
     commit(types.SET_DESIGN_SYSTEM, designSystem)

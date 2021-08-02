@@ -1,7 +1,6 @@
-import { number, text, boolean, object, select, withKnobs } from '@storybook/addon-knobs'
+import { number, text, boolean, object, withKnobs } from '@storybook/addon-knobs'
 
-import { SFloatInput, SRow, SDesignSystemProvider } from '../components'
-import DesignSystem from '../types/DesignSystem'
+import { SFloatInput, SRow } from '../components'
 
 export default {
   component: SFloatInput,
@@ -10,10 +9,8 @@ export default {
 }
 
 export const configurable = () => ({
-  components: { SFloatInput, SRow, SDesignSystemProvider },
-  template: `
-            <s-design-system-provider :value="designSystem">
-              <s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
+  components: { SFloatInput, SRow },
+  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-float-input
                  v-model="model"
                  :decimals="decimals"
@@ -21,20 +18,16 @@ export const configurable = () => ({
                  :delimiters="delimiters"
                  :max="max"
                >
-                <div v-if="top" slot="top">{{ top }}</div>
-                <div v-if="bottom" slot="bottom">{{ bottom }}</div>
-                <div v-if="left" slot="left">{{ left }}</div>
-                <div v-if="right" slot="right">{{ right }}</div>
+                 <div v-if="top" slot="top">{{ top }}</div>
+                 <div v-if="bottom" slot="bottom">{{ bottom }}</div>
+                 <div v-if="left" slot="left">{{ left }}</div>
+                 <div v-if="right" slot="right">{{ right }}</div>
                </s-float-input>
-              </s-row>
-            </s-design-system-provider>`,
+             </s-row>`,
   data: () => ({
     model: ''
   }),
   props: {
-    designSystem: {
-      default: select('Design System', Object.values(DesignSystem), DesignSystem.DEFAULT)
-    },
     decimals: {
       default: number('Decimals', 18)
     },

@@ -1,6 +1,9 @@
 $radio-button-class: ".el-radio-button";
 $radio-button-border-width: 1px;
 $radio-button-border-color: var(--s-color-theme-accent);
+$radio-button-font-size: var(--s-font-size-small);
+$radio-button-line-height: var(--s-line-height-big);
+$radio-small-label-font-size: var(--s-font-size-mini);
 
 @mixin radio-button-size(
   $modifier: "small",
@@ -21,17 +24,27 @@ $radio-button-border-color: var(--s-color-theme-accent);
   }
 }
 
+@mixin radio-button-vertical-padding(
+  $size: 'small',
+  $font-size: $radio-button-font-size,
+  $line-height: $radio-button-line-height
+) {
+  $vertical-padding: calc(calc(var(--s-size-#{$size}) - #{$font-size} * #{$line-height} - #{$radio-button-border-width * 2}) / 2);
+  &.is-bordered {
+    padding-top: $vertical-padding;
+    padding-bottom: $vertical-padding;
+  }
+}
+
 .el-radio {
   color: var(--s-color-base-content-primary);
   &__label {
-    line-height: var(--s-line-height-big);
+    line-height: $radio-button-line-height;
   }
   &.s-big {
     @extend .s-big;
     line-height: $s-size-big;
-    &.is-bordered {
-      padding-top: 18px;
-    }
+    @include radio-button-vertical-padding('big');
     > .el-radio__input .el-radio__inner {
       width: 20px;
       height: 20px;
@@ -45,6 +58,7 @@ $radio-button-border-color: var(--s-color-theme-accent);
   &.s-medium {
     @extend .s-medium;
     line-height: $s-size-medium;
+    @include radio-button-vertical-padding('medium');
     > .el-radio__input .el-radio__inner {
       width: 16px;
       height: 16px;
@@ -55,14 +69,10 @@ $radio-button-border-color: var(--s-color-theme-accent);
       }
     }
   }
-  &.s-small {
-    @extend .s-small;
-    line-height: $s-size-small;
-    &.is-bordered {
-      padding-top: 9px;
-    }
+  &.s-small,
+  &.s-mini {
     > .el-radio__label {
-      font-size: var(--s-font-size-mini);
+      font-size: $radio-small-label-font-size;
     }
     > .el-radio__input .el-radio__inner {
       width: 14px;
@@ -73,6 +83,15 @@ $radio-button-border-color: var(--s-color-theme-accent);
         height: 6px;
       }
     }
+  }
+  &.s-small {
+    @extend .s-small;
+    line-height: $s-size-small;
+    @include radio-button-vertical-padding($font-size: $radio-small-label-font-size);
+  }
+  &.s-mini {
+    height: var(--s-size-mini);
+    @include radio-button-vertical-padding('mini');
   }
   &.is-bordered {
     border-color: var(--s-color-base-border-primary);

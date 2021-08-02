@@ -3,7 +3,7 @@ import Theme from '../types/Theme'
 import DesignSystem from '../types/DesignSystem'
 import Locale from '../types/Locale'
 
-export const setTheme = async (theme: Theme) => {
+export const setTheme = async (theme?: Theme) => {
   await store.dispatch('setTheme', theme)
 }
 
