@@ -7,7 +7,7 @@ import { setTheme, setDesignSystem } from '../../utils'
 import mainStore from '../../store'
 
 export default {
-  title: 'Design System/Intro/Theming',
+  title: 'Design System/Intro/Theming (WIP)',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
@@ -15,10 +15,14 @@ export default {
 export const configurable = () => ({
   components: { SButton, SDivider },
   template: `<div>
-               <s-button @click="handleThemeChange(theme)">{{ theme }}</s-button>
-               <s-button @click="handleDesignSystemChange(designSystem)">{{ designSystem || 'default' }}</s-button>
+               <h4>This feature has Work In Progress status</h4>
+               <div class="s-flex" style="align-items: center;">
+                 <h4 style="margin-right: 10px;">Theme:</h4>
+                 <s-button @click="handleThemeChange(theme)">{{ theme }}</s-button>
+                 <s-button @click="handleDesignSystemChange(designSystem)">{{ designSystem || 'default' }}</s-button>
+               </div>
                <s-divider />
-               <h4>You can also check another components, these colors are applied to the whole library</h4>
+               <h4>You can check all components, these theme settings are applied to the whole library</h4>
              </div>`,
   computed: {
     theme: () => mainStore?.getters?.libraryTheme,
