@@ -6,6 +6,7 @@ import ElColorPicker from 'element-ui/lib/color-picker'
 
 import '../../src/styles/index.scss'
 import './index.scss'
+import './neu-theme-variables.scss'
 import mainStore from '../../src/store'
 import { setTheme } from '../../src/utils'
 import { ElementUIPlugin } from '../../src/plugins'

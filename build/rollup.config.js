@@ -57,8 +57,9 @@ export default {
               .replace('../../node_modules/element-ui/packages/theme-chalk/src/index', './element-ui/index')
           }
         },
-        { src: 'node_modules/element-ui/packages/theme-chalk/src/*', dest: 'lib/styles/element-ui' },
-        { src: 'src/styles/neumorphism/*', dest: 'lib/styles/neumorphism' }
+        { src: 'src/styles/neumorphism/*', dest: 'lib/styles/neumorphism' },
+        { src: 'src/styles/theme/*', dest: 'lib/styles/theme' },
+        { src: 'node_modules/element-ui/packages/theme-chalk/src/*', dest: 'lib/styles/element-ui' }
       ]
     }),
     multiInput({
