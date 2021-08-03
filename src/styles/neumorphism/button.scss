@@ -145,7 +145,7 @@ $neu-button-padding-mini: 3px 6px !default;
 ) {
   &:disabled, &:disabled:hover {
     color: $neu-button-text-color-disabled;
-    background-color: $background-color;
+    background: $background-color;
     border-color: $neu-button-border-color-disabled;
     box-shadow: $box-shadow;
     border-width: $border-width;
@@ -180,6 +180,12 @@ $neu-button-padding-mini: 3px 6px !default;
   @include size('medium', $neu-button-padding-medium);
   @include size('small', $neu-button-padding-small);
   @include size('mini', $neu-button-padding-mini);
+
+  &.is-loading {
+    &:before {
+      background-color: transparent;
+    }
+  }
 
   &.s-primary {
     background: $neu-button-primary-background-color;
