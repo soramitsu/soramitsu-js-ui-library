@@ -75,16 +75,22 @@
   &.el-tabs--card {
     > .el-tabs__header {
       border-bottom-color: var(--s-color-base-background-hover);
-      .el-tabs__nav {
-        border-color: var(--s-color-base-background-hover);
-      }
-      .el-tabs__item {
-        border-left-color: var(--s-color-base-background-hover);
+      .el-tabs {
+        &__item.is-active {
+          border-bottom-color: var(--s-color-utility-body);
+        }
+        &__nav {
+          border-color: var(--s-color-base-background-hover);
+        }
+        &__item {
+          border-left-color: var(--s-color-base-background-hover);
+        }
       }
     }
   }
   &.el-tabs--border-card {
     border-color: var(--s-color-base-border-primary);
+    background-color: inherit;
     > .el-tabs__header {
       background-color: var(--s-color-base-background);
       border-bottom-color: var(--s-color-base-border-primary);
@@ -92,6 +98,11 @@
         &:hover,
         &.is-active {
           color: var(--s-color-theme-accent);
+          background-color: inherit;
+        }
+        &.is-active {
+          border-right-color: var(--s-color-base-border-primary);
+          border-left-color: var(--s-color-base-border-primary);
         }
       }
     }

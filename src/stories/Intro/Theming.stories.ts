@@ -36,6 +36,7 @@ export const configurable = () => ({
     handleDesignSystemChange: (designSystem: DesignSystem) => {
       const newDesignSystem = designSystem === DesignSystem.DEFAULT ? DesignSystem.NEUMORPHIC : DesignSystem.DEFAULT
       setDesignSystem(newDesignSystem)
+      document.documentElement.setAttribute('design-system', newDesignSystem)
     }
   }
 })
