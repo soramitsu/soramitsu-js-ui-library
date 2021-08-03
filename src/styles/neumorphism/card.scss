@@ -1,7 +1,7 @@
 @mixin status ($status: 'success') {
   &.s-status-#{$status} {
-    background: var(--s-color-status-#{$status}-background);
     color: var(--s-color-status-#{$status});
+    background: var(--s-color-status-#{$status}-background);
   }
 }
 
@@ -36,6 +36,10 @@
 
   &.is-always-shadow, &.is-hover-shadow:hover, &.is-hover-shadow:focus {
     box-shadow: var(--s-shadow-element);
+
+    &.s-pressed {
+      box-shadow: var(--s-shadow-element-pressed);
+    }
   }
 
   &.s-primary {
