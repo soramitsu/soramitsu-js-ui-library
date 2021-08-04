@@ -14,7 +14,7 @@ export default {
 export const configurable = () => ({
   components: { SButton, SIcon },
   template: `<s-button
-               :class="typography"
+               :class="withTypography ? typography : ''"
                :disabled="disabled"
                :loading="loading"
                :tooltip="tooltip"
@@ -59,6 +59,9 @@ export const configurable = () => ({
     },
     content: {
       default: text('Button text', 'Default')
+    },
+    withTypography: {
+      default: boolean('With Typography css class', false)
     },
     typography: {
       default: text('Typographic css class', 's-typography-button--large')
