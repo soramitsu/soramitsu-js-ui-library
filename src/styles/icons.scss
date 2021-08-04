@@ -749,13 +749,13 @@ $s-icon-various-toy-horse-24: "\eae9";
 .s-icon-clear-X-16 {
   &:before {
     content: $s-icon-clear-X-16;    
-    color: #a3a4a8;
+    color: var(--s-color-base-content-quaternary);
   }
 }
 .s-icon-clear-X-xs-16 {
   &:before {
     content: $s-icon-clear-X-xs-16;    
-    color: #a3a4a8;
+    color: var(--s-color-base-content-quaternary);
   }
 }
 .s-icon-copy-16 {
