@@ -140,6 +140,7 @@ $input-padding-left: $s-basic-spacing * 2 - $input-border-width;
     }
 
     &__icon {
+      color: var(--s-color-base-content-secondary);
       line-height: 1;
       width: $input-icon-width;
     }
