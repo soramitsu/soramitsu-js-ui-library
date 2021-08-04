@@ -177,7 +177,7 @@ $neu-button-padding-mini: 3px 6px !default;
 
 @mixin action-size ($suffix: 'big') {
   &.s-#{$suffix} {
-    padding: 5px;
+    padding: 0;
     height: var(--s-size-#{$suffix});
     width: var(--s-size-#{$suffix});
   }
