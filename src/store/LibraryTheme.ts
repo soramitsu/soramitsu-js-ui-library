@@ -11,6 +11,7 @@ const types = flow(
   flatMap(x => [x + '_REQUEST', x + '_SUCCESS', x + '_FAILURE']),
   concat([
     'SET_THEME',
+    'SWITCH_THEME',
     'SET_DESIGN_SYSTEM'
   ]),
   map(x => [x, x]),
@@ -46,6 +47,7 @@ const mutations = {
     state.theme = theme
     localStorage.setItem('libraryTheme', theme)
   },
+  [types.SWITCH_THEME] (state: State) {},
   [types.SET_DESIGN_SYSTEM] (state: State, designSystem: DesignSystem) {
     state.designSystem = designSystem
   }
@@ -58,6 +60,11 @@ const actions = {
       commit(types.SET_THEME, computedTheme)
     }
     document.documentElement.setAttribute('design-system-theme', computedTheme)
+  },
+  async switchTheme ({ commit, state: { theme }, dispatch }) {
+    const newTheme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
+    commit(types.SWITCH_THEME)
+    await dispatch('setTheme', newTheme)
   },
   setDesignSystem ({ commit }, designSystem: DesignSystem) {
     commit(types.SET_DESIGN_SYSTEM, designSystem)
