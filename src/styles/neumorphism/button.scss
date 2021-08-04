@@ -122,6 +122,9 @@ $neu-button-action-text-color-hover: var(--s-color-base-content-secondary) !defa
 $neu-button-action-text-color-pressed: var(--s-color-theme-accent) !default;
 $neu-button-action-text-color-alternative: var(--s-color-base-content-tertiary) !default;
 $neu-button-action-text-color-alternative-active: var(--s-color-base-content-secondary) !default;
+$neu-button-action-primary-text-color: var(--s-color-base-on-accent) !default;
+// Action button: Dark: text colors
+$neu-button-action-primary-text-color--dark: var(--s-color-utility-surface) !default;
 // Action button: border colors
 $neu-button-action-border-color: transparent !default;
 $neu-button-action-border-color-hover: $neu-button-action-border-color !default;
@@ -132,6 +135,14 @@ $neu-button-action-box-shadow: $neu-button-secondary-box-shadow !default;
 $neu-button-action-box-shadow-hover: $neu-button-action-box-shadow !default;
 $neu-button-action-box-shadow-pressed: var(--s-shadow-element) !default;
 $neu-button-action-box-shadow-alternative: none !default;
+
+:root {
+  --neu-button-action-primary-text-color: #{$neu-button-action-primary-text-color};
+}
+
+[design-system-theme="dark"] {
+  --neu-button-action-primary-text-color: #{$neu-button-action-primary-text-color--dark};
+}
 
 $neu-button-padding-big: 7px 13px !default;
 $neu-button-padding-medium: 5px 13px !default;
@@ -166,7 +177,7 @@ $neu-button-padding-mini: 3px 6px !default;
 
 @mixin action-size ($suffix: 'big') {
   &.s-#{$suffix} {
-    padding: 7px;
+    padding: 0;
     height: var(--s-size-#{$suffix});
     width: var(--s-size-#{$suffix});
   }
@@ -292,6 +303,10 @@ $neu-button-padding-mini: 3px 6px !default;
     @include action-size('medium');
     @include action-size('small');
     @include action-size('mini');
+
+    &.s-primary {
+      color: var(--neu-button-action-primary-text-color);
+    }
 
     &:not(.s-primary) {
       background: $neu-button-action-background-color;
