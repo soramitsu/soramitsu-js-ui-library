@@ -7,6 +7,10 @@ export const setTheme = async (theme?: Theme) => {
   await store.dispatch('setTheme', theme)
 }
 
+export const switchTheme = async () => {
+  await store.dispatch('switchTheme')
+}
+
 export const setDesignSystem = async (designSystem: DesignSystem) => {
   await store.dispatch('setDesignSystem', designSystem)
 }
