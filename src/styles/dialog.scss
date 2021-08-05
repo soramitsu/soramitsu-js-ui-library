@@ -24,7 +24,7 @@
   }
   & & {
     &__header, &__title {
-      @include font-weight(700, true);
+      font-weight: 700;
     }
     &__title {
       font-size: var(--s-heading5-font-size);
@@ -33,6 +33,14 @@
     }
     &__body {
       color: var(--s-color-base-content-primary);
+    }
+    &__close {
+      color: var(--s-color-base-content-secondary);
+    }
+    &__headerbtn:focus, &__headerbtn:hover {
+      .el-dialog__close {
+        color: var(--s-color-theme-accent);
+      }
     }
   }
   > * {
