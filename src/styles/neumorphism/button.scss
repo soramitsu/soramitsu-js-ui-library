@@ -304,7 +304,7 @@ $neu-button-padding-mini: 3px 6px !default;
     @include action-size('small');
     @include action-size('mini');
 
-    &.s-primary {
+    &.s-primary:not(:disabled) {
       color: var(--neu-button-action-primary-text-color);
     }
 
