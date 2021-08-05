@@ -68,6 +68,7 @@ const actions = {
   },
   setDesignSystem ({ commit }, designSystem: DesignSystem) {
     commit(types.SET_DESIGN_SYSTEM, designSystem)
+    document.documentElement.setAttribute('design-system', designSystem)
   }
 }
 
