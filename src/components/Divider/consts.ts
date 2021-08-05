@@ -8,7 +8,8 @@ export enum ContentPosition {
 
 export enum DividerType {
   PRIMARY = 'primary',
-  SECONDARY = 'secondary'
+  SECONDARY = 'secondary',
+  TERTIARY = 'tertiary'
 }
 
 export const DividerDirection = Direction

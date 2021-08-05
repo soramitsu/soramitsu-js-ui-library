@@ -90,7 +90,7 @@ $neu-button-tertiary-text-color-active: var(--s-color-base-content-secondary) !d
 $neu-button-tertiary-border-color: transparent !default;
 $neu-button-tertiary-border-color-active: $neu-button-tertiary-border-color !default;
 // Tertiary button: box-shadow
-$neu-button-tertiary-box-shadow: var(--s-shadow-element) !default;
+$neu-button-tertiary-box-shadow: var(--s-shadow-element-pressed) !default;
 $neu-button-tertiary-box-shadow-active: $neu-button-tertiary-box-shadow !default;
 // Dark Theme: Tertiary button: box-shadow
 $neu-button-tertiary-box-shadow--dark: var(--s-shadow-element-pressed--dark) !default;
