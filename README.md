@@ -1,74 +1,27 @@
-# soramitsu-js-ui-library
+# Vue 3 + Typescript + Vite
 
-## Project setup
-```
-yarn install
-```
+This template should help get you started developing with Vue 3 and Typescript in Vite.
 
-## Font variables setup
-Required!: Add scss font variables to your project
+## Recommended IDE Setup
 
-```
-$s-font-family-default-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/Sora-VariableFont_wght.ttf' !default;
-$s-font-family-mono-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/JetBrainsMono-Regular.woff' !default;
-$s-font-family-icons-path: '~@soramitsu/soramitsu-js-ui/lib/assets/fonts/soramitsu-icons-1.0.0.ttf' !default;
-```
+[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
 
-## Usage library in project
-### 1.Install all of library components:
-```
-import Vue from 'vue
-import SoramitsuElements from '@soramitsu/soramitsu-js-ui'
+### If Using `<script setup>`
 
-const options = {
-  store // if u want to merge ui lib modules
-}
+[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
 
-Vue.use(SoramitsuElements, options)
-```
-### 2.Install only necessary components (to reduce vendors bundle size)
-```
-import Vue from 'vue
-import ElementUIPlugin from '@soramitsu/soramitsu-js-ui/src/plugins/elementUI'
-import SoramitsuUIStorePlugin from '@soramitsu/soramitsu-js-ui/src/plugins/soramitsuUIStore'
-import SButton from '@soramitsu/soramitsu-js-ui/src/components/Button/SButton'
-import SButton from '@soramitsu/soramitsu-js-ui/src/components/Input/SInput'
+## Type Support For `.vue` Imports in TS
 
-Vue.use(ElementUIPlugin) // required
-Vue.use(SoramitsuUIStorePlugin, store) // optional
-Vue.use(SButton)
-Vue.use(SInput)
-```
+Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
 
-### Compiles and hot-reloads storybook with components for development
-```
-yarn storybook:serve
-```
+### If Using Volar
 
-### Compiles and minifies storybook with components and docs for production
-```
-yarn storybook:build
-```
+Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 
-### Compiles and minifies for production
-```
-yarn build
-```
+### If Using Vetur
 
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Run your end-to-end tests
-```
-yarn test:e2e
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
+2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
+3. Open `src/main.ts` in VSCode
+4. Open the VSCode command palette
+5. Search and run "Select TypeScript version" -> "Use workspace version"

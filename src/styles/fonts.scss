@@ -1,18 +1,18 @@
 @font-face {
   font-family: "soramitsu-icons";
-  src: url(#{$s-font-family-icons-path}) format("truetype");
+  src: url("../assets/fonts/soramitsu-icons-1.0.0.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 @font-face {
   font-family: "Sora";
-  src: url(#{$s-font-family-default-path}) format("truetype-variations");
+  src: url("../assets/fonts/Sora-VariableFont_wght.ttf") format("truetype-variations");
   font-weight: 1 999;
 }
 @font-face {
   font-family: "JetBrainsMono";
-  src: url(#{$s-font-family-mono-path});
+  src: url("../assets/fonts/JetBrainsMono-Regular.woff");
   font-weight: normal;
   font-style: normal;
 }
