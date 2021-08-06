@@ -13,11 +13,11 @@ html {
   margin: 0;
 }
 
+/* Typography */
 .d1 {
   font-size: var(--s-heading0-font-size);
 }
 
-/* Typography */
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6, .h7,
 .d2,
@@ -148,6 +148,10 @@ h6,
   line-height: var(--s-line-height-big);
 }
 
+.s-code {
+  font-family: var(--s-font-family-mono);
+}
+
 .s-flex {
   display: flex;
 }
@@ -248,11 +252,30 @@ button > span {
 }
 
 .el-message-box {
+  background-color: var(--s-color-base-on-accent);
+  border-radius: var(--s-border-radius-small);
+  border: none;
+  [design-system="neumorphic"] & {
+    box-shadow: var(--s-shadow-dialog);
+  }
   & & {
     &__header {
       .el-message-box__title {
         color: var(--s-color-base-content-primary);
         font-size: var(--s-heading5-font-size);
+        font-feature-settings: var(--s-font-feature-settings-heading);
+        font-weight: 700;
+      }
+    }
+    &__content {
+      color: var(--s-color-base-content-primary);
+    }
+    &__close {
+      color: var(--s-color-base-content-secondary);
+    }
+    &__headerbtn:focus, &__headerbtn:hover {
+      .el-message-box__close {
+        color: var(--s-color-theme-accent);
       }
     }
     &__btns {
@@ -266,9 +289,9 @@ button > span {
           border-color: var(--s-color-theme-accent);
         }
         &.el-button--primary {
-          &:hover, &:active, &:focus {
-            color: var(--s-color-base-on-accent);
-          }
+          background-color: var(--s-color-theme-accent);
+          border-color: var(--s-color-theme-accent);
+          color: var(--s-color-base-on-accent);
           &:hover {
             background-color: var(--s-color-theme-accent-hover);
             border-color: var(--s-color-theme-accent-hover);
