@@ -3,7 +3,7 @@
     box-shadow: var(--s-shadow-dialog);
   }
 }
-.v-modal {
+[design-system="neumorphic"] .v-modal {
   opacity: 0.75;
   backdrop-filter: blur(4px);
   // TODO: Fix FF behaviour
