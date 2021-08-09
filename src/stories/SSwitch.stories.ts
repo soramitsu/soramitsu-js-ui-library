@@ -1,10 +1,10 @@
-import { text, number, boolean, select, withKnobs } from '@storybook/addon-knobs'
+import { text, number, boolean, withKnobs } from '@storybook/addon-knobs'
 
 import { SSwitch } from '../components'
 
 export default {
   component: SSwitch,
-  title: 'Design System/Components/Switch',
+  title: 'Design System/Components/Switch 🟣',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }

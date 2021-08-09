@@ -5,7 +5,7 @@ import { BorderRadius } from '../types'
 
 export default {
   component: SDialog,
-  title: 'Design System/Components/Dialog',
+  title: 'Design System/Components/Dialog 🟣',
   decorators: [withKnobs]
 }
 

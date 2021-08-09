@@ -1,12 +1,12 @@
 import { text, boolean, withKnobs, number, select } from '@storybook/addon-knobs'
 
-import { SInput, SRow, SCol } from '../components'
-import { InputType, InputSize } from '../components/Input'
-import { BorderRadius } from '../types'
+import { SInput, SRow, SCol } from '../../components'
+import { InputType, InputSize } from '../../components/Input'
+import { BorderRadius } from '../../types'
 
 export default {
   component: SInput,
-  title: 'Design System/Components/Input',
+  title: 'Design System/Components/Input 🟣',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }

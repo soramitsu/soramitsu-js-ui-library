@@ -6,7 +6,7 @@ import { BorderRadius, Status, Size } from '../types'
 
 export default {
   component: SCard,
-  title: 'Design System/Components/Card',
+  title: 'Design System/Components/Card 🟣',
   decorators: [withKnobs]
 }
 
