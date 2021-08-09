@@ -4,7 +4,7 @@ import { SCollapse, SCollapseItem } from '../../components'
 
 export default {
   component: SCollapseItem,
-  title: 'Design System/Components/Collapse/Collapse Item',
+  title: 'Design System/Components/Collapse 🟣/Collapse Item',
   decorators: [withKnobs]
 }
 

@@ -6,7 +6,7 @@ import { Size, BorderRadius } from '../types'
 
 export default {
   component: SButton,
-  title: 'Design System/Components/Button',
+  title: 'Design System/Components/Button 🟣',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
