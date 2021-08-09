@@ -44,7 +44,6 @@ addDecorator(() => ({
   template: `<s-design-system-provider :value="designSystem" class="s-flex" style="flex-direction: column;">
                <div class="s-flex" style="align-items: center; justify-content: flex-end; margin-right: 10px;">
                  <s-checkbox
-                   v-if="hasNeumorphicMode"
                    style="margin-right: 10px;"
                    label="NEUMORPHISM"
                    :value="!!designSystem"
@@ -63,7 +62,7 @@ addDecorator(() => ({
              </s-design-system-provider>`,
   store: mainStore,
   computed: {
-    hasNeumorphicMode: () => window.location.href.includes(neuLabelCode) || window.location.href.includes('🟣'),
+    // hasNeumorphicMode: () => window.location.href.includes(neuLabelCode) || window.location.href.includes('🟣'), // Set v-if="hasNeumorphicMode" if needed
     theme: () => mainStore?.getters?.libraryTheme as Theme,
     designSystem: () => mainStore?.getters?.libraryDesignSystem as DesignSystem
   },
