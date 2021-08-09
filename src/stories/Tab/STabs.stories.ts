@@ -6,7 +6,7 @@ import { BorderRadius } from '../../types'
 
 export default {
   component: STabs,
-  title: 'Design System/Components/Tabs',
+  title: 'Design System/Components/Tabs 🟣',
   decorators: [withKnobs]
 }
 

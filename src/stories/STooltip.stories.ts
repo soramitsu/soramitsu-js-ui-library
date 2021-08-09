@@ -6,7 +6,7 @@ import { BorderRadius } from '../types'
 
 export default {
   component: STooltip,
-  title: 'Design System/Components/Tooltip',
+  title: 'Design System/Components/Tooltip 🟣',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
