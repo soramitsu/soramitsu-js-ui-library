@@ -5,7 +5,7 @@ import { BorderTypes } from '../../components/Collapse'
 
 export default {
   component: SCollapse,
-  title: 'Design System/Components/Collapse',
+  title: 'Design System/Components/Collapse 🟣',
   decorators: [withKnobs]
 }
 

@@ -1,10 +1,10 @@
 import { number, text, boolean, object, withKnobs } from '@storybook/addon-knobs'
 
-import { SFloatInput, SRow } from '../components'
+import { SFloatInput, SRow } from '../../components'
 
 export default {
   component: SFloatInput,
-  title: 'Design System/Components/Input/Float',
+  title: 'Design System/Components/Input 🟣/Float',
   decorators: [withKnobs]
 }
 

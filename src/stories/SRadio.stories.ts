@@ -5,7 +5,7 @@ import { Size } from '../types'
 
 export default {
   component: SRadio,
-  title: 'Design System/Components/Radio',
+  title: 'Design System/Components/Radio 🟣',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
