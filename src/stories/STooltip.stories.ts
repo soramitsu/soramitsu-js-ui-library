@@ -21,7 +21,9 @@ export const configurable = () => ({
                  :disabled="disabled"
                  :border-radius="borderRadius"
                  :offset="offset"
-                 :openDelay="openDelay"
+                 :open-delay="openDelay"
+                 :close-delay="closeDelay"
+                 :hide-after="hideAfter"
                  @change="handleChange"
                >
                  <s-button style="margin: 40px">Custom tooltip</s-button>
@@ -48,6 +50,12 @@ export const configurable = () => ({
     },
     openDelay: {
       default: number('Open delay', 0)
+    },
+    closeDelay: {
+      default: number('Close delay', 0)
+    },
+    hideAfter: {
+      default: number('Hide after', 0)
     }
   },
   methods: {
