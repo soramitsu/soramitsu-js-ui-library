@@ -36,6 +36,7 @@
           @blur="handleBlur"
           @focus="handleFocus"
           @paste.native="handlePaste"
+          @dblclick.native="handleDblClick"
           @keypress.enter.native="handleEnter"
         >
           <slot slot="prefix" name="prefix"></slot>
@@ -263,6 +264,10 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
 
     const value = event.clipboardData.getData('text')
     this.$emit('paste', value)
+  }
+
+  handleDblClick (event: Event): void {
+    this.$emit('dblclick', event)
   }
 
   handleBlur (event: Event): void {

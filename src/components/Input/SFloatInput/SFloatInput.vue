@@ -1,12 +1,14 @@
 <template>
   <s-input
+    ref="input"
     :placeholder="placeholderValue"
     :value="formatted"
     v-bind="$attrs"
     v-on="{
       ...$listeners,
       input: handleInput,
-      blur: onBlur
+      blur: onBlur,
+      dblclick: onDblClick
     }"
   >
     <template v-for="(_, scopedSlotName) in $scopedSlots" v-slot:[scopedSlotName]="slotData">
@@ -16,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
 
 import SInput from '../SInput'
 import { Float } from '../../../directives'
@@ -50,6 +52,10 @@ export default class SFloatInput extends Vue {
   @Prop({ type: Object, default: () => DEFAULT_DELIMITERS }) readonly delimiters?: any
   @Prop({ type: [String, Number], default: undefined, validator: isNumberLikeValue }) readonly max!: string | number
 
+  @Ref('input') inputComponent!: any
+
+  prevSelectionPosition = 0
+
   get placeholderValue (): string {
     return this.placeholder || '0'.concat(this.delimiters.decimal, '0')
   }
@@ -58,7 +64,26 @@ export default class SFloatInput extends Vue {
     return this.hasLocaleString ? this.toLocaleString() : this.value
   }
 
-  handleInput (value: string): void {
+  get input () {
+    return this.inputComponent.$refs['el-input'].$refs.input
+  }
+
+  saveSelectionPosition () {
+    this.prevSelectionPosition = this.input.selectionStart
+  }
+
+  handleSelectionPosition () {
+    const pos = this.input.selectionStart
+    const length = this.input.value.length
+    if (pos === length && this.prevSelectionPosition !== length) {
+      this.input.selectionStart = this.prevSelectionPosition
+      this.input.selectionEnd = this.prevSelectionPosition
+    }
+  }
+
+  async handleInput (value: string): Promise<void> {
+    this.saveSelectionPosition()
+
     if (this.hasLocaleString) {
       // Cleanup value's format
       value = value.replace(new RegExp('\\' + this.delimiters.thousand, 'g'), '')
@@ -73,6 +98,10 @@ export default class SFloatInput extends Vue {
     ].reduce((buffer, rule) => rule(buffer), value)
 
     this.onInput(newValue)
+
+    await this.$nextTick()
+
+    this.handleSelectionPosition()
   }
 
   onBlur (event: Event): void {
@@ -85,6 +114,11 @@ export default class SFloatInput extends Vue {
     }
 
     this.$emit('blur', event)
+  }
+
+  onDblClick (event: Event): void {
+    const target = event.target as any
+    target.select()
   }
 
   onInput (value: string): void {
