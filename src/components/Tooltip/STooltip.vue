@@ -13,7 +13,7 @@
     :open-delay="openDelay"
     :popper-class="computedPopperClass"
     :manual="manual"
-    :hide-after="closeDelay"
+    :hide-after="hideAfter"
     :tabindex="tabindex"
   >
     <slot slot="content" name="content"></slot>
@@ -106,6 +106,12 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
    */
   @Prop({ default: 0, type: Number }) readonly closeDelay!: number
   /**
+   * Timeout in milliseconds to hide tooltip after appearing.
+   *
+   * `0` by default
+   */
+  @Prop({ default: 0, type: Number }) readonly hideAfter!: number
+  /**
    * Tabindex of the tooltip.
    *
    * `0` by default
@@ -142,12 +148,13 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
     this.$emit('change', value)
   }
 
+  @Watch('closeDelay')
+  private handleChangeCloseDelay (value: number): void {
+    this.updateCloseDelay(value)
+  }
+
   mounted (): void {
-    const tooltip = this.tooltip
-    if (!tooltip) {
-      return
-    }
-    tooltip.debounceClose = debounce(200, tooltip.handleClosePopper)
+    this.updateCloseDelay(this.closeDelay)
   }
 
   get computedTheme (): string {
@@ -159,6 +166,14 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
       }
     }
     return this.theme
+  }
+
+  updateCloseDelay (value: number): void {
+    const tooltip = this.tooltip
+    if (!tooltip) {
+      return
+    }
+    tooltip.debounceClose = debounce(value, tooltip.handleClosePopper)
   }
 }
 </script>
