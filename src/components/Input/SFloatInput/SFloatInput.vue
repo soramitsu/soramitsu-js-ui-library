@@ -69,7 +69,7 @@ export default class SFloatInput extends Vue {
   }
 
   saveSelectionPosition (value: string): void {
-    const pos = this.input.selectionStart
+    const pos = this.input.selectionStart as number
     const chars = value.slice(0, pos).replace(new RegExp('\\' + this.delimiters.thousand, 'g'), '')
 
     this.charsCountBeforeSelection = chars.length
