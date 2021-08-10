@@ -25,7 +25,7 @@ export const configurable = () => ({
                </s-float-input>
              </s-row>`,
   data: () => ({
-    model: '123 123 123 123.3123123'
+    model: '10000'
   }),
   props: {
     decimals: {

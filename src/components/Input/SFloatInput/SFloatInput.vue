@@ -54,7 +54,7 @@ export default class SFloatInput extends Vue {
 
   @Ref('input') inputComponent!: any
 
-  prevSelectionPosition = 0
+  charCountBeforeSelection = 0
 
   get placeholderValue (): string {
     return this.placeholder || '0'.concat(this.delimiters.decimal, '0')
@@ -68,29 +68,42 @@ export default class SFloatInput extends Vue {
     return this.inputComponent.$refs['el-input'].$refs.input
   }
 
-  saveSelectionPosition () {
-    this.prevSelectionPosition = this.input.selectionStart
+  saveSelectionPosition (value: string): void {
+    const pos = this.input.selectionStart
+    const chars = value.slice(0, pos).replace(new RegExp('\\' + this.delimiters.thousand, 'g'), '')
+
+    this.charCountBeforeSelection = chars.length
   }
 
-  handleSelectionPosition () {
-    const pos = this.input.selectionStart
-    const length = this.input.value.length
-    if (pos === length && this.prevSelectionPosition !== length) {
-      this.input.selectionStart = this.prevSelectionPosition
-      this.input.selectionEnd = this.prevSelectionPosition
+  updateSelectionPosition (): void {
+    const charCount = this.charCountBeforeSelection
+    const value = this.formatted
+
+    let selectionStart = 0
+
+    for (let i = 0, handledChars = 0; handledChars < charCount; selectionStart++, i++) {
+      const char = value.charAt(i)
+      const isValidChar = char === this.delimiters.decimal || !Number.isNaN(parseInt(char))
+
+      if (isValidChar) {
+        handledChars++
+      }
     }
+
+    this.input.selectionStart = this.input.selectionEnd = selectionStart
   }
 
   async handleInput (value: string): Promise<void> {
-    this.saveSelectionPosition()
-
     if (this.hasLocaleString) {
+      // save selection position to update it later in new formatted value
+      this.saveSelectionPosition(value)
       // Cleanup value's format
       value = value.replace(new RegExp('\\' + this.delimiters.thousand, 'g'), '')
       if (this.delimiters.decimal !== DEFAULT_DECIMAL_DELIMITER) {
         value = value.replace(this.delimiters.decimal, DEFAULT_DECIMAL_DELIMITER)
       }
     }
+
     const newValue = [
       (v) => this.formatNumberField(v, this.decimals),
       (v) => isNumberLikeValue(v) ? v : DEFAULT_VALUE,
@@ -99,9 +112,10 @@ export default class SFloatInput extends Vue {
 
     this.onInput(newValue)
 
-    await this.$nextTick()
-
-    this.handleSelectionPosition()
+    if (this.hasLocaleString) {
+      await this.$nextTick()
+      this.updateSelectionPosition()
+    }
   }
 
   onBlur (event: Event): void {
@@ -154,7 +168,7 @@ export default class SFloatInput extends Vue {
     }
 
     // Avoid several decimal delimiters
-    if ((value.match(new RegExp(DEFAULT_DECIMAL_DELIMITER, 'g')) || []).length > 1) {
+    if ((value.match(new RegExp(`\\${DEFAULT_DECIMAL_DELIMITER}`, 'g')) || []).length > 1) {
       formatted = formatted.substring(0, decimalDelimiterIndex + 1) + formatted.substring(decimalDelimiterIndex + 1).replace(DEFAULT_DECIMAL_DELIMITER, '')
     }
 
