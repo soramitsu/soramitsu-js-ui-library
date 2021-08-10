@@ -25,14 +25,14 @@ export const configurable = () => ({
                </s-float-input>
              </s-row>`,
   data: () => ({
-    model: '10000'
+    model: ''
   }),
   props: {
     decimals: {
       default: number('Decimals', 18)
     },
     max: {
-      default: text('Max', '9000000000000000000000000000000000')
+      default: text('Max', '90000000')
     },
     hasLocaleString: {
       default: boolean('Has Locale String', false)
