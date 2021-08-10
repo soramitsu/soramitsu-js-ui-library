@@ -14,7 +14,7 @@
     :class="computedClasses"
     :close-on-click-modal="closeOnClickModal"
     :close-on-press-escape="closeOnEsc"
-    :before-close="beforeClose"
+    :before-close="handleBeforeClose"
     :center="center"
     @open="handleOpen"
     @close="handleClose"
@@ -135,9 +135,9 @@ export default class SDialog extends Mixins(BorderRadiusMixin, DesignSystemInjec
   /**
    * Function that will be called before closing.
    *
-   * `(done: boolean) => {}`
+   * `beforeClose(closeFn: () => void)`
    */
-  @Prop({ type: Function }) readonly beforeClose!: (done: boolean) => {}
+  @Prop({ type: Function }) readonly beforeClose!: ((closeFn: () => void) => void) | null
   /**
    * Key for dialog content.
    * If you need force rerender of table content (for instance, columns were changed)
@@ -151,15 +151,51 @@ export default class SDialog extends Mixins(BorderRadiusMixin, DesignSystemInjec
 
   model = this.visible
   computedTop = this.top
+  shouldNotBeClosed = false
 
   @Watch('visible')
   private handlePropChange (value: boolean): void {
+    const wrapper = (this.dialog || {}).$el as HTMLElement
+    if (!wrapper) {
+      return
+    }
+    const activeDialog = wrapper.children[0]
+    if (!activeDialog) {
+      return
+    }
+    if (!value) {
+      this.erd.uninstall(wrapper)
+      this.erd.uninstall(activeDialog)
+      activeDialog.removeEventListener('mouseleave', this.handleCheckCursorPosition)
+    } else {
+      this.erd.listenTo(wrapper, this.computeTop)
+      this.erd.listenTo(activeDialog, this.computeTop)
+      activeDialog.addEventListener('mouseleave', this.handleCheckCursorPosition)
+    }
     this.model = value
   }
 
   @Watch('model')
   private handleValueChange (value: boolean): void {
     this.$emit('update:visible', value)
+  }
+
+  handleCheckCursorPosition (e): void {
+    if (e.buttons) { // When was pressed and left
+      this.shouldNotBeClosed = true
+    }
+  }
+
+  handleBeforeClose (closeFn: () => void) {
+    if (this.shouldNotBeClosed) {
+      this.shouldNotBeClosed = false
+      return
+    }
+    if (this.beforeClose) {
+      this.beforeClose(closeFn)
+    } else {
+      closeFn()
+    }
   }
 
   get computedClasses (): Array<string> {
@@ -176,26 +212,20 @@ export default class SDialog extends Mixins(BorderRadiusMixin, DesignSystemInjec
     return cssClasses
   }
 
-  mounted (): void {
-    this.$nextTick(() => {
+  destroyed (): void {
+    if (this.model) {
       const wrapper = (this.dialog || {}).$el as HTMLElement
       if (!wrapper) {
         return
       }
-      this.erd.listenTo(wrapper, this.computeTop)
-      this.erd.listenTo(wrapper.children[0], this.computeTop)
-    })
-  }
-
-  destroyed (): void {
-    this.$nextTick(() => {
-      const wrapper = (this.dialog || {}).$el as HTMLElement
-      if (!wrapper) {
+      const activeDialog = wrapper.children[0]
+      if (!activeDialog) {
         return
       }
       this.erd.uninstall(wrapper)
-      this.erd.uninstall(wrapper.children[0])
-    })
+      this.erd.uninstall(activeDialog)
+      activeDialog.removeEventListener('mouseleave', this.handleCheckCursorPosition)
+    }
   }
 
   computeTop (): void {
