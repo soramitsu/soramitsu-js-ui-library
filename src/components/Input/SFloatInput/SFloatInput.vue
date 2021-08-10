@@ -64,7 +64,7 @@ export default class SFloatInput extends Vue {
     return this.hasLocaleString ? this.toLocaleString() : this.value
   }
 
-  get input () {
+  get input (): HTMLInputElement {
     return this.inputComponent.$refs['el-input'].$refs.input
   }
 
