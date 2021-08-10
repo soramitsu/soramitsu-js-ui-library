@@ -54,7 +54,7 @@ export default class SFloatInput extends Vue {
 
   @Ref('input') inputComponent!: any
 
-  charCountBeforeSelection = 0
+  charsCountBeforeSelection = 0
 
   get placeholderValue (): string {
     return this.placeholder || '0'.concat(this.delimiters.decimal, '0')
@@ -72,25 +72,25 @@ export default class SFloatInput extends Vue {
     const pos = this.input.selectionStart
     const chars = value.slice(0, pos).replace(new RegExp('\\' + this.delimiters.thousand, 'g'), '')
 
-    this.charCountBeforeSelection = chars.length
+    this.charsCountBeforeSelection = chars.length
   }
 
   updateSelectionPosition (): void {
-    const charCount = this.charCountBeforeSelection
-    const value = this.formatted
+    const {
+      charsCountBeforeSelection: charsCount,
+      formatted: value,
+      delimiters: { thousand }
+    } = this
 
-    let selectionStart = 0
+    let selection = 0
 
-    for (let i = 0, handledChars = 0; handledChars < charCount; selectionStart++, i++) {
-      const char = value.charAt(i)
-      const isValidChar = char === this.delimiters.decimal || !Number.isNaN(parseInt(char))
-
-      if (isValidChar) {
+    for (let handledChars = 0; handledChars < charsCount; selection++) {
+      if (value.charAt(selection) !== thousand) {
         handledChars++
       }
     }
 
-    this.input.selectionStart = this.input.selectionEnd = selectionStart
+    this.input.selectionStart = this.input.selectionEnd = selection
   }
 
   async handleInput (value: string): Promise<void> {
