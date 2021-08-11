@@ -93,10 +93,6 @@ $neu-button-tertiary-border-color-active: $neu-button-tertiary-border-color !def
 $neu-button-tertiary-box-shadow: var(--s-shadow-element-pressed) !default;
 $neu-button-tertiary-box-shadow-pressed: var(--s-shadow-element) !default;
 $neu-button-tertiary-box-shadow-active: $neu-button-tertiary-box-shadow !default;
-// Dark Theme: Tertiary button: box-shadow
-$neu-button-tertiary-box-shadow--dark: var(--s-shadow-element-pressed--dark) !default;
-$neu-button-tertiary-box-shadow-pressed--dark: var(--s-shadow-element--dark) !default;
-$neu-button-tertiary-box-shadow-active--dark: $neu-button-tertiary-box-shadow--dark !default;
 
 // Action button: common
 $neu-button-action-border-width: 0px !default;
