@@ -1,15 +1,9 @@
 .s-typography {
   &-input {
     &-field {
-      font-size: var(--s-font-size-medium);
+      font-size: var(--s-font-size-small);
       line-height: var(--s-line-height-medium);
       font-weight: 300;
-
-      &--large {
-        font-size: var(--s-font-size-large);
-        line-height: var(--s-line-height-small);
-        font-weight: 700;
-      }
     }
   }
   &-button {
