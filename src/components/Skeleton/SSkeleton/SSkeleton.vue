@@ -24,22 +24,22 @@ export default class SSkeleton extends Vue {
   /**
    * Whether showing the animation
    */
-  @Prop({ default: false, type: Boolean }) readonly animated?: boolean
+  @Prop({ default: false, type: Boolean }) readonly animated!: boolean
   /**
    * How many fake items to render to the DOM, should have integer value
    */
-  @Prop({ default: 1, type: Number }) readonly count?: number
+  @Prop({ default: 1, type: Number }) readonly count!: number
   /**
    * Whether showing the skeleton
    */
-  @Prop({ default: true, type: Boolean }) readonly loading?: boolean
+  @Prop({ default: true, type: Boolean }) readonly loading!: boolean
   /**
    * Numbers of the row, only useful when no template slot were given, should have integer value
    */
-  @Prop({ default: 4, type: Number }) readonly rows?: number
+  @Prop({ default: 4, type: Number }) readonly rows!: number
   /**
    * Rendering delay in millseconds, should have integer value
    */
-  @Prop({ default: 0, type: Number }) readonly throttle?: number
+  @Prop({ default: 0, type: Number }) readonly throttle!: number
 }
 </script>

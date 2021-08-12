@@ -24,7 +24,7 @@ export const configurable = () => ({
       default: text('Src', 'https://picsum.photos/1024')
     },
     fit: {
-      default: select('Element', Object.values(ImageFit), ImageFit.NONE)
+      default: select('Fit', Object.values(ImageFit), ImageFit.NONE)
     },
     lazy: {
       default: boolean('Lazy', true)

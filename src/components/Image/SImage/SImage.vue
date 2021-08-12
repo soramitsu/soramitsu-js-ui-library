@@ -2,7 +2,7 @@
   <div class="s-image__container">
     <s-skeleton
       v-if="hasSkeleton"
-      :loading="!this.elImage || this.elImage.loading"
+      :loading="!elImage || elImage.loading"
       :animated="animated"
     >
       <template #template>
@@ -50,32 +50,32 @@ export default class SImage extends Vue {
   /**
    * Image source, same as native
    */
-  @Prop({ default: null, type: String }) readonly src!: string | null
+  @Prop({ default: () => null, type: String }) readonly src!: string
   /**
    * Indicate how the image should be resized to fit its container, same as object-fit
    */
-  @Prop({ default: ImageFit.NONE, type: String }) readonly fit?: string
+  @Prop({ default: ImageFit.NONE, type: String }) readonly fit!: string
   /**
    * Native alt
    */
-  @Prop({ default: '', type: String }) readonly alt?: string
+  @Prop({ default: '', type: String }) readonly alt!: string
   /**
    * Whether to use lazy load
    */
-  @Prop({ default: false, type: Boolean }) readonly lazy?: boolean
+  @Prop({ default: false, type: Boolean }) readonly lazy!: boolean
   /**
    * Set image preview z-index
    */
-  @Prop({ default: 0, type: Number }) readonly zIndex?: number
+  @Prop({ default: 0, type: Number }) readonly zIndex!: number
   /**
    * Whether image has skeleton
    */
-  @Prop({ default: true, type: Boolean }) readonly hasSkeleton?: boolean
+  @Prop({ default: true, type: Boolean }) readonly hasSkeleton!: boolean
   /**
    * Whether skeleton has animation
    */
-  @Prop({ default: true, type: Boolean }) readonly animated?: boolean
+  @Prop({ default: true, type: Boolean }) readonly animated!: boolean
 
-  @Ref('image') elImage?: any
+  @Ref('image') elImage!: any
 }
 </script>
