@@ -14,7 +14,8 @@ import { SkeletonItemElement } from '../consts'
 export default class SSkeletonItem extends Vue {
   /**
    * The current rendering skeleton type.
-   * Possible values are: `p` / `text` / `h1` / `h2` / `h3` / `text` / `caption` / `button` / `image` / `circle` / `rect`
+   * Possible values are: `p` / `text` / `h1` / `h2` / `h3` / `text` / `caption` / `button` / `image` / `circle` / `rect`.
+   * Default value is SkeletonItemElement.TEXT.
    */
   @Prop({ default: SkeletonItemElement.TEXT, type: String }) readonly element!: string
 }

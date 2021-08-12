@@ -22,11 +22,12 @@ import ElSkeletonItem from 'element-ui/lib/skeleton-item'
 })
 export default class SSkeleton extends Vue {
   /**
-   * Whether showing the animation
+   * Whether showing the animation, default value is false.
    */
   @Prop({ default: false, type: Boolean }) readonly animated!: boolean
   /**
-   * How many fake items to render to the DOM, should have integer value
+   * How many fake items to render in the DOM, should have integer value.
+   * Default value is 1.
    */
   @Prop({ default: 1, type: Number }) readonly count!: number
   /**
@@ -34,11 +35,12 @@ export default class SSkeleton extends Vue {
    */
   @Prop({ default: true, type: Boolean }) readonly loading!: boolean
   /**
-   * Numbers of the row, only useful when no template slot were given, should have integer value
+   * Numbers of the row, only useful when no template slot were given, should have integer value.
+   * Default value is 1.
    */
   @Prop({ default: 4, type: Number }) readonly rows!: number
   /**
-   * Rendering delay in millseconds, should have integer value
+   * Rendering delay in millseconds, should have integer value. Default value is zero.
    */
   @Prop({ default: 0, type: Number }) readonly throttle!: number
 }

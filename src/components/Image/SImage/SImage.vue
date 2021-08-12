@@ -16,6 +16,7 @@
           :fit="fit"
           :alt="alt"
           :lazy="lazy"
+          :scroll-container="scrollContainer"
           :z-ndex="zIndex"
         />
       </template>
@@ -27,6 +28,7 @@
       :fit="fit"
       :alt="alt"
       :lazy="lazy"
+      :scroll-container="scrollContainer"
       :z-ndex="zIndex"
     />
   </div>
@@ -52,9 +54,11 @@ export default class SImage extends Vue {
    */
   @Prop({ default: () => null, type: String }) readonly src!: string
   /**
-   * Indicate how the image should be resized to fit its container, same as object-fit
+   * Indicate how the image should be resized to fit its container, same as object-fit.
+   * Possible values are: `fill` / `contain` / `cover` / `none` / `scale-down`.
+   * Default value is ImageFit.FILL.
    */
-  @Prop({ default: ImageFit.NONE, type: String }) readonly fit!: string
+  @Prop({ default: ImageFit.FILL, type: String }) readonly fit!: string
   /**
    * Native alt
    */
@@ -63,6 +67,11 @@ export default class SImage extends Vue {
    * Whether to use lazy load
    */
   @Prop({ default: false, type: Boolean }) readonly lazy!: boolean
+  /**
+   * The container to add scroll listener when using lazy load.
+   * Posssible value is the nearest parent container whose overflow property is auto or scroll
+   */
+  @Prop({ default: '', type: [String, HTMLElement] }) readonly scrollContainer!: string | HTMLElement
   /**
    * Set image preview z-index
    */
