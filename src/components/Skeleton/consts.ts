@@ -1,4 +1,4 @@
-export enum SkeletonItemVariant {
+export enum SkeletonItemElement {
   P = 'p',
   TEXT = 'text',
   H1 = 'h1',

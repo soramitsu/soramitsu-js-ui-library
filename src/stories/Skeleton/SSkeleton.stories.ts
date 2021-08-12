@@ -1,6 +1,7 @@
-import { boolean, number, withKnobs } from '@storybook/addon-knobs'
+import { boolean, number, text, withKnobs } from '@storybook/addon-knobs'
 
 import { SSkeleton, SSkeletonItem } from '../../components/Skeleton'
+import { SImage } from '../../components/Image'
 
 export default {
   component: SSkeleton,
@@ -12,7 +13,8 @@ export default {
 export const configurable = () => ({
   components: {
     SSkeleton,
-    SSkeletonItem
+    SSkeletonItem,
+    SImage
   },
   template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
               <s-skeleton
@@ -24,12 +26,12 @@ export const configurable = () => ({
                 style="width: 100%;"
               >
                 <template #template>
-                  <s-skeleton-item variant="image" />
-                  <s-skeleton-item variant="p" />
-                  <s-skeleton-item variant="p" />
+                  <s-skeleton-item element="image" />
+                  <s-skeleton-item element="p" />
+                  <s-skeleton-item element="p" />
                 </template>
                 <template>
-                  <img src="https://picsum.photos/150">
+                  <s-image :src="src" :lazy="lazy" :hasSkeleton="false" />
                   <p class="p3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                   <p class="p3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </template>
@@ -50,6 +52,12 @@ export const configurable = () => ({
     },
     throttle: {
       default: number('Throttle', 0)
+    },
+    src: {
+      default: text('Image Src', 'https://picsum.photos/1024')
+    },
+    lazy: {
+      default: boolean('Image Lazy', true)
     }
   }
 })

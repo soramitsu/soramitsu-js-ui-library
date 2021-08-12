@@ -1,6 +1,6 @@
 import { select, withKnobs } from '@storybook/addon-knobs'
 
-import { SSkeleton, SSkeletonItem, SkeletonItemVariant } from '../../components/Skeleton'
+import { SSkeleton, SSkeletonItem, SkeletonItemElement } from '../../components/Skeleton'
 
 export default {
   component: SSkeletonItem,
@@ -17,13 +17,13 @@ export const configurable = () => ({
   template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
               <s-skeleton animated :loading="true" style="width: 100%;">
                 <template #template>
-                  <s-skeleton-item :variant="variant" />
+                  <s-skeleton-item :element="element" />
                 </template>
               </s-skeleton>
             </div>`,
   props: {
-    variant: {
-      default: select('Variant', Object.values(SkeletonItemVariant), SkeletonItemVariant.TEXT)
+    element: {
+      default: select('Element', Object.values(SkeletonItemElement), SkeletonItemElement.TEXT)
     }
   }
 })

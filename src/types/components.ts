@@ -26,6 +26,7 @@ export enum Components {
   SFormItem = 'SFormItem',
   SHeader = 'SHeader',
   SIcon = 'SIcon',
+  SImage = 'SImage',
   SInput = 'SInput',
   SFloatInput = 'SFloatInput',
   SJsonInput = 'SJsonInput',

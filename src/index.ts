@@ -24,6 +24,7 @@ import {
   SFormItem,
   SHeader,
   SIcon,
+  SImage,
   SInput,
   SFloatInput,
   SJsonInput,
@@ -94,6 +95,7 @@ const SoramitsuElements = {
     vue.use(SFormItem)
     vue.use(SHeader)
     vue.use(SIcon)
+    vue.use(SImage)
     vue.use(SInput)
     vue.use(SFloatInput)
     vue.use(SJsonInput)
@@ -166,6 +168,7 @@ export {
   SFormItem,
   SHeader,
   SIcon,
+  SImage,
   SInput,
   SFloatInput,
   SJsonInput,
