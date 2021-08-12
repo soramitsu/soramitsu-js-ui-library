@@ -25,8 +25,12 @@
         }
       }
       > [class^="s-input"]:not(.s-disabled) {
-        background-color: var(--s-color-status-error-background);
         border-color: var(--s-color-status-error);
+        background-color: var(--s-color-status-error-background);
+
+        [design-system-theme="dark"] & {
+          background-color: var(--s-color-base-background);
+        }
 
         .s-placeholder {
           color: var(--s-color-status-error);

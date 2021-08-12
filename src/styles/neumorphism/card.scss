@@ -1,7 +1,14 @@
 @mixin status ($status: 'success') {
   &.s-status-#{$status} {
     color: var(--s-color-status-#{$status});
-    background: var(--s-color-status-#{$status}-background);
+
+    &.s-primary {
+      background: var(--s-color-status-#{$status}-background);
+
+      [design-system-theme="dark"] & {
+        --s-color-status-#{$status}: var(--s-color-base-on-accent);
+      }
+    }
   }
 }
 
@@ -42,7 +49,7 @@
     }
   }
 
-  &.s-primary {
+  &.s-primary.s-status-default {
     background: var(--s-color-utility-surface);
 
     &.is-always-shadow, &.is-hover-shadow:hover, &.is-hover-shadow:focus {
