@@ -43,6 +43,8 @@ export enum Components {
   SScrollSectionItem = 'SScrollSectionItem',
   SScrollSections = 'SScrollSections',
   SSelect = 'SSelect',
+  SSkeleton = 'SSkeleton',
+  SSkeletonItem = 'SSkeletonItem',
   SSlider = 'SSlider',
   SSubmenu = 'SSubmenu',
   SSwitch = 'SSwitch',

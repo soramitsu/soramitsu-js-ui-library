@@ -41,6 +41,8 @@ import {
   SScrollSectionItem,
   SScrollSections,
   SSelect,
+  SSkeleton,
+  SSkeletonItem,
   SSlider,
   SSubmenu,
   SSwitch,
@@ -109,6 +111,8 @@ const SoramitsuElements = {
     vue.use(SScrollSectionItem)
     vue.use(SScrollSections)
     vue.use(SSelect)
+    vue.use(SSkeleton)
+    vue.use(SSkeletonItem)
     vue.use(SSlider)
     vue.use(SSubmenu)
     vue.use(SSwitch)
@@ -179,6 +183,8 @@ export {
   SScrollSectionItem,
   SScrollSections,
   SSelect,
+  SSkeleton,
+  SSkeletonItem,
   SSlider,
   SSubmenu,
   SSwitch,
