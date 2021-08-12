@@ -197,7 +197,7 @@ $s-color-button-tertiary-background-focused--dark: var(--s-color-base-background
   }
   span {
     font-feature-settings: var(--s-font-feature-settings-heading);
-    @include font-weight(700, true);
+    @include font-weight(700);
   }
   &:not(.s-action) > span {
     display: flex;
