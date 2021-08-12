@@ -1,16 +1,9 @@
-$neu-tab-shadow: var(--s-shadow-element);
-$neu-tab-shadow--dark: var(--s-shadow-element-pressed);
-$neu-tabs-shadow: var(--s-shadow-element-pressed);
-$neu-tabs-shadow--dark: var(--s-shadow-element);
+$neu-tab-shadow: var(--s-shadow-element-pressed);
+$neu-tabs-shadow: var(--s-shadow-element);
 
 :root {
   --neu-tab-shadow: #{$neu-tab-shadow};
   --neu-tabs-shadow: #{$neu-tabs-shadow};
-}
-
-[design-system-theme="dark"] {
-  --neu-tab-shadow: #{$neu-tab-shadow--dark};
-  --neu-tabs-shadow: #{$neu-tabs-shadow--dark};
 }
 
 .s-tabs.neumorphic {
