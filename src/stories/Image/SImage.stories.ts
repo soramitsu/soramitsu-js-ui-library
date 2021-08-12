@@ -15,8 +15,8 @@ export const configurable = () => ({
     :fit="fit"
     :alt="alt"
     :lazy="lazy"
-    :zIndex="zIndex"
-    :hasSkeleton="hasSkeleton"
+    :z-index="zIndex"
+    :has-skeleton="hasSkeleton"
     :animated="animated"
   />`,
   props: {
@@ -33,7 +33,7 @@ export const configurable = () => ({
       default: text('Alt', '')
     },
     zIndex: {
-      default: number('ZIndex', 0)
+      default: number('Z-index', 0)
     },
     hasSkeleton: {
       default: boolean('Has Skeleton', true)

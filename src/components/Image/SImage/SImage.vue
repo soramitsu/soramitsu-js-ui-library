@@ -2,17 +2,33 @@
   <div class="s-image__container">
     <s-skeleton
       v-if="hasSkeleton"
-      :loading="loading"
+      :loading="!this.elImage || this.elImage.loading"
       :animated="animated"
     >
       <template #template>
         <s-skeleton-item element="image" />
       </template>
       <template>
-        <el-image ref="image" class="s-image" :src="src" :lazy="lazy" />
+        <el-image
+          ref="image"
+          class="s-image"
+          :src="src"
+          :fit="fit"
+          :alt="alt"
+          :lazy="lazy"
+          :z-ndex="zIndex"
+        />
       </template>
     </s-skeleton>
-    <el-image v-else ref="image" class="s-image" :src="src" :lazy="lazy" />
+    <el-image v-else
+      ref="image"
+      class="s-image"
+      :src="src"
+      :fit="fit"
+      :alt="alt"
+      :lazy="lazy"
+      :z-ndex="zIndex"
+    />
   </div>
 </template>
 
@@ -50,7 +66,7 @@ export default class SImage extends Vue {
   /**
    * Set image preview z-index
    */
-  @Prop({ default: 0, type: String }) readonly zIndex?: number
+  @Prop({ default: 0, type: Number }) readonly zIndex?: number
   /**
    * Whether image has skeleton
    */
@@ -61,9 +77,5 @@ export default class SImage extends Vue {
   @Prop({ default: true, type: Boolean }) readonly animated?: boolean
 
   @Ref('image') elImage?: any
-
-  loading (): boolean {
-    return !this.elImage || this.elImage.loading
-  }
 }
 </script>
