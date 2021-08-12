@@ -2,6 +2,10 @@
   &.s-status-#{$status} {
     color: var(--s-color-status-#{$status});
     background: var(--s-color-status-#{$status}-background);
+
+    [design-system-theme="dark"] & {
+      --s-color-status-#{$status}: var(--s-color-base-on-accent);
+    }
   }
 }
 
