@@ -1,11 +1,11 @@
-import { boolean, number, text, withKnobs } from '@storybook/addon-knobs'
+import { boolean, number, text, select, withKnobs } from '@storybook/addon-knobs'
 
-import { SSkeleton, SSkeletonItem } from '../../components/Skeleton'
-import { SImage } from '../../components/Image'
+import { SSkeleton, SSkeletonItem, SkeletonItemElement } from '../components/Skeleton'
+import { SImage } from '../components/Image'
 
 export default {
   component: SSkeleton,
-  title: 'Design System/Components/Skeleton/SSkeleton',
+  title: 'Design System/Components/Skeleton',
   decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
@@ -58,6 +58,25 @@ export const configurable = () => ({
     },
     lazy: {
       default: boolean('Image Lazy', true)
+    }
+  }
+})
+
+export const SkeletonItem = () => ({
+  components: {
+    SSkeleton,
+    SSkeletonItem
+  },
+  template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
+              <s-skeleton animated :loading="true" style="width: 100%;">
+                <template #template>
+                  <s-skeleton-item :element="element" />
+                </template>
+              </s-skeleton>
+            </div>`,
+  props: {
+    element: {
+      default: select('Element', Object.values(SkeletonItemElement), SkeletonItemElement.TEXT)
     }
   }
 })

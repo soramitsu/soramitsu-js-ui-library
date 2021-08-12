@@ -1,14 +1,50 @@
-import { boolean, withKnobs } from '@storybook/addon-knobs'
+import { text, boolean, number, select, withKnobs } from '@storybook/addon-knobs'
 
-import { SImage } from '../../components/Image'
+import { SImage, ImageFit } from '../components/Image'
 
 export default {
   component: SImage,
-  title: 'Design System/Components/Image/Lazy',
+  title: 'Design System/Components/Image',
   decorators: [withKnobs]
 }
 
 export const configurable = () => ({
+  components: { SImage },
+  template: `<s-image
+    :src="src"
+    :fit="fit"
+    :alt="alt"
+    :lazy="lazy"
+    :z-index="zIndex"
+    :has-skeleton="hasSkeleton"
+    :animated="animated"
+  />`,
+  props: {
+    src: {
+      default: text('Src', 'https://picsum.photos/1024')
+    },
+    fit: {
+      default: select('Element', Object.values(ImageFit), ImageFit.NONE)
+    },
+    lazy: {
+      default: boolean('Lazy', true)
+    },
+    alt: {
+      default: text('Alt', '')
+    },
+    zIndex: {
+      default: number('Z-index', 0)
+    },
+    hasSkeleton: {
+      default: boolean('Has Skeleton', true)
+    },
+    animated: {
+      default: boolean('Skeleton has Animation', true)
+    }
+  }
+})
+
+export const LazyImages = () => ({
   components: { SImage },
   template: `<div style="width: 100%;">
     <s-image :src="imageSrc + '?random=1'" :lazy="true" :has-skeleton="false" />
