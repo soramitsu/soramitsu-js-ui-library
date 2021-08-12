@@ -1,11 +1,12 @@
 $s-skeleton-class: '.el-skeleton';
+$s-skeleton-background-color: var(--s-color-base-content-tertiary);
 
 .s-skeleton {
   #{$s-skeleton-class} {
     font-size: 0;
     width: 100%;
     &__item {
-      background-color: var(--s-color-base-background);
+      background-color: $s-skeleton-background-color;
       &:not(:last-child) {
         margin-bottom: calc(var(--s-basic-spacing) / 2);
       }
@@ -16,7 +17,7 @@ $s-skeleton-class: '.el-skeleton';
     &__image {
       min-height: 150px;
       svg {
-        fill: var(--s-color-base-on-disabled);
+        fill: var(--s-color-base-on-accent);
       }
     }
     &__text, &__caption, &__rect {
@@ -42,7 +43,7 @@ $s-skeleton-class: '.el-skeleton';
     }
     &.is-animated {
       #{$s-skeleton-class}__item {
-        background: linear-gradient(90deg, var(--s-color-base-background) 25%, var(--s-color-base-background-hover) 37%, var(--s-color-base-background) 63%);
+        background: linear-gradient(90deg, $s-skeleton-background-color 25%, var(--s-color-base-background-hover) 37%, $s-skeleton-background-color 63%);
         background-size: 400% 100%;
       }
     }
