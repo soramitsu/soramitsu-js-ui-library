@@ -1,6 +1,6 @@
 {
   "name": "@soramitsu/soramitsu-js-ui",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "private": false,
   "publishConfig": {
     "registry": "https://nexus.iroha.tech/repository/npm-soramitsu/"
@@ -28,7 +28,7 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "element-resize-detector": "^1.2.1",
-    "element-ui": "^2.13.2",
+    "element-ui": "^2.15.5",
     "lodash": "^4.17.15",
     "throttle-debounce": "^1.0.1",
     "v-jsoneditor": "^1.4.1",

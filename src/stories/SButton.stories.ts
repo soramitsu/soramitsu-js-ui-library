@@ -181,7 +181,7 @@ export const loading = () => ({
                  :type="item.type"
                  :tooltip="item.tooltip"
                  :icon="item.icon"
-                 :loading="true"
+                 loading
                >
                  {{ item.label }}
                </s-button>
