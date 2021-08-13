@@ -33,9 +33,9 @@ import { ImageFit } from '../consts'
 })
 export default class SImage extends Vue {
   /**
-   * Image source, same as native
+   * Image source, same as native, this is required property
    */
-  @Prop({ default: () => null, type: String }) readonly src!: string
+  @Prop({ default: () => null, type: String, required: true }) readonly src!: string
   /**
    * Indicate how the image should be resized to fit its container, same as object-fit.
    * Possible values are: `fill` / `contain` / `cover` / `none` / `scale-down`.
