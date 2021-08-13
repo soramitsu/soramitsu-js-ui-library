@@ -68,7 +68,7 @@ export const SkeletonItem = () => ({
     SSkeletonItem
   },
   template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
-              <s-skeleton animated :loading="true" style="width: 100%;">
+              <s-skeleton animated loading style="width: 100%;">
                 <template #template>
                   <s-skeleton-item :element="element" />
                 </template>

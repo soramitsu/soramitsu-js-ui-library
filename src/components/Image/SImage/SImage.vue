@@ -54,7 +54,7 @@ export default class SImage extends Vue {
    * The container to add scroll listener when using lazy load.
    * Posssible value is the nearest parent container whose overflow property is auto or scroll
    */
-  @Prop({ default: () => null, type: [String, HTMLElement] }) readonly scrollContainer!: string | HTMLElement
+  @Prop({ type: [String, HTMLElement] }) readonly scrollContainer!: string | HTMLElement
   /**
    * Set image preview z-index
    */
