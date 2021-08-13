@@ -24,6 +24,7 @@ import {
   SFormItem,
   SHeader,
   SIcon,
+  SImage,
   SInput,
   SFloatInput,
   SJsonInput,
@@ -41,6 +42,8 @@ import {
   SScrollSectionItem,
   SScrollSections,
   SSelect,
+  SSkeleton,
+  SSkeletonItem,
   SSlider,
   SSubmenu,
   SSwitch,
@@ -92,6 +95,7 @@ const SoramitsuElements = {
     vue.use(SFormItem)
     vue.use(SHeader)
     vue.use(SIcon)
+    vue.use(SImage)
     vue.use(SInput)
     vue.use(SFloatInput)
     vue.use(SJsonInput)
@@ -109,6 +113,8 @@ const SoramitsuElements = {
     vue.use(SScrollSectionItem)
     vue.use(SScrollSections)
     vue.use(SSelect)
+    vue.use(SSkeleton)
+    vue.use(SSkeletonItem)
     vue.use(SSlider)
     vue.use(SSubmenu)
     vue.use(SSwitch)
@@ -162,6 +168,7 @@ export {
   SFormItem,
   SHeader,
   SIcon,
+  SImage,
   SInput,
   SFloatInput,
   SJsonInput,
@@ -179,6 +186,8 @@ export {
   SScrollSectionItem,
   SScrollSections,
   SSelect,
+  SSkeleton,
+  SSkeletonItem,
   SSlider,
   SSubmenu,
   SSwitch,
