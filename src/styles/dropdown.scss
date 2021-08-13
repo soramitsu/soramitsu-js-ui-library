@@ -68,4 +68,10 @@
   &.is-disabled {
     color: var(--s-color-base-content-quaternary);
   }
+  &--divided {
+    border-top-color: var(--s-color-base-border-secondary);
+    &:before {
+      background-color: transparent;
+    }
+  }
 }
