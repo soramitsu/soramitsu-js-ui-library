@@ -1,44 +1,27 @@
 <template>
-  <div class="s-image__container">
-    <s-skeleton
-      v-if="hasSkeleton"
-      :loading="!elImage || elImage.loading"
-      :animated="animated"
-    >
+  <el-image
+    ref="image"
+    class="s-image"
+    :src="src"
+    :fit="fit"
+    :alt="alt"
+    :lazy="lazy"
+    :scroll-container="scrollContainer"
+    :z-ndex="zIndex"
+  >
+    <s-skeleton v-if="hasSkeleton" slot="placeholder" :animated="animated">
       <template #template>
-        <s-skeleton-item element="image" />
-      </template>
-      <template>
-        <el-image
-          ref="image"
-          class="s-image"
-          :src="src"
-          :fit="fit"
-          :alt="alt"
-          :lazy="lazy"
-          :scroll-container="scrollContainer"
-          :z-ndex="zIndex"
-        />
+        <s-skeleton-item :element="SkeletonItemElement.IMAGE" />
       </template>
     </s-skeleton>
-    <el-image v-else
-      ref="image"
-      class="s-image"
-      :src="src"
-      :fit="fit"
-      :alt="alt"
-      :lazy="lazy"
-      :scroll-container="scrollContainer"
-      :z-ndex="zIndex"
-    />
-  </div>
+  </el-image>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
 import ElImage from 'element-ui/lib/image'
 
-import { SSkeleton, SSkeletonItem } from '../../Skeleton'
+import { SSkeleton, SSkeletonItem, SkeletonItemElement } from '../../Skeleton'
 import { ImageFit } from '../consts'
 
 @Component({
@@ -56,9 +39,9 @@ export default class SImage extends Vue {
   /**
    * Indicate how the image should be resized to fit its container, same as object-fit.
    * Possible values are: `fill` / `contain` / `cover` / `none` / `scale-down`.
-   * Default value is ImageFit.FILL.
+   * Default value is ImageFit.NONE.
    */
-  @Prop({ default: ImageFit.FILL, type: String }) readonly fit!: string
+  @Prop({ default: ImageFit.NONE, type: String }) readonly fit!: string
   /**
    * Native alt
    */
@@ -71,7 +54,7 @@ export default class SImage extends Vue {
    * The container to add scroll listener when using lazy load.
    * Posssible value is the nearest parent container whose overflow property is auto or scroll
    */
-  @Prop({ default: '', type: [String, HTMLElement] }) readonly scrollContainer!: string | HTMLElement
+  @Prop({ default: () => null, type: [String, HTMLElement] }) readonly scrollContainer!: string | HTMLElement
   /**
    * Set image preview z-index
    */
@@ -84,6 +67,8 @@ export default class SImage extends Vue {
    * Whether skeleton has animation
    */
   @Prop({ default: true, type: Boolean }) readonly animated!: boolean
+
+  readonly SkeletonItemElement = SkeletonItemElement
 
   @Ref('image') elImage!: any
 }

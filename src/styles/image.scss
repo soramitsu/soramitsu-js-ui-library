@@ -1,5 +1,18 @@
 .s-image {
+  width: 100%;
   &__container {
+    overflow-y: auto;
+    height: auto;
     width: 100%;
+  }
+  .el-image__error {
+    height: inherit;
+    width: 100%;;
+    background-color: var(--s-color-status-error-background);
+    color: var(--s-color-status-error);
+    font-size: var(--s-font-size-medium);
+    [design-system-theme="dark"] & {
+      color: var(--s-color-base-on-accent);
+    }
   }
 }
