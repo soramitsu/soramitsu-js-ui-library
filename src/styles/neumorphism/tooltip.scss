@@ -77,13 +77,13 @@ $neu-tooltip-arrow-width: 8px;
       &[x-placement^="left"],
       &[x-placement^="left-start"] {
         .popper__arrow {
-          margin-top: calc($neu-tooltip-arrow-shift / 2);
+          margin-top: calc(#{$neu-tooltip-arrow-shift} / 2);
         }
       }
       &[x-placement^="right-end"],
       &[x-placement^="left-end"] {
         .popper__arrow {
-          margin-bottom: calc($neu-tooltip-arrow-shift / 2);
+          margin-bottom: calc(#{$neu-tooltip-arrow-shift} / 2);
         }
       }
     }
