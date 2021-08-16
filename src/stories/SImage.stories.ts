@@ -10,16 +10,17 @@ export default {
 
 export const configurable = () => ({
   components: { SImage },
-  template: `<s-image
-    :src="src"
-    :fit="fit"
-    :alt="alt"
-    :lazy="lazy"
-    :z-index="zIndex"
-    :has-skeleton="hasSkeleton"
-    :animated="animated"
-    style="height: 300px;"
-  />`,
+  template: `
+    <s-image
+      :src="src"
+      :fit="fit"
+      :alt="alt"
+      :lazy="lazy"
+      :z-index="zIndex"
+      :has-skeleton="hasSkeleton"
+      :animated="animated"
+      style="height: 300px;"
+    />`,
   props: {
     src: {
       default: text('Src', 'https://picsum.photos/1024')
@@ -47,23 +48,24 @@ export const configurable = () => ({
 
 export const LazyImages = () => ({
   components: { SImage },
-  template: `<div style="width: 100%; overflow-y: auto; height: 300px;">
-    <s-image :src="imageSrc + '?random=1'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=2'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=3'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=4'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=5'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=6'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=7'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=8'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=9'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=10'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=11'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=12'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=13'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=14'" lazy style="height: inherit;" />
-    <s-image :src="imageSrc + '?random=15'" lazy style="height: inherit;" />
-  </div>`,
+  template: `
+    <div style="width: 100%; overflow-y: auto; height: 300px;">
+      <s-image :src="imageSrc + '?random=1'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=2'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=3'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=4'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=5'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=6'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=7'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=8'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=9'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=10'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=11'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=12'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=13'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=14'" lazy style="height: inherit;" />
+      <s-image :src="imageSrc + '?random=15'" lazy style="height: inherit;" />
+    </div>`,
   data: () => ({
     imageSrc: 'https://picsum.photos/1024/300'
   })
