@@ -50,4 +50,28 @@ $neu-tooltip-background-color:  var(--s-color-base-content-secondary) !default;
       }
     }
   }
+  &.s-border-radius-mini {
+    $popper-arrow-shift: calc(var(--s-border-radius-mini) / 4);
+    $popper-arrow-width: 7px;
+    &[x-placement^="right"],
+    &[x-placement^="right-start"],
+    &[x-placement^="left"],
+    &[x-placement^="left-start"] {
+      .popper__arrow {
+        margin-top: $popper-arrow-shift;
+      }
+    }
+    &[x-placement^="right-end"],
+    &[x-placement^="left-end"] {
+      .popper__arrow {
+        margin-bottom: $popper-arrow-shift;
+      }
+    }
+    &[x-placement^="right"] .popper__arrow {
+      border-right-width: $popper-arrow-width;
+    }
+    &[x-placement^="left"] .popper__arrow {
+      border-left-width: $popper-arrow-width;
+    }
+  }
 }
