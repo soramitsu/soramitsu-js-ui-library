@@ -86,7 +86,7 @@ export const withDifferentPlacement = () => ({
   components: { STooltip, SButton, SRow, SMain },
   template: `<s-main style="padding: 40px 80px;">
                <s-row v-for="placements in items" :key="placements[0]" style="padding-bottom: 20px;">
-                 <s-tooltip v-for="placement in placements" :key="placement" :placement="placement" :content="placement">
+                 <s-tooltip v-for="placement in placements" :border-radius="borderRadius" :key="placement" :placement="placement" :content="placement">
                    <s-button>{{ placement }}</s-button>
                  </s-tooltip>
                </s-row>
@@ -94,6 +94,9 @@ export const withDifferentPlacement = () => ({
   props: {
     items: {
       default: () => differentPlacementData
+    },
+    borderRadius: {
+      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
     }
   }
 })

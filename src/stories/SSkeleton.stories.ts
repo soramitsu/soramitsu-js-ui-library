@@ -16,27 +16,28 @@ export const configurable = () => ({
     SSkeletonItem,
     SImage
   },
-  template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
-              <s-skeleton
-                :animated="animated"
-                :count="count"
-                :loading="loading"
-                :rows="2"
-                :throttle="throttle"
-                style="width: 100%;"
-              >
-                <template #template>
-                  <s-skeleton-item element="image" />
-                  <s-skeleton-item element="p" />
-                  <s-skeleton-item element="p" />
-                </template>
-                <template>
-                  <s-image :src="src" :lazy="lazy" :has-skeleton="false" />
-                  <p class="p3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  <p class="p3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </template>
-              </s-skeleton>
-            </div>`,
+  template: `
+    <div class="s-flex" style="flex: 1; flex-direction: column;">
+      <s-skeleton
+        :animated="animated"
+        :count="count"
+        :loading="loading"
+        :rows="2"
+        :throttle="throttle"
+        style="width: 100%;"
+      >
+        <template #template>
+          <s-skeleton-item element="image" />
+          <s-skeleton-item element="p" />
+          <s-skeleton-item element="p" />
+        </template>
+        <template>
+          <s-image :src="src" :lazy="lazy" :has-skeleton="false" />
+          <p class="p3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p class="p3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </template>
+      </s-skeleton>
+    </div>`,
   props: {
     animated: {
       default: boolean('Animated', true)
@@ -67,13 +68,14 @@ export const SkeletonItem = () => ({
     SSkeleton,
     SSkeletonItem
   },
-  template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
-              <s-skeleton animated loading style="width: 100%;">
-                <template #template>
-                  <s-skeleton-item :element="element" />
-                </template>
-              </s-skeleton>
-            </div>`,
+  template: `
+    <div class="s-flex" style="flex: 1; flex-direction: column;">
+      <s-skeleton animated loading style="width: 100%;">
+        <template #template>
+          <s-skeleton-item :element="element" />
+        </template>
+      </s-skeleton>
+    </div>`,
   props: {
     element: {
       default: select('Element', Object.values(SkeletonItemElement), SkeletonItemElement.TEXT)
