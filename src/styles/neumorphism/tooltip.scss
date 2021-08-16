@@ -2,6 +2,8 @@ $neu-tooltip-max-width: 236px !default;
 $neu-tooltip-padding: 6px 8px !default;
 $neu-tooltip-line-height: 12px !default;
 $neu-tooltip-background-color:  var(--s-color-base-content-secondary) !default;
+$neu-tooltip-arrow-shift: calc(var(--s-border-radius-mini) / 4);
+$neu-tooltip-arrow-width: 8px;
 
 .el-tooltip__popper.neumorphic {
   max-width: $neu-tooltip-max-width;
@@ -38,6 +40,7 @@ $neu-tooltip-background-color:  var(--s-color-base-content-secondary) !default;
     &[x-placement^="right"] .popper__arrow {
       border-right-color: $neu-tooltip-background-color;
       border-bottom-color: transparent;
+      border-right-width: $neu-tooltip-arrow-width;
       &::after {
         border-right-color: inherit;
       }
@@ -45,8 +48,60 @@ $neu-tooltip-background-color:  var(--s-color-base-content-secondary) !default;
     &[x-placement^="left"] .popper__arrow {
       border-left-color: $neu-tooltip-background-color;
       border-bottom-color: transparent;
+      border-left-width: $neu-tooltip-arrow-width;
       &::after {
         border-left-color: inherit;
+      }
+    }
+  }
+  &.s-border-radius {
+    &-mini {
+      &[x-placement^="right"],
+      &[x-placement^="right-start"],
+      &[x-placement^="left"],
+      &[x-placement^="left-start"] {
+        .popper__arrow {
+          margin-top: $neu-tooltip-arrow-shift;
+        }
+      }
+      &[x-placement^="right-end"],
+      &[x-placement^="left-end"] {
+        .popper__arrow {
+          margin-bottom: $neu-tooltip-arrow-shift;
+        }
+      }
+    }
+    &-small {
+      &[x-placement^="right"],
+      &[x-placement^="right-start"],
+      &[x-placement^="left"],
+      &[x-placement^="left-start"] {
+        .popper__arrow {
+          margin-top: calc(#{$neu-tooltip-arrow-shift} / 2);
+        }
+      }
+      &[x-placement^="right-end"],
+      &[x-placement^="left-end"] {
+        .popper__arrow {
+          margin-bottom: calc(#{$neu-tooltip-arrow-shift} / 2);
+        }
+      }
+    }
+    &-medium,
+    &-big {
+      &[x-placement^="right"],
+      &[x-placement^="right-start"],
+      &[x-placement^="left"],
+      &[x-placement^="left-start"] {
+        .popper__arrow {
+          margin-top: -2px;
+        }
+      }
+      &[x-placement^="right-end"],
+      &[x-placement^="left-end"] {
+        .popper__arrow {
+          margin-bottom: -2px;
+        }
       }
     }
   }
