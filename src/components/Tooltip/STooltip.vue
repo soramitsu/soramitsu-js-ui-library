@@ -85,9 +85,9 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
   /**
    * Delay of the tooltip appearance, in millisecond.
    *
-   * `0` by default
+   * `1000` by default
    */
-  @Prop({ default: 0, type: Number }) readonly openDelay!: number
+  @Prop({ default: 1000, type: Number }) readonly openDelay!: number
   /**
    * Custom class name for tooltip's popper
    */
