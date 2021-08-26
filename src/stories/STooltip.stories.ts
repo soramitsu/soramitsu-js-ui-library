@@ -49,7 +49,7 @@ export const configurable = () => ({
       default: number('Offset', 0)
     },
     openDelay: {
-      default: number('Open delay', 0)
+      default: number('Open delay', 1000)
     },
     closeDelay: {
       default: number('Close delay', 0)
