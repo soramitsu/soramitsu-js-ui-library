@@ -1,6 +1,7 @@
 .el-dialog {
   background-color: var(--s-color-base-on-accent);
   &__wrapper {
+    overflow: hidden;
     &.s-border-radius {
       &-big,
       &-medium,
