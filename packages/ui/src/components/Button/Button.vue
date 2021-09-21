@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type BtnType = 'primary' | 'outline'
+type BtnType = 'primary' | 'secondary'
 
 const props = withDefaults(
   defineProps<{

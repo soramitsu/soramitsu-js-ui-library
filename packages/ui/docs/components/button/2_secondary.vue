@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Button } from '@/components/Button'
+import { SButton } from '@/components/Button'
 </script>
 
 <template>
   <DemoSection>
-    <Button type="secondary">
+    <SButton type="secondary">
       Secondary btn
-    </Button>
+    </SButton>
   </DemoSection>
 </template>

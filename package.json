@@ -1,24 +1,18 @@
 {
-    "name": "@soramitsu-ui/monorepo",
-    "version": "0.0.0",
-    "scripts": {
-        "preinstall": "npx only-allow pnpm"
-    },
-    "devDependencies": {
-        "@types/node": "^16.9.4",
-        "@typescript-eslint/eslint-plugin": "^4.31.1",
-        "@typescript-eslint/parser": "^4.31.1",
-        "esbuild-register": "^3.0.0",
-        "eslint": "^7.32.0",
-        "eslint-config-alloy": "^4.3.0",
-        "eslint-plugin-vue": "^7.18.0",
-        "prettier": "^2.4.1",
-        "prettier-eslint": "^13.0.0",
-        "rollup": "^2.56.3",
-        "rollup-plugin-esbuild": "^4.5.0",
-        "rollup-plugin-scss": "^3.0.0",
-        "rollup-plugin-vue": "^6.0.0",
-        "sass": "^1.41.1",
-        "typescript": "^4.4.3"
-    }
+  "name": "@soramitsu-ui/monorepo",
+  "version": "0.0.0",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
+  "devDependencies": {
+    "@types/node": "^16.9.4",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "eslint": "^7.32.0",
+    "eslint-config-alloy": "^4.3.0",
+    "eslint-plugin-vue": "^7.18.0",
+    "prettier": "^2.4.1",
+    "prettier-eslint": "^13.0.0",
+    "typescript": "^4.4.3"
+  }
 }
