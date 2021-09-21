@@ -1,6 +1,10 @@
 import { defineConfig } from 'windicss/helpers'
-import { presetToWindicssPreset, PRESET_DEFAULT } from '@soramitsu-ui/theme'
+import { preset, THEME_DEFAULT, pluginThemeUtility } from '@soramitsu-ui/theme'
 
 export default defineConfig({
-    presets: [presetToWindicssPreset(PRESET_DEFAULT)],
+  extract: {
+    include: ['**/*.{md,vue}', '.vitepress/**/*.{ts,md,vue}'],
+  },
+  presets: [preset],
+  plugins: [pluginThemeUtility('default', THEME_DEFAULT)],
 })

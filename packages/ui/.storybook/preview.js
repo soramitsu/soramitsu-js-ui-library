@@ -4,18 +4,18 @@ import { addParameters } from '@storybook/vue3'
 import { DocsPage, DocsContainer } from '@storybook/addon-docs'
 
 addParameters({
-  docs: {
-    container: DocsContainer,
-    page: DocsPage,
-  },
+    docs: {
+        container: DocsContainer,
+        page: DocsPage,
+    },
 })
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
+    actions: { argTypesRegex: '^on[A-Z].*' },
+    controls: {
+        matchers: {
+            color: /(background|color)$/i,
+            date: /Date$/,
+        },
     },
-  },
 }

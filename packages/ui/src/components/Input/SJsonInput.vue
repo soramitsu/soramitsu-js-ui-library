@@ -1,24 +1,15 @@
 <script setup lang="ts">
-import {
-  defineProps,
-  computed,
-  ref,
-  onMounted,
-  onBeforeUnmount,
-  defineEmit,
-  nextTick,
-  watch,
-} from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
 import type { PropType } from 'vue'
 import JSONEditor from 'jsoneditor'
 import type { JSONEditorOptions } from 'jsoneditor'
 import 'jsoneditor/dist/jsoneditor.min.css'
 import isEmpty from 'lodash/fp/isEmpty'
 
-const emit = defineEmit(['input', 'error'])
+const emit = defineEmits(['update:modelValue', 'error'])
 
 const props = defineProps({
-  value: {
+  modelValue: {
     type: Object,
     default: () => ({}),
   },
@@ -32,9 +23,11 @@ const props = defineProps({
   },
   dictionary: {
     type: Array as PropType<Array<string>>,
-    default: () => ([]),
+    default: () => [],
   },
 })
+
+const model = computed(() => props.modelValue)
 
 const minHeight = 178
 
@@ -73,8 +66,7 @@ const computedOptions = computed(() => ({
 }))
 
 const computedHeight = computed(() => {
-  if (localHeight.value === null)
-    return props.height
+  if (localHeight.value === null) return props.height
   return `${localHeight.value}px`
 })
 
@@ -105,13 +97,17 @@ watch(computedHeight, () => {
 function onChange(...args: any) {
   let error = null
   let json = {}
-  try { json = (editor.value as any).get() }
-  catch (err) { error = err }
-  if (error) { emit('error', error) }
-  else {
+  try {
+    json = (editor.value as any).get()
+  } catch (err) {
+    error = err
+  }
+  if (error) {
+    emit('error', error)
+  } else {
     if (editor.value) {
       internalChange.value = true
-      emit('input', json)
+      emit('update:modelValue', json)
       nextTick(() => {
         internalChange.value = false
       })
@@ -129,7 +125,7 @@ function initView() {
     }
     editor.value = new JSONEditor(jsoneditor.value, editorOptions)
   }
-  editor.value.set(props.value !== undefined ? props.value : {})
+  editor.value.set(model.value !== undefined ? model.value : {})
   aceEditor.value = (editor.value as any).aceEditor
 }
 
@@ -140,14 +136,22 @@ function destroyView() {
   }
 }
 
-watch(() => props.value, () => {
-  if (editor.value && props.value !== undefined && !internalChange.value) editor.value.set(props.value)
-}, { deep: true })
+watch(
+  model,
+  (val) => {
+    if (editor.value && val !== undefined && !internalChange.value) editor.value.set(val)
+  },
+  { deep: true },
+)
 
-watch(() => props.options, () => {
-  if (!editor.value) throw new Error('editor is null')
-  if (props.options && props.options.mode && editor) editor.value.setMode(props.options.mode)
-}, { deep: true })
+watch(
+  () => props.options,
+  () => {
+    if (!editor.value) throw new Error('editor is null')
+    if (props.options?.mode && editor) editor.value.setMode(props.options.mode)
+  },
+  { deep: true },
+)
 </script>
 
 <template>
@@ -201,7 +205,7 @@ $footer-height: 26px
 </style>
 
 <style lang="sass">
-@import '../../styles/variables.scss'
+// @import '../../styles/variables.scss'
 
 $color-ide-variable: #0451A5
 $color-ide-string: #A31515
@@ -213,7 +217,8 @@ $footer-height: 26px
 .s-json-input__editor
   .jsoneditor
     border: none !important
-    font-family: $s-font-family-mono
+    @apply font-mono
+    // font-family: $s-font-family-mono
 
   .jsoneditor-outer
     height: calc(100% - #{$footer-height})
@@ -222,16 +227,19 @@ $footer-height: 26px
 
   .ace-jsoneditor
     *, textarea.jsoneditor-text *
-      font-family: $s-font-family-mono
+      @apply font-mono
+      // font-family: $s-font-family-mono
 
     .ace_fold
       border: none
       background: none
-      color: var(--s-color-base-content-primary)
+      @apply text-base-content-primary
+      // color: var(--s-color-base-content-primary)
       margin-top: -13px
 
     .ace_text-layer
-      color: var(--s-color-base-content-primary)
+      @apply text-base-content-primary
+      // color: var(--s-color-base-content-primary)
 
     .ace_variable
       color: $color-ide-variable
@@ -252,16 +260,19 @@ $footer-height: 26px
 
       .ace_marker-layer
         .ace_active-line
-          background-color: var(--s-color-base-background)
+          @apply bg-base-background
+          // background-color: var(--s-color-base-background)
 
         .ace_selection
-          background: var(--s-color-base-background-hover)
+          @apply bg-base-background-hover
+          // background: var(--s-color-base-background-hover)
 
   .jsoneditor-statusbar
     border-bottom-left-radius: 3px
     border-bottom-right-radius: 3px
-    background-color: var(--s-color-base-background)
-    color: var(--s-color-base-content-tertiary)
+    @apply bg-base-background text-base-content-tertiary
+    // background-color: var(--s-color-base-background)
+    // color: var(--s-color-base-content-tertiary)
 
     .jsoneditor-parse-error-icon
       // If full error message will be needed, then it should be removed
@@ -269,23 +280,28 @@ $footer-height: 26px
       pointer-events: none
 
   .ace_gutter
-    background-color: var(--s-color-base-background)
-    color: var(--s-color-base-content-primary)
+    @apply bg-base-background text-base-content-primary
+    // background-color: var(--s-color-base-background)
+    // color: var(--s-color-base-content-primary)
 
     &-active-line
-      background-color: var(--s-color-base-background-hover)
+      @apply bg-base-background-hover
+      // background-color: var(--s-color-base-background-hover)
 
   .ace_editor .ace_content,
   .ace_gutter .ace_gutter-cell
-    font-family: $s-font-family-mono
+    @apply font-mono
+    // font-family: $s-font-family-mono
 
   .ace_tooltip
-    font-family: $s-font-family-default
-    background: var(--s-color-base-content-primary)
-    border-color: var(--s-color-base-content-primary)
-    color: var(--s-color-base-on-accent)
-    border-radius: var(--s-border-radius-mini)
+    @apply bg-base-content-primary border-base-content-primary text-base-on-accent
+    @apply rounded-sm text-p4 font-serif
+    // font-family: $s-font-family-default
+    // background: var(--s-color-base-content-primary)
+    // border-color: var(--s-color-base-content-primary)
+    // color: var(--s-color-base-on-accent)
+    // border-radius: var(--s-border-radius-mini)
     padding: 10px
-    font-size: var(--s-font-size-mini)
+    // font-size: var(--s-font-size-mini)
     line-height: 1.2
 </style>

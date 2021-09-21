@@ -2,32 +2,55 @@
 type BtnType = 'primary' | 'outline'
 
 const props = withDefaults(
-    defineProps<{
-        rounded: boolean
-        type: BtnType
-    }>(),
-    {
-        type: 'primary',
-    },
+  defineProps<{
+    rounded?: boolean
+    type?: BtnType
+  }>(),
+  {
+    type: 'primary',
+  },
 )
 </script>
 
 <template>
-    <div
-        :class="[
-            's-button',
-            `s-button--type-${type}`,
-            {
-                's-rounded--rounded': rounded,
-            },
-        ]"
-    >
-        <slot />
-    </div>
+  <div
+    role="button"
+    tabindex="0"
+    :class="[
+      's-button',
+      `s-button--type-${type}`,
+      {
+        's-button--rounded': rounded,
+      },
+    ]"
+  >
+    <slot />
+  </div>
 </template>
 
 <style lang="scss">
 .s-button {
-    color: white;
+  @apply cursor-pointer inline-block px-2 py-1 rounded select-none;
+
+  &--type-primary {
+    @apply text-white bg-accent;
+    &:hover {
+      @apply bg-accent-hover;
+    }
+    &:active {
+      @apply bg-accent-pressed;
+    }
+    &:focus {
+      @apply bg-accent-focused;
+    }
+  }
+
+  &--type-secondary {
+    @apply bg-gray-300 text-black;
+  }
+
+  &--rounded {
+    @apply rounded-full;
+  }
 }
 </style>
