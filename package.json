@@ -1,6 +1,6 @@
 {
   "name": "@soramitsu/soramitsu-js-ui",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "private": false,
   "publishConfig": {
     "registry": "https://nexus.iroha.tech/repository/npm-soramitsu/"
