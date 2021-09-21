@@ -84,8 +84,8 @@ $neu-button-tertiary-background-color: var(--s-color-utility-body) !default;
 $neu-button-tertiary-background-color-active: $neu-button-tertiary-background-color !default;
 $neu-button-tertiary-background-color-alternative: $neu-button-tertiary-background-color !default;
 // Tertiary button: text colors
-$neu-button-tertiary-text-color: var(--s-color-base-content-secondary) !default;
-$neu-button-tertiary-text-color-active: var(--s-color-base-content-primary) !default;
+$neu-button-tertiary-text-color: var(--s-color-base-content-tertiary) !default;
+$neu-button-tertiary-text-color-active: var(--s-color-base-content-secondary) !default;
 // Tertiary button: border colors
 $neu-button-tertiary-border-color: transparent !default;
 $neu-button-tertiary-border-color-active: $neu-button-tertiary-border-color !default;
@@ -93,6 +93,21 @@ $neu-button-tertiary-border-color-active: $neu-button-tertiary-border-color !def
 $neu-button-tertiary-box-shadow: var(--s-shadow-element-pressed) !default;
 $neu-button-tertiary-box-shadow-pressed: var(--s-shadow-element) !default;
 $neu-button-tertiary-box-shadow-active: $neu-button-tertiary-box-shadow !default;
+// Dark Theme: Tertiary button: box-shadow
+$neu-button-tertiary-box-shadow--dark: var(--s-shadow-element-pressed--dark) !default;
+$neu-button-tertiary-box-shadow-active--dark: $neu-button-tertiary-box-shadow--dark !default;
+
+:root {
+  --neu-button-tertiary-box-shadow: #{$neu-button-tertiary-box-shadow};
+  --neu-button-tertiary-box-shadow-active: #{$neu-button-tertiary-box-shadow-active};
+  --neu-button-tertiary-box-shadow--dark: #{$neu-button-tertiary-box-shadow--dark};
+  --neu-button-tertiary-box-shadow-active--dark: #{$neu-button-tertiary-box-shadow-active--dark};
+}
+
+[design-system-theme="dark"] {
+  --neu-button-tertiary-box-shadow: #{$neu-button-tertiary-box-shadow--dark};
+  --neu-button-tertiary-box-shadow-active: #{$neu-button-tertiary-box-shadow-active--dark};
+}
 
 // Action button: common
 $neu-button-action-border-width: 0px !default;
@@ -268,7 +283,7 @@ $neu-button-padding-mini: 3px 6px !default;
     border-color: $neu-button-tertiary-border-color;
     border-style: $neu-button-tertiary-border-style;
     border-width: $neu-button-tertiary-border-width;
-    box-shadow: $neu-button-tertiary-box-shadow;
+    box-shadow: var(--neu-button-tertiary-box-shadow);
     color: $neu-button-tertiary-text-color;
 
     &:hover, &:focus, &.focusing, &:active, &.s-pressed {
