@@ -2,7 +2,26 @@
   "name": "@soramitsu-ui/theme",
   "version": "0.1.0",
   "main": "src/lib.ts",
+  "scripts": {
+    "build": "del dist/* tmp-declaration/* && pnpm build:declaration && pnpm build:rollup",
+    "build:rollup": "rollup -c",
+    "build:declaration": "tsc --declaration --declarationDir tmp-declaration --emitDeclarationOnly"
+  },
   "dependencies": {
     "windicss": "^3.1.7"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "del": "^6.0.0",
+    "del-cli": "^4.0.1",
+    "rollup": "^2.56.3",
+    "rollup-plugin-dts": "^4.0.0",
+    "rollup-plugin-esbuild": "^4.5.0",
+    "sucrase": "^3.20.1"
+  },
+  "publishConfig": {
+    "main": "dist/lib.cjs.js",
+    "module": "dist/lib.esm.js",
+    "types": "dist/lib.d.ts"
   }
 }
