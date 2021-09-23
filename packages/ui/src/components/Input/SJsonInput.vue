@@ -123,7 +123,7 @@ function initView() {
       ...computedOptions.value,
       onChange,
     }
-    editor.value = new JSONEditor(jsoneditor.value, editorOptions)
+    editor.value = new JSONEditor(jsoneditor.value as HTMLElement, editorOptions)
   }
   editor.value.set(model.value !== undefined ? model.value : {})
   aceEditor.value = (editor.value as any).aceEditor

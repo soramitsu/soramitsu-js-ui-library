@@ -28,28 +28,28 @@ function configForTheme(name: string, theme: ThemePreset): RollupOptions {
 }
 
 export default defineConfig([
-  // {
-  //   input: 'src/lib.ts',
-  //   external: [/^windicss/],
-  //   plugins: [esbuild()],
-  //   output: [
-  //     {
-  //       file: 'dist/lib.esm.js',
-  //       format: 'esm',
-  //     },
-  //     {
-  //       file: 'dist/lib.cjs.js',
-  //       format: 'cjs',
-  //     },
-  //   ],
-  // },
-  // {
-  //   input: 'tmp-declaration/lib.d.ts',
-  //   plugins: [dts()],
-  //   output: {
-  //     file: 'dist/lib.d.ts',
-  //     format: 'esm',
-  //   },
-  // },
-  configForTheme('default', themeDefault),
+  {
+    input: 'src/lib.ts',
+    external: [/^windicss/],
+    plugins: [esbuild()],
+    output: [
+      {
+        file: 'dist/lib.esm.js',
+        format: 'esm',
+      },
+      {
+        file: 'dist/lib.cjs.js',
+        format: 'cjs',
+      },
+    ],
+  },
+  {
+    input: 'tmp-declaration/lib.d.ts',
+    plugins: [dts()],
+    output: {
+      file: 'dist/lib.d.ts',
+      format: 'esm',
+    },
+  },
+  // configForTheme('default', themeDefault),
 ])

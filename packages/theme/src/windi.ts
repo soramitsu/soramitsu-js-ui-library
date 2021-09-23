@@ -6,7 +6,7 @@ function v(variableName: ThemeVars): string {
   return `var(${variableName})`
 }
 
-export function pluginThemeUtility(themeName: string, theme: ThemePreset) {
+export function windicssPluginThemeUtility(themeName: string, theme: ThemePreset) {
   return plugin(({ addUtilities }) => {
     addUtilities({
       [`.theme-${themeName}`]: {
@@ -16,10 +16,17 @@ export function pluginThemeUtility(themeName: string, theme: ThemePreset) {
   })
 }
 
-export const preset: Config = {
+export const windicssPreset: Config = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          'soramitsu-red': v(ThemeVars.BrandSoramitsuRed),
+          'pms-black': v(ThemeVars.BrandPMSBlack),
+          'ultra-black': v(ThemeVars.BrandUltraBlack),
+          'white': v(ThemeVars.BrandWhite),
+          'polkaswap-pink': v(ThemeVars.BrandPolkaswapPink),
+        },
         accent: {
           DEFAULT: v(ThemeVars.ColorThemeAccent),
           hover: v(ThemeVars.ColorThemeAccentHover),

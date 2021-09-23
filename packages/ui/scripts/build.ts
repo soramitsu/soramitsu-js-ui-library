@@ -13,13 +13,8 @@ async function main() {
   consola.info('Clearing dist & declaration build dir')
   await del(['dist/*', 'tmp-declaration/*'])
 
-  consola.info('Running typecheck')
   await $('pnpm', ['typecheck'])
-
-  consola.info('Building declaration')
   await $('pnpm', ['build:declaration'])
-
-  consola.info('Rolling up')
   await $('pnpm', ['build:rollup'])
 
   consola.success('UI build is done! ^_^')
