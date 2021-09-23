@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import windi from 'vite-plugin-windicss'
 import path from 'path'
+import { windicssPreset, THEME_DEFAULT, windicssPluginThemeUtility } from '@soramitsu-ui/theme'
 
 /**
  * Special config for vitepress

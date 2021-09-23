@@ -20,5 +20,12 @@ module.exports = {
         'cypress/globals': true,
       },
     },
+    // WIP
+    // {
+    //   files: ['**/packages/ui/src/**/*.spec.{j,t}s'],
+    //   env: {
+    //     jest: true,
+    //   },
+    // },
   ],
 }

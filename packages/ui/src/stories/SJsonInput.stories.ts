@@ -20,28 +20,28 @@ const meta: Meta = {
 
 export default meta
 
-type Props = {}
-
-const value = {
-  object: {
-    string: 'I am a string!',
-    array: [1, 2, 3],
-    null: null,
-    boolean: true,
-  },
-  anotherArray: [1, 2, 3.5],
-  boolean: false,
-  null: null,
-  number: 21,
+interface Props {
+  value: any
 }
 
-const Template: Story<Props> = args => ({
+const Template: Story<Props> = (args: unknown) => ({
   components: { SJsonInput },
   setup() {
     return { args }
   },
   data: () => ({
-    value,
+    value: {
+      object: {
+        string: 'I am a string!',
+        array: [1, 2, 3],
+        null: null,
+        boolean: true,
+      },
+      anotherArray: [1, 2, 3.5],
+      boolean: false,
+      null: null,
+      number: 21,
+    },
   }),
   template: '<SJsonInput :value="value" v-bind="args" />',
 })

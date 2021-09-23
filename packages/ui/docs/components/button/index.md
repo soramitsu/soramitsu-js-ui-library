@@ -6,14 +6,14 @@ import Rounded from './3_rounded.vue'
 
 # Button
 
-### Just a button
+## Just a button
 
 <JustButton/>
 
-### Secondary button
+## Secondary button
 
 <Secondary/>
 
-### Rounded
+## Rounded
 
 <Rounded/>

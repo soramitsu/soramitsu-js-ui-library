@@ -4,4 +4,6 @@ import Example from './1_example.vue'
 
 # JSON Input
 
+## Empty example
+
 <Example/>
