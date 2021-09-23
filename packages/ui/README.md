@@ -6,4 +6,6 @@ Main package.
 
 ```sh
 pnpm docs:dev
+pnpm docs:build
+pnpm docs:serve
 ```

@@ -6,7 +6,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["cypress", "cypress-plugin-snapshots"]
   },
   "include": [
     "src/**/*.ts",
@@ -15,6 +16,8 @@
     "src/**/*.vue",
     "docs/**/*.ts",
     "docs/**/*.vue",
-    "docs/**/*.js"
+    "docs/**/*.js",
+    "cypress/**/*.ts",
+    "cypress/**/*.js"
   ]
 }

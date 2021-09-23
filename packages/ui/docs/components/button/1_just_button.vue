@@ -3,7 +3,7 @@ import { SButton } from '@/components/Button'
 </script>
 
 <template>
-  <DemoSection>
+  <DemoSection data-cy="story-just-button">
     <SButton>Act</SButton>
   </DemoSection>
 </template>
