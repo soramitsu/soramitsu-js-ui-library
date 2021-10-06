@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   stories: [
     '../src/**/*.stories.mdx',
@@ -13,6 +15,12 @@ module.exports = {
     if (scssRule) {
       scssRule.sideEffects = true
     }
+
+    config.module.rules.push({
+      test: /\.vue$/,
+      loader: require.resolve('vue-loader'),
+      include: path.resolve(__dirname, '../'),
+    });
 
     return config
   }

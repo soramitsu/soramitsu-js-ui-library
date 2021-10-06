@@ -1,6 +1,9 @@
 {
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "docs:serve": "yarn --cwd packages/ui docs:serve",
+    "docs:build": "yarn --cwd packages/ui docs:build"
+  },
   "workspaces": [
     "packages/*"
   ],

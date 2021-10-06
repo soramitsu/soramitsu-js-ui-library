@@ -44,7 +44,6 @@
     "rollup-plugin-vue": "^6.0.0",
     "rollup-plugin-windicss": "^1.4.3",
     "sass": "^1.41.1",
-    "sass-loader": "^12.1.0",
     "sucrase": "^3.20.1",
     "type-fest": "^2.3.4",
     "vite": "^2.5.10",
