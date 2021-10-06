@@ -9,5 +9,15 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "lib": ["esnext", "dom"]
+    },
+    "paths": {
+        "@soramitsu-ui/icons": ["packages/icons/src"],
+        "@soramitsu-ui/icons/*": ["packages/icons/src/*"],
+        "@soramitsu-ui/script-utils": ["packages/script-utils/src"],
+        "@soramitsu-ui/script-utils/*": ["packages/script-utils/src/*"],
+        "@soramitsu-ui/theme": ["packages/theme/src"],
+        "@soramitsu-ui/theme/*": ["packages/theme/src/*"],
+        "@soramitsu-ui/ui": ["packages/ui/src"],
+        "@soramitsu-ui/ui/*": ["packages/ui/src/*"]
     }
 }
