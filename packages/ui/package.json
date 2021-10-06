@@ -16,7 +16,7 @@
     "vue": "3.2.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.5",
+    "@mdx-js/preact": "^1.6.22",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
     "@soramitsu-ui/theme": "^0.1.0",
@@ -28,7 +28,6 @@
     "@types/lodash": "^4.14.173",
     "@vitejs/plugin-vue": "^1.8.1",
     "@vue/compiler-sfc": "3.2.12",
-    "babel-loader": "^8.2.2",
     "chalk": "^4.1.2",
     "consola": "^2.15.3",
     "cypress": "^8.4.1",
@@ -44,12 +43,12 @@
     "rollup-plugin-vue": "^6.0.0",
     "rollup-plugin-windicss": "^1.4.3",
     "sass": "^1.41.1",
+    "storybook-builder-vite": "^0.0.12",
     "sucrase": "^3.20.1",
     "type-fest": "^2.3.4",
     "vite": "^2.5.10",
     "vite-plugin-windicss": "^1.4.3",
     "vitepress": "^0.18.1",
-    "vue-loader": "^16.8.1",
     "vue-tsc": "^0.3.0",
     "windicss": "^3.1.7"
   }
