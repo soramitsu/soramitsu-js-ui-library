@@ -1,4 +1,5 @@
-import { Story, Meta } from '@storybook/vue3'
+import { Meta } from '@storybook/vue3'
+import { Component } from 'vue'
 
 import SJsonInput from '../components/Input/SJsonInput.vue'
 
@@ -6,7 +7,7 @@ const meta: Meta = {
   title: 'Example/JSON Input',
   component: SJsonInput,
   argTypes: {
-    value: {
+    modelValue: {
       description: 'Description from story',
       type: { name: 'string', required: false },
       control: {
@@ -20,32 +21,24 @@ const meta: Meta = {
 
 export default meta
 
-interface Props {
-  value: any
-}
-
-const Template: Story<Props> = (args: unknown) => ({
+export const Primary = (): Component => ({
   components: { SJsonInput },
   setup() {
-    return { args }
-  },
-  data: () => ({
-    value: {
-      object: {
-        string: 'I am a string!',
-        array: [1, 2, 3],
+    return {
+      value: {
+        object: {
+          string: 'I am a string!',
+          array: [1, 2, 3],
+          null: null,
+          boolean: true,
+        },
+        anotherArray: [1, 2, 3.5],
+        boolean: false,
         null: null,
-        boolean: true,
+        number: 21,
       },
-      anotherArray: [1, 2, 3.5],
-      boolean: false,
-      null: null,
-      number: 21,
-    },
-  }),
-  template: '<SJsonInput :value="value" v-bind="args" />',
+    }
+  },
+  // template: 'wtf',
+  template: `<SJsonInput :model-value="value" />`,
 })
-
-export const Primary = Template.bind({})
-
-// Configurable.args = { height: '500px' }
