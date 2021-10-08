@@ -1,14 +1,13 @@
 {
   "name": "@soramitsu-ui/ui",
   "version": "2.0.0-alpha.0",
-  "main": "src/lib.ts",
+  "main": "dist/lib.cjs.js",
+  "module": "dist/lib.esm.js",
+  "types": "dist/lib.d.ts",
   "scripts": {
     "docs:build": "build-storybook",
     "docs:serve": "start-storybook -p 6006",
-    "typecheck": "vue-tsc --noEmit",
-    "build": "esno scripts/build",
-    "build:declaration": "tsc --declaration --emitDeclarationOnly --declarationDir tmp-declaration",
-    "build:rollup": "rollup -c"
+    "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
     "jsoneditor": "^9.5.5",
@@ -17,8 +16,6 @@
   },
   "devDependencies": {
     "@mdx-js/preact": "^1.6.22",
-    "@rollup/plugin-commonjs": "^20.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.4",
     "@soramitsu-ui/theme": "^0.1.0",
     "@storybook/addon-actions": "^6.3.9",
     "@storybook/addon-essentials": "^6.3.9",
@@ -35,16 +32,9 @@
     "del": "^6.0.0",
     "esno": "^0.9.1",
     "execa": "^5.1.1",
-    "rollup": "^2.56.3",
-    "rollup-plugin-dts": "^4.0.0",
-    "rollup-plugin-esbuild": "^4.5.0",
-    "rollup-plugin-postcss": "^4.0.1",
-    "rollup-plugin-scss": "^3.0.0",
-    "rollup-plugin-vue": "^6.0.0",
-    "rollup-plugin-windicss": "^1.4.3",
+    "postcss": "^8",
     "sass": "^1.41.1",
     "storybook-builder-vite": "^0.0.12",
-    "sucrase": "^3.20.1",
     "type-fest": "^2.3.4",
     "vite": "^2.5.10",
     "vite-plugin-windicss": "^1.4.3",

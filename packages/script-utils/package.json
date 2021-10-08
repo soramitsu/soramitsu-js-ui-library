@@ -1,8 +1,8 @@
 {
   "name": "@soramitsu-ui/script-utils",
   "version": "0.1.0",
+  "private": true,
   "description": "Utils for scripting tools like build scripts",
-  "main": "src/lib.ts",
   "dependencies": {
     "consola": "^2.15.3",
     "execa": "^5.1.1"

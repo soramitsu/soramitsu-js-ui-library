@@ -1,4 +1,3 @@
-import path from 'path'
 import consola from 'consola'
 import execa from 'execa'
 import del from 'del'
@@ -10,12 +9,10 @@ async function $(file: string, args?: string[]): Promise<void> {
 }
 
 async function main() {
-  consola.info('Clearing dist & declaration build dir')
   await del(['dist/*', 'tmp-declaration/*'])
-
-  await $('pnpm', ['typecheck'])
-  await $('pnpm', ['build:declaration'])
-  await $('pnpm', ['build:rollup'])
+  await $('yarn', ['build:declaration'])
+  await $('yarn', ['build:rollup'])
+  await $('yarn', ['--cwd', 'packages/theme', 'build:themes'])
 
   consola.success('UI build is done! ^_^')
 }
