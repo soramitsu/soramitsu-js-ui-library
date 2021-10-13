@@ -130,6 +130,10 @@ export default class SDropdown extends Mixins(SizeMixin, BorderRadiusMixin) {
    * `0` by default
    */
   @Prop({ type: Number, default: 0 }) readonly tabindex!: number
+  /**
+   * Popper class
+   */
+  @Prop({ type: String, default: '' }) readonly popperClass!: string
 
   @Ref('dropdown') dropdown!: ElDropdown
 
@@ -150,6 +154,9 @@ export default class SDropdown extends Mixins(SizeMixin, BorderRadiusMixin) {
     }
     if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
+    }
+    if (this.popperClass) {
+      cssClasses.push(this.popperClass)
     }
     return cssClasses
   }
