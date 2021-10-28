@@ -1,31 +1,20 @@
 {
   "name": "@soramitsu-ui/theme",
   "version": "0.1.0",
-  "main": "src/lib.ts",
+  "main": "dist/lib.cjs.js",
+  "module": "dist/lib.esm.js",
+  "types": "dist/lib.d.ts",
   "scripts": {
-    "build": "esno scripts/build",
-    "build:rollup": "rollup -c",
-    "build:declaration": "tsc --declaration --declarationDir tmp-declaration --emitDeclarationOnly",
-    "build:themes": "esno scripts/build-themes"
+    "build:themes": "sucrase-node scripts/build-themes"
   },
   "dependencies": {
     "windicss": "^3.1.7"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^13.0.4",
-    "@soramitsu-ui/script-utils": "workspace:^0.1.0",
+    "@soramitsu-ui/script-utils": "^0.1.0",
+    "chalk": "^4.1.2",
     "consola": "^2.15.3",
-    "del": "^6.0.0",
-    "esno": "^0.9.1",
     "make-dir": "^3.1.0",
-    "rollup": "^2.56.3",
-    "rollup-plugin-dts": "^4.0.0",
-    "rollup-plugin-esbuild": "^4.5.0",
     "sucrase": "^3.20.1"
-  },
-  "publishConfig": {
-    "main": "dist/lib.cjs.js",
-    "module": "dist/lib.esm.js",
-    "types": "dist/lib.d.ts"
   }
 }
