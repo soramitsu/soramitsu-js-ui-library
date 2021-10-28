@@ -1,13 +1,26 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
-        "moduleResolution": "node",
-        "strict": true,
-        "jsx": "preserve",
-        "sourceMap": true,
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "lib": ["esnext", "dom"]
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": ["esnext", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      // "@soramitsu-ui/icons": ["packages/icons/src"],
+      // "@soramitsu-ui/icons/*": ["packages/icons/src/*"],
+      "@soramitsu-ui/script-utils": ["packages/script-utils/src/lib.ts"],
+      // "@soramitsu-ui/script-utils/*": ["packages/script-utils/src/*"],
+      "@soramitsu-ui/theme": ["packages/theme/src/lib.ts"]
+      // "@soramitsu-ui/theme/*": ["packages/theme/src/*"]
+      // "@soramitsu-ui/ui": ["packages/ui/src"],
+      // "@soramitsu-ui/ui/*": ["packages/ui/src/*"]
     }
+  },
+  "exclude": ["packages/ui/cypress"]
 }
