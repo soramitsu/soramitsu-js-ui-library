@@ -1,9 +1,6 @@
-import { defineThemePreset, ThemeVars } from './core'
+import { defineThemePreset, ThemeVars, ThemePreset } from './core'
 
-/**
- * TODO fix scss var references
- */
-export default defineThemePreset({
+export const THEME_DEFAULT = defineThemePreset({
   [ThemeVars.BrandSoramitsuRed]: '#E3232C',
   [ThemeVars.BrandPMSBlack]: '#2D2926',
   [ThemeVars.BrandUltraBlack]: '#0D0248',
@@ -41,67 +38,32 @@ export default defineThemePreset({
 
   // font size
 
-  [ThemeVars.FontSizeD1]: '40px',
-  [ThemeVars.FontSizeD2]: '30px',
+  [ThemeVars.FontSize4xl]: '40px',
+  [ThemeVars.FontSize3xl]: '36px',
+  [ThemeVars.FontSize2xl]: '30px',
+  [ThemeVars.FontSizeXl]: '24px',
+  [ThemeVars.FontSizeLg]: '18px',
+  [ThemeVars.FontSizeMd]: '16px',
+  [ThemeVars.FontSizeSm]: '14px',
+  [ThemeVars.FontSizeXs]: '12px',
+  [ThemeVars.FontSize2xs]: '10px',
 
-  [ThemeVars.FontSizeH1]: '36px',
-  [ThemeVars.FontSizeH2]: '30px',
-  [ThemeVars.FontSizeH3]: '24px',
-  [ThemeVars.FontSizeH4]: '18px',
-  [ThemeVars.FontSizeH5]: '16px',
-  [ThemeVars.FontSizeH6]: '14px',
-  [ThemeVars.FontSizeH7]: '12px',
-
-  [ThemeVars.FontSizeCH1]: '14px',
-  [ThemeVars.FontSizeCH2]: '12px',
-  [ThemeVars.FontSizeCH3]: '10px',
-
-  [ThemeVars.FontSizeP1]: '16px',
-  [ThemeVars.FontSizeP2]: '14px',
-  [ThemeVars.FontSizeP3]: '14px',
-  [ThemeVars.FontSizeP4]: '12px',
-
-  [ThemeVars.FontSizeSingleline]: '15px',
-
-  // end font size
-
-  // [ThemeVars.LineHeightReset]: `1`,
-  // [ThemeVars.LineHeightMini]: `1.2`,
-  // [ThemeVars.LineHeightExtraSmall]: `1.25`,
-  // [ThemeVars.LineHeightSmall]: `1.3`,
-  // [ThemeVars.LineHeightBase]: `1.4`,
-  // [ThemeVars.LineHeightMedium]: `1.5`,
-  // [ThemeVars.LineHeightBig]: `1.8`,
-  // [ThemeVars.LetterSpacingMini]: `-0.04em`,
-  // [ThemeVars.LetterSpacingSmall]: `-0.02em`,
-  // [ThemeVars.LetterSpacingMedium]: `-0.01em`,
-  // [ThemeVars.LetterSpacingBig]: `0.01em`,
-  // [ThemeVars.LetterSpacingLarge]: `0.03em`,
-  // [ThemeVars.LetterSpacingExtraLarge]: `0.06em`,
-  // [ThemeVars.FontFeatureSettingsCommon]: `"tnum" on, "lnum" on, "case" on, "salt" on, "ss01" on`,
-  // [ThemeVars.FontFeatureSettingsHeading]: `"tnum" on, "lnum" on, "salt" on, "case" on`,
-  // [ThemeVars.FontFeatureSettingsCapsHeading]: `"tnum" on, "lnum" on, "case" on`,
-  // [ThemeVars.FontFeatureSettingsCaps]: `"case" on`,
-  // [ThemeVars.FontFeatureSettingsSingleline]: `"salt" on, "case" on`,
-  // [ThemeVars.FontFeatureSettingsCardTitle]: `"tnum" on, "lnum" on, "ss01" on`,
-  // [ThemeVars.FontFeatureSettingsInput]: `"tnum" on, "lnum" on`,
-  // [ThemeVars.FontFeatureSettingsButton]: `"tnum" on, "lnum" on, "salt" on`,
-  [ThemeVars.SizeMini]: `24px`,
-  [ThemeVars.SizeSmall]: `32px`,
-  [ThemeVars.SizeMedium]: `40px`,
-  [ThemeVars.SizeBig]: `56px`,
-  [ThemeVars.BasicSpacing]: `8px`,
+  // [ThemeVars.SizeMini]: `24px`,
+  // [ThemeVars.SizeSmall]: `32px`,
+  // [ThemeVars.SizeMedium]: `40px`,
+  // [ThemeVars.SizeBig]: `56px`,
+  // [ThemeVars.BasicSpacing]: `8px`,
   // [ThemeVars.BorderRadiusMini]: `$s-border-radius-base`,
   // [ThemeVars.BorderRadiusSmall]: `$s-border-radius-base * 2`,
   // [ThemeVars.BorderRadiusMedium]: `$s-border-radius-base * 3`,
   // [ThemeVars.BorderRadiusBig]: `$s-border-radius-base * 4`,
-  [ThemeVars.ShadowColorDark]: `rgba(0, 0, 0, 0.1)`,
+  // [ThemeVars.ShadowColorDark]: `rgba(0, 0, 0, 0.1)`,
   [ThemeVars.ShadowTokenIcon]: 'black', // FIXME
-  [ThemeVars.ShadowColorDarkLight]: `rgba(0, 0, 0, 0.02)`,
-  [ThemeVars.ShadowColorLight]: `rgba(255, 255, 255, 1)`,
-  [ThemeVars.ShadowColorLightDark]: `rgba(255, 255, 255, 0.8)`,
-  [ThemeVars.ShadowElement]: `-1px -1px 1px var(${ThemeVars.ShadowColorDarkLight}), 1px 1px 3px var(${ThemeVars.ShadowColorDark}), inset 1px 1px 2px var(${ThemeVars.ShadowColorLightDark})`,
-  [ThemeVars.ShadowElementPressed]: `1px 1px 2px var(${ThemeVars.ShadowColorLight}), inset 1px 1px 2px var(${ThemeVars.ShadowColorDark})`,
+  // [ThemeVars.ShadowColorDarkLight]: `rgba(0, 0, 0, 0.02)`,
+  // [ThemeVars.ShadowColorLight]: `rgba(255, 255, 255, 1)`,
+  // [ThemeVars.ShadowColorLightDark]: `rgba(255, 255, 255, 0.8)`,
+  // [ThemeVars.ShadowElement]: `-1px -1px 1px var(${ThemeVars.ShadowColorDarkLight}), 1px 1px 3px var(${ThemeVars.ShadowColorDark}), inset 1px 1px 2px var(${ThemeVars.ShadowColorLightDark})`,
+  // [ThemeVars.ShadowElementPressed]: `1px 1px 2px var(${ThemeVars.ShadowColorLight}), inset 1px 1px 2px var(${ThemeVars.ShadowColorDark})`,
   [ThemeVars.ShadowSurface]: `0px 1px 4px rgba(13, 2, 72, 0.35)`,
   [ThemeVars.ShadowTooltip]: `0px 1px 4px rgba(13, 2, 72, 0.35)`,
   [ThemeVars.ShadowTab]: `0px 1px 1px rgba(0, 0, 0, 0.1)`,
@@ -109,3 +71,7 @@ export default defineThemePreset({
   [ThemeVars.ShadowMobileTapBar]: `0px -4px 8px rgba(19, 19, 19, 0.15)`,
   [ThemeVars.ShadowMobileSideMenu]: `-4px 4px 8px rgba(19, 19, 19, 0.15)`,
 })
+
+export function overrideDefaultPreset(overrides: Partial<ThemePreset>): ThemePreset {
+  return { ...THEME_DEFAULT, ...overrides }
+}

@@ -6,16 +6,197 @@ function v(variableName: ThemeVars): string {
   return `var(${variableName})`
 }
 
-export function windicssPluginThemeUtility(themeName: string, theme: ThemePreset) {
+function defineSoraTypographyBlockStyle<
+  T extends Partial<{
+    fontSize: string
+    letterSpacing: string
+    lineHeight: string
+    fontFeatureSettings: string
+    fontWeight: string
+    fontFamily: string
+    fontStyle: string
+    textTransform: string
+  }>,
+>(a: T): T {
+  return {
+    fontFamily: 'Sora',
+    fontWeight: 'normal',
+    ...a,
+  }
+}
+
+function soraTyBlockName<B extends string>(block: B): `.s-ty-${B}` {
+  return `.s-ty-${block}`
+}
+
+/**
+ * Adds typography blocks from Web Design System.
+ *
+ * @example
+ * ```html
+ * <div class="s-ty-h2">I am a H2 heading!</div>
+ * ```
+ *
+ * TODO test with jest
+ */
+export function windicssPluginTypography() {
+  return plugin(({ addUtilities }) => {
+    const typographyUtilities = {
+      [soraTyBlockName('d1')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSize4xl),
+        letterSpacing: '-0.02rem',
+        lineHeight: '120%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'ss01' on, 'case' on",
+        fontWeight: 'bold',
+      }),
+      [soraTyBlockName('d2')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSize2xl),
+        letterSpacing: '-0.04rem',
+        lineHeight: '130%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'case' on",
+        fontWeight: 'bold',
+      }),
+
+      [soraTyBlockName('h1')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSize3xl),
+        letterSpacing: '-0.04rem',
+        lineHeight: '120%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'case' on",
+      }),
+      [soraTyBlockName('h2')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSize2xl),
+        letterSpacing: '-0.04rem',
+        lineHeight: '130%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'case' on",
+      }),
+      [soraTyBlockName('h3')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSizeXl),
+        letterSpacing: '-0.02rem',
+        lineHeight: '130%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'case' on",
+      }),
+      [soraTyBlockName('h4')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSizeLg),
+        letterSpacing: '-0.02rem',
+        lineHeight: '150%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'case' on",
+      }),
+      [soraTyBlockName('h5')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSizeMd),
+        letterSpacing: '0.01rem',
+        lineHeight: '150%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'case' on",
+        fontWeight: 'bold',
+      }),
+      [soraTyBlockName('h6')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSizeSm),
+        lineHeight: '150%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'case' on",
+        fontWeight: 'bold',
+      }),
+      [soraTyBlockName('h7')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSizeXs),
+        lineHeight: '150%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'case' on",
+        fontWeight: 'bold',
+      }),
+
+      [soraTyBlockName('ch1')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSizeSm),
+        letterSpacing: '0.01em',
+        lineHeight: '130%',
+        textTransform: 'uppercase',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'case' on",
+        fontWeight: 'bold',
+      }),
+      [soraTyBlockName('ch2')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSizeXs),
+        letterSpacing: '0.03em',
+        lineHeight: '130%',
+        textTransform: 'uppercase',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'case' on",
+        fontWeight: 'bold',
+      }),
+      [soraTyBlockName('ch3')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSize2xs),
+        letterSpacing: '0.06em',
+        lineHeight: '140%',
+        textTransform: 'uppercase',
+        fontFeatureSettings: "'case' on",
+        fontWeight: 'bold',
+      }),
+
+      [soraTyBlockName('p1')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSizeMd),
+        lineHeight: '170%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'case' on",
+      }),
+      [soraTyBlockName('p2')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSizeSm),
+        lineHeight: '180%',
+        fontWeight: '600',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'case' on",
+      }),
+      [soraTyBlockName('p3')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSizeSm),
+        lineHeight: '180%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'case' on",
+      }),
+      [soraTyBlockName('p4')]: defineSoraTypographyBlockStyle({
+        fontSize: v(ThemeVars.FontSizeXs),
+        lineHeight: '180%',
+        fontFeatureSettings: "'tnum' on, 'lnum' on, 'salt' on, 'ss01' on, 'case' on",
+      }),
+    }
+
+    addUtilities(typographyUtilities)
+  })
+}
+
+/**
+ * Adds utility to override theme variables in a specified scope
+ *
+ * @remarks
+ *
+ * Plugin could be installed like this:
+ *
+ * ```ts
+ * // windi.config.ts
+ * import { windicssPluginTheme, ThemeVars } from '@soramitsu-ui/theme'
+ *
+ * export default {
+ *   plugins: [
+ *     windicssPluginTheme('my-custom-theme', {
+ *       [ThemeVars.BrandSoramitsuRed]: "#ff0000"
+ *     })
+ *   ]
+ * }
+ * ```
+ *
+ * Usage of the appended utility:
+ *
+ * ```html
+ * <div class="s-theme-my-custom-theme">
+ *   Custom theme is applied here
+ * </div>
+ * ```
+ *
+ * @param themeName Affects utility name, i.e. `s-theme-${themeName}`
+ * @param theme Subset of theme variables
+ */
+export function windicssPluginTheme(themeName: string, theme: Partial<ThemePreset>) {
   return plugin(({ addUtilities }) => {
     addUtilities({
-      [`.theme-${themeName}`]: {
+      [`.s-theme-${themeName}`]: {
         ...theme,
       },
     })
   })
 }
 
+/**
+ * Preset with colors, font sizes, shadows etc (WIP)
+ */
 export const windicssPreset: Config = {
   theme: {
     extend: {
@@ -24,7 +205,7 @@ export const windicssPreset: Config = {
           'soramitsu-red': v(ThemeVars.BrandSoramitsuRed),
           'pms-black': v(ThemeVars.BrandPMSBlack),
           'ultra-black': v(ThemeVars.BrandUltraBlack),
-          'white': v(ThemeVars.BrandWhite),
+          white: v(ThemeVars.BrandWhite),
           'polkaswap-pink': v(ThemeVars.BrandPolkaswapPink),
         },
         accent: {
@@ -79,30 +260,17 @@ export const windicssPreset: Config = {
       },
 
       fontSize: {
-        d1: v(ThemeVars.FontSizeD1),
-        d2: v(ThemeVars.FontSizeD2),
-
-        h1: v(ThemeVars.FontSizeH1),
-        h2: v(ThemeVars.FontSizeH2),
-        h3: v(ThemeVars.FontSizeH3),
-        h4: v(ThemeVars.FontSizeH4),
-        h5: v(ThemeVars.FontSizeH5),
-        h6: v(ThemeVars.FontSizeH6),
-        h7: v(ThemeVars.FontSizeH7),
-
-        ch1: v(ThemeVars.FontSizeCH1),
-        ch2: v(ThemeVars.FontSizeCH2),
-        ch3: v(ThemeVars.FontSizeCH3),
-
-        p1: v(ThemeVars.FontSizeP1),
-        p2: v(ThemeVars.FontSizeP2),
-        p3: v(ThemeVars.FontSizeP3),
-        p4: v(ThemeVars.FontSizeP4),
-
-        singleline: v(ThemeVars.FontSizeSingleline),
+        '3xl': v(ThemeVars.FontSize3xl),
+        '2xl': v(ThemeVars.FontSize2xl),
+        xl: v(ThemeVars.FontSizeXl),
+        lg: v(ThemeVars.FontSizeLg),
+        md: v(ThemeVars.FontSizeMd),
+        sm: v(ThemeVars.FontSizeSm),
+        xs: v(ThemeVars.FontSizeXs),
+        '2xs': v(ThemeVars.FontSize2xs),
       },
 
-      // TODO
+      // TODO shadows etc
     },
   },
 }
