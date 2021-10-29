@@ -12,6 +12,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@changesets/cli": "^2.17.0",
     "@lerna/publish": "^3.22.1",
     "@types/node": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
