@@ -4,4 +4,6 @@ dist
 dist-ssr
 *.local
 versus.md
-tmp-declaration
+dist-ts
+tsconfig.tsbuildinfo
+yarn-error.log

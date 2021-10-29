@@ -1,9 +1,17 @@
 module.exports = {
   root: true,
   extends: ['alloy', 'alloy/typescript', 'plugin:vue/vue3-recommended'],
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    ecmaVersion: 2020,
     parser: '@typescript-eslint/parser',
+    ecmaVersion: 2020,
+    sourceType: 'module',
+  },
+  globals: {
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    defineExpose: 'readonly',
+    withDefaults: 'readonly',
   },
   rules: {
     'vue/html-indent': ['warn', 2],
@@ -13,19 +21,18 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/cypress/**/*.{j,t}s'],
+      files: ['**/cypress/**/*.{j,t}s', '**/*.cy.{js,ts}'],
       plugins: ['cypress'],
       extends: ['plugin:cypress/recommended'],
       env: {
         'cypress/globals': true,
       },
     },
-    // WIP
-    // {
-    //   files: ['**/packages/ui/src/**/*.spec.{j,t}s'],
-    //   env: {
-    //     jest: true,
-    //   },
-    // },
+    {
+      files: ['**/*.spec.{js,ts}'],
+      env: {
+        jest: true,
+      },
+    },
   ],
 }

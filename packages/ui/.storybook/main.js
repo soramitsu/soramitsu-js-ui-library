@@ -1,5 +1,5 @@
 const path = require('path')
-const { default: windi } = require('vite-plugin-windicss')
+const { default: Windi } = require('vite-plugin-windicss')
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -12,8 +12,11 @@ module.exports = {
    */
   async viteFinal(config, { configType }) {
     config.resolve.alias['@'] = path.resolve(__dirname, '../src')
-    config.resolve.alias['~'] = path.resolve(__dirname, '..')
-    config.plugins.push(windi({ config: path.resolve(__dirname, '../windi.config.ts') }))
+    config.plugins.push(
+      Windi({
+        config: path.resolve(__dirname, '../windi.config.ts'),
+      }),
+    )
 
     return config
   },

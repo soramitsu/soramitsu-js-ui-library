@@ -1,11 +1,24 @@
-# ui-lib
+# ui
 
-Main package.
+## Usage
 
-## Docs
+All in one:
 
-```sh
-pnpm docs:dev
-pnpm docs:build
-pnpm docs:serve
+```ts
+import { plugin } from '@soramitsu-ui/ui'
+import { createApp } from 'vue'
+
+const app = createApp({}).use(plugin())
+```
+
+A-la-carte:
+
+```vue
+<script setup>
+import { SButton } from '@soramitsu-ui/ui'
+</script>
+
+<template>
+  <SButton>Click</SButton>
+</template>
 ```

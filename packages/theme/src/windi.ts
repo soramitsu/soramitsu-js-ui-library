@@ -16,7 +16,7 @@ function defineSoraTypographyBlockStyle<
     fontFamily: string
     fontStyle: string
     textTransform: string
-  }>,
+  }>
 >(a: T): T {
   return {
     fontFamily: 'Sora',
@@ -268,6 +268,10 @@ export const windicssPreset: Config = {
         sm: v(ThemeVars.FontSizeSm),
         xs: v(ThemeVars.FontSizeXs),
         '2xs': v(ThemeVars.FontSize2xs),
+      },
+
+      fontFamily: {
+        sora: 'Sora',
       },
 
       // TODO shadows etc

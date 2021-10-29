@@ -1,4 +1,3 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-
 require('sucrase/register')
-module.exports = require('./index.ts')
+module.exports = require('./scripts/rollup.config.ts')

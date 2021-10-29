@@ -1,4 +1,4 @@
-import { defineThemePreset, ThemeVars, ThemePreset } from './core'
+import { defineThemePreset, ThemeVars, ThemePreset } from './theme'
 
 export const THEME_DEFAULT = defineThemePreset({
   [ThemeVars.BrandSoramitsuRed]: '#E3232C',

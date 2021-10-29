@@ -1,4 +1,8 @@
 {
-  "baseUrl": "http://localhost:6006",
-  "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"]
+  "component": {
+    "componentFolder": "./src",
+    "testFiles": "**/*.spec.cy.{js,jsx,ts,tsx}",
+    "video": false,
+    "supportFile": "./cypress/support/index.ts"
+  }
 }

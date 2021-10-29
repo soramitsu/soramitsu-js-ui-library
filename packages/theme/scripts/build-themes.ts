@@ -1,4 +1,4 @@
-import themeDefault from '../src/theme-default'
+import { THEME_DEFAULT } from '../src/theme-default'
 import fs from 'fs/promises'
 import path from 'path'
 import consola from 'consola'
@@ -10,18 +10,13 @@ function varsToCss(vars: Map<string, string>, namespaceName = ':root'): string {
   return `${namespaceName} {\n${rows}\n}`
 }
 
-async function main() {
+export default async function () {
   const themesOutputDir = path.resolve(__dirname, '../dist/themes')
   await makeDir(themesOutputDir)
 
   const outputFilename = path.join(themesOutputDir, 'default.css')
-  const data = varsToCss(new Map(Object.entries(themeDefault)))
+  const data = varsToCss(new Map(Object.entries(THEME_DEFAULT)))
   await fs.writeFile(outputFilename, data)
 
   consola.success(chalk`{yellow Default} theme written into {blue.bold ${outputFilename}}`)
 }
-
-main().catch((err) => {
-  consola.fatal(err)
-  process.exit(1)
-})

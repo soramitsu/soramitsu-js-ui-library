@@ -8,10 +8,12 @@ import nodeResolve from '@rollup/plugin-node-resolve'
 import dts from 'rollup-plugin-dts'
 import path from 'path'
 
+const resolve = (...paths: string[]): string => path.resolve(__dirname, '../', ...paths)
+
 function uiLibConfigs(): RollupOptions[] {
   const OUTPUT_FILE_NAME_FORMAT = '[name].[format].js'
 
-  const UI_DIST = 'packages/ui/dist'
+  const UI_DIST = 'dist'
 
   /**
    * Yields paths relative to src
@@ -26,10 +28,10 @@ function uiLibConfigs(): RollupOptions[] {
   return [
     // main build chunks - esm + cjs
     {
-      input: [...inputs()].map((x) => path.join('packages/ui/src', x)),
+      input: [...inputs()].map((x) => resolve('src', x)),
       external: ['vue', 'jsoneditor', /^lodash/],
       plugins: [
-        ...windi({ config: path.join(__dirname, '../packages/ui/windi.config.ts') }),
+        ...windi({ config: resolve('windi.config.ts') }),
         esbuild(),
         vue(),
         postcss(),
@@ -54,7 +56,8 @@ function uiLibConfigs(): RollupOptions[] {
     // TS declaration build
     // TODO vue-dts-gen
     {
-      input: 'tmp-declaration/packages/ui/src/lib.d.ts',
+      input: 'dist-ts/src/lib.d.ts',
+      external: 'vue',
       plugins: [
         {
           name: 'vue-declaration-stub',
@@ -75,39 +78,11 @@ function uiLibConfigs(): RollupOptions[] {
         dts(),
       ],
       output: {
-        file: 'packages/ui/dist/lib.d.ts',
+        file: 'dist/lib.d.ts',
         format: 'esm',
       },
     },
   ]
 }
 
-function themeLibConfigs(): RollupOptions[] {
-  return [
-    {
-      input: 'packages/theme/src/lib.ts',
-      external: [/^windicss/],
-      plugins: [esbuild()],
-      output: [
-        {
-          file: 'packages/theme/dist/lib.esm.js',
-          format: 'esm',
-        },
-        {
-          file: 'packages/theme/dist/lib.cjs.js',
-          format: 'cjs',
-        },
-      ],
-    },
-    {
-      input: 'tmp-declaration/packages/theme/src/lib.d.ts',
-      plugins: [dts()],
-      output: {
-        file: 'packages/theme/dist/lib.d.ts',
-        format: 'esm',
-      },
-    },
-  ]
-}
-
-export default defineConfig([...uiLibConfigs(), ...themeLibConfigs()])
+export default defineConfig([...uiLibConfigs()])
