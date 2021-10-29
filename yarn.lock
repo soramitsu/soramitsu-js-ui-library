@@ -8599,7 +8599,7 @@ fast-glob@^2.2.6:
     merge2 "^1.2.3"
     micromatch "^3.1.10"
 
-fast-glob@^3.1.1, fast-glob@^3.2.7:
+fast-glob@^3.1.1, fast-glob@^3.2.5, fast-glob@^3.2.7:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.7.tgz#fd6cb7a2d7e9aa7a7846111e85a196d6b2f766a1"
   integrity sha512-rYGMRwip6lUMvYD3BTScMwT1HtAs2d71SMv66Vrxs0IekGZEjhM0pcMfjQPnknBt2zeCwQMEupiN02ZP4DiT1Q==
@@ -17891,6 +17891,15 @@ vue-docgen-loader@^1.5.0:
     jscodeshift "^0.7.0"
     loader-utils "^1.2.3"
     querystring "^0.2.0"
+
+vue-dts-gen@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/vue-dts-gen/-/vue-dts-gen-0.3.0.tgz#7e661c437bf87605b75f64421d8f5e43e5668a6c"
+  integrity sha512-PXSqyEfFgcqjuioFYbLQtTHZ2+UCCY94uzo98/cQE6Vun/8sjD1Bo22R5E1xag2v2+0/eUl+SuDzldJR3U1AHQ==
+  dependencies:
+    cac "^6.7.2"
+    fast-glob "^3.2.5"
+    resolve-from "^5.0.0"
 
 vue-eslint-parser@^7.10.0:
   version "7.11.0"

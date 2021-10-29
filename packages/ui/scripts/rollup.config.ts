@@ -7,6 +7,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import dts from 'rollup-plugin-dts'
 import path from 'path'
+import rollupPluginVueDts from './rollup-plugin-vue-dts'
 
 const resolve = (...paths: string[]): string => path.resolve(__dirname, '../', ...paths)
 
@@ -54,29 +55,10 @@ function uiLibConfigs(): RollupOptions[] {
       ],
     },
     // TS declaration build
-    // TODO vue-dts-gen
     {
       input: 'dist-ts/src/lib.d.ts',
       external: 'vue',
-      plugins: [
-        {
-          name: 'vue-declaration-stub',
-          resolveId(id) {
-            if (id.endsWith('.vue')) return id + '.d.ts'
-            return null
-          },
-          load(id) {
-            if (id.endsWith('.vue.d.ts')) {
-              return `
-              import { DefineComponent } from 'vue'
-              const component: DefineComponent<{}, {}, any>
-              export default component
-            `
-            }
-          },
-        },
-        dts(),
-      ],
+      plugins: [rollupPluginVueDts(), dts()],
       output: {
         file: 'dist/lib.d.ts',
         format: 'esm',

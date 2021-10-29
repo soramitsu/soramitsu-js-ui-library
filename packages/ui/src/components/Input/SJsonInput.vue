@@ -1,31 +1,29 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
-import type { PropType } from 'vue'
 import JSONEditor from 'jsoneditor'
 import type { JSONEditorOptions } from 'jsoneditor'
 import 'jsoneditor/dist/jsoneditor.min.css'
 import isEmpty from 'lodash/fp/isEmpty'
 
-const emit = defineEmits(['update:modelValue', 'error'])
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: any): void
+  (event: 'error', value: unknown): void
+}>()
 
-const props = defineProps({
-  modelValue: {
-    type: Object,
-    default: () => ({}),
+const props = withDefaults(
+  defineProps<{
+    modelValue?: Object
+    options?: JSONEditorOptions
+    height?: string
+    dictionary?: string[]
+  }>(),
+  {
+    modelValue: () => ({}),
+    options: () => ({}),
+    height: '',
+    dictionary: () => [],
   },
-  options: {
-    type: Object as PropType<JSONEditorOptions>,
-    default: () => ({}),
-  },
-  height: {
-    type: String,
-    default: '',
-  },
-  dictionary: {
-    type: Array as PropType<Array<string>>,
-    default: () => [],
-  },
-})
+)
 
 const model = computed(() => props.modelValue)
 

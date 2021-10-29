@@ -1,6 +1,6 @@
 import { Processor } from 'windicss/lib'
 import { windicssPluginTheme, windicssPluginTypography } from './windi'
-import { ThemeVars } from './core'
+import { ThemeVars } from './theme'
 
 describe('Theme', () => {
   test('Generates class with specified variable', () => {

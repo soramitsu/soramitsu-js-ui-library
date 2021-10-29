@@ -1,4 +1,4 @@
-import { ThemePreset, ThemeVars } from './core'
+import { ThemePreset, ThemeVars } from './theme'
 import { Config } from 'windicss/types/interfaces'
 import plugin from 'windicss/plugin'
 
@@ -16,7 +16,7 @@ function defineSoraTypographyBlockStyle<
     fontFamily: string
     fontStyle: string
     textTransform: string
-  }>
+  }>,
 >(a: T): T {
   return {
     fontFamily: 'Sora',
