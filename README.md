@@ -60,8 +60,16 @@ yarn sb:build
 
 ### Versioning
 
-TODO changesets
+Use **changesets** to describe changes you've done in the project libraries.
+
+- Collect changesets for each PR (`yarn changeset`);
+- When PR is reviewed, apply collected changesets (`yarn changeset version`)
+- Then PR might be closed
 
 ### Linting
 
-TODO add commands
+**Only ESLint check:**
+
+```shell
+yarn lint:check
+```

@@ -6,7 +6,7 @@
     "test:all": "yarn --cwd packages/theme test && yarn --cwd packages/ui cy:ci",
     "build": "concurrently \"yarn --cwd packages/ui build\" \"yarn --cwd packages/theme build\"",
     "build:theme": "yarn --cwd packages/theme build",
-    "lint:check": "echo todo"
+    "lint:check": "eslint ."
   },
   "workspaces": [
     "packages/*"
