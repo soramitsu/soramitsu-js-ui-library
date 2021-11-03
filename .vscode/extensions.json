@@ -1,10 +1,8 @@
 {
-  "recommendations": [
-    "antfu.vite",
-    "johnsoncodehk.volar",
-    "lokalise.i18n-ally",
-    "antfu.iconify",
-    "dbaeumer.vscode-eslint",
-    "syler.sass-indented",
-  ]
+    "recommendations": [
+        "johnsoncodehk.volar",
+        "dbaeumer.vscode-eslint",
+        "syler.sass-indented",
+        "rvest.vs-code-prettier-eslint"
+    ]
 }
