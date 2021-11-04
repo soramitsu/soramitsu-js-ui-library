@@ -1,0 +1,17 @@
+@mixin s-select-sizes {
+  &-sm {
+    height: 24px;
+  }
+
+  &-md {
+    height: 32px;
+  }
+
+  &-lg {
+    height: 40px;
+  }
+
+  &-xl {
+    height: 56px;
+  }
+}

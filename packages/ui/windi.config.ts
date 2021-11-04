@@ -3,7 +3,7 @@ import { windicssPreset, THEME_DEFAULT, windicssPluginTheme, windicssPluginTypog
 
 export default defineConfig({
   extract: {
-    include: ['**/*.{md,vue}', '.vitepress/**/*.{ts,md,vue}'],
+    include: ['**/*.{md,vue,tsx}', '.vitepress/**/*.{ts,md,vue}'],
   },
   presets: [windicssPreset],
   plugins: [windicssPluginTheme('default', THEME_DEFAULT), windicssPluginTypography()],
