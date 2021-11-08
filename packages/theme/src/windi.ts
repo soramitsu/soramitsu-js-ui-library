@@ -274,6 +274,13 @@ export const windicssPreset: Config = {
         sora: 'Sora',
       },
 
+      size: {
+        mini: v(ThemeVars.SizeMini),
+        small: v(ThemeVars.SizeSmall),
+        medium: v(ThemeVars.SizeMedium),
+        big: v(ThemeVars.SizeBig),
+      }
+
       // TODO shadows etc
     },
   },

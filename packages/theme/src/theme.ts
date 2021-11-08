@@ -68,11 +68,10 @@ export enum ThemeVars {
   FontSize3xl = '--s-font-size-3xl',
   FontSize4xl = '--s-font-size-4xl',
 
-  // // ???
-  // SizeMini = '--s-size-mini',
-  // SizeSmall = '--s-size-small',
-  // SizeMedium = '--s-size-medium',
-  // SizeBig = '--s-size-big',
+  SizeMini = '--s-size-mini',
+  SizeSmall = '--s-size-small',
+  SizeMedium = '--s-size-medium',
+  SizeBig = '--s-size-big',
 
   ShadowSurface = '--s-shadow-surface',
   ShadowTooltip = '--s-shadow-tooltip',
