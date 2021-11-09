@@ -11,8 +11,6 @@ import { computed } from 'vue';
 import { CheckboxSize } from './consts';
 
 type CheckboxValue = string | number;
-type CheckboxLabel = string | number;
-
 type CheckboxModelValue = boolean | CheckboxValue[];
 
 interface Checkbox {
@@ -22,7 +20,7 @@ interface Checkbox {
   modelValue?: CheckboxModelValue;
   id?: string;
   name?: string;
-  label?: CheckboxLabel;
+  label?: string;
   disabled?: boolean;
   indeterminate?: boolean;
   border?: boolean;
@@ -71,6 +69,7 @@ const checked = computed((): boolean => {
         's-checkbox--bordered': border,
         's-checkbox--checked': checked,
         's-checkbox--disabled': disabled,
+        's-checkbox--indeterminate': indeterminate,
       }
     ]"
   >
@@ -95,16 +94,17 @@ const checked = computed((): boolean => {
         <slot>{{ label }}</slot>
       </span>
     </div>
+    <div class="s-checkbox__description" v-if="$slots.description">
+      <slot name="description" />
+    </div>
   </label>
 </template>
 
 <style lang="scss">
-@mixin size($size, $fontSize, $labelOffset, $padding) {
+@mixin size($size, $padding, $labelOffset, $descriptionOffset) {
   $base: calc(var(--s-size-#{$size}) / 2);
 
   &--size-#{$size} {
-    font-size: $fontSize;
-
     &.s-checkbox--bordered {
       padding: $padding;
     }
@@ -116,6 +116,10 @@ const checked = computed((): boolean => {
 
     .s-checkbox__input + .s-checkbox__label {
       margin-left: $labelOffset;
+    }
+
+    .s-checkbox__description {
+      margin-top: $descriptionOffset;
     }
   }
 }
@@ -133,24 +137,40 @@ const checked = computed((): boolean => {
   }
 }
 
+@mixin label-size($size, $fontSize, $lineHeight) {
+  &--size-#{$size} {
+    .s-checkbox__label {
+      font-size: $fontSize;
+      line-height: $lineHeight;
+      letter-spacing: -0.02em;
+    }
+  }
+}
+
 .s-checkbox {
   cursor: pointer;
   display: inline-flex;
   flex-flow: column nowrap;
 
-  @include size('mini', var(--s-font-size-2xs), 6px, 7px 7px);
-  @include size('small', var(--s-font-size-xs), 6px, 7px 9px);
-  @include size('medium', var(--s-font-size-sm), 8px, 9px 9px);
+  @include size('mini', 7px 7px, 6px, 4px);
+  @include size('small', 7px 9px, 6px, 6px);
+  @include size('medium', 9px 9px, 8px, 8px);
   @include checkmark-size('mini', 1px, 3px, 2px, 5px);
   @include checkmark-size('small', 0px, 4px, 4px, 8px);
   @include checkmark-size('medium', 1px, 6px, 5px, 10px);
+  @include label-size('mini', var(--s-font-size-2xs), 16px);
+  @include label-size('small', var(--s-font-size-xs), 18px);
+  @include label-size('medium', var(--s-font-size-sm), 20px);
 
   &--disabled {
     cursor: not-allowed;
     color: var(--s-color-base-on-disabled);
   }
 
-  &:hover, &:focus, &--checked {
+  &:hover,
+  &:focus,
+  &--checked,
+  &--indeterminate {
     &:not(.s-checkbox--disabled) {
       .s-checkbox__inner {
         border-color: var(--s-color-theme-accent-hover);
@@ -161,7 +181,8 @@ const checked = computed((): boolean => {
     }
   }
 
-  &--checked {
+  &--checked,
+  &--indeterminate {
     &:not(.s-checkbox--disabled) {
       .s-checkbox__inner {
         background-color: var(--s-color-theme-accent-hover);
@@ -179,7 +200,9 @@ const checked = computed((): boolean => {
         }
       }
     }
+  }
 
+  &--checked {
     .s-checkbox__inner {
       &::after {
         transform: rotate(45deg) scaleY(1);
@@ -224,8 +247,6 @@ const checked = computed((): boolean => {
       border-top: 0;
       border-width: 2px;
       position: absolute;
-      left: 4px;
-      top: 1px;
       transform: rotate(45deg) scaleY(0);
       transition: transform .15s ease-in .05s;
       transform-origin: center;

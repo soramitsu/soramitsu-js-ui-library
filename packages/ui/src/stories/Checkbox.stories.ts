@@ -44,8 +44,11 @@ const Template: Story = (args: any) => ({
   },
   template: `
   <div>
-    <div>model: {{ model }}</div>
-    <SCheckbox v-bind="args" v-model="model" />
+    <SCheckbox v-bind="args" v-model="model">
+      <template #description>
+        model: {{ model }}
+      </template>
+    </SCheckbox>
   </div>
   `,
 });
