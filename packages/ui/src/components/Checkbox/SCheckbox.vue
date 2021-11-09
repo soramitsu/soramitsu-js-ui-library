@@ -70,39 +70,165 @@ const checked = computed((): boolean => {
       {
         's-checkbox--bordered': border,
         's-checkbox--checked': checked,
+        's-checkbox--disabled': disabled,
       }
     ]"
   >
-    <span class="s-checkbox__input">
-      <input
-        :id="id"
-        :name="name"
-        :true-value="trueValue"
-        :false-value="falseValue"
-        :value="value"
-        :checked="checked"
-        :disabled="disabled"
-        :indeterminate="indeterminate"
-        v-model="model"
-        type="checkbox"
-        class="s-checkbox__original"
-      />
-      <span class="s-checkbox__inner" />
-    </span>
-    <span class="s-checkbox__label" v-if="$slots.default || label">
-      <slot>{{ label }}</slot>
-    </span>
+    <div class="s-checkbox__content">
+      <span class="s-checkbox__input">
+        <input
+          :id="id"
+          :name="name"
+          :true-value="trueValue"
+          :false-value="falseValue"
+          :value="value"
+          :checked="checked"
+          :disabled="disabled"
+          :indeterminate="indeterminate"
+          v-model="model"
+          type="checkbox"
+          class="s-checkbox__original"
+        />
+        <span class="s-checkbox__inner" />
+      </span>
+      <span class="s-checkbox__label" v-if="$slots.default || label">
+        <slot>{{ label }}</slot>
+      </span>
+    </div>
   </label>
 </template>
 
-<style lang="scss" scoped>
-.s-checkbox {
-  &--size {
-    &-medium {
-      .s-checkbox__inner {
-        width: var(--s-size-mini) / 2;
-        height: var(--s-size-mini) / 2;
+<style lang="scss">
+@mixin size($size, $fontSize, $labelOffset, $padding) {
+  $base: calc(var(--s-size-#{$size}) / 2);
+
+  &--size-#{$size} {
+    font-size: $fontSize;
+
+    &.s-checkbox--bordered {
+      padding: $padding;
+    }
+
+    .s-checkbox__inner {
+      width: $base;
+      height: $base;
+    }
+
+    .s-checkbox__input + .s-checkbox__label {
+      margin-left: $labelOffset;
+    }
+  }
+}
+
+@mixin checkmark-size($size, $top, $left, $width, $height) {
+  &--size-#{$size} {
+    .s-checkbox__inner {
+      &::after {
+        top: $top;
+        left: $left;
+        width: $width;
+        height: $height;
       }
+    }
+  }
+}
+
+.s-checkbox {
+  cursor: pointer;
+  display: inline-flex;
+  flex-flow: column nowrap;
+
+  @include size('mini', var(--s-font-size-2xs), 6px, 7px 7px);
+  @include size('small', var(--s-font-size-xs), 6px, 7px 9px);
+  @include size('medium', var(--s-font-size-sm), 8px, 9px 9px);
+  @include checkmark-size('mini', 1px, 3px, 2px, 5px);
+  @include checkmark-size('small', 0px, 4px, 4px, 8px);
+  @include checkmark-size('medium', 1px, 6px, 5px, 10px);
+
+  &--disabled {
+    cursor: not-allowed;
+    color: var(--s-color-base-on-disabled);
+  }
+
+  &:hover, &:focus, &--checked {
+    &:not(.s-checkbox--disabled) {
+      .s-checkbox__inner {
+        border-color: var(--s-color-theme-accent-hover);
+      }
+      &.s-checkbox--bordered {
+        border-color: var(--s-color-theme-accent-hover);
+      }
+    }
+  }
+
+  &--checked {
+    &:not(.s-checkbox--disabled) {
+      .s-checkbox__inner {
+        background-color: var(--s-color-theme-accent-hover);
+        border-color: var(--s-color-theme-accent-hover);
+      }
+    }
+
+    &.s-checkbox--disabled {
+      .s-checkbox__inner {
+        background-color: var(--s-color-base-disabled);
+        border-color: var(--s-color-base-disabled);
+
+        &::after {
+          border-color: var(--s-color-base-on-disabled);
+        }
+      }
+    }
+
+    .s-checkbox__inner {
+      &::after {
+        transform: rotate(45deg) scaleY(1);
+      }
+    }
+  }
+
+  &--bordered {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+    border-color: var(--s-color-base-border-primary);
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__input {
+    display: flex;
+  }
+
+  &__original {
+    display: none;
+  }
+
+  &__inner {
+    position: relative;
+    display: inline-block;
+    border-radius: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--s-color-base-border-primary);
+
+    &::after {
+      content: "";
+      box-sizing: content-box;
+      border-color: white;
+      border-style: solid;
+      border-left: 0;
+      border-top: 0;
+      border-width: 2px;
+      position: absolute;
+      left: 4px;
+      top: 1px;
+      transform: rotate(45deg) scaleY(0);
+      transition: transform .15s ease-in .05s;
+      transform-origin: center;
     }
   }
 }
