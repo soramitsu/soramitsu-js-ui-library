@@ -35,24 +35,49 @@ const meta: Meta = {
 
 export default meta
 
-const Template: Story = (args: any) => ({
+const createTemplate = (initialModel: any): Story => (args: any) => ({
   components: { SCheckbox },
   setup() {
-    const model = ref(false);
+    const model = ref(initialModel);
+    const { items, ...rest } = args;
 
-    return { args, model };
+    const checkboxes = Array.isArray(items)
+      ? items.map(item => ({ ...rest, ...item }))
+      : [rest];
+
+    return { checkboxes, model };
   },
   template: `
   <div>
-    <SCheckbox v-bind="args" v-model="model">
-      <template #description>
-        model: {{ model }}
-      </template>
-    </SCheckbox>
+    <div>model: {{ model }}</div>
+    <SCheckbox
+      v-for="(item, index) in checkboxes"
+      :key="index"
+      v-bind="item"
+      v-model="model"
+    />
   </div>
   `,
-});
+})
 
-export const Single = Template.bind({});
+export const Single = (createTemplate(false)).bind({});
 Single.args = {
+};
+
+export const Multiple = (createTemplate([])).bind({});
+Multiple.args = {
+  items: [
+    {
+      label: 'One',
+      value: 1
+    },
+    {
+      label: 'Two',
+      value: 2
+    },
+    {
+      label: 'Three',
+      value: 3
+    },
+  ]
 };

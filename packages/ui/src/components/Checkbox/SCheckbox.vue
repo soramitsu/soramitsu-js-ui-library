@@ -104,7 +104,7 @@ const checked = computed((): boolean => {
 @mixin size($size, $padding, $labelOffset, $descriptionOffset) {
   $base: calc(var(--s-size-#{$size}) / 2);
 
-  &--size-#{$size} {
+  &.s-checkbox--size-#{$size} {
     &.s-checkbox--bordered {
       padding: $padding;
     }
@@ -124,8 +124,18 @@ const checked = computed((): boolean => {
   }
 }
 
+@mixin label-size($size, $fontSize, $lineHeight) {
+  &.s-checkbox--size-#{$size} {
+    .s-checkbox__label {
+      font-size: $fontSize;
+      line-height: $lineHeight;
+      letter-spacing: -0.02em;
+    }
+  }
+}
+
 @mixin checkmark-size($size, $top, $left, $width, $height) {
-  &--size-#{$size} {
+  &.s-checkbox--size-#{$size} {
     .s-checkbox__inner {
       &::after {
         top: $top;
@@ -133,16 +143,6 @@ const checked = computed((): boolean => {
         width: $width;
         height: $height;
       }
-    }
-  }
-}
-
-@mixin label-size($size, $fontSize, $lineHeight) {
-  &--size-#{$size} {
-    .s-checkbox__label {
-      font-size: $fontSize;
-      line-height: $lineHeight;
-      letter-spacing: -0.02em;
     }
   }
 }
@@ -155,12 +155,18 @@ const checked = computed((): boolean => {
   @include size('mini', 7px 7px, 6px, 4px);
   @include size('small', 7px 9px, 6px, 6px);
   @include size('medium', 9px 9px, 8px, 8px);
-  @include checkmark-size('mini', 1px, 3px, 2px, 5px);
-  @include checkmark-size('small', 0px, 4px, 4px, 8px);
-  @include checkmark-size('medium', 1px, 6px, 5px, 10px);
   @include label-size('mini', var(--s-font-size-2xs), 16px);
   @include label-size('small', var(--s-font-size-xs), 18px);
   @include label-size('medium', var(--s-font-size-sm), 20px);
+  @include checkmark-size('mini', 1px, 3px, 2px, 5px);
+  @include checkmark-size('small', 0px, 4px, 4px, 8px);
+  @include checkmark-size('medium', 1px, 6px, 5px, 10px);
+
+  &--indeterminate {
+    @include checkmark-size('mini', 4px, 2px, 6px, 2px);
+    @include checkmark-size('small', 6px, 3px, 8px, 2px);
+    @include checkmark-size('medium', 8px, 4px, 10px, 2px);
+  }
 
   &--disabled {
     cursor: not-allowed;
@@ -210,11 +216,19 @@ const checked = computed((): boolean => {
     }
   }
 
+  &--indeterminate {
+    .s-checkbox__inner {
+      &::after {
+        transform: scaleY(1);
+        border: none;
+        background: var(--s-color-base-on-accent);
+      }
+    }
+  }
+
   &--bordered {
-    border-style: solid;
-    border-width: 1px;
+    border: 1px solid var(--s-color-base-border-primary);
     border-radius: 4px;
-    border-color: var(--s-color-base-border-primary);
   }
 
   &__content {
@@ -241,7 +255,7 @@ const checked = computed((): boolean => {
     &::after {
       content: "";
       box-sizing: content-box;
-      border-color: white;
+      border-color: var(--s-color-base-on-accent);
       border-style: solid;
       border-left: 0;
       border-top: 0;
