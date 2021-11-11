@@ -1,6 +1,6 @@
-import { MaybeElementRef } from '@vueuse/core'
 import { Ref, computed } from 'vue'
 import { Option } from './types'
+import { whenever, and, not } from '@vueuse/core'
 
 export interface UseSelectModelReturn<T> {
   /**
@@ -72,6 +72,21 @@ export function useSelectModel<T = any>({
   const selectedOptions = computed<Option[]>(() => options.value.filter((x) => isValueSelected(x.value)))
 
   const isSomethingSelected = computed<boolean>(() => !!selectedSet.value.size)
+
+  const isModelAnArray = computed<boolean>(() => Array.isArray(model.value))
+
+  function modelFromSingleToMultiple() {
+    const current = model.value as null | T
+    model.value = current === null ? [] : [current]
+  }
+
+  function modelFromMultipleToSingle() {
+    const current = model.value as T[]
+    model.value = current.length ? current[0] : null
+  }
+
+  whenever(and(isModelAnArray, not(multiple)), modelFromMultipleToSingle, { immediate: true })
+  whenever(and(not(isModelAnArray), multiple), modelFromSingleToMultiple, { immediate: true })
 
   return {
     isValueSelected,

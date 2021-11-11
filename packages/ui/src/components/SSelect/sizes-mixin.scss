@@ -1,17 +1,21 @@
 @mixin s-select-sizes {
   &-sm {
     height: 24px;
+    @apply s-ty-p4;
   }
 
   &-md {
     height: 32px;
+    @apply s-ty-p4;
   }
 
   &-lg {
     height: 40px;
+    @apply s-ty-p3;
   }
 
   &-xl {
     height: 56px;
+    @apply s-ty-p1;
   }
 }

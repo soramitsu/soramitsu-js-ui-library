@@ -1,5 +1,6 @@
 const path = require('path')
 const { default: Windi } = require('vite-plugin-windicss')
+const Icons = require('unplugin-icons/vite')
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -16,6 +17,7 @@ module.exports = {
       Windi({
         config: path.resolve(__dirname, '../windi.config.ts'),
       }),
+      Icons(),
     )
 
     return config

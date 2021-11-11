@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue-demi'
 import { SSelectItemType } from './types'
-import IconCheckMark from '@soramitsu-ui/icons/icomoon/basic-check-mark-24.svg'
+import IconCheckMark from '~icons/mdi/check'
 import { useSSelectApi } from './api'
 
 const props = defineProps<{
@@ -18,14 +18,20 @@ const emit = defineEmits<(event: 'toggle') => void>()
 
 <template>
   <div
-    :class="['s-select-item', `s-select-item--size-${api.size}`, { 's-select-item--selected': selected }]"
+    :class="[
+      's-select-item',
+      `s-select-item--size-${api.size}`,
+      {
+        's-select-item--selected': selected,
+      },
+    ]"
     @click="emit('toggle')"
   >
     <template v-if="!isCheckMode">
       <template v-if="multiple">
-        radio
+        checkbox
       </template><template v-else>
-        check
+        radio
       </template>
       <template v-if="selected">
         !
@@ -50,7 +56,7 @@ const emit = defineEmits<(event: 'toggle') => void>()
 
 .s-select-item {
   @apply bg-utility-surface;
-  @apply flex items-center px-2 py-1 select-none cursor-pointer space-x-4;
+  @apply flex items-center px-[10px] py-1 select-none cursor-pointer space-x-4;
 
   &:hover,
   &:active,
@@ -63,11 +69,24 @@ const emit = defineEmits<(event: 'toggle') => void>()
   }
 
   &__right-check-wrapper {
-    @apply w-6 h-6 flex items-end;
+    @apply w-6 h-6 flex items-center justify-center;
   }
+
+  $root: &;
 
   &--size {
     @include sizes-mixin.s-select-sizes;
+
+    @mixin check-size($size, $px) {
+      &-#{$size} #{$root}__right-check-wrapper {
+        font-size: $px;
+      }
+    }
+
+    @include check-size('sm', 16px);
+    @include check-size('md', 16px);
+    @include check-size('lg', 16px);
+    @include check-size('xl', 24px);
   }
 }
 </style>

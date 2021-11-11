@@ -2,7 +2,6 @@ import { series } from 'gulp'
 import del from 'del'
 import { $ } from 'zx'
 import fg from 'fast-glob'
-// import { globby } from 'globby'
 
 async function clean() {
   await del(['dist-ts', 'dist'])

@@ -3,17 +3,20 @@ import { useSSelectApi } from './api'
 import { SSelectItemType } from './types'
 import SSelectItem from './SSelectItem.vue'
 
-const api = useSSelectApi()
+defineProps<{
+  itemType: SSelectItemType
+}>()
 
-const ITEM_TYPE = SSelectItemType.Check
+const api = useSSelectApi()
 </script>
 
 <template>
-  <div class="bg-utility-surface rounded overflow-hidden shadow-dropdown">
+  <div class="s-select-dropdown">
     <SSelectItem
       v-for="(opt, i) in api.options"
       :key="i"
-      :type="ITEM_TYPE"
+      :type="itemType"
+      :multiple="api.multiple"
       :selected="api.isValueSelected(opt.value)"
       @toggle="api.toggleSelection(opt.value)"
     >
@@ -21,3 +24,9 @@ const ITEM_TYPE = SSelectItemType.Check
     </SSelectItem>
   </div>
 </template>
+
+<style lang="scss">
+.s-select-dropdown {
+  @apply bg-utility-surface rounded overflow-hidden shadow-dropdown;
+}
+</style>

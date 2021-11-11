@@ -51,8 +51,6 @@ export function usePopper(params: UsePopperParams): UsePopperReturn {
         },
       ],
     })
-
-    console.log('updated')
   }
 
   function disposeInstance() {

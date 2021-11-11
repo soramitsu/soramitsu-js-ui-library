@@ -3,7 +3,7 @@ import { SSelectSize, Option } from './types'
 import { computed, provide, readonly } from 'vue'
 import { useSelectModel } from './tools'
 import { SSelectApi, S_SELECT_API_KEY } from './api'
-import { templateRef, useVModel, useToggle, onClickOutside, unrefElement } from '@vueuse/core'
+import { templateRef, useVModel, useToggle, onClickOutside, unrefElement, whenever, and } from '@vueuse/core'
 import { usePopper } from '@/composables/popper'
 import { useConditionalScope } from '@/composables/conditional-scope'
 
@@ -23,11 +23,13 @@ const props = withDefaults(
     label?: string
 
     /**
+     * TODO
+     *
      * - Doesn't allow to unselect value in single mode
      * - Doesn't allow to unselect last the only one picked value in multiple mode
      * - Picks some value automatically (the first one) if `modelValue` is null and there are some available options
      */
-    // mandatory?: boolean
+    mandatory?: boolean
 
     /**
      * @default 's-select-dropdown-transition'
@@ -35,7 +37,7 @@ const props = withDefaults(
     dropdownTransitionName?: string
 
     /**
-     * todo
+     * TODO
      */
     syncMenuAndInputWidths?: boolean
   }>(),
@@ -92,6 +94,9 @@ useConditionalScope(showPopper, () => {
   )
 })
 
+// close popper if select is disabled
+whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
+
 const api: SSelectApi<any> = readonly({
   ...modeling,
   multiple,
@@ -108,7 +113,7 @@ provide(S_SELECT_API_KEY, api)
 </script>
 
 <template>
-  <div class="p-4">
+  <div>
     <div ref="popperRef">
       <slot name="control" />
     </div>
@@ -124,11 +129,11 @@ provide(S_SELECT_API_KEY, api)
 </template>
 
 <style lang="scss">
-.s-select-dropdown-transition {
-  $ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
-  $ease-in-back: cubic-bezier(0.36, 0, 0.66, -0.56);
-  $dur: 0.2s;
+$ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+$ease-in-back: cubic-bezier(0.36, 0, 0.66, -0.56);
+$dur: 0.2s;
 
+.s-select-dropdown-transition {
   &-enter-active {
     transition: all $dur $ease-out-back;
   }

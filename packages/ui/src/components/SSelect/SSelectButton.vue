@@ -2,7 +2,7 @@
 import { computed } from 'vue-demi'
 import { useSSelectApi } from './api'
 import { SSelectButtonType } from './types'
-import IconChevronBottom from '@soramitsu-ui/icons/icomoon/chevron-bottom-16.svg'
+import SSelectChevron from './SSelectChevron'
 
 const props = withDefaults(
   defineProps<{
@@ -36,59 +36,86 @@ const formattedSelectedValue = computed<string | null>(() => {
 
 <template>
   <div
-    v-if="type === SSelectButtonType.Default"
     :class="[
-      's-select-btn s-select-btn--default',
+      's-select-btn',
+      `s-select-btn--${type}`,
       `s-select-btn--size-${api.size}`,
       {
-        's-select-btn--non-empty': api.isSomethingSelected,
+        's-select-btn--empty': !api.isSomethingSelected,
+        's-select-btn--disabled': api.disabled,
       },
     ]"
     @click="toggle"
   >
     <span class="s-select-btn__label">
-      <slot name="label">
+      <slot
+        name="label"
+        v-bind="api"
+      >
         {{ api.label }}
       </slot>
       <template v-if="api.isSomethingSelected">:</template>
     </span>
 
-    <span>
-      <template v-if="api.isSomethingSelected"> {{ formattedSelectedValue }} </template>
+    <span
+      v-if="api.isSomethingSelected"
+      class="s-select-btn__selection"
+    >
+      {{ formattedSelectedValue }}
     </span>
 
-    <IconChevronBottom
-      :class="{
-        'transform rotate-180': api.isMenuOpened,
-      }"
-    />
+    <SSelectChevron :rotate="api.isMenuOpened" />
   </div>
-
-  <span v-else>
-    <span><slot name="label">{{ api.label }}</slot></span>
-  </span>
 </template>
 
 <style lang="scss" scoped>
 @use './sizes-mixin.scss';
 
 .s-select-btn {
-  @apply select-none flex items-center space-x-2 cursor-pointer;
+  $root: &;
+
+  @apply select-none inline-flex items-center space-x-2 cursor-pointer;
 
   &--default {
-    @apply bg-base-background text-base-content-primary rounded px-2 py-1;
+    @apply bg-base-background text-base-content-primary rounded px-4;
 
     &:hover {
       @apply bg-base-background-hover;
     }
   }
 
-  &--non-empty &__label {
+  &--inline {
+    #{$root}__selection {
+      @apply underline underline-solid underline-base-content-primary;
+    }
+
+    &:hover#{$root}--empty #{$root}__label {
+      text-decoration: underline;
+      // @apply underline;
+    }
+  }
+
+  &--disabled {
+    @apply pointer-events-none opacity-75;
+  }
+
+  &:not(&--empty) &__label {
     @apply text-base-content-tertiary;
   }
 
   &--size {
     @include sizes-mixin.s-select-sizes;
+
+    @mixin chevron-size($size, $px) {
+      &-#{$size} .s-select-chevron {
+        font-size: $px;
+      }
+    }
+
+    @include chevron-size('sm', 8px);
+    @include chevron-size('md', 8px);
+    @include chevron-size('lg', 10px);
+    @include chevron-size('xl', 16px);
   }
 }
 </style>

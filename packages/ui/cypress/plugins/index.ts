@@ -3,6 +3,7 @@ import Windi from 'vite-plugin-windicss'
 import Vue from '@vitejs/plugin-vue'
 import VueJsx from '@vitejs/plugin-vue-jsx'
 import VueSvg from 'vite-svg-loader'
+import Icons from 'unplugin-icons/vite'
 import path from 'path'
 // import { initPlugin } from 'cypress-plugin-snapshots/plugin'
 
@@ -18,6 +19,7 @@ const pluginConfig: Cypress.PluginConfig = (on, config) => {
           Vue(),
           VueJsx(),
           VueSvg(),
+          Icons(),
         ],
         resolve: {
           alias: {

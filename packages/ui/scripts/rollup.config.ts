@@ -4,6 +4,7 @@ import windi from 'rollup-plugin-windicss'
 import postcss from 'rollup-plugin-postcss'
 import vue from 'rollup-plugin-vue'
 import vueSvg from 'vite-svg-loader'
+import icons from 'unplugin-icons/rollup'
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import dts from 'rollup-plugin-dts'
@@ -40,6 +41,7 @@ function uiLibConfigs(): RollupOptions[] {
         postcss(),
         commonjs(),
         nodeResolve(),
+        icons(),
       ],
       output: [
         {
