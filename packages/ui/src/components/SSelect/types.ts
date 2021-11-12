@@ -11,7 +11,7 @@ export enum SSelectButtonType {
   // Icon = 'icon'
 }
 
-export enum SSelectItemType {
+export enum SSelectOptionType {
   RadioOrCheckbox = 'rad-or-check',
   Check = 'check',
 }

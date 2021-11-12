@@ -153,10 +153,10 @@ export const SSelectChevron: FunctionalComponent<Props>;
 export const SSelectInput: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
-export const SSelectItem: DefineComponent<{}, {}, any>;
+export const SSelectOption: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
-export enum SSelectItemType {
+export enum SSelectOptionType {
     // (undocumented)
     Check = "check",
     // (undocumented)

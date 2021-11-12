@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { computed } from 'vue-demi'
-import { SSelectItemType } from './types'
+import { SSelectOptionType } from './types'
 import IconCheckMark from '~icons/mdi/check'
 import { useSSelectApi } from './api'
 
 const props = defineProps<{
-  type: SSelectItemType
+  type: SSelectOptionType
   multiple?: boolean
   selected?: boolean
 }>()
 
 const api = useSSelectApi()
-const isCheckMode = computed(() => props.type === SSelectItemType.Check)
+const isCheckMode = computed(() => props.type === SSelectOptionType.Check)
 
 const emit = defineEmits<(event: 'toggle') => void>()
 </script>
@@ -19,10 +19,10 @@ const emit = defineEmits<(event: 'toggle') => void>()
 <template>
   <div
     :class="[
-      's-select-item',
-      `s-select-item--size-${api.size}`,
+      's-select-option',
+      `s-select-option--size-${api.size}`,
       {
-        's-select-item--selected': selected,
+        's-select-option--selected': selected,
       },
     ]"
     @click="emit('toggle')"
@@ -37,12 +37,12 @@ const emit = defineEmits<(event: 'toggle') => void>()
         !
       </template>
     </template>
-    <div class="s-select-item__content">
+    <div class="s-select-option__content">
       <slot />
     </div>
 
     <template v-if="isCheckMode">
-      <div class="s-select-item__right-check-wrapper">
+      <div class="s-select-option__right-check-wrapper">
         <template v-if="selected">
           <IconCheckMark />
         </template>
@@ -54,7 +54,7 @@ const emit = defineEmits<(event: 'toggle') => void>()
 <style lang="scss">
 @use './sizes-mixin.scss';
 
-.s-select-item {
+.s-select-option {
   @apply bg-utility-surface;
   @apply flex items-center px-[10px] py-1 select-none cursor-pointer space-x-4;
 

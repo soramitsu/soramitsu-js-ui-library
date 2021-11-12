@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Option, SSelectButtonType, SSelectItemType, SSelectSize } from './types'
+import { Option, SSelectButtonType, SSelectOptionType, SSelectSize } from './types'
 import SSelectBase from './SSelectBase.vue'
 import SSelectButton from './SSelectButton.vue'
 import SSelectDropdown from './SSelectDropdown.vue'
@@ -34,7 +34,7 @@ const buttonType = computed(() => (props.inline ? SSelectButtonType.Inline : SSe
     </template>
 
     <template #dropdown>
-      <SSelectDropdown :item-type="SSelectItemType.Check" />
+      <SSelectDropdown :item-type="SSelectOptionType.Check" />
     </template>
   </SSelectBase>
 </template>

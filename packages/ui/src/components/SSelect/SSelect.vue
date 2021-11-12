@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Option, SSelectItemType, SSelectSize } from './types'
+import { Option, SSelectOptionType, SSelectSize } from './types'
 import SSelectBase from './SSelectBase.vue'
 import SSelectInput from './SSelectInput.vue'
 import SSelectDropdown from './SSelectDropdown.vue'
@@ -30,7 +30,7 @@ const props = defineProps<{
     </template>
 
     <template #dropdown>
-      <SSelectDropdown :item-type="SSelectItemType.RadioOrCheckbox" />
+      <SSelectDropdown :item-type="SSelectOptionType.RadioOrCheckbox" />
     </template>
   </SSelectBase>
 </template>

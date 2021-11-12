@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useSSelectApi } from './api'
-import { SSelectItemType } from './types'
-import SSelectItem from './SSelectItem.vue'
+import { SSelectOptionType } from './types'
+import SSelectOption from './SSelectOption.vue'
 
 defineProps<{
-  itemType: SSelectItemType
+  itemType: SSelectOptionType
 }>()
 
 const api = useSSelectApi()
@@ -12,7 +12,7 @@ const api = useSSelectApi()
 
 <template>
   <div class="s-select-dropdown">
-    <SSelectItem
+    <SSelectOption
       v-for="(opt, i) in api.options"
       :key="i"
       :type="itemType"
@@ -21,7 +21,7 @@ const api = useSSelectApi()
       @toggle="api.toggleSelection(opt.value)"
     >
       {{ opt.label }}
-    </SSelectItem>
+    </SSelectOption>
   </div>
 </template>
 
