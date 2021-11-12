@@ -1,6 +1,9 @@
 const path = require('path')
-const { default: Windi } = require('vite-plugin-windicss')
-const Icons = require('unplugin-icons/vite')
+const { loadConfigFromFile, mergeConfig } = require('vite')
+
+function resolve(...paths) {
+  return path.resolve(__dirname, '..', ...paths)
+}
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -11,15 +14,15 @@ module.exports = {
   /**
    * @param {import('vite').UserConfig} config
    */
-  async viteFinal(config, { configType }) {
-    config.resolve.alias['@'] = path.resolve(__dirname, '../src')
-    config.plugins.push(
-      Windi({
-        config: path.resolve(__dirname, '../windi.config.ts'),
-      }),
-      Icons(),
+  async viteFinal(config) {
+    const { config: mainConfig } = await loadConfigFromFile(
+      { mode: 'development', command: 'serve' },
+      resolve('vite.config.ts'),
     )
 
-    return config
+    // vue plugin is already presented in storybook's config, so we need to deduplicate it
+    mainConfig.plugins = mainConfig.plugins.filter((x) => !/vite:vue/.test(x.name))
+
+    return mergeConfig(config, mainConfig)
   },
 }

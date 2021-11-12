@@ -1,14 +1,13 @@
 import { FunctionalComponent, h } from 'vue'
 import IconChevronBottom from '~icons/mdi/chevron-down'
+import './SSelectChevron.scss'
 
 interface Props {
   rotate?: boolean
 }
 
-const component: FunctionalComponent<Props> = ({ rotate }) => {
-  import('./SSelectChevron.scss')
-
-  return h(IconChevronBottom, {
+const component: FunctionalComponent<Props> = ({ rotate }) =>
+  h(IconChevronBottom, {
     class: [
       's-select-chevron',
       {
@@ -16,7 +15,6 @@ const component: FunctionalComponent<Props> = ({ rotate }) => {
       },
     ],
   })
-}
 
 component.props = { rotate: Boolean }
 

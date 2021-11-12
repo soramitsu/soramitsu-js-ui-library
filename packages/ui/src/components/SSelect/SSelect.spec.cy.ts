@@ -251,7 +251,7 @@ it('SSelect - clicking options, checking auto-transformations', () => {
   assertValue('2')
 })
 
-it.only('SDropdown - model usage works', () => {
+it('SDropdown - model usage works', () => {
   mount({
     setup() {
       const model = ref(null)

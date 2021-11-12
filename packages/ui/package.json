@@ -2,18 +2,32 @@
   "name": "@soramitsu-ui/ui",
   "version": "0.1.0",
   "main": "dist/lib.cjs.js",
-  "module": "dist/lib.esm.js",
+  "module": "dist/lib.es.js",
   "types": "dist/lib.d.ts",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/lib.es.js",
+      "require": "./dist/lib.cjs.js"
+    },
+    "./styles": "./dist/style.css",
+    "./*": "./*"
+  },
   "scripts": {
     "sb:build": "build-storybook",
     "sb:serve": "start-storybook -p 6006",
     "cy": "cypress open-ct",
     "cy:ci": "cypress run-ct --quiet --reporter spec",
     "typecheck": "vue-tsc --noEmit",
-    "build": "gulp --require sucrase/register -f gulpfile.ts"
+    "gulpts": "gulp --require sucrase/register -f gulpfile.ts",
+    "clean": "yarn gulpts clean",
+    "build": "yarn gulpts",
+    "build:tsc": "tsc --outDir dist-ts --emitDeclarationOnly --declaration",
+    "build:vite": "vite build",
+    "api:extract": "api-extractor run",
+    "api:extract:local": "api-extractor run --local"
   },
   "dependencies": {
     "@popperjs/core": "^2.10.2",
@@ -28,8 +42,7 @@
     "@iconify/json": "^1.1.426",
     "@jest/types": "^27.2.4",
     "@mdx-js/preact": "^1.6.22",
-    "@rollup/plugin-commonjs": "^21.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.5",
+    "@microsoft/api-extractor": "^7.18.19",
     "@soramitsu-ui/icons": "^0.1.0",
     "@soramitsu-ui/theme": "^0.1.0",
     "@storybook/addon-actions": "^6.3.9",
@@ -42,22 +55,12 @@
     "@vitejs/plugin-vue": "^1.8.1",
     "@vitejs/plugin-vue-jsx": "^1.2.0",
     "@vue/compiler-sfc": "3.2.12",
-    "chalk": "^4.1.2",
-    "consola": "^2.15.3",
     "cypress": "^8.4.1",
     "cypress-plugin-snapshots": "^1.4.4",
     "del": "^6.0.0",
-    "esno": "^0.9.1",
     "execa": "^5.1.1",
     "fast-glob": "^3.2.7",
     "gulp": "^4.0.2",
-    "postcss": "^8",
-    "rollup": "^2.58.3",
-    "rollup-plugin-dts": "^4.0.0",
-    "rollup-plugin-esbuild": "^4.5.0",
-    "rollup-plugin-postcss": "^4.0.1",
-    "rollup-plugin-vue": "^6.0.0",
-    "rollup-plugin-windicss": "^1.4.9",
     "sass": "^1.41.1",
     "storybook-builder-vite": "^0.0.12",
     "sucrase": "^3.20.3",
