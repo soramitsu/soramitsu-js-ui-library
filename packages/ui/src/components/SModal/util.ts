@@ -100,6 +100,12 @@ export interface UseModalVisibilityReturn {
    * component fires appear transition i.e. enter transition. It violates visibility invariant.
    *
    * To solve this, this flag will be `false` when `eager` and initial show it `false`.
+   *
+   * Btw, issue:
+   * https://github.com/vuejs/vue-next/issues/4845
+   *
+   * Comment with solution that i decided to use:
+   * https://github.com/vuejs/vue-next/issues/4845#issuecomment-957974094
    */
   modalTransitionAppear: boolean
 }
@@ -127,9 +133,7 @@ export function useModalVisibility({
     { flush: 'pre' },
   )
 
-  // whenever(notAllHidden, () => emit('before-open'))
   whenever(allVisible, () => emit('after-open'))
-  // whenever(not(allVisible), () => emit('before-close'))
   whenever(allHidden, () => emit('after-close'))
 
   const rootIf = or(eager, show, notAllHidden)
