@@ -20,8 +20,8 @@ export function bareMetalVModel<T, K extends string = 'modelValue'>(
   [key in `onUpdate:${K}`]: (value: T) => void
 } {
   return {
-    [prop]: model.value as any,
-    [`onUpdate:${prop}`]: (v) => {
+    [prop]: model.value as T,
+    [`onUpdate:${prop}`]: (v: T) => {
       model.value = v
     },
   } as any

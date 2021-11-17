@@ -7,7 +7,9 @@
 import { ComputedRef } from 'vue';
 import { DeepReadonly } from 'vue';
 import { DefineComponent } from 'vue';
+import { FocusTrap } from 'focus-trap';
 import { FunctionalComponent } from 'vue';
+import { InjectionKey } from 'vue';
 import { Plugin as Plugin_2 } from 'vue';
 import { Ref } from 'vue';
 import { UnwrapRef } from 'vue';
@@ -94,6 +96,9 @@ export enum InputType {
 export function plugin(): Plugin_2;
 
 // @public (undocumented)
+export const S_MODAL_API_KEY: InjectionKey<SModalApi>;
+
+// @public (undocumented)
 export const SButton: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
@@ -104,6 +109,19 @@ export const SDropdown: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
 export const SJsonInput: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
+export const SModal: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
+export interface SModalApi {
+    // (undocumented)
+    close: () => void;
+    focusTrap: null | FocusTrap;
+}
+
+// @public (undocumented)
+export const SModalCard: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
 export const SSelect: DefineComponent<{}, {}, any>;
@@ -177,6 +195,9 @@ export enum SSelectSize {
 
 // @public (undocumented)
 export function useDesignSystem(): ComputedRef<DesignSystem>;
+
+// @public (undocumented)
+export function useSModalApi(): SModalApi;
 
 // @public (undocumented)
 export function useSSelectApi<T = any>(): SSelectApi<T>;
