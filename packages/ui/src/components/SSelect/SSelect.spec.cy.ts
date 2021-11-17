@@ -8,16 +8,12 @@ import SSelectButton from './SSelectButton.vue'
 import SSelectInput from './SSelectInput.vue'
 import SSelect from './SSelect.vue'
 import { useToggle } from '@vueuse/core'
+import { bareMetalVModel } from '@/util'
 
 const SIZES = [SSelectSize.Sm, SSelectSize.Md, SSelectSize.Lg, SSelectSize.Xl]
 
-function vModel<T>(model: Ref<T>): { modelValue: T; 'onUpdate:modelValue': (value: T) => void } {
-  return {
-    modelValue: model.value as any,
-    'onUpdate:modelValue': (v) => {
-      model.value = v
-    },
-  }
+function vModel<T>(model: Ref<T>) {
+  return bareMetalVModel(model, 'modelValue')
 }
 
 it('Gallery - Dropdown', () => {
