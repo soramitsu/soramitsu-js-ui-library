@@ -2,6 +2,7 @@ import { mount } from '@cypress/vue'
 import { useCounter } from '@vueuse/core'
 import { ref } from 'vue'
 import SNotificationBody from './SNotificationBody.vue'
+import { NotificationType } from './types'
 
 it('Playground', () => {
   mount(
@@ -89,4 +90,34 @@ it('Close btn works', () => {
     .click()
     .get('[data-cy=item]')
     .should('not.exist')
+})
+
+it('Different types', () => {
+  mount({
+    components: { SNotificationBody },
+    setup() {
+      return {
+        types: Object.values(NotificationType),
+      }
+    },
+    template: `
+      <div class="p-4 grid grid-cols-2 gap-4">
+        <SNotificationBody
+          v-for="x in types"
+          :key="x"
+          :type="x"
+          show-close-btn
+        >
+          <template #title>
+            <span class="uppercase">{{ x }}</span>
+          </template>
+          <template #description>
+            Aut cum scuto aut in scuto
+          </template>
+        </SNotificationBody>
+      </div>
+    `,
+  })
+
+  // todo snap
 })

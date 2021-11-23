@@ -4,11 +4,11 @@ import type { Component } from 'vue'
 import { NotificationType } from './types'
 import SNotificationBodyTimeline from './SNotificationBodyTimeline.vue'
 
-import IconClose from '~icons/mdi/close'
-import IconSuccess from '~icons/mdi/check-circle-outline'
-import IconInfo from '~icons/mdi/information-outline'
-import IconWarning from '~icons/mdi/alert-outline'
-import IconError from '~icons/mdi/close-octagon-outline'
+import IconClose from '@soramitsu-ui/icons/icomoon/basic-close-24.svg'
+import IconSuccess from '@soramitsu-ui/icons/icomoon/basic-circle-checked-24.svg'
+import IconInfo from '@soramitsu-ui/icons/icomoon/notifications-info-24.svg'
+import IconWarning from '@soramitsu-ui/icons/icomoon/notifications-alert-triangle-24.svg'
+import IconError from '@soramitsu-ui/icons/icomoon/notifications-x-octagon-24.svg'
 
 const props = withDefaults(
   defineProps<{
@@ -129,6 +129,12 @@ function onTimeout() {
 
   @include define-icon-color('warning') {
     @apply text-status-warning;
+  }
+
+  // fix for broken sora icons
+  &__close-wrapper svg,
+  &__icon-wrapper svg {
+    fill: currentColor;
   }
 }
 </style>
