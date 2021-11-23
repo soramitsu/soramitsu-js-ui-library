@@ -1,1 +1,3 @@
-export type ToastDisplayPlacement = 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left'
+export type ToastsDisplayPlacementVertical = 'top' | 'bottom'
+
+export type ToastsDisplayPlacementHorizontal = 'left' | 'right' | 'center'

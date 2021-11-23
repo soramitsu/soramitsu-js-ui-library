@@ -1,9 +1,10 @@
 import SToastsProvider from './SToastsProvider'
 import SToastsDisplay from './SToastsDisplay.vue'
 
-import { h, onScopeDispose, defineComponent, ref } from 'vue'
+import { h, onScopeDispose, defineComponent, ref, reactive } from 'vue'
 import { mount } from '@cypress/vue'
-import { useCounter } from '@vueuse/core'
+import { config } from '@vue/test-utils'
+import { useCounter, useVModel } from '@vueuse/core'
 import { ToastsApi, TOASTS_API_KEY } from './api'
 import { forceInject } from '@/util'
 
@@ -38,26 +39,92 @@ const Toast = defineComponent({
   },
 })
 
+before(() => {
+  config.global.components = {
+    SToastsProvider,
+    SToastsDisplay,
+    Toast,
+    UseToggle,
+  }
+  config.global.stubs = { 'transition-group': false }
+})
+
+after(() => {
+  config.global.components = {}
+  config.global.stubs = {}
+})
+
 it('Playground', () => {
   mount(
     {
+      setup() {
+        let count = 0
+        const toasts: number[] = reactive([])
+        const vert = ref('bottom')
+        const vertItems = ['bottom', 'top']
+        const hor = ref('left')
+        const horItems = ['left', 'center', 'right']
+
+        function push() {
+          toasts.push(count++)
+        }
+
+        function close(i: number) {
+          toasts.splice(toasts.indexOf(i), 1)
+        }
+
+        return {
+          toasts,
+          push,
+          close,
+          vert,
+          vertItems,
+          hor,
+          horItems,
+        }
+      },
       template: `
         <SToastsProvider>
-          <SToastsDisplay placement="top-left" />
+          <SToastsDisplay :vertical="vert" :horizontal="hor" />
 
+          <template v-for="i in toasts" :key="i">
             <Toast>
-              Here I am
+              <div class="p-2 bg-blue-300 shadow-lg rounded">
+                Toast {{ i }}
+
+                <button @click="close(i)">Close</button>
+              </div>
             </Toast>
+          </template>
+
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div>
+              <RadioList v-model="vert" :options="vertItems" />
+              <RadioList v-model="hor" :options="horItems" />
+              <button @click="push">Push</button>
+            </div>
+          </div>
         </SToastsProvider>
       `,
     },
     {
       global: {
         components: {
-          SToastsProvider,
-          SToastsDisplay,
-          Toast,
-          UseToggle,
+          RadioList: {
+            props: ['modelValue', 'options'],
+            emits: ['update:modelValue'],
+            setup(props, { emit }) {
+              const proxy = useVModel(props, 'modelValue', emit)
+              return { proxy }
+            },
+            template: `
+              <div class="space-x-4">
+                <span v-for="item in options" :key="item">
+                  <input v-model="proxy" :value="item" type="radio"> {{ item }}
+                </span>
+              </div>
+            `,
+          },
         },
       },
     },
@@ -65,31 +132,19 @@ it('Playground', () => {
 })
 
 it('Minimal working repr', () => {
-  mount(
-    {
-      template: `
-        <SToastsProvider>
-          <SToastsDisplay placement="top-right" />
+  mount({
+    template: `
+      <SToastsProvider>
+        <SToastsDisplay />
 
-          <UseToggle v-slot="{ value }">
-            <Toast v-if="value">
-              Here I am
-            </Toast>
-          </UseToggle>
-        </SToastsProvider>
-      `,
-    },
-    {
-      global: {
-        components: {
-          SToastsProvider,
-          SToastsDisplay,
-          Toast,
-          UseToggle,
-        },
-      },
-    },
-  )
+        <UseToggle v-slot="{ value }">
+          <Toast v-if="value">
+            Here I am
+          </Toast>
+        </UseToggle>
+      </SToastsProvider>
+    `,
+  })
 
   cy.contains('Here I am').should('not.exist')
 
@@ -101,31 +156,20 @@ it('Minimal working repr', () => {
 })
 
 it('Different nested providers with different displays', () => {
-  mount(
-    {
-      template: `
-        <SToastsProvider api-key="notify">
-          <SToastsDisplay placement="top-right" />
+  mount({
+    template: `
+      <SToastsProvider api-key="notify">
+        <SToastsDisplay />
 
-          <SToastsProvider api-key="message">
-            <SToastsDisplay placement="bottom-left" />
+        <SToastsProvider api-key="message">
+          <SToastsDisplay />
 
-            <Toast via="notify">Notification</Toast>
-            <Toast via="message">Message</Toast>
-          </SToastsProvider>
+          <Toast via="notify">Notification</Toast>
+          <Toast via="message">Message</Toast>
         </SToastsProvider>
-      `,
-    },
-    {
-      global: {
-        components: {
-          SToastsProvider,
-          SToastsDisplay,
-          Toast,
-        },
-      },
-    },
-  )
+      </SToastsProvider>
+    `,
+  })
 
   cy.get('.s-toasts-display')
     .should('have.length', 2)
@@ -138,30 +182,19 @@ it('Different nested providers with different displays', () => {
 })
 
 it('Multiple providers with multiple displays in the deep', () => {
-  mount(
-    {
-      template: `
-        <SToastsProvider api-key="A">
-          <SToastsProvider api-key="B">
-            <SToastsDisplay api-key="A" placement="top-right" />
-            <SToastsDisplay api-key="B" placement="bottom-left" />
+  mount({
+    template: `
+      <SToastsProvider api-key="A">
+        <SToastsProvider api-key="B">
+          <SToastsDisplay api-key="A" />
+          <SToastsDisplay api-key="B" />
 
-            <Toast via="A">ToastA</Toast>
-            <Toast via="B">ToastB</Toast>
-          </SToastsProvider>
+          <Toast via="A">ToastA</Toast>
+          <Toast via="B">ToastB</Toast>
         </SToastsProvider>
-      `,
-    },
-    {
-      global: {
-        components: {
-          SToastsProvider,
-          SToastsDisplay,
-          Toast,
-        },
-      },
-    },
-  )
+      </SToastsProvider>
+    `,
+  })
 
   cy.get('.s-toasts-display')
     .should('have.length', 2)
@@ -174,29 +207,18 @@ it('Multiple providers with multiple displays in the deep', () => {
 })
 
 it('Composed provider', () => {
-  mount(
-    {
-      template: `
-        <SToastsProvider :api-key="['A', 'B']">
-          <SToastsDisplay placement="top-right" />
+  mount({
+    template: `
+      <SToastsProvider :api-key="['A', 'B']">
+        <SToastsDisplay />
 
-          <Toast via="A">ToastA</Toast>
-          <Toast via="B">ToastB</Toast>
-        </SToastsProvider>
-      `,
-    },
-    {
-      global: {
-        components: {
-          SToastsProvider,
-          SToastsDisplay,
-          Toast,
-        },
-      },
-    },
-  )
+        <Toast via="A">ToastA</Toast>
+        <Toast via="B">ToastB</Toast>
+      </SToastsProvider>
+    `,
+  })
 
-  cy.get('.s-toasts-display')
+  cy.get('.s-toasts-display__stack')
     .children()
     .should('have.length', 2)
     .first()
@@ -208,35 +230,24 @@ it('Composed provider', () => {
 })
 
 it("Reactivity in Toast's slot is not broken", () => {
-  mount(
-    {
-      setup() {
-        const { count, inc } = useCounter()
+  mount({
+    setup() {
+      const { count, inc } = useCounter()
 
-        return { count, inc }
-      },
-      template: `
-        <SToastsProvider>
-          <SToastsDisplay placement="top" />
-
-          <button @click="inc()">inc</button>
-
-          <Toast>
-            Count: {{ count }}
-          </Toast>
-        </SToastsProvider>
-      `,
+      return { count, inc }
     },
-    {
-      global: {
-        components: {
-          SToastsProvider,
-          SToastsDisplay,
-          Toast,
-        },
-      },
-    },
-  )
+    template: `
+      <SToastsProvider>
+        <SToastsDisplay />
+
+        <button @click="inc()">inc</button>
+
+        <Toast>
+          Count: {{ count }}
+        </Toast>
+      </SToastsProvider>
+    `,
+  })
 
   cy.contains('Count: 0')
   cy.contains('inc').click().click().click()
@@ -262,7 +273,7 @@ it('Component in slot keeps its state', () => {
           {
             default: () => [
               h(SToastsDisplay as any, {
-                placement: 'top',
+                placement: 'top-right',
               }),
               h(Counter, { 'data-cy': 'outer' }),
               h(
@@ -288,4 +299,21 @@ it('Component in slot keeps its state', () => {
     .contains('Count: 1')
     .get('[data-cy=inner]')
     .contains('Count: 2')
+})
+
+it('Rendered toast is clickable, but its container is not', () => {
+  mount({
+    template: `
+      <SToastsProvider>
+        <SToastsDisplay />
+
+        <Toast>
+          <button>click me</button>
+        </Toast>
+      </SToastsProvider>
+    `,
+  })
+
+  cy.contains('click me').click().parent().should('have.css', 'pointer-events', 'none')
+  cy.get('.s-toasts-display').should('have.css', 'pointer-events', 'none')
 })

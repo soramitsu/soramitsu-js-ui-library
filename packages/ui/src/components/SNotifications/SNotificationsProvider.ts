@@ -1,6 +1,10 @@
-import { h, FunctionalComponent } from 'vue'
-import { SToastsProvider, SToastsDisplay, ToastDisplayPlacement } from '../SToasts'
-import { TOAST_DISPLAY_PLACEMENT_PROP } from '../SToasts/util'
+import { h, FunctionalComponent, PropType } from 'vue'
+import {
+  SToastsProvider,
+  SToastsDisplay,
+  ToastsDisplayPlacementHorizontal,
+  ToastsDisplayPlacementVertical,
+} from '../SToasts'
 import { NOTIFICATIONS_API_KEY } from './api'
 
 /**
@@ -30,7 +34,8 @@ import { NOTIFICATIONS_API_KEY } from './api'
  * ```
  */
 const component: FunctionalComponent<{
-  placement: ToastDisplayPlacement
+  vertical?: ToastsDisplayPlacementVertical
+  horizontal?: ToastsDisplayPlacementHorizontal
   absolute?: boolean
   to?: string
 }> = (props, { slots }) =>
@@ -45,7 +50,9 @@ const component: FunctionalComponent<{
   )
 
 component.props = {
-  placement: TOAST_DISPLAY_PLACEMENT_PROP,
+  // no need in validators - placements will be validates in the display component
+  vertical: { type: String as PropType<ToastsDisplayPlacementVertical> },
+  horizontal: { type: String as PropType<ToastsDisplayPlacementHorizontal> },
   absolute: Boolean,
   to: String,
 }

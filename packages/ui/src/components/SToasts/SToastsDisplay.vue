@@ -1,10 +1,21 @@
 <script setup lang="ts">
-import { TOAST_DISPLAY_PLACEMENT_PROP } from './util'
+import { validateHorizontalPlacement, validateVerticalPlacement } from './util'
 import { ToastsApi, TOASTS_API_KEY } from './api'
 import { forceInject } from '@/util'
+import { PropType } from 'vue'
+import { ToastsDisplayPlacementVertical, ToastsDisplayPlacementHorizontal } from './types'
 
 const props = defineProps({
-  placement: TOAST_DISPLAY_PLACEMENT_PROP,
+  vertical: {
+    type: String as PropType<ToastsDisplayPlacementVertical>,
+    default: 'bottom',
+    validate: validateVerticalPlacement,
+  },
+  horizontal: {
+    type: String as PropType<ToastsDisplayPlacementHorizontal>,
+    default: 'left',
+    validate: validateHorizontalPlacement,
+  },
   absolute: Boolean,
   /**
    * Where to teleport it
@@ -20,6 +31,48 @@ const props = defineProps({
 })
 
 const api = forceInject<ToastsApi>(props.apiKey)
+
+// no need in entering height transition due to stack nature of toasts
+
+// function enter(element: HTMLElement) {
+//   const width = getComputedStyle(element).width
+
+//   element.style.width = width
+//   element.style.position = 'absolute'
+//   element.style.visibility = 'hidden'
+//   element.style.height = 'auto'
+
+//   const height = getComputedStyle(element).height
+
+//   element.style.width = ''
+//   element.style.position = ''
+//   element.style.visibility = ''
+//   element.style.height = '0'
+
+//   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+//   getComputedStyle(element).height
+
+//   requestAnimationFrame(() => {
+//     element.style.height = height
+//   })
+// }
+
+// function afterEnter(element: HTMLElement) {
+//   element.style.height = 'auto'
+// }
+
+function leave(element: HTMLElement) {
+  const height = getComputedStyle(element).height
+
+  element.style.height = height
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  getComputedStyle(element).height
+
+  requestAnimationFrame(() => {
+    element.style.height = '0'
+  })
+}
 </script>
 
 <template>
@@ -29,29 +82,32 @@ const api = forceInject<ToastsApi>(props.apiKey)
   >
     <div
       class="s-toasts-display"
-      :data-placement="placement"
+      :data-placement-v="vertical"
+      :data-placement-h="horizontal"
       :data-absolute="absolute"
     >
-      <!-- todo add expand transition -->
-      <div
-        v-for="[key, toast] in api.toasts"
-        :key="key"
-      >
-        <component :is="toast.slot" />
+      <div class="s-toasts-display__stack">
+        <TransitionGroup
+          name="s-toasts-display__grow-transition"
+          @leave="leave"
+        >
+          <div
+            v-for="[key, toast] in api.toasts"
+            :key="key"
+            class="s-toasts-display__item"
+          >
+            <div class="s-toasts-display__item-spacer" />
+            <component :is="toast.slot" />
+          </div>
+        </TransitionGroup>
       </div>
     </div>
   </Teleport>
 </template>
 
 <style lang="scss">
-@mixin define-placement($which-one) {
-  &[data-placement='#{$which-one}'] {
-    @content;
-  }
-}
-
 .s-toasts-display {
-  @apply p-4 space-y-4;
+  @apply px-4 pointer-events-none inset-0 flex;
 
   &[data-absolute='true'] {
     @apply absolute;
@@ -61,24 +117,113 @@ const api = forceInject<ToastsApi>(props.apiKey)
     @apply fixed;
   }
 
-  @include define-placement('top-right') {
-    top: 0;
-    right: 0;
+  &__stack {
+    @apply flex flex-col;
   }
 
-  @include define-placement('top-left') {
-    top: 0;
-    left: 0;
+  @mixin vertical($placement) {
+    &[data-placement-v='#{$placement}'] {
+      @content;
+    }
   }
 
-  @include define-placement('bottom-right') {
-    bottom: 0;
-    right: 0;
+  @mixin horizontal($placement) {
+    &[data-placement-h='#{$placement}'] {
+      @content;
+    }
   }
 
-  @include define-placement('bottom-left') {
-    bottom: 0;
-    left: 0;
+  @mixin vertical-stack($placement) {
+    &[data-placement-v='#{$placement}'] &__stack {
+      @content;
+    }
+  }
+
+  @mixin horizontal-stack($placement) {
+    &[data-placement-h='#{$placement}'] &__stack {
+      @content;
+    }
+  }
+
+  @include vertical('top') {
+    @apply items-start;
+  }
+
+  @include vertical('bottom') {
+    @apply items-end pb-4;
+  }
+
+  @include vertical-stack('bottom') {
+    @apply flex-col-reverse;
+  }
+
+  @include horizontal('left') {
+    @apply justify-start;
+  }
+
+  @include horizontal('center') {
+    @apply justify-center;
+  }
+
+  @include horizontal('right') {
+    @apply justify-end;
+  }
+
+  @include horizontal-stack('left') {
+    @apply items-start;
+  }
+
+  @include horizontal-stack('right') {
+    @apply items-end;
+  }
+
+  @include horizontal-stack('center') {
+    @apply items-center;
+  }
+
+  &__item {
+    // hardware acceleration for expand transition
+    will-change: height;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+
+    &-spacer {
+      @apply h-4;
+    }
+
+    & > * {
+      @apply pointer-events-auto;
+    }
+  }
+
+  &__grow-transition {
+    $scale: 0.75;
+    $transform-scale: scale($scale, $scale * $scale);
+    $ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    $ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    $dur-height: 0.35s;
+    $dur-transform: 0.25s;
+
+    &-leave-active {
+      transition: height $dur-height $dur-transform $ease-out-quart, opacity $dur-transform $ease-in-out,
+        transform $dur-transform $ease-in-out;
+    }
+
+    &-enter-active {
+      transition: opacity $dur-transform $ease-out-quart, transform $dur-transform $ease-out-quart;
+    }
+
+    &-enter-from {
+      transform: $transform-scale;
+      opacity: 0;
+    }
+
+    &-leave-to {
+      transform: $transform-scale;
+      opacity: 0;
+      height: 0;
+    }
   }
 }
 </style>

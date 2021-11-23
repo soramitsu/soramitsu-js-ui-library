@@ -4,30 +4,39 @@ import SNotificationsProvider from './SNotificationsProvider'
 import SUseNotification from './SUseNotification'
 
 it('Notification is controlled by the boolean model', () => {
-  mount({
-    components: {
-      SNotificationsProvider,
-      SUseNotification,
-    },
-    setup() {
-      return {
-        show: ref(false),
-      }
-    },
-    template: `
-      <SNotificationsProvider placement="bottom-right">
-        <input v-model="show" type="checkbox">
+  mount(
+    {
+      setup() {
+        return {
+          show: ref(false),
+        }
+      },
+      template: `
+        <SNotificationsProvider placement="bottom-right">
+          <input v-model="show" type="checkbox">
 
-        show - {{ show }}
+          show - {{ show }}
 
-        <SUseNotification v-model:show="show" show-close-btn>
-          <template #title>
-            My <code>custom</code> title
-          </template>
-        </SUseNotification>
-      </SNotificationsProvider>
-    `,
-  })
+          <SUseNotification v-model:show="show" show-close-btn>
+            <template #title>
+              My <code>custom</code> title
+            </template>
+          </SUseNotification>
+        </SNotificationsProvider>
+      `,
+    },
+    {
+      global: {
+        components: {
+          SNotificationsProvider,
+          SUseNotification,
+        },
+        stubs: {
+          'transition-group': false,
+        },
+      },
+    },
+  )
 
   cy.contains('My custom title').should('not.exist')
   cy.get('input').click()

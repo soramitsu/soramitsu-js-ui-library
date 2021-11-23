@@ -1,16 +1,12 @@
-import { ToastDisplayPlacement } from './types'
-import { Prop, PropType } from 'vue'
+import { ToastsDisplayPlacementHorizontal, ToastsDisplayPlacementVertical } from './types'
 
-export const PLACEMENTS: ToastDisplayPlacement[] = ['top-left', 'top-right', 'bottom-right', 'bottom-left']
+const VERTICAL = new Set<ToastsDisplayPlacementVertical>(['bottom', 'top'])
+const HORIZONTAL = new Set<ToastsDisplayPlacementHorizontal>(['left', 'right', 'center'])
 
-export const PLACEMENTS_SET = new Set(PLACEMENTS)
-
-export function validatePlacement(value: unknown): value is ToastDisplayPlacement {
-  return PLACEMENTS_SET.has(value as any)
+export function validateVerticalPlacement(x: any) {
+  return VERTICAL.has(x)
 }
 
-export const TOAST_DISPLAY_PLACEMENT_PROP: Prop<ToastDisplayPlacement> = {
-  type: String as PropType<ToastDisplayPlacement>,
-  required: true,
-  validator: validatePlacement,
+export function validateHorizontalPlacement(x: any) {
+  return HORIZONTAL.has(x)
 }
