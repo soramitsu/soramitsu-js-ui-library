@@ -32,11 +32,20 @@ export default defineConfig({
     lib: {
       entry: resolve('src/lib.ts'),
       formats: ['es', 'cjs'],
-      fileName: (format) => `lib.${format}.ts`,
+      fileName: (format) => `lib.${format}.js`,
     },
     rollupOptions: {
       output: { chunkFileNames: '[name].[format].js' },
-      external: ['vue', /^lodash/, 'jsoneditor', '@popperjs/core', /^@vueuse/],
+      external: [
+        'vue',
+        /^lodash/,
+        'jsoneditor',
+        '@popperjs/core',
+        /^@vueuse/,
+        /^soramitsu-ui/,
+        'body-scroll-lock',
+        'focus-trap',
+      ],
     },
   },
 })
