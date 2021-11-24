@@ -14,7 +14,7 @@ it('Notification is controlled by the boolean model', () => {
         }
       },
       template: `
-        <SNotificationsProvider placement="bottom-right">
+        <SNotificationsProvider>
           <input v-model="show" type="checkbox">
 
           show - {{ show }}

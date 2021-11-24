@@ -1,6 +1,6 @@
 import { h, defineComponent, PropType, onScopeDispose } from 'vue'
 import { useVModel } from '@vueuse/core'
-import { NotificationType } from './types'
+import { Status } from '@/types'
 import SNotificationBody from './SNotificationBody.vue'
 import { useConditionalScope } from '@/composables/conditional-scope'
 import { forceInject } from '@/util'
@@ -11,9 +11,9 @@ export default defineComponent({
   props: {
     show: Boolean,
     title: String,
-    type: {
-      type: String as PropType<NotificationType>,
-      default: NotificationType.Info,
+    status: {
+      type: String as PropType<Status>,
+      default: Status.Info,
     },
     timeout: {
       type: Number,

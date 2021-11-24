@@ -1,3 +1,5 @@
+export * from './types'
+
 export * from './components/Button'
 export * from './components/Input'
 export * from './components/SDesignSystemProvider'
@@ -6,6 +8,7 @@ export * from './components/SSelect'
 export * from './components/SModal'
 export * from './components/SNotifications'
 export * from './components/SToasts'
+export * from './components/SAlert'
 
 import { Plugin } from 'vue'
 import { SButton } from './components/Button'
@@ -15,6 +18,7 @@ import { SSelect, SDropdown } from './components/SSelect'
 import { SModal, SModalCard } from './components/SModal'
 import { SToastsDisplay, SToastsProvider } from './components/SToasts'
 import { SNotificationBody, SNotificationsProvider, SUseNotification } from './components/SNotifications'
+import { SAlert } from './components/SAlert'
 
 export function plugin(): Plugin {
   return (app) => {
@@ -31,5 +35,6 @@ export function plugin(): Plugin {
     app.component('SNotificationBody', SNotificationBody)
     app.component('SNotificationsProvider', SNotificationsProvider)
     app.component('SUseNotification', SUseNotification)
+    app.component('SAlert', SAlert)
   }
 }

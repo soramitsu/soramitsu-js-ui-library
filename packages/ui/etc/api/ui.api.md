@@ -20,6 +20,7 @@ import { Ref } from 'vue';
 import { RendererElement } from 'vue';
 import { RendererNode } from 'vue';
 import { Slot } from 'vue';
+import { Status as Status_2 } from '@/types';
 import { UnwrapRef } from 'vue';
 import { VNode } from 'vue';
 import { VNodeProps } from 'vue';
@@ -109,18 +110,6 @@ export enum InputType {
 export const NOTIFICATIONS_API_KEY: InjectionKey<ToastsApi>;
 
 // @public (undocumented)
-export enum NotificationType {
-    // (undocumented)
-    Error = "error",
-    // (undocumented)
-    Info = "info",
-    // (undocumented)
-    Success = "success",
-    // (undocumented)
-    Warning = "warning"
-}
-
-// @public (undocumented)
 export function plugin(): Plugin_2;
 
 // @public (undocumented)
@@ -139,6 +128,9 @@ export interface RegisterToastParams {
 export const S_MODAL_API_KEY: InjectionKey<SModalApi>;
 
 // @public (undocumented)
+export const SAlert: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
 export const SButton: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
@@ -154,12 +146,12 @@ export interface ShowNotificationParams {
     // (undocumented)
     descriptionSlot?: Slot;
     showCloseBtn?: MaybeRef<boolean>;
+    status?: MaybeRef<Status_2>;
     timeout?: MaybeRef<number | undefined>;
     // (undocumented)
     title?: MaybeRef<string | undefined | null>;
     // (undocumented)
     titleSlot?: Slot;
-    type?: MaybeRef<NotificationType>;
 }
 
 // @public (undocumented)
@@ -265,6 +257,18 @@ export enum SSelectSize {
     Xl = "xl"
 }
 
+// @public
+export enum Status {
+    // (undocumented)
+    Error = "error",
+    // (undocumented)
+    Info = "info",
+    // (undocumented)
+    Success = "success",
+    // (undocumented)
+    Warning = "warning"
+}
+
 // @public (undocumented)
 export const SToastsDisplay: DefineComponent<{}, {}, any>;
 
@@ -288,9 +292,9 @@ apiKey: ProvideKey | ProvideKey[];
 export const SUseNotification: DefineComponent<    {
 show: BooleanConstructor;
 title: StringConstructor;
-type: {
-type: PropType<NotificationType>;
-default: NotificationType;
+status: {
+type: PropType<Status_2>;
+default: Status_2;
 };
 timeout: {
 type: NumberConstructor;
@@ -301,12 +305,12 @@ description: StringConstructor;
 }, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "click:close" | "timeout")[], "timeout" | "update:show" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
 show?: unknown;
 title?: unknown;
-type?: unknown;
+status?: unknown;
 timeout?: unknown;
 showCloseBtn?: unknown;
 description?: unknown;
 } & {
-type: NotificationType;
+status: Status_2;
 timeout: number;
 showCloseBtn: boolean;
 show: boolean;
@@ -318,7 +322,7 @@ title?: string | undefined;
 onTimeout?: ((...args: any[]) => any) | undefined;
 "onUpdate:show"?: ((...args: any[]) => any) | undefined;
 }, {
-type: NotificationType;
+status: Status_2;
 timeout: number;
 showCloseBtn: boolean;
 show: boolean;

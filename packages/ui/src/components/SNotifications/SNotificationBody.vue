@@ -1,37 +1,24 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { Component } from 'vue'
-import { NotificationType } from './types'
+import { Status } from '@/types'
 import SNotificationBodyTimeline from './SNotificationBodyTimeline.vue'
-
-import IconClose from '@soramitsu-ui/icons/icomoon/basic-close-24.svg'
-import IconSuccess from '@soramitsu-ui/icons/icomoon/basic-circle-checked-24.svg'
-import IconInfo from '@soramitsu-ui/icons/icomoon/notifications-info-24.svg'
-import IconWarning from '@soramitsu-ui/icons/icomoon/notifications-alert-triangle-24.svg'
-import IconError from '@soramitsu-ui/icons/icomoon/notifications-x-octagon-24.svg'
+import { IconClose, STATUS_ICONS_MAP } from '@/components/icons'
 
 const props = withDefaults(
   defineProps<{
     title?: string
     description?: string
-    type?: NotificationType
+    status?: Status
     timeout?: number
     showCloseBtn?: boolean
   }>(),
   {
-    type: NotificationType.Info,
+    status: Status.Info,
     timeout: 0,
   },
 )
 
-const ICON_TYPE_MAP: { [K in NotificationType]: Component } = {
-  [NotificationType.Info]: IconInfo,
-  [NotificationType.Warning]: IconWarning,
-  [NotificationType.Error]: IconError,
-  [NotificationType.Success]: IconSuccess,
-}
-
-const IconViaType = computed(() => ICON_TYPE_MAP[props.type])
+const StatusIcon = computed(() => STATUS_ICONS_MAP[props.status])
 
 const emit = defineEmits<(event: 'click:close' | 'timeout') => void>()
 
@@ -47,11 +34,11 @@ function onTimeout() {
 <template>
   <div
     class="s-notification-body"
-    :data-type="type"
+    :data-status="status"
   >
     <div class="s-notification-body__spacer">
       <div class="s-notification-body__icon-wrapper">
-        <component :is="IconViaType" />
+        <component :is="StatusIcon" />
       </div>
 
       <div class="s-notification-body__content">
@@ -87,8 +74,8 @@ function onTimeout() {
 </template>
 
 <style lang="scss">
-@mixin define-icon-color($type) {
-  &[data-type='#{$type}'] &__icon-wrapper {
+@mixin define-icon-color($status) {
+  &[data-status='#{$status}'] &__icon-wrapper {
     @content;
   }
 }
