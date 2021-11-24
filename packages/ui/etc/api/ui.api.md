@@ -189,7 +189,8 @@ export const SNotificationBody: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
 export const SNotificationsProvider: FunctionalComponent<{
-    placement: ToastDisplayPlacement;
+    vertical?: ToastsDisplayPlacementVertical;
+    horizontal?: ToastsDisplayPlacementHorizontal;
     absolute?: boolean;
     to?: string;
 }>;
@@ -324,9 +325,6 @@ show: boolean;
 }>;
 
 // @public (undocumented)
-export type ToastDisplayPlacement = 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left';
-
-// @public (undocumented)
 export const TOASTS_API_KEY: InjectionKey<ToastsApi>;
 
 // @public (undocumented)
@@ -336,6 +334,12 @@ export interface ToastsApi {
     // (undocumented)
     toasts: DeepReadonly<Array<[key: number, toast: RegisteredToast]>>;
 }
+
+// @public (undocumented)
+export type ToastsDisplayPlacementHorizontal = 'left' | 'right' | 'center';
+
+// @public (undocumented)
+export type ToastsDisplayPlacementVertical = 'top' | 'bottom';
 
 // @public (undocumented)
 export type UnregisterFn = () => void;
