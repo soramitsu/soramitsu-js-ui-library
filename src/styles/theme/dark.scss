@@ -35,17 +35,17 @@ $s-color-status-warning-background--dark: #479AEF !default;
 $s-color-status-error-background--dark: #F754A3 !default;
 // Shadow
 // dark variations
-$s-shadow-color-dark--dark: rgba(41, 0, 71, 0.33);
-$s-shadow-color-dark-lighten--dark: rgba(155, 111, 165, 0.25);
-$s-shadow-color-dark-light--dark: rgba(155, 111, 165, 0.1);
+$s-shadow-color-dark--dark: rgba(41, 0, 71, 0.33) !default;
+$s-shadow-color-dark-lighten--dark: rgba(155, 111, 165, 0.25) !default;
+$s-shadow-color-dark-light--dark: rgba(155, 111, 165, 0.1) !default;
 // light variations
-$s-shadow-color-light--dark: rgba(255, 255, 255, 1);
-$s-shadow-color-light-darken--dark: rgba(255, 255, 255, 0.1);
-$s-shadow-color-light-dark--dark: rgba(255, 255, 255, 0.05);
+$s-shadow-color-light--dark: rgba(255, 255, 255, 1) !default;
+$s-shadow-color-light-darken--dark: rgba(255, 255, 255, 0.1) !default;
+$s-shadow-color-light-dark--dark: rgba(255, 255, 255, 0.05) !default;
 // another variations
-$s-shadow-color-primary--dark: #391057;
-$s-shadow-color-secondary--dark: #9B6FA5;
+$s-shadow-color-primary--dark: #391057 !default;
+$s-shadow-color-secondary--dark: #9B6FA5 !default;
 // element shadows
-$s-shadow-element--dark: 1px 1px 2px var(--s-shadow-color-light-darken--dark), inset -5px -5px 5px var(--s-shadow-color-light-dark--dark), inset 1px 1px 10px var(--s-shadow-color-dark--dark);
-$s-shadow-element-pressed--dark: -5px -5px 10px var(--s-shadow-color-dark-lighten--dark), 2px 2px 15px var(--s-color-base-background--dark), inset 1px 1px 2px var(--s-shadow-color-dark-lighten--dark);
-$s-shadow-dialog--dark: -10px -10px 30px var(--s-shadow-color-dark-lighten--dark), 20px 20px 60px var(--s-color-base-background--dark), inset 1px 1px 10px var(--s-shadow-color-dark-light--dark);
+$s-shadow-element--dark: 1px 1px 2px var(--s-shadow-color-light-darken--dark), inset -5px -5px 5px var(--s-shadow-color-light-dark--dark), inset 1px 1px 10px var(--s-shadow-color-dark--dark) !default;
+$s-shadow-element-pressed--dark: -5px -5px 10px var(--s-shadow-color-dark-lighten--dark), 2px 2px 15px var(--s-color-base-background--dark), inset 1px 1px 2px var(--s-shadow-color-dark-lighten--dark) !default;
+$s-shadow-dialog--dark: -10px -10px 30px var(--s-shadow-color-dark-lighten--dark), 20px 20px 60px var(--s-color-base-background--dark), inset 1px 1px 10px var(--s-shadow-color-dark-light--dark) !default;
