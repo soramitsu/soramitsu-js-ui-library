@@ -199,6 +199,7 @@ useCloseOnEsc(
       :class="['s-modal__root', rootClass]"
       :style="rootStyle"
       :data-absolute="absolute"
+      data-testid="root"
     >
       <Transition
         appear
@@ -209,6 +210,7 @@ useCloseOnEsc(
           v-if="overlayIf"
           :class="['s-modal__overlay', overlayClass]"
           :style="overlayStyle"
+          data-testid="overlay"
           @click="onOverlayClick"
         />
       </Transition>
@@ -226,6 +228,7 @@ useCloseOnEsc(
           :class="['s-modal__modal', modalClass]"
           aria-modal="true"
           role="dialog"
+          data-testid="modal"
         >
           <slot />
         </div>
