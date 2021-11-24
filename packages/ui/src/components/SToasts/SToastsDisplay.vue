@@ -33,34 +33,6 @@ const props = defineProps({
 const api = forceInject<ToastsApi>(props.apiKey)
 
 // no need in entering height transition due to stack nature of toasts
-
-// function enter(element: HTMLElement) {
-//   const width = getComputedStyle(element).width
-
-//   element.style.width = width
-//   element.style.position = 'absolute'
-//   element.style.visibility = 'hidden'
-//   element.style.height = 'auto'
-
-//   const height = getComputedStyle(element).height
-
-//   element.style.width = ''
-//   element.style.position = ''
-//   element.style.visibility = ''
-//   element.style.height = '0'
-
-//   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-//   getComputedStyle(element).height
-
-//   requestAnimationFrame(() => {
-//     element.style.height = height
-//   })
-// }
-
-// function afterEnter(element: HTMLElement) {
-//   element.style.height = 'auto'
-// }
-
 function leave(element: HTMLElement) {
   const height = getComputedStyle(element).height
 
@@ -82,11 +54,15 @@ function leave(element: HTMLElement) {
   >
     <div
       class="s-toasts-display"
+      data-testid="root"
       :data-placement-v="vertical"
       :data-placement-h="horizontal"
       :data-absolute="absolute"
     >
-      <div class="s-toasts-display__stack">
+      <div
+        class="s-toasts-display__stack"
+        data-testid="list"
+      >
         <TransitionGroup
           name="s-toasts-display__grow-transition"
           @leave="leave"

@@ -4,6 +4,8 @@ import { ref } from 'vue'
 import SNotificationBody from './SNotificationBody.vue'
 import { NotificationType } from './types'
 
+const findCloseBtn = () => cy.get('[data-testid=close-btn]')
+
 it('Playground', () => {
   mount(
     {
@@ -79,17 +81,10 @@ it('Close btn works', () => {
     `,
   })
 
-  const CLOSE_BTN_SELECTOR = '.s-notification-body__close-wrapper button'
-
-  cy.get(CLOSE_BTN_SELECTOR)
-    .should('not.exist')
-    .get('input')
-    .click()
-    .get(CLOSE_BTN_SELECTOR)
-    .should('exist')
-    .click()
-    .get('[data-cy=item]')
-    .should('not.exist')
+  findCloseBtn().should('not.exist')
+  cy.get('input').click()
+  findCloseBtn().should('exist').click()
+  cy.get('[data-cy=item]').should('not.exist')
 })
 
 it('Different types', () => {

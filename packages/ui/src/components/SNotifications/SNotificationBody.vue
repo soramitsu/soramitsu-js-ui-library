@@ -71,6 +71,7 @@ function onTimeout() {
       <div class="s-notification-body__close-wrapper">
         <button
           v-if="showCloseBtn"
+          data-testid="close-btn"
           @click="onClickClose"
         >
           <IconClose />

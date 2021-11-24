@@ -8,6 +8,9 @@ import { useCounter, useVModel } from '@vueuse/core'
 import { ToastsApi, TOASTS_API_KEY } from './api'
 import { forceInject } from '@/util'
 
+const findRoot = () => cy.get('[data-testid=root]')
+const findList = () => cy.get('[data-testid=list]')
+
 const UseToggle = defineComponent({
   setup() {
     const flag = ref(false)
@@ -171,7 +174,7 @@ it('Different nested providers with different displays', () => {
     `,
   })
 
-  cy.get('.s-toasts-display')
+  findRoot()
     .should('have.length', 2)
     .first()
     .within(() => {
@@ -196,7 +199,7 @@ it('Multiple providers with multiple displays in the deep', () => {
     `,
   })
 
-  cy.get('.s-toasts-display')
+  findRoot()
     .should('have.length', 2)
     .first()
     .within(() => {
@@ -218,7 +221,7 @@ it('Composed provider', () => {
     `,
   })
 
-  cy.get('.s-toasts-display__stack')
+  findList()
     .children()
     .should('have.length', 2)
     .first()
@@ -315,5 +318,5 @@ it('Rendered toast is clickable, but its container is not', () => {
   })
 
   cy.contains('click me').click().parent().should('have.css', 'pointer-events', 'none')
-  cy.get('.s-toasts-display').should('have.css', 'pointer-events', 'none')
+  findRoot().should('have.css', 'pointer-events', 'none')
 })
