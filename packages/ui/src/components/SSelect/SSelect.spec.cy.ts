@@ -1,7 +1,7 @@
 import { mount } from '@cypress/vue'
-import { ref, h, Ref } from 'vue'
-import { Option, SSelectSize } from './types'
-import { SSelectApi } from './api'
+import { Ref } from 'vue'
+import { SelectOption, SelectSize } from './types'
+import { SelectApi } from './api'
 import SDropdown from './SDropdown.vue'
 import SSelectBase from './SSelectBase.vue'
 import SSelectButton from './SSelectButton.vue'
@@ -9,7 +9,7 @@ import SSelectInput from './SSelectInput.vue'
 import SSelect from './SSelect.vue'
 import { useToggle } from '@vueuse/core'
 
-const SIZES = [SSelectSize.Sm, SSelectSize.Md, SSelectSize.Lg, SSelectSize.Xl]
+const SIZES = [SelectSize.Sm, SelectSize.Md, SelectSize.Lg, SelectSize.Xl]
 
 function vModel<T>(model: Ref<T>): { modelValue: T; 'onUpdate:modelValue': (value: T) => void } {
   return {
@@ -33,7 +33,7 @@ it('Gallery - Dropdown', () => {
     },
   ]
 
-  const Dropdown = (props: { size: SSelectSize; inline?: boolean }) =>
+  const Dropdown = (props: { size: SelectSize; inline?: boolean }) =>
     h(
       SDropdown,
       {
@@ -66,7 +66,7 @@ it('Gallery - Dropdown', () => {
 
 it('Gallery - Select', () => {
   const model = ref<null | number[]>(null)
-  const options: Option[] = [
+  const options: SelectOption[] = [
     {
       label: 'One',
       value: 1,
@@ -81,7 +81,7 @@ it('Gallery - Select', () => {
     },
   ]
 
-  const Select = (props: { size: SSelectSize }) =>
+  const Select = (props: { size: SelectSize }) =>
     h(SSelect, {
       ...vModel(model),
       label: 'dip dap',
@@ -120,7 +120,7 @@ for (const [ControlComponent, name] of [
   [SSelectInput, 'Input'],
 ] as [any, string][]) {
   it(`${name} - api is available at \'label\' slot`, () => {
-    const CheckSlot = (api: SSelectApi<any>) => `CHECKING: ${api.selectedOptions.length}`
+    const CheckSlot = (api: SelectApi<any>) => `CHECKING: ${api.selectedOptions.length}`
 
     mount(() =>
       h(

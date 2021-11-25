@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useSSelectApi } from './api'
-import { SSelectOptionType } from './types'
+import { useSelectApi } from './api'
+import { SelectOptionType } from './types'
 import SSelectOption from './SSelectOption.vue'
 
 defineProps<{
-  itemType: SSelectOptionType
+  itemType: SelectOptionType
 }>()
 
-const api = useSSelectApi()
+const api = useSelectApi()
 </script>
 
 <template>

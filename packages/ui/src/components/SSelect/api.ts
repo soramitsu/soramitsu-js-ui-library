@@ -1,23 +1,22 @@
-// import { MaybeRef } from '@vueuse/core'
-import { InjectionKey, UnwrapRef, DeepReadonly, inject, Ref, readonly, provide } from 'vue'
-import { Option, SSelectSize } from './types'
+import { InjectionKey, UnwrapRef, DeepReadonly } from 'vue'
+import { SelectOption, SelectSize } from './types'
 import { UseSelectModelReturn } from './tools'
 
-export interface SSelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
-  readonly options: DeepReadonly<UnwrapRef<Option<T>>[]>
+export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
+  readonly options: DeepReadonly<UnwrapRef<SelectOption<T>>[]>
   readonly multiple: boolean
   readonly disabled: boolean
   readonly label: string | null
-  readonly size: SSelectSize
+  readonly size: SelectSize
 
   readonly isMenuOpened: boolean
   menuToggle: (value?: boolean) => void
 }
 
-export const S_SELECT_API_KEY: InjectionKey<SSelectApi<any>> = Symbol('SSelect API')
+export const SELECT_API_KEY: InjectionKey<SelectApi<any>> = Symbol('SelectAPI')
 
-export function useSSelectApi<T = any>(): SSelectApi<T> {
-  const val = inject(S_SELECT_API_KEY)
+export function useSelectApi<T = any>(): SelectApi<T> {
+  const val = inject(SELECT_API_KEY)
   if (!val) {
     throw new Error('Injection failed; You should use this only inside of the SSelectBase component')
   }
