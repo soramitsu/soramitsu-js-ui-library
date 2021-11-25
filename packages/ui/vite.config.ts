@@ -40,7 +40,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: { chunkFileNames: '[name].[format].js' },
-      external: ['vue', /^lodash/, 'jsoneditor', '@popperjs/core', /^@vueuse/],
+      external: ['vue', /^lodash/, 'jsoneditor', '@popperjs/core', /^@vueuse/, '@soramitsu-ui/theme'],
     },
   },
 })
