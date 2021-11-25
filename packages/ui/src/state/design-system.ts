@@ -12,7 +12,7 @@ export enum DesignSystem {
 export const DESIGN_SYSTEM_KEY: InjectionKey<DesignSystemProviderAPI> = Symbol('Soramitsu UI Design System')
 
 export function useDesignSystem(): ComputedRef<DesignSystem> {
-  const api = inject(DESIGN_SYSTEM_KEY)
+  const api = inject(DESIGN_SYSTEM_KEY, null)
 
   return computed(() => api?.current ?? DesignSystem.Default)
 }
