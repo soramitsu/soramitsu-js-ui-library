@@ -1,12 +1,8 @@
-import SModal from './SModal.vue'
-import SModalCard from './SModalCard.vue'
-
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { h, defineComponent, Ref, ref } from 'vue'
-import { useToggle } from '@vueuse/core'
+import { Ref } from 'vue'
 import { bareMetalVModel } from '@/util'
-import { useSModalApi } from './api'
+import { SModal, SModalCard, useModalApi } from './index'
 
 const showVModel = (val: Ref<boolean>) => bareMetalVModel(val, 'show')
 const findRoot = () => cy.get('[data-testid=root]')
@@ -338,7 +334,7 @@ describe('Modal API', () => {
   it('Modal closes via API call', () => {
     const ModalContent = defineComponent({
       setup() {
-        const api = useSModalApi()
+        const api = useModalApi()
 
         return () =>
           h(
@@ -556,7 +552,7 @@ it('Open-closed events', () => {
     })
 })
 
-describe.only('Eagering', () => {
+describe('Eagering', () => {
   function mountFactory(params?: { eager?: boolean }) {
     mount({
       components: { SModal },

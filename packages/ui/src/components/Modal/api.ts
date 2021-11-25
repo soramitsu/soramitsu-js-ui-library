@@ -2,7 +2,7 @@ import { forceInject } from '@/util'
 import { InjectionKey } from 'vue'
 import { FocusTrap } from 'focus-trap'
 
-export interface SModalApi {
+export interface ModalApi {
   close: () => void
   /**
    * It's `null` if focus trap was disabled in SModal props
@@ -10,8 +10,8 @@ export interface SModalApi {
   focusTrap: null | FocusTrap
 }
 
-export const S_MODAL_API_KEY: InjectionKey<SModalApi> = Symbol('SModalApi')
+export const MODAL_API_KEY: InjectionKey<ModalApi> = Symbol('ModalAPI')
 
-export function useSModalApi(): SModalApi {
-  return forceInject(S_MODAL_API_KEY)
+export function useModalApi(): ModalApi {
+  return forceInject(MODAL_API_KEY)
 }

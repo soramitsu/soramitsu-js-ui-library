@@ -1,6 +1,7 @@
 import { InjectionKey, UnwrapRef, DeepReadonly } from 'vue'
 import { SelectOption, SelectSize } from './types'
 import { UseSelectModelReturn } from './tools'
+import { forceInject } from '@/util'
 
 export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
   readonly options: DeepReadonly<UnwrapRef<SelectOption<T>>[]>
@@ -16,9 +17,5 @@ export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelRetur
 export const SELECT_API_KEY: InjectionKey<SelectApi<any>> = Symbol('SelectAPI')
 
 export function useSelectApi<T = any>(): SelectApi<T> {
-  const val = inject(SELECT_API_KEY)
-  if (!val) {
-    throw new Error('Injection failed; You should use this only inside of the SSelectBase component')
-  }
-  return val
+  return forceInject(SELECT_API_KEY)
 }

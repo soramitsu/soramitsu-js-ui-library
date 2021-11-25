@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed, provide, readonly, watch, Ref } from 'vue'
-import { templateRef, useVModel } from '@vueuse/core'
+import { Ref } from 'vue'
 import { normalizeTransitionAttrs, useCloseOnEsc, useModalVisibility } from './util'
-import { SModalApi, S_MODAL_API_KEY } from './api'
+import { ModalApi, MODAL_API_KEY } from './api'
 import { useFocusTrap } from '@/composables/focus-trap'
 import { FocusTrap, Options as FocusTrapOptions } from 'focus-trap'
 import { BodyScrollOptions } from 'body-scroll-lock'
@@ -92,13 +91,13 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   teleportTo: 'body',
-  modalTransition: () => 's-modal__modal-transition',
-  overlayTransition: () => 's-modal__overlay-transition',
+  modalTransition: 's-modal__modal-transition',
+  overlayTransition: 's-modal__overlay-transition',
   closeOnOverlayClick: true,
   closeOnEsc: true,
   showOverlay: true,
-  lockScroll: () => true,
-  focusTrap: () => true,
+  lockScroll: true,
+  focusTrap: true,
   eager: false,
 })
 
@@ -148,11 +147,11 @@ if (props.lockScroll) {
 
 // API
 
-const api: SModalApi = readonly({
+const api: ModalApi = readonly({
   close,
   focusTrap,
 })
-provide(S_MODAL_API_KEY, api)
+provide(MODAL_API_KEY, api)
 
 // ETC
 
