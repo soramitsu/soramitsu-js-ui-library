@@ -118,14 +118,50 @@ function close() {
   showModel.value = false
 }
 
+const modalRef = templateRef('modal')
+const rootRef = templateRef('root')
+
+// VISIBILITY
+
+const overlayTransitionAttrs = computed(() => normalizeTransitionAttrs(props.overlayTransition))
+const modalTransitionAttrs = computed(() => normalizeTransitionAttrs(props.modalTransition))
+
+const {
+  rootIf,
+  rootShow,
+  modalIf,
+  modalShow,
+  overlayIf,
+  overlayTransitionListeners,
+  modalTransitionListeners,
+  modalTransitionAppear,
+} = useModalVisibility({
+  show: showModel,
+  overlayEnabled: showOverlay,
+  eager,
+  emit,
+})
+
 // FOCUS TRAP
 
-const modalRef = templateRef('modal')
 let focusTrap: null | Ref<null | FocusTrap> = null
 if (props.focusTrap) {
   const options: FocusTrapOptions = props.focusTrap === true ? {} : props.focusTrap
+
+  const focusTrapTarget = shallowRef<null | HTMLElement | SVGElement>(null)
+  watch(
+    [modalShow, rootRef],
+    ([val, el]) => {
+      focusTrapTarget.value = val ? el ?? null : null
+    },
+    {
+      // edge case: eager rendering, modal is "display: none". `tabbable` throws an error
+      // because contents are hidden yet. Post flush fixes it.
+      flush: 'post',
+    },
+  )
   ;({ trap: focusTrap } = useFocusTrap({
-    elem: modalRef,
+    elem: focusTrapTarget,
     options,
   }))
 
@@ -155,25 +191,6 @@ provide(MODAL_API_KEY, api)
 
 // ETC
 
-const overlayTransitionAttrs = computed(() => normalizeTransitionAttrs(props.overlayTransition))
-const modalTransitionAttrs = computed(() => normalizeTransitionAttrs(props.modalTransition))
-
-const {
-  rootIf,
-  rootShow,
-  modalIf,
-  modalShow,
-  overlayIf,
-  overlayTransitionListeners,
-  modalTransitionListeners,
-  modalTransitionAppear,
-} = useModalVisibility({
-  show: showModel,
-  overlayEnabled: showOverlay,
-  eager,
-  emit,
-})
-
 function onOverlayClick() {
   emit('click:overlay')
   if (props.closeOnOverlayClick) {
@@ -195,6 +212,7 @@ useCloseOnEsc(
     <div
       v-if="rootIf"
       v-show="rootShow"
+      ref="root"
       :class="['s-modal__root', rootClass]"
       :style="rootStyle"
       :data-absolute="absolute"
@@ -238,23 +256,37 @@ useCloseOnEsc(
 
 <style lang="scss">
 .s-modal {
+  $ease-in-out-md: cubic-bezier(0.4, 0, 0.2, 1);
+  $ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  $dur-enter: 0.25s;
+  $dur-leave: 0.15s;
+
   &__modal-transition {
-    &-enter-active,
+    &-enter-active {
+      transition: all $dur-enter $ease-out-expo;
+    }
+
     &-leave-active {
-      transition: all 0.3s ease;
+      transition: all $dur-leave $ease-in-out-md;
     }
 
     &-enter-from,
     &-leave-to {
       opacity: 0;
-      transform: scale(0.5);
+    }
+
+    &-enter-from {
+      $scale: 0.75;
+      transform: scale($scale);
     }
   }
 
   &__overlay-transition {
-    &-enter-active,
+    &-enter-active {
+      transition: all $dur-enter $ease-in-out-md;
+    }
     &-leave-active {
-      transition: all 0.3s ease;
+      transition: all $dur-leave $ease-in-out-md;
     }
 
     &-enter-from,

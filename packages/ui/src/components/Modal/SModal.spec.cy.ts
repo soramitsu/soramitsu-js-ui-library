@@ -28,6 +28,7 @@ it('Mounts', () => {
           SModal,
           {
             ...showVModel(show),
+            focusTrap: false,
           },
           {
             default: () =>
@@ -47,79 +48,56 @@ it('Mounts', () => {
 })
 
 describe('Focus trap', () => {
-  /**
-   * If focus occures inside of it, renders message "__FOCUSED__"
-   */
-  const FocusChecker = defineComponent({
-    setup() {
-      const [focused, setFocus] = useToggle(false)
-
-      return () => [
-        h(
-          'div',
-          {
-            class: 'bg-white p-4',
-          },
-          [
-            h('input', {
-              onFocus: () => setFocus(true),
-              onBlur: () => setFocus(false),
-            }),
-            focused.value && '__FOCUSED__',
-          ],
-        ),
-      ]
-    },
-  })
-
-  const CHECK_REGEX = /__FOCUSED__/
-
-  function Scene(props?: { focusTrap?: boolean }) {
-    return defineComponent({
+  function mountFactory(params?: { focusTrap?: boolean; eager?: boolean }) {
+    mount({
+      components: { SModal },
       setup() {
-        const [show, toggleShow] = useToggle(false)
-
-        return () => [
-          h(
-            'button',
-            {
-              onClick: () => toggleShow(true),
-            },
-            'open modal',
-          ),
-          h(
-            SModal,
-            {
-              focusTrap: props?.focusTrap,
-              ...showVModel(show),
-            },
-            {
-              default: () => h(FocusChecker),
-            },
-          ),
-        ]
+        return { show: ref(false), params }
       },
+      template: `
+        <button @click="show = true">open modal</button>
+        <SModal v-model:show="show" v-bind="params">
+          <input data-cy="check">
+          <button @click="show = false">close modal</button>
+        </SModal>
+      `,
     })
   }
 
+  function assertFirstTabbableFocus(shouldBeFocused: boolean) {
+    cy.get('input[data-cy=check]').should(shouldBeFocused ? 'be.focused' : 'not.be.focused')
+  }
+
   it('Works by default', () => {
-    mount(Scene())
+    mountFactory()
 
     cy.get('button').click()
 
-    cy.contains(CHECK_REGEX)
+    assertFirstTabbableFocus(true)
   })
 
   it("Doesn't work if `false` is passed", () => {
-    mount(Scene({ focusTrap: false }))
+    mountFactory({ focusTrap: false })
 
     cy.get('button').click()
 
-    cy.contains(CHECK_REGEX).should('not.exist')
+    assertFirstTabbableFocus(false)
+  })
+
+  it('Works with eager modal', () => {
+    mountFactory({ eager: true })
+
+    // when focus trap is enabled, everything outside of it is not clickable
+    // so click should just work
+    cy.contains('open modal').click()
+
+    assertFirstTabbableFocus(true)
+    cy.contains('close modal').click()
+    cy.contains('open modal').should('be.focused')
   })
 })
 
-describe('Some tests with simple modal', () => {
+describe('Some tests with simple modal with focus trap', () => {
   /**
    * Mounts:
    * - without a focus trap
@@ -132,33 +110,31 @@ describe('Some tests with simple modal', () => {
     absolute?: boolean
   }) {
     return mount({
+      components: { SModal },
       setup() {
         const show = ref(false)
 
-        return () => [
-          h(
-            'button',
-            {
-              onClick: () => {
-                show.value = true
-              },
-            },
-            'toggle',
-          ),
-          h(
-            SModal,
-            {
-              ...showVModel(show),
-              ...params,
-              focusTrap: false,
-              modalTransition: null,
-            },
-            {
-              default: () => h('span', {}, 'Dip'),
-            },
-          ),
-        ]
+        return { show, params }
       },
+      template: `
+        <button @click="show = true">
+          Open
+        </button>
+
+        <SModal
+          v-model:show="show"
+          v-bind="params"
+          :modal-transition="null"
+        >
+          <div>
+            Dip
+
+            <button @click="show = false">
+              Close
+            </button>
+          </div>
+        </SModal>
+      `,
     })
   }
 
