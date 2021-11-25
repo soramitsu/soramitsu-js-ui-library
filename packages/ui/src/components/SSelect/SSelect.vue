@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { Option, SSelectOptionType, SSelectSize } from './types'
+import { SelectOption, SelectOptionType, SelectSize } from './types'
 import SSelectBase from './SSelectBase.vue'
 import SSelectInput from './SSelectInput.vue'
 import SSelectDropdown from './SSelectDropdown.vue'
 
-const props = defineProps<{
+defineProps<{
   modelValue?: any
-  options?: Option[]
+  options?: SelectOption[]
   disabled?: boolean
   multiple?: boolean
   label?: string
-  size?: SSelectSize
+  size?: SelectSize
 }>()
 </script>
 
@@ -30,7 +30,7 @@ const props = defineProps<{
     </template>
 
     <template #dropdown>
-      <SSelectDropdown :item-type="SSelectOptionType.RadioOrCheckbox" />
+      <SSelectDropdown :item-type="SelectOptionType.RadioOrCheckbox" />
     </template>
   </SSelectBase>
 </template>

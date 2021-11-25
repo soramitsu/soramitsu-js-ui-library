@@ -10,6 +10,5 @@ export { default as SSelectOption } from './SSelectOption.vue'
 export { default as SSelectChevron } from './SSelectChevron'
 
 // tools
-export { SSelectSize, SSelectButtonType, SSelectOptionType } from './types'
-export { useSSelectApi } from './api'
-export type { SSelectApi } from './api'
+export * from './types'
+export * from './api'

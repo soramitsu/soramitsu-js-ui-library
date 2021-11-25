@@ -1,114 +1,97 @@
 import { mount } from '@cypress/vue'
-import { ref, h, Ref } from 'vue'
-import { Option, SSelectSize } from './types'
-import { SSelectApi } from './api'
-import SDropdown from './SDropdown.vue'
-import SSelectBase from './SSelectBase.vue'
-import SSelectButton from './SSelectButton.vue'
-import SSelectInput from './SSelectInput.vue'
-import SSelect from './SSelect.vue'
-import { useToggle } from '@vueuse/core'
-import { bareMetalVModel } from '@/util'
+import { config } from '@vue/test-utils'
+import { SSelect, SSelectBase, SSelectButton, SSelectInput, SDropdown, SelectSize } from './index'
 
-const SIZES = [SSelectSize.Sm, SSelectSize.Md, SSelectSize.Lg, SSelectSize.Xl]
+const SIZES = [SelectSize.Sm, SelectSize.Md, SelectSize.Lg, SelectSize.Xl]
 
-function vModel<T>(model: Ref<T>) {
-  return bareMetalVModel(model, 'modelValue')
-}
+before(() => {
+  config.global.components = { SDropdown, SSelectButton, SSelectInput, SSelectBase, SSelect }
+  config.global.stubs = { transition: false }
+})
+
+after(() => {
+  config.global.components = {}
+  config.global.stubs = {}
+})
 
 it('Gallery - Dropdown', () => {
-  const model = ref<string[]>([])
-  const options = [
-    {
-      label: 'Aaaa',
-      value: 'a',
+  mount({
+    setup() {
+      return {
+        model: ref<string[]>([]),
+        options: [
+          {
+            label: 'Aaaa',
+            value: 'a',
+          },
+          {
+            label: 'Bbbb',
+            value: 'b',
+          },
+        ],
+        SIZES,
+      }
     },
-    {
-      label: 'Bbbb',
-      value: 'b',
-    },
-  ]
+    template: `
+      <div class="p-2 space-y-2">
+        <code>Model: {{ model }}</code>
 
-  const Dropdown = (props: { size: SSelectSize; inline?: boolean }) =>
-    h(
-      SDropdown,
-      {
-        ...vModel(model),
-        size: props.size,
-        multiple: true,
-        options,
-        inline: props.inline,
-      },
-      { label: () => 'My label' },
-    )
-
-  const ComponentsList = () => [false, true].map((inline) => SIZES.map((size) => Dropdown({ size, inline }))).flat()
-
-  mount(
-    () =>
-      h('div', { class: 'p-2 space-y-2' }, [
-        h('span', ['Model: ', h('code', {}, JSON.stringify(model.value))]),
-        h('div', { class: 'grid grid-cols-2 gap-2' }, h(ComponentsList)),
-      ]),
-    {
-      global: {
-        stubs: {
-          transition: false,
-        },
-      },
-    },
-  )
+        <div class="grid grid-cols-2 gap-2">
+          <template v-for="inline in [false, true]">
+            <template v-for="size in SIZES">
+              <SDropdown
+                v-model="model"
+                v-bind="{ inline, size, options }"
+                multiple
+                label="My label"
+              />
+            </template>
+          </template>
+        </div>
+      </div>
+    `,
+  })
 })
 
 it('Gallery - Select', () => {
-  const model = ref<null | number[]>(null)
-  const options: Option[] = [
-    {
-      label: 'One',
-      value: 1,
-    },
-    {
-      label: 'Two',
-      value: 2,
-    },
-    {
-      label: 'Three',
-      value: 3,
-    },
-  ]
-
-  const Select = (props: { size: SSelectSize }) =>
-    h(SSelect, {
-      ...vModel(model),
-      label: 'dip dap',
-      size: props.size,
-      multiple: true,
-      options,
-    })
-
-  const Variants = () => SIZES.map((size) => Select({ size }))
-
-  mount(
-    () =>
-      h(
-        'div',
-        { class: 'p-4' },
-        h(
-          'div',
+  mount({
+    setup() {
+      return {
+        model: ref<string[]>([]),
+        options: [
           {
-            class: 'grid gap-2 grid-cols-2',
+            label: 'One',
+            value: 1,
           },
-          h(Variants),
-        ),
-      ),
-    {
-      global: {
-        stubs: {
-          transition: false,
-        },
-      },
+          {
+            label: 'Two',
+            value: 2,
+          },
+          {
+            label: 'Three',
+            value: 3,
+          },
+        ],
+        SIZES,
+      }
     },
-  )
+    template: `
+      <div class="p-2 space-y-2">
+        <code>Model: {{ model }}</code>
+
+        <div class="grid grid-cols-2 gap-2">
+          <template v-for="size in SIZES">
+            <SSelect
+              v-model="model"
+              v-bind="{ size, options }"
+              multiple
+              label="My label"
+            />
+          </template>
+        </div>
+      </div>
+    `,
+  })
 })
 
 for (const [ControlComponent, name] of [
@@ -116,48 +99,47 @@ for (const [ControlComponent, name] of [
   [SSelectInput, 'Input'],
 ] as [any, string][]) {
   it(`${name} - api is available at \'label\' slot`, () => {
-    const CheckSlot = (api: SSelectApi<any>) => `CHECKING: ${api.selectedOptions.length}`
-
-    mount(() =>
-      h(
-        SSelectBase,
-        {
-          modelValue: [1, 2],
-          options: [
-            { label: '1', value: 1 },
-            { label: '2', value: 2 },
-            { label: '3', value: 3 },
-          ],
-        },
-        {
-          control: () =>
-            h(
-              ControlComponent,
-              {},
-              {
-                label: CheckSlot,
-              },
-            ),
-        },
-      ),
-    )
+    mount({
+      components: { ControlComponent },
+      setup() {
+        return {
+          bind: {
+            modelValue: [1, 2],
+            options: [
+              { label: '1', value: 1 },
+              { label: '2', value: 2 },
+              { label: '3', value: 3 },
+            ],
+          },
+        }
+      },
+      template: `
+        <SSelectBase v-bind="bind">
+          <template #control>
+            <ControlComponent>
+              <template #label="api">
+                CHECKING: {{ api.selectedOptions.length }}
+              </template>
+            </ControlComponent>
+          </template>
+        </SSelectBase>
+      `,
+    })
 
     cy.contains('CHECKING: 2')
   })
 
   it(`${name} - Control is not clickable if input is disabled`, () => {
-    mount(() =>
-      h(
-        SSelectBase,
-        {
-          label: 'Test',
-          disabled: true,
-        },
-        {
-          control: () => h(ControlComponent),
-        },
-      ),
-    )
+    mount({
+      components: { ControlComponent },
+      template: `
+        <SSelectBase label="Test" disabled>
+          <template #control>
+            <ControlComponent />
+          </template>
+        </SSelectBase>
+      `,
+    })
 
     cy.contains('Test').should('have.css', 'pointer-events', 'none')
   })
@@ -203,24 +185,28 @@ it('SSelect - clicking options, checking auto-transformations', () => {
   mount({
     setup() {
       const model = ref(null)
-      const opts = [
+      const modelStr = computed(() => JSON.stringify(model.value))
+
+      const options = [
         { label: 'Opt 1', value: 1 },
         { label: 'Opt 2', value: 2 },
         { label: 'Opt 3', value: 3 },
       ]
       const [multiple, toggle] = useToggle(false)
 
-      return () => [
-        h('div', {}, `Value: ${JSON.stringify(model.value)}`),
-        h('button', { onClick: () => toggle() }, multiple.value ? 'multi' : 'single'),
-        h(SSelect, {
-          ...vModel(model),
-          options: opts,
-          label: 'Dap',
-          multiple: multiple.value,
-        }),
-      ]
+      const buttonLabel = computed(() => (multiple.value ? 'multi' : 'single'))
+
+      return { model, modelStr, options, multiple, toggle, buttonLabel }
     },
+    template: `
+      <div>Value: {{ modelStr }}</div>
+      <button @click="toggle()">{{ buttonLabel }}</button>
+      <SSelect
+        v-model="model"
+        v-bind="{ options, multiple }"
+        label="Dap"
+      />
+    `,
   })
 
   function assertValue(val: string) {
@@ -251,17 +237,18 @@ it('SDropdown - model usage works', () => {
   mount({
     setup() {
       const model = ref(null)
-      const opts = [{ value: true, label: 'Truth' }]
+      const options = [{ value: true, label: 'Truth' }]
 
-      return () => [
-        h('span', {}, `Value: ${JSON.stringify(model.value)}`),
-        h(SDropdown, {
-          ...vModel(model),
-          options: opts,
-          label: 'drop',
-        }),
-      ]
+      return { model, options }
     },
+    template: `
+      <span>Value: {{ model }}</span>
+      <SDropdown
+        v-model="model"
+        label="drop"
+        v-bind="{ options }"
+      />  
+    `,
   })
 
   cy.contains('drop').click()

@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { computed } from 'vue-demi'
-import { SSelectOptionType } from './types'
+import { SelectOptionType } from './types'
 import IconCheckMark from '~icons/mdi/check'
-import { useSSelectApi } from './api'
+import { useSelectApi } from './api'
 
 const props = defineProps<{
-  type: SSelectOptionType
+  type: SelectOptionType
   multiple?: boolean
   selected?: boolean
 }>()
 
-const api = useSSelectApi()
-const isCheckMode = computed(() => props.type === SSelectOptionType.Check)
+const api = useSelectApi()
+const isCheckMode = computed(() => props.type === SelectOptionType.Check)
 
 const emit = defineEmits<(event: 'toggle') => void>()
 </script>
@@ -30,7 +29,8 @@ const emit = defineEmits<(event: 'toggle') => void>()
     <template v-if="!isCheckMode">
       <template v-if="multiple">
         checkbox
-      </template><template v-else>
+      </template>
+      <template v-else>
         radio
       </template>
       <template v-if="selected">
@@ -77,15 +77,15 @@ const emit = defineEmits<(event: 'toggle') => void>()
   &--size {
     @include sizes-mixin.s-select-sizes;
 
-    @mixin check-size($size, $px) {
+    @mixin check-size($size, $px: 16px) {
       &-#{$size} #{$root}__right-check-wrapper {
         font-size: $px;
       }
     }
 
-    @include check-size('sm', 16px);
-    @include check-size('md', 16px);
-    @include check-size('lg', 16px);
+    @include check-size('sm');
+    @include check-size('md');
+    @include check-size('lg');
     @include check-size('xl', 24px);
   }
 }

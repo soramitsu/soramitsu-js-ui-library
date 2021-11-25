@@ -3,6 +3,7 @@ import Windi from 'vite-plugin-windicss'
 import Vue from '@vitejs/plugin-vue'
 import Icons from 'unplugin-icons/vite'
 import Svg from 'vite-svg-loader'
+import AutoImport from 'unplugin-auto-import/vite'
 import path from 'path'
 
 function resolve(...args: string[]): string {
@@ -23,6 +24,9 @@ export default defineConfig({
     Vue(),
     Icons(),
     Svg(),
+    AutoImport({
+      imports: ['vue', '@vueuse/core'],
+    }),
   ],
   build: {
     cssCodeSplit: false,
@@ -36,7 +40,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: { chunkFileNames: '[name].[format].js' },
-      external: ['vue', /^lodash/, 'jsoneditor', '@popperjs/core', /^@vueuse/],
+      external: ['vue', /^lodash/, 'jsoneditor', '@popperjs/core', /^@vueuse/, '@soramitsu-ui/theme'],
     },
   },
 })

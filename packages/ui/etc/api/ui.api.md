@@ -125,11 +125,12 @@ export const SModalCard: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
 export const SSelect: DefineComponent<{}, {}, any>;
+export const SELECT_API_KEY: InjectionKey<SelectApi<any>>;
 
 // Warning: (ae-forgotten-export) The symbol "UseSelectModelReturn" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export interface SSelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
+export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
     // (undocumented)
     readonly disabled: boolean;
     // (undocumented)
@@ -140,27 +141,59 @@ export interface SSelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelRetu
     menuToggle: (value?: boolean) => void;
     // (undocumented)
     readonly multiple: boolean;
-    // Warning: (ae-forgotten-export) The symbol "Option" needs to be exported by the entry point lib.d.ts
-    //
     // (undocumented)
-    readonly options: DeepReadonly<UnwrapRef<Option_2<T>>[]>;
+    readonly options: DeepReadonly<UnwrapRef<SelectOption<T>>[]>;
     // (undocumented)
-    readonly size: SSelectSize;
+    readonly size: SelectSize;
 }
+
+// @public (undocumented)
+export enum SelectButtonType {
+    // (undocumented)
+    Default = "default",
+    // (undocumented)
+    Inline = "inline"
+}
+
+// @public (undocumented)
+export interface SelectOption<T = any> {
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    value: T;
+}
+
+// @public (undocumented)
+export enum SelectOptionType {
+    // (undocumented)
+    Check = "check",
+    // (undocumented)
+    RadioOrCheckbox = "rad-or-check"
+}
+
+// @public (undocumented)
+export enum SelectSize {
+    // (undocumented)
+    Lg = "lg",
+    // (undocumented)
+    Md = "md",
+    // (undocumented)
+    Sm = "sm",
+    // (undocumented)
+    Xl = "xl"
+}
+
+// @public (undocumented)
+export const SJsonInput: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
+export const SSelect: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
 export const SSelectBase: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
 export const SSelectButton: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export enum SSelectButtonType {
-    // (undocumented)
-    Default = "default",
-    // (undocumented)
-    Inline = "inline"
-}
 
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
@@ -174,26 +207,6 @@ export const SSelectInput: DefineComponent<{}, {}, any>;
 export const SSelectOption: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
-export enum SSelectOptionType {
-    // (undocumented)
-    Check = "check",
-    // (undocumented)
-    RadioOrCheckbox = "rad-or-check"
-}
-
-// @public (undocumented)
-export enum SSelectSize {
-    // (undocumented)
-    Lg = "lg",
-    // (undocumented)
-    Md = "md",
-    // (undocumented)
-    Sm = "sm",
-    // (undocumented)
-    Xl = "xl"
-}
-
-// @public (undocumented)
 export function useDesignSystem(): ComputedRef<DesignSystem>;
 
 // @public (undocumented)
@@ -201,6 +214,7 @@ export function useSModalApi(): SModalApi;
 
 // @public (undocumented)
 export function useSSelectApi<T = any>(): SSelectApi<T>;
+export function useSelectApi<T = any>(): SelectApi<T>;
 
 // (No @packageDocumentation comment for this package)
 
