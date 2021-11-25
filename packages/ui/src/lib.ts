@@ -2,13 +2,13 @@ export * from './components/Button'
 export * from './components/Input'
 export * from './components/SDesignSystemProvider'
 export { DesignSystem, useDesignSystem } from './state/design-system'
-export * from './components/SSelect'
+export * from './components/Select'
 
 import { Plugin } from 'vue'
 import { SButton } from './components/Button'
 import { SJsonInput, Autocomplete } from './components/Input'
 import { SDesignSystemProvider } from './components/SDesignSystemProvider'
-import { SSelect, SDropdown } from './components/SSelect'
+import { SSelect, SDropdown } from './components/Select'
 
 export function plugin(): Plugin {
   return (app) => {
