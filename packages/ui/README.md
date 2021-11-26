@@ -2,7 +2,13 @@
 
 ## Usage
 
-All in one:
+Styles import:
+
+```ts
+import '@soramitsu-ui/ui/styles'
+```
+
+All-in-one plugin:
 
 ```ts
 import { plugin } from '@soramitsu-ui/ui'

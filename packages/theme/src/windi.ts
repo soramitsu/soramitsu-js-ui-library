@@ -16,7 +16,7 @@ function defineSoraTypographyBlockStyle<
     fontFamily: string
     fontStyle: string
     textTransform: string
-  }>,
+  }>
 >(a: T): T {
   return {
     fontFamily: 'Sora',
@@ -274,7 +274,17 @@ export const windicssPreset: Config = {
         sora: 'Sora',
       },
 
-      // TODO shadows etc
+      boxShadow: {
+        surface: v(ThemeVars.ShadowSurface),
+        tooltip: v(ThemeVars.ShadowTooltip),
+        'token-icon': v(ThemeVars.ShadowTokenIcon),
+        tab: v(ThemeVars.ShadowTab),
+        dropdown: v(ThemeVars.ShadowDropdown),
+        'mobile-tab-bar': v(ThemeVars.ShadowMobileTapBar),
+        'mobile-side-menu': v(ThemeVars.ShadowMobileSideMenu),
+      },
+
+      // todo more
     },
   },
 }

@@ -1,11 +1,14 @@
 {
   "private": true,
   "scripts": {
-    "sb:serve": "yarn --cwd packages/ui docs:serve",
-    "sb:build": "yarn --cwd packages/ui docs:build",
-    "test:all": "yarn --cwd packages/theme test && yarn --cwd packages/ui cy:ci",
-    "build": "concurrently \"yarn --cwd packages/ui build\" \"yarn --cwd packages/theme build\"",
+    "sb:serve": "yarn --cwd packages/ui sb:serve",
+    "sb:build": "yarn --cwd packages/ui sb:build",
+    "test:all": "run-p test:theme:unit test:ui:cy",
+    "test:theme:unit": "yarn --cwd packages/theme test",
+    "test:ui:cy": "yarn --cwd packages/ui cy:ci",
+    "build": "run-s build:theme build:ui",
     "build:theme": "yarn --cwd packages/theme build",
+    "build:ui": "yarn --cwd packages/ui build",
     "lint:check": "eslint ."
   },
   "workspaces": [
@@ -17,12 +20,12 @@
     "@types/node": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
-    "concurrently": "^6.3.0",
     "esbuild-jest": "^0.5.0",
     "eslint": "^7.32.0",
     "eslint-config-alloy": "^4.3.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-vue": "^7.18.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.4.1",
     "prettier-eslint": "^13.0.0",
     "typescript": "^4.4.3"

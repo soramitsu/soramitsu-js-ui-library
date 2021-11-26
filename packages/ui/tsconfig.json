@@ -7,5 +7,4 @@
     },
     "types": ["cypress"]
   },
-  "include": ["src"]
 }
