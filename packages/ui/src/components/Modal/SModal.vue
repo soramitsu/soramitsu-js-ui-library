@@ -168,7 +168,17 @@ if (props.focusTrap) {
   watch(
     focusTrap,
     (trap) => {
-      trap?.activate()
+      try {
+        trap?.activate()
+      } catch (err) {
+        console.warn(
+          '[SModal] focus-trap activation is failed. Does your modal contain any tabbable node?' +
+            '\nTip: you can disable focus-trap completely by setting `focus-trap` prop to `false`' +
+            '\n\nOriginal error:\n\n%o',
+          err,
+        )
+        throw err
+      }
     },
     { immediate: true },
   )

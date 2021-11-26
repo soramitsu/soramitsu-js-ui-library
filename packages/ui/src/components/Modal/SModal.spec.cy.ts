@@ -3,6 +3,7 @@ import { config } from '@vue/test-utils'
 import { Ref } from 'vue'
 import { bareMetalVModel } from '@/util'
 import { SModal, SModalCard, useModalApi } from './index'
+import { objectPick } from '@vueuse/shared'
 
 const showVModel = (val: Ref<boolean>) => bareMetalVModel(val, 'show')
 const findRoot = () => cy.get('[data-testid=root]')
@@ -48,17 +49,23 @@ it('Mounts', () => {
 })
 
 describe('Focus trap', () => {
-  function mountFactory(params?: { focusTrap?: boolean; eager?: boolean }) {
+  function mountFactory(params?: { focusTrap?: boolean; eager?: boolean; mountWithoutTabbable?: boolean }) {
     mount({
       components: { SModal },
       setup() {
-        return { show: ref(false), params }
+        const props = objectPick(params || {}, ['focusTrap', 'eager'])
+
+        const mountTabbables: boolean = !params?.mountWithoutTabbable ?? true
+
+        return { show: ref(false), mountTabbables, props }
       },
       template: `
         <button @click="show = true">open modal</button>
-        <SModal v-model:show="show" v-bind="params">
-          <input data-cy="check">
-          <button @click="show = false">close modal</button>
+        <SModal v-model:show="show" v-bind="props">
+          <template v-if="mountTabbables">
+            <input data-cy="check">
+            <button @click="show = false">close modal</button>
+          </template>
         </SModal>
       `,
     })
@@ -94,6 +101,26 @@ describe('Focus trap', () => {
     assertFirstTabbableFocus(true)
     cy.contains('close modal').click()
     cy.contains('open modal').should('be.focused')
+  })
+
+  // skip: Cypress Component Testing is unstable, and I guess that sandboxing is not working well in every case
+  // due to this, if you turn on this test, other tests will fail
+  // FIXME
+  it.skip('Print warning with a tip in case when no any tabbable nodes inside of modal', () => {
+    mountFactory({ mountWithoutTabbable: true })
+
+    cy.stub(window.console, 'warn').as('consoleWarn')
+    cy.on('uncaught:exception', (err) => {
+      if (/focus-trap/.test(err.message)) {
+        return false
+      }
+    })
+
+    cy.contains('open modal').click()
+
+    cy.get('@consoleWarn')
+      .should('be.calledWithMatch', /you can disable focus-trap completely by setting `focus-trap` prop to `false`/)
+      .and('be.calledWithMatch', /\[SModal\]/)
   })
 })
 
