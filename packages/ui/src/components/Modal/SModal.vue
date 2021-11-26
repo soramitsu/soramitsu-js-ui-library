@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed, provide, readonly, watch, Ref } from 'vue'
-import { templateRef, useVModel } from '@vueuse/core'
+import { Ref } from 'vue'
 import { normalizeTransitionAttrs, useCloseOnEsc, useModalVisibility } from './util'
-import { SModalApi, S_MODAL_API_KEY } from './api'
+import { ModalApi, MODAL_API_KEY } from './api'
 import { useFocusTrap } from '@/composables/focus-trap'
 import { FocusTrap, Options as FocusTrapOptions } from 'focus-trap'
 import { BodyScrollOptions } from 'body-scroll-lock'
@@ -92,13 +91,13 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   teleportTo: 'body',
-  modalTransition: () => 's-modal__modal-transition',
-  overlayTransition: () => 's-modal__overlay-transition',
+  modalTransition: 's-modal__modal-transition',
+  overlayTransition: 's-modal__overlay-transition',
   closeOnOverlayClick: true,
   closeOnEsc: true,
   showOverlay: true,
-  lockScroll: () => true,
-  focusTrap: () => true,
+  lockScroll: true,
+  focusTrap: true,
   eager: false,
 })
 
@@ -119,42 +118,10 @@ function close() {
   showModel.value = false
 }
 
-// FOCUS TRAP
-
 const modalRef = templateRef('modal')
-let focusTrap: null | Ref<null | FocusTrap> = null
-if (props.focusTrap) {
-  const options: FocusTrapOptions = props.focusTrap === true ? {} : props.focusTrap
-  ;({ trap: focusTrap } = useFocusTrap({
-    elem: modalRef,
-    options,
-  }))
+const rootRef = templateRef('root')
 
-  watch(
-    focusTrap,
-    (trap) => {
-      trap?.activate()
-    },
-    { immediate: true },
-  )
-}
-
-// BODY SCROLL LOCK
-
-if (props.lockScroll) {
-  const opts: BodyScrollOptions = props.lockScroll === true ? {} : props.lockScroll
-  useBodyScrollLock(modalRef, opts)
-}
-
-// API
-
-const api: SModalApi = readonly({
-  close,
-  focusTrap,
-})
-provide(S_MODAL_API_KEY, api)
-
-// ETC
+// VISIBILITY
 
 const overlayTransitionAttrs = computed(() => normalizeTransitionAttrs(props.overlayTransition))
 const modalTransitionAttrs = computed(() => normalizeTransitionAttrs(props.modalTransition))
@@ -174,6 +141,65 @@ const {
   eager,
   emit,
 })
+
+// FOCUS TRAP
+
+let focusTrap: null | Ref<null | FocusTrap> = null
+if (props.focusTrap) {
+  const options: FocusTrapOptions = props.focusTrap === true ? {} : props.focusTrap
+
+  const focusTrapTarget = shallowRef<null | HTMLElement | SVGElement>(null)
+  watch(
+    [modalShow, rootRef],
+    ([val, el]) => {
+      focusTrapTarget.value = val ? el ?? null : null
+    },
+    {
+      // edge case: eager rendering, modal is "display: none". `tabbable` throws an error
+      // because contents are hidden yet. Post flush fixes it.
+      flush: 'post',
+    },
+  )
+  ;({ trap: focusTrap } = useFocusTrap({
+    elem: focusTrapTarget,
+    options,
+  }))
+
+  watch(
+    focusTrap,
+    (trap) => {
+      try {
+        trap?.activate()
+      } catch (err) {
+        console.warn(
+          '[SModal] focus-trap activation is failed. Does your modal contain any tabbable node?' +
+            '\nTip: you can disable focus-trap completely by setting `focus-trap` prop to `false`' +
+            '\n\nOriginal error:\n\n%o',
+          err,
+        )
+        throw err
+      }
+    },
+    { immediate: true },
+  )
+}
+
+// BODY SCROLL LOCK
+
+if (props.lockScroll) {
+  const opts: BodyScrollOptions = props.lockScroll === true ? {} : props.lockScroll
+  useBodyScrollLock(modalRef, opts)
+}
+
+// API
+
+const api: ModalApi = readonly({
+  close,
+  focusTrap,
+})
+provide(MODAL_API_KEY, api)
+
+// ETC
 
 function onOverlayClick() {
   emit('click:overlay')
@@ -196,9 +222,11 @@ useCloseOnEsc(
     <div
       v-if="rootIf"
       v-show="rootShow"
+      ref="root"
       :class="['s-modal__root', rootClass]"
       :style="rootStyle"
       :data-absolute="absolute"
+      data-testid="root"
     >
       <Transition
         appear
@@ -209,6 +237,7 @@ useCloseOnEsc(
           v-if="overlayIf"
           :class="['s-modal__overlay', overlayClass]"
           :style="overlayStyle"
+          data-testid="overlay"
           @click="onOverlayClick"
         />
       </Transition>
@@ -226,6 +255,7 @@ useCloseOnEsc(
           :class="['s-modal__modal', modalClass]"
           aria-modal="true"
           role="dialog"
+          data-testid="modal"
         >
           <slot />
         </div>
@@ -236,23 +266,37 @@ useCloseOnEsc(
 
 <style lang="scss">
 .s-modal {
+  $ease-in-out-md: cubic-bezier(0.4, 0, 0.2, 1);
+  $ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  $dur-enter: 0.25s;
+  $dur-leave: 0.15s;
+
   &__modal-transition {
-    &-enter-active,
+    &-enter-active {
+      transition: all $dur-enter $ease-out-expo;
+    }
+
     &-leave-active {
-      transition: all 0.3s ease;
+      transition: all $dur-leave $ease-in-out-md;
     }
 
     &-enter-from,
     &-leave-to {
       opacity: 0;
-      transform: scale(0.5);
+    }
+
+    &-enter-from {
+      $scale: 0.75;
+      transform: scale($scale);
     }
   }
 
   &__overlay-transition {
-    &-enter-active,
+    &-enter-active {
+      transition: all $dur-enter $ease-in-out-md;
+    }
     &-leave-active {
-      transition: all 0.3s ease;
+      transition: all $dur-leave $ease-in-out-md;
     }
 
     &-enter-from,

@@ -1,17 +1,17 @@
 import { InjectionKey, DeepReadonly, reactive, readonly, computed, Slot, FunctionalComponent } from 'vue'
 
-export type UnregisterFn = () => void
+export type ToastUnregisterFn = () => void
 
-export interface RegisterToastParams {
+export interface ToastRegisterParams {
   slot: Slot | FunctionalComponent
 }
 
-export type RegisteredToast = RegisterToastParams
+export type RegisteredToast = ToastRegisterParams
 
-export type RegisterFn = (params: RegisterToastParams) => UnregisterFn
+export type ToastRegisterFn = (params: ToastRegisterParams) => ToastUnregisterFn
 
 export interface ToastsApi {
-  register: RegisterFn
+  register: ToastRegisterFn
   toasts: DeepReadonly<Array<[key: number, toast: RegisteredToast]>>
 }
 
@@ -21,7 +21,7 @@ export function defineToastsApi(): ToastsApi {
   const toastsMap = reactive(new Map<number, RegisteredToast>())
   let keysCounter = 0
 
-  const register: RegisterFn = (params) => {
+  const register: ToastRegisterFn = (params) => {
     const key = keysCounter++
 
     toastsMap.set(key, params)

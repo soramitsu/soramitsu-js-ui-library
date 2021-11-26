@@ -1,22 +1,23 @@
-export enum SSelectSize {
+export enum SelectSize {
   Sm = 'sm',
   Md = 'md',
   Lg = 'lg',
   Xl = 'xl',
 }
 
-export enum SSelectButtonType {
+export enum SelectButtonType {
   Default = 'default',
   Inline = 'inline',
+  // TODO append in future
   // Icon = 'icon'
 }
 
-export enum SSelectOptionType {
+export enum SelectOptionType {
   RadioOrCheckbox = 'rad-or-check',
   Check = 'check',
 }
 
-export interface Option<T = any> {
+export interface SelectOption<T = any> {
   label: string
   value: T
 }

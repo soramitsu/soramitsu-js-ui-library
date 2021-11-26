@@ -107,25 +107,23 @@ export enum InputType {
 }
 
 // @public (undocumented)
+export const MODAL_API_KEY: InjectionKey<ModalApi>;
+
+// @public (undocumented)
+export interface ModalApi {
+    // (undocumented)
+    close: () => void;
+    focusTrap: null | FocusTrap;
+}
+
+// @public (undocumented)
 export const NOTIFICATIONS_API_KEY: InjectionKey<ToastsApi>;
 
 // @public (undocumented)
 export function plugin(): Plugin_2;
 
 // @public (undocumented)
-export type RegisteredToast = RegisterToastParams;
-
-// @public (undocumented)
-export type RegisterFn = (params: RegisterToastParams) => UnregisterFn;
-
-// @public (undocumented)
-export interface RegisterToastParams {
-    // (undocumented)
-    slot: Slot | FunctionalComponent;
-}
-
-// @public (undocumented)
-export const S_MODAL_API_KEY: InjectionKey<SModalApi>;
+export type RegisteredToast = ToastRegisterParams;
 
 // @public (undocumented)
 export const SAlert: DefineComponent<{}, {}, any>;
@@ -140,18 +138,77 @@ export const SDesignSystemProvider: DefineComponent<{}, {}, any>;
 export const SDropdown: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
+export const SELECT_API_KEY: InjectionKey<SelectApi<any>>;
+
+// Warning: (ae-forgotten-export) The symbol "UseSelectModelReturn" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
+    // (undocumented)
+    readonly disabled: boolean;
+    // (undocumented)
+    readonly isMenuOpened: boolean;
+    // (undocumented)
+    readonly label: string | null;
+    // (undocumented)
+    menuToggle: (value?: boolean) => void;
+    // (undocumented)
+    readonly multiple: boolean;
+    // (undocumented)
+    readonly options: DeepReadonly<UnwrapRef<SelectOption<T>>[]>;
+    // (undocumented)
+    readonly size: SelectSize;
+}
+
+// @public (undocumented)
+export enum SelectButtonType {
+    // (undocumented)
+    Default = "default",
+    // (undocumented)
+    Inline = "inline"
+}
+
+// @public (undocumented)
+export interface SelectOption<T = any> {
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    value: T;
+}
+
+// @public (undocumented)
+export enum SelectOptionType {
+    // (undocumented)
+    Check = "check",
+    // (undocumented)
+    RadioOrCheckbox = "rad-or-check"
+}
+
+// @public (undocumented)
+export enum SelectSize {
+    // (undocumented)
+    Lg = "lg",
+    // (undocumented)
+    Md = "md",
+    // (undocumented)
+    Sm = "sm",
+    // (undocumented)
+    Xl = "xl"
+}
+
+// @public (undocumented)
 export interface ShowNotificationParams {
     // (undocumented)
     description?: MaybeRef<string | undefined | null>;
     // (undocumented)
-    descriptionSlot?: Slot;
+    descriptionSlot?: Slot | FunctionalComponent;
     showCloseBtn?: MaybeRef<boolean>;
     status?: MaybeRef<Status_2>;
     timeout?: MaybeRef<number | undefined>;
     // (undocumented)
     title?: MaybeRef<string | undefined | null>;
     // (undocumented)
-    titleSlot?: Slot;
+    titleSlot?: Slot | FunctionalComponent;
 }
 
 // @public (undocumented)
@@ -165,13 +222,6 @@ export const SJsonInput: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
 export const SModal: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export interface SModalApi {
-    // (undocumented)
-    close: () => void;
-    focusTrap: null | FocusTrap;
-}
 
 // @public (undocumented)
 export const SModalCard: DefineComponent<{}, {}, any>;
@@ -190,41 +240,11 @@ export const SNotificationsProvider: FunctionalComponent<{
 // @public (undocumented)
 export const SSelect: DefineComponent<{}, {}, any>;
 
-// Warning: (ae-forgotten-export) The symbol "UseSelectModelReturn" needs to be exported by the entry point lib.d.ts
-//
-// @public (undocumented)
-export interface SSelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
-    // (undocumented)
-    readonly disabled: boolean;
-    // (undocumented)
-    readonly isMenuOpened: boolean;
-    // (undocumented)
-    readonly label: string | null;
-    // (undocumented)
-    menuToggle: (value?: boolean) => void;
-    // (undocumented)
-    readonly multiple: boolean;
-    // Warning: (ae-forgotten-export) The symbol "Option" needs to be exported by the entry point lib.d.ts
-    //
-    // (undocumented)
-    readonly options: DeepReadonly<UnwrapRef<Option_2<T>>[]>;
-    // (undocumented)
-    readonly size: SSelectSize;
-}
-
 // @public (undocumented)
 export const SSelectBase: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
 export const SSelectButton: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export enum SSelectButtonType {
-    // (undocumented)
-    Default = "default",
-    // (undocumented)
-    Inline = "inline"
-}
 
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
@@ -236,26 +256,6 @@ export const SSelectInput: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
 export const SSelectOption: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export enum SSelectOptionType {
-    // (undocumented)
-    Check = "check",
-    // (undocumented)
-    RadioOrCheckbox = "rad-or-check"
-}
-
-// @public (undocumented)
-export enum SSelectSize {
-    // (undocumented)
-    Lg = "lg",
-    // (undocumented)
-    Md = "md",
-    // (undocumented)
-    Sm = "sm",
-    // (undocumented)
-    Xl = "xl"
-}
 
 // @public
 export enum Status {
@@ -329,12 +329,21 @@ show: boolean;
 }>;
 
 // @public (undocumented)
+export type ToastRegisterFn = (params: ToastRegisterParams) => ToastUnregisterFn;
+
+// @public (undocumented)
+export interface ToastRegisterParams {
+    // (undocumented)
+    slot: Slot | FunctionalComponent;
+}
+
+// @public (undocumented)
 export const TOASTS_API_KEY: InjectionKey<ToastsApi>;
 
 // @public (undocumented)
 export interface ToastsApi {
     // (undocumented)
-    register: RegisterFn;
+    register: ToastRegisterFn;
     // (undocumented)
     toasts: DeepReadonly<Array<[key: number, toast: RegisteredToast]>>;
 }
@@ -346,10 +355,13 @@ export type ToastsDisplayPlacementHorizontal = 'left' | 'right' | 'center';
 export type ToastsDisplayPlacementVertical = 'top' | 'bottom';
 
 // @public (undocumented)
-export type UnregisterFn = () => void;
+export type ToastUnregisterFn = () => void;
 
 // @public (undocumented)
 export function useDesignSystem(): ComputedRef<DesignSystem>;
+
+// @public (undocumented)
+export function useModalApi(): ModalApi;
 
 // @public (undocumented)
 export function useNotifications(): UseNotificationsReturn;
@@ -361,14 +373,11 @@ export interface UseNotificationsReturn {
 }
 
 // @public (undocumented)
-export function useSModalApi(): SModalApi;
-
-// @public (undocumented)
-export function useSSelectApi<T = any>(): SSelectApi<T>;
+export function useSelectApi<T = any>(): SelectApi<T>;
 
 // Warnings were encountered during analysis:
 //
-// dist-ts/src/components/SToasts/SToastsProvider.d.ts:8:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts
+// dist-ts/src/components/Toasts/SToastsProvider.d.ts:8:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts
 
 // (No @packageDocumentation comment for this package)
 

@@ -1,27 +1,23 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Option, SSelectButtonType, SSelectOptionType, SSelectSize } from './types'
+import { SelectOption, SelectOptionType, SelectSize } from './types'
 import SSelectBase from './SSelectBase.vue'
-import SSelectButton from './SSelectButton.vue'
+import SSelectInput from './SSelectInput.vue'
 import SSelectDropdown from './SSelectDropdown.vue'
 
-const props = defineProps<{
+defineProps<{
   modelValue?: any
-  options?: Option[]
+  options?: SelectOption[]
   disabled?: boolean
   multiple?: boolean
   label?: string
-  size?: SSelectSize
-  inline?: boolean
+  size?: SelectSize
 }>()
-
-const buttonType = computed(() => (props.inline ? SSelectButtonType.Inline : SSelectButtonType.Default))
 </script>
 
 <template>
   <SSelectBase v-bind="{ ...$attrs, ...$props }">
     <template #control>
-      <SSelectButton :type="buttonType">
+      <SSelectInput>
         <template #label="binding">
           <slot
             name="label"
@@ -30,11 +26,11 @@ const buttonType = computed(() => (props.inline ? SSelectButtonType.Inline : SSe
             {{ label }}
           </slot>
         </template>
-      </SSelectButton>
+      </SSelectInput>
     </template>
 
     <template #dropdown>
-      <SSelectDropdown :item-type="SSelectOptionType.Check" />
+      <SSelectDropdown :item-type="SelectOptionType.RadioOrCheckbox" />
     </template>
   </SSelectBase>
 </template>

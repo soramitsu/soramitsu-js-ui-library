@@ -2,7 +2,7 @@ import { InjectionKey, inject, Ref } from 'vue'
 
 export function forceInject<T>(key: string | InjectionKey<T>): T {
   const something = inject(key)
-  if (!something) throw new Error(`Injection of "${key}" failed`)
+  if (!something) throw new Error(`Injection of "${String(key)}" failed`)
   return something
 }
 

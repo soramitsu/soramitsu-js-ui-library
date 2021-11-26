@@ -91,6 +91,10 @@ function onTimeout() {
   box-shadow: 0px 68px 80px rgba(24, 24, 29, 0.09), 0px 30.1471px 24.1177px rgba(24, 24, 29, 0.058643),
     0px 12.5216px 10.0172px rgba(24, 24, 29, 0.045), 0px 4.5288px 3.62304px rgba(24, 24, 29, 0.031357);
 
+  &__content {
+    @apply flex-1;
+  }
+
   &__spacer {
     @apply flex space-x-4;
   }

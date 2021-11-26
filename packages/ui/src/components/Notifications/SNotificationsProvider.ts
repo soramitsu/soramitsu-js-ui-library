@@ -4,7 +4,7 @@ import {
   SToastsDisplay,
   ToastsDisplayPlacementHorizontal,
   ToastsDisplayPlacementVertical,
-} from '../SToasts'
+} from '../Toasts'
 import { NOTIFICATIONS_API_KEY } from './api'
 
 /**
@@ -45,7 +45,13 @@ const component: FunctionalComponent<{
       apiKey: NOTIFICATIONS_API_KEY,
     },
     {
-      default: () => [h(SToastsDisplay as any, props), slots.default?.()],
+      default: () => [
+        h(SToastsDisplay as any, {
+          // reactivity is lost if props are not spreaded
+          ...props,
+        }),
+        slots.default?.(),
+      ],
     },
   )
 

@@ -1,5 +1,5 @@
-import { useEventListener, whenever, not, or, and } from '@vueuse/core'
-import { Ref, reactive, computed, watch } from 'vue'
+import { Ref } from 'vue'
+import { not, or, and } from '@vueuse/core'
 
 /**
  * Transforms *something* into something that could be binded to `Transition` component as `v-bind="something"`
@@ -13,8 +13,8 @@ export function normalizeTransitionAttrs(something: null | undefined | string | 
 }
 
 export function useCloseOnEsc(active: Ref<boolean>, closeCb: () => void) {
-  useEventListener('keydown', (ev) => {
-    if (active.value && ev.key === 'Escape') {
+  onKeyStroke('Escape', () => {
+    if (active.value) {
       closeCb()
     }
   })

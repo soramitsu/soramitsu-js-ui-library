@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { computed, h, useSlots } from 'vue'
-import { useSSelectApi } from './api'
-import { SSelectSize } from './types'
+import { useSelectApi } from './api'
+import { SelectSize } from './types'
 import SSelectChevron from './SSelectChevron'
 
 const slots = useSlots()
-const api = useSSelectApi()
+const api = useSelectApi()
 
 const selectionsJoined = computed<string>(() => api.selectedOptions.map((x) => x.label).join(', '))
 
@@ -14,7 +13,7 @@ const selectionsJoined = computed<string>(() => api.selectedOptions.map((x) => x
  * Non-column: `<label>: <selection>`
  */
 const isColumnLayout = computed<boolean>(() => {
-  return api.size === SSelectSize.Xl
+  return api.size === SelectSize.Xl
 })
 
 const FLabel = () => {
@@ -97,7 +96,8 @@ const FSelection = () => (api.isSomethingSelected ? h('span', {}, selectionsJoin
   }
 
   &--size-xl:not(&--empty) &__label {
-    margin-bottom: -6px;
+    $magic-spacing-gap-fix: -0.4rem;
+    margin-bottom: $magic-spacing-gap-fix;
   }
 
   // chevron sizing
