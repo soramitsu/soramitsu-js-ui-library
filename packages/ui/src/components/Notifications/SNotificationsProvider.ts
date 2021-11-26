@@ -4,7 +4,7 @@ import {
   SToastsDisplay,
   ToastsDisplayPlacementHorizontal,
   ToastsDisplayPlacementVertical,
-} from '../SToasts'
+} from '../Toasts'
 import { NOTIFICATIONS_API_KEY } from './api'
 
 /**

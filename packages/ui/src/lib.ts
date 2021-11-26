@@ -4,8 +4,8 @@ export * from './components/SDesignSystemProvider'
 export { DesignSystem, useDesignSystem } from './state/design-system'
 export * from './components/Modal'
 export * from './components/Select'
-export * from './components/SNotifications'
-export * from './components/SToasts'
+export * from './components/Notifications'
+export * from './components/Toasts'
 
 import { Plugin } from 'vue'
 import { SButton } from './components/Button'
@@ -13,8 +13,8 @@ import { SJsonInput, Autocomplete } from './components/Input'
 import { SDesignSystemProvider } from './components/SDesignSystemProvider'
 import { SModal, SModalCard } from './components/Modal'
 import { SSelect, SDropdown } from './components/Select'
-import { SToastsDisplay, SToastsProvider } from './components/SToasts'
-import { SNotificationBody, SNotificationsProvider, SUseNotification } from './components/SNotifications'
+import { SToastsDisplay, SToastsProvider } from './components/Toasts'
+import { SNotificationBody, SNotificationsProvider, SUseNotification } from './components/Notifications'
 
 export function plugin(): Plugin {
   return (app) => {
