@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "sb:serve": "yarn --cwd packages/ui docs:serve",
-    "sb:build": "yarn --cwd packages/ui docs:build",
+    "sb:serve": "yarn --cwd packages/ui sb:serve",
+    "sb:build": "yarn --cwd packages/ui sb:build",
     "test:all": "yarn --cwd packages/theme test && yarn --cwd packages/ui cy:ci",
     "build": "concurrently \"yarn --cwd packages/ui build\" \"yarn --cwd packages/theme build\"",
     "build:theme": "yarn --cwd packages/theme build",
