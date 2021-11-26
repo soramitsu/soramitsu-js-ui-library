@@ -93,10 +93,17 @@ export enum InputType {
 }
 
 // @public (undocumented)
-export function plugin(): Plugin_2;
+export const MODAL_API_KEY: InjectionKey<ModalApi>;
 
 // @public (undocumented)
-export const S_MODAL_API_KEY: InjectionKey<SModalApi>;
+export interface ModalApi {
+    // (undocumented)
+    close: () => void;
+    focusTrap: null | FocusTrap;
+}
+
+// @public (undocumented)
+export function plugin(): Plugin_2;
 
 // @public (undocumented)
 export const SButton: DefineComponent<{}, {}, any>;
@@ -108,23 +115,6 @@ export const SDesignSystemProvider: DefineComponent<{}, {}, any>;
 export const SDropdown: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
-export const SJsonInput: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export const SModal: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export interface SModalApi {
-    // (undocumented)
-    close: () => void;
-    focusTrap: null | FocusTrap;
-}
-
-// @public (undocumented)
-export const SModalCard: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export const SSelect: DefineComponent<{}, {}, any>;
 export const SELECT_API_KEY: InjectionKey<SelectApi<any>>;
 
 // Warning: (ae-forgotten-export) The symbol "UseSelectModelReturn" needs to be exported by the entry point lib.d.ts
@@ -187,6 +177,12 @@ export enum SelectSize {
 export const SJsonInput: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
+export const SModal: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
+export const SModalCard: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
 export const SSelect: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
@@ -210,10 +206,9 @@ export const SSelectOption: DefineComponent<{}, {}, any>;
 export function useDesignSystem(): ComputedRef<DesignSystem>;
 
 // @public (undocumented)
-export function useSModalApi(): SModalApi;
+export function useModalApi(): ModalApi;
 
 // @public (undocumented)
-export function useSSelectApi<T = any>(): SSelectApi<T>;
 export function useSelectApi<T = any>(): SelectApi<T>;
 
 // (No @packageDocumentation comment for this package)
