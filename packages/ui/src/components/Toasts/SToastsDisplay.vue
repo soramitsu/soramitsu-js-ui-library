@@ -182,8 +182,7 @@ function leave(element: HTMLElement) {
     $dur-transform: 0.25s;
 
     &-leave-active {
-      transition: height $dur-height $dur-transform $ease-out-quart, opacity $dur-transform $ease-in-out,
-        transform $dur-transform $ease-in-out;
+      transition: height $dur-height $dur-transform $ease-out-quart, opacity $dur-transform $ease-in-out;
     }
 
     &-enter-active {
@@ -196,7 +195,6 @@ function leave(element: HTMLElement) {
     }
 
     &-leave-to {
-      transform: $transform-scale;
       opacity: 0;
       height: 0;
     }

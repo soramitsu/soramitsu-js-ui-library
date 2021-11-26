@@ -1,4 +1,4 @@
-import { Slot, h, unref } from 'vue'
+import { Slot, FunctionalComponent, h, unref } from 'vue'
 import { MaybeRef } from '@vueuse/core'
 import { NOTIFICATIONS_API_KEY } from './api'
 import { NotificationType } from './types'
@@ -7,9 +7,9 @@ import SNotificationBody from './SNotificationBody.vue'
 
 export interface ShowNotificationParams {
   title?: MaybeRef<string | undefined | null>
-  titleSlot?: Slot
+  titleSlot?: Slot | FunctionalComponent
   description?: MaybeRef<string | undefined | null>
-  descriptionSlot?: Slot
+  descriptionSlot?: Slot | FunctionalComponent
   /**
    * @default NotificationType.Info
    */
