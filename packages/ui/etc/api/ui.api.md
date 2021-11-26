@@ -137,6 +137,17 @@ export interface RegisterToastParams {
 
 // @public (undocumented)
 export const S_MODAL_API_KEY: InjectionKey<SModalApi>;
+export const MODAL_API_KEY: InjectionKey<ModalApi>;
+
+// @public (undocumented)
+export interface ModalApi {
+    // (undocumented)
+    close: () => void;
+    focusTrap: null | FocusTrap;
+}
+
+// @public (undocumented)
+export function plugin(): Plugin_2;
 
 // @public (undocumented)
 export const SButton: DefineComponent<{}, {}, any>;
@@ -148,55 +159,6 @@ export const SDesignSystemProvider: DefineComponent<{}, {}, any>;
 export const SDropdown: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
-export interface ShowNotificationParams {
-    // (undocumented)
-    description?: MaybeRef<string | undefined | null>;
-    // (undocumented)
-    descriptionSlot?: Slot;
-    showCloseBtn?: MaybeRef<boolean>;
-    timeout?: MaybeRef<number | undefined>;
-    // (undocumented)
-    title?: MaybeRef<string | undefined | null>;
-    // (undocumented)
-    titleSlot?: Slot;
-    type?: MaybeRef<NotificationType>;
-}
-
-// @public (undocumented)
-export interface ShowNotificationReturn {
-    // (undocumented)
-    close: () => void;
-}
-
-// @public (undocumented)
-export const SJsonInput: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export const SModal: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export interface SModalApi {
-    // (undocumented)
-    close: () => void;
-    focusTrap: null | FocusTrap;
-}
-
-// @public (undocumented)
-export const SModalCard: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export const SNotificationBody: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export const SNotificationsProvider: FunctionalComponent<{
-    vertical?: ToastsDisplayPlacementVertical;
-    horizontal?: ToastsDisplayPlacementHorizontal;
-    absolute?: boolean;
-    to?: string;
-}>;
-
-// @public (undocumented)
-export const SSelect: DefineComponent<{}, {}, any>;
 export const SELECT_API_KEY: InjectionKey<SelectApi<any>>;
 
 // Warning: (ae-forgotten-export) The symbol "UseSelectModelReturn" needs to be exported by the entry point lib.d.ts
@@ -259,6 +221,12 @@ export enum SelectSize {
 export const SJsonInput: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
+export const SModal: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
+export const SModalCard: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
 export const SSelect: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
@@ -282,19 +250,9 @@ export const SSelectOption: DefineComponent<{}, {}, any>;
 export function useDesignSystem(): ComputedRef<DesignSystem>;
 
 // @public (undocumented)
-export function useNotifications(): UseNotificationsReturn;
+export function useModalApi(): ModalApi;
 
 // @public (undocumented)
-export interface UseNotificationsReturn {
-    // (undocumented)
-    show: (params: ShowNotificationParams) => ShowNotificationReturn;
-}
-
-// @public (undocumented)
-export function useSModalApi(): SModalApi;
-
-// @public (undocumented)
-export function useSSelectApi<T = any>(): SSelectApi<T>;
 export function useSelectApi<T = any>(): SelectApi<T>;
 
 // Warnings were encountered during analysis:
