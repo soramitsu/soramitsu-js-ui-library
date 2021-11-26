@@ -8,7 +8,7 @@ export * from './components/Modal'
 export * from './components/Select'
 export * from './components/Notifications'
 export * from './components/Toasts'
-export * from './components/SAlert'
+export * from './components/Alert'
 
 import { Plugin } from 'vue'
 import { SButton } from './components/Button'
@@ -18,7 +18,7 @@ import { SModal, SModalCard } from './components/Modal'
 import { SSelect, SDropdown } from './components/Select'
 import { SToastsDisplay, SToastsProvider } from './components/Toasts'
 import { SNotificationBody, SNotificationsProvider, SUseNotification } from './components/Notifications'
-import { SAlert } from './components/SAlert'
+import { SAlert } from './components/Alert'
 
 export function plugin(): Plugin {
   return (app) => {
