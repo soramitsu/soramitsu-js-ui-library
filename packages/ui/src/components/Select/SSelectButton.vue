@@ -1,22 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue-demi'
-import { useSSelectApi } from './api'
-import { SSelectButtonType } from './types'
+import { useSelectApi } from './api'
+import { SelectButtonType } from './types'
 import SSelectChevron from './SSelectChevron'
 
 const props = withDefaults(
   defineProps<{
-    type?: SSelectButtonType
+    type?: SelectButtonType
   }>(),
   {
-    type: SSelectButtonType.Default,
+    type: SelectButtonType.Default,
   },
 )
 
-const api = useSSelectApi()
-
-// const label = computed(() => api.label)
-// const isMenuOpened = computed(() => api.isMenuOpened)
+const api = useSelectApi()
 
 function toggle() {
   api.menuToggle()
@@ -91,7 +87,6 @@ const formattedSelectedValue = computed<string | null>(() => {
 
     &:hover#{$root}--empty #{$root}__label {
       text-decoration: underline;
-      // @apply underline;
     }
   }
 

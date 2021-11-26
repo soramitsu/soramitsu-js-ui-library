@@ -197,11 +197,12 @@ export const SNotificationsProvider: FunctionalComponent<{
 
 // @public (undocumented)
 export const SSelect: DefineComponent<{}, {}, any>;
+export const SELECT_API_KEY: InjectionKey<SelectApi<any>>;
 
 // Warning: (ae-forgotten-export) The symbol "UseSelectModelReturn" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export interface SSelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
+export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
     // (undocumented)
     readonly disabled: boolean;
     // (undocumented)
@@ -212,41 +213,30 @@ export interface SSelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelRetu
     menuToggle: (value?: boolean) => void;
     // (undocumented)
     readonly multiple: boolean;
-    // Warning: (ae-forgotten-export) The symbol "Option" needs to be exported by the entry point lib.d.ts
-    //
     // (undocumented)
-    readonly options: DeepReadonly<UnwrapRef<Option_2<T>>[]>;
+    readonly options: DeepReadonly<UnwrapRef<SelectOption<T>>[]>;
     // (undocumented)
-    readonly size: SSelectSize;
+    readonly size: SelectSize;
 }
 
 // @public (undocumented)
-export const SSelectBase: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export const SSelectButton: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export enum SSelectButtonType {
+export enum SelectButtonType {
     // (undocumented)
     Default = "default",
     // (undocumented)
     Inline = "inline"
 }
 
-// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
-//
 // @public (undocumented)
-export const SSelectChevron: FunctionalComponent<Props>;
+export interface SelectOption<T = any> {
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    value: T;
+}
 
 // @public (undocumented)
-export const SSelectInput: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export const SSelectOption: DefineComponent<{}, {}, any>;
-
-// @public (undocumented)
-export enum SSelectOptionType {
+export enum SelectOptionType {
     // (undocumented)
     Check = "check",
     // (undocumented)
@@ -254,7 +244,7 @@ export enum SSelectOptionType {
 }
 
 // @public (undocumented)
-export enum SSelectSize {
+export enum SelectSize {
     // (undocumented)
     Lg = "lg",
     // (undocumented)
@@ -266,83 +256,27 @@ export enum SSelectSize {
 }
 
 // @public (undocumented)
-export const SToastsDisplay: DefineComponent<{}, {}, any>;
+export const SJsonInput: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
-export const SToastsProvider: DefineComponent<    {
-apiKey: {
-type: PropType<ProvideKey | ProvideKey[]>;
-default: null;
-};
-}, () => VNode<RendererNode, RendererElement, {
-[key: string]: any;
-}>[] | undefined, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
-apiKey?: unknown;
-} & {
-apiKey: ProvideKey | ProvideKey[];
-} & {}>, {
-apiKey: ProvideKey | ProvideKey[];
-}>;
+export const SSelect: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
-export const SUseNotification: DefineComponent<    {
-show: BooleanConstructor;
-title: StringConstructor;
-type: {
-type: PropType<NotificationType>;
-default: NotificationType;
-};
-timeout: {
-type: NumberConstructor;
-default: number;
-};
-showCloseBtn: BooleanConstructor;
-description: StringConstructor;
-}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "click:close" | "timeout")[], "timeout" | "update:show" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
-show?: unknown;
-title?: unknown;
-type?: unknown;
-timeout?: unknown;
-showCloseBtn?: unknown;
-description?: unknown;
-} & {
-type: NotificationType;
-timeout: number;
-showCloseBtn: boolean;
-show: boolean;
-} & {
-description?: string | undefined;
-title?: string | undefined;
-}> & {
-"onClick:close"?: ((...args: any[]) => any) | undefined;
-onTimeout?: ((...args: any[]) => any) | undefined;
-"onUpdate:show"?: ((...args: any[]) => any) | undefined;
-}, {
-type: NotificationType;
-timeout: number;
-showCloseBtn: boolean;
-show: boolean;
-}>;
+export const SSelectBase: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
-export const TOASTS_API_KEY: InjectionKey<ToastsApi>;
+export const SSelectButton: DefineComponent<{}, {}, any>;
+
+// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SSelectChevron: FunctionalComponent<Props>;
 
 // @public (undocumented)
-export interface ToastsApi {
-    // (undocumented)
-    register: RegisterFn;
-    // (undocumented)
-    toasts: DeepReadonly<Array<[key: number, toast: RegisteredToast]>>;
-}
+export const SSelectInput: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
-export type ToastsDisplayPlacementHorizontal = 'left' | 'right' | 'center';
-
-// @public (undocumented)
-export type ToastsDisplayPlacementVertical = 'top' | 'bottom';
-
-// @public (undocumented)
-export type UnregisterFn = () => void;
+export const SSelectOption: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
 export function useDesignSystem(): ComputedRef<DesignSystem>;
@@ -361,6 +295,7 @@ export function useSModalApi(): SModalApi;
 
 // @public (undocumented)
 export function useSSelectApi<T = any>(): SSelectApi<T>;
+export function useSelectApi<T = any>(): SelectApi<T>;
 
 // Warnings were encountered during analysis:
 //

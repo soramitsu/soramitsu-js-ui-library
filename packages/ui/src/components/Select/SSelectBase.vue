@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { SSelectSize, Option } from './types'
-import { computed, provide, readonly } from 'vue'
+import { SelectSize, SelectOption } from './types'
 import { useSelectModel } from './tools'
-import { SSelectApi, S_SELECT_API_KEY } from './api'
-import { templateRef, useVModel, useToggle, onClickOutside, unrefElement, whenever, and } from '@vueuse/core'
+import { SelectApi, SELECT_API_KEY } from './api'
+import { and } from '@vueuse/core'
 import { usePopper } from '@/composables/popper'
 import { useConditionalScope } from '@/composables/conditional-scope'
 
@@ -13,9 +12,9 @@ const props = withDefaults(
     multiple?: boolean
 
     modelValue?: any
-    options?: Option[]
+    options?: SelectOption[]
 
-    size?: SSelectSize
+    size?: SelectSize
 
     /**
      * This value is used if `label` slot is missing
@@ -42,7 +41,7 @@ const props = withDefaults(
     syncMenuAndInputWidths?: boolean
   }>(),
   {
-    size: SSelectSize.Md,
+    size: SelectSize.Md,
     options: () => [],
     modelValue: null,
     multiple: false,
@@ -57,7 +56,7 @@ const emit = defineEmits<(event: 'update:modelValue', value: any) => void>()
 const model = useVModel(props, 'modelValue', emit)
 const multiple = computed<boolean>(() => props.multiple)
 const disabled = computed<boolean>(() => props.disabled)
-const options = computed<Option[]>(() => props.options)
+const options = computed<SelectOption[]>(() => props.options)
 const size = computed(() => props.size)
 const label = computed<string | null>(() => props.label ?? null)
 
@@ -85,7 +84,6 @@ useConditionalScope(showPopper, () => {
     popper,
     (e) => {
       const isClickInsideOfControlSlot = e.composedPath().includes(unrefElement(popperRef) as any)
-      // console.log('click outside:', e, { isClickInsideOfControlSlot })
       if (!isClickInsideOfControlSlot) {
         togglePopper(false)
       }
@@ -97,7 +95,7 @@ useConditionalScope(showPopper, () => {
 // close popper if select is disabled
 whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
 
-const api: SSelectApi<any> = readonly({
+const api: SelectApi<any> = readonly({
   ...modeling,
   multiple,
   options,
@@ -108,8 +106,7 @@ const api: SSelectApi<any> = readonly({
   size,
 })
 
-provide(S_SELECT_API_KEY, api)
-// const popperContentVisible = ref(false)
+provide(SELECT_API_KEY, api)
 </script>
 
 <template>

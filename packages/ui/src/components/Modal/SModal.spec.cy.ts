@@ -1,14 +1,14 @@
-import SModal from './SModal.vue'
-import SModalCard from './SModalCard.vue'
-
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { h, defineComponent, Ref, ref } from 'vue'
-import { useToggle } from '@vueuse/core'
+import { Ref } from 'vue'
 import { bareMetalVModel } from '@/util'
-import { useSModalApi } from './api'
+import { SModal, SModalCard, useModalApi } from './index'
+import { objectPick } from '@vueuse/shared'
 
 const showVModel = (val: Ref<boolean>) => bareMetalVModel(val, 'show')
+const findRoot = () => cy.get('[data-testid=root]')
+const findModal = () => findRoot().find('[data-testid=modal]')
+const findOverlay = () => findRoot().find('[data-testid=overlay]')
 
 before(() => {
   config.global.stubs = { transition: false }
@@ -29,6 +29,7 @@ it('Mounts', () => {
           SModal,
           {
             ...showVModel(show),
+            focusTrap: false,
           },
           {
             default: () =>
@@ -48,79 +49,82 @@ it('Mounts', () => {
 })
 
 describe('Focus trap', () => {
-  /**
-   * If focus occures inside of it, renders message "__FOCUSED__"
-   */
-  const FocusChecker = defineComponent({
-    setup() {
-      const [focused, setFocus] = useToggle(false)
-
-      return () => [
-        h(
-          'div',
-          {
-            class: 'bg-white p-4',
-          },
-          [
-            h('input', {
-              onFocus: () => setFocus(true),
-              onBlur: () => setFocus(false),
-            }),
-            focused.value && '__FOCUSED__',
-          ],
-        ),
-      ]
-    },
-  })
-
-  const CHECK_REGEX = /__FOCUSED__/
-
-  function Scene(props?: { focusTrap?: boolean }) {
-    return defineComponent({
+  function mountFactory(params?: { focusTrap?: boolean; eager?: boolean; mountWithoutTabbable?: boolean }) {
+    mount({
+      components: { SModal },
       setup() {
-        const [show, toggleShow] = useToggle(false)
+        const props = objectPick(params || {}, ['focusTrap', 'eager'])
 
-        return () => [
-          h(
-            'button',
-            {
-              onClick: () => toggleShow(true),
-            },
-            'open modal',
-          ),
-          h(
-            SModal,
-            {
-              focusTrap: props?.focusTrap,
-              ...showVModel(show),
-            },
-            {
-              default: () => h(FocusChecker),
-            },
-          ),
-        ]
+        const mountTabbables: boolean = !params?.mountWithoutTabbable ?? true
+
+        return { show: ref(false), mountTabbables, props }
       },
+      template: `
+        <button @click="show = true">open modal</button>
+        <SModal v-model:show="show" v-bind="props">
+          <template v-if="mountTabbables">
+            <input data-cy="check">
+            <button @click="show = false">close modal</button>
+          </template>
+        </SModal>
+      `,
     })
   }
 
+  function assertFirstTabbableFocus(shouldBeFocused: boolean) {
+    cy.get('input[data-cy=check]').should(shouldBeFocused ? 'be.focused' : 'not.be.focused')
+  }
+
   it('Works by default', () => {
-    mount(Scene())
+    mountFactory()
 
     cy.get('button').click()
 
-    cy.contains(CHECK_REGEX)
+    assertFirstTabbableFocus(true)
   })
 
   it("Doesn't work if `false` is passed", () => {
-    mount(Scene({ focusTrap: false }))
+    mountFactory({ focusTrap: false })
 
     cy.get('button').click()
 
-    cy.contains(CHECK_REGEX).should('not.exist')
+    assertFirstTabbableFocus(false)
+  })
+
+  it('Works with eager modal', () => {
+    mountFactory({ eager: true })
+
+    // when focus trap is enabled, everything outside of it is not clickable
+    // so click should just work
+    cy.contains('open modal').click()
+
+    assertFirstTabbableFocus(true)
+    cy.contains('close modal').click()
+    cy.contains('open modal').should('be.focused')
+  })
+
+  // skip: Cypress Component Testing is unstable, and I guess that sandboxing is not working well in every case
+  // due to this, if you turn on this test, other tests will fail
+  // FIXME
+  it.skip('Print warning with a tip in case when no any tabbable nodes inside of modal', () => {
+    mountFactory({ mountWithoutTabbable: true })
+
+    cy.stub(window.console, 'warn').as('consoleWarn')
+    cy.on('uncaught:exception', (err) => {
+      if (/focus-trap/.test(err.message)) {
+        return false
+      }
+    })
+
+    cy.contains('open modal').click()
+
+    cy.get('@consoleWarn')
+      .should('be.calledWithMatch', /you can disable focus-trap completely by setting `focus-trap` prop to `false`/)
+      .and('be.calledWithMatch', /\[SModal\]/)
   })
 })
 
-describe('Some tests with simple modal', () => {
+describe('Some tests with simple modal with focus trap', () => {
   /**
    * Mounts:
    * - without a focus trap
@@ -133,44 +137,40 @@ describe('Some tests with simple modal', () => {
     absolute?: boolean
   }) {
     return mount({
+      components: { SModal },
       setup() {
         const show = ref(false)
 
-        return () => [
-          h(
-            'button',
-            {
-              onClick: () => {
-                show.value = true
-              },
-            },
-            'toggle',
-          ),
-          h(
-            SModal,
-            {
-              ...showVModel(show),
-              ...params,
-              focusTrap: false,
-              modalTransition: null,
-            },
-            {
-              default: () => h('span', {}, 'Dip'),
-            },
-          ),
-        ]
+        return { show, params }
       },
+      template: `
+        <button @click="show = true">
+          Open
+        </button>
+
+        <SModal
+          v-model:show="show"
+          v-bind="params"
+          :modal-transition="null"
+        >
+          <div>
+            Dip
+
+            <button @click="show = false">
+              Close
+            </button>
+          </div>
+        </SModal>
+      `,
     })
   }
-
-  const MODAL_OVERLAY_SELECTOR = '.s-modal__overlay'
 
   it('Modal closes by click on overlay', () => {
     mountFactory()
 
     cy.get('button').click()
     cy.contains('Dip')
-    cy.get(MODAL_OVERLAY_SELECTOR).click('top', { force: true })
+    findOverlay().click('top', { force: true })
     cy.contains('Dip').should('not.exist')
   })
 
@@ -179,7 +179,7 @@ describe('Some tests with simple modal', () => {
 
     cy.get('button').click()
     cy.contains('Dip')
-    cy.get(MODAL_OVERLAY_SELECTOR).click('top', { force: true })
+    findOverlay().click('top', { force: true })
 
     // it may be still mounted
     // eslint-disable-next-line cypress/no-unnecessary-waiting
@@ -213,21 +213,21 @@ describe('Some tests with simple modal', () => {
     mountFactory({ showOverlay: false })
 
     cy.get('button').click()
-    cy.get(MODAL_OVERLAY_SELECTOR).should('not.exist')
+    findOverlay().should('not.exist')
   })
 
   it('Modal root is `fixed` by default', () => {
     mountFactory()
 
     cy.get('button').click()
-    cy.get('.s-modal__root').should('have.css', 'position', 'fixed')
+    findRoot().should('have.css', 'position', 'fixed')
   })
 
   it('Modal root is `absolute` if related prop is set to true', () => {
     mountFactory({ absolute: true })
 
     cy.get('button').click()
-    cy.get('.s-modal__root').should('have.css', 'position', 'absolute')
+    findRoot().should('have.css', 'position', 'absolute')
   })
 })
 
@@ -313,32 +313,16 @@ describe('Classes & styles applying', () => {
   }
 
   const CASES = defineCases([
-    [
-      'Root class',
-      { rootClass: ['a', 'b', { c: true }] },
-      () => cy.get('.s-modal__root').should('have.class', 'a b c'),
-    ],
-    [
-      'Root style',
-      { rootStyle: { zIndex: 55123 } },
-      () => cy.get('.s-modal__root').should('have.css', 'zIndex', '55123'),
-    ],
-    ['Modal class', { modalClass: ['re ri rae'] }, () => cy.get('.s-modal__modal').should('have.class', 're ri rae')],
-    [
-      'Modal style',
-      { modalStyle: { zIndex: 55123 } },
-      () => cy.get('.s-modal__modal').should('have.css', 'zIndex', '55123'),
-    ],
+    ['Root class', { rootClass: ['a', 'b', { c: true }] }, () => findRoot().should('have.class', 'a b c')],
+    ['Root style', { rootStyle: { zIndex: 55123 } }, () => findRoot().should('have.css', 'zIndex', '55123')],
+    ['Modal class', { modalClass: ['re ri rae'] }, () => findModal().should('have.class', 're ri rae')],
+    ['Modal style', { modalStyle: { zIndex: 55123 } }, () => findModal().should('have.css', 'zIndex', '55123')],
     [
       'Overlay class',
       { overlayClass: [{ a: false }, 're ri rae'] },
-      () => cy.get('.s-modal__overlay').should('have.class', 're ri rae'),
+      () => findOverlay().should('have.class', 're ri rae'),
     ],
-    [
-      'Overlay style',
-      { overlayStyle: { zIndex: 55123 } },
-      () => cy.get('.s-modal__overlay').should('have.css', 'zIndex', '55123'),
-    ],
+    ['Overlay style', { overlayStyle: { zIndex: 55123 } }, () => findOverlay().should('have.css', 'zIndex', '55123')],
   ])
 
   for (const [label, params, assertion] of CASES) {
@@ -353,7 +337,7 @@ describe('Modal API', () => {
   it('Modal closes via API call', () => {
     const ModalContent = defineComponent({
       setup() {
-        const api = useSModalApi()
+        const api = useModalApi()
 
         return () =>
           h(
@@ -491,14 +475,14 @@ describe('Emitting of click:overlay', () => {
   it('Emitted by default', () => {
     mountFactory()
 
-    cy.get('.s-modal__overlay').click('top', { force: true })
+    findOverlay().click('top', { force: true })
     cy.contains('Emitted: true')
   })
 
   it('Emitted even with closeOnOverlayClick=false', () => {
     mountFactory({ closeOnOverlayClick: false })
 
-    cy.get('.s-modal__overlay').click('top', { force: true })
+    findOverlay().click('top', { force: true })
     cy.contains('Emitted: true')
   })
 })
@@ -572,10 +556,6 @@ it('Open-closed events', () => {
 })
 
 describe('Eagering', () => {
-  const ROOT = 'cy-root'
-  const OVERLAY = 'cy-overlay'
-  const MODAL = 'cy-modal'
-
   function mountFactory(params?: { eager?: boolean }) {
     mount({
       components: { SModal },
@@ -583,9 +563,6 @@ describe('Eagering', () => {
         const show = ref(false)
 
         const bindings = {
-          rootClass: ROOT,
-          overlayClass: OVERLAY,
-          modalClass: MODAL,
           teleportTo: null,
           focusTrap: false,
           overlayTransition: null,
@@ -612,6 +589,12 @@ describe('Eagering', () => {
     })
   }
 
+  const findAnchorRoot = () => cy.get('#anchor [data-testid=root]')
+  const findAnchorModal = () => findAnchorRoot().find('[data-testid=modal]')
+  const findAnchorOverlay = () => findAnchorRoot().find('[data-testid=overlay]')
+
+  const fragmentsGetters = [() => findAnchorRoot(), () => findAnchorModal(), () => findAnchorOverlay()]
+
   it('Non-eager rendering (default behavior)', () => {
     mountFactory()
 
@@ -620,34 +603,31 @@ describe('Eagering', () => {
 
     cy.contains('Open').click()
 
-    // everything should be visible
-    for (const fragmentClass of [ROOT, MODAL]) {
-      cy.get(`#anchor .${fragmentClass}`).should('exist').and('be.visible')
+    // everything should exist
+    for (const getter of fragmentsGetters) {
+      getter().should('exist')
     }
-    cy.get(`#anchor .${OVERLAY}`).should('exist')
 
     cy.contains('Close').click()
 
     // everything should not exist
-    for (const fragmentClass of [ROOT, OVERLAY, MODAL]) {
-      cy.get(`#anchor .${fragmentClass}`).should('not.exist')
-    }
+    findAnchorRoot().should('not.exist')
   })
 
   it('Eager rendering', () => {
     mountFactory({ eager: true })
 
-    cy.get(`#anchor .${ROOT}`).should('exist').and('not.be.visible')
-    cy.get(`#anchor .${MODAL}`).should('exist')
+    findAnchorRoot().should('exist').and('not.be.visible')
+    findAnchorModal().should('exist')
 
     cy.contains('Open').click()
 
-    cy.get(`#anchor .${MODAL}`).should('be.visible')
+    findAnchorModal().should('be.visible')
 
     cy.contains('Close').click()
 
     cy.contains('Show: false')
-    cy.get(`#anchor .${ROOT}`).should('exist').and('not.be.visible')
-    cy.get(`#anchor .${MODAL}`).should('exist').and('not.be.visible')
+    findAnchorRoot().should('exist').and('not.be.visible')
+    findAnchorModal().should('exist').and('not.be.visible')
   })
 })

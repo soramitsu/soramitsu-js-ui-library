@@ -1,5 +1,5 @@
-import { Ref, computed } from 'vue'
-import { Option } from './types'
+import { Ref } from 'vue'
+import { SelectOption } from './types'
 import { whenever, and, not } from '@vueuse/core'
 
 export interface UseSelectModelReturn<T> {
@@ -18,7 +18,7 @@ export interface UseSelectModelReturn<T> {
   /**
    * List of selected options (with only one item maximum in a single mode)
    */
-  selectedOptions: Ref<Option<T>[]>
+  selectedOptions: Ref<SelectOption<T>[]>
 
   isSomethingSelected: Ref<boolean>
 }
@@ -26,7 +26,7 @@ export interface UseSelectModelReturn<T> {
 export interface UseSelectModelParams<T> {
   multiple: Ref<boolean>
   model: Ref<null | T | T[]>
-  options: Ref<Option<T>[]>
+  options: Ref<SelectOption<T>[]>
 }
 
 export function useSelectModel<T = any>({
@@ -69,7 +69,7 @@ export function useSelectModel<T = any>({
     isValueSelected(value) ? unselect(value) : select(value)
   }
 
-  const selectedOptions = computed<Option[]>(() => options.value.filter((x) => isValueSelected(x.value)))
+  const selectedOptions = computed<SelectOption[]>(() => options.value.filter((x) => isValueSelected(x.value)))
 
   const isSomethingSelected = computed<boolean>(() => !!selectedSet.value.size)
 
