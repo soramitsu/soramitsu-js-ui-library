@@ -162,7 +162,16 @@ if (props.focusTrap) {
   )
   ;({ trap: focusTrap } = useFocusTrap({
     elem: focusTrapTarget,
-    options,
+    options: {
+      ...options,
+      escapeDeactivates(event) {
+        if (typeof options.escapeDeactivates === 'function') {
+          return options.escapeDeactivates(event)
+        }
+
+        return props.closeOnEsc ? true : false
+      },
+    },
   }))
 
   watch(
