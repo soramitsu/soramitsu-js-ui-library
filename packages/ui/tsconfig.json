@@ -7,4 +7,5 @@
     },
     "types": ["cypress"]
   },
+  "exclude": ["dist", "dist-ts"]
 }
