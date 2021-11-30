@@ -270,6 +270,9 @@ export enum Status {
 }
 
 // @public (undocumented)
+export const STextField: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
 export const SToastsDisplay: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
