@@ -8,6 +8,7 @@ const findLabel = () => cy.get('label')
 const findCounter = () => cy.get('[data-testid=counter]')
 const findMsg = () => cy.get('[data-testid=message]')
 const findEye = () => cy.get('[data-testid=eye]')
+const findAppend = () => cy.get('[data-testid=append]')
 
 before(() => {
   config.global.components = { STextField }
@@ -145,6 +146,98 @@ describe('Status message', () => {
     })
 
     findMsg().contains('bar')
+  })
+
+  it('Conditional slot works', () => {
+    mount({
+      setup() {
+        return {
+          showSlot: ref(false),
+        }
+      },
+      template: `
+        <input type="checkbox" v-model="showSlot">
+
+        <STextField>
+          <template #message v-if="showSlot">
+            Conditional message
+          </template>
+        </STextField>
+      `,
+    })
+
+    findMsg().should('not.exist')
+    cy.get('input[type=checkbox]').click()
+    findMsg().should('exist')
+    cy.get('input[type=checkbox]').click()
+    findMsg().should('not.exist')
+  })
+})
+
+describe('Append slot', () => {
+  it('No append if no slot', () => {
+    mount(() => h(STextField))
+
+    findAppend().should('not.exist')
+  })
+
+  it('Rendered with eye', () => {
+    mount(() =>
+      h(
+        STextField,
+        { password: true },
+        {
+          append: () => 'Anchor',
+        },
+      ),
+    )
+
+    findAppend().within(() => {
+      findEye()
+      cy.contains('Anchor')
+    })
+  })
+
+  it('Rendered with counter', () => {
+    mount(() =>
+      h(
+        STextField,
+        { counter: 20 },
+        {
+          append: () => 'Hey',
+        },
+      ),
+    )
+
+    findAppend().within(() => {
+      findCounter()
+      cy.contains('Hey')
+    })
+  })
+
+  it('Conditional slot works', () => {
+    mount({
+      setup() {
+        return {
+          showSlot: ref(false),
+        }
+      },
+      template: `
+        <input type="checkbox" v-model="showSlot">
+    
+        <STextField>
+          <template #append v-if="showSlot">
+            He
+          </template>
+        </STextField>
+      `,
+    })
+
+    findAppend().should('not.exist')
+    cy.get('input[type=checkbox]').click()
+    findAppend().should('exist')
+    cy.get('input[type=checkbox]').click()
+    findAppend().should('not.exist')
   })
 })
 

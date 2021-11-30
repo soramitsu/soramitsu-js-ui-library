@@ -122,8 +122,12 @@ const isValueEmpty = computed(() => !model.value)
 
 // MESSAGE
 
-const isMessageSlotDefined = computed<boolean>(() => !!slots.message)
-const shouldRenderMessage = computed<boolean>(() => !!props.message || isMessageSlotDefined.value)
+// watchEffect(() => {
+//   console.log('reactive? %o\nkeys: %o', isReactive(slots), Object.keys(slots))
+// })
+
+const isMessageSlotDefined = () => !!slots.message
+const shouldRenderMessage = () => !!props.message || isMessageSlotDefined()
 const messageIcon = computed(() => {
   if (status.value === null) return null
   return STATUS_ICONS_MAP_16[status.value]
@@ -162,8 +166,8 @@ const counterText = computed<string | null>(() => {
 // APPEND
 
 const showEye = computed<boolean>(() => props.password && !props.noEye)
-const isAppendSlotDefined = computed<boolean>(() => !!slots.append)
-const shouldRenderAppend = computed<boolean>(() => !!counterText.value || isAppendSlotDefined.value || showEye.value)
+const isAppendSlotDefined = () => !!slots.append
+const shouldRenderAppend = () => !!counterText.value || isAppendSlotDefined() || showEye.value
 
 // EYE
 
@@ -198,8 +202,9 @@ const inputType = computed(() =>
       >
 
       <div
-        v-if="shouldRenderAppend"
+        v-if="shouldRenderAppend()"
         class="s-text-field__append"
+        data-testid="append"
       >
         <div
           v-if="counterText"
@@ -225,21 +230,23 @@ const inputType = computed(() =>
       </div>
     </div>
 
-    <div
-      v-if="shouldRenderMessage"
-      data-testid="message"
-      class="s-text-field__message"
-    >
-      <component
-        :is="messageIcon"
-        v-if="messageIcon"
-        class="s-text-field__message-icon"
-      />
+    <Transition name="s-text-field__message-transition">
+      <div
+        v-if="shouldRenderMessage()"
+        data-testid="message"
+        class="s-text-field__message"
+      >
+        <component
+          :is="messageIcon"
+          v-if="messageIcon"
+          class="s-text-field__message-icon"
+        />
 
-      <span>
-        <slot name="message">{{ message }}</slot>
-      </span>
-    </div>
+        <span>
+          <slot name="message">{{ message }}</slot>
+        </span>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -356,6 +363,19 @@ $message-icon-alignment-fix: -1px;
       fill: currentColor;
       @apply inline-block mr-1 relative;
       top: $message-icon-alignment-fix;
+    }
+
+    &-transition {
+      &-enter-active,
+      &-leave-active {
+        @apply transition-all;
+      }
+
+      &-enter-from,
+      &-leave-to {
+        transform: translateY(-8px);
+        opacity: 0;
+      }
     }
   }
 
