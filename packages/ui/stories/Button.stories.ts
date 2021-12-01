@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/vue3'
 import { Component, FunctionalComponent, h, Slot } from 'vue'
-import { SButton } from '../components/Button'
+import { SButton } from '@/lib'
 
 const meta: Meta = {
   title: 'Example/Button',

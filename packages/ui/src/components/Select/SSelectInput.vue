@@ -21,7 +21,7 @@ const FLabel = () => {
   return h(
     'span',
     { class: 's-select-input__label' },
-    !isColumnLayout.value && api.isSomethingSelected ? [label, ':'] : label,
+    (!isColumnLayout.value && api.isSomethingSelected ? [label, ':'] : label) as any,
   )
 }
 const FSelection = () => (api.isSomethingSelected ? h('span', {}, selectionsJoined.value) : null)

@@ -18,7 +18,7 @@ const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : Sele
 </script>
 
 <template>
-  <SSelectBase v-bind="{ ...$attrs, ...$props }">
+  <SSelectBase v-bind="{ ...$attrs, ...$props } as any">
     <template #control>
       <SSelectButton :type="buttonType">
         <template #label="binding">

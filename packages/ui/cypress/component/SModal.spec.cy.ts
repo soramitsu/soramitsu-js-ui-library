@@ -2,8 +2,8 @@ import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
 import { Ref } from 'vue'
 import { bareMetalVModel } from '@/util'
-import { SModal, SModalCard, useModalApi } from './index'
-import { objectPick } from '@vueuse/shared'
+import { SModal, SModalCard, useModalApi } from '@/lib'
+import { objectPick } from '@vueuse/core'
 import { Options as FocusTrapOptions } from 'focus-trap'
 
 const showVModel = (val: Ref<boolean>) => bareMetalVModel(val, 'show')
