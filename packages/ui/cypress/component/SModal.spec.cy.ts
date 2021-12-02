@@ -2,8 +2,9 @@ import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
 import { Ref } from 'vue'
 import { bareMetalVModel } from '@/util'
-import { SModal, SModalCard, useModalApi } from './index'
-import { objectPick } from '@vueuse/shared'
+import { SModal, SModalCard, useModalApi } from '@/lib'
+import { objectPick } from '@vueuse/core'
+import { Options as FocusTrapOptions } from 'focus-trap'
 
 const showVModel = (val: Ref<boolean>) => bareMetalVModel(val, 'show')
 const findRoot = () => cy.get('[data-testid=root]')
@@ -49,11 +50,16 @@ it('Mounts', () => {
 })
 
 describe('Focus trap', () => {
-  function mountFactory(params?: { focusTrap?: boolean; eager?: boolean; mountWithoutTabbable?: boolean }) {
+  function mountFactory(params?: {
+    focusTrap?: boolean | FocusTrapOptions
+    eager?: boolean
+    mountWithoutTabbable?: boolean
+    closeOnEsc?: boolean
+  }) {
     mount({
       components: { SModal },
       setup() {
-        const props = objectPick(params || {}, ['focusTrap', 'eager'])
+        const props = objectPick(params || {}, ['focusTrap', 'eager', 'closeOnEsc'])
 
         const mountTabbables: boolean = !params?.mountWithoutTabbable ?? true
 
@@ -121,6 +127,33 @@ describe('Focus trap', () => {
     cy.get('@consoleWarn')
       .should('be.calledWithMatch', /you can disable focus-trap completely by setting `focus-trap` prop to `false`/)
       .and('be.calledWithMatch', /\[SModal\]/)
+  })
+
+  it("{esc} doesn't disable focus trap if `close-on-esc=false`", () => {
+    mountFactory({ closeOnEsc: false })
+
+    cy.contains('open modal').click()
+    assertFirstTabbableFocus(true)
+    cy.get('body').type('{esc}')
+    assertFirstTabbableFocus(true)
+  })
+
+  it('{esc} handling focus-trap option works', () => {
+    const spy = Cypress.sinon.spy()
+
+    mountFactory({
+      focusTrap: {
+        escapeDeactivates: spy,
+      },
+    })
+
+    cy.contains('open modal')
+      .click()
+      .get('body')
+      .type('{esc}')
+      .then(() => {
+        cy.wrap(spy).should('be.calledOnce')
+      })
   })
 })
 

@@ -1,7 +1,6 @@
 import { Meta } from '@storybook/vue3'
 import { Component } from 'vue'
-
-import SJsonInput from '../components/Input/SJsonInput.vue'
+import { SJsonInput } from '@/lib'
 
 const meta: Meta = {
   title: 'Example/JSON Input',

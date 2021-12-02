@@ -1,4 +1,4 @@
-import SJsonInput from './SJsonInput.vue'
+import { SJsonInput } from '@/lib'
 import { mount } from '@cypress/vue'
 
 it('Mount SJsonInput', () => {

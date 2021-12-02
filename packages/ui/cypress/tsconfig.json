@@ -1,0 +1,10 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["cypress"],
+    "paths": {
+      "@/*": ["../src/*"]
+    }
+  },
+  "include": ["./", "../auto-imports.d.ts"]
+}

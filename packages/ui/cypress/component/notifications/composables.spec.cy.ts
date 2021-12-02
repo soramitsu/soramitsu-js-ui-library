@@ -1,7 +1,6 @@
 import { mount } from '@cypress/vue'
 import { defineComponent } from 'vue'
-import { useNotifications } from './composables'
-import SNotificationsProvider from './SNotificationsProvider'
+import { useNotifications, SNotificationsProvider } from '@/lib'
 
 describe('useNotifications()', () => {
   it('Composable works, notification is shown', () => {

@@ -101,12 +101,7 @@ const props = withDefaults(defineProps<Props>(), {
   eager: false,
 })
 
-interface Emits {
-  (event: 'update:show', value: boolean): void
-  (event: 'click:overlay' | 'before-open' | 'after-open' | 'before-close' | 'after-close'): void
-}
-
-const emit = defineEmits<Emits>()
+const emit = defineEmits(['update:show', 'click:overlay', 'before-open', 'after-open', 'before-close', 'after-close'])
 
 // ***
 
@@ -162,7 +157,16 @@ if (props.focusTrap) {
   )
   ;({ trap: focusTrap } = useFocusTrap({
     elem: focusTrapTarget,
-    options,
+    options: {
+      ...options,
+      escapeDeactivates(event) {
+        if (typeof options.escapeDeactivates === 'function') {
+          return options.escapeDeactivates(event)
+        }
+
+        return props.closeOnEsc ? true : false
+      },
+    },
   }))
 
   watch(

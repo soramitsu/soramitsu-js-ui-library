@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DesignSystem, DesignSystemProviderAPI, DESIGN_SYSTEM_KEY } from '@/state/design-system'
+import { DesignSystem, DesignSystemProviderAPI, DESIGN_SYSTEM_KEY } from './api'
 import { computed, readonly, provide } from 'vue'
 
 const props = withDefaults(

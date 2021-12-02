@@ -1,7 +1,5 @@
 import { mount } from '@cypress/vue'
-import { ref } from 'vue'
-import SNotificationsProvider from './SNotificationsProvider'
-import SUseNotification from './SUseNotification'
+import { SNotificationsProvider, SUseNotification } from '@/lib'
 
 const findCloseBtn = () => cy.get('[data-testid=close-btn]', {})
 

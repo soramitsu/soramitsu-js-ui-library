@@ -5,15 +5,19 @@
 ```ts
 
 import { AllowedComponentProps } from 'vue';
+import { BodyScrollOptions } from 'body-scroll-lock';
 import { ComponentCustomProps } from 'vue';
 import { ComponentOptionsMixin } from 'vue';
 import { ComputedRef } from 'vue';
 import { DeepReadonly } from 'vue';
 import { DefineComponent } from 'vue';
+import { EmitsOptions } from 'vue';
 import { FocusTrap } from 'focus-trap';
 import { FunctionalComponent } from 'vue';
 import { InjectionKey } from 'vue';
+import type { JSONEditorOptions } from 'jsoneditor';
 import { MaybeRef } from '@vueuse/core';
+import { Options } from 'focus-trap';
 import { Plugin as Plugin_2 } from 'vue';
 import { PropType } from 'vue';
 import { Ref } from 'vue';
@@ -37,11 +41,20 @@ export enum Autocomplete {
 export function defineToastsApi(): ToastsApi;
 
 // @public (undocumented)
+export const DESIGN_SYSTEM_KEY: InjectionKey<DesignSystemProviderAPI>;
+
+// @public (undocumented)
 export enum DesignSystem {
     // (undocumented)
     Default = "DEFAULT",
     // (undocumented)
     Neumorphic = "NEUMORPHIC"
+}
+
+// @public (undocumented)
+export interface DesignSystemProviderAPI {
+    // (undocumented)
+    readonly current: DesignSystem;
 }
 
 // @public (undocumented)
@@ -126,16 +139,112 @@ export function plugin(): Plugin_2;
 export type RegisteredToast = ToastRegisterParams;
 
 // @public (undocumented)
-export const SAlert: DefineComponent<{}, {}, any>;
+export const SAlert: DefineComponent<    {
+inline: {
+type: PropType<boolean>;
+};
+status: {
+type: PropType<Status_2>;
+} & {
+default: Status_2;
+};
+showCloseBtn: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+title: {
+type: PropType<string>;
+};
+description: {
+type: PropType<string>;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"click:close": () => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+inline?: unknown;
+status?: unknown;
+showCloseBtn?: unknown;
+title?: unknown;
+description?: unknown;
+} & {
+status: Status_2;
+showCloseBtn: boolean;
+} & {
+description?: string | undefined;
+title?: string | undefined;
+inline?: boolean | undefined;
+}> & {
+"onClick:close"?: (() => any) | undefined;
+}, {
+status: Status_2;
+showCloseBtn: boolean;
+}>;
 
 // @public (undocumented)
-export const SButton: DefineComponent<{}, {}, any>;
+export const SButton: DefineComponent<    {
+rounded: {
+type: PropType<boolean>;
+};
+type: {
+type: PropType<BtnType>;
+} & {
+default: string;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+rounded?: unknown;
+type?: unknown;
+} & {
+type: BtnType;
+} & {
+rounded?: boolean | undefined;
+}>, {
+type: BtnType;
+}>;
 
 // @public (undocumented)
-export const SDesignSystemProvider: DefineComponent<{}, {}, any>;
+export const SDesignSystemProvider: DefineComponent<    {
+value: {
+type: PropType<DesignSystem>;
+} & {
+default: DesignSystem;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+value?: unknown;
+} & {
+value: DesignSystem;
+} & {}>, {
+value: DesignSystem;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_DefinePropsToOptions" needs to be exported by the entry point lib.d.ts
+//
 // @public (undocumented)
-export const SDropdown: DefineComponent<{}, {}, any>;
+export const SDropdown: DefineComponent<__VLS_DefinePropsToOptions_2<{
+modelValue?: any;
+options?: SelectOption<any>[] | undefined;
+disabled?: boolean | undefined;
+multiple?: boolean | undefined;
+label?: string | undefined;
+size?: SelectSize | undefined;
+inline?: boolean | undefined;
+}>, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+options?: unknown;
+disabled?: unknown;
+multiple?: unknown;
+label?: unknown;
+size?: unknown;
+inline?: unknown;
+} & {} & {
+modelValue?: unknown;
+options?: SelectOption<any>[] | undefined;
+disabled?: boolean | undefined;
+multiple?: boolean | undefined;
+label?: string | undefined;
+size?: SelectSize | undefined;
+inline?: boolean | undefined;
+}>, {}>;
 
 // @public (undocumented)
 export const SELECT_API_KEY: InjectionKey<SelectApi<any>>;
@@ -218,16 +327,241 @@ export interface ShowNotificationReturn {
 }
 
 // @public (undocumented)
-export const SJsonInput: DefineComponent<{}, {}, any>;
+export const SJsonInput: DefineComponent<    {
+modelValue: {
+type: PropType<Object>;
+} & {
+default: () => {};
+};
+options: {
+type: PropType<JSONEditorOptions>;
+} & {
+default: () => {};
+};
+height: {
+type: PropType<string>;
+} & {
+default: string;
+};
+dictionary: {
+type: PropType<string[]>;
+} & {
+default: () => never[];
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: any) => void;
+} & {
+error: (value: unknown) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+options?: unknown;
+height?: unknown;
+dictionary?: unknown;
+} & {
+modelValue: Object;
+options: JSONEditorOptions;
+height: string;
+dictionary: string[];
+} & {}> & {
+onError?: ((value: unknown) => any) | undefined;
+"onUpdate:modelValue"?: ((value: any) => any) | undefined;
+}, {
+modelValue: Object;
+options: JSONEditorOptions;
+height: string;
+dictionary: string[];
+}>;
 
 // @public (undocumented)
-export const SModal: DefineComponent<{}, {}, any>;
+export const SModal: DefineComponent<    {
+show: {
+type: PropType<boolean>;
+required: true;
+};
+teleportTo: {
+type: PropType<string>;
+} & {
+default: string;
+};
+absolute: {
+type: PropType<boolean>;
+};
+rootClass: {
+type: PropType<ClassType>;
+};
+modalClass: {
+type: PropType<ClassType>;
+};
+overlayClass: {
+type: PropType<ClassType>;
+};
+rootStyle: {
+type: PropType<object>;
+};
+modalStyle: {
+type: PropType<object>;
+};
+overlayStyle: {
+type: PropType<object>;
+};
+modalTransition: {
+type: PropType<string | object>;
+} & {
+default: string;
+};
+overlayTransition: {
+type: PropType<string | object>;
+} & {
+default: string;
+};
+lockScroll: {
+type: PropType<boolean | BodyScrollOptions>;
+} & {
+default: boolean;
+};
+showOverlay: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+closeOnOverlayClick: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+closeOnEsc: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+focusTrap: {
+type: PropType<boolean | Options>;
+} & {
+default: boolean;
+};
+eager: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("before-open" | "after-open" | "before-close" | "after-close" | "update:show" | "click:overlay")[], "before-open" | "after-open" | "before-close" | "after-close" | "update:show" | "click:overlay", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+show?: unknown;
+teleportTo?: unknown;
+absolute?: unknown;
+rootClass?: unknown;
+modalClass?: unknown;
+overlayClass?: unknown;
+rootStyle?: unknown;
+modalStyle?: unknown;
+overlayStyle?: unknown;
+modalTransition?: unknown;
+overlayTransition?: unknown;
+lockScroll?: unknown;
+showOverlay?: unknown;
+closeOnOverlayClick?: unknown;
+closeOnEsc?: unknown;
+focusTrap?: unknown;
+eager?: unknown;
+} & {
+show: boolean;
+eager: boolean;
+teleportTo: string;
+modalTransition: string | object;
+overlayTransition: string | object;
+lockScroll: boolean | BodyScrollOptions;
+showOverlay: boolean;
+closeOnOverlayClick: boolean;
+closeOnEsc: boolean;
+focusTrap: boolean | Options;
+} & {
+absolute?: boolean | undefined;
+rootClass?: ClassType | undefined;
+modalClass?: ClassType | undefined;
+overlayClass?: ClassType | undefined;
+rootStyle?: object | undefined;
+modalStyle?: object | undefined;
+overlayStyle?: object | undefined;
+}> & {
+"onBefore-open"?: ((...args: any[]) => any) | undefined;
+"onAfter-open"?: ((...args: any[]) => any) | undefined;
+"onBefore-close"?: ((...args: any[]) => any) | undefined;
+"onAfter-close"?: ((...args: any[]) => any) | undefined;
+"onUpdate:show"?: ((...args: any[]) => any) | undefined;
+"onClick:overlay"?: ((...args: any[]) => any) | undefined;
+}, {
+eager: boolean;
+teleportTo: string;
+modalTransition: string | object;
+overlayTransition: string | object;
+lockScroll: boolean | BodyScrollOptions;
+showOverlay: boolean;
+closeOnOverlayClick: boolean;
+closeOnEsc: boolean;
+focusTrap: boolean | Options;
+}>;
 
 // @public (undocumented)
-export const SModalCard: DefineComponent<{}, {}, any>;
+export const SModalCard: DefineComponent<    {
+title: {
+type: PropType<string>;
+};
+width: {
+type: PropType<string>;
+} & {
+default: string;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+title?: unknown;
+width?: unknown;
+} & {
+width: string;
+} & {
+title?: string | undefined;
+}>, {
+width: string;
+}>;
 
 // @public (undocumented)
-export const SNotificationBody: DefineComponent<{}, {}, any>;
+export const SNotificationBody: DefineComponent<    {
+title: {
+type: PropType<string>;
+};
+description: {
+type: PropType<string>;
+};
+status: {
+type: PropType<Status_2>;
+} & {
+default: Status_2;
+};
+timeout: {
+type: PropType<number>;
+} & {
+default: number;
+};
+showCloseBtn: {
+type: PropType<boolean>;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("timeout" | "click:close")[], "timeout" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+title?: unknown;
+description?: unknown;
+status?: unknown;
+timeout?: unknown;
+showCloseBtn?: unknown;
+} & {
+status: Status_2;
+timeout: number;
+} & {
+description?: string | undefined;
+title?: string | undefined;
+showCloseBtn?: boolean | undefined;
+}> & {
+onTimeout?: ((...args: any[]) => any) | undefined;
+"onClick:close"?: ((...args: any[]) => any) | undefined;
+}, {
+status: Status_2;
+timeout: number;
+}>;
 
 // @public (undocumented)
 export const SNotificationsProvider: FunctionalComponent<{
@@ -237,14 +571,124 @@ export const SNotificationsProvider: FunctionalComponent<{
     to?: string;
 }>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_DefinePropsToOptions" needs to be exported by the entry point lib.d.ts
+//
 // @public (undocumented)
-export const SSelect: DefineComponent<{}, {}, any>;
+export const SSelect: DefineComponent<__VLS_DefinePropsToOptions<{
+modelValue?: any;
+options?: SelectOption<any>[] | undefined;
+disabled?: boolean | undefined;
+multiple?: boolean | undefined;
+label?: string | undefined;
+size?: SelectSize | undefined;
+}>, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+options?: unknown;
+disabled?: unknown;
+multiple?: unknown;
+label?: unknown;
+size?: unknown;
+} & {} & {
+modelValue?: unknown;
+options?: SelectOption<any>[] | undefined;
+disabled?: boolean | undefined;
+multiple?: boolean | undefined;
+label?: string | undefined;
+size?: SelectSize | undefined;
+}>, {}>;
 
 // @public (undocumented)
-export const SSelectBase: DefineComponent<{}, {}, any>;
+export const SSelectBase: DefineComponent<    {
+disabled: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+multiple: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+modelValue: {
+type: PropType<any>;
+} & {
+default: null;
+};
+options: {
+type: PropType<SelectOption<any>[]>;
+} & {
+default: () => never[];
+};
+size: {
+type: PropType<SelectSize>;
+} & {
+default: SelectSize;
+};
+label: {
+type: PropType<string>;
+};
+mandatory: {
+type: PropType<boolean>;
+};
+dropdownTransitionName: {
+type: PropType<string>;
+} & {
+default: string;
+};
+syncMenuAndInputWidths: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: any) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+disabled?: unknown;
+multiple?: unknown;
+modelValue?: unknown;
+options?: unknown;
+size?: unknown;
+label?: unknown;
+mandatory?: unknown;
+dropdownTransitionName?: unknown;
+syncMenuAndInputWidths?: unknown;
+} & {
+modelValue: null;
+options: SelectOption<any>[];
+disabled: boolean;
+multiple: boolean;
+size: SelectSize;
+dropdownTransitionName: string;
+syncMenuAndInputWidths: boolean;
+} & {
+label?: string | undefined;
+mandatory?: boolean | undefined;
+}> & {
+"onUpdate:modelValue"?: ((value: any) => any) | undefined;
+}, {
+modelValue: null;
+options: SelectOption<any>[];
+disabled: boolean;
+multiple: boolean;
+size: SelectSize;
+dropdownTransitionName: string;
+syncMenuAndInputWidths: boolean;
+}>;
 
 // @public (undocumented)
-export const SSelectButton: DefineComponent<{}, {}, any>;
+export const SSelectButton: DefineComponent<    {
+type: {
+type: PropType<SelectButtonType>;
+} & {
+default: SelectButtonType;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+type?: unknown;
+} & {
+type: SelectButtonType;
+} & {}>, {
+type: SelectButtonType;
+}>;
 
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
@@ -252,10 +696,29 @@ export const SSelectButton: DefineComponent<{}, {}, any>;
 export const SSelectChevron: FunctionalComponent<Props>;
 
 // @public (undocumented)
-export const SSelectInput: DefineComponent<{}, {}, any>;
+export const SSelectInput: DefineComponent<    {}, () => void, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, EmitsOptions, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{} & {} & {}>, {}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_DefinePropsToOptions" needs to be exported by the entry point lib.d.ts
+//
 // @public (undocumented)
-export const SSelectOption: DefineComponent<{}, {}, any>;
+export const SSelectOption: DefineComponent<__VLS_DefinePropsToOptions_3<{
+type: SelectOptionType;
+multiple?: boolean | undefined;
+selected?: boolean | undefined;
+}>, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+toggle: () => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+type?: unknown;
+multiple?: unknown;
+selected?: unknown;
+} & {
+type: SelectOptionType;
+} & {
+multiple?: boolean | undefined;
+selected?: boolean | undefined;
+}> & {
+onToggle?: (() => any) | undefined;
+}, {}>;
 
 // @public
 export enum Status {
@@ -270,10 +733,129 @@ export enum Status {
 }
 
 // @public (undocumented)
-export const STextField: DefineComponent<{}, {}, any>;
+export const STextField: DefineComponent<    {
+modelValue: {
+type: PropType<string>;
+};
+label: {
+type: PropType<string>;
+};
+id: {
+type: PropType<string>;
+};
+password: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+noEye: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+disabled: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+counter: {
+type: PropType<string | number | boolean>;
+} & {
+default: boolean;
+};
+status: {
+type: PropType<Status_2.Success | Status_2.Warning | Status_2.Error>;
+};
+success: {
+type: PropType<boolean>;
+};
+warning: {
+type: PropType<boolean>;
+};
+error: {
+type: PropType<boolean>;
+};
+message: {
+type: PropType<string>;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: string) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+label?: unknown;
+id?: unknown;
+password?: unknown;
+noEye?: unknown;
+disabled?: unknown;
+counter?: unknown;
+status?: unknown;
+success?: unknown;
+warning?: unknown;
+error?: unknown;
+message?: unknown;
+} & {
+password: boolean;
+disabled: boolean;
+noEye: boolean;
+counter: string | number | boolean;
+} & {
+error?: boolean | undefined;
+modelValue?: string | undefined;
+id?: string | undefined;
+status?: Status_2.Success | Status_2.Warning | Status_2.Error | undefined;
+label?: string | undefined;
+success?: boolean | undefined;
+warning?: boolean | undefined;
+message?: string | undefined;
+}> & {
+"onUpdate:modelValue"?: ((value: string) => any) | undefined;
+}, {
+password: boolean;
+disabled: boolean;
+noEye: boolean;
+counter: string | number | boolean;
+}>;
 
 // @public (undocumented)
-export const SToastsDisplay: DefineComponent<{}, {}, any>;
+export const SToastsDisplay: DefineComponent<    {
+vertical: {
+type: PropType<ToastsDisplayPlacementVertical>;
+default: string;
+validate: typeof validateVerticalPlacement;
+};
+horizontal: {
+type: PropType<ToastsDisplayPlacementHorizontal>;
+default: string;
+validate: typeof validateHorizontalPlacement;
+};
+absolute: BooleanConstructor;
+to: {
+type: StringConstructor;
+default: string;
+};
+apiKey: {
+type: (SymbolConstructor | StringConstructor)[];
+default: InjectionKey<ToastsApi>;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+vertical?: unknown;
+horizontal?: unknown;
+absolute?: unknown;
+to?: unknown;
+apiKey?: unknown;
+} & {
+absolute: boolean;
+vertical: ToastsDisplayPlacementVertical;
+horizontal: ToastsDisplayPlacementHorizontal;
+to: string;
+apiKey: string | symbol;
+} & {}>, {
+absolute: boolean;
+vertical: ToastsDisplayPlacementVertical;
+horizontal: ToastsDisplayPlacementHorizontal;
+to: string;
+apiKey: string | symbol;
+}>;
 
 // @public (undocumented)
 export const SToastsProvider: DefineComponent<    {
@@ -305,7 +887,7 @@ default: number;
 };
 showCloseBtn: BooleanConstructor;
 description: StringConstructor;
-}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "click:close" | "timeout")[], "timeout" | "update:show" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "timeout" | "click:close")[], "update:show" | "timeout" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
 show?: unknown;
 title?: unknown;
 status?: unknown;
@@ -314,21 +896,21 @@ showCloseBtn?: unknown;
 description?: unknown;
 } & {
 status: Status_2;
+show: boolean;
 timeout: number;
 showCloseBtn: boolean;
-show: boolean;
 } & {
 description?: string | undefined;
 title?: string | undefined;
 }> & {
-"onClick:close"?: ((...args: any[]) => any) | undefined;
-onTimeout?: ((...args: any[]) => any) | undefined;
 "onUpdate:show"?: ((...args: any[]) => any) | undefined;
+onTimeout?: ((...args: any[]) => any) | undefined;
+"onClick:close"?: ((...args: any[]) => any) | undefined;
 }, {
 status: Status_2;
+show: boolean;
 timeout: number;
 showCloseBtn: boolean;
-show: boolean;
 }>;
 
 // @public (undocumented)
@@ -380,7 +962,11 @@ export function useSelectApi<T = any>(): SelectApi<T>;
 
 // Warnings were encountered during analysis:
 //
-// dist-ts/src/components/Toasts/SToastsProvider.d.ts:8:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Button/Button.vue.d.ts:7:9 - (ae-forgotten-export) The symbol "BtnType" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Modal/SModal.vue.d.ts:18:9 - (ae-forgotten-export) The symbol "ClassType" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:9:9 - (ae-forgotten-export) The symbol "validateVerticalPlacement" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:14:9 - (ae-forgotten-export) The symbol "validateHorizontalPlacement" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Toasts/SToastsProvider.d.ts:8:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts
 
 // (No @packageDocumentation comment for this package)
 
