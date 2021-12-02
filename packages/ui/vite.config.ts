@@ -29,6 +29,7 @@ export default defineConfig({
     }),
   ],
   build: {
+    sourcemap: true,
     cssCodeSplit: false,
     minify: false,
     chunkSizeWarningLimit: 2_000,
