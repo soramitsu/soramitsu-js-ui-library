@@ -689,6 +689,29 @@ onToggle?: (() => any) | undefined;
 }, {}>;
 
 // @public (undocumented)
+export const SSpinner: DefineComponent<    {
+size: {
+type: PropType<string | number>;
+} & {
+default: string;
+};
+width: {
+type: PropType<string | number>;
+} & {
+default: number;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+size?: unknown;
+width?: unknown;
+} & {
+width: string | number;
+size: string | number;
+} & {}>, {
+width: string | number;
+size: string | number;
+}>;
+
+// @public (undocumented)
 export const SToastsDisplay: DefineComponent<    {
 vertical: {
 type: PropType<ToastsDisplayPlacementVertical>;
