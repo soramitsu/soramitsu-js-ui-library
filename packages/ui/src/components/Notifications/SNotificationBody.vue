@@ -20,7 +20,7 @@ const props = withDefaults(
 
 const StatusIcon = computed(() => STATUS_ICONS_MAP[props.status])
 
-const emit = defineEmits<(event: 'click:close' | 'timeout') => void>()
+const emit = defineEmits(['click:close', 'timeout'])
 
 function onClickClose() {
   emit('click:close')

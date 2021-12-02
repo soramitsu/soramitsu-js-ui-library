@@ -3,7 +3,7 @@ import { windicssPreset, THEME_DEFAULT, windicssPluginTheme, windicssPluginTypog
 
 export default defineConfig({
   extract: {
-    include: ['src/**/*.{md,vue}', 'src/**/*.spec.cy.{js,ts}', 'src/stories/**/*.{js,ts}'],
+    include: ['src/**/*.vue', 'cypress/component/**/*.spec.cy.{js,ts}', 'stories/**/*.stories.{js,ts}'],
   },
   presets: [windicssPreset],
   plugins: [windicssPluginTheme('default', THEME_DEFAULT), windicssPluginTypography()],

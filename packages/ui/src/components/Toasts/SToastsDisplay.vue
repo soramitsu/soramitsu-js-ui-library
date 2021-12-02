@@ -65,7 +65,7 @@ function leave(element: HTMLElement) {
       >
         <TransitionGroup
           name="s-toasts-display__grow-transition"
-          @leave="leave"
+          @leave="leave as any"
         >
           <div
             v-for="[key, toast] in api.toasts"

@@ -48,7 +48,7 @@ export function useNotifications(): UseNotificationsReturn {
       const unreg = toasts.register({
         slot: () =>
           h(
-            SNotificationBody,
+            SNotificationBody as any,
             {
               title: unref(params.title),
               description: unref(params.description),
