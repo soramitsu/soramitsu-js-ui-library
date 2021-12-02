@@ -16,7 +16,7 @@ function defineSoraTypographyBlockStyle<
     fontFamily: string
     fontStyle: string
     textTransform: string
-  }>
+  }>,
 >(a: T): T {
   return {
     fontFamily: 'Sora',
@@ -251,10 +251,12 @@ export const windicssPreset: Config = {
           success: v(ThemeVars.ColorStatusSuccess),
           warning: v(ThemeVars.ColorStatusWarning),
           error: v(ThemeVars.ColorStatusError),
+          info: v(ThemeVars.ColorStatusInfo),
           background: {
             success: v(ThemeVars.ColorStatusSuccessBackground),
             warning: v(ThemeVars.ColorStatusWarningBackground),
             error: v(ThemeVars.ColorStatusErrorBackground),
+            info: v(ThemeVars.ColorStatusInfoBackground),
           },
         },
       },

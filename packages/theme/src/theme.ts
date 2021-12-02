@@ -54,9 +54,11 @@ export enum ThemeVars {
   ColorStatusSuccess = '--s-color-status-success',
   ColorStatusWarning = '--s-color-status-warning',
   ColorStatusError = '--s-color-status-error',
+  ColorStatusInfo = '--s-color-status-info',
   ColorStatusSuccessBackground = '--s-color-status-success-background',
   ColorStatusWarningBackground = '--s-color-status-warning-background',
   ColorStatusErrorBackground = '--s-color-status-error-background',
+  ColorStatusInfoBackground = '--s-color-status-info-background',
 
   FontSize2xs = '--s-font-size-2xs',
   FontSizeXs = '--s-font-size-xs',

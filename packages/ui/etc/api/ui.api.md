@@ -4,15 +4,25 @@
 
 ```ts
 
+import { AllowedComponentProps } from 'vue';
+import { ComponentCustomProps } from 'vue';
+import { ComponentOptionsMixin } from 'vue';
 import { ComputedRef } from 'vue';
 import { DeepReadonly } from 'vue';
 import { DefineComponent } from 'vue';
 import { FocusTrap } from 'focus-trap';
 import { FunctionalComponent } from 'vue';
 import { InjectionKey } from 'vue';
+import { MaybeRef } from '@vueuse/core';
 import { Plugin as Plugin_2 } from 'vue';
+import { PropType } from 'vue';
 import { Ref } from 'vue';
+import { RendererElement } from 'vue';
+import { RendererNode } from 'vue';
+import { Slot } from 'vue';
 import { UnwrapRef } from 'vue';
+import { VNode } from 'vue';
+import { VNodeProps } from 'vue';
 
 // @public (undocumented)
 export enum Autocomplete {
@@ -21,6 +31,9 @@ export enum Autocomplete {
     // (undocumented)
     ON = "on"
 }
+
+// @public (undocumented)
+export function defineToastsApi(): ToastsApi;
 
 // @public (undocumented)
 export enum DesignSystem {
@@ -103,7 +116,25 @@ export interface ModalApi {
 }
 
 // @public (undocumented)
+export const NOTIFICATIONS_API_KEY: InjectionKey<ToastsApi>;
+
+// @public (undocumented)
+export enum NotificationType {
+    // (undocumented)
+    Error = "error",
+    // (undocumented)
+    Info = "info",
+    // (undocumented)
+    Success = "success",
+    // (undocumented)
+    Warning = "warning"
+}
+
+// @public (undocumented)
 export function plugin(): Plugin_2;
+
+// @public (undocumented)
+export type RegisteredToast = ToastRegisterParams;
 
 // @public (undocumented)
 export const SButton: DefineComponent<{}, {}, any>;
@@ -174,6 +205,27 @@ export enum SelectSize {
 }
 
 // @public (undocumented)
+export interface ShowNotificationParams {
+    // (undocumented)
+    description?: MaybeRef<string | undefined | null>;
+    // (undocumented)
+    descriptionSlot?: Slot | FunctionalComponent;
+    showCloseBtn?: MaybeRef<boolean>;
+    timeout?: MaybeRef<number | undefined>;
+    // (undocumented)
+    title?: MaybeRef<string | undefined | null>;
+    // (undocumented)
+    titleSlot?: Slot | FunctionalComponent;
+    type?: MaybeRef<NotificationType>;
+}
+
+// @public (undocumented)
+export interface ShowNotificationReturn {
+    // (undocumented)
+    close: () => void;
+}
+
+// @public (undocumented)
 export const SJsonInput: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
@@ -181,6 +233,17 @@ export const SModal: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
 export const SModalCard: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
+export const SNotificationBody: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
+export const SNotificationsProvider: FunctionalComponent<{
+    vertical?: ToastsDisplayPlacementVertical;
+    horizontal?: ToastsDisplayPlacementHorizontal;
+    absolute?: boolean;
+    to?: string;
+}>;
 
 // @public (undocumented)
 export const SSelect: DefineComponent<{}, {}, any>;
@@ -203,13 +266,114 @@ export const SSelectInput: DefineComponent<{}, {}, any>;
 export const SSelectOption: DefineComponent<{}, {}, any>;
 
 // @public (undocumented)
+export const SToastsDisplay: DefineComponent<{}, {}, any>;
+
+// @public (undocumented)
+export const SToastsProvider: DefineComponent<    {
+apiKey: {
+type: PropType<ProvideKey | ProvideKey[]>;
+default: null;
+};
+}, () => VNode<RendererNode, RendererElement, {
+[key: string]: any;
+}>[] | undefined, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+apiKey?: unknown;
+} & {
+apiKey: ProvideKey | ProvideKey[];
+} & {}>, {
+apiKey: ProvideKey | ProvideKey[];
+}>;
+
+// @public (undocumented)
+export const SUseNotification: DefineComponent<    {
+show: BooleanConstructor;
+title: StringConstructor;
+type: {
+type: PropType<NotificationType>;
+default: NotificationType;
+};
+timeout: {
+type: NumberConstructor;
+default: number;
+};
+showCloseBtn: BooleanConstructor;
+description: StringConstructor;
+}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "click:close" | "timeout")[], "timeout" | "update:show" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+show?: unknown;
+title?: unknown;
+type?: unknown;
+timeout?: unknown;
+showCloseBtn?: unknown;
+description?: unknown;
+} & {
+type: NotificationType;
+timeout: number;
+showCloseBtn: boolean;
+show: boolean;
+} & {
+description?: string | undefined;
+title?: string | undefined;
+}> & {
+"onClick:close"?: ((...args: any[]) => any) | undefined;
+onTimeout?: ((...args: any[]) => any) | undefined;
+"onUpdate:show"?: ((...args: any[]) => any) | undefined;
+}, {
+type: NotificationType;
+timeout: number;
+showCloseBtn: boolean;
+show: boolean;
+}>;
+
+// @public (undocumented)
+export type ToastRegisterFn = (params: ToastRegisterParams) => ToastUnregisterFn;
+
+// @public (undocumented)
+export interface ToastRegisterParams {
+    // (undocumented)
+    slot: Slot | FunctionalComponent;
+}
+
+// @public (undocumented)
+export const TOASTS_API_KEY: InjectionKey<ToastsApi>;
+
+// @public (undocumented)
+export interface ToastsApi {
+    // (undocumented)
+    register: ToastRegisterFn;
+    // (undocumented)
+    toasts: DeepReadonly<Array<[key: number, toast: RegisteredToast]>>;
+}
+
+// @public (undocumented)
+export type ToastsDisplayPlacementHorizontal = 'left' | 'right' | 'center';
+
+// @public (undocumented)
+export type ToastsDisplayPlacementVertical = 'top' | 'bottom';
+
+// @public (undocumented)
+export type ToastUnregisterFn = () => void;
+
+// @public (undocumented)
 export function useDesignSystem(): ComputedRef<DesignSystem>;
 
 // @public (undocumented)
 export function useModalApi(): ModalApi;
 
 // @public (undocumented)
+export function useNotifications(): UseNotificationsReturn;
+
+// @public (undocumented)
+export interface UseNotificationsReturn {
+    // (undocumented)
+    show: (params: ShowNotificationParams) => ShowNotificationReturn;
+}
+
+// @public (undocumented)
 export function useSelectApi<T = any>(): SelectApi<T>;
+
+// Warnings were encountered during analysis:
+//
+// dist-ts/src/components/Toasts/SToastsProvider.d.ts:8:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts
 
 // (No @packageDocumentation comment for this package)
 
