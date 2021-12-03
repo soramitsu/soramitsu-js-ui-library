@@ -113,9 +113,9 @@ export default class STabs extends Mixins(BorderRadiusMixin, DesignSystemInject)
     if (this.designSystemClass) {
       cssClasses.push(this.designSystemClass)
     }
-    // neu tabs implemented only with TabsType.ROUNDED type
-    if (this.isNeumorphic || (this.type === TabsType.ROUNDED && ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position))) {
-      cssClasses.push('s-rounded')
+    // neu tabs implemented only with TabsType.ROUNDED or TabsType.CARD types
+    if (this.isNeumorphic || ([TabsType.ROUNDED, TabsType.CARD].includes(this.type) && ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position))) {
+      cssClasses.push(`s-${this.type}`)
     } else if (this.type === TabsType.ACCENT_ROUNDED && ([TabsPosition.TOP, TabsPosition.BOTTOM] as Array<string>).includes(this.position)) {
       cssClasses.push('s-accent-rounded')
     }
