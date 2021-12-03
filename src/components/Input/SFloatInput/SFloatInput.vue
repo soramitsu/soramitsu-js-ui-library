@@ -94,17 +94,11 @@ export default class SFloatInput extends Vue {
   }
 
   async handleInput (value: string): Promise<void> {
-    if (this.hasLocaleString) {
-      // save selection position to update it later in new formatted value
-      this.saveSelectionPosition(value)
-      // Cleanup value's format
-      value = value.replace(new RegExp('\\' + this.delimiters.thousand, 'g'), '')
-      if (this.delimiters.decimal !== DEFAULT_DECIMAL_DELIMITER) {
-        value = value.replace(this.delimiters.decimal, DEFAULT_DECIMAL_DELIMITER)
-      }
-    }
+    // save selection position to update it later in new formatted value
+    this.saveSelectionPosition(value)
 
     const newValue = [
+      (v) => this.normalizeDelimeters(v),
       (v) => this.formatNumberField(v, this.decimals),
       (v) => isNumberLikeValue(v) ? v : DEFAULT_VALUE,
       (v) => this.checkValueForExtremum(v)
@@ -112,10 +106,8 @@ export default class SFloatInput extends Vue {
 
     this.onInput(newValue)
 
-    if (this.hasLocaleString) {
-      await this.$nextTick()
-      this.updateSelectionPosition()
-    }
+    await this.$nextTick()
+    this.updateSelectionPosition()
   }
 
   onBlur (event: Event): void {
@@ -156,19 +148,35 @@ export default class SFloatInput extends Vue {
     return value
   }
 
+  private normalizeDelimeters (value: string): string {
+    const formatted = value.replace(new RegExp('\\' + this.delimiters.thousand, 'g'), '')
+
+    if (this.delimiters.decimal !== DEFAULT_DECIMAL_DELIMITER) {
+      return formatted.replace(this.delimiters.decimal, DEFAULT_DECIMAL_DELIMITER)
+    }
+
+    return formatted
+  }
+
   private formatNumberField (value: string, decimals: number): string {
     if (!['string', 'number'].includes(typeof value)) return value
 
+    // remove non digits & decimal delimeter symbols
     let formatted = String(value).replace(new RegExp('[^\\d' + DEFAULT_DECIMAL_DELIMITER + ']', 'g'), '')
-    const decimalDelimiterIndex = formatted.indexOf(DEFAULT_DECIMAL_DELIMITER)
+
+    // remove non significant leading zeros
+    if (/^0+/.test(formatted) && formatted.indexOf(DEFAULT_DECIMAL_DELIMITER) !== -1) {
+      formatted = formatted.replace(/^0+(\d)/, '$1')
+    }
 
     // Add prefix zero if needed
-    if (decimalDelimiterIndex === 0) {
+    if (formatted.indexOf(DEFAULT_DECIMAL_DELIMITER) === 0) {
       formatted = '0' + formatted
     }
 
     // Avoid several decimal delimiters
     if ((value.match(new RegExp(`\\${DEFAULT_DECIMAL_DELIMITER}`, 'g')) || []).length > 1) {
+      const decimalDelimiterIndex = formatted.indexOf(DEFAULT_DECIMAL_DELIMITER)
       formatted = formatted.substring(0, decimalDelimiterIndex + 1) + formatted.substring(decimalDelimiterIndex + 1).replace(DEFAULT_DECIMAL_DELIMITER, '')
     }
 
