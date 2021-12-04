@@ -99,7 +99,7 @@ export interface UseModalVisibilityReturn {
    * There is a corner case: when `eager` is enabled and modal renders with v-if but not with v-show, Transition
    * component fires appear transition i.e. enter transition. It violates visibility invariant.
    *
-   * To solve this, this flag will be `false` when `eager` and initial show it `false`.
+   * To solve this, this flag will be `false` when `eager` is true and initial show is `false`.
    *
    * Btw, issue:
    * https://github.com/vuejs/vue-next/issues/4845

@@ -3,8 +3,7 @@ import { SelectSize, SelectOption } from './types'
 import { useSelectModel } from './tools'
 import { SelectApi, SELECT_API_KEY } from './api'
 import { and } from '@vueuse/core'
-import { usePopper } from '@/composables/popper'
-import { useConditionalScope } from '@/composables/conditional-scope'
+import { SPopover } from '@/components/Popover'
 
 const props = withDefaults(
   defineProps<{
@@ -66,31 +65,7 @@ const modeling = useSelectModel({
   options,
 })
 
-const popperRef = templateRef<HTMLDivElement | null>('popperRef')
-const popper = templateRef<HTMLDivElement | null>('popper')
-
-const { active: popperActive } = usePopper({
-  popperElem: popper,
-  referenceElem: popperRef,
-  placement: 'bottom-start',
-  active: true,
-  distance: 4,
-})
-
 const [showPopper, togglePopper] = useToggle(false)
-
-useConditionalScope(showPopper, () => {
-  onClickOutside(
-    popper,
-    (e) => {
-      const isClickInsideOfControlSlot = e.composedPath().includes(unrefElement(popperRef) as any)
-      if (!isClickInsideOfControlSlot) {
-        togglePopper(false)
-      }
-    },
-    {},
-  )
-})
 
 // close popper if select is disabled
 whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
@@ -111,17 +86,32 @@ provide(SELECT_API_KEY, api)
 
 <template>
   <div>
-    <div ref="popperRef">
-      <slot name="control" />
-    </div>
-
-    <div ref="popper">
-      <Transition :name="dropdownTransitionName">
-        <div v-show="showPopper">
-          <slot name="dropdown" />
+    <SPopover
+      v-model:show="showPopper"
+      placement="bottom-start"
+      trigger="manual"
+      distance="4"
+      @click-outside="togglePopper(false)"
+    >
+      <template #trigger>
+        <div>
+          <slot name="control" />
         </div>
-      </Transition>
-    </div>
+      </template>
+
+      <template #popper="{ show, instance }">
+        <div>
+          <Transition
+            :name="dropdownTransitionName"
+            @before-enter="() => instance.update()"
+          >
+            <div v-show="show">
+              <slot name="dropdown" />
+            </div>
+          </Transition>
+        </div>
+      </template>
+    </SPopover>
   </div>
 </template>
 
