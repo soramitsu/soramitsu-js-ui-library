@@ -15,6 +15,7 @@ import { EmitsOptions } from 'vue';
 import { FocusTrap } from 'focus-trap';
 import { FunctionalComponent } from 'vue';
 import { InjectionKey } from 'vue';
+import { Instance } from '@popperjs/core';
 import type { JSONEditorOptions } from 'jsoneditor';
 import { MaybeRef } from '@vueuse/core';
 import { Options } from 'focus-trap';
@@ -146,6 +147,17 @@ export enum NotificationType {
 
 // @public (undocumented)
 export function plugin(): Plugin_2;
+
+// @public (undocumented)
+export const POPOVER_API_KEY: InjectionKey<PopoverApi>;
+
+// @public (undocumented)
+export interface PopoverApi {
+    addPopperRefOverride: (elem: HTMLElement) => void;
+    deletePopperRefOverride: (elem: HTMLElement) => void;
+    popper: Instance | null;
+    show: boolean;
+}
 
 // @public (undocumented)
 export type RegisteredToast = ToastRegisterParams;
@@ -896,6 +908,9 @@ export interface UseNotificationsReturn {
     // (undocumented)
     show: (params: ShowNotificationParams) => ShowNotificationReturn;
 }
+
+// @public (undocumented)
+export const usePopoverApi: () => PopoverApi;
 
 // @public (undocumented)
 export function useSelectApi<T = any>(): SelectApi<T>;
