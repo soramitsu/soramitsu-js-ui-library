@@ -28,23 +28,42 @@ const { wrapperIf, wrapperShow, contentIf, contentShow, transitionProps } = useW
 function onEnter() {
   api.popper?.update()
 }
+
+const wrapper = templateRef('wrapper')
+const wrapperNormalized = eagerComputed(() => unrefElement(wrapper) as null | HTMLDivElement)
+watch(wrapperNormalized, (el, oldEl) => {
+  if (oldEl) api.deletePopperRefOverride(oldEl)
+  if (el) api.addPopperRefOverride(el)
+})
+
+onScopeDispose(() => {
+  const el = wrapperNormalized.value
+  el && api.deletePopperRefOverride(el)
+})
 </script>
 
 <template>
   <div
     v-if="wrapperIf"
     v-show="wrapperShow"
+    ref="wrapper"
   >
     <Transition
       v-bind="mergeProps($attrs, transitionProps)"
       @enter="onEnter"
     >
-      <div
+      <span
         v-if="contentIf"
         v-show="contentShow"
       >
         <slot />
-      </div>
+      </span>
     </Transition>
   </div>
 </template>
+
+<style lang="scss" scoped>
+span {
+  display: inline-block;
+}
+</style>

@@ -310,6 +310,29 @@ describe('SPopoverWrappedTransition', () => {
       findTrigger().click()
       findPopper().should('not.be.visible')
     })
+
+    it('Popper is created in non-eager mode', () => {
+      mount({
+        template: `
+          <SPopover
+            trigger="click"
+          >
+            <template #trigger>
+              <button>trigger</button>
+            </template>
+
+            <template #popper="{ popper }">
+              <SPopoverWrappedTransition>
+                <span>Popper: {{ !!popper }}</span>
+              </SPopoverWrappedTransition>
+            </template>
+          </SPopover>
+        `,
+      })
+
+      cy.contains('trigger').click()
+      cy.contains('Popper: true')
+    })
   })
 
   it('Passing props & events to transition component itself')

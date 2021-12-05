@@ -1,8 +1,9 @@
 import { Ref, cloneVNode, PropType } from 'vue'
-import { Placement, placements } from '@popperjs/core'
+import { Placement, placements, Instance } from '@popperjs/core'
 import { not, or } from '@vueuse/core'
 import { usePopper } from '@/composables/popper'
 import { PopoverApi, POPOVER_API_KEY } from './api'
+import { Except } from 'type-fest'
 
 function useDelayNumberGreaterThanOrEqualToZero(reactiveGetter: () => string | number): Ref<number> {
   return computed(() => {
@@ -42,15 +43,16 @@ function useDelayedShow(show: Ref<boolean>, delays: { show: Ref<number>; hide: R
   return delayed
 }
 
-function templateElementRef(name: string) {
-  const tmp = templateRef(name)
-  const elem = eagerComputed(() => {
-    const el = unrefElement(tmp)
-    if (!el) return null
-    if (el.nodeType !== Node.ELEMENT_NODE) return null
-    return el
+function createSanitizedTemplateRef(): { rawRef: Ref<any>; sanitizedRef: Ref<null | HTMLElement> } {
+  const rawRef = ref(null)
+
+  const sanitizedRef = eagerComputed(() => {
+    const el = unrefElement(rawRef)
+    if (el && el instanceof HTMLElement) return el
+    return null
   })
-  return elem
+
+  return { rawRef, sanitizedRef }
 }
 
 function useElHover(elemRef: Ref<null | Element>): {
@@ -74,6 +76,16 @@ function useElHover(elemRef: Ref<null | Element>): {
       },
     },
   }
+}
+
+function defineReadonlyApi(
+  raw: {
+    show: Ref<boolean>
+    popper: Ref<Instance | null>
+  } & Except<PopoverApi, 'show' | 'popper'>,
+): PopoverApi {
+  const api: PopoverApi = reactive(raw)
+  return readonly(api) as PopoverApi
 }
 
 /**
@@ -125,12 +137,24 @@ export default defineComponent({
     const skidding = useNumberCast(() => props.skidding)
     const distance = useNumberCast(() => props.distance)
 
-    const triggerRef = templateElementRef('trigger')
-    const popperRef = templateElementRef('popper')
+    const { rawRef: triggerRawRef, sanitizedRef: triggerRef } = createSanitizedTemplateRef()
+    const { rawRef: popperRawRef, sanitizedRef: popperNativeRef } = createSanitizedTemplateRef()
+
+    // popper ref overrides for edge cases
+    const popperRefOverrides = reactive(new Set<HTMLElement>())
+    const somePopperRefOverride = computed(() => {
+      if (popperRefOverrides.size) {
+        // just return first entry
+        // eslint-disable-next-line no-unreachable-loop
+        for (const i of popperRefOverrides) return i
+      }
+      return null
+    })
+    const popperRef = eagerComputed(() => somePopperRefOverride.value || popperNativeRef.value)
 
     const { instance } = usePopper({
-      referenceElem: triggerRef as Ref<null | Element>,
-      popperElem: popperRef as Ref<null | HTMLElement>,
+      referenceElem: triggerRef,
+      popperElem: popperRef,
       options: reactive({
         placement: computed(() => props.placement),
         modifiers: [
@@ -177,12 +201,12 @@ export default defineComponent({
       }
     })
 
-    const api = readonly(
-      reactive({
-        show: showFinal,
-        popper: instance,
-      }) as PopoverApi,
-    ) as PopoverApi
+    const api = defineReadonlyApi({
+      show: showFinal,
+      popper: instance,
+      addPopperRefOverride: (el) => popperRefOverrides.add(el),
+      deletePopperRefOverride: (el) => popperRefOverrides.delete(el),
+    })
 
     provide(POPOVER_API_KEY, api)
 
@@ -219,7 +243,7 @@ export default defineComponent({
         cloneVNode(
           trigger,
           {
-            ref: 'trigger',
+            ref: triggerRawRef,
             ...triggerHoverListeners,
             onClick: onTriggerClick,
           },
@@ -229,7 +253,7 @@ export default defineComponent({
           cloneVNode(
             popper,
             {
-              ref: 'popper',
+              ref: popperRawRef,
               ...popperHoverListeners,
             },
             true,
