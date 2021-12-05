@@ -3,7 +3,7 @@ import { SelectSize, SelectOption } from './types'
 import { useSelectModel } from './tools'
 import { SelectApi, SELECT_API_KEY } from './api'
 import { and } from '@vueuse/core'
-import { SPopover } from '@/components/Popover'
+import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 
 const props = withDefaults(
   defineProps<{
@@ -30,11 +30,6 @@ const props = withDefaults(
     mandatory?: boolean
 
     /**
-     * @default 's-select-dropdown-transition'
-     */
-    dropdownTransitionName?: string
-
-    /**
      * TODO
      */
     syncMenuAndInputWidths?: boolean
@@ -45,7 +40,6 @@ const props = withDefaults(
     modelValue: null,
     multiple: false,
     disabled: false,
-    dropdownTransitionName: 's-select-dropdown-transition',
     syncMenuAndInputWidths: false,
   },
 )
@@ -99,17 +93,13 @@ provide(SELECT_API_KEY, api)
         </div>
       </template>
 
-      <template #popper="{ show, instance }">
-        <div>
-          <Transition
-            :name="dropdownTransitionName"
-            @before-enter="() => instance.update()"
-          >
-            <div v-show="show">
-              <slot name="dropdown" />
-            </div>
-          </Transition>
-        </div>
+      <template #popper>
+        <SPopoverWrappedTransition
+          name="s-select-dropdown-transition"
+          eager
+        >
+          <slot name="dropdown" />
+        </SPopoverWrappedTransition>
       </template>
     </SPopover>
   </div>

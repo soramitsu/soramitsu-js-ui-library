@@ -1,10 +1,11 @@
-import { SPopover } from '@/components/Popover'
+import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
+import { usePopoverApi } from '@/components/Popover/api'
 import { mount } from '@cypress/vue'
 import { Instance } from '@popperjs/core'
 import { config } from '@vue/test-utils'
 
 before(() => {
-  config.global.components = { SPopover }
+  config.global.components = { SPopover, SPopoverWrappedTransition }
   config.global.stubs = { transition: false }
 })
 
@@ -211,30 +212,109 @@ describe('Elements binding', () => {
   })
 })
 
-it('Popper instance is available inside of "popper" slot', () => {
-  mount({
-    setup() {
-      const checkInstance = (x: unknown): x is Instance => !!x && !!(x as Instance).state && !!(x as Instance).update
+describe('Popper API', () => {
+  it('Popper instance is available inside of "popper" slot', () => {
+    mount({
+      setup() {
+        const checkInstance = (x: unknown): x is Instance => !!x && !!(x as Instance).state && !!(x as Instance).update
 
-      return { checkInstance }
-    },
-    template: `
-      <SPopover trigger="click">
-        <template #trigger>
-          <button>trigger</button>
-        </template>
+        return { checkInstance }
+      },
+      template: `
+        <SPopover trigger="click">
+          <template #trigger>
+            <button>trigger</button>
+          </template>
+  
+          <template #popper="{ show, popper }">
+            <span v-if="show">
+              Instance: {{ checkInstance(popper) }}
+            </span>
+          </template>
+        </SPopover>
+      `,
+    })
 
-        <template #popper="{ show, instance }">
-          <span v-if="show">
-            Instance: {{ checkInstance(instance) }}
-          </span>
-        </template>
-      </SPopover>
-    `,
+    cy.get('button').click()
+    cy.contains('Instance: true')
   })
 
-  cy.get('button').click()
-  cy.contains('Instance: true')
+  it('Popper API is provided to children slots', () => {
+    mount({
+      components: {
+        Check: {
+          setup() {
+            usePopoverApi()
+            return () => null
+          },
+        },
+      },
+      template: `
+        <SPopover>
+          <template #trigger><Check/></template>
+          <template #popper><Check/></template>
+        </SPopover>
+      `,
+    })
+  })
+})
+
+describe('SPopoverWrappedTransition', () => {
+  describe('Eagering', () => {
+    function mountFactory(params?: { eager?: boolean }) {
+      mount({
+        setup() {
+          return {
+            eager: params?.eager ?? false,
+          }
+        },
+        template: `
+          <SPopover
+            trigger="click"
+          >
+            <template #trigger>
+              <button>trigger</button>
+            </template>
+  
+            <template #popper>
+              <SPopoverWrappedTransition
+                :eager="eager"
+              >
+                <span>popper</span>
+              </SPopoverWrappedTransition>
+            </template>
+          </SPopover>
+        `,
+      })
+    }
+
+    const findTrigger = () => cy.contains('trigger')
+    const findPopper = () => cy.contains('popper')
+
+    it('Non-eager mode', () => {
+      mountFactory()
+
+      findPopper().should('not.exist')
+      findTrigger().click()
+      findPopper().should('exist')
+      findTrigger().click()
+      findPopper().should('not.exist')
+    })
+
+    it('Eager mode', () => {
+      mountFactory({ eager: true })
+
+      findPopper().and('not.be.visible')
+      findTrigger().click()
+      findPopper().should('be.visible')
+      findTrigger().click()
+      findPopper().should('not.be.visible')
+    })
+  })
+
+  it('Passing props & events to transition component itself')
+  it('Binding class, style & attrs to the wrapper element')
+  it('Binding class, style & attrs to the content element')
 })
 
 it('Throws an error if no trigger slot')

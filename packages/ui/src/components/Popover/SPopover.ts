@@ -1,9 +1,10 @@
 import { Ref, cloneVNode, PropType } from 'vue'
-import { Placement, placements, Instance } from '@popperjs/core'
+import { Placement, placements } from '@popperjs/core'
 import { not, or } from '@vueuse/core'
 import { usePopper } from '@/composables/popper'
+import { PopoverApi, POPOVER_API_KEY } from './api'
 
-function useNormalizedDelay(reactiveGetter: () => string | number): Ref<number> {
+function useDelayNumberGreaterThanOrEqualToZero(reactiveGetter: () => string | number): Ref<number> {
   return computed(() => {
     const val = reactiveGetter()
     const num = typeof val === 'number' ? val : Number(val)
@@ -11,7 +12,7 @@ function useNormalizedDelay(reactiveGetter: () => string | number): Ref<number> 
   })
 }
 
-function useNormalizedNum(reactiveGetter: () => string | number): Ref<number> {
+function useNumberCast(reactiveGetter: () => string | number): Ref<number> {
   return computed(() => Number(reactiveGetter()))
 }
 
@@ -75,17 +76,6 @@ function useElHover(elemRef: Ref<null | Element>): {
   }
 }
 
-export interface SPopoverPopperSlotBindings {
-  /**
-   * Should popper be shown
-   */
-  show: boolean
-  /**
-   * Current popper instance
-   */
-  instance: Instance | null
-}
-
 /**
  * HOC-wrapper for `@popperjs/core` with many convenient features out of the box:
  *
@@ -130,10 +120,10 @@ export default defineComponent({
   },
   emits: ['update:show', 'click-outside'],
   setup(props, { slots, emit }) {
-    const showDelay = useNormalizedDelay(() => props.showDelay)
-    const hideDelay = useNormalizedDelay(() => props.hideDelay)
-    const skidding = useNormalizedNum(() => props.skidding)
-    const distance = useNormalizedNum(() => props.distance)
+    const showDelay = useDelayNumberGreaterThanOrEqualToZero(() => props.showDelay)
+    const hideDelay = useDelayNumberGreaterThanOrEqualToZero(() => props.hideDelay)
+    const skidding = useNumberCast(() => props.skidding)
+    const distance = useNumberCast(() => props.distance)
 
     const triggerRef = templateElementRef('trigger')
     const popperRef = templateElementRef('popper')
@@ -160,9 +150,16 @@ export default defineComponent({
     const { hover: popperHover, listeners: popperHoverListeners } = useElHover(popperRef)
     const sharedHover = or(triggerHover, popperHover)
 
-    watch([() => props.trigger, sharedHover], ([triggerType, hoverVal]) => {
-      if (triggerType === 'hover') show.value = hoverVal
-    })
+    debouncedWatch(
+      () => props.trigger === 'hover' && [sharedHover.value],
+      (maybeHover) => {
+        if (maybeHover) {
+          const [val] = maybeHover
+          show.value = val
+        }
+      },
+      { debounce: 50 },
+    )
 
     function onTriggerClick() {
       if (props.trigger === 'click') {
@@ -180,10 +177,14 @@ export default defineComponent({
       }
     })
 
-    const popperSlotBindings: SPopoverPopperSlotBindings = reactive({
-      show: showFinal,
-      instance,
-    })
+    const api = readonly(
+      reactive({
+        show: showFinal,
+        popper: instance,
+      }) as PopoverApi,
+    ) as PopoverApi
+
+    provide(POPOVER_API_KEY, api)
 
     return () => {
       let trigger
@@ -196,7 +197,7 @@ export default defineComponent({
         if (nodes.length !== 1) {
           throw new Error('"trigger" slot should render exact 1 element')
         }
-        trigger = nodes[0]
+        ;[trigger] = nodes
       }
 
       let popper
@@ -204,11 +205,11 @@ export default defineComponent({
       if (!slots.popper) {
         popper = null
       } else {
-        const nodes = slots.popper(popperSlotBindings)
+        const nodes = slots.popper(api)
         if (!nodes.length) {
           popper = null
         } else if (nodes.length === 1) {
-          popper = nodes[0]
+          ;[popper] = nodes
         } else {
           throw new Error('"popper" slot should return either nothing either the only 1 element')
         }
