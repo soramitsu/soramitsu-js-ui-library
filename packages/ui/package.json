@@ -55,7 +55,7 @@
     "@vitejs/plugin-vue": "^1.8.1",
     "@vitejs/plugin-vue-jsx": "^1.2.0",
     "@vue/compiler-sfc": "3.2.22",
-    "@vue/test-utils": "2.0.0-rc.16",
+    "@vue/test-utils": "2.0.0-rc.17",
     "cypress": "^8.4.1",
     "cypress-plugin-snapshots": "^1.4.4",
     "del-cli": "^4.0.1",
