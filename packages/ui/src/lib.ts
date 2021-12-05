@@ -5,6 +5,7 @@ export * from './components/Modal'
 export * from './components/Select'
 export * from './components/Notifications'
 export * from './components/Toasts'
+export * from './components/Popover'
 
 import { Plugin } from 'vue'
 import { SButton } from './components/Button'
@@ -14,6 +15,7 @@ import { SModal, SModalCard } from './components/Modal'
 import { SSelect, SDropdown } from './components/Select'
 import { SToastsDisplay, SToastsProvider } from './components/Toasts'
 import { SNotificationBody, SNotificationsProvider, SUseNotification } from './components/Notifications'
+import { SPopover, SPopoverWrappedTransition } from './components/Popover'
 
 export function plugin(): Plugin {
   return (app) => {
@@ -30,5 +32,7 @@ export function plugin(): Plugin {
     app.component('SNotificationBody', SNotificationBody)
     app.component('SNotificationsProvider', SNotificationsProvider)
     app.component('SUseNotification', SUseNotification)
+    app.component('SPopover', SPopover)
+    app.component('SPopoverWrappedTransition', SPopoverWrappedTransition)
   }
 }
