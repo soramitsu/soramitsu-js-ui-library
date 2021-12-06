@@ -1,5 +1,8 @@
 $neu-tab-shadow: var(--s-shadow-element-pressed);
 $neu-tabs-shadow: var(--s-shadow-element);
+$neu-card-tabs-item-padding: var(--s-size-mini);
+$neu-card-tabs-item-shadow: -5px -5px 15px var(--s-shadow-color-light-dark), 1px 1px 15px var(--s-shadow-color-dark), inset 0px 0px 8px var(--s-shadow-color-dark);
+$neu-card-tabs-item-shadow-pressed: -5px -5px 15px var(--s-shadow-color-light-dark), 1px 1px 15px var(--s-shadow-color-dark);
 
 :root {
   --neu-tab-shadow: #{$neu-tab-shadow};
@@ -23,7 +26,7 @@ $neu-tabs-shadow: var(--s-shadow-element);
     }
   }
 
-  &.s-rounded {
+  &.s-rounded, &.s-card {
     .el-tabs {
       &__nav-wrap {
         background-color: var(--s-color-base-background);
@@ -48,8 +51,48 @@ $neu-tabs-shadow: var(--s-shadow-element);
           }
         }
       }
+    }
+  }
+
+  &.s-rounded {
+    .el-tabs {
       &__item {
         text-transform: uppercase;
+      }
+    }
+  }
+
+  &.s-card {
+    .el-tabs {
+      &__nav-wrap {
+        .el-tabs__item {
+          box-shadow: $neu-card-tabs-item-shadow;
+          &.is-active {
+            box-shadow: $neu-card-tabs-item-shadow-pressed;
+          }
+          &.is-active, &:not(.is-active):hover, &:not(.is-active):focus.is-focus {
+            color: var(--s-color-base-content-primary);
+          }
+        }
+      }
+      &__item {
+        text-transform: capitalize;
+        text-align: center;
+        padding-right: calc(#{$neu-card-tabs-item-padding} / 2);
+        padding-left: calc(#{$neu-card-tabs-item-padding} / 2);
+      }
+      &__active-bar {
+        &::after {
+          content: "";
+          position: absolute;
+          display: block;
+          height: 2px;
+          width: calc(100% + calc(#{$neu-card-tabs-item-padding}));
+          left: 0;
+          bottom: 0;
+          background-color: inherit;
+          margin-left: calc(#{$neu-card-tabs-item-padding} / -2);
+        }
       }
     }
   }
