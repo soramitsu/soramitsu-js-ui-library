@@ -31,6 +31,8 @@
           :tabindex="tabindex"
           :prefix-icon="prefix"
           :suffix-icon="suffix"
+          :rows="rows"
+          :autosize="autosize"
           @input="handleInput"
           @change="handleChange"
           @blur="handleBlur"
@@ -166,6 +168,14 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
    * Field size, "big" by default
    */
   @Prop({ default: InputSize.BIG, type: String }) readonly size!: InputSize
+  /**
+   * Rows for textarea
+   */
+  @Prop({ default: 2, type: Number }) readonly rows!: number
+  /**
+   * Autosize for textarea
+   */
+  @Prop({ default: {}, type: Object }) readonly autosize!: object
 
   @Ref('el-input') input!: ElInput
   @Ref('file') file!: HTMLElement
