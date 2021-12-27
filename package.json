@@ -9,7 +9,8 @@
     "build": "run-s build:theme build:ui",
     "build:theme": "yarn --cwd packages/theme build",
     "build:ui": "yarn --cwd packages/ui build",
-    "lint:check": "eslint ."
+    "lint:check": "eslint .",
+    "publish-workspaces": "lerna publish from-package"
   },
   "workspaces": [
     "packages/*"

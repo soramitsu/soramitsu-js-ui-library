@@ -5,9 +5,6 @@ def pipeline = new org.js.LibPipeline(
     packageManager: 'yarn',
     testCmds: ['yarn test:all'],
     buildDockerImage: 'build-tools/node:14-ubuntu-cypress',
-    // todo
-    // pushCmds: [],
-    // npmRegistries: ['': 'npm-soramitsu-admin'],
-    // npmLoginEmail:'admin@soramitsu.co.jp'
-)
+    pushCmds: ['yarn publish-workspaces --no-verify-access'],
+    npmLoginEmail:'admin@soramitsu.co.jp')
 pipeline.runPipeline()
