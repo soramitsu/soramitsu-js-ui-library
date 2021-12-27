@@ -4,6 +4,9 @@
   "main": "dist/lib.cjs.js",
   "module": "dist/lib.es.js",
   "types": "dist/lib.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist"
   ],
