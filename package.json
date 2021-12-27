@@ -1,5 +1,6 @@
 {
   "private": true,
+  "license": "Apache-2.0",
   "scripts": {
     "sb:serve": "yarn --cwd packages/ui sb:serve",
     "sb:build": "yarn --cwd packages/ui sb:build",
