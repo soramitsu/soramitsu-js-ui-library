@@ -15,7 +15,7 @@ defineProps<{
 </script>
 
 <template>
-  <SSelectBase v-bind="{ ...$attrs, ...$props }">
+  <SSelectBase v-bind="{ ...$attrs, ...$props } as any">
     <template #control>
       <SSelectInput>
         <template #label="binding">

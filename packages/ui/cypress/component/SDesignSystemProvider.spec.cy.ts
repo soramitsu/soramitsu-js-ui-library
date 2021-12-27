@@ -1,7 +1,5 @@
-import { defineComponent, h } from 'vue'
 import { mount } from '@cypress/vue'
-import { DesignSystem, useDesignSystem } from '@/state/design-system'
-import SDesignSystemProvider from './SDesignSystemProvider.vue'
+import { DesignSystem, useDesignSystem, SDesignSystemProvider } from '@/lib'
 
 const Checker = defineComponent({
   setup() {

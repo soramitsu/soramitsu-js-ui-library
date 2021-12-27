@@ -1,11 +1,6 @@
-import SToastsProvider from './SToastsProvider'
-import SToastsDisplay from './SToastsDisplay.vue'
-
-import { h, onScopeDispose, defineComponent, ref, reactive } from 'vue'
+import { SToastsProvider, SToastsDisplay, ToastsApi, TOASTS_API_KEY } from '@/lib'
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { useCounter, useVModel } from '@vueuse/core'
-import { ToastsApi, TOASTS_API_KEY } from './api'
 import { forceInject } from '@/util'
 
 const findRoot = () => cy.get('[data-testid=root]')
