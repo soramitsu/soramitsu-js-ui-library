@@ -1,6 +1,6 @@
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { SSelect, SSelectBase, SSelectButton, SSelectInput, SDropdown, SelectSize } from './index'
+import { SSelect, SSelectBase, SSelectButton, SSelectInput, SDropdown, SelectSize } from '@/lib'
 
 const SIZES = [SelectSize.Sm, SelectSize.Md, SelectSize.Lg, SelectSize.Xl]
 

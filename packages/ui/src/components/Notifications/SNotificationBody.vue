@@ -33,7 +33,7 @@ const ICON_TYPE_MAP: { [K in NotificationType]: Component } = {
 
 const IconViaType = computed(() => ICON_TYPE_MAP[props.type])
 
-const emit = defineEmits<(event: 'click:close' | 'timeout') => void>()
+const emit = defineEmits(['click:close', 'timeout'])
 
 function onClickClose() {
   emit('click:close')

@@ -1,7 +1,6 @@
 export * from './components/Button'
 export * from './components/Input'
 export * from './components/SDesignSystemProvider'
-export { DesignSystem, useDesignSystem } from './state/design-system'
 export * from './components/Modal'
 export * from './components/Select'
 export * from './components/Notifications'

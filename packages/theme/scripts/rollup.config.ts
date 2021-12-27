@@ -3,7 +3,7 @@ import rollupPluginDts from 'rollup-plugin-dts'
 
 export default defineConfig([
   {
-    input: 'dist-ts/src/lib.js',
+    input: 'dist-ts/lib.js',
     external: [/^windicss/],
     output: [
       {
@@ -17,7 +17,7 @@ export default defineConfig([
     ],
   },
   {
-    input: 'dist-ts/src/lib.d.ts',
+    input: 'dist-ts/lib.d.ts',
     plugins: [rollupPluginDts()],
     output: {
       file: 'dist/lib.d.ts',
