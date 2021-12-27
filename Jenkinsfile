@@ -1,10 +1,11 @@
-@Library('jenkins-library') _
-
+@Library('jenkins-library')
 def pipeline = new org.js.LibPipeline(
-    steps: this,
-    packageManager: 'yarn',
-    testCmds: ['yarn test:all'],
+    steps:             this,
+    packageManager:   'yarn',
     buildDockerImage: 'build-tools/node:14-ubuntu-cypress',
-    pushCmds: ['yarn publish-workspaces --no-verify-access'],
-    npmLoginEmail:'admin@soramitsu.co.jp')
+    npmLoginEmail:    'admin@soramitsu.co.jp',
+    testCmds:         ['yarn test:all'],
+    pushCmds:         ['yarn publish-workspaces --no-verify-access'],
+    libPushBranches:  ['master', 'next']
+)
 pipeline.runPipeline()
