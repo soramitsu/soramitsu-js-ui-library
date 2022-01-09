@@ -1,5 +1,5 @@
 <template>
-  <div class="s-col" :class="computedClasses" :style="computedStyles">
+  <div class="s-col" :class="computedClasses">
     <slot></slot>
   </div>
 </template>
@@ -80,23 +80,6 @@ export default class SCol extends Vue {
       }
     }
     return cssClasses
-  }
-
-  get gutter (): number {
-    let parent = this.$parent as any
-    while (parent && parent.$options.name !== 'SRow') {
-      parent = parent.$parent
-    }
-    return parent ? parent.gutter : 0
-  }
-
-  get computedStyles (): object {
-    const styles = {} as any
-    if (this.gutter) {
-      styles.paddingLeft = `${this.gutter / 2}px`
-      styles.paddingRight = styles.paddingLeft
-    }
-    return styles
   }
 }
 </script>
