@@ -720,18 +720,6 @@ selected?: boolean | undefined;
 onToggle?: (() => any) | undefined;
 }, {}>;
 
-// @public
-export enum Status {
-    // (undocumented)
-    Error = "error",
-    // (undocumented)
-    Info = "info",
-    // (undocumented)
-    Success = "success",
-    // (undocumented)
-    Warning = "warning"
-}
-
 // @public (undocumented)
 export const SSpinner: DefineComponent<    {
 size: {
@@ -754,6 +742,18 @@ size: string | number;
 width: string | number;
 size: string | number;
 }>;
+
+// @public
+export enum Status {
+    // (undocumented)
+    Error = "error",
+    // (undocumented)
+    Info = "info",
+    // (undocumented)
+    Success = "success",
+    // (undocumented)
+    Warning = "warning"
+}
 
 // @public (undocumented)
 export const SToastsDisplay: DefineComponent<    {
