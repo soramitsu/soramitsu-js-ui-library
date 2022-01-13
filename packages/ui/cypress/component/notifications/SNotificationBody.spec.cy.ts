@@ -1,5 +1,5 @@
 import { mount } from '@cypress/vue'
-import { SNotificationBody, NotificationType } from '@/lib'
+import { SNotificationBody, Status } from '@/lib'
 
 const findCloseBtn = () => cy.get('[data-testid=close-btn]')
 
@@ -89,15 +89,15 @@ it('Different types', () => {
     components: { SNotificationBody },
     setup() {
       return {
-        types: Object.values(NotificationType),
+        statuses: Object.values(Status),
       }
     },
     template: `
       <div class="p-4 grid grid-cols-2 gap-4">
         <SNotificationBody
-          v-for="x in types"
+          v-for="x in statuses"
           :key="x"
-          :type="x"
+          :status="x"
           show-close-btn
         >
           <template #title>
