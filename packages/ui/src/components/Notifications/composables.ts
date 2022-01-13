@@ -1,7 +1,7 @@
 import { Slot, FunctionalComponent, h, unref } from 'vue'
 import { MaybeRef } from '@vueuse/core'
 import { NOTIFICATIONS_API_KEY } from './api'
-import { NotificationType } from './types'
+import { Status } from '@/types'
 import { forceInject } from '@/util'
 import SNotificationBody from './SNotificationBody.vue'
 
@@ -11,9 +11,9 @@ export interface ShowNotificationParams {
   description?: MaybeRef<string | undefined | null>
   descriptionSlot?: Slot | FunctionalComponent
   /**
-   * @default NotificationType.Info
+   * @default Status.Info
    */
-  type?: MaybeRef<NotificationType>
+  status?: MaybeRef<Status>
   /**
    * @default 5000
    */
@@ -52,7 +52,7 @@ export function useNotifications(): UseNotificationsReturn {
             {
               title: unref(params.title),
               description: unref(params.description),
-              type: unref(params.type),
+              status: unref(params.status),
               timeout: unref(params.timeout) ?? 5000,
               showCloseBtn: unref(params.showCloseBtn),
               'onClick:close': onClickClose,
