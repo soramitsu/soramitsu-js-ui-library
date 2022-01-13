@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const sizeNorm = eagerComputed(() => {
-  if (typeof props.size === 'number' || /^\d+$/.test(props.size)) {
+  if (typeof props.size === 'number' || !Number.isNaN(parseFloat(props.size))) {
     return `${props.size}px`
   }
   return props.size
