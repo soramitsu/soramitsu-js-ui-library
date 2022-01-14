@@ -8,6 +8,7 @@ export * from './components/Select'
 export * from './components/Notifications'
 export * from './components/Toasts'
 export * from './components/Alert'
+export * from './components/Spinner'
 export * from './components/TextField'
 
 import { Plugin } from 'vue'
@@ -19,6 +20,7 @@ import { SSelect, SDropdown } from './components/Select'
 import { SToastsDisplay, SToastsProvider } from './components/Toasts'
 import { SNotificationBody, SNotificationsProvider, SUseNotification } from './components/Notifications'
 import { SAlert } from './components/Alert'
+import { SSpinner } from './components/Spinner'
 import { STextField } from './components/TextField'
 
 export function plugin(): Plugin {
@@ -37,6 +39,7 @@ export function plugin(): Plugin {
     app.component('SNotificationsProvider', SNotificationsProvider)
     app.component('SUseNotification', SUseNotification)
     app.component('SAlert', SAlert)
+    app.component('SSpinner', SSpinner)
     app.component('STextField', STextField)
   }
 }
