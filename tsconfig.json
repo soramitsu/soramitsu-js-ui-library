@@ -7,10 +7,10 @@
     "jsx": "preserve",
     "sourceMap": false,
     "declaration": true,
-    "composite": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+    "types": []
   }
 }

@@ -251,10 +251,12 @@ export const windicssPreset: Config = {
           success: v(ThemeVars.ColorStatusSuccess),
           warning: v(ThemeVars.ColorStatusWarning),
           error: v(ThemeVars.ColorStatusError),
+          info: v(ThemeVars.ColorStatusInfo),
           background: {
             success: v(ThemeVars.ColorStatusSuccessBackground),
             warning: v(ThemeVars.ColorStatusWarningBackground),
             error: v(ThemeVars.ColorStatusErrorBackground),
+            info: v(ThemeVars.ColorStatusInfoBackground),
           },
         },
       },
@@ -274,7 +276,17 @@ export const windicssPreset: Config = {
         sora: 'Sora',
       },
 
-      // TODO shadows etc
+      boxShadow: {
+        surface: v(ThemeVars.ShadowSurface),
+        tooltip: v(ThemeVars.ShadowTooltip),
+        'token-icon': v(ThemeVars.ShadowTokenIcon),
+        tab: v(ThemeVars.ShadowTab),
+        dropdown: v(ThemeVars.ShadowDropdown),
+        'mobile-tab-bar': v(ThemeVars.ShadowMobileTapBar),
+        'mobile-side-menu': v(ThemeVars.ShadowMobileSideMenu),
+      },
+
+      // todo more
     },
   },
 }
