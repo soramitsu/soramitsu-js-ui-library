@@ -36,7 +36,7 @@ export const THEME_DEFAULT = defineThemePreset({
   [ThemeVars.ColorStatusSuccessBackground]: `#CCEDCC`,
   [ThemeVars.ColorStatusWarningBackground]: `#FFE3B8`,
   [ThemeVars.ColorStatusErrorBackground]: `#FFF9FA`,
-  [ThemeVars.ColorStatusInfoBackground]: `white`, // fixme
+  [ThemeVars.ColorStatusInfoBackground]: `#F3F6FF`,
 
   // font size
 

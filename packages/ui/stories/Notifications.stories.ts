@@ -1,5 +1,5 @@
 import { defineMeta, defineStory } from './util'
-import { SNotificationsProvider, SUseNotification, useNotifications, SNotificationBody, NotificationType } from '@/lib'
+import { SNotificationsProvider, SUseNotification, useNotifications, SNotificationBody, Status } from '@/lib'
 import { not } from '@vueuse/core'
 
 export default defineMeta({
@@ -88,7 +88,7 @@ export const ViaComposable = defineStory(() => ({
               title: 'Knock-knock',
               descriptionSlot: () => ['Do ', h('b', 'not'), ' open the door'],
               timeout: 1000 + ~~(Math.random() * 2000),
-              type: NotificationType.Warning,
+              status: Status.Warning,
             })
           },
         }
@@ -111,19 +111,19 @@ export const ViaComposable = defineStory(() => ({
 export const PureNotifucationBody = defineStory(() => ({
   components: { SNotificationBody },
   setup() {
-    const types = Object.values(NotificationType)
+    const statuses = Object.values(Status)
 
     const closed = ref(0)
     const timedOut = ref(0)
 
-    return { types, timedOut, closed }
+    return { statuses, timedOut, closed }
   },
   template: `
     <div class="grid grid-cols-2 gap-4">
       <SNotificationBody
-        v-for="(x, i) in types"
+        v-for="(x, i) in statuses"
         :key="x"
-        :type="x"
+        :status="x"
         :timeout="2000 * (i + 1)"
         :show-close-btn="closed < 10"
         @click:close="closed++"

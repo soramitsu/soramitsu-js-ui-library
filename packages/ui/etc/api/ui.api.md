@@ -26,6 +26,7 @@ import { Ref } from 'vue';
 import { RendererElement } from 'vue';
 import { RendererNode } from 'vue';
 import { Slot } from 'vue';
+import { Status as Status_2 } from '@/types';
 import { UnwrapRef } from 'vue';
 import { VNode } from 'vue';
 import { VNodeProps } from 'vue';
@@ -134,18 +135,6 @@ export interface ModalApi {
 export const NOTIFICATIONS_API_KEY: InjectionKey<ToastsApi>;
 
 // @public (undocumented)
-export enum NotificationType {
-    // (undocumented)
-    Error = "error",
-    // (undocumented)
-    Info = "info",
-    // (undocumented)
-    Success = "success",
-    // (undocumented)
-    Warning = "warning"
-}
-
-// @public (undocumented)
 export function plugin(): Plugin_2;
 
 // @public (undocumented)
@@ -161,6 +150,49 @@ export interface PopoverApi {
 
 // @public (undocumented)
 export type RegisteredToast = ToastRegisterParams;
+
+// @public (undocumented)
+export const SAlert: DefineComponent<    {
+inline: {
+type: PropType<boolean>;
+};
+status: {
+type: PropType<Status_2>;
+} & {
+default: Status_2;
+};
+showCloseBtn: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+title: {
+type: PropType<string>;
+};
+description: {
+type: PropType<string>;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"click:close": () => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+inline?: unknown;
+status?: unknown;
+showCloseBtn?: unknown;
+title?: unknown;
+description?: unknown;
+} & {
+status: Status_2;
+showCloseBtn: boolean;
+} & {
+description?: string | undefined;
+title?: string | undefined;
+inline?: boolean | undefined;
+}> & {
+"onClick:close"?: (() => any) | undefined;
+}, {
+status: Status_2;
+showCloseBtn: boolean;
+}>;
 
 // @public (undocumented)
 export const SButton: DefineComponent<    {
@@ -293,12 +325,12 @@ export interface ShowNotificationParams {
     // (undocumented)
     descriptionSlot?: Slot | FunctionalComponent;
     showCloseBtn?: MaybeRef<boolean>;
+    status?: MaybeRef<Status_2>;
     timeout?: MaybeRef<number | undefined>;
     // (undocumented)
     title?: MaybeRef<string | undefined | null>;
     // (undocumented)
     titleSlot?: Slot | FunctionalComponent;
-    type?: MaybeRef<NotificationType>;
 }
 
 // @public (undocumented)
@@ -510,10 +542,10 @@ type: PropType<string>;
 description: {
 type: PropType<string>;
 };
-type: {
-type: PropType<NotificationType>;
+status: {
+type: PropType<Status_2>;
 } & {
-default: NotificationType;
+default: Status_2;
 };
 timeout: {
 type: PropType<number>;
@@ -526,11 +558,11 @@ type: PropType<boolean>;
 }, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("timeout" | "click:close")[], "timeout" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
 title?: unknown;
 description?: unknown;
-type?: unknown;
+status?: unknown;
 timeout?: unknown;
 showCloseBtn?: unknown;
 } & {
-type: NotificationType;
+status: Status_2;
 timeout: number;
 } & {
 description?: string | undefined;
@@ -540,7 +572,7 @@ showCloseBtn?: boolean | undefined;
 onTimeout?: ((...args: any[]) => any) | undefined;
 "onClick:close"?: ((...args: any[]) => any) | undefined;
 }, {
-type: NotificationType;
+status: Status_2;
 timeout: number;
 }>;
 
@@ -769,6 +801,41 @@ onToggle?: (() => any) | undefined;
 }, {}>;
 
 // @public (undocumented)
+export const SSpinner: DefineComponent<    {
+size: {
+type: PropType<string | number>;
+} & {
+default: string;
+};
+width: {
+type: PropType<string | number>;
+} & {
+default: number;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+size?: unknown;
+width?: unknown;
+} & {
+width: string | number;
+size: string | number;
+} & {}>, {
+width: string | number;
+size: string | number;
+}>;
+
+// @public
+export enum Status {
+    // (undocumented)
+    Error = "error",
+    // (undocumented)
+    Info = "info",
+    // (undocumented)
+    Success = "success",
+    // (undocumented)
+    Warning = "warning"
+}
+
+// @public (undocumented)
 export const SToastsDisplay: DefineComponent<    {
 vertical: {
 type: PropType<ToastsDisplayPlacementVertical>;
@@ -829,9 +896,9 @@ apiKey: ProvideKey | ProvideKey[];
 export const SUseNotification: DefineComponent<    {
 show: BooleanConstructor;
 title: StringConstructor;
-type: {
-type: PropType<NotificationType>;
-default: NotificationType;
+status: {
+type: PropType<Status_2>;
+default: Status_2;
 };
 timeout: {
 type: NumberConstructor;
@@ -842,12 +909,12 @@ description: StringConstructor;
 }, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "timeout" | "click:close")[], "update:show" | "timeout" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
 show?: unknown;
 title?: unknown;
-type?: unknown;
+status?: unknown;
 timeout?: unknown;
 showCloseBtn?: unknown;
 description?: unknown;
 } & {
-type: NotificationType;
+status: Status_2;
 show: boolean;
 timeout: number;
 showCloseBtn: boolean;
@@ -859,7 +926,7 @@ title?: string | undefined;
 onTimeout?: ((...args: any[]) => any) | undefined;
 "onClick:close"?: ((...args: any[]) => any) | undefined;
 }, {
-type: NotificationType;
+status: Status_2;
 show: boolean;
 timeout: number;
 showCloseBtn: boolean;
