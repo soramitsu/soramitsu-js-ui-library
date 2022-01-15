@@ -1,12 +1,31 @@
 <script setup lang="ts">
-interface Switch {
+interface Props {
+  /**
+   * Id for matching checkbox with label
+   *
+   */
   id: string
+  /**
+   * Text label for checkbox
+   *
+   * @default ''
+   */
   label?: string
+  /**
+   * Attr specifies whether checkbox is set
+   *
+   * @default true
+   */
   checked?: boolean
+  /**
+   * Attr specfifies whether checkbox is disabled
+   *
+   * @default false
+   */
   disabled?: boolean
 }
 
-const props = withDefaults(defineProps<Switch>(), {
+const props = withDefaults(defineProps<Props>(), {
   label: '',
   checked: true,
   disabled: false,
