@@ -756,6 +756,90 @@ export enum Status {
 }
 
 // @public (undocumented)
+export const STextField: DefineComponent<    {
+modelValue: {
+type: PropType<string>;
+};
+label: {
+type: PropType<string>;
+};
+id: {
+type: PropType<string>;
+};
+password: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+noEye: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+disabled: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+counter: {
+type: PropType<string | number | boolean>;
+} & {
+default: boolean;
+};
+status: {
+type: PropType<Status_2.Success | Status_2.Warning | Status_2.Error>;
+};
+success: {
+type: PropType<boolean>;
+};
+warning: {
+type: PropType<boolean>;
+};
+error: {
+type: PropType<boolean>;
+};
+message: {
+type: PropType<string>;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: string) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+label?: unknown;
+id?: unknown;
+password?: unknown;
+noEye?: unknown;
+disabled?: unknown;
+counter?: unknown;
+status?: unknown;
+success?: unknown;
+warning?: unknown;
+error?: unknown;
+message?: unknown;
+} & {
+password: boolean;
+disabled: boolean;
+noEye: boolean;
+counter: string | number | boolean;
+} & {
+error?: boolean | undefined;
+modelValue?: string | undefined;
+id?: string | undefined;
+status?: Status_2.Success | Status_2.Warning | Status_2.Error | undefined;
+label?: string | undefined;
+success?: boolean | undefined;
+warning?: boolean | undefined;
+message?: string | undefined;
+}> & {
+"onUpdate:modelValue"?: ((value: string) => any) | undefined;
+}, {
+password: boolean;
+disabled: boolean;
+noEye: boolean;
+counter: string | number | boolean;
+}>;
+
+// @public (undocumented)
 export const SToastsDisplay: DefineComponent<    {
 vertical: {
 type: PropType<ToastsDisplayPlacementVertical>;
