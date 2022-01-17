@@ -1,74 +1,58 @@
-import { createPopper, VirtualElement, Instance, Placement } from '@popperjs/core'
-import { MaybeRef, and } from '@vueuse/core'
-import { computed, watch, unref, ref, shallowRef, onScopeDispose, Ref } from 'vue'
+import { createPopper, VirtualElement, Instance, Options } from '@popperjs/core'
+import { MaybeRef } from '@vueuse/core'
+import { computed, watch, unref, shallowRef, onScopeDispose, Ref, isReactive } from 'vue'
+
+type ElementReference = Element | VirtualElement
+type ElementPopper = HTMLElement
 
 export interface UsePopperParams {
-  referenceElem: MaybeRef<Element | VirtualElement | null>
-  popperElem: MaybeRef<HTMLElement | null>
-
-  /**
-   * Initial active value
-   * @default true
-   */
-  active?: boolean
-
-  placement?: MaybeRef<Placement>
-
-  /**
-   * https://popper.js.org/docs/v2/modifiers/offset/#skidding-1
-   */
-  skidding?: MaybeRef<number>
-
-  /**
-   * https://popper.js.org/docs/v2/modifiers/offset/#skidding-1
-   */
-  distance?: MaybeRef<number>
+  referenceElem: MaybeRef<ElementReference | null>
+  popperElem: MaybeRef<ElementPopper | null>
+  options?: MaybeRef<Partial<Options>>
+  callbackInit?: (reference: ElementReference, popper: ElementPopper) => Instance
+  callbackDestroy?: (instance: Instance) => void
 }
 
 export interface UsePopperReturn {
-  active: Ref<boolean>
+  instance: Ref<Instance | null>
 }
 
 export function usePopper(params: UsePopperParams): UsePopperReturn {
   const elemReference = computed(() => unref(params.referenceElem))
   const elemPopper = computed(() => unref(params.popperElem))
-  const placement = computed<Placement>(() => unref(params.placement ?? 'auto'))
-  const skiddingAndOffset = computed<[number, number]>(() => [unref(params.skidding) ?? 0, unref(params.distance) ?? 0])
+  const opts = params.options || {}
 
-  const bothElemsExist = and(elemReference, elemPopper)
-  const active = ref(params.active ?? true)
-  const popperShouldExist = and(bothElemsExist, active)
+  const instance = shallowRef<Instance | null>(null)
 
-  const inst = shallowRef<Instance | null>(null)
-
-  function initInstance() {
-    inst.value = createPopper(elemReference.value!, elemPopper.value!, {
-      placement: placement.value,
-      modifiers: [
-        {
-          name: 'offset',
-          options: { offset: skiddingAndOffset.value },
-        },
-      ],
-    })
+  function init(reference: ElementReference, popper: ElementPopper) {
+    instance.value = markRaw(params.callbackInit?.(reference, popper) ?? createPopper(reference, popper, unref(opts)))
   }
 
-  function disposeInstance() {
-    inst.value?.destroy()
+  function destroy() {
+    instance.value && (params.callbackDestroy ? params.callbackDestroy(instance.value) : instance.value.destroy())
   }
 
-  watch(popperShouldExist, (flag) => (flag ? initInstance() : disposeInstance()), { immediate: true })
-  onScopeDispose(disposeInstance)
+  watch(
+    [elemReference, elemPopper],
+    ([a, b]) => {
+      destroy()
+      a && b && init(a, b)
+    },
+    { immediate: true },
+  )
+  onScopeDispose(destroy)
 
-  // updating opts
-  watch(placement, (val) => {
-    if (inst.value) {
-      inst.value.setOptions({ placement: val })
-    }
-  })
-  watch(skiddingAndOffset, (val) => {
-    inst.value?.setOptions({ modifiers: [{ name: 'offset', options: { offset: val } }] })
-  })
+  if (isReactive(opts)) {
+    watch(
+      opts,
+      (updated) => {
+        if (instance.value) {
+          instance.value.setOptions(unref(updated))
+        }
+      },
+      { deep: true },
+    )
+  }
 
-  return { active }
+  return { instance }
 }

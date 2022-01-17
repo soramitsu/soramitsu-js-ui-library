@@ -255,3 +255,24 @@ it('SDropdown - model usage works', () => {
   cy.contains('Truth').click()
   cy.contains('Value: true')
 })
+
+it('SDropdown - show/hide by clicks', () => {
+  mount({
+    setup() {
+      return {
+        options: [{ label: 'OPTION', value: 0 }],
+      }
+    },
+    template: `
+      <SDropdown
+        label="Label"
+        :options="options"
+      />
+    `,
+  })
+
+  cy.contains('Label').click()
+  cy.contains('OPTION').should('be.visible')
+  cy.contains('Label').click()
+  cy.contains('OPTION').should('not.be.visible')
+})
