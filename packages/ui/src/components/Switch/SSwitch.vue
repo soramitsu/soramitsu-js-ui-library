@@ -40,17 +40,14 @@ const props = withDefaults(defineProps<Props>(), {
 </template>
 
 <style lang="scss" scoped>
-$color-switch-btn-label: #2d2926;
-$color-switch-btn-label-disabled: #a3a4a8;
-$color-switch-btn-checked: #d0021b;
 $color-switch-btn-checked-hover: #c6021a;
-$color-switch-btn-unchecked: #dde0e1;
+
 .s-switch {
   display: flex;
   align-items: center;
   &-button {
     position: relative;
-    background-color: $color-switch-btn-unchecked;
+    background-color: var(--s-color-base-border-primary);
     width: 40px;
     height: 20px;
     appearance: none;
@@ -58,10 +55,10 @@ $color-switch-btn-unchecked: #dde0e1;
     border-radius: 20px;
     transition: 0.5s;
     &:checked {
-      background-color: $color-switch-btn-checked;
+      background-color: var(--s-color-theme-accent);
     }
     &:checked:hover {
-      background-color: $color-switch-btn-checked-hover;
+      background-color: var(--s-color-theme-accent-hover);
     }
     &::before {
       content: '';
@@ -71,7 +68,7 @@ $color-switch-btn-unchecked: #dde0e1;
       border-radius: 10px;
       top: 0;
       left: 0;
-      background-color: #fff;
+      background-color: var(--s-brand-white);
       transition: 0.5s;
       transform: scale(0.8);
     }
@@ -79,23 +76,23 @@ $color-switch-btn-unchecked: #dde0e1;
       left: 20px;
     }
     &:hover {
-      background-color: $color-switch-btn-checked-hover;
+      background-color: var(--s-color-theme-accent-hover);
       cursor: pointer;
     }
     &:disabled {
-      background-color: $color-switch-btn-unchecked;
+      background-color: var(--s-color-base-border-primary);
     }
     &:disabled + .s-switch-label {
-      color: $color-switch-btn-label-disabled;
+      color: var(--s-color-base-content-quaternary);
     }
     &:disabled:hover {
-      background-color: $color-switch-btn-unchecked;
+      background-color: var(--s-color-base-border-primary);
       cursor: pointer;
     }
   }
   &-label {
-    // font-family: 'Sora';
-    color: $color-switch-btn-label;
+    font-family: Sora;
+    color: var(--s-color-base-content-primary);
     font-size: 20px;
     margin-left: 8px;
     text-align: center;
