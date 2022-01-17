@@ -27,27 +27,22 @@ export const SwitchDisabledWithLabel = defineStory(() => ({
     <SSwitch
       id="id"
       label="Label"
-      checked="false"
+      :checked=false
       disabled
     />
   `,
 }))
 
-// export const SwitchDisabledWithLabel = Template.bind({})
-// SwitchDisabledWithLabel.args = {
-//   props: {
-//     id: 'id',
-//     label: 'Label',
-//     disabled: true,
-//     checked: false,
-//   },
-// }
-
-// export const SwitchDisabledAndCheckedWithLabel = Template.bind({})
-// SwitchDisabledAndCheckedWithLabel.args = {
-//   props: {
-//     id: 'id',
-//     label: 'Label',
-//     disabled: true,
-//   },
-// }
+export const SwitchDisabledAndCheckedWithLabel = defineStory(() => ({
+  components: {
+    SSwitch,
+  },
+  setup() {},
+  template: `
+    <SSwitch
+      id="id"
+      label="Label"
+      disabled
+    />
+  `,
+}))
