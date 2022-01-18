@@ -49,7 +49,7 @@ const props = withDefaults(
       }
     }
 
-    &_type_primary &_disabled {
+    &_type_#{$name}#{&}_disabled {
       @apply #{$disabled}
     }
   }
@@ -58,7 +58,7 @@ const props = withDefaults(
     $default: bg-accent text-white,
     $hover: bg-accent-hover,
     $active: bg-accent-pressed,
-    $disabled: bg-accent-disabled,
+    $disabled: bg-secondary-hover,
   );
 
   @include button-type(secondary,
