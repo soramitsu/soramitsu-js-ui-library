@@ -9,6 +9,24 @@ export default defineMeta({
       options: ['primary', 'secondary', 'outline', 'action'],
       control: { type: 'inline-radio' }
     },
+    size: {
+      defaultValue: 'medium',
+      options: ['mini', 'small', 'medium', 'big'],
+      control: { type: 'inline-radio' }
+    },
+    borderRadius: {
+      defaultValue: 'medium',
+      options: ['mini', 'small', 'medium', 'big'],
+      control: { type: 'inline-radio' }
+    },
+    disabled: {
+      defaultValue: false,
+      control: { type: 'boolean' }
+    },
+    rounded: {
+      defaultValue: false,
+      control: { type: 'boolean' }
+    },
   }
 })
 
@@ -20,6 +38,14 @@ export const Button = defineStory((args) =>  ({
     return args
   },
   template: `
-    <SButton :type="type">{{type}}</SButton>
+    <SButton
+      :type="type"
+      :size="size"
+      :border-radius="borderRadius"
+      :disabled="disabled"
+      :rounded="rounded"
+    >
+      {{type}}
+    </SButton>
   `
 }))

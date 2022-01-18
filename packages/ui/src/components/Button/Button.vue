@@ -112,5 +112,23 @@ const definitelyBorderRadius = usePropsTypeFilter(props.borderRadius, BUTTON_BOR
     $active: border-accent-pressed text-accent-pressed,
     $disabled: border-base-border-primary text-base-content-quaternary,
   );
+
+  &_size {
+    &_mini {
+      height: 24px;
+    }
+
+    &_small {
+      height: 32px;
+    }
+
+    &_medium {
+      height: 40px;
+    }
+
+    &_big {
+      height: 56px;
+    }
+  }
 }
 </style>
