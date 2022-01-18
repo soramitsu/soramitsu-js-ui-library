@@ -15,9 +15,11 @@ import { EmitsOptions } from 'vue';
 import { FocusTrap } from 'focus-trap';
 import { FunctionalComponent } from 'vue';
 import { InjectionKey } from 'vue';
+import { Instance } from '@popperjs/core';
 import type { JSONEditorOptions } from 'jsoneditor';
 import { MaybeRef } from '@vueuse/core';
 import { Options } from 'focus-trap';
+import { Placement } from '@popperjs/core';
 import { Plugin as Plugin_2 } from 'vue';
 import { PropType } from 'vue';
 import { Ref } from 'vue';
@@ -134,6 +136,17 @@ export const NOTIFICATIONS_API_KEY: InjectionKey<ToastsApi>;
 
 // @public (undocumented)
 export function plugin(): Plugin_2;
+
+// @public (undocumented)
+export const POPOVER_API_KEY: InjectionKey<PopoverApi>;
+
+// @public (undocumented)
+export interface PopoverApi {
+    addPopperRefOverride: (elem: HTMLElement) => void;
+    deletePopperRefOverride: (elem: HTMLElement) => void;
+    popper: Instance | null;
+    show: boolean;
+}
 
 // @public (undocumented)
 export type RegisteredToast = ToastRegisterParams;
@@ -571,6 +584,81 @@ export const SNotificationsProvider: FunctionalComponent<{
     to?: string;
 }>;
 
+// @public (undocumented)
+export const SPopover: DefineComponent<    {
+show: BooleanConstructor;
+trigger: {
+type: PropType<"click" | "manual" | "hover">;
+default: string;
+validator: (v: unknown) => boolean;
+};
+placement: {
+type: PropType<Placement>;
+default: string;
+validator: (v: unknown) => boolean;
+};
+skidding: {
+type: (StringConstructor | NumberConstructor)[];
+default: number;
+};
+distance: {
+type: (StringConstructor | NumberConstructor)[];
+default: number;
+};
+showDelay: {
+type: (StringConstructor | NumberConstructor)[];
+default: number;
+};
+hideDelay: {
+type: (StringConstructor | NumberConstructor)[];
+default: number;
+};
+}, () => (VNode<RendererNode, RendererElement, {
+[key: string]: any;
+}> | null)[], unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "click-outside")[], "update:show" | "click-outside", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+show?: unknown;
+trigger?: unknown;
+placement?: unknown;
+skidding?: unknown;
+distance?: unknown;
+showDelay?: unknown;
+hideDelay?: unknown;
+} & {
+show: boolean;
+placement: Placement;
+trigger: "click" | "manual" | "hover";
+skidding: string | number;
+distance: string | number;
+showDelay: string | number;
+hideDelay: string | number;
+} & {}> & {
+"onUpdate:show"?: ((...args: any[]) => any) | undefined;
+"onClick-outside"?: ((...args: any[]) => any) | undefined;
+}, {
+show: boolean;
+placement: Placement;
+trigger: "click" | "manual" | "hover";
+skidding: string | number;
+distance: string | number;
+showDelay: string | number;
+hideDelay: string | number;
+}>;
+
+// @public (undocumented)
+export const SPopoverWrappedTransition: DefineComponent<    {
+eager: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+eager?: unknown;
+} & {
+eager: boolean;
+} & {}>, {
+eager: boolean;
+}>;
+
 // Warning: (ae-forgotten-export) The symbol "__VLS_DefinePropsToOptions" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
@@ -630,11 +718,6 @@ type: PropType<string>;
 mandatory: {
 type: PropType<boolean>;
 };
-dropdownTransitionName: {
-type: PropType<string>;
-} & {
-default: string;
-};
 syncMenuAndInputWidths: {
 type: PropType<boolean>;
 } & {
@@ -650,7 +733,6 @@ options?: unknown;
 size?: unknown;
 label?: unknown;
 mandatory?: unknown;
-dropdownTransitionName?: unknown;
 syncMenuAndInputWidths?: unknown;
 } & {
 modelValue: null;
@@ -658,7 +740,6 @@ options: SelectOption<any>[];
 disabled: boolean;
 multiple: boolean;
 size: SelectSize;
-dropdownTransitionName: string;
 syncMenuAndInputWidths: boolean;
 } & {
 label?: string | undefined;
@@ -671,7 +752,6 @@ options: SelectOption<any>[];
 disabled: boolean;
 multiple: boolean;
 size: SelectSize;
-dropdownTransitionName: string;
 syncMenuAndInputWidths: boolean;
 }>;
 
@@ -754,6 +834,90 @@ export enum Status {
     // (undocumented)
     Warning = "warning"
 }
+
+// @public (undocumented)
+export const STextField: DefineComponent<    {
+modelValue: {
+type: PropType<string>;
+};
+label: {
+type: PropType<string>;
+};
+id: {
+type: PropType<string>;
+};
+password: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+noEye: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+disabled: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+counter: {
+type: PropType<string | number | boolean>;
+} & {
+default: boolean;
+};
+status: {
+type: PropType<Status_2.Success | Status_2.Warning | Status_2.Error>;
+};
+success: {
+type: PropType<boolean>;
+};
+warning: {
+type: PropType<boolean>;
+};
+error: {
+type: PropType<boolean>;
+};
+message: {
+type: PropType<string>;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: string) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+label?: unknown;
+id?: unknown;
+password?: unknown;
+noEye?: unknown;
+disabled?: unknown;
+counter?: unknown;
+status?: unknown;
+success?: unknown;
+warning?: unknown;
+error?: unknown;
+message?: unknown;
+} & {
+password: boolean;
+disabled: boolean;
+noEye: boolean;
+counter: string | number | boolean;
+} & {
+error?: boolean | undefined;
+modelValue?: string | undefined;
+id?: string | undefined;
+status?: Status_2.Success | Status_2.Warning | Status_2.Error | undefined;
+label?: string | undefined;
+success?: boolean | undefined;
+warning?: boolean | undefined;
+message?: string | undefined;
+}> & {
+"onUpdate:modelValue"?: ((value: string) => any) | undefined;
+}, {
+password: boolean;
+disabled: boolean;
+noEye: boolean;
+counter: string | number | boolean;
+}>;
 
 // @public (undocumented)
 export const SToastsDisplay: DefineComponent<    {
@@ -895,6 +1059,9 @@ export interface UseNotificationsReturn {
     // (undocumented)
     show: (params: ShowNotificationParams) => ShowNotificationReturn;
 }
+
+// @public (undocumented)
+export const usePopoverApi: () => PopoverApi;
 
 // @public (undocumented)
 export function useSelectApi<T = any>(): SelectApi<T>;
