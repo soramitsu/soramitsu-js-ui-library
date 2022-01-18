@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type BtnType = 'primary' | 'secondary'
+type BtnType = 'primary' | 'secondary' | 'outline' | 'action'
 
 const props = withDefaults(
   defineProps<{
@@ -18,12 +18,13 @@ const props = withDefaults(
     tabindex="0"
     :class="[
       's-button',
-      `s-button--type-${type}`,
+      `s-button_type_${props.type}`,
       {
-        's-button--rounded': rounded,
+        's-button_rounded': rounded,
       },
     ]"
   >
+    {{ props.type }}
     <slot />
   </div>
 </template>
@@ -32,24 +33,61 @@ const props = withDefaults(
 .s-button {
   @apply cursor-pointer inline-block px-2 py-1 rounded select-none;
 
-  &--type-primary {
-    @apply text-white bg-accent;
+  &_type_primary {
+    @apply bg-accent text-white;
+
     &:hover {
       @apply bg-accent-hover;
     }
+
     &:active {
       @apply bg-accent-pressed;
     }
-    &:focus {
-      @apply bg-accent-focused;
+  }
+
+  &_type_primary &_disabled {
+    @apply bg-accent-disabled;
+  }
+
+
+
+  &_type_secondary, &_type_action {
+    @apply bg-base-background text-base-content-primary;
+
+    &:hover {
+      @apply bg-base-background-hover;
+    }
+
+    &:active {
+      @apply bg-base-border-primary;
     }
   }
 
-  &--type-secondary {
-    @apply bg-gray-300 text-black;
+  &_type_secondary &_disabled, &_type_action &_disabled {
+    @apply bg-base-disabled text-base-content-quaternary;
   }
 
-  &--rounded {
+
+
+  &_type_outline {
+    @apply border border-solid border-base-border-primary text-base-content-primary;
+
+    &:hover {
+      @apply border-accent-hover text-accent-hover;
+    }
+
+    &:active {
+      @apply border-accent-pressed text-accent-pressed;
+    }
+  }
+
+  &_type_outline &_disabled {
+    @apply border-base-border-primary text-base-content-quaternary;
+  }
+
+
+
+  &__rounded {
     @apply rounded-full;
   }
 }
