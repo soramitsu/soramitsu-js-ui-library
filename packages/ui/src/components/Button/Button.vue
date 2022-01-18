@@ -3,11 +3,14 @@ type BtnType = 'primary' | 'secondary' | 'outline' | 'action'
 
 const props = withDefaults(
   defineProps<{
+    type?: BtnType,
     rounded?: boolean
-    type?: BtnType
+    disabled?: boolean
   }>(),
   {
     type: 'primary',
+    rounded: false,
+    disabled: false,
   },
 )
 </script>
@@ -20,7 +23,8 @@ const props = withDefaults(
       's-button',
       `s-button_type_${props.type}`,
       {
-        's-button_rounded': rounded,
+        's-button_disabled': disabled,
+        'rounded-full': rounded,
       },
     ]"
   >
@@ -33,62 +37,50 @@ const props = withDefaults(
 .s-button {
   @apply cursor-pointer inline-block px-2 py-1 rounded select-none;
 
-  &_type_primary {
-    @apply bg-accent text-white;
+  @mixin button-type($name, $default, $hover, $active, $disabled) {
+    &_type_#{$name} {
+      @apply #{$default};
 
-    &:hover {
-      @apply bg-accent-hover;
+      &:hover {
+        @apply #{$hover}
+      }
+
+      &:active {
+        @apply #{$active}
+      }
     }
 
-    &:active {
-      @apply bg-accent-pressed;
-    }
-  }
-
-  &_type_primary &_disabled {
-    @apply bg-accent-disabled;
-  }
-
-
-
-  &_type_secondary, &_type_action {
-    @apply bg-base-background text-base-content-primary;
-
-    &:hover {
-      @apply bg-base-background-hover;
-    }
-
-    &:active {
-      @apply bg-base-border-primary;
+    &_type_primary &_disabled {
+      @apply #{$disabled}
     }
   }
 
-  &_type_secondary &_disabled, &_type_action &_disabled {
-    @apply bg-base-disabled text-base-content-quaternary;
-  }
+  @include button-type(primary,
+    $default: bg-accent text-white,
+    $hover: bg-accent-hover,
+    $active: bg-accent-pressed,
+    $disabled: bg-accent-disabled,
+  );
 
+  @include button-type(secondary,
+    $default: bg-base-background text-base-content-primary,
+    $hover: bg-base-background-hover,
+    $active: bg-base-border-primary,
+    $disabled:bg-base-disabled text-base-content-quaternary,
+  );
 
+  @include button-type(action,
+    $default: bg-base-background text-base-content-primary,
+    $hover: bg-base-background-hover,
+    $active: bg-base-border-primary,
+    $disabled: bg-base-disabled text-base-content-quaternary,
+  );
 
-  &_type_outline {
-    @apply border border-solid border-base-border-primary text-base-content-primary;
-
-    &:hover {
-      @apply border-accent-hover text-accent-hover;
-    }
-
-    &:active {
-      @apply border-accent-pressed text-accent-pressed;
-    }
-  }
-
-  &_type_outline &_disabled {
-    @apply border-base-border-primary text-base-content-quaternary;
-  }
-
-
-
-  &__rounded {
-    @apply rounded-full;
-  }
+  @include button-type(outline,
+    $default: border border-solid border-base-border-primary text-base-content-primary,
+    $hover: border-accent-hover text-accent-hover,
+    $active: border-accent-pressed text-accent-pressed,
+    $disabled: border-base-border-primary text-base-content-quaternary,
+  );
 }
 </style>
