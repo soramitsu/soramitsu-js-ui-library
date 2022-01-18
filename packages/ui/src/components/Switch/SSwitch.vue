@@ -12,13 +12,13 @@ interface Props {
    */
   label?: string
   /**
-   * Attr specifies whether checkbox is set
+   * Attr specifies whether switch is active
    *
-   * @default false
+   * @default true
    */
   checked?: boolean
   /**
-   * Attr specfifies whether checkbox is disabled
+   * Attr specfifies whether switch is disabled
    *
    * @default false
    */
@@ -30,18 +30,29 @@ const props = withDefaults(defineProps<Props>(), {
   checked: true,
   disabled: false,
 })
+
+const emit = defineEmits(['isActive'])
+
+function handleChange(value: boolean) {
+  emit('isActive', value)
+}
 </script>
 
 <template>
   <div class="s-switch">
-    <input type="checkbox" :id="id" :checked="checked" :disabled="disabled" class="s-switch-button" />
+    <input
+      type="checkbox"
+      @change="handleChange(checked ?? true)"
+      :id="id"
+      :checked="checked"
+      :disabled="disabled"
+      class="s-switch-button"
+    />
     <label :for="id" class="s-switch-label">{{ label }}</label>
   </div>
 </template>
 
 <style lang="scss" scoped>
-$color-switch-btn-checked-hover: #c6021a;
-
 .s-switch {
   display: flex;
   align-items: center;
