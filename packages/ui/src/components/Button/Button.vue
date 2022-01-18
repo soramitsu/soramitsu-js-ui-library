@@ -28,7 +28,6 @@ const props = withDefaults(
       },
     ]"
   >
-    {{ props.type }}
     <slot />
   </div>
 </template>
