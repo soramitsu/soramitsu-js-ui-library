@@ -1,18 +1,48 @@
 <script setup lang="ts">
-type BtnType = 'primary' | 'secondary' | 'outline' | 'action'
+import { computed, ComputedRef } from 'vue'
+
+const BUTTON_TYPE_VALUES = ['primary', 'secondary', 'outline', 'action'] as const
+const BUTTON_SIZE_VALUES = ['mini', 'small', 'medium', 'big'] as const
+const BUTTON_BORDER_RADIUS_VALUES = ['mini', 'small', 'medium', 'big'] as const
+
+type ButtonType = typeof BUTTON_TYPE_VALUES[number]
+type ButtonSize = typeof BUTTON_SIZE_VALUES[number]
+type ButtonBorderRadius = typeof BUTTON_BORDER_RADIUS_VALUES[number]
+
+function usePropsTypeFilter<T>(value: T, validValues: readonly T[], defaultValue?: T): ComputedRef<T> {
+  return computed(() => {
+    if (validValues.includes(value)) {
+      return value
+    }
+
+    if (defaultValue !== undefined) {
+      return defaultValue
+    }
+
+    throw new Error('Wrong type')
+  })
+}
 
 const props = withDefaults(
   defineProps<{
-    type?: BtnType,
+    type?: ButtonType,
+    size?: ButtonSize,
+    borderRadius?: ButtonBorderRadius,
     rounded?: boolean
     disabled?: boolean
   }>(),
   {
     type: 'primary',
+    size: 'medium',
+    borderRadius: 'medium',
     rounded: false,
     disabled: false,
   },
 )
+
+const definitelyType = usePropsTypeFilter(props.type, BUTTON_TYPE_VALUES, 'primary')
+const definitelySize = usePropsTypeFilter(props.size, BUTTON_SIZE_VALUES, 'medium')
+const definitelyBorderRadius = usePropsTypeFilter(props.borderRadius, BUTTON_BORDER_RADIUS_VALUES, 'medium')
 </script>
 
 <template>
@@ -21,7 +51,8 @@ const props = withDefaults(
     tabindex="0"
     :class="[
       's-button',
-      `s-button_type_${props.type}`,
+      `s-button_type_${definitelyType}`,
+      `s-button_size_${definitelySize}`,
       {
         's-button_disabled': disabled,
         'rounded-full': rounded,
