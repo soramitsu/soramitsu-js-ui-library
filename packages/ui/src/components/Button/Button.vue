@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ComputedRef } from 'vue'
+import { SSpinner } from '../Spinner'
 
 const BUTTON_TYPE_VALUES = ['primary', 'secondary', 'outline', 'action'] as const
 const BUTTON_SIZE_VALUES = ['mini', 'small', 'medium', 'big'] as const
@@ -8,6 +9,20 @@ const BUTTON_ICON_POSITION_VALUES = ['left', 'right'] as const
 type ButtonType = typeof BUTTON_TYPE_VALUES[number]
 type ButtonSize = typeof BUTTON_SIZE_VALUES[number]
 type ButtonIconPosition = typeof BUTTON_ICON_POSITION_VALUES[number]
+
+const SpinnerSize: Record<ButtonSize, string> = {
+  mini: '12',
+  small: '18',
+  medium: '24',
+  big: '24',
+}
+
+const SpinnerWidth: Record<ButtonSize, string> = {
+  mini: '3',
+  small: '4',
+  medium: '4',
+  big: '4',
+}
 
 function usePropsTypeFilter<T>(value: T, validValues: readonly T[], defaultValue?: T): ComputedRef<T> {
   return computed(() => {
@@ -31,6 +46,7 @@ const props = withDefaults(
     iconPosition?: ButtonIconPosition,
     rounded?: boolean,
     disabled?: boolean,
+    loading?: boolean,
   }>(),
   {
     type: 'secondary',
@@ -39,6 +55,7 @@ const props = withDefaults(
     iconPosition: 'left',
     rounded: false,
     disabled: false,
+    loading: false,
   },
 )
 
@@ -56,12 +73,20 @@ const isAction = computed(() => definitelyType.value === 'action')
       `s-button_size_${definitelySize}`,
       `s-button_icon-position_${definitelyIconPosition}`,
       {
-        's-button_disabled': disabled,
+        's-button_disabled': loading || disabled,
+        's-button_loading': loading,
         's-button_rounded': isAction && rounded,
       },
     ]"
   >
-    <div class="s-button__icon">
+    <SSpinner
+      v-if="loading"
+      class="flex-grow absolute"
+      :size="SpinnerSize[definitelySize]"
+      :width="SpinnerWidth[definitelySize]"
+    />
+
+    <span class="s-button__icon s-button__content-item">
       <i
         v-if="icon"
         :class="icon"
@@ -70,8 +95,10 @@ const isAction = computed(() => definitelyType.value === 'action')
         v-else
         name="icon"
       />
-    </div>
-    <slot v-if="!isAction" />
+    </span>
+    <span class="s-button__content-item">
+      <slot v-if="!isAction" />
+    </span>
   </button>
 </template>
 
@@ -113,6 +140,10 @@ const isAction = computed(() => definitelyType.value === 'action')
 
 .s-button {
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;
+
+  &_loading &__content-item {
+    visibility: hidden;
+  }
 
   &_icon-position_left {
     @apply flex-row

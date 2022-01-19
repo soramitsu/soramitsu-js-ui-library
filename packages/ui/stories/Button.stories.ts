@@ -32,6 +32,10 @@ export default defineMeta({
       defaultValue: false,
       control: { type: 'boolean' }
     },
+    loading: {
+      defaultValue: false,
+      control: { type: 'boolean' }
+    },
   }
 })
 
@@ -51,6 +55,7 @@ export const Button = defineStory((args) =>  ({
       :rounded="rounded"
       :icon="icon"
       :icon-position="iconPosition"
+      :loading="loading"
     >
       <template #icon>
         <IconClose />
