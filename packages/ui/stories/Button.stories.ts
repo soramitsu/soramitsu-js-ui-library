@@ -14,11 +14,6 @@ export default defineMeta({
       options: ['mini', 'small', 'medium', 'big'],
       control: { type: 'inline-radio' }
     },
-    borderRadius: {
-      defaultValue: 'medium',
-      options: ['mini', 'small', 'medium', 'big'],
-      control: { type: 'inline-radio' }
-    },
     disabled: {
       defaultValue: false,
       control: { type: 'boolean' }
@@ -41,7 +36,6 @@ export const Button = defineStory((args) =>  ({
     <SButton
       :type="type"
       :size="size"
-      :border-radius="borderRadius"
       :disabled="disabled"
       :rounded="rounded"
     >
