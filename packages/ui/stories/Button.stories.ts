@@ -1,5 +1,6 @@
 import { defineMeta, defineStory } from './util'
 import { SButton } from '@/lib'
+import { IconClose } from '@/components/icons'
 
 export default defineMeta({
   title: 'Example/Button',
@@ -12,6 +13,15 @@ export default defineMeta({
     size: {
       defaultValue: 'medium',
       options: ['mini', 'small', 'medium', 'big'],
+      control: { type: 'inline-radio' }
+    },
+    icon: {
+      defaultValue: '',
+      control: { type: 'text' }
+    },
+    iconPosition: {
+      defaultValue: 'left',
+      options: ['left', 'right'],
       control: { type: 'inline-radio' }
     },
     disabled: {
@@ -28,6 +38,7 @@ export default defineMeta({
 export const Button = defineStory((args) =>  ({
   components: {
     SButton,
+    IconClose,
   },
   setup() {
     return args
@@ -38,7 +49,12 @@ export const Button = defineStory((args) =>  ({
       :size="size"
       :disabled="disabled"
       :rounded="rounded"
+      :icon="icon"
+      :icon-position="iconPosition"
     >
+      <template #icon>
+        <IconClose />
+      </template>
       {{type}}
     </SButton>
   `
