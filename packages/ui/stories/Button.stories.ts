@@ -36,6 +36,10 @@ export default defineMeta({
       defaultValue: false,
       control: { type: 'boolean' }
     },
+    uppercase: {
+      defaultValue: false,
+      control: { type: 'boolean' }
+    },
   }
 })
 
@@ -56,6 +60,7 @@ export const Button = defineStory((args) =>  ({
       :icon="icon"
       :icon-position="iconPosition"
       :loading="loading"
+      :uppercase="uppercase"
     >
       <template #icon>
         <IconClose />

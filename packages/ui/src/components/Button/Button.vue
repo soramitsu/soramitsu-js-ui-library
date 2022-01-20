@@ -44,6 +44,7 @@ const props = withDefaults(
     rounded?: boolean,
     disabled?: boolean,
     loading?: boolean,
+    uppercase?: boolean,
   }>(),
   {
     type: 'secondary',
@@ -54,6 +55,7 @@ const props = withDefaults(
     rounded: false,
     disabled: false,
     loading: false,
+    uppercase: false,
   },
 )
 
@@ -73,8 +75,8 @@ const isAction = computed(() => definitelyType.value === 'action')
       `s-button_icon-position_${definitelyIconPosition}`,
       {
         's-button_disabled': loading || disabled,
-        's-button_loading': loading,
-        's-button_rounded': isAction && rounded,
+        'rounded-full': isAction && rounded,
+        's-ty-ch3': definitelySize === 'mini' && uppercase,
       },
     ]"
   >
@@ -85,7 +87,10 @@ const isAction = computed(() => definitelyType.value === 'action')
       :width="SPINNER_WIDTH[definitelySize]"
     />
 
-    <span class="s-button__icon s-button__content-item">
+    <span
+      class="s-button__icon"
+      :class="{ 'invisible': loading }"
+    >
       <i
         v-if="icon"
         :class="icon"
@@ -95,7 +100,7 @@ const isAction = computed(() => definitelyType.value === 'action')
         name="icon"
       />
     </span>
-    <span class="s-button__content-item">
+    <span :class="{ 'invisible': loading }">
       <slot v-if="!isAction" />
     </span>
   </button>
@@ -140,36 +145,32 @@ const isAction = computed(() => definitelyType.value === 'action')
 .s-button {
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;
 
-  &_loading &__content-item {
-    visibility: hidden;
-  }
-
   &_icon-position_left {
-    @apply flex-row
-  }
-
-  &_icon-position_right {
-    @apply flex-row-reverse
+    @apply flex-row;
   }
 
   &_icon-position_left &__icon {
-    @apply mr-8px
+    @apply mr-8px;
   }
 
   &_size_mini#{&}_icon-position_left &__icon {
-    @apply mr-6px
+    @apply mr-6px;
+  }
+
+  &_icon-position_right {
+    @apply flex-row-reverse;
   }
 
   &_icon-position_right &__icon {
-    @apply ml-8px
+    @apply ml-8px;
   }
 
   &_size_mini#{&}_icon-position_right &__icon {
-    @apply ml-6px
+    @apply ml-6px;
   }
 
   &_type_action &__icon, &_size_mini#{&}_type_action &__icon {
-    @apply mx-0
+    @apply mx-0;
   }
 
   @include button-type(primary,
@@ -224,9 +225,5 @@ const isAction = computed(() => definitelyType.value === 'action')
     $padding: px-24px,
     $font: s-ty-h5
   );
-
-  &_rounded {
-    @apply rounded-full
-  }
 }
 </style>
