@@ -126,11 +126,15 @@ const isAction = computed(() => definitelyType.value === 'action')
   }
 }
 
-@mixin button-size($name, $height, $padding, $font, $border-radius: 4px) {
+@mixin button-size($name, $height, $padding, $font, $icon-size, $border-radius: 4px) {
   &_size_#{$name} {
     height: $height;
     border-radius: $border-radius;
     @apply #{$font};
+  }
+
+  &_size_#{$name} &__icon {
+    font-size: $icon-size;
   }
 
   &_size_#{$name}:not(&_type_action) {
@@ -205,25 +209,29 @@ const isAction = computed(() => definitelyType.value === 'action')
     $height: 24px,
     $padding: px-8px,
     $font: s-ty-p4,
+    $icon-size: 12px,
     $border-radius: 2px
   );
 
   @include button-size(small,
     $height: 32px,
     $padding: px-12px,
-    $font: s-ty-h7
+    $font: s-ty-h7,
+    $icon-size: 16px
   );
 
   @include button-size(medium,
     $height: 40px,
     $padding: px-16px,
-    $font: s-ty-h6
+    $font: s-ty-h6,
+    $icon-size: 16px
   );
 
   @include button-size(big,
     $height: 56px,
     $padding: px-24px,
-    $font: s-ty-h5
+    $font: s-ty-h5,
+    $icon-size: 24px
   );
 }
 </style>
