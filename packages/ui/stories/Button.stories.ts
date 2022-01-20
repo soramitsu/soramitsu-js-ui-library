@@ -3,47 +3,10 @@ import { SButton } from '@/lib'
 import { IconClose } from '@/components/icons'
 
 export default defineMeta({
-  title: 'Example/Button',
-  argTypes: {
-    type: {
-      defaultValue: 'primary',
-      options: ['primary', 'secondary', 'outline', 'action'],
-      control: { type: 'inline-radio' }
-    },
-    size: {
-      defaultValue: 'medium',
-      options: ['mini', 'small', 'medium', 'big'],
-      control: { type: 'inline-radio' }
-    },
-    icon: {
-      defaultValue: '',
-      control: { type: 'text' }
-    },
-    iconPosition: {
-      defaultValue: 'left',
-      options: ['left', 'right'],
-      control: { type: 'inline-radio' }
-    },
-    disabled: {
-      defaultValue: false,
-      control: { type: 'boolean' }
-    },
-    rounded: {
-      defaultValue: false,
-      control: { type: 'boolean' }
-    },
-    loading: {
-      defaultValue: false,
-      control: { type: 'boolean' }
-    },
-    uppercase: {
-      defaultValue: false,
-      control: { type: 'boolean' }
-    },
-  }
+  title: 'Example/Button'
 })
 
-export const Button = defineStory((args) =>  ({
+export const Configurable = defineStory((args) =>  ({
   components: {
     SButton,
     IconClose,
@@ -63,9 +26,50 @@ export const Button = defineStory((args) =>  ({
       :uppercase="uppercase"
     >
       <template #icon>
-        <IconClose />
+        <IconClose v-if="showExampleIcon"/>
       </template>
       {{type}}
     </SButton>
   `
 }))
+Configurable.argTypes = {
+  type: {
+    defaultValue: 'primary',
+        options: ['primary', 'secondary', 'outline', 'action'],
+        control: { type: 'inline-radio' }
+  },
+  size: {
+    defaultValue: 'medium',
+        options: ['mini', 'small', 'medium', 'big'],
+        control: { type: 'inline-radio' }
+  },
+  icon: {
+    defaultValue: '',
+        control: { type: 'text' }
+  },
+  iconPosition: {
+    defaultValue: 'left',
+        options: ['left', 'right'],
+        control: { type: 'inline-radio' }
+  },
+  showExampleIcon: {
+    defaultValue: true,
+        control: { type: 'boolean' }
+  },
+  disabled: {
+    defaultValue: false,
+        control: { type: 'boolean' }
+  },
+  rounded: {
+    defaultValue: false,
+        control: { type: 'boolean' }
+  },
+  loading: {
+    defaultValue: false,
+        control: { type: 'boolean' }
+  },
+  uppercase: {
+    defaultValue: false,
+        control: { type: 'boolean' }
+  },
+}
