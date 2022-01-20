@@ -10,14 +10,14 @@ type ButtonType = typeof BUTTON_TYPE_VALUES[number]
 type ButtonSize = typeof BUTTON_SIZE_VALUES[number]
 type ButtonIconPosition = typeof BUTTON_ICON_POSITION_VALUES[number]
 
-const SpinnerSize: Record<ButtonSize, string> = {
+const SPINNER_SIZE: Record<ButtonSize, string> = {
   mini: '12',
   small: '18',
   medium: '24',
   big: '24',
 }
 
-const SpinnerWidth: Record<ButtonSize, string> = {
+const SPINNER_WIDTH: Record<ButtonSize, string> = {
   mini: '3',
   small: '4',
   medium: '4',
@@ -85,8 +85,8 @@ const isAction = computed(() => definitelyType.value === 'action')
     <SSpinner
       v-if="loading"
       class="flex-grow absolute"
-      :size="SpinnerSize[definitelySize]"
-      :width="SpinnerWidth[definitelySize]"
+      :size="SPINNER_SIZE[definitelySize]"
+      :width="SPINNER_WIDTH[definitelySize]"
     />
 
     <span class="s-button__icon s-button__content-item">
