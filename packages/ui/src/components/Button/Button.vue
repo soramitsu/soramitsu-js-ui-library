@@ -24,17 +24,13 @@ const SPINNER_WIDTH: Record<ButtonSize, string> = {
   big: '4',
 }
 
-function usePropsTypeFilter<T>(value: T, validValues: readonly T[], defaultValue?: T): ComputedRef<T> {
+function usePropsTypeFilter<T>(value: T, validValues: readonly T[], defaultValue: T): ComputedRef<T> {
   return computed(() => {
     if (validValues.includes(value)) {
       return value
     }
 
-    if (defaultValue !== undefined) {
-      return defaultValue
-    }
-
-    throw new Error('Wrong type')
+    return defaultValue
   })
 }
 
