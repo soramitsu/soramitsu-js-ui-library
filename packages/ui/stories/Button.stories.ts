@@ -20,7 +20,11 @@ export const Configurable = defineStory((args) =>  ({
     <div class="flex flex-col items-start">
       <SButton v-bind="args">
         <template #icon>
-          <IconClose />
+          <!--viewBox for svg scaling-->
+          <IconClose
+            viewBox="0 0 24 24"
+            style="width: 1em; height: 1em;"
+          />
         </template>
         {{ args.type }}
       </SButton>
@@ -29,7 +33,11 @@ export const Configurable = defineStory((args) =>  ({
           class="mt-4"
       >
         <template #icon>
-          <IconClose v-if="args.type === 'action'"/>
+          <IconClose 
+            v-if="args.type === 'action'"
+            viewBox="0 0 24 24"
+            style="width: 1em; height: 1em;"
+          />
         </template>
         {{ args.type }}
       </SButton>
