@@ -169,7 +169,7 @@ const isAction = computed(() => definitelyType.value === 'action')
     @apply ml-6px;
   }
 
-  &_type_action &__icon, &_size_mini#{&}_type_action &__icon, &__icon:empty {
+  &_type_action &__icon, &_size_mini#{&}_type_action &__icon, & &__icon:empty {
     @apply mx-0;
   }
 
