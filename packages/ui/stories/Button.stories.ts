@@ -12,64 +12,56 @@ export const Configurable = defineStory((args) =>  ({
     IconClose,
   },
   setup() {
-    return args
+    return {
+      args
+    }
   },
   template: `
-    <SButton
-      :type="type"
-      :size="size"
-      :disabled="disabled"
-      :rounded="rounded"
-      :icon="icon"
-      :icon-position="iconPosition"
-      :loading="loading"
-      :uppercase="uppercase"
-    >
-      <template #icon>
-        <IconClose v-if="showExampleIcon"/>
-      </template>
-      {{type}}
-    </SButton>
+    <div class="flex flex-col items-start">
+      <SButton v-bind="args">
+        <template #icon>
+          <IconClose />
+        </template>
+        {{ args.type }}
+      </SButton>
+      <SButton
+          v-bind="args"
+          class="mt-4"
+      >
+        <template #icon>
+          <IconClose v-if="args.type === 'action'"/>
+        </template>
+        {{ args.type }}
+      </SButton>
+    </div>
   `
 }))
 Configurable.argTypes = {
   type: {
-    defaultValue: 'primary',
-        options: ['primary', 'secondary', 'outline', 'action'],
-        control: { type: 'inline-radio' }
+    options: ['primary', 'secondary', 'outline', 'action'],
+    control: 'inline-radio'
   },
   size: {
-    defaultValue: 'medium',
-        options: ['mini', 'small', 'medium', 'big'],
-        control: { type: 'inline-radio' }
+    options: ['mini', 'small', 'medium', 'big'],
+    control: 'inline-radio'
   },
-  icon: {
-    defaultValue: '',
-        control: { type: 'text' }
-  },
+  icon: { control: 'text' },
   iconPosition: {
-    defaultValue: 'left',
-        options: ['left', 'right'],
-        control: { type: 'inline-radio' }
+    options: ['left', 'right'],
+    control: 'inline-radio'
   },
-  showExampleIcon: {
-    defaultValue: true,
-        control: { type: 'boolean' }
-  },
-  disabled: {
-    defaultValue: false,
-        control: { type: 'boolean' }
-  },
-  rounded: {
-    defaultValue: false,
-        control: { type: 'boolean' }
-  },
-  loading: {
-    defaultValue: false,
-        control: { type: 'boolean' }
-  },
-  uppercase: {
-    defaultValue: false,
-        control: { type: 'boolean' }
-  },
+  disabled: { control: 'boolean' },
+  rounded: { control: 'boolean' },
+  loading: { control: 'boolean' },
+  uppercase: { control: 'boolean' },
+}
+Configurable.args = {
+  type: 'primary',
+  size: 'medium',
+  icon: '',
+  iconPosition: 'left',
+  disabled: false,
+  rounded: false,
+  loading: false,
+  uppercase: false,
 }
