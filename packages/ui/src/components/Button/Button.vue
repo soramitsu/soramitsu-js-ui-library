@@ -24,7 +24,7 @@ const SPINNER_WIDTH: Record<ButtonSize, string> = {
   big: '4',
 }
 
-function usePropsTypeFilter<T>(value: T, validValues: readonly T[], defaultValue: T): ComputedRef<T> {
+function usePropTypeFilter<T>(value: T, validValues: readonly T[], defaultValue: T): ComputedRef<T> {
   return computed(() => {
     if (validValues.includes(value)) {
       return value
@@ -59,9 +59,9 @@ const props = withDefaults(
   },
 )
 
-const definitelyType = usePropsTypeFilter(props.type, BUTTON_TYPE_VALUES, 'primary')
-const definitelySize = usePropsTypeFilter(props.size, BUTTON_SIZE_VALUES, 'medium')
-const definitelyIconPosition = usePropsTypeFilter(props.iconPosition, BUTTON_ICON_POSITION_VALUES, 'left')
+const definitelyType = usePropTypeFilter(props.type, BUTTON_TYPE_VALUES, 'primary')
+const definitelySize = usePropTypeFilter(props.size, BUTTON_SIZE_VALUES, 'medium')
+const definitelyIconPosition = usePropTypeFilter(props.iconPosition, BUTTON_ICON_POSITION_VALUES, 'left')
 const isAction = computed(() => definitelyType.value === 'action')
 </script>
 
