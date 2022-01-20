@@ -42,6 +42,7 @@ const props = withDefaults(
   defineProps<{
     type?: ButtonType,
     size?: ButtonSize,
+    nativeType?: string,
     icon?: string,
     iconPosition?: ButtonIconPosition,
     rounded?: boolean,
@@ -51,6 +52,7 @@ const props = withDefaults(
   {
     type: 'secondary',
     size: 'medium',
+    nativeType: 'button',
     icon: '',
     iconPosition: 'left',
     rounded: false,
@@ -67,6 +69,7 @@ const isAction = computed(() => definitelyType.value === 'action')
 
 <template>
   <button
+    :type="nativeType"
     :class="[
       's-button',
       `s-button_type_${definitelyType}`,
