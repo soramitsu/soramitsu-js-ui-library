@@ -38,7 +38,7 @@ const showSpinner = computed(() => {
       <div
         v-if="!showSpinner"
         class="marker"
-        :class="!colorBackground? `marker-color-${type}` : 'bg-white'"
+        :class="!colorBackground? `s-badge--color-${type}` : 'bg-white'"
       />
       <SSpinner
         v-else
@@ -67,33 +67,27 @@ const showSpinner = computed(() => {
   font-feature-settings: 'case'on;
 
 
-  &--color-active,
-  .marker-color-active {
+  &--color-active {
     @apply bg-status-success;
   }
 
-  &--color-error,
-  .marker-color-error {
+  &--color-error{
     @apply bg-status-error;
   }
 
-  &--color-warning,
-  .marker-color-warning {
+  &--color-warning {
     @apply bg-status-warning;
   }
 
-  &--color-info,
-  .marker-color-info {
+  &--color-info {
     @apply bg-status-info;
   }
 
-  &--color-debug,
-  .marker-color-debug {
+  &--color-debug {
     @apply bg-accent-focused;
   }
 
-  &--color-pending,
-  .marker-color-pending {
+  &--color-pending {
     @apply bg-base-content-tertiary;
   }
 
@@ -108,9 +102,7 @@ const showSpinner = computed(() => {
     width: 10px;
     min-width: 10px;
     height: 10px;
-  }
-
- 
+  } 
 
   .title {
     text-transform: uppercase;
