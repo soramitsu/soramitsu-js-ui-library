@@ -30,7 +30,7 @@ const showSpinner = computed(() => {
     class=""
     :class="[
       's-badge',
-      {'s-border' : withBorder},
+      {'s-badge--border' : withBorder},
       colorBackground? `s-badge--color-${type} text-white` : ' text-brand-pms-black'
     ]"
   >
@@ -52,7 +52,7 @@ const showSpinner = computed(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .s-badge {
   @apply cursor-default select-none block;
   border-radius: 30px;
@@ -108,10 +108,10 @@ const showSpinner = computed(() => {
     text-transform: uppercase;
   }
 
-}
-
- .s-border {
+  &--border {
     @apply border border-1 border-base-background
   }
+
+} 
 
 </style>
