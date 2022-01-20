@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ComputedRef } from 'vue'
-import { SSpinner } from '../Spinner'
+import { SSpinner } from '@/lib'
 
 const BUTTON_TYPE_VALUES = ['primary', 'secondary', 'outline', 'action'] as const
 const BUTTON_SIZE_VALUES = ['mini', 'small', 'medium', 'big'] as const
