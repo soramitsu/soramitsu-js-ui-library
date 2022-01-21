@@ -4,7 +4,7 @@ def pipeline = new org.js.LibPipeline(
     packageManager:   'yarn',
     buildDockerImage: 'build-tools/node:14-ubuntu-cypress',
     npmLoginEmail:    'admin@soramitsu.co.jp',
-    testCmds:         ['yarn test:all'],
+    testCmds:         ['yarn build:theme && yarn test:all'],
     pushCmds:         ['yarn publish-workspaces --no-verify-access'],
     libPushBranches:  ['master', 'next']
 )
