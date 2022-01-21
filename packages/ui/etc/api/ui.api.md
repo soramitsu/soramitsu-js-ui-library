@@ -659,6 +659,29 @@ eager: boolean;
 eager: boolean;
 }>;
 
+// @public (undocumented)
+export const SProgressBar: DefineComponent<    {
+percent: {
+type: PropType<number>;
+} & {
+default: number;
+};
+lineHeight: {
+type: PropType<number>;
+} & {
+default: number;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+percent?: unknown;
+lineHeight?: unknown;
+} & {
+lineHeight: number;
+percent: number;
+} & {}>, {
+lineHeight: number;
+percent: number;
+}>;
+
 // Warning: (ae-forgotten-export) The symbol "__VLS_DefinePropsToOptions" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
