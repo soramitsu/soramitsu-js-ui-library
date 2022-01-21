@@ -184,8 +184,8 @@ description?: unknown;
 status: Status_2;
 showCloseBtn: boolean;
 } & {
-title?: string | undefined;
 description?: string | undefined;
+title?: string | undefined;
 inline?: boolean | undefined;
 }> & {
 "onClick:close"?: (() => any) | undefined;
@@ -196,81 +196,23 @@ showCloseBtn: boolean;
 
 // @public (undocumented)
 export const SButton: DefineComponent<    {
-type: {
-type: PropType<"outline" | "action" | "primary" | "secondary">;
-} & {
-default: string;
-};
-size: {
-type: PropType<"big" | "small" | "mini" | "medium">;
-} & {
-default: string;
-};
-nativeType: {
-type: PropType<"reset" | "submit" | "button">;
-} & {
-default: string;
-};
-icon: {
-type: PropType<string>;
-} & {
-default: string;
-};
-iconPosition: {
-type: PropType<"left" | "right">;
-} & {
-default: string;
-};
 rounded: {
 type: PropType<boolean>;
-} & {
-default: boolean;
 };
-disabled: {
-type: PropType<boolean>;
+type: {
+type: PropType<BtnType>;
 } & {
-default: boolean;
-};
-loading: {
-type: PropType<boolean>;
-} & {
-default: boolean;
-};
-uppercase: {
-type: PropType<boolean>;
-} & {
-default: boolean;
+default: string;
 };
 }, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
-type?: unknown;
-size?: unknown;
-nativeType?: unknown;
-icon?: unknown;
-iconPosition?: unknown;
 rounded?: unknown;
-disabled?: unknown;
-loading?: unknown;
-uppercase?: unknown;
+type?: unknown;
 } & {
-type: "outline" | "action" | "primary" | "secondary";
-loading: boolean;
-disabled: boolean;
-size: "big" | "small" | "mini" | "medium";
-nativeType: "reset" | "submit" | "button";
-icon: string;
-iconPosition: "left" | "right";
-rounded: boolean;
-uppercase: boolean;
-} & {}>, {
-type: "outline" | "action" | "primary" | "secondary";
-loading: boolean;
-disabled: boolean;
-size: "big" | "small" | "mini" | "medium";
-nativeType: "reset" | "submit" | "button";
-icon: string;
-iconPosition: "left" | "right";
-rounded: boolean;
-uppercase: boolean;
+type: BtnType;
+} & {
+rounded?: boolean | undefined;
+}>, {
+type: BtnType;
 }>;
 
 // @public (undocumented)
@@ -623,8 +565,8 @@ showCloseBtn?: unknown;
 status: Status_2;
 timeout: number;
 } & {
-title?: string | undefined;
 description?: string | undefined;
+title?: string | undefined;
 showCloseBtn?: boolean | undefined;
 }> & {
 onTimeout?: ((...args: any[]) => any) | undefined;
@@ -1061,8 +1003,8 @@ show: boolean;
 timeout: number;
 showCloseBtn: boolean;
 } & {
-title?: string | undefined;
 description?: string | undefined;
+title?: string | undefined;
 }> & {
 "onUpdate:show"?: ((...args: any[]) => any) | undefined;
 onTimeout?: ((...args: any[]) => any) | undefined;
@@ -1126,6 +1068,7 @@ export function useSelectApi<T = any>(): SelectApi<T>;
 
 // Warnings were encountered during analysis:
 //
+// dist-ts/components/Button/Button.vue.d.ts:7:9 - (ae-forgotten-export) The symbol "BtnType" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Modal/SModal.vue.d.ts:18:9 - (ae-forgotten-export) The symbol "ClassType" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:9:9 - (ae-forgotten-export) The symbol "validateVerticalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:14:9 - (ae-forgotten-export) The symbol "validateHorizontalPlacement" needs to be exported by the entry point lib.d.ts
