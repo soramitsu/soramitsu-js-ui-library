@@ -79,10 +79,12 @@ const isAction = computed(() => definitelyType.value === 'action')
         's-ty-ch3': definitelySize === 'mini' && uppercase,
       },
     ]"
+    :disabled="loading || disabled"
   >
     <SSpinner
       v-if="loading"
       class="flex-grow absolute"
+      data-testid="spinner"
       :size="SPINNER_SIZE[definitelySize]"
       :width="SPINNER_WIDTH[definitelySize]"
     />
@@ -90,6 +92,7 @@ const isAction = computed(() => definitelyType.value === 'action')
     <span
       class="s-button__icon"
       :class="{ 'invisible': loading }"
+      data-testid="icon"
     >
       <i
         v-if="icon"
@@ -100,7 +103,10 @@ const isAction = computed(() => definitelyType.value === 'action')
         name="icon"
       />
     </span>
-    <span :class="{ 'invisible': loading }">
+    <span
+      :class="{ 'invisible': loading }"
+      data-testid="text"
+    >
       <slot v-if="!isAction" />
     </span>
   </button>
@@ -122,6 +128,7 @@ const isAction = computed(() => definitelyType.value === 'action')
   }
 
   &_type_#{$name}#{&}_disabled {
+    @apply cursor-default;
     @apply #{$disabled};
   }
 }
