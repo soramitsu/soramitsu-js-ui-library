@@ -20,7 +20,6 @@ export const Configurable = defineStory((args) =>  ({
     <div class="flex flex-col items-start">
       <SButton v-bind="args">
         <template #icon>
-          <!--viewBox for svg scaling-->
           <IconClose style="width: 1em; height: 1em;"/>
         </template>
         {{ args.type }}
