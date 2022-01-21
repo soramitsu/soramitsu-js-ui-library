@@ -38,7 +38,7 @@ const props = withDefaults(
   defineProps<{
     type?: ButtonType,
     size?: ButtonSize,
-    nativeType?: string,
+    nativeType?: 'button' | 'reset' | 'submit',
     icon?: string,
     iconPosition?: ButtonIconPosition,
     rounded?: boolean,
