@@ -22,10 +22,6 @@ describe('Button', () => {
       it('Then it has disabled natively', () => {
         findButton().should('have.prop', 'disabled', true)
       })
-
-      it('Then it has special class', () => {
-        findButton().should('have.class', 's-button_disabled')
-      })
     })
   })
 
@@ -53,7 +49,6 @@ describe('Button', () => {
 
       it('Then it is disabled', () => {
         findButton().should('have.prop', 'disabled', true)
-        findButton().should('have.class', 's-button_disabled')
       })
     })
   })
@@ -76,6 +71,24 @@ describe('Button', () => {
         findButton().should('have.css', 'text-transform', 'uppercase')
       })
     })
+
+    context('When It is true and button is not mini sized', () => {
+      beforeEach(() => {
+        mount(SButton, {
+          propsData: {
+            size: 'medium',
+            uppercase: true,
+          },
+          slots: {
+            default: () => 'Soramitsu'
+          }
+        })
+      })
+
+      it('Then text is not in upper case', () => {
+        findButton().should('not.have.css', 'text-transform', 'uppercase')
+      })
+    })
   })
 
   context('Given prop rounded', () => {
@@ -92,8 +105,26 @@ describe('Button', () => {
         })
       })
 
-      it('Then text is in upper case', () => {
+      it('Then button is rounded', () => {
         findButton().should('have.class', 'rounded-full')
+      })
+    })
+
+    context('When It is true and button is not type action', () => {
+      beforeEach(() => {
+        mount(SButton, {
+          propsData: {
+            type: 'primary',
+            rounded: true,
+          },
+          slots: {
+            default: () => 'Soramitsu'
+          }
+        })
+      })
+
+      it('Then button is not rounded', () => {
+        findButton().should('not.have.class', 'rounded-full')
       })
     })
   })
