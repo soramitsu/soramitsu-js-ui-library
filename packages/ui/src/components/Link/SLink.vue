@@ -70,7 +70,7 @@ const finalTag = computed(() => props.tag || 'a')
 
 <style lang="scss">
 .s-link {
-  @apply cursor-pointer inline-flex items-center text-status-info;
+  @apply cursor-pointer inline-flex items-center text-status-info p2;
   $component: &;
 
   &:hover {
