@@ -256,9 +256,9 @@ type: "outline" | "action" | "primary" | "secondary";
 loading: boolean;
 disabled: boolean;
 size: "big" | "small" | "mini" | "medium";
-nativeType: "reset" | "submit" | "button";
-icon: string;
 iconPosition: "left" | "right";
+icon: string;
+nativeType: "reset" | "submit" | "button";
 rounded: boolean;
 uppercase: boolean;
 } & {}>, {
@@ -266,9 +266,9 @@ type: "outline" | "action" | "primary" | "secondary";
 loading: boolean;
 disabled: boolean;
 size: "big" | "small" | "mini" | "medium";
-nativeType: "reset" | "submit" | "button";
-icon: string;
 iconPosition: "left" | "right";
+icon: string;
+nativeType: "reset" | "submit" | "button";
 rounded: boolean;
 uppercase: boolean;
 }>;
@@ -441,6 +441,45 @@ modelValue: Object;
 options: JSONEditorOptions;
 height: string;
 dictionary: string[];
+}>;
+
+// @public (undocumented)
+export const SLink: DefineComponent<    {
+type: {
+type: PropType<"link" | "hint">;
+} & {
+default: string;
+};
+iconPosition: {
+type: PropType<"left" | "right">;
+} & {
+default: string;
+};
+icon: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+tag: {
+type: PropType<string | object>;
+} & {
+default: string;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+type?: unknown;
+iconPosition?: unknown;
+icon?: unknown;
+tag?: unknown;
+} & {
+type: "link" | "hint";
+iconPosition: "left" | "right";
+icon: boolean;
+tag: string | object;
+} & {}>, {
+type: "link" | "hint";
+iconPosition: "left" | "right";
+icon: boolean;
+tag: string | object;
 }>;
 
 // @public (undocumented)
