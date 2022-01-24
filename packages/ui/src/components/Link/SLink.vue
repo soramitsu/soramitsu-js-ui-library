@@ -59,10 +59,12 @@ const finalTag = computed(() => props.tag || 'a')
       <IconBasicExternalLink24
         v-if="type === 'link'"
         class="s-link__icon"
+        data-testid="icon"
       />
       <IconStatusInfo
         v-else
         class="s-link__icon"
+        data-testid="icon"
       />
     </template>
   </component>
