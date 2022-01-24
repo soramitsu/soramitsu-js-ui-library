@@ -3,7 +3,7 @@ import { SLink } from '@/lib'
 import { IconClose } from '@/components/icons'
 
 export default defineMeta({
-  title: 'Example/Button'
+  title: 'Example/Link'
 })
 
 export const Configurable = defineStory((args) =>  ({
@@ -18,12 +18,18 @@ export const Configurable = defineStory((args) =>  ({
   },
   template: `
     <div class="flex flex-col items-start">
-    <SLink v-bind="args">
+    <SLink
+      v-bind="args"
+      href="https://soramitsu.co.jp/"
+      target="_blank"
+    >
       {{ args.type }}
     </SLink>
     <SLink
-        v-bind="args"
-        class="mt-4"
+      v-bind="args"
+      class="mt-4"
+      href="https://soramitsu.co.jp/"
+      target="_blank"
     >
       {{ args.type }}
     </SLink>
