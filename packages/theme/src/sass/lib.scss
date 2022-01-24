@@ -1,0 +1,169 @@
+@use './tokens';
+@use './util';
+@use 'sass:list';
+
+$vars-prefix: '--sora_';
+$typography-prefix: 'sora-tpg-';
+
+$tokens-compiled: util.tree-flatten(tokens.$tokens);
+$tokens-compiled: util.map-filter-non-null-values($tokens-compiled);
+$tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
+
+@function token($id) {
+  @if not map-has-key($tokens-compiled, $id) {
+    @error "Cannot resolve token with id #{inspect($id)}";
+  }
+
+  @return map-get($tokens-compiled, $id);
+}
+
+@function token-as-var($id) {
+  $value: token($id);
+  @return var($value);
+}
+
+@mixin eval-tokens($values-map) {
+  @include util.eval-tokens($tokens-compiled, $values-map);
+}
+
+@mixin eval-tokens-partial($partial-values-map) {
+  @include util.eval-tokens($tokens-compiled, $partial-values-map, true);
+}
+
+@mixin tokens-preset-light() {
+  @include eval-tokens(
+    (
+      sys: (
+        'color': (
+          'primary': #d0021b,
+          'primary-hover': #c6021a,
+          'primary-pressed': #bb0218,
+          'primary-focused': #b10217,
+          'primary-background': #fae6e8,
+          'primary-hover-background': #f6ccd1,
+          'primary-pressed-background': #f1b3bb,
+          'primary-focused-background': #ec9aa4,
+          'content-primary': #2d2926,
+          'content-secondary': #53565a,
+          'content-tertiary': #75787b,
+          'content-quaternary': #a3a4a8,
+          'content-on-background-inverted': #fff,
+          'background': #f5f7f8,
+          'background-hover': #eceff0,
+          'background-inverted': #4e4e4e,
+          'border-primary': #dde0e1,
+          'border-secondary': #eceff0,
+          'disabled': #f5f7f8,
+          'on-disabled': #a3a4a8,
+          'body': #fff,
+          'surface': #fff,
+          'surface-overlay': rgba(255, 255, 255, 0.7),
+          'overlay': rgba(0, 0, 0, 0.45),
+          'success': #009900,
+          'success-background': #ddf4dd,
+          'success-background-hover': #b2f1b2,
+          'warning': #ff9900,
+          'warning-background': #fff2df,
+          'warning-background-hover': #ffe3ba,
+          'error': #ff0000,
+          'error-background': #fff9fa,
+          'error-background-hover': #ffd9df,
+          'info': #1070ca,
+          'info-background': #f3f6ff,
+          'info-background-hover': #dbe4ff,
+        ),
+        'shadow': (
+          'page-header': 0px 24px 80px
+            rgba(10.000000353902578, 2.000000118277967, 34.00000177323818, 0.07000000029802322),
+          'floating-notification': 0px 68px 80px
+            rgba(24.000000469386578, 24.000000469386578, 29.000000171363354, 0.09000000357627869),
+          'dropdown': 0px 0px 4px rgba(45.00000111758709, 41.00000135600567, 38.0000015348196, 0.07999999821186066),
+          'active-tab': 0px 1px 1px rgba(83.00000265240669, 86.00000247359276, 90.00000223517418, 0.10000000149011612),
+        ),
+      ),
+    )
+  );
+}
+
+@mixin typography($id) {
+  @if list.index(tokens.$typography-tokens, $id) == null {
+    @error "Wrong typography token: #{inspect($id)}";
+  }
+
+  .#{$typography-prefix}#{$id} {
+    @content;
+  }
+}
+
+@mixin typography-preset-default() {
+  @include typography('d1') {
+    @include util.typography-factory($size: 40px, $height: 120%, $spacing: -2%, $weight: bold);
+  }
+
+  @include typography('d2') {
+    @include util.typography-factory($size: 30px, $height: 130%, $spacing: -4%, $weight: bold);
+  }
+
+  @include typography('h1') {
+    @include util.typography-factory($size: 36px, $height: 120%, $spacing: -4%);
+  }
+
+  @include typography('h2') {
+    @include util.typography-factory($size: 30px, $height: 130%, $spacing: -4%);
+  }
+
+  @include typography('h3') {
+    @include util.typography-factory($size: 24px, $height: 130%, $spacing: -2%);
+  }
+
+  @include typography('h4') {
+    @include util.typography-factory($size: 18px, $height: 150%, $spacing: -2%);
+  }
+
+  @include typography('h5') {
+    @include util.typography-factory($size: 16px, $height: 150%, $spacing: 1%);
+  }
+
+  @include typography('h6') {
+    @include util.typography-factory($size: 14px, $height: 150%);
+  }
+
+  @include typography('h7') {
+    @include util.typography-factory($size: 12px, $height: 150%);
+  }
+
+  @include typography('ch1') {
+    @include util.typography-factory($size: 14px, $height: 130%, $spacing: 1%, $weight: bold);
+    text-transform: uppercase;
+  }
+
+  @include typography('ch2') {
+    @include util.typography-factory($size: 12px, $height: 130%, $spacing: 3%, $weight: bold);
+    text-transform: uppercase;
+  }
+
+  @include typography('ch3') {
+    @include util.typography-factory($size: 10px, $height: 140%, $spacing: 6%, $weight: bold);
+    text-transform: uppercase;
+  }
+
+  @include typography('p1') {
+    @include util.typography-factory($size: 16px, $height: 170%);
+  }
+
+  @include typography('p2') {
+    @include util.typography-factory($size: 14px, $height: 180%, $weight: 600);
+  }
+
+  @include typography('p3') {
+    @include util.typography-factory($size: 14px, $height: 180%);
+  }
+
+  @include typography('p4') {
+    @include util.typography-factory($size: 12px, $height: 180%);
+  }
+
+  @include typography('s1') {
+    @include util.typography-factory($size: 15px, $height: 16px);
+  }
+}

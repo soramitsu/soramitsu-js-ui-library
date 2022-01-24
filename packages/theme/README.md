@@ -46,16 +46,16 @@ $tokens: (
 
 This is a pure tokens schema, without any values. If you want to add some new tokens, you should do it here in the same format.
 
-**Bindings** could be made safely with `resolve` or `resolve-as-var` utility functions:
+**Bindings** could be made safely with `token` or `token-as-var` utility functions:
 
 ```scss
-@use './util';
+@use '~@soramitsu-ui/theme/sass' as theme;
 
 .alert {
   &--ok {
-    background: var(util.resolve('comp.alert.background-ok'));
+    background: var(theme.token('comp.alert.background-ok'));
     //  or
-    background: util.resolve-as-var('comp.alert.background-ok');
+    background: theme.token-as-var('comp.alert.background-ok');
   }
 }
 ```
@@ -69,7 +69,7 @@ This is a pure tokens schema, without any values. If you want to add some new to
 To **bind some actual values for tokens**, use `eval-tokens` or `eval-tokens-partial` mixins:
 
 ```scss
-@use './util';
+@use '~@soramitsu-ui/theme/sass' as theme;
 
 :root {
   @include util.eval-tokens(
@@ -83,14 +83,14 @@ To **bind some actual values for tokens**, use `eval-tokens` or `eval-tokens-par
         ),
         'sys': (
           'color': (
-            'status-ok': util.resolve-as-var('ref.color.blue'),
-            'status-err': util.resolve-as-var('ref.color.red'),
+            'status-ok': theme.token-as-var('ref.color.blue'),
+            'status-err': theme.token-as-var('ref.color.red'),
           ),
         ),
         'comp': (
           'alert': (
-            'background-ok': util.resolve-as-var('sys.color.status-ok'),
-            'background-err': util.resolve-as-var('sys.color.status-err'),
+            'background-ok': theme.token-as-var('sys.color.status-ok'),
+            'background-err': theme.token-as-var('sys.color.status-err'),
           ),
         )
       )
@@ -123,10 +123,10 @@ To **bind some actual values for tokens**, use `eval-tokens` or `eval-tokens-par
 This library also exports **presets** of tokens (only `light` yet). You can use it like this:
 
 ```scss
-@use './token-presets';
+@use '~@soramitsu-ui/theme/sass' as theme;
 
 :root {
-  @include token-presets.light;
+  @include theme.tokens-preset.light;
 }
 ```
 
@@ -180,9 +180,9 @@ With typography the problem becomes more complicated. Each typography "token" co
 
 Thus we cannot to use only Sass utilities which compile the actual class names, and it's better to define there classes statically. Let's use such naming convention:
 
-- `.sora-tpg-display-1`
-- `.sora-tpg-display-2`
-- `.sora-tpg-heading-1`
+- `.sora-tpg-d1`
+- `.sora-tpg-d2`
+- `.sora-tpg-h1`
 - ...
 
 > You can explore the full set of typography tokens in Figma.
@@ -196,9 +196,9 @@ TODO shortcuts guide
 To **define** actual typography classes you can use `typography` mixin that **validates the name of typography token** and **generates the actual class name** for it, so you can be more decoupled from the implementation details and to be a bit more refactoring-resistent.
 
 ```scss
-@use './util';
+@use '~@soramitsu-ui/theme/sass' as theme;
 
-@include util.typography('display-1') {
+@include theme.typography('d1') {
   font-family: Sora;
   font-weight: normal;
   font-size: 40px;
@@ -209,23 +209,23 @@ To **define** actual typography classes you can use `typography` mixin that **va
 ```
 
 ```css
-.sora-tpg-display-1 {
+.sora-tpg-d1 {
   font-family: Sora;
   font-weight: normal;
   font-size: 40px;
 }
 ```
 
-Finally, this library export the base typography preset. You can use it like this:
+Finally, you can use default typography preset:
 
 ```scss
-@use './typography-presets';
+@use '~@soramitsu-ui/theme/sass' as theme;
 
-@include typography-presets.default();
+@include theme.typography-preset-default;
 
 // or nest it
 .my-custom-typography-scope {
-  @include typography-presets.default();
+  @include theme.typography-preset-default;
 }
 
 // or whatever else
@@ -233,11 +233,18 @@ Finally, this library export the base typography preset. You can use it like thi
 
 ### Possible "Neumorphism" in the future
 
-We have already established that Neumorphism could not be implemented only via tokens - there will be too much of them, and code will become too complex. Thus, apparently Neumorphism will be a global design system variation, even with its own tokens tree. Utilities like `resolve`, `eval-tokens`, theme presets etc will become `resolve-std` & `resolve-neumorphic` (maybe the old `resolve` helper will remain, but as deprecated functionality with errors/warning/redirections to `std` functionality).
+We have already established that Neumorphism could not be implemented only via tokens - there will be too much of them, and code will become too complex. Thus, apparently Neumorphism will be a global design system variation, even with its own tokens tree. Utilities like `token`, `eval-tokens`, theme presets etc will become `token-std` & `token-neumorphic` (maybe the old `token` helper will remain, but as deprecated functionality with errors/warning/redirections to `std` functionality).
 
 ### Fonts
 
-describe fonts exports
+To use Sora font, use the following entrypoint:
 
-TODO
-add tests for SASS and library exports (jest require.resolve after build)
+```scss
+// From SCSS
+@use '~@soramitsu-ui/theme/fonts/Sora';
+```
+
+```js
+// From JavaScript
+import '@soramitsu-ui/theme/fonts/Sora'
+```
