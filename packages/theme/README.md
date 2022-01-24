@@ -2,6 +2,44 @@
 
 This package contains the core part of Soramitsu's Design System - it's **tokens** and **typography** - and also their **presets**.
 
+# TL;DR
+
+Quick setup with Sass:
+
+```scss
+@use '@soramitsu-ui/fonts/Sora';
+@use '@soramitsu-ui/theme/sass' as theme;
+
+@include theme.typography-preset-default;
+
+:root {
+  @include theme.tokens-preset-light;
+
+  // or
+
+  @include theme.eval-tokens-partial(
+    (
+      sys: (
+        color: (
+          primary: black,
+        ),
+      ),
+    )
+  );
+}
+
+.your-button {
+  color: theme.token-as-var('sys.color.primary');
+}
+```
+
+```html
+<!-- Use typography -->
+<h1 class="sora-tpg-h1">Lorem ipsum dolor sit amet.</h1>
+```
+
+Explore/edit a set of available tokens at `src/sass/tokens.scss`.
+
 ## Guide
 
 Design System is based on **tokens**. The most of them are just CSS Custom Properties, but **typography** works via CSS Classes. Their approaches are different.
@@ -19,7 +57,7 @@ There are 2 main use cases for tokens:
 
 For both this library provides a set of Sass utilities. With them, you can abstract from actual variables names, get verbose errors or warning in case you use wrong variable paths or something was deprecated/moved etc.
 
-Anyway, the main dictionary of design system tokens is located at `src/sass/tokens.scss` in this format:
+Anyway, the main dictionary of design system tokens is located at **`src/sass/tokens.scss`** in this format:
 
 ```scss
 $tokens: (
@@ -49,7 +87,7 @@ This is a pure tokens schema, without any values. If you want to add some new to
 **Bindings** could be made safely with `token` or `token-as-var` utility functions:
 
 ```scss
-@use '~@soramitsu-ui/theme/sass' as theme;
+@use '@soramitsu-ui/theme/sass' as theme;
 
 .alert {
   &--ok {
@@ -69,7 +107,7 @@ This is a pure tokens schema, without any values. If you want to add some new to
 To **bind some actual values for tokens**, use `eval-tokens` or `eval-tokens-partial` mixins:
 
 ```scss
-@use '~@soramitsu-ui/theme/sass' as theme;
+@use '@soramitsu-ui/theme/sass' as theme;
 
 :root {
   @include util.eval-tokens(
@@ -123,7 +161,7 @@ To **bind some actual values for tokens**, use `eval-tokens` or `eval-tokens-par
 This library also exports **presets** of tokens (only `light` yet). You can use it like this:
 
 ```scss
-@use '~@soramitsu-ui/theme/sass' as theme;
+@use '@soramitsu-ui/theme/sass' as theme;
 
 :root {
   @include theme.tokens-preset.light;
@@ -196,7 +234,7 @@ TODO shortcuts guide
 To **define** actual typography classes you can use `typography` mixin that **validates the name of typography token** and **generates the actual class name** for it, so you can be more decoupled from the implementation details and to be a bit more refactoring-resistent.
 
 ```scss
-@use '~@soramitsu-ui/theme/sass' as theme;
+@use '@soramitsu-ui/theme/sass' as theme;
 
 @include theme.typography('d1') {
   font-family: Sora;
@@ -241,7 +279,7 @@ To use Sora font, use the following entrypoint:
 
 ```scss
 // From SCSS
-@use '~@soramitsu-ui/theme/fonts/Sora';
+@use '@soramitsu-ui/theme/fonts/Sora';
 ```
 
 ```js
