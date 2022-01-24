@@ -1,3 +1,7 @@
+<script lang="ts">
+export default defineComponent({ name: 'SButton' })
+</script>
+
 <script setup lang="ts">
 import { computed, ComputedRef } from 'vue'
 import { SSpinner } from '@/lib'
