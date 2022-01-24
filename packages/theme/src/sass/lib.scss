@@ -97,31 +97,31 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
 
 @mixin typography-preset-default() {
   @include typography('d1') {
-    @include util.typography-factory($size: 40px, $height: 120%, $spacing: -2%, $weight: bold);
+    @include util.typography-factory($size: 40px, $height: 120%, $spacing: -0.02em, $weight: bold);
   }
 
   @include typography('d2') {
-    @include util.typography-factory($size: 30px, $height: 130%, $spacing: -4%, $weight: bold);
+    @include util.typography-factory($size: 30px, $height: 130%, $spacing: -0.04em, $weight: bold);
   }
 
   @include typography('h1') {
-    @include util.typography-factory($size: 36px, $height: 120%, $spacing: -4%);
+    @include util.typography-factory($size: 36px, $height: 120%, $spacing: -0.04em);
   }
 
   @include typography('h2') {
-    @include util.typography-factory($size: 30px, $height: 130%, $spacing: -4%);
+    @include util.typography-factory($size: 30px, $height: 130%, $spacing: -0.04em);
   }
 
   @include typography('h3') {
-    @include util.typography-factory($size: 24px, $height: 130%, $spacing: -2%);
+    @include util.typography-factory($size: 24px, $height: 130%, $spacing: -0.02em);
   }
 
   @include typography('h4') {
-    @include util.typography-factory($size: 18px, $height: 150%, $spacing: -2%);
+    @include util.typography-factory($size: 18px, $height: 150%, $spacing: -0.02em);
   }
 
   @include typography('h5') {
-    @include util.typography-factory($size: 16px, $height: 150%, $spacing: 1%);
+    @include util.typography-factory($size: 16px, $height: 150%, $spacing: 0.01em);
   }
 
   @include typography('h6') {
@@ -133,17 +133,17 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
   }
 
   @include typography('ch1') {
-    @include util.typography-factory($size: 14px, $height: 130%, $spacing: 1%, $weight: bold);
+    @include util.typography-factory($size: 14px, $height: 130%, $spacing: 0.01em, $weight: bold);
     text-transform: uppercase;
   }
 
   @include typography('ch2') {
-    @include util.typography-factory($size: 12px, $height: 130%, $spacing: 3%, $weight: bold);
+    @include util.typography-factory($size: 12px, $height: 130%, $spacing: 0.03em, $weight: bold);
     text-transform: uppercase;
   }
 
   @include typography('ch3') {
-    @include util.typography-factory($size: 10px, $height: 140%, $spacing: 6%, $weight: bold);
+    @include util.typography-factory($size: 10px, $height: 140%, $spacing: 0.06em, $weight: bold);
     text-transform: uppercase;
   }
 

@@ -2,27 +2,6 @@
 @use 'sass:map';
 @use 'sass:list';
 
-// @function str-dot-split($str) {
-//   $items: [];
-
-//   @while $str != '' {
-//     $idx: str-index($str, '.');
-//     $part: null;
-
-//     @if $idx == null {
-//       $part: $str;
-//       $str: '';
-//     } @else {
-//       $part: str-slice($str, 0, $idx - 1);
-//       $str: str-slice($str, $idx + 1, -1);
-//     }
-
-//     $items: append($items, $part);
-//   }
-
-//   @return $items;
-// }
-
 @function str-replace($source, $target, $replacement) {
   $idx: string.index($source, $target);
 
@@ -41,6 +20,7 @@
   $acc: ();
   @each $key in map.keys($map) {
     $var-name: $prefix + str-replace($key, '.', '_');
+    $var-name: string.unquote($var-name);
     $acc: map.set($acc, $key, $var-name);
   }
   @return $acc;
@@ -96,10 +76,6 @@
   // check that there are no excessive tokens
   $excessive: lists-diff($given-keys, $compiled-keys);
 
-  // @debug 'given', $given-keys;
-  // @debug 'compiled', $compiled-keys;
-  // @debug 'excessive', $excessive;
-
   @if list.length($excessive) > 0 {
     @error "Provided tokens data is invalid - there are some excessive keys: #{$excessive}";
   }
@@ -142,22 +118,3 @@
 
   @return $acc;
 }
-
-// // compiles tree with 'null's to a flat map from dotted token name (e.g. sys.color.primary) to it's variable name.
-// @function compile-tokens-tree($tree) {
-// }
-
-// @function resolve($tree, $path-raw) {
-//   $path: str-dot-split($path-raw);
-//   @if not map.has-key($tree, $path...) {
-//     @error "Token #{inspect($path-raw)} not found";
-//   }
-
-//   $value: map.get($tree, $path...);
-//   $ty: type-of($value);
-//   @if $ty != 'string' {
-//     @error "Invalid value type of token #{inspect($path-raw)}. Expected string, got #{$ty}: #{$value}";
-//   }
-
-//   @return $value;
-// }

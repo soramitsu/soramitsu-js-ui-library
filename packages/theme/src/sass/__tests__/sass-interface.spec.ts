@@ -40,7 +40,7 @@ describe('Exports', () => {
       ),
     ).toMatchInlineSnapshot(`
       "body {
-        color: var(\\"--sora_sys_color_primary\\");
+        color: var(--sora_sys_color_primary);
       }"
     `)
   })
@@ -171,7 +171,7 @@ describe('Exports', () => {
         font-size: 40px;
         font-weight: bold;
         line-height: 120%;
-        letter-spacing: -2%;
+        letter-spacing: -0.02em;
       }
 
       .sora-tpg-d2 {
@@ -179,7 +179,7 @@ describe('Exports', () => {
         font-size: 30px;
         font-weight: bold;
         line-height: 130%;
-        letter-spacing: -4%;
+        letter-spacing: -0.04em;
       }
 
       .sora-tpg-h1 {
@@ -187,7 +187,7 @@ describe('Exports', () => {
         font-size: 36px;
         font-weight: 400;
         line-height: 120%;
-        letter-spacing: -4%;
+        letter-spacing: -0.04em;
       }
 
       .sora-tpg-h2 {
@@ -195,7 +195,7 @@ describe('Exports', () => {
         font-size: 30px;
         font-weight: 400;
         line-height: 130%;
-        letter-spacing: -4%;
+        letter-spacing: -0.04em;
       }
 
       .sora-tpg-h3 {
@@ -203,7 +203,7 @@ describe('Exports', () => {
         font-size: 24px;
         font-weight: 400;
         line-height: 130%;
-        letter-spacing: -2%;
+        letter-spacing: -0.02em;
       }
 
       .sora-tpg-h4 {
@@ -211,7 +211,7 @@ describe('Exports', () => {
         font-size: 18px;
         font-weight: 400;
         line-height: 150%;
-        letter-spacing: -2%;
+        letter-spacing: -0.02em;
       }
 
       .sora-tpg-h5 {
@@ -219,7 +219,7 @@ describe('Exports', () => {
         font-size: 16px;
         font-weight: 400;
         line-height: 150%;
-        letter-spacing: 1%;
+        letter-spacing: 0.01em;
       }
 
       .sora-tpg-h6 {
@@ -243,7 +243,7 @@ describe('Exports', () => {
         font-size: 14px;
         font-weight: bold;
         line-height: 130%;
-        letter-spacing: 1%;
+        letter-spacing: 0.01em;
         text-transform: uppercase;
       }
 
@@ -252,7 +252,7 @@ describe('Exports', () => {
         font-size: 12px;
         font-weight: bold;
         line-height: 130%;
-        letter-spacing: 3%;
+        letter-spacing: 0.03em;
         text-transform: uppercase;
       }
 
@@ -261,7 +261,7 @@ describe('Exports', () => {
         font-size: 10px;
         font-weight: bold;
         line-height: 140%;
-        letter-spacing: 6%;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
       }
 
