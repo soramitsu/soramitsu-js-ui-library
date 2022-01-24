@@ -18,21 +18,13 @@ export const Configurable = defineStory((args) =>  ({
   },
   template: `
     <div class="flex flex-col items-start">
-    <SLink
-      v-bind="args"
-      href="https://soramitsu.co.jp/"
-      target="_blank"
-    >
-      {{ args.type }}
-    </SLink>
-    <SLink
-      v-bind="args"
-      class="mt-4"
-      href="https://soramitsu.co.jp/"
-      target="_blank"
-    >
-      {{ args.type }}
-    </SLink>
+      <SLink
+        v-bind="args"
+        href="https://soramitsu.co.jp/"
+        target="_blank"
+      >
+        {{ args.type }}
+      </SLink>
     </div>
   `
 }))
