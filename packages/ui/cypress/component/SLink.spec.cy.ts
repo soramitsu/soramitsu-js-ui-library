@@ -61,7 +61,7 @@ describe('Link', () => {
       })
     })
 
-    context('When it is link', () => {
+    context('When it is hint', () => {
       beforeEach(() => {
         mount(SLink, {
           propsData: {
