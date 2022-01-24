@@ -23,7 +23,11 @@ export default defineConfig({
     }),
     Vue(),
     Icons(),
-    Svg(),
+    Svg({
+      svgoConfig: {
+        plugins: [{ name: 'removeViewBox', active: false }]
+      }
+    }),
     AutoImport({
       imports: ['vue', '@vueuse/core'],
     }),
