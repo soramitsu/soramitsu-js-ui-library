@@ -117,26 +117,27 @@ describe('Exports', () => {
         --sora_sys_color_border-secondary: #eceff0;
         --sora_sys_color_disabled: #f5f7f8;
         --sora_sys_color_on-disabled: #a3a4a8;
-        --sora_sys_color_body: #fff;
-        --sora_sys_color_surface: #fff;
-        --sora_sys_color_surface-overlay: rgba(255, 255, 255, 0.7);
-        --sora_sys_color_overlay: rgba(0, 0, 0, 0.45);
-        --sora_sys_color_success: #009900;
-        --sora_sys_color_success-background: #ddf4dd;
-        --sora_sys_color_success-background-hover: #b2f1b2;
-        --sora_sys_color_warning: #ff9900;
-        --sora_sys_color_warning-background: #fff2df;
-        --sora_sys_color_warning-background-hover: #ffe3ba;
-        --sora_sys_color_error: #ff0000;
-        --sora_sys_color_error-background: #fff9fa;
-        --sora_sys_color_error-background-hover: #ffd9df;
-        --sora_sys_color_info: #1070ca;
-        --sora_sys_color_info-background: #f3f6ff;
-        --sora_sys_color_info-background-hover: #dbe4ff;
-        --sora_sys_shadow_page-header: 0px 24px 80px rgba(10, 2, 34, 0.0700000003);
-        --sora_sys_shadow_floating-notification: 0px 68px 80px rgba(24, 24, 29, 0.0900000036);
-        --sora_sys_shadow_dropdown: 0px 0px 4px rgba(45, 41, 38, 0.0799999982);
-        --sora_sys_shadow_active-tab: 0px 1px 1px rgba(83, 86, 90, 0.1000000015);
+        --sora_sys_color_util_body: #fff;
+        --sora_sys_color_util_surface: #fff;
+        --sora_sys_color_util_surface-overlay: rgba(255, 255, 255, 0.7);
+        --sora_sys_color_util_overlay: rgba(0, 0, 0, 0.45);
+        --sora_sys_color_status_success: #009900;
+        --sora_sys_color_status_success-background: #ddf4dd;
+        --sora_sys_color_status_success-background-hover: #b2f1b2;
+        --sora_sys_color_status_warning: #ff9900;
+        --sora_sys_color_status_warning-background: #fff2df;
+        --sora_sys_color_status_warning-background-hover: #ffe3ba;
+        --sora_sys_color_status_error: #ff0000;
+        --sora_sys_color_status_error-background: #fff9fa;
+        --sora_sys_color_status_error-background-hover: #ffd9df;
+        --sora_sys_color_status_info: #1070ca;
+        --sora_sys_color_status_info-background: #f3f6ff;
+        --sora_sys_color_status_info-background-hover: #dbe4ff;
+        --sora_sys_shadow_page-header: 0px 24px 80px rgba(10, 2, 34, 0.07), 0px 10.0266px 33.4221px rgba(10, 2, 34, 0.0558697), 0px 5.36071px 17.869px rgba(10, 2, 34, 0.05437), 0px 3.00517px 10.0172px rgba(10, 2, 34, 0.0484701), 0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562), 0px 0.664142px 2.21381px rgba(10, 2, 34, 0.0208172);
+        --sora_sys_shadow_modal-window-header: 0px -8px 80px rgba(10, 2, 34, 0.07), 0px 1px 33.4221px rgba(10, 2, 34, 0.0558697), 0px 0px 17.869px rgba(10, 2, 34, 0.05437), 0px 2px 10.0172px rgba(10, 2, 34, 0.0484701), 0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562), 0px 0.664142px 2.21381px rgba(10, 2, 34, 0.0208172);
+        --sora_sys_shadow_floating-notification: 0px 68px 80px rgba(24, 24, 29, 0.09), 0px 30.1471px 24.1177px rgba(24, 24, 29, 0.058643), 0px 12.5216px 10.0172px rgba(24, 24, 29, 0.045), 0px 4.5288px 3.62304px rgba(24, 24, 29, 0.031357);
+        --sora_sys_shadow_dropdown: 0px 0px 4px rgba(45, 41, 38, 0.08), 0px 4px 16px rgba(45, 41, 38, 0.08);
+        --sora_sys_shadow_active-tab: 0px 1px 1px rgba(83, 86, 90, 0.1);
       }"
     `)
   })
