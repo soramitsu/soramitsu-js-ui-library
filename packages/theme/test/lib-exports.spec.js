@@ -11,7 +11,7 @@ function resolveEntry(relative = '') {
 }
 
 test.each([
-  ['', 'dist/lib.cjs.js'],
+  // ['', 'dist/lib.cjs.js'],
   ['/sass', 'src/sass/lib.scss'],
   ['/sass/util.scss', 'src/sass/util.scss'],
   ['/fonts/Sora', 'src/fonts/Sora/index.css'],
