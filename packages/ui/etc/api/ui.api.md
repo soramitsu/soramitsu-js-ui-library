@@ -823,6 +823,47 @@ width: string | number;
 size: string | number;
 }>;
 
+// @public (undocumented)
+export const STab: DefineComponent<    {
+disabled: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+borderRadius: {
+type: PropType<string>;
+} & {
+default: string;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+disabled?: unknown;
+borderRadius?: unknown;
+} & {
+borderRadius: string;
+disabled: boolean;
+} & {}>, {
+borderRadius: string;
+disabled: boolean;
+}>;
+
+// @public (undocumented)
+export const STabsPanel: DefineComponent<    {
+modelValue: {
+type: PropType<number>;
+required: true;
+} & {
+default: number;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+} & {
+modelValue: number;
+} & {}> & {
+"onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+}, {
+modelValue: number;
+}>;
+
 // @public
 export enum Status {
     // (undocumented)
