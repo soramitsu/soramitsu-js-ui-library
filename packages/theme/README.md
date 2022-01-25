@@ -227,9 +227,7 @@ Thus we cannot to use only Sass utilities which compile the actual class names, 
 
 Anyway, this library provides a bit of utilities which could help to reduce typography (possible) headacke.
 
-WindiCSS shortcuts could help to **bind** typography classes - (i) you will see tips in the VSCode and (ii) these shortcuts are a bit different from actual typography class names and thus **less coupled** to them.
-
-TODO shortcuts guide
+**TODO**: find a way to use Windi CSS to make bindings?
 
 To **define** actual typography classes you can use `typography` mixin that **validates the name of typography token** and **generates the actual class name** for it, so you can be more decoupled from the implementation details and to be a bit more refactoring-resistent.
 
@@ -286,3 +284,7 @@ To use Sora font, use the following entrypoint:
 // From JavaScript
 import '@soramitsu-ui/theme/fonts/Sora'
 ```
+
+## TODO
+
+- [ ] Define Windi CSS preset with bindings to system/reference tokens. It will be useful primarily for library users, not for the component library itself.

@@ -27,22 +27,21 @@ function onClickClose() {
 
 <template>
   <div
-    class="s-alert"
+    :class="['s-alert', { 's-alert_inline': inline }]"
     :data-status="status"
-    :data-inline="inline"
   >
     <div class="s-alert__icon-wrapper">
       <component :is="StatusIcon" />
     </div>
 
-    <div class="s-alert__content">
-      <div class="s-alert__title">
+    <div class="flex-1">
+      <div class="sora-tpg-h5">
         <slot name="title">
           {{ title }}
         </slot>
       </div>
 
-      <div class="s-alert__description">
+      <div class="sora-tpg-p3">
         <slot name="description">
           {{ description }}
         </slot>
@@ -64,60 +63,28 @@ function onClickClose() {
 </template>
 
 <style lang="scss">
+@use '@/theme';
+
 .s-alert {
   @apply rounded border border-solid;
   @apply px-6 py-4;
   @apply flex space-x-4;
-  @apply text-base-content-primary;
 
-  @mixin status($x) {
-    &[data-status='#{$x}'] {
-      @content;
+  @each $status in ('info', 'warning', 'success', 'error') {
+    $bg: theme.token-as-var('sys.color.status.#{$status}-background');
+    $fg: theme.token-as-var('sys.color.status.#{$status}');
+
+    &[data-status='#{$status}'] {
+      background: $bg;
+      border-color: $fg;
+    }
+
+    &[data-status='#{$status}'] &__icon-wrapper {
+      color: $fg;
     }
   }
 
-  @mixin status-icon($x) {
-    &[data-status='#{$x}'] &__icon-wrapper {
-      @content;
-    }
-  }
-
-  @include status('info') {
-    @apply bg-status-background-info border-status-info;
-  }
-  @include status-icon('info') {
-    @apply text-status-info;
-  }
-  @include status('error') {
-    @apply bg-status-background-error border-status-error;
-  }
-  @include status-icon('error') {
-    @apply text-status-error;
-  }
-  @include status('warning') {
-    @apply bg-status-background-warning border-status-warning;
-  }
-  @include status-icon('warning') {
-    @apply text-status-warning;
-  }
-  @include status('success') {
-    @apply bg-status-background-success border-status-success;
-  }
-  @include status-icon('success') {
-    @apply text-status-success;
-  }
-
-  &__content {
-    @apply flex-1;
-  }
-
-  &__title {
-    @apply s-ty-h5;
-  }
-
-  &__description {
-    @apply s-ty-p3;
-  }
+  // TODO implement inline
 
   &__icon-wrapper svg,
   &__close-wrapper svg {

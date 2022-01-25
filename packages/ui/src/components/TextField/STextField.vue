@@ -1,6 +1,4 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-
 export default defineComponent({
   name: 'STextField',
   inheritAttrs: false,
@@ -119,12 +117,10 @@ const status = computed<null | TextFieldStatus>(() => {
 const model = useVModel(props, 'modelValue', emit, { passive: true })
 
 const isValueEmpty = computed(() => !model.value)
+const isFocused = ref(false)
+const labelTypographyClass = computed(() => (!isFocused.value && isValueEmpty.value ? 'sora-tpg-p3' : 'sora-tpg-p4'))
 
 // MESSAGE
-
-// watchEffect(() => {
-//   console.log('reactive? %o\nkeys: %o', isReactive(slots), Object.keys(slots))
-// })
 
 const isMessageSlotDefined = () => !!slots.message
 const shouldRenderMessage = () => !!props.message || isMessageSlotDefined()
@@ -189,7 +185,10 @@ const inputType = computed(() =>
     :data-status="status"
   >
     <div class="s-text-field__input-wrapper">
-      <label :for="id">
+      <label
+        :for="id"
+        :class="labelTypographyClass"
+      >
         <slot name="label">{{ label }}</slot>
       </label>
 
@@ -199,6 +198,8 @@ const inputType = computed(() =>
         :type="inputType"
         :disabled="disabled"
         v-bind="$attrs"
+        @focus="isFocused = true"
+        @blur="isFocused = false"
       >
 
       <div
@@ -209,7 +210,7 @@ const inputType = computed(() =>
         <div
           v-if="counterText"
           data-testid="counter"
-          class="s-text-field__counter"
+          class="s-text-field__counter sora-tpg-p4"
         >
           {{ counterText }}
         </div>
@@ -234,7 +235,7 @@ const inputType = computed(() =>
       <div
         v-if="shouldRenderMessage()"
         data-testid="message"
-        class="s-text-field__message"
+        class="s-text-field__message sora-tpg-p4"
       >
         <component
           :is="messageIcon"
@@ -251,19 +252,18 @@ const inputType = computed(() =>
 </template>
 
 <style lang="scss">
+@use '@/theme';
+
 $height: 56px;
 $input-padding: 24px 16px 6px 16px;
 $label-top-primary: 16px;
 $label-top-secondary: 6px;
 $message-icon-alignment-fix: -1px;
 
-@function status-color($status) {
-  @return var(--s-color-status-#{$status});
-}
-
-@function status-color-bg($status) {
-  @return var(--s-color-status-#{$status}-background);
-}
+$theme-bg: theme.token-as-var('sys.color.background');
+$theme-bg-hover: theme.token-as-var('sys.color.background-hover');
+$theme-border-primary: theme.token-as-var('sys.color.border-primary');
+$theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
 
 .s-text-field {
   $root: &;
@@ -277,27 +277,30 @@ $message-icon-alignment-fix: -1px;
   &:focus-within {
     label {
       transform: translateY(#{$label-top-secondary});
-      @apply s-ty-p4;
+      // @apply s-ty-p4;
     }
   }
 
   &__input-wrapper {
-    @apply bg-base-background rounded border border-transparent;
+    background: $theme-bg;
+    @apply rounded border border-transparent;
     @apply relative flex;
     @apply transition-all;
 
     height: $height;
 
     &:hover:not(:focus-within) {
-      @apply bg-base-background-hover;
+      background: $theme-bg-hover;
     }
 
     &:focus-within {
-      @apply border-base-border-primary bg-transparent;
+      border-color: $theme-border-primary;
+      @apply bg-transparent;
     }
 
     label {
-      @apply s-ty-p3 text-base-content-tertiary pointer-events-none;
+      color: $theme-content-tertiary;
+      @apply pointer-events-none;
       @apply absolute top-0 left-4;
       @apply transition-all;
 
@@ -321,12 +324,13 @@ $message-icon-alignment-fix: -1px;
   }
 
   &__counter {
-    @apply text-base-content-tertiary s-ty-p4;
+    color: $theme-content-tertiary;
   }
 
   @each $status in 'success', 'warning', 'error' {
-    $col: status-color($status);
-    $bg: status-color-bg($status);
+    $col: theme.token-as-var('sys.color.status.#{$status}');
+    $bg: theme.token-as-var('sys.color.status.#{$status}-background');
+    $bg-hover: theme.token-as-var('sys.color.status.#{$status}-background-hover');
 
     &[data-status='#{$status}'] {
       label {
@@ -340,9 +344,7 @@ $message-icon-alignment-fix: -1px;
         }
 
         &:hover:not(:focus-within) {
-          // FIXME
-          // need special status-hover color
-          background: transparent;
+          background: $bg-hover;
         }
 
         &:focus-within {
@@ -357,7 +359,7 @@ $message-icon-alignment-fix: -1px;
   }
 
   &__message {
-    @apply s-ty-p4 pt-2;
+    @apply pt-2;
 
     svg#{&}-icon {
       fill: currentColor;

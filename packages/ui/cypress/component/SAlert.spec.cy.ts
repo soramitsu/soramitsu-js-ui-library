@@ -1,7 +1,7 @@
 import { mount } from '@cypress/vue'
 import { ref } from 'vue'
 import { Status } from '@/types'
-import SAlert from './SAlert.vue'
+import { SAlert } from '@/lib'
 
 it('Different statuses', () => {
   mount({
