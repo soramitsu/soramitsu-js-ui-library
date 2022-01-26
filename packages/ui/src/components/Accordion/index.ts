@@ -1,1 +1,1 @@
-export { default as SAccordion } from './SAccordion.vue'
+export { default as SAccordionItem } from './SAccordionItem.vue'

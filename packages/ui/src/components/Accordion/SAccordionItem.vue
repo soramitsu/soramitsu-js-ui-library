@@ -1,5 +1,5 @@
 <script lang="ts">
-export default defineComponent({ name: 'SAccordion' })
+export default { name: 'SAccordionItem' }
 </script>
 
 <script setup lang="ts">
