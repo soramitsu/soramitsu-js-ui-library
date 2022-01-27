@@ -25,7 +25,7 @@ import { SAlert } from './components/Alert'
 import { SSpinner } from './components/Spinner'
 import { STextField } from './components/TextField'
 import { SPopover, SPopoverWrappedTransition } from './components/Popover'
-import { SAccordionItem } from './components/Accordion'
+import { SAccordionItem, SAccordion } from './components/Accordion'
 
 export function plugin(): Plugin {
   return (app) => {
@@ -48,5 +48,6 @@ export function plugin(): Plugin {
     app.component('SPopover', SPopover)
     app.component('SPopoverWrappedTransition', SPopoverWrappedTransition)
     app.component('SAccordionItem', SAccordionItem)
+    app.component('SAccordion', SAccordion)
   }
 }

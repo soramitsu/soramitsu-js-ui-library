@@ -3,23 +3,32 @@ export default { name: 'SAccordionItem' }
 </script>
 
 <script setup lang="ts">
+import { onUnmounted, computed } from 'vue'
 import { IconArrowsChevronDownRounded24 } from '@/components/icons'
+import { useAccordionApi } from './api'
 
 const props = withDefaults(
     defineProps<{
       modelValue?: boolean,
       title?: string,
       subtitle?: string,
+      name?: string,
     }>(),
     {
       modelValue: false,
       title: '',
       subtitle: '',
+      name: '',
     },
 )
 
-const emit = defineEmits<(event: 'update:modelValue', value: string) => void>()
+const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
 const model = useVModel(props, 'modelValue', emit, { passive: true })
+
+
+function toggle(expand?: boolean) {
+  model.value = expand ?? !model.value
+}
 
 function setContentClosed(el: HTMLElement) {
   el.style.height = '0';
@@ -34,7 +43,25 @@ function handleContentToggleEnd(el: HTMLElement) {
 }
 
 function handleTriggerClick() {
-  model.value = !model.value
+  toggle()
+}
+
+const groupApi = useAccordionApi()
+
+if (groupApi) {
+  const { register, unregister } = groupApi
+
+  const api = computed(() => ({
+    name: props.name,
+    isActive: model.value,
+    toggle
+  }))
+
+  register(api)
+
+  onUnmounted(() => {
+    unregister(api)
+  })
 }
 </script>
 
@@ -42,7 +69,7 @@ function handleTriggerClick() {
   <div
     class="s-accordion-item"
     :class="{
-      's-accordion-item_expanded': modelValue
+      's-accordion-item_expanded': model
     }"
   >
     <div
