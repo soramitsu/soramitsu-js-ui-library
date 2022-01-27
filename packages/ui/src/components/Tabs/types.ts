@@ -1,5 +1,7 @@
+import { Ref } from 'vue'
+
 export interface InjectData {
-  active: number
-  tabs: any[]
-  selectTab: (tab: string) => void
+  active: Ref<number>
+  tabs: Ref<any[]>
+  selectTab: (tab: number) => void
 }

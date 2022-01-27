@@ -1,43 +1,36 @@
 <script setup lang="ts">
-
-import { ref } from 'vue';
-
+import { tabsState as tabsStateKey } from './api'
 
 const props = withDefaults(
   defineProps<{
-    disabled?: boolean,
-    borderRadius?: string,
-  }>(), {
-  disabled: false,
-  borderRadius: ''
-}
+    disabled?: boolean
+    borderRadius?: string
+  }>(),
+  {
+    disabled: false,
+    borderRadius: '',
+  },
 )
 
-const instance = getCurrentInstance();
-
-
-const {active, tabs, selectTab}  = inject("tabsState", {
+const instance = getCurrentInstance()
+const { active, tabs, selectTab } = inject(tabsStateKey) || {
   active: ref(0),
   tabs: ref<any>([]),
-  selectTab: (t:number) => {},
-});
+  selectTab: (t: number) => {},
+}
 
-const index = computed(() =>
-  tabs.value.findIndex((target:any) => target.uid === instance?.uid)
-);
-const isActive = computed(() => index.value === active.value);
+const index = computed(() => tabs.value.findIndex((target: any) => target.uid === instance?.uid))
+const isActive = computed(() => index.value === active.value)
 
 const activateTab = () => {
-  selectTab(index.value);
-};
+  selectTab(index.value)
+}
 
 watchEffect(() => {
   if (index.value === -1) {
-    if (instance)
-    tabs.value.push(instance);
+    if (instance) tabs.value.push(instance)
   }
-});
-
+})
 </script>
 
 <template>
@@ -47,7 +40,7 @@ watchEffect(() => {
     :disabled="disabled"
     :class="[
       { 's-tab_active': isActive },
-      borderRadius ? `s-tab_border-radius-${borderRadius}` : 's-tab_border-radius-none'
+      borderRadius ? `s-tab_border-radius-${borderRadius}` : 's-tab_border-radius-none',
     ]"
     @click="activateTab"
   >

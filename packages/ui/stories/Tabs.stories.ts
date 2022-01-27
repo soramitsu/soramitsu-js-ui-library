@@ -7,7 +7,6 @@ const meta: Meta = {
 
 export default meta
 
-
 const defaultUsageStory = () => ({
   components: { STabsPanel, STab },
   template: `
@@ -17,11 +16,10 @@ const defaultUsageStory = () => ({
    <STab :border-radius="'right'">Third</STab>
    <STab class="ml-4" :border-radius="'full'" :disabled="true">Disabled</STab>
  </STabsPanel>`,
- setup() {
-  let currentTab = ref(0);    
-  return {  currentTab };
-}
+  setup() {
+    let currentTab = ref(0)
+    return { currentTab }
+  },
 })
 
-export const defaultUsage = defaultUsageStory.bind({});
-
+export const defaultUsage = defaultUsageStory.bind({})
