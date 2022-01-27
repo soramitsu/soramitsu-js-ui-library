@@ -40,17 +40,17 @@ function handleTriggerClick() {
 
 <template>
   <div
-    class="s-accordion"
+    class="s-accordion-item"
     :class="{
-      's-accordion_expanded': modelValue
+      's-accordion-item_expanded': modelValue
     }"
   >
     <div
-      class="s-accordion__trigger"
+      class="s-accordion-item__trigger"
       @click="handleTriggerClick"
     >
-      <div class="s-accordion__head">
-        <div class="s-accordion__title">
+      <div class="s-accordion-item__head">
+        <div class="s-accordion-item__title">
           <template v-if="title">
             {{ title }}
           </template>
@@ -59,7 +59,7 @@ function handleTriggerClick() {
             name="title"
           />
         </div>
-        <div class="s-accordion__subtitle">
+        <div class="s-accordion-item__subtitle">
           <template v-if="subtitle">
             {{ subtitle }}
           </template>
@@ -69,7 +69,7 @@ function handleTriggerClick() {
           />
         </div>
       </div>
-      <IconArrowsChevronDownRounded24 class="s-accordion__chevron" />
+      <IconArrowsChevronDownRounded24 class="s-accordion-item__chevron" />
     </div>
 
     <transition
@@ -82,7 +82,7 @@ function handleTriggerClick() {
       @after-leave="handleContentToggleEnd"
     >
       <div v-show="model">
-        <div class="s-accordion__body">
+        <div class="s-accordion-item__body">
           <slot />
         </div>
       </div>
@@ -91,7 +91,7 @@ function handleTriggerClick() {
 </template>
 
 <style lang="scss">
-.s-accordion {
+.s-accordion-item {
   @apply flex flex-col border border-base-border-secondary;
   $component: &;
 
