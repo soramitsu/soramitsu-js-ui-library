@@ -152,6 +152,76 @@ export interface PopoverApi {
 export type RegisteredToast = ToastRegisterParams;
 
 // @public (undocumented)
+export const SAccordion: DefineComponent<    {
+modelValue: {
+type: PropType<(string | number)[]>;
+} & {
+default: () => never[];
+};
+multiple: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: (string | number)[]) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+multiple?: unknown;
+} & {
+modelValue: (string | number)[];
+multiple: boolean;
+} & {}> & {
+"onUpdate:modelValue"?: ((value: (string | number)[]) => any) | undefined;
+}, {
+modelValue: (string | number)[];
+multiple: boolean;
+}>;
+
+// @public (undocumented)
+export const SAccordionItem: DefineComponent<    {
+modelValue: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+title: {
+type: PropType<string>;
+} & {
+default: string;
+};
+subtitle: {
+type: PropType<string>;
+} & {
+default: string;
+};
+name: {
+type: PropType<string>;
+} & {
+default: string;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: boolean) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+title?: unknown;
+subtitle?: unknown;
+name?: unknown;
+} & {
+modelValue: boolean;
+title: string;
+name: string;
+subtitle: string;
+} & {}> & {
+"onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
+}, {
+modelValue: boolean;
+title: string;
+name: string;
+subtitle: string;
+}>;
+
+// @public (undocumented)
 export const SAlert: DefineComponent<    {
 inline: {
 type: PropType<boolean>;
