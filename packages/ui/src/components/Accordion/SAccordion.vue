@@ -13,7 +13,7 @@ const props = withDefaults(
     }>(),
     {
       modelValue: () => [],
-      multiple: true
+      multiple: false
     },
 )
 
@@ -21,16 +21,25 @@ const emit = defineEmits<(event: 'update:modelValue', value: (string | number)[]
 const model = useVModel(props, 'modelValue', emit, { passive: true })
 
 const items: Ref<AccordionItemApi>[] = []
+const itemsToOpen = computed(() => {
+  return props.multiple || !model.value.length ? model.value : [model.value[0]]
+})
 
-watch(model, () => {
+watch(itemsToOpen, () => {
   items.forEach(item => {
-    const isItemActive = model.value.includes(item.value.name)
-    item.value.toggle(isItemActive)
+    updateItemState(item.value)
   })
 }, { immediate: true })
 
+function updateItemState(item: AccordionItemApi) {
+  if (!item.name) return
+
+  const isItemActive = itemsToOpen.value.includes(item.name)
+  item.toggle(isItemActive)
+}
+
 function handleSelection(item: AccordionItemApi) {
-  if (item.isActive) {
+  if (!props.multiple && item.isActive) {
     items.forEach(x => {
       if (x.value !== item) x.value.toggle(false)
     })
@@ -40,6 +49,7 @@ function handleSelection(item: AccordionItemApi) {
 const api: AccordionApi = {
   register(item: Ref<AccordionItemApi>) {
     items.push(item)
+    updateItemState(item.value)
     watch(item, handleSelection)
   },
   unregister(item: Ref<AccordionItemApi>) {
@@ -55,11 +65,23 @@ provide(ACCORDION_API_KEY, api)
 </script>
 
 <template>
-  <slot />
+  <div class="s-accordion">
+    <slot />
+  </div>
 </template>
 
 <style lang="scss">
 .s-accordion {
+  .s-accordion-item:first-child {
+    @apply rounded-t-8px;
 
+    .s-accordion-item__trigger {
+      @apply rounded-t-8px;
+    }
+  }
+
+  .s-accordion-item:last-child {
+    @apply rounded-b-8px;
+  }
 }
 </style>
