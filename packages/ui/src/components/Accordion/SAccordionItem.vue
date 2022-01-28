@@ -30,16 +30,22 @@ function toggle(expand?: boolean) {
   model.value = expand ?? !model.value
 }
 
-function setContentClosed(el: HTMLElement) {
-  el.style.height = '0';
+function setContentClosed(el: Element) {
+  if (el instanceof HTMLElement) {
+    el.style.height = '0';
+  }
 }
 
-function setContentOpened(el: HTMLElement) {
-  el.style.height = el.scrollHeight + "px";
+function setContentOpened(el: Element) {
+  if (el instanceof HTMLElement) {
+    el.style.height = el.scrollHeight + "px";
+  }
 }
 
-function handleContentToggleEnd(el: HTMLElement) {
-  el.style.height = "";
+function handleContentToggleEnd(el: Element) {
+  if (el instanceof HTMLElement) {
+    el.style.height = "";
+  }
 }
 
 function handleTriggerClick() {
