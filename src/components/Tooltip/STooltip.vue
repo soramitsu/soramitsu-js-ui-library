@@ -164,7 +164,7 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
 
   handleWindowFocus () {
     setTimeout(() => {
-      if (this.tooltip?.hide) {
+      if (this.tooltip && this.tooltip.hide) {
         this.tooltip.hide()
       }
     }, this.openDelay)
