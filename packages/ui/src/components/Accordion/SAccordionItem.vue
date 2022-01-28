@@ -108,7 +108,10 @@ if (groupApi) {
       @leave="setContentClosed"
       @after-leave="handleContentToggleEnd"
     >
-      <div v-show="model">
+      <div
+        v-show="model"
+        class="s-accordion-item__body-wrapper"
+      >
         <div class="s-accordion-item__body">
           <slot />
         </div>
