@@ -1,5 +1,6 @@
 import { defineMeta, defineStory } from './util'
 import { SAccordionItem, SAccordion } from '@/lib'
+import { Ref } from 'vue';
 
 export default defineMeta({
   title: 'Example/Accordion'
@@ -25,8 +26,8 @@ export const AccordionItem = defineStory((args: Record<string, unknown>) =>  ({
   `
 }))
 AccordionItem.argTypes = {
-  title: { controls: 'text' },
-  subtitle: { controls: 'text' },
+  title: { control: 'text' },
+  subtitle: { control: 'text' },
 }
 AccordionItem.args = {
   title: 'Accordion item',
@@ -39,24 +40,33 @@ export const Accordion = defineStory((args: Record<string, unknown>) =>  ({
     SAccordion
   },
   setup() {
+    const selectedStr = ref('item2 item1');
+    let modelValue: Ref<string[]> = ref([])
+
+    watch(selectedStr, () => {
+      modelValue.value = selectedStr.value.split(' ')
+    }, { immediate: true })
+
     return {
       args,
-      model: ref([]),
+      selectedStr,
+      modelValue
     }
   },
   template: `
-    <SAccordion v-model="model">
-      <SAccordionItem name="item1">
-        <template #title>Item 1</template>
-        <template #subtitle>first item</template>
+    <input class="border mb-4 w-500px" v-model="selectedStr">
+    <SAccordion v-model="modelValue" v-bind="args">
+      <SAccordionItem v-for="i in 5" :name="'item' + i">
+        <template #title>Item {{ i }}</template>
+        <template #subtitle>{{ i }} item</template>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
         ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
         cillum dolore eu fugiat nulla pariatur.
       </SAccordionItem>
-      <SAccordionItem name="item1">
-        <template #title>Item 2</template>
-        <template #subtitle>second item</template>
+      <SAccordionItem>
+        <template #title>Nameless</template>
+        <template #subtitle>Nameless item</template>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
         ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -65,11 +75,9 @@ export const Accordion = defineStory((args: Record<string, unknown>) =>  ({
     </SAccordion>
   `
 }))
-AccordionItem.argTypes = {
-  title: { controls: 'text' },
-  subtitle: { controls: 'text' },
+Accordion.argTypes = {
+  multiple: { control: 'boolean' }
 }
-AccordionItem.args = {
-  title: 'Accordion item',
-  subtitle: 'Accordion item description',
+Accordion.args = {
+  multiple: true
 }
