@@ -26,11 +26,7 @@ function onClickClose() {
 </script>
 
 <template>
-  <div
-    class="s-alert"
-    :data-status="status"
-    :data-inline="inline"
-  >
+  <div class="s-alert" :data-status="status" :data-inline="inline">
     <div class="s-alert__icon-wrapper">
       <component :is="StatusIcon" />
     </div>
@@ -49,14 +45,8 @@ function onClickClose() {
       </div>
     </div>
 
-    <div
-      v-if="showCloseBtn"
-      class="s-alert__close-wrapper"
-    >
-      <button
-        data-testid="close-btn"
-        @click="onClickClose"
-      >
+    <div v-if="showCloseBtn" class="s-alert__close-wrapper">
+      <button data-testid="close-btn" @click="onClickClose">
         <IconClose />
       </button>
     </div>

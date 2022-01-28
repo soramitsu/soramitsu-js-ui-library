@@ -1,12 +1,16 @@
 <script setup lang="ts">
 interface Props {
   /**
-   * Id for matching checkbox with label
+   * v-model for two-way data binding
+   */
+  modelValue?: boolean
+  /**
+   * Id for matching switch with label
    *
    */
   id: string
   /**
-   * Text label for checkbox
+   * Text label for switch
    *
    * @default ''
    */
@@ -30,19 +34,13 @@ const props = withDefaults(defineProps<Props>(), {
   checked: true,
   disabled: false,
 })
-
-const emit = defineEmits(['isActive'])
-
-function handleChange(value: boolean) {
-  emit('isActive', value)
-}
 </script>
 
 <template>
   <div class="s-switch">
     <input
       type="checkbox"
-      @change="handleChange(checked ?? true)"
+      @change="$emit('update:modelValue', checked)"
       :id="id"
       :checked="checked"
       :disabled="disabled"
