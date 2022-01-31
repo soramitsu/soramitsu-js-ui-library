@@ -16,8 +16,8 @@ it('SSwitch - renders with specified label', () => {
   cy.contains('Label')
 })
 
-it('SSwitch - renders unchecked switch when false prop is passed', () => {
-  mount(SSwitch, { props: { id: 'id', checked: false } })
+it('SSwitch - renders unchecked switch by default', () => {
+  mount(SSwitch, { props: { id: 'id' } })
 
   cy.get('input').should('be.not.checked')
 })
