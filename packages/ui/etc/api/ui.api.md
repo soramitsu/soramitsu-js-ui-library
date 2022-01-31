@@ -837,11 +837,6 @@ type: PropType<string>;
 } & {
 default: string;
 };
-checked: {
-type: PropType<boolean>;
-} & {
-default: boolean;
-};
 disabled: {
 type: PropType<boolean>;
 } & {
@@ -853,13 +848,11 @@ default: boolean;
 modelValue?: unknown;
 id?: unknown;
 label?: unknown;
-checked?: unknown;
 disabled?: unknown;
 } & {
 id: string;
 disabled: boolean;
 label: string;
-checked: boolean;
 } & {
 modelValue?: boolean | undefined;
 }> & {
@@ -867,7 +860,6 @@ modelValue?: boolean | undefined;
 }, {
 disabled: boolean;
 label: string;
-checked: boolean;
 }>;
 
 // @public

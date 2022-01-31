@@ -16,12 +16,6 @@ it('SSwitch - renders with specified label', () => {
   cy.contains('Label')
 })
 
-it('SSwitch - renders checked switch by default', () => {
-  mount(SSwitch, { props: { id: 'id' } })
-
-  cy.get('input').should('be.checked')
-})
-
 it('SSwitch - renders unchecked switch when false prop is passed', () => {
   mount(SSwitch, { props: { id: 'id', checked: false } })
 
@@ -35,27 +29,6 @@ it('SSwitch - renders disabled switch when prop is passed', () => {
 })
 
 it('SSwitch - handles two-way data binding and rises value up', () => {
-  mount({
-    setup() {
-      const checked = ref(true)
-
-      return { checked }
-    },
-    template: `
-      <div class="switch">{{ checked }}</div>
-      <SSwitch
-        id="id"
-        v-model="checked"
-        label="Label"
-      />
-      `,
-  })
-
-  cy.contains('Label').click()
-  cy.get('.switch').contains('false')
-})
-
-it('SSwitch - handles two-way data binding when providing checked value', () => {
   mount({
     setup() {
       const checked = ref(false)

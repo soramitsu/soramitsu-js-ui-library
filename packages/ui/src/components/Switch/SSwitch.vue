@@ -34,17 +34,8 @@ const model = useVModel(props, 'modelValue', emit)
 
 <template>
   <div class="s-switch">
-    <input
-      :id="id"
-      v-model="model"
-      type="checkbox"
-      :disabled="disabled"
-      class="s-switch-button"
-    >
-    <label
-      :for="id"
-      class="s-switch-label"
-    >{{ label }}</label>
+    <input :id="id" v-model="model" type="checkbox" :disabled="disabled" class="s-switch-button" />
+    <label :for="id" class="s-switch-label">{{ label }}</label>
   </div>
 </template>
 
