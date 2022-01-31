@@ -848,7 +848,7 @@ type: PropType<boolean>;
 default: boolean;
 };
 }, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
-"update:modelValue": (value: any) => void;
+"update:modelValue": (value: boolean) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
 modelValue?: unknown;
 id?: unknown;
@@ -863,7 +863,7 @@ checked: boolean;
 } & {
 modelValue?: boolean | undefined;
 }> & {
-"onUpdate:modelValue"?: ((value: any) => any) | undefined;
+"onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
 }, {
 disabled: boolean;
 label: string;

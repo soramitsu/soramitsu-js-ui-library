@@ -38,8 +38,6 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
 const model = useVModel(props, 'modelValue', emit)
 
-console.log('modelValue', model.value)
-
 function onSwitchChange(e: Event) {
   model.value = (e.target as HTMLInputElement).checked
 }
@@ -49,11 +47,11 @@ function onSwitchChange(e: Event) {
   <div class="s-switch">
     <input
       type="checkbox"
-      @change="onSwitchChange"
       :id="id"
       :checked="checked"
       :disabled="disabled"
       class="s-switch-button"
+      @change="onSwitchChange"
     />
     <label :for="id" class="s-switch-label">{{ label }}</label>
   </div>

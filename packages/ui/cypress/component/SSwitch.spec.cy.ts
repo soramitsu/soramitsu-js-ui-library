@@ -37,6 +37,27 @@ it('SSwitch - renders disabled switch when prop is passed', () => {
 it('SSwitch - handles two-way data binding and rises value up', () => {
   mount({
     setup() {
+      const checked = ref(true)
+
+      return { checked }
+    },
+    template: `
+      <div class="switch">{{ checked }}</div>
+      <SSwitch
+        id="id"
+        v-model="checked"
+        label="Label"
+      />
+      `,
+  })
+
+  cy.contains('Label').click()
+  cy.get('.switch').contains('false')
+})
+
+it('SSwitch - handles two-way data binding when providing checked value', () => {
+  mount({
+    setup() {
       const checked = ref(false)
 
       return { checked }
@@ -45,13 +66,13 @@ it('SSwitch - handles two-way data binding and rises value up', () => {
       <div class="switch">{{ checked }}</div>
       <SSwitch
         id="id"
-        data-testid="switch"
         v-model="checked"
+        :checked="checked"
         label="Label"
       />
       `,
   })
 
-  cy.get('[data-testid=switch]').click()
+  cy.contains('Label').click()
   cy.get('.switch').contains('true')
 })
