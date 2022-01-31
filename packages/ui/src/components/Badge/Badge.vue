@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {SSpinner} from '../Spinner'
+import { SSpinner } from '../Spinner'
 
 type BdgType = 'active' | 'error' | 'warning' | 'info' | 'debug' | 'pending'
 
@@ -14,14 +14,13 @@ const props = withDefaults(
     type: 'active',
     colorBackground: false,
     withBorder: false,
-    onlyMarker: false
+    onlyMarker: false,
   },
 )
 
 const showSpinner = computed(() => {
   return props.type === 'pending'
 })
-
 </script>
 
 <template>
@@ -30,15 +29,15 @@ const showSpinner = computed(() => {
     class=""
     :class="[
       's-badge',
-      {'s-badge--border' : withBorder},
-      colorBackground? `s-badge--color-${type} text-white` : ' text-brand-pms-black'
+      { 's-badge--border': withBorder },
+      colorBackground ? `s-badge--color-${type} text-white` : ' text-brand-pms-black',
     ]"
   >
     <div class="flex items-center justify-start">
       <div
         v-if="!showSpinner"
         class="marker"
-        :class="!colorBackground? `s-badge--color-${type}` : 'bg-white'"
+        :class="!colorBackground ? `s-badge--color-${type}` : 'bg-white'"
       />
       <SSpinner
         v-else
@@ -64,14 +63,13 @@ const showSpinner = computed(() => {
   line-height: 140%;
   width: fit-content;
   letter-spacing: 0.06em;
-  font-feature-settings: 'case'on;
-
+  font-feature-settings: 'case' on;
 
   &--color-active {
     @apply bg-status-success;
   }
 
-  &--color-error{
+  &--color-error {
     @apply bg-status-error;
   }
 
@@ -102,16 +100,14 @@ const showSpinner = computed(() => {
     width: 10px;
     min-width: 10px;
     height: 10px;
-  } 
+  }
 
   .title {
     text-transform: uppercase;
   }
 
   &--border {
-    @apply border border-1 border-base-background
+    @apply border border-1 border-base-background;
   }
-
-} 
-
+}
 </style>

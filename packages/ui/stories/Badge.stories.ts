@@ -15,7 +15,6 @@ interface Args {
   onlyMarker?: boolean
 }
 
-
 const configurableStory = (args: Args) => ({
   components: { SBadge },
   template: `<SBadge  :type="args.type" :colorBackground ="args.colorBackground"
@@ -23,24 +22,24 @@ const configurableStory = (args: Args) => ({
   :withBorder="args.withBorder"> {{args.slotTitle}}
   </SBadge>`,
   setup() {
-    return { args };
-  }
+    return { args }
+  },
 })
 
-export const configurable = configurableStory.bind({});
+export const configurable = configurableStory.bind({})
 configurable.args = {
-    type: 'active',
-    withBorder: false, 
-    colorBackground :false, 
-    onlyMarker: false,
-    slotTitle: 'badge'
-  }
+  type: 'active',
+  withBorder: false,
+  colorBackground: false,
+  onlyMarker: false,
+  slotTitle: 'badge',
+}
 
 configurable.argTypes = {
   type: {
-    options: ['active' , 'error' , 'warning' , 'info' , 'debug' , 'pending'],
+    options: ['active', 'error', 'warning', 'info', 'debug', 'pending'],
     control: { type: 'select' },
-  }
+  },
 }
 
 export const DifferentStatuses = defineStory(() => ({
@@ -101,7 +100,6 @@ export const onlyMarker = defineStory(() => ({
   `,
 }))
 
-
 export const withColorBackground = defineStory(() => ({
   components: { SBadge },
   template: `
@@ -134,7 +132,7 @@ export const withColorBackground = defineStory(() => ({
   `,
 }))
 
-export const withBorder= defineStory(() => ({
+export const withBorder = defineStory(() => ({
   components: { SBadge },
   template: `
     <div class="grid grid-cols-3 gap-4 w-max">
