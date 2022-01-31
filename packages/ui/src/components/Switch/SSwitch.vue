@@ -34,13 +34,22 @@ const props = withDefaults(defineProps<Props>(), {
   checked: true,
   disabled: false,
 })
+
+const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
+const model = useVModel(props, 'modelValue', emit)
+
+console.log('modelValue', model.value)
+
+function onSwitchChange(e: Event) {
+  model.value = (e.target as HTMLInputElement).checked
+}
 </script>
 
 <template>
   <div class="s-switch">
     <input
       type="checkbox"
-      @change="$emit('update:modelValue', checked)"
+      @change="onSwitchChange"
       :id="id"
       :checked="checked"
       :disabled="disabled"
@@ -105,6 +114,7 @@ const props = withDefaults(defineProps<Props>(), {
     font-size: 20px;
     margin-left: 8px;
     text-align: center;
+    cursor: pointer;
   }
 }
 </style>

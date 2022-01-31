@@ -825,6 +825,9 @@ size: string | number;
 
 // @public (undocumented)
 export const SSwitch: DefineComponent<    {
+modelValue: {
+type: PropType<boolean>;
+};
 id: {
 type: PropType<string>;
 required: true;
@@ -844,7 +847,10 @@ type: PropType<boolean>;
 } & {
 default: boolean;
 };
-}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "isActive"[], "isActive", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: any) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
 id?: unknown;
 label?: unknown;
 checked?: unknown;
@@ -854,8 +860,10 @@ id: string;
 disabled: boolean;
 label: string;
 checked: boolean;
-} & {}> & {
-onIsActive?: ((...args: any[]) => any) | undefined;
+} & {
+modelValue?: boolean | undefined;
+}> & {
+"onUpdate:modelValue"?: ((value: any) => any) | undefined;
 }, {
 disabled: boolean;
 label: string;
