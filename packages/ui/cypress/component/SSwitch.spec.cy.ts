@@ -67,7 +67,6 @@ it('SSwitch - handles two-way data binding when providing checked value', () => 
       <SSwitch
         id="id"
         v-model="checked"
-        :checked="checked"
         label="Label"
       />
       `,

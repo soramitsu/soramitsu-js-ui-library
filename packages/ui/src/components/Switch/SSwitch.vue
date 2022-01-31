@@ -16,12 +16,6 @@ interface Props {
    */
   label?: string
   /**
-   * Attr specifies whether switch is active
-   *
-   * @default true
-   */
-  checked?: boolean
-  /**
    * Attr specfifies whether switch is disabled
    *
    * @default false
@@ -31,29 +25,26 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   label: '',
-  checked: true,
   disabled: false,
 })
 
 const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
 const model = useVModel(props, 'modelValue', emit)
-
-function onSwitchChange(e: Event) {
-  model.value = (e.target as HTMLInputElement).checked
-}
 </script>
 
 <template>
   <div class="s-switch">
     <input
-      type="checkbox"
       :id="id"
-      :checked="checked"
+      v-model="model"
+      type="checkbox"
       :disabled="disabled"
       class="s-switch-button"
-      @change="onSwitchChange"
-    />
-    <label :for="id" class="s-switch-label">{{ label }}</label>
+    >
+    <label
+      :for="id"
+      class="s-switch-label"
+    >{{ label }}</label>
   </div>
 </template>
 
