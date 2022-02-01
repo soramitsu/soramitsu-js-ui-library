@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/vue3'
 import { SBadge } from '@/lib'
 import { defineStory } from './util'
+import { BadgeType, BadgeTypes } from '../src/components/Badge/types'
 
 const meta: Meta = {
   title: 'Example/Badge',
@@ -9,7 +10,7 @@ const meta: Meta = {
 export default meta
 
 interface Args {
-  type?: 'active' | 'error' | 'warning' | 'info' | 'debug' | 'pending'
+  type?: BadgeType
   colorBackground?: boolean
   withBorder?: boolean
   onlyMarker?: boolean
@@ -35,9 +36,11 @@ configurable.args = {
   slotTitle: 'badge',
 }
 
+const badgeTypeValues = Object.values(BadgeTypes).filter((t) => typeof t === 'string')
+
 configurable.argTypes = {
   type: {
-    options: ['active', 'error', 'warning', 'info', 'debug', 'pending'],
+    options: badgeTypeValues,
     control: { type: 'select' },
   },
 }

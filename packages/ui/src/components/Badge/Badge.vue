@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { SSpinner } from '../Spinner'
-
-type BdgType = 'active' | 'error' | 'warning' | 'info' | 'debug' | 'pending'
+import { BadgeType } from './types'
 
 const props = withDefaults(
   defineProps<{
-    type?: BdgType
+    type?: BadgeType
     colorBackground?: boolean
     withBorder?: boolean
     onlyMarker?: boolean
@@ -26,7 +25,6 @@ const showSpinner = computed(() => {
 <template>
   <div
     tabindex="0"
-    class=""
     :class="[
       's-badge',
       { 's-badge--border': withBorder },
