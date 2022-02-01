@@ -48,3 +48,11 @@ it('SSwitch - handles two-way data binding and rises value up', () => {
   cy.contains('Label').click()
   cy.get('.switch').contains('true')
 })
+
+it('SSwitch - has the same id for linking label with input element', () => {
+  const id = 'identificator'
+  mount(SSwitch, { props: { id } })
+
+  cy.get('input').should('have.id', id)
+  cy.get('label').should('have.attr', 'for', id)
+})

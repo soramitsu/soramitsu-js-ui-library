@@ -43,7 +43,7 @@ const model = useVModel(props, 'modelValue', emit)
 .s-switch {
   display: flex;
   align-items: center;
-  &-button {
+  &__button {
     position: relative;
     background-color: var(--s-color-base-border-primary);
     width: 40px;
@@ -88,7 +88,7 @@ const model = useVModel(props, 'modelValue', emit)
       cursor: pointer;
     }
   }
-  &-label {
+  &__label {
     font-family: Sora;
     color: var(--s-color-base-content-primary);
     font-size: 20px;
