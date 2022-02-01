@@ -197,7 +197,7 @@ showCloseBtn: boolean;
 // @public (undocumented)
 export const SBadge: DefineComponent<    {
 type: {
-type: PropType<BdgType>;
+type: PropType<BadgeType>;
 } & {
 default: string;
 };
@@ -222,12 +222,12 @@ colorBackground?: unknown;
 withBorder?: unknown;
 onlyMarker?: unknown;
 } & {
-type: BdgType;
+type: BadgeType;
 colorBackground: boolean;
 withBorder: boolean;
 onlyMarker: boolean;
 } & {}>, {
-type: BdgType;
+type: BadgeType;
 colorBackground: boolean;
 withBorder: boolean;
 onlyMarker: boolean;
@@ -1107,7 +1107,7 @@ export function useSelectApi<T = any>(): SelectApi<T>;
 
 // Warnings were encountered during analysis:
 //
-// dist-ts/components/Badge/Badge.vue.d.ts:4:9 - (ae-forgotten-export) The symbol "BdgType" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Badge/Badge.vue.d.ts:4:9 - (ae-forgotten-export) The symbol "BadgeType" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Button/Button.vue.d.ts:7:9 - (ae-forgotten-export) The symbol "BtnType" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Modal/SModal.vue.d.ts:18:9 - (ae-forgotten-export) The symbol "ClassType" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:9:9 - (ae-forgotten-export) The symbol "validateVerticalPlacement" needs to be exported by the entry point lib.d.ts
