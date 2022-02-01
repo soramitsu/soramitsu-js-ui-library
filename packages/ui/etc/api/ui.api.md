@@ -823,6 +823,45 @@ width: string | number;
 size: string | number;
 }>;
 
+// @public (undocumented)
+export const SSwitch: DefineComponent<    {
+modelValue: {
+type: PropType<boolean>;
+};
+id: {
+type: PropType<string>;
+required: true;
+};
+label: {
+type: PropType<string>;
+} & {
+default: string;
+};
+disabled: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: boolean) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+id?: unknown;
+label?: unknown;
+disabled?: unknown;
+} & {
+id: string;
+disabled: boolean;
+label: string;
+} & {
+modelValue?: boolean | undefined;
+}> & {
+"onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
+}, {
+disabled: boolean;
+label: string;
+}>;
+
 // @public
 export enum Status {
     // (undocumented)
