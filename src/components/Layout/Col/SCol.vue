@@ -84,7 +84,7 @@ export default class SCol extends Vue {
 
   get gutter (): number {
     let parent = this.$parent as any
-    while (parent && parent.$options.name !== 'SRow') {
+    while (parent && parent.$options._componentTag !== 's-row') {
       parent = parent.$parent
     }
     return parent ? parent.gutter : 0

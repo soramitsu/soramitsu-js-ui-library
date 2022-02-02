@@ -155,6 +155,19 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
 
   mounted (): void {
     this.updateCloseDelay(this.closeDelay)
+    window.addEventListener('focus', this.handleWindowFocus)
+  }
+
+  beforeDestroy (): void {
+    window.removeEventListener('focus', this.handleWindowFocus)
+  }
+
+  handleWindowFocus () {
+    setTimeout(() => {
+      if (this.tooltip && this.tooltip.hide) {
+        this.tooltip.hide()
+      }
+    }, this.openDelay)
   }
 
   get computedTheme (): string {
