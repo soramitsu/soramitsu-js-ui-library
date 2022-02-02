@@ -5,28 +5,8 @@ export default defineComponent({ name: 'SButton' })
 <script setup lang="ts">
 import { computed, ComputedRef } from 'vue'
 import { SSpinner } from '@/lib'
-
-const BUTTON_TYPE_VALUES = ['primary', 'secondary', 'outline', 'action'] as const
-const BUTTON_SIZE_VALUES = ['mini', 'small', 'medium', 'big'] as const
-const BUTTON_ICON_POSITION_VALUES = ['left', 'right'] as const
-
-type ButtonType = typeof BUTTON_TYPE_VALUES[number]
-type ButtonSize = typeof BUTTON_SIZE_VALUES[number]
-type ButtonIconPosition = typeof BUTTON_ICON_POSITION_VALUES[number]
-
-const SPINNER_SIZE: Record<ButtonSize, string> = {
-  mini: '12',
-  small: '18',
-  medium: '24',
-  big: '24',
-}
-
-const SPINNER_WIDTH: Record<ButtonSize, string> = {
-  mini: '3',
-  small: '4',
-  medium: '4',
-  big: '4',
-}
+import { BUTTON_ICON_POSITION_VALUES, BUTTON_SIZE_VALUES, BUTTON_TYPE_VALUES, SPINNER_SIZE, SPINNER_WIDTH } from './consts'
+import { ButtonType, ButtonSize, ButtonIconPosition } from './types'
 
 function usePropTypeFilter<T>(value: T, validValues: readonly T[], defaultValue: T): ComputedRef<T> {
   return computed(() => {
