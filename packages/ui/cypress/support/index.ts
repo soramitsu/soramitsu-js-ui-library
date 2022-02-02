@@ -19,6 +19,5 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-import '@soramitsu-ui/theme/fonts/Sora/index.css'
-import './custom.css'
 import 'virtual:windi.css'
+import './custom.scss'

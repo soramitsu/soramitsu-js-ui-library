@@ -269,6 +269,8 @@ useCloseOnEsc(
 </template>
 
 <style lang="scss">
+@use '@/theme';
+
 .s-modal {
   $ease-in-out-md: cubic-bezier(0.4, 0, 0.2, 1);
   $ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -323,7 +325,8 @@ useCloseOnEsc(
 
   &__overlay {
     @apply z-999;
-    @apply absolute inset-0 bg-utility-overlay;
+    @apply absolute inset-0;
+    background: theme.token-as-var('sys.color.util.overlay');
   }
 
   &__modal {

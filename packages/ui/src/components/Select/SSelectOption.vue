@@ -53,15 +53,16 @@ const emit = defineEmits<(event: 'toggle') => void>()
 
 <style lang="scss">
 @use './sizes-mixin.scss';
+@use '@/theme';
 
 .s-select-option {
-  @apply bg-utility-surface;
+  background: theme.token-as-var('sys.color.util.surface');
   @apply flex items-center px-[10px] py-1 select-none cursor-pointer space-x-4;
 
   &:hover,
   &:active,
   &--selected {
-    @apply bg-base-background;
+    background: theme.token-as-var('sys.color.background');
   }
 
   &__content {
