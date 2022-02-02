@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { InjectData } from './types'
-import { tabsState as tabsStateKey } from './api'
+import { TabsState, TABS_STATE } from './api'
 
 const props = withDefaults(
   defineProps<{
@@ -19,16 +18,19 @@ const selectTab = (tab: number): void => {
 const active = computed(() => props.modelValue)
 const tabs = ref<any[]>([])
 
-const tabState: InjectData = {
+const tabState: TabsState = {
   active,
   tabs,
   selectTab,
 }
 
-provide(tabsStateKey, tabState)
+provide(TABS_STATE, tabState)
 </script>
 <template>
-  <div role="tablist" class="tabs-panel flex items-center justify-start">
+  <div
+    role="tablist"
+    class="tabs-panel flex items-center justify-start"
+  >
     <slot />
   </div>
 </template>

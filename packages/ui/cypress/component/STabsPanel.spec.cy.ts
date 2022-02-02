@@ -16,10 +16,12 @@ describe('STabsPanel', () => {
   it('STab border-radius prop test', () => {
     mount({
       template: `
+      <STabsPanel>
         <STab :border-radius="'full'" data-cy="full">full</STab>
         <STab data-cy="none">none</STab>
         <STab :border-radius="'left'" data-cy="left">left</STab>
         <STab :border-radius="'right'" data-cy="right">right</STab>
+      </STabsPanel>
       `,
     })
     getEl('full').should('have.css', 'border-radius', '8px')
@@ -31,8 +33,10 @@ describe('STabsPanel', () => {
   it('STab disabled prop test', () => {
     mount({
       template: `
-        <STab :disabled="true" data-cy="disabled">disabled</STab>
-        <STab data-cy="notDisabled">notDisabled</STab>
+        <STabsPanel>
+          <STab :disabled="true" data-cy="disabled">disabled</STab>
+          <STab data-cy="notDisabled">notDisabled</STab>
+        </STabsPanel>
       `,
     })
     getEl('disabled').should('be.disabled')
@@ -60,6 +64,38 @@ describe('STabsPanel', () => {
       .click()
       .then(() => {
         getEl('second').should('have.class', 's-tab_active')
+      })
+  })
+
+  it('STabsPanel - injection test', () => {
+    mount({
+      template: `
+            <STabsPanel v-model="currentTab" data-cy="tabsPanel">
+              <STab>First</STab>
+              <STab data-cy="second">Second</STab>
+              <STab>Third</STab>
+            </STabsPanel>`,
+      setup() {
+        let currentTab = ref(0)
+        return {
+          currentTab,
+        }
+      },
+    })
+    getEl('tabsPanel')
+      .children()
+      .should('have.length', 3)
+      .first()
+      .within(() => {
+        cy.contains('First')
+      })
+      .next()
+      .within(() => {
+        cy.contains('Second')
+      })
+      .next()
+      .within(() => {
+        cy.contains('Third')
       })
   })
 })

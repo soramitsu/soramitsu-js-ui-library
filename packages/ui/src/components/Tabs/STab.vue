@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { tabsState as tabsStateKey } from './api'
+import { useTabsStateApi } from './api'
 
 const props = withDefaults(
   defineProps<{
@@ -13,7 +13,7 @@ const props = withDefaults(
 )
 
 const instance = getCurrentInstance()
-const { active, tabs, selectTab } = inject(tabsStateKey) || {
+const { active, tabs, selectTab } = useTabsStateApi() || {
   active: ref(0),
   tabs: ref<any>([]),
   selectTab: (t: number) => {},
