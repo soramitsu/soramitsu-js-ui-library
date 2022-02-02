@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { eagerComputed } from '@vueuse/core'
 import { IconClose, STATUS_ICONS_MAP } from '@/components/icons'
 import { Status } from '@/types'
 
