@@ -1,5 +1,6 @@
 <script setup lang="ts">
 // Animated SVG comes from https://codepen.io/supah/pen/BjYLdW
+// TODO refactor to functional
 
 interface Props {
   /**

@@ -65,6 +65,7 @@ const formattedSelectedValue = computed<string | null>(() => {
 </template>
 
 <style lang="scss" scoped>
+@use '@/theme';
 @use './sizes-mixin.scss';
 
 .s-select-btn {
@@ -73,16 +74,19 @@ const formattedSelectedValue = computed<string | null>(() => {
   @apply select-none inline-flex items-center space-x-2 cursor-pointer;
 
   &--default {
-    @apply bg-base-background text-base-content-primary rounded px-4;
+    background: theme.token-as-var('sys.color.background');
+    color: theme.token-as-var('sys.color.content-primary');
+    @apply rounded px-4;
 
     &:hover {
-      @apply bg-base-background-hover;
+      background: theme.token-as-var('sys.color.background-hover');
     }
   }
 
   &--inline {
     #{$root}__selection {
-      @apply underline underline-solid underline-base-content-primary;
+      @apply underline underline-solid;
+      text-decoration-color: theme.token-as-var('sys.color.content-primary');
     }
 
     &:hover#{$root}--empty #{$root}__label {
@@ -95,7 +99,7 @@ const formattedSelectedValue = computed<string | null>(() => {
   }
 
   &:not(&--empty) &__label {
-    @apply text-base-content-tertiary;
+    color: theme.token-as-var('sys.color.content-tertiary');
   }
 
   &--size {

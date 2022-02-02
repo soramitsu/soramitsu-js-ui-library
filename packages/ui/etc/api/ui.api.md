@@ -8,7 +8,6 @@ import { AllowedComponentProps } from 'vue';
 import { BodyScrollOptions } from 'body-scroll-lock';
 import { ComponentCustomProps } from 'vue';
 import { ComponentOptionsMixin } from 'vue';
-import { ComputedRef } from 'vue';
 import { DeepReadonly } from 'vue';
 import { DefineComponent } from 'vue';
 import { EmitsOptions } from 'vue';
@@ -41,23 +40,6 @@ export enum Autocomplete {
 
 // @public (undocumented)
 export function defineToastsApi(): ToastsApi;
-
-// @public (undocumented)
-export const DESIGN_SYSTEM_KEY: InjectionKey<DesignSystemProviderAPI>;
-
-// @public (undocumented)
-export enum DesignSystem {
-    // (undocumented)
-    Default = "DEFAULT",
-    // (undocumented)
-    Neumorphic = "NEUMORPHIC"
-}
-
-// @public (undocumented)
-export interface DesignSystemProviderAPI {
-    // (undocumented)
-    readonly current: DesignSystem;
-}
 
 // @public (undocumented)
 export enum InputSize {
@@ -213,21 +195,6 @@ type: BtnType;
 rounded?: boolean | undefined;
 }>, {
 type: BtnType;
-}>;
-
-// @public (undocumented)
-export const SDesignSystemProvider: DefineComponent<    {
-value: {
-type: PropType<DesignSystem>;
-} & {
-default: DesignSystem;
-};
-}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
-value?: unknown;
-} & {
-value: DesignSystem;
-} & {}>, {
-value: DesignSystem;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_DefinePropsToOptions" needs to be exported by the entry point lib.d.ts
@@ -1083,9 +1050,6 @@ export type ToastsDisplayPlacementVertical = 'top' | 'bottom';
 
 // @public (undocumented)
 export type ToastUnregisterFn = () => void;
-
-// @public (undocumented)
-export function useDesignSystem(): ComputedRef<DesignSystem>;
 
 // @public (undocumented)
 export function useModalApi(): ModalApi;
