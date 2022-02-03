@@ -97,10 +97,13 @@ const isAction = computed(() => definitelyType.value === 'action')
 </template>
 
 <style lang="scss">
+@use '@/theme';
+
+@include theme.typography-preset-default;
+
 @mixin button-type($name, $default, $hover, $active, $disabled) {
   &_type_#{$name} {
     @apply #{$default};
-    fill: currentColor;
 
     &:hover {
       @apply #{$hover};
@@ -112,7 +115,6 @@ const isAction = computed(() => definitelyType.value === 'action')
   }
 
   &_type_#{$name}#{&}_disabled {
-    @apply cursor-default;
     @apply #{$disabled};
   }
 }
@@ -139,6 +141,11 @@ const isAction = computed(() => definitelyType.value === 'action')
 
 .s-button {
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;
+  fill: currentColor;
+
+  &_disabled {
+    @apply cursor-default;
+  }
 
   &_icon-position_left {
     @apply flex-row;
@@ -168,38 +175,66 @@ const isAction = computed(() => definitelyType.value === 'action')
     @apply mx-0;
   }
 
-  @include button-type(primary,
-    $default: bg-accent text-white,
-    $hover: bg-accent-hover,
-    $active: bg-accent-pressed,
-    $disabled: bg-secondary-hover,
-  );
+  &_type_primary {
+    background-color: theme.token-as-var('sys.color.primary');
+    color: theme.token-as-var('sys.color.content-on-background-inverted');
 
-  @include button-type(secondary,
-    $default: bg-base-background text-base-content-primary,
-    $hover: bg-base-background-hover,
-    $active: bg-base-border-primary,
-    $disabled:bg-base-disabled text-base-content-quaternary,
-  );
+    &:hover {
+      background-color: theme.token-as-var('sys.color.primary-hover');
+    }
 
-  @include button-type(action,
-    $default: bg-base-background text-base-content-primary,
-    $hover: bg-base-background-hover,
-    $active: bg-base-border-primary,
-    $disabled: bg-base-disabled text-base-content-quaternary,
-  );
+    &:active {
+      background-color: theme.token-as-var('sys.color.primary-pressed');
+    }
+  }
 
-  @include button-type(outline,
-    $default: border border-solid border-base-border-primary text-base-content-primary,
-    $hover: border-accent-hover text-accent-hover,
-    $active: border-accent-pressed text-accent-pressed,
-    $disabled: border-base-border-primary text-base-content-quaternary,
-  );
+  &_type_primary#{&}_disabled {
+    background-color: theme.token-as-var('sys.color.primary-hover-background');
+  }
+
+  &_type_secondary, &_type_action {
+    background-color: theme.token-as-var('sys.color.background');
+    color: theme.token-as-var('sys.color.content-primary');
+
+    &:hover {
+      background-color: theme.token-as-var('sys.color.background-hover');
+    }
+
+    &:active {
+      background-color: theme.token-as-var('sys.color.border-primary');
+    }
+  }
+
+  &_type_secondary#{&}_disabled, &_type_actiony#{&}_disabled {
+    background-color: theme.token-as-var('sys.color.disabled');
+    color: theme.token-as-var('sys.color.on-disabled');
+  }
+
+
+  &_type_outline {
+    border: 1px solid theme.token-as-var('sys.color.border-primary');
+    color: theme.token-as-var('sys.color.content-primary');
+
+    &:hover {
+      border: 1px solid theme.token-as-var('sys.color.primary-hover');
+      color: theme.token-as-var('sys.color.primary-hover');
+    }
+
+    &:active {
+      border: 1px solid theme.token-as-var('sys.color.primary-pressed');
+      color: theme.token-as-var('sys.color.primary-pressed');
+    }
+  }
+
+  &_type_outline#{&}_disabled {
+    border: 1px solid theme.token-as-var('sys.color.disabled');
+    color: theme.token-as-var('sys.color.on-disabled');
+  }
 
   @include button-size(mini,
     $height: 24px,
     $padding: px-8px,
-    $font: s-ty-p4,
+    $font: sora-tpg-p4,
     $icon-size: 12px,
     $border-radius: 2px
   );
@@ -207,21 +242,21 @@ const isAction = computed(() => definitelyType.value === 'action')
   @include button-size(small,
     $height: 32px,
     $padding: px-12px,
-    $font: s-ty-h7,
+    $font: sora-tpg-h7,
     $icon-size: 16px
   );
 
   @include button-size(medium,
     $height: 40px,
     $padding: px-16px,
-    $font: s-ty-h6,
+    $font: sora-tpg-h6,
     $icon-size: 16px
   );
 
   @include button-size(big,
     $height: 56px,
     $padding: px-24px,
-    $font: s-ty-h5,
+    $font: sora-tpg-h5,
     $icon-size: 24px
   );
 }
