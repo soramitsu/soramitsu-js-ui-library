@@ -60,7 +60,7 @@ const isAction = computed(() => definitelyType.value === 'action')
       {
         's-button_disabled': loading || disabled,
         'rounded-full': isAction && rounded,
-        's-ty-ch3': definitelySize === 'mini' && uppercase,
+        'sora-tpg-ch3': definitelySize === 'mini' && uppercase,
       },
     ]"
     :disabled="loading || disabled"
