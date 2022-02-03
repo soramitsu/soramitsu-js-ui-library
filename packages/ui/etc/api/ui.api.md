@@ -39,6 +39,24 @@ export enum Autocomplete {
 }
 
 // @public (undocumented)
+export const BUTTON_ICON_POSITION_VALUES: readonly ["left", "right"];
+
+// @public (undocumented)
+export const BUTTON_SIZE_VALUES: readonly ["mini", "small", "medium", "big"];
+
+// @public (undocumented)
+export const BUTTON_TYPE_VALUES: readonly ["primary", "secondary", "outline", "action"];
+
+// @public (undocumented)
+export type ButtonIconPosition = typeof BUTTON_ICON_POSITION_VALUES[number];
+
+// @public (undocumented)
+export type ButtonSize = typeof BUTTON_SIZE_VALUES[number];
+
+// @public (undocumented)
+export type ButtonType = typeof BUTTON_TYPE_VALUES[number];
+
+// @public (undocumented)
 export function defineToastsApi(): ToastsApi;
 
 // @public (undocumented)
@@ -179,12 +197,12 @@ showCloseBtn: boolean;
 // @public (undocumented)
 export const SButton: DefineComponent<    {
 type: {
-type: PropType<"outline" | "action" | "primary" | "secondary">;
+type: PropType<"primary" | "secondary" | "outline" | "action">;
 } & {
 default: string;
 };
 size: {
-type: PropType<"big" | "small" | "mini" | "medium">;
+type: PropType<"mini" | "small" | "medium" | "big">;
 } & {
 default: string;
 };
@@ -234,20 +252,20 @@ disabled?: unknown;
 loading?: unknown;
 uppercase?: unknown;
 } & {
-type: "outline" | "action" | "primary" | "secondary";
+type: "primary" | "secondary" | "outline" | "action";
 loading: boolean;
 disabled: boolean;
-size: "big" | "small" | "mini" | "medium";
+size: "mini" | "small" | "medium" | "big";
 nativeType: "reset" | "submit" | "button";
 icon: string;
 iconPosition: "left" | "right";
 rounded: boolean;
 uppercase: boolean;
 } & {}>, {
-type: "outline" | "action" | "primary" | "secondary";
+type: "primary" | "secondary" | "outline" | "action";
 loading: boolean;
 disabled: boolean;
-size: "big" | "small" | "mini" | "medium";
+size: "mini" | "small" | "medium" | "big";
 nativeType: "reset" | "submit" | "button";
 icon: string;
 iconPosition: "left" | "right";
@@ -608,6 +626,12 @@ export const SNotificationsProvider: FunctionalComponent<{
     absolute?: boolean;
     to?: string;
 }>;
+
+// @public (undocumented)
+export const SPINNER_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
+
+// @public (undocumented)
+export const SPINNER_WIDTH: Record<typeof BUTTON_SIZE_VALUES[number], string>;
 
 // @public (undocumented)
 export const SPopover: DefineComponent<    {
