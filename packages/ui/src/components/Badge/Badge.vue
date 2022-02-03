@@ -50,6 +50,7 @@ const showSpinner = computed(() => {
 </template>
 
 <style lang="scss">
+@use '@/theme';
 .s-badge {
   @apply cursor-default select-none block;
   border-radius: 30px;
@@ -63,28 +64,23 @@ const showSpinner = computed(() => {
   letter-spacing: 0.06em;
   font-feature-settings: 'case' on;
 
+  @each $status in ('error', 'warning', 'info') {
+    $bg: theme.token-as-var('sys.color.status.#{$status}');
+    &--color-#{$status} {
+      background-color: $bg;
+    }
+  }
+
   &--color-active {
-    @apply bg-status-success;
-  }
-
-  &--color-error {
-    @apply bg-status-error;
-  }
-
-  &--color-warning {
-    @apply bg-status-warning;
-  }
-
-  &--color-info {
-    @apply bg-status-info;
+    background-color: theme.token-as-var('sys.color.status.success');
   }
 
   &--color-debug {
-    @apply bg-accent-focused;
+    background-color: theme.token-as-var('sys.color.accent-focused');
   }
 
   &--color-pending {
-    @apply bg-base-content-tertiary;
+    background-color: theme.token-as-var('sys.color.content-tertiary');
   }
 
   .marker {
