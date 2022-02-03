@@ -11,6 +11,7 @@ export * from './components/Spinner'
 export * from './components/Switch'
 export * from './components/TextField'
 export * from './components/Popover'
+export * from './components/Badge'
 
 import { Plugin } from 'vue'
 import { SButton } from './components/Button'
@@ -24,6 +25,7 @@ import { SSpinner } from './components/Spinner'
 import { SSwitch } from './components/Switch'
 import { STextField } from './components/TextField'
 import { SPopover, SPopoverWrappedTransition } from './components/Popover'
+import { SBadge } from './components/Badge'
 
 export function plugin(): Plugin {
   return (app) => {
@@ -45,5 +47,6 @@ export function plugin(): Plugin {
     app.component('STextField', STextField)
     app.component('SPopover', SPopover)
     app.component('SPopoverWrappedTransition', SPopoverWrappedTransition)
+    app.component('SBadge', SBadge)
   }
 }
