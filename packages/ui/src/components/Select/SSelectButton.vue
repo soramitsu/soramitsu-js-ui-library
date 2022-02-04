@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSelectApi } from './api'
-import { SelectButtonType } from './types'
+import { SelectButtonType, SelectSize } from './types'
 import SSelectChevron from './SSelectChevron'
 
 const props = withDefaults(
@@ -28,17 +28,29 @@ const formattedSelectedValue = computed<string | null>(() => {
   }
   return null
 })
+
+function typography(): string {
+  switch (api.size) {
+    case SelectSize.Xl:
+      return 'sora-tpg-p1'
+    case SelectSize.Lg:
+      return 'sora-tpg-p3'
+    default:
+      return 'sora-tpg-p4'
+  }
+}
 </script>
 
 <template>
   <div
     :class="[
       's-select-btn',
-      `s-select-btn--${type}`,
-      `s-select-btn--size-${api.size}`,
+      `s-select-btn_${type}`,
+      `s-select-btn_size_${api.size}`,
+      typography(),
       {
-        's-select-btn--empty': !api.isSomethingSelected,
-        's-select-btn--disabled': api.disabled,
+        's-select-btn_empty': !api.isSomethingSelected,
+        's-select-btn_disabled': api.disabled,
       },
     ]"
     @click="toggle"
@@ -73,7 +85,7 @@ const formattedSelectedValue = computed<string | null>(() => {
 
   @apply select-none inline-flex items-center space-x-2 cursor-pointer;
 
-  &--default {
+  &_default {
     background: theme.token-as-var('sys.color.background');
     color: theme.token-as-var('sys.color.content-primary');
     @apply rounded px-4;
@@ -83,30 +95,30 @@ const formattedSelectedValue = computed<string | null>(() => {
     }
   }
 
-  &--inline {
+  &_inline {
     #{$root}__selection {
       @apply underline underline-solid;
       text-decoration-color: theme.token-as-var('sys.color.content-primary');
     }
 
-    &:hover#{$root}--empty #{$root}__label {
+    &:hover#{$root}_empty #{$root}__label {
       text-decoration: underline;
     }
   }
 
-  &--disabled {
+  &_disabled {
     @apply pointer-events-none opacity-75;
   }
 
-  &:not(&--empty) &__label {
+  &:not(&_empty) &__label {
     color: theme.token-as-var('sys.color.content-tertiary');
   }
 
-  &--size {
+  &_size {
     @include sizes-mixin.s-select-sizes;
 
     @mixin chevron-size($size, $px) {
-      &-#{$size} .s-select-chevron {
+      &_#{$size} .s-select-chevron {
         font-size: $px;
       }
     }
