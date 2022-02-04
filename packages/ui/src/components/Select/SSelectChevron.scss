@@ -2,7 +2,7 @@
   transition: transform 0.15s;
   @apply ease-in-out;
 
-  &--rotate {
+  &_rotate {
     transform: rotate(180deg);
   }
 }

@@ -19,9 +19,9 @@ const emit = defineEmits<(event: 'toggle') => void>()
   <div
     :class="[
       's-select-option',
-      `s-select-option--size-${api.size}`,
+      `s-select-option_size_${api.size}`,
       {
-        's-select-option--selected': selected,
+        's-select-option_selected': selected,
       },
     ]"
     @click="emit('toggle')"
@@ -61,7 +61,7 @@ const emit = defineEmits<(event: 'toggle') => void>()
 
   &:hover,
   &:active,
-  &--selected {
+  &_selected {
     background: theme.token-as-var('sys.color.background');
   }
 
@@ -75,11 +75,11 @@ const emit = defineEmits<(event: 'toggle') => void>()
 
   $root: &;
 
-  &--size {
+  &_size {
     @include sizes-mixin.s-select-sizes;
 
     @mixin check-size($size, $px: 16px) {
-      &-#{$size} #{$root}__right-check-wrapper {
+      &_#{$size} #{$root}__right-check-wrapper {
         font-size: $px;
       }
     }
