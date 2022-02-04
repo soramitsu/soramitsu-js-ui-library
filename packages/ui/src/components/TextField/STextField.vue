@@ -178,8 +178,8 @@ const inputType = computed(() =>
     :class="[
       's-text-field',
       {
-        's-text-field--empty': isValueEmpty,
-        's-text-field--disabled': disabled,
+        's-text-field_empty': isValueEmpty,
+        's-text-field_disabled': disabled,
       },
     ]"
     :data-status="status"
@@ -268,12 +268,12 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
 .s-text-field {
   $root: &;
 
-  &--disabled &__input-wrapper {
+  &_disabled &__input-wrapper {
     @apply pointer-events-none opacity-75;
     // todo
   }
 
-  &:not(&--empty),
+  &:not(&_empty),
   &:focus-within {
     label {
       transform: translateY(#{$label-top-secondary});
