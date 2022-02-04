@@ -117,6 +117,7 @@ describe('Exports', () => {
         --sora_sys_color_border-secondary: #eceff0;
         --sora_sys_color_disabled: #f5f7f8;
         --sora_sys_color_on-disabled: #a3a4a8;
+        --sora_sys_color_accent-focused: #aa0e42;
         --sora_sys_color_util_body: #fff;
         --sora_sys_color_util_surface: #fff;
         --sora_sys_color_util_surface-overlay: rgba(255, 255, 255, 0.7);
