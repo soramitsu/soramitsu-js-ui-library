@@ -14,13 +14,21 @@ it('When size pros is a number, it is set as px', () => {
 })
 
 it('When size prop is a stringified number, it is set as px', () => {
-  mount(SSpinner, { props: { size: '55' } })
+  mount(SSpinner, { props: { size: '12' } })
 
-  svgSizeShouldBe('55px')
+  svgSizeShouldBe('12px')
 })
 
 it('When size prop is a number with some dimension, it is set as is', () => {
-  mount(SSpinner, { props: { size: '16rem' } })
+  mount(() =>
+    h(
+      'div',
+      {
+        style: { fontSize: '120px' },
+      },
+      [h(SSpinner, { size: '1em' })],
+    ),
+  )
 
-  svgSizeShouldBe('16rem')
+  svgSizeShouldBe('120px')
 })
