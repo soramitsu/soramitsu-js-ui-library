@@ -8,7 +8,6 @@ import { AllowedComponentProps } from 'vue';
 import { BodyScrollOptions } from 'body-scroll-lock';
 import { ComponentCustomProps } from 'vue';
 import { ComponentOptionsMixin } from 'vue';
-import { ComputedRef } from 'vue';
 import { DeepReadonly } from 'vue';
 import { DefineComponent } from 'vue';
 import { EmitsOptions } from 'vue';
@@ -41,23 +40,6 @@ export enum Autocomplete {
 
 // @public (undocumented)
 export function defineToastsApi(): ToastsApi;
-
-// @public (undocumented)
-export const DESIGN_SYSTEM_KEY: InjectionKey<DesignSystemProviderAPI>;
-
-// @public (undocumented)
-export enum DesignSystem {
-    // (undocumented)
-    Default = "DEFAULT",
-    // (undocumented)
-    Neumorphic = "NEUMORPHIC"
-}
-
-// @public (undocumented)
-export interface DesignSystemProviderAPI {
-    // (undocumented)
-    readonly current: DesignSystem;
-}
 
 // @public (undocumented)
 export enum InputSize {
@@ -213,21 +195,6 @@ type: BtnType;
 rounded?: boolean | undefined;
 }>, {
 type: BtnType;
-}>;
-
-// @public (undocumented)
-export const SDesignSystemProvider: DefineComponent<    {
-value: {
-type: PropType<DesignSystem>;
-} & {
-default: DesignSystem;
-};
-}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
-value?: unknown;
-} & {
-value: DesignSystem;
-} & {}>, {
-value: DesignSystem;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_DefinePropsToOptions" needs to be exported by the entry point lib.d.ts
@@ -824,6 +791,45 @@ size: string | number;
 }>;
 
 // @public (undocumented)
+export const SSwitch: DefineComponent<    {
+modelValue: {
+type: PropType<boolean>;
+};
+id: {
+type: PropType<string>;
+required: true;
+};
+label: {
+type: PropType<string>;
+} & {
+default: string;
+};
+disabled: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: boolean) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+id?: unknown;
+label?: unknown;
+disabled?: unknown;
+} & {
+id: string;
+disabled: boolean;
+label: string;
+} & {
+modelValue?: boolean | undefined;
+}> & {
+"onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
+}, {
+disabled: boolean;
+label: string;
+}>;
+
+// @public (undocumented)
 export const STab: DefineComponent<    {
 disabled: {
 type: PropType<boolean>;
@@ -1085,9 +1091,6 @@ export type ToastsDisplayPlacementVertical = 'top' | 'bottom';
 
 // @public (undocumented)
 export type ToastUnregisterFn = () => void;
-
-// @public (undocumented)
-export function useDesignSystem(): ComputedRef<DesignSystem>;
 
 // @public (undocumented)
 export function useModalApi(): ModalApi;

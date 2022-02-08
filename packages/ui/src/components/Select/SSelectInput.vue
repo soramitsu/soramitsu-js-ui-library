@@ -16,25 +16,45 @@ const isColumnLayout = computed<boolean>(() => {
   return api.size === SelectSize.Xl
 })
 
+function typographyLabel(): string {
+  return !api.isSomethingSelected && api.size === SelectSize.Xl ? 'sora-tpg-p3' : 'sora-tpg-p4'
+}
+
+function typographySelection(): string {
+  return api.size === SelectSize.Xl ? 'sora-tpg-p3' : 'sora-tpg-p4'
+}
+
 const FLabel = () => {
   const label = slots.label?.(api) ?? api.label
   return h(
     'span',
-    { class: 's-select-input__label' },
+    {
+      class: ['s-select-input__label', typographyLabel()],
+    },
     (!isColumnLayout.value && api.isSomethingSelected ? [label, ':'] : label) as any,
   )
 }
-const FSelection = () => (api.isSomethingSelected ? h('span', {}, selectionsJoined.value) : null)
+
+const FSelection = () =>
+  api.isSomethingSelected
+    ? h(
+        'span',
+        {
+          class: typographySelection(),
+        },
+        selectionsJoined.value,
+      )
+    : null
 </script>
 
 <template>
   <div
     :class="[
       's-select-input',
-      `s-select-input--size-${api.size}`,
+      `s-select-input_size_${api.size}`,
       {
-        's-select-input--empty': !api.isSomethingSelected,
-        's-select-input--disabled': api.disabled,
+        's-select-input_empty': !api.isSomethingSelected,
+        's-select-input_disabled': api.disabled,
       },
     ]"
     @click="api.menuToggle()"
@@ -60,56 +80,50 @@ const FSelection = () => (api.isSomethingSelected ? h('span', {}, selectionsJoin
 
 <style lang="scss">
 @use './sizes-mixin.scss';
+@use '@/theme';
 
 .s-select-input {
   $root: &;
 
-  @apply bg-base-background text-base-content-primary rounded flex items-center px-4;
+  @apply rounded flex items-center px-4;
   @apply select-none cursor-pointer;
 
-  &--disabled {
+  background: theme.token-as-var('sys.color.background');
+  color: theme.token-as-var('sys.color.content-primary');
+
+  &_disabled {
     @apply pointer-events-none opacity-75;
   }
 
   &:hover {
-    @apply bg-base-background-hover;
+    background: theme.token-as-var('sys.color.background-hover');
   }
 
   &__label {
-    @apply text-base-content-tertiary;
+    color: theme.token-as-var('sys.color.content-tertiary');
   }
 
-  &--size {
+  &_size {
     @include sizes-mixin.s-select-sizes;
+
+    // chevron sizing
+
+    @mixin chevron-size($size, $px) {
+      &_#{$size} .s-select-chevron {
+        font-size: $px;
+      }
+    }
+
+    @include chevron-size('sm', 10px);
+    @include chevron-size('md', 12px);
+    @include chevron-size('lg', 16px);
+    @include chevron-size('xl', 24px);
   }
 
-  &--size-sm,
-  &--size-md,
-  &--size-lg,
-  &--size-xl &__label {
-    @apply s-ty-p4;
-  }
-
-  &--size-xl#{&}--empty &__label,
-  &--size-xl {
-    @apply s-ty-p3;
-  }
-
-  &--size-xl:not(&--empty) &__label {
+  // magic spacing fix
+  &_size_xl:not(&_empty) &__label {
     $magic-spacing-gap-fix: -0.4rem;
     margin-bottom: $magic-spacing-gap-fix;
   }
-
-  // chevron sizing
-  @mixin chevron-size($size, $px) {
-    &--size-#{$size} .s-select-chevron {
-      font-size: $px;
-    }
-  }
-
-  @include chevron-size('sm', 10px);
-  @include chevron-size('md', 12px);
-  @include chevron-size('lg', 16px);
-  @include chevron-size('xl', 24px);
 }
 </style>

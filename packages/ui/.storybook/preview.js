@@ -1,6 +1,5 @@
 import 'virtual:windi.css'
-import './custom.css'
-import '@soramitsu-ui/theme/fonts/Sora/index.css'
+import './custom.scss'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
