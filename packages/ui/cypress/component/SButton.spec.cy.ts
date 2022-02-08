@@ -54,11 +54,11 @@ describe('Button', () => {
   })
 
   context('Given prop uppercase', () => {
-    context('When It is true and button is mini sized', () => {
+    context('When It is true and button is xs sized', () => {
       beforeEach(() => {
         mount(SButton, {
           propsData: {
-            size: 'mini',
+            size: 'xs',
             uppercase: true,
           },
           slots: {
@@ -72,11 +72,11 @@ describe('Button', () => {
       })
     })
 
-    context('When It is true and button is not mini sized', () => {
+    context('When It is true and button is not xs sized', () => {
       beforeEach(() => {
         mount(SButton, {
           propsData: {
-            size: 'medium',
+            size: 'md',
             uppercase: true,
           },
           slots: {

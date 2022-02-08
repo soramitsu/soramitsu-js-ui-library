@@ -41,7 +41,7 @@ const props = withDefaults(
   }>(),
   {
     type: 'secondary',
-    size: 'medium',
+    size: 'md',
     nativeType: 'button',
     icon: '',
     iconPosition: 'left',
@@ -53,11 +53,11 @@ const props = withDefaults(
 )
 
 const definitelyType = usePropTypeFilter(() => props.type, BUTTON_TYPE_VALUES, 'primary')
-const definitelySize = usePropTypeFilter(() => props.size, BUTTON_SIZE_VALUES, 'medium')
+const definitelySize = usePropTypeFilter(() => props.size, BUTTON_SIZE_VALUES, 'md')
 const definitelyIconPosition = usePropTypeFilter(() => props.iconPosition, BUTTON_ICON_POSITION_VALUES, 'left')
 const isAction = computed(() => definitelyType.value === 'action')
 const font = computed(() => {
-  if (definitelySize.value === 'mini' && props.uppercase) {
+  if (definitelySize.value === 'xs' && props.uppercase) {
     return 'sora-tpg-ch3'
   }
 
@@ -244,26 +244,26 @@ const font = computed(() => {
     color: theme.token-as-var('sys.color.on-disabled');
   }
 
-  @include button-size(mini,
+  @include button-size(xs,
     $height: 24px,
     $padding: px-8px,
     $icon-size: 12px,
     $border-radius: 2px
   );
 
-  @include button-size(small,
+  @include button-size(sm,
     $height: 32px,
     $padding: px-12px,
     $icon-size: 16px
   );
 
-  @include button-size(medium,
+  @include button-size(md,
     $height: 40px,
     $padding: px-16px,
     $icon-size: 16px
   );
 
-  @include button-size(big,
+  @include button-size(lg,
     $height: 56px,
     $padding: px-24px,
     $icon-size: 24px

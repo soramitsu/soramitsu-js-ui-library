@@ -42,7 +42,7 @@ export enum Autocomplete {
 export const BUTTON_ICON_POSITION_VALUES: readonly ["left", "right"];
 
 // @public (undocumented)
-export const BUTTON_SIZE_VALUES: readonly ["mini", "small", "medium", "big"];
+export const BUTTON_SIZE_VALUES: readonly ["xs", "sm", "md", "lg"];
 
 // @public (undocumented)
 export const BUTTON_TYPE_VALUES: readonly ["primary", "secondary", "outline", "action"];
@@ -205,7 +205,7 @@ type: PropType<"primary" | "secondary" | "outline" | "action">;
 default: string;
 };
 size: {
-type: PropType<"big" | "small" | "mini" | "medium">;
+type: PropType<"xs" | "sm" | "md" | "lg">;
 } & {
 default: string;
 };
@@ -258,7 +258,7 @@ uppercase?: unknown;
 type: "primary" | "secondary" | "outline" | "action";
 loading: boolean;
 disabled: boolean;
-size: "big" | "small" | "mini" | "medium";
+size: "xs" | "sm" | "md" | "lg";
 nativeType: "reset" | "submit" | "button";
 icon: string;
 iconPosition: "left" | "right";
@@ -268,7 +268,7 @@ uppercase: boolean;
 type: "primary" | "secondary" | "outline" | "action";
 loading: boolean;
 disabled: boolean;
-size: "big" | "small" | "mini" | "medium";
+size: "xs" | "sm" | "md" | "lg";
 nativeType: "reset" | "submit" | "button";
 icon: string;
 iconPosition: "left" | "right";
