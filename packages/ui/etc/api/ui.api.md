@@ -184,9 +184,9 @@ description?: unknown;
 status: Status_2;
 showCloseBtn: boolean;
 } & {
+inline?: boolean | undefined;
 title?: string | undefined;
 description?: string | undefined;
-inline?: boolean | undefined;
 }> & {
 "onClick:close"?: (() => any) | undefined;
 }, {
@@ -202,7 +202,7 @@ type: PropType<"primary" | "secondary" | "outline" | "action">;
 default: string;
 };
 size: {
-type: PropType<"mini" | "small" | "medium" | "big">;
+type: PropType<"big" | "small" | "mini" | "medium">;
 } & {
 default: string;
 };
@@ -255,7 +255,7 @@ uppercase?: unknown;
 type: "primary" | "secondary" | "outline" | "action";
 loading: boolean;
 disabled: boolean;
-size: "mini" | "small" | "medium" | "big";
+size: "big" | "small" | "mini" | "medium";
 nativeType: "reset" | "submit" | "button";
 icon: string;
 iconPosition: "left" | "right";
@@ -265,7 +265,7 @@ uppercase: boolean;
 type: "primary" | "secondary" | "outline" | "action";
 loading: boolean;
 disabled: boolean;
-size: "mini" | "small" | "medium" | "big";
+size: "big" | "small" | "mini" | "medium";
 nativeType: "reset" | "submit" | "button";
 icon: string;
 iconPosition: "left" | "right";
@@ -293,13 +293,13 @@ label?: unknown;
 size?: unknown;
 inline?: unknown;
 } & {} & {
+inline?: boolean | undefined;
 modelValue?: unknown;
 options?: SelectOption<any>[] | undefined;
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
 size?: SelectSize | undefined;
-inline?: boolean | undefined;
 }>, {}>;
 
 // @public (undocumented)
@@ -598,7 +598,7 @@ default: number;
 showCloseBtn: {
 type: PropType<boolean>;
 };
-}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("timeout" | "click:close")[], "timeout" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("click:close" | "timeout")[], "click:close" | "timeout", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
 title?: unknown;
 description?: unknown;
 status?: unknown;
@@ -608,12 +608,12 @@ showCloseBtn?: unknown;
 status: Status_2;
 timeout: number;
 } & {
+showCloseBtn?: boolean | undefined;
 title?: string | undefined;
 description?: string | undefined;
-showCloseBtn?: boolean | undefined;
 }> & {
-onTimeout?: ((...args: any[]) => any) | undefined;
 "onClick:close"?: ((...args: any[]) => any) | undefined;
+onTimeout?: ((...args: any[]) => any) | undefined;
 }, {
 status: Status_2;
 timeout: number;
@@ -990,10 +990,10 @@ disabled: boolean;
 noEye: boolean;
 counter: string | number | boolean;
 } & {
+status?: Status_2.Success | Status_2.Warning | Status_2.Error | undefined;
 error?: boolean | undefined;
 modelValue?: string | undefined;
 id?: string | undefined;
-status?: Status_2.Success | Status_2.Warning | Status_2.Error | undefined;
 label?: string | undefined;
 success?: boolean | undefined;
 warning?: boolean | undefined;
@@ -1078,7 +1078,7 @@ default: number;
 };
 showCloseBtn: BooleanConstructor;
 description: StringConstructor;
-}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "timeout" | "click:close")[], "update:show" | "timeout" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("click:close" | "update:show" | "timeout")[], "click:close" | "update:show" | "timeout", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
 show?: unknown;
 title?: unknown;
 status?: unknown;
@@ -1087,21 +1087,21 @@ showCloseBtn?: unknown;
 description?: unknown;
 } & {
 status: Status_2;
+showCloseBtn: boolean;
 show: boolean;
 timeout: number;
-showCloseBtn: boolean;
 } & {
 title?: string | undefined;
 description?: string | undefined;
 }> & {
+"onClick:close"?: ((...args: any[]) => any) | undefined;
 "onUpdate:show"?: ((...args: any[]) => any) | undefined;
 onTimeout?: ((...args: any[]) => any) | undefined;
-"onClick:close"?: ((...args: any[]) => any) | undefined;
 }, {
 status: Status_2;
+showCloseBtn: boolean;
 show: boolean;
 timeout: number;
-showCloseBtn: boolean;
 }>;
 
 // @public (undocumented)
