@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SModalCard',
+})
+</script>
+
 <script setup lang="ts">
 withDefaults(
   defineProps<{

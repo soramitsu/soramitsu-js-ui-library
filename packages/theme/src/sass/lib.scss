@@ -146,6 +146,10 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
     @include util.typography-factory($size: 18px, $height: 150%, $spacing: -0.02em);
   }
 
+  @include typography('h4-bold') {
+    @include util.typography-factory($size: 18px, $height: 150%, $spacing: 0, $weight: bold);
+  }
+
   @include typography('h5') {
     @include util.typography-factory($size: 16px, $height: 150%, $spacing: 0.01em);
   }

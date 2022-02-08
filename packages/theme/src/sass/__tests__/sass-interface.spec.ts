@@ -216,6 +216,14 @@ describe('Exports', () => {
         letter-spacing: -0.02em;
       }
 
+      .sora-tpg-h4-bold {
+        font-family: Sora;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 150%;
+        letter-spacing: 0;
+      }
+
       .sora-tpg-h5 {
         font-family: Sora;
         font-size: 16px;

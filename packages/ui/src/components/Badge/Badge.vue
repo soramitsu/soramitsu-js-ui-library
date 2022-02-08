@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SBadge',
+})
+</script>
+
 <script setup lang="ts">
 import { SSpinner } from '../Spinner'
 import { BadgeType } from './types'
@@ -43,7 +49,7 @@ const showSpinner = computed(() => {
       />
       <span
         v-if="!onlyMarker"
-        class="title ml-2"
+        class="title"
       ><slot /></span>
     </div>
   </div>
@@ -98,6 +104,7 @@ const showSpinner = computed(() => {
 
   .title {
     text-transform: uppercase;
+    margin-left: 8px;
   }
 
   &--border {
