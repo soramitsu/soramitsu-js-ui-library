@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SToastsDisplay',
+})
+</script>
+
 <script setup lang="ts">
 import { validateHorizontalPlacement, validateVerticalPlacement } from './util'
 import { ToastsApi, TOASTS_API_KEY } from './api'

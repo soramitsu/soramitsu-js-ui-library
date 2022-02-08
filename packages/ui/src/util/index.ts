@@ -1,4 +1,4 @@
-import { InjectionKey, inject, Ref } from 'vue'
+import { InjectionKey, inject, Ref, Component, FunctionalComponent } from 'vue'
 
 export function forceInject<T>(key: string | InjectionKey<T>): T {
   const something = inject(key)
@@ -16,13 +16,22 @@ export function bareMetalVModel<T, K extends string = 'modelValue'>(
   prop: K = 'modelValue' as K,
 ): {
   [key in `${K}`]: T
-} & {
-  [key in `onUpdate:${K}`]: (value: T) => void
-} {
+} &
+  {
+    [key in `onUpdate:${K}`]: (value: T) => void
+  } {
   return {
     [prop]: model.value as T,
     [`onUpdate:${prop}`]: (v: T) => {
       model.value = v
     },
   } as any
+}
+
+export function getComponentName(comp: Component): string | undefined {
+  if (typeof comp === 'function') {
+    // functional component
+    return (comp as FunctionalComponent).displayName
+  }
+  return comp.name
 }

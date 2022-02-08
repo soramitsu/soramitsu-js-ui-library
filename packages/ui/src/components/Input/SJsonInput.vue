@@ -1,5 +1,10 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SJsonInput',
+})
+</script>
+
 <script setup lang="ts">
-import { computed, ref, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
 import JSONEditor from 'jsoneditor'
 import type { JSONEditorOptions } from 'jsoneditor'
 import 'jsoneditor/dist/jsoneditor.min.css'

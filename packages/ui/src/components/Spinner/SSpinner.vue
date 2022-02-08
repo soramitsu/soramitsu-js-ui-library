@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SSpinner',
+})
+</script>
+
 <script setup lang="ts">
 // Animated SVG comes from https://codepen.io/supah/pen/BjYLdW
 // TODO refactor to functional

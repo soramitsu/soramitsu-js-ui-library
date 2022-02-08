@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SButton',
+})
+</script>
+
 <script setup lang="ts">
 type BtnType = 'primary' | 'secondary'
 

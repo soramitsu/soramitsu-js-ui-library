@@ -17,5 +17,6 @@ const component: FunctionalComponent<Props> = ({ rotate }) =>
   })
 
 component.props = { rotate: Boolean }
+component.displayName = 'SSelectChevron'
 
 export default component
