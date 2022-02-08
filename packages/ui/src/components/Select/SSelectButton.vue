@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SSelectButton',
+})
+</script>
+
 <script setup lang="ts">
 import { useSelectApi } from './api'
 import { SelectButtonType, SelectSize } from './types'

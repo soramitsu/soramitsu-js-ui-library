@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SModal',
+})
+</script>
+
 <script setup lang="ts">
 import { Ref } from 'vue'
 import { normalizeTransitionAttrs, useCloseOnEsc, useModalVisibility } from './util'

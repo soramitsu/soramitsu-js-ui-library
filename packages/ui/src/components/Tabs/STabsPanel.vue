@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'STabsPanel',
+})
+</script>
+
 <script setup lang="ts">
 import { TabsState, TABS_STATE } from './api'
 
