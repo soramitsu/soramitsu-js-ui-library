@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SSpinner',
+})
+</script>
+
 <script setup lang="ts">
 // Animated SVG comes from https://codepen.io/supah/pen/BjYLdW
 // TODO refactor to functional
@@ -23,7 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const sizeNorm = eagerComputed(() => {
-  if (typeof props.size === 'number' || !Number.isNaN(parseFloat(props.size))) {
+  if (typeof props.size === 'number' || !Number.isNaN(Number(props.size))) {
     return `${props.size}px`
   }
   return props.size
