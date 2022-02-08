@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SSelectOption',
+})
+</script>
+
 <script setup lang="ts">
 import { SelectOptionType } from './types'
 import IconCheckMark from '~icons/mdi/check'
@@ -19,14 +25,15 @@ const emit = defineEmits<(event: 'toggle') => void>()
   <div
     :class="[
       's-select-option',
-      `s-select-option--size-${api.size}`,
+      `s-select-option_size_${api.size}`,
       {
-        's-select-option--selected': selected,
+        's-select-option_selected': selected,
       },
     ]"
     @click="emit('toggle')"
   >
     <template v-if="!isCheckMode">
+      <!-- FIXME checkbox & radio -->
       <template v-if="multiple">
         checkbox
       </template>
@@ -53,15 +60,16 @@ const emit = defineEmits<(event: 'toggle') => void>()
 
 <style lang="scss">
 @use './sizes-mixin.scss';
+@use '@/theme';
 
 .s-select-option {
-  @apply bg-utility-surface;
+  background: theme.token-as-var('sys.color.util.surface');
   @apply flex items-center px-[10px] py-1 select-none cursor-pointer space-x-4;
 
   &:hover,
   &:active,
-  &--selected {
-    @apply bg-base-background;
+  &_selected {
+    background: theme.token-as-var('sys.color.background');
   }
 
   &__content {
@@ -74,11 +82,11 @@ const emit = defineEmits<(event: 'toggle') => void>()
 
   $root: &;
 
-  &--size {
+  &_size {
     @include sizes-mixin.s-select-sizes;
 
     @mixin check-size($size, $px: 16px) {
-      &-#{$size} #{$root}__right-check-wrapper {
+      &_#{$size} #{$root}__right-check-wrapper {
         font-size: $px;
       }
     }

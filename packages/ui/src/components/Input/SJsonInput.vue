@@ -1,5 +1,10 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SJsonInput',
+})
+</script>
+
 <script setup lang="ts">
-import { computed, ref, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
 import JSONEditor from 'jsoneditor'
 import type { JSONEditorOptions } from 'jsoneditor'
 import 'jsoneditor/dist/jsoneditor.min.css'
@@ -202,104 +207,110 @@ $footer-height: 26px
     cursor: ns-resize
 </style>
 
-<style lang="sass">
-// @import '../../styles/variables.scss'
+<style lang="scss">
+@use '@/theme';
 
-$color-ide-variable: #0451A5
-$color-ide-string: #A31515
-$color-ide-number: #098658
-$color-ide-boolean: #0000FF
+$color-ide-variable: #0451a5;
+$color-ide-string: #a31515;
+$color-ide-number: #098658;
+$color-ide-boolean: #0000ff;
 
-$footer-height: 26px
+$footer-height: 26px;
 
-.s-json-input__editor
-  .jsoneditor
-    border: none !important
-    @apply font-mono
-    // font-family: $s-font-family-mono
+$color-content-primary: theme.token-as-var('sys.color.content-primary');
+$color-content-tertiary: theme.token-as-var('sys.color.content-primary');
+$color-bg: theme.token-as-var('sys.color.background');
+$color-bg-hover: theme.token-as-var('sys.color.background-hover');
 
-  .jsoneditor-outer
-    height: calc(100% - #{$footer-height})
-    margin-bottom: -1px !important
-    padding-bottom: 1px !important
+.s-json-input__editor {
+  .jsoneditor {
+    border: none !important;
+    @apply font-mono;
+  }
+  .jsoneditor-outer {
+    height: calc(100% - #{$footer-height});
+    margin-bottom: -1px !important;
+    padding-bottom: 1px !important;
+  }
+  .ace-jsoneditor {
+    *,
+    textarea.jsoneditor-text * {
+      @apply font-mono;
+    }
+    .ace_fold {
+      border: none;
+      background: none;
+      color: $color-content-primary;
+      margin-top: -13px;
+    }
+    .ace_text-layer {
+      color: $color-content-primary;
+    }
+    .ace_variable {
+      color: $color-ide-variable;
+    }
+    .ace_string {
+      color: $color-ide-string;
+    }
+    .ace_constant {
+      &.ace_numeric {
+        color: $color-ide-number;
+      }
+      &.ace_language {
+        color: $color-ide-boolean;
+      }
+    }
+    &.ace_editor {
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
 
-  .ace-jsoneditor
-    *, textarea.jsoneditor-text *
-      @apply font-mono
-      // font-family: $s-font-family-mono
+      .ace_marker-layer {
+        .ace_active-line {
+          background: $color-bg;
+        }
+        .ace_selection {
+          background: $color-bg-hover;
+        }
+      }
+    }
+  }
+  .jsoneditor-statusbar {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    color: $color-content-tertiary;
+    background: $color-bg;
 
-    .ace_fold
-      border: none
-      background: none
-      @apply text-base-content-primary
-      // color: var(--s-color-base-content-primary)
-      margin-top: -13px
-
-    .ace_text-layer
-      @apply text-base-content-primary
-      // color: var(--s-color-base-content-primary)
-
-    .ace_variable
-      color: $color-ide-variable
-
-    .ace_string
-      color: $color-ide-string
-
-    .ace_constant
-      &.ace_numeric
-        color: $color-ide-number
-
-      &.ace_language
-        color: $color-ide-boolean
-
-    &.ace_editor
-      border-top-left-radius: 3px
-      border-top-right-radius: 3px
-
-      .ace_marker-layer
-        .ace_active-line
-          @apply bg-base-background
-          // background-color: var(--s-color-base-background)
-
-        .ace_selection
-          @apply bg-base-background-hover
-          // background: var(--s-color-base-background-hover)
-
-  .jsoneditor-statusbar
-    border-bottom-left-radius: 3px
-    border-bottom-right-radius: 3px
-    @apply bg-base-background text-base-content-tertiary
-    // background-color: var(--s-color-base-background)
-    // color: var(--s-color-base-content-tertiary)
-
-    .jsoneditor-parse-error-icon
+    .jsoneditor-parse-error-icon {
       // If full error message will be needed, then it should be removed
-      display: none !important
-      pointer-events: none
+      display: none !important;
+      pointer-events: none;
+    }
+  }
+  .ace_gutter {
+    color: $color-content-tertiary;
+    background: $color-bg;
 
-  .ace_gutter
-    @apply bg-base-background text-base-content-primary
-    // background-color: var(--s-color-base-background)
-    // color: var(--s-color-base-content-primary)
-
-    &-active-line
-      @apply bg-base-background-hover
-      // background-color: var(--s-color-base-background-hover)
-
+    &-active-line {
+      background: $color-bg-hover;
+    }
+  }
   .ace_editor .ace_content,
-  .ace_gutter .ace_gutter-cell
-    @apply font-mono
-    // font-family: $s-font-family-mono
-
-  .ace_tooltip
-    @apply bg-base-content-primary border-base-content-primary text-base-on-accent
-    @apply rounded-sm text-p4 font-serif
+  .ace_gutter .ace_gutter-cell {
+    @apply font-mono;
+  }
+  .ace_tooltip {
+    // FIXME
+    // @apply bg-base-content-primary border-base-content-primary text-base-on-accent;
+    // @apply text-p4;
+    @apply rounded-sm font-serif;
     // font-family: $s-font-family-default
     // background: var(--s-color-base-content-primary)
     // border-color: var(--s-color-base-content-primary)
     // color: var(--s-color-base-on-accent)
     // border-radius: var(--s-border-radius-mini)
-    padding: 10px
+    padding: 10px;
     // font-size: var(--s-font-size-mini)
-    line-height: 1.2
+    line-height: 1.2;
+  }
+}
 </style>

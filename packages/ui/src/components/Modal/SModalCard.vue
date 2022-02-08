@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SModalCard',
+})
+</script>
+
 <script setup lang="ts">
 withDefaults(
   defineProps<{
@@ -22,7 +28,8 @@ withDefaults(
     class="s-modal-card"
     :style="{ width }"
   >
-    <div class="s-modal-card__title">
+    <!-- FIXME typography class in Figma is set incorrectly; wait for update and bind it here then -->
+    <div class="text-center sora-tpg-h3">
       <slot name="title">
         {{ title }}
       </slot>
@@ -33,22 +40,15 @@ withDefaults(
 </template>
 
 <style lang="scss">
+@use '@/theme';
+
+$col-surface: theme.token-as-var('sys.color.util.surface');
+$shadow: theme.token-as-var('sys.shadow.floating-notification');
+
 .s-modal-card {
-  @apply bg-utility-surface rounded-xl p-6;
+  @apply rounded-xl p-6;
 
-  // TODO add to theme "Floating Notification" shadow
-  box-shadow: 0px 68px 80px rgba(24, 24, 29, 0.09), 0px 30.1471px 24.1177px rgba(24, 24, 29, 0.058643),
-    0px 12.5216px 10.0172px rgba(24, 24, 29, 0.045), 0px 4.5288px 3.62304px rgba(24, 24, 29, 0.031357);
-
-  &__title {
-    @apply text-center;
-
-    // TODO add to typography "Title 2"
-    font-family: Sora;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 22px;
-    line-height: 28px;
-  }
+  background: $col-surface;
+  box-shadow: $shadow;
 }
 </style>
