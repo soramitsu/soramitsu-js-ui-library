@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SAlert',
+})
+</script>
+
 <script setup lang="ts">
 import { IconClose, STATUS_ICONS_MAP } from '@/components/icons'
 import { Status } from '@/types'

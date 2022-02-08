@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SSelectOption',
+})
+</script>
+
 <script setup lang="ts">
 import { SelectOptionType } from './types'
 import IconCheckMark from '~icons/mdi/check'
@@ -27,6 +33,7 @@ const emit = defineEmits<(event: 'toggle') => void>()
     @click="emit('toggle')"
   >
     <template v-if="!isCheckMode">
+      <!-- FIXME checkbox & radio -->
       <template v-if="multiple">
         checkbox
       </template>
