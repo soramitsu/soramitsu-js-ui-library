@@ -60,6 +60,9 @@ export type ButtonType = typeof BUTTON_TYPE_VALUES[number];
 export function defineToastsApi(): ToastsApi;
 
 // @public (undocumented)
+export const FONT_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
+
+// @public (undocumented)
 export enum InputSize {
     // (undocumented)
     BIG = "big",

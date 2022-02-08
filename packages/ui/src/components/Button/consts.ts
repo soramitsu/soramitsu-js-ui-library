@@ -15,3 +15,10 @@ export const SPINNER_WIDTH: Record<typeof BUTTON_SIZE_VALUES[number], string> = 
   medium: '4',
   big: '4',
 }
+
+export const FONT_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string> = {
+  mini: 'sora-tpg-p4',
+  small: 'sora-tpg-h7',
+  medium: 'sora-tpg-h6',
+  big: 'sora-tpg-h5',
+}

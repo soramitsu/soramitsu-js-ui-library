@@ -1,17 +1,26 @@
 <script lang="ts">
-export default defineComponent({ name: 'SButton' })
+export default defineComponent({
+  name: 'SButton'
+})
 </script>
 
 <script setup lang="ts">
 import { computed, ComputedRef } from 'vue'
 import { SSpinner } from '@/lib'
-import { BUTTON_ICON_POSITION_VALUES, BUTTON_SIZE_VALUES, BUTTON_TYPE_VALUES, SPINNER_SIZE, SPINNER_WIDTH } from './consts'
+import {
+  BUTTON_ICON_POSITION_VALUES,
+  BUTTON_SIZE_VALUES,
+  BUTTON_TYPE_VALUES,
+  SPINNER_SIZE,
+  SPINNER_WIDTH,
+  FONT_SIZE
+} from './consts'
 import { ButtonType, ButtonSize, ButtonIconPosition } from './types'
 
-function usePropTypeFilter<T>(value: T, validValues: readonly T[], defaultValue: T): ComputedRef<T> {
+function usePropTypeFilter<T>(value: () => T, validValues: readonly T[], defaultValue: T): ComputedRef<T> {
   return computed(() => {
-    if (validValues.includes(value)) {
-      return value
+    if (validValues.includes(value())) {
+      return value()
     }
 
     return defaultValue
@@ -43,10 +52,17 @@ const props = withDefaults(
   },
 )
 
-const definitelyType = usePropTypeFilter(props.type, BUTTON_TYPE_VALUES, 'primary')
-const definitelySize = usePropTypeFilter(props.size, BUTTON_SIZE_VALUES, 'medium')
-const definitelyIconPosition = usePropTypeFilter(props.iconPosition, BUTTON_ICON_POSITION_VALUES, 'left')
+const definitelyType = usePropTypeFilter(() => props.type, BUTTON_TYPE_VALUES, 'primary')
+const definitelySize = usePropTypeFilter(() => props.size, BUTTON_SIZE_VALUES, 'medium')
+const definitelyIconPosition = usePropTypeFilter(() => props.iconPosition, BUTTON_ICON_POSITION_VALUES, 'left')
 const isAction = computed(() => definitelyType.value === 'action')
+const font = computed(() => {
+  if (definitelySize.value === 'mini' && props.uppercase) {
+    return 'sora-tpg-ch3'
+  }
+
+  return FONT_SIZE[definitelySize.value]
+})
 </script>
 
 <template>
@@ -57,10 +73,10 @@ const isAction = computed(() => definitelyType.value === 'action')
       `s-button_type_${definitelyType}`,
       `s-button_size_${definitelySize}`,
       `s-button_icon-position_${definitelyIconPosition}`,
+      font,
       {
         's-button_disabled': loading || disabled,
         'rounded-full': isAction && rounded,
-        'sora-tpg-ch3': definitelySize === 'mini' && uppercase,
       },
     ]"
     :disabled="loading || disabled"
@@ -99,8 +115,6 @@ const isAction = computed(() => definitelyType.value === 'action')
 <style lang="scss">
 @use '@/theme';
 
-@include theme.typography-preset-default;
-
 @mixin button-type($name, $default, $hover, $active, $disabled) {
   &_type_#{$name} {
     @apply #{$default};
@@ -119,11 +133,10 @@ const isAction = computed(() => definitelyType.value === 'action')
   }
 }
 
-@mixin button-size($name, $height, $padding, $font, $icon-size, $border-radius: 4px) {
+@mixin button-size($name, $height, $padding, $icon-size, $border-radius: 4px) {
   &_size_#{$name} {
     height: $height;
     border-radius: $border-radius;
-    @apply #{$font};
   }
 
   &_size_#{$name} &__icon {
@@ -234,7 +247,6 @@ const isAction = computed(() => definitelyType.value === 'action')
   @include button-size(mini,
     $height: 24px,
     $padding: px-8px,
-    $font: sora-tpg-p4,
     $icon-size: 12px,
     $border-radius: 2px
   );
@@ -242,21 +254,18 @@ const isAction = computed(() => definitelyType.value === 'action')
   @include button-size(small,
     $height: 32px,
     $padding: px-12px,
-    $font: sora-tpg-h7,
     $icon-size: 16px
   );
 
   @include button-size(medium,
     $height: 40px,
     $padding: px-16px,
-    $font: sora-tpg-h6,
     $icon-size: 16px
   );
 
   @include button-size(big,
     $height: 56px,
     $padding: px-24px,
-    $font: sora-tpg-h5,
     $icon-size: 24px
   );
 }
