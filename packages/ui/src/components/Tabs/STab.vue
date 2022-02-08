@@ -53,13 +53,14 @@ watchEffect(() => {
 </template>
 
 <style lang="scss">
+@use '@/theme';
 $border-radius-side: v-bind(borderRadius);
 
-$inactive-font-color: var(--s-color-base-content-primary);
-$background-color: var(--s-color-base-background);
-$hover-font-color: var(--s-color-theme-accent-hover);
-$text-color-active: var(--s-color-base-content-primary);
-$text-color-disabled: var(--s-color-base-content-quaternary);
+$inactive-font-color: theme.token-as-var('sys.color.content-primary');
+$background-color: theme.token-as-var('sys.color.background');
+$hover-font-color: theme.token-as-var('sys.color.primary-hover');
+$text-color-active: theme.token-as-var('sys.color.content-primary');
+$text-color-disabled: theme.token-as-var('sys.color.content-quaternary');
 
 .s-tab {
   @apply select-none;

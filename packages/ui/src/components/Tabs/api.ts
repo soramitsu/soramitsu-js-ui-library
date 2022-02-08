@@ -1,6 +1,5 @@
 import { forceInject } from '@/util'
-import { InjectionKey } from 'vue'
-import { Ref } from 'vue'
+import { InjectionKey, Ref } from 'vue'
 
 export interface TabsState {
   active: Ref<number>
