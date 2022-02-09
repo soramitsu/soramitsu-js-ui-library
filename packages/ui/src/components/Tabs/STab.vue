@@ -42,7 +42,7 @@ watchEffect(() => {
 <template>
   <button
     role="tab"
-    class="s-tab flex justify-center items-center"
+    class="s-tab flex justify-center items-center sora-tpg-p2"
     :disabled="disabled"
     :class="[
       { 's-tab_active': isActive },
@@ -67,6 +67,7 @@ $background-color: theme.token-as-var('sys.color.background');
 $hover-font-color: theme.token-as-var('sys.color.primary-hover');
 $text-color-active: theme.token-as-var('sys.color.content-primary');
 $text-color-disabled: theme.token-as-var('sys.color.content-quaternary');
+$active-tab-shadow: theme.token-as-var('sys.shadow.active-tab');
 
 .s-tab {
   @apply select-none;
@@ -74,12 +75,6 @@ $text-color-disabled: theme.token-as-var('sys.color.content-quaternary');
 
   background: $background-color;
   color: $inactive-font-color;
-
-  font-family: Sora;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 180%;
   outline: none;
 
   &_border-radius-none {
@@ -120,7 +115,7 @@ $text-color-disabled: theme.token-as-var('sys.color.content-quaternary');
 
     .s-tab__label-container {
       background: white;
-      box-shadow: 0px 1px 1px rgba(83, 86, 90, 0.1);
+      box-shadow: $active-tab-shadow;
     }
   }
 
