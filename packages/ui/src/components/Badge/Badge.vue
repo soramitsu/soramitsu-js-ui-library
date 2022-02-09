@@ -31,10 +31,11 @@ const showSpinner = computed(() => {
 <template>
   <div
     tabindex="0"
+    class="sora-tpg-ch3"
     :class="[
       's-badge',
       { 's-badge--border': withBorder },
-      colorBackground ? `s-badge--color-${type} text-white` : ' text-brand-pms-black',
+      colorBackground ? `s-badge--color-${type} text-white` : ' primary-text-color',
     ]"
   >
     <div class="flex items-center justify-start">
@@ -61,14 +62,7 @@ const showSpinner = computed(() => {
   @apply cursor-default select-none block;
   border-radius: 30px;
   padding: 5px 10px;
-  font-size: 10px;
-  font-family: Sora;
-  font-style: normal;
-  font-weight: bold;
-  line-height: 140%;
   width: fit-content;
-  letter-spacing: 0.06em;
-  font-feature-settings: 'case' on;
 
   @each $status in ('error', 'warning', 'info') {
     $bg: theme.token-as-var('sys.color.status.#{$status}');
@@ -87,6 +81,10 @@ const showSpinner = computed(() => {
 
   &--color-pending {
     background-color: theme.token-as-var('sys.color.content-tertiary');
+  }
+
+  .primary-text-color {
+    color: theme.token-as-var('sys.color.content-primary');
   }
 
   .marker {

@@ -1,5 +1,4 @@
 ---
-'@soramitsu-ui/theme': minor
 '@soramitsu-ui/ui': minor
 ---
 
