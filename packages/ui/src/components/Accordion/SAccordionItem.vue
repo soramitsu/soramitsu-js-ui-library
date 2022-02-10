@@ -130,18 +130,17 @@ if (groupApi) {
 @use '@/theme';
 
 .s-accordion-item {
-  @apply flex flex-col border border-base-border-secondary;
+  @apply flex flex-col;
+  border: 1px solid theme.token-as-var('sys.color.border-secondary');
   $component: &;
 
   &_expanded {
-    @apply border-base-border-primary;
-
     #{$component}__chevron {
       transform: rotate(180deg);
     }
 
     #{$component}__trigger {
-      @apply bg-base-background;
+      background-color: theme.token-as-var('sys.color.background');
     }
 
     #{$component}__body-wrapper {
