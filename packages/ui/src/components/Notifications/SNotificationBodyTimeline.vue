@@ -1,7 +1,10 @@
-<script setup lang="ts">
-import { toRefs, watch, ref, computed } from 'vue'
-import { useRafFn, useTimeoutFn } from '@vueuse/core'
+<script lang="ts">
+export default defineComponent({
+  name: 'SNotificationBodyTimeline',
+})
+</script>
 
+<script setup lang="ts">
 const props = defineProps<{
   /**
    * 0 to disable
@@ -16,11 +19,7 @@ const { timeout } = toRefs(props)
 let timestamps: null | [startedAt: number, willFireAt: number] = null
 const timeoutProgress = ref(0)
 
-const {
-  start: startTimeout,
-  stop: stopTimeout,
-  isPending,
-} = useTimeoutFn(
+const { start: startTimeout, stop: stopTimeout, isPending } = useTimeoutFn(
   () => {
     timestamps = null
     emit('timeout')

@@ -1,5 +1,10 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SNotificationBody',
+})
+</script>
+
 <script setup lang="ts">
-import { computed } from 'vue'
 import { Status } from '@/types'
 import SNotificationBodyTimeline from './SNotificationBodyTimeline.vue'
 import { IconClose, STATUS_ICONS_MAP } from '@/components/icons'
