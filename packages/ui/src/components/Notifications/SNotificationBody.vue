@@ -1,5 +1,10 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SNotificationBody',
+})
+</script>
+
 <script setup lang="ts">
-import { computed } from 'vue'
 import { Status } from '@/types'
 import SNotificationBodyTimeline from './SNotificationBodyTimeline.vue'
 import { IconClose, STATUS_ICONS_MAP } from '@/components/icons'
@@ -36,19 +41,19 @@ function onTimeout() {
     class="s-notification-body"
     :data-status="status"
   >
-    <div class="s-notification-body__spacer">
+    <div class="flex space-x-4">
       <div class="s-notification-body__icon-wrapper">
         <component :is="StatusIcon" />
       </div>
 
-      <div class="s-notification-body__content">
-        <div class="s-notification-body__title">
+      <div class="flex-1">
+        <div class="sora-tpg-p2">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
 
-        <div class="s-notification-body__description">
+        <div class="sora-tpg-p4">
           <slot name="description">
             {{ description }}
           </slot>
@@ -74,6 +79,8 @@ function onTimeout() {
 </template>
 
 <style lang="scss">
+@use '@/theme';
+
 @mixin define-icon-color($status) {
   &[data-status='#{$status}'] &__icon-wrapper {
     @content;
@@ -81,46 +88,24 @@ function onTimeout() {
 }
 
 .s-notification-body {
-  @apply bg-base-content-primary text-base-on-accent rounded-lg;
-  @apply px-6 py-4;
+  @apply px-6 py-4 rounded-lg;
 
   // for time line
   @apply relative overflow-hidden;
 
-  // fixme
-  box-shadow: 0px 68px 80px rgba(24, 24, 29, 0.09), 0px 30.1471px 24.1177px rgba(24, 24, 29, 0.058643),
-    0px 12.5216px 10.0172px rgba(24, 24, 29, 0.045), 0px 4.5288px 3.62304px rgba(24, 24, 29, 0.031357);
+  background: theme.token-as-var('sys.color.content-primary');
+  color: theme.token-as-var('sys.color.content-on-background-inverted');
+  box-shadow: theme.token-as-var('sys.shadow.floating-notification');
 
-  &__content {
-    @apply flex-1;
+  @mixin apply-icon-color($status) {
+    &[data-status='#{$status}'] &__icon-wrapper {
+      color: theme.token-as-var('sys.color.status.#{$status}');
+    }
   }
 
-  &__spacer {
-    @apply flex space-x-4;
-  }
-
-  &__title {
-    @apply s-ty-p2;
-  }
-
-  &__description {
-    @apply s-ty-p4;
-  }
-
-  @include define-icon-color('success') {
-    @apply text-status-success;
-  }
-
-  @include define-icon-color('info') {
-    @apply text-status-info;
-  }
-
-  @include define-icon-color('error') {
-    @apply text-status-error;
-  }
-
-  @include define-icon-color('warning') {
-    @apply text-status-warning;
+  // status variations
+  @each $status in 'info', 'success', 'error', 'warning' {
+    @include apply-icon-color($status);
   }
 
   // fix for broken sora icons

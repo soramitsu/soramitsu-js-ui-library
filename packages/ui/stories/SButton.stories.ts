@@ -1,5 +1,5 @@
 import { defineMeta, defineStory } from './util'
-import { SButton } from '@/lib'
+import { SButton, BUTTON_TYPE_VALUES, BUTTON_SIZE_VALUES, BUTTON_ICON_POSITION_VALUES } from '@/lib'
 import { IconClose } from '@/components/icons'
 
 export default defineMeta({
@@ -41,16 +41,16 @@ export const Configurable = defineStory((args) =>  ({
 }))
 Configurable.argTypes = {
   type: {
-    options: ['primary', 'secondary', 'outline', 'action'],
+    options: BUTTON_TYPE_VALUES,
     control: 'inline-radio'
   },
   size: {
-    options: ['mini', 'small', 'medium', 'big'],
+    options: BUTTON_SIZE_VALUES,
     control: 'inline-radio'
   },
   icon: { control: 'text' },
   iconPosition: {
-    options: ['left', 'right'],
+    options: BUTTON_ICON_POSITION_VALUES,
     control: 'inline-radio'
   },
   disabled: { control: 'boolean' },

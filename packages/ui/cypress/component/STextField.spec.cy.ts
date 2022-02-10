@@ -1,7 +1,7 @@
 import { Status } from '@/types'
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { STextField } from './index'
+import { STextField } from '@/lib'
 
 const findInput = () => cy.get('input')
 const findLabel = () => cy.get('label')

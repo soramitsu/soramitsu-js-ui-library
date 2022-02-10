@@ -8,7 +8,6 @@ import { AllowedComponentProps } from 'vue';
 import { BodyScrollOptions } from 'body-scroll-lock';
 import { ComponentCustomProps } from 'vue';
 import { ComponentOptionsMixin } from 'vue';
-import { ComputedRef } from 'vue';
 import { DeepReadonly } from 'vue';
 import { DefineComponent } from 'vue';
 import { EmitsOptions } from 'vue';
@@ -40,24 +39,28 @@ export enum Autocomplete {
 }
 
 // @public (undocumented)
+export const BUTTON_ICON_POSITION_VALUES: readonly ["left", "right"];
+
+// @public (undocumented)
+export const BUTTON_SIZE_VALUES: readonly ["xs", "sm", "md", "lg"];
+
+// @public (undocumented)
+export const BUTTON_TYPE_VALUES: readonly ["primary", "secondary", "outline", "action"];
+
+// @public (undocumented)
+export type ButtonIconPosition = typeof BUTTON_ICON_POSITION_VALUES[number];
+
+// @public (undocumented)
+export type ButtonSize = typeof BUTTON_SIZE_VALUES[number];
+
+// @public (undocumented)
+export type ButtonType = typeof BUTTON_TYPE_VALUES[number];
+
+// @public (undocumented)
 export function defineToastsApi(): ToastsApi;
 
 // @public (undocumented)
-export const DESIGN_SYSTEM_KEY: InjectionKey<DesignSystemProviderAPI>;
-
-// @public (undocumented)
-export enum DesignSystem {
-    // (undocumented)
-    Default = "DEFAULT",
-    // (undocumented)
-    Neumorphic = "NEUMORPHIC"
-}
-
-// @public (undocumented)
-export interface DesignSystemProviderAPI {
-    // (undocumented)
-    readonly current: DesignSystem;
-}
+export const FONT_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
 
 // @public (undocumented)
 export enum InputSize {
@@ -254,9 +257,9 @@ description?: unknown;
 status: Status_2;
 showCloseBtn: boolean;
 } & {
+inline?: boolean | undefined;
 title?: string | undefined;
 description?: string | undefined;
-inline?: boolean | undefined;
 }> & {
 "onClick:close"?: (() => any) | undefined;
 }, {
@@ -267,12 +270,12 @@ showCloseBtn: boolean;
 // @public (undocumented)
 export const SButton: DefineComponent<    {
 type: {
-type: PropType<"outline" | "action" | "primary" | "secondary">;
+type: PropType<"primary" | "secondary" | "outline" | "action">;
 } & {
 default: string;
 };
 size: {
-type: PropType<"big" | "small" | "mini" | "medium">;
+type: PropType<"xs" | "sm" | "md" | "lg">;
 } & {
 default: string;
 };
@@ -322,40 +325,25 @@ disabled?: unknown;
 loading?: unknown;
 uppercase?: unknown;
 } & {
-type: "outline" | "action" | "primary" | "secondary";
+type: "primary" | "secondary" | "outline" | "action";
 loading: boolean;
 disabled: boolean;
-size: "big" | "small" | "mini" | "medium";
+size: "xs" | "sm" | "md" | "lg";
 nativeType: "reset" | "submit" | "button";
 icon: string;
 iconPosition: "left" | "right";
 rounded: boolean;
 uppercase: boolean;
 } & {}>, {
-type: "outline" | "action" | "primary" | "secondary";
+type: "primary" | "secondary" | "outline" | "action";
 loading: boolean;
 disabled: boolean;
-size: "big" | "small" | "mini" | "medium";
+size: "xs" | "sm" | "md" | "lg";
 nativeType: "reset" | "submit" | "button";
 icon: string;
 iconPosition: "left" | "right";
 rounded: boolean;
 uppercase: boolean;
-}>;
-
-// @public (undocumented)
-export const SDesignSystemProvider: DefineComponent<    {
-value: {
-type: PropType<DesignSystem>;
-} & {
-default: DesignSystem;
-};
-}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
-value?: unknown;
-} & {
-value: DesignSystem;
-} & {}>, {
-value: DesignSystem;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_DefinePropsToOptions" needs to be exported by the entry point lib.d.ts
@@ -378,13 +366,13 @@ label?: unknown;
 size?: unknown;
 inline?: unknown;
 } & {} & {
+inline?: boolean | undefined;
 modelValue?: unknown;
 options?: SelectOption<any>[] | undefined;
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
 size?: SelectSize | undefined;
-inline?: boolean | undefined;
 }>, {}>;
 
 // @public (undocumented)
@@ -683,7 +671,7 @@ default: number;
 showCloseBtn: {
 type: PropType<boolean>;
 };
-}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("timeout" | "click:close")[], "timeout" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("click:close" | "timeout")[], "click:close" | "timeout", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
 title?: unknown;
 description?: unknown;
 status?: unknown;
@@ -693,12 +681,12 @@ showCloseBtn?: unknown;
 status: Status_2;
 timeout: number;
 } & {
+showCloseBtn?: boolean | undefined;
 title?: string | undefined;
 description?: string | undefined;
-showCloseBtn?: boolean | undefined;
 }> & {
-onTimeout?: ((...args: any[]) => any) | undefined;
 "onClick:close"?: ((...args: any[]) => any) | undefined;
+onTimeout?: ((...args: any[]) => any) | undefined;
 }, {
 status: Status_2;
 timeout: number;
@@ -711,6 +699,12 @@ export const SNotificationsProvider: FunctionalComponent<{
     absolute?: boolean;
     to?: string;
 }>;
+
+// @public (undocumented)
+export const SPINNER_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
+
+// @public (undocumented)
+export const SPINNER_WIDTH: Record<typeof BUTTON_SIZE_VALUES[number], string>;
 
 // @public (undocumented)
 export const SPopover: DefineComponent<    {
@@ -951,6 +945,45 @@ width: string | number;
 size: string | number;
 }>;
 
+// @public (undocumented)
+export const SSwitch: DefineComponent<    {
+modelValue: {
+type: PropType<boolean>;
+};
+id: {
+type: PropType<string>;
+required: true;
+};
+label: {
+type: PropType<string>;
+} & {
+default: string;
+};
+disabled: {
+type: PropType<boolean>;
+} & {
+default: boolean;
+};
+}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: boolean) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+modelValue?: unknown;
+id?: unknown;
+label?: unknown;
+disabled?: unknown;
+} & {
+id: string;
+disabled: boolean;
+label: string;
+} & {
+modelValue?: boolean | undefined;
+}> & {
+"onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
+}, {
+disabled: boolean;
+label: string;
+}>;
+
 // @public
 export enum Status {
     // (undocumented)
@@ -1030,10 +1063,10 @@ disabled: boolean;
 noEye: boolean;
 counter: string | number | boolean;
 } & {
+status?: Status_2.Success | Status_2.Warning | Status_2.Error | undefined;
 error?: boolean | undefined;
 modelValue?: string | undefined;
 id?: string | undefined;
-status?: Status_2.Success | Status_2.Warning | Status_2.Error | undefined;
 label?: string | undefined;
 success?: boolean | undefined;
 warning?: boolean | undefined;
@@ -1118,7 +1151,7 @@ default: number;
 };
 showCloseBtn: BooleanConstructor;
 description: StringConstructor;
-}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "timeout" | "click:close")[], "update:show" | "timeout" | "click:close", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
+}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("click:close" | "update:show" | "timeout")[], "click:close" | "update:show" | "timeout", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
 show?: unknown;
 title?: unknown;
 status?: unknown;
@@ -1127,21 +1160,21 @@ showCloseBtn?: unknown;
 description?: unknown;
 } & {
 status: Status_2;
+showCloseBtn: boolean;
 show: boolean;
 timeout: number;
-showCloseBtn: boolean;
 } & {
 title?: string | undefined;
 description?: string | undefined;
 }> & {
+"onClick:close"?: ((...args: any[]) => any) | undefined;
 "onUpdate:show"?: ((...args: any[]) => any) | undefined;
 onTimeout?: ((...args: any[]) => any) | undefined;
-"onClick:close"?: ((...args: any[]) => any) | undefined;
 }, {
 status: Status_2;
+showCloseBtn: boolean;
 show: boolean;
 timeout: number;
-showCloseBtn: boolean;
 }>;
 
 // @public (undocumented)
@@ -1172,9 +1205,6 @@ export type ToastsDisplayPlacementVertical = 'top' | 'bottom';
 
 // @public (undocumented)
 export type ToastUnregisterFn = () => void;
-
-// @public (undocumented)
-export function useDesignSystem(): ComputedRef<DesignSystem>;
 
 // @public (undocumented)
 export function useModalApi(): ModalApi;
