@@ -83,7 +83,7 @@ if (groupApi) {
       @click="handleTriggerClick"
     >
       <div class="s-accordion-item__head">
-        <div class="s-accordion-item__title">
+        <div class="sora-tpg-p2">
           <template v-if="title">
             {{ title }}
           </template>
@@ -92,7 +92,7 @@ if (groupApi) {
             name="title"
           />
         </div>
-        <div class="s-accordion-item__subtitle">
+        <div class="s-accordion-item__subtitle sora-tpg-p4">
           <template v-if="subtitle">
             {{ subtitle }}
           </template>
@@ -127,6 +127,8 @@ if (groupApi) {
 </template>
 
 <style lang="scss">
+@use '@/theme';
+
 .s-accordion-item {
   @apply flex flex-col border border-base-border-secondary;
   $component: &;
@@ -161,12 +163,8 @@ if (groupApi) {
     @apply flex-grow flex flex-col justify-center;
   }
 
-  &__titile {
-    @apply s-ty-p2;
-  }
-
   &__subtitle {
-    @apply s-ty-p4 text-base-content-tertiary;
+    color: theme.token-as-var('sys.color.content-tertiary');
   }
 
   &__body {
