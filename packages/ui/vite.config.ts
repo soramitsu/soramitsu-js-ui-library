@@ -30,6 +30,9 @@ export default defineConfig({
     }),
     AutoImport({
       imports: ['vue', '@vueuse/core'],
+      eslintrc: {
+        enabled: true,
+      },
     }),
   ],
   build: {
