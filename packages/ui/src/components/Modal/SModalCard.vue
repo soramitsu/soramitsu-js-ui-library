@@ -5,6 +5,10 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
+import { SButton } from '../Button'
+import { IconClose } from '../icons'
+import { useModalApi } from './api'
+
 withDefaults(
   defineProps<{
     /**
@@ -13,29 +17,49 @@ withDefaults(
     title?: string
 
     /**
-     * @default '300px'
+     * Flag to control whether to hide the close button
+     *
+     * @default true
      */
-    width?: string
+    close?: boolean
   }>(),
   {
-    width: '300px',
+    close: true,
   },
 )
+
+const api = useModalApi()
+
+function closeClick() {
+  api.close()
+}
 </script>
 
 <template>
-  <div
-    class="s-modal-card"
-    :style="{ width }"
-  >
-    <!-- FIXME typography class in Figma is set incorrectly; wait for update and bind it here then -->
-    <div class="text-center sora-tpg-h3">
-      <slot name="title">
-        {{ title }}
-      </slot>
+  <div class="s-modal-card">
+    <div class="s-modal-card__header flex items-center">
+      <span class="sora-tpg-h4-bold flex-1">
+        <slot name="title">
+          {{ title }}
+        </slot>
+      </span>
+
+      <SButton
+        v-if="close"
+        type="action"
+        size="sm"
+        data-testid="btn-close"
+        @click="closeClick"
+      >
+        <template #icon>
+          <IconClose />
+        </template>
+      </SButton>
     </div>
 
-    <slot />
+    <div class="px-6 py-8">
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -44,11 +68,18 @@ withDefaults(
 
 $col-surface: theme.token-as-var('sys.color.util.surface');
 $shadow: theme.token-as-var('sys.shadow.floating-notification');
+$shadow-header: theme.token-as-var('sys.shadow.modal-window-header');
 
 .s-modal-card {
-  @apply rounded-xl p-6;
+  @apply rounded-xl overflow-hidden;
 
   background: $col-surface;
   box-shadow: $shadow;
+  min-width: 300px;
+
+  &__header {
+    @apply px-6 py-6 text-center;
+    box-shadow: $shadow-header;
+  }
 }
 </style>
