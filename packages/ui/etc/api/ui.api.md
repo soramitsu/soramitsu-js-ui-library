@@ -224,12 +224,12 @@ loading: boolean;
 uppercase: boolean;
 }>>>, {
 type: "primary" | "secondary" | "outline" | "action";
-disabled: boolean;
 size: "xs" | "sm" | "md" | "lg";
 nativeType: HTMLButtonType;
 icon: string;
 iconPosition: "left" | "right";
 rounded: boolean;
+disabled: boolean;
 loading: boolean;
 uppercase: boolean;
 }>;
@@ -423,16 +423,16 @@ focusTrap: boolean | Options;
 // @public (undocumented)
 export const SModalCard: DefineComponent<__VLS_WithDefaults_5<__VLS_TypePropsToRuntimeProps_5<{
 title?: string | undefined;
-width?: string | undefined;
+close?: boolean | undefined;
 }>, {
-width: string;
+close: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_5<__VLS_TypePropsToRuntimeProps_5<{
 title?: string | undefined;
-width?: string | undefined;
+close?: boolean | undefined;
 }>, {
-width: string;
+close: boolean;
 }>>>, {
-width: string;
+close: boolean;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -626,9 +626,9 @@ syncMenuAndInputWidths: boolean;
 }, {
 modelValue: any;
 options: SelectOption<any>[];
-multiple: boolean;
-disabled: boolean;
 size: SelectSize;
+disabled: boolean;
+multiple: boolean;
 syncMenuAndInputWidths: boolean;
 }>;
 
@@ -685,8 +685,8 @@ width: number;
 size: string;
 width: number;
 }>>>, {
-width: string | number;
 size: string | number;
+width: string | number;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -705,8 +705,8 @@ disabled: boolean;
 }>>> & {
 "onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
 }, {
-label: string;
 disabled: boolean;
+label: string;
 }>;
 
 // @public
