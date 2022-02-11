@@ -40,7 +40,31 @@ export enum Autocomplete {
 }
 
 // @public (undocumented)
+export const BUTTON_ICON_POSITION_VALUES: readonly ["left", "right"];
+
+// @public (undocumented)
+export const BUTTON_SIZE_VALUES: readonly ["xs", "sm", "md", "lg"];
+
+// @public (undocumented)
+export const BUTTON_TYPE_VALUES: readonly ["primary", "secondary", "outline", "action"];
+
+// @public (undocumented)
+export type ButtonIconPosition = typeof BUTTON_ICON_POSITION_VALUES[number];
+
+// @public (undocumented)
+export type ButtonSize = typeof BUTTON_SIZE_VALUES[number];
+
+// @public (undocumented)
+export type ButtonType = typeof BUTTON_TYPE_VALUES[number];
+
+// @public (undocumented)
 export function defineToastsApi(): ToastsApi;
+
+// @public (undocumented)
+export const FONT_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
+
+// @public (undocumented)
+export type HTMLButtonType = 'button' | 'reset' | 'submit';
 
 // @public (undocumented)
 export enum InputSize {
@@ -159,17 +183,55 @@ showCloseBtn: boolean;
 //
 // @public (undocumented)
 export const SButton: DefineComponent<__VLS_WithDefaults_2<__VLS_TypePropsToRuntimeProps_2<{
+type?: "primary" | "secondary" | "outline" | "action" | undefined;
+size?: "xs" | "sm" | "md" | "lg" | undefined;
+nativeType?: HTMLButtonType | undefined;
+icon?: string | undefined;
+iconPosition?: "left" | "right" | undefined;
 rounded?: boolean | undefined;
-type?: BtnType | undefined;
+disabled?: boolean | undefined;
+loading?: boolean | undefined;
+uppercase?: boolean | undefined;
 }>, {
 type: string;
+size: string;
+nativeType: string;
+icon: string;
+iconPosition: string;
+rounded: boolean;
+disabled: boolean;
+loading: boolean;
+uppercase: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_2<__VLS_TypePropsToRuntimeProps_2<{
+type?: "primary" | "secondary" | "outline" | "action" | undefined;
+size?: "xs" | "sm" | "md" | "lg" | undefined;
+nativeType?: HTMLButtonType | undefined;
+icon?: string | undefined;
+iconPosition?: "left" | "right" | undefined;
 rounded?: boolean | undefined;
-type?: BtnType | undefined;
+disabled?: boolean | undefined;
+loading?: boolean | undefined;
+uppercase?: boolean | undefined;
 }>, {
 type: string;
+size: string;
+nativeType: string;
+icon: string;
+iconPosition: string;
+rounded: boolean;
+disabled: boolean;
+loading: boolean;
+uppercase: boolean;
 }>>>, {
-type: BtnType;
+type: "primary" | "secondary" | "outline" | "action";
+disabled: boolean;
+size: "xs" | "sm" | "md" | "lg";
+nativeType: HTMLButtonType;
+icon: string;
+iconPosition: "left" | "right";
+rounded: boolean;
+loading: boolean;
+uppercase: boolean;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
@@ -410,6 +472,12 @@ export const SNotificationsProvider: FunctionalComponent<{
     absolute?: boolean;
     to?: string;
 }>;
+
+// @public (undocumented)
+export const SPINNER_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
+
+// @public (undocumented)
+export const SPINNER_WIDTH: Record<typeof BUTTON_SIZE_VALUES[number], string>;
 
 // @public (undocumented)
 export const SPopover: DefineComponent<    {
@@ -834,7 +902,6 @@ export function useSelectApi<T = any>(): SelectApi<T>;
 
 // Warnings were encountered during analysis:
 //
-// dist-ts/components/Button/Button.vue.d.ts:4:5 - (ae-forgotten-export) The symbol "BtnType" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:9:9 - (ae-forgotten-export) The symbol "validateVerticalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:14:9 - (ae-forgotten-export) The symbol "validateHorizontalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsProvider.d.ts:8:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts
