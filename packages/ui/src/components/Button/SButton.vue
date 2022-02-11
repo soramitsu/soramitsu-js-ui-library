@@ -15,7 +15,7 @@ import {
   SPINNER_WIDTH,
   FONT_SIZE
 } from './consts'
-import { ButtonType, ButtonSize, ButtonIconPosition } from './types'
+import { ButtonType, ButtonSize, ButtonIconPosition, HTMLButtonType } from './types'
 
 function usePropTypeFilter<T>(value: () => T, validValues: readonly T[], defaultValue: T): ComputedRef<T> {
   return computed(() => {
@@ -31,7 +31,7 @@ const props = withDefaults(
   defineProps<{
     type?: ButtonType,
     size?: ButtonSize,
-    nativeType?: 'button' | 'reset' | 'submit',
+    nativeType?: HTMLButtonType,
     icon?: string,
     iconPosition?: ButtonIconPosition,
     rounded?: boolean,
