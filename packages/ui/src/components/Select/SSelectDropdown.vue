@@ -1,3 +1,9 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'SSelectDropdown',
+})
+</script>
+
 <script setup lang="ts">
 import { useSelectApi } from './api'
 import { SelectOptionType } from './types'
@@ -26,7 +32,11 @@ const api = useSelectApi()
 </template>
 
 <style lang="scss">
+@use '@/theme';
+
 .s-select-dropdown {
-  @apply bg-utility-surface rounded overflow-hidden shadow-dropdown;
+  @apply rounded overflow-hidden;
+  background: theme.token-as-var('sys.color.util.surface');
+  box-shadow: theme.token-as-var('sys.shadow.dropdown');
 }
 </style>

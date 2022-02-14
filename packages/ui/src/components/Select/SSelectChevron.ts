@@ -11,11 +11,12 @@ const component: FunctionalComponent<Props> = ({ rotate }) =>
     class: [
       's-select-chevron',
       {
-        's-select-chevron--rotate': rotate,
+        's-select-chevron_rotate': rotate,
       },
     ],
   })
 
 component.props = { rotate: Boolean }
+component.displayName = 'SSelectChevron'
 
 export default component

@@ -13,10 +13,12 @@ const findOverlay = () => findRoot().find('[data-testid=overlay]')
 
 before(() => {
   config.global.stubs = { transition: false }
+  config.global.components = { SModal, SModalCard }
 })
 
 after(() => {
   config.global.stubs = {}
+  config.global.components = {}
 })
 
 it('Mounts', () => {
@@ -24,28 +26,24 @@ it('Mounts', () => {
     setup() {
       const [show, toggleShow] = useToggle(false)
 
-      return () => [
-        h('button', { onClick: () => toggleShow() }, { default: () => 'show toggle' }),
-        h(
-          SModal,
-          {
-            ...showVModel(show),
-            focusTrap: false,
-          },
-          {
-            default: () =>
-              h(
-                SModalCard,
-                {},
-                {
-                  title: () => 'Titul',
-                  default: () => 'defualt',
-                },
-              ),
-          },
-        ),
-      ]
+      return {
+        show,
+        toggleShow,
+      }
     },
+    template: `
+      <button @click="toggleShow()">show toggle</button>
+      <SModal
+        v-model:show="show"
+        :focus-trap="false"
+      >
+        <SModalCard>
+          <template #title>Title slot</template>
+          
+          Default slot
+        </SModalCard>
+      </SModal>
+    `,
   })
 })
 
@@ -301,7 +299,7 @@ describe('Teleportation', () => {
     mount(() => [
       h('div', { 'data-cy': 'anchor' }, [
         h(
-          SModal,
+          SModal as any,
           {
             teleportTo: null,
             show: true,
@@ -446,7 +444,7 @@ describe('Scroll Lock', () => {
             'A very huge element',
           ),
           h(
-            SModal,
+            SModal as any,
             {
               ...showVModel(show),
               ...params,
@@ -662,5 +660,50 @@ describe('Eagering', () => {
     cy.contains('Show: false')
     findAnchorRoot().should('exist').and('not.be.visible')
     findAnchorModal().should('exist').and('not.be.visible')
+  })
+})
+
+describe('SModalCard', () => {
+  const findCloseBtn = () => cy.get('[data-testid=btn-close]')
+
+  it('When "close" SModalCard button is clicked, then modal is closed', () => {
+    mount({
+      setup() {
+        return {
+          show: ref(true),
+        }
+      },
+      template: `
+        Show: {{ show }}
+
+        <SModal v-model:show="show">
+          <SModalCard data-testid="card">
+            Some placeholder
+          </SModalCard>
+        </SModal>
+      `,
+    })
+
+    cy.contains('Show: true')
+    cy.get('[data-testid=card]').within(() => {
+      findCloseBtn().click()
+    })
+    cy.contains('Show: false')
+  })
+
+  it('When "close" prop is false, then close button does not exist', () => {
+    mount({
+      template: `
+        <SModal show :focus-trap="false">
+          <SModalCard :close="false" data-testid="card">
+            Some placeholder
+          </SModalCard>
+        </SModal>
+      `,
+    })
+
+    cy.get('[data-testid=card]').within(() => {
+      findCloseBtn().should('not.exist')
+    })
   })
 })

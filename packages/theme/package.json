@@ -1,38 +1,52 @@
 {
   "name": "@soramitsu-ui/theme",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "dist/lib.cjs.js",
   "module": "dist/lib.esm.js",
   "types": "dist/lib.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/lib.esm.js",
+      "require": "./dist/lib.cjs.js"
+    },
+    "./sass": "./src/sass/lib.scss",
+    "./sass/*": "./src/sass/*",
+    "./fonts/Sora": "./src/fonts/Sora/index.css"
+  },
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public"
   },
   "files": [
     "dist",
-    "fonts"
+    "src/sass",
+    "src/fonts/Sora"
   ],
   "scripts": {
-    "build": "gulp -r sucrase/register -f gulpfile.ts",
-    "test": "jest"
+    "clean": "del dist dist-ts",
+    "build": "run-s clean build:tsc build:rollup",
+    "build:tsc": "tsc --outDir dist-ts",
+    "build:rollup": "rollup -c",
+    "test": "run-p test:main test:exports",
+    "test:main": "jest",
+    "test:exports": "jest -c jest-exports.config.js"
   },
   "dependencies": {
     "windicss": "^3.1.7"
   },
   "devDependencies": {
-    "@types/gulp": "^4.0.9",
     "@types/jest": "^27.0.2",
-    "chalk": "^4.1.2",
-    "consola": "^2.15.3",
-    "del": "^6.0.0",
+    "@types/node": "^17.0.14",
+    "del-cli": "^4.0.1",
     "esbuild-jest": "^0.5.0",
-    "gulp": "^4.0.2",
     "jest": "^27.3.1",
-    "make-dir": "^3.1.0",
+    "jest-resolver-enhanced": "^1.0.1",
+    "npm-run-all": "^4.1.5",
     "rollup": "^2.58.3",
     "rollup-plugin-dts": "^4.0.0",
-    "sucrase": "^3.20.1",
-    "typescript": "^4.4.4",
-    "zx": "^4.2.0"
+    "sass": "^1.49.0",
+    "sucrase": "^3.20.3",
+    "type-fest": "^2.9.0",
+    "typescript": "^4.4.4"
   }
 }
