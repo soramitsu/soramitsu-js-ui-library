@@ -5,6 +5,7 @@ export default { name: 'SAccordionItem' }
 <script setup lang="ts">
 import { onUnmounted, computed } from 'vue'
 import { IconArrowsChevronDownRounded24 } from '@/components/icons'
+import { useIncrementalId } from '@/composables/incremental-id'
 import { useAccordionApi } from './api'
 
 const props = withDefaults(
@@ -25,6 +26,7 @@ const props = withDefaults(
 const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
 const model = useVModel(props, 'modelValue', emit, { passive: true })
 
+const contentId = 'accordion-item-content-' + useIncrementalId()
 
 function toggle(expand?: boolean) {
   model.value = expand ?? !model.value
@@ -32,19 +34,19 @@ function toggle(expand?: boolean) {
 
 function setContentClosed(el: Element) {
   if (el instanceof HTMLElement) {
-    el.style.height = '0';
+    el.style.height = '0'
   }
 }
 
 function setContentOpened(el: Element) {
   if (el instanceof HTMLElement) {
-    el.style.height = el.scrollHeight + "px";
+    el.style.height = el.scrollHeight + "px"
   }
 }
 
 function handleContentToggleEnd(el: Element) {
   if (el instanceof HTMLElement) {
-    el.style.height = "";
+    el.style.height = ""
   }
 }
 
@@ -77,9 +79,13 @@ if (groupApi) {
     :class="{
       's-accordion-item_expanded': model
     }"
+    data-testid="accordion-item"
   >
-    <div
+    <button
       class="s-accordion-item__trigger"
+      data-testid="trigger"
+      :aria-expanded="model"
+      :aria-controls="contentId"
       @click="handleTriggerClick"
     >
       <div class="s-accordion-item__head">
@@ -102,8 +108,11 @@ if (groupApi) {
           />
         </div>
       </div>
-      <IconArrowsChevronDownRounded24 class="s-accordion-item__chevron" />
-    </div>
+      <IconArrowsChevronDownRounded24
+        class="s-accordion-item__chevron"
+        aria-hidden="true"
+      />
+    </button>
 
     <transition
       name="accordion"
@@ -116,7 +125,9 @@ if (groupApi) {
     >
       <div
         v-show="model"
+        :id="contentId"
         class="s-accordion-item__body-wrapper"
+        data-testid="content"
       >
         <div class="s-accordion-item__body">
           <slot />
@@ -155,7 +166,7 @@ if (groupApi) {
 
   &__trigger {
     transition: 250ms ease-in-out background-color;
-    @apply h-64px px-24px flex items-center cursor-pointer;
+    @apply h-64px px-24px flex items-center cursor-pointer text-left;
   }
 
   &__head {
