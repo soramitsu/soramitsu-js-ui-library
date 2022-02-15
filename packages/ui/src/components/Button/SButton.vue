@@ -5,8 +5,9 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { computed, ComputedRef } from 'vue'
+import { computed } from 'vue'
 import { SSpinner } from '@/lib'
+import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import {
   BUTTON_ICON_POSITION_VALUES,
   BUTTON_SIZE_VALUES,
@@ -16,16 +17,6 @@ import {
   FONT_SIZE
 } from './consts'
 import { ButtonType, ButtonSize, ButtonIconPosition, HTMLButtonType } from './types'
-
-function usePropTypeFilter<T>(value: () => T, validValues: readonly T[], defaultValue: T): ComputedRef<T> {
-  return computed(() => {
-    if (validValues.includes(value())) {
-      return value()
-    }
-
-    return defaultValue
-  })
-}
 
 const props = withDefaults(
   defineProps<{

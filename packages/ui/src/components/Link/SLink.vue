@@ -3,24 +3,11 @@ export default defineComponent({name: 'SLink'})
 </script>
 
 <script setup lang="ts">
-import { computed, ComputedRef } from 'vue'
+import { computed } from 'vue'
+import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { IconBasicExternalLink24, IconStatusInfo } from '../icons'
-
-const LINK_TYPE_VALUES = ['link', 'hint'] as const
-const LINK_ICON_POSITION_VALUES = ['left', 'right'] as const
-
-type LinkType = typeof LINK_TYPE_VALUES[number]
-type LinkIconPosition = typeof LINK_ICON_POSITION_VALUES[number]
-
-function usePropTypeFilter<T>(value: T, validValues: readonly T[], defaultValue: T): ComputedRef<T> {
-  return computed(() => {
-    if (validValues.includes(value)) {
-      return value
-    }
-
-    return defaultValue
-  })
-}
+import { LINK_ICON_POSITION_VALUES, LINK_TYPE_VALUES } from './consts'
+import { LinkIconPosition, LinkType } from './types'
 
 const props = withDefaults(
     defineProps<{
@@ -38,8 +25,8 @@ const props = withDefaults(
 )
 
 
-const definitelyType = usePropTypeFilter(props.type, LINK_TYPE_VALUES, 'link')
-const definitelyIconPosition = usePropTypeFilter(props.iconPosition, LINK_ICON_POSITION_VALUES, 'right')
+const definitelyType = usePropTypeFilter(() => props.type, LINK_TYPE_VALUES, 'link')
+const definitelyIconPosition = usePropTypeFilter(() => props.iconPosition, LINK_ICON_POSITION_VALUES, 'right')
 const finalTag = computed(() => props.tag || 'a')
 </script>
 
