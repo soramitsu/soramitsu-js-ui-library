@@ -1,6 +1,7 @@
 export * from './Alert'
 export * from './Button'
 export * from './Input'
+export * from './Link'
 export * from './Modal'
 export * from './Notifications'
 export * from './Popover'
