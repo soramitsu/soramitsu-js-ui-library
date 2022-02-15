@@ -50,6 +50,7 @@ const finalTag = computed(() => props.tag || 'a')
       's-link',
       `s-link_type_${type}`,
       `s-link_icon-position_${iconPosition}`,
+      'sora-tpg-p3',
     ]"
   >
     <span>
@@ -71,8 +72,11 @@ const finalTag = computed(() => props.tag || 'a')
 </template>
 
 <style lang="scss">
+@use '@/theme';
+
 .s-link {
-  @apply cursor-pointer inline-flex items-center text-status-info p2;
+  @apply cursor-pointer inline-flex items-center text-status-info;
+  color: theme.token-as-var('sys.color.status.info');
   $component: &;
 
   &:hover {
