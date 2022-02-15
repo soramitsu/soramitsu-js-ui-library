@@ -8,7 +8,7 @@ import { provide, Ref, watch } from 'vue'
 
 const props = withDefaults(
     defineProps<{
-      modelValue?: (string | number)[],
+      modelValue?: string[],
       multiple?: boolean
     }>(),
     {
@@ -17,7 +17,7 @@ const props = withDefaults(
     },
 )
 
-const emit = defineEmits<(event: 'update:modelValue', value: (string | number)[]) => void>()
+const emit = defineEmits<(event: 'update:modelValue', value: string[]) => void>()
 const model = useVModel(props, 'modelValue', emit, { passive: true })
 
 const items: Ref<AccordionItemApi>[] = []

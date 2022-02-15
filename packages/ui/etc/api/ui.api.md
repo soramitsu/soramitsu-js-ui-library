@@ -32,6 +32,27 @@ import { VNode } from 'vue';
 import { VNodeProps } from 'vue';
 
 // @public (undocumented)
+export const ACCORDION_API_KEY: InjectionKey<AccordionApi | undefined>;
+
+// @public (undocumented)
+export interface AccordionApi {
+    // (undocumented)
+    register: (item: Ref<AccordionItemApi>) => void;
+    // (undocumented)
+    unregister: (item: Ref<AccordionItemApi>) => void;
+}
+
+// @public (undocumented)
+export interface AccordionItemApi {
+    // (undocumented)
+    isActive: boolean;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    toggle: (expand?: boolean) => void;
+}
+
+// @public (undocumented)
 export enum Autocomplete {
     // (undocumented)
     OFF = "off",
@@ -163,23 +184,23 @@ export type RegisteredToast = ToastRegisterParams;
 //
 // @public (undocumented)
 export const SAccordion: DefineComponent<__VLS_WithDefaults_2<__VLS_TypePropsToRuntimeProps_2<{
-modelValue?: (string | number)[] | undefined;
+modelValue?: string[] | undefined;
 multiple?: boolean | undefined;
 }>, {
 modelValue: () => never[];
 multiple: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
-"update:modelValue": (value: (string | number)[]) => void;
+"update:modelValue": (value: string[]) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_2<__VLS_TypePropsToRuntimeProps_2<{
-modelValue?: (string | number)[] | undefined;
+modelValue?: string[] | undefined;
 multiple?: boolean | undefined;
 }>, {
 modelValue: () => never[];
 multiple: boolean;
 }>>> & {
-"onUpdate:modelValue"?: ((value: (string | number)[]) => any) | undefined;
+"onUpdate:modelValue"?: ((value: string[]) => any) | undefined;
 }, {
-modelValue: (string | number)[];
+modelValue: string[];
 multiple: boolean;
 }>;
 
@@ -941,6 +962,9 @@ export type ToastsDisplayPlacementVertical = 'top' | 'bottom';
 
 // @public (undocumented)
 export type ToastUnregisterFn = () => void;
+
+// @public (undocumented)
+export const useAccordionApi: () => AccordionApi | undefined;
 
 // @public (undocumented)
 export function useModalApi(): ModalApi;

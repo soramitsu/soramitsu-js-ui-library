@@ -1,7 +1,7 @@
 import { InjectionKey, Ref, inject } from 'vue'
 
 export interface AccordionItemApi {
-  name: string | number
+  name: string
   toggle: (expand?: boolean) => void
   isActive: boolean
 }
