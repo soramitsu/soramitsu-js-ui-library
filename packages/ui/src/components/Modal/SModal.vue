@@ -109,7 +109,7 @@ const props = withDefaults(defineProps<Props>(), {
   teleportTo: 'body',
   modalTransition: 's-modal__modal-transition',
   overlayTransition: 's-modal__overlay-transition',
-  closeOnOverlayClickcomputeNextLabelIdoseOnEsc: true,
+  closeOnOverlayClick: true,
   closeOnEsc: true,
   showOverlay: true,
   lockScroll: true,
