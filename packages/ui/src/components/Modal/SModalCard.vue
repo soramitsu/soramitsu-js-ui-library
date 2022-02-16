@@ -38,11 +38,14 @@ function closeClick() {
 <template>
   <div class="s-modal-card">
     <div class="s-modal-card__header flex items-center">
-      <span class="sora-tpg-h4-bold flex-1">
+      <h2
+        :id="api.labelledBy"
+        class="sora-tpg-h4-bold flex-1"
+      >
         <slot name="title">
           {{ title }}
         </slot>
-      </span>
+      </h2>
 
       <SButton
         v-if="close"

@@ -8,6 +8,17 @@ export interface ModalApi {
    * It's `null` if focus trap was disabled in SModal props
    */
   focusTrap: null | FocusTrap
+
+  /**
+   * ID that is pointed by the modal with `aria-labelledby`.
+   * Should be used in child component.
+   */
+  labelledBy: string
+
+  /**
+   * ID that is pointed by the modal with `aria-describedby`.
+   */
+  describedBy: string | null
 }
 
 export const MODAL_API_KEY: InjectionKey<ModalApi> = Symbol('ModalAPI')

@@ -18,7 +18,6 @@ import { InjectionKey } from 'vue';
 import { Instance } from '@popperjs/core';
 import type { JSONEditorOptions } from 'jsoneditor';
 import { MaybeRef } from '@vueuse/core';
-import { Options } from 'focus-trap';
 import { Placement } from '@popperjs/core';
 import { Plugin as Plugin_2 } from 'vue';
 import { PropType } from 'vue';
@@ -135,7 +134,9 @@ export const MODAL_API_KEY: InjectionKey<ModalApi>;
 export interface ModalApi {
     // (undocumented)
     close: () => void;
+    describedBy: string | null;
     focusTrap: null | FocusTrap;
+    labelledBy: string;
 }
 
 // @public (undocumented)
@@ -382,22 +383,26 @@ export const SModal: DefineComponent<__VLS_WithDefaults_4<__VLS_TypePropsToRunti
 teleportTo: string;
 modalTransition: string;
 overlayTransition: string;
-closeOnOverlayClick: boolean;
+closeOnOverlayClickcomputeNextLabelIdoseOnEsc: boolean;
 closeOnEsc: boolean;
 showOverlay: boolean;
 lockScroll: boolean;
 focusTrap: boolean;
 eager: boolean;
+labelledBy: string;
+describedBy: null;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("before-open" | "after-open" | "before-close" | "after-close" | "update:show" | "click:overlay")[], "before-open" | "after-open" | "before-close" | "after-close" | "update:show" | "click:overlay", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_4<__VLS_TypePropsToRuntimeProps_4<Props_2>, {
 teleportTo: string;
 modalTransition: string;
 overlayTransition: string;
-closeOnOverlayClick: boolean;
+closeOnOverlayClickcomputeNextLabelIdoseOnEsc: boolean;
 closeOnEsc: boolean;
 showOverlay: boolean;
 lockScroll: boolean;
 focusTrap: boolean;
 eager: boolean;
+labelledBy: string;
+describedBy: null;
 }>>> & {
 "onBefore-open"?: ((...args: any[]) => any) | undefined;
 "onAfter-open"?: ((...args: any[]) => any) | undefined;
@@ -412,9 +417,10 @@ modalTransition: string | object;
 overlayTransition: string | object;
 lockScroll: boolean | BodyScrollOptions;
 showOverlay: boolean;
-closeOnOverlayClick: boolean;
 closeOnEsc: boolean;
-focusTrap: boolean | Options;
+focusTrap: boolean | object;
+labelledBy: string;
+describedBy: string | null;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
