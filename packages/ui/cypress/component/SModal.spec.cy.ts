@@ -723,7 +723,7 @@ describe('A11y', () => {
     cy.checkA11y()
   })
 
-  it('When `label-id` prop is set, then its value is used for label', () => {
+  it('When `labelled-by` prop is set, then its value is used for label', () => {
     const CUSTOM_LABEL_ID = 'custom-id'
 
     mount({
