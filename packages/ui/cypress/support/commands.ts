@@ -27,6 +27,7 @@
 // import 'cypress-plugin-snapshots/commands'
 
 import 'cypress-axe'
+import 'cypress-plugin-tab'
 
 // Overwriting broken injection
 Cypress.Commands.overwrite('injectAxe', () => {
