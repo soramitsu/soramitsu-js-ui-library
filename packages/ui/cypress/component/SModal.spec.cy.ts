@@ -33,10 +33,7 @@ it('Mounts', () => {
     },
     template: `
       <button @click="toggleShow()">show toggle</button>
-      <SModal
-        v-model:show="show"
-        :focus-trap="false"
-      >
+      <SModal v-model:show="show">
         <SModalCard>
           <template #title>Title slot</template>
           
@@ -705,5 +702,116 @@ describe('SModalCard', () => {
     cy.get('[data-testid=card]').within(() => {
       findCloseBtn().should('not.exist')
     })
+  })
+})
+
+describe('A11y', () => {
+  it('When `labelledBy` of SModal is used, then a11y is ok', () => {
+    mount({
+      template: `
+        <SModal show v-slot="{ labelledBy }">
+          <h2 :id="labelledBy">
+            This modal is labelled by this heading
+          </h2>
+
+          <button> Close </button>
+        </SModal>
+      `,
+    })
+
+    cy.injectAxeAndConfigureCTDefaults()
+    cy.checkA11y()
+  })
+
+  it('When `labelled-by` prop is set, then its value is used for label', () => {
+    const CUSTOM_LABEL_ID = 'custom-id'
+
+    mount({
+      template: `
+        <SModal show labelled-by="${CUSTOM_LABEL_ID}" v-slot="{ labelledBy }">
+          <h2 :id="labelledBy">Label</h2>
+          <button>close</button>
+        </SModal>
+      `,
+    })
+
+    cy.get('h2').should('have.attr', 'id', CUSTOM_LABEL_ID)
+
+    cy.injectAxeAndConfigureCTDefaults()
+    cy.checkA11y()
+  })
+
+  it('When two different modals are rendered, they have different generated labels', () => {
+    mount({
+      setup() {
+        return {
+          show: ref(true),
+        }
+      },
+      template: `
+        <input type="checkbox" v-model="show">
+
+        <SModal v-if="show" show v-slot="{ labelledBy }">
+          <h2 :id="labelledBy">Label</h2>
+          <button @click="show = false">Close</button>
+        </SModal>
+      `,
+    })
+
+    let firstLabelId: string
+
+    cy.get('h2').then((el) => {
+      firstLabelId = el.attr('id') as string
+    })
+
+    cy.contains('Close').click()
+    cy.get('input').click()
+
+    cy.get('h2').should((el) => {
+      expect(el.attr('id')).not.to.eq(firstLabelId)
+    })
+  })
+
+  it('When SModalCard is used, then label id is automatically set and its title is a <h2>', () => {
+    mount({
+      template: `
+        <SModal show>
+          <SModalCard>
+            <template #title>
+              Soramitsu
+            </template>
+          </SModalCard>
+        </SModal>
+      `,
+    })
+
+    cy.injectAxeAndConfigureCTDefaults()
+    cy.checkA11y()
+
+    cy.get('h2').contains('Soramitsu')
+  })
+
+  it('When `described-by` is set on SModal, its aria attr is set', () => {
+    mount({
+      template: `
+        <SModal show described-by="desc1">
+          <SModalCard>
+            <template #title> Title </template>
+
+            <div id="desc1">
+              Description
+            </div>
+          </SModalCard>
+        </SModal>
+      `,
+    })
+
+    // btw `aria-describedby` is not checked by axe-core.
+    // Maybe it should be configured more strict for it?
+    // FIXME
+    cy.injectAxeAndConfigureCTDefaults()
+    cy.checkA11y()
+
+    findModal().should('have.attr', 'aria-describedby', 'desc1')
   })
 })
