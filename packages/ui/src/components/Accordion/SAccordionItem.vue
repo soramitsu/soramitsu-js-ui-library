@@ -5,28 +5,28 @@ export default { name: 'SAccordionItem' }
 <script setup lang="ts">
 import { onUnmounted, computed } from 'vue'
 import { IconArrowsChevronDownRounded24 } from '@/components/icons'
-import { useIncrementalId } from '@/composables/incremental-id'
+import { nextIncrementalId } from '@/util/incremental-id'
 import { useAccordionApi } from './api'
 
 const props = withDefaults(
-    defineProps<{
-      modelValue?: boolean,
-      title?: string,
-      subtitle?: string,
-      name?: string,
-    }>(),
-    {
-      modelValue: false,
-      title: '',
-      subtitle: '',
-      name: '',
-    },
+  defineProps<{
+    modelValue?: boolean
+    title?: string
+    subtitle?: string
+    name?: string
+  }>(),
+  {
+    modelValue: false,
+    title: '',
+    subtitle: '',
+    name: '',
+  },
 )
 
 const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
 const model = useVModel(props, 'modelValue', emit, { passive: true })
 
-const contentId = 'accordion-item-content-' + useIncrementalId()
+const contentId = 'accordion-item-content-' + nextIncrementalId()
 
 function toggle(expand?: boolean) {
   model.value = expand ?? !model.value
@@ -40,13 +40,13 @@ function setContentClosed(el: Element) {
 
 function setContentOpened(el: Element) {
   if (el instanceof HTMLElement) {
-    el.style.height = el.scrollHeight + "px"
+    el.style.height = el.scrollHeight + 'px'
   }
 }
 
 function handleContentToggleEnd(el: Element) {
   if (el instanceof HTMLElement) {
-    el.style.height = ""
+    el.style.height = ''
   }
 }
 
@@ -62,7 +62,7 @@ if (groupApi) {
   const api = computed(() => ({
     name: props.name,
     isActive: model.value,
-    toggle
+    toggle,
   }))
 
   register(api)
@@ -77,7 +77,7 @@ if (groupApi) {
   <div
     class="s-accordion-item"
     :class="{
-      's-accordion-item_expanded': model
+      's-accordion-item_expanded': model,
     }"
     data-testid="accordion-item"
   >
@@ -181,7 +181,8 @@ if (groupApi) {
     @apply p-24px;
   }
 
-  .accordion-enter-active, .accordion-leave-active {
+  .accordion-enter-active,
+  .accordion-leave-active {
     transition: 250ms ease-in-out height;
     will-change: height;
     overflow: hidden;
