@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': minor
 ---
 
-Added tabs component
+Add STabsPanel and STab components.

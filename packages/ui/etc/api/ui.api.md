@@ -39,6 +39,19 @@ export enum Autocomplete {
 }
 
 // @public (undocumented)
+export type BackgroundType = 'primary' | 'secondary' | 'none';
+
+// @public (undocumented)
+export enum BackgroundTypeValues {
+    // (undocumented)
+    'none' = 2,
+    // (undocumented)
+    'primary' = 0,
+    // (undocumented)
+    'secondary' = 1
+}
+
+// @public (undocumented)
 export function defineToastsApi(): ToastsApi;
 
 // @public (undocumented)
@@ -836,38 +849,44 @@ type: PropType<boolean>;
 } & {
 default: boolean;
 };
-borderRadius: {
+name: {
 type: PropType<string>;
-} & {
-default: string;
+required: true;
 };
 }, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
 disabled?: unknown;
-borderRadius?: unknown;
+name?: unknown;
 } & {
-borderRadius: string;
+name: string;
 disabled: boolean;
 } & {}>, {
-borderRadius: string;
 disabled: boolean;
 }>;
 
 // @public (undocumented)
 export const STabsPanel: DefineComponent<    {
 modelValue: {
-type: PropType<number>;
+type: PropType<string>;
 required: true;
 } & {
-default: number;
+default: string;
+};
+background: {
+type: PropType<BackgroundType>;
+} & {
+default: string;
 };
 }, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
 modelValue?: unknown;
+background?: unknown;
 } & {
-modelValue: number;
+modelValue: string;
+background: BackgroundType;
 } & {}> & {
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
-modelValue: number;
+modelValue: string;
+background: BackgroundType;
 }>;
 
 // @public
@@ -1064,6 +1083,19 @@ timeout: number;
 }>;
 
 // @public (undocumented)
+export const TABS_PANEL_API_KEY: InjectionKey<TabsPanelApi>;
+
+// @public (undocumented)
+export interface TabsPanelApi {
+    // (undocumented)
+    active: string;
+    // (undocumented)
+    background: string;
+    // (undocumented)
+    selectTab: (tab: string) => void;
+}
+
+// @public (undocumented)
 export type ToastRegisterFn = (params: ToastRegisterParams) => ToastUnregisterFn;
 
 // @public (undocumented)
@@ -1109,6 +1141,9 @@ export const usePopoverApi: () => PopoverApi;
 
 // @public (undocumented)
 export function useSelectApi<T = any>(): SelectApi<T>;
+
+// @public (undocumented)
+export function useTabsStateApi(): TabsPanelApi;
 
 // Warnings were encountered during analysis:
 //

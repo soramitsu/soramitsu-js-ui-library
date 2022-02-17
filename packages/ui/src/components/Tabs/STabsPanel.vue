@@ -5,32 +5,33 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { TabsState, TABS_STATE } from './api'
+import { TabsPanelApi, TABS_PANEL_API_KEY, BackgroundType } from './api'
 
 const props = withDefaults(
   defineProps<{
-    modelValue: number
+    modelValue: string
+    background?: BackgroundType
   }>(),
   {
-    modelValue: 0,
+    modelValue: '',
+    background: 'primary',
   },
 )
 
 const emit = defineEmits(['update:modelValue'])
 
-const selectTab = (tab: number): void => {
+const selectTab = (tab: string): void => {
   emit('update:modelValue', tab)
 }
 const active = computed(() => props.modelValue)
-const tabs = ref<any[]>([])
 
-const tabState: TabsState = {
-  active,
-  tabs,
+const tabState: TabsPanelApi = reactive({
+  active: active,
   selectTab,
-}
+  background: props.background,
+})
 
-provide(TABS_STATE, tabState)
+provide(TABS_PANEL_API_KEY, tabState)
 </script>
 <template>
   <div
@@ -40,3 +41,16 @@ provide(TABS_STATE, tabState)
     <slot />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.tabs-panel {
+  &:deep(*:first-child) {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  &:deep(*:last-child) {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+}
+</style>

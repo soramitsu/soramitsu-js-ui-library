@@ -5,38 +5,35 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { useTabsStateApi } from './api'
+import { useTabsStateApi, TabsPanelApi } from './api'
 
 const props = withDefaults(
   defineProps<{
     disabled?: boolean
-    borderRadius?: string
+    name: string
   }>(),
   {
     disabled: false,
-    borderRadius: '',
   },
 )
 
-const instance = getCurrentInstance()
-const { active, tabs, selectTab } = useTabsStateApi() || {
-  active: ref(0),
-  tabs: ref<any>([]),
-  selectTab: (t: number) => {},
-}
-
-const index = computed(() => tabs.value.findIndex((target: any) => target.uid === instance?.uid))
-const isActive = computed(() => index.value === active.value)
+const state: TabsPanelApi = useTabsStateApi()
+const { active } = toRefs(state)
+const { selectTab, background } = state
+const tabIsActive = computed(() => props.name === active.value)
 
 const activateTab = () => {
-  selectTab(index.value)
+  selectTab(props.name)
 }
 
-watchEffect(() => {
-  if (index.value === -1) {
-    if (instance) tabs.value.push(instance)
-  }
-})
+watch(
+  () => props.disabled,
+  (newVal) => {
+    if (newVal && tabIsActive.value) {
+      selectTab('')
+    }
+  },
+)
 </script>
 
 <template>
@@ -44,10 +41,7 @@ watchEffect(() => {
     role="tab"
     class="s-tab flex justify-center items-center sora-tpg-p2"
     :disabled="disabled"
-    :class="[
-      { 's-tab_active': isActive },
-      borderRadius ? `s-tab_border-radius-${borderRadius}` : 's-tab_border-radius-none',
-    ]"
+    :class="[{ 's-tab_active': tabIsActive }, `s-tab_background-${background}`]"
     @click="activateTab"
   >
     <div class="s-tab__label-container flex justify-center items-center">
@@ -60,38 +54,17 @@ watchEffect(() => {
 
 <style lang="scss">
 @use '@/theme';
-$border-radius-side: v-bind(borderRadius);
 
-$inactive-font-color: theme.token-as-var('sys.color.content-primary');
-$background-color: theme.token-as-var('sys.color.background');
-$hover-font-color: theme.token-as-var('sys.color.primary-hover');
-$text-color-active: theme.token-as-var('sys.color.content-primary');
-$text-color-disabled: theme.token-as-var('sys.color.content-quaternary');
-$active-tab-shadow: theme.token-as-var('sys.shadow.active-tab');
+$font-color-inactive: theme.token-as-var('sys.color.content-primary');
+$font-color-hover: theme.token-as-var('sys.color.primary-hover');
+$font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
 
 .s-tab {
   @apply select-none;
   padding: 4px;
+  color: $font-color-inactive;
 
-  background: $background-color;
-  color: $inactive-font-color;
   outline: none;
-
-  &_border-radius-none {
-    border-radius: 0;
-  }
-
-  &_border-radius-right {
-    border-radius: 0 8px 8px 0;
-  }
-
-  &_border-radius-left {
-    border-radius: 8px 0 0 8px;
-  }
-
-  &_border-radius-full {
-    border-radius: 8px;
-  }
 
   &:not(.s-tab_active) .s-tab__label {
     opacity: 0.55;
@@ -101,24 +74,6 @@ $active-tab-shadow: theme.token-as-var('sys.shadow.active-tab');
     outline: none;
   }
 
-  &:hover:not(.s-tab_active, .s-tab:disabled) {
-    color: $hover-font-color;
-
-    .s-tab__label {
-      opacity: 1;
-    }
-  }
-
-  &_active {
-    cursor: default;
-    color: $text-color-active;
-
-    .s-tab__label-container {
-      background: white;
-      box-shadow: $active-tab-shadow;
-    }
-  }
-
   &__label-container {
     width: 100%;
     height: 100%;
@@ -126,12 +81,81 @@ $active-tab-shadow: theme.token-as-var('sys.shadow.active-tab');
     border-radius: 8px;
   }
 
+  &:hover:not(.s-tab_active, .s-tab:disabled) {
+    color: $font-color-hover;
+
+    .s-tab__label {
+      opacity: 1;
+    }
+  }
+
   &:disabled {
     cursor: default;
 
     .s-tab__label {
-      color: $text-color-disabled;
+      color: $font-color-disabled;
       opacity: 0.7;
+    }
+  }
+
+  &.s-tab_active {
+    cursor: default;
+  }
+
+  &_background-primary {
+    $font-color-active: theme.token-as-var('sys.color.util.body');
+
+    $background-color: theme.token-as-var('sys.color.util.body');
+    $background-color-active: theme.token-as-var('sys.color.primary');
+
+    $border: 1px solid theme.token-as-var('sys.color.border-primary');
+    $border-active: 1px solid $background-color-active;
+
+    background: $background-color;
+    border: $border;
+
+    &.s-tab_active {
+      color: $font-color-active;
+      background-color: $background-color-active;
+      border: $border-active;
+    }
+  }
+
+  &_background-secondary {
+    $font-color-active: theme.token-as-var('sys.color.content-primary');
+    $background-color: theme.token-as-var('sys.color.background');
+    $tab-shadow-active: theme.token-as-var('sys.shadow.active-tab');
+
+    background: $background-color;
+
+    &.s-tab_active {
+      cursor: default;
+      color: $font-color-active;
+
+      .s-tab__label-container {
+        background: white;
+        box-shadow: $tab-shadow-active;
+      }
+    }
+  }
+
+  &_background-none {
+    $font-color-active: theme.token-as-var('sys.color.primary');
+
+    $background-color: none;
+    $background-color-active: none;
+
+    $border: 2px solid theme.token-as-var('sys.color.border-primary');
+    $border-active: 2px solid theme.token-as-var('sys.color.primary');
+
+    background: $background-color;
+    border-bottom: $border;
+    border-radius: 0 !important;
+
+    &.s-tab_active {
+      color: $font-color-active;
+      background-color: $background-color-active;
+      border-bottom: $border-active;
     }
   }
 }

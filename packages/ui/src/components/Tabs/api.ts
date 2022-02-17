@@ -1,14 +1,22 @@
 import { forceInject } from '@/util'
-import { InjectionKey, Ref } from 'vue'
+import { InjectionKey } from 'vue'
 
-export interface TabsState {
-  active: Ref<number>
-  tabs: Ref<any[]>
-  selectTab: (tab: number) => void
+export interface TabsPanelApi {
+  active: string
+  selectTab: (tab: string) => void
+  background: string
 }
 
-export const TABS_STATE: InjectionKey<TabsState> = Symbol('tabsState')
+export type BackgroundType = 'primary' | 'secondary' | 'none'
 
-export function useTabsStateApi(): TabsState {
-  return forceInject(TABS_STATE)
+export enum BackgroundTypeValues {
+  'primary',
+  'secondary',
+  'none',
+}
+
+export const TABS_PANEL_API_KEY: InjectionKey<TabsPanelApi> = Symbol('tabsState')
+
+export function useTabsStateApi(): TabsPanelApi {
+  return forceInject(TABS_PANEL_API_KEY)
 }
