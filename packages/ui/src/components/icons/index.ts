@@ -20,6 +20,8 @@ import IconStatusError16 from '@soramitsu-ui/icons/icomoon/status-error-ic-16.sv
 import IconBasicEye24 from '@soramitsu-ui/icons/icomoon/basic-eye-24.svg'
 import IconBasicEyeNo24 from '@soramitsu-ui/icons/icomoon/basic-eye-no-24.svg'
 
+import IconArrowsChevronDownRounded24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-down-rounded-24.svg'
+
 export {
   IconClose,
   IconStatusError,
@@ -31,6 +33,7 @@ export {
   IconStatusWarning16,
   IconBasicEye24,
   IconBasicEyeNo24,
+  IconArrowsChevronDownRounded24,
 }
 
 export const STATUS_ICONS_MAP: { [K in Status]: Component } = {
