@@ -158,3 +158,9 @@ export function useModalVisibility({
     modalTransitionListeners: createTransitionVisibilityListeners('modal', toggle),
   }
 }
+
+let GLOBAL_ID_COUNTER = 0
+
+export function computeNextLabelId(): string {
+  return `s-modal-label-id-${GLOBAL_ID_COUNTER++}`
+}
