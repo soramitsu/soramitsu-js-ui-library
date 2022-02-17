@@ -1,6 +1,6 @@
 import { Ref } from 'vue'
 import { not, or, and } from '@vueuse/core'
-import { nextIncrementalId } from '@/util/incremental-id'
+import { nextIncrementalCounter } from '@/util'
 
 /**
  * Transforms *something* into something that could be binded to `Transition` component as `v-bind="something"`
@@ -161,5 +161,5 @@ export function useModalVisibility({
 }
 
 export function computeNextLabelId(): string {
-  return `s-modal-label-id-${nextIncrementalId()}`
+  return `s-modal-label-id-${nextIncrementalCounter()}`
 }

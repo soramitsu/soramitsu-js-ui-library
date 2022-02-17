@@ -5,7 +5,7 @@ export default { name: 'SAccordionItem' }
 <script setup lang="ts">
 import { onUnmounted, computed } from 'vue'
 import { IconArrowsChevronDownRounded24 } from '@/components/icons'
-import { nextIncrementalId } from '@/util/incremental-id'
+import { nextIncrementalCounter } from '@/util'
 import { useAccordionApi } from './api'
 
 const props = withDefaults(
@@ -26,7 +26,7 @@ const props = withDefaults(
 const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
 const model = useVModel(props, 'modelValue', emit, { passive: true })
 
-const contentId = 'accordion-item-content-' + nextIncrementalId()
+const contentId = 'accordion-item-content-' + nextIncrementalCounter()
 
 function toggle(expand?: boolean) {
   model.value = expand ?? !model.value

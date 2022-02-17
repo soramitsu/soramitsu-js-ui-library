@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': patch
 ---
 
-**refactor**: use the same `nextIncrementalId()` utility within SAccordionItem & SModal
+**refactor**: use the same `nextIncrementalCounter()` utility within SAccordionItem & SModal
