@@ -71,6 +71,8 @@ export enum BackgroundTypeValues {
     // (undocumented)
     'secondary' = 1
 }
+
+// @public (undocumented)
 export const BUTTON_ICON_POSITION_VALUES: readonly ["left", "right"];
 
 // @public (undocumented)
@@ -808,47 +810,41 @@ disabled: boolean;
 label: string;
 }>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
 // @public (undocumented)
-export const STab: DefineComponent<    {
-disabled: {
-type: PropType<boolean>;
-} & {
-default: boolean;
-};
-name: {
-type: PropType<string>;
-required: true;
-};
-}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
-disabled?: unknown;
-name?: unknown;
-} & {
+export const STab: DefineComponent<__VLS_WithDefaults_16<__VLS_TypePropsToRuntimeProps_19<{
+disabled?: boolean | undefined;
 name: string;
+}>, {
 disabled: boolean;
-} & {}>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_16<__VLS_TypePropsToRuntimeProps_19<{
+disabled?: boolean | undefined;
+name: string;
+}>, {
+disabled: boolean;
+}>>>, {
 disabled: boolean;
 }>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
 // @public (undocumented)
-export const STabsPanel: DefineComponent<    {
-modelValue: {
-type: PropType<string>;
-required: true;
-} & {
-default: string;
-};
-background: {
-type: PropType<BackgroundType>;
-} & {
-default: string;
-};
-}, () => void, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<{
-modelValue?: unknown;
-background?: unknown;
-} & {
+export const STabsPanel: DefineComponent<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<{
 modelValue: string;
-background: BackgroundType;
-} & {}> & {
+background?: BackgroundType | undefined;
+}>, {
+modelValue: string;
+background: string;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<{
+modelValue: string;
+background?: BackgroundType | undefined;
+}>, {
+modelValue: string;
+background: string;
+}>>> & {
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
 modelValue: string;
