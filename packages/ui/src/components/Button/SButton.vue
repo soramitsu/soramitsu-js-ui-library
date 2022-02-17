@@ -218,7 +218,7 @@ const font = computed(() => {
     }
   }
 
-  &_type_secondary#{&}_disabled, &_type_actiony#{&}_disabled {
+  &_type_secondary#{&}_disabled, &_type_action#{&}_disabled {
     background-color: theme.token-as-var('sys.color.disabled');
     color: theme.token-as-var('sys.color.on-disabled');
   }
