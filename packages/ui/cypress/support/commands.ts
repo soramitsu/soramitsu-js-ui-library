@@ -25,3 +25,43 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 // import 'cypress-plugin-snapshots/commands'
+
+import 'cypress-axe'
+
+// Overwriting broken injection
+Cypress.Commands.overwrite('injectAxe', () => {
+  cy.task('readAxeCoreCached', null, { log: false }).then((contents) => {
+    cy.get('head', { log: false }).then((el) => {
+      el.append(`<script>${contents}</script>`)
+    })
+  })
+})
+
+Cypress.Commands.add('injectAxeAndConfigureCTDefaults', () => {
+  cy.injectAxe()
+
+  cy.configureAxe({
+    rules: [
+      {
+        id: 'landmark-one-main',
+        enabled: false,
+      },
+      {
+        id: 'page-has-heading-one',
+        enabled: false,
+      },
+    ],
+  })
+})
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Command to inject axe-core & configure defaults that are suitable
+       * for component testing
+       */
+      injectAxeAndConfigureCTDefaults: () => Chainable<null>
+    }
+  }
+}
