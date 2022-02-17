@@ -52,7 +52,7 @@ interface Props {
    * If this value is defined, then the counter will be shown.
    *
    * @remarks
-   * Could not be <= 0. Render depends on the passed value type:
+   * Could not be less than 0. Render depends on the passed value type:
    *
    * - number | string - `{count}/{counter value}`
    * - boolean (true) - `{count}` (just a count)

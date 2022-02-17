@@ -17,6 +17,7 @@ import { SSwitch } from './Switch'
 import { STextField } from './TextField'
 import { SPopover, SPopoverWrappedTransition } from './Popover'
 import { STab, STabsPanel } from './Tabs'
+import { SAccordion, SAccordionItem } from './Accordion'
 
 /**
  * Component names should be identical to their variable names
@@ -45,5 +46,7 @@ export const COMPONENTS: Record<string, Component> = {
   SSwitch,
   STextField,
   STab,
-  STabsPanel
+  STabsPanel,
+  SAccordion,
+  SAccordionItem
 }
