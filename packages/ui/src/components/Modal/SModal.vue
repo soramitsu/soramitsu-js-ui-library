@@ -6,12 +6,13 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { Ref } from 'vue'
-import { normalizeTransitionAttrs, useCloseOnEsc, useModalVisibility, computeNextLabelId } from './util'
+import { normalizeTransitionAttrs, useCloseOnEsc, useModalVisibility } from './util'
 import { ModalApi, MODAL_API_KEY } from './api'
 import { useFocusTrap } from '@/composables/focus-trap'
 import { FocusTrap, Options as FocusTrapOptions } from 'focus-trap'
 import { BodyScrollOptions } from 'body-scroll-lock'
 import { useBodyScrollLock } from '@/composables/body-scroll-lock'
+import { nextIncrementalCounter } from '@/util'
 
 type ClassType = object | string | string[]
 type StyleType = object
@@ -117,7 +118,7 @@ const props = withDefaults(defineProps<Props>(), {
   eager: false,
   labelledBy:
     // here is a Vue typing error - primitive value factory is a valid default value
-    (() => computeNextLabelId()) as unknown as string,
+    ((() => `s-modal-label-id-${nextIncrementalCounter()}`) as unknown) as string,
   describedBy: null,
 })
 
