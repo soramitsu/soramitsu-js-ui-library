@@ -1,0 +1,54 @@
+@use '@/theme';
+@use 'sass:map';
+
+$outline-size: (
+  md: 12px,
+  lg: 16px,
+  xl: 20px,
+);
+
+$dot-size: (
+  md: 8px,
+  lg: 9px,
+  xl: 12px,
+);
+
+$color-primary: theme.token-as-var('sys.color.primary');
+
+.s-radio-atom {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 99px;
+  border-color: $color-primary;
+
+  &__dot {
+    background: $color-primary;
+    border-radius: 99px;
+
+    &-transition {
+      &-enter-active,
+      &-leave-active {
+        transition: all 0.4s ease;
+      }
+
+      &-enter-from,
+      &-leave-to {
+        opacity: 0;
+      }
+    }
+  }
+
+  @each $size in md, lg, xl {
+    &_size_#{$size} {
+      $px: map.get($outline-size, $size);
+      width: $px;
+      height: $px;
+    }
+
+    &_size_#{$size} &__dot {
+      $px: map.get($dot-size, $size);
+      width: $px;
+      height: $px;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { InjectionKey } from 'vue'
+import { InjectionKey, Ref } from 'vue'
 import { forceInject } from '@/util'
 
 export interface RadioGroupApi {
@@ -7,20 +7,15 @@ export interface RadioGroupApi {
    *
    * It is automatically unregistered on scope dispose.
    */
-  registerRadio: () => RadioGroupRegisteredItemApi
+  registerRadio: (params: RegisterRadioParams) => RadioGroupRegisteredItemApi
+}
+
+export interface RegisterRadioParams {
+  value: Ref<any>
+  elem: Ref<null | HTMLElement>
 }
 
 export interface RadioGroupRegisteredItemApi {
-  /**
-   * Sets a value of the radio.
-   */
-  setValue: (value: any) => void
-
-  /**
-   * Sets an element of the radio. It is used for keyboard navigation and to determine order between radio buttons
-   */
-  setEl: (el: HTMLElement) => void
-
   /**
    * Reactive radio state. Can be used for styling and `aria-checked` attr.
    */
@@ -36,6 +31,9 @@ export interface RadioGroupRegisteredItemApi {
    */
   isTabbable: boolean
 
+  /**
+   * Tells to the radio group that this item was checked
+   */
   check: () => void
 }
 

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { PropType } from 'vue'
+import { useRadioGroupApi } from './api'
 import { RadioButtonSize, RADIO_BUTTON_SIZE } from './const'
+import SRadioAtom from './SRadioAtom'
 
 const props = defineProps({
   value: {
@@ -17,6 +19,11 @@ const props = defineProps({
   },
 })
 
+const root = templateRef<HTMLElement | null>('root')
+const value = computed(() => props.value)
+
+const api = useRadioGroupApi().registerRadio({ value, elem: root })
+
 // SLOTS
 
 const slots = useSlots()
@@ -25,17 +32,26 @@ const isThereSlot = (name: string): boolean => !!slots[name]
 
 // ETC
 
-const tabindex = 0
+const tabindex = computed(() => (api.isTabbable ? 0 : -1))
 
 const descriptionId = '1234'
 </script>
 
 <template>
   <div
+    ref="root"
     role="radio"
     :tabindex="tabindex"
+    :aria-checked="api.isChecked"
     :aria-describedby="descriptionId"
+    class="m-4 border-2 rounded p-2 cursor-pointer focus:ring ring-dark-300"
+    @click="api.check()"
   >
+    <SRadioAtom
+      size="md"
+      :checked="api.isChecked"
+    />
+
     <slot />
 
     <div
