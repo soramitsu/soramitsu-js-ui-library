@@ -3,6 +3,7 @@ import { PropType } from 'vue'
 import { useRadioGroupApi } from './api'
 import { RadioButtonSize, RADIO_BUTTON_SIZE } from './const'
 import SRadioAtom from './SRadioAtom'
+import { nextIncrementalCounter } from '@/util'
 
 const props = defineProps({
   value: {
@@ -19,10 +20,10 @@ const props = defineProps({
   },
 })
 
-const root = templateRef<HTMLElement | null>('root')
-const value = computed(() => props.value)
-
-const api = useRadioGroupApi().registerRadio({ value, elem: root })
+const api = useRadioGroupApi().registerRadio({
+  valueRef: computed(() => props.value),
+  elRef: templateRef('root'),
+})
 
 // SLOTS
 
@@ -34,7 +35,7 @@ const isThereSlot = (name: string): boolean => !!slots[name]
 
 const tabindex = computed(() => (api.isTabbable ? 0 : -1))
 
-const descriptionId = '1234'
+const descriptionId = `SRadioButtonDescription${nextIncrementalCounter()}`
 </script>
 
 <template>

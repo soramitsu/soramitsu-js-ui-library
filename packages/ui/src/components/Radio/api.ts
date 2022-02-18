@@ -11,8 +11,8 @@ export interface RadioGroupApi {
 }
 
 export interface RegisterRadioParams {
-  value: Ref<any>
-  elem: Ref<null | HTMLElement>
+  valueRef: Ref<any>
+  elRef: Ref<null | HTMLElement>
 }
 
 export interface RadioGroupRegisteredItemApi {

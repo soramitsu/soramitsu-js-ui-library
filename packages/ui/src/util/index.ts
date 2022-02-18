@@ -1,3 +1,4 @@
+import { MaybeElementRef, MaybeRef } from '@vueuse/core'
 import { InjectionKey, inject, Ref, Component, FunctionalComponent } from 'vue'
 
 export function forceInject<T>(key: string | InjectionKey<T>): T {
@@ -16,10 +17,9 @@ export function bareMetalVModel<T, K extends string = 'modelValue'>(
   prop: K = 'modelValue' as K,
 ): {
   [key in `${K}`]: T
-} &
-  {
-    [key in `onUpdate:${K}`]: (value: T) => void
-  } {
+} & {
+  [key in `onUpdate:${K}`]: (value: T) => void
+} {
   return {
     [prop]: model.value as T,
     [`onUpdate:${prop}`]: (v: T) => {

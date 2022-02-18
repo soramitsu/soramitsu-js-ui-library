@@ -16,6 +16,8 @@ $dot-size: (
 $color-primary: theme.token-as-var('sys.color.primary');
 
 .s-radio-atom {
+  @apply flex items-center justify-center;
+
   border-width: 1px;
   border-style: solid;
   border-radius: 99px;
