@@ -5,12 +5,12 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { TabsPanelApi, TABS_PANEL_API_KEY, BackgroundType } from './api'
+import { TabsPanelApi, TABS_PANEL_API_KEY, TabsPanelBackgroundType } from './api'
 
 const props = withDefaults(
   defineProps<{
     modelValue: string
-    background?: BackgroundType
+    background?: TabsPanelBackgroundType
   }>(),
   {
     modelValue: '',
@@ -43,14 +43,15 @@ provide(TABS_PANEL_API_KEY, tabState)
 </template>
 
 <style lang="scss" scoped>
+$tab-border-radius: 8px;
 .tabs-panel {
   &:deep(*:first-child) {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-top-left-radius: $tab-border-radius;
+    border-bottom-left-radius: $tab-border-radius;
   }
   &:deep(*:last-child) {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-top-right-radius: $tab-border-radius;
+    border-bottom-right-radius: $tab-border-radius;
   }
 }
 </style>

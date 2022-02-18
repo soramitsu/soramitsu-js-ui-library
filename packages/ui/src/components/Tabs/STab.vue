@@ -5,7 +5,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { useTabsStateApi, TabsPanelApi } from './api'
+import { useTabsPanelApi, TabsPanelApi } from './api'
 
 const props = withDefaults(
   defineProps<{
@@ -17,7 +17,7 @@ const props = withDefaults(
   },
 )
 
-const state: TabsPanelApi = useTabsStateApi()
+const state: TabsPanelApi = useTabsPanelApi()
 const { active } = toRefs(state)
 const { selectTab, background } = state
 const tabIsActive = computed(() => props.name === active.value)
@@ -41,7 +41,7 @@ watch(
     role="tab"
     class="s-tab flex justify-center items-center sora-tpg-p2"
     :disabled="disabled"
-    :class="[{ 's-tab_active': tabIsActive }, `s-tab_background-${background}`]"
+    :class="[{ 's-tab_active': tabIsActive }, `s-tab_background_${background}`]"
     @click="activateTab"
   >
     <div class="s-tab__label-container flex justify-center items-center">
@@ -102,7 +102,7 @@ $font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
     cursor: default;
   }
 
-  &_background-primary {
+  &_background_primary {
     $font-color-active: theme.token-as-var('sys.color.util.body');
 
     $background-color: theme.token-as-var('sys.color.util.body');
@@ -121,7 +121,7 @@ $font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
     }
   }
 
-  &_background-secondary {
+  &_background_secondary {
     $font-color-active: theme.token-as-var('sys.color.content-primary');
     $background-color: theme.token-as-var('sys.color.background');
     $tab-shadow-active: theme.token-as-var('sys.shadow.active-tab');
@@ -139,7 +139,7 @@ $font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
     }
   }
 
-  &_background-none {
+  &_background_none {
     $font-color-active: theme.token-as-var('sys.color.primary');
 
     $background-color: none;

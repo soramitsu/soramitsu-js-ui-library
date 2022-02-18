@@ -4,19 +4,18 @@ import { InjectionKey } from 'vue'
 export interface TabsPanelApi {
   active: string
   selectTab: (tab: string) => void
-  background: string
+  background: TabsPanelBackgroundType
 }
 
-export type BackgroundType = 'primary' | 'secondary' | 'none'
+export const TABS_PANEL_BACKGROUND_TYPES = ['primary', 'secondary', 'none'] as const
 
-export enum BackgroundTypeValues {
-  'primary',
-  'secondary',
-  'none',
-}
+export type TabsPanelBackgroundType = 
+  typeof TABS_PANEL_BACKGROUND_TYPES extends ReadonlyArray<infer T>
+    ? T
+    : never
 
-export const TABS_PANEL_API_KEY: InjectionKey<TabsPanelApi> = Symbol('tabsState')
+export const TABS_PANEL_API_KEY: InjectionKey<TabsPanelApi> = Symbol('tabsPanel')
 
-export function useTabsStateApi(): TabsPanelApi {
+export function useTabsPanelApi(): TabsPanelApi {
   return forceInject(TABS_PANEL_API_KEY)
 }

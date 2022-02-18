@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/vue3'
-import { STab, STabsPanel, BackgroundTypeValues, BackgroundType } from '@/lib'
+import { STab, STabsPanel, TabsPanelBackgroundType, TABS_PANEL_BACKGROUND_TYPES } from '@/lib'
 
 const meta: Meta = {
   title: 'Example/Tab',
@@ -8,7 +8,7 @@ const meta: Meta = {
 export default meta
 
 interface configurableArgs {
-  backgroundType: BackgroundType
+  backgroundType: TabsPanelBackgroundType
 }
 
 const configurableStory = (args: configurableArgs) => ({
@@ -29,7 +29,7 @@ const configurableStory = (args: configurableArgs) => ({
 
 export const configurable = configurableStory.bind({})
 
-const backgroundTypeValues = Object.values(BackgroundTypeValues).filter((t) => typeof t === 'string')
+const backgroundTypeValues = TABS_PANEL_BACKGROUND_TYPES
 
 configurable.args = {
   backgroundType: 'primary',

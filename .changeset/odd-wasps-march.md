@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': minor
 ---
 
-Add STabsPanel and STab components.
+**feat**: Add STabsPanel and STab components.

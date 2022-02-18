@@ -1,6 +1,6 @@
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { STabsPanel, STab, useTabsStateApi, TabsPanelApi } from '@/lib'
+import { STabsPanel, STab, useTabsPanelApi, TabsPanelApi } from '@/lib'
 
 before(() => {
   config.global.components = { STabsPanel, STab }
@@ -23,9 +23,10 @@ describe('STabsPanel', () => {
       </STabsPanel>
       `,
     })
-    getEl('left').should('have.css', 'border-radius', '8px 0px 0px 8px')
+    const borderRadius = '8px'
+    getEl('left').should('have.css', 'border-radius', `${borderRadius} 0px 0px ${borderRadius}`)
     getEl('center').should('have.css', 'border-radius', '0px')
-    getEl('right').should('have.css', 'border-radius', '0px 8px 8px 0px')
+    getEl('right').should('have.css', 'border-radius', `0px ${borderRadius} ${borderRadius} 0px`)
   })
 
   it('Disabled prop works correctly', () => {
@@ -41,7 +42,7 @@ describe('STabsPanel', () => {
     getEl('notDisabled').should('not.be.disabled')
   })
 
-  it('Background type prop is primary', () => {
+  it('When background prop on STabsPanel is set to primary, then STab background is set accordingly', () => {
     mount({
       template: `
         <STabsPanel :background="'primary'" data-cy="primary">
@@ -49,10 +50,10 @@ describe('STabsPanel', () => {
         </STabsPanel>
       `,
     })
-    getEl('tabName').should('have.class', 's-tab_background-primary')
+    getEl('tabName').should('have.class', 's-tab_background_primary')
   })
 
-  it('Background type prop is secondary', () => {
+  it('When background prop on STabsPanel is set to secondary, then STab background is set accordingly', () => {
     mount({
       template: `
         <STabsPanel :background="'secondary'" data-cy="secondary">
@@ -60,10 +61,10 @@ describe('STabsPanel', () => {
         </STabsPanel>
       `,
     })
-    getEl('tabName').should('have.class', 's-tab_background-secondary')
+    getEl('tabName').should('have.class', 's-tab_background_secondary')
   })
 
-  it('Background type prop is none', () => {
+  it('When background prop on STabsPanel is set to none, then STab background is set accordingly', () => {
     mount({
       template: `
         <STabsPanel :background="'none'" data-cy="none">
@@ -71,7 +72,7 @@ describe('STabsPanel', () => {
         </STabsPanel>
       `,
     })
-    getEl('tabName').should('have.class', 's-tab_background-none')
+    getEl('tabName').should('have.class', 's-tab_background_none')
   })
 
   it('Click on tab makes this tab active', () => {
@@ -138,7 +139,7 @@ describe('STabsPanel', () => {
       setup(props) {
         const { tabId } = toRefs(props)
 
-        const state: TabsPanelApi = useTabsStateApi()
+        const state: TabsPanelApi = useTabsPanelApi()
         const { selectTab } = state
         const activateTab = () => {
           selectTab(tabId.value)

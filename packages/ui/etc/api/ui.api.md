@@ -60,19 +60,6 @@ export enum Autocomplete {
 }
 
 // @public (undocumented)
-export type BackgroundType = 'primary' | 'secondary' | 'none';
-
-// @public (undocumented)
-export enum BackgroundTypeValues {
-    // (undocumented)
-    'none' = 2,
-    // (undocumented)
-    'primary' = 0,
-    // (undocumented)
-    'secondary' = 1
-}
-
-// @public (undocumented)
 export const BUTTON_ICON_POSITION_VALUES: readonly ["left", "right"];
 
 // @public (undocumented)
@@ -834,13 +821,13 @@ disabled: boolean;
 // @public (undocumented)
 export const STabsPanel: DefineComponent<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<{
 modelValue: string;
-background?: BackgroundType | undefined;
+background?: "primary" | "secondary" | "none" | undefined;
 }>, {
 modelValue: string;
 background: string;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<{
 modelValue: string;
-background?: BackgroundType | undefined;
+background?: "primary" | "secondary" | "none" | undefined;
 }>, {
 modelValue: string;
 background: string;
@@ -848,7 +835,7 @@ background: string;
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
 modelValue: string;
-background: BackgroundType;
+background: "primary" | "secondary" | "none";
 }>;
 
 // @public
@@ -999,14 +986,20 @@ timeout: number;
 export const TABS_PANEL_API_KEY: InjectionKey<TabsPanelApi>;
 
 // @public (undocumented)
+export const TABS_PANEL_BACKGROUND_TYPES: readonly ["primary", "secondary", "none"];
+
+// @public (undocumented)
 export interface TabsPanelApi {
     // (undocumented)
     active: string;
     // (undocumented)
-    background: string;
+    background: TabsPanelBackgroundType;
     // (undocumented)
     selectTab: (tab: string) => void;
 }
+
+// @public (undocumented)
+export type TabsPanelBackgroundType = typeof TABS_PANEL_BACKGROUND_TYPES extends ReadonlyArray<infer T> ? T : never;
 
 // @public (undocumented)
 export type ToastRegisterFn = (params: ToastRegisterParams) => ToastUnregisterFn;
@@ -1059,7 +1052,7 @@ export const usePopoverApi: () => PopoverApi;
 export function useSelectApi<T = any>(): SelectApi<T>;
 
 // @public (undocumented)
-export function useTabsStateApi(): TabsPanelApi;
+export function useTabsPanelApi(): TabsPanelApi;
 
 // Warnings were encountered during analysis:
 //
