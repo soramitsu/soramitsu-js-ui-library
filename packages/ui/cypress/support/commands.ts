@@ -51,6 +51,10 @@ Cypress.Commands.add('injectAxeAndConfigureCTDefaults', () => {
         id: 'page-has-heading-one',
         enabled: false,
       },
+      {
+        id: 'region',
+        enabled: false,
+      },
     ],
   })
 })

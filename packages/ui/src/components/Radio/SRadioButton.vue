@@ -43,6 +43,7 @@ const descriptionId = `SRadioButtonDescription${nextIncrementalCounter()}`
     ref="root"
     role="radio"
     :tabindex="tabindex"
+    data-testid="radio-button"
     :aria-checked="api.isChecked"
     :aria-describedby="descriptionId"
     class="m-4 border-2 rounded p-2 cursor-pointer focus:ring ring-dark-300"

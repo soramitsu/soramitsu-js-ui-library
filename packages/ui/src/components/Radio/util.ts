@@ -22,13 +22,24 @@ export function useRadiosSelector<T extends Element>(
     elems.value = Array.from(root.querySelectorAll(selectorRef.value))
   }
 
-  const updateInATick = ref(false)
-  whenever(updateInATick, doUpdate, { flush: 'post' })
+  const updateTriggerCounter = ref(0)
+  let lastUpdateTriggeredCounter = 0
+
+  // watchEffect(() => {
+  //   console.log('triggers', { ...reactive({ updateTriggerCounter, lastUpdateTriggeredCounter }) })
+  // })
+
+  watch(updateTriggerCounter, (num) => {
+    if (num > lastUpdateTriggeredCounter) {
+      doUpdate()
+      lastUpdateTriggeredCounter = num
+    }
+  })
 
   function update(immediate?: boolean) {
     if (immediate) doUpdate()
     else {
-      updateInATick.value = true
+      updateTriggerCounter.value++
     }
   }
 
@@ -71,13 +82,16 @@ export interface Radio {
 }
 
 export interface UseRadiosRegistrationReturn {
+  /**
+   * Should be called within a setup context of the radio button
+   */
   registerRadio: RadioGroupApi['registerRadio']
   /**
-   * Function to toggle between focus between radios
+   * Function to toggle focus between radios
    */
   moveFocus: (idxDelta: number) => void
   /**
-   * It is needed to check focused radio with Space key press
+   * It is needed to check focused radio with {space} key press
    */
   checkFocused: () => void
 }
@@ -93,14 +107,14 @@ export function useRadiosRegistration({
 }): UseRadiosRegistrationReturn {
   const radios = shallowReactive<Set<Radio>>(new Set())
 
-  const isAnythingChecked = eagerComputed<boolean>(() => {
+  const isNothingChecked = eagerComputed<boolean>(() => {
     for (const entry of radios) {
-      if (entry.isChecked.value) return true
+      if (entry.isChecked.value) return false
     }
-    return false
+    return true
   })
 
-  function findFocusedRadio(): null | Radio {
+  const focusedRadio = computed<null | Radio>(() => {
     for (const entry of radios) {
       if (entry.isFocused.value) {
         return entry
@@ -108,10 +122,12 @@ export function useRadiosRegistration({
     }
 
     return null
-  }
+  })
+
+  const isNothingFocused = eagerComputed<boolean>(() => !focusedRadio.value)
 
   function findIndexOfFocusedRadio(): number {
-    return findFocusedRadio()?.index?.value ?? -1
+    return focusedRadio.value?.index?.value ?? -1
   }
 
   function radioByIndex(idx: number): null | Radio {
@@ -143,13 +159,15 @@ export function useRadiosRegistration({
   }
 
   function checkFocused() {
-    const radio = findFocusedRadio()
+    const radio = focusedRadio.value
     if (radio) {
       model.value = radio.valueRef.value
     }
   }
 
   function registerRadio({ elRef, valueRef }: RegisterRadioParams): RadioGroupRegisteredItemApi {
+    const { focused: isFocused } = useFocus({ target: elRef })
+
     const index = eagerComputed<number>(() => (elRef.value ? radioElements.value.indexOf(elRef.value) : -1))
 
     const isItTheFirstRadioInTheGroup = eagerComputed<boolean>(() => index.value === 0)
@@ -157,10 +175,11 @@ export function useRadiosRegistration({
     const isChecked = eagerComputed<boolean>(() => model.value === valueRef.value)
 
     const isTabbable = eagerComputed(
-      () => isChecked.value || (!isAnythingChecked.value && isItTheFirstRadioInTheGroup.value),
+      () =>
+        isFocused.value ||
+        (isNothingFocused.value && isChecked.value) ||
+        (isNothingChecked.value && isItTheFirstRadioInTheGroup.value),
     )
-
-    const { focused: isFocused } = useFocus({ target: elRef })
 
     // watchEffect(() => {
     //   console.log(
@@ -184,13 +203,13 @@ export function useRadiosRegistration({
       isFocused,
     }
 
-    watch(elRef, (x) => x && updateRadioElements())
+    watch(elRef, (x) => x && updateRadioElements(), { flush: 'sync' })
 
     onMounted(() => {
       radios.add(registeredEntry)
     })
 
-    onScopeDispose(() => {
+    onUnmounted(() => {
       radios.delete(registeredEntry)
       updateRadioElements()
     })
