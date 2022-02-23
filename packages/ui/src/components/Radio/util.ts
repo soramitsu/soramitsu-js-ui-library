@@ -181,6 +181,8 @@ export function useRadiosRegistration({
         (isNothingChecked.value && isItTheFirstRadioInTheGroup.value),
     )
 
+    const tabindex = computed(() => (isTabbable.value ? 0 : -1))
+
     // watchEffect(() => {
     //   console.log(
     //     'Radio state; value: %O; checked: %O; tabbable: %O; index: %O',
@@ -219,13 +221,13 @@ export function useRadiosRegistration({
         RadioGroupRegisteredItemApi,
         {
           isChecked: Ref<boolean>
-          isTabbable: Ref<boolean>
+          tabindex: Ref<number>
         }
       >
     >({
       check,
       isChecked,
-      isTabbable,
+      tabindex,
     })
   }
 

@@ -14,6 +14,7 @@ $dot-size: (
 );
 
 $color-primary: theme.token-as-var('sys.color.primary');
+$color-border-primary: theme.token-as-var('sys.color.border-primary');
 
 .s-radio-atom {
   @apply flex items-center justify-center;
@@ -21,7 +22,22 @@ $color-primary: theme.token-as-var('sys.color.primary');
   border-width: 1px;
   border-style: solid;
   border-radius: 99px;
-  border-color: $color-primary;
+
+  border-color: $color-border-primary;
+
+  $root: &;
+
+  &_checked,
+  &_hover,
+  &:hover {
+    &:not(#{$root}_disabled) {
+      border-color: $color-primary;
+    }
+  }
+
+  &_checked#{&}_disabled &__dot {
+    background: $color-border-primary;
+  }
 
   &__dot {
     background: $color-primary;

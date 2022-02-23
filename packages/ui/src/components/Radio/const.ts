@@ -1,3 +1,19 @@
-export const RADIO_BUTTON_SIZE = ['md', 'lg', 'xl'] as const
+import { RadioButtonSize } from '.'
 
-export type RadioButtonSize = typeof RADIO_BUTTON_SIZE extends ReadonlyArray<infer T> ? T : never
+/**
+ * FIXME wait for design
+ */
+export const TYPOGRAPHY: Record<RadioButtonSize, { label: string; description: string }> = {
+  xl: {
+    label: 'sora-tpg-p3',
+    description: 'sora-tpg-p4',
+  },
+  lg: {
+    label: 'sora-tpg-p3',
+    description: 'sora-tpg-p4',
+  },
+  md: {
+    label: 'sora-tpg-p3',
+    description: 'sora-tpg-p4',
+  },
+}

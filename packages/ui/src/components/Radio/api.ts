@@ -13,6 +13,7 @@ export interface RadioGroupApi {
 export interface RegisterRadioParams {
   valueRef: Ref<any>
   elRef: Ref<null | HTMLElement>
+  disabledRef: Ref<boolean>
 }
 
 export interface RadioGroupRegisteredItemApi {
@@ -21,15 +22,7 @@ export interface RadioGroupRegisteredItemApi {
    */
   isChecked: boolean
 
-  /**
-   *
-   * "Tabbable" means that radio should have `tabindex="0"`.
-   * Radio button is tabbable in 2 cases:
-   *
-   * - When it is checked
-   * - When nothing in the radio group is checked and it is the first button in the radio group
-   */
-  isTabbable: boolean
+  tabindex: number
 
   /**
    * Tells to the radio group that this item was checked

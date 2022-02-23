@@ -1,6 +1,6 @@
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { SRadioButton, SRadioGroup } from '@/components/Radio'
+import { SRadioButton, SRadioGroup, RADIO_BUTTON_SIZE } from '@/components/Radio'
 
 before(() => {
   config.global.components = { SRadioButton, SRadioGroup }
@@ -116,6 +116,38 @@ describe('Initial tabindex', () => {
   // it(
   //   "When some radio was selected, but then value changed so radio group doesn't have a selected radio anymore, then zero tabindex is saved for the last tabbable radio",
   // )
+})
+
+it.only('Play', () => {
+  mount({
+    setup() {
+      return {
+        SIZES: RADIO_BUTTON_SIZE,
+      }
+    },
+    template: `
+      <SRadioGroup>
+        <div v-for="s in SIZES" :key="s" class="grid grid-cols-2 border border-blue-300 m-4 gap-4 p-4">
+          <SRadioButton :size="s" :value="s">
+            Size {{ s }}
+          </SRadioButton>
+
+          <SRadioButton :size="s" :value="s + '-bordered'" type="bordered">
+            Bordered
+          </SRadioButton>
+
+          <SRadioButton :size="s" :value="s + '-desc'" type="bordered-with-description">
+            Bordered
+
+            <template #description>
+              With description
+            </template>
+          </SRadioButton>
+
+        </div>
+      </SRadioGroup>
+    `,
+  })
 })
 
 describe('Keyboard, Focusing', () => {

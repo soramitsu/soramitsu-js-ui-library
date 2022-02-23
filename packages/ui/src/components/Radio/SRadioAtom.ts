@@ -1,10 +1,15 @@
 import './SRadioAtom.scss'
 
-import { FunctionalComponent, h, Transition, mergeProps, PropType } from 'vue'
-import { RadioButtonSize } from './const'
+import { FunctionalComponent, Transition, mergeProps, PropType } from 'vue'
+import { RadioButtonSize } from './types'
 
 interface Props {
   checked?: boolean
+  disabled?: boolean
+  /**
+   * Forced hover activation. Useful when it is a part of a larger component.
+   */
+  hover?: boolean
   size: RadioButtonSize
 }
 
@@ -18,6 +23,8 @@ const component: FunctionalComponent<Props> = (props, { attrs }) => {
           `s-radio-atom_size_${props.size}`,
           {
             's-radio-atom_checked': props.checked ?? false,
+            's-radio-atom_disabled': props.disabled ?? false,
+            's-radio-atom_hover': props.hover ?? false,
           },
         ],
       },
@@ -42,6 +49,8 @@ component.props = {
     type: String as PropType<RadioButtonSize>,
     required: true,
   },
+  disabled: Boolean,
+  hover: Boolean,
   checked: Boolean,
 }
 
