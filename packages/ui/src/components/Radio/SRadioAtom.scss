@@ -19,7 +19,7 @@ $color-border-primary: theme.token-as-var('sys.color.border-primary');
 $transition-dur-easing: 0.2s ease;
 
 .s-radio-atom {
-  @apply flex items-center justify-center;
+  @apply flex items-center justify-center relative;
 
   border: 1px solid $color-border-primary;
   border-radius: 99px;
@@ -36,41 +36,35 @@ $transition-dur-easing: 0.2s ease;
     }
   }
 
-  &_checked#{&}_disabled &__dot {
+  &::before {
+    content: '';
+    opacity: 0;
+    transform: scale(0.65);
+    background: $color-primary;
+    transition: all 0.15s ease;
+    border-radius: 99px;
+  }
+
+  &_checked::before {
+    opacity: 1;
+    transform: none;
+  }
+
+  &_checked#{&}_disabled::before {
     background: $color-border-primary;
   }
 
-  &__dot {
-    background: $color-primary;
-    border-radius: 99px;
-
-    transition: background $transition-dur-easing;
-
-    &-transition {
-      &-enter-active,
-      &-leave-active {
-        transition: transform 0.15s ease, opacity 0.15s ease;
-      }
-
-      &-enter-from,
-      &-leave-to {
-        opacity: 0;
-        transform: scale(0.65);
-      }
-    }
-  }
-
   @each $size in md, lg, xl {
-    &_size_#{$size} {
+    &[data-size='#{$size}'] {
       $px: map.get($outline-size, $size);
       width: $px;
       height: $px;
-    }
 
-    &_size_#{$size} &__dot {
-      $px: map.get($dot-size, $size);
-      width: $px;
-      height: $px;
+      &::before {
+        $px: map.get($dot-size, $size);
+        width: $px;
+        height: $px;
+      }
     }
   }
 }

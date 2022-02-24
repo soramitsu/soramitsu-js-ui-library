@@ -1,7 +1,7 @@
-export const RADIO_BUTTON_SIZE = ['md', 'lg', 'xl'] as const
+export const RADIO_SIZE_VALUES = ['md', 'lg', 'xl'] as const
 
-export type RadioButtonSize = typeof RADIO_BUTTON_SIZE extends ReadonlyArray<infer T> ? T : never
+export type RadioSize = typeof RADIO_SIZE_VALUES extends ReadonlyArray<infer T> ? T : never
 
-export const RADIO_BUTTON_TYPE = ['default', 'bordered', 'bordered-with-description'] as const
+export const RADIO_TYPE_VALUES = ['default', 'bordered', 'bordered-with-description'] as const
 
-export type RadioButtonType = typeof RADIO_BUTTON_TYPE extends ReadonlyArray<infer T> ? T : never
+export type RadioType = typeof RADIO_TYPE_VALUES extends ReadonlyArray<infer T> ? T : never

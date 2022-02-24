@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import { PropType } from 'vue'
 import { useRadioGroupApi } from './api'
-import { RadioButtonSize, RADIO_BUTTON_SIZE, RadioButtonType, RADIO_BUTTON_TYPE } from './types'
+import { RadioSize, RADIO_SIZE_VALUES, RadioType, RADIO_TYPE_VALUES } from './types'
 import { TYPOGRAPHY } from './const'
 import { nextIncrementalCounter } from '@/util'
 import SRadioAtom from './SRadioAtom'
@@ -19,14 +19,14 @@ const props = defineProps({
   },
   disabled: Boolean,
   type: {
-    type: String as PropType<RadioButtonType>,
+    type: String as PropType<RadioType>,
     default: 'default',
-    validate: (value: any) => RADIO_BUTTON_TYPE.includes(value),
+    validate: (value: any) => RADIO_TYPE_VALUES.includes(value),
   },
   size: {
-    type: String as PropType<RadioButtonSize>,
+    type: String as PropType<RadioSize>,
     default: 'md',
-    validate: (value: unknown) => RADIO_BUTTON_SIZE.includes(value as any),
+    validate: (value: unknown) => RADIO_SIZE_VALUES.includes(value as any),
   },
 })
 
@@ -136,7 +136,7 @@ $dur-easing: 0.2s ease;
     border: 1px solid $border-primary;
 
     &:hover,
-    &[aria-checked='true'] {
+    &[aria-checked='true']:not([aria-disabled='true']) {
       border-color: $primary;
     }
   }

@@ -1,6 +1,6 @@
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { SRadio, SRadioGroup, RADIO_BUTTON_SIZE, useRadioGroupApi } from '@/components/Radio'
+import { SRadio, SRadioGroup, RADIO_SIZE_VALUES, useRadioGroupApi } from '@/components/Radio'
 
 before(() => {
   config.global.components = { SRadio, SRadioGroup }
@@ -27,7 +27,7 @@ it('Play', () => {
   mount({
     setup() {
       return {
-        SIZES: RADIO_BUTTON_SIZE,
+        SIZES: RADIO_SIZE_VALUES,
         disabled: ref(false),
       }
     },
