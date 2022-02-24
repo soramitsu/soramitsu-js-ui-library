@@ -1,4 +1,4 @@
-import { RadioButtonSize } from '.'
+import { RadioButtonSize } from './types'
 
 /**
  * FIXME wait for design

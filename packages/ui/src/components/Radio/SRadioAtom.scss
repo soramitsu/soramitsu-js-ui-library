@@ -16,14 +16,15 @@ $dot-size: (
 $color-primary: theme.token-as-var('sys.color.primary');
 $color-border-primary: theme.token-as-var('sys.color.border-primary');
 
+$transition-dur-easing: 0.2s ease;
+
 .s-radio-atom {
   @apply flex items-center justify-center;
 
-  border-width: 1px;
-  border-style: solid;
+  border: 1px solid $color-border-primary;
   border-radius: 99px;
 
-  border-color: $color-border-primary;
+  transition: border-color $transition-dur-easing;
 
   $root: &;
 
@@ -43,15 +44,18 @@ $color-border-primary: theme.token-as-var('sys.color.border-primary');
     background: $color-primary;
     border-radius: 99px;
 
+    transition: background $transition-dur-easing;
+
     &-transition {
       &-enter-active,
       &-leave-active {
-        transition: all 0.4s ease;
+        transition: transform 0.15s ease, opacity 0.15s ease;
       }
 
       &-enter-from,
       &-leave-to {
         opacity: 0;
+        transform: scale(0.65);
       }
     }
   }

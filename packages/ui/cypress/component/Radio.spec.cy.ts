@@ -1,13 +1,15 @@
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { SRadioButton, SRadioGroup, RADIO_BUTTON_SIZE } from '@/components/Radio'
+import { SRadioButton, SRadioGroup, RADIO_BUTTON_SIZE, useRadioGroupApi } from '@/components/Radio'
 
 before(() => {
   config.global.components = { SRadioButton, SRadioGroup }
+  config.global.stubs = { transition: false }
 })
 
 after(() => {
   config.global.components = {}
+  config.global.stubs = {}
 })
 
 const testidSelector = (id: string) => `[data-testid=${id}]`
@@ -20,6 +22,41 @@ const expectRadioToBeTabbable = (innerText: string) =>
 
 const expectRadioToBeNotTabbable = (innerText: string) =>
   findRadioButtonContains(innerText).should('have.attr', 'tabindex', -1)
+
+it('Play', () => {
+  mount({
+    setup() {
+      return {
+        SIZES: RADIO_BUTTON_SIZE,
+        disabled: ref(false),
+      }
+    },
+    template: `
+      <input type="checkbox" v-model="disabled" id="disabled">
+      <label for="disabled">Disabled</label>
+
+      <SRadioGroup>
+        <div v-for="s in SIZES" :key="s" class="grid grid-cols-2 border border-blue-300 m-4 gap-4 p-4">
+          <SRadioButton v-bind="{ disabled, value: s, size: s }">
+            Size {{ s }}
+          </SRadioButton>
+
+          <SRadioButton v-bind="{ disabled, value: s + '-bordered', size: s }" type="bordered">
+            Bordered
+          </SRadioButton>
+
+          <SRadioButton v-bind="{ disabled, value: s + '-desc', size: s }" type="bordered-with-description">
+            Bordered
+
+            <template #description>
+              With description
+            </template>
+          </SRadioButton>
+        </div>
+      </SRadioGroup>
+    `,
+  })
+})
 
 describe('Initial tabindex', () => {
   it("When RadioGroup doesn't have an initial value, then a11y is ok and the first radio is tabbable", () => {
@@ -118,80 +155,71 @@ describe('Initial tabindex', () => {
   // )
 })
 
-it.only('Play', () => {
-  mount({
-    setup() {
-      return {
-        SIZES: RADIO_BUTTON_SIZE,
-      }
-    },
-    template: `
-      <SRadioGroup>
-        <div v-for="s in SIZES" :key="s" class="grid grid-cols-2 border border-blue-300 m-4 gap-4 p-4">
-          <SRadioButton :size="s" :value="s">
-            Size {{ s }}
-          </SRadioButton>
-
-          <SRadioButton :size="s" :value="s + '-bordered'" type="bordered">
-            Bordered
-          </SRadioButton>
-
-          <SRadioButton :size="s" :value="s + '-desc'" type="bordered-with-description">
-            Bordered
-
-            <template #description>
-              With description
-            </template>
-          </SRadioButton>
-
-        </div>
-      </SRadioGroup>
-    `,
-  })
-})
-
-describe('Keyboard, Focusing', () => {
+describe('Keyboard, Focusing, Disabling', () => {
   beforeEach(() => {
     mount({
       setup() {
         const valueRef = ref<null | string>(null)
-        const root = templateRef<HTMLElement>('root')
-        const keys = useMagicKeys({ target: root })
+        const disableDeep = ref(false)
+        const disableAll = ref(false)
 
-        whenever(
-          keys['Shift+R'],
-          () => {
-            valueRef.value = 'regular'
-          },
-          { flush: 'sync' },
-        )
+        const root = templateRef<HTMLElement>('root')
+
+        const keys = useMagicKeys({ target: root })
+        function useWhenPressed(what: string, cb: () => void) {
+          whenever(keys[what], cb, { flush: 'sync' })
+        }
+
+        useWhenPressed('Shift+R', () => {
+          valueRef.value = 'regular'
+        })
+
+        useWhenPressed('Shift+D', () => {
+          disableDeep.value = true
+        })
+
+        useWhenPressed('Shift+A', () => {
+          disableAll.value = true
+        })
 
         return {
           value: valueRef,
+          disableDeep,
+          disableAll,
         }
       },
       template: `
         <div class="p-4" ref="root">
-          <p>
-            Model: {{ value || 'none' }}
+          <p data-cy="model">
+            {{ value || 'none' }}
           </p>
+
+          <div>
+            <input id="disable-all" type="checkbox" v-model="disableAll">
+            <label for="disable-all">
+              Disable all
+            </label>
+          </div>
+
+          <div>
+            <input id="disable-deep" type="checkbox" v-model="disableDeep">
+            <label for="disable-deep">
+              Disable deep dish
+            </label>
+          </div>
 
           <button>Pre</button>
 
-          <SRadioGroup v-model="value">
-            <template #label>
-              Pizza Crust
-            </template>
-        
-            <SRadioButton value="regular">
+          <SRadioGroup v-model="value">        
+            <SRadioButton value="regular" :disabled="disableAll">
               Regular crust
             </SRadioButton>
         
-            <SRadioButton value="deep">
+            <SRadioButton value="deep" :disabled="disableDeep || disableAll">
               Deep dish
             </SRadioButton>
         
-            <SRadioButton value="thin">
+            <SRadioButton value="thin" :disabled="disableAll">
               Thin crust
             </SRadioButton>
           </SRadioGroup>
@@ -203,7 +231,10 @@ describe('Keyboard, Focusing', () => {
     })
   })
 
-  const modelShouldBe = (value: string) => cy.contains(`Model: ${value}`)
+  const modelShouldBe = (value: string) => cy.dataCy('model').contains(value)
+
+  const findDeepDisabledCheckbox = () => cy.get('input#disable-deep')
+  const findAllDisabledCheckbox = () => cy.get('input#disable-all')
 
   it('When something is focused by click, a11y is ok', () => {
     findRadioButtonContains('Deep dish').click()
@@ -283,89 +314,130 @@ describe('Keyboard, Focusing', () => {
     findRadioButtonContains('Deep dish').should('be.focused')
     modelShouldBe('deep')
   })
+
+  describe('"disabled" cases', () => {
+    it('When radio is disabled, then it is not clickable & not tabbable', () => {
+      findDeepDisabledCheckbox().check()
+
+      cy.injectAxeAndConfigureCTDefaults()
+      cy.checkA11y()
+
+      findRadioButtonContains('Deep dish')
+        .should('have.attr', 'tabindex', -1)
+        .should('have.attr', 'aria-disabled', 'true')
+        .should('have.css', 'pointer-events', 'none')
+
+      findDeepDisabledCheckbox().uncheck()
+    })
+
+    it('When radio is selected and becomes disabled, then it is still checked', () => {
+      findRadioButtonContains('Deep dish').click()
+      findDeepDisabledCheckbox().check()
+      findRadioButtonContains('Deep dish').should('have.attr', 'aria-checked', 'true')
+    })
+
+    it('When radio is selected and focused, but becomes disabled, then it is still focused and navigation works correctly', () => {
+      findRadioButtonContains('Deep dish').click()
+      cy.focused().type('{shift+d}') // disabling without losing focus
+      findRadioButtonContains('Deep dish').should('be.focused')
+      modelShouldBe('deep')
+
+      cy.focused().type('{leftarrow}')
+      modelShouldBe('regular')
+      cy.focused().type('{rightarrow}')
+      modelShouldBe('thin') // disabled radio is jumped over, so not "deep", but "thin"
+    })
+
+    it("When everything suddenly becomes disabled, focus & value doesn't change by keyboard", () => {
+      findRadioButtonContains('Regular crust').click().type('{shift+a}')
+      findAllDisabledCheckbox().should('be.checked')
+      cy.focused().type('{rightarrow}')
+      cy.focused().contains('Regular crust')
+      modelShouldBe('regular')
+    })
+  })
 })
 
-// describe.skip('v-modeling', () => {
-//   const TestRadio = defineComponent({
-//     props: {
-//       value: Object,
-//     },
-//     setup(props) {
-//       const elRef = templateRef<HTMLElement>('root')
-//       const valueRef = computed(() => props.value)
+describe('SRadioGroup', () => {
+  it('It has role=radiogroup', () => {
+    mount({
+      template: `
+        <SRadioGroup data-cy="group">
+          Soramitsu
+        </SRadioGroup>
+      `,
+    })
 
-//       const api = useRadioGroupApi().registerRadio({ elRef, valueRef })
+    cy.dataCy('group').should('have.attr', 'role', 'radiogroup')
+  })
 
-//       const { isChecked } = toRefs(api)
+  it('When custom radio selector is set, it is used correctly', () => {
+    const CustomRadio = defineComponent({
+      props: {
+        value: String,
+      },
+      setup(props) {
+        const { tabindex, check } = useRadioGroupApi().registerRadio({
+          elRef: templateRef('root'),
+          valueRef: computed(() => props.value),
+          disabledRef: ref(false),
+        })
 
-//       function handleClick() {
-//         api.check()
-//       }
+        return { tabindex, check }
+      },
+      template: `
+        <div
+          ref="root"
+          class="custom-radio"
+          v-bind="{ tabindex }"
+          @click="check"
+        >
+          <slot />
+        </div>
+      `,
+    })
 
-//       return {
-//         isChecked,
-//         handleClick,
-//       }
-//     },
-//     template: `
-//       <div role="radio" @click="handleClick" tabindex=0>
-//         <slot />
+    const CUSTOM_SELECTOR = `div.custom-radio`
 
-//         Is checked: {{ isChecked }}
-//       </div>
-//     `,
-//   })
+    mount({
+      components: { CustomRadio },
+      setup() {
+        return { val: ref(null), selector: CUSTOM_SELECTOR }
+      },
+      template: `
+        <p id="model">{{ val }}</p>
+        
+        <SRadioGroup v-model="val" :radio-selector="selector">
+          <CustomRadio value="aaa">
+            AAA
+          </CustomRadio>
+          <CustomRadio value="bbb">
+            BBB
+          </CustomRadio>
+        </SRadioGroup>
+      `,
+    })
+    const findCustomRadioContaining = (what: string) => cy.get(CUSTOM_SELECTOR).contains(what).closest(CUSTOM_SELECTOR)
+    const modelShouldBe = (val: string) => cy.get('#model').should('have.text', val)
 
-//   it('When complex value with `value-key` prop is used, v-modeling works fine', () => {
-//     mount({
-//       components: { TestRadio },
-//       setup() {
-//         interface Option {
-//           val: number
-//         }
+    // navigation & focus should work
+    findCustomRadioContaining('AAA').click()
+    modelShouldBe('aaa')
+    cy.focused().type('{leftarrow}')
+    cy.focused().contains('BBB')
+    modelShouldBe('bbb')
+  })
 
-//         const OPTIONS: Option[] = [
-//           {
-//             val: 1,
-//           },
-//           {
-//             val: 2,
-//           },
-//         ]
+  it('When `labelled-by` & `described-by` are set, then appropriate ARIA is set', () => {
+    mount({
+      template: `
+        <SRadioGroup data-cy="group" labelled-by="label" described-by="desc">
+          <label id="label">Label</label>
+          <div id="desc">Description</div>
+        </SRadioGroup>
+      `,
+    })
 
-//         function valueKey(x: Option) {
-//           return x.val
-//         }
-
-//         return {
-//           value: ref(1),
-//           valueKey,
-//         }
-//       },
-//       template: `
-//         Model: {{ value }}
-
-//         <SRadioGroup v-model="value" :value-key="valueKey">
-//           <TestRadio
-//             v-for="x in OPTIONS"
-//             :key="x.val"
-//             :value="x"
-//           >
-//             Radio {{ x.val }}
-//           </TestRadio>
-//         </SRadioGroup>
-//       `,
-//     })
-
-//     const modelShouldBe = (val: string) => cy.contains(`Model: ${val}`)
-
-//     modelShouldBe('1')
-//     cy.contains('Radio 1').contains('Is checked: true')
-
-//     cy.contains('Radio 2').contains('Is checked: false').click()
-
-//     cy.contains('Radio 2').contains('Is checked: true')
-//     cy.contains('Radio 1').contains('Is checked: false')
-//     modelShouldBe('2')
-//   })
-// })
+    cy.dataCy('group').should('have.attr', 'aria-labelledby', 'label').should('have.attr', 'aria-describedby', 'desc')
+  })
+})

@@ -59,6 +59,13 @@ Cypress.Commands.add('injectAxeAndConfigureCTDefaults', () => {
   })
 })
 
+Cypress.Commands.add('dataCy', { prevSubject: 'optional' }, (subject, cyId) => {
+  if (subject) {
+    return cy.wrap(subject).find(`[data-cy=${cyId}]`)
+  }
+  return cy.get(`[data-cy=${cyId}]`)
+})
+
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -67,6 +74,11 @@ declare global {
        * for component testing
        */
       injectAxeAndConfigureCTDefaults: () => Chainable<null>
+
+      /**
+       * Shorthand for `[data-cy=<xxx>]` selector with a subject (`cy.find()`) or without (`cy.get()`)
+       */
+      dataCy: (cyId: string) => Chainable
     }
   }
 }

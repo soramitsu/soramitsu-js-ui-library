@@ -17,6 +17,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   modelValue: null,
   radioSelector: '[role=radio]',
+  labelledBy: '',
+  describedBy: '',
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -44,43 +46,35 @@ function handleKeydown(e: KeyboardEvent) {
   switch (e.code) {
     case 'ArrowDown':
     case 'ArrowRight':
-      moveFocus(1)
+      moveFocus()
       break
 
     case 'ArrowUp':
     case 'ArrowLeft':
-      moveFocus(-1)
+      moveFocus(false)
       break
 
     case 'Space':
       checkFocused()
       break
+
+    default:
+      return
   }
+
+  // was handled
+  e.preventDefault()
 }
-
-// ETC
-
-const aria = computed(() => {
-  const attrs: Record<string, string> = {}
-
-  if (props.labelledBy) {
-    attrs['aria-labelledby'] = props.labelledBy
-  }
-  if (props.describedBy) {
-    attrs['aria-describedby'] = props.describedBy
-  }
-
-  return attrs
-})
 </script>
 
 <template>
   <div
     ref="root"
     role="radiogroup"
-    v-bind="aria"
+    :aria-labelledby="labelledBy"
+    :aria-describedby="describedBy"
     @keydown="handleKeydown"
   >
-    <slot v-bind="{ labelledBy }" />
+    <slot />
   </div>
 </template>

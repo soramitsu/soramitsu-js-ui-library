@@ -19,7 +19,7 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<RadioButtonSize>,
-    default: 'sm',
+    default: 'md',
     validate: (value: unknown) => RADIO_BUTTON_SIZE.includes(value as any),
   },
 })
@@ -86,11 +86,26 @@ const describedBy = computed(() => (props.type === 'bordered-with-description' ?
 @use '@/theme';
 
 $primary: theme.token-as-var('sys.color.primary');
+$on-disabled: theme.token-as-var('sys.color.on-disabled');
 $border-primary: theme.token-as-var('sys.color.border-primary');
+
+$dur-easing: 0.2s ease;
 
 .s-radio-button {
   @apply select-none cursor-pointer rounded;
   padding: 8px 10px;
+  transition: all $dur-easing;
+
+  $root: &;
+
+  &[aria-disabled='true'] {
+    pointer-events: none;
+
+    label,
+    #{$root}__description {
+      color: $on-disabled;
+    }
+  }
 
   &:focus {
     outline: none;
@@ -106,6 +121,11 @@ $border-primary: theme.token-as-var('sys.color.border-primary');
     margin-top: 4px;
   }
 
+  label,
+  &__description {
+    transition: color $dur-easing;
+  }
+
   &[class*='_type_bordered'] {
     border: 1px solid $border-primary;
 
@@ -115,15 +135,19 @@ $border-primary: theme.token-as-var('sys.color.border-primary');
     }
   }
 
-  &_type_default {
-    &:hover {
-      @apply bg-gray-100;
-    }
+  // Styles below doesn't come from design
+  // FIXME
 
-    &:focus,
-    &:active {
-      @apply bg-gray-300;
-    }
+  &:hover {
+    @apply bg-gray-50;
+  }
+
+  &:active {
+    @apply bg-gray-100;
+  }
+
+  &:focus {
+    @apply ring ring-opacity-25 ring-blue-500 ring-offset-2;
   }
 }
 </style>
