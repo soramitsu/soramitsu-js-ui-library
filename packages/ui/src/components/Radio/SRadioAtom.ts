@@ -13,7 +13,7 @@ interface Props {
   size: RadioButtonSize
 }
 
-const component: FunctionalComponent<Props> = (props, { attrs }) => {
+const SRadioAtom: FunctionalComponent<Props> = (props, { attrs }) => {
   return h(
     'div',
     mergeProps(
@@ -44,7 +44,7 @@ const component: FunctionalComponent<Props> = (props, { attrs }) => {
   )
 }
 
-component.props = {
+SRadioAtom.props = {
   size: {
     type: String as PropType<RadioButtonSize>,
     required: true,
@@ -54,4 +54,6 @@ component.props = {
   checked: Boolean,
 }
 
-export default component
+SRadioAtom.displayName = SRadioAtom.name
+
+export default SRadioAtom

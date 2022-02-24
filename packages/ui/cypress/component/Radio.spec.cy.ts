@@ -1,9 +1,9 @@
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { SRadioButton, SRadioGroup, RADIO_BUTTON_SIZE, useRadioGroupApi } from '@/components/Radio'
+import { SRadio, SRadioGroup, RADIO_BUTTON_SIZE, useRadioGroupApi } from '@/components/Radio'
 
 before(() => {
-  config.global.components = { SRadioButton, SRadioGroup }
+  config.global.components = { SRadio, SRadioGroup }
   config.global.stubs = { transition: false }
 })
 
@@ -37,21 +37,21 @@ it('Play', () => {
 
       <SRadioGroup>
         <div v-for="s in SIZES" :key="s" class="grid grid-cols-2 border border-blue-300 m-4 gap-4 p-4">
-          <SRadioButton v-bind="{ disabled, value: s, size: s }">
+          <SRadio v-bind="{ disabled, value: s, size: s }">
             Size {{ s }}
-          </SRadioButton>
+          </SRadio>
 
-          <SRadioButton v-bind="{ disabled, value: s + '-bordered', size: s }" type="bordered">
+          <SRadio v-bind="{ disabled, value: s + '-bordered', size: s }" type="bordered">
             Bordered
-          </SRadioButton>
+          </SRadio>
 
-          <SRadioButton v-bind="{ disabled, value: s + '-desc', size: s }" type="bordered-with-description">
+          <SRadio v-bind="{ disabled, value: s + '-desc', size: s }" type="bordered-with-description">
             Bordered
 
             <template #description>
               With description
             </template>
-          </SRadioButton>
+          </SRadio>
         </div>
       </SRadioGroup>
     `,
@@ -63,8 +63,8 @@ describe('Initial tabindex', () => {
     mount({
       template: `
         <SRadioGroup>
-          <SRadioButton value="1">First</SRadioButton>
-          <SRadioButton value="2">Second</SRadioButton>
+          <SRadio value="1">First</SRadio>
+          <SRadio value="2">Second</SRadio>
         </SRadioGroup>
       `,
     })
@@ -93,13 +93,13 @@ describe('Initial tabindex', () => {
         <button @click="inc()">inc</button>
 
         <SRadioGroup>
-          <SRadioButton
+          <SRadio
             v-for="i in 5"
             :key="count + i"
             :value="count + i"
           >
             Radio {{ count + i }}
-          </SRadioButton>
+          </SRadio>
         </SRadioGroup>
       `,
     })
@@ -135,8 +135,8 @@ describe('Initial tabindex', () => {
         <button @click="set">Set</button>
 
         <SRadioGroup v-model="val">
-          <SRadioButton value="bar">Bar</SRadioButton>
-          <SRadioButton value="foo">Foo</SRadioButton>
+          <SRadio value="bar">Bar</SRadio>
+          <SRadio value="foo">Foo</SRadio>
         </SRadioGroup>
       `,
     })
@@ -211,17 +211,17 @@ describe('Keyboard, Focusing, Disabling', () => {
           <button>Pre</button>
 
           <SRadioGroup v-model="value">        
-            <SRadioButton value="regular" :disabled="disableAll">
+            <SRadio value="regular" :disabled="disableAll">
               Regular crust
-            </SRadioButton>
+            </SRadio>
         
-            <SRadioButton value="deep" :disabled="disableDeep || disableAll">
+            <SRadio value="deep" :disabled="disableDeep || disableAll">
               Deep dish
-            </SRadioButton>
+            </SRadio>
         
-            <SRadioButton value="thin" :disabled="disableAll">
+            <SRadio value="thin" :disabled="disableAll">
               Thin crust
-            </SRadioButton>
+            </SRadio>
           </SRadioGroup>
       
 

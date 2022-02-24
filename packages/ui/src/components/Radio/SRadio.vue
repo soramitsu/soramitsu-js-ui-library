@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  name: 'SRadio',
+}
+</script>
+
 <script setup lang="ts">
 import { PropType } from 'vue'
 import { useRadioGroupApi } from './api'
@@ -50,7 +56,7 @@ const describedBy = computed(() => (props.type === 'bordered-with-description' ?
     :aria-describedby="describedBy"
     :aria-checked="api.isChecked"
     :aria-disabled="disabled"
-    :class="['s-radio-button', `s-radio-button_type_${type}`, `s-radio-button_size_${size}`]"
+    :class="['s-radio', `s-radio_type_${type}`, `s-radio_size_${size}`]"
     data-testid="radio-button"
     @click="api.check()"
     @mouseenter="hover = true"
@@ -75,7 +81,7 @@ const describedBy = computed(() => (props.type === 'bordered-with-description' ?
     <div
       v-if="type === 'bordered-with-description'"
       :id="uniqueDescriptionId"
-      :class="[tpg.description, 's-radio-button__description']"
+      :class="[tpg.description, 's-radio__description']"
     >
       <slot name="description" />
     </div>
@@ -91,7 +97,7 @@ $border-primary: theme.token-as-var('sys.color.border-primary');
 
 $dur-easing: 0.2s ease;
 
-.s-radio-button {
+.s-radio {
   @apply select-none cursor-pointer rounded;
   padding: 8px 10px;
   transition: all $dur-easing;
