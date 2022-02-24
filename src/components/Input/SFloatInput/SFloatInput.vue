@@ -172,6 +172,7 @@ export default class SFloatInput extends Vue {
     // Add prefix zero if needed
     if (formatted.indexOf(DEFAULT_DECIMAL_DELIMITER) === 0) {
       formatted = '0' + formatted
+      this.charsCountBeforeSelection++
     }
 
     // Avoid several decimal delimiters
