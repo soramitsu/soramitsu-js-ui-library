@@ -1,2 +1,2 @@
 FROM    nginxinc/nginx-unprivileged:1.20
-COPY    ./dist /usr/share/nginx/html
+COPY    ./packages/ui/storybook-static /usr/share/nginx/html
