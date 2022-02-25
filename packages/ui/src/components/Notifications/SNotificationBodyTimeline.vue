@@ -19,7 +19,11 @@ const { timeout } = toRefs(props)
 let timestamps: null | [startedAt: number, willFireAt: number] = null
 const timeoutProgress = ref(0)
 
-const { start: startTimeout, stop: stopTimeout, isPending } = useTimeoutFn(
+const {
+  start: startTimeout,
+  stop: stopTimeout,
+  isPending,
+} = useTimeoutFn(
   () => {
     timestamps = null
     emit('timeout')
