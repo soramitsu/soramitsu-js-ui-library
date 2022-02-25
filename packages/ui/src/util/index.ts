@@ -35,3 +35,12 @@ export function getComponentName(comp: Component): string | undefined {
   }
   return comp.name
 }
+
+let incrementalCounter = 0
+
+/*
+  Returns global unique id
+ */
+export function nextIncrementalCounter(): number {
+  return incrementalCounter++
+}
