@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ['alloy', 'alloy/typescript', 'plugin:vue/vue3-recommended'],
+  extends: ['alloy', 'alloy/typescript', 'plugin:vue/vue3-recommended', 'plugin:vuejs-accessibility/recommended'],
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -36,6 +36,28 @@ module.exports = {
       files: ['**/*.spec.{js,ts}'],
       env: {
         jest: true,
+      },
+    },
+
+    // It is OK to define a lot of components in stories or tests
+    {
+      files: ['**/packages/ui/stories/**/*.stories.ts', '**/*.cy.{js,ts}'],
+      rules: {
+        'vue/one-component-per-file': 'off',
+      },
+    },
+
+    // FIXME - temporary disables to fix them in a different PRs
+    {
+      files: ['**/ui/src/components/Select/**/*.vue'],
+      rules: {
+        'vuejs-accessibility/click-events-have-key-events': 'off',
+      },
+    },
+    {
+      files: ['**/STextField.vue', '**/SSwitch.vue'],
+      rules: {
+        'vuejs-accessibility/label-has-for': 'off',
       },
     },
   ],
