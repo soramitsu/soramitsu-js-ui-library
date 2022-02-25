@@ -93,3 +93,5 @@ To use "Format On Save" feature you should setup your (I)DE to run:
 ```
 
 Maybe you will also need to specify paths for prettier config, prettier binary, eslint config or eslint binary. See all list of options with `yarn prettier-eslint -h`.
+
+> If you are using VSCode, take a lot at [Prettier ESLint](https://marketplace.visualstudio.com/items?itemName=rvest.vs-code-prettier-eslint) extension, it may help with auto formatting.
