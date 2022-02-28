@@ -44,3 +44,7 @@ let incrementalCounter = 0
 export function nextIncrementalCounter(): number {
   return incrementalCounter++
 }
+
+export function uniqueElementId(): string {
+  return `soraui-uid-${nextIncrementalCounter()}`
+}

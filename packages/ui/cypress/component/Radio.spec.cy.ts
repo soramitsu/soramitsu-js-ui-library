@@ -4,12 +4,10 @@ import { SRadio, SRadioGroup, RADIO_SIZE_VALUES, useRadioGroupApi } from '@/comp
 
 before(() => {
   config.global.components = { SRadio, SRadioGroup }
-  config.global.stubs = { transition: false }
 })
 
 after(() => {
   config.global.components = {}
-  config.global.stubs = {}
 })
 
 const testidSelector = (id: string) => `[data-testid=${id}]`
@@ -23,7 +21,7 @@ const expectRadioToBeTabbable = (innerText: string) =>
 const expectRadioToBeNotTabbable = (innerText: string) =>
   findRadioButtonContains(innerText).should('have.attr', 'tabindex', -1)
 
-it('Play', () => {
+it.only('Play', () => {
   mount({
     setup() {
       return {
@@ -36,7 +34,7 @@ it('Play', () => {
       <label for="disabled">Disabled</label>
 
       <SRadioGroup>
-        <div v-for="s in SIZES" :key="s" class="grid grid-cols-2 border border-blue-300 m-4 gap-4 p-4">
+        <div v-for="s in SIZES" :key="s" class="grid grid-cols-3 place-items-start border border-blue-300 m-4 gap-4 p-4">
           <SRadio v-bind="{ disabled, value: s, size: s }">
             Size {{ s }}
           </SRadio>

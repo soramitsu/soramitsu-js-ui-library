@@ -1,1 +1,3 @@
-export { default as SCheckbox } from './SCheckbox.vue'
+export * from './types'
+export { default as SCheckboxAtom } from './SCheckboxAtom'
+export { default as SCheckboxSolo } from './SCheckboxSolo.vue'

@@ -8,9 +8,9 @@ export default {
 import { PropType } from 'vue'
 import { useRadioGroupApi } from './api'
 import { RadioSize, RADIO_SIZE_VALUES, RadioType, RADIO_TYPE_VALUES } from './types'
-import { TYPOGRAPHY } from './const'
 import { nextIncrementalCounter } from '@/util'
 import SRadioAtom from './SRadioAtom'
+import SRadioBody from './SRadioBody'
 
 const props = defineProps({
   value: {
@@ -40,120 +40,84 @@ const api = useRadioGroupApi().registerRadio({
 
 const hover = ref(false)
 
-const tpg = computed(() => TYPOGRAPHY[props.size])
-
 const uniqueLabelId = `sora${nextIncrementalCounter()}`
 const uniqueDescriptionId = `sora${nextIncrementalCounter()}`
 const describedBy = computed(() => (props.type === 'bordered-with-description' ? uniqueDescriptionId : ''))
 </script>
 
 <template>
-  <div
+  <SRadioBody
     ref="root"
     role="radio"
     :tabindex="api.tabindex"
-    :aria-labelledby="uniqueLabelId"
-    :aria-describedby="describedBy"
+    :type="type"
+    :size="size"
+    :label-id="uniqueLabelId"
+    :description-id="describedBy"
     :aria-checked="api.isChecked"
     :aria-disabled="disabled"
-    :class="['s-radio', `s-radio_type_${type}`, `s-radio_size_${size}`]"
     data-testid="radio-button"
+    class="s-radio"
     @click="api.check()"
     @mouseenter="hover = true"
     @mouseleave="hover = false"
   >
-    <div class="flex space-x-2 items-center">
+    <template #atom>
       <SRadioAtom
         :size="size"
         :checked="api.isChecked"
         :disabled="disabled"
         :hover="hover"
       />
+    </template>
 
-      <label
-        :id="uniqueLabelId"
-        :class="tpg.label"
-      >
-        <slot />
-      </label>
-    </div>
+    <template #label>
+      <slot />
+    </template>
 
-    <div
-      v-if="type === 'bordered-with-description'"
-      :id="uniqueDescriptionId"
-      :class="[tpg.description, 's-radio__description']"
-    >
+    <template #description>
       <slot name="description" />
-    </div>
-  </div>
+    </template>
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      aria-hidden="true"
+      role="img"
+      class="iconify iconify--ic"
+      width="32"
+      height="32"
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8.29 13.29a.996.996 0 0 1-1.41 0L5.71 12.7a.996.996 0 1 1 1.41-1.41L10 14.17l6.88-6.88a.996.996 0 1 1 1.41 1.41l-7.58 7.59z"
+      />
+    </svg>
+  </SRadioBody>
 </template>
 
 <style lang="scss">
 @use '@/theme';
 
-$primary: theme.token-as-var('sys.color.primary');
-$on-disabled: theme.token-as-var('sys.color.on-disabled');
-$border-primary: theme.token-as-var('sys.color.border-primary');
-
-$dur-easing: 0.2s ease;
-
-.s-radio {
-  @apply select-none cursor-pointer rounded;
-  padding: 8px 10px;
-  transition: all $dur-easing;
-
+.s-radio.s-radio-body {
   $root: &;
 
   &[aria-disabled='true'] {
     pointer-events: none;
 
     label,
-    #{$root}__description {
-      color: $on-disabled;
+    .s-radio-body__description {
+      color: theme.token-as-var('sys.color.on-disabled');
     }
   }
 
-  &:focus {
-    outline: none;
-  }
-
-  label {
-    color: theme.token-as-var('sys.color.content-primary');
-    @apply cursor-pointer;
-  }
-
-  &__description {
-    color: theme.token-as-var('sys.color.content-secondary');
-    margin-top: 4px;
-  }
-
-  label,
-  &__description {
-    transition: color $dur-easing;
-  }
-
-  &[class*='_type_bordered'] {
-    border: 1px solid $border-primary;
-
+  &[data-type^='bordered'] {
     &:hover,
     &[aria-checked='true']:not([aria-disabled='true']) {
-      border-color: $primary;
+      border-color: theme.token-as-var('sys.color.primary');
     }
-  }
-
-  // Styles below doesn't come from design
-  // FIXME
-
-  &:hover {
-    @apply bg-gray-50;
-  }
-
-  &:active {
-    @apply bg-gray-100;
-  }
-
-  &:focus {
-    @apply ring ring-opacity-25 ring-blue-500 ring-offset-2;
   }
 }
 </style>
