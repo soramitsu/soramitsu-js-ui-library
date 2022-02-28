@@ -1,7 +1,6 @@
 import { Meta } from '@storybook/vue3'
-import { SBadge } from '@/lib'
+import { SBadge, BadgeType, BadgeTypes } from '@/lib'
 import { defineStory } from './util'
-import { BadgeType, BadgeTypes } from '../src/components/Badge/types'
 
 const meta: Meta = {
   title: 'Example/Badge',
@@ -36,11 +35,9 @@ configurable.args = {
   slotTitle: 'badge',
 }
 
-const badgeTypeValues = Object.values(BadgeTypes).filter((t) => typeof t === 'string')
-
 configurable.argTypes = {
   type: {
-    options: badgeTypeValues,
+    options: BadgeTypes,
     control: { type: 'select' },
   },
 }

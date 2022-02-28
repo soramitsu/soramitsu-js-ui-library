@@ -6,7 +6,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { SSpinner } from '../Spinner'
-import { BadgeType } from './types'
+import { BadgeType } from './api'
 
 const props = withDefaults(
   defineProps<{
@@ -30,19 +30,18 @@ const showSpinner = computed(() => {
 
 <template>
   <div
-    tabindex="0"
     class="sora-tpg-ch3"
     :class="[
       's-badge',
-      { 's-badge--border': withBorder },
-      colorBackground ? `s-badge--color-${type} text-white` : ' primary-text-color',
+      { 's-badge_border': withBorder },
+      colorBackground ? `s-badge_color_${type} text-white` : ' primary-text-color',
     ]"
   >
     <div class="flex items-center justify-start">
       <div
         v-if="!showSpinner"
         class="marker"
-        :class="!colorBackground ? `s-badge--color-${type}` : 'bg-white'"
+        :class="!colorBackground ? `s-badge_color_${type}` : 'bg-white'"
       />
       <SSpinner
         v-else
@@ -66,17 +65,17 @@ const showSpinner = computed(() => {
 
   @each $status in ('error', 'warning', 'info', 'debug') {
     $bg: theme.token-as-var('sys.color.status.#{$status}');
-    &--color-#{$status} {
+    &_color_#{$status} {
       background-color: $bg;
     }
   }
 
-  &--color-active {
+  &_color_active {
     background-color: theme.token-as-var('sys.color.status.success');
   }
 
 
-  &--color-pending {
+  &_color_pending {
     background-color: theme.token-as-var('sys.color.content-tertiary');
   }
 
@@ -102,7 +101,7 @@ const showSpinner = computed(() => {
     margin-left: 8px;
   }
 
-  &--border {
+  &_border {
     @apply border border-1 border-base-background;
   }
 }
