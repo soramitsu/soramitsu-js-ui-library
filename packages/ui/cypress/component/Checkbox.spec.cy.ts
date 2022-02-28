@@ -27,7 +27,7 @@ it('Play', () => {
           <SCheckboxSolo v-model=tri>Tri</SCheckboxSolo>
         </div>
 
-        <div v-for="s in sizes" :key="s" class="grid grid-cols-3 place-items-start gap-4 p-4 m-4 border border-blue-300">
+        <div v-for="s in sizes" :key="s" class="grid grid-cols-3 place-items-start gap-4 p-4 m-4 border border-gray-100">
           <SCheckboxSolo v-model="checked" :size="s" :disabled="disabled && s === 'md'">
             Default
           </SCheckboxSolo>

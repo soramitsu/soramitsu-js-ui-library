@@ -21,7 +21,7 @@ const expectRadioToBeTabbable = (innerText: string) =>
 const expectRadioToBeNotTabbable = (innerText: string) =>
   findRadioButtonContains(innerText).should('have.attr', 'tabindex', -1)
 
-it.only('Play', () => {
+it('Play', () => {
   mount({
     setup() {
       return {
