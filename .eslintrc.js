@@ -16,6 +16,9 @@ module.exports = {
   rules: {
     'vue/html-indent': ['warn', 2],
 
+    // to fix windicss scanning in cases like `:class="{ invisible: true }"`
+    'vue/quote-props': ['warn', 'always'],
+
     // make possible `/// <reference...`
     'spaced-comment': ['error', 'always', { markers: ['/'] }],
   },

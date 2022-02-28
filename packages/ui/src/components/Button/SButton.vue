@@ -6,7 +6,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { computed, ComputedRef } from 'vue'
-import { SSpinner } from '@/lib'
+import { SSpinner } from '../Spinner'
 import {
   BUTTON_ICON_POSITION_VALUES,
   BUTTON_SIZE_VALUES,
@@ -91,7 +91,7 @@ const font = computed(() => {
 
     <span
       class="s-button__icon"
-      :class="{ invisible: loading }"
+      :class="{ 'invisible': loading }"
       data-testid="icon"
     >
       <i
@@ -104,7 +104,7 @@ const font = computed(() => {
       />
     </span>
     <span
-      :class="{ invisible: loading }"
+      :class="{ 'invisible': loading }"
       data-testid="text"
     >
       <slot v-if="!isAction" />

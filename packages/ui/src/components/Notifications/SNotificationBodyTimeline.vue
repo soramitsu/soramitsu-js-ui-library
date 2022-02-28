@@ -71,7 +71,7 @@ const styleRight = computed<string>(() => `${timeoutProgress.value * 100}%`)
     <div
       v-if="isPending"
       class="s-notification-body-timeline"
-      :style="{ right: styleRight }"
+      :style="{ 'right': styleRight }"
     />
   </Transition>
 </template>

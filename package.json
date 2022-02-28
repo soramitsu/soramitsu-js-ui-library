@@ -4,7 +4,7 @@
   "scripts": {
     "sb:serve": "yarn --cwd packages/ui sb:serve",
     "sb:build": "yarn --cwd packages/ui sb:build",
-    "test:all": "run-p lint:check test:theme:unit build:theme test:ui:cy",
+    "test:all": "run-s lint:check test:theme:unit build:theme test:ui:cy",
     "test:theme:unit": "yarn --cwd packages/theme test",
     "test:ui:cy": "yarn --cwd packages/ui cy:ci",
     "build": "run-s build:theme build:ui",
