@@ -714,9 +714,9 @@ syncMenuAndInputWidths: boolean;
 }, {
 modelValue: any;
 multiple: boolean;
-options: SelectOption<any>[];
 size: SelectSize;
 disabled: boolean;
+options: SelectOption<any>[];
 syncMenuAndInputWidths: boolean;
 }>;
 
