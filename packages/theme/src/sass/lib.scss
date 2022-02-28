@@ -55,7 +55,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'border-secondary': #eceff0,
           'disabled': #f5f7f8,
           'on-disabled': #a3a4a8,
-          'accent-focused': #aa0e42,
           'util': (
             'body': #fff,
             'surface': #fff,
@@ -75,6 +74,9 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'info': #1070ca,
             'info-background': #f3f6ff,
             'info-background-hover': #dbe4ff,
+            'debug': #aa0e42,
+            'debug-background': #ffeef4,
+            'debug-background-hover': #f3d3de,
           ),
         ),
         'shadow': (

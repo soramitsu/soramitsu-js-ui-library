@@ -64,7 +64,7 @@ const showSpinner = computed(() => {
   padding: 5px 10px;
   width: fit-content;
 
-  @each $status in ('error', 'warning', 'info') {
+  @each $status in ('error', 'warning', 'info', 'debug') {
     $bg: theme.token-as-var('sys.color.status.#{$status}');
     &--color-#{$status} {
       background-color: $bg;
@@ -75,9 +75,6 @@ const showSpinner = computed(() => {
     background-color: theme.token-as-var('sys.color.status.success');
   }
 
-  &--color-debug {
-    background-color: theme.token-as-var('sys.color.accent-focused');
-  }
 
   &--color-pending {
     background-color: theme.token-as-var('sys.color.content-tertiary');

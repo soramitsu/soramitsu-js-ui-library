@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': minor
 ---
 
-Added Badge component
+**feat**: Added Badge component
