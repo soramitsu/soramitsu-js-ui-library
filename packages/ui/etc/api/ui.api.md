@@ -60,6 +60,12 @@ export enum Autocomplete {
 }
 
 // @public (undocumented)
+export type BadgeType = typeof BadgeTypes extends ReadonlyArray<infer T> ? T : never;
+
+// @public (undocumented)
+export const BadgeTypes: readonly ["active", "error", "warning", "info", "debug", "pending"];
+
+// @public (undocumented)
 export const BUTTON_ICON_POSITION_VALUES: readonly ["left", "right"];
 
 // @public (undocumented)
@@ -265,7 +271,7 @@ showCloseBtn: boolean;
 //
 // @public (undocumented)
 export const SBadge: DefineComponent<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<{
-type?: BadgeType | undefined;
+type?: "error" | "warning" | "active" | "info" | "debug" | "pending" | undefined;
 colorBackground?: boolean | undefined;
 withBorder?: boolean | undefined;
 onlyMarker?: boolean | undefined;
@@ -275,7 +281,7 @@ colorBackground: boolean;
 withBorder: boolean;
 onlyMarker: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<{
-type?: BadgeType | undefined;
+type?: "error" | "warning" | "active" | "info" | "debug" | "pending" | undefined;
 colorBackground?: boolean | undefined;
 withBorder?: boolean | undefined;
 onlyMarker?: boolean | undefined;
@@ -285,7 +291,7 @@ colorBackground: boolean;
 withBorder: boolean;
 onlyMarker: boolean;
 }>>>, {
-type: BadgeType;
+type: "error" | "warning" | "active" | "info" | "debug" | "pending";
 colorBackground: boolean;
 withBorder: boolean;
 onlyMarker: boolean;
@@ -1024,7 +1030,6 @@ export function useSelectApi<T = any>(): SelectApi<T>;
 
 // Warnings were encountered during analysis:
 //
-// dist-ts/components/Badge/Badge.vue.d.ts:3:5 - (ae-forgotten-export) The symbol "BadgeType" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:9:9 - (ae-forgotten-export) The symbol "validateVerticalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:14:9 - (ae-forgotten-export) The symbol "validateHorizontalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsProvider.d.ts:8:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts
