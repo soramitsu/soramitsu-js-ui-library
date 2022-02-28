@@ -1,27 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const path = require('path')
-const fs = require('fs')
-
-const UI_PACKAGE_AUTO_IMPORTS_DTS = path.resolve(__dirname, './packages/ui/auto-imports.d.ts')
-
-function parseAutoImportsDts(contents) {
-  const matchResults = contents.matchAll(/^\s+const (\w+): typeof import/gm)
-  return Array.from(matchResults, ([, word]) => word)
-}
-
-/**
- * Extracts auto-imports from generated `.d.ts` and collects them into readonly-globals
- * so ESLint could know about them
- */
-function extractAutoImportGlobals(dtsFile) {
-  const contents = fs.readFileSync(dtsFile, { encoding: 'utf-8' })
-  const parsed = parseAutoImportsDts(contents)
-  return parsed.reduce((acc, word) => {
-    acc[word] = 'readonly'
-    return acc
-  }, {})
-}
-
 module.exports = {
   root: true,
   extends: ['alloy', 'alloy/typescript', 'plugin:vue/vue3-recommended'],
@@ -54,7 +30,7 @@ module.exports = {
     },
     {
       files: ['**/packages/ui/**/*.{ts,vue,js}'],
-      globals: extractAutoImportGlobals(UI_PACKAGE_AUTO_IMPORTS_DTS),
+      extends: ['./packages/ui/.eslintrc-auto-import.json'],
     },
     {
       files: ['**/*.spec.{js,ts}'],
