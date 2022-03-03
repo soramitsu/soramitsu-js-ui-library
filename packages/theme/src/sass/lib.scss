@@ -157,15 +157,15 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
   }
 
   @include typography('h5') {
-    @include util.typography-factory($size: 16px, $height: 150%, $spacing: 0.01em);
+    @include util.typography-factory($size: 16px, $height: 150%, $spacing: 0.01em, $weight: bold);
   }
 
   @include typography('h6') {
-    @include util.typography-factory($size: 14px, $height: 150%);
+    @include util.typography-factory($size: 14px, $height: 150%, $weight: bold);
   }
 
   @include typography('h7') {
-    @include util.typography-factory($size: 12px, $height: 150%);
+    @include util.typography-factory($size: 12px, $height: 150%, $weight: bold);
   }
 
   @include typography('ch1') {
