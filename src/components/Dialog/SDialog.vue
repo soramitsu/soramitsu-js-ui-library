@@ -238,7 +238,7 @@ export default class SDialog extends Mixins(BorderRadiusMixin, DesignSystemInjec
       this.computedTop = this.top
       return
     }
-    const dialog = wrapper.children[0] as HTMLElement
+    const dialog = wrapper.getElementsByClassName('el-dialog')[0] as HTMLElement
     const top = wrapper.clientHeight - dialog.clientHeight > 0
       ? Math.floor((wrapper.clientHeight - dialog.clientHeight) / 2)
       : 0
