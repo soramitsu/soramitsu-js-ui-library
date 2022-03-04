@@ -202,6 +202,10 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
     @include util.typography-factory($size: 12px, $height: 180%);
   }
 
+  @include typography('p5') {
+    @include util.typography-factory($size: 10px, $height: 160%);
+  }
+
   @include typography('s1') {
     @include util.typography-factory($size: 15px, $height: 16px);
   }
