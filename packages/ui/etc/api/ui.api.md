@@ -152,13 +152,13 @@ export enum InputType {
 export const LINK_ICON_POSITION_VALUES: readonly ["left", "right"];
 
 // @public (undocumented)
-export const LINK_TYPE_VALUES: readonly ["link", "hint"];
+export const LINK_UNDERLINE_TYPE_VALUES: readonly ["solid", "dotted"];
 
 // @public (undocumented)
 export type LinkIconPosition = typeof LINK_ICON_POSITION_VALUES[number];
 
 // @public (undocumented)
-export type LinkType = typeof LINK_TYPE_VALUES[number];
+export type LinkUnderlineType = typeof LINK_UNDERLINE_TYPE_VALUES[number];
 
 // @public (undocumented)
 export const MODAL_API_KEY: InjectionKey<ModalApi>;
@@ -472,27 +472,27 @@ dictionary: string[];
 //
 // @public (undocumented)
 export const SLink: DefineComponent<__VLS_WithDefaults_6<__VLS_TypePropsToRuntimeProps_6<{
-type?: "link" | "hint" | undefined;
+underline?: "solid" | "dotted" | undefined;
 iconPosition?: "left" | "right" | undefined;
 icon?: boolean | undefined;
 tag?: string | object | undefined;
 }>, {
-type: string;
+underline: string;
 iconPosition: string;
 icon: boolean;
 tag: string;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_6<__VLS_TypePropsToRuntimeProps_6<{
-type?: "link" | "hint" | undefined;
+underline?: "solid" | "dotted" | undefined;
 iconPosition?: "left" | "right" | undefined;
 icon?: boolean | undefined;
 tag?: string | object | undefined;
 }>, {
-type: string;
+underline: string;
 iconPosition: string;
 icon: boolean;
 tag: string;
 }>>>, {
-type: "link" | "hint";
+underline: "solid" | "dotted";
 iconPosition: "left" | "right";
 icon: boolean;
 tag: string | object;
