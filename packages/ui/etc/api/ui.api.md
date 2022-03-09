@@ -60,6 +60,12 @@ export enum Autocomplete {
 }
 
 // @public (undocumented)
+export type BadgeType = typeof BadgeTypes extends ReadonlyArray<infer T> ? T : never;
+
+// @public (undocumented)
+export const BadgeTypes: readonly ["active", "error", "warning", "info", "debug", "pending"];
+
+// @public (undocumented)
 export const BUTTON_ICON_POSITION_VALUES: readonly ["left", "right"];
 
 // @public (undocumented)
@@ -270,6 +276,37 @@ showCloseBtn: boolean;
 }, {
 status: Status_2;
 showCloseBtn: boolean;
+}>;
+
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SBadge: DefineComponent<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<{
+type?: "error" | "warning" | "active" | "info" | "debug" | "pending" | undefined;
+colorBackground?: boolean | undefined;
+withBorder?: boolean | undefined;
+onlyMarker?: boolean | undefined;
+}>, {
+type: string;
+colorBackground: boolean;
+withBorder: boolean;
+onlyMarker: boolean;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<{
+type?: "error" | "warning" | "active" | "info" | "debug" | "pending" | undefined;
+colorBackground?: boolean | undefined;
+withBorder?: boolean | undefined;
+onlyMarker?: boolean | undefined;
+}>, {
+type: string;
+colorBackground: boolean;
+withBorder: boolean;
+onlyMarker: boolean;
+}>>>, {
+type: "error" | "warning" | "active" | "info" | "debug" | "pending";
+colorBackground: boolean;
+withBorder: boolean;
+onlyMarker: boolean;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
