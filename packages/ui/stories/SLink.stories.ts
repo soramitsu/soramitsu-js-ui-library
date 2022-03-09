@@ -1,5 +1,5 @@
 import { defineMeta, defineStory } from './util'
-import { SLink } from '@/lib'
+import { LINK_ICON_POSITION_VALUES, LINK_UNDERLINE_TYPE_VALUES, SLink } from '@/lib'
 import { IconClose } from '@/components/icons'
 
 export default defineMeta({
@@ -23,18 +23,18 @@ export const Configurable = defineStory((args) =>  ({
         href="https://soramitsu.co.jp/"
         target="_blank"
       >
-        {{ args.type }}
+        Link
       </SLink>
     </div>
   `
 }))
 Configurable.argTypes = {
-  type: {
-    options: ['link', 'hint'],
+  underline: {
+    options: LINK_UNDERLINE_TYPE_VALUES,
     control: 'inline-radio'
   },
   iconPosition: {
-    options: ['left', 'right'],
+    options: LINK_ICON_POSITION_VALUES,
     control: 'inline-radio'
   },
   icon: {
@@ -42,7 +42,7 @@ Configurable.argTypes = {
   }
 }
 Configurable.args = {
-  type: 'link',
+  underline: 'solid',
   icon: true,
   iconPosition: 'left',
 }

@@ -5,39 +5,47 @@ export default defineComponent({ name: 'SLink' })
 <script setup lang="ts">
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { IconBasicExternalLink24, IconStatusInfo } from '../icons'
-import { LINK_ICON_POSITION_VALUES, LINK_TYPE_VALUES } from './consts'
-import { LinkIconPosition, LinkType } from './types'
+import { LINK_ICON_POSITION_VALUES, LINK_UNDERLINE_TYPE_VALUES } from './consts'
+import { LinkIconPosition, LinkUnderlineType } from './types'
 
 const props = withDefaults(
   defineProps<{
-    type?: LinkType
+    underline?: LinkUnderlineType
     iconPosition?: LinkIconPosition
     icon?: boolean
     tag?: string | object
   }>(),
   {
-    type: 'link',
+    underline: 'solid',
     iconPosition: 'right',
     icon: false,
     tag: 'a',
   },
 )
 
-const definitelyType = usePropTypeFilter(() => props.type, LINK_TYPE_VALUES, 'link')
+const definitelyUnderlineType = usePropTypeFilter(() => props.underline, LINK_UNDERLINE_TYPE_VALUES, 'solid')
 const definitelyIconPosition = usePropTypeFilter(() => props.iconPosition, LINK_ICON_POSITION_VALUES, 'right')
 </script>
 
 <template>
   <component
     :is="tag"
-    :class="['s-link', `s-link_type_${type}`, `s-link_icon-position_${iconPosition}`, 'sora-tpg-p3']"
+    :class="['s-link', `s-link_type_${definitelyUnderlineType}`, `s-link_icon-position_${iconPosition}`, 'sora-tpg-p3']"
   >
     <span>
       <slot />
     </span>
     <template v-if="icon">
-      <IconBasicExternalLink24 v-if="type === 'link'" class="s-link__icon" data-testid="icon" />
-      <IconStatusInfo v-else class="s-link__icon" data-testid="icon" />
+      <IconBasicExternalLink24
+        v-if="definitelyUnderlineType === 'solid'"
+        class="s-link__icon"
+        data-testid="icon"
+      />
+      <IconStatusInfo
+        v-else
+        class="s-link__icon"
+        data-testid="icon"
+      />
     </template>
   </component>
 </template>
@@ -55,11 +63,11 @@ const definitelyIconPosition = usePropTypeFilter(() => props.iconPosition, LINK_
   }
 
   &_type {
-    &_link {
+    &_solid {
       text-decoration: underline;
     }
 
-    &_hint {
+    &_dotted {
       text-decoration: underline dotted;
     }
   }
