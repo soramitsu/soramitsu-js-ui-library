@@ -66,7 +66,8 @@ const font = computed(() => {
       font,
       {
         's-button_disabled': loading || disabled,
-        'rounded-full': isAction && rounded,
+        's-button_rounded': isAction && rounded,
+        's-button_loading': loading,
       },
     ]"
     :disabled="loading || disabled"
@@ -79,11 +80,23 @@ const font = computed(() => {
       :width="SPINNER_WIDTH[definitelySize]"
     />
 
-    <span class="s-button__icon" :class="{ invisible: loading }" data-testid="icon">
-      <i v-if="icon" :class="icon" />
-      <slot v-else name="icon" />
+    <span
+      class="s-button__icon"
+      data-testid="icon"
+    >
+      <i
+        v-if="icon"
+        :class="icon"
+      />
+      <slot
+        v-else
+        name="icon"
+      />
     </span>
-    <span :class="{ invisible: loading }" data-testid="text">
+    <span
+      class="s-button__text"
+      data-testid="text"
+    >
       <slot v-if="!isAction" />
     </span>
   </button>
@@ -132,6 +145,7 @@ const font = computed(() => {
 .s-button {
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;
   fill: currentColor;
+  $component: &;
 
   &_disabled {
     @apply cursor-default;
@@ -231,5 +245,15 @@ const font = computed(() => {
   @include button-size(md, $height: 40px, $padding: px-16px, $icon-size: 16px);
 
   @include button-size(lg, $height: 56px, $padding: px-24px, $icon-size: 24px);
+
+  &_rounded {
+    @apply rounded-full;
+  }
+
+  &_loading {
+    #{$component}__icon, #{$component}__text {
+      @apply invisible;
+    }
+  }
 }
 </style>
