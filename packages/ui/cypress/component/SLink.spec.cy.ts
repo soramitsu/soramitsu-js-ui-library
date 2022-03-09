@@ -42,12 +42,12 @@ describe('Link', () => {
     })
   })
 
-  context('Given prop type', () => {
-    context('When it is link', () => {
+  context('Given prop underline', () => {
+    context('When it is solid', () => {
       beforeEach(() => {
         mount(SLink, {
           propsData: {
-            type: 'link',
+            underline: 'solid',
           },
           slots: {
             default: () => 'Soramitsu'
@@ -61,11 +61,11 @@ describe('Link', () => {
       })
     })
 
-    context('When it is hint', () => {
+    context('When it is dotted', () => {
       beforeEach(() => {
         mount(SLink, {
           propsData: {
-            type: 'hint',
+            underline: 'dotted',
           },
           slots: {
             default: () => 'Soramitsu'
