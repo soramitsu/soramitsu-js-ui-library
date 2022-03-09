@@ -18,7 +18,7 @@ const props = withDefaults(
   {
     underline: 'solid',
     iconPosition: 'right',
-    icon: false,
+    icon: true,
     tag: 'a',
   },
 )
@@ -36,16 +36,15 @@ const definitelyIconPosition = usePropTypeFilter(() => props.iconPosition, LINK_
       <slot />
     </span>
     <template v-if="icon">
-      <IconBasicExternalLink24
-        v-if="definitelyUnderlineType === 'solid'"
-        class="s-link__icon"
-        data-testid="icon"
-      />
-      <IconStatusInfo
-        v-else
-        class="s-link__icon"
-        data-testid="icon"
-      />
+      <slot
+        name="icon"
+        :class="'s-link__icon'"
+      >
+        <IconBasicExternalLink24
+          class="s-link__icon"
+          data-testid="icon"
+        />
+      </slot>
     </template>
   </component>
 </template>

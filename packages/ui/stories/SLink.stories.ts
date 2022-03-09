@@ -1,6 +1,6 @@
 import { defineMeta, defineStory } from './util'
 import { LINK_ICON_POSITION_VALUES, LINK_UNDERLINE_TYPE_VALUES, SLink } from '@/lib'
-import { IconClose } from '@/components/icons'
+import { IconStatusInfo } from '@/components/icons'
 
 export default defineMeta({
   title: 'Example/Link'
@@ -9,7 +9,7 @@ export default defineMeta({
 export const Configurable = defineStory((args) =>  ({
   components: {
     SLink,
-    IconClose,
+    IconStatusInfo,
   },
   setup() {
     return {
@@ -24,6 +24,9 @@ export const Configurable = defineStory((args) =>  ({
         target="_blank"
       >
         Link
+        <template #icon="iconProps">
+          <IconStatusInfo :class="iconProps.class" />
+        </template>
       </SLink>
     </div>
   `
