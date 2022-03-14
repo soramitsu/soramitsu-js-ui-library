@@ -47,5 +47,5 @@ export const COMPONENTS: Record<string, Component> = {
   STextField,
   SBadge,
   SAccordion,
-  SAccordionItem
+  SAccordionItem,
 }

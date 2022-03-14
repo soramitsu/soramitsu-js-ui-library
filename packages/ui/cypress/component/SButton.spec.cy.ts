@@ -14,8 +14,8 @@ describe('Button', () => {
             disabled: true,
           },
           slots: {
-            default: () => 'Soramitsu'
-          }
+            default: () => 'Soramitsu',
+          },
         })
       })
 
@@ -33,8 +33,8 @@ describe('Button', () => {
             loading: true,
           },
           slots: {
-            default: () => 'Soramitsu'
-          }
+            default: () => 'Soramitsu',
+          },
         })
       })
 
@@ -62,8 +62,8 @@ describe('Button', () => {
             uppercase: true,
           },
           slots: {
-            default: () => 'Soramitsu'
-          }
+            default: () => 'Soramitsu',
+          },
         })
       })
 
@@ -80,8 +80,8 @@ describe('Button', () => {
             uppercase: true,
           },
           slots: {
-            default: () => 'Soramitsu'
-          }
+            default: () => 'Soramitsu',
+          },
         })
       })
 
@@ -100,8 +100,8 @@ describe('Button', () => {
             rounded: true,
           },
           slots: {
-            default: () => 'Soramitsu'
-          }
+            default: () => 'Soramitsu',
+          },
         })
       })
 
@@ -118,8 +118,8 @@ describe('Button', () => {
             rounded: true,
           },
           slots: {
-            default: () => 'Soramitsu'
-          }
+            default: () => 'Soramitsu',
+          },
         })
       })
 

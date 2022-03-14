@@ -1,19 +1,19 @@
 <script lang="ts">
 export default defineComponent({
-  name: 'SButton'
+  name: 'SButton',
 })
 </script>
 
 <script setup lang="ts">
 import { computed, ComputedRef } from 'vue'
-import { SSpinner } from '@/lib'
+import { SSpinner } from '../Spinner'
 import {
   BUTTON_ICON_POSITION_VALUES,
   BUTTON_SIZE_VALUES,
   BUTTON_TYPE_VALUES,
   SPINNER_SIZE,
   SPINNER_WIDTH,
-  FONT_SIZE
+  FONT_SIZE,
 } from './consts'
 import { ButtonType, ButtonSize, ButtonIconPosition, HTMLButtonType } from './types'
 
@@ -29,15 +29,15 @@ function usePropTypeFilter<T>(value: () => T, validValues: readonly T[], default
 
 const props = withDefaults(
   defineProps<{
-    type?: ButtonType,
-    size?: ButtonSize,
-    nativeType?: HTMLButtonType,
-    icon?: string,
-    iconPosition?: ButtonIconPosition,
-    rounded?: boolean,
-    disabled?: boolean,
-    loading?: boolean,
-    uppercase?: boolean,
+    type?: ButtonType
+    size?: ButtonSize
+    nativeType?: HTMLButtonType
+    icon?: string
+    iconPosition?: ButtonIconPosition
+    rounded?: boolean
+    disabled?: boolean
+    loading?: boolean
+    uppercase?: boolean
   }>(),
   {
     type: 'secondary',
@@ -184,7 +184,9 @@ const font = computed(() => {
     @apply ml-6px;
   }
 
-  &_type_action &__icon, &_size_mini#{&}_type_action &__icon, & &__icon:empty {
+  &_type_action &__icon,
+  &_size_mini#{&}_type_action &__icon,
+  & &__icon:empty {
     @apply mx-0;
   }
 
@@ -205,7 +207,8 @@ const font = computed(() => {
     background-color: theme.token-as-var('sys.color.primary-hover-background');
   }
 
-  &_type_secondary, &_type_action {
+  &_type_secondary,
+  &_type_action {
     background-color: theme.token-as-var('sys.color.background');
     color: theme.token-as-var('sys.color.content-primary');
 
@@ -218,11 +221,11 @@ const font = computed(() => {
     }
   }
 
-  &_type_secondary#{&}_disabled, &_type_action#{&}_disabled {
+  &_type_secondary#{&}_disabled,
+  &_type_action#{&}_disabled {
     background-color: theme.token-as-var('sys.color.disabled');
     color: theme.token-as-var('sys.color.on-disabled');
   }
-
 
   &_type_outline {
     border: 1px solid theme.token-as-var('sys.color.border-primary');
@@ -244,29 +247,12 @@ const font = computed(() => {
     color: theme.token-as-var('sys.color.on-disabled');
   }
 
-  @include button-size(xs,
-    $height: 24px,
-    $padding: px-8px,
-    $icon-size: 12px,
-    $border-radius: 2px
-  );
+  @include button-size(xs, $height: 24px, $padding: px-8px, $icon-size: 12px, $border-radius: 2px);
 
-  @include button-size(sm,
-    $height: 32px,
-    $padding: px-12px,
-    $icon-size: 16px
-  );
+  @include button-size(sm, $height: 32px, $padding: px-12px, $icon-size: 16px);
 
-  @include button-size(md,
-    $height: 40px,
-    $padding: px-16px,
-    $icon-size: 16px
-  );
+  @include button-size(md, $height: 40px, $padding: px-16px, $icon-size: 16px);
 
-  @include button-size(lg,
-    $height: 56px,
-    $padding: px-24px,
-    $icon-size: 24px
-  );
+  @include button-size(lg, $height: 56px, $padding: px-24px, $icon-size: 24px);
 }
 </style>
