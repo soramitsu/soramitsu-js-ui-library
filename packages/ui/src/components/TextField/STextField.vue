@@ -221,6 +221,7 @@ const inputType = computed(() =>
           v-if="showEye"
           class="s-text-field__eye"
           data-testid="eye"
+          type="button"
           @click="toggleForceReveal()"
         >
           <Transition name="s-text-field__eye-transition">
