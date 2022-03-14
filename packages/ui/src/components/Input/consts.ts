@@ -1,6 +1,6 @@
 export enum Autocomplete {
   OFF = 'off',
-  ON = 'on'
+  ON = 'on',
 }
 
 export enum InputType {
@@ -27,11 +27,11 @@ export enum InputType {
   TEL = 'tel',
   TIME = 'time',
   URL = 'url',
-  WEEK = 'week'
+  WEEK = 'week',
 }
 
 export enum InputSize {
   SMALL = 'small',
   MEDIUM = 'medium',
-  BIG = 'big'
+  BIG = 'big',
 }

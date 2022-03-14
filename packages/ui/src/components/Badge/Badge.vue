@@ -74,7 +74,6 @@ const showSpinner = computed(() => {
     background-color: theme.token-as-var('sys.color.status.success');
   }
 
-
   &_color_pending {
     background-color: theme.token-as-var('sys.color.content-tertiary');
   }

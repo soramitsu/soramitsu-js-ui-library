@@ -19,7 +19,11 @@ const { timeout } = toRefs(props)
 let timestamps: null | [startedAt: number, willFireAt: number] = null
 const timeoutProgress = ref(0)
 
-const { start: startTimeout, stop: stopTimeout, isPending } = useTimeoutFn(
+const {
+  start: startTimeout,
+  stop: stopTimeout,
+  isPending,
+} = useTimeoutFn(
   () => {
     timestamps = null
     emit('timeout')
@@ -67,7 +71,7 @@ const styleRight = computed<string>(() => `${timeoutProgress.value * 100}%`)
     <div
       v-if="isPending"
       class="s-notification-body-timeline"
-      :style="{ right: styleRight }"
+      :style="{ 'right': styleRight }"
     />
   </Transition>
 </template>
