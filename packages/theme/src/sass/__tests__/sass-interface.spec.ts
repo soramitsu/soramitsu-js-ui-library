@@ -230,7 +230,7 @@ describe('Exports', () => {
       .sora-tpg-h5 {
         font-family: Sora;
         font-size: 16px;
-        font-weight: 400;
+        font-weight: bold;
         line-height: 150%;
         letter-spacing: 0.01em;
       }
@@ -238,7 +238,7 @@ describe('Exports', () => {
       .sora-tpg-h6 {
         font-family: Sora;
         font-size: 14px;
-        font-weight: 400;
+        font-weight: bold;
         line-height: 150%;
         letter-spacing: 0;
       }
@@ -246,7 +246,7 @@ describe('Exports', () => {
       .sora-tpg-h7 {
         font-family: Sora;
         font-size: 12px;
-        font-weight: 400;
+        font-weight: bold;
         line-height: 150%;
         letter-spacing: 0;
       }
@@ -307,6 +307,14 @@ describe('Exports', () => {
         font-size: 12px;
         font-weight: 400;
         line-height: 180%;
+        letter-spacing: 0;
+      }
+
+      .sora-tpg-p5 {
+        font-family: Sora;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 160%;
         letter-spacing: 0;
       }
 
