@@ -4,7 +4,7 @@ export default defineComponent({ name: 'SLink' })
 
 <script setup lang="ts">
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
-import { IconBasicExternalLink24, IconStatusInfo } from '../icons'
+import { IconBasicExternalLink24 } from '../icons'
 import { LINK_ICON_POSITION_VALUES, LINK_UNDERLINE_TYPE_VALUES } from './consts'
 import { LinkIconPosition, LinkUnderlineType } from './types'
 
