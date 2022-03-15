@@ -6,6 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
+import { StyleValue } from 'vue'
 import { Status } from '@/types'
 import { STATUS_ICONS_MAP_16, IconBasicEye24, IconBasicEyeNo24 } from '../icons'
 
@@ -159,6 +160,11 @@ const counterText = computed<string | null>(() => {
   return limit === null ? String(currentCount) : `${currentCount}/${limit}`
 })
 
+const attrs = useAttrs()
+const rootClass = computed(() => attrs.class)
+const rootStyle = computed(() => attrs.style as StyleValue)
+const inputAttrs = reactiveOmit(attrs, 'class', 'style')
+
 // APPEND
 
 const showEye = computed<boolean>(() => props.password && !props.noEye)
@@ -181,7 +187,9 @@ const inputType = computed(() =>
         's-text-field_empty': isValueEmpty,
         's-text-field_disabled': disabled,
       },
+      rootClass,
     ]"
+    :style="rootStyle"
     :data-status="status"
   >
     <div class="s-text-field__input-wrapper">
@@ -197,7 +205,7 @@ const inputType = computed(() =>
         v-model="model"
         :type="inputType"
         :disabled="disabled"
-        v-bind="$attrs"
+        v-bind="inputAttrs"
         @focus="isFocused = true"
         @blur="isFocused = false"
       >
@@ -221,6 +229,7 @@ const inputType = computed(() =>
           v-if="showEye"
           class="s-text-field__eye"
           data-testid="eye"
+          type="button"
           @click="toggleForceReveal()"
         >
           <Transition name="s-text-field__eye-transition">
