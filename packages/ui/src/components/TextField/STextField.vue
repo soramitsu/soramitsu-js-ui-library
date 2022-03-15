@@ -162,7 +162,7 @@ const counterText = computed<string | null>(() => {
 
 const attrs = useAttrs()
 const rootClass = computed(() => attrs.class)
-const rootStyle = computed(() => attrs.style) as StyleValue
+const rootStyle = computed(() => attrs.style as StyleValue)
 const inputAttrs = reactiveOmit(attrs, 'class', 'style')
 
 // APPEND
@@ -187,7 +187,7 @@ const inputType = computed(() =>
         's-text-field_empty': isValueEmpty,
         's-text-field_disabled': disabled,
       },
-      rootClass
+      rootClass,
     ]"
     :style="rootStyle"
     :data-status="status"
