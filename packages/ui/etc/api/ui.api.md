@@ -355,10 +355,10 @@ loading: boolean;
 uppercase: boolean;
 }>>>, {
 type: "primary" | "secondary" | "outline" | "action";
-iconPosition: "left" | "right";
-icon: string;
 size: "xs" | "sm" | "md" | "lg";
 nativeType: HTMLButtonType;
+icon: string;
+iconPosition: "left" | "right";
 rounded: boolean;
 disabled: boolean;
 loading: boolean;
@@ -529,9 +529,9 @@ iconPosition: string;
 icon: boolean;
 tag: string;
 }>>>, {
-underline: "solid" | "dotted";
-iconPosition: "left" | "right";
 icon: boolean;
+iconPosition: "left" | "right";
+underline: "solid" | "dotted";
 tag: string | object;
 }>;
 
