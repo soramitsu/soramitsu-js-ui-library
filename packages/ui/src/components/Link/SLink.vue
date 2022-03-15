@@ -23,8 +23,10 @@ const props = withDefaults(
   },
 )
 
-const definitelyUnderlineType = usePropTypeFilter(() => props.underline, LINK_UNDERLINE_TYPE_VALUES, 'solid')
-const definitelyIconPosition = usePropTypeFilter(() => props.iconPosition, LINK_ICON_POSITION_VALUES, 'right')
+const propFilter = usePropTypeFilter(props)
+
+const definitelyUnderlineType = propFilter('underline', LINK_UNDERLINE_TYPE_VALUES, 'solid')
+const definitelyIconPosition = propFilter('iconPosition', LINK_ICON_POSITION_VALUES, 'right')
 </script>
 
 <template>

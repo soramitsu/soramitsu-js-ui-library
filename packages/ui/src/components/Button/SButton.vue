@@ -5,7 +5,6 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { computed, ComputedRef } from 'vue'
 import { SSpinner } from '../Spinner'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import {
@@ -43,9 +42,11 @@ const props = withDefaults(
   },
 )
 
-const definitelyType = usePropTypeFilter(() => props.type, BUTTON_TYPE_VALUES, 'primary')
-const definitelySize = usePropTypeFilter(() => props.size, BUTTON_SIZE_VALUES, 'md')
-const definitelyIconPosition = usePropTypeFilter(() => props.iconPosition, BUTTON_ICON_POSITION_VALUES, 'left')
+const filterProp = usePropTypeFilter(props)
+
+const definitelyType = filterProp('type', BUTTON_TYPE_VALUES, 'primary')
+const definitelySize = filterProp('size', BUTTON_SIZE_VALUES, 'md')
+const definitelyIconPosition = filterProp('iconPosition', BUTTON_ICON_POSITION_VALUES, 'left')
 const isAction = computed(() => definitelyType.value === 'action')
 const font = computed(() => {
   if (definitelySize.value === 'xs' && props.uppercase) {
