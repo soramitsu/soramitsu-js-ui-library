@@ -6,9 +6,9 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
+import { StyleValue } from 'vue'
 import { Status } from '@/types'
 import { STATUS_ICONS_MAP_16, IconBasicEye24, IconBasicEyeNo24 } from '../icons'
-import { omit, pick } from 'lodash'
 
 /**
  * warning: don't use it inside of `Props`. Vue compiler determines it
@@ -161,14 +161,9 @@ const counterText = computed<string | null>(() => {
 })
 
 const attrs = useAttrs()
-const rootAttrs = computed(() => pick(attrs, ['class', 'style']))
-const inputAttrs = computed(() => {
-  if (typeof attrs === 'object') {
-    return omit(attrs, ['class', 'style'])
-  }
-
-  return attrs
-})
+const rootClass = computed(() => attrs.class)
+const rootStyle = computed(() => attrs.style) as StyleValue
+const inputAttrs = reactiveOmit(attrs, 'class', 'style')
 
 // APPEND
 
@@ -192,9 +187,10 @@ const inputType = computed(() =>
         's-text-field_empty': isValueEmpty,
         's-text-field_disabled': disabled,
       },
+      rootClass
     ]"
+    :style="rootStyle"
     :data-status="status"
-    v-bind="rootAttrs"
   >
     <div class="s-text-field__input-wrapper">
       <label
