@@ -1,4 +1,4 @@
-import { ComputedRef } from 'vue';
+import { ComputedRef } from 'vue'
 
 export function usePropTypeFilter<T>(value: () => T, validValues: readonly T[], defaultValue: T): ComputedRef<T> {
   return computed(() => {

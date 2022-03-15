@@ -14,8 +14,8 @@ describe('Link', () => {
             icon: true,
           },
           slots: {
-            default: () => 'Soramitsu'
-          }
+            default: () => 'Soramitsu',
+          },
         })
       })
 
@@ -31,8 +31,8 @@ describe('Link', () => {
             icon: false,
           },
           slots: {
-            default: () => 'Soramitsu'
-          }
+            default: () => 'Soramitsu',
+          },
         })
       })
 
@@ -50,8 +50,8 @@ describe('Link', () => {
             underline: 'solid',
           },
           slots: {
-            default: () => 'Soramitsu'
-          }
+            default: () => 'Soramitsu',
+          },
         })
       })
 
@@ -68,8 +68,8 @@ describe('Link', () => {
             underline: 'dotted',
           },
           slots: {
-            default: () => 'Soramitsu'
-          }
+            default: () => 'Soramitsu',
+          },
         })
       })
 

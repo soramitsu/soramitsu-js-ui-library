@@ -252,7 +252,8 @@ const font = computed(() => {
   }
 
   &_loading {
-    #{$component}__icon, #{$component}__text {
+    #{$component}__icon,
+    #{$component}__text {
       @apply invisible;
     }
   }

@@ -3,17 +3,17 @@ import { LINK_ICON_POSITION_VALUES, LINK_UNDERLINE_TYPE_VALUES, SLink } from '@/
 import { IconStatusInfo } from '@/components/icons'
 
 export default defineMeta({
-  title: 'Example/Link'
+  title: 'Example/Link',
 })
 
-export const Configurable = defineStory((args) =>  ({
+export const Configurable = defineStory((args) => ({
   components: {
     SLink,
     IconStatusInfo,
   },
   setup() {
     return {
-      args
+      args,
     }
   },
   template: `
@@ -29,20 +29,20 @@ export const Configurable = defineStory((args) =>  ({
         </template>
       </SLink>
     </div>
-  `
+  `,
 }))
 Configurable.argTypes = {
   underline: {
     options: LINK_UNDERLINE_TYPE_VALUES,
-    control: 'inline-radio'
+    control: 'inline-radio',
   },
   iconPosition: {
     options: LINK_ICON_POSITION_VALUES,
-    control: 'inline-radio'
+    control: 'inline-radio',
   },
   icon: {
-    control: 'boolean'
-  }
+    control: 'boolean',
+  },
 }
 Configurable.args = {
   underline: 'solid',
