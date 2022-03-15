@@ -49,5 +49,5 @@ export const COMPONENTS: Record<string, Component> = {
   SBadge,
   SAccordion,
   SAccordionItem,
-  SLink
+  SLink,
 }

@@ -5,7 +5,8 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { SSpinner } from '@/lib'
+import { computed, ComputedRef } from 'vue'
+import { SSpinner } from '../Spinner'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import {
   BUTTON_ICON_POSITION_VALUES,
