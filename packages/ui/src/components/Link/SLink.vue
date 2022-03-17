@@ -32,7 +32,12 @@ const definitelyIconPosition = propFilter('iconPosition', LINK_ICON_POSITION_VAL
 <template>
   <component
     :is="tag"
-    :class="['s-link', `s-link_type_${definitelyUnderlineType}`, `s-link_icon-position_${iconPosition}`, 'sora-tpg-p3']"
+    :class="[
+      's-link',
+      `s-link_type_${definitelyUnderlineType}`,
+      `s-link_icon-position_${definitelyIconPosition}`,
+      'sora-tpg-p3',
+    ]"
   >
     <span>
       <slot />
