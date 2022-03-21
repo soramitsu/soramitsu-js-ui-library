@@ -1,19 +1,19 @@
 import { defineMeta, defineStory } from './util'
 import { SAccordionItem, SAccordion } from '@/lib'
-import { Ref } from 'vue';
+import { Ref } from 'vue'
 
 export default defineMeta({
-  title: 'Example/Accordion'
+  title: 'Example/Accordion',
 })
 
-export const AccordionItem = defineStory((args: Record<string, unknown>) =>  ({
+export const AccordionItem = defineStory((args: Record<string, unknown>) => ({
   components: {
     SAccordionItem,
   },
   setup() {
     return {
       args,
-      model: ref(false)
+      model: ref(false),
     }
   },
   template: `
@@ -23,7 +23,7 @@ export const AccordionItem = defineStory((args: Record<string, unknown>) =>  ({
       ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
       cillum dolore eu fugiat nulla pariatur.
     </SAccordionItem>
-  `
+  `,
 }))
 AccordionItem.argTypes = {
   title: { control: 'text' },
@@ -34,23 +34,27 @@ AccordionItem.args = {
   subtitle: 'Accordion item description',
 }
 
-export const Accordion = defineStory((args: Record<string, unknown>) =>  ({
+export const Accordion = defineStory((args: Record<string, unknown>) => ({
   components: {
     SAccordionItem,
-    SAccordion
+    SAccordion,
   },
   setup() {
-    const selectedStr = ref('item2 item1');
+    const selectedStr = ref('item2 item1')
     let modelValue: Ref<string[]> = ref([])
 
-    watch(selectedStr, () => {
-      modelValue.value = selectedStr.value.split(' ')
-    }, { immediate: true })
+    watch(
+      selectedStr,
+      () => {
+        modelValue.value = selectedStr.value.split(' ')
+      },
+      { immediate: true },
+    )
 
     return {
       args,
       selectedStr,
-      modelValue
+      modelValue,
     }
   },
   template: `
@@ -73,11 +77,11 @@ export const Accordion = defineStory((args: Record<string, unknown>) =>  ({
         cillum dolore eu fugiat nulla pariatur.
       </SAccordionItem>
     </SAccordion>
-  `
+  `,
 }))
 Accordion.argTypes = {
-  multiple: { control: 'boolean' }
+  multiple: { control: 'boolean' },
 }
 Accordion.args = {
-  multiple: true
+  multiple: true,
 }

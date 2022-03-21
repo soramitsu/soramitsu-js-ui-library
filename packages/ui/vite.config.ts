@@ -16,7 +16,7 @@ const vueCompilerTransforms = {
     return (node: RootNode | TemplateChildNode) => {
       if (process.env.NODE_ENV === 'production') {
         if (node.type === 1 /* NodeTypes.ELEMENT */) {
-          for(let i = 0; i < node.props.length; i++){
+          for (let i = 0; i < node.props.length; i++) {
             const p = node.props[i]
 
             if (p && p.type === 6 /* NodeTypes.ATTRIBUTE */ && p.name === attr) {
@@ -27,7 +27,7 @@ const vueCompilerTransforms = {
         }
       }
     }
-  }
+  },
 }
 
 export default defineConfig({
@@ -41,18 +41,18 @@ export default defineConfig({
       // explicit path in case when cwd is not the `__dirname`
       config: resolve('windi.config.ts'),
     }),
-    Vue(({
+    Vue({
       template: {
         compilerOptions: {
-          nodeTransforms: [vueCompilerTransforms.removeAttribute('data-testid')]
-        }
-      }
-    })),
+          nodeTransforms: [vueCompilerTransforms.removeAttribute('data-testid')],
+        },
+      },
+    }),
     Icons(),
     Svg({
       svgoConfig: {
-        plugins: [{ name: 'removeViewBox', active: false }]
-      }
+        plugins: [{ name: 'removeViewBox', active: false }],
+      },
     }),
     AutoImport({
       imports: ['vue', '@vueuse/core'],

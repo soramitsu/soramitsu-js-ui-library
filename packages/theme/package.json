@@ -40,6 +40,7 @@
     "del-cli": "^4.0.1",
     "esbuild-jest": "^0.5.0",
     "jest": "^27.3.1",
+    "jest-environment-node-single-context": "^27.3.0",
     "jest-resolver-enhanced": "^1.0.1",
     "npm-run-all": "^4.1.5",
     "rollup": "^2.58.3",
