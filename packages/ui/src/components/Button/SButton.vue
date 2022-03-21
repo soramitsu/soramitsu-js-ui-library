@@ -5,8 +5,8 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { computed, ComputedRef } from 'vue'
 import { SSpinner } from '../Spinner'
+import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import {
   BUTTON_ICON_POSITION_VALUES,
   BUTTON_SIZE_VALUES,
@@ -16,16 +16,6 @@ import {
   FONT_SIZE,
 } from './consts'
 import { ButtonType, ButtonSize, ButtonIconPosition, HTMLButtonType } from './types'
-
-function usePropTypeFilter<T>(value: () => T, validValues: readonly T[], defaultValue: T): ComputedRef<T> {
-  return computed(() => {
-    if (validValues.includes(value())) {
-      return value()
-    }
-
-    return defaultValue
-  })
-}
 
 const props = withDefaults(
   defineProps<{
@@ -52,9 +42,11 @@ const props = withDefaults(
   },
 )
 
-const definitelyType = usePropTypeFilter(() => props.type, BUTTON_TYPE_VALUES, 'primary')
-const definitelySize = usePropTypeFilter(() => props.size, BUTTON_SIZE_VALUES, 'md')
-const definitelyIconPosition = usePropTypeFilter(() => props.iconPosition, BUTTON_ICON_POSITION_VALUES, 'left')
+const filterProp = usePropTypeFilter(props)
+
+const definitelyType = filterProp('type', BUTTON_TYPE_VALUES, 'primary')
+const definitelySize = filterProp('size', BUTTON_SIZE_VALUES, 'md')
+const definitelyIconPosition = filterProp('iconPosition', BUTTON_ICON_POSITION_VALUES, 'left')
 const isAction = computed(() => definitelyType.value === 'action')
 const font = computed(() => {
   if (definitelySize.value === 'xs' && props.uppercase) {
@@ -76,7 +68,8 @@ const font = computed(() => {
       font,
       {
         's-button_disabled': loading || disabled,
-        'rounded-full': isAction && rounded,
+        's-button_rounded': isAction && rounded,
+        's-button_loading': loading,
       },
     ]"
     :disabled="loading || disabled"
@@ -91,7 +84,6 @@ const font = computed(() => {
 
     <span
       class="s-button__icon"
-      :class="{ 'invisible': loading }"
       data-testid="icon"
     >
       <i
@@ -104,7 +96,7 @@ const font = computed(() => {
       />
     </span>
     <span
-      :class="{ 'invisible': loading }"
+      class="s-button__text"
       data-testid="text"
     >
       <slot v-if="!isAction" />
@@ -155,6 +147,7 @@ const font = computed(() => {
 .s-button {
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;
   fill: currentColor;
+  $component: &;
 
   &_disabled {
     @apply cursor-default;
@@ -254,5 +247,16 @@ const font = computed(() => {
   @include button-size(md, $height: 40px, $padding: px-16px, $icon-size: 16px);
 
   @include button-size(lg, $height: 56px, $padding: px-24px, $icon-size: 24px);
+
+  &_rounded {
+    @apply rounded-full;
+  }
+
+  &_loading {
+    #{$component}__icon,
+    #{$component}__text {
+      @apply invisible;
+    }
+  }
 }
 </style>

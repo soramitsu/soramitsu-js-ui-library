@@ -106,7 +106,7 @@ describe('Button', () => {
       })
 
       it('Then button is rounded', () => {
-        findButton().should('have.class', 'rounded-full')
+        findButton().should('have.css', 'border-radius', '9999px')
       })
     })
 
