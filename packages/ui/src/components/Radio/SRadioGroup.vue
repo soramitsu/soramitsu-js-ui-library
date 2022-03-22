@@ -74,6 +74,11 @@ function handleKeydown(e: KeyboardEvent) {
 </script>
 
 <template>
+  <!-- 
+    https://www.w3.org/TR/wai-aria-practices-1.1/examples/radio/radio-1/radio-1.html
+    "radiogroup ... Is not focusable because focus is managed using a roving tabindex strategy as described below."
+  -->
+  <!-- eslint-disable-next-line vuejs-accessibility/interactive-supports-focus -->
   <div
     ref="root"
     role="radiogroup"
