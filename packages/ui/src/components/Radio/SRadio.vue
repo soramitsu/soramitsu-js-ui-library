@@ -45,7 +45,7 @@ const describedBy = computed(() => (definitelyType.value === 'bordered-with-desc
 </script>
 
 <template>
-  <!-- ignore due to handle via CSS -->
+  <!-- handled via CSS -->
   <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
   <SRadioBody
     ref="root"
