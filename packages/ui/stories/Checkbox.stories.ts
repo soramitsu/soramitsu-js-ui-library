@@ -1,83 +1,95 @@
-import { Meta, Story } from '@storybook/vue3'
-import { ref } from 'vue'
+import { SCheckboxAtom, SCheckboxSolo, CHECKBOX_SIZE_VALUES, CHECKBOX_TYPE_VALUES } from '@/lib'
+import { defineMeta, defineStory } from './util'
 
-import { SCheckbox } from '../components/Checkbox';
-import { CheckboxSize } from '../components/Checkbox/consts';
-
-const meta: Meta = {
+export default defineMeta({
   title: 'Example/Checkbox',
-  component: SCheckbox,
-  argTypes: {
-    label: {
-      control: { type: 'text' }
-    },
-    disabled: {
-      control: { type: 'boolean' }
-    },
-    indeterminate: {
-      control: { type: 'boolean' }
-    },
-    border: {
-      control: { type: 'boolean' }
-    },
-    size: {
-      control: { type: 'select', options: CheckboxSize }
-    }
+})
+
+export const AtomConfigurable = defineStory((args) => ({
+  components: { SCheckboxAtom },
+  setup: () => ({ args }),
+  template: `
+    <SCheckboxAtom v-bind="args" />
+  `,
+}))
+
+AtomConfigurable.argTypes = {
+  size: {
+    options: CHECKBOX_SIZE_VALUES,
+    control: 'inline-radio',
   },
-  args: {
-    label: 'Checkbox',
-    disabled: false,
-    indeterminate: false,
-    border: false,
-    size: CheckboxSize.MEDIUM
+  checked: {
+    options: [false, true, 'mixed'],
+    control: 'inline-radio',
+  },
+  hover: {
+    control: 'boolean',
+  },
+  disabled: {
+    control: 'boolean',
   },
 }
 
-export default meta
+AtomConfigurable.args = {
+  size: 'md',
+  checked: false,
+  disabled: false,
+  hover: false,
+}
 
-const createTemplate = (initialModel: any): Story => (args: any) => ({
-  components: { SCheckbox },
-  setup() {
-    const model = ref(initialModel);
-    const { items, ...rest } = args;
-
-    const checkboxes = Array.isArray(items)
-      ? items.map(item => ({ ...rest, ...item }))
-      : [rest];
-
-    return { checkboxes, model };
-  },
+export const SoloTwoCheckboxes = defineStory((args) => ({
+  components: { SCheckboxSolo },
+  setup: () => ({ args }),
   template: `
-  <div>
-    <div>model: {{ model }}</div>
-    <SCheckbox
-      v-for="(item, index) in checkboxes"
-      :key="index"
-      v-bind="item"
-      v-model="model"
-    />
-  </div>
+    <div class="flex space-x-4">
+      <SCheckboxSolo v-bind="args">
+        Tiramisu
+      </SCheckboxSolo>
+
+      <SCheckboxSolo>
+        Soramatsu
+      </SCheckboxSolo>
+    </div>
   `,
-})
+}))
 
-export const Single = (createTemplate(false)).bind({});
-Single.args = {
-};
+export const SoloBordered = defineStory((args) => ({
+  components: { SCheckboxSolo },
+  setup: () => ({ args }),
+  template: `
+    <SCheckboxSolo type="bordered" v-bind="args" class="inline-block">
+      Miramitsu
+    </SCheckboxSolo>
+  `,
+}))
 
-export const Multiple = (createTemplate([])).bind({});
-Multiple.args = {
-  items: [
+export const SoloDescription = defineStory((args) => ({
+  components: { SCheckboxSolo },
+  setup: () => ({ args }),
+
+  template: `
+    <SCheckboxSolo v-bind="args" type="bordered-with-description" class="inline-block">
+      Miramistin
+
+      <template #description>
+        Siramatsu
+      </template>
+    </SCheckboxSolo>
+  `,
+}))
+
+SoloTwoCheckboxes.argTypes =
+  SoloBordered.argTypes =
+  SoloDescription.argTypes =
     {
-      label: 'One',
-      value: 1
-    },
+      disabled: {
+        control: 'boolean',
+      },
+    }
+
+SoloTwoCheckboxes.args =
+  SoloBordered.args =
+  SoloDescription.args =
     {
-      label: 'Two',
-      value: 2
-    },
-    {
-      label: 'Three',
-      value: 3
-    },
-  ]
-};
+      disabled: false,
+    }
