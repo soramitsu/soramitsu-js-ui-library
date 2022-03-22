@@ -1,7 +1,7 @@
 # Checkboxes - TODO
 
-- [ ] Lightweight checkbox atom, with tri-state support
-- [ ] Solo dual-state checkbox
+- [x] Lightweight checkbox atom, with tri-state support
+- [x] Solo dual-state checkbox
 - [ ] Group of dual-state checkboxes, controlling model with `Set`
 
   Reference implementation: https://www.w3.org/TR/wai-aria-practices-1.1/examples/checkbox/checkbox-1/checkbox-1.html
@@ -39,4 +39,4 @@
 
   Questions:
 
-  - Should mixed-checkbox, that controls other checkboxes, be wrapped into group?
+  - Should mixed-checkbox, that controls other checkboxes, be wrapped into a group?

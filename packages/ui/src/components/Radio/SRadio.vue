@@ -5,30 +5,29 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { PropType } from 'vue'
 import { useRadioGroupApi } from './api'
 import { RadioSize, RADIO_SIZE_VALUES, RadioType, RADIO_TYPE_VALUES } from './types'
 import { nextIncrementalCounter } from '@/util'
 import SRadioAtom from './SRadioAtom'
 import SRadioBody from './SRadioBody'
+import { usePropTypeFilter } from '@/composables/prop-type-filter'
 
-const props = defineProps({
-  value: {
-    type: [Number, String, Symbol, Object],
-    required: true,
-  },
-  disabled: Boolean,
-  type: {
-    type: String as PropType<RadioType>,
-    default: 'default',
-    validate: (value: any) => RADIO_TYPE_VALUES.includes(value),
-  },
-  size: {
-    type: String as PropType<RadioSize>,
-    default: 'md',
-    validate: (value: unknown) => RADIO_SIZE_VALUES.includes(value as any),
-  },
+interface Props {
+  value: any
+  disabled?: boolean
+  type?: RadioType
+  size?: RadioSize
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  disabled: false,
+  type: 'default',
+  size: 'md',
 })
+
+const propFilter = usePropTypeFilter(props)
+const definitelyType = propFilter('type', RADIO_TYPE_VALUES, 'default')
+const definitelySize = propFilter('size', RADIO_SIZE_VALUES, 'md')
 
 const api = useRadioGroupApi().registerRadio({
   valueRef: computed(() => props.value),
@@ -42,16 +41,18 @@ const hover = ref(false)
 
 const uniqueLabelId = `sora${nextIncrementalCounter()}`
 const uniqueDescriptionId = `sora${nextIncrementalCounter()}`
-const describedBy = computed(() => (props.type === 'bordered-with-description' ? uniqueDescriptionId : ''))
+const describedBy = computed(() => (definitelyType.value === 'bordered-with-description' ? uniqueDescriptionId : ''))
 </script>
 
 <template>
+  <!-- ignore due to handle via CSS -->
+  <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
   <SRadioBody
     ref="root"
     role="radio"
     :tabindex="api.tabindex"
-    :type="type"
-    :size="size"
+    :type="definitelyType"
+    :size="definitelySize"
     :label-id="uniqueLabelId"
     :description-id="describedBy"
     :aria-checked="api.isChecked"
@@ -64,7 +65,7 @@ const describedBy = computed(() => (props.type === 'bordered-with-description' ?
   >
     <template #atom>
       <SRadioAtom
-        :size="size"
+        :size="definitelySize"
         :checked="api.isChecked"
         :disabled="disabled"
         :hover="hover"

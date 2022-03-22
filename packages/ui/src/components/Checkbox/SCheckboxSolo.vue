@@ -5,36 +5,34 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { PropType } from 'vue'
 import { uniqueElementId } from '@/util'
 import { CheckboxSize, CheckboxType, CHECKBOX_SIZE_VALUES, CHECKBOX_TYPE_VALUES } from './types'
-import { validateChecked } from './util'
+import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import SRadioBody from '../Radio/SRadioBody'
 import SCheckboxAtom from './SCheckboxAtom'
 
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false,
-    validate: validateChecked,
-  },
-  type: {
-    type: String as PropType<CheckboxType>,
-    default: 'default',
-    validate: (x: any) => CHECKBOX_TYPE_VALUES.includes(x),
-  },
-  size: {
-    type: String as PropType<CheckboxSize>,
-    default: 'md',
-    validate: (x: any) => CHECKBOX_SIZE_VALUES.includes(x),
-  },
-  tri: Boolean,
-  disabled: Boolean,
+interface Props {
+  modelValue?: boolean
+  type?: CheckboxType
+  size?: CheckboxSize
+  disabled?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: false,
+  type: 'default',
+  size: 'md',
 })
+
+const propFilter = usePropTypeFilter(props)
+
+const definitelyType = propFilter('type', CHECKBOX_TYPE_VALUES, 'default')
+const definitelySize = propFilter('size', CHECKBOX_SIZE_VALUES, 'md')
 
 const emit = defineEmits(['update:modelValue'])
 
 const model = useVModel(props, 'modelValue', emit, { passive: true })
+
 function toggleModel() {
   model.value = !model.value
 }
@@ -45,15 +43,17 @@ const hover = ref(false)
 </script>
 
 <template>
+  <!-- it is not needed because focus state is controlled via CSS -->
+  <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
   <SRadioBody
     role="checkbox"
     :aria-checked="model"
     :aria-disabled="disabled"
-    :size="size"
-    :type="type"
+    :size="definitelySize"
+    :type="definitelyType"
     :label-id="uniqueLabelId"
     :description-id="uniqueDescriptionId"
-    tabindex="0"
+    :tabindex="disabled ? -1 : 0"
     class="s-checkbox-solo"
     @click="toggleModel"
     @keypress.space="toggleModel"
@@ -62,8 +62,8 @@ const hover = ref(false)
   >
     <template #atom>
       <SCheckboxAtom
-        :checked="model && tri ? 'mixed' : model"
-        :size="size"
+        :checked="model"
+        :size="definitelySize"
         :disabled="disabled"
         :hover="hover"
       />
@@ -94,7 +94,7 @@ const hover = ref(false)
 
   &[data-type^='bordered'] {
     &:hover,
-    &[aria-checked='true']:not([aria-disabled='true']) {
+    &[aria-checked='true']:not([aria-disabled]) {
       border-color: theme.token-as-var('sys.color.primary');
     }
   }
