@@ -7,45 +7,12 @@ $sizes: (
   md: 12px,
 );
 
-// $sizes-check: (
-//   xl: 14px,
-//   lg: 10px,
-//   md: 7px,
-// );
-
 $border-radius: 3px;
 $color-disabled: theme.token-as-var('sys.color.disabled');
 $color-on-disabled: theme.token-as-var('sys.color.on-disabled');
 $color-primary: theme.token-as-var('sys.color.primary');
 $color-border-primary: theme.token-as-var('sys.color.border-primary');
 $color-on-accent: theme.token-as-var('sys.color.content-on-background-inverted');
-
-// svg.s-checkbox-atom {
-//   $root: &;
-
-//   &:hover,
-//   &_hover,
-//   &[data-checked='true'],
-//   &[data-checked='mixed'] {
-//     &:not(#{$root}_disabled) {
-//       color: $color-primary;
-//     }
-//   }
-
-//   &_disabled {
-//     color: $color-disabled;
-//     background: $color-on-disabled;
-//   }
-
-//   @each $size in md, lg, xl {
-//     &[data-size='#{$size}'] {
-//       $val: map.get($sizes, $size);
-//       font-size: map.get($sizes, $size);
-//       // width: $val;
-//       // height: $val;
-//     }
-//   }
-// }
 
 .s-checkbox-atom {
   @apply flex items-center justify-center;
@@ -89,7 +56,6 @@ $color-on-accent: theme.token-as-var('sys.color.content-on-background-inverted')
     transition: color 0.2s ease;
   }
 
-  // "check" icon styles
   &[data-checked='true'] svg {
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -103,19 +69,6 @@ $color-on-accent: theme.token-as-var('sys.color.content-on-background-inverted')
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-
-  // &::before {
-  //   content: '';
-  //   display: block;
-  //   // top: 2px;
-  //   // left: 7px;
-  //   width: 8px;
-  //   height: 14px;
-  //   border-style: solid;
-  //   border-color: black;
-  //   border-width: 0 2px 2px 0;
-  //   transform: rotate(45deg);
-  // }
 
   @each $size in md, lg, xl {
     &[data-size='#{$size}'] {
