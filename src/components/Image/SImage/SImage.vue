@@ -6,6 +6,7 @@
     :fit="fit"
     :alt="alt"
     :lazy="lazy"
+    :preview-src-list="srcList"
     :scroll-container="scrollContainer"
     :z-ndex="zIndex"
   >
@@ -55,6 +56,10 @@ export default class SImage extends Vue {
    * Posssible value is the nearest parent container whose overflow property is auto or scroll
    */
   @Prop({ type: [String, HTMLElement] }) readonly scrollContainer!: string | HTMLElement
+  /**
+   * Allow big image preview. It accepts list of image URLs
+  */
+  @Prop({ default: [], type: [String] }) readonly srcList!: Array<string>
   /**
    * Set image preview z-index
    */
