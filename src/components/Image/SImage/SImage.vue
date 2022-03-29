@@ -58,7 +58,7 @@ export default class SImage extends Vue {
   @Prop({ type: [String, HTMLElement] }) readonly scrollContainer!: string | HTMLElement
   /**
    * Allow big image preview. It accepts list of image URLs
-  */
+   */
   @Prop({ default: () => [], type: [String] }) readonly srcList!: Array<string>
   /**
    * Set image preview z-index
