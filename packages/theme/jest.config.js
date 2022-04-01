@@ -3,4 +3,5 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': ['esbuild-jest', { sourcemap: true }],
   },
+  testEnvironment: 'jest-environment-node-single-context',
 }
