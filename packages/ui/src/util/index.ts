@@ -1,3 +1,4 @@
+import { MaybeElementRef, MaybeRef } from '@vueuse/core'
 import { InjectionKey, inject, Ref, Component, FunctionalComponent } from 'vue'
 
 export function forceInject<T>(key: string | InjectionKey<T>): T {
@@ -42,4 +43,8 @@ let incrementalCounter = 0
  */
 export function nextIncrementalCounter(): number {
   return incrementalCounter++
+}
+
+export function uniqueElementId(): string {
+  return `soraui-uid-${nextIncrementalCounter()}`
 }

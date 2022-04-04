@@ -1,0 +1,71 @@
+@use '@/theme';
+
+$primary: theme.token-as-var('sys.color.primary');
+$on-disabled: theme.token-as-var('sys.color.on-disabled');
+$border-primary: theme.token-as-var('sys.color.border-primary');
+
+$dur-easing: 0.2s ease;
+
+.s-radio-body {
+  @apply select-none cursor-pointer rounded;
+  padding: 8px 10px;
+  transition: all $dur-easing;
+
+  $root: &;
+
+  // Should be enabled externally
+
+  // &[aria-disabled='true'] {
+  //   pointer-events: none;
+
+  //   label,
+  //   #{$root}__description {
+  //     color: $on-disabled;
+  //   }
+  // }
+
+  &:focus {
+    outline: none;
+  }
+
+  label {
+    color: theme.token-as-var('sys.color.content-primary');
+    @apply cursor-pointer;
+  }
+
+  &__description {
+    color: theme.token-as-var('sys.color.content-secondary');
+    margin-top: 4px;
+  }
+
+  label,
+  &__description {
+    transition: color $dur-easing;
+  }
+
+  &[data-type^='bordered'] {
+    border: 1px solid $border-primary;
+
+    // should be controlled externally
+
+    // &:hover,
+    // &[aria-checked='true']:not([aria-disabled='true']) {
+    //   border-color: $primary;
+    // }
+  }
+
+  // Styles below doesn't come from design
+  // FIXME
+
+  &:hover {
+    @apply bg-gray-50;
+  }
+
+  &:active {
+    @apply bg-gray-100;
+  }
+
+  &:focus {
+    @apply ring ring-opacity-25 ring-blue-500 ring-offset-2;
+  }
+}

@@ -27,6 +27,7 @@
 // import 'cypress-plugin-snapshots/commands'
 
 import 'cypress-axe'
+import 'cypress-plugin-tab'
 
 // Overwriting broken injection
 Cypress.Commands.overwrite('injectAxe', () => {
@@ -50,8 +51,19 @@ Cypress.Commands.add('injectAxeAndConfigureCTDefaults', () => {
         id: 'page-has-heading-one',
         enabled: false,
       },
+      {
+        id: 'region',
+        enabled: false,
+      },
     ],
   })
+})
+
+Cypress.Commands.add('dataCy', { prevSubject: 'optional' }, (subject, cyId) => {
+  if (subject) {
+    return cy.wrap(subject).find(`[data-cy=${cyId}]`)
+  }
+  return cy.get(`[data-cy=${cyId}]`)
 })
 
 declare global {
@@ -62,6 +74,11 @@ declare global {
        * for component testing
        */
       injectAxeAndConfigureCTDefaults: () => Chainable<null>
+
+      /**
+       * Shorthand for `[data-cy=<xxx>]` selector with a subject (`cy.find()`) or without (`cy.get()`)
+       */
+      dataCy: (cyId: string) => Chainable
     }
   }
 }
