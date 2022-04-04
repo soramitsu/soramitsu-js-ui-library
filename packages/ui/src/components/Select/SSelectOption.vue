@@ -8,6 +8,8 @@ export default defineComponent({
 import { SelectOptionType } from './types'
 import IconCheckMark from '~icons/mdi/check'
 import { useSelectApi } from './api'
+import { SCheckboxAtom } from '../Checkbox'
+import { SRadioAtom } from '../Radio'
 
 const props = defineProps<{
   type: SelectOptionType
@@ -33,15 +35,17 @@ const emit = defineEmits<(event: 'toggle') => void>()
     @click="emit('toggle')"
   >
     <template v-if="!isCheckMode">
-      <!-- FIXME checkbox & radio -->
       <template v-if="multiple">
-        checkbox
+        <SCheckboxAtom
+          :checked="selected"
+          size="lg"
+        />
       </template>
       <template v-else>
-        radio
-      </template>
-      <template v-if="selected">
-        !
+        <SRadioAtom
+          :checked="selected"
+          size="lg"
+        />
       </template>
     </template>
     <div class="s-select-option__content">
