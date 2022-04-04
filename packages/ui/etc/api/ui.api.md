@@ -84,6 +84,9 @@ export type ButtonSize = typeof BUTTON_SIZE_VALUES[number];
 export type ButtonType = typeof BUTTON_TYPE_VALUES[number];
 
 // @public (undocumented)
+export type CheckboxState = boolean | 'mixed';
+
+// @public (undocumented)
 export function defineToastsApi(): ToastsApi;
 
 // @public (undocumented)
@@ -196,7 +199,53 @@ export interface PopoverApi {
 }
 
 // @public (undocumented)
+export const RADIO_GROUP_API_KEY: InjectionKey<RadioGroupApi>;
+
+// @public (undocumented)
+const RADIO_SIZE_VALUES: readonly ["md", "lg", "xl"];
+export { RADIO_SIZE_VALUES as CHECKBOX_SIZE_VALUES }
+export { RADIO_SIZE_VALUES }
+
+// @public (undocumented)
+const RADIO_TYPE_VALUES: readonly ["default", "bordered", "bordered-with-description"];
+export { RADIO_TYPE_VALUES as CHECKBOX_TYPE_VALUES }
+export { RADIO_TYPE_VALUES }
+
+// @public (undocumented)
+export interface RadioGroupApi {
+    registerRadio: (params: RegisterRadioParams) => RadioGroupRegisteredItemApi;
+}
+
+// @public (undocumented)
+export interface RadioGroupRegisteredItemApi {
+    check: () => void;
+    isChecked: boolean;
+    // (undocumented)
+    tabindex: number;
+}
+
+// @public (undocumented)
+type RadioSize = typeof RADIO_SIZE_VALUES extends ReadonlyArray<infer T> ? T : never;
+export { RadioSize as CheckboxSize }
+export { RadioSize }
+
+// @public (undocumented)
+type RadioType = typeof RADIO_TYPE_VALUES extends ReadonlyArray<infer T> ? T : never;
+export { RadioType as CheckboxType }
+export { RadioType }
+
+// @public (undocumented)
 export type RegisteredToast = ToastRegisterParams;
+
+// @public (undocumented)
+export interface RegisterRadioParams {
+    // (undocumented)
+    disabledRef: Ref<boolean>;
+    // (undocumented)
+    elRef: Ref<null | HTMLElement>;
+    // (undocumented)
+    valueRef: Ref<any>;
+}
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
@@ -363,6 +412,32 @@ rounded: boolean;
 disabled: boolean;
 loading: boolean;
 uppercase: boolean;
+}>;
+
+// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SCheckboxAtom: FunctionalComponent<Props_8>;
+
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SCheckboxSolo: DefineComponent<__VLS_WithDefaults_17<__VLS_TypePropsToRuntimeProps_20<Props_9>, {
+modelValue: boolean;
+type: string;
+size: string;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_17<__VLS_TypePropsToRuntimeProps_20<Props_9>, {
+modelValue: boolean;
+type: string;
+size: string;
+}>>> & {
+"onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+}, {
+modelValue: boolean;
+type: "default" | "bordered" | "bordered-with-description";
+size: "md" | "lg" | "xl";
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
@@ -732,6 +807,54 @@ eager: boolean;
 eager: boolean;
 }>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SRadio: DefineComponent<__VLS_WithDefaults_18<__VLS_TypePropsToRuntimeProps_21<Props_10>, {
+disabled: boolean;
+type: string;
+size: string;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_18<__VLS_TypePropsToRuntimeProps_21<Props_10>, {
+disabled: boolean;
+type: string;
+size: string;
+}>>>, {
+type: "default" | "bordered" | "bordered-with-description";
+size: "md" | "lg" | "xl";
+disabled: boolean;
+}>;
+
+// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SRadioAtom: FunctionalComponent<Props_12>;
+
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SRadioGroup: DefineComponent<__VLS_WithDefaults_19<__VLS_TypePropsToRuntimeProps_22<Props_11>, {
+modelValue: null;
+radioSelector: string;
+labelledBy: string;
+describedBy: string;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_19<__VLS_TypePropsToRuntimeProps_22<Props_11>, {
+modelValue: null;
+radioSelector: string;
+labelledBy: string;
+describedBy: string;
+}>>> & {
+"onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+}, {
+modelValue: string | number | symbol | object | null;
+labelledBy: string;
+describedBy: string;
+radioSelector: string;
+}>;
+
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
@@ -1067,6 +1190,9 @@ export interface UseNotificationsReturn {
 
 // @public (undocumented)
 export const usePopoverApi: () => PopoverApi;
+
+// @public (undocumented)
+export function useRadioGroupApi(): RadioGroupApi;
 
 // @public (undocumented)
 export function useSelectApi<T = any>(): SelectApi<T>;
