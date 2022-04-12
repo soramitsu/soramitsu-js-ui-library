@@ -14,8 +14,8 @@ describe('Accordion', () => {
             title: 'Soramitsu',
           },
           slots: {
-            default: () => 'Soramitsu text'
-          }
+            default: () => 'Soramitsu text',
+          },
         })
       })
 
@@ -31,14 +31,14 @@ describe('Accordion', () => {
 
   context(`Given default accordion`, () => {
     beforeEach(() => {
-      mount( {
+      mount({
         components: {
           SAccordion,
-          SAccordionItem
+          SAccordionItem,
         },
         setup() {
           return {
-            modelValue: ref([])
+            modelValue: ref([]),
           }
         },
         template: `
@@ -56,13 +56,13 @@ describe('Accordion', () => {
               cillum dolore eu fugiat nulla pariatur.
             </SAccordionItem>
           </SAccordion>
-        `
+        `,
       })
     })
 
     context('When one item is expanded', () => {
       it('Then other are closed', () => {
-        ['#item1', '#item2', '#item3'].forEach(id => {
+        ;['#item1', '#item2', '#item3'].forEach((id) => {
           findAccordionItem().filter(id).find(testIdSelector('trigger')).click()
           findAccordionItem().filter(id).find(testIdSelector('content')).should('not.be.hidden')
           findAccordionItem().filter(`:not(${id})`).find(testIdSelector('content')).should('be.hidden')
@@ -73,14 +73,14 @@ describe('Accordion', () => {
 
   context(`Given accordion with 'multiple' prop`, () => {
     beforeEach(() => {
-      mount( {
+      mount({
         components: {
           SAccordion,
-          SAccordionItem
+          SAccordionItem,
         },
         setup() {
           return {
-            modelValue: ref([])
+            modelValue: ref([]),
           }
         },
         template: `
@@ -101,7 +101,7 @@ describe('Accordion', () => {
               cillum dolore eu fugiat nulla pariatur.
             </SAccordionItem>
           </SAccordion>
-        `
+        `,
       })
     })
 

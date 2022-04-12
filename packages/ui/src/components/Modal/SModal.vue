@@ -12,7 +12,7 @@ import { useFocusTrap } from '@/composables/focus-trap'
 import { FocusTrap, Options as FocusTrapOptions } from 'focus-trap'
 import { BodyScrollOptions } from 'body-scroll-lock'
 import { useBodyScrollLock } from '@/composables/body-scroll-lock'
-import { nextIncrementalCounter } from '@/util'
+import { uniqueElementId } from '@/util'
 
 type ClassType = object | string | string[]
 type StyleType = object
@@ -118,7 +118,7 @@ const props = withDefaults(defineProps<Props>(), {
   eager: false,
   labelledBy:
     // here is a Vue typing error - primitive value factory is a valid default value
-    ((() => `s-modal-label-id-${nextIncrementalCounter()}`) as unknown) as string,
+    uniqueElementId as unknown as string,
   describedBy: null,
 })
 
@@ -260,6 +260,7 @@ useCloseOnEsc(
         v-bind="overlayTransitionAttrs"
         v-on="overlayTransitionListeners"
       >
+        <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
         <div
           v-if="overlayIf"
           :class="['s-modal__overlay', overlayClass]"
