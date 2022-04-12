@@ -12,6 +12,7 @@ import { useFocusTrap } from '@/composables/focus-trap'
 import { FocusTrap, Options as FocusTrapOptions } from 'focus-trap'
 import { BodyScrollOptions } from 'body-scroll-lock'
 import { useBodyScrollLock } from '@/composables/body-scroll-lock'
+import { uniqueElementId } from '@/util'
 
 type ClassType = object | string | string[]
 type StyleType = object
@@ -85,7 +86,7 @@ interface Props {
    *
    * @default true
    */
-  focusTrap?: boolean | FocusTrapOptions
+  focusTrap?: boolean | object
 
   /**
    * Always render modal content and toggle modal visibility with `v-show` instead of `v-if`
@@ -93,6 +94,16 @@ interface Props {
    * @default false
    */
   eager?: boolean
+
+  /**
+   * ID of the modal label. If it is not set, then an unique ID will be generated.
+   */
+  labelledBy?: string
+
+  /**
+   * Used for `aria-describedby`. It is not automatically generated.
+   */
+  describedBy?: string | null
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -105,6 +116,10 @@ const props = withDefaults(defineProps<Props>(), {
   lockScroll: true,
   focusTrap: true,
   eager: false,
+  labelledBy:
+    // here is a Vue typing error - primitive value factory is a valid default value
+    uniqueElementId as unknown as string,
+  describedBy: null,
 })
 
 const emit = defineEmits(['update:show', 'click:overlay', 'before-open', 'after-open', 'before-close', 'after-close'])
@@ -206,6 +221,8 @@ if (props.lockScroll) {
 const api: ModalApi = readonly({
   close,
   focusTrap,
+  labelledBy: computed(() => props.labelledBy),
+  describedBy: computed(() => props.describedBy),
 })
 provide(MODAL_API_KEY, api)
 
@@ -243,6 +260,7 @@ useCloseOnEsc(
         v-bind="overlayTransitionAttrs"
         v-on="overlayTransitionListeners"
       >
+        <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
         <div
           v-if="overlayIf"
           :class="['s-modal__overlay', overlayClass]"
@@ -263,11 +281,13 @@ useCloseOnEsc(
           ref="modal"
           :style="modalStyle"
           :class="['s-modal__modal', modalClass]"
-          aria-modal="true"
-          role="dialog"
           data-testid="modal"
+          role="dialog"
+          aria-modal="true"
+          :aria-labelledby="labelledBy"
+          :aria-describedby="describedBy || ''"
         >
-          <slot />
+          <slot v-bind="api" />
         </div>
       </Transition>
     </div>

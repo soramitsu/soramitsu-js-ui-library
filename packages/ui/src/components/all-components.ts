@@ -17,6 +17,11 @@ import { SSwitch } from './Switch'
 import { STextField } from './TextField'
 import { SPopover, SPopoverWrappedTransition } from './Popover'
 import { SProgressBar } from './ProgressBar'
+import { SBadge } from './Badge'
+import { SAccordion, SAccordionItem } from './Accordion'
+import { SLink } from './Link'
+import { SRadio, SRadioAtom, SRadioGroup } from './Radio'
+import { SCheckboxAtom, SCheckboxSolo } from './Checkbox'
 
 /**
  * Component names should be identical to their variable names
@@ -44,5 +49,14 @@ export const COMPONENTS: Record<string, Component> = {
   SPopoverWrappedTransition,
   SSwitch,
   STextField,
-  SProgressBar
+  SProgressBar,
+  SBadge,
+  SAccordion,
+  SAccordionItem,
+  SLink,
+  SRadio,
+  SRadioAtom,
+  SRadioGroup,
+  SCheckboxAtom,
+  SCheckboxSolo,
 }

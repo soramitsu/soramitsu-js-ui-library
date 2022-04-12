@@ -74,6 +74,9 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'info': #1070ca,
             'info-background': #f3f6ff,
             'info-background-hover': #dbe4ff,
+            'debug': #aa0e42,
+            'debug-background': #ffeef4,
+            'debug-background-hover': #f3d3de,
           ),
         ),
         'shadow': (
@@ -84,6 +87,13 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             0px 3.00517px 10.0172px rgba(10, 2, 34, 0.0484701),
             0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562),
             0px 0.664142px 2.21381px rgba(10, 2, 34, 0.0208172),
+          ),
+          'page-header-light': (
+            0px 6px 30px rgba(10, 2, 34, 0.03),
+            0px 3px 9px rgba(10, 2, 34, 0.02),
+            0px 5.36071px 6px rgba(10, 2, 34, 0.04),
+            0px 3.00517px 7px rgba(10, 2, 34, 0.03),
+            0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562),
           ),
           'modal-window-header': (
             0px -8px 80px rgba(10, 2, 34, 0.07),
@@ -150,15 +160,15 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
   }
 
   @include typography('h5') {
-    @include util.typography-factory($size: 16px, $height: 150%, $spacing: 0.01em);
+    @include util.typography-factory($size: 16px, $height: 150%, $spacing: 0.01em, $weight: bold);
   }
 
   @include typography('h6') {
-    @include util.typography-factory($size: 14px, $height: 150%);
+    @include util.typography-factory($size: 14px, $height: 150%, $weight: bold);
   }
 
   @include typography('h7') {
-    @include util.typography-factory($size: 12px, $height: 150%);
+    @include util.typography-factory($size: 12px, $height: 150%, $weight: bold);
   }
 
   @include typography('ch1') {
@@ -190,6 +200,10 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
 
   @include typography('p4') {
     @include util.typography-factory($size: 12px, $height: 180%);
+  }
+
+  @include typography('p5') {
+    @include util.typography-factory($size: 10px, $height: 160%);
   }
 
   @include typography('s1') {

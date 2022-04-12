@@ -6,8 +6,9 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
+import { StyleValue } from 'vue'
 import { Status } from '@/types'
-import { STATUS_ICONS_MAP_16, IconBasicEye24, IconBasicEyeNo24 } from '../icons'
+import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff } from '../icons'
 
 /**
  * warning: don't use it inside of `Props`. Vue compiler determines it
@@ -52,7 +53,7 @@ interface Props {
    * If this value is defined, then the counter will be shown.
    *
    * @remarks
-   * Could not be <= 0. Render depends on the passed value type:
+   * Could not be less than 0. Render depends on the passed value type:
    *
    * - number | string - `{count}/{counter value}`
    * - boolean (true) - `{count}` (just a count)
@@ -159,6 +160,11 @@ const counterText = computed<string | null>(() => {
   return limit === null ? String(currentCount) : `${currentCount}/${limit}`
 })
 
+const attrs = useAttrs()
+const rootClass = computed(() => attrs.class)
+const rootStyle = computed(() => attrs.style as StyleValue)
+const inputAttrs = reactiveOmit(attrs, 'class', 'style')
+
 // APPEND
 
 const showEye = computed<boolean>(() => props.password && !props.noEye)
@@ -181,7 +187,9 @@ const inputType = computed(() =>
         's-text-field_empty': isValueEmpty,
         's-text-field_disabled': disabled,
       },
+      rootClass,
     ]"
+    :style="rootStyle"
     :data-status="status"
   >
     <div class="s-text-field__input-wrapper">
@@ -197,7 +205,7 @@ const inputType = computed(() =>
         v-model="model"
         :type="inputType"
         :disabled="disabled"
-        v-bind="$attrs"
+        v-bind="inputAttrs"
         @focus="isFocused = true"
         @blur="isFocused = false"
       >
@@ -221,12 +229,11 @@ const inputType = computed(() =>
           v-if="showEye"
           class="s-text-field__eye"
           data-testid="eye"
+          type="button"
           @click="toggleForceReveal()"
         >
-          <Transition name="s-text-field__eye-transition">
-            <IconBasicEye24 v-if="!forceRevealPassword" />
-            <IconBasicEyeNo24 v-else />
-          </Transition>
+          <IconEye v-if="!forceRevealPassword" />
+          <IconEyeOff v-else />
         </button>
       </div>
     </div>
@@ -309,7 +316,7 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
     }
 
     input {
-      @apply h-full flex-1;
+      @apply h-full flex-1 w-full min-w-0;
       padding: $input-padding;
 
       background: transparent;
@@ -385,21 +392,13 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
     cursor: pointer;
     position: relative;
 
-    &-transition {
-      &-leave-active,
-      &-enter-active {
-        @apply transition-transform;
-      }
+    // icon size
+    // approximately, not strict by design system
+    // FIXME
+    font-size: 18px;
 
-      &-leave-active {
-        position: absolute;
-      }
-
-      &-enter-from,
-      &-leave-to {
-        // FIXME scale transition twitching a bit
-        @apply transform scale-0;
-      }
+    &:active svg {
+      transform: scale(0.9);
     }
   }
 }

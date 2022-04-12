@@ -160,7 +160,7 @@ watch(
 <template>
   <div
     class="s-json-input"
-    :style="{ height: computedHeight }"
+    :style="{ 'height': computedHeight }"
   >
     <div
       ref="jsoneditor"

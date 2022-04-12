@@ -1,30 +1,6 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const path = require('path')
-const fs = require('fs')
-
-const UI_PACKAGE_AUTO_IMPORTS_DTS = path.resolve(__dirname, './packages/ui/auto-imports.d.ts')
-
-function parseAutoImportsDts(contents) {
-  const matchResults = contents.matchAll(/^\s+const (\w+): typeof import/gm)
-  return Array.from(matchResults, ([, word]) => word)
-}
-
-/**
- * Extracts auto-imports from generated `.d.ts` and collects them into readonly-globals
- * so ESLint could know about them
- */
-function extractAutoImportGlobals(dtsFile) {
-  const contents = fs.readFileSync(dtsFile, { encoding: 'utf-8' })
-  const parsed = parseAutoImportsDts(contents)
-  return parsed.reduce((acc, word) => {
-    acc[word] = 'readonly'
-    return acc
-  }, {})
-}
-
 module.exports = {
   root: true,
-  extends: ['alloy', 'alloy/typescript', 'plugin:vue/vue3-recommended'],
+  extends: ['alloy', 'alloy/typescript', 'plugin:vue/vue3-recommended', 'plugin:vuejs-accessibility/recommended'],
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -40,6 +16,9 @@ module.exports = {
   rules: {
     'vue/html-indent': ['warn', 2],
 
+    // to fix windicss scanning in cases like `:class="{ invisible: true }"`
+    'vue/quote-props': ['warn', 'always'],
+
     // make possible `/// <reference...`
     'spaced-comment': ['error', 'always', { markers: ['/'] }],
   },
@@ -54,12 +33,34 @@ module.exports = {
     },
     {
       files: ['**/packages/ui/**/*.{ts,vue,js}'],
-      globals: extractAutoImportGlobals(UI_PACKAGE_AUTO_IMPORTS_DTS),
+      extends: ['./packages/ui/.eslintrc-auto-import.json'],
     },
     {
       files: ['**/*.spec.{js,ts}'],
       env: {
         jest: true,
+      },
+    },
+
+    // It is OK to define a lot of components in stories or tests
+    {
+      files: ['**/packages/ui/stories/**/*.stories.ts', '**/*.cy.{js,ts}'],
+      rules: {
+        'vue/one-component-per-file': 'off',
+      },
+    },
+
+    // FIXME - temporary disables to fix them in a different PRs
+    {
+      files: ['**/ui/src/components/Select/**/*.vue'],
+      rules: {
+        'vuejs-accessibility/click-events-have-key-events': 'off',
+      },
+    },
+    {
+      files: ['**/STextField.vue', '**/SSwitch.vue'],
+      rules: {
+        'vuejs-accessibility/label-has-for': 'off',
       },
     },
   ],

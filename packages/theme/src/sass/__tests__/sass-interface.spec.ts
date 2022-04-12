@@ -133,7 +133,11 @@ describe('Exports', () => {
         --sora_sys_color_status_info: #1070ca;
         --sora_sys_color_status_info-background: #f3f6ff;
         --sora_sys_color_status_info-background-hover: #dbe4ff;
+        --sora_sys_color_status_debug: #aa0e42;
+        --sora_sys_color_status_debug-background: #ffeef4;
+        --sora_sys_color_status_debug-background-hover: #f3d3de;
         --sora_sys_shadow_page-header: 0px 24px 80px rgba(10, 2, 34, 0.07), 0px 10.0266px 33.4221px rgba(10, 2, 34, 0.0558697), 0px 5.36071px 17.869px rgba(10, 2, 34, 0.05437), 0px 3.00517px 10.0172px rgba(10, 2, 34, 0.0484701), 0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562), 0px 0.664142px 2.21381px rgba(10, 2, 34, 0.0208172);
+        --sora_sys_shadow_page-header-light: 0px 6px 30px rgba(10, 2, 34, 0.03), 0px 3px 9px rgba(10, 2, 34, 0.02), 0px 5.36071px 6px rgba(10, 2, 34, 0.04), 0px 3.00517px 7px rgba(10, 2, 34, 0.03), 0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562);
         --sora_sys_shadow_modal-window-header: 0px -8px 80px rgba(10, 2, 34, 0.07), 0px 1px 33.4221px rgba(10, 2, 34, 0.0558697), 0px 0px 17.869px rgba(10, 2, 34, 0.05437), 0px 2px 10.0172px rgba(10, 2, 34, 0.0484701), 0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562), 0px 0.664142px 2.21381px rgba(10, 2, 34, 0.0208172);
         --sora_sys_shadow_floating-notification: 0px 68px 80px rgba(24, 24, 29, 0.09), 0px 30.1471px 24.1177px rgba(24, 24, 29, 0.058643), 0px 12.5216px 10.0172px rgba(24, 24, 29, 0.045), 0px 4.5288px 3.62304px rgba(24, 24, 29, 0.031357);
         --sora_sys_shadow_dropdown: 0px 0px 4px rgba(45, 41, 38, 0.08), 0px 4px 16px rgba(45, 41, 38, 0.08);
@@ -226,7 +230,7 @@ describe('Exports', () => {
       .sora-tpg-h5 {
         font-family: Sora;
         font-size: 16px;
-        font-weight: 400;
+        font-weight: bold;
         line-height: 150%;
         letter-spacing: 0.01em;
       }
@@ -234,7 +238,7 @@ describe('Exports', () => {
       .sora-tpg-h6 {
         font-family: Sora;
         font-size: 14px;
-        font-weight: 400;
+        font-weight: bold;
         line-height: 150%;
         letter-spacing: 0;
       }
@@ -242,7 +246,7 @@ describe('Exports', () => {
       .sora-tpg-h7 {
         font-family: Sora;
         font-size: 12px;
-        font-weight: 400;
+        font-weight: bold;
         line-height: 150%;
         letter-spacing: 0;
       }
@@ -303,6 +307,14 @@ describe('Exports', () => {
         font-size: 12px;
         font-weight: 400;
         line-height: 180%;
+        letter-spacing: 0;
+      }
+
+      .sora-tpg-p5 {
+        font-family: Sora;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 160%;
         letter-spacing: 0;
       }
 
