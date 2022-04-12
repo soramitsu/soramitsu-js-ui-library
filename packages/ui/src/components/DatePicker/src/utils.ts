@@ -1,5 +1,13 @@
 import Vue from 'vue';
-import { isString, isObject } from 'element-ui/src/utils/types';
+// import { isString, isObject } from 'element-ui/src/utils/types';
+
+function isString(obj: any) {
+  return Object.prototype.toString.call(obj) === '[object String]';
+}
+
+function isObject(obj: any) {
+  return Object.prototype.toString.call(obj) === '[object Object]';
+}
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -98,7 +106,7 @@ export const arrayFindIndex = function(arr, pred) {
   return -1;
 };
 
-export const arrayFind = function(arr, pred) {
+export const arrayFind = function(arr: any, pred: any) {
   const idx = arrayFindIndex(arr, pred);
   return idx !== -1 ? arr[idx] : undefined;
 };
