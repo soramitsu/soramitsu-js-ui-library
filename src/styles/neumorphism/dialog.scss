@@ -4,8 +4,5 @@
   }
 }
 [design-system="neumorphic"] .v-modal {
-  opacity: 0.75;
-  backdrop-filter: blur(4px);
-  // TODO: Fix FF behaviour
-  filter: blur(4px);
+  @include use-blur;
 }
