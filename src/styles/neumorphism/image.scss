@@ -11,15 +11,17 @@
         border-color: transparent;
         border-style: solid;
         border-width: 0px;
-        box-shadow: var(--s-shadow-element-pressed);
         color: var(--s-color-base-content-tertiary);
+        transition: opacity .3s;
+        &:hover {
+          opacity: 1;
+        }
       }
       &__close, &__next, &__prev {
         &:hover {
           background: var(--s-color-utility-body);
           border-color: transparent;
           color: var(--s-color-base-content-secondary);
-          box-shadow: var(--s-shadow-element-pressed);
         }
       }
       &__actions {
@@ -29,7 +31,12 @@
     #{$class}__actions__inner {
       color: inherit;
       .el-icon {
-        &-zoom-in, &-zoom-out, &-full-screen, &-refresh-left, &-refresh-right {
+        &-zoom-in,
+        &-zoom-out,
+        &-full-screen,
+        &-refresh-left,
+        &-refresh-right,
+        &-c-scale-to-original {
           cursor: pointer;
           &:hover {
             color: var(--s-color-base-content-secondary);
