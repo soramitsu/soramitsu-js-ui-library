@@ -10,7 +10,7 @@
         background: var(--s-color-utility-body);
         border-color: transparent;
         border-style: solid;
-        border-width: 0px;
+        border-width: 0;
         color: var(--s-color-base-content-tertiary);
         transition: opacity .3s;
         &:hover {
@@ -47,7 +47,7 @@
     .el-icon-close {
       font-family: var(--s-font-family-icons) !important;
       @extend .s-icon-x-16;
-      font-size: 16px;
+      font-size: var(--s-icon-font-size-mini);
     }
   }
 }
