@@ -251,6 +251,14 @@ button > span {
   }
 }
 
+@mixin use-blur {
+  background-color: var(--s-color-utility-overlay);
+  opacity: 0.75;
+  backdrop-filter: blur(4px);
+  // TODO: Fix FF behaviour
+  filter: blur(4px);
+}
+
 .el-message-box {
   background-color: var(--s-color-base-on-accent);
   border-radius: var(--s-border-radius-small);

@@ -1,0 +1,53 @@
+[design-system="neumorphic"] {
+  $class: '.el-image-viewer';
+
+  #{$class}__mask {
+    @include use-blur;
+  }
+  #{$class}__btn {
+    &#{$class} {
+      &__close, &__next, &__prev, &__actions {
+        background: var(--s-color-utility-body);
+        border-color: transparent;
+        border-style: solid;
+        border-width: 0;
+        color: var(--s-color-base-content-tertiary);
+        transition: opacity .3s;
+        &:hover {
+          opacity: 1;
+        }
+      }
+      &__close, &__next, &__prev {
+        &:hover {
+          background: var(--s-color-utility-body);
+          border-color: transparent;
+          color: var(--s-color-base-content-secondary);
+        }
+      }
+      &__actions {
+        cursor: default;
+      }
+    }
+    #{$class}__actions__inner {
+      color: inherit;
+      .el-icon {
+        &-zoom-in,
+        &-zoom-out,
+        &-full-screen,
+        &-refresh-left,
+        &-refresh-right,
+        &-c-scale-to-original {
+          cursor: pointer;
+          &:hover {
+            color: var(--s-color-base-content-secondary);
+          }
+        }
+      }
+    }
+    .el-icon-close {
+      font-family: var(--s-font-family-icons) !important;
+      @extend .s-icon-x-16;
+      font-size: var(--s-icon-font-size-mini);
+    }
+  }
+}
