@@ -16,6 +16,7 @@ import { SSpinner } from './Spinner'
 import { SSwitch } from './Switch'
 import { STextField } from './TextField'
 import { SPopover, SPopoverWrappedTransition } from './Popover'
+import { STab, STabsPanel } from './Tabs'
 import { SBadge } from './Badge'
 import { SAccordion, SAccordionItem } from './Accordion'
 import { SLink } from './Link'
@@ -48,6 +49,8 @@ export const COMPONENTS: Record<string, Component> = {
   SPopoverWrappedTransition,
   SSwitch,
   STextField,
+  STab,
+  STabsPanel,
   SBadge,
   SAccordion,
   SAccordionItem,
