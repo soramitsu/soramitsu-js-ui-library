@@ -331,7 +331,7 @@ showCloseBtn: boolean;
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SBadge: DefineComponent<__VLS_WithDefaults_18<__VLS_TypePropsToRuntimeProps_21<{
+export const SBadge: DefineComponent<__VLS_WithDefaults_19<__VLS_TypePropsToRuntimeProps_22<{
 type?: "error" | "warning" | "active" | "info" | "debug" | "pending" | undefined;
 colorBackground?: boolean | undefined;
 withBorder?: boolean | undefined;
@@ -341,7 +341,7 @@ type: string;
 colorBackground: boolean;
 withBorder: boolean;
 onlyMarker: boolean;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_18<__VLS_TypePropsToRuntimeProps_21<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_19<__VLS_TypePropsToRuntimeProps_22<{
 type?: "error" | "warning" | "active" | "info" | "debug" | "pending" | undefined;
 colorBackground?: boolean | undefined;
 withBorder?: boolean | undefined;
@@ -424,11 +424,11 @@ export const SCheckboxAtom: FunctionalComponent<Props_8>;
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SCheckboxSolo: DefineComponent<__VLS_WithDefaults_19<__VLS_TypePropsToRuntimeProps_22<Props_9>, {
+export const SCheckboxSolo: DefineComponent<__VLS_WithDefaults_20<__VLS_TypePropsToRuntimeProps_23<Props_9>, {
 modelValue: boolean;
 type: string;
 size: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_19<__VLS_TypePropsToRuntimeProps_22<Props_9>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_20<__VLS_TypePropsToRuntimeProps_23<Props_9>, {
 modelValue: boolean;
 type: string;
 size: string;
@@ -833,11 +833,11 @@ lineHeight: number;
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SRadio: DefineComponent<__VLS_WithDefaults_20<__VLS_TypePropsToRuntimeProps_23<Props_10>, {
+export const SRadio: DefineComponent<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<Props_10>, {
 disabled: boolean;
 type: string;
 size: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_20<__VLS_TypePropsToRuntimeProps_23<Props_10>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<Props_10>, {
 disabled: boolean;
 type: string;
 size: string;
@@ -857,12 +857,12 @@ export const SRadioAtom: FunctionalComponent<Props_12>;
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SRadioGroup: DefineComponent<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<Props_11>, {
+export const SRadioGroup: DefineComponent<__VLS_WithDefaults_22<__VLS_TypePropsToRuntimeProps_25<Props_11>, {
 modelValue: null;
 radioSelector: string;
 labelledBy: string;
 describedBy: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<Props_11>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_22<__VLS_TypePropsToRuntimeProps_25<Props_11>, {
 modelValue: null;
 radioSelector: string;
 labelledBy: string;
@@ -1025,12 +1025,12 @@ label: string;
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STab: DefineComponent<__VLS_WithDefaults_17<__VLS_TypePropsToRuntimeProps_20<{
+export const STab: DefineComponent<__VLS_WithDefaults_18<__VLS_TypePropsToRuntimeProps_21<{
 disabled?: boolean | undefined;
 name: string;
 }>, {
 disabled: boolean;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_17<__VLS_TypePropsToRuntimeProps_20<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_18<__VLS_TypePropsToRuntimeProps_21<{
 disabled?: boolean | undefined;
 name: string;
 }>, {
@@ -1043,13 +1043,13 @@ disabled: boolean;
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STabsPanel: DefineComponent<__VLS_WithDefaults_16<__VLS_TypePropsToRuntimeProps_19<{
+export const STabsPanel: DefineComponent<__VLS_WithDefaults_17<__VLS_TypePropsToRuntimeProps_20<{
 modelValue: string;
 background?: "primary" | "secondary" | "none" | undefined;
 }>, {
 modelValue: string;
 background: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_16<__VLS_TypePropsToRuntimeProps_19<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_17<__VLS_TypePropsToRuntimeProps_20<{
 modelValue: string;
 background?: "primary" | "secondary" | "none" | undefined;
 }>, {
