@@ -1,5 +1,18 @@
 # @soramitsu-ui/ui
 
+## 0.5.0
+
+### Minor Changes
+
+- b8e7fc6: **feat**: Added ProgressBar component
+- 8c4dd8f: **feat**: add Checkbox components (`SCheckboxAtom`, `SCheckboxSolo`)
+- 8c4dd8f: **feat**: add Radio components (`SRadioAtom`, `SRadio`, `SRadioGroup`)
+- 681200f: **feat**: Add STabsPanel and STab components.
+
+### Patch Changes
+
+- 1611a3a: **refactor**: use consistent `uniqueElementId` everywhere, thus generated IDs will be a bit different
+
 ## 0.4.0
 
 ### Minor Changes
