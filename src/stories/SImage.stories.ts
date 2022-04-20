@@ -1,4 +1,4 @@
-import { text, boolean, number, select, withKnobs } from '@storybook/addon-knobs'
+import { text, boolean, number, select, withKnobs, array } from '@storybook/addon-knobs'
 
 import { SImage, ImageFit } from '../components/Image'
 
@@ -16,6 +16,7 @@ export const configurable = () => ({
       :fit="fit"
       :alt="alt"
       :lazy="lazy"
+      :src-list="srcList"
       :z-index="zIndex"
       :has-skeleton="hasSkeleton"
       :animated="animated"
@@ -42,6 +43,9 @@ export const configurable = () => ({
     },
     animated: {
       default: boolean('Skeleton has Animation', true)
+    },
+    srcList: {
+      default: array('Src List', ['https://picsum.photos/1024', 'https://picsum.photos/1024/300'])
     }
   }
 })
