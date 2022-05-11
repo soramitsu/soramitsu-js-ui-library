@@ -44,7 +44,8 @@ function handleContentToggleEnd(el: Element) {
 <style lang="scss">
 .collapse-enter-active,
 .collapse-leave-active {
-  transition: v-bind(duration) ease-in-out height;
+  transition: ease-in-out height;
+  transition-duration: v-bind(duration);
   will-change: height;
   overflow: hidden;
 }
