@@ -21,6 +21,7 @@ import { STab, STabsPanel } from './Tabs'
 import { SBadge } from './Badge'
 import { SAccordion, SAccordionItem } from './Accordion'
 import { SLink } from './Link'
+import { SCollapseTransition } from './Transitions'
 import { SRadio, SRadioAtom, SRadioGroup } from './Radio'
 import { SCheckboxAtom, SCheckboxSolo } from './Checkbox'
 
@@ -60,6 +61,7 @@ export const COMPONENTS: Record<string, Component> = {
   SRadio,
   SRadioAtom,
   SRadioGroup,
+  SCollapseTransition,
   SCheckboxAtom,
   SCheckboxSolo,
 }
