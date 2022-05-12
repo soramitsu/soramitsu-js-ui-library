@@ -24,6 +24,7 @@ import { SLink } from './Link'
 import { SCollapseTransition } from './Transitions'
 import { SRadio, SRadioAtom, SRadioGroup } from './Radio'
 import { SCheckboxAtom, SCheckboxSolo } from './Checkbox'
+import { SMenu, SMenuItem, SSubmenu } from './Menu'
 
 /**
  * Component names should be identical to their variable names
@@ -64,4 +65,7 @@ export const COMPONENTS: Record<string, Component> = {
   SCollapseTransition,
   SCheckboxAtom,
   SCheckboxSolo,
+  SMenu,
+  SMenuItem,
+  SSubmenu
 }
