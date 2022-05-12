@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const props = withDefaults(
-    defineProps<{
-      duration?: string,
-    }>(),
-    {
-      duration: '150ms'
-    },
+  defineProps<{
+    duration?: string
+  }>(),
+  {
+    duration: '150ms',
+  },
 )
 
 function setContentClosed(el: Element) {
