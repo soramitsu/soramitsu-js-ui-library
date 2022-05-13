@@ -35,25 +35,38 @@ provide(MENU_API_KEY, api)
 </script>
 
 <template>
-  <ul
-    class="s-menu"
+  <div
+    class="s-menu flex flex-col"
     :class="{
       's-menu_collapsed': collapsed,
     }"
   >
-    <slot />
-  </ul>
+    <div class="s-menu__header">
+      <slot name="header" />
+    </div>
+
+    <ul class="flex-grow">
+      <slot />
+    </ul>
+
+    <slot name="footer" />
+  </div>
 </template>
 
 <style lang="scss">
 .s-menu {
   background-color: #2e2e36; // Base [night] / Background
+  color: #ffffff; // Base [night] / ContentPrimary
   width: 220px;
   height: 100%;
   transition: 150ms ease-in-out width;
 
   &_collapsed {
     width: 64px;
+  }
+
+  &__header {
+    background-color: #26262d; // Utility [night] / Surface
   }
 }
 </style>
