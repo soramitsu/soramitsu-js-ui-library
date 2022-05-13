@@ -7,26 +7,28 @@ import { MENU_API_KEY } from '@/components/Menu/api'
 
 const props = withDefaults(
   defineProps<{
-    defaultActive?: string
+    modelValue?: string
     collapsed?: boolean
   }>(),
   {
-    defaultActive: '',
+    modelValue: '',
     collapsed: false,
   },
 )
 
-const active = ref(props.defaultActive)
+const emit = defineEmits<(event: 'update:modelValue', value: string) => void>()
+const model = useVModel(props, 'modelValue', emit, { passive: true })
+
 const collapsed = computed(() => props.collapsed)
 
 const api = {
-  active,
+  active: model,
   select,
   collapsed,
 }
 
 function select(value: string) {
-  active.value = value
+  model.value = value
 }
 
 provide(MENU_API_KEY, api)
