@@ -32,6 +32,8 @@ function handleClick(event: HTMLElement) {
     :class="{
       's-menu-item-body_submenu-item': submenuItem,
       's-menu-item-body_active': active,
+      'py-8px': submenuItem,
+      'py-14px': !submenuItem,
     }"
     @click="handleClick"
   >
@@ -65,11 +67,10 @@ function handleClick(event: HTMLElement) {
 .s-menu-item-body {
   $root: &;
   background-color: #2e2e36; // Base [night] / Background
-  color: #ffffff; // Base [night] / ContentPrimary
-  height: 54px;
+  min-height: 54px;
 
   &_submenu-item {
-    height: 50px;
+    min-height: 50px;
     background-color: #26262d; // Utility [night] / Surface
   }
 
