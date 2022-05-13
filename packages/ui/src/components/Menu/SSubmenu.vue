@@ -84,9 +84,11 @@ watch(isMenuCollapsed, () => {
     </SMenuItemBody>
 
     <SCollapseTransition>
-      <ul v-show="opened">
-        <slot />
-      </ul>
+      <div v-show="opened">
+        <ul class="s-submenu__items">
+          <slot />
+        </ul>
+      </div>
     </SCollapseTransition>
   </li>
 </template>
@@ -101,6 +103,20 @@ watch(isMenuCollapsed, () => {
 
   &_opened &__chevron {
     transform: rotateZ(-180deg);
+  }
+
+  &_opened &__items .s-menu-item-body__content,
+  &_opened &__items .s-menu-item-body__prepend {
+    animation: 150ms ease-in-out slide;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translateX(-16px);
+    }
+    100% {
+      transform: translateX(0);
+    }
   }
 }
 </style>
