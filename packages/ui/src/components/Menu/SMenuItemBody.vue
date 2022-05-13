@@ -45,7 +45,12 @@ function handleClick(event: HTMLElement) {
       />
     </div>
 
-    <div v-show="!minified">
+    <div
+      class="s-menu-item-body__content truncate"
+      :class="{
+        'invisible': minified
+      }"
+    >
       <slot />
     </div>
 
