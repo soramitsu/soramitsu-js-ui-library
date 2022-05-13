@@ -60,7 +60,7 @@ watch(isMenuCollapsed, () => {
     :class="{ 's-submenu_opened': opened }"
   >
     <SMenuItemBody
-      :active="opened"
+      :active="opened || hasActiveItem"
       :minified="isMenuCollapsed"
       @click="handleTriggerClick"
     >
@@ -94,8 +94,6 @@ watch(isMenuCollapsed, () => {
 </template>
 
 <style lang="scss">
-@use '@/theme';
-
 .s-submenu {
   &__chevron {
     transition: 150ms ease-in-out transform;
