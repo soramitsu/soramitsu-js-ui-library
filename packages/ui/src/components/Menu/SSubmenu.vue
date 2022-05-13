@@ -27,7 +27,9 @@ function unregister(index: string) {
 const [opened, toggle] = useToggle(false)
 
 function handleTriggerClick() {
-  toggle()
+  if (!isMenuCollapsed.value) {
+    toggle()
+  }
 }
 
 let isMenuCollapsed = ref(false)
@@ -46,7 +48,7 @@ watch(hasActiveItem, () => {
 })
 
 watch(isMenuCollapsed, () => {
-  if (!isMenuCollapsed.value) {
+  if (isMenuCollapsed.value) {
     toggle(false)
   }
 })
@@ -54,7 +56,6 @@ watch(isMenuCollapsed, () => {
 
 <template>
   <li
-    v-show="!isMenuCollapsed"
     class="s-submenu"
     :class="{ 's-submenu_opened': opened }"
   >
