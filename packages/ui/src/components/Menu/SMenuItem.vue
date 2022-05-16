@@ -50,6 +50,7 @@ if (submenuApi) {
 <template>
   <SMenuItemBody
     tag="li"
+    data-testid="menu-item"
     :active="isSelected"
     :submenu-item="isInSubmenu"
     :minified="isMenuCollapsed"

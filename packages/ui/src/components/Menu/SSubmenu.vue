@@ -56,10 +56,12 @@ watch(isMenuCollapsed, () => {
 
 <template>
   <li
+    data-testid="submenu"
     class="s-submenu"
     :class="{ 's-submenu_opened': opened }"
   >
     <SMenuItemBody
+      data-testid="submenu-trigger"
       :active="opened || hasActiveItem"
       :minified="isMenuCollapsed"
       @click="handleTriggerClick"
@@ -85,7 +87,10 @@ watch(isMenuCollapsed, () => {
 
     <SCollapseTransition>
       <div v-show="opened">
-        <ul class="s-submenu__items">
+        <ul
+          class="s-submenu__items"
+          data-testid="submenu-items"
+        >
           <slot />
         </ul>
       </div>

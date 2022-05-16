@@ -36,6 +36,7 @@ provide(MENU_API_KEY, api)
 
 <template>
   <div
+    data-testid="menu"
     class="s-menu flex flex-col"
     :class="{
       's-menu_collapsed': collapsed,
