@@ -67,5 +67,5 @@ export const COMPONENTS: Record<string, Component> = {
   SCheckboxSolo,
   SMenu,
   SMenuItem,
-  SSubmenu
+  SSubmenu,
 }

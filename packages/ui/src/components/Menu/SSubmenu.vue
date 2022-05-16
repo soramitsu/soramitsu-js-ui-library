@@ -1,5 +1,5 @@
 <script lang="ts">
-export default { name: 'SMenuItem' }
+export default { name: 'SSubmenu' }
 </script>
 
 <script setup lang="ts">

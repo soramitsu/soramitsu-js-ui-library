@@ -1,3 +1,7 @@
+<script lang="ts">
+export default { name: 'SCollapseTransition' }
+</script>
+
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{

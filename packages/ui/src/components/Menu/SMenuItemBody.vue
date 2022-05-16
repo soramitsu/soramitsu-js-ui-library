@@ -1,5 +1,5 @@
 <script lang="ts">
-export default { name: 'SMenuItemView' }
+export default { name: 'SMenuItemBody' }
 </script>
 
 <script setup lang="ts">
@@ -48,7 +48,7 @@ function handleClick(event: HTMLElement) {
     <div
       class="s-menu-item-body__content truncate"
       :class="{
-        'invisible': minified
+        'invisible': minified,
       }"
     >
       <slot />
