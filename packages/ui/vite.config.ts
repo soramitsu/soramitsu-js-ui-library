@@ -51,10 +51,7 @@ export default defineConfig({
     Icons(),
     Svg({
       svgoConfig: {
-        plugins: [
-          { name: 'removeViewBox', active: false },
-          { name: 'removeTitle', active: true },
-        ],
+        plugins: [{ name: 'removeViewBox', active: false }],
       },
     }),
     AutoImport({
