@@ -170,6 +170,19 @@ export type LinkIconPosition = typeof LINK_ICON_POSITION_VALUES[number];
 export type LinkUnderlineType = typeof LINK_UNDERLINE_TYPE_VALUES[number];
 
 // @public (undocumented)
+export const MENU_API_KEY: InjectionKey<MenuApi | undefined>;
+
+// @public (undocumented)
+export interface MenuApi {
+    // (undocumented)
+    active: Ref<string>;
+    // (undocumented)
+    collapsed: Ref<boolean>;
+    // (undocumented)
+    select: (index: string) => void;
+}
+
+// @public (undocumented)
 export const MODAL_API_KEY: InjectionKey<ModalApi>;
 
 // @public (undocumented)
@@ -302,9 +315,9 @@ name: string;
 "onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
 }, {
 modelValue: boolean;
+name: string;
 title: string;
 subtitle: string;
-name: string;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -438,6 +451,22 @@ size: string;
 modelValue: boolean;
 type: "default" | "bordered" | "bordered-with-description";
 size: "md" | "lg" | "xl";
+}>;
+
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SCollapseTransition: DefineComponent<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<{
+duration?: string | undefined;
+}>, {
+duration: string;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<{
+duration?: string | undefined;
+}>, {
+duration: string;
+}>>>, {
+duration: string;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
@@ -609,6 +638,45 @@ iconPosition: "left" | "right";
 underline: "solid" | "dotted";
 tag: string | object;
 }>;
+
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SMenu: DefineComponent<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+modelValue?: string | undefined;
+collapsed?: boolean | undefined;
+}>, {
+modelValue: string;
+collapsed: boolean;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: string) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+modelValue?: string | undefined;
+collapsed?: boolean | undefined;
+}>, {
+modelValue: string;
+collapsed: boolean;
+}>>> & {
+"onUpdate:modelValue"?: ((value: string) => any) | undefined;
+}, {
+modelValue: string;
+collapsed: boolean;
+}>;
+
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SMenuItem: DefineComponent<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
+index: string;
+}>, {}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+click: (value: HTMLElement) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
+index: string;
+}>, {}>>> & {
+onClick?: ((value: HTMLElement) => any) | undefined;
+}, {}>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
@@ -833,11 +901,11 @@ lineHeight: number;
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SRadio: DefineComponent<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<Props_10>, {
+export const SRadio: DefineComponent<__VLS_WithDefaults_22<__VLS_TypePropsToRuntimeProps_25<Props_10>, {
 disabled: boolean;
 type: string;
 size: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<Props_10>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_22<__VLS_TypePropsToRuntimeProps_25<Props_10>, {
 disabled: boolean;
 type: string;
 size: string;
@@ -857,12 +925,12 @@ export const SRadioAtom: FunctionalComponent<Props_12>;
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SRadioGroup: DefineComponent<__VLS_WithDefaults_22<__VLS_TypePropsToRuntimeProps_25<Props_11>, {
+export const SRadioGroup: DefineComponent<__VLS_WithDefaults_23<__VLS_TypePropsToRuntimeProps_26<Props_11>, {
 modelValue: null;
 radioSelector: string;
 labelledBy: string;
 describedBy: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_22<__VLS_TypePropsToRuntimeProps_25<Props_11>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_23<__VLS_TypePropsToRuntimeProps_26<Props_11>, {
 modelValue: null;
 radioSelector: string;
 labelledBy: string;
@@ -1000,6 +1068,9 @@ width: number;
 size: string | number;
 width: string | number;
 }>;
+
+// @public (undocumented)
+export const SSubmenu: DefineComponent<    {}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, EmitsOptions, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {}>>, {}>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
@@ -1169,6 +1240,17 @@ apiKey: ProvideKey | ProvideKey[];
 }>;
 
 // @public (undocumented)
+export const SUBMENU_API_KEY: InjectionKey<SubmenuApi | undefined>;
+
+// @public (undocumented)
+export interface SubmenuApi {
+    // (undocumented)
+    register: (index: string) => void;
+    // (undocumented)
+    unregister: (index: string) => void;
+}
+
+// @public (undocumented)
 export const SUseNotification: DefineComponent<    {
 show: BooleanConstructor;
 title: StringConstructor;
@@ -1258,6 +1340,9 @@ export type ToastUnregisterFn = () => void;
 export const useAccordionApi: () => AccordionApi | undefined;
 
 // @public (undocumented)
+export const useMenuApi: () => MenuApi | undefined;
+
+// @public (undocumented)
 export function useModalApi(): ModalApi;
 
 // @public (undocumented)
@@ -1277,6 +1362,9 @@ export function useRadioGroupApi(): RadioGroupApi;
 
 // @public (undocumented)
 export function useSelectApi<T = any>(): SelectApi<T>;
+
+// @public (undocumented)
+export const useSubmenuApi: () => SubmenuApi | undefined;
 
 // @public (undocumented)
 export function useTabsPanelApi(): TabsPanelApi;
