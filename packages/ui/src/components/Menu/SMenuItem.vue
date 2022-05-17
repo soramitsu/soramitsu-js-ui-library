@@ -48,21 +48,24 @@ if (submenuApi) {
 </script>
 
 <template>
-  <SMenuItemBody
-    tag="li"
-    data-testid="menu-item"
-    :active="isSelected"
-    :submenu-item="isInSubmenu"
-    :minified="isMenuCollapsed"
-    @click="handleClick"
-  >
-    <template #icon="iconProps">
-      <slot
-        name="icon"
-        v-bind="iconProps"
-      />
-    </template>
+  <li role="none">
+    <SMenuItemBody
+      data-testid="menu-item"
+      role="treeitem"
+      :aria-selected="isSelected"
+      :active="isSelected"
+      :submenu-item="isInSubmenu"
+      :minified="isMenuCollapsed"
+      @click="handleClick"
+    >
+      <template #icon="iconProps">
+        <slot
+          name="icon"
+          v-bind="iconProps"
+        />
+      </template>
 
-    <slot />
-  </SMenuItemBody>
+      <slot />
+    </SMenuItemBody>
+  </li>
 </template>

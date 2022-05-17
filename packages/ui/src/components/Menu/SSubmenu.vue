@@ -57,6 +57,9 @@ watch(isMenuCollapsed, () => {
 <template>
   <li
     data-testid="submenu"
+    role="treeitem"
+    :aria-expanded="opened"
+    :aria-selected="opened"
     class="s-submenu"
     :class="{ 's-submenu_opened': opened }"
   >
@@ -79,6 +82,7 @@ watch(isMenuCollapsed, () => {
         <IconChevronBottom16
           v-bind="appendProps"
           class="s-submenu__chevron"
+          aria-hidden="true"
           width="10"
           heigh="10"
         />

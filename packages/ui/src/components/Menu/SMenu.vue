@@ -35,7 +35,7 @@ provide(MENU_API_KEY, api)
 </script>
 
 <template>
-  <div
+  <nav
     data-testid="menu"
     class="s-menu flex flex-col"
     :class="{
@@ -46,12 +46,15 @@ provide(MENU_API_KEY, api)
       <slot name="header" />
     </div>
 
-    <ul class="flex-grow">
+    <ul
+      class="flex-grow"
+      role="tree"
+    >
       <slot />
     </ul>
 
     <slot name="footer" />
-  </div>
+  </nav>
 </template>
 
 <style lang="scss">
