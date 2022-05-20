@@ -1,5 +1,5 @@
 <script lang="ts">
-export default { name: 'SMenuItemBody' }
+export default { name: 'SNavigationMenuItemBody' }
 </script>
 
 <script setup lang="ts">
@@ -43,25 +43,25 @@ function handleClick(event: HTMLElement) {
 <template>
   <component
     :is="tag"
-    class="s-menu-item-body flex items-center cursor-pointer pl-24px pr-16px"
+    class="s-navigation-menu-item-body flex items-center cursor-pointer pl-24px pr-16px"
     :class="{
-      's-menu-item-body_submenu-item': submenuItem,
-      's-menu-item-body_active': active,
+      's-navigation-menu-item-body_submenu-item': submenuItem,
+      's-navigation-menu-item-body_active': active,
       'py-8px': submenuItem,
       'py-14px': !submenuItem,
     }"
     @click="handleClick"
   >
-    <div class="s-menu-item-body__prepend flex-shrink-0 flex items-center justify-end h-16px w-16px mr-8px">
+    <div class="s-navigation-menu-item-body__prepend flex-shrink-0 flex items-center justify-end h-16px w-16px mr-8px">
       <slot
         v-if="!submenuItem"
         name="icon"
-        :class="'s-menu-item-body__icon'"
+        :class="'s-navigation-menu-item-body__icon'"
       />
     </div>
 
     <div
-      class="s-menu-item-body__content truncate"
+      class="s-navigation-menu-item-body__content truncate"
       :class="{
         'invisible': minified,
       }"
@@ -75,7 +75,7 @@ function handleClick(event: HTMLElement) {
     >
       <slot
         name="append"
-        :class="'s-menu-item-body__append'"
+        :class="'s-navigation-menu-item-body__append'"
       />
     </div>
   </component>
@@ -84,7 +84,7 @@ function handleClick(event: HTMLElement) {
 <style lang="scss">
 @use '@/theme';
 
-.s-menu-item-body {
+.s-navigation-menu-item-body {
   $root: &;
   background-color: #2e2e36; // Base [night] / Background
   min-height: 54px;

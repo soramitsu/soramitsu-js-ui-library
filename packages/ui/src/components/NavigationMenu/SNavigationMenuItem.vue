@@ -1,11 +1,11 @@
 <script lang="ts">
-export default { name: 'SMenuItem' }
+export default { name: 'SNavigationMenuItem' }
 </script>
 
 <script setup lang="ts">
 import { computed, onUnmounted } from 'vue'
-import { useMenuApi, useSubmenuApi } from '@/components/Menu/api'
-import SMenuItemBody from '@/components/Menu/SMenuItemBody.vue'
+import { useMenuApi, useSubmenuApi } from '@/components/NavigationMenu/api'
+import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenutemBody.vue'
 
 const props = withDefaults(
   defineProps<{
@@ -45,8 +45,8 @@ if (submenuApi) {
 
 <template>
   <li role="none">
-    <SMenuItemBody
-      data-testid="menu-item"
+    <SNavigationMenuItemBody
+      data-testid="navigation-menu-item"
       role="treeitem"
       :aria-selected="isSelected"
       :active="isSelected"
@@ -62,6 +62,6 @@ if (submenuApi) {
       </template>
 
       <slot />
-    </SMenuItemBody>
+    </SNavigationMenuItemBody>
   </li>
 </template>

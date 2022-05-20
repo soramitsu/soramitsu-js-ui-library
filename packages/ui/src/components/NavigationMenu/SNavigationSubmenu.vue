@@ -1,12 +1,12 @@
 <script lang="ts">
-export default { name: 'SSubmenu' }
+export default { name: 'SNavigationSubmenu' }
 </script>
 
 <script setup lang="ts">
 import { Ref } from 'vue'
-import SMenuItemBody from '@/components/Menu/SMenuItemBody.vue'
+import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenutemBody.vue'
 import { SCollapseTransition } from '@/components/Transitions'
-import { SUBMENU_API_KEY, useMenuApi } from '@/components/Menu/api'
+import { SUBMENU_API_KEY, useMenuApi } from '@/components/NavigationMenu/api'
 import { IconChevronBottom16 } from '@/components/icons'
 import { and, not } from '@vueuse/core'
 
@@ -45,15 +45,15 @@ whenever(isMenuCollapsed, () => toggle(false), { immediate: true })
 
 <template>
   <li
-    data-testid="submenu"
+    data-testid="navigation-submenu"
     role="treeitem"
     :aria-expanded="opened"
     :aria-selected="opened"
-    class="s-submenu"
-    :class="{ 's-submenu_opened': opened }"
+    class="s-navigation-submenu"
+    :class="{ 's-navigation-submenu_opened': opened }"
   >
-    <SMenuItemBody
-      data-testid="submenu-trigger"
+    <SNavigationMenuItemBody
+      data-testid="navigation-submenu-trigger"
       :active="opened || hasActiveItem"
       :minified="isMenuCollapsed"
       @click="handleTriggerClick"
@@ -70,19 +70,19 @@ whenever(isMenuCollapsed, () => toggle(false), { immediate: true })
       <template #append="appendProps">
         <IconChevronBottom16
           v-bind="appendProps"
-          class="s-submenu__chevron"
+          class="s-navigation-submenu__chevron"
           aria-hidden="true"
           width="10"
           heigh="10"
         />
       </template>
-    </SMenuItemBody>
+    </SNavigationMenuItemBody>
 
     <SCollapseTransition>
       <div v-show="opened">
         <ul
-          class="s-submenu__items"
-          data-testid="submenu-items"
+          class="s-navigation-submenu__items"
+          data-testid="navigation-submenu-items"
         >
           <slot />
         </ul>
@@ -92,7 +92,7 @@ whenever(isMenuCollapsed, () => toggle(false), { immediate: true })
 </template>
 
 <style lang="scss">
-.s-submenu {
+.s-navigation-submenu {
   &__chevron {
     transition: 150ms ease-in-out transform;
   }
@@ -101,8 +101,8 @@ whenever(isMenuCollapsed, () => toggle(false), { immediate: true })
     transform: rotateZ(-180deg);
   }
 
-  &_opened &__items .s-menu-item-body__content,
-  &_opened &__items .s-menu-item-body__prepend {
+  &_opened &__items .s-navigation-menu-item-body__content,
+  &_opened &__items .s-navigation-menu-item-body__prepend {
     animation: 150ms ease-in-out slide;
   }
 

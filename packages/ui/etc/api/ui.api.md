@@ -170,7 +170,7 @@ export type LinkIconPosition = typeof LINK_ICON_POSITION_VALUES[number];
 export type LinkUnderlineType = typeof LINK_UNDERLINE_TYPE_VALUES[number];
 
 // @public (undocumented)
-export const MENU_API_KEY: InjectionKey<MenuApi | undefined>;
+export const MENU_API_KEY: InjectionKey<MenuApi>;
 
 // @public (undocumented)
 export interface MenuApi {
@@ -178,7 +178,6 @@ export interface MenuApi {
     active: Ref<string>;
     // (undocumented)
     collapsed: Ref<boolean>;
-    // (undocumented)
     select: (index: string) => void;
 }
 
@@ -641,45 +640,6 @@ tag: string | object;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
-//
-// @public (undocumented)
-export const SMenu: DefineComponent<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
-modelValue?: string | undefined;
-collapsed?: boolean | undefined;
-}>, {
-modelValue: string;
-collapsed: boolean;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
-"update:modelValue": (value: string) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
-modelValue?: string | undefined;
-collapsed?: boolean | undefined;
-}>, {
-modelValue: string;
-collapsed: boolean;
-}>>> & {
-"onUpdate:modelValue"?: ((value: string) => any) | undefined;
-}, {
-modelValue: string;
-collapsed: boolean;
-}>;
-
-// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
-// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
-//
-// @public (undocumented)
-export const SMenuItem: DefineComponent<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
-index: string;
-}>, {}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
-click: (value: HTMLElement) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
-index: string;
-}>, {}>>> & {
-onClick?: ((value: HTMLElement) => any) | undefined;
-}, {}>;
-
-// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
-// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
@@ -745,6 +705,48 @@ close: boolean;
 }>>>, {
 close: boolean;
 }>;
+
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SNavigationMenu: DefineComponent<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+modelValue?: string | undefined;
+collapsed?: boolean | undefined;
+}>, {
+modelValue: string;
+collapsed: boolean;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: string) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+modelValue?: string | undefined;
+collapsed?: boolean | undefined;
+}>, {
+modelValue: string;
+collapsed: boolean;
+}>>> & {
+"onUpdate:modelValue"?: ((value: string) => any) | undefined;
+}, {
+modelValue: string;
+collapsed: boolean;
+}>;
+
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SNavigationMenuItem: DefineComponent<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
+index: string;
+}>, {}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+click: (value: HTMLElement) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
+index: string;
+}>, {}>>> & {
+onClick?: ((value: HTMLElement) => any) | undefined;
+}, {}>;
+
+// @public (undocumented)
+export const SNavigationSubmenu: DefineComponent<    {}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, EmitsOptions, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {}>>, {}>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
@@ -1069,9 +1071,6 @@ size: string | number;
 width: string | number;
 }>;
 
-// @public (undocumented)
-export const SSubmenu: DefineComponent<    {}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, EmitsOptions, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {}>>, {}>;
-
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
@@ -1244,10 +1243,8 @@ export const SUBMENU_API_KEY: InjectionKey<SubmenuApi | undefined>;
 
 // @public (undocumented)
 export interface SubmenuApi {
-    // (undocumented)
-    register: (index: string) => void;
-    // (undocumented)
-    unregister: (index: string) => void;
+    register: (index: Ref<string>) => void;
+    unregister: (index: Ref<string>) => void;
 }
 
 // @public (undocumented)
@@ -1340,7 +1337,7 @@ export type ToastUnregisterFn = () => void;
 export const useAccordionApi: () => AccordionApi | undefined;
 
 // @public (undocumented)
-export const useMenuApi: () => MenuApi | undefined;
+export const useMenuApi: () => MenuApi;
 
 // @public (undocumented)
 export function useModalApi(): ModalApi;

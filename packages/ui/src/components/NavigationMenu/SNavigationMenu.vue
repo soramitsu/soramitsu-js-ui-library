@@ -1,9 +1,9 @@
 <script lang="ts">
-export default { name: 'SMenu' }
+export default { name: 'SNavigationMenu' }
 </script>
 
 <script setup lang="ts">
-import { MENU_API_KEY } from '@/components/Menu/api'
+import { MENU_API_KEY } from '@/components/NavigationMenu/api'
 
 const props = withDefaults(
   defineProps<{
@@ -36,13 +36,13 @@ provide(MENU_API_KEY, api)
 
 <template>
   <nav
-    data-testid="menu"
-    class="s-menu flex flex-col"
+    data-testid="navigation-menu"
+    class="s-navigation-menu flex flex-col"
     :class="{
-      's-menu_collapsed': collapsed,
+      's-navigation-menu_collapsed': collapsed,
     }"
   >
-    <div class="s-menu__header">
+    <div class="s-navigation-menu__header">
       <slot name="header" />
     </div>
 
@@ -60,7 +60,7 @@ provide(MENU_API_KEY, api)
 <style lang="scss">
 @use '@/theme';
 
-.s-menu {
+.s-navigation-menu {
   background-color: #2e2e36; // Base [night] / Background
   color: theme.token-as-var('sys.color.content-on-background-inverted');
   width: 220px;

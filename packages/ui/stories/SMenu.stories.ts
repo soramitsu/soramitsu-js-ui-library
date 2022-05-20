@@ -1,16 +1,16 @@
 import { defineMeta, defineStory } from './util'
-import { SMenu, SMenuItem, SSubmenu } from '@/lib'
+import { SNavigationMenu, SNavigationMenuItem, SNavigationSubmenu } from '@/lib'
 import { IconStatusInfo } from '@/components/icons'
 
 export default defineMeta({
-  title: 'Example/Menu',
+  title: 'Example/NavigationMenu',
 })
 
 export const Configurable = defineStory((args: Record<string, unknown>) => ({
   components: {
-    SMenuItem,
-    SMenu,
-    SSubmenu,
+    SNavigationMenuItem,
+    SNavigationMenu,
+    SNavigationSubmenu,
     IconStatusInfo,
   },
   setup() {
@@ -30,7 +30,7 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
         <button @click="collapsed = !collapsed" class="block mb-16px border border-black">collapse</button>
       </div>
   
-      <SMenu v-bind="args" v-model="selectedItem" :collapsed="collapsed">
+      <SNavigationMenu v-bind="args" v-model="selectedItem" :collapsed="collapsed">
         <template #header>
           <div class="sora-tpg-h2 px-14px py-16px text-center divide-y divide-current">
             <div v-if="!collapsed">Header</div>
@@ -38,33 +38,33 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
           </div>
         </template>
 
-        <SMenuItem v-for="i in 5" :index="String(i)">
+        <SNavigationMenuItem v-for="i in 5" :index="String(i)">
           <template #icon="iconProps">
             <IconStatusInfo :class="iconProps.class" />
           </template>
           Option {{ String(i) }}
-        </SMenuItem>
+        </SNavigationMenuItem>
   
-        <SSubmenu>
+        <SNavigationSubmenu>
           <template #title>Submenu</template>
-          <SMenuItem v-for="i in 5" :index="String(i) + 0">
+          <SNavigationMenuItem v-for="i in 5" :index="String(i) + 0">
             Option {{ String(i) + 0 }}
-          </SMenuItem>
-        </SSubmenu>
+          </SNavigationMenuItem>
+        </SNavigationSubmenu>
   
-        <SMenuItem index="01">
+        <SNavigationMenuItem index="01">
           <template #icon="iconProps">
             <IconStatusInfo :class="iconProps.class" />
           </template>
           Long long truncated text
-        </SMenuItem>
+        </SNavigationMenuItem>
 
-        <SMenuItem index="02">
+        <SNavigationMenuItem index="02">
           <template #icon="iconProps">
             <IconStatusInfo :class="iconProps.class" />
           </template>
           Long long Text with<br>line break
-        </SMenuItem>
+        </SNavigationMenuItem>
 
         <template #footer>
           <div class="px-30px whitespace-nowrap text-center divide-y divide-current" :class="{ 'invisible': collapsed }">
@@ -72,7 +72,7 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
             <div class="py-16px">Footer content</div>
           </div>
         </template>
-      </SMenu>
+      </SNavigationMenu>
     </div>
   `,
 }))

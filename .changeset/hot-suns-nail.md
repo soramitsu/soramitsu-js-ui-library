@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': minor
 ---
 
-**feat**: add Menu components (`SMenu`, `SSubmenu`, `SMenuItem`, `SMenuItemBody`)
+**feat**: add Menu components (`SNavigationMenu`, `SNavigationSubmenu`, `SNavigationMenuItem`, `SNavigationMenuItemBody`)

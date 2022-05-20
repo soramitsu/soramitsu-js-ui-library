@@ -1,19 +1,19 @@
 import { mount } from '@cypress/vue'
-import { SMenu, SSubmenu, SMenuItem } from '@/lib'
+import { SNavigationMenu, SNavigationSubmenu, SNavigationMenuItem } from '@/lib'
 import { config } from '@vue/test-utils'
 
 const testIdSelector = (id: string) => `[data-testid=${id}]`
 
 before(() => {
-  config.global.components = { SMenu, SSubmenu, SMenuItem }
+  config.global.components = { SNavigationMenu, SNavigationSubmenu, SNavigationMenuItem }
 })
 
 after(() => {
   config.global.components = {}
 })
 
-describe('Menu', () => {
-  const findMenu = () => cy.get(testIdSelector('menu'))
+describe('NavigationMenu', () => {
+  const findMenu = () => cy.get(testIdSelector('navigation-menu'))
   const HEADER_TEXT = 'Header'
   const FOOTER_TEXT = 'Footer'
   const OPENED_MENU_WIDTH = '220px'
@@ -32,29 +32,29 @@ describe('Menu', () => {
         template: `
           <button id="collapse-btn" @click="collapsed = !collapsed">collapse</button>
       
-          <SMenu v-model="selectedItem" :collapsed="collapsed">
+          <SNavigationMenu v-model="selectedItem" :collapsed="collapsed">
           <template #header>
             <div id="header-content">${HEADER_TEXT}</div>
           </template>
 
-            <SMenuItem v-for="i in 5" :index="String(i)" :id="'item-' + i">
+            <SNavigationMenuItem v-for="i in 5" :index="String(i)" :id="'item-' + i">
               <template #icon="iconProps">
                 <IconStatusInfo :class="iconProps.class" />
               </template>
               Option {{ String(i) }}
-            </SMenuItem>
+            </SNavigationMenuItem>
 
-            <SSubmenu>
+            <SNavigationSubmenu>
               <template #title>Submenu</template>
-              <SMenuItem v-for="i in 5" :index="String(i) + 0" :id="'item-' + i + '0'">
+              <SNavigationMenuItem v-for="i in 5" :index="String(i) + 0" :id="'item-' + i + '0'">
                 Option {{ String(i) + 0 }}
-              </SMenuItem>
-            </SSubmenu>
+              </SNavigationMenuItem>
+            </SNavigationSubmenu>
           
             <template #footer>
               <div id="footer-content">${FOOTER_TEXT}</div>
             </template>
-          </SMenu>
+          </SNavigationMenu>
         `,
       })
     })
@@ -65,9 +65,9 @@ describe('Menu', () => {
       })
 
       it('Then its submenu opens on click', () => {
-        cy.get(testIdSelector('submenu-items')).should('be.hidden')
-        cy.get(testIdSelector('submenu-trigger')).click()
-        cy.get(testIdSelector('submenu-items')).should('be.visible')
+        cy.get(testIdSelector('navigation-submenu-items')).should('be.hidden')
+        cy.get(testIdSelector('navigation-submenu-trigger')).click()
+        cy.get(testIdSelector('navigation-submenu-items')).should('be.visible')
       })
 
       it('Then passed into header text is present', () => {
@@ -85,9 +85,9 @@ describe('Menu', () => {
       })
 
       it("Then submenu can't be opened ", () => {
-        cy.get(testIdSelector('submenu-items')).should('be.hidden')
-        cy.get(testIdSelector('submenu-trigger')).click()
-        cy.get(testIdSelector('submenu-items')).should('be.hidden')
+        cy.get(testIdSelector('navigation-submenu-items')).should('be.hidden')
+        cy.get(testIdSelector('navigation-submenu-trigger')).click()
+        cy.get(testIdSelector('navigation-submenu-items')).should('be.hidden')
       })
     })
 
@@ -101,9 +101,9 @@ describe('Menu', () => {
       })
 
       it('Then it closes submenus on menu close', () => {
-        cy.get(testIdSelector('submenu-trigger')).click()
+        cy.get(testIdSelector('navigation-submenu-trigger')).click()
         cy.get('#collapse-btn').click()
-        cy.get(testIdSelector('submenu-items')).should('be.hidden')
+        cy.get(testIdSelector('navigation-submenu-items')).should('be.hidden')
       })
     })
   })
@@ -117,21 +117,21 @@ describe('Menu', () => {
           }
         },
         template: `
-          <SMenu v-model="selectedItem">
-            <SSubmenu>
+          <SNavigationMenu v-model="selectedItem">
+            <SNavigationSubmenu>
               <template #title>Submenu</template>
-              <SMenuItem v-for="i in 5" :index="String(i) + 0">
+              <SNavigationMenuItem v-for="i in 5" :index="String(i) + 0">
                 Option {{ String(i) + 0 }}
-              </SMenuItem>
-            </SSubmenu>
-          </SMenu>
+              </SNavigationMenuItem>
+            </SNavigationSubmenu>
+          </SNavigationMenu>
         `,
       })
     })
 
     context('When it is initiated', () => {
       it('Then submenu with active item is open', () => {
-        cy.get(testIdSelector('submenu-items')).should('be.visible')
+        cy.get(testIdSelector('navigation-submenu-items')).should('be.visible')
       })
     })
   })
@@ -146,21 +146,21 @@ describe('Menu', () => {
           }
         },
         template: `
-          <SMenu v-model="selectedItem" :collapsed="collapsed">
-            <SSubmenu>
+          <SNavigationMenu v-model="selectedItem" :collapsed="collapsed">
+            <SNavigationSubmenu>
               <template #title>Submenu</template>
-              <SMenuItem v-for="i in 5" :index="String(i) + 0">
+              <SNavigationMenuItem v-for="i in 5" :index="String(i) + 0">
                 Option {{ String(i) + 0 }}
-              </SMenuItem>
-            </SSubmenu>
-          </SMenu>
+              </SNavigationMenuItem>
+            </SNavigationSubmenu>
+          </SNavigationMenu>
         `,
       })
     })
 
     context('When it is initiated', () => {
       it('Then submenu with active item is closed', () => {
-        cy.get(testIdSelector('submenu-items')).should('be.hidden')
+        cy.get(testIdSelector('navigation-submenu-items')).should('be.hidden')
       })
     })
   })
