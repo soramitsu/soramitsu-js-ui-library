@@ -1,28 +1,32 @@
 import { mount } from '@cypress/vue'
 import { SMenu, SSubmenu, SMenuItem } from '@/lib'
+import { config } from '@vue/test-utils'
 
 const testIdSelector = (id: string) => `[data-testid=${id}]`
 
+before(() => {
+  config.global.components = { SMenu, SSubmenu, SMenuItem }
+})
+
+after(() => {
+  config.global.components = {}
+})
+
 describe('Menu', () => {
   const findMenu = () => cy.get(testIdSelector('menu'))
-  const headerText = 'Header'
-  const footerText = 'Footer'
-  const openedMenuWidth = '220px'
-  const closedMenuWidth = '64px'
-  const initiallySelectedItem = '1'
+  const HEADER_TEXT = 'Header'
+  const FOOTER_TEXT = 'Footer'
+  const OPENED_MENU_WIDTH = '220px'
+  const CLOSED_MENU_WIDTH = '64px'
+  const INITIALLY_SELECTED_ITEM = '1'
 
   context(`Given default menu`, () => {
     beforeEach(() => {
       mount({
-        components: {
-          SMenu,
-          SSubmenu,
-          SMenuItem,
-        },
         setup() {
           return {
             collapsed: ref(false),
-            selectedItem: ref(initiallySelectedItem),
+            selectedItem: ref(INITIALLY_SELECTED_ITEM),
           }
         },
         template: `
@@ -30,7 +34,7 @@ describe('Menu', () => {
       
           <SMenu v-model="selectedItem" :collapsed="collapsed">
           <template #header>
-            <div id="header-content">${headerText}</div>
+            <div id="header-content">${HEADER_TEXT}</div>
           </template>
 
             <SMenuItem v-for="i in 5" :index="String(i)" :id="'item-' + i">
@@ -48,7 +52,7 @@ describe('Menu', () => {
             </SSubmenu>
           
             <template #footer>
-              <div id="footer-content">${footerText}</div>
+              <div id="footer-content">${FOOTER_TEXT}</div>
             </template>
           </SMenu>
         `,
@@ -57,7 +61,7 @@ describe('Menu', () => {
 
     context('When it is initiated', () => {
       it('Then it is expanded', () => {
-        findMenu().should('have.css', 'width', openedMenuWidth)
+        findMenu().should('have.css', 'width', OPENED_MENU_WIDTH)
       })
 
       it('Then its submenu opens on click', () => {
@@ -67,11 +71,11 @@ describe('Menu', () => {
       })
 
       it('Then passed into header text is present', () => {
-        cy.get('#header-content').should('have.text', headerText)
+        cy.get('#header-content').should('have.text', HEADER_TEXT)
       })
 
       it('Then passed into footer text is present', () => {
-        cy.get('#footer-content').should('have.text', footerText)
+        cy.get('#footer-content').should('have.text', FOOTER_TEXT)
       })
     })
 
@@ -89,11 +93,11 @@ describe('Menu', () => {
 
     context('When it toggles collapse state', () => {
       it('Then it changes its width', () => {
-        findMenu().should('have.css', 'width', openedMenuWidth)
+        findMenu().should('have.css', 'width', OPENED_MENU_WIDTH)
         cy.get('#collapse-btn').click()
-        findMenu().should('have.css', 'width', closedMenuWidth)
+        findMenu().should('have.css', 'width', CLOSED_MENU_WIDTH)
         cy.get('#collapse-btn').click()
-        findMenu().should('have.css', 'width', openedMenuWidth)
+        findMenu().should('have.css', 'width', OPENED_MENU_WIDTH)
       })
 
       it('Then it closes submenus on menu close', () => {
@@ -107,11 +111,6 @@ describe('Menu', () => {
   context(`Given menu with active item in submenu`, () => {
     beforeEach(() => {
       mount({
-        components: {
-          SMenu,
-          SSubmenu,
-          SMenuItem,
-        },
         setup() {
           return {
             selectedItem: ref('10'),
@@ -140,11 +139,6 @@ describe('Menu', () => {
   context(`Given collapsed menu with active item in submenu`, () => {
     beforeEach(() => {
       mount({
-        components: {
-          SMenu,
-          SSubmenu,
-          SMenuItem,
-        },
         setup() {
           return {
             selectedItem: ref('10'),
