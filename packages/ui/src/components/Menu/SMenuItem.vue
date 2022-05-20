@@ -16,14 +16,10 @@ const props = withDefaults(
 
 const emit = defineEmits<(event: 'click', value: HTMLElement) => void>()
 
-let isSelected = ref(false)
-let isMenuCollapsed = ref(false)
 const menuApi = useMenuApi()
 
-if (menuApi) {
-  isSelected = computed(() => menuApi.active.value === props.index)
-  isMenuCollapsed = computed(() => menuApi.collapsed.value)
-}
+const isSelected = computed(() => menuApi.active.value === props.index)
+const isMenuCollapsed = computed(() => menuApi.collapsed.value)
 
 function handleClick(event: HTMLElement) {
   if (menuApi) {
@@ -39,10 +35,10 @@ const submenuApi = useSubmenuApi()
 if (submenuApi) {
   isInSubmenu.value = true
 
-  submenuApi.register(props.index)
+  submenuApi.register(ref(props.index))
 
   onUnmounted(() => {
-    submenuApi.unregister(props.index)
+    submenuApi.unregister(ref(props.index))
   })
 }
 </script>

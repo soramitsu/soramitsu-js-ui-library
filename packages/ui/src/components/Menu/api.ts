@@ -1,4 +1,5 @@
 import { InjectionKey, inject, Ref } from 'vue'
+import { forceInject } from '@/util'
 
 export interface MenuApi {
   select: (index: string) => void
@@ -11,8 +12,8 @@ export interface SubmenuApi {
   unregister: (index: string) => void
 }
 
-export const MENU_API_KEY: InjectionKey<MenuApi | undefined> = Symbol('MenuAPI')
+export const MENU_API_KEY: InjectionKey<MenuApi> = Symbol('MenuAPI')
 export const SUBMENU_API_KEY: InjectionKey<SubmenuApi | undefined> = Symbol('SubmenuAPI')
 
-export const useMenuApi = () => inject(MENU_API_KEY, undefined)
+export const useMenuApi = () => forceInject(MENU_API_KEY)
 export const useSubmenuApi = () => inject(SUBMENU_API_KEY, undefined)

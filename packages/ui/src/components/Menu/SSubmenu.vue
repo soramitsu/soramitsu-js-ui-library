@@ -3,12 +3,14 @@ export default { name: 'SSubmenu' }
 </script>
 
 <script setup lang="ts">
+import { Ref } from 'vue'
 import SMenuItemBody from '@/components/Menu/SMenuItemBody.vue'
 import { SCollapseTransition } from '@/components/Transitions'
 import { SUBMENU_API_KEY, useMenuApi } from '@/components/Menu/api'
 import { IconChevronBottom16 } from '@/components/icons'
+import { and, not } from '@vueuse/core'
 
-const includedItems = shallowReactive(new Set<string>([]))
+const includedItems = shallowReactive(new Set<Ref<string>>([]))
 
 const api = {
   register,
@@ -16,11 +18,11 @@ const api = {
 }
 provide(SUBMENU_API_KEY, api)
 
-function register(index: string) {
+function register(index: Ref<string>) {
   includedItems.add(index)
 }
 
-function unregister(index: string) {
+function unregister(index: Ref<string>) {
   includedItems.delete(index)
 }
 
@@ -32,26 +34,13 @@ function handleTriggerClick() {
   }
 }
 
-let isMenuCollapsed = ref(false)
-let hasActiveItem = ref(false)
 const menuApi = useMenuApi()
 
-if (menuApi) {
-  isMenuCollapsed = computed(() => menuApi.collapsed.value)
-  hasActiveItem = computed(() => includedItems.has(menuApi.active.value))
-}
+let isMenuCollapsed = computed(() => menuApi.collapsed.value)
+let hasActiveItem = computed(() => [...includedItems].map((x) => x.value).includes(menuApi.active.value))
 
-watch(hasActiveItem, () => {
-  if (!isMenuCollapsed.value && hasActiveItem.value) {
-    toggle(true)
-  }
-})
-
-watch(isMenuCollapsed, () => {
-  if (isMenuCollapsed.value) {
-    toggle(false)
-  }
-})
+whenever(and(not(isMenuCollapsed), hasActiveItem), () => toggle(true), { immediate: true })
+whenever(isMenuCollapsed, () => toggle(false), { immediate: true })
 </script>
 
 <template>
