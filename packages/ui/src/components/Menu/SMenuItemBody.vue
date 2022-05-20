@@ -5,9 +5,24 @@ export default { name: 'SMenuItemBody' }
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    tag?: string
+    /**
+     * HTML tag or Vue component used as root
+     *
+     * @default 'div'
+     */
+    tag?: string | object
+    /**
+     * Applies special styles for items located in submenu
+     *
+     * @default false
+     */
     submenuItem?: boolean
     active?: boolean
+    /**
+     * Removes everything except icon
+     *
+     * @default false
+     */
     minified?: boolean
   }>(),
   {
