@@ -33,12 +33,12 @@ const isInSubmenu = ref(false)
 const submenuApi = useSubmenuApi()
 
 if (submenuApi) {
+  const index = computed(() => props.index)
   isInSubmenu.value = true
-
-  submenuApi.register(ref(props.index))
+  submenuApi.register(index)
 
   onUnmounted(() => {
-    submenuApi.unregister(ref(props.index))
+    submenuApi.unregister(index)
   })
 }
 </script>
