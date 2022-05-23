@@ -38,7 +38,7 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
           </div>
         </template>
 
-        <SNavigationMenuItem v-for="i in 5" :index="String(i)">
+        <SNavigationMenuItem v-for="i in 5" :value="String(i)">
           <template #icon="iconProps">
             <IconStatusInfo :class="iconProps.class" />
           </template>
@@ -47,19 +47,19 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
   
         <SNavigationSubmenu>
           <template #title>Submenu</template>
-          <SNavigationMenuItem v-for="i in 5" :index="String(i) + 0">
+          <SNavigationMenuItem v-for="i in 5" :value="String(i) + 0">
             Option {{ String(i) + 0 }}
           </SNavigationMenuItem>
         </SNavigationSubmenu>
   
-        <SNavigationMenuItem index="01">
+        <SNavigationMenuItem value="01">
           <template #icon="iconProps">
             <IconStatusInfo :class="iconProps.class" />
           </template>
           Long long truncated text
         </SNavigationMenuItem>
 
-        <SNavigationMenuItem index="02">
+        <SNavigationMenuItem value="02">
           <template #icon="iconProps">
             <IconStatusInfo :class="iconProps.class" />
           </template>

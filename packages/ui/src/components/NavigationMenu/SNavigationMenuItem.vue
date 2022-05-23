@@ -5,7 +5,7 @@ export default { name: 'SNavigationMenuItem' }
 <script setup lang="ts">
 import { computed, onUnmounted } from 'vue'
 import { useMenuApi, useSubmenuApi } from '@/components/NavigationMenu/api'
-import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenutemBody.vue'
+import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenuItemBody.vue'
 
 const props = withDefaults(
   defineProps<{

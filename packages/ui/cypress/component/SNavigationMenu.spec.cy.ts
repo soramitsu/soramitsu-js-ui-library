@@ -37,7 +37,7 @@ describe('NavigationMenu', () => {
             <div id="header-content">${HEADER_TEXT}</div>
           </template>
 
-            <SNavigationMenuItem v-for="i in 5" :index="String(i)" :id="'item-' + i">
+            <SNavigationMenuItem v-for="i in 5" :value="String(i)" :id="'item-' + i">
               <template #icon="iconProps">
                 <IconStatusInfo :class="iconProps.class" />
               </template>
@@ -46,7 +46,7 @@ describe('NavigationMenu', () => {
 
             <SNavigationSubmenu>
               <template #title>Submenu</template>
-              <SNavigationMenuItem v-for="i in 5" :index="String(i) + 0" :id="'item-' + i + '0'">
+              <SNavigationMenuItem v-for="i in 5" :value="String(i) + 0" :id="'item-' + i + '0'">
                 Option {{ String(i) + 0 }}
               </SNavigationMenuItem>
             </SNavigationSubmenu>
@@ -120,7 +120,7 @@ describe('NavigationMenu', () => {
           <SNavigationMenu v-model="selectedItem">
             <SNavigationSubmenu>
               <template #title>Submenu</template>
-              <SNavigationMenuItem v-for="i in 5" :index="String(i) + 0">
+              <SNavigationMenuItem v-for="i in 5" :value="String(i) + 0">
                 Option {{ String(i) + 0 }}
               </SNavigationMenuItem>
             </SNavigationSubmenu>
@@ -149,7 +149,7 @@ describe('NavigationMenu', () => {
           <SNavigationMenu v-model="selectedItem" :collapsed="collapsed">
             <SNavigationSubmenu>
               <template #title>Submenu</template>
-              <SNavigationMenuItem v-for="i in 5" :index="String(i) + 0">
+              <SNavigationMenuItem v-for="i in 5" :value="String(i) + 0">
                 Option {{ String(i) + 0 }}
               </SNavigationMenuItem>
             </SNavigationSubmenu>

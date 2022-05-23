@@ -4,7 +4,7 @@ export default { name: 'SNavigationSubmenu' }
 
 <script setup lang="ts">
 import { Ref } from 'vue'
-import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenutemBody.vue'
+import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenuItemBody.vue'
 import { SCollapseTransition } from '@/components/Transitions'
 import { SUBMENU_API_KEY, useMenuApi } from '@/components/NavigationMenu/api'
 import { IconChevronBottom16 } from '@/components/icons'
