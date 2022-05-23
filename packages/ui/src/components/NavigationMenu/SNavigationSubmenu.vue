@@ -37,7 +37,15 @@ function handleTriggerClick() {
 const menuApi = useMenuApi()
 
 let isMenuCollapsed = computed(() => menuApi.collapsed.value)
-let hasActiveItem = computed(() => [...includedItems].map((x) => x.value).includes(menuApi.active.value))
+let hasActiveItem = computed(() => {
+  for (const item of includedItems) {
+    if (item.value === menuApi.active.value) {
+      return true
+    }
+  }
+
+  return false
+})
 
 whenever(and(not(isMenuCollapsed), hasActiveItem), () => toggle(true), { immediate: true })
 whenever(isMenuCollapsed, () => toggle(false), { immediate: true })
