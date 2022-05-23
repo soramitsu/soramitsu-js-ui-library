@@ -3,7 +3,7 @@ export default { name: 'SNavigationMenu' }
 </script>
 
 <script setup lang="ts">
-import { MENU_API_KEY } from '@/components/NavigationMenu/api'
+import { NAVIGATION_MENU_API_KEY } from '@/components/NavigationMenu/api'
 
 const props = withDefaults(
   defineProps<{
@@ -41,7 +41,7 @@ function select(value: string) {
   model.value = value
 }
 
-provide(MENU_API_KEY, api)
+provide(NAVIGATION_MENU_API_KEY, api)
 </script>
 
 <template>

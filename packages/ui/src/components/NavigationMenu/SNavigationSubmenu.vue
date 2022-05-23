@@ -6,7 +6,7 @@ export default { name: 'SNavigationSubmenu' }
 import { Ref } from 'vue'
 import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenuItemBody.vue'
 import { SCollapseTransition } from '@/components/Transitions'
-import { SUBMENU_API_KEY, useMenuApi } from '@/components/NavigationMenu/api'
+import { NAVIGATION_SUBMENU_API_KEY, useNavigationMenuApi } from '@/components/NavigationMenu/api'
 import { IconChevronBottom16 } from '@/components/icons'
 import { and, not } from '@vueuse/core'
 
@@ -16,7 +16,7 @@ const api = readonly({
   register,
   unregister,
 })
-provide(SUBMENU_API_KEY, api)
+provide(NAVIGATION_SUBMENU_API_KEY, api)
 
 function register(index: Ref<string>) {
   includedItems.add(index)
@@ -34,7 +34,7 @@ function handleTriggerClick() {
   }
 }
 
-const menuApi = useMenuApi()
+const menuApi = useNavigationMenuApi()
 
 let isMenuCollapsed = computed(() => menuApi.collapsed)
 let hasActiveItem = computed(() => {

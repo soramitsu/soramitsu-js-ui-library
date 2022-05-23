@@ -4,7 +4,7 @@ export default { name: 'SNavigationMenuItem' }
 
 <script setup lang="ts">
 import { computed, onUnmounted } from 'vue'
-import { useMenuApi, useSubmenuApi } from '@/components/NavigationMenu/api'
+import { useNavigationMenuApi, useNavigationSubmenuApi } from '@/components/NavigationMenu/api'
 import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenuItemBody.vue'
 
 const props = withDefaults(
@@ -17,7 +17,7 @@ const props = withDefaults(
   {},
 )
 
-const menuApi = useMenuApi()
+const menuApi = useNavigationMenuApi()
 
 const isSelected = computed(() => menuApi.active === props.value)
 const isMenuCollapsed = computed(() => menuApi.collapsed)
@@ -27,7 +27,7 @@ function handleClick() {
 }
 
 let isInSubmenu = false
-const submenuApi = useSubmenuApi()
+const submenuApi = useNavigationSubmenuApi()
 
 if (submenuApi) {
   const value = computed(() => props.value)
