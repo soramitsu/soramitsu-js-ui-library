@@ -31,11 +31,11 @@ const model = useVModel(props, 'modelValue', emit, { passive: true })
 
 const collapsed = computed(() => props.collapsed)
 
-const api = {
+const api = readonly({
   active: model,
   select,
   collapsed,
-}
+})
 
 function select(value: string) {
   model.value = value

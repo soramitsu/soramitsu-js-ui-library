@@ -12,10 +12,10 @@ import { and, not } from '@vueuse/core'
 
 const includedItems = shallowReactive(new Set<Ref<string>>([]))
 
-const api = {
+const api = readonly({
   register,
   unregister,
-}
+})
 provide(SUBMENU_API_KEY, api)
 
 function register(index: Ref<string>) {
@@ -36,10 +36,10 @@ function handleTriggerClick() {
 
 const menuApi = useMenuApi()
 
-let isMenuCollapsed = computed(() => menuApi.collapsed.value)
+let isMenuCollapsed = computed(() => menuApi.collapsed)
 let hasActiveItem = computed(() => {
   for (const item of includedItems) {
-    if (item.value === menuApi.active.value) {
+    if (item.value === menuApi.active) {
       return true
     }
   }

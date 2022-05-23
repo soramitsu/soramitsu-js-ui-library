@@ -19,8 +19,8 @@ const props = withDefaults(
 
 const menuApi = useMenuApi()
 
-const isSelected = computed(() => menuApi.active.value === props.value)
-const isMenuCollapsed = computed(() => menuApi.collapsed.value)
+const isSelected = computed(() => menuApi.active === props.value)
+const isMenuCollapsed = computed(() => menuApi.collapsed)
 
 function handleClick() {
   menuApi.select(props.value)

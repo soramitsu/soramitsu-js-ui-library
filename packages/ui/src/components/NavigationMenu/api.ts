@@ -1,4 +1,4 @@
-import { InjectionKey, inject, Ref } from 'vue'
+import {InjectionKey, inject, Ref, DeepReadonly, UnwrapNestedRefs} from 'vue'
 import { forceInject } from '@/util'
 
 export interface MenuApi {
@@ -6,8 +6,8 @@ export interface MenuApi {
    * Should be called inside item to select it
    */
   select: (index: string) => void
-  active: Ref<string>
-  collapsed: Ref<boolean>
+  active: string
+  collapsed: boolean
 }
 
 export interface SubmenuApi {
@@ -21,8 +21,8 @@ export interface SubmenuApi {
   unregister: (index: Ref<string>) => void
 }
 
-export const MENU_API_KEY: InjectionKey<MenuApi> = Symbol('MenuAPI')
-export const SUBMENU_API_KEY: InjectionKey<SubmenuApi | undefined> = Symbol('SubmenuAPI')
+export const MENU_API_KEY: InjectionKey<DeepReadonly<MenuApi>> = Symbol('MenuAPI')
+export const SUBMENU_API_KEY: InjectionKey<DeepReadonly<SubmenuApi> | undefined> = Symbol('SubmenuAPI')
 
 export const useMenuApi = () => forceInject(MENU_API_KEY)
 export const useSubmenuApi = () => inject(SUBMENU_API_KEY, undefined)
