@@ -26,12 +26,12 @@ function handleClick() {
   menuApi.select(props.value)
 }
 
-const isInSubmenu = ref(false)
+let isInSubmenu = false
 const submenuApi = useSubmenuApi()
 
 if (submenuApi) {
   const value = computed(() => props.value)
-  isInSubmenu.value = true
+  isInSubmenu = true
   submenuApi.register(value)
 
   onUnmounted(() => {
