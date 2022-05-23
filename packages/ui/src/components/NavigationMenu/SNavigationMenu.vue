@@ -7,7 +7,17 @@ import { MENU_API_KEY } from '@/components/NavigationMenu/api'
 
 const props = withDefaults(
   defineProps<{
+    /**
+     * Selected item value
+     *
+     * @default ''
+     */
     modelValue?: string
+    /**
+     * Sets collapsed state, which makes menu narrow if true
+     *
+     * @default false
+     */
     collapsed?: boolean
   }>(),
   {
