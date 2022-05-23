@@ -43,12 +43,6 @@ const props = withDefaults(
     minified: false,
   },
 )
-
-const emit = defineEmits<(event: 'click', value: HTMLElement) => void>()
-
-function handleClick(event: HTMLElement) {
-  emit('click', event)
-}
 </script>
 
 <template>
@@ -62,7 +56,6 @@ function handleClick(event: HTMLElement) {
       'py-8px': submenuItem,
       'py-14px': !submenuItem,
     }"
-    @click="handleClick"
   >
     <div class="s-navigation-menu-item-body__prepend flex-shrink-0 flex items-center justify-end h-16px w-16px mr-8px">
       <slot

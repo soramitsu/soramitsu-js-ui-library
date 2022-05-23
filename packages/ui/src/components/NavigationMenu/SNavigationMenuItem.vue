@@ -14,19 +14,15 @@ const props = withDefaults(
   {},
 )
 
-const emit = defineEmits<(event: 'click', value: HTMLElement) => void>()
-
 const menuApi = useMenuApi()
 
 const isSelected = computed(() => menuApi.active.value === props.index)
 const isMenuCollapsed = computed(() => menuApi.collapsed.value)
 
-function handleClick(event: HTMLElement) {
+function handleClick() {
   if (menuApi) {
     menuApi.select(props.index)
   }
-
-  emit('click', event)
 }
 
 const isInSubmenu = ref(false)
