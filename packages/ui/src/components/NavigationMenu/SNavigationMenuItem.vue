@@ -23,9 +23,7 @@ const isSelected = computed(() => menuApi.active.value === props.value)
 const isMenuCollapsed = computed(() => menuApi.collapsed.value)
 
 function handleClick() {
-  if (menuApi) {
-    menuApi.select(props.value)
-  }
+  menuApi.select(props.value)
 }
 
 const isInSubmenu = ref(false)
