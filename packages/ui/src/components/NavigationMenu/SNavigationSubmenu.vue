@@ -14,16 +14,13 @@ const includedItems = shallowReactive(new Set<Ref<string>>([]))
 
 const api = readonly({
   register,
-  unregister,
 })
 provide(NAVIGATION_SUBMENU_API_KEY, api)
 
 function register(index: Ref<string>) {
   includedItems.add(index)
-}
 
-function unregister(index: Ref<string>) {
-  includedItems.delete(index)
+  onScopeDispose(() => includedItems.delete(index))
 }
 
 const [opened, toggle] = useToggle(false)

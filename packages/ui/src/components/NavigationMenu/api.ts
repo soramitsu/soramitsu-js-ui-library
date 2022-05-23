@@ -12,17 +12,14 @@ export interface NavigationMenuApi {
 
 export interface NavigationSubmenuApi {
   /**
-   * Should be called inside item when created
+   * Should be called inside item on setup. Unregister on scope dispose automatically
    */
   register: (index: Ref<string>) => void
-  /**
-   * Should be called inside item when destroyed
-   */
-  unregister: (index: Ref<string>) => void
 }
 
 export const NAVIGATION_MENU_API_KEY: InjectionKey<DeepReadonly<NavigationMenuApi>> = Symbol('NavigationMenuAPI')
-export const NAVIGATION_SUBMENU_API_KEY: InjectionKey<DeepReadonly<NavigationSubmenuApi> | undefined> = Symbol('NavigationSubmenuAPI')
+export const NAVIGATION_SUBMENU_API_KEY: InjectionKey<DeepReadonly<NavigationSubmenuApi> | undefined> =
+  Symbol('NavigationSubmenuAPI')
 
 export const useNavigationMenuApi = () => forceInject(NAVIGATION_MENU_API_KEY)
 export const useNavigationSubmenuApi = () => inject(NAVIGATION_SUBMENU_API_KEY, undefined)

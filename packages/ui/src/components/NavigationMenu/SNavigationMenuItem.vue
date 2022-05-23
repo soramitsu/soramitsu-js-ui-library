@@ -33,10 +33,6 @@ if (submenuApi) {
   const value = computed(() => props.value)
   isInSubmenu = true
   submenuApi.register(value)
-
-  onUnmounted(() => {
-    submenuApi.unregister(value)
-  })
 }
 </script>
 
