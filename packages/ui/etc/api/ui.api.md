@@ -170,18 +170,6 @@ export type LinkIconPosition = typeof LINK_ICON_POSITION_VALUES[number];
 export type LinkUnderlineType = typeof LINK_UNDERLINE_TYPE_VALUES[number];
 
 // @public (undocumented)
-export const MENU_API_KEY: InjectionKey<MenuApi>;
-
-// @public (undocumented)
-export interface MenuApi {
-    // (undocumented)
-    active: Ref<string>;
-    // (undocumented)
-    collapsed: Ref<boolean>;
-    select: (index: string) => void;
-}
-
-// @public (undocumented)
 export const MODAL_API_KEY: InjectionKey<ModalApi>;
 
 // @public (undocumented)
@@ -191,6 +179,26 @@ export interface ModalApi {
     describedBy: string | null;
     focusTrap: null | FocusTrap;
     labelledBy: string;
+}
+
+// @public (undocumented)
+export const NAVIGATION_MENU_API_KEY: InjectionKey<DeepReadonly<NavigationMenuApi>>;
+
+// @public (undocumented)
+export const NAVIGATION_SUBMENU_API_KEY: InjectionKey<DeepReadonly<NavigationSubmenuApi> | undefined>;
+
+// @public (undocumented)
+export interface NavigationMenuApi {
+    // (undocumented)
+    active: string;
+    // (undocumented)
+    collapsed: boolean;
+    select: (index: string) => void;
+}
+
+// @public (undocumented)
+export interface NavigationSubmenuApi {
+    register: (index: Ref<string>) => void;
 }
 
 // @public (undocumented)
@@ -736,9 +744,9 @@ collapsed: boolean;
 //
 // @public (undocumented)
 export const SNavigationMenuItem: DefineComponent<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
-index: string;
+value: string;
 }>, {}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
-index: string;
+value: string;
 }>, {}>>>, {}>;
 
 // @public (undocumented)
@@ -1235,15 +1243,6 @@ apiKey: ProvideKey | ProvideKey[];
 }>;
 
 // @public (undocumented)
-export const SUBMENU_API_KEY: InjectionKey<SubmenuApi | undefined>;
-
-// @public (undocumented)
-export interface SubmenuApi {
-    register: (index: Ref<string>) => void;
-    unregister: (index: Ref<string>) => void;
-}
-
-// @public (undocumented)
 export const SUseNotification: DefineComponent<    {
 show: BooleanConstructor;
 title: StringConstructor;
@@ -1333,10 +1332,19 @@ export type ToastUnregisterFn = () => void;
 export const useAccordionApi: () => AccordionApi | undefined;
 
 // @public (undocumented)
-export const useMenuApi: () => MenuApi;
+export function useModalApi(): ModalApi;
 
 // @public (undocumented)
-export function useModalApi(): ModalApi;
+export const useNavigationMenuApi: () => {
+    readonly select: (index: string) => void;
+    readonly active: string;
+    readonly collapsed: boolean;
+};
+
+// @public (undocumented)
+export const useNavigationSubmenuApi: () => {
+    readonly register: (index: Ref<string>) => void;
+} | undefined;
 
 // @public (undocumented)
 export function useNotifications(): UseNotificationsReturn;
@@ -1355,9 +1363,6 @@ export function useRadioGroupApi(): RadioGroupApi;
 
 // @public (undocumented)
 export function useSelectApi<T = any>(): SelectApi<T>;
-
-// @public (undocumented)
-export const useSubmenuApi: () => SubmenuApi | undefined;
 
 // @public (undocumented)
 export function useTabsPanelApi(): TabsPanelApi;
