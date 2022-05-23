@@ -9,19 +9,22 @@ import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenu
 
 const props = withDefaults(
   defineProps<{
-    index: string
+    /**
+     * Item identifier
+     */
+    value: string
   }>(),
   {},
 )
 
 const menuApi = useMenuApi()
 
-const isSelected = computed(() => menuApi.active.value === props.index)
+const isSelected = computed(() => menuApi.active.value === props.value)
 const isMenuCollapsed = computed(() => menuApi.collapsed.value)
 
 function handleClick() {
   if (menuApi) {
-    menuApi.select(props.index)
+    menuApi.select(props.value)
   }
 }
 
@@ -29,12 +32,12 @@ const isInSubmenu = ref(false)
 const submenuApi = useSubmenuApi()
 
 if (submenuApi) {
-  const index = computed(() => props.index)
+  const value = computed(() => props.value)
   isInSubmenu.value = true
-  submenuApi.register(index)
+  submenuApi.register(value)
 
   onUnmounted(() => {
-    submenuApi.unregister(index)
+    submenuApi.unregister(value)
   })
 }
 </script>
