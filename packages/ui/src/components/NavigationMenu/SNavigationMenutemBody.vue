@@ -17,7 +17,18 @@ const props = withDefaults(
      * @default false
      */
     submenuItem?: boolean
+    /**
+     * Applies special styles like primary color mark (includes highlighting)
+     *
+     * @default false
+     */
     active?: boolean
+    /**
+     * Highlight with another background color
+     *
+     * @default false
+     */
+    highlighted?: boolean
     /**
      * Removes everything except icon
      *
@@ -47,6 +58,7 @@ function handleClick(event: HTMLElement) {
     :class="{
       's-navigation-menu-item-body_submenu-item': submenuItem,
       's-navigation-menu-item-body_active': active,
+      's-navigation-menu-item-body_highlighted': highlighted,
       'py-8px': submenuItem,
       'py-14px': !submenuItem,
     }"
@@ -86,8 +98,11 @@ function handleClick(event: HTMLElement) {
 
 .s-navigation-menu-item-body {
   $root: &;
-  background-color: #2e2e36; // Base [night] / Background
   min-height: 54px;
+  background-color: #2e2e36; // Base [night] / Background
+  box-shadow: inset 5px 0 transparent;
+  transition: 100ms ease-in-out;
+  transition-property: background-color, box-shadow;
 
   &_submenu-item {
     min-height: 50px;
@@ -98,6 +113,10 @@ function handleClick(event: HTMLElement) {
   &:hover {
     background-color: #26262d; // Utility [night] / Surface
     box-shadow: inset 5px 0 theme.token-as-var('sys.color.primary');
+  }
+
+  &_highlighted {
+    background-color: #26262d; // Utility [night] / Surface
   }
 
   &_submenu-item#{$root}_active,

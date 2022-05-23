@@ -54,7 +54,8 @@ whenever(isMenuCollapsed, () => toggle(false), { immediate: true })
   >
     <SNavigationMenuItemBody
       data-testid="navigation-submenu-trigger"
-      :active="opened || hasActiveItem"
+      :active="hasActiveItem"
+      :highlighted="opened"
       :minified="isMenuCollapsed"
       @click="handleTriggerClick"
     >
