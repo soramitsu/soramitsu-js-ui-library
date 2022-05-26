@@ -1,5 +1,4 @@
-import SPopover from './SPopover'
-import SPopoverWrappedTransition from './SPopoverWrappedTransition.vue'
+export { default as SPopover } from './SPopover'
+export { default as SPopoverWrappedTransition } from './SPopoverWrappedTransition.vue'
 
-export { SPopover, SPopoverWrappedTransition }
 export * from './api'

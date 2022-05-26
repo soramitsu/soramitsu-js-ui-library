@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import Windi from 'vite-plugin-windicss'
 import Vue from '@vitejs/plugin-vue'
 import { RootNode, TemplateChildNode } from '@vue/compiler-core'
@@ -31,6 +31,12 @@ const vueCompilerTransforms = {
 }
 
 export default defineConfig({
+  test: {
+    include: ['src/**/*.spec.ts'],
+  },
+  define: {
+    'import.meta.vitest': 'undefined',
+  },
   resolve: {
     alias: {
       '@': resolve('src'),
@@ -67,6 +73,7 @@ export default defineConfig({
     minify: false,
     chunkSizeWarningLimit: 2_000,
     reportCompressedSize: false,
+    target: 'esnext',
     lib: {
       entry: resolve('src/lib.ts'),
       formats: ['es', 'cjs'],

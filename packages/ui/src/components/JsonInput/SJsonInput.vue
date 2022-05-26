@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SJsonInput',
-})
-</script>
-
 <script setup lang="ts">
 import JSONEditor from 'jsoneditor'
 import type { JSONEditorOptions } from 'jsoneditor'

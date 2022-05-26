@@ -1,7 +1,3 @@
-<script lang="ts">
-export default { name: 'SAccordionItem' }
-</script>
-
 <script setup lang="ts">
 import { onUnmounted, computed } from 'vue'
 import { IconArrowsChevronDownRounded24 } from '@/components/icons'

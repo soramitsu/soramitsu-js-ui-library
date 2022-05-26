@@ -54,7 +54,7 @@ export const STATUS_ICONS_MAP: { [K in Status]: Component } = {
  * TODO append info icon? For now it is used only in STextField that doesn't
  * need "info" entry here
  */
-export const STATUS_ICONS_MAP_16: { [K in Exclude<Status, Status.Info>]: Component } = {
+export const STATUS_ICONS_MAP_16: { [K in Exclude<Status, typeof Status.Info>]: Component } = {
   [Status.Warning]: IconStatusWarning16,
   [Status.Error]: IconStatusError16,
   [Status.Success]: IconStatusSuccess16,

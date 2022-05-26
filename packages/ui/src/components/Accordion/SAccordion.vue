@@ -1,7 +1,3 @@
-<script lang="ts">
-export default { name: 'SAccordion' }
-</script>
-
 <script setup lang="ts">
 import { AccordionItemApi, AccordionApi, ACCORDION_API_KEY } from './api'
 import { provide, Ref, watch } from 'vue'

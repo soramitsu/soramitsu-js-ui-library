@@ -6,7 +6,7 @@
 
 import { Component } from 'vue'
 import { SButton } from './Button'
-import { SJsonInput } from './Input'
+// import { SJsonInput } from './JsonInput'
 import { SModal, SModalCard } from './Modal'
 import { SSelect, SDropdown, SSelectBase, SSelectButton, SSelectChevron, SSelectInput, SSelectOption } from './Select'
 import { SToastsDisplay, SToastsProvider } from './Toasts'
@@ -23,13 +23,14 @@ import { SAccordion, SAccordionItem } from './Accordion'
 import { SLink } from './Link'
 import { SRadio, SRadioAtom, SRadioGroup } from './Radio'
 import { SCheckboxAtom, SCheckboxSolo } from './Checkbox'
+import { SBodyScrollLockProvider } from './BodyScrollLockProvider'
 
 /**
  * Component names should be identical to their variable names
  */
 export const COMPONENTS: Record<string, Component> = {
   SButton,
-  SJsonInput,
+  // SJsonInput,
   SModal,
   SModalCard,
   SSelect,
@@ -62,4 +63,5 @@ export const COMPONENTS: Record<string, Component> = {
   SRadioGroup,
   SCheckboxAtom,
   SCheckboxSolo,
+  SBodyScrollLockProvider,
 }

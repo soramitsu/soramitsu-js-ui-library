@@ -1,7 +1,3 @@
-<script lang="ts">
-export default defineComponent({ name: 'SLink' })
-</script>
-
 <script setup lang="ts">
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { IconBasicExternalLink24 } from '../icons'

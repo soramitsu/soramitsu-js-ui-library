@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SNotificationBodyTimeline',
-})
-</script>
-
 <script setup lang="ts">
 const props = defineProps<{
   /**

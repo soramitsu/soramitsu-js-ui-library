@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SModalCard',
-})
-</script>
-
 <script setup lang="ts">
 import { SButton } from '../Button'
 import { IconClose } from '../icons'

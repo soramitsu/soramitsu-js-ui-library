@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SProgressBar',
-})
-</script>
-
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
