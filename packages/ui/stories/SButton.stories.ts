@@ -60,7 +60,7 @@ Configurable.argTypes = {
 }
 Configurable.args = {
   type: 'primary',
-  size: 'medium',
+  size: 'md',
   icon: '',
   iconPosition: 'left',
   disabled: false,
