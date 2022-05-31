@@ -19,10 +19,6 @@ $neu-tooltip-arrow-width: 8px;
 
     .popper__arrow {
       border-bottom-color: $neu-tooltip-background-color;
-      right: 0 !important;
-      left: 0 !important;
-      margin-right: auto !important;
-      margin-left: auto !important;
       &::after {
         border-bottom-color: inherit;
       }
