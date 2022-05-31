@@ -23,15 +23,6 @@ $neu-tooltip-arrow-width: 8px;
         border-bottom-color: inherit;
       }
     }
-    &[x-placement^="top"],
-    &[x-placement^="bottom"] {
-      .popper__arrow {
-        right: 0 !important;
-        left: 0 !important;
-        margin-right: auto !important;
-        margin-left: auto !important;
-      }
-    }
     &[x-placement^="top"] .popper__arrow {
       border-top-color: $neu-tooltip-background-color;
       border-bottom-color: transparent;
