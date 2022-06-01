@@ -25,6 +25,7 @@ import { SCollapseTransition } from './Transitions'
 import { SRadio, SRadioAtom, SRadioGroup } from './Radio'
 import { SCheckboxAtom, SCheckboxSolo } from './Checkbox'
 import { SNavigationMenu, SNavigationMenuItem, SNavigationSubmenu } from './NavigationMenu'
+import { STable, STableColumn } from './Table'
 
 /**
  * Component names should be identical to their variable names
@@ -55,6 +56,8 @@ export const COMPONENTS: Record<string, Component> = {
   SProgressBar,
   STab,
   STabsPanel,
+  STable,
+  STableColumn,
   SBadge,
   SAccordion,
   SAccordionItem,
