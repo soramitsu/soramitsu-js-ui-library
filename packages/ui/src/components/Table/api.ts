@@ -1,5 +1,6 @@
 import { InjectionKey, DeepReadonly, Slot } from 'vue'
 import { forceInject } from '@/util'
+import { TableColumnAlign } from '@/components/Table/types'
 
 export interface ColumnWidthProps {
   width: null | number
@@ -7,7 +8,12 @@ export interface ColumnWidthProps {
   realWidth: number
 }
 
-export interface ColumnApi extends ColumnWidthProps {
+export interface ColumnAlignProps {
+  align: TableColumnAlign
+  headerAlign: TableColumnAlign
+}
+
+export interface ColumnApi extends ColumnWidthProps, ColumnAlignProps {
   prop: string
   label?: string
   cellSlot?: Slot

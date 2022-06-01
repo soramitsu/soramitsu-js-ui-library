@@ -3,8 +3,8 @@ import { useTableApi } from '@/components'
 import { PropType } from '@vue/runtime-core'
 import { nextIncrementalCounter } from '@/util'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
-import { TABLE_COLUMN_TYPE_VALUES } from '@/components/Table/consts'
-import { TableColumnType } from '@/components/Table/types'
+import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from '@/components/Table/consts'
+import { TableColumnAlign, TableColumnType } from '@/components/Table/types'
 import { ColumnWidthProps } from './api'
 
 export default defineComponent({
@@ -30,7 +30,6 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    property: String,
     /**
      * column width
      */
@@ -88,12 +87,11 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    showTooltipWhenOverflow: Boolean,
     /**
      * alignment
      */
     align: {
-      type: String as PropType<'left' | 'center' | 'right'>,
+      type: String as PropType<TableColumnAlign>,
       default: 'left',
     },
     /**
@@ -136,6 +134,8 @@ export default defineComponent({
 
     const filterProp = usePropTypeFilter(props)
     const definitelyType = filterProp('type', TABLE_COLUMN_TYPE_VALUES, 'default')
+    const definitelyAlign = filterProp('align', TABLE_COLUMN_ALIGN_VALUES, 'left')
+    const definitelyHeaderAlign = filterProp('headerAlign', TABLE_COLUMN_ALIGN_VALUES, 'left')
 
     // Width
     const cellStarts: Record<Exclude<TableColumnType, 'default'>, ColumnWidthProps> = {
@@ -172,6 +172,8 @@ export default defineComponent({
       prop: props.prop,
       label: props.label,
       showOverflowTooltip: props.showOverflowTooltip,
+      align: definitelyAlign.value,
+      headerAlign: definitelyHeaderAlign.value,
       ...widthProps.value,
     })
 

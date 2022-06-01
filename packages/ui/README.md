@@ -45,3 +45,11 @@ There are no need for `router` as it was just call push with selected item `inde
 `index` property in `SMenuItem`(`SNavigationMenuItem`) renamed to `value`.
 
 Toggling `SNavigationSubmenu` doesn't call `SNavigationMenu` `select` event.
+
+### STable
+
+Column type `index` removed and so is prop `index`
+
+Removed `property` and `showTooltipWhenOverflow` prop, which were aliases to `prop` and `showOverflowTooltip`
+
+`align` in column options (like in events) now has values without `is-` prefix

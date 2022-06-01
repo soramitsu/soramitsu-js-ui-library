@@ -14,10 +14,10 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
     return {
       args,
       data: ref([
-        { prop1: '21', prop2: 'a12' },
-        { prop1: '12', prop2: 'a21' },
-        { prop1: '31', prop2: 'a2' },
-        { prop1: '13', prop2: 'a32' },
+        { prop1: '21', prop2: 'a12', prop3: 'b12', prop4: 'c12' },
+        { prop1: '12', prop2: 'a21', prop3: 'b21', prop4: 'c21' },
+        { prop1: '31', prop2: 'a2', prop3: 'b2', prop4: 'c2' },
+        { prop1: '13', prop2: 'a32', prop3: 'b32', prop4: 'c32' },
       ]),
     }
   },
@@ -40,18 +40,24 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
     
       <s-table-column
         prop="prop2"
-        label="Prop 1"
-        min-width="300"
-      />
-      <s-table-column
-        prop="prop2"
-        label="Prop 1"
-        width="100"
-      />
-      <s-table-column
-        prop="prop2"
-        label="Prop 1"
+        label="Prop 2"
         min-width="200"
+        header-align="center"
+        align="right"
+      />
+      <s-table-column
+        prop="prop3"
+        label="Prop 3"
+        width="100"
+        align="right"
+        header-align="center"
+      />
+      <s-table-column
+        prop="prop4"
+        label="Prop 4"
+        min-width="50"
+        align="center"
+        header-align="right"
       />
     </s-table>
   `,

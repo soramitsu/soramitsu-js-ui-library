@@ -122,6 +122,7 @@ function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: Mouse
               v-for="(column, columnIndex) in columns"
               :key="column.prop"
               class="s-table__th py-12px"
+              :class="[`s-table__td_align_${column.headerAlign}`]"
               :style="`width: ${columnsWidths[columnIndex]}px`"
               @click="handleHeaderMouseEvent({ column, 'event': $event })"
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
@@ -153,6 +154,7 @@ function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: Mouse
               v-for="(column, columnIndex) in columns"
               :key="column.prop"
               class="s-table__td py-12px"
+              :class="[`s-table__td_align_${column.align}`]"
               :style="rowIndex === 0 ? `width: ${columnsWidths[columnIndex]}px` : ''"
               @mouseenter="handleCellMouseEvent({ row, column, 'event': $event })"
               @mouseleave="handleCellMouseEvent({ row, column, 'event': $event })"
@@ -212,9 +214,16 @@ function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: Mouse
     text-overflow: ellipsis;
     vertical-align: middle;
     position: relative;
-    text-align: left;
 
-    &_is-right {
+    &_align_center {
+      text-align: center;
+    }
+
+    &_align_left {
+      text-align: left;
+    }
+
+    &_align_right {
       text-align: right;
     }
   }
