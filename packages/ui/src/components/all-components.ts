@@ -17,7 +17,7 @@ import { SSwitch } from './Switch'
 import { STextField } from './TextField'
 import { SPopover, SPopoverWrappedTransition } from './Popover'
 import { SAccordion, SAccordionItem } from './Accordion'
-import { SDatePicker} from './DateP'
+import { SDatePicker} from './DatePicker'
 
 /**
  * Component names should be identical to their variable names

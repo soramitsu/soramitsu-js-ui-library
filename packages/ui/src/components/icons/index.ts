@@ -21,6 +21,11 @@ import IconBasicEye24 from '@soramitsu-ui/icons/icomoon/basic-eye-24.svg'
 import IconBasicEyeNo24 from '@soramitsu-ui/icons/icomoon/basic-eye-no-24.svg'
 
 import IconArrowsChevronDownRounded24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-down-rounded-24.svg'
+import IconArrowsChevronRight24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-right-24.svg'
+import IconArrowsChevronLeft24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-left-24.svg'
+import IconArrowsChevronBottom24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-bottom-24.svg'
+import IconBasicCheckMark24 from '@soramitsu-ui/icons/icomoon/basic-check-mark-24.svg'
+
 
 export {
   IconClose,
@@ -34,6 +39,10 @@ export {
   IconBasicEye24,
   IconBasicEyeNo24,
   IconArrowsChevronDownRounded24,
+  IconArrowsChevronRight24,
+  IconArrowsChevronLeft24,
+  IconBasicCheckMark24,
+  IconArrowsChevronBottom24
 }
 
 export const STATUS_ICONS_MAP: { [K in Status]: Component } = {

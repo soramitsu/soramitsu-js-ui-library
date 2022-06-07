@@ -1,405 +1,679 @@
 <script lang="ts">
-export default defineComponent({
+export default {
   name: 'SDatePicker',
-})
+}
 </script>
 
 <script setup lang="ts">
-import { PickerTypes, PickerAlignment, InputTypes, BorderRadius, Size } from './consts'
-import DateTable from './src/basic/date-table.vue'
-import { SSelect, SDropdown, SelectOption, SSelectBase, SSelectButton, SSelectOption, useSelectApi } from '@/lib'
+import { ref } from 'vue'
+import DateTable from './src/date-table.vue'
+import MonthTable from './src/month-table.vue'
+import MonthPanel from './month-panel.vue'
+import YearTable from './src/year-table.vue'
+import TimePanel from './time-panel.vue'
+import { options } from './consts'
 
+import { IconBasicCheckMark24, IconArrowsChevronBottom24 } from '@/components/icons'
+import { maska as vMaska } from 'maska'
+import { DateTime } from 'luxon'
+import Popper from 'vue3-popper'
+
+import {
+  DatePickerType,
+  RangeState,
+  DateState,
+  PickState,
+  StateStore,
+  Options,
+  PresetOption,
+  ShowState,
+  RangeOptionValue,
+} from './types'
 
 interface Props {
-  /**
-    * Value of date picker component. Can be used with `v-model`.
-   * Can be date object / array with date objects for date range picker
-   */
-  modelValue: string
-
-  /**
-      * Type of the date picker component. Available values:
-   *
-   * `"year"`/`"month"`/`"date"`/`"dates"`/`"datetime"`/`"week"`/`"datetimerange"`/`"daterange"`/`"monthrange"`
-   */
-  readonly type: string
-
-  /**
-    * Input type of the datepicker component. Available values: `"input"`, `"select"`.
-   * `"input"` can be set only when `type` is not range. Otherwise, `"select"` will be set automatically.
-   *
-   * `"input"` is set by default
-   */
-  readonly inputType: string
-
-  /**
-    * When in range mode, the left and right panels are linked by default.
-   * Set `unlink-panels=true` if you want the two panels to switch current months independently.
-   *
-   * `false` by default
-   */
-
- readonly unlinkPanels: boolean
-  /**
-   * Readonly state of the date picker component
-   *
-   * `false` by default
-   */
-  readonly readonly: boolean
-  /**
-   * Disabled state of the date picker component
-   *
-   * `false` by default
-   */
-  readonly disabled: boolean
-  /**
-   * Editable state of the date picker input
-   *
-   * `true` by default
-   */
-  readonly editable: boolean
-  /**
-   * Clearable state of the date picker input. It will be set **only** when `inputType="input"`.
-   * TODO: ask design team about it
-   *
-   * `true` by default
-   */
-  readonly clearable: boolean
-  /**
-   * Placeholder in non-range mode
-   */
-   readonly placeholder: string
-  /**
-   * Placeholder for the start date in range mode
-   */
-   readonly startPlaceholder: string
-  /**
-   * Placeholder for the end date in range mode
-   */
-   readonly endPlaceholder: string
-  /**
-   * Format for dates of the displayed value in the input box.
-   *
-   * See: https://element.eleme.io/#/en-US/component/date-picker#date-formats
-   */
-   readonly format: string
-  /**
-   * Alignment. Available values: `"left"`/`"center"`/`"right"`
-   *
-   * `"left"` is set by default
-   */
-   readonly align: string
-  /**
-   * Custom class name for date picker's dropdown
-   */
-   readonly popperClass: string
-  /**
-   * Additional set of presets for range date picker component.
-   *
-   * See: https://element.eleme.io/#/en-US/component/date-picker#picker-options
-   */
-  readonly pickerOptions: object
-  /**
-   * Range separator.
-   *
-   * `"-"` by default
-   */
-   readonly rangeSeparator: string
-  /**
-   * Default date of the calendar
-   */
-   readonly defaultValue: any
-  /**
-   * The time value to use when selecting date range
-   */
-   readonly defaultTime: Array<string>
-  /**
-   * Format of binding value. If not specified, the binding value will be a `Date` object.
-   *
-   * See https://element.eleme.io/#/en-US/component/date-picker#date-formats
-   */
-   readonly valueFormat: string
-  /**
-   * Name of the native input
-   */
-   readonly name: string
-  /**
-   * Custom prefix icon class
-   */
-  /**
-   * Clear button icon class.
-   *
-   * `"el-icon-circle-close"` is set by default
-   */
-  readonly clearIcon: string
-  /**
-   * Will be validation event triggered from form.
-   *
-   * `true` by default
-   */
-  readonly validateEvent: boolean
-
-  readonly borderRadius?: string
-
-  readonly size?: string
+  modelValue: Date[] | Date
+  type: DatePickerType
+  time: boolean
 }
-
-const currentDate = computed(() => new Date(props.modelValue))
-
-const emit = defineEmits(['update:modelValue', 'blur', 'focus'])
-
 const props = withDefaults(defineProps<Props>(), {
-  type: PickerTypes.DATE,
-  inputType: InputTypes.INPUT,
-  unlinkPanels: false,
-  readonly: false,
-  disabled: false,
-  editable: true,
-  clearable: true,
-  placeholder: '',
-  startPlaceholder: '',
-  endPlaceholder: '',
-  align: PickerAlignment.LEFT,
-  rangeSeparator: '-',
-  clearIcon: 'el-icon-circle-close',
-  validateEvent: true,
-  borderRadius: BorderRadius.SMALL,
-  size: Size.MEDIUM
+  type: 'day',
+  time: false,
 })
 
-const pickType = ref('')
+const emit = defineEmits(['update:modelValue'])
 
-const focused  = ref(false);
+const gridType = computed(() => {
+  const time = props.time ? 'time' : ''
+  const range = props.type === 'range' ? '--range' : ''
+  const pick = props.type === 'pick' ? '--pick' : ''
+  return `custom-grid--date${time}${range || pick || ''}`
+})
 
 const isRange = computed(() => {
-  return ([PickerTypes.DATETIMERANGE, PickerTypes.DATERANGE, PickerTypes.MONTHRANGE] as Array<string>).includes(props.type)  
+  return props.type === 'range'
 })
 
-const isInputType = computed(() => {
-  return !isRange && props.inputType === InputTypes.INPUT
+const formatPattern = computed(() => {
+  return props.time ? 'dd/MM/yyyy, HH:mm' : 'dd/MM/yyyy'
 })
 
-const willHaveClearButton = computed(() => {
-  return isInputType && props.clearable
+// ____STATE_STORE________________________________________________________________
+
+const today = new Date()
+
+const rangeState = ref<RangeState>({
+  selecting: false,
+  startDate: new Date(today.getFullYear(), today.getMonth(), 1) || null,
+  endDate: new Date(today.getFullYear(), today.getMonth(), 7) || null,
 })
 
-const willPlaceholderBeShown = computed(() => {
-  if (!isInputType) {
-    return false
+const dayState = ref<DateState>(new Date())
+const pickState = ref<PickState>([])
+
+const stateStore = computed<StateStore>(() => {
+  return {
+    dayState: dayState.value,
+    pickState: pickState.value,
+    rangeState: rangeState.value,
   }
-  return !!(props.modelValue && props.placeholder)
 })
 
-const computedPopperClass = computed(() => {
-  const cssClasses: Array < string > = []
-  // if (props.popperClass) {
-  //   cssClasses.push(popperClass)
-  // }
-  // if (isStandardBorderRadius) {
-  //   cssClasses.push(`s-border-radius-${borderRadius}`)
-  // }
-  return cssClasses.join(' ')
+const getKeyValue =
+  <U extends keyof T, T extends object>(key: U) =>
+  (obj: T) =>
+    obj[key]
+
+const updateModelValue = () => {
+  if (props.type === 'day') {
+    emit('update:modelValue', dayState.value)
+  } else if (props.type === 'pick') {
+    emit('update:modelValue', pickState.value)
+  } else {
+    emit('update:modelValue', [rangeState.value.startDate, rangeState.value.endDate])
+  }
+}
+
+const onDatePick = (data: RangeOptionValue | Date | Date[]) => {
+  if (props.type === 'day') {
+    dayState.value = data as Date
+    emit('update:modelValue', dayState.value)
+  } else if (props.type === 'pick') {
+    pickState.value = data as Date[]
+    emit('update:modelValue', pickState.value)
+    setDateForTimeFieldName(pickState.value.length - 1)
+  } else {
+    let rsData = data as RangeOptionValue
+    rangeState.value = { startDate: rsData.startDate, endDate: rsData.endDate, selecting: rsData.selecting }
+    setDateForTimeFieldName(rsData.selectedField)
+  }
+  updateModelValue()
+  menuState.value = 'Custom'
+}
+
+updateModelValue()
+
+// __________________________________________________________________________________
+
+const onMenuClick = (data: Date | RangeOptionValue, label: string) => {
+  onDatePick(data)
+  updateShowedMonths()
+  menuState.value = label
+}
+
+const menuState = ref<string>('')
+
+// ____SHOW_STATE____________________________________________________________________
+
+const updateShowedMonths = () => {
+  let date: Date | null = null
+  switch (props.type) {
+    case 'pick':
+      date = pickState.value[pickState.value.length - 1]
+      break
+    case 'day':
+      date = dayState.value
+      break
+    case 'range':
+      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
+      // date = getKeyValue<keyof RangeState, RangeState>(dateForTime.value)(rangeState.value)
+      break
+    default:
+  }
+  if (!date) return `00:00`
+  updateShowedMonth(date.getMonth())
+  updateShowedYear(date.getFullYear())
+}
+
+const showState = ref<ShowState>({
+  month: 0,
+  year: 0,
 })
 
+showState.value.month = today.getMonth()
+showState.value.year = today.getFullYear()
 
-const computedClasses = computed(() => {
-  const cssClasses: Array<string> = ['s-date-picker']
-    // if ((elForm || elFormItem || {}).size) {
-    //   cssClasses.push(`s-${(elForm || elFormItem).size}`)
-    // } else if (isStandardSize) {
-    //   cssClasses.push(`s-${props.size}`)
-    // }
-    if ((Object.values(InputTypes) as Array<string>).includes(props.inputType)) {
-      cssClasses.push(`s-${!isInputType ? InputTypes.SELECT : props.inputType}-type`)
-    }
-    if (isStandardBorderRadius) {
-      cssClasses.push(`s-border-radius-${props.borderRadius}`)
-    }
-    if (focused) {
-      cssClasses.push('s-focused')
-    }
-    if (props.disabled) {
-      cssClasses.push('s-disabled')
-    }
-    if ((!isRange && props.modelValue) || (isRange && props.modelValue.length !== 0)) {
-      cssClasses.push('s-has-value')
-    }
-    return cssClasses  
+const updateShowedState = (deltaMonth: number) => {
+  let newMonth = showState.value.month + deltaMonth
+  if (newMonth > 11) {
+    updateShowedMonth(0)
+    updateShowedYear(showState.value.year + 1)
+  } else if (newMonth < 0) {
+    updateShowedMonth(11)
+    updateShowedYear(showState.value.year - 1)
+  } else {
+    updateShowedMonth(newMonth)
+  }
+  return
+}
+
+const updateShowedMonth = (month: number) => {
+  showState.value.month = month
+  changeView('dates')
+}
+
+const updateShowedYear = (year: number) => {
+  showState.value.year = year
+  changeView('dates')
+}
+
+const nextMonthShowState = computed(() => {
+  const month = showState.value.month > 10 ? 0 : showState.value.month + 1
+  const year = month === 0 ? showState.value.year + 1 : showState.value.year
+  return {
+    month,
+    year,
+  }
 })
 
-const isStandardSize = computed(() => {
-    return (Object.values(Size) as Array<string>).includes(props.size)
-  })
+// watch(props.modelValue, ()=> {
+//   updateShowedMonths()
+// }, {deep: true})
 
-const computedSize = computed(() => {
-    if (props.size === Size.BIG || !isStandardSize) {
-      return ''
+// _____________________________________________________________________________
+
+// _______________________________________VIEW__________________________________________
+
+const OPTIONS: PresetOption[] = options[props.type as keyof Options] || []
+
+const currentView = ref('dates')
+
+const changeView = (viewName: string) => {
+  currentView.value = viewName
+}
+
+// _____________________________________________________________________________
+
+// _______________________________________TIME__________________________________________
+
+const dateForTime = ref<string>('')
+
+const setDateForTimeFieldName = (field: string | Number) => {
+  dateForTime.value = `${field}`
+}
+
+const updateTime = (time: string) => {
+  const arr = time.split(':').map((item) => Number(item))
+  console.log(time)
+  let date
+  switch (props.type) {
+    case 'pick':
+      date = pickState.value[dateForTime.value as keyof PickState] as Date | null
+      if (!date) return
+      pickState.value[dateForTime.value as keyof PickState] = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        arr[0],
+        arr[1],
+        0,
+      )
+      break
+    case 'day':
+      date = dayState.value
+      dayState.value = new Date(date.getFullYear(), date.getMonth(), date.getDate(), arr[0], arr[1], 0)
+      break
+    case 'range':
+      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
+      if (!date) return
+      rangeState.value[dateForTime.value as keyof RangeState] = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        arr[0],
+        arr[1],
+        0,
+      )
+      break
+    default:
+  }
+
+  updateModelValue()
+}
+
+const currentValueTime = computed(() => {
+  if (!dateForTime.value && props.type !== 'day') return `00:00`
+  let date
+  switch (props.type) {
+    case 'pick':
+      date = pickState.value[pickState.value.length - 1]
+      break
+    case 'day':
+      date = dayState.value
+      break
+    case 'range':
+      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
+      break
+    default:
+  }
+  if (!date) return `00:00`
+  const hours = timeDecoder(date.getHours())
+  const minutes = timeDecoder(date.getMinutes())
+  return `${hours}:${minutes}`
+})
+
+const timeDecoder = (num: number) => {
+  return num.toString().length < 2 ? `0${num}` : num
+}
+
+// _______________________________________________________________________________________
+
+const firstCalendarModelValue = computed(() => {
+  // return isRange.value ? props.modelValue[0] : props.modelValue
+  if (props.type === 'range') {
+    const modelValue = props.modelValue as Date[]
+    return modelValue[0]
+  } else {
+    return props.modelValue
+  }
+})
+
+const calendarToModelValue = computed(() => {
+  return props.modelValue as Date[][1]
+})
+
+const customInputValue = (field: string) => {
+  return formatDate(rangeState.value[field as keyof RangeState])
+}
+
+const updateCustomInput = (event: any, field: string) => {
+  const newVal = event.target.value
+  const date = fromFormat(newVal)
+  if (date) rangeState.value[field as keyof RangeState] = date
+  rangeState.value.selecting = false
+  updateModelValue()
+  updateShowedMonths()
+}
+
+const updateCustomInputDay = (event: any) => {
+  const newVal = event.target.value
+  const date = fromFormat(newVal)
+  if (date) dayState.value = date
+  updateModelValue()
+  updateShowedMonths()
+}
+
+const customInputValueStartDate = computed(() => {
+  return customInputValue('startDate')
+})
+
+const customInputValueEndDate = computed(() => {
+  return customInputValue('endDate')
+})
+
+const customInputValueDay = computed(() => {
+  return formatDate(dayState.value)
+})
+
+const customInputConfig = computed(() => {
+  return {
+    mask: `##/##/####${props.time ? ', ##:##' : ''}`,
+    class: `custom-input${props.time ? '--time' : ''}`
+  }
+})
+
+const formatDate = (date: any) => {
+  if (!date) return ''
+  return DateTime.fromJSDate(date).toFormat(formatPattern.value)
+}
+
+const fromFormat = (dateString: string) => {
+  let date = DateTime.fromFormat(dateString, formatPattern.value)
+  if (!date.isValid) return null
+  console.dir(date)
+  return date.toJSDate()
+}
+
+const headTitle = computed(() => {
+  try {
+    switch (props.type) {
+      case 'day':
+        return formatDate(props.modelValue)
+      case 'range': {
+        const modelValue = props.modelValue as Date[]
+        return modelValue.map((item: Date) => formatDate(item)).join(' - ')
+      }
+
+      case 'pick': {
+        const modelValue = props.modelValue as Date[]
+        return modelValue.map((item: Date) => formatDate(item)).join(', ')
+      }
+      default:
+        break
     }
-    return props.size
-  })
-
-const isStandardBorderRadius = computed(() => {
-    return (Object.values(BorderRadius) as Array<string>).includes(props.borderRadius)
-  })
-
-const handleBlur = (component: any) => {
-    focused.value = false
-    emit('blur', component)
+  } catch {
+    return ''
   }
+})
 
-const handleFocus  = (component: any) => {
-    if (props.disabled || props.readonly) {
-      return
-    }
-    focused.value = true
-    emit('focus', component)
-  }
-
-const handleChange  = (values: any) => {
-    focused.value = false
-  }
-
-const OPTIONS: any[] = [
-  {
-    label: 'All time',
-    value: 'all_time',
-  },
-  {
-    label: 'Today',
-    value: 'today',
-  },
-  {
-    label: 'This week',
-    value: 'this_week',
-  },
-  {
-    label: 'Last week',
-    value: 'last_week',
-  },
-  {
-    label: 'This month',
-    value: 'this_month',
-  },
-  {
-    label: 'Last month',
-    value: 'last_month',
-  },
-  {
-    label: 'This year',
-    value: 'this_year',
-  },
-  {
-    label: 'Last year',
-    value: 'last_year',
-  },
-  {
-    label: 'Custom',
-    value: 'custom',
-  }
-]
-
-const rangeState =  {
-          endDate: null,
-          selecting: false,
-          row: null,
-          column: null
-        };
-
-// const handleChangeRange = (val) => {
-//         this.minDate = val.minDate;
-//         this.maxDate = val.maxDate;
-//         this.rangeState = val.rangeState;
-//       };
-
-// const defaultValue = (val:any) => {
-//         if (!Array.isArray(this.value)) {
-//           const [left, right] = calcDefaultValue(val);
-//           this.leftDate = left;
-//           this.rightDate = val && val[1] && this.unlinkPanels
-//             ? right
-//             : nextMonth(this.leftDate);
-//         }
-//       }
-
+const arrowState = ref<string>('')
+const switchArrow = (newArrowState: string) => {
+  arrowState.value = newArrowState
+}
 </script>
 
 <template>
-  <div :class="computedClasses">
-    <SSelect 
-      :options="OPTIONS"
-      v-model = "pickType"
-      label="Date"
-    />
-    <div v-if="pickType">
-      <!-- <DateTable
-        selection-mode="day"
-        :type="PickerTypes.DATE"
-        :date="currentDate"
-        :default-value="defaultValue"
-        :min-date="minDate"
-        :max-date="maxDate"
-        :range-state="rangeState"
-        :disabled-date="disabledDate"
-        :cell-class-name="cellClassName"
-        :value="'ff'"
-        @changerange="handleChangeRange"
-        @pick="handleRangePick"
-      /> -->
-            <DateTable
-        selection-mode="day"
-        :type="PickerTypes.DATE"
-        :date="currentDate"
-        :default-value="defaultValue"
-        :range-state="rangeState"
-        :value="'ff'"
-      />
-    </div>
-    <div>Время</div>
-    <div>Даты</div>
-    <!-- <span
-      v-if="willPlaceholderBeShown"
-      class="s-placeholder"
-    >{{ placeholder }}</span>
-    <el-date-picker
-      ref="picker"
-      :model-value="modelValue"
-      :type="type"
-      :unlink-panels="unlinkPanels"
-      :readonly="readonly"
-      :disabled="disabled"
-      :size="size"
-      :editable="editable"
-      :clearable="willHaveClearButton"
-      :placeholder="placeholder"
-      :start-placeholder="startPlaceholder"
-      :end-placeholder="endPlaceholder"
-      :format="format"
-      :align="align"
-      :popper-class="computedPopperClass"
-      :picker-options="pickerOptions"
-      :range-separator="rangeSeparator"
-      :default-value="defaultValue"
-      :default-time="defaultTime"
-      :value-format="valueFormat"
-      prefix-icon="-"
-      :clear-icon="clearIcon"
-      :validate-event="validateEvent"
-      @blur="handleBlur"
-      @focus="handleFocus"
-      @change="handleChange"
-      @input="(event: any) => $emit('update:modelValue', event.target.value)"
+  <div>
+    <Popper
+      @open:popper="switchArrow('reverse')"
+      @close:popper="switchArrow('')"
     >
-      <slot
-        slot="range-separator"
-        name="range-separator"
-      />
-    </el-date-picker>
-    <s-icon
-      v-if="!isInputType"
-      name="chevron-down-rounded-16"
-    /> -->
+      <div class="p-2 sora-tpg-ch2 relative pr-6 cursor-pointer title">
+        {{ headTitle || 'Date' }}
+        <div
+          class="arrow"
+          :class="arrowState"
+        >
+          <IconArrowsChevronBottom24 />
+        </div>
+      </div>
+      <template #content="{ close }">
+        <div
+          class="custom-grid sora-tpg-p4"
+          :class="`${gridType}`"
+        >
+          <div class="select flex flex-col justify-start items-stretch sora-tpg-p3">
+            <p
+              v-for="(item, idx) in OPTIONS"
+              :key="idx"
+              class="menu-item"
+              :class="menuState === item.label ? 'active' : ''"
+              @click="onMenuClick(item.value, item.label)"
+            >
+              {{ item.label }}
+              <span
+                v-show="menuState === item.label"
+                class="menu-item__checkmark"
+              ><IconBasicCheckMark24 /></span>
+            </p>
+          </div>
+          <div class="calendars flex justify-center items-start">
+            <div class="calendar-from">
+              <div
+                v-show="currentView === 'dates'"
+                class="flex flex-col justify-start items-center"
+              >
+                <MonthPanel
+                  class="w-full"
+                  :show-month="showState.month"
+                  :show-year="showState.year"
+                  @change-view="changeView"
+                  @update-showed-state="updateShowedState"
+                />
+                <DateTable
+                  :value="firstCalendarModelValue"
+                  :time="props.time"
+                  :selection-mode="type"
+                  :show-state="showState"
+                  :state-store="stateStore"
+                  @pick="onDatePick"
+                  @update-showed-state="updateShowedState"
+                />
+              </div>
+            </div>
+            <div
+              v-if="isRange"
+              class="calendar-to"
+            >
+              <div
+                v-show="currentView === 'dates'"
+                class="flex flex-col justify-start items-center"
+              >
+                <MonthPanel
+                  class="w-full"
+                  :show-month="nextMonthShowState.month"
+                  :show-year="nextMonthShowState.year"
+                  :hide-arrows="true"
+                  @update-showed-state="updateShowedState"
+                  @change-view="changeView"
+                />
+                <DateTable
+                  :value="calendarToModelValue"
+                  :time="props.time"
+                  :selection-mode="type"
+                  :show-state="nextMonthShowState"
+                  :state-store="stateStore"
+                  @pick="onDatePick"
+                  @update-showed-state="updateShowedState"
+                />
+              </div>
+            </div>
+            <div
+              v-if="currentView === 'months'"
+              class=" h-full"
+            >
+              <MonthTable
+                :value="showState.month"
+                @pick="updateShowedMonth"
+              />
+            </div>
+            <div v-if="currentView === 'years'">
+              <YearTable
+                :value="showState.year"
+                @pick="updateShowedYear"
+              />
+            </div>
+          </div>
+          <div
+            v-if="time && !['years', 'months'].includes(currentView)"
+            class="time flex flex-col justify-center"
+          >
+            <TimePanel
+              :value="currentValueTime"
+              @update-time="updateTime"
+            />
+          </div>
+          <div
+            v-if="menuState === 'Custom'"
+            class="custom-panel flex justify-center items-center relative"
+          >
+            <div class="flex justify-center items-center">
+              <template v-if="props.type === 'range'">
+                <input
+                  v-maska="customInputConfig.mask"
+                  class="custom-input"
+                  :class="customInputConfig.class"
+                  :value="customInputValueStartDate"
+                  @change="updateCustomInput($event, 'startDate')"
+                >
+                <div class="mx-2">
+                  -
+                </div>
+                <input
+                  v-maska="customInputConfig.mask"
+                  class="custom-input"
+                  :class="customInputConfig.class"
+                  :value="customInputValueEndDate"
+                  @change="updateCustomInput($event, 'endDate')"
+                >
+              </template>
+              <template v-if="props.type === 'day'">
+                <input
+                  v-maska="customInputConfig.mask"
+                  class="custom-input"
+                  :class="customInputConfig.class"
+                  :value="customInputValueDay"
+                  @change="updateCustomInputDay($event)"
+                >
+              </template>
+              <button
+                class="save-button"
+                @click="close"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      </template>
+    </Popper>
   </div>
 </template>
 
 <style lang="scss" scoped>
+@use '@/theme';
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) scale(0.66);
+}
+.arrow svg {
+  transition: 0.3s;
+}
+
+.arrow.reverse svg {
+  transform: rotate(180deg);
+}
+
+.custom-grid {
+  display: grid;
+  background-color: theme.token-as-var('sys.color.util.surface');
+
+  grid-template-areas:
+    'select calendars time'
+    'select custom custom';
+  grid-template-columns: 150px auto 76px;
+  grid-template-rows: 342px 1fr;
+  height: 405px;
+  width: 886px;
+  
+
+  box-shadow: theme.token-as-var('sys.shadow.dropdown');
+
+  &--date {
+    grid-template-areas:
+      'select calendars'
+      'select custom';
+    width: 522px;
+    grid-template-columns: 150px auto;
+  }
+  &--date--range {
+    grid-template-areas:
+      'select calendars'
+      'select custom';
+    width: 822px;
+    grid-template-columns: 150px auto;
+  }
+
+  &--datetime {
+    grid-template-areas:
+      'select calendars  time'
+      'select custom custom';
+    width: 558px;
+    grid-template-columns: 150px auto 76px;
+  }
+
+  &--datetime--pick {
+    grid-template-areas:
+      'calendars time'
+      'custom custom';
+    width: 448px;
+    grid-template-columns: 372px 76px;
+  }
+
+  &--date--pick {
+    grid-template-areas:
+      'calendars'
+      'custom';
+    width: 372px;
+    grid-template-columns: 372px;
+  }
+}
+
+.select {
+  grid-area: select;
+  border-right: 1px solid theme.token-as-var('sys.color.border-primary');
+}
+.calendar-from {
+  grid-area: cal;
+}
+.calendar-to {
+  grid-area: cale;
+  margin-left: 16px;
+}
+.time {
+  grid-area: time;
+  // border-left: 1px solid theme.token-as-var('sys.color.border-primary');
+}
+.custom-panel {
+  grid-area: custom;
+  border-top: 1px solid theme.token-as-var('sys.color.border-primary');
+}
+
+.calendars {
+  grid-area: calendars;
+}
+
+.menu-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  position: relative;
+  &__checkmark {
+    position: absolute;
+    top: 0;
+    right: 8px;
+    transform: translateY(50%);
+  }
+}
+
+.menu-item:hover {
+  background-color: theme.token-as-var('sys.color.background-hover');
+}
+.menu-item.active {
+  background-color: theme.token-as-var('sys.color.background-hover');
+}
+
+.custom-input {
+  outline: none;
+  border: 1px solid theme.token-as-var('sys.color.border-primary');
+  border-radius: 4px;
+  padding: 5px 10px;
+  width: 120px;
+  height: 32px;
+  text-align: center;
+
+  &--time {
+    width: 150px;
+  }
+}
+
+.save-button {
+  font-size: 10px;
+  width: 44px;
+  height: 24px;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  background: theme.token-as-var('sys.color.primary');
+  border-radius: 2px;
+  color: theme.token-as-var('sys.color.util.surface');
+  font-weight: 700;
+}
+
+.title {
+  border-radius: 4px;
+  border: 1px solid theme.token-as-var('sys.color.border-primary');
+}
 </style>

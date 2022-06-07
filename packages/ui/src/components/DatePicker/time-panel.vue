@@ -1,0 +1,85 @@
+<script lang="ts">
+export default defineComponent({
+  name: 'TimePanel',
+})
+</script>
+
+<script setup lang="ts">
+const emit = defineEmits(['updateTime'])
+
+interface Props {
+  value: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  value: '00:00',
+})
+
+let timeArray = ref<string[]>([])
+
+for (let i = 0; i < 24; i++) {
+  const hour = i < 10 ? `0${i}` : i
+  timeArray.value.push(`${hour}:00`)
+  timeArray.value.push(`${hour}:30`)
+}
+
+const updateTime = (e: any) => {
+  emit('updateTime', e.target.textContent)
+}
+</script>
+
+<template>
+  <div class="time-panel flex flex-col items-center justify-start sora-tpg-p4">
+    <p
+      v-for="(time, idx) in timeArray"
+      :key="idx"
+      class="cursor-pointer"
+      :class="time === value ? 'active' : ''"
+      @click="updateTime"
+    >
+      {{ time }}
+    </p>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+@use '@/theme';
+.time-panel {
+  overflow-y: scroll;
+  height: 100%;
+  padding: 4px 0;
+
+  p {
+    margin-bottom: 10px;
+    padding: 1px 4px;
+    width: 44px;
+    height: 24px;    
+    font-feature-settings: 'tnum' on, 'lnum' on, 'case' on;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.time-panel::-webkit-scrollbar {
+  background: transparent;
+  width: 2px;
+}
+
+.time-panel::-webkit-scrollbar-thumb {
+  background: theme.token-as-var('sys.color.border-primary');
+  border-radius: 2px;
+}
+
+.time-panel {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.active {
+  background-color: theme.token-as-var('sys.color.primary');
+  color: theme.token-as-var('sys.color.util.surface');
+  border-radius: 2px;
+}
+</style>

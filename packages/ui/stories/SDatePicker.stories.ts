@@ -1,6 +1,5 @@
 import { defineMeta, defineStory } from './util'
 import { SDatePicker } from '@/lib'
-import { IconClose } from '@/components/icons'
 import { ref } from 'vue'
 
 export default defineMeta({
@@ -13,45 +12,30 @@ export const Configurable = defineStory((args) =>  ({
   },
   setup() {
     const date = ref(new Date())
-    const month = ref(0)
     return {
-      args, date, month
+      args, date
     }
   },
   template: `
     <div class="flex flex-col items-start">
-    <SDatePicker v-model="date" v-model:month="month"/>
+      <SDatePicker v-model="date" :type="args.type" :time="args.time" />
     </div>
-    <p>{{date}}</p>
-    <p>{{month}}</p>
+    <div class="flex items-center justify-start">
+      <p>@v-model = </p>
+      <p>{{date}}</p>
+    </div>
   `
 }))
-// Configurable.argTypes = {
-//   type: {
-//     options: BUTTON_TYPE_VALUES,
-//     control: 'inline-radio'
-//   },
-//   size: {
-//     options: BUTTON_SIZE_VALUES,
-//     control: 'inline-radio'
-//   },
-//   icon: { control: 'text' },
-//   iconPosition: {
-//     options: BUTTON_ICON_POSITION_VALUES,
-//     control: 'inline-radio'
-//   },
-//   disabled: { control: 'boolean' },
-//   rounded: { control: 'boolean' },
-//   loading: { control: 'boolean' },
-//   uppercase: { control: 'boolean' },
-// }
-// Configurable.args = {
-//   type: 'primary',
-//   size: 'medium',
-//   icon: '',
-//   iconPosition: 'left',
-//   disabled: false,
-//   rounded: false,
-//   loading: false,
-//   uppercase: false,
-// }
+Configurable.argTypes = {
+  type: {
+    options: ['day', 'range', 'pick'],
+    control: 'select',
+  },
+  time: {
+    control: 'boolean'
+  },
+}
+Configurable.args = {
+  type: 'day',
+  time: true
+}
