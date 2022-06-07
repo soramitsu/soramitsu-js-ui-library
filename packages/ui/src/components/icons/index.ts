@@ -17,6 +17,8 @@ import IconStatusWarning16 from '~icons/ri/alert-fill'
 import IconStatusSuccess16 from '@soramitsu-ui/icons/icomoon/status-success-clr-16.svg'
 import IconStatusError16 from '@soramitsu-ui/icons/icomoon/status-error-ic-16.svg'
 
+import IconArrowTop16 from '@soramitsu-ui/icons/icomoon/arrow-top-16.svg'
+
 // BROKEN
 // import IconBasicEye24 from '@soramitsu-ui/icons/icomoon/basic-eye-24.svg'
 // import IconBasicEyeNo24 from '@soramitsu-ui/icons/icomoon/basic-eye-no-24.svg'
@@ -43,6 +45,7 @@ export {
   IconArrowsChevronDownRounded24,
   IconChevronBottom16,
   IconBasicExternalLink24,
+  IconArrowTop16,
 }
 
 export const STATUS_ICONS_MAP: { [K in Status]: Component } = {

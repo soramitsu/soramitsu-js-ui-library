@@ -1,6 +1,6 @@
 import { InjectionKey, DeepReadonly, Slot } from 'vue'
 import { forceInject } from '@/util'
-import { TableColumnAlign } from '@/components/Table/types'
+import { ColumnSortBy, ColumnSortOrder, TableColumnAlign } from '@/components/Table/types'
 
 export interface ColumnWidthProps {
   width: null | number
@@ -13,7 +13,15 @@ export interface ColumnAlignProps {
   headerAlign: TableColumnAlign
 }
 
-export interface ColumnApi extends ColumnWidthProps, ColumnAlignProps {
+export interface ColumnSortProps {
+  sortable: boolean | 'custom'
+  sortMethod: <T>(a: T, b: T) => number
+  sortBy: ColumnSortBy
+  sortOrders: ColumnSortOrder[]
+}
+
+export interface ColumnApi extends ColumnWidthProps, ColumnAlignProps, ColumnSortProps {
+  id: string
   prop: string
   label?: string
   cellSlot?: Slot

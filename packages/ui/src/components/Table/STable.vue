@@ -5,6 +5,10 @@ export default { name: 'STable' }
 <script setup lang="ts">
 import type { Slot } from 'vue'
 import { ColumnApi, TABLE_API_KEY } from '@/components'
+import { IconArrowTop16 } from '@/components/icons'
+import { useColumnSort } from '@/components/Table/column-sort.composable'
+import { TableRow, CellEventData, HeaderEventData, RowEventData, SortEventData } from './types'
+import get from 'lodash/get'
 
 type Row = Record<string, unknown>
 type CellEventData = [Row, ColumnApi, EventTarget, MouseEvent]
@@ -12,21 +16,27 @@ type RowEventData = [Row, ColumnApi, MouseEvent]
 type HeaderEventData = [ColumnApi, MouseEvent]
 
 const props = defineProps<{
-  data: Row[]
+  data: TableRow[]
 }>()
 
 const emit = defineEmits<{
   (event: 'cell-mouse-enter' | 'cell-mouse-leave' | 'cell-click' | 'cell-dblclick', value: CellEventData): void
   (event: 'header-click' | 'header-contextmenu', value: HeaderEventData): void
   (event: 'row-click' | 'row-dblclick' | 'row-contextmenu', value: RowEventData): void
+  (event: 'sort-change', value: SortEventData): void
 }>()
 
 const columns: ColumnApi[] = shallowReactive([])
+const { sortStates, sortedData, handleSortChange } = useColumnSort(toRef(props, 'data'))
 
 function register(column: ColumnApi) {
   const index = columns.push(column)
+  sortStates.set(column, null)
 
-  onScopeDispose(() => columns.splice(index, 1))
+  onScopeDispose(() => {
+    columns.splice(index, 1)
+    sortStates.delete(column)
+  })
 }
 
 const api = readonly({
@@ -60,7 +70,15 @@ useResizeObserver(table, (entries) => {
   tableWidth.value = width
 })
 
-function handleCellMouseEvent(ctx: { row: Row; column: ColumnApi; event: MouseEvent }) {
+function handleSortClick(column: ColumnApi) {
+  const newOrder = handleSortChange(column)
+
+  if (!newOrder) return
+
+  emit('sort-change', { column, prop: column.prop, order: newOrder })
+}
+
+function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi; event: MouseEvent }) {
   if (!ctx.event.target) {
     return
   }
@@ -91,13 +109,14 @@ function handleCellMouseEvent(ctx: { row: Row; column: ColumnApi; event: MouseEv
   }
 }
 
-function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: MouseEvent }) {
+function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
   if (!ctx.event.target) {
     return
   }
 
   switch (ctx.event.type) {
     case 'click': {
+      handleSortClick(ctx.column)
       emit('header-click', [ctx.column, ctx.event])
       break
     }
@@ -153,7 +172,7 @@ function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: Mouse
       <table class="s-table__body w-full">
         <tbody>
           <tr
-            v-for="(row, rowIndex) in data"
+            v-for="(row, rowIndex) in sortedData"
             :key="JSON.stringify(row)"
             class="s-table__tr"
           >
@@ -174,7 +193,7 @@ function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: Mouse
                 :class="{
                   's-table__cell_has-tooltip': column.showOverflowTooltip,
                 }"
-                :title="column.showOverflowTooltip ? row[column.prop] : null"
+                :title="column.showOverflowTooltip ? get(row, column.prop) : null"
               >
                 <component
                   :is="column.cellSlot"
@@ -182,7 +201,7 @@ function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: Mouse
                   v-bind="{ row, column, rowIndex }"
                 />
                 <template v-else>
-                  {{ row[column.prop] }}
+                  {{ get(row, column.prop) }}
                 </template>
               </div>
             </td>
@@ -233,6 +252,24 @@ function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: Mouse
 
     &_align_right {
       text-align: right;
+    }
+  }
+
+  &__th {
+    color: theme.token-as-var('sys.color.content-tertiary');
+  }
+
+  &__sort-icon {
+    visibility: hidden;
+    fill: currentColor;
+
+    &_asc,
+    &_desc {
+      visibility: visible;
+    }
+
+    &_desc {
+      transform: rotateZ(180deg);
     }
   }
 

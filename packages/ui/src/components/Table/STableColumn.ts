@@ -4,7 +4,7 @@ import { PropType } from '@vue/runtime-core'
 import { nextIncrementalCounter } from '@/util'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from '@/components/Table/consts'
-import { TableColumnAlign, TableColumnType } from '@/components/Table/types'
+import { ColumnSortBy, ColumnSortOrder, TableColumnAlign, TableColumnType } from '@/components/Table/types'
 import { ColumnWidthProps } from './api'
 
 export default defineComponent({
@@ -55,18 +55,24 @@ export default defineComponent({
     /**
      * sorting method, works when sortable is true. Should return a number, just like Array.sort
      */
-    sortMethod: Function as PropType<typeof Array.prototype.sort>,
+    sortMethod: {
+      type: Function as PropType<<T>(a: T, b: T) => number>,
+      default: null,
+    },
     /**
      * specify which property to sort by, works when sortable is true and sort-method is undefined.
      * If set to an Array, the column will sequentially sort by the next property if the previous one is equal
      */
-    sortBy: [String, Function, Array],
+    sortBy: {
+      type: [String, Function, Array] as PropType<ColumnSortBy>,
+      default: null,
+    },
     /**
      * the order of the sorting strategies used when sorting the data, works when sortable is true.
      * Accepts an array, as the user clicks on the header, the column is sorted in order of the elements in the array
      */
     sortOrders: {
-      type: Array as PropType<('ascending' | 'descending' | null)[]>,
+      type: Array as PropType<ColumnSortOrder[]>,
       default: () => ['ascending', 'descending', null],
     },
     /**
@@ -165,7 +171,20 @@ export default defineComponent({
       }
     })
 
+    const sortProps = computed(() => {
+      return {
+        sortable: props.sortable === 'custom' ? ('custom' as const) : Boolean(props.sortable),
+        sortMethod: props.sortMethod,
+        sortBy: props.sortBy,
+        sortOrders: props.sortOrders,
+      }
+    })
+
+    const basicProps = ['columnKey', 'label', 'className', 'labelClassName', 'formatter', 'fixed', 'resizable']
+    const selectProps = ['selectable', 'reserveSelection']
+
     tableApi.register({
+      id: columnId,
       cellSlot: slots.default,
       headerSlot: slots.header,
       prop: props.prop,
@@ -174,6 +193,7 @@ export default defineComponent({
       align: definitelyAlign.value,
       headerAlign: definitelyHeaderAlign.value || definitelyAlign.value,
       ...widthProps.value,
+      ...sortProps.value,
     })
 
     return () => null
