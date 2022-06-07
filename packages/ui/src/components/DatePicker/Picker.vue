@@ -78,11 +78,6 @@ const stateStore = computed<StateStore>(() => {
   }
 })
 
-const getKeyValue =
-  <U extends keyof T, T extends object>(key: U) =>
-  (obj: T) =>
-    obj[key]
-
 const updateModelValue = () => {
   if (props.type === 'day') {
     emit('update:modelValue', dayState.value)
@@ -183,6 +178,10 @@ const nextMonthShowState = computed(() => {
     month,
     year,
   }
+})
+
+const showStateView = computed(() => {
+  return ['years', 'months'].includes(currentView.value)
 })
 
 // watch(props.modelValue, ()=> {
@@ -327,7 +326,7 @@ const customInputValueDay = computed(() => {
 const customInputConfig = computed(() => {
   return {
     mask: `##/##/####${props.time ? ', ##:##' : ''}`,
-    class: `custom-input${props.time ? '--time' : ''}`
+    class: `custom-input${props.time ? '--time' : ''}`,
   }
 })
 
@@ -389,7 +388,7 @@ const switchArrow = (newArrowState: string) => {
       <template #content="{ close }">
         <div
           class="custom-grid sora-tpg-p4"
-          :class="`${gridType}`"
+          :class="[`${gridType}`, { narrow: showStateView }]"
         >
           <div class="select flex flex-col justify-start items-stretch sora-tpg-p3">
             <p
@@ -459,7 +458,7 @@ const switchArrow = (newArrowState: string) => {
             </div>
             <div
               v-if="currentView === 'months'"
-              class=" h-full"
+              class="h-full w-full flex items-center justify-center"
             >
               <MonthTable
                 :value="showState.month"
@@ -474,7 +473,7 @@ const switchArrow = (newArrowState: string) => {
             </div>
           </div>
           <div
-            v-if="time && !['years', 'months'].includes(currentView)"
+            v-if="time && !showStateView"
             class="time flex flex-col justify-center"
           >
             <TimePanel
@@ -483,7 +482,7 @@ const switchArrow = (newArrowState: string) => {
             />
           </div>
           <div
-            v-if="menuState === 'Custom'"
+            v-if="menuState === 'Custom' && !showStateView"
             class="custom-panel flex justify-center items-center relative"
           >
             <div class="flex justify-center items-center">
@@ -557,7 +556,10 @@ const switchArrow = (newArrowState: string) => {
   grid-template-rows: 342px 1fr;
   height: 405px;
   width: 886px;
-  
+
+  &.narrow {
+    width: 640px;
+  }
 
   box-shadow: theme.token-as-var('sys.shadow.dropdown');
 
@@ -598,6 +600,13 @@ const switchArrow = (newArrowState: string) => {
       'custom';
     width: 372px;
     grid-template-columns: 372px;
+  }
+
+  &--datetime--pick,
+  &--date--pick {
+    &.narrow {
+      width: 372px;
+    }
   }
 }
 

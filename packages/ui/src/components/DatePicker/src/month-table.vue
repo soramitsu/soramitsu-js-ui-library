@@ -70,7 +70,7 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
 
 <template>
   <div
-    class="month-table sora-tpg-p3"
+    class="month-table sora-tpg-p4"
     @click="handleMonthTableClick"
   >
     <div
@@ -97,8 +97,8 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
   width: 320px;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 80px);
 
   & > div {
     text-align: center;
