@@ -142,8 +142,7 @@ export default defineComponent({
     const definitelyAlign = filterProp('align', TABLE_COLUMN_ALIGN_VALUES, 'left')
     const definitelyHeaderAlign = filterProp('headerAlign', [null, ...TABLE_COLUMN_ALIGN_VALUES], null)
 
-    // Width
-    const cellStarts: Record<Exclude<TableColumnType, 'default'>, ColumnWidthProps> = {
+    const widthsPresets: Record<Exclude<TableColumnType, 'default'>, ColumnWidthProps> = {
       selection: {
         width: 48,
         minWidth: 48,
@@ -158,7 +157,7 @@ export default defineComponent({
 
     const widthProps = computed(() => {
       if (definitelyType.value !== 'default') {
-        return cellStarts[definitelyType.value]
+        return widthsPresets[definitelyType.value]
       }
 
       const parsedWith = parseInt(props.width, 10)
@@ -179,9 +178,6 @@ export default defineComponent({
         sortOrders: props.sortOrders,
       }
     })
-
-    const basicProps = ['columnKey', 'label', 'className', 'labelClassName', 'formatter', 'fixed', 'resizable']
-    const selectProps = ['selectable', 'reserveSelection']
 
     tableApi.register({
       id: columnId,
