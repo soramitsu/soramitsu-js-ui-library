@@ -114,20 +114,20 @@ function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: Mouse
     ref="table"
     class="s-table"
   >
-    <div class="s-table__body-wrapper">
-      <table class="s-table__body w-full">
+    <div class="s-table__header-wrapper">
+      <table class="s-table__header w-full">
         <thead>
           <tr class="s-table__tr">
             <th
               v-for="(column, columnIndex) in columns"
               :key="column.prop"
-              class="s-table__th py-12px"
-              :class="[`s-table__td_align_${column.headerAlign}`]"
+              class="s-table__th cursor-pointer py-12px sora-tpg-ch3"
+              :class="[`s-table__th_align_${column.headerAlign}`]"
               :style="`width: ${columnsWidths[columnIndex]}px`"
               @click="handleHeaderMouseEvent({ column, 'event': $event })"
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
             >
-              <div class="s-table__cell px-16px">
+              <div class="s-table__cell inline-flex items-center px-16px">
                 <component
                   :is="column.headerSlot"
                   v-if="column.headerSlot"
@@ -136,6 +136,13 @@ function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: Mouse
                 <template v-else>
                   {{ column.label }}
                 </template>
+                <IconArrowTop16
+                  class="s-table__sort-icon inline ml-10px"
+                  :class="{
+                    's-table__sort-icon_asc': sortStates.get(column) === 'ascending',
+                    's-table__sort-icon_desc': sortStates.get(column) === 'descending',
+                  }"
+                />
               </div>
             </th>
           </tr>
@@ -153,7 +160,7 @@ function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: Mouse
             <td
               v-for="(column, columnIndex) in columns"
               :key="column.prop"
-              class="s-table__td py-12px"
+              class="s-table__td py-12px sora-tpg-p3"
               :class="[`s-table__td_align_${column.align}`]"
               :style="rowIndex === 0 ? `width: ${columnsWidths[columnIndex]}px` : ''"
               @mouseenter="handleCellMouseEvent({ row, column, 'event': $event })"
@@ -191,7 +198,8 @@ function handleHeaderMouseEvent(ctx: { row: Row; column: ColumnApi; event: Mouse
 @use '@/theme';
 
 .s-table {
-  &__body {
+  &__body,
+  &__header {
     table-layout: fixed;
     border-collapse: separate;
     border-spacing: 0;

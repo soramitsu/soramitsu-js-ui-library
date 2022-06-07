@@ -98,7 +98,7 @@ export default defineComponent({
      * alignment of the table header. If omitted, the value of the above align attribute will be applied
      */
     headerAlign: {
-      type: String as PropType<'left' | 'center' | 'right'>,
+      type: String as PropType<TableColumnAlign | null>,
       default: null,
     },
     /**
@@ -128,14 +128,13 @@ export default defineComponent({
   setup(props) {
     const tableApi = useTableApi()
     const slots = useSlots()
-    // =================================
 
     const columnId = 's-table_column_' + nextIncrementalCounter()
 
     const filterProp = usePropTypeFilter(props)
     const definitelyType = filterProp('type', TABLE_COLUMN_TYPE_VALUES, 'default')
     const definitelyAlign = filterProp('align', TABLE_COLUMN_ALIGN_VALUES, 'left')
-    const definitelyHeaderAlign = filterProp('headerAlign', TABLE_COLUMN_ALIGN_VALUES, 'left')
+    const definitelyHeaderAlign = filterProp('headerAlign', [null, ...TABLE_COLUMN_ALIGN_VALUES], null)
 
     // Width
     const cellStarts: Record<Exclude<TableColumnType, 'default'>, ColumnWidthProps> = {
@@ -173,7 +172,7 @@ export default defineComponent({
       label: props.label,
       showOverflowTooltip: props.showOverflowTooltip,
       align: definitelyAlign.value,
-      headerAlign: definitelyHeaderAlign.value,
+      headerAlign: definitelyHeaderAlign.value || definitelyAlign.value,
       ...widthProps.value,
     })
 
