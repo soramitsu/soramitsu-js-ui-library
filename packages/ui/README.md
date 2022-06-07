@@ -48,8 +48,16 @@ Toggling `SNavigationSubmenu` doesn't call `SNavigationMenu` `select` event.
 
 ### STable
 
-Column type `index` removed and so is prop `index`
+Column type `index` removed and so is prop `index`.
 
-Removed `property` and `showTooltipWhenOverflow` prop, which were aliases to `prop` and `showOverflowTooltip`
+Removed header filtration:
 
-`align` in column options (like in events) now has values without `is-` prefix
+- Props: `filters`, `filter-placement`, `filter-multiple`, `filter-method`, `filtered-value`, `column-key`
+- Method `clearFilter`
+- Event `filter-change`
+
+Removed `property` and `showTooltipWhenOverflow` prop, which were aliases to `prop` and `showOverflowTooltip`.
+
+Removed `renderHeader` prop (use slot instead).
+
+`align` in column options (like in events) now has values without `is-` prefix.
