@@ -613,6 +613,7 @@ const switchArrow = (newArrowState: string) => {
 .calendars {
   grid-area: calendars;
   margin: 0 16px;
+  margin-bottom: 16px;
 }
 
 .menu-item {
