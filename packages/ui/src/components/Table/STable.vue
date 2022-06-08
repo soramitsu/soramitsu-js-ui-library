@@ -9,6 +9,7 @@ import { IconArrowTop16 } from '@/components/icons'
 import { useColumnSort } from '@/components/Table/column-sort.composable'
 import { TableRow, CellEventData, HeaderEventData, RowEventData, SortEventData } from './types'
 import get from 'lodash/get'
+import { useFlexColumns } from '@/components/Table/flex-columns-widths.composable'
 
 type Row = Record<string, unknown>
 type CellEventData = [Row, ColumnApi, EventTarget, MouseEvent]
@@ -27,6 +28,10 @@ const emit = defineEmits<{
 }>()
 
 const columns: ColumnApi[] = shallowReactive([])
+
+const table = ref(null)
+const { columnsWidths } = useFlexColumns(columns, table)
+
 const { sortStates, sortedData, handleSortChange } = useColumnSort(toRef(props, 'data'))
 
 function register(column: ColumnApi) {
@@ -44,31 +49,6 @@ const api = readonly({
 })
 
 provide(TABLE_API_KEY, api)
-
-const table = ref(null)
-const tableWidth = ref(0)
-
-const columnsWidths = computed(() => {
-  const baseColumnsWidths = columns.map((col) => col.width ?? col.minWidth)
-  const baseColumnsWidthsSum = baseColumnsWidths.reduce((sum, width) => sum + width, 0)
-  const freeSpace = tableWidth.value - baseColumnsWidthsSum
-
-  if (freeSpace > 0) {
-    return columns.map((col) => {
-      if (col.width) return col.width
-
-      return col.minWidth + Math.floor((col.minWidth * freeSpace) / baseColumnsWidthsSum)
-    })
-  }
-
-  return baseColumnsWidths
-})
-
-useResizeObserver(table, (entries) => {
-  const entry = entries[0]
-  const { width } = entry.contentRect
-  tableWidth.value = width
-})
 
 function handleSortClick(column: ColumnApi) {
   const newOrder = handleSortChange(column)
