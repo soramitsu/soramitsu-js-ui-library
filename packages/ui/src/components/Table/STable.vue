@@ -32,7 +32,7 @@ const columns: ColumnApi[] = shallowReactive([])
 const table = ref(null)
 const { columnsWidths } = useFlexColumns(columns, table)
 
-const { sortStates, sortedData, handleSortChange } = useColumnSort(toRef(props, 'data'))
+const { sortStates, sortedData, handleSortChange, getNextOrder } = useColumnSort(toRef(props, 'data'))
 
 function register(column: ColumnApi) {
   const index = columns.push(column)
@@ -52,6 +52,16 @@ provide(TABLE_API_KEY, api)
 
 function getDefaultCellValue(row: TableRow, column: ColumnApi, index: number) {
   return column.formatter ? column.formatter(row, column, get(row, column.prop), index) : get(row, column.prop)
+}
+
+function getSortIconStateClasses(column: ColumnApi) {
+  const order = sortStates.get(column)
+
+  if (order !== null) {
+    return ['s-table__sort-icon_active', order === 'ascending' ? 's-table__sort-icon_asc' : 's-table__sort-icon_desc']
+  }
+
+  return [getNextOrder(column, order) === 'ascending' ? 's-table__sort-icon_asc' : 's-table__sort-icon_desc']
 }
 
 function handleSortClick(column: ColumnApi) {
@@ -124,8 +134,16 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
             <th
               v-for="(column, columnIndex) in columns"
               :key="column.prop"
-              class="s-table__th cursor-pointer py-12px sora-tpg-ch3"
-              :class="[`s-table__th_align_${column.headerAlign}`, column.className, column.labelClassName]"
+              class="s-table__th py-12px sora-tpg-ch3"
+              :class="[
+                `s-table__th_align_${column.headerAlign}`,
+                column.className,
+                column.labelClassName,
+                {
+                  's-table__th_sortable': column.sortable,
+                  'cursor-pointer': column.sortable,
+                },
+              ]"
               :style="`width: ${columnsWidths[columnIndex]}px`"
               @click="handleHeaderMouseEvent({ column, 'event': $event })"
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
@@ -141,10 +159,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
                 </template>
                 <IconArrowTop16
                   class="s-table__sort-icon inline ml-10px"
-                  :class="{
-                    's-table__sort-icon_asc': sortStates.get(column) === 'ascending',
-                    's-table__sort-icon_desc': sortStates.get(column) === 'descending',
-                  }"
+                  :class="getSortIconStateClasses(column)"
                 />
               </div>
             </th>
@@ -247,14 +262,18 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
     visibility: hidden;
     fill: currentColor;
 
-    &_asc,
-    &_desc {
+    &_active {
       visibility: visible;
+      fill: theme.token-as-var('sys.color.primary');
     }
 
-    &_desc {
+    &_asc {
       transform: rotateZ(180deg);
     }
+  }
+
+  &__th_sortable:hover &__sort-icon {
+    visibility: visible;
   }
 
   &__cell {

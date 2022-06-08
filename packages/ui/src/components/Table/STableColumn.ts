@@ -188,6 +188,9 @@ export default defineComponent({
       }
     })
 
+    const basicProps = ['formatter', 'fixed', 'resizable']
+    const selectProps = ['selectable', 'reserveSelection']
+
     tableApi.register({
       id: columnId,
       cellSlot: slots.default,

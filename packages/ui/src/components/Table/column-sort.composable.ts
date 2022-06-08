@@ -11,7 +11,7 @@ export function useColumnSort(data: Ref<TableRow[]>) {
     sortedData.value = data.value
   })
 
-  function toggleOrder(column: ColumnApi, order: ColumnSortOrder) {
+  function getNextOrder(column: ColumnApi, order: ColumnSortOrder) {
     const index = column.sortOrders.indexOf(order)
     return column.sortOrders[(index + 1) % column.sortOrders.length]
   }
@@ -78,7 +78,7 @@ export function useColumnSort(data: Ref<TableRow[]>) {
       return
     }
 
-    const newOrder = toggleOrder(column, order)
+    const newOrder = getNextOrder(column, order)
     sortStates.set(column, newOrder)
     sortData(newOrder, column)
 
@@ -89,5 +89,6 @@ export function useColumnSort(data: Ref<TableRow[]>) {
     sortStates,
     sortedData,
     handleSortChange,
+    getNextOrder,
   }
 }
