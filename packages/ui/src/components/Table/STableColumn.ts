@@ -188,6 +188,8 @@ export default defineComponent({
       showOverflowTooltip: props.showOverflowTooltip,
       align: definitelyAlign.value,
       headerAlign: definitelyHeaderAlign.value || definitelyAlign.value,
+      className: props.className,
+      labelClassName: props.labelClassName,
       ...widthProps.value,
       ...sortProps.value,
     })

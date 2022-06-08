@@ -28,6 +28,8 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
         label="Prop 1"
         min-width="100"
         show-overflow-tooltip
+        class-name="td-class"
+        label-class-name="header-class"
       >
         <template #default="{ row, column, rowIndex }">
           Row #{{ rowIndex }}: {{ row.prop1 }} - custom

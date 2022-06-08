@@ -26,7 +26,9 @@ export interface ColumnApi extends ColumnWidthProps, ColumnAlignProps, ColumnSor
   label?: string
   cellSlot?: Slot
   headerSlot?: Slot
-  showOverflowTooltip?: boolean
+  showOverflowTooltip?: boolean,
+  className: string,
+  labelClassName: string,
 }
 
 export interface TableApi {

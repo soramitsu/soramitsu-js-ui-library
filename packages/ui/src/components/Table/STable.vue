@@ -121,7 +121,11 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
               v-for="(column, columnIndex) in columns"
               :key="column.prop"
               class="s-table__th cursor-pointer py-12px sora-tpg-ch3"
-              :class="[`s-table__th_align_${column.headerAlign}`]"
+              :class="[
+                `s-table__th_align_${column.headerAlign}`,
+                column.className,
+                column.labelClassName
+              ]"
               :style="`width: ${columnsWidths[columnIndex]}px`"
               @click="handleHeaderMouseEvent({ column, 'event': $event })"
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
@@ -160,7 +164,10 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
               v-for="(column, columnIndex) in columns"
               :key="column.prop"
               class="s-table__td py-12px sora-tpg-p3"
-              :class="[`s-table__td_align_${column.align}`]"
+              :class="[
+                `s-table__td_align_${column.align}`,
+                column.className
+              ]"
               :style="rowIndex === 0 ? `width: ${columnsWidths[columnIndex]}px` : ''"
               @mouseenter="handleCellMouseEvent({ row, column, 'event': $event })"
               @mouseleave="handleCellMouseEvent({ row, column, 'event': $event })"
