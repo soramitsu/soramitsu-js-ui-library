@@ -60,4 +60,6 @@ Removed `property` and `showTooltipWhenOverflow` prop, which were aliases to `pr
 
 Removed `renderHeader` prop (use slot instead).
 
+Removed `resizable` prop.
+
 `align` in column options (like in events) now has values without `is-` prefix.

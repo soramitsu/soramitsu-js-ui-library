@@ -82,13 +82,6 @@ export default defineComponent({
       default: () => ['ascending', 'descending', null],
     },
     /**
-     * whether column width can be resized, works when border of el-table is true
-     */
-    resizable: {
-      type: Boolean,
-      default: true,
-    },
-    /**
      * function that formats cell content
      */
     formatter: {
