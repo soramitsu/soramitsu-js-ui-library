@@ -79,6 +79,7 @@ const stateStore = computed<StateStore>(() => {
 })
 
 const updateModelValue = () => {
+  console.log('updateModelValue')
   if (props.type === 'day') {
     emit('update:modelValue', dayState.value)
   } else if (props.type === 'pick') {
@@ -406,7 +407,7 @@ const switchArrow = (newArrowState: string) => {
             </p>
           </div>
           <div class="calendars flex justify-center items-start">
-            <div class="calendar-from">
+            <div class="calendar calendar-from">
               <div
                 v-show="currentView === 'dates'"
                 class="flex flex-col justify-start items-center"
@@ -431,7 +432,7 @@ const switchArrow = (newArrowState: string) => {
             </div>
             <div
               v-if="isRange"
-              class="calendar-to"
+              class="calendar calendar-to"
             >
               <div
                 v-show="currentView === 'dates'"
@@ -458,11 +459,12 @@ const switchArrow = (newArrowState: string) => {
             </div>
             <div
               v-if="currentView === 'months'"
-              class="h-full w-full flex items-center justify-center"
+              class="h-full w-full flex items-start justify-center"
             >
               <MonthTable
-                :value="showState.month"
+                :show-state="showState"
                 @pick="updateShowedMonth"
+                @update-showed-year="updateShowedYear"
               />
             </div>
             <div v-if="currentView === 'years'">
@@ -552,13 +554,10 @@ const switchArrow = (newArrowState: string) => {
   grid-template-areas:
     'select calendars time'
     'select custom custom';
-  grid-template-columns: 150px auto 76px;
-  grid-template-rows: 342px 1fr;
-  height: 405px;
-  width: 886px;
+  max-height: 405px;
 
   &.narrow {
-    width: 640px;
+    // width: 640px;
   }
 
   box-shadow: theme.token-as-var('sys.shadow.dropdown');
@@ -567,71 +566,53 @@ const switchArrow = (newArrowState: string) => {
     grid-template-areas:
       'select calendars'
       'select custom';
-    width: 522px;
-    grid-template-columns: 150px auto;
   }
   &--date--range {
     grid-template-areas:
       'select calendars'
       'select custom';
-    width: 822px;
-    grid-template-columns: 150px auto;
   }
 
   &--datetime {
     grid-template-areas:
       'select calendars  time'
       'select custom custom';
-    width: 558px;
-    grid-template-columns: 150px auto 76px;
   }
 
   &--datetime--pick {
     grid-template-areas:
       'calendars time'
       'custom custom';
-    width: 448px;
-    grid-template-columns: 372px 76px;
   }
 
   &--date--pick {
     grid-template-areas:
       'calendars'
       'custom';
-    width: 372px;
-    grid-template-columns: 372px;
-  }
-
-  &--datetime--pick,
-  &--date--pick {
-    &.narrow {
-      width: 372px;
-    }
   }
 }
 
 .select {
   grid-area: select;
   border-right: 1px solid theme.token-as-var('sys.color.border-primary');
-}
-.calendar-from {
-  grid-area: cal;
+  width: 150px;
 }
 .calendar-to {
-  grid-area: cale;
   margin-left: 16px;
 }
 .time {
   grid-area: time;
-  // border-left: 1px solid theme.token-as-var('sys.color.border-primary');
+  max-height: 342px;
 }
 .custom-panel {
   grid-area: custom;
   border-top: 1px solid theme.token-as-var('sys.color.border-primary');
+  height: 52px;
 }
 
 .calendars {
   grid-area: calendars;
+  margin: 0 16px;
 }
 
 .menu-item {

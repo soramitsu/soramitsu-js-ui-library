@@ -6,9 +6,14 @@ export default {
 
 <script setup lang="ts">
 import { ComputedRef } from 'vue'
+import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/icons'
+
+import {
+  ShowState
+} from '../types'
 
 interface Props {
-  value: number
+  showState: ShowState
 }
 
 interface MonthCellStyle {
@@ -22,9 +27,23 @@ interface MonthCell {
   text: number
 }
 
+const currentMonth = computed(() => {
+  return props.showState.month
+})
+
+const currentYear = computed(() => {
+  return props.showState.year
+})
+
+const changeYear = (delta:number) => {
+  deltaYear.value += delta
+}
+
+const deltaYear = ref(0)
+
 const props = withDefaults(defineProps<Props>(), {})
 
-const emit = defineEmits(['changerange', 'pick', 'updateRangeStateSel'])
+const emit = defineEmits(['updateShowedYear', 'pick', 'updateShowedMonth'])
 
 const months = ref(['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'])
 const monthsFull = [
@@ -50,14 +69,15 @@ const getCellStyle = (cell: MonthCell) => {
   const today = new Date()
   const month = cell.text
 
-  style.current = props.value === month
-  style.today = today.getMonth() === month
+  style.current = (currentMonth.value === month) && (deltaYear.value === 0)
+  style.today = (today.getMonth() === month) && (today.getFullYear() === currentYear.value + deltaYear.value)
   return style
 }
 const handleMonthTableClick = (event: any) => {
   let target = event.target
   const month = Number(target.getAttribute('month'))
   emit('pick', month)
+  emit ('updateShowedYear', currentYear.value + deltaYear.value)
 }
 
 const gridCells: ComputedRef<MonthCell[]> = computed(() => {
@@ -69,20 +89,39 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
 </script>
 
 <template>
-  <div
-    class="month-table sora-tpg-p4"
-    @click="handleMonthTableClick"
-  >
+  <div>
+    <div class="flex justify-between items-center sora-tpg-p2 year-range-panel">
+      <button
+        type="button"
+        class=""
+        @click="changeYear(-1)"
+      >
+        <IconArrowsChevronLeft24 />
+      </button>
+      <p>{{ currentYear + deltaYear }}</p>
+      <button
+        type="button"
+        class=""
+        @click="changeYear(1)"
+      >
+        <IconArrowsChevronRight24 />
+      </button>
+    </div>
     <div
-      v-for="(cell, idx) in gridCells"
-      :key="idx"
-      :class="getCellStyle(cell)"
+      class="month-table sora-tpg-p4"
+      @click="handleMonthTableClick"
     >
-      <div>
-        <a
-          class="cell"
-          :month="cell.text"
-        >{{ `${monthsFull[cell.text]}` }}</a>
+      <div
+        v-for="(cell, idx) in gridCells"
+        :key="idx"
+        :class="getCellStyle(cell)"
+      >
+        <div>
+          <a
+            class="cell"
+            :month="cell.text"
+          >{{ `${monthsFull[cell.text]}` }}</a>
+        </div>
       </div>
     </div>
   </div>
@@ -90,6 +129,10 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
 
 <style lang="scss" scoped>
 @use '@/theme';
+
+.year-range-panel {
+  height: 57px;
+}
 
 .month-table {
   margin: -1px;
@@ -116,33 +159,6 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
       &.start-date .cell {
         color: theme.token-as-var('sys.color.util.surface');
       }
-    }
-
-    &.in-range {
-      & div,
-      & div:hover {
-        background-color: theme.token-as-var('sys.color.background');
-      }
-    }
-
-    &.end-date div,
-    &.start-date div {
-      color: theme.token-as-var('sys.color.util.surface');
-
-      & .cell {
-        color: theme.token-as-var('sys.color.util.surface');
-        background-color: theme.token-as-var('sys.color.primary');
-      }
-    }
-
-    &.start-date div {
-      border-top-left-radius: 24px;
-      border-bottom-left-radius: 24px;
-    }
-
-    &.end-date div {
-      border-top-right-radius: 24px;
-      border-bottom-right-radius: 24px;
     }
 
     &.current:not(.disabled) .cell {

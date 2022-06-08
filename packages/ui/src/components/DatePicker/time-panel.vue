@@ -48,6 +48,7 @@ const updateTime = (e: any) => {
   overflow-y: scroll;
   height: 100%;
   padding: 4px 0;
+  padding-right: 20px;
 
   p {
     margin-bottom: 10px;
@@ -73,8 +74,11 @@ const updateTime = (e: any) => {
 }
 
 .time-panel {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  // -ms-overflow-style: none; /* IE and Edge */
+  // scrollbar-width: none; /* Firefox */
+  scrollbar-color: theme.token-as-var('sys.color.border-primary') transparent;
+  scrollbar-arrow-color: transparent;
+  scrollbar-width: thin;
 }
 
 .active {
