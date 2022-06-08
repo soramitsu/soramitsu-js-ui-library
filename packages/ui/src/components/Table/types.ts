@@ -15,6 +15,12 @@ export interface SortEventData {
   order: ColumnSortOrder
 }
 
+export type ColumnCellValueFormatter = (
+  row: TableRow,
+  column: ColumnApi,
+  cellValue: TableRow[string],
+  index: number,
+) => string
 export type ColumnSortByPropKeyFunc = (row: TableRow, index: number) => string
 export type ColumnSortBy = string | ColumnSortByPropKeyFunc | (ColumnSortByPropKeyFunc | string)[]
 export type ColumnSortOrder = 'ascending' | 'descending' | null

@@ -50,6 +50,10 @@ const api = readonly({
 
 provide(TABLE_API_KEY, api)
 
+function getDefaultCellValue(row: TableRow, column: ColumnApi, index: number) {
+  return column.formatter ? column.formatter(row, column, get(row, column.prop), index) : get(row, column.prop)
+}
+
 function handleSortClick(column: ColumnApi) {
   const newOrder = handleSortChange(column)
 
@@ -121,11 +125,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
               v-for="(column, columnIndex) in columns"
               :key="column.prop"
               class="s-table__th cursor-pointer py-12px sora-tpg-ch3"
-              :class="[
-                `s-table__th_align_${column.headerAlign}`,
-                column.className,
-                column.labelClassName
-              ]"
+              :class="[`s-table__th_align_${column.headerAlign}`, column.className, column.labelClassName]"
               :style="`width: ${columnsWidths[columnIndex]}px`"
               @click="handleHeaderMouseEvent({ column, 'event': $event })"
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
@@ -164,10 +164,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
               v-for="(column, columnIndex) in columns"
               :key="column.prop"
               class="s-table__td py-12px sora-tpg-p3"
-              :class="[
-                `s-table__td_align_${column.align}`,
-                column.className
-              ]"
+              :class="[`s-table__td_align_${column.align}`, column.className]"
               :style="rowIndex === 0 ? `width: ${columnsWidths[columnIndex]}px` : ''"
               @mouseenter="handleCellMouseEvent({ row, column, 'event': $event })"
               @mouseleave="handleCellMouseEvent({ row, column, 'event': $event })"
@@ -188,7 +185,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
                   v-bind="{ row, column, rowIndex }"
                 />
                 <template v-else>
-                  {{ get(row, column.prop) }}
+                  {{ getDefaultCellValue(row, column, rowIndex) }}
                 </template>
               </div>
             </td>

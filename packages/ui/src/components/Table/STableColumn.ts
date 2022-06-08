@@ -4,7 +4,13 @@ import { PropType } from '@vue/runtime-core'
 import { nextIncrementalCounter } from '@/util'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from '@/components/Table/consts'
-import { ColumnSortBy, ColumnSortOrder, TableColumnAlign, TableColumnType } from '@/components/Table/types'
+import {
+  ColumnCellValueFormatter,
+  ColumnSortBy,
+  ColumnSortOrder,
+  TableColumnAlign,
+  TableColumnType,
+} from '@/components/Table/types'
 import { ColumnWidthProps } from './api'
 
 export default defineComponent({
@@ -85,7 +91,10 @@ export default defineComponent({
     /**
      * function that formats cell content
      */
-    formatter: Function,
+    formatter: {
+      type: Function as PropType<ColumnCellValueFormatter>,
+      default: null,
+    },
     /**
      * whether to hide extra content and show them in a tooltip when hovering on the cell
      */
@@ -190,6 +199,7 @@ export default defineComponent({
       headerAlign: definitelyHeaderAlign.value || definitelyAlign.value,
       className: props.className,
       labelClassName: props.labelClassName,
+      formatter: props.formatter,
       ...widthProps.value,
       ...sortProps.value,
     })

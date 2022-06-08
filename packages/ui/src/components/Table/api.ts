@@ -1,6 +1,6 @@
 import { InjectionKey, DeepReadonly, Slot } from 'vue'
 import { forceInject } from '@/util'
-import { ColumnSortBy, ColumnSortOrder, TableColumnAlign } from '@/components/Table/types'
+import { ColumnCellValueFormatter, ColumnSortBy, ColumnSortOrder, TableColumnAlign } from '@/components/Table/types'
 
 export interface ColumnWidthProps {
   width: null | number
@@ -26,9 +26,10 @@ export interface ColumnApi extends ColumnWidthProps, ColumnAlignProps, ColumnSor
   label?: string
   cellSlot?: Slot
   headerSlot?: Slot
-  showOverflowTooltip?: boolean,
-  className: string,
-  labelClassName: string,
+  showOverflowTooltip?: boolean
+  className: string
+  labelClassName: string
+  formatter: ColumnCellValueFormatter | null
 }
 
 export interface TableApi {
