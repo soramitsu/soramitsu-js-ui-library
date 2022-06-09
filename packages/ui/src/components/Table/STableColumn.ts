@@ -34,7 +34,7 @@ export default defineComponent({
      */
     prop: {
       type: String,
-      required: true,
+      default: '',
     },
     /**
      * column width
@@ -186,6 +186,7 @@ export default defineComponent({
 
     tableApi.register({
       id: columnId,
+      type: definitelyType.value,
       cellSlot: slots.default,
       headerSlot: slots.header,
       prop: props.prop,

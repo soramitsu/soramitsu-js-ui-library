@@ -4,7 +4,7 @@ export default { name: 'STable' }
 
 <script setup lang="ts">
 import type { Slot } from 'vue'
-import { ColumnApi, TABLE_API_KEY } from '@/components'
+import { ActionColumnApi, ColumnApi, TABLE_API_KEY } from '@/components'
 import { IconArrowTop16 } from '@/components/icons'
 import { useColumnSort } from '@/components/Table/column-sort.composable'
 import { TableRow, CellEventData, HeaderEventData, RowEventData, SortEventData } from './types'
@@ -27,20 +27,24 @@ const emit = defineEmits<{
   (event: 'sort-change', value: SortEventData): void
 }>()
 
-const columns: ColumnApi[] = shallowReactive([])
+const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
 
 const table = ref(null)
 const { columnsWidths } = useFlexColumns(columns, table)
 
 const { sortStates, sortedData, handleSortChange, getNextOrder } = useColumnSort(toRef(props, 'data'))
 
-function register(column: ColumnApi) {
+function register(column: ColumnApi | ActionColumnApi) {
   const index = columns.push(column)
-  sortStates.set(column, null)
+  if (isDefaultColumn(column)) {
+    sortStates.set(column, null)
+  }
 
   onScopeDispose(() => {
     columns.splice(index, 1)
-    sortStates.delete(column)
+    if (isDefaultColumn(column)) {
+      sortStates.delete(column)
+    }
   })
 }
 
@@ -49,6 +53,10 @@ const api = readonly({
 })
 
 provide(TABLE_API_KEY, api)
+
+function isDefaultColumn(column: ColumnApi | ActionColumnApi): column is ColumnApi {
+  return column.type === 'default'
+}
 
 function getDefaultCellValue(row: TableRow, column: ColumnApi, index: number) {
   return column.formatter ? column.formatter(row, column, get(row, column.prop), index) : get(row, column.prop)
@@ -72,7 +80,7 @@ function handleSortClick(column: ColumnApi) {
   emit('sort-change', { column, prop: column.prop, order: newOrder })
 }
 
-function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi; event: MouseEvent }) {
+function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi | ActionColumnApi; event: MouseEvent }) {
   if (!ctx.event.target) {
     return
   }
@@ -103,14 +111,17 @@ function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi; event: Mo
   }
 }
 
-function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
+function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; event: MouseEvent }) {
   if (!ctx.event.target) {
     return
   }
 
   switch (ctx.event.type) {
     case 'click': {
-      handleSortClick(ctx.column)
+      if (isDefaultColumn(ctx.column) && ctx.column.sortable) {
+        handleSortClick(ctx.column)
+      }
+
       emit('header-click', [ctx.column, ctx.event])
       break
     }
@@ -139,6 +150,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
                 `s-table__th_align_${column.headerAlign}`,
                 column.className,
                 column.labelClassName,
+                column.id,
                 {
                   's-table__th_sortable': column.sortable,
                   'cursor-pointer': column.sortable,
@@ -158,6 +170,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
                   {{ column.label }}
                 </template>
                 <IconArrowTop16
+                  v-if="isDefaultColumn(column) && column.sortable"
                   class="s-table__sort-icon inline ml-10px"
                   :class="getSortIconStateClasses(column)"
                 />
@@ -175,11 +188,12 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
             :key="JSON.stringify(row)"
             class="s-table__tr"
           >
+            <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
             <td
               v-for="(column, columnIndex) in columns"
               :key="column.prop"
               class="s-table__td py-12px sora-tpg-p3"
-              :class="[`s-table__td_align_${column.align}`, column.className]"
+              :class="[`s-table__td_align_${column.align}`, column.id, column.className]"
               :style="rowIndex === 0 ? `width: ${columnsWidths[columnIndex]}px` : ''"
               @mouseenter="handleCellMouseEvent({ row, column, 'event': $event })"
               @mouseleave="handleCellMouseEvent({ row, column, 'event': $event })"
@@ -199,7 +213,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi; event: MouseEvent }) {
                   v-if="column.cellSlot"
                   v-bind="{ row, column, rowIndex }"
                 />
-                <template v-else>
+                <template v-else-if="isDefaultColumn(column)">
                   {{ getDefaultCellValue(row, column, rowIndex) }}
                 </template>
               </div>

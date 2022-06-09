@@ -1,14 +1,14 @@
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from './consts'
-import { ColumnApi } from '@/components'
+import { ActionColumnApi, ColumnApi } from '@/components'
 
 export type TableColumnType = typeof TABLE_COLUMN_TYPE_VALUES[number]
 export type TableColumnAlign = typeof TABLE_COLUMN_ALIGN_VALUES[number]
 
 export type TableRow = Record<string, unknown>
 
-export type CellEventData = [TableRow, ColumnApi, EventTarget, MouseEvent]
-export type RowEventData = [TableRow, ColumnApi, MouseEvent]
-export type HeaderEventData = [ColumnApi, MouseEvent]
+export type CellEventData = [TableRow, ColumnApi | ActionColumnApi, EventTarget, MouseEvent]
+export type RowEventData = [TableRow, ColumnApi | ActionColumnApi, MouseEvent]
+export type HeaderEventData = [ColumnApi | ActionColumnApi, MouseEvent]
 export interface SortEventData {
   column: ColumnApi
   prop: string

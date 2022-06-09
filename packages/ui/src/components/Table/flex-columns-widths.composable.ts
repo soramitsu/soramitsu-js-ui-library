@@ -1,7 +1,7 @@
-import { ColumnApi } from '@/components'
+import { ActionColumnApi, ColumnApi } from '@/components'
 import { MaybeElementRef } from '@vueuse/core'
 
-export function useFlexColumns(columns: ColumnApi[], table: MaybeElementRef) {
+export function useFlexColumns(columns: (ColumnApi | ActionColumnApi)[], table: MaybeElementRef) {
   const tableWidth = ref(0)
 
   const columnsWidths = computed(() => {
