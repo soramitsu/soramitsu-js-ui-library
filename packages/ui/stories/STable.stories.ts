@@ -24,6 +24,7 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
   },
   template: `
     <s-table :data="data">
+      <s-table-column type="selection" />
       <s-table-column
         prop="prop1"
         label="Prop 1"

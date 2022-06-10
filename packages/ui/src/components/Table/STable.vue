@@ -4,12 +4,13 @@ export default { name: 'STable' }
 
 <script setup lang="ts">
 import type { Slot } from 'vue'
-import { ActionColumnApi, ColumnApi, TABLE_API_KEY } from '@/components'
+import { ActionColumnApi, ColumnApi, TABLE_API_KEY, SCheckboxAtom } from '@/components'
 import { IconArrowTop16 } from '@/components/icons'
 import { useColumnSort } from '@/components/Table/column-sort.composable'
 import { TableRow, CellEventData, HeaderEventData, RowEventData, SortEventData } from './types'
 import get from 'lodash/get'
 import { useFlexColumns } from '@/components/Table/flex-columns-widths.composable'
+import { useRowSelect } from '@/components/Table/row-select.composable'
 
 type Row = Record<string, unknown>
 type CellEventData = [Row, ColumnApi, EventTarget, MouseEvent]
@@ -21,18 +22,21 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (event: 'cell-mouse-enter' | 'cell-mouse-leave' | 'cell-click' | 'cell-dblclick', value: CellEventData): void
-  (event: 'header-click' | 'header-contextmenu', value: HeaderEventData): void
-  (event: 'row-click' | 'row-dblclick' | 'row-contextmenu', value: RowEventData): void
+  (event: 'cell-mouse-enter' | 'cell-mouse-leave' | 'cell-click' | 'cell-dblclick', ...value: CellEventData): void
+  (event: 'header-click' | 'header-contextmenu', ...value: HeaderEventData): void
+  (event: 'row-click' | 'row-dblclick' | 'row-contextmenu', ...value: RowEventData): void
   (event: 'sort-change', value: SortEventData): void
+  (event: 'selection-change' | 'select-all', value: TableRow[]): void
+  (event: 'select', ...value: [TableRow[], TableRow]): void
 }>()
 
 const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
-
+const data = toRef(props, 'data')
 const table = ref(null)
-const { columnsWidths } = useFlexColumns(columns, table)
 
-const { sortStates, sortedData, handleSortChange, getNextOrder } = useColumnSort(toRef(props, 'data'))
+const { columnsWidths } = useFlexColumns(columns, table)
+const { sortStates, sortedData, handleSortChange, getNextOrder } = useColumnSort(data)
+const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } = useRowSelect(data)
 
 function register(column: ColumnApi | ActionColumnApi) {
   const index = columns.push(column)
@@ -48,14 +52,16 @@ function register(column: ColumnApi | ActionColumnApi) {
   })
 }
 
-const api = readonly({
-  register,
-})
+const api = readonly({ register })
 
 provide(TABLE_API_KEY, api)
 
 function isDefaultColumn(column: ColumnApi | ActionColumnApi): column is ColumnApi {
   return column.type === 'default'
+}
+
+function isSelectionColumn(column: ColumnApi | ActionColumnApi): column is ActionColumnApi & { type: 'selection' } {
+  return column.type === 'selection'
 }
 
 function getDefaultCellValue(row: TableRow, column: ColumnApi, index: number) {
@@ -80,6 +86,20 @@ function handleSortClick(column: ColumnApi) {
   emit('sort-change', { column, prop: column.prop, order: newOrder })
 }
 
+function handleAllSelect() {
+  toggleAllSelections()
+  const selectedArray = [...selectedRows]
+  emit('select-all', selectedArray)
+  emit('selection-change', selectedArray)
+}
+
+function handleRowSelect(row: TableRow) {
+  toggleRowSelection(row)
+  const selectedArray = [...selectedRows]
+  emit('select', selectedArray, row)
+  emit('selection-change', selectedArray)
+}
+
 function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi | ActionColumnApi; event: MouseEvent }) {
   if (!ctx.event.target) {
     return
@@ -87,25 +107,25 @@ function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi | ActionCo
 
   switch (ctx.event.type) {
     case 'mouseleave': {
-      emit('cell-mouse-leave', [ctx.row, ctx.column, ctx.event.target, ctx.event])
+      emit('cell-mouse-leave', ctx.row, ctx.column, ctx.event.target, ctx.event)
       break
     }
     case 'mouseenter': {
-      emit('cell-mouse-enter', [ctx.row, ctx.column, ctx.event.target, ctx.event])
+      emit('cell-mouse-enter', ctx.row, ctx.column, ctx.event.target, ctx.event)
       break
     }
     case 'click': {
-      emit('cell-click', [ctx.row, ctx.column, ctx.event.target, ctx.event])
-      emit('row-click', [ctx.row, ctx.column, ctx.event])
+      emit('cell-click', ctx.row, ctx.column, ctx.event.target, ctx.event)
+      emit('row-click', ctx.row, ctx.column, ctx.event)
       break
     }
     case 'dblclick': {
-      emit('cell-dblclick', [ctx.row, ctx.column, ctx.event.target, ctx.event])
-      emit('row-dblclick', [ctx.row, ctx.column, ctx.event])
+      emit('cell-dblclick', ctx.row, ctx.column, ctx.event.target, ctx.event)
+      emit('row-dblclick', ctx.row, ctx.column, ctx.event)
       break
     }
     case 'contextmenu': {
-      emit('row-contextmenu', [ctx.row, ctx.column, ctx.event])
+      emit('row-contextmenu', ctx.row, ctx.column, ctx.event)
       break
     }
   }
@@ -122,11 +142,11 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
         handleSortClick(ctx.column)
       }
 
-      emit('header-click', [ctx.column, ctx.event])
+      emit('header-click', ctx.column, ctx.event)
       break
     }
     case 'contextmenu': {
-      emit('header-contextmenu', [ctx.column, ctx.event])
+      emit('header-contextmenu', ctx.column, ctx.event)
       break
     }
   }
@@ -166,14 +186,24 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                   v-if="column.headerSlot"
                   v-bind="{ column, columnIndex }"
                 />
-                <template v-else>
+
+                <template v-else-if="isDefaultColumn(column)">
                   {{ column.label }}
+                  <IconArrowTop16
+                    v-if="column.sortable"
+                    class="s-table__sort-icon inline ml-10px"
+                    :class="getSortIconStateClasses(column)"
+                  />
                 </template>
-                <IconArrowTop16
-                  v-if="isDefaultColumn(column) && column.sortable"
-                  class="s-table__sort-icon inline ml-10px"
-                  :class="getSortIconStateClasses(column)"
-                />
+
+                <template v-else-if="isSelectionColumn(column)">
+                  <SCheckboxAtom
+                    class="cursor-pointer"
+                    size="xl"
+                    :checked="isSomeSelected ? (isAllSelected ? true : 'mixed') : false"
+                    @click="handleAllSelect"
+                  />
+                </template>
               </div>
             </th>
           </tr>
@@ -215,6 +245,14 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                 />
                 <template v-else-if="isDefaultColumn(column)">
                   {{ getDefaultCellValue(row, column, rowIndex) }}
+                </template>
+                <template v-else-if="isSelectionColumn(column)">
+                  <SCheckboxAtom
+                    class="cursor-pointer"
+                    size="xl"
+                    :checked="selectedRows.has(row)"
+                    @click="handleRowSelect(row)"
+                  />
                 </template>
               </div>
             </td>
