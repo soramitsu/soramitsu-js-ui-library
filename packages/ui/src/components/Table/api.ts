@@ -2,10 +2,10 @@ import { InjectionKey, DeepReadonly, Slot } from 'vue'
 import { forceInject } from '@/util'
 import {
   ColumnCellValueFormatter,
+  ColumnRowSelectableFunc,
   ColumnSortBy,
   ColumnSortOrder,
   TableColumnAlign,
-  TableColumnType,
 } from '@/components/Table/types'
 
 export interface ColumnWidthProps {
@@ -19,6 +19,11 @@ export interface ColumnAlignProps {
   headerAlign: TableColumnAlign
 }
 
+export interface ColumnSelectProps {
+  selectable: ColumnRowSelectableFunc | null
+  reserveSelection?: boolean
+}
+
 export interface ColumnSortProps {
   sortable: boolean | 'custom'
   sortMethod: <T>(a: T, b: T) => number
@@ -26,7 +31,7 @@ export interface ColumnSortProps {
   sortOrders: ColumnSortOrder[]
 }
 
-export interface CommonColumnApi extends ColumnWidthProps, ColumnAlignProps, ColumnSortProps {
+export interface CommonColumnApi extends ColumnWidthProps, ColumnAlignProps, ColumnSortProps, ColumnSelectProps {
   id: string
   label?: string
   cellSlot?: Slot

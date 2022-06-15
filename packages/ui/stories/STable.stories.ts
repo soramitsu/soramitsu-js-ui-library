@@ -24,7 +24,7 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
   },
   template: `
     <s-table :data="data">
-      <s-table-column type="selection" />
+      <s-table-column type="selection" :selectable="(row, index) => !!(index % 2)" />
       <s-table-column
         prop="prop1"
         label="Prop 1"
@@ -41,7 +41,7 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
           {{ column.label }} - custom
         </template>
       </s-table-column>
-    
+
       <s-table-column
         prop="prop2"
         label="Prop 2"

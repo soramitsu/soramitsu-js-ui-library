@@ -22,5 +22,6 @@ export type ColumnCellValueFormatter = (
   index: number,
 ) => string
 export type ColumnSortByPropKeyFunc = (row: TableRow, index: number) => string
+export type ColumnRowSelectableFunc = (row: TableRow, index: number) => boolean
 export type ColumnSortBy = string | ColumnSortByPropKeyFunc | (ColumnSortByPropKeyFunc | string)[]
 export type ColumnSortOrder = 'ascending' | 'descending' | null

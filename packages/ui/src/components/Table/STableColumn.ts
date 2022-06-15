@@ -6,6 +6,7 @@ import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from '@/components/Table/consts'
 import {
   ColumnCellValueFormatter,
+  ColumnRowSelectableFunc,
   ColumnSortBy,
   ColumnSortOrder,
   TableColumnAlign,
@@ -126,12 +127,18 @@ export default defineComponent({
     /**
      * function that determines if a certain row can be selected, works when type is 'selection'
      */
-    selectable: Function,
+    selectable: {
+      type: Function as PropType<ColumnRowSelectableFunc>,
+      default: null,
+    },
     /**
      * whether to reserve selection after data refreshing, works when type is 'selection'.
      * Note that row-key is required for this to work
      */
-    reserveSelection: Boolean,
+    reserveSelection: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
     const tableApi = useTableApi()
@@ -181,8 +188,12 @@ export default defineComponent({
       }
     })
 
-    const basicProps = ['formatter', 'fixed', 'resizable']
-    const selectProps = ['selectable', 'reserveSelection']
+    const selectProps = computed(() => {
+      return {
+        selectable: props.selectable,
+        reserveSelection: props.reserveSelection,
+      }
+    })
 
     tableApi.register({
       id: columnId,
@@ -199,6 +210,7 @@ export default defineComponent({
       formatter: props.formatter,
       ...widthProps.value,
       ...sortProps.value,
+      ...selectProps.value,
     })
 
     return () => null

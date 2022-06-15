@@ -64,6 +64,10 @@ function isSelectionColumn(column: ColumnApi | ActionColumnApi): column is Actio
   return column.type === 'selection'
 }
 
+function isCheckBoxDisabled(column: ActionColumnApi, row: TableRow, index: number) {
+  return !column.selectable || column.selectable(row, index)
+}
+
 function getDefaultCellValue(row: TableRow, column: ColumnApi, index: number) {
   return column.formatter ? column.formatter(row, column, get(row, column.prop), index) : get(row, column.prop)
 }
@@ -86,8 +90,8 @@ function handleSortClick(column: ColumnApi) {
   emit('sort-change', { column, prop: column.prop, order: newOrder })
 }
 
-function handleAllSelect() {
-  toggleAllSelections()
+function handleAllSelect(column: ActionColumnApi) {
+  toggleAllSelections(column.selectable)
   const selectedArray = [...selectedRows]
   emit('select-all', selectedArray)
   emit('selection-change', selectedArray)
@@ -201,7 +205,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                     class="cursor-pointer"
                     size="xl"
                     :checked="isSomeSelected ? (isAllSelected ? true : 'mixed') : false"
-                    @click="handleAllSelect"
+                    @click.stop="handleAllSelect(column)"
                   />
                 </template>
               </div>
@@ -248,10 +252,11 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                 </template>
                 <template v-else-if="isSelectionColumn(column)">
                   <SCheckboxAtom
-                    class="cursor-pointer"
+                    :class="{ 'cursor-pointer': !isCheckBoxDisabled(column, row, rowIndex) }"
                     size="xl"
                     :checked="selectedRows.has(row)"
-                    @click="handleRowSelect(row)"
+                    :disabled="isCheckBoxDisabled(column, row, rowIndex)"
+                    @click.stop="isCheckBoxDisabled(column, row, rowIndex) || handleRowSelect(row)"
                   />
                 </template>
               </div>

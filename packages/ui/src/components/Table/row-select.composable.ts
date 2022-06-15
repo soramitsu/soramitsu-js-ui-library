@@ -1,19 +1,21 @@
 import { Ref } from 'vue'
-import { TableRow } from '@/components/Table/types'
+import { ColumnRowSelectableFunc, TableRow } from '@/components/Table/types'
 
 export function useRowSelect(data: Ref<TableRow[]>) {
   const selectedRows = shallowReactive(new Set<TableRow>())
   const isAllSelected = computed(() => selectedRows.size === data.value.length)
   const isSomeSelected = computed(() => selectedRows.size > 0)
 
-  function toggleAllSelections() {
-    if (isAllSelected.value) {
+  function toggleAllSelections(selectable: ColumnRowSelectableFunc | null) {
+    const selectableRows = selectable ? data.value.filter((row, index) => !selectable(row, index)) : data.value
+
+    if (selectedRows.size === selectableRows.length) {
       selectedRows.clear()
 
       return
     }
 
-    for (let row of data.value) {
+    for (let row of selectableRows) {
       selectedRows.add(row)
     }
   }
