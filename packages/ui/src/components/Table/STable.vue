@@ -5,7 +5,7 @@ export default { name: 'STable' }
 <script setup lang="ts">
 import type { Slot } from 'vue'
 import { ActionColumnApi, ColumnApi, TABLE_API_KEY, SCheckboxAtom } from '@/components'
-import { IconArrowTop16 } from '@/components/icons'
+import { IconArrowTop16, IconArrowsChevronDownRounded24 } from '@/components/icons'
 import { useColumnSort } from '@/components/Table/column-sort.composable'
 import { TableRow, CellEventData, HeaderEventData, RowEventData, SortEventData } from './types'
 import get from 'lodash/get'
@@ -28,6 +28,7 @@ const emit = defineEmits<{
   (event: 'sort-change', value: SortEventData): void
   (event: 'selection-change' | 'select-all', value: TableRow[]): void
   (event: 'select', ...value: [TableRow[], TableRow]): void
+  (event: 'expand-change', ...value: [TableRow, TableRow[]]): void
 }>()
 
 const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
@@ -37,6 +38,29 @@ const table = ref(null)
 const { columnsWidths } = useFlexColumns(columns, table)
 const { sortStates, sortedData, handleSortChange, getNextOrder } = useColumnSort(data)
 const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } = useRowSelect(data)
+
+const expandedRows = shallowReactive(new Set<TableRow>())
+const lastExpandColumn = computed(() => {
+  let res
+
+  for (let column of columns) {
+    if (column.type === 'expand') {
+      res = column
+    }
+  }
+
+  return res
+})
+
+function toggleRowExpanded(row: TableRow) {
+  if (expandedRows.has(row)) {
+    expandedRows.delete(row)
+
+    return
+  }
+
+  expandedRows.add(row)
+}
 
 function register(column: ColumnApi | ActionColumnApi) {
   const index = columns.push(column)
@@ -62,6 +86,10 @@ function isDefaultColumn(column: ColumnApi | ActionColumnApi): column is ColumnA
 
 function isSelectionColumn(column: ColumnApi | ActionColumnApi): column is ActionColumnApi & { type: 'selection' } {
   return column.type === 'selection'
+}
+
+function isExpandColumn(column: ColumnApi | ActionColumnApi): column is ActionColumnApi & { type: 'expand' } {
+  return column.type === 'expand'
 }
 
 function isCheckBoxDisabled(column: ActionColumnApi, row: TableRow, index: number) {
@@ -104,6 +132,11 @@ function handleRowSelect(row: TableRow) {
   emit('selection-change', selectedArray)
 }
 
+function handleRowExpand(row: TableRow) {
+  toggleRowExpanded(row)
+  emit('expand-change', row, [...expandedRows])
+}
+
 function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi | ActionColumnApi; event: MouseEvent }) {
   if (!ctx.event.target) {
     return
@@ -119,6 +152,11 @@ function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi | ActionCo
       break
     }
     case 'click': {
+      if (isExpandColumn(ctx.column)) {
+        handleRowExpand(ctx.row)
+        break
+      }
+
       emit('cell-click', ctx.row, ctx.column, ctx.event.target, ctx.event)
       emit('row-click', ctx.row, ctx.column, ctx.event)
       break
@@ -217,51 +255,75 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
     <div class="s-table__body-wrapper">
       <table class="s-table__body w-full">
         <tbody>
-          <tr
+          <template
             v-for="(row, rowIndex) in sortedData"
             :key="JSON.stringify(row)"
-            class="s-table__tr"
           >
-            <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
-            <td
-              v-for="(column, columnIndex) in columns"
-              :key="column.prop"
-              class="s-table__td py-12px sora-tpg-p3"
-              :class="[`s-table__td_align_${column.align}`, column.id, column.className]"
-              :style="rowIndex === 0 ? `width: ${columnsWidths[columnIndex]}px` : ''"
-              @mouseenter="handleCellMouseEvent({ row, column, 'event': $event })"
-              @mouseleave="handleCellMouseEvent({ row, column, 'event': $event })"
-              @click="handleCellMouseEvent({ row, column, 'event': $event })"
-              @dblclick="handleCellMouseEvent({ row, column, 'event': $event })"
-              @contextmenu="handleCellMouseEvent({ row, column, 'event': $event })"
-            >
-              <div
-                class="s-table__cell px-16px"
-                :class="{
-                  's-table__cell_has-tooltip': column.showOverflowTooltip,
-                }"
-                :title="column.showOverflowTooltip ? get(row, column.prop) : null"
+            <tr class="s-table__tr">
+              <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
+              <td
+                v-for="(column, columnIndex) in columns"
+                :key="column.prop"
+                class="s-table__td py-12px sora-tpg-p3"
+                :class="[`s-table__td_align_${column.align}`, column.id, column.className]"
+                :style="rowIndex === 0 ? `width: ${columnsWidths[columnIndex]}px` : ''"
+                @mouseenter="handleCellMouseEvent({ row, column, 'event': $event })"
+                @mouseleave="handleCellMouseEvent({ row, column, 'event': $event })"
+                @click="handleCellMouseEvent({ row, column, 'event': $event })"
+                @dblclick="handleCellMouseEvent({ row, column, 'event': $event })"
+                @contextmenu="handleCellMouseEvent({ row, column, 'event': $event })"
+              >
+                <div
+                  class="s-table__cell px-16px"
+                  :class="{
+                    's-table__cell_has-tooltip': column.showOverflowTooltip,
+                  }"
+                  :title="column.showOverflowTooltip ? get(row, column.prop) : null"
+                >
+                  <template v-if="isDefaultColumn(column)">
+                    <component
+                      :is="column.cellSlot"
+                      v-if="column.cellSlot"
+                      v-bind="{ row, column, rowIndex }"
+                    />
+                    <template v-else>
+                      {{ getDefaultCellValue(row, column, rowIndex) }}
+                    </template>
+                  </template>
+
+                  <template v-else-if="isSelectionColumn(column)">
+                    <SCheckboxAtom
+                      :class="{ 'cursor-pointer': !isCheckBoxDisabled(column, row, rowIndex) }"
+                      size="xl"
+                      :checked="selectedRows.has(row)"
+                      :disabled="isCheckBoxDisabled(column, row, rowIndex)"
+                      @click.stop="isCheckBoxDisabled(column, row, rowIndex) || handleRowSelect(row)"
+                    />
+                  </template>
+
+                  <template v-else-if="isExpandColumn(column)">
+                    <IconArrowsChevronDownRounded24
+                      class="s-table__expand-icon"
+                      :class="{ 's-table__expand-icon_active': expandedRows.has(row) }"
+                    />
+                  </template>
+                </div>
+              </td>
+            </tr>
+
+            <tr v-if="lastExpandColumn && expandedRows.has(row)">
+              <td
+                class="s-table__expanded-cell py-12px px-16px"
+                :colspan="columns.length"
               >
                 <component
-                  :is="column.cellSlot"
-                  v-if="column.cellSlot"
-                  v-bind="{ row, column, rowIndex }"
+                  :is="lastExpandColumn.cellSlot"
+                  v-if="lastExpandColumn.cellSlot"
+                  v-bind="{ row, 'column': lastExpandColumn, rowIndex }"
                 />
-                <template v-else-if="isDefaultColumn(column)">
-                  {{ getDefaultCellValue(row, column, rowIndex) }}
-                </template>
-                <template v-else-if="isSelectionColumn(column)">
-                  <SCheckboxAtom
-                    :class="{ 'cursor-pointer': !isCheckBoxDisabled(column, row, rowIndex) }"
-                    size="xl"
-                    :checked="selectedRows.has(row)"
-                    :disabled="isCheckBoxDisabled(column, row, rowIndex)"
-                    @click.stop="isCheckBoxDisabled(column, row, rowIndex) || handleRowSelect(row)"
-                  />
-                </template>
-              </div>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          </template>
         </tbody>
       </table>
     </div>
@@ -315,6 +377,12 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
     color: theme.token-as-var('sys.color.content-tertiary');
   }
 
+  &__expanded-cell {
+    background-color: theme.token-as-var('sys.color.background');
+    border-bottom: 1px solid theme.token-as-var('sys.color.border-secondary');
+    min-height: 40px;
+  }
+
   &__sort-icon {
     visibility: hidden;
     fill: currentColor;
@@ -325,6 +393,15 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
     }
 
     &_asc {
+      transform: rotateZ(180deg);
+    }
+  }
+
+  &__expand-icon {
+    fill: currentColor;
+    transition: 0.15s ease-in-out transform;
+
+    &_active {
       transform: rotateZ(180deg);
     }
   }

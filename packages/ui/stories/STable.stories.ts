@@ -14,10 +14,10 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
     return {
       args,
       data: ref([
-        { prop1: '21', prop2: 'a12', prop3: 1424631694418, prop4: 'c12' },
-        { prop1: '12', prop2: 'a421', prop3: 1224382694418, prop4: 'c21' },
-        { prop1: '31', prop2: 'a2', prop3: 1524682614418, prop4: 'c2' },
-        { prop1: '13', prop2: 'a32', prop3: 1654642633318, prop4: 'c32' },
+        { prop1: '21', prop2: 'a12', date: 1424631694418, prop4: 'c12' },
+        { prop1: '12', prop2: 'a421', date: 1224382694418, prop4: 'c21' },
+        { prop1: '31', prop2: 'a2', date: 1524682614418, prop4: 'c2' },
+        { prop1: '13', prop2: 'a32', date: 1654642633318, prop4: 'c32' },
       ]),
       formatter: (row: any, column: any, x: number) => new Date(x).toLocaleDateString(),
     }
@@ -51,8 +51,8 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
         sortable
       />
       <s-table-column
-        prop="prop3"
-        label="Prop 3"
+        prop="date"
+        label="Date"
         width="120"
         align="right"
         :formatter="formatter"
@@ -65,6 +65,11 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
         align="center"
         header-align="right"
       />
+      <s-table-column type="expand">
+        <template #default="{ row, column, rowIndex }">
+          Expand slot for row #{{ rowIndex }}, where raw date field is {{ row.date }}
+        </template>
+      </s-table-column>
     </s-table>
   `,
 }))
