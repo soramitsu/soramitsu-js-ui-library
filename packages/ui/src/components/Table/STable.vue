@@ -33,9 +33,9 @@ const emit = defineEmits<{
 
 const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
 const data = toRef(props, 'data')
-const table = ref(null)
+const tableWrapper = ref(null)
 
-const { columnsWidths } = useFlexColumns(columns, table)
+const { columnsWidths, columnsWidthsSum } = useFlexColumns(columns, tableWrapper)
 const { sortStates, sortedData, handleSortChange, getNextOrder } = useColumnSort(data)
 const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } = useRowSelect(data)
 
@@ -197,17 +197,20 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
 
 <template>
   <div
-    ref="table"
+    ref="tableWrapper"
     class="s-table"
   >
     <div class="s-table__header-wrapper">
-      <table class="s-table__header w-full">
+      <table
+        class="s-table__header w-full"
+        :style="`width: ${columnsWidthsSum}px`"
+      >
         <thead>
           <tr class="s-table__tr">
             <th
               v-for="(column, columnIndex) in columns"
               :key="column.prop"
-              class="s-table__th py-12px sora-tpg-ch3"
+              class="s-table__th py-12px px-0 sora-tpg-ch3"
               :class="[
                 `s-table__th_align_${column.headerAlign}`,
                 column.className,
@@ -253,7 +256,10 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
       </table>
     </div>
     <div class="s-table__body-wrapper">
-      <table class="s-table__body w-full">
+      <table
+        class="s-table__body w-full"
+        :style="`width: ${columnsWidthsSum}px`"
+      >
         <tbody>
           <template
             v-for="(row, rowIndex) in sortedData"
@@ -264,7 +270,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
               <td
                 v-for="(column, columnIndex) in columns"
                 :key="column.prop"
-                class="s-table__td py-12px sora-tpg-p3"
+                class="s-table__td py-12px px-0 sora-tpg-p3"
                 :class="[`s-table__td_align_${column.align}`, column.id, column.className]"
                 :style="rowIndex === 0 ? `width: ${columnsWidths[columnIndex]}px` : ''"
                 @mouseenter="handleCellMouseEvent({ row, column, 'event': $event })"

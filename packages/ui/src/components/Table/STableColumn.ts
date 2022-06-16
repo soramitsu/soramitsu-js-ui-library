@@ -153,14 +153,14 @@ export default defineComponent({
 
     const widthsPresets: Record<Exclude<TableColumnType, 'default'>, ColumnWidthProps> = {
       selection: {
-        width: 48,
-        minWidth: 48,
-        realWidth: 48,
+        width: 52,
+        minWidth: 52,
+        realWidth: 52,
       },
       expand: {
-        width: 48,
-        minWidth: 48,
-        realWidth: 48,
+        width: 52,
+        minWidth: 52,
+        realWidth: 52,
       },
     }
 
