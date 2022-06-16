@@ -1,7 +1,3 @@
-<script lang="ts">
-export default { name: 'SNavigationMenu' }
-</script>
-
 <script setup lang="ts">
 import { NAVIGATION_MENU_API_KEY } from '@/components/NavigationMenu/api'
 
