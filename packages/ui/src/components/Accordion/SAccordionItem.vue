@@ -3,6 +3,7 @@ import { onUnmounted, computed } from 'vue'
 import { IconArrowsChevronDownRounded24 } from '@/components/icons'
 import { uniqueElementId } from '@/util'
 import { useAccordionApi } from './api'
+import { SCollapseTransition } from '@/components/Transitions'
 
 const props = withDefaults(
   defineProps<{
@@ -26,24 +27,6 @@ const contentId = uniqueElementId()
 
 function toggle(expand?: boolean) {
   model.value = expand ?? !model.value
-}
-
-function setContentClosed(el: Element) {
-  if (el instanceof HTMLElement) {
-    el.style.height = '0'
-  }
-}
-
-function setContentOpened(el: Element) {
-  if (el instanceof HTMLElement) {
-    el.style.height = el.scrollHeight + 'px'
-  }
-}
-
-function handleContentToggleEnd(el: Element) {
-  if (el instanceof HTMLElement) {
-    el.style.height = ''
-  }
 }
 
 function handleTriggerClick() {
@@ -110,15 +93,7 @@ if (groupApi) {
       />
     </button>
 
-    <transition
-      name="accordion"
-      @before-enter="setContentClosed"
-      @enter="setContentOpened"
-      @after-enter="handleContentToggleEnd"
-      @before-leave="setContentOpened"
-      @leave="setContentClosed"
-      @after-leave="handleContentToggleEnd"
-    >
+    <SCollapseTransition>
       <div
         v-show="model"
         :id="contentId"
@@ -129,7 +104,7 @@ if (groupApi) {
           <slot />
         </div>
       </div>
-    </transition>
+    </SCollapseTransition>
   </div>
 </template>
 
@@ -175,13 +150,6 @@ if (groupApi) {
 
   &__body {
     @apply p-24px;
-  }
-
-  .accordion-enter-active,
-  .accordion-leave-active {
-    transition: 250ms ease-in-out height;
-    will-change: height;
-    overflow: hidden;
   }
 }
 </style>

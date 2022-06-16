@@ -26,6 +26,7 @@ import IconEye from '~icons/majesticons/eye-line'
 import IconEyeOff from '~icons/majesticons/eye-off-line'
 
 import IconArrowsChevronDownRounded24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-down-rounded-24.svg'
+import IconChevronBottom16 from '@soramitsu-ui/icons/icomoon/chevron-bottom-16.svg'
 import IconBasicExternalLink24 from '@soramitsu-ui/icons/icomoon/basic-external-link-24.svg'
 
 export {
@@ -40,6 +41,7 @@ export {
   IconEye,
   IconEyeOff,
   IconArrowsChevronDownRounded24,
+  IconChevronBottom16,
   IconBasicExternalLink24,
 }
 
