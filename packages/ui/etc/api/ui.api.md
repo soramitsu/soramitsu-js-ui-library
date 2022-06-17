@@ -411,8 +411,8 @@ size: string;
 }>>> & {
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
-modelValue: boolean;
 type: "default" | "bordered" | "bordered-with-description";
+modelValue: boolean;
 size: "md" | "lg" | "xl";
 }>;
 
