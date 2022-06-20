@@ -6,9 +6,8 @@ export default {
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import DateTable from './src/date-table.vue'
 import MonthTable from './src/month-table.vue'
-import MonthPanel from './month-panel.vue'
+import DatePanel from './date-panel.vue'
 import YearTable from './src/year-table.vue'
 import TimePanel from './time-panel.vue'
 import { options } from './consts'
@@ -42,22 +41,11 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const gridType = computed(() => {
-  const time = props.time ? 'time' : ''
-  const range = props.type === 'range' ? '--range' : ''
-  const pick = props.type === 'pick' ? '--pick' : ''
-  return `custom-grid--date${time}${range || pick || ''}`
-})
-
 const isRange = computed(() => {
   return props.type === 'range'
 })
 
-const formatPattern = computed(() => {
-  return props.time ? 'dd/MM/yyyy, HH:mm' : 'dd/MM/yyyy'
-})
-
-// ____STATE_STORE________________________________________________________________
+// #region STATE_STORE
 
 const today = new Date()
 
@@ -108,17 +96,9 @@ const onDatePick = (data: RangeOptionValue | Date | Date[]) => {
 
 updateModelValue()
 
-// __________________________________________________________________________________
+// #endregion
 
-const onMenuClick = (data: Date | RangeOptionValue, label: string) => {
-  onDatePick(data)
-  updateShowedMonths()
-  menuState.value = label
-}
-
-const menuState = ref<string>('')
-
-// ____SHOW_STATE____________________________________________________________________
+// #region SHOW_STATE
 
 const updateShowedMonths = () => {
   let date: Date | null = null
@@ -185,15 +165,29 @@ const showStateView = computed(() => {
   return ['years', 'months'].includes(currentView.value)
 })
 
-// watch(props.modelValue, ()=> {
-//   updateShowedMonths()
-// }, {deep: true})
+// #endregion
 
-// _____________________________________________________________________________
+// #region OPTIONS_PANEL
+const onMenuClick = (data: Date | RangeOptionValue, label: string) => {
+  onDatePick(data)
+  updateShowedMonths()
+  menuState.value = label
+}
 
-// _______________________________________VIEW__________________________________________
+const menuState = ref<string>('')
 
 const OPTIONS: PresetOption[] = options[props.type as keyof Options] || []
+
+// #endregion
+
+// #region VISUAL
+
+const gridType = computed(() => {
+  const time = props.time ? 'time' : ''
+  const range = props.type === 'range' ? '-range' : ''
+  const pick = props.type === 'pick' ? '-pick' : ''
+  return `date-picker_date${time}${range || pick || ''}`
+})
 
 const currentView = ref('dates')
 
@@ -201,9 +195,36 @@ const changeView = (viewName: string) => {
   currentView.value = viewName
 }
 
-// _____________________________________________________________________________
+const headTitle = computed(() => {
+  try {
+    switch (props.type) {
+      case 'day':
+        return formatDate(props.modelValue)
+      case 'range': {
+        const modelValue = props.modelValue as Date[]
+        return modelValue.map((item: Date) => formatDate(item)).join(' - ')
+      }
 
-// _______________________________________TIME__________________________________________
+      case 'pick': {
+        const modelValue = props.modelValue as Date[]
+        return modelValue.map((item: Date) => formatDate(item)).join(', ')
+      }
+      default:
+        break
+    }
+  } catch {
+    return ''
+  }
+})
+
+const arrowState = ref<string>('')
+const switchArrow = (newArrowState: string) => {
+  arrowState.value = newArrowState
+}
+
+// #endregion
+
+// #region TIME
 
 const dateForTime = ref<string>('')
 
@@ -219,7 +240,7 @@ const updateTime = (time: string) => {
     case 'pick':
       date = pickState.value[dateForTime.value as keyof PickState] as Date | null
       if (!date) return
-      pickState.value[dateForTime.value as keyof PickState] = new Date(
+      (pickState as any).value[dateForTime.value as keyof PickState] = new Date(
         date.getFullYear(),
         date.getMonth(),
         date.getDate(),
@@ -235,7 +256,7 @@ const updateTime = (time: string) => {
     case 'range':
       date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
       if (!date) return
-      rangeState.value[dateForTime.value as keyof RangeState] = new Date(
+      (rangeState as any).value[dateForTime.value as keyof RangeState] = new Date(
         date.getFullYear(),
         date.getMonth(),
         date.getDate(),
@@ -275,10 +296,11 @@ const timeDecoder = (num: number) => {
   return num.toString().length < 2 ? `0${num}` : num
 }
 
-// _______________________________________________________________________________________
+// #endregion
 
+// #region CALENDARS_PANEL
 const firstCalendarModelValue = computed(() => {
-  // return isRange.value ? props.modelValue[0] : props.modelValue
+  if (!props.modelValue) return new Date();
   if (props.type === 'range') {
     const modelValue = props.modelValue as Date[]
     return modelValue[0]
@@ -287,9 +309,14 @@ const firstCalendarModelValue = computed(() => {
   }
 })
 
-const calendarToModelValue = computed(() => {
+const calendarToModelValue = computed(() => {  
+  if (!props.modelValue) return new Date();
   return props.modelValue as Date[][1]
 })
+
+// #endregion
+
+// #region CUSTOM_PANEL
 
 const customInputValue = (field: string) => {
   return formatDate(rangeState.value[field as keyof RangeState])
@@ -298,7 +325,7 @@ const customInputValue = (field: string) => {
 const updateCustomInput = (event: any, field: string) => {
   const newVal = event.target.value
   const date = fromFormat(newVal)
-  if (date) rangeState.value[field as keyof RangeState] = date
+  if (date) (rangeState as any).value[field as keyof RangeState] = date
   rangeState.value.selecting = false
   updateModelValue()
   updateShowedMonths()
@@ -311,6 +338,22 @@ const updateCustomInputDay = (event: any) => {
   updateModelValue()
   updateShowedMonths()
 }
+
+const updateCustomInputPick = (event: any) => {
+  const newVal = event.target.value
+  const date = fromFormat(newVal)
+  if (date) {
+    if (pickState.value.length > 0)
+      pickState.value[pickState.value.length - 1] = date;
+      else pickState.value.push(date)
+    }
+  updateModelValue()
+  updateShowedMonths()
+}
+
+const customInputValuePick = computed(() => {
+ return formatDate(pickState.value[pickState.value.length - 1])      
+})
 
 const customInputValueStartDate = computed(() => {
   return customInputValue('startDate')
@@ -327,8 +370,16 @@ const customInputValueDay = computed(() => {
 const customInputConfig = computed(() => {
   return {
     mask: `##/##/####${props.time ? ', ##:##' : ''}`,
-    class: `custom-input${props.time ? '--time' : ''}`,
+    class: `custom-panel__input${props.time ? '_time' : ''}`,
   }
+})
+
+// #endregion
+
+// #region FORMATTING
+
+const formatPattern = computed(() => {
+  return props.time ? 'dd/MM/yyyy, HH:mm' : 'dd/MM/yyyy'
 })
 
 const formatDate = (date: any) => {
@@ -343,44 +394,19 @@ const fromFormat = (dateString: string) => {
   return date.toJSDate()
 }
 
-const headTitle = computed(() => {
-  try {
-    switch (props.type) {
-      case 'day':
-        return formatDate(props.modelValue)
-      case 'range': {
-        const modelValue = props.modelValue as Date[]
-        return modelValue.map((item: Date) => formatDate(item)).join(' - ')
-      }
-
-      case 'pick': {
-        const modelValue = props.modelValue as Date[]
-        return modelValue.map((item: Date) => formatDate(item)).join(', ')
-      }
-      default:
-        break
-    }
-  } catch {
-    return ''
-  }
-})
-
-const arrowState = ref<string>('')
-const switchArrow = (newArrowState: string) => {
-  arrowState.value = newArrowState
-}
+// #endregion
 </script>
 
 <template>
-  <div>
+  <div class="picker-component">
     <Popper
       @open:popper="switchArrow('reverse')"
       @close:popper="switchArrow('')"
     >
-      <div class="p-2 sora-tpg-ch2 relative pr-6 cursor-pointer title">
+      <div class="head-title p-2 sora-tpg-ch2 relative pr-6 cursor-pointer">
         {{ headTitle || 'Date' }}
         <div
-          class="arrow"
+          class="head-title__arrow"
           :class="arrowState"
         >
           <IconArrowsChevronBottom24 />
@@ -388,74 +414,58 @@ const switchArrow = (newArrowState: string) => {
       </div>
       <template #content="{ close }">
         <div
-          class="custom-grid sora-tpg-p4"
+          class="date-picker sora-tpg-p4"
+          data-testid="date-picker"
           :class="[`${gridType}`, { narrow: showStateView }]"
         >
-          <div class="select flex flex-col justify-start items-stretch sora-tpg-p3">
+          <div
+            v-if="props.type!='pick'"
+            class="options-panel sora-tpg-p3"
+          >
             <p
               v-for="(item, idx) in OPTIONS"
               :key="idx"
-              class="menu-item"
+              class="options-panel__item"
               :class="menuState === item.label ? 'active' : ''"
               @click="onMenuClick(item.value, item.label)"
             >
               {{ item.label }}
               <span
                 v-show="menuState === item.label"
-                class="menu-item__checkmark"
+                class="options-panel__checkmark"
               ><IconBasicCheckMark24 /></span>
             </p>
           </div>
-          <div class="calendars flex justify-center items-start">
-            <div class="calendar calendar-from">
-              <div
+          <div class="calendars-panel">
+            <div>
+              <DatePanel
                 v-show="currentView === 'dates'"
-                class="flex flex-col justify-start items-center"
-              >
-                <MonthPanel
-                  class="w-full"
-                  :show-month="showState.month"
-                  :show-year="showState.year"
-                  @change-view="changeView"
-                  @update-showed-state="updateShowedState"
-                />
-                <DateTable
-                  :value="firstCalendarModelValue"
-                  :time="props.time"
-                  :selection-mode="type"
-                  :show-state="showState"
-                  :state-store="stateStore"
-                  @pick="onDatePick"
-                  @update-showed-state="updateShowedState"
-                />
-              </div>
+                :show-state="showState"
+                :value="firstCalendarModelValue"
+                :time="props.time"
+                :selection-mode="type"
+                :state-store="stateStore"
+                @change-view="changeView"
+                @update-showed-state="updateShowedState"
+                @pick="onDatePick"
+              />
             </div>
             <div
               v-if="isRange"
-              class="calendar calendar-to"
+              class="ml-4"
             >
-              <div
+              <DatePanel
                 v-show="currentView === 'dates'"
-                class="flex flex-col justify-start items-center"
-              >
-                <MonthPanel
-                  class="w-full"
-                  :show-month="nextMonthShowState.month"
-                  :show-year="nextMonthShowState.year"
-                  :hide-arrows="true"
-                  @update-showed-state="updateShowedState"
-                  @change-view="changeView"
-                />
-                <DateTable
-                  :value="calendarToModelValue"
-                  :time="props.time"
-                  :selection-mode="type"
-                  :show-state="nextMonthShowState"
-                  :state-store="stateStore"
-                  @pick="onDatePick"
-                  @update-showed-state="updateShowedState"
-                />
-              </div>
+                :show-state="nextMonthShowState"
+                :value="calendarToModelValue"
+                :time="props.time"
+                :selection-mode="type"
+                :state-store="stateStore"
+                :hide-arrows="true"
+                @change-view="changeView"
+                @update-showed-state="updateShowedState"
+                @pick="onDatePick"
+              />
             </div>
             <div
               v-if="currentView === 'months'"
@@ -476,7 +486,7 @@ const switchArrow = (newArrowState: string) => {
           </div>
           <div
             v-if="time && !showStateView"
-            class="time flex flex-col justify-center"
+            class="time-panel"
           >
             <TimePanel
               :value="currentValueTime"
@@ -485,13 +495,13 @@ const switchArrow = (newArrowState: string) => {
           </div>
           <div
             v-if="menuState === 'Custom' && !showStateView"
-            class="custom-panel flex justify-center items-center relative"
+            class="custom-panel"
           >
             <div class="flex justify-center items-center">
               <template v-if="props.type === 'range'">
                 <input
                   v-maska="customInputConfig.mask"
-                  class="custom-input"
+                  class="custom-panel__input"
                   :class="customInputConfig.class"
                   :value="customInputValueStartDate"
                   @change="updateCustomInput($event, 'startDate')"
@@ -501,7 +511,7 @@ const switchArrow = (newArrowState: string) => {
                 </div>
                 <input
                   v-maska="customInputConfig.mask"
-                  class="custom-input"
+                  class="custom-panel__input"
                   :class="customInputConfig.class"
                   :value="customInputValueEndDate"
                   @change="updateCustomInput($event, 'endDate')"
@@ -510,10 +520,19 @@ const switchArrow = (newArrowState: string) => {
               <template v-if="props.type === 'day'">
                 <input
                   v-maska="customInputConfig.mask"
-                  class="custom-input"
+                  class="custom-panel__input"
                   :class="customInputConfig.class"
                   :value="customInputValueDay"
                   @change="updateCustomInputDay($event)"
+                >
+              </template>
+              <template v-if="props.type === 'pick' && pickState.length > 0">
+                <input
+                  v-maska="customInputConfig.mask"
+                  class="custom-panel__input"
+                  :class="customInputConfig.class"
+                  :value="customInputValuePick"
+                  @change="updateCustomInputPick($event)"
                 >
               </template>
               <button
@@ -533,138 +552,138 @@ const switchArrow = (newArrowState: string) => {
 <style lang="scss" scoped>
 @use '@/theme';
 
-.arrow {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%) scale(0.66);
-}
-.arrow svg {
-  transition: 0.3s;
-}
+.picker-component {
+  .head-title {
+    border-radius: 4px;
+    border: 1px solid theme.token-as-var('sys.color.border-primary');
 
-.arrow.reverse svg {
-  transform: rotate(180deg);
-}
+    &__arrow {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%) scale(0.66);
 
-.custom-grid {
-  display: grid;
-  background-color: theme.token-as-var('sys.color.util.surface');
+      & svg {
+        transition: 0.3s;
+      }
 
-  grid-template-areas:
-    'select calendars time'
-    'select custom custom';
-  max-height: 405px;
-
-  &.narrow {
-    // width: 640px;
+      &.reverse svg {
+        transform: rotate(180deg);
+      }
+    }
   }
 
-  box-shadow: theme.token-as-var('sys.shadow.dropdown');
+  .date-picker {
+    display: grid;
+    background-color: theme.token-as-var('sys.color.util.surface');
 
-  &--date {
     grid-template-areas:
-      'select calendars'
-      'select custom';
+      'options calendars time'
+      'options custom custom';
+    max-height: 405px;
+    border-radius: 4px;
+    box-shadow: theme.token-as-var('sys.shadow.dropdown');
+
+    &_date {
+      grid-template-areas:
+        'options calendars'
+        'options custom';
+    }
+    &_date-range {
+      grid-template-areas:
+        'options calendars'
+        'options custom';
+    }
+
+    &_datetime {
+      grid-template-areas:
+        'options calendars  time'
+        'options custom custom';
+    }
+
+    &_datetime-pick {
+      grid-template-areas:
+        'calendars time'
+        'custom custom';
+    }
+
+    &_date-pick {
+      grid-template-areas:
+        'calendars'
+        'custom';
+    }
+
+    .options-panel {
+      @apply flex flex-col justify-start;
+      grid-area: options;
+      border-right: 1px solid theme.token-as-var('sys.color.border-primary');
+
+      &__item {
+        padding: 10px 16px;
+        cursor: pointer;
+        position: relative;
+        width: 150px;
+        &:hover {
+          background-color: theme.token-as-var('sys.color.background-hover');
+        }
+        &.active {
+          background-color: theme.token-as-var('sys.color.background-hover');
+        }
+      }
+
+      &__checkmark {
+        position: absolute;
+        top: 0;
+        right: 8px;
+        transform: translateY(50%);
+      }
+    }
+
+    .calendars-panel {
+      @apply flex justify-center items-start;
+      grid-area: calendars;
+      margin: 0 16px;
+      margin-bottom: 16px;
+    }
+    .time-panel {
+      @apply flex flex-col justify-start;
+      grid-area: time;
+      max-height: 342px;
+    }
+    .custom-panel {
+      @apply flex justify-center items-center relative;
+      grid-area: custom;
+      border-top: 1px solid theme.token-as-var('sys.color.border-primary');
+      height: 52px;
+
+      &__input {
+        outline: none;
+        border: 1px solid theme.token-as-var('sys.color.border-primary');
+        border-radius: 4px;
+        padding: 5px 10px;
+        width: 120px;
+        height: 32px;
+        text-align: center;
+
+        &_time {
+          width: 150px;
+        }
+      }
+
+      .save-button {
+        font-size: 10px;
+        width: 44px;
+        height: 24px;
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+        background: theme.token-as-var('sys.color.primary');
+        border-radius: 2px;
+        color: theme.token-as-var('sys.color.util.surface');
+        font-weight: 700;
+      }
+    }
   }
-  &--date--range {
-    grid-template-areas:
-      'select calendars'
-      'select custom';
-  }
-
-  &--datetime {
-    grid-template-areas:
-      'select calendars  time'
-      'select custom custom';
-  }
-
-  &--datetime--pick {
-    grid-template-areas:
-      'calendars time'
-      'custom custom';
-  }
-
-  &--date--pick {
-    grid-template-areas:
-      'calendars'
-      'custom';
-  }
-}
-
-.select {
-  grid-area: select;
-  border-right: 1px solid theme.token-as-var('sys.color.border-primary');
-  width: 150px;
-}
-.calendar-to {
-  margin-left: 16px;
-}
-.time {
-  grid-area: time;
-  max-height: 342px;
-}
-.custom-panel {
-  grid-area: custom;
-  border-top: 1px solid theme.token-as-var('sys.color.border-primary');
-  height: 52px;
-}
-
-.calendars {
-  grid-area: calendars;
-  margin: 0 16px;
-  margin-bottom: 16px;
-}
-
-.menu-item {
-  padding: 10px 16px;
-  cursor: pointer;
-  position: relative;
-  &__checkmark {
-    position: absolute;
-    top: 0;
-    right: 8px;
-    transform: translateY(50%);
-  }
-}
-
-.menu-item:hover {
-  background-color: theme.token-as-var('sys.color.background-hover');
-}
-.menu-item.active {
-  background-color: theme.token-as-var('sys.color.background-hover');
-}
-
-.custom-input {
-  outline: none;
-  border: 1px solid theme.token-as-var('sys.color.border-primary');
-  border-radius: 4px;
-  padding: 5px 10px;
-  width: 120px;
-  height: 32px;
-  text-align: center;
-
-  &--time {
-    width: 150px;
-  }
-}
-
-.save-button {
-  font-size: 10px;
-  width: 44px;
-  height: 24px;
-  position: absolute;
-  top: 50%;
-  right: 16px;
-  transform: translateY(-50%);
-  background: theme.token-as-var('sys.color.primary');
-  border-radius: 2px;
-  color: theme.token-as-var('sys.color.util.surface');
-  font-weight: 700;
-}
-
-.title {
-  border-radius: 4px;
-  border: 1px solid theme.token-as-var('sys.color.border-primary');
 }
 </style>

@@ -316,6 +316,24 @@ loading: boolean;
 uppercase: boolean;
 }>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SDatePicker: DefineComponent<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<Props_8>, {
+type: string;
+time: boolean;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<Props_8>, {
+type: string;
+time: boolean;
+}>>> & {
+"onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+}, {
+type: DatePickerType;
+time: boolean;
+}>;
+
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
@@ -993,6 +1011,7 @@ export function useSelectApi<T = any>(): SelectApi<T>;
 
 // Warnings were encountered during analysis:
 //
+// dist-ts/components/DatePicker/Picker.vue.d.ts:16:5 - (ae-forgotten-export) The symbol "DatePickerType" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:9:9 - (ae-forgotten-export) The symbol "validateVerticalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:14:9 - (ae-forgotten-export) The symbol "validateHorizontalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsProvider.d.ts:8:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts

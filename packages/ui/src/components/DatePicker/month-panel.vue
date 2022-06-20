@@ -61,12 +61,12 @@ const changeView = (viewName: string) => {
     <div class="flex justify-center items-center">
       <span
         role="button"
-        class="header-label"
+        class="header__label"
         @click="changeView('months')"
       >{{ months[showMonth] }}</span>
       <span
         role="button"
-        class="header-label"
+        class="header__label"
         @click="changeView('years')"
       >{{ showYear }}</span>
     </div>
@@ -87,12 +87,7 @@ const changeView = (viewName: string) => {
 .header {
   height: 57px;
 
-  &--bordered {
-    margin-bottom: 0;
-    border-bottom: 1px solid theme.token-as-var('sys.color.border-primary');
-  }
-
-  &-label {
+  &__label {
     padding: 0 5px;
     line-height: 22px;
     text-align: center;

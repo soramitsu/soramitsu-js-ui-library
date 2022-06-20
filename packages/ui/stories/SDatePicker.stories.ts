@@ -11,7 +11,7 @@ export const Configurable = defineStory((args) =>  ({
     SDatePicker,
   },
   setup() {
-    const date = ref(new Date())
+    let date = ref<Date|null>(null)
     return {
       args, date
     }

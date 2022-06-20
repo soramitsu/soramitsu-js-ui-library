@@ -93,7 +93,6 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
     <div class="flex justify-between items-center sora-tpg-p2 year-range-panel">
       <button
         type="button"
-        class=""
         @click="changeYear(-1)"
       >
         <IconArrowsChevronLeft24 />
@@ -101,7 +100,6 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
       <p>{{ currentYear + deltaYear }}</p>
       <button
         type="button"
-        class=""
         @click="changeYear(1)"
       >
         <IconArrowsChevronRight24 />
@@ -163,12 +161,7 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
 
     &.current:not(.disabled) .cell {
       color: theme.token-as-var('sys.color.primary');
-    }
-
-    &.disabled .cell {
-      background-color: theme.token-as-var('sys.color.on-disabled');
-      cursor: not-allowed;
-    }
+    }   
 
     &.today .cell {
       color: theme.token-as-var('sys.color.primary');

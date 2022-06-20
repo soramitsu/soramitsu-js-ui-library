@@ -29,7 +29,7 @@ const updateTime = (e: any) => {
 </script>
 
 <template>
-  <div class="time-panel flex flex-col items-center justify-start sora-tpg-p4">
+  <div class="time-panel sora-tpg-p4">
     <p
       v-for="(time, idx) in timeArray"
       :key="idx"
@@ -45,45 +45,42 @@ const updateTime = (e: any) => {
 <style lang="scss" scoped>
 @use '@/theme';
 .time-panel {
+  @apply flex flex-col items-center justify-start;
   overflow-y: scroll;
   height: 100%;
   padding: 4px 0;
   padding-right: 20px;
 
+  scrollbar-color: theme.token-as-var('sys.color.border-primary') transparent;
+  scrollbar-arrow-color: transparent;
+  scrollbar-width: thin;
+
   p {
     margin-bottom: 10px;
     padding: 1px 4px;
     width: 44px;
-    height: 24px;    
+    height: 24px;
     font-feature-settings: 'tnum' on, 'lnum' on, 'case' on;
 
     &:last-child {
       margin-bottom: 0;
     }
   }
-}
 
-.time-panel::-webkit-scrollbar {
-  background: transparent;
-  width: 2px;
-}
+  &::-webkit-scrollbar {
+    background: transparent;
+    width: 2px;
+  }
 
-.time-panel::-webkit-scrollbar-thumb {
-  background: theme.token-as-var('sys.color.border-primary');
-  border-radius: 2px;
-}
+  &::-webkit-scrollbar-thumb {
+    background: theme.token-as-var('sys.color.border-primary');
+    border-radius: 2px;
+  }
 
-.time-panel {
-  // -ms-overflow-style: none; /* IE and Edge */
-  // scrollbar-width: none; /* Firefox */
-  scrollbar-color: theme.token-as-var('sys.color.border-primary') transparent;
-  scrollbar-arrow-color: transparent;
-  scrollbar-width: thin;
-}
-
-.active {
-  background-color: theme.token-as-var('sys.color.primary');
-  color: theme.token-as-var('sys.color.util.surface');
-  border-radius: 2px;
+  .active {
+    background-color: theme.token-as-var('sys.color.primary');
+    color: theme.token-as-var('sys.color.util.surface');
+    border-radius: 2px;
+  }
 }
 </style>

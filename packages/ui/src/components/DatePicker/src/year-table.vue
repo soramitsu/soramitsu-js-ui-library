@@ -45,10 +45,9 @@ const handleYearTableClick = (event: any) => {
 </script>
 
 <template>
-  <div class="flex justify-between items-center sora-tpg-p2 year-range-panel">
+  <div class="sora-tpg-p2 year-range-panel">
     <button
       type="button"
-      class=""
       @click="changeDecade(-1)"
     >
       <IconArrowsChevronLeft24 />
@@ -56,7 +55,6 @@ const handleYearTableClick = (event: any) => {
     <p>{{ `${startYear} - ${startYear + 9}` }}</p>
     <button
       type="button"
-      class=""
       @click="changeDecade(1)"
     >
       <IconArrowsChevronRight24 />
@@ -64,7 +62,7 @@ const handleYearTableClick = (event: any) => {
   </div>
 
   <div
-    class="custom-grid year-table sora-tpg-p3"
+    class="year-table sora-tpg-p3"
     @click="handleYearTableClick"
   >
     <div
@@ -81,6 +79,7 @@ const handleYearTableClick = (event: any) => {
 <style lang="scss" scoped>
 @use '@/theme';
 .year-range-panel {
+  @apply flex justify-between items-center;
   height: 57px;
 }
 
@@ -100,23 +99,13 @@ const handleYearTableClick = (event: any) => {
     &.today .cell {
       color: theme.token-as-var('sys.color.primary');
       font-weight: 700;
-    }
-
-    &.disabled .cell {
-      background-color: theme.token-as-var('sys.color.background');
-      cursor: not-allowed;
-      color: theme.token-as-var('sys.color.on-disabled');
-
-      &:hover {
-        color: theme.token-as-var('sys.color.on-disabled');
-      }
-    }
+    }   
 
     & .cell:hover {
       color: theme.token-as-var('sys.color.primary');
     }
 
-    &.current:not(.disabled) .cell {
+    &.current .cell {
       color: theme.token-as-var('sys.color.primary');
     }
   }
