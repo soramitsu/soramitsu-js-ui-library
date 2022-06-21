@@ -57,6 +57,8 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
         align="right"
         :formatter="formatter"
         header-align="center"
+        :sort-orders="['descending', 'ascending', null]"
+        sortable
       />
       <s-table-column
         prop="prop4"
