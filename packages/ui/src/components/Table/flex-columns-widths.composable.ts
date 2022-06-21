@@ -29,6 +29,6 @@ export function useFlexColumns(columns: (ColumnApi | ActionColumnApi)[], table: 
 
   return {
     columnsWidths,
-    columnsWidthsSum
+    columnsWidthsSum,
   }
 }
