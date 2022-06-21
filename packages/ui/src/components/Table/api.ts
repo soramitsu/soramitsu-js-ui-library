@@ -11,17 +11,11 @@ import {
 export interface ColumnWidthProps {
   width: null | number
   minWidth: number
-  realWidth: number
 }
 
 export interface ColumnAlignProps {
   align: TableColumnAlign
   headerAlign: TableColumnAlign
-}
-
-export interface ColumnSelectProps {
-  selectable: ColumnRowSelectableFunc | null
-  reserveSelection?: boolean
 }
 
 export interface ColumnSortProps {
@@ -31,7 +25,7 @@ export interface ColumnSortProps {
   sortOrders: ColumnSortOrder[]
 }
 
-export interface CommonColumnApi extends ColumnWidthProps, ColumnAlignProps, ColumnSortProps, ColumnSelectProps {
+export interface CommonColumnApi extends ColumnWidthProps, ColumnAlignProps, ColumnSortProps {
   id: string
   label?: string
   cellSlot?: Slot
@@ -40,6 +34,8 @@ export interface CommonColumnApi extends ColumnWidthProps, ColumnAlignProps, Col
   className: string
   labelClassName: string
   formatter: ColumnCellValueFormatter | null
+  selectable: ColumnRowSelectableFunc | null
+  reserveSelection?: boolean
 }
 
 export interface ColumnApi extends CommonColumnApi {
