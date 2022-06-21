@@ -14,11 +14,6 @@ import { useColumnExpand } from '@/components/Table/column-expand.composable'
 import { isDefaultColumn, isExpandColumn, isSelectionColumn } from '@/components/Table/utils'
 import get from 'lodash/get'
 
-type Row = Record<string, unknown>
-type CellEventData = [Row, ColumnApi, EventTarget, MouseEvent]
-type RowEventData = [Row, ColumnApi, MouseEvent]
-type HeaderEventData = [ColumnApi, MouseEvent]
-
 const props = withDefaults(
   defineProps<{
     data: TableRow[]
@@ -50,9 +45,17 @@ const tableWrapper = ref(null)
 
 const { columnsWidths, columnsWidthsSum } = useFlexColumns(columns, tableWrapper)
 const { expandedRows, activeExpandColumn, toggleRowExpanded } = useColumnExpand(columns)
-const { sortState, sortedData, explicitSort, handleSortChange, getNextOrder } = useColumnSort(data)
+const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applySameSort } = useColumnSort(data)
 const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } =
   useRowSelect(sortedData)
+
+if (props.defaultSort) {
+  sort(props.defaultSort)
+}
+
+watch([data, columns], () => {
+  applySameSort()
+})
 
 function register(column: ColumnApi | ActionColumnApi) {
   const index = columns.push(column)
@@ -70,7 +73,7 @@ function sort({ prop, order }: { prop: string; order: ColumnSortOrder }) {
   const column = getColumnByProp(prop)
 
   if (column) {
-    explicitSort(column, order)
+    sortExplicitly(column, order)
   }
 }
 
