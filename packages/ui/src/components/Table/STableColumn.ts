@@ -144,8 +144,6 @@ export default defineComponent({
     const tableApi = useTableApi()
     const slots = useSlots()
 
-    const columnId = 's-table_column_' + nextIncrementalCounter()
-
     const filterProp = usePropTypeFilter(props)
     const definitelyType = filterProp('type', TABLE_COLUMN_TYPE_VALUES, 'default')
     const definitelyAlign = filterProp('align', TABLE_COLUMN_ALIGN_VALUES, 'left')
@@ -155,12 +153,10 @@ export default defineComponent({
       selection: {
         width: 52,
         minWidth: 52,
-        realWidth: 52,
       },
       expand: {
         width: 52,
         minWidth: 52,
-        realWidth: 52,
       },
     }
 
@@ -169,13 +165,9 @@ export default defineComponent({
         return widthsPresets[definitelyType.value]
       }
 
-      const parsedWith = parseInt(props.width, 10)
-      const parsedMinWidth = parseInt(props.minWidth, 10)
-
       return {
-        width: parsedWith || null,
-        minWidth: parsedMinWidth || 80,
-        realWidth: parsedWith || parsedMinWidth || 80,
+        width: parseInt(props.width, 10) || null,
+        minWidth: parseInt(props.minWidth, 10) || 80,
       }
     })
 
@@ -188,15 +180,8 @@ export default defineComponent({
       }
     })
 
-    const selectProps = computed(() => {
-      return {
-        selectable: props.selectable,
-        reserveSelection: props.reserveSelection,
-      }
-    })
-
-    tableApi.register({
-      id: columnId,
+    const api = shallowReactive({
+      id: 's-table_column_' + nextIncrementalCounter(),
       type: definitelyType.value,
       cellSlot: slots.default,
       headerSlot: slots.header,
@@ -208,10 +193,35 @@ export default defineComponent({
       className: props.className,
       labelClassName: props.labelClassName,
       formatter: props.formatter,
+      selectable: props.selectable,
+      reserveSelection: props.reserveSelection,
       ...widthProps.value,
       ...sortProps.value,
-      ...selectProps.value,
     })
+
+    watchEffect(() => {
+      api.type = definitelyType.value
+      api.cellSlot = slots.default
+      api.headerSlot = slots.header
+      api.prop = props.prop
+      api.label = props.label
+      api.showOverflowTooltip = props.showOverflowTooltip
+      api.align = definitelyAlign.value
+      api.headerAlign = definitelyHeaderAlign.value || definitelyAlign.value
+      api.className = props.className
+      api.labelClassName = props.labelClassName
+      api.formatter = props.formatter
+      api.selectable = props.selectable
+      api.reserveSelection = props.reserveSelection
+      api.width = widthProps.value.width
+      api.minWidth = widthProps.value.minWidth
+      api.sortable = sortProps.value.sortable
+      api.sortMethod = sortProps.value.sortMethod
+      api.sortBy = sortProps.value.sortBy
+      api.sortOrders = sortProps.value.sortOrders
+    })
+
+    tableApi.register(api)
 
     return () => null
   },
