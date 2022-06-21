@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SButton',
-})
-</script>
-
 <script setup lang="ts">
 import { SSpinner } from '../Spinner'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'

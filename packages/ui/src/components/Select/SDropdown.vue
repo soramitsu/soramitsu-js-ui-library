@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SDropdown',
-})
-</script>
-
 <script setup lang="ts">
 import { SelectOption, SelectButtonType, SelectOptionType, SelectSize } from './types'
 import SSelectBase from './SSelectBase.vue'

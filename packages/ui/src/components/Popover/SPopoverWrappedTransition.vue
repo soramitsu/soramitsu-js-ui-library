@@ -1,8 +1,7 @@
 <script lang="ts">
-export default defineComponent({
-  name: 'SPopoverWrappedTransition',
+export default {
   inheritAttrs: false,
-})
+}
 </script>
 
 <script setup lang="ts">

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'STabsPanel',
-})
-</script>
-
 <script setup lang="ts">
 import { TabsPanelApi, TABS_PANEL_API_KEY, TabsPanelBackgroundType } from './api'
 

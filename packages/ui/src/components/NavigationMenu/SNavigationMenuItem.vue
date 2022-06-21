@@ -1,7 +1,3 @@
-<script lang="ts">
-export default { name: 'SNavigationMenuItem' }
-</script>
-
 <script setup lang="ts">
 import { computed, onUnmounted } from 'vue'
 import { useNavigationMenuApi, useNavigationSubmenuApi } from '@/components/NavigationMenu/api'

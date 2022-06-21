@@ -20,14 +20,16 @@ export function useCloseOnEsc(active: Ref<boolean>, closeCb: () => void) {
   })
 }
 
-export enum VisibilityState {
-  Hidden,
-  Entering,
-  Visible,
-  Leaving,
-}
+const VisibilityState = {
+  Hidden: 'hidden',
+  Entering: 'entering',
+  Visible: 'visible',
+  Leaving: 'leaving',
+} as const
 
-export type VisibilityStateMap<K extends string> = {
+type VisibilityState = typeof VisibilityState[keyof typeof VisibilityState]
+
+type VisibilityStateMap<K extends string> = {
   [key in K]: VisibilityState
 }
 

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: 'SRadio',
-}
-</script>
-
 <script setup lang="ts">
 import { useRadioGroupApi } from './api'
 import { RadioSize, RADIO_SIZE_VALUES, RadioType, RADIO_TYPE_VALUES } from './types'

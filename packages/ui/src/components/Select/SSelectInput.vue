@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SSelectInput',
-})
-</script>
-
 <script setup lang="ts">
 import { useSelectApi } from './api'
 import { SelectSize } from './types'

@@ -1,8 +1,7 @@
 <script lang="ts">
-export default defineComponent({
-  name: 'STextField',
+export default {
   inheritAttrs: false,
-})
+}
 </script>
 
 <script setup lang="ts">
@@ -14,7 +13,7 @@ import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff } from '../icons'
  * warning: don't use it inside of `Props`. Vue compiler determines it
  * as an object and generates wrong props definition
  */
-type TextFieldStatus = Exclude<Status, Status.Info>
+type TextFieldStatus = Exclude<Status, typeof Status.Info>
 
 interface Props {
   /**
@@ -68,7 +67,7 @@ interface Props {
    * Primary status prop. Overrides `success`, `warning` and `error` particular
    * setters.
    */
-  status?: Status.Success | Status.Error | Status.Warning
+  status?: typeof Status.Success | typeof Status.Error | typeof Status.Warning
   /**
    * Shorthand for `success` status
    */

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SSelectOption',
-})
-</script>
-
 <script setup lang="ts">
 import { SelectOptionType } from './types'
 import IconCheckMark from '~icons/mdi/check'

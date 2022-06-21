@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SSelect',
-})
-</script>
-
 <script setup lang="ts">
 import { SelectOption, SelectOptionType, SelectSize } from './types'
 import SSelectBase from './SSelectBase.vue'
