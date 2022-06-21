@@ -7,19 +7,32 @@ import type { Slot } from 'vue'
 import { ActionColumnApi, ColumnApi, TABLE_API_KEY, SCheckboxAtom } from '@/components'
 import { IconArrowTop16, IconArrowsChevronDownRounded24 } from '@/components/icons'
 import { useColumnSort } from '@/components/Table/column-sort.composable'
-import { TableRow, CellEventData, HeaderEventData, RowEventData, SortEventData } from './types'
-import get from 'lodash/get'
+import { TableRow, CellEventData, HeaderEventData, RowEventData, SortEventData, ColumnSortOrder } from './types'
 import { useFlexColumns } from '@/components/Table/flex-columns-widths.composable'
 import { useRowSelect } from '@/components/Table/row-select.composable'
+import { useColumnExpand } from '@/components/Table/column-expand.composable'
+import { isDefaultColumn, isExpandColumn, isSelectionColumn } from '@/components/Table/utils'
+import get from 'lodash/get'
 
 type Row = Record<string, unknown>
 type CellEventData = [Row, ColumnApi, EventTarget, MouseEvent]
 type RowEventData = [Row, ColumnApi, MouseEvent]
 type HeaderEventData = [ColumnApi, MouseEvent]
 
-const props = defineProps<{
-  data: TableRow[]
-}>()
+const props = withDefaults(
+  defineProps<{
+    data: TableRow[]
+    /**
+     * set the default sort column and order.
+     * property prop is used to set default sort column, property order is used to set default sort order
+     * if prop is set, and order is not set, then order is default to ascending
+     */
+    defaultSort?: { prop: string; order: ColumnSortOrder } | null
+  }>(),
+  {
+    defaultSort: null,
+  },
+)
 
 const emit = defineEmits<{
   (event: 'cell-mouse-enter' | 'cell-mouse-leave' | 'cell-click' | 'cell-dblclick', ...value: CellEventData): void
@@ -36,43 +49,16 @@ const data = toRef(props, 'data')
 const tableWrapper = ref(null)
 
 const { columnsWidths, columnsWidthsSum } = useFlexColumns(columns, tableWrapper)
-const { sortStates, sortedData, handleSortChange, getNextOrder } = useColumnSort(data)
-const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } = useRowSelect(data)
-
-const expandedRows = shallowReactive(new Set<TableRow>())
-const lastExpandColumn = computed(() => {
-  let res
-
-  for (let column of columns) {
-    if (column.type === 'expand') {
-      res = column
-    }
-  }
-
-  return res
-})
-
-function toggleRowExpanded(row: TableRow) {
-  if (expandedRows.has(row)) {
-    expandedRows.delete(row)
-
-    return
-  }
-
-  expandedRows.add(row)
-}
+const { expandedRows, activeExpandColumn, toggleRowExpanded } = useColumnExpand(columns)
+const { sortState, sortedData, explicitSort, handleSortChange, getNextOrder } = useColumnSort(data)
+const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } =
+  useRowSelect(sortedData)
 
 function register(column: ColumnApi | ActionColumnApi) {
   const index = columns.push(column)
-  if (isDefaultColumn(column)) {
-    sortStates.set(column, null)
-  }
 
   onScopeDispose(() => {
     columns.splice(index, 1)
-    if (isDefaultColumn(column)) {
-      sortStates.delete(column)
-    }
   })
 }
 
@@ -80,20 +66,24 @@ const api = readonly({ register })
 
 provide(TABLE_API_KEY, api)
 
-function isDefaultColumn(column: ColumnApi | ActionColumnApi): column is ColumnApi {
-  return column.type === 'default'
+function sort({ prop, order }: { prop: string; order: ColumnSortOrder }) {
+  const column = getColumnByProp(prop)
+
+  if (column) {
+    explicitSort(column, order)
+  }
 }
 
-function isSelectionColumn(column: ColumnApi | ActionColumnApi): column is ActionColumnApi & { type: 'selection' } {
-  return column.type === 'selection'
-}
-
-function isExpandColumn(column: ColumnApi | ActionColumnApi): column is ActionColumnApi & { type: 'expand' } {
-  return column.type === 'expand'
-}
+defineExpose({
+  sort,
+})
 
 function isCheckBoxDisabled(column: ActionColumnApi, row: TableRow, index: number) {
   return !column.selectable || column.selectable(row, index)
+}
+
+function getColumnByProp(prop: string) {
+  return columns.filter(isDefaultColumn).find((column) => column.prop === prop)
 }
 
 function getDefaultCellValue(row: TableRow, column: ColumnApi, index: number) {
@@ -101,7 +91,11 @@ function getDefaultCellValue(row: TableRow, column: ColumnApi, index: number) {
 }
 
 function getSortIconStateClasses(column: ColumnApi) {
-  const order = sortStates.get(column)
+  let order = null
+
+  if (column === sortState.column) {
+    order = sortState.order
+  }
 
   if (order !== null) {
     return ['s-table__sort-icon_active', order === 'ascending' ? 's-table__sort-icon_asc' : 's-table__sort-icon_desc']
@@ -317,15 +311,15 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
               </td>
             </tr>
 
-            <tr v-if="lastExpandColumn && expandedRows.has(row)">
+            <tr v-if="activeExpandColumn && expandedRows.has(row)">
               <td
                 class="s-table__expanded-cell py-12px px-16px"
                 :colspan="columns.length"
               >
                 <component
-                  :is="lastExpandColumn.cellSlot"
-                  v-if="lastExpandColumn.cellSlot"
-                  v-bind="{ row, 'column': lastExpandColumn, rowIndex }"
+                  :is="activeExpandColumn.cellSlot"
+                  v-if="activeExpandColumn.cellSlot"
+                  v-bind="{ row, 'column': activeExpandColumn, rowIndex }"
                 />
               </td>
             </tr>

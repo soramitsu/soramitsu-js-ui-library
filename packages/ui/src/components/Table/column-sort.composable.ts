@@ -4,12 +4,20 @@ import { ColumnSortOrder, TableRow } from '@/components/Table/types'
 import get from 'lodash/get'
 
 export function useColumnSort(data: Ref<TableRow[]>) {
-  const sortStates = reactive(new Map<ColumnApi, ColumnSortOrder>())
+  const sortState: { column: ColumnApi | null; order: ColumnSortOrder } = shallowReactive({
+    column: null,
+    order: null,
+  })
   let sortedData: Ref<TableRow[]> = ref(data.value)
 
   watch(data, () => {
     sortedData.value = data.value
   })
+
+  function setSortColumn(column: ColumnApi) {
+    sortState.column = column
+    sortState.order = null
+  }
 
   function getNextOrder(column: ColumnApi, order: ColumnSortOrder) {
     const index = column.sortOrders.indexOf(order)
@@ -72,22 +80,34 @@ export function useColumnSort(data: Ref<TableRow[]>) {
   }
 
   function handleSortChange(column: ColumnApi) {
-    const order = sortStates.get(column)
-
-    if (!column.sortable || order === undefined) {
+    if (!column.sortable) {
       return
     }
 
-    const newOrder = getNextOrder(column, order)
-    sortStates.set(column, newOrder)
+    if (sortState.column !== column) {
+      setSortColumn(column)
+    }
+
+    const newOrder = getNextOrder(column, sortState.order)
+    sortState.order = newOrder
     sortData(newOrder, column)
 
     return newOrder
   }
 
+  function explicitSort(column: ColumnApi, newOrder: ColumnSortOrder) {
+    if (sortState.column !== column) {
+      setSortColumn(column)
+    }
+
+    sortState.order = newOrder
+    sortData(newOrder, column)
+  }
+
   return {
-    sortStates,
     sortedData,
+    sortState,
+    explicitSort,
     handleSortChange,
     getNextOrder,
   }
