@@ -4,7 +4,7 @@ import { isExpandColumn } from "@/components/Table/utils";
 
 export function useColumnExpand(columns: (ColumnApi | ActionColumnApi)[]) {
   const expandedRows = shallowReactive(new Set<TableRow>())
-  const lastExpandColumn = computed(() => {
+  const activeExpandColumn = computed(() => {
     let res
 
     for (let column of columns) {
@@ -27,7 +27,7 @@ export function useColumnExpand(columns: (ColumnApi | ActionColumnApi)[]) {
   }
 
   return {
-    activeExpandColumn: lastExpandColumn,
+    activeExpandColumn,
     expandedRows,
     toggleRowExpanded,
   }

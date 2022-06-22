@@ -16,6 +16,9 @@ import get from 'lodash/get'
 
 const props = withDefaults(
   defineProps<{
+    /**
+     * Table data
+     * */
     data: TableRow[]
     /**
      * set the default sort column and order.
@@ -23,6 +26,74 @@ const props = withDefaults(
      * if prop is set, and order is not set, then order is default to ascending
      */
     defaultSort?: { prop: string; order: ColumnSortOrder } | null
+    /** Table's height. By default it has an auto height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles */
+    height: string | number
+
+    /** Table's max-height. The height of the table starts from auto until it reaches the maxHeight limit. The maxHeight is measured in pixels, same as height */
+    maxHeight: string | number
+
+    /** Whether table has vertical border */
+    border: boolean
+
+    /** Whether width of column automatically fits its container */
+    fit: boolean
+
+    /** Whether table header is visible */
+    showHeader: boolean
+
+    /** Whether current row is highlighted */
+    highlightCurrentRow: boolean
+
+    /** Key of current row, a set only prop */
+    currentRowKey: string | number
+
+    /** Horizontal indentation of nodes in adjacent levels in pixels */
+    indent: number
+
+    /** Function that returns custom class names for a row, or a string assigning class names for every row */
+    rowClassName: string | ((param: rowCallbackParams) => string)
+
+    /** Function that returns custom style for a row, or an object assigning custom style for every row */
+    rowStyle: object | ((param: rowCallbackParams) => object)
+
+    /** Function that returns custom class names for a cell, or a string assigning class names for every cell */
+    cellClassName: string | ((param: cellCallbackParams) => string)
+
+    /** Function that returns custom style for a cell, or an object assigning custom style for every cell */
+    cellStyle: object | ((param: cellCallbackParams) => object)
+
+    /** Function that returns custom class names for a row in table header, or a string assigning class names for every row in table header */
+    headerRowClassName: string | ((param: rowCallbackParams) => string)
+
+    /** Function that returns custom style for a row in table header, or an object assigning custom style for every row in table header */
+    headerRowStyle: object | ((param: rowCallbackParams) => object)
+
+    /** Function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header */
+    headerCellClassName: string | ((param: cellCallbackParams) => string)
+
+    /** Function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header */
+    headerCellStyle: object | ((param: cellCallbackParams) => object)
+
+    /** Key of row data, used for optimizing rendering. Required if reserve-selection is on */
+    rowKey: (row: object) => any
+
+    /** Displayed text when data is empty. You can customize this area with `slot="empty"` */
+    emptyText: String
+
+    /**
+     * whether expand all rows by default,
+     * works when the table has a column type="expand" or contains tree structure data
+     * */
+    defaultExpandAll?: boolean
+
+    /** Set expanded rows by this prop. Prop's value is the keys of expand rows, you should set row-key before using this prop */
+    expandRowKeys: any[]
+
+    /** removed temp */
+    // tooltipEffect: 'dark' | 'light'
+
+    /** Controls the behavior of master checkbox in multi-select tables when only some rows are selected */
+    selectOnIndeterminate: boolean
   }>(),
   {
     defaultSort: null,
