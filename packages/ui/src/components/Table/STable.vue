@@ -125,12 +125,12 @@ if (props.defaultSort) {
   sort(props.defaultSort)
 }
 
+if (props.defaultExpandAll) {
+  data.value.forEach(toggleRowExpanded)
+}
+
 watch([data, columns], () => {
   applyCurrentSort()
-
-  if (props.defaultExpandAll && activeExpandColumn.value) {
-    data.value.forEach(toggleRowExpanded)
-  }
 })
 
 function register(column: ColumnApi | ActionColumnApi) {
