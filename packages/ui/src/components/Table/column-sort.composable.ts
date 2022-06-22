@@ -100,7 +100,7 @@ export function useColumnSort(data: Ref<TableRow[]>) {
     sortData(newOrder, column)
   }
 
-  function applySameSort() {
+  function applyCurrentSort() {
     if (!sortState.column) {
       return
     }
@@ -112,7 +112,7 @@ export function useColumnSort(data: Ref<TableRow[]>) {
     sortedData,
     sortState,
     sortExplicitly,
-    applySameSort,
+    applyCurrentSort,
     handleSortChange,
     getNextOrder,
   }

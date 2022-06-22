@@ -45,7 +45,7 @@ const tableWrapper = ref(null)
 
 const { columnsWidths, columnsWidthsSum } = useFlexColumns(columns, tableWrapper)
 const { expandedRows, activeExpandColumn, toggleRowExpanded } = useColumnExpand(columns)
-const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applySameSort } = useColumnSort(data)
+const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applyCurrentSort } = useColumnSort(data)
 const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } =
   useRowSelect(sortedData)
 
@@ -54,7 +54,7 @@ if (props.defaultSort) {
 }
 
 watch([data, columns], () => {
-  applySameSort()
+  applyCurrentSort()
 })
 
 function register(column: ColumnApi | ActionColumnApi) {
