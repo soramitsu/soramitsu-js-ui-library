@@ -97,6 +97,7 @@ const props = withDefaults(
   }>(),
   {
     defaultSort: null,
+    defaultExpandAll: false,
   },
 )
 
@@ -126,6 +127,10 @@ if (props.defaultSort) {
 
 watch([data, columns], () => {
   applyCurrentSort()
+
+  if (props.defaultExpandAll && activeExpandColumn.value) {
+    data.value.forEach(toggleRowExpanded)
+  }
 })
 
 function register(column: ColumnApi | ActionColumnApi) {
