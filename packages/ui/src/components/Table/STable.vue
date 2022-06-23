@@ -26,29 +26,29 @@ const props = withDefaults(
      * if prop is set, and order is not set, then order is default to ascending
      */
     defaultSort?: { prop: string; order: ColumnSortOrder } | null
-    /** Table's height. By default it has an auto height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles */
-    height: string | number
-
-    /** Table's max-height. The height of the table starts from auto until it reaches the maxHeight limit. The maxHeight is measured in pixels, same as height */
-    maxHeight: string | number
-
-    /** Whether table has vertical border */
-    border: boolean
-
-    /** Whether width of column automatically fits its container */
-    fit: boolean
-
-    /** Whether table header is visible */
-    showHeader: boolean
-
-    /** Whether current row is highlighted */
-    highlightCurrentRow: boolean
-
-    /** Key of current row, a set only prop */
-    currentRowKey: string | number
-
-    /** Horizontal indentation of nodes in adjacent levels in pixels */
-    indent: number
+    // /** Table's height. By default it has an auto height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles */
+    // height: string | number
+    //
+    // /** Table's max-height. The height of the table starts from auto until it reaches the maxHeight limit. The maxHeight is measured in pixels, same as height */
+    // maxHeight: string | number
+    //
+    // /** Whether table has vertical border */
+    // border: boolean
+    //
+    // /** Whether width of column automatically fits its container */
+    // fit: boolean
+    //
+    // /** Whether table header is visible */
+    // showHeader: boolean
+    //
+    // /** Whether current row is highlighted */
+    // highlightCurrentRow: boolean
+    //
+    // /** Key of current row, a set only prop */
+    // currentRowKey: string | number
+    //
+    // /** Horizontal indentation of nodes in adjacent levels in pixels */
+    // indent: number
 
     // /** Function that returns custom class names for a row, or a string assigning class names for every row */
     // rowClassName: string | ((param: rowCallbackParams) => string)
@@ -79,10 +79,10 @@ const props = withDefaults(
      * When its type is String, multi-level access is supported, e.g. user.info.id,
      * but user.info[0].id is not supported, in which case Function should be used.
      * */
-    rowKey?: string | ((row: TableRow) => string) | null
+    rowKey?: string | ((row: TableRow) => unknown) | null
 
-    /** Displayed text when data is empty. You can customize this area with `slot="empty"` */
-    emptyText: String
+    // /** Displayed text when data is empty. You can customize this area with `slot="empty"` */
+    // emptyText: String
 
     /**
      * whether expand all rows by default,
@@ -90,19 +90,23 @@ const props = withDefaults(
      * */
     defaultExpandAll?: boolean
 
-    /** Set expanded rows by this prop. Prop's value is the keys of expand rows, you should set row-key before using this prop */
-    expandRowKeys: any[]
+    /**
+     * Set expanded rows by this prop. Prop's value is the keys of expand rows,
+     * you should set row-key before using this prop
+     * */
+    expandRowKeys?: unknown[]
 
     /** removed temp */
     // tooltipEffect: 'dark' | 'light'
 
-    /** Controls the behavior of master checkbox in multi-select tables when only some rows are selected */
-    selectOnIndeterminate: boolean
+    // /** Controls the behavior of master checkbox in multi-select tables when only some rows are selected */
+    // selectOnIndeterminate: boolean
   }>(),
   {
     defaultSort: null,
     defaultExpandAll: false,
     rowKey: null,
+    expandRowKeys: () => []
   },
 )
 
@@ -117,8 +121,9 @@ const emit = defineEmits<{
 }>()
 
 const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
-const data = toRef(props, 'data')
+const { data, expandRowKeys } = toRefs(props)
 const tableWrapper = ref(null)
+const rowKeys = shallowReactive(new Map<TableRow, unknown>())
 
 const { columnsWidths, columnsWidthsSum } = useFlexColumns(columns, tableWrapper)
 const { expandedRows, activeExpandColumn, toggleRowExpanded } = useColumnExpand(columns)
@@ -137,6 +142,18 @@ if (props.defaultExpandAll) {
 watch([data, columns], () => {
   applyCurrentSort()
 })
+
+watch([rowKeys, expandRowKeys], () => {
+  for (let [row, key] of rowKeys) {
+    if (props.expandRowKeys.includes(key)) {
+      toggleRowExpanded(row)
+    }
+  }
+})
+
+watch(sortedData, () => {
+  sortedData.value.forEach((row, rowIndex) => rowKeys.set(row, getRowKey(row, rowIndex)))
+}, { immediate: true })
 
 function register(column: ColumnApi | ActionColumnApi) {
   const index = columns.push(column)
@@ -368,7 +385,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
         <tbody>
           <template
             v-for="(row, rowIndex) in sortedData"
-            :key="getRowKey(row, rowIndex)"
+            :key="rowKeys.get(row)"
           >
             <tr class="s-table__tr">
               <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
