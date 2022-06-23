@@ -48,7 +48,13 @@ Toggling `SNavigationSubmenu` doesn't call `SNavigationMenu` `select` event.
 
 ### STable
 
+There are columns sending reactive data to table with provided register function.
+So creating table column prop values in template (like `:selectable="() => {}"`) causes recursive rerender,
+as every render creates new value for prop which triggers another render.
+
 Column type `index` removed and so is prop `index`.
+
+`align` in column options (like in events) now has values without `is-` prefix.
 
 Removed header filtration:
 
@@ -71,5 +77,3 @@ Removed `renderHeader` prop (use slot instead).
 Removed `resizable` prop, and so is `header-dragend` event.
 
 Removed `stripe` prop, as there are no design for it.
-
-`align` in column options (like in events) now has values without `is-` prefix.

@@ -20,11 +20,13 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
         { prop1: '13', prop2: 'a32', date: 1654642633318, prop4: 'c32' },
       ]),
       formatter: (row: any, column: any, x: number) => new Date(x).toLocaleDateString(),
+      selectable: (row: any, index: number) => !!(index % 2),
+      sortOrders: ['descending', 'ascending', null]
     }
   },
   template: `
     <s-table :data="data">
-      <s-table-column type="selection" :selectable="(row, index) => !!(index % 2)" />
+      <s-table-column type="selection" :selectable="selectable" />
       <s-table-column
         prop="prop1"
         label="Prop 1"
@@ -57,7 +59,7 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
         align="right"
         :formatter="formatter"
         header-align="center"
-        :sort-orders="['descending', 'ascending', null]"
+        :sort-orders="sortOrders"
         sortable
       />
       <s-table-column
