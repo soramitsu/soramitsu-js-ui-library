@@ -1,6 +1,6 @@
 import { TableRow } from '@/components/Table/types'
 import { ActionColumnApi, ColumnApi } from '@/components'
-import { isExpandColumn } from "@/components/Table/utils";
+import { isExpandColumn } from '@/components/Table/utils'
 
 export function useColumnExpand(columns: (ColumnApi | ActionColumnApi)[]) {
   const expandedRows = shallowReactive(new Set<TableRow>())

@@ -13,3 +13,8 @@ export function isSelectionColumn(
 export function isExpandColumn(column: ColumnApi | ActionColumnApi): column is ActionColumnApi & { type: 'expand' } {
   return column.type === 'expand'
 }
+
+// Without type predicate checked like this object becomes object without keys
+export function isRecord(obj: unknown): obj is Record<string, unknown> {
+  return obj !== null && typeof obj === 'object'
+}

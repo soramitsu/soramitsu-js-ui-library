@@ -11,7 +11,7 @@ import { TableRow, CellEventData, HeaderEventData, RowEventData, SortEventData, 
 import { useFlexColumns } from '@/components/Table/flex-columns-widths.composable'
 import { useRowSelect } from '@/components/Table/row-select.composable'
 import { useColumnExpand } from '@/components/Table/column-expand.composable'
-import { isDefaultColumn, isExpandColumn, isSelectionColumn } from '@/components/Table/utils'
+import { isDefaultColumn, isExpandColumn, isRecord, isSelectionColumn } from '@/components/Table/utils'
 import get from 'lodash/get'
 
 const props = withDefaults(
@@ -50,32 +50,36 @@ const props = withDefaults(
     /** Horizontal indentation of nodes in adjacent levels in pixels */
     indent: number
 
-    /** Function that returns custom class names for a row, or a string assigning class names for every row */
-    rowClassName: string | ((param: rowCallbackParams) => string)
+    // /** Function that returns custom class names for a row, or a string assigning class names for every row */
+    // rowClassName: string | ((param: rowCallbackParams) => string)
+    //
+    // /** Function that returns custom style for a row, or an object assigning custom style for every row */
+    // rowStyle: object | ((param: rowCallbackParams) => object)
+    //
+    // /** Function that returns custom class names for a cell, or a string assigning class names for every cell */
+    // cellClassName: string | ((param: cellCallbackParams) => string)
+    //
+    // /** Function that returns custom style for a cell, or an object assigning custom style for every cell */
+    // cellStyle: object | ((param: cellCallbackParams) => object)
+    //
+    // /** Function that returns custom class names for a row in table header, or a string assigning class names for every row in table header */
+    // headerRowClassName: string | ((param: rowCallbackParams) => string)
+    //
+    // /** Function that returns custom style for a row in table header, or an object assigning custom style for every row in table header */
+    // headerRowStyle: object | ((param: rowCallbackParams) => object)
+    //
+    // /** Function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header */
+    // headerCellClassName: string | ((param: cellCallbackParams) => string)
+    //
+    // /** Function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header */
+    // headerCellStyle: object | ((param: cellCallbackParams) => object)
 
-    /** Function that returns custom style for a row, or an object assigning custom style for every row */
-    rowStyle: object | ((param: rowCallbackParams) => object)
-
-    /** Function that returns custom class names for a cell, or a string assigning class names for every cell */
-    cellClassName: string | ((param: cellCallbackParams) => string)
-
-    /** Function that returns custom style for a cell, or an object assigning custom style for every cell */
-    cellStyle: object | ((param: cellCallbackParams) => object)
-
-    /** Function that returns custom class names for a row in table header, or a string assigning class names for every row in table header */
-    headerRowClassName: string | ((param: rowCallbackParams) => string)
-
-    /** Function that returns custom style for a row in table header, or an object assigning custom style for every row in table header */
-    headerRowStyle: object | ((param: rowCallbackParams) => object)
-
-    /** Function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header */
-    headerCellClassName: string | ((param: cellCallbackParams) => string)
-
-    /** Function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header */
-    headerCellStyle: object | ((param: cellCallbackParams) => object)
-
-    /** Key of row data, used for optimizing rendering. Required if reserve-selection is on */
-    rowKey: (row: object) => any
+    /**
+     * key of row data, used for optimizing rendering. Required if reserve-selection is on or display tree data.
+     * When its type is String, multi-level access is supported, e.g. user.info.id,
+     * but user.info[0].id is not supported, in which case Function should be used.
+     * */
+    rowKey?: string | ((row: TableRow) => string) | null
 
     /** Displayed text when data is empty. You can customize this area with `slot="empty"` */
     emptyText: String
@@ -98,6 +102,7 @@ const props = withDefaults(
   {
     defaultSort: null,
     defaultExpandAll: false,
+    rowKey: null,
   },
 )
 
@@ -163,6 +168,33 @@ function isCheckBoxDisabled(column: ActionColumnApi, row: TableRow, index: numbe
 
 function getColumnByProp(prop: string) {
   return columns.filter(isDefaultColumn).find((column) => column.prop === prop)
+}
+
+function getRowKey(row: TableRow, index: number) {
+  if (!props.rowKey) {
+    return index
+  }
+
+  if (typeof props.rowKey === 'string') {
+    if (props.rowKey.includes('.')) {
+      return row[props.rowKey]
+    }
+
+    let keys = props.rowKey.split('.')
+    let current: unknown = row
+
+    for (let key of keys) {
+      if (isRecord(current) && key in current) {
+        current = current[key]
+      }
+    }
+
+    return current
+  }
+
+  if (typeof props.rowKey === 'function') {
+    return props.rowKey.call(null, row)
+  }
 }
 
 function getDefaultCellValue(row: TableRow, column: ColumnApi, index: number) {
@@ -282,7 +314,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
           <tr class="s-table__tr">
             <th
               v-for="(column, columnIndex) in columns"
-              :key="column.prop"
+              :key="column.id"
               class="s-table__th py-12px px-0 sora-tpg-ch3"
               :class="[
                 `s-table__th_align_${column.headerAlign}`,
@@ -336,13 +368,13 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
         <tbody>
           <template
             v-for="(row, rowIndex) in sortedData"
-            :key="JSON.stringify(row)"
+            :key="getRowKey(row, rowIndex)"
           >
             <tr class="s-table__tr">
               <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
               <td
                 v-for="(column, columnIndex) in columns"
-                :key="column.prop"
+                :key="column.id"
                 class="s-table__td py-12px px-0 sora-tpg-p3"
                 :class="[`s-table__td_align_${column.align}`, column.id, column.className]"
                 :style="rowIndex === 0 ? `width: ${columnsWidths[columnIndex]}px` : ''"
