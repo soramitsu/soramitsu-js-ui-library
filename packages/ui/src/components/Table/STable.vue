@@ -101,8 +101,10 @@ const props = withDefaults(
      * */
     rowKey?: string | ((row: TableRow) => unknown) | null
 
-    // /** Displayed text when data is empty. You can customize this area with `slot="empty"` */
-    // emptyText: String
+    /**
+     * Displayed text when data is empty. You can customize this area with `slot="empty"`
+     * */
+    emptyText?: string
 
     /**
      * whether expand all rows by default,
@@ -126,6 +128,7 @@ const props = withDefaults(
   {
     data: () => [],
     defaultSort: null,
+    emptyText: '',
     defaultExpandAll: false,
     rowKey: null,
     expandRowKeys: () => [],
@@ -160,8 +163,10 @@ const rowKeys = shallowReactive(new Map<TableRow, unknown>())
 const { columnsWidths, columnsWidthsSum } = useFlexColumns(columns, tableWrapper)
 const { expandedRows, activeExpandColumn, toggleRowExpanded } = useColumnExpand(columns)
 const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applyCurrentSort } = useColumnSort(data)
-const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } =
-  useRowSelect(sortedData, reactive({ selectOnIndeterminate }))
+const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } = useRowSelect(
+  sortedData,
+  reactive({ selectOnIndeterminate }),
+)
 
 if (props.defaultSort) {
   sort(props.defaultSort)
@@ -524,6 +529,16 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
           </template>
         </tbody>
       </table>
+      <div
+        v-if="!data.length"
+        class="s-table__empty-block flex justify-center items-center h-60px"
+      >
+        <span class="s-table__empty-text sora-tpg-p3">
+          <slot name="empty">
+            {{ emptyText || 'No Data' }}
+          </slot>
+        </span>
+      </div>
     </div>
     <slot />
   </div>
@@ -618,6 +633,10 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
     &_has-tooltip {
       white-space: nowrap;
     }
+  }
+
+  &__empty-text {
+    color: theme.token-as-var('sys.color.content-tertiary');
   }
 }
 </style>

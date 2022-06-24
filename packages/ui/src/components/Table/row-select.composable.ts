@@ -7,9 +7,7 @@ export function useRowSelect(data: Ref<TableRow[]>, options: { selectOnIndetermi
   const isSomeSelected = computed(() => selectedRows.size > 0)
 
   function toggleAllSelections(selectable: ColumnRowSelectableFunc | null) {
-    const selectableRows = selectable
-      ? data.value.filter((row, index) => !selectable(row, index))
-      : data.value
+    const selectableRows = selectable ? data.value.filter((row, index) => !selectable(row, index)) : data.value
 
     if (selectedRows.size === selectableRows.length) {
       selectedRows.clear()
