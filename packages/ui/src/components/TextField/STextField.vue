@@ -98,7 +98,7 @@ interface Props {
    * Text to display under the input.
    *
    * @remarks
-   * If input has some status, text will be style d according to this
+   * If input has some status, text will be styled according to this
    * status and will be prefixed with a status icon.
    *
    * Also you can use `message` slot.
