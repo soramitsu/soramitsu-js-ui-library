@@ -88,29 +88,31 @@ describe('Modeling extensions', () => {
     findInput().type('henno').should('have.value', 'henno')
   })
 
-  it('Input value changes according to passed transform function', () => {
+  it('Input value does not change if upstream modelValue has not been changed', () => {
     mount({
       setup() {
-        const model = ref('')
+        const nums = ref('')
 
-        function updateModelValue(val: string) {
-          model.value = val === 'foo' ? 'bar' : val
+        function updateNums(val: string) {
+          if (/^\d+$/.test(val)) {
+            nums.value = val
+          }
         }
 
-        return { model, updateModelValue }
+        return { nums, updateNums }
       },
       template: `
         <STextField
-          :model-value="model"
-          @update:model-value="updateModelValue"
+          :model-value="nums"
+          @update:model-value="updateNums"
         />
 
-        <span id="assert">{{ model }}</span>
+        <span id="assert">{{ nums }}</span>
       `,
     })
 
-    findInput().type('foo').should('have.value', 'bar')
-    cy.get('#assert').should('have.text', 'bar')
+    findInput().type('123fff').should('have.value', '123')
+    cy.get('#assert').should('have.text', '123')
   })
 })
 
