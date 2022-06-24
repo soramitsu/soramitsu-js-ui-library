@@ -17,9 +17,23 @@ type TextFieldStatus = Exclude<Status, typeof Status.Info>
 
 interface Props {
   /**
-   * Passive model value.
+   * Model value
    */
   modelValue?: string
+
+  /**
+   * "Strict sync" means that when `<input>` element's value is updated,
+   * component's `modelValue` is updated **and then** input's value is set
+   * by `modelValue`.
+   *
+   * This behavior disallows for `<input>` to have value that differs from
+   * `modelValue`.
+   *
+   * Enable this prop to disable this behaviour.
+   *
+   * @default false
+   */
+  noModelValueStrictSync?: boolean
 
   /**
    * Will be used if `label` slot is omitted
@@ -84,7 +98,7 @@ interface Props {
    * Text to display under the input.
    *
    * @remarks
-   * If input has some status, text will be styled according to this
+   * If input has some status, text will be style d according to this
    * status and will be prefixed with a status icon.
    *
    * Also you can use `message` slot.
@@ -98,6 +112,7 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   counter: false,
   noEye: false,
+  noModelValueStrictSync: false,
 })
 
 const emit = defineEmits<(event: 'update:modelValue', value: string) => void>()
@@ -114,7 +129,15 @@ const status = computed<null | TextFieldStatus>(() => {
   return null
 })
 
-const model = useVModel(props, 'modelValue', emit, { passive: true })
+const model = useVModel(props, 'modelValue', emit)
+
+function onInput(e: Event) {
+  const el = e.target as HTMLInputElement
+  model.value = el.value
+  if (!props.noModelValueStrictSync) {
+    el.value = model.value ?? ''
+  }
+}
 
 const isValueEmpty = computed(() => !model.value)
 const isFocused = ref(false)
@@ -201,10 +224,11 @@ const inputType = computed(() =>
 
       <input
         :id="id"
-        v-model="model"
+        :value="model"
         :type="inputType"
         :disabled="disabled"
         v-bind="inputAttrs"
+        @input="onInput"
         @focus="isFocused = true"
         @blur="isFocused = false"
       >
