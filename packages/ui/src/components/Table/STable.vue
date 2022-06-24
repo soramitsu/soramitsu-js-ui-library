@@ -48,8 +48,10 @@ const props = withDefaults(
     // /** Whether width of column automatically fits its container */
     // fit: boolean
     //
-    // /** Whether table header is visible */
-    // showHeader: boolean
+    /**
+     * Whether table header is visible
+     * */
+    showHeader?: boolean
     //
     // /** Whether current row is highlighted */
     // highlightCurrentRow: boolean
@@ -127,6 +129,7 @@ const props = withDefaults(
     defaultExpandAll: false,
     rowKey: null,
     expandRowKeys: () => [],
+    showHeader: true,
     rowClassName: '',
     rowStyle: () => ({}),
     cellClassName: '',
@@ -365,7 +368,10 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
     ref="tableWrapper"
     class="s-table"
   >
-    <div class="s-table__header-wrapper">
+    <div
+      v-if="showHeader"
+      class="s-table__header-wrapper"
+    >
       <table
         class="s-table__header w-full"
         :style="`width: ${columnsWidthsSum}px`"
