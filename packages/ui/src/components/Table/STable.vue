@@ -29,7 +29,7 @@ const props = withDefaults(
     /**
      * Table data
      * */
-    data: TableRow[]
+    data?: TableRow[]
     /**
      * set the default sort column and order.
      * property prop is used to set default sort column, property order is used to set default sort order
@@ -116,10 +116,13 @@ const props = withDefaults(
     /** removed temp */
     // tooltipEffect: 'dark' | 'light'
 
-    // /** Controls the behavior of master checkbox in multi-select tables when only some rows are selected */
-    // selectOnIndeterminate: boolean
+    /**
+     * Controls the behavior of master checkbox in multi-select tables when only some rows are selected
+     * */
+    selectOnIndeterminate?: boolean
   }>(),
   {
+    data: () => [],
     defaultSort: null,
     defaultExpandAll: false,
     rowKey: null,
@@ -132,6 +135,7 @@ const props = withDefaults(
     headerRowStyle: () => ({}),
     headerCellClassName: '',
     headerCellStyle: () => ({}),
+    selectOnIndeterminate: true,
   },
 )
 
@@ -146,7 +150,7 @@ const emit = defineEmits<{
 }>()
 
 const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
-const { data, expandRowKeys } = toRefs(props)
+const { data, expandRowKeys, selectOnIndeterminate } = toRefs(props)
 const tableWrapper = ref(null)
 const rowKeys = shallowReactive(new Map<TableRow, unknown>())
 
@@ -154,7 +158,7 @@ const { columnsWidths, columnsWidthsSum } = useFlexColumns(columns, tableWrapper
 const { expandedRows, activeExpandColumn, toggleRowExpanded } = useColumnExpand(columns)
 const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applyCurrentSort } = useColumnSort(data)
 const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } =
-  useRowSelect(sortedData)
+  useRowSelect(sortedData, reactive({ selectOnIndeterminate }))
 
 if (props.defaultSort) {
   sort(props.defaultSort)
@@ -412,10 +416,11 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
 
                 <template v-else-if="isSelectionColumn(column)">
                   <SCheckboxAtom
-                    class="cursor-pointer"
+                    :class="{ 'cursor-pointer': data.length }"
                     size="xl"
                     :checked="isSomeSelected ? (isAllSelected ? true : 'mixed') : false"
-                    @click.stop="handleAllSelect(column)"
+                    :disabled="!data.length"
+                    @click.stop="data.length && handleAllSelect(column)"
                   />
                 </template>
               </div>
