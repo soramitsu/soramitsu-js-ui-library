@@ -5,25 +5,25 @@ import fs from 'fs/promises'
 
 const resolve = (...paths: string[]) => path.resolve(__dirname, ...paths)
 
-const ESM_TREE_SHAKING_DIST = 'esm-tree-shaken-dist'
 const ESM_TREE_SHAKING_TEST_LIB_DIR = 'esm-tree-shaking-test-lib'
-const LIB_BUNDLE_ESM_FILE = resolve('../../dist/lib.es.js')
-const LIB_BUNDLE_CJS_FILE = resolve('../../dist/lib.cjs.js')
+const LIB_BUNDLE_ESM_FILE = resolve('../../dist/lib.mjs')
+const LIB_BUNDLE_CJS_FILE = resolve('../../dist/lib.cjs')
 
 test('ESM build should be tree-shakeable', async () => {
   await vite.build({
-    root: resolve(),
+    root: resolve(ESM_TREE_SHAKING_TEST_LIB_DIR),
     build: {
       lib: {
-        entry: resolve(ESM_TREE_SHAKING_TEST_LIB_DIR, 'entry.ts'),
+        entry: 'entry.ts',
         formats: ['es'],
         fileName: 'output',
       },
-      outDir: ESM_TREE_SHAKING_DIST,
     },
   })
 
-  const outputContents = await fs.readFile(resolve(ESM_TREE_SHAKING_DIST, 'output.es.js'), { encoding: 'utf-8' })
+  const outputContents = await fs.readFile(resolve(ESM_TREE_SHAKING_TEST_LIB_DIR, 'dist/output.es.js'), {
+    encoding: 'utf-8',
+  })
 
   expect(outputContents.length).toBeLessThan(1_000)
   expect(outputContents).toMatchInlineSnapshot(`
