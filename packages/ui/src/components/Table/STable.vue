@@ -7,7 +7,17 @@ import type { Slot } from 'vue'
 import { ActionColumnApi, ColumnApi, TABLE_API_KEY, SCheckboxAtom } from '@/components'
 import { IconArrowTop16, IconArrowsChevronDownRounded24 } from '@/components/icons'
 import { useColumnSort } from '@/components/Table/column-sort.composable'
-import { TableRow, CellEventData, HeaderEventData, RowEventData, SortEventData, ColumnSortOrder } from './types'
+import {
+  TableRow,
+  CellEventData,
+  HeaderEventData,
+  RowEventData,
+  SortEventData,
+  ColumnSortOrder,
+  TableCellConfigCallbackParams,
+  TableRowConfigCallbackParams,
+  TableHeaderCellConfigCallbackParams,
+} from './types'
 import { useFlexColumns } from '@/components/Table/flex-columns-widths.composable'
 import { useRowSelect } from '@/components/Table/row-select.composable'
 import { useColumnExpand } from '@/components/Table/column-expand.composable'
@@ -50,30 +60,38 @@ const props = withDefaults(
     // /** Horizontal indentation of nodes in adjacent levels in pixels */
     // indent: number
 
-    // /** Function that returns custom class names for a row, or a string assigning class names for every row */
-    // rowClassName: string | ((param: rowCallbackParams) => string)
-    //
-    // /** Function that returns custom style for a row, or an object assigning custom style for every row */
-    // rowStyle: object | ((param: rowCallbackParams) => object)
-    //
-    // /** Function that returns custom class names for a cell, or a string assigning class names for every cell */
-    // cellClassName: string | ((param: cellCallbackParams) => string)
-    //
-    // /** Function that returns custom style for a cell, or an object assigning custom style for every cell */
-    // cellStyle: object | ((param: cellCallbackParams) => object)
-    //
-    // /** Function that returns custom class names for a row in table header, or a string assigning class names for every row in table header */
-    // headerRowClassName: string | ((param: rowCallbackParams) => string)
-    //
-    // /** Function that returns custom style for a row in table header, or an object assigning custom style for every row in table header */
-    // headerRowStyle: object | ((param: rowCallbackParams) => object)
-    //
-    // /** Function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header */
-    // headerCellClassName: string | ((param: cellCallbackParams) => string)
-    //
-    // /** Function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header */
-    // headerCellStyle: object | ((param: cellCallbackParams) => object)
-
+    /**
+     * Function that returns custom class names for a row, or a string assigning class names for every row
+     * */
+    rowClassName?: string | ((param: TableRowConfigCallbackParams) => string)
+    /**
+     * Function that returns custom style for a row, or an object assigning custom style for every row
+     * */
+    rowStyle?: object | ((param: TableRowConfigCallbackParams) => object)
+    /**
+     * Function that returns custom class names for a cell, or a string assigning class names for every cell
+     * */
+    cellClassName?: string | ((param: TableCellConfigCallbackParams) => string)
+    /**
+     * Function that returns custom style for a cell, or an object assigning custom style for every cell
+     * */
+    cellStyle?: object | ((param: TableCellConfigCallbackParams) => object)
+    /**
+     * Function that returns custom class names for a row in table header, or a string assigning class names for every row in table header
+     * */
+    headerRowClassName?: string | (() => string)
+    /**
+     * Function that returns custom style for a row in table header, or an object assigning custom style for every row in table header
+     * */
+    headerRowStyle?: object | (() => object)
+    /**
+     * Function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header
+     * */
+    headerCellClassName?: string | ((param: TableHeaderCellConfigCallbackParams) => string)
+    /**
+     * Function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header
+     * */
+    headerCellStyle?: object | ((param: TableHeaderCellConfigCallbackParams) => object)
     /**
      * key of row data, used for optimizing rendering. Required if reserve-selection is on or display tree data.
      * When its type is String, multi-level access is supported, e.g. user.info.id,
@@ -89,7 +107,6 @@ const props = withDefaults(
      * works when the table has a column type="expand" or contains tree structure data
      * */
     defaultExpandAll?: boolean
-
     /**
      * Set expanded rows by this prop. Prop's value is the keys of expand rows,
      * you should set row-key before using this prop
@@ -106,7 +123,15 @@ const props = withDefaults(
     defaultSort: null,
     defaultExpandAll: false,
     rowKey: null,
-    expandRowKeys: () => []
+    expandRowKeys: () => [],
+    rowClassName: '',
+    rowStyle: () => ({}),
+    cellClassName: '',
+    cellStyle: () => ({}),
+    headerRowClassName: '',
+    headerRowStyle: () => ({}),
+    headerCellClassName: '',
+    headerCellStyle: () => ({}),
   },
 )
 
@@ -151,9 +176,14 @@ watch([rowKeys, expandRowKeys], () => {
   }
 })
 
-watch(sortedData, () => {
-  sortedData.value.forEach((row, rowIndex) => rowKeys.set(row, getRowKey(row, rowIndex)))
-}, { immediate: true })
+watch(
+  sortedData,
+  () => {
+    rowKeys.clear()
+    sortedData.value.forEach((row, rowIndex) => rowKeys.set(row, getRowKey(row, rowIndex)))
+  },
+  { immediate: true },
+)
 
 function register(column: ColumnApi | ActionColumnApi) {
   const index = columns.push(column)
@@ -178,6 +208,15 @@ function sort({ prop, order }: { prop: string; order: ColumnSortOrder }) {
 defineExpose({
   sort,
 })
+
+function getStyleOrClass<T extends object | string>(prop: T | (() => T), args: undefined): T | null
+function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T), args: S): T | null {
+  if (typeof prop === 'function') {
+    return prop(args)
+  }
+
+  return prop || null
+}
 
 function isCheckBoxDisabled(column: ActionColumnApi, row: TableRow, index: number) {
   return !column.selectable || column.selectable(row, index)
@@ -210,7 +249,7 @@ function getRowKey(row: TableRow, index: number) {
   }
 
   if (typeof props.rowKey === 'function') {
-    return props.rowKey.call(null, row)
+    return props.rowKey(row)
   }
 }
 
@@ -328,7 +367,11 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
         :style="`width: ${columnsWidthsSum}px`"
       >
         <thead>
-          <tr class="s-table__tr">
+          <tr
+            class="s-table__tr"
+            :class="getStyleOrClass(rowClassName)"
+            :style="getStyleOrClass(rowStyle)"
+          >
             <th
               v-for="(column, columnIndex) in columns"
               :key="column.id"
@@ -342,8 +385,12 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                   's-table__th_sortable': column.sortable,
                   'cursor-pointer': column.sortable,
                 },
+                getStyleOrClass(headerCellClassName, { column, columnIndex }),
               ]"
-              :style="`width: ${columnsWidths[columnIndex]}px`"
+              :style="{
+                'width': `${columnsWidths[columnIndex]}px`,
+                ...getStyleOrClass(headerCellStyle, { column, columnIndex }),
+              }"
               @click="handleHeaderMouseEvent({ column, 'event': $event })"
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
             >
@@ -387,14 +434,26 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
             v-for="(row, rowIndex) in sortedData"
             :key="rowKeys.get(row)"
           >
-            <tr class="s-table__tr">
+            <tr
+              class="s-table__tr"
+              :class="getStyleOrClass(rowClassName, { row, rowIndex })"
+              :style="getStyleOrClass(rowStyle, { row, rowIndex })"
+            >
               <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
               <td
                 v-for="(column, columnIndex) in columns"
                 :key="column.id"
                 class="s-table__td py-12px px-0 sora-tpg-p3"
-                :class="[`s-table__td_align_${column.align}`, column.id, column.className]"
-                :style="rowIndex === 0 ? `width: ${columnsWidths[columnIndex]}px` : ''"
+                :class="[
+                  `s-table__td_align_${column.align}`,
+                  column.id,
+                  column.className,
+                  getStyleOrClass(cellClassName, { row, rowIndex, column, columnIndex }),
+                ]"
+                :style="{
+                  'width': rowIndex === 0 ? `${columnsWidths[columnIndex]}px` : '',
+                  ...getStyleOrClass(cellStyle, { row, rowIndex, column, columnIndex }),
+                }"
                 @mouseenter="handleCellMouseEvent({ row, column, 'event': $event })"
                 @mouseleave="handleCellMouseEvent({ row, column, 'event': $event })"
                 @click="handleCellMouseEvent({ row, column, 'event': $event })"

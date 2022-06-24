@@ -56,9 +56,13 @@ Column type `index` removed and so is prop `index`.
 
 `align` in column options (like in events) now has values without `is-` prefix.
 
+Callbacks for `headerCellStyle` and `headerCellClassName` now called without row information
+and callbacks for `headerRowStyle` and `headerRowClassName` now don't have parameters at all,
+because they don't have ones
+
 Removed header filtration:
 
-- Props: `filters`, `filter-placement`, `filter-multiple`, `filter-method`, `filtered-value`, `column-key`
+- Props: `filters`, `filterPlacement`, `filterMultiple`, `filterMethod`, `filteredValue`, `columnKey`
 - Method `clearFilter`
 - Event `filter-change`
 

@@ -21,7 +21,7 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
       ]),
       formatter: (row: any, column: any, x: number) => new Date(x).toLocaleDateString(),
       selectable: (row: any, index: number) => !!(index % 2),
-      sortOrders: ['descending', 'ascending', null]
+      sortOrders: ['descending', 'ascending', null],
     }
   },
   template: `

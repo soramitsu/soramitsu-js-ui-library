@@ -1,4 +1,4 @@
-import { InjectionKey, DeepReadonly, Slot } from 'vue'
+import { DeepReadonly, InjectionKey, Slot } from 'vue'
 import { forceInject } from '@/util'
 import {
   ColumnCellValueFormatter,
