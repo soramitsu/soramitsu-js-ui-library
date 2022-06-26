@@ -77,7 +77,7 @@ export default defineConfig({
     lib: {
       entry: resolve('src/lib.ts'),
       formats: ['es', 'cjs'],
-      fileName: (format) => `lib.${format}.js`,
+      fileName: (format) => `lib.${format === 'es' ? 'mjs' : 'cjs'}`,
     },
     rollupOptions: {
       output: { chunkFileNames: '[name].[format].js' },
