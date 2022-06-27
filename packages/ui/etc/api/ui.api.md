@@ -1077,6 +1077,7 @@ password: boolean;
 disabled: boolean;
 counter: boolean;
 noEye: boolean;
+noModelValueStrictSync: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: string) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_14<__VLS_TypePropsToRuntimeProps_17<Props_7>, {
@@ -1085,10 +1086,12 @@ password: boolean;
 disabled: boolean;
 counter: boolean;
 noEye: boolean;
+noModelValueStrictSync: boolean;
 }>>> & {
 "onUpdate:modelValue"?: ((value: string) => any) | undefined;
 }, {
 disabled: boolean;
+noModelValueStrictSync: boolean;
 password: boolean;
 noEye: boolean;
 counter: string | number | boolean;
