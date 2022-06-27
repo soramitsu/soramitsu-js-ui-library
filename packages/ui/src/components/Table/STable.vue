@@ -42,12 +42,10 @@ const props = withDefaults(
     // /** Table's max-height. The height of the table starts from auto until it reaches the maxHeight limit. The maxHeight is measured in pixels, same as height */
     // maxHeight: string | number
     //
-    // /** Whether table has vertical border */
-    // border: boolean
     /**
      * Whether width of column automatically fits its container
      * */
-    fit: boolean
+    fit?: boolean
     /**
      * Whether table header is visible
      * */
@@ -557,8 +555,6 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
 
   &__tr:hover > &__td {
     background-color: theme.token-as-var('sys.color.background-hover');
-    border-left: none;
-    border-right: none;
   }
 
   &__td,

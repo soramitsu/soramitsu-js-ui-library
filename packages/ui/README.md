@@ -80,4 +80,4 @@ Removed `renderHeader` prop (use slot instead).
 
 Removed `resizable` prop, and so is `header-dragend` event.
 
-Removed `stripe` prop, as there are no design for it.
+Removed `stripe` and `border` props, as there are no design for them.
