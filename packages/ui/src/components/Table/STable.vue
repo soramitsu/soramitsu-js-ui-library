@@ -44,10 +44,10 @@ const props = withDefaults(
     //
     // /** Whether table has vertical border */
     // border: boolean
-    //
-    // /** Whether width of column automatically fits its container */
-    // fit: boolean
-    //
+    /**
+     * Whether width of column automatically fits its container
+     * */
+    fit: boolean
     /**
      * Whether table header is visible
      * */
@@ -100,12 +100,10 @@ const props = withDefaults(
      * but user.info[0].id is not supported, in which case Function should be used.
      * */
     rowKey?: string | ((row: TableRow) => unknown) | null
-
     /**
      * Displayed text when data is empty. You can customize this area with `slot="empty"`
      * */
     emptyText?: string
-
     /**
      * whether expand all rows by default,
      * works when the table has a column type="expand" or contains tree structure data
@@ -131,6 +129,7 @@ const props = withDefaults(
     emptyText: '',
     defaultExpandAll: false,
     rowKey: null,
+    fit: true,
     expandRowKeys: () => [],
     showHeader: true,
     rowClassName: '',
@@ -156,11 +155,11 @@ const emit = defineEmits<{
 }>()
 
 const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
-const { data, expandRowKeys, selectOnIndeterminate } = toRefs(props)
+const { data, expandRowKeys, selectOnIndeterminate, fit } = toRefs(props)
 const tableWrapper = ref(null)
 const rowKeys = shallowReactive(new Map<TableRow, unknown>())
 
-const { columnsWidths, columnsWidthsSum } = useFlexColumns(columns, tableWrapper)
+const { columnsWidths, columnsWidthsSum } = useFlexColumns(columns, tableWrapper, fit)
 const { expandedRows, activeExpandColumn, toggleRowExpanded } = useColumnExpand(columns)
 const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applyCurrentSort } = useColumnSort(data)
 const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } = useRowSelect(
