@@ -63,9 +63,6 @@ const props = withDefaults(
     //
     // /** Key of current row, a set only prop */
     // currentRowKey: string | number
-    //
-    // /** Horizontal indentation of nodes in adjacent levels in pixels */
-    // indent: number
 
     /**
      * Function that returns custom class names for a row, or a string assigning class names for every row
@@ -120,7 +117,7 @@ const props = withDefaults(
      * */
     expandRowKeys?: unknown[]
 
-    /** removed temp */
+    /** TODO: make something with it when tooltip will be ready (and so use tooltip) */
     // tooltipEffect: 'dark' | 'light'
 
     /**

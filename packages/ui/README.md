@@ -72,7 +72,7 @@ Removed summary:
 
 Removed tree rows:
 
-- Props: `treeProps`, `load`, `lazy`
+- Props: `treeProps`, `load`, `lazy`, `indent`
 
 Removed `property` and `showTooltipWhenOverflow` prop, which were aliases to `prop` and `showOverflowTooltip`.
 
