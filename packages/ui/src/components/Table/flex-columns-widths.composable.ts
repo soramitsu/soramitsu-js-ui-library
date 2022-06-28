@@ -1,10 +1,7 @@
 import { ActionColumnApi, ColumnApi } from '@/components'
-import { MaybeElementRef } from '@vueuse/core'
 import { Ref } from 'vue'
 
-export function useFlexColumns(columns: (ColumnApi | ActionColumnApi)[], table: MaybeElementRef, fit: Ref<boolean>) {
-  const tableWidth = ref(0)
-
+export function useFlexColumns(columns: (ColumnApi | ActionColumnApi)[], tableWidth: Ref<number>, fit: Ref<boolean>) {
   const columnsWidths = computed(() => {
     const baseColumnsWidths = columns.map((col) => col.width ?? col.minWidth)
 
@@ -26,10 +23,6 @@ export function useFlexColumns(columns: (ColumnApi | ActionColumnApi)[], table: 
   })
 
   const columnsWidthsSum = computed(() => columnsWidths.value.reduce((sum, width) => sum + width, 0))
-
-  useResizeObserver(table, (entries) => {
-    tableWidth.value = entries[0].contentRect.width
-  })
 
   return {
     columnsWidths,

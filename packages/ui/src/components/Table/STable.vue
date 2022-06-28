@@ -23,6 +23,8 @@ import { useRowSelect } from '@/components/Table/row-select.composable'
 import { useColumnExpand } from '@/components/Table/column-expand.composable'
 import { isDefaultColumn, isExpandColumn, isRecord, isSelectionColumn } from '@/components/Table/utils'
 import get from 'lodash/get'
+import { MaybeElementRef, not } from '@vueuse/core'
+import { useTableHeights } from '@/components/Table/table-heights.composable'
 
 const props = withDefaults(
   defineProps<{
@@ -34,14 +36,19 @@ const props = withDefaults(
      * set the default sort column and order.
      * property prop is used to set default sort column, property order is used to set default sort order
      * if prop is set, and order is not set, then order is default to ascending
-     */
+     * */
     defaultSort?: { prop: string; order: ColumnSortOrder } | null
-    // /** Table's height. By default it has an auto height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles */
-    // height: string | number
-    //
-    // /** Table's max-height. The height of the table starts from auto until it reaches the maxHeight limit. The maxHeight is measured in pixels, same as height */
-    // maxHeight: string | number
-    //
+    /**
+     * Table's height. By default, it has an `auto` height.
+     * If its value is a number, the height is measured in pixels;
+     * if its value is a string, the height is affected by external styles
+     * */
+    height?: string | number
+    /**
+     * Table's max-height. The height of the table starts from auto until it reaches the maxHeight limit.
+     * The maxHeight is measured in pixels, same as height
+     * */
+    maxHeight?: string | number
     /**
      * Whether width of column automatically fits its container
      * */
@@ -124,6 +131,8 @@ const props = withDefaults(
   {
     data: () => [],
     defaultSort: null,
+    height: '',
+    maxHeight: '',
     emptyText: '',
     defaultExpandAll: false,
     rowKey: null,
@@ -153,11 +162,35 @@ const emit = defineEmits<{
 }>()
 
 const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
-const { data, expandRowKeys, selectOnIndeterminate, fit } = toRefs(props)
-const tableWrapper = ref(null)
+const { data, expandRowKeys, selectOnIndeterminate, fit, showHeader, height, maxHeight } = toRefs(props)
 const rowKeys = shallowReactive(new Map<TableRow, unknown>())
 
-const { columnsWidths, columnsWidthsSum } = useFlexColumns(columns, tableWrapper, fit)
+const tableWrapper: MaybeElementRef = ref(null)
+const tableSizes = reactive({
+  height: 0,
+  width: 0,
+})
+useResizeObserver(tableWrapper, (entries) => {
+  tableSizes.width = entries[0].contentRect.width
+  tableSizes.height = entries[0].contentRect.height
+})
+
+const headerWrapper: MaybeElementRef = ref(null)
+const headerHeight = ref(0)
+useResizeObserver(headerWrapper, (entries) => {
+  headerHeight.value = entries[0].contentRect.height
+})
+whenever(not(showHeader), () => {
+  headerHeight.value = 0
+})
+
+const { columnsWidths, columnsWidthsSum } = useFlexColumns(columns, toRef(tableSizes, 'width'), fit)
+const { tableHeightStyles, bodyHeightStyles } = useTableHeights({
+  propHeight: height,
+  propMaxHeight: maxHeight,
+  headerHeight,
+  tableHeight: toRef(tableSizes, 'height'),
+})
 const { expandedRows, activeExpandColumn, toggleRowExpanded } = useColumnExpand(columns)
 const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applyCurrentSort } = useColumnSort(data)
 const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } = useRowSelect(
@@ -369,9 +402,11 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
   <div
     ref="tableWrapper"
     class="s-table"
+    :style="tableHeightStyles"
   >
     <div
       v-if="showHeader"
+      ref="headerWrapper"
       class="s-table__header-wrapper"
     >
       <table
@@ -437,10 +472,13 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
         </thead>
       </table>
     </div>
-    <div class="s-table__body-wrapper">
+    <div
+      class="s-table__body-wrapper"
+      :style="bodyHeightStyles"
+    >
       <table
         class="s-table__body w-full"
-        :style="`width: ${columnsWidthsSum}px`"
+        :style="{ 'width': `${columnsWidthsSum}px` }"
       >
         <tbody>
           <template
@@ -536,6 +574,12 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
           </slot>
         </span>
       </div>
+      <div
+        v-if="$slots.append"
+        class="s-table__append-wrapper"
+      >
+        <slot name="append" />
+      </div>
     </div>
     <slot />
   </div>
@@ -545,6 +589,10 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
 @use '@/theme';
 
 .s-table {
+  &__body-wrapper {
+    overflow-y: auto;
+  }
+
   &__body,
   &__header {
     table-layout: fixed;
@@ -632,6 +680,10 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
 
   &__empty-text {
     color: theme.token-as-var('sys.color.content-tertiary');
+  }
+
+  &__append-wrapper {
+    overflow: hidden;
   }
 }
 </style>
