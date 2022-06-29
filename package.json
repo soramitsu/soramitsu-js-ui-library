@@ -14,7 +14,7 @@
     "test:ui:after-build": "yarn --cwd packages/ui test:after-build",
     "build": "run-s build:theme build:vite-plugin-svg build:ui",
     "build:theme": "yarn --cwd packages/theme build",
-    "build:vite-plugin-svg": "vite --cwd packages/vite-plugin-svg build",
+    "build:vite-plugin-svg": "yarn --cwd packages/vite-plugin-svg build",
     "build:ui": "yarn --cwd packages/ui build",
     "build:ui:only-vite": "yarn --cwd packages/ui build:vite",
     "lint:check": "run-s lint:es lint:format:check",
