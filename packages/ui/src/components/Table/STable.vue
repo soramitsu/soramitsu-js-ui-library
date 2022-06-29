@@ -533,6 +533,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                   class="s-table__cell px-16px"
                   :class="{
                     's-table__cell_has-tooltip': column.showOverflowTooltip,
+                    'cursor-pointer': isExpandColumn(column),
                   }"
                   :title="column.showOverflowTooltip ? get(row, column.prop) : null"
                 >
@@ -569,7 +570,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
 
             <tr v-if="activeExpandColumn && expandedRows.has(row)">
               <td
-                class="s-table__expanded-cell py-12px px-16px"
+                class="s-table__expanded-cell py-16px px-32px"
                 :colspan="columns.length"
               >
                 <component
@@ -619,8 +620,9 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
     border: none;
   }
 
-  &__tr:hover > &__td {
-    background-color: theme.token-as-var('sys.color.background-hover');
+  &__tr:hover > &__td,
+  &__tr_current > &__td {
+    background-color: theme.token-as-var('sys.color.background');
   }
 
   &__td,
