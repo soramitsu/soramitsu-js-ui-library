@@ -1,10 +1,27 @@
 import { Ref } from 'vue'
 import { ColumnRowSelectableFunc, TableRow } from '@/components/Table/types'
+import { isSelectionColumn } from '@/components/Table/utils'
+import { ActionColumnApi, ColumnApi } from '@/components'
 
-export function useRowSelect(data: Ref<TableRow[]>, options: { selectOnIndeterminate: boolean }) {
+export function useRowSelect(
+  data: Ref<TableRow[]>,
+  columns: (ColumnApi | ActionColumnApi)[],
+  options: { selectOnIndeterminate: boolean },
+) {
   const selectedRows = shallowReactive(new Set<TableRow>())
   const isAllSelected = computed(() => selectedRows.size === data.value.length)
   const isSomeSelected = computed(() => selectedRows.size > 0)
+  const activeSelectionColumn = computed(() => {
+    let res
+
+    for (let column of columns) {
+      if (isSelectionColumn(column)) {
+        res = column
+      }
+    }
+
+    return res
+  })
 
   function toggleAllSelections(selectable: ColumnRowSelectableFunc | null) {
     const selectableRows = selectable ? data.value.filter((row, index) => !selectable(row, index)) : data.value
@@ -46,6 +63,7 @@ export function useRowSelect(data: Ref<TableRow[]>, options: { selectOnIndetermi
     selectedRows,
     isAllSelected,
     isSomeSelected,
+    activeSelectionColumn,
     toggleAllSelections,
     toggleRowSelection,
   }

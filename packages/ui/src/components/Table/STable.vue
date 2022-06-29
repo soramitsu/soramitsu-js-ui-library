@@ -162,7 +162,7 @@ const emit = defineEmits<{
 }>()
 
 const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
-const { data, selectOnIndeterminate, fit, showHeader, height, maxHeight } = toRefs(props)
+const { data, selectOnIndeterminate, fit, showHeader, height, maxHeight, expandRowKeys, currentRowKey } = toRefs(props)
 const rowKeys = shallowReactive(new Map<TableRow, unknown>())
 
 const tableWrapper: MaybeElementRef = ref(null)
@@ -193,10 +193,8 @@ const { tableHeightStyles, bodyHeightStyles } = useTableHeights({
 })
 const { expandedRows, activeExpandColumn, toggleRowExpanded } = useColumnExpand(columns)
 const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applyCurrentSort } = useColumnSort(data)
-const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } = useRowSelect(
-  sortedData,
-  reactive({ selectOnIndeterminate }),
-)
+const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection, activeSelectionColumn } =
+  useRowSelect(sortedData, columns, reactive({ selectOnIndeterminate }))
 
 const currentRow: ShallowRef<TableRow | null> = shallowRef(null)
 
@@ -204,9 +202,9 @@ function isCurrentRow(row: TableRow) {
   return currentRow.value === toRaw(row)
 }
 
-watchEffect(() => {
+watch([rowKeys, currentRowKey], () => {
   for (let [row, key] of rowKeys) {
-    if (key === props.currentRowKey) {
+    if (key === currentRowKey.value) {
       currentRow.value = row
     }
   }
@@ -217,17 +215,19 @@ if (props.defaultSort) {
 }
 
 if (props.defaultExpandAll) {
-  data.value.forEach(toggleRowExpanded)
+  data.value.forEach((row) => toggleRowExpanded(row))
 }
 
 watch([data, columns], () => {
   applyCurrentSort()
 })
 
-watchEffect(() => {
+watch([rowKeys, expandRowKeys], () => {
+  expandedRows.clear()
+
   for (let [row, key] of rowKeys) {
-    if (props.expandRowKeys.includes(key)) {
-      toggleRowExpanded(row)
+    if (expandRowKeys.value.includes(key)) {
+      toggleRowExpanded(row, true)
     }
   }
 })
@@ -236,7 +236,7 @@ watch(
   sortedData,
   () => {
     rowKeys.clear()
-    sortedData.value.forEach((row, rowIndex) => rowKeys.set(row, getRowKey(row, rowIndex)))
+    sortedData.value.forEach((row) => rowKeys.set(row, getRowKey(row)))
   },
   { immediate: true },
 )
@@ -282,11 +282,7 @@ function getColumnByProp(prop: string) {
   return columns.filter(isDefaultColumn).find((column) => column.prop === prop)
 }
 
-function getRowKey(row: TableRow, index: number) {
-  if (!props.rowKey) {
-    return index
-  }
-
+function getRowKey(row: TableRow) {
   if (typeof props.rowKey === 'string') {
     if (props.rowKey.includes('.')) {
       return row[props.rowKey]
@@ -370,7 +366,7 @@ function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi | ActionCo
     }
     case 'click': {
       if (isExpandColumn(ctx.column)) {
-        handleRowExpand(ctx.row)
+        handleRowExpand(toRaw(ctx.row))
         break
       }
 
@@ -498,7 +494,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
         <tbody>
           <template
             v-for="(row, rowIndex) in sortedData"
-            :key="rowKeys.get(row)"
+            :key="rowKey ? rowKeys.get(row) : rowIndex"
           >
             <tr
               class="s-table__tr"

@@ -16,8 +16,8 @@ export function useColumnExpand(columns: (ColumnApi | ActionColumnApi)[]) {
     return res
   })
 
-  function toggleRowExpanded(row: TableRow) {
-    if (expandedRows.has(row)) {
+  function toggleRowExpanded(row: TableRow, value?: boolean) {
+    if ((value !== undefined && !value) || (value === undefined && expandedRows.has(row))) {
       expandedRows.delete(row)
 
       return
