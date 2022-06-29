@@ -22,9 +22,10 @@ import { useFlexColumns } from '@/components/Table/flex-columns-widths.composabl
 import { useRowSelect } from '@/components/Table/row-select.composable'
 import { useColumnExpand } from '@/components/Table/column-expand.composable'
 import { isDefaultColumn, isExpandColumn, isRecord, isSelectionColumn } from '@/components/Table/utils'
-import get from 'lodash/get'
 import { MaybeElementRef, not } from '@vueuse/core'
 import { useTableHeights } from '@/components/Table/table-heights.composable'
+import get from 'lodash/get'
+import findLast from 'lodash/findLast'
 
 const props = withDefaults(
   defineProps<{
@@ -165,6 +166,8 @@ const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
 const { data, selectOnIndeterminate, fit, showHeader, height, maxHeight, expandRowKeys, currentRowKey } = toRefs(props)
 const rowKeys = shallowReactive(new Map<TableRow, unknown>())
 const keyRows = shallowReactive(new Map<unknown, TableRow>())
+const activeExpandColumn = computed(() => findLast(columns, isExpandColumn))
+const activeSelectionColumn = computed(() => findLast(columns, isSelectionColumn))
 
 const tableWrapper: MaybeElementRef = ref(null)
 const tableSizes = reactive({
@@ -192,10 +195,12 @@ const { tableHeightStyles, bodyHeightStyles } = useTableHeights({
   headerHeight,
   tableHeight: toRef(tableSizes, 'height'),
 })
-const { expandedRows, activeExpandColumn, toggleRowExpanded } = useColumnExpand(columns)
+const { expandedRows, toggleRowExpanded } = useColumnExpand()
 const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applyCurrentSort } = useColumnSort(data)
-const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection, activeSelectionColumn } =
-  useRowSelect(sortedData, columns, reactive({ selectOnIndeterminate }))
+const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } = useRowSelect(
+  sortedData,
+  reactive({ selectOnIndeterminate }),
+)
 
 const currentRow: ShallowRef<TableRow | null> = shallowRef(null)
 
