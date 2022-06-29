@@ -208,12 +208,8 @@ function isCurrentRow(row: TableRow) {
   return currentRow.value === toRaw(row)
 }
 
-watch([rowKeys, currentRowKey], () => {
-  for (let [row, key] of rowKeys) {
-    if (key === currentRowKey.value) {
-      currentRow.value = row
-    }
-  }
+watch([keyRows, currentRowKey], () => {
+  currentRow.value = keyRows.get(currentRowKey.value) ?? null
 })
 
 if (props.defaultSort) {
@@ -229,13 +225,13 @@ watch([data, columns], () => {
 })
 
 watch(
-  sortedData,
+  data,
   () => {
     rowKeys.clear()
     keyRows.clear()
 
     if (props.rowKey) {
-      sortedData.value.forEach((row) => {
+      data.value.forEach((row) => {
         const key = getRowKey(row)
         rowKeys.set(row, key)
         keyRows.set(key, row)
@@ -245,18 +241,20 @@ watch(
   { immediate: true },
 )
 
-watch([rowKeys, expandRowKeys], () => {
+watch([keyRows, expandRowKeys], () => {
   expandedRows.clear()
 
-  for (let [row, key] of rowKeys) {
-    if (expandRowKeys.value.includes(key)) {
+  expandRowKeys.value.forEach((key) => {
+    const row = keyRows.get(key)
+
+    if (row) {
       toggleRowExpanded(row, true)
     }
-  }
+  })
 })
 
 let storedSelectedRowsKeys: unknown[] = []
-watch(rowKeys, () => {
+watch(keyRows, () => {
   selectedRows.clear()
 
   if (activeSelectionColumn.value?.reserveSelection) {
@@ -299,19 +297,6 @@ defineExpose({
   sort,
 })
 
-function getStyleOrClass<T extends object | string>(prop: T | (() => T), args: undefined): T | null
-function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T), args: S): T | null {
-  if (typeof prop === 'function') {
-    return prop(args)
-  }
-
-  return prop || null
-}
-
-function isCheckBoxDisabled(column: ActionColumnApi, row: TableRow, index: number) {
-  return !column.selectable || column.selectable(row, index)
-}
-
 function getColumnByProp(prop: string) {
   return columns.filter(isDefaultColumn).find((column) => column.prop === prop)
 }
@@ -337,6 +322,19 @@ function getRowKey(row: TableRow) {
   if (typeof props.rowKey === 'function') {
     return props.rowKey(row)
   }
+}
+
+function getStyleOrClass<T extends object | string>(prop: T | (() => T), args: undefined): T | null
+function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T), args: S): T | null {
+  if (typeof prop === 'function') {
+    return prop(args)
+  }
+
+  return prop || null
+}
+
+function isCheckBoxDisabled(column: ActionColumnApi, row: TableRow, index: number) {
+  return !column.selectable || column.selectable(row, index)
 }
 
 function getDefaultCellValue(row: TableRow, column: ColumnApi, index: number) {
