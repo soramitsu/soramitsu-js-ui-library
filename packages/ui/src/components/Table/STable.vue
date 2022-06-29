@@ -164,6 +164,7 @@ const emit = defineEmits<{
 const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
 const { data, selectOnIndeterminate, fit, showHeader, height, maxHeight, expandRowKeys, currentRowKey } = toRefs(props)
 const rowKeys = shallowReactive(new Map<TableRow, unknown>())
+const keyRows = shallowReactive(new Map<unknown, TableRow>())
 
 const tableWrapper: MaybeElementRef = ref(null)
 const tableSizes = reactive({
@@ -222,6 +223,23 @@ watch([data, columns], () => {
   applyCurrentSort()
 })
 
+watch(
+  sortedData,
+  () => {
+    rowKeys.clear()
+    keyRows.clear()
+
+    if (props.rowKey) {
+      sortedData.value.forEach((row) => {
+        const key = getRowKey(row)
+        rowKeys.set(row, key)
+        keyRows.set(key, row)
+      })
+    }
+  },
+  { immediate: true },
+)
+
 watch([rowKeys, expandRowKeys], () => {
   expandedRows.clear()
 
@@ -232,14 +250,25 @@ watch([rowKeys, expandRowKeys], () => {
   }
 })
 
-watch(
-  sortedData,
-  () => {
-    rowKeys.clear()
-    sortedData.value.forEach((row) => rowKeys.set(row, getRowKey(row)))
-  },
-  { immediate: true },
-)
+let storedSelectedRowsKeys: unknown[] = []
+watch(rowKeys, () => {
+  selectedRows.clear()
+
+  if (activeSelectionColumn.value?.reserveSelection) {
+    const newStoredSelectedRowsKeys: typeof storedSelectedRowsKeys = []
+
+    storedSelectedRowsKeys.forEach((key) => {
+      const row = keyRows.get(key)
+
+      if (row) {
+        toggleRowSelection(row)
+        newStoredSelectedRowsKeys.push(key)
+      }
+    })
+
+    storedSelectedRowsKeys = newStoredSelectedRowsKeys
+  }
+})
 
 function register(column: ColumnApi | ActionColumnApi) {
   const index = columns.push(column)
@@ -334,6 +363,7 @@ function handleSortClick(column: ColumnApi) {
 function handleAllSelect(column: ActionColumnApi) {
   toggleAllSelections(column.selectable)
   const selectedArray = [...selectedRows]
+  storedSelectedRowsKeys = selectedArray.map((row) => rowKeys.get(row))
   emit('select-all', selectedArray)
   emit('selection-change', selectedArray)
 }
@@ -341,6 +371,7 @@ function handleAllSelect(column: ActionColumnApi) {
 function handleRowSelect(row: TableRow) {
   toggleRowSelection(row)
   const selectedArray = [...selectedRows]
+  storedSelectedRowsKeys = selectedArray.map((row) => rowKeys.get(row))
   emit('select', selectedArray, row)
   emit('selection-change', selectedArray)
 }
