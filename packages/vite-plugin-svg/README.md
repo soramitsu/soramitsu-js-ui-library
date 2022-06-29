@@ -6,7 +6,7 @@ This packages is created because of https://github.com/jpkleemans/vite-svg-loade
 
 ## Install
 
-As regular NPM package.
+As a regular NPM package.
 
 ## Usage
 
