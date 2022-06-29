@@ -3,7 +3,7 @@ export default { name: 'STable' }
 </script>
 
 <script setup lang="ts">
-import type { Slot } from 'vue'
+import type { ShallowRef, Slot } from 'vue'
 import { ActionColumnApi, ColumnApi, TABLE_API_KEY, SCheckboxAtom } from '@/components'
 import { IconArrowTop16, IconArrowsChevronDownRounded24 } from '@/components/icons'
 import { useColumnSort } from '@/components/Table/column-sort.composable'
@@ -57,13 +57,14 @@ const props = withDefaults(
      * Whether table header is visible
      * */
     showHeader?: boolean
-    //
-    // /** Whether current row is highlighted */
-    // highlightCurrentRow: boolean
-    //
-    // /** Key of current row, a set only prop */
-    // currentRowKey: string | number
-
+    /**
+     * Whether current row is highlighted
+     * */
+    highlightCurrentRow?: boolean
+    /**
+     * Key of current row, a set only prop
+     * */
+    currentRowKey?: string | number
     /**
      * Function that returns custom class names for a row, or a string assigning class names for every row
      * */
@@ -145,6 +146,8 @@ const props = withDefaults(
     headerCellClassName: '',
     headerCellStyle: () => ({}),
     selectOnIndeterminate: true,
+    highlightCurrentRow: false,
+    currentRowKey: '',
   },
 )
 
@@ -159,7 +162,7 @@ const emit = defineEmits<{
 }>()
 
 const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
-const { data, expandRowKeys, selectOnIndeterminate, fit, showHeader, height, maxHeight } = toRefs(props)
+const { data, selectOnIndeterminate, fit, showHeader, height, maxHeight } = toRefs(props)
 const rowKeys = shallowReactive(new Map<TableRow, unknown>())
 
 const tableWrapper: MaybeElementRef = ref(null)
@@ -195,6 +198,20 @@ const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggle
   reactive({ selectOnIndeterminate }),
 )
 
+const currentRow: ShallowRef<TableRow | null> = shallowRef(null)
+
+function isCurrentRow(row: TableRow) {
+  return currentRow.value === toRaw(row)
+}
+
+watchEffect(() => {
+  for (let [row, key] of rowKeys) {
+    if (key === props.currentRowKey) {
+      currentRow.value = row
+    }
+  }
+})
+
 if (props.defaultSort) {
   sort(props.defaultSort)
 }
@@ -207,7 +224,7 @@ watch([data, columns], () => {
   applyCurrentSort()
 })
 
-watch([rowKeys, expandRowKeys], () => {
+watchEffect(() => {
   for (let [row, key] of rowKeys) {
     if (props.expandRowKeys.includes(key)) {
       toggleRowExpanded(row)
@@ -357,6 +374,7 @@ function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi | ActionCo
         break
       }
 
+      currentRow.value = toRaw(ctx.row)
       emit('cell-click', ctx.row, ctx.column, ctx.event.target, ctx.event)
       emit('row-click', ctx.row, ctx.column, ctx.event)
       break
@@ -484,7 +502,10 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
           >
             <tr
               class="s-table__tr"
-              :class="getStyleOrClass(rowClassName, { row, rowIndex })"
+              :class="{
+                's-table__tr_current': highlightCurrentRow && isCurrentRow(row),
+                ...getStyleOrClass(rowClassName, { row, rowIndex }),
+              }"
               :style="getStyleOrClass(rowStyle, { row, rowIndex })"
             >
               <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
