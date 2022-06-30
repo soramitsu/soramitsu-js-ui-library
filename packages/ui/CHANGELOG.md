@@ -5,7 +5,7 @@
 ### Patch Changes
 
 - 4f3fdcd: **fix**: fix icon components that aren't built as Vue components, close #429
-- 80856f7: **fix**: (`SAccordionItem`) workaround #433 by using `modelValue` directly
+- 80856f7: **fix**: (`SAccordionItem`) workaround #433 by using handmade passive `v-model`
 
 ## 0.6.0
 
