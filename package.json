@@ -7,7 +7,7 @@
   "scripts": {
     "sb:serve": "yarn --cwd packages/ui sb:serve",
     "sb:build": "yarn --cwd packages/ui sb:build",
-    "test:all": "run-s lint:check test:theme:unit test:ui:unit build:theme test:ui:cy build:ui:only-vite test:ui:after-build",
+    "test:all": "run-s lint:check test:theme:unit build:vite-plugin-svg test:ui:unit build:theme test:ui:cy build:ui:only-vite test:ui:after-build",
     "test:theme:unit": "yarn --cwd packages/theme test",
     "test:ui:unit": "yarn --cwd packages/ui test:unit",
     "test:ui:cy": "yarn --cwd packages/ui cy:ci",
