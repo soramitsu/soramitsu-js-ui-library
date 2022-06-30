@@ -21,7 +21,19 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
-const model = useVModel(props, 'modelValue', emit, { passive: true })
+
+const model = ref(props.modelValue)
+watch(
+  () => props.modelValue,
+  (origin) => {
+    model.value = origin
+  },
+)
+watch(model, (dep) => {
+  if (dep !== props.modelValue) {
+    emit('update:modelValue', dep)
+  }
+})
 
 const contentId = uniqueElementId()
 
