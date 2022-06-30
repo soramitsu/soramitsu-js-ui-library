@@ -57,7 +57,7 @@ describe('Focus trap', () => {
       setup() {
         const props = objectPick(params || {}, ['focusTrap', 'eager', 'closeOnEsc'])
 
-        const mountTabbables: boolean = !params?.mountWithoutTabbable ?? true
+        const mountTabbables = !params?.mountWithoutTabbable
 
         return { show: ref(false), mountTabbables, props }
       },

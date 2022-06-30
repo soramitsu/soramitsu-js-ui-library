@@ -3,7 +3,7 @@ import Windi from 'vite-plugin-windicss'
 import Vue from '@vitejs/plugin-vue'
 import { RootNode, TemplateChildNode } from '@vue/compiler-core'
 import Icons from 'unplugin-icons/vite'
-import Svg from 'vite-svg-loader'
+import Svg from '@soramitsu-ui/vite-plugin-svg'
 import AutoImport from 'unplugin-auto-import/vite'
 import path from 'path'
 
@@ -56,7 +56,7 @@ export default defineConfig({
     }),
     Icons(),
     Svg({
-      svgoConfig: {
+      svgo: {
         plugins: [{ name: 'removeViewBox', active: false }],
       },
     }),

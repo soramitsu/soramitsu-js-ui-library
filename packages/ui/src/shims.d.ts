@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-duplicate-imports */
+/* eslint-disable no-duplicate-imports */
 
 declare module '*.svg' {
   import { DefineComponent } from 'vue'
