@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SSwitch',
-})
-</script>
-
 <script setup lang="ts">
 interface Props {
   /**

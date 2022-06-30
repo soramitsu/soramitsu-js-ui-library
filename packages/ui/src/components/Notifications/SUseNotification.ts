@@ -6,7 +6,7 @@ import { useConditionalScope } from '@/composables/conditional-scope'
 import { forceInject } from '@/util'
 import { NOTIFICATIONS_API_KEY } from './api'
 
-export default defineComponent({
+export default /* @__PURE__ */ defineComponent({
   name: 'SUseNotification',
   props: {
     show: Boolean,

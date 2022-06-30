@@ -1,7 +1,3 @@
-<script lang="ts">
-export default { name: 'SNavigationSubmenu' }
-</script>
-
 <script setup lang="ts">
 import { Ref } from 'vue'
 import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenuItemBody.vue'

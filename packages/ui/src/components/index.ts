@@ -1,7 +1,10 @@
 export * from './Accordion'
 export * from './Alert'
 export * from './Button'
-export * from './Input'
+
+// It has dirty dependencies: lodash, jsoneditor
+// export * from './JsonInput'
+
 export * from './Link'
 export * from './Modal'
 export * from './Notifications'
@@ -17,5 +20,6 @@ export * from './Badge'
 export * from './Checkbox'
 export * from './Transitions'
 export * from './Radio'
+export * from './BodyScrollLockProvider'
 export * from './NavigationMenu'
 export * from './Table'

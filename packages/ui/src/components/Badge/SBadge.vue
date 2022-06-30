@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SBadge',
-})
-</script>
-
 <script setup lang="ts">
 import { SSpinner } from '../Spinner'
 import { BadgeType } from './api'

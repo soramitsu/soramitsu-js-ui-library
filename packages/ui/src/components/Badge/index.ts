@@ -1,2 +1,2 @@
-export { default as SBadge } from './Badge.vue'
+export { default as SBadge } from './SBadge.vue'
 export * from './api'

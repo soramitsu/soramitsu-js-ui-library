@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SSelectDropdown',
-})
-</script>
-
 <script setup lang="ts">
 import { useSelectApi } from './api'
 import { SelectOptionType } from './types'

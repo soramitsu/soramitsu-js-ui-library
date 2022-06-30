@@ -2,9 +2,10 @@ import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
 import { Ref } from 'vue'
 import { bareMetalVModel } from '@/util'
-import { SModal, SModalCard, useModalApi } from '@/lib'
+import { SModal, SModalCard, useModalApi, SBodyScrollLockProvider, BodyScrollLockApi } from '@/lib'
 import { objectPick } from '@vueuse/core'
 import { Options as FocusTrapOptions } from 'focus-trap'
+import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock'
 
 const showVModel = (val: Ref<boolean>) => bareMetalVModel(val, 'show')
 const findRoot = () => cy.get('[data-testid=root]')
@@ -56,7 +57,7 @@ describe('Focus trap', () => {
       setup() {
         const props = objectPick(params || {}, ['focusTrap', 'eager', 'closeOnEsc'])
 
-        const mountTabbables: boolean = !params?.mountWithoutTabbable ?? true
+        const mountTabbables = !params?.mountWithoutTabbable
 
         return { show: ref(false), mountTabbables, props }
       },
@@ -421,6 +422,15 @@ describe('Scroll Lock', () => {
       setup() {
         const show = ref(false)
 
+        const bodyScrollLockApi: BodyScrollLockApi = {
+          lock: (el) => {
+            disableBodyScroll(el)
+          },
+          unlock: (el) => {
+            enableBodyScroll(el)
+          },
+        }
+
         return () => [
           h(
             'button',
@@ -441,15 +451,22 @@ describe('Scroll Lock', () => {
             'A very huge element',
           ),
           h(
-            SModal as any,
+            SBodyScrollLockProvider,
+            { api: bodyScrollLockApi },
             {
-              ...showVModel(show),
-              ...params,
-              focusTrap: false,
-              modalTransition: null,
-            },
-            {
-              default: () => h('span', {}, 'Dip'),
+              default: () =>
+                h(
+                  SModal as any,
+                  {
+                    ...showVModel(show),
+                    ...params,
+                    focusTrap: false,
+                    modalTransition: null,
+                  },
+                  {
+                    default: () => h('span', {}, 'Dip'),
+                  },
+                ),
             },
           ),
         ]

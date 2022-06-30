@@ -1,7 +1,3 @@
-<script lang="ts">
-export default { name: 'SNavigationMenuItemBody' }
-</script>
-
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{

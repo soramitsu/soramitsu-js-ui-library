@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import Windi from 'vite-plugin-windicss'
 import Vue from '@vitejs/plugin-vue'
 import { RootNode, TemplateChildNode } from '@vue/compiler-core'
 import Icons from 'unplugin-icons/vite'
-import Svg from 'vite-svg-loader'
+import Svg from '@soramitsu-ui/vite-plugin-svg'
 import AutoImport from 'unplugin-auto-import/vite'
 import path from 'path'
 
@@ -31,6 +31,12 @@ const vueCompilerTransforms = {
 }
 
 export default defineConfig({
+  test: {
+    include: ['src/**/*.spec.ts'],
+  },
+  define: {
+    'import.meta.vitest': 'undefined',
+  },
   resolve: {
     alias: {
       '@': resolve('src'),
@@ -50,7 +56,7 @@ export default defineConfig({
     }),
     Icons(),
     Svg({
-      svgoConfig: {
+      svgo: {
         plugins: [{ name: 'removeViewBox', active: false }],
       },
     }),
@@ -67,10 +73,11 @@ export default defineConfig({
     minify: false,
     chunkSizeWarningLimit: 2_000,
     reportCompressedSize: false,
+    target: 'esnext',
     lib: {
       entry: resolve('src/lib.ts'),
       formats: ['es', 'cjs'],
-      fileName: (format) => `lib.${format}.js`,
+      fileName: (format) => `lib.${format === 'es' ? 'mjs' : 'cjs'}`,
     },
     rollupOptions: {
       output: { chunkFileNames: '[name].[format].js' },

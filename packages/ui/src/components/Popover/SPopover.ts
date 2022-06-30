@@ -99,7 +99,7 @@ function defineReadonlyApi(
  * Partially based on:
  * https://github.com/TuSimple/naive-ui/blob/195c94a0c3610ee4492676dbbe0e781333658218/src/popover/src/Popover.tsx
  */
-export default defineComponent({
+export default /* @__PURE__ */ defineComponent({
   name: 'SPopover',
   props: {
     show: Boolean,

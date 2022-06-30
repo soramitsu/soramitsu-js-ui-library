@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: 'SCheckboxSolo',
-}
-</script>
-
 <script setup lang="ts">
 import { uniqueElementId } from '@/util'
 import { CheckboxSize, CheckboxType, CHECKBOX_SIZE_VALUES, CHECKBOX_TYPE_VALUES } from './types'

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SSelectBase',
-})
-</script>
-
 <script setup lang="ts">
 import { SelectSize, SelectOption } from './types'
 import { useSelectModel } from './tools'

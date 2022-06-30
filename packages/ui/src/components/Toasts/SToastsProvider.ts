@@ -15,7 +15,7 @@ function* iterKeys<T>(baseKey: T, additional: T | T[]): Generator<T> {
 /**
  * SToastsAPI provider, nothing else
  */
-export default defineComponent({
+export default /* @__PURE__ */ defineComponent({
   name: 'SToastsProvider',
   props: {
     /**
