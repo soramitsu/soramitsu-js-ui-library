@@ -99,10 +99,11 @@ if (groupApi) {
           />
         </div>
       </div>
-      <IconArrowsChevronDownRounded24
-        class="s-accordion-item__chevron"
-        aria-hidden="true"
-      />
+      <div class="s-accordion-item__chevron">
+        <slot name="chevron">
+          <IconArrowsChevronDownRounded24 aria-hidden="true" />
+        </slot>
+      </div>
     </button>
 
     <SCollapseTransition>
