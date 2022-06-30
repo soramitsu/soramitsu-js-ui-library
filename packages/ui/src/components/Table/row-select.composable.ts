@@ -6,7 +6,7 @@ export function useRowSelect(data: Ref<TableRow[]>, options: { selectOnIndetermi
   const isAllSelected = computed(() => selectedRows.size === data.value.length)
   const isSomeSelected = computed(() => selectedRows.size > 0)
 
-  function toggleAllSelections(selectable: ColumnRowSelectableFunc | null) {
+  function toggleAllSelection(selectable: ColumnRowSelectableFunc | null) {
     const selectableRows = selectable ? data.value.filter((row, index) => !selectable(row, index)) : data.value
 
     if (selectedRows.size === selectableRows.length) {
@@ -32,8 +32,8 @@ export function useRowSelect(data: Ref<TableRow[]>, options: { selectOnIndetermi
     }
   }
 
-  function toggleRowSelection(row: TableRow) {
-    if (selectedRows.has(row)) {
+  function toggleRowSelection(row: TableRow, value?: boolean) {
+    if ((value !== undefined && !value) || (value === undefined && selectedRows.has(row))) {
       selectedRows.delete(row)
 
       return
@@ -46,7 +46,7 @@ export function useRowSelect(data: Ref<TableRow[]>, options: { selectOnIndetermi
     selectedRows,
     isAllSelected,
     isSomeSelected,
-    toggleAllSelections,
+    toggleAllSelection,
     toggleRowSelection,
   }
 }

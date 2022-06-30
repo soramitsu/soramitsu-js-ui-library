@@ -81,3 +81,5 @@ Removed `renderHeader` prop (use slot instead).
 Removed `resizable` prop, and so is `header-dragend` event.
 
 Removed `stripe` and `border` props, as there are no design for them.
+
+Removed public method `doLayout`, because resize observables should be enough.

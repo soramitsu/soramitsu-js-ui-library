@@ -10,7 +10,7 @@ export function useColumnSort(data: Ref<TableRow[]>) {
   })
   let sortedData: Ref<TableRow[]> = ref(data.value)
 
-  function setSortColumn(column: ColumnApi) {
+  function startSortWithNewColumn(column: ColumnApi | null) {
     sortState.column = column
     sortState.order = null
   }
@@ -81,19 +81,16 @@ export function useColumnSort(data: Ref<TableRow[]>) {
     }
 
     if (sortState.column !== column) {
-      setSortColumn(column)
+      startSortWithNewColumn(column)
     }
 
-    const newOrder = getNextOrder(column, sortState.order)
-    sortState.order = newOrder
-    sortData(newOrder, column)
-
-    return newOrder
+    sortState.order = getNextOrder(column, sortState.order)
+    sortData(sortState.order, column)
   }
 
   function sortExplicitly(column: ColumnApi, newOrder: ColumnSortOrder) {
     if (sortState.column !== column) {
-      setSortColumn(column)
+      startSortWithNewColumn(column)
     }
 
     sortState.order = newOrder
@@ -110,12 +107,18 @@ export function useColumnSort(data: Ref<TableRow[]>) {
     sortData(sortState.order, sortState.column)
   }
 
+  function clearSort() {
+    startSortWithNewColumn(null)
+    sortedData.value = data.value
+  }
+
   return {
     sortedData,
     sortState,
     sortExplicitly,
     applyCurrentSort,
     handleSortChange,
+    clearSort,
     getNextOrder,
   }
 }

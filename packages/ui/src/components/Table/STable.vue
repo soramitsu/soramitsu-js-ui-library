@@ -196,8 +196,9 @@ const { tableHeightStyles, bodyHeightStyles } = useTableHeights({
   tableHeight: toRef(tableSizes, 'height'),
 })
 const { expandedRows, toggleRowExpanded } = useColumnExpand()
-const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applyCurrentSort } = useColumnSort(data)
-const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelections, toggleRowSelection } = useRowSelect(
+const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applyCurrentSort, clearSort } =
+  useColumnSort(data)
+const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelection, toggleRowSelection } = useRowSelect(
   sortedData,
   reactive({ selectOnIndeterminate }),
 )
@@ -208,8 +209,12 @@ function isCurrentRow(row: TableRow) {
   return currentRow.value === toRaw(row)
 }
 
+function setCurrentRow(row: TableRow | null) {
+  currentRow.value = toRaw(row)
+}
+
 watch([keyRows, currentRowKey], () => {
-  currentRow.value = keyRows.get(currentRowKey.value) ?? null
+  setCurrentRow(keyRows.get(currentRowKey.value) ?? null)
 })
 
 if (props.defaultSort) {
@@ -273,6 +278,21 @@ watch(keyRows, () => {
   }
 })
 
+function manualToggleAllSelection(column: ActionColumnApi) {
+  toggleAllSelection(column.selectable)
+  storedSelectedRowsKeys = [...selectedRows].map((row) => rowKeys.get(row))
+}
+
+function manualToggleRowSelection(row: TableRow, value?: boolean) {
+  toggleRowSelection(row, value)
+  storedSelectedRowsKeys = [...selectedRows].map((row) => rowKeys.get(row))
+}
+
+function manualClearSelection() {
+  selectedRows.clear()
+  storedSelectedRowsKeys = []
+}
+
 function register(column: ColumnApi | ActionColumnApi) {
   const index = columns.push(column)
 
@@ -282,7 +302,6 @@ function register(column: ColumnApi | ActionColumnApi) {
 }
 
 const api = readonly({ register })
-
 provide(TABLE_API_KEY, api)
 
 function sort({ prop, order }: { prop: string; order: ColumnSortOrder }) {
@@ -294,7 +313,41 @@ function sort({ prop, order }: { prop: string; order: ColumnSortOrder }) {
 }
 
 defineExpose({
+  /**
+   * used in multiple selection Table, clear user selection
+   * */
+  clearSelection: manualClearSelection,
+  /**
+   * used in multiple selection Table, toggle if a certain row is selected.
+   * With the second parameter, you can directly set if this row is selected
+   * */
+  toggleRowSelection: manualToggleRowSelection,
+  /**
+   * used in multiple selection Table, toggle the selected state of all rows
+   * */
+  toggleAllSelection: () => {
+    if (activeSelectionColumn.value) {
+      manualToggleAllSelection(activeSelectionColumn.value)
+    }
+  },
+  /**
+   * used in expandable Table or tree Table, toggle if a certain row is expanded.
+   * With the second parameter, you can directly set if this row is expanded or collapsed
+   * */
+  toggleRowExpansion: toggleRowExpanded,
+  /**
+   * sort Table manually. Property prop is used to set sort column, property order is used to set sort order
+   * */
   sort,
+  /**
+   * clear sorting, restore data to the original order
+   * */
+  clearSort,
+  /**
+   * used in single selection Table, set a certain row selected.
+   * If called without any parameter, it will clear selection.
+   * */
+  setCurrentRow,
 })
 
 function getColumnByProp(prop: string) {
@@ -356,25 +409,20 @@ function getSortIconStateClasses(column: ColumnApi) {
 }
 
 function handleSortClick(column: ColumnApi) {
-  const newOrder = handleSortChange(column)
-
-  if (!newOrder) return
-
-  emit('sort-change', { column, prop: column.prop, order: newOrder })
+  handleSortChange(column)
+  emit('sort-change', { column, prop: column.prop, order: sortState.order })
 }
 
 function handleAllSelect(column: ActionColumnApi) {
-  toggleAllSelections(column.selectable)
+  manualToggleAllSelection(column)
   const selectedArray = [...selectedRows]
-  storedSelectedRowsKeys = selectedArray.map((row) => rowKeys.get(row))
   emit('select-all', selectedArray)
   emit('selection-change', selectedArray)
 }
 
 function handleRowSelect(row: TableRow) {
-  toggleRowSelection(row)
+  manualToggleRowSelection(row)
   const selectedArray = [...selectedRows]
-  storedSelectedRowsKeys = selectedArray.map((row) => rowKeys.get(row))
   emit('select', selectedArray, row)
   emit('selection-change', selectedArray)
 }
@@ -404,7 +452,7 @@ function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi | ActionCo
         break
       }
 
-      currentRow.value = toRaw(ctx.row)
+      setCurrentRow(ctx.row)
       emit('cell-click', ctx.row, ctx.column, ctx.event.target, ctx.event)
       emit('row-click', ctx.row, ctx.column, ctx.event)
       break
