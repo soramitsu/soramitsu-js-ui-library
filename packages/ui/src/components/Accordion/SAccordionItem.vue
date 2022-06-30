@@ -95,7 +95,7 @@ if (groupApi) {
 
     <SCollapseTransition>
       <div
-        v-show="model"
+        v-show="modelValue"
         :id="contentId"
         class="s-accordion-item__body-wrapper"
         data-testid="content"
