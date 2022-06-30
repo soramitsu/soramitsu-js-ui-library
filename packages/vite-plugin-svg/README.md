@@ -18,9 +18,9 @@ Install as Vite plugin:
 export default {
   plugins: [
     Svg({
-      svgo: {} // pass optimization options or `false` to disable
-    })
-  ]
+      svgo: {}, // pass optimization options or `false` to disable
+    }),
+  ],
 }
 ```
 

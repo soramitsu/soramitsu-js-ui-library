@@ -5,13 +5,13 @@ export default defineConfig({
     lib: {
       entry: 'src/lib.ts',
       formats: ['cjs'],
-      fileName: () => 'vite-plugin-svg.cjs'
+      fileName: () => 'vite-plugin-svg.cjs',
     },
     rollupOptions: {
-      external: ['@vue/compiler-sfc', 'svgo', 'fs/promises']
+      external: ['@vue/compiler-sfc', 'svgo', 'fs/promises'],
     },
     sourcemap: true,
     minify: false,
-    target:  'esnext'        
-  }
+    target: 'esnext',
+  },
 })
