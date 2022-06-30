@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import JSONEditor from 'jsoneditor'
-import type { JSONEditorOptions } from 'jsoneditor'
+import JSONEditor, { type JSONEditorOptions } from 'jsoneditor'
 import 'jsoneditor/dist/jsoneditor.min.css'
 import isEmpty from 'lodash/fp/isEmpty'
 

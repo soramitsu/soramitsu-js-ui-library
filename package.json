@@ -1,16 +1,20 @@
 {
   "private": true,
   "license": "Apache-2.0",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "sb:serve": "yarn --cwd packages/ui sb:serve",
     "sb:build": "yarn --cwd packages/ui sb:build",
-    "test:all": "run-s lint:check test:theme:unit test:ui:unit build:theme test:ui:cy build:ui:only-vite test:ui:after-build",
+    "test:all": "run-s lint:check test:theme:unit build:vite-plugin-svg test:ui:unit build:theme test:ui:cy build:ui:only-vite test:ui:after-build",
     "test:theme:unit": "yarn --cwd packages/theme test",
     "test:ui:unit": "yarn --cwd packages/ui test:unit",
     "test:ui:cy": "yarn --cwd packages/ui cy:ci",
     "test:ui:after-build": "yarn --cwd packages/ui test:after-build",
-    "build": "run-s build:theme build:ui",
+    "build": "run-s build:theme build:vite-plugin-svg build:ui",
     "build:theme": "yarn --cwd packages/theme build",
+    "build:vite-plugin-svg": "yarn --cwd packages/vite-plugin-svg build",
     "build:ui": "yarn --cwd packages/ui build",
     "build:ui:only-vite": "yarn --cwd packages/ui build:vite",
     "lint:check": "run-s lint:es lint:format:check",
@@ -21,9 +25,6 @@
     "lint:format:fix": "yarn lint:format:base --write",
     "publish-workspaces": "lerna publish from-package"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
     "@changesets/cli": "^2.17.0",
     "@types/node": "^17.0.14",
