@@ -1,7 +1,3 @@
-<script lang="ts">
-export default { name: 'STable' }
-</script>
-
 <script setup lang="ts">
 import type { ShallowRef, Slot } from 'vue'
 import { ActionColumnApi, ColumnApi, TABLE_API_KEY, SCheckboxAtom } from '@/components'
@@ -495,6 +491,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
   <div
     ref="tableWrapper"
     class="s-table"
+    data-testid="table"
     :style="tableHeightStyles"
   >
     <div
@@ -509,8 +506,9 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
         <thead>
           <tr
             class="s-table__tr"
-            :class="getStyleOrClass(rowClassName)"
-            :style="getStyleOrClass(rowStyle)"
+            data-testid="table-header-row"
+            :class="getStyleOrClass(headerRowClassName)"
+            :style="getStyleOrClass(headerRowStyle)"
           >
             <th
               v-for="(column, columnIndex) in columns"
@@ -531,6 +529,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                 'width': `${columnsWidths[columnIndex]}px`,
                 ...getStyleOrClass(headerCellStyle, { column, columnIndex }),
               }"
+              data-testid="table-header-cell"
               @click="handleHeaderMouseEvent({ column, 'event': $event })"
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
             >
@@ -553,6 +552,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                 <template v-else-if="isSelectionColumn(column)">
                   <SCheckboxAtom
                     :class="{ 'cursor-pointer': data.length }"
+                    data-testid="table-header-selection-checkbox"
                     size="xl"
                     :checked="isSomeSelected ? (isAllSelected ? true : 'mixed') : false"
                     :disabled="!data.length"
@@ -580,11 +580,12 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
           >
             <tr
               class="s-table__tr"
-              :class="{
-                's-table__tr_current': highlightCurrentRow && isCurrentRow(row),
-                ...getStyleOrClass(rowClassName, { row, rowIndex }),
-              }"
+              :class="[
+                getStyleOrClass(rowClassName, { row, rowIndex }),
+                { 's-table__tr_current': highlightCurrentRow && isCurrentRow(row) }
+              ]"
               :style="getStyleOrClass(rowStyle, { row, rowIndex })"
+              data-testid="table-row"
             >
               <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
               <td
@@ -601,6 +602,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                   'width': rowIndex === 0 ? `${columnsWidths[columnIndex]}px` : '',
                   ...getStyleOrClass(cellStyle, { row, rowIndex, column, columnIndex }),
                 }"
+                data-testid="table-cell"
                 @mouseenter="handleCellMouseEvent({ row, column, 'event': $event })"
                 @mouseleave="handleCellMouseEvent({ row, column, 'event': $event })"
                 @click="handleCellMouseEvent({ row, column, 'event': $event })"
@@ -630,6 +632,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                     <SCheckboxAtom
                       :class="{ 'cursor-pointer': !isCheckBoxDisabled(column, row, rowIndex) }"
                       size="xl"
+                      data-testid="table-selection-checkbox"
                       :checked="selectedRows.has(row)"
                       :disabled="isCheckBoxDisabled(column, row, rowIndex)"
                       @click.stop="isCheckBoxDisabled(column, row, rowIndex) || handleRowSelect(row)"
@@ -640,13 +643,17 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                     <IconArrowsChevronDownRounded24
                       class="s-table__expand-icon"
                       :class="{ 's-table__expand-icon_active': expandedRows.has(row) }"
+                      data-testid="table-expanded-icon"
                     />
                   </template>
                 </div>
               </td>
             </tr>
 
-            <tr v-if="activeExpandColumn && expandedRows.has(row)">
+            <tr
+              v-if="activeExpandColumn && expandedRows.has(row)"
+              data-testid="table-expanded-block"
+            >
               <td
                 class="s-table__expanded-cell py-16px px-32px"
                 :colspan="columns.length"
@@ -663,6 +670,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
       </table>
       <div
         v-if="!data.length"
+        data-testid="table-empty-block"
         class="s-table__empty-block flex justify-center items-center h-60px"
       >
         <span class="s-table__empty-text sora-tpg-p3">
