@@ -49,6 +49,9 @@ describe('Table', () => {
   const HEADER_CELL_CLASS_NAME = 'HEADER_CELL_CLASS_NAME'
   const HEADER_CELL_STYLE = { color: 'rgb(44, 55, 66)' }
 
+  const COLUMN_CELL_CLASS_NAME = 'COLUMN_CELL_CLASS_NAME'
+  const COLUMN_HEADER_CELL_CLASS_NAME = 'COLUMN_HEADER_CELL_CLASS_NAME'
+
   context(`Given table with expand and selection columns with all rows expanded by default`, () => {
     beforeEach(() => {
       mount({
@@ -147,8 +150,9 @@ describe('Table', () => {
 
     context('When it is initiated', () => {
       it('Then row with according prop is highlighted', () => {
-        cy.get(testIdSelector('table-row')).filter('.s-table__tr_current').should('have.length', 1)
-        cy.get(testIdSelector('table-row')).filter('.s-table__tr_current').should('have.text', HIGHLIGHTED_KEY)
+        cy.get(testIdSelector('table-row')).filter('.s-table__tr_current')
+          .should('have.length', 1)
+          .should('have.text', HIGHLIGHTED_KEY)
       })
     })
 
@@ -199,7 +203,7 @@ describe('Table', () => {
     })
   })
 
-  context(`Given table with custom classes and styles`, () => {
+  context(`Given table with custom classes and styles on table and classes on first column`, () => {
     beforeEach(() => {
       mount({
         setup() {
@@ -219,7 +223,11 @@ describe('Table', () => {
             header-cell-class-name="${HEADER_CELL_CLASS_NAME}"
             :header-cell-style='${JSON.stringify(HEADER_CELL_STYLE)}'
           >
-            <STableColumn prop="${PROP_NAME_1}" />
+            <STableColumn
+              prop="${PROP_NAME_1}"
+              class-name="${COLUMN_CELL_CLASS_NAME}"
+              label-class-name="${COLUMN_HEADER_CELL_CLASS_NAME}"
+            />
           </STable>`,
       })
     })
@@ -255,6 +263,18 @@ describe('Table', () => {
 
       it('Then header cells have styles from prop', () => {
         cy.get(testIdSelector('table-header-cell')).should('have.css', 'color', HEADER_CELL_STYLE.color)
+      })
+
+      it('Then fist column cell have classes from className prop', () => {
+        cy.get(testIdSelector('table-row')).each(el => {
+          cy.wrap(el).find(testIdSelector('table-cell')).first().should('have.class', COLUMN_CELL_CLASS_NAME)
+        })
+      })
+
+      it('Then fist column header cell have styles from className and labelClassName prop', () => {
+        cy.get(testIdSelector('table-header-cell')).first()
+          .should('have.class', COLUMN_HEADER_CELL_CLASS_NAME)
+          .should('have.class', COLUMN_CELL_CLASS_NAME)
       })
     })
   })
