@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ShallowRef, Slot } from 'vue'
+import type { CSSProperties, ShallowRef, Slot } from 'vue'
 import { ActionColumnApi, ColumnApi, TABLE_API_KEY, SCheckboxAtom } from '@/components'
 import { IconArrowTop16, IconArrowsChevronDownRounded24 } from '@/components/icons'
 import { useColumnSort } from '@/components/Table/column-sort.composable'
@@ -69,7 +69,7 @@ const props = withDefaults(
     /**
      * Function that returns custom style for a row, or an object assigning custom style for every row
      * */
-    rowStyle?: object | ((param: TableRowConfigCallbackParams) => object)
+    rowStyle?: CSSProperties | ((param: TableRowConfigCallbackParams) => CSSProperties)
     /**
      * Function that returns custom class names for a cell, or a string assigning class names for every cell
      * */
@@ -77,7 +77,7 @@ const props = withDefaults(
     /**
      * Function that returns custom style for a cell, or an object assigning custom style for every cell
      * */
-    cellStyle?: object | ((param: TableCellConfigCallbackParams) => object)
+    cellStyle?: CSSProperties | ((param: TableCellConfigCallbackParams) => CSSProperties)
     /**
      * Function that returns custom class names for a row in table header, or a string assigning class names for every row in table header
      * */
@@ -85,7 +85,7 @@ const props = withDefaults(
     /**
      * Function that returns custom style for a row in table header, or an object assigning custom style for every row in table header
      * */
-    headerRowStyle?: object | (() => object)
+    headerRowStyle?: CSSProperties | (() => CSSProperties)
     /**
      * Function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header
      * */
@@ -93,7 +93,7 @@ const props = withDefaults(
     /**
      * Function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header
      * */
-    headerCellStyle?: object | ((param: TableHeaderCellConfigCallbackParams) => object)
+    headerCellStyle?: CSSProperties | ((param: TableHeaderCellConfigCallbackParams) => CSSProperties)
     /**
      * key of row data, used for optimizing rendering. Required if reserve-selection is on.
      * When its type is String, multi-level access is supported, e.g. user.info.id,
@@ -373,13 +373,14 @@ function getRowKey(row: TableRow) {
   }
 }
 
-function getStyleOrClass<T extends object | string>(prop: T | (() => T), args: undefined): T | null
-function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T), args: S): T | null {
+function getStyleOrClass<T extends object | string>(prop: T | (() => T), args?: undefined): T | undefined
+function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T), args: S): T | undefined
+function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T), args: S): T | undefined {
   if (typeof prop === 'function') {
     return prop(args)
   }
 
-  return prop || null
+  return prop || undefined
 }
 
 function isCheckBoxDisabled(column: ActionColumnApi, row: TableRow, index: number) {
@@ -388,6 +389,14 @@ function isCheckBoxDisabled(column: ActionColumnApi, row: TableRow, index: numbe
 
 function getDefaultCellValue(row: TableRow, column: ColumnApi, index: number) {
   return column.formatter ? column.formatter(row, column, get(row, column.prop), index) : get(row, column.prop)
+}
+
+function getCellTooltipContent(row: TableRow, column: ColumnApi | ActionColumnApi) {
+  if (!column.showOverflowTooltip || !isDefaultColumn(column)) {
+    return
+  }
+
+  return String(get(row, column.prop))
 }
 
 function getSortIconStateClasses(column: ColumnApi) {
@@ -616,7 +625,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
                     's-table__cell_has-tooltip': column.showOverflowTooltip,
                     'cursor-pointer': isExpandColumn(column),
                   }"
-                  :title="column.showOverflowTooltip ? get(row, column.prop) : null"
+                  :title="getCellTooltipContent(row, column)"
                 >
                   <template v-if="isDefaultColumn(column)">
                     <component

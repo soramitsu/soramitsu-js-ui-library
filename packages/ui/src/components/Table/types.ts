@@ -34,11 +34,11 @@ export interface TableRowConfigCallbackParams {
 export interface TableCellConfigCallbackParams {
   row: TableRow
   rowIndex: number
-  column: ColumnApi
+  column: ColumnApi | ActionColumnApi
   columnIndex: number
 }
 
 export interface TableHeaderCellConfigCallbackParams {
-  column: ColumnApi
+  column: ColumnApi | ActionColumnApi
   columnIndex: number
 }
