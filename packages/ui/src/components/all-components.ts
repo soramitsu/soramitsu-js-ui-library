@@ -6,7 +6,7 @@
 
 import { Component } from 'vue'
 import { SButton } from './Button'
-import { SJsonInput } from './Input'
+// import { SJsonInput } from './JsonInput'
 import { SModal, SModalCard } from './Modal'
 import { SSelect, SDropdown, SSelectBase, SSelectButton, SSelectChevron, SSelectInput, SSelectOption } from './Select'
 import { SToastsDisplay, SToastsProvider } from './Toasts'
@@ -16,7 +16,16 @@ import { SSpinner } from './Spinner'
 import { SSwitch } from './Switch'
 import { STextField } from './TextField'
 import { SPopover, SPopoverWrappedTransition } from './Popover'
+import { SProgressBar } from './ProgressBar'
+import { STab, STabsPanel } from './Tabs'
+import { SBadge } from './Badge'
 import { SAccordion, SAccordionItem } from './Accordion'
+import { SLink } from './Link'
+import { SCollapseTransition } from './Transitions'
+import { SRadio, SRadioAtom, SRadioGroup } from './Radio'
+import { SCheckboxAtom, SCheckboxSolo } from './Checkbox'
+import { SBodyScrollLockProvider } from './BodyScrollLockProvider'
+import { SNavigationMenu, SNavigationMenuItem, SNavigationSubmenu } from './NavigationMenu'
 import { SDatePicker} from './DatePicker'
 
 /**
@@ -24,7 +33,7 @@ import { SDatePicker} from './DatePicker'
  */
 export const COMPONENTS: Record<string, Component> = {
   SButton,
-  SJsonInput,
+  // SJsonInput,
   SModal,
   SModalCard,
   SSelect,
@@ -45,7 +54,22 @@ export const COMPONENTS: Record<string, Component> = {
   SPopoverWrappedTransition,
   SSwitch,
   STextField,
+  SProgressBar,
+  STab,
+  STabsPanel,
+  SBadge,
   SAccordion,
   SAccordionItem,
-  SDatePicker
+  SLink,
+  SRadio,
+  SRadioAtom,
+  SRadioGroup,
+  SCollapseTransition,
+  SCheckboxAtom,
+  SCheckboxSolo,
+  SBodyScrollLockProvider,
+  SNavigationMenu,
+  SNavigationMenuItem,
+  SNavigationSubmenu,
+  SDatePicker,
 }

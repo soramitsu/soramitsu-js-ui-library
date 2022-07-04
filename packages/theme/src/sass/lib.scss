@@ -74,6 +74,9 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'info': #1070ca,
             'info-background': #f3f6ff,
             'info-background-hover': #dbe4ff,
+            'debug': #aa0e42,
+            'debug-background': #ffeef4,
+            'debug-background-hover': #f3d3de,
           ),
         ),
         'shadow': (
@@ -157,15 +160,15 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
   }
 
   @include typography('h5') {
-    @include util.typography-factory($size: 16px, $height: 150%, $spacing: 0.01em);
+    @include util.typography-factory($size: 16px, $height: 150%, $spacing: 0.01em, $weight: bold);
   }
 
   @include typography('h6') {
-    @include util.typography-factory($size: 14px, $height: 150%);
+    @include util.typography-factory($size: 14px, $height: 150%, $weight: bold);
   }
 
   @include typography('h7') {
-    @include util.typography-factory($size: 12px, $height: 150%);
+    @include util.typography-factory($size: 12px, $height: 150%, $weight: bold);
   }
 
   @include typography('ch1') {
@@ -197,6 +200,10 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
 
   @include typography('p4') {
     @include util.typography-factory($size: 12px, $height: 180%);
+  }
+
+  @include typography('p5') {
+    @include util.typography-factory($size: 10px, $height: 160%);
   }
 
   @include typography('s1') {

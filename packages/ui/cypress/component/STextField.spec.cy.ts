@@ -71,12 +71,49 @@ it('Events are emitted from input', () => {
   cy.contains('Focused: false')
 })
 
-it('Input changes its value even if modelValue is not set', () => {
-  mount({
-    template: `<STextField />`,
+describe('Modeling extensions', () => {
+  it('Input does not change its value when prop is not updated', () => {
+    mount({
+      template: `<STextField />`,
+    })
+
+    findInput().type('henno').should('have.value', '')
   })
 
-  findInput().type('henno').should('have.value', 'henno')
+  it('Input changes its value when prop is not updated BUT strict sync is disabled', () => {
+    mount({
+      template: `<STextField no-model-value-strict-sync />`,
+    })
+
+    findInput().type('henno').should('have.value', 'henno')
+  })
+
+  it('Input value does not change if upstream modelValue has not been changed', () => {
+    mount({
+      setup() {
+        const nums = ref('')
+
+        function updateNums(val: string) {
+          if (/^\d+$/.test(val)) {
+            nums.value = val
+          }
+        }
+
+        return { nums, updateNums }
+      },
+      template: `
+        <STextField
+          :model-value="nums"
+          @update:model-value="updateNums"
+        />
+
+        <span id="assert">{{ nums }}</span>
+      `,
+    })
+
+    findInput().type('123fff').should('have.value', '123')
+    cy.get('#assert').should('have.text', '123')
+  })
 })
 
 describe('Counter', () => {

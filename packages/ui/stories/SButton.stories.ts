@@ -3,17 +3,17 @@ import { SButton, BUTTON_TYPE_VALUES, BUTTON_SIZE_VALUES, BUTTON_ICON_POSITION_V
 import { IconClose } from '@/components/icons'
 
 export default defineMeta({
-  title: 'Example/Button'
+  title: 'Example/Button',
 })
 
-export const Configurable = defineStory((args) =>  ({
+export const Configurable = defineStory((args) => ({
   components: {
     SButton,
     IconClose,
   },
   setup() {
     return {
-      args
+      args,
     }
   },
   template: `
@@ -37,21 +37,21 @@ export const Configurable = defineStory((args) =>  ({
         {{ args.type }}
       </SButton>
     </div>
-  `
+  `,
 }))
 Configurable.argTypes = {
   type: {
     options: BUTTON_TYPE_VALUES,
-    control: 'inline-radio'
+    control: 'inline-radio',
   },
   size: {
     options: BUTTON_SIZE_VALUES,
-    control: 'inline-radio'
+    control: 'inline-radio',
   },
   icon: { control: 'text' },
   iconPosition: {
     options: BUTTON_ICON_POSITION_VALUES,
-    control: 'inline-radio'
+    control: 'inline-radio',
   },
   disabled: { control: 'boolean' },
   rounded: { control: 'boolean' },
@@ -60,7 +60,7 @@ Configurable.argTypes = {
 }
 Configurable.args = {
   type: 'primary',
-  size: 'medium',
+  size: 'md',
   icon: '',
   iconPosition: 'left',
   disabled: false,

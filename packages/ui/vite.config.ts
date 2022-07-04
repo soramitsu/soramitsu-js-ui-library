@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import Windi from 'vite-plugin-windicss'
 import Vue from '@vitejs/plugin-vue'
 import { RootNode, TemplateChildNode } from '@vue/compiler-core'
 import Icons from 'unplugin-icons/vite'
-import Svg from 'vite-svg-loader'
+import Svg from '@soramitsu-ui/vite-plugin-svg'
 import AutoImport from 'unplugin-auto-import/vite'
 import path from 'path'
 
@@ -16,7 +16,7 @@ const vueCompilerTransforms = {
     return (node: RootNode | TemplateChildNode) => {
       if (process.env.NODE_ENV === 'production') {
         if (node.type === 1 /* NodeTypes.ELEMENT */) {
-          for(let i = 0; i < node.props.length; i++){
+          for (let i = 0; i < node.props.length; i++) {
             const p = node.props[i]
 
             if (p && p.type === 6 /* NodeTypes.ATTRIBUTE */ && p.name === attr) {
@@ -27,10 +27,16 @@ const vueCompilerTransforms = {
         }
       }
     }
-  }
+  },
 }
 
 export default defineConfig({
+  test: {
+    include: ['src/**/*.spec.ts'],
+  },
+  define: {
+    'import.meta.vitest': 'undefined',
+  },
   resolve: {
     alias: {
       '@': resolve('src'),
@@ -41,18 +47,18 @@ export default defineConfig({
       // explicit path in case when cwd is not the `__dirname`
       config: resolve('windi.config.ts'),
     }),
-    Vue(({
+    Vue({
       template: {
         compilerOptions: {
-          nodeTransforms: [vueCompilerTransforms.removeAttribute('data-testid')]
-        }
-      }
-    })),
+          nodeTransforms: [vueCompilerTransforms.removeAttribute('data-testid')],
+        },
+      },
+    }),
     Icons(),
     Svg({
-      svgoConfig: {
-        plugins: [{ name: 'removeViewBox', active: false }]
-      }
+      svgo: {
+        plugins: [{ name: 'removeViewBox', active: false }],
+      },
     }),
     AutoImport({
       imports: ['vue', '@vueuse/core'],
@@ -67,10 +73,11 @@ export default defineConfig({
     minify: false,
     chunkSizeWarningLimit: 2_000,
     reportCompressedSize: false,
+    target: 'esnext',
     lib: {
       entry: resolve('src/lib.ts'),
       formats: ['es', 'cjs'],
-      fileName: (format) => `lib.${format}.js`,
+      fileName: (format) => `lib.${format === 'es' ? 'mjs' : 'cjs'}`,
     },
     rollupOptions: {
       output: { chunkFileNames: '[name].[format].js' },

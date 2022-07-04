@@ -17,8 +17,13 @@ import IconStatusWarning16 from '~icons/ri/alert-fill'
 import IconStatusSuccess16 from '@soramitsu-ui/icons/icomoon/status-success-clr-16.svg'
 import IconStatusError16 from '@soramitsu-ui/icons/icomoon/status-error-ic-16.svg'
 
-import IconBasicEye24 from '@soramitsu-ui/icons/icomoon/basic-eye-24.svg'
-import IconBasicEyeNo24 from '@soramitsu-ui/icons/icomoon/basic-eye-no-24.svg'
+// BROKEN
+// import IconBasicEye24 from '@soramitsu-ui/icons/icomoon/basic-eye-24.svg'
+// import IconBasicEyeNo24 from '@soramitsu-ui/icons/icomoon/basic-eye-no-24.svg'
+
+// TODO update design system too
+import IconEye from '~icons/majesticons/eye-line'
+import IconEyeOff from '~icons/majesticons/eye-off-line'
 
 import IconArrowsChevronDownRounded24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-down-rounded-24.svg'
 import IconArrowsChevronRight24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-right-24.svg'
@@ -26,6 +31,8 @@ import IconArrowsChevronLeft24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-
 import IconArrowsChevronBottom24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-bottom-24.svg'
 import IconBasicCheckMark24 from '@soramitsu-ui/icons/icomoon/basic-check-mark-24.svg'
 
+import IconChevronBottom16 from '@soramitsu-ui/icons/icomoon/chevron-bottom-16.svg'
+import IconBasicExternalLink24 from '@soramitsu-ui/icons/icomoon/basic-external-link-24.svg'
 
 export {
   IconClose,
@@ -36,13 +43,15 @@ export {
   IconStatusError16,
   IconStatusSuccess16,
   IconStatusWarning16,
-  IconBasicEye24,
-  IconBasicEyeNo24,
+  IconEye,
+  IconEyeOff,
   IconArrowsChevronDownRounded24,
   IconArrowsChevronRight24,
   IconArrowsChevronLeft24,
   IconBasicCheckMark24,
-  IconArrowsChevronBottom24
+  IconArrowsChevronBottom24,
+  IconChevronBottom16,
+  IconBasicExternalLink24,
 }
 
 export const STATUS_ICONS_MAP: { [K in Status]: Component } = {
@@ -56,7 +65,7 @@ export const STATUS_ICONS_MAP: { [K in Status]: Component } = {
  * TODO append info icon? For now it is used only in STextField that doesn't
  * need "info" entry here
  */
-export const STATUS_ICONS_MAP_16: { [K in Exclude<Status, Status.Info>]: Component } = {
+export const STATUS_ICONS_MAP_16: { [K in Exclude<Status, typeof Status.Info>]: Component } = {
   [Status.Warning]: IconStatusWarning16,
   [Status.Error]: IconStatusError16,
   [Status.Success]: IconStatusSuccess16,

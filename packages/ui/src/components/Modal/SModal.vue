@@ -1,21 +1,14 @@
-<script lang="ts">
-export default defineComponent({
-  name: 'SModal',
-})
-</script>
-
 <script setup lang="ts">
-import { Ref } from 'vue'
+import { Ref, StyleValue } from 'vue'
 import { normalizeTransitionAttrs, useCloseOnEsc, useModalVisibility } from './util'
 import { ModalApi, MODAL_API_KEY } from './api'
 import { useFocusTrap } from '@/composables/focus-trap'
 import { FocusTrap, Options as FocusTrapOptions } from 'focus-trap'
-import { BodyScrollOptions } from 'body-scroll-lock'
-import { useBodyScrollLock } from '@/composables/body-scroll-lock'
-import { nextIncrementalCounter } from '@/util'
+import { uniqueElementId } from '@/util'
+import { useBodyScrollLockIfPossible } from '../BodyScrollLockProvider'
 
 type ClassType = object | string | string[]
-type StyleType = object
+type StyleType = StyleValue
 
 interface Props {
   /**
@@ -54,13 +47,11 @@ interface Props {
   overlayTransition?: string | object
 
   /**
-   * You can pass some custom options here. Pass `false` to disable.
-   *
-   * note: it is not reactive
+   * Lock scroll if possible. You should provide a `BodyScrollLockApi` with `SBodyScrollLockProvider` component.
    *
    * @default true
    */
-  lockScroll?: boolean | BodyScrollOptions
+  lockScroll?: boolean
 
   /**
    * Set to `false` to not show overlay at all
@@ -118,7 +109,7 @@ const props = withDefaults(defineProps<Props>(), {
   eager: false,
   labelledBy:
     // here is a Vue typing error - primitive value factory is a valid default value
-    ((() => `s-modal-label-id-${nextIncrementalCounter()}`) as unknown) as string,
+    uniqueElementId as unknown as string,
   describedBy: null,
 })
 
@@ -211,10 +202,7 @@ if (props.focusTrap) {
 
 // BODY SCROLL LOCK
 
-if (props.lockScroll) {
-  const opts: BodyScrollOptions = props.lockScroll === true ? {} : props.lockScroll
-  useBodyScrollLock(modalRef, opts)
-}
+useBodyScrollLockIfPossible(computed(() => (props.lockScroll ? unref(modalRef) : null)))
 
 // API
 
@@ -260,6 +248,7 @@ useCloseOnEsc(
         v-bind="overlayTransitionAttrs"
         v-on="overlayTransitionListeners"
       >
+        <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
         <div
           v-if="overlayIf"
           :class="['s-modal__overlay', overlayClass]"

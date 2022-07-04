@@ -1,3 +1,5 @@
 node_modules
 dist
 dist-ts
+storybook-static
+/packages/ui/test/after-build/esm-tree-shaken-dist

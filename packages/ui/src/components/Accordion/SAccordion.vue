@@ -1,20 +1,16 @@
-<script lang="ts">
-export default { name: 'SAccordion' }
-</script>
-
 <script setup lang="ts">
 import { AccordionItemApi, AccordionApi, ACCORDION_API_KEY } from './api'
 import { provide, Ref, watch } from 'vue'
 
 const props = withDefaults(
-    defineProps<{
-      modelValue?: string[],
-      multiple?: boolean
-    }>(),
-    {
-      modelValue: () => [],
-      multiple: false
-    },
+  defineProps<{
+    modelValue?: string[]
+    multiple?: boolean
+  }>(),
+  {
+    modelValue: () => [],
+    multiple: false,
+  },
 )
 
 const emit = defineEmits<(event: 'update:modelValue', value: string[]) => void>()
@@ -25,11 +21,15 @@ const itemsToOpen = computed(() => {
   return props.multiple || !model.value.length ? model.value : [model.value[0]]
 })
 
-watch(itemsToOpen, () => {
-  items.forEach(item => {
-    updateItemState(item.value)
-  })
-}, { immediate: true })
+watch(
+  itemsToOpen,
+  () => {
+    items.forEach((item) => {
+      updateItemState(item.value)
+    })
+  },
+  { immediate: true },
+)
 
 function updateItemState(item: AccordionItemApi) {
   if (!item.name) return
@@ -40,7 +40,7 @@ function updateItemState(item: AccordionItemApi) {
 
 function handleSelection(item: AccordionItemApi) {
   if (!props.multiple && item.isActive) {
-    items.forEach(x => {
+    items.forEach((x) => {
       if (x.value !== item) x.value.toggle(false)
     })
   }
@@ -58,7 +58,7 @@ const api: AccordionApi = {
     if (itemIndex === -1) return
 
     items.splice(itemIndex, 1)
-  }
+  },
 }
 
 provide(ACCORDION_API_KEY, api)
