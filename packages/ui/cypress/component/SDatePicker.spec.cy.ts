@@ -70,7 +70,7 @@ describe('SDatePicker', () => {
         <p data-cy="result">{{date}}</p>
       `,
       setup() {
-        const date = ref(new Date())
+        const date = ref([])
         return {
           date,
         }
@@ -79,41 +79,52 @@ describe('SDatePicker', () => {
     picker().children('.options-panel').should('not.exist')
   })
 
-  //   it('Input panel works correctly', () => {
-  //     mount({
-  //       template: `
-  //         <SDatePicker v-model="date" :type="'day'" data-cy="pk"/>
-  //         <p data-cy="result">{{date}}</p>
-  //       `,
-  //       setup() {
-  //         const date = ref(new Date())
-  //         return {
-  //           date,
-  //         }
-  //       },
-  //     })
-  //     getEl('pk').children().click()
-  //     .then(() => {
-  //     picker().get('.options-panel__item').last()
-  //       .click()
-  //       .then(() => {
-  //         picker().children('.custom-panel').get('input').type('01012000')
-  //         .then(() => {
-  //           getEl('result').should('have.text', '111')
-  //         })
-  //       })
-  //     })
 
-  // })
+  describe('Panels tests', () => { 
 
-  it('Click on month cause display Month Table', () => {
+  it('Input panel works correctly', () => {
     mount({
       template: `
-      <SDatePicker v-model="date" :type="'pick'" data-cy="picker"/>
+          <SDatePicker v-model="date" :type="'day'" data-cy="pk"/>
+          <p data-cy="result">{{date.getTime()}}</p>
+        `,
+      setup() {
+        const date = ref(new Date())
+        return {
+          date,
+        }
+      },
+    })
+    getEl('pk')
+      .children()
+      .click()
+      .then(() => {
+        picker()
+          .get('.options-panel__item')
+          .last()
+          .click()
+          .then(() => {
+            picker()
+              .get('.custom-panel__input')
+              .focus()
+              .clear()
+              .type('01012000')
+              .blur()              
+          })
+          .then(() => {
+            getEl('result').should('have.text', '946666800000')
+          })
+      })
+  })
+
+  it('Month panel works as expected', () => {
+    mount({
+      template: `
+      <SDatePicker v-model="date" :type="'day'" data-cy="picker"/>
       <p data-cy="result">{{date}}</p>
     `,
       setup() {
-        const date = ref(new Date())
+        const date = ref(new Date('01.01.2000'))
         return {
           date,
         }
@@ -129,8 +140,73 @@ describe('SDatePicker', () => {
           .first()
           .click()
           .then(() => {
-            picker().get('.month-table').should('exist')
+            cy.get('.year-range-panel > button').first().click()
+            cy.get('.month-table > div:contains("May")').click()
+          })
+          .then(() => {
+            picker().get('.header__label').should('contain', '1999')
+            picker().get('.header__label').should('contain', 'May')
           })
       })
   })
+
+  it('Year panel works correctly', () => {
+    mount({
+      template: `
+      <SDatePicker v-model="date" :type="'day'" data-cy="picker"/>
+      <p data-cy="result">{{date}}</p>
+    `,
+      setup() {
+        const t = new Date('01.01.2000')
+        const date = ref(t)
+        console.log(date)
+        return {
+          date,
+        }
+      },
+    })
+
+    getEl('picker')
+      .children()
+      .click()
+      .then(() => {
+        picker()
+          .get('.header__label')
+          .last()
+          .click()
+          .then(() => {
+            cy.get('.year-table > .available:contains("2004")').click()
+          })
+          .then(() => {
+            picker().get('.header__label').should('contain', '2004')
+          })
+      })
+  })
+
+  it('Time panel works correctly', () => {
+    mount({
+      template: `
+      <SDatePicker v-model="date" :type="'day'" data-cy="picker" :time="true"/>
+      <p data-cy="result">{{date}}</p>
+    `,
+      setup() {
+        const t = new Date('01.01.2000')
+        const date = ref(t)
+        return {
+          date,
+        }
+      },
+    })
+
+    getEl('picker')
+      .children()
+      .click()
+      .then(() => {
+            cy.get('.time-table > p:contains("02:00")').click()          
+          .then(() => {
+            getEl('result').should('contain', '02:00')
+          })
+      })
+  })
+})
 })

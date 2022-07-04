@@ -11,14 +11,15 @@ export const Configurable = defineStory((args) =>  ({
     SDatePicker,
   },
   setup() {
-    let date = ref<Date|null>(null)
+    let date = ref<Date|null>(new Date('01.01.2000'))
+    // let date = ref<Date|null>(null)
     return {
       args, date
     }
   },
   template: `
     <div class="flex flex-col items-start">
-      <SDatePicker v-model="date" :type="args.type" :time="args.time" />
+      <SDatePicker v-model="date" :type="args.type" :time="args.time" :disabled="args.disabled"/>
     </div>
     <div class="flex items-center justify-start">
       <p>@v-model = </p>
@@ -37,5 +38,6 @@ Configurable.argTypes = {
 }
 Configurable.args = {
   type: 'day',
-  time: true
+  time: true,
+  disabled: false
 }

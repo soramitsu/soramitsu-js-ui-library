@@ -33,10 +33,12 @@ interface Props {
   modelValue: Date[] | Date
   type: DatePickerType
   time: boolean
+  disabled: boolean
 }
 const props = withDefaults(defineProps<Props>(), {
   type: 'day',
   time: false,
+  disabled: false
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -44,6 +46,8 @@ const emit = defineEmits(['update:modelValue'])
 const isRange = computed(() => {
   return props.type === 'range'
 })
+
+
 
 // #region STATE_STORE
 
@@ -66,8 +70,19 @@ const stateStore = computed<StateStore>(() => {
   }
 })
 
+const init = () => {
+  if (props.type === 'day') {
+    dayState.value = props.modelValue as DateState
+  } else if (props.type === 'pick') {
+    pickState.value = props.modelValue as PickState
+  } else {
+    rangeState.value.startDate = (props.modelValue as Date[])[0]
+    rangeState.value.endDate = (props.modelValue as Date[])[1]
+  }
+  updateShowedMonths()
+}
+
 const updateModelValue = () => {
-  console.log('updateModelValue')
   if (props.type === 'day') {
     emit('update:modelValue', dayState.value)
   } else if (props.type === 'pick') {
@@ -94,7 +109,7 @@ const onDatePick = (data: RangeOptionValue | Date | Date[]) => {
   menuState.value = 'Custom'
 }
 
-updateModelValue()
+
 
 // #endregion
 
@@ -395,15 +410,25 @@ const fromFormat = (dateString: string) => {
 }
 
 // #endregion
+
+if (props.modelValue || (props.modelValue as Date[])?.length > 0 )
+  init(); 
+else 
+updateModelValue();
+
 </script>
 
 <template>
   <div class="picker-component">
     <Popper
+      :disabled="disabled"
       @open:popper="switchArrow('reverse')"
       @close:popper="switchArrow('')"
     >
-      <div class="head-title p-2 sora-tpg-ch2 relative pr-6 cursor-pointer">
+      <div
+        class="head-title p-2 sora-tpg-ch2 relative pr-6 "
+        :class="disabled ? 'cursor-default':'cursor-pointer'"
+      >
         {{ headTitle || 'Date' }}
         <div
           class="head-title__arrow"

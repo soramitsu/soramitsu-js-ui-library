@@ -29,7 +29,7 @@ const updateTime = (e: any) => {
 </script>
 
 <template>
-  <div class="time-panel sora-tpg-p4">
+  <div class="time-table sora-tpg-p4">
     <p
       v-for="(time, idx) in timeArray"
       :key="idx"
@@ -44,7 +44,7 @@ const updateTime = (e: any) => {
 
 <style lang="scss" scoped>
 @use '@/theme';
-.time-panel {
+.time-table {
   @apply flex flex-col items-center justify-start;
   overflow-y: scroll;
   height: 100%;
