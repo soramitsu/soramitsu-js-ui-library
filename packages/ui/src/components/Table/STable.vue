@@ -583,7 +583,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
               class="s-table__tr"
               :class="[
                 getStyleOrClass(rowClassName, { row, rowIndex }),
-                { 's-table__tr_current': highlightCurrentRow && isCurrentRow(row) }
+                { 's-table__tr_current': highlightCurrentRow && isCurrentRow(row) },
               ]"
               :style="getStyleOrClass(rowStyle, { row, rowIndex })"
               data-testid="table-row"

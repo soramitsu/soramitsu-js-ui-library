@@ -1,6 +1,5 @@
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { useTableApi } from '@/components'
-import { PropType } from '@vue/runtime-core'
 import { nextIncrementalCounter } from '@/util'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from '@/components/Table/consts'

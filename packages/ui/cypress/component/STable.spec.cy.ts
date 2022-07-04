@@ -1,7 +1,6 @@
 import { mount } from '@cypress/vue'
 import { STable, STableColumn } from '@/lib'
 import { config } from '@vue/test-utils'
-import {template} from "lodash";
 
 const testIdSelector = (id: string) => `[data-testid=${id}]`
 
@@ -26,11 +25,21 @@ describe('Table', () => {
   const COMMON_KEY = '21'
 
   const ROW_1 = { [PROP_NAME_1]: COMMON_KEY, [PROP_NAME_2]: 'a12', [PROP_NAME_3]: 1424631694418, [PROP_NAME_4]: 'c12' }
-  const ROW_2 = { [PROP_NAME_1]: HIGHLIGHTED_KEY, [PROP_NAME_2]: 'a421', [PROP_NAME_3]: 1224382694418, [PROP_NAME_4]: 'c21' }
+  const ROW_2 = {
+    [PROP_NAME_1]: HIGHLIGHTED_KEY,
+    [PROP_NAME_2]: 'a421',
+    [PROP_NAME_3]: 1224382694418,
+    [PROP_NAME_4]: 'c21',
+  }
   const ROW_3 = { [PROP_NAME_1]: '31', [PROP_NAME_2]: 'a2', [PROP_NAME_3]: 1524682614418, [PROP_NAME_4]: 'c2' }
   const ROW_4 = { [PROP_NAME_1]: '13', [PROP_NAME_2]: 'a32', [PROP_NAME_3]: 1654642633318, [PROP_NAME_4]: 'c32' }
 
-  const ALT_ROW_1 = { [PROP_NAME_1]: COMMON_KEY, [PROP_NAME_2]: 'b12', [PROP_NAME_3]: 1424331994418, [PROP_NAME_4]: 'g12' }
+  const ALT_ROW_1 = {
+    [PROP_NAME_1]: COMMON_KEY,
+    [PROP_NAME_2]: 'b12',
+    [PROP_NAME_3]: 1424331994418,
+    [PROP_NAME_4]: 'g12',
+  }
   const ALT_ROW_2 = { [PROP_NAME_1]: 'q12', [PROP_NAME_2]: 'b421', [PROP_NAME_3]: 1223389694418, [PROP_NAME_4]: 'g21' }
   const ALT_ROW_3 = { [PROP_NAME_1]: 'q31', [PROP_NAME_2]: 'b2', [PROP_NAME_3]: 1524632694418, [PROP_NAME_4]: 'g2' }
   const ALT_ROW_4 = { [PROP_NAME_1]: 'q13', [PROP_NAME_2]: 'b32', [PROP_NAME_3]: 1654342933318, [PROP_NAME_4]: 'g32' }
@@ -83,16 +92,26 @@ describe('Table', () => {
     })
 
     context('When expand cell clicked', () => {
-      it('Then it\'s expanded block hidden', () => {
-        cy.get(testIdSelector('table-row')).first().get(testIdSelector('table-expanded-icon')).eq(0).closest('td').click()
-        cy.get(testIdSelector('table-row')).first().next().should('not.have.attr', 'data-testid', template('table-expanded-block'))
+      it("Then it's expanded block hidden", () => {
+        cy.get(testIdSelector('table-row'))
+          .first()
+          .get(testIdSelector('table-expanded-icon'))
+          .eq(0)
+          .closest('td')
+          .click()
+        cy.get(testIdSelector('table-row'))
+          .first()
+          .next()
+          .should('not.have.attr', 'data-testid','table-expanded-block')
       })
     })
 
     context('When header selection checkbox clicked', () => {
       it('Then all selection checkboxes are selected', () => {
         cy.get(testIdSelector('table-header-selection-checkbox')).click()
-        cy.get(testIdSelector('table-selection-checkbox')).filter('[data-checked="true"]').should('have.length', DATA.length)
+        cy.get(testIdSelector('table-selection-checkbox'))
+          .filter('[data-checked="true"]')
+          .should('have.length', DATA.length)
       })
     })
 
@@ -150,7 +169,8 @@ describe('Table', () => {
 
     context('When it is initiated', () => {
       it('Then row with according prop is highlighted', () => {
-        cy.get(testIdSelector('table-row')).filter('.s-table__tr_current')
+        cy.get(testIdSelector('table-row'))
+          .filter('.s-table__tr_current')
           .should('have.length', 1)
           .should('have.text', HIGHLIGHTED_KEY)
       })
@@ -159,7 +179,9 @@ describe('Table', () => {
     context('When other row clicked', () => {
       it('Then it selected as current row', () => {
         cy.get(testIdSelector('table-row')).eq(ROW_INDEX_TO_SELECT_AS_NEW_CURRENT).click()
-        cy.get(testIdSelector('table-row')).eq(ROW_INDEX_TO_SELECT_AS_NEW_CURRENT).should('have.class', 's-table__tr_current')
+        cy.get(testIdSelector('table-row'))
+          .eq(ROW_INDEX_TO_SELECT_AS_NEW_CURRENT)
+          .should('have.class', 's-table__tr_current')
       })
     })
   })
@@ -174,8 +196,8 @@ describe('Table', () => {
             data,
             altData,
             switchData: () => {
-              [data.value, altData.value] = [altData.value, data.value]
-            }
+              ;[data.value, altData.value] = [altData.value, data.value]
+            },
           }
         },
         template: `
@@ -195,10 +217,14 @@ describe('Table', () => {
         cy.get(testIdSelector('table-header-selection-checkbox')).click()
         cy.get('#change-data').click()
 
-        cy.get(testIdSelector('table-selection-checkbox')).filter('[data-checked="true"]').closest('tr')
-          .each(el => cy.wrap(el).should('have.text', COMMON_KEY))
-        cy.get(testIdSelector('table-selection-checkbox')).filter('[data-checked="false"]').closest('tr')
-          .each(el => cy.wrap(el).should('not.have.text', COMMON_KEY))
+        cy.get(testIdSelector('table-selection-checkbox'))
+          .filter('[data-checked="true"]')
+          .closest('tr')
+          .each((el) => cy.wrap(el).should('have.text', COMMON_KEY))
+        cy.get(testIdSelector('table-selection-checkbox'))
+          .filter('[data-checked="false"]')
+          .closest('tr')
+          .each((el) => cy.wrap(el).should('not.have.text', COMMON_KEY))
       })
     })
   })
@@ -266,13 +292,14 @@ describe('Table', () => {
       })
 
       it('Then fist column cell have classes from className prop', () => {
-        cy.get(testIdSelector('table-row')).each(el => {
+        cy.get(testIdSelector('table-row')).each((el) => {
           cy.wrap(el).find(testIdSelector('table-cell')).first().should('have.class', COLUMN_CELL_CLASS_NAME)
         })
       })
 
       it('Then fist column header cell have styles from className and labelClassName prop', () => {
-        cy.get(testIdSelector('table-header-cell')).first()
+        cy.get(testIdSelector('table-header-cell'))
+          .first()
           .should('have.class', COLUMN_HEADER_CELL_CLASS_NAME)
           .should('have.class', COLUMN_CELL_CLASS_NAME)
       })
@@ -282,9 +309,6 @@ describe('Table', () => {
   context(`Given table with no data`, () => {
     beforeEach(() => {
       mount({
-        setup() {
-          return { }
-        },
         template: `
           <STable
             :data="[]"
@@ -309,9 +333,6 @@ describe('Table', () => {
   context(`Given table with empty slot and no data`, () => {
     beforeEach(() => {
       mount({
-        setup() {
-          return { }
-        },
         template: `
           <STable :data="[]">
             <template #empty>${NO_DATA_TEXT}</template>
