@@ -534,14 +534,15 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
             >
               <div class="s-table__cell inline-flex items-center px-16px">
-                <component
-                  :is="column.headerSlot"
-                  v-if="column.headerSlot"
-                  v-bind="{ column, columnIndex }"
-                />
-
-                <template v-else-if="isDefaultColumn(column)">
-                  {{ column.label }}
+                <template v-if="isDefaultColumn(column)">
+                  <component
+                    :is="column.headerSlot"
+                    v-if="column.headerSlot"
+                    v-bind="{ column, columnIndex }"
+                  />
+                  <template v-else>
+                    {{ column.label }}
+                  </template>
                   <IconArrowTop16
                     v-if="column.sortable"
                     class="s-table__sort-icon inline ml-10px"
