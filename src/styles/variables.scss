@@ -39,7 +39,9 @@ $s-shadow-color-dark-light: rgba(0, 0, 0, 0.02) !default;
 $s-shadow-color-light: rgba(255, 255, 255, 1) !default;
 $s-shadow-color-light-dark: rgba(255, 255, 255, 0.8) !default;
 $s-shadow-element: 1px 1px 5px var(--s-shadow-color-light), inset -5px -5px 5px rgba(255, 255, 255, 0.5), inset 1px 1px 10px var(--s-shadow-color-dark) !default;
+$s-shadow-element-flipped: 1px -1px 5px var(--s-shadow-color-light), inset -5px 5px 5px rgba(255, 255, 255, 0.5), inset 1px -1px 10px var(--s-shadow-color-dark) !default;
 $s-shadow-element-pressed: -5px -5px 10px var(--s-shadow-color-light), 1px 1px 10px var(--s-shadow-color-dark), inset 1px 1px 2px var(--s-shadow-color-light-dark) !default;
+$s-shadow-element-pressed-flipped: -5px 5px 10px var(--s-shadow-color-light), 1px -1px 10px var(--s-shadow-color-dark), inset 1px -1px 2px var(--s-shadow-color-light-dark) !default;
 $s-shadow-dialog: -10px -10px 30px rgba(255, 255, 255, 0.9), 20px 20px 60px var(--s-shadow-color-dark), inset 1px 1px 10px var(--s-shadow-color-light) !default;
 
 // TODO: use it and discuss colors of these shadows

@@ -68,7 +68,9 @@
   --s-shadow-color-primary--dark: #{$s-shadow-color-primary--dark};
   --s-shadow-color-secondary--dark: #{$s-shadow-color-secondary--dark};
   --s-shadow-element--dark: #{$s-shadow-element--dark};
+  --s-shadow-element-flipped--dark: #{$s-shadow-element-flipped--dark};
   --s-shadow-element-pressed--dark: #{$s-shadow-element-pressed--dark};
+  --s-shadow-element-pressed-flipped--dark: #{$s-shadow-element-pressed-flipped--dark};
   --s-shadow-dialog--dark: #{$s-shadow-dialog--dark};
   // Fonts
   --s-font-family-default: #{$s-font-family-default};
@@ -139,7 +141,9 @@
   --s-shadow-color-light: #{$s-shadow-color-light};
   --s-shadow-color-light-dark: #{$s-shadow-color-light-dark};
   --s-shadow-element: #{$s-shadow-element};
+  --s-shadow-element-flipped: #{$s-shadow-element-flipped};
   --s-shadow-element-pressed: #{$s-shadow-element-pressed};
+  --s-shadow-element-pressed-flipped: #{$s-shadow-element-pressed-flipped};
   --s-shadow-dialog: #{$s-shadow-dialog};
   --s-shadow-surface: #{$s-shadow-surface};
   --s-shadow-tooltip: #{$s-shadow-tooltip};
@@ -187,6 +191,8 @@
   --s-shadow-color-light-darken: var(--s-shadow-color-light-darken--dark);
   --s-shadow-color-light-dark: var(--s-shadow-color-light-dark--dark);
   --s-shadow-element: var(--s-shadow-element--dark);
+  --s-shadow-element-flipped: var(--s-shadow-element-flipped--dark);
   --s-shadow-element-pressed: var(--s-shadow-element-pressed--dark);
+  --s-shadow-element-pressed-flipped: var(--s-shadow-element-pressed-flipped--dark);
   --s-shadow-dialog: var(--s-shadow-dialog--dark);
 }
