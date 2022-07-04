@@ -98,7 +98,7 @@ export function useColumnSort(data: Ref<TableRow[]>) {
   }
 
   function applyCurrentSort() {
-    if (!sortState.column) {
+    if (!sortState.column || sortState.column.sortable === 'custom') {
       sortedData.value = data.value
 
       return
