@@ -15,7 +15,8 @@ import { options } from './consts'
 import { IconBasicCheckMark24, IconArrowsChevronBottom24 } from '@/components/icons'
 import { maska as vMaska } from 'maska'
 import { DateTime } from 'luxon'
-import Popper from 'vue3-popper'
+import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
+import { and } from '@vueuse/core'
 
 import {
   DatePickerType,
@@ -38,7 +39,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   type: 'day',
   time: false,
-  disabled: false
+  disabled: false,
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -46,8 +47,6 @@ const emit = defineEmits(['update:modelValue'])
 const isRange = computed(() => {
   return props.type === 'range'
 })
-
-
 
 // #region STATE_STORE
 
@@ -108,8 +107,6 @@ const onDatePick = (data: RangeOptionValue | Date | Date[]) => {
   updateModelValue()
   menuState.value = 'Custom'
 }
-
-
 
 // #endregion
 
@@ -232,10 +229,9 @@ const headTitle = computed(() => {
   }
 })
 
-const arrowState = ref<string>('')
-const switchArrow = (newArrowState: string) => {
-  arrowState.value = newArrowState
-}
+const arrowState = computed(() => {
+  return showPopper.value ? 'reverse' : ''
+})
 
 // #endregion
 
@@ -255,7 +251,7 @@ const updateTime = (time: string) => {
     case 'pick':
       date = pickState.value[dateForTime.value as keyof PickState] as Date | null
       if (!date) return
-      (pickState as any).value[dateForTime.value as keyof PickState] = new Date(
+      ;(pickState as any).value[dateForTime.value as keyof PickState] = new Date(
         date.getFullYear(),
         date.getMonth(),
         date.getDate(),
@@ -271,7 +267,7 @@ const updateTime = (time: string) => {
     case 'range':
       date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
       if (!date) return
-      (rangeState as any).value[dateForTime.value as keyof RangeState] = new Date(
+      ;(rangeState as any).value[dateForTime.value as keyof RangeState] = new Date(
         date.getFullYear(),
         date.getMonth(),
         date.getDate(),
@@ -315,7 +311,7 @@ const timeDecoder = (num: number) => {
 
 // #region CALENDARS_PANEL
 const firstCalendarModelValue = computed(() => {
-  if (!props.modelValue) return new Date();
+  if (!props.modelValue) return new Date()
   if (props.type === 'range') {
     const modelValue = props.modelValue as Date[]
     return modelValue[0]
@@ -324,8 +320,8 @@ const firstCalendarModelValue = computed(() => {
   }
 })
 
-const calendarToModelValue = computed(() => {  
-  if (!props.modelValue) return new Date();
+const calendarToModelValue = computed(() => {
+  if (!props.modelValue) return new Date()
   return props.modelValue as Date[][1]
 })
 
@@ -358,16 +354,15 @@ const updateCustomInputPick = (event: any) => {
   const newVal = event.target.value
   const date = fromFormat(newVal)
   if (date) {
-    if (pickState.value.length > 0)
-      pickState.value[pickState.value.length - 1] = date;
-      else pickState.value.push(date)
-    }
+    if (pickState.value.length > 0) pickState.value[pickState.value.length - 1] = date
+    else pickState.value.push(date)
+  }
   updateModelValue()
   updateShowedMonths()
 }
 
 const customInputValuePick = computed(() => {
- return formatDate(pickState.value[pickState.value.length - 1])      
+  return formatDate(pickState.value[pickState.value.length - 1])
 })
 
 const customInputValueStartDate = computed(() => {
@@ -411,166 +406,182 @@ const fromFormat = (dateString: string) => {
 
 // #endregion
 
-if (props.modelValue || (props.modelValue as Date[])?.length > 0 )
-  init(); 
-else 
-updateModelValue();
+// #region POPPER
+const [showPopper, togglePopper] = useToggle(false)
+whenever(and(props.disabled, showPopper), () => togglePopper(false), { immediate: true })
 
+const updateShow = () => {
+  if (!props.disabled) togglePopper(true)
+}
+// #endregion
+
+if (props.modelValue || (props.modelValue as Date[])?.length > 0) init()
+else updateModelValue()
 </script>
 
 <template>
   <div class="picker-component">
-    <Popper
-      :disabled="disabled"
-      @open:popper="switchArrow('reverse')"
-      @close:popper="switchArrow('')"
+    <SPopover
+      v-model:show="showPopper"
+      placement="bottom-start"
+      trigger="manual"
+      distance="4"
+      @click-outside="togglePopper(false)"
     >
-      <div
-        class="head-title p-2 sora-tpg-ch2 relative pr-6 "
-        :class="disabled ? 'cursor-default':'cursor-pointer'"
-      >
-        {{ headTitle || 'Date' }}
+      <template #trigger>
         <div
-          class="head-title__arrow"
-          :class="arrowState"
+          class="head-title p-2 sora-tpg-ch2 relative pr-6"
+          :class="disabled ? 'cursor-default' : 'cursor-pointer'"
+          @click="updateShow"
         >
-          <IconArrowsChevronBottom24 />
-        </div>
-      </div>
-      <template #content="{ close }">
-        <div
-          class="date-picker sora-tpg-p4"
-          data-testid="date-picker"
-          :class="[`${gridType}`, { narrow: showStateView }]"
-        >
+          {{ headTitle || 'Date' }}
           <div
-            v-if="props.type!='pick'"
-            class="options-panel sora-tpg-p3"
+            class="head-title__arrow"
+            :class="arrowState"
           >
-            <p
-              v-for="(item, idx) in OPTIONS"
-              :key="idx"
-              class="options-panel__item"
-              :class="menuState === item.label ? 'active' : ''"
-              @click="onMenuClick(item.value, item.label)"
-            >
-              {{ item.label }}
-              <span
-                v-show="menuState === item.label"
-                class="options-panel__checkmark"
-              ><IconBasicCheckMark24 /></span>
-            </p>
-          </div>
-          <div class="calendars-panel">
-            <div>
-              <DatePanel
-                v-show="currentView === 'dates'"
-                :show-state="showState"
-                :value="firstCalendarModelValue"
-                :time="props.time"
-                :selection-mode="type"
-                :state-store="stateStore"
-                @change-view="changeView"
-                @update-showed-state="updateShowedState"
-                @pick="onDatePick"
-              />
-            </div>
-            <div
-              v-if="isRange"
-              class="ml-4"
-            >
-              <DatePanel
-                v-show="currentView === 'dates'"
-                :show-state="nextMonthShowState"
-                :value="calendarToModelValue"
-                :time="props.time"
-                :selection-mode="type"
-                :state-store="stateStore"
-                :hide-arrows="true"
-                @change-view="changeView"
-                @update-showed-state="updateShowedState"
-                @pick="onDatePick"
-              />
-            </div>
-            <div
-              v-if="currentView === 'months'"
-              class="h-full w-full flex items-start justify-center"
-            >
-              <MonthTable
-                :show-state="showState"
-                @pick="updateShowedMonth"
-                @update-showed-year="updateShowedYear"
-              />
-            </div>
-            <div v-if="currentView === 'years'">
-              <YearTable
-                :value="showState.year"
-                @pick="updateShowedYear"
-              />
-            </div>
-          </div>
-          <div
-            v-if="time && !showStateView"
-            class="time-panel"
-          >
-            <TimePanel
-              :value="currentValueTime"
-              @update-time="updateTime"
-            />
-          </div>
-          <div
-            v-if="menuState === 'Custom' && !showStateView"
-            class="custom-panel"
-          >
-            <div class="flex justify-center items-center">
-              <template v-if="props.type === 'range'">
-                <input
-                  v-maska="customInputConfig.mask"
-                  class="custom-panel__input"
-                  :class="customInputConfig.class"
-                  :value="customInputValueStartDate"
-                  @change="updateCustomInput($event, 'startDate')"
-                >
-                <div class="mx-2">
-                  -
-                </div>
-                <input
-                  v-maska="customInputConfig.mask"
-                  class="custom-panel__input"
-                  :class="customInputConfig.class"
-                  :value="customInputValueEndDate"
-                  @change="updateCustomInput($event, 'endDate')"
-                >
-              </template>
-              <template v-if="props.type === 'day'">
-                <input
-                  v-maska="customInputConfig.mask"
-                  class="custom-panel__input"
-                  :class="customInputConfig.class"
-                  :value="customInputValueDay"
-                  @change="updateCustomInputDay($event)"
-                >
-              </template>
-              <template v-if="props.type === 'pick' && pickState.length > 0">
-                <input
-                  v-maska="customInputConfig.mask"
-                  class="custom-panel__input"
-                  :class="customInputConfig.class"
-                  :value="customInputValuePick"
-                  @change="updateCustomInputPick($event)"
-                >
-              </template>
-              <button
-                class="save-button"
-                @click="close"
-              >
-                Done
-              </button>
-            </div>
+            <IconArrowsChevronBottom24 />
           </div>
         </div>
       </template>
-    </Popper>
+      <template #popper>
+        <SPopoverWrappedTransition
+          name="s-select-dropdown-transition"
+          eager
+        >
+          <div
+            class="date-picker sora-tpg-p4"
+            data-testid="date-picker"
+            :class="[`${gridType}`, { narrow: showStateView }]"
+          >
+            <div
+              v-if="props.type != 'pick'"
+              class="options-panel sora-tpg-p3"
+            >
+              <p
+                v-for="(item, idx) in OPTIONS"
+                :key="idx"
+                class="options-panel__item"
+                :class="menuState === item.label ? 'active' : ''"
+                @click="onMenuClick(item.value, item.label)"
+              >
+                {{ item.label }}
+                <span
+                  v-show="menuState === item.label"
+                  class="options-panel__checkmark"
+                ><IconBasicCheckMark24 /></span>
+              </p>
+            </div>
+            <div class="calendars-panel">
+              <div>
+                <DatePanel
+                  v-show="currentView === 'dates'"
+                  :show-state="showState"
+                  :value="firstCalendarModelValue"
+                  :time="props.time"
+                  :selection-mode="type"
+                  :state-store="stateStore"
+                  @change-view="changeView"
+                  @update-showed-state="updateShowedState"
+                  @pick="onDatePick"
+                />
+              </div>
+              <div
+                v-if="isRange"
+                class="ml-4"
+              >
+                <DatePanel
+                  v-show="currentView === 'dates'"
+                  :show-state="nextMonthShowState"
+                  :value="calendarToModelValue"
+                  :time="props.time"
+                  :selection-mode="type"
+                  :state-store="stateStore"
+                  :hide-arrows="true"
+                  @change-view="changeView"
+                  @update-showed-state="updateShowedState"
+                  @pick="onDatePick"
+                />
+              </div>
+              <div
+                v-if="currentView === 'months'"
+                class="h-full w-full flex items-start justify-center"
+              >
+                <MonthTable
+                  :show-state="showState"
+                  @pick="updateShowedMonth"
+                  @update-showed-year="updateShowedYear"
+                />
+              </div>
+              <div v-if="currentView === 'years'">
+                <YearTable
+                  :value="showState.year"
+                  @pick="updateShowedYear"
+                />
+              </div>
+            </div>
+            <div
+              v-if="time && !showStateView"
+              class="time-panel"
+            >
+              <TimePanel
+                :value="currentValueTime"
+                @update-time="updateTime"
+              />
+            </div>
+            <div
+              v-if="menuState === 'Custom' && !showStateView"
+              class="custom-panel"
+            >
+              <div class="flex justify-center items-center">
+                <template v-if="props.type === 'range'">
+                  <input
+                    v-maska="customInputConfig.mask"
+                    class="custom-panel__input"
+                    :class="customInputConfig.class"
+                    :value="customInputValueStartDate"
+                    @change="updateCustomInput($event, 'startDate')"
+                  >
+                  <div class="mx-2">
+                    -
+                  </div>
+                  <input
+                    v-maska="customInputConfig.mask"
+                    class="custom-panel__input"
+                    :class="customInputConfig.class"
+                    :value="customInputValueEndDate"
+                    @change="updateCustomInput($event, 'endDate')"
+                  >
+                </template>
+                <template v-if="props.type === 'day'">
+                  <input
+                    v-maska="customInputConfig.mask"
+                    class="custom-panel__input"
+                    :class="customInputConfig.class"
+                    :value="customInputValueDay"
+                    @change="updateCustomInputDay($event)"
+                  >
+                </template>
+                <template v-if="props.type === 'pick' && pickState.length > 0">
+                  <input
+                    v-maska="customInputConfig.mask"
+                    class="custom-panel__input"
+                    :class="customInputConfig.class"
+                    :value="customInputValuePick"
+                    @change="updateCustomInputPick($event)"
+                  >
+                </template>
+                <button
+                  class="save-button"
+                  @click="togglePopper(false)"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+          </div>
+        </SPopoverWrappedTransition>
+      </template>
+    </SPopover>
   </div>
 </template>
 

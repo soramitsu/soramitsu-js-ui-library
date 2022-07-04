@@ -3,18 +3,18 @@ import { SDatePicker } from '@/lib'
 import { ref } from 'vue'
 
 export default defineMeta({
-  title: 'Example/DatePicker'
+  title: 'Example/DatePicker',
 })
 
-export const Configurable = defineStory((args) =>  ({
+export const Configurable = defineStory((args) => ({
   components: {
     SDatePicker,
   },
   setup() {
-    let date = ref<Date|null>(new Date('01.01.2000'))
-    // let date = ref<Date|null>(null)
+    let date = ref<Date | null>(null)
     return {
-      args, date
+      args,
+      date,
     }
   },
   template: `
@@ -25,7 +25,7 @@ export const Configurable = defineStory((args) =>  ({
       <p>@v-model = </p>
       <p>{{date}}</p>
     </div>
-  `
+  `,
 }))
 Configurable.argTypes = {
   type: {
@@ -33,11 +33,11 @@ Configurable.argTypes = {
     control: 'select',
   },
   time: {
-    control: 'boolean'
+    control: 'boolean',
   },
 }
 Configurable.args = {
   type: 'day',
   time: true,
-  disabled: false
+  disabled: false,
 }
