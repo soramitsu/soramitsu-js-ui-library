@@ -6,7 +6,7 @@ import {
   ColumnSortBy,
   ColumnSortOrder,
   TableColumnAlign,
-} from '@/components/Table/types'
+} from './types'
 
 export interface ColumnWidthProps {
   width: null | number

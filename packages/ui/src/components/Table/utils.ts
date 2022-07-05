@@ -1,4 +1,4 @@
-import { ActionColumnApi, ColumnApi } from '@/components'
+import { ActionColumnApi, ColumnApi } from './api'
 
 export function isDefaultColumn(column: ColumnApi | ActionColumnApi): column is ColumnApi {
   return column.type === 'default'

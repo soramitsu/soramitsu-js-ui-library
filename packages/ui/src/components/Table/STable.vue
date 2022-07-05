@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { CSSProperties, ShallowRef, Slot } from 'vue'
-import { ActionColumnApi, ColumnApi, TABLE_API_KEY, SCheckboxAtom } from '@/components'
+import { MaybeElementRef, not } from '@vueuse/core'
+import { SCheckboxAtom } from '@/components/Checkbox'
 import { IconArrowTop16, IconArrowsChevronDownRounded24 } from '@/components/icons'
-import { useColumnSort } from '@/components/Table/column-sort.composable'
+import { useColumnSort } from './column-sort.composable'
 import {
   TableRow,
   CellEventData,
@@ -14,13 +15,12 @@ import {
   TableRowConfigCallbackParams,
   TableHeaderCellConfigCallbackParams,
 } from './types'
-import { useFlexColumns } from '@/components/Table/flex-columns-widths.composable'
-import { useRowSelect } from '@/components/Table/row-select.composable'
-import { useColumnExpand } from '@/components/Table/column-expand.composable'
-import { isDefaultColumn, isExpandColumn, isRecord, isSelectionColumn } from '@/components/Table/utils'
-import { MaybeElementRef, not } from '@vueuse/core'
-import { useTableHeights } from '@/components/Table/table-heights.composable'
-import { get, findLast } from 'lodash-es'
+import { useFlexColumns } from './flex-columns-widths.composable'
+import { useRowSelect } from './row-select.composable'
+import { useColumnExpand } from './column-expand.composable'
+import { isDefaultColumn, isExpandColumn, isRecord, isSelectionColumn } from './utils'
+import { ActionColumnApi, ColumnApi, TABLE_API_KEY } from './api'
+import { useTableHeights } from './table-heights.composable'
 
 const props = withDefaults(
   defineProps<{

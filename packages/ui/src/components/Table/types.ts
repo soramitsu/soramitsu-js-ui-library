@@ -1,5 +1,5 @@
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from './consts'
-import { ActionColumnApi, ColumnApi } from '@/components'
+import { ActionColumnApi, ColumnApi } from './api'
 
 export type TableColumnType = typeof TABLE_COLUMN_TYPE_VALUES[number]
 export type TableColumnAlign = typeof TABLE_COLUMN_ALIGN_VALUES[number]
