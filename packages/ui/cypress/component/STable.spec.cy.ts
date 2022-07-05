@@ -102,7 +102,7 @@ describe('Table', () => {
         cy.get(testIdSelector('table-row'))
           .first()
           .next()
-          .should('not.have.attr', 'data-testid','table-expanded-block')
+          .should('not.have.attr', 'data-testid', 'table-expanded-block')
       })
     })
 

@@ -148,14 +148,23 @@ const props = withDefaults(
   },
 )
 
+/* eslint-disable @typescript-eslint/unified-signatures */
 const emit = defineEmits<{
-  (event: 'cell-mouse-enter' | 'cell-mouse-leave' | 'cell-click' | 'cell-dblclick', ...value: CellEventData): void
-  (event: 'header-click' | 'header-contextmenu', ...value: HeaderEventData): void
-  (event: 'row-click' | 'row-dblclick' | 'row-contextmenu', ...value: RowEventData): void
+  (event: 'cell-mouse-enter', ...value: CellEventData): void
+  (event: 'cell-mouse-leave', ...value: CellEventData): void
+  (event: 'cell-click', ...value: CellEventData): void
+  (event: 'cell-dblclick', ...value: CellEventData): void
+  (event: 'header-click', ...value: HeaderEventData): void
+  (event: 'header-contextmenu', ...value: HeaderEventData): void
+  (event: 'row-click', ...value: RowEventData): void
+  (event: 'row-dblclick', ...value: RowEventData): void
+  (event: 'row-contextmenu', ...value: RowEventData): void
   (event: 'sort-change', value: SortEventData): void
-  (event: 'selection-change' | 'select-all', value: TableRow[]): void
+  (event: 'selection-change', value: TableRow[]): void
+  (event: 'select-all', value: TableRow[]): void
   (event: 'select', ...value: [TableRow[], TableRow]): void
   (event: 'expand-change', ...value: [TableRow, TableRow[]]): void
+  (event: 'current-change', ...value: [TableRow | null, TableRow | null]): void
 }>()
 
 const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
@@ -442,33 +451,38 @@ function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi | ActionCo
     return
   }
 
+  const rawRow = toRaw(ctx.row)
+
   switch (ctx.event.type) {
     case 'mouseleave': {
-      emit('cell-mouse-leave', ctx.row, ctx.column, ctx.event.target, ctx.event)
+      emit('cell-mouse-leave', rawRow, ctx.column, ctx.event.target, ctx.event)
       break
     }
     case 'mouseenter': {
-      emit('cell-mouse-enter', ctx.row, ctx.column, ctx.event.target, ctx.event)
+      emit('cell-mouse-enter', rawRow, ctx.column, ctx.event.target, ctx.event)
       break
     }
     case 'click': {
       if (isExpandColumn(ctx.column)) {
-        handleRowExpand(toRaw(ctx.row))
+        handleRowExpand(rawRow)
         break
       }
 
-      setCurrentRow(ctx.row)
-      emit('cell-click', ctx.row, ctx.column, ctx.event.target, ctx.event)
-      emit('row-click', ctx.row, ctx.column, ctx.event)
+      const oldCurrentRow = currentRow
+      setCurrentRow(rawRow)
+
+      emit('cell-click', rawRow, ctx.column, ctx.event.target, ctx.event)
+      emit('row-click', rawRow, ctx.column, ctx.event)
+      emit('current-change', currentRow.value, oldCurrentRow.value)
       break
     }
     case 'dblclick': {
-      emit('cell-dblclick', ctx.row, ctx.column, ctx.event.target, ctx.event)
-      emit('row-dblclick', ctx.row, ctx.column, ctx.event)
+      emit('cell-dblclick', rawRow, ctx.column, ctx.event.target, ctx.event)
+      emit('row-dblclick', rawRow, ctx.column, ctx.event)
       break
     }
     case 'contextmenu': {
-      emit('row-contextmenu', ctx.row, ctx.column, ctx.event)
+      emit('row-contextmenu', rawRow, ctx.column, ctx.event)
       break
     }
   }
