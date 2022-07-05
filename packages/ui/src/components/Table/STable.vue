@@ -20,8 +20,7 @@ import { useColumnExpand } from '@/components/Table/column-expand.composable'
 import { isDefaultColumn, isExpandColumn, isRecord, isSelectionColumn } from '@/components/Table/utils'
 import { MaybeElementRef, not } from '@vueuse/core'
 import { useTableHeights } from '@/components/Table/table-heights.composable'
-import get from 'lodash/get'
-import findLast from 'lodash/findLast'
+import { get, findLast } from 'lodash-es'
 
 const props = withDefaults(
   defineProps<{
