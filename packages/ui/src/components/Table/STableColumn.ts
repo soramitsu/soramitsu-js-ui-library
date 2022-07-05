@@ -13,7 +13,8 @@ import {
 } from '@/components/Table/types'
 import { ColumnWidthProps } from './api'
 
-export default defineComponent({
+export default /* @__PURE__ */ defineComponent({
+  name: 'STableColumn',
   props: {
     /**
      * column type
