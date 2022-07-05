@@ -10,7 +10,7 @@ import MonthTable from './src/month-table.vue'
 import DatePanel from './date-panel.vue'
 import YearTable from './src/year-table.vue'
 import TimePanel from './time-panel.vue'
-import { options } from './consts'
+import { options } from './presets'
 
 import { IconBasicCheckMark24, IconArrowsChevronBottom24 } from '@/components/icons'
 import { maska as vMaska } from 'maska'
@@ -432,6 +432,7 @@ else updateModelValue()
         <div
           class="head-title p-2 sora-tpg-ch2 relative pr-6"
           :class="disabled ? 'cursor-default' : 'cursor-pointer'"
+          @keydown="updateShow"
           @click="updateShow"
         >
           {{ headTitle || 'Date' }}
@@ -451,7 +452,7 @@ else updateModelValue()
           <div
             class="date-picker sora-tpg-p4"
             data-testid="date-picker"
-            :class="[`${gridType}`, { narrow: showStateView }]"
+            :class="[`${gridType}`, { 'narrow': showStateView }]"
           >
             <div
               v-if="props.type != 'pick'"
@@ -463,6 +464,7 @@ else updateModelValue()
                 class="options-panel__item"
                 :class="menuState === item.label ? 'active' : ''"
                 @click="onMenuClick(item.value, item.label)"
+                @keydown="onMenuClick(item.value, item.label)"
               >
                 {{ item.label }}
                 <span

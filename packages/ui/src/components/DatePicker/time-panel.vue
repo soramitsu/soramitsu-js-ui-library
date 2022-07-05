@@ -1,7 +1,7 @@
 <script lang="ts">
-export default defineComponent({
+export default {
   name: 'TimePanel',
-})
+}
 </script>
 
 <script setup lang="ts">
@@ -36,6 +36,7 @@ const updateTime = (e: any) => {
       class="cursor-pointer"
       :class="time === value ? 'active' : ''"
       @click="updateTime"
+      @keydown="updateTime"
     >
       {{ time }}
     </p>

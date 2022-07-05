@@ -7,10 +7,9 @@ export default {
 <script setup lang="ts">
 import { ComputedRef } from 'vue'
 import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/icons'
+import { months } from '../consts'
 
-import {
-  ShowState
-} from '../types'
+import { ShowState } from '../types'
 
 interface Props {
   showState: ShowState
@@ -35,7 +34,7 @@ const currentYear = computed(() => {
   return props.showState.year
 })
 
-const changeYear = (delta:number) => {
+const changeYear = (delta: number) => {
   deltaYear.value += delta
 }
 
@@ -45,22 +44,6 @@ const props = withDefaults(defineProps<Props>(), {})
 
 const emit = defineEmits(['updateShowedYear', 'pick', 'updateShowedMonth'])
 
-const months = ref(['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'])
-const monthsFull = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-]
-
 const getCellStyle = (cell: MonthCell) => {
   const style: MonthCellStyle = {
     current: false,
@@ -69,19 +52,19 @@ const getCellStyle = (cell: MonthCell) => {
   const today = new Date()
   const month = cell.text
 
-  style.current = (currentMonth.value === month) && (deltaYear.value === 0)
-  style.today = (today.getMonth() === month) && (today.getFullYear() === currentYear.value + deltaYear.value)
+  style.current = currentMonth.value === month && deltaYear.value === 0
+  style.today = today.getMonth() === month && today.getFullYear() === currentYear.value + deltaYear.value
   return style
 }
 const handleMonthTableClick = (event: any) => {
   let target = event.target
   const month = Number(target.getAttribute('month'))
   emit('pick', month)
-  emit ('updateShowedYear', currentYear.value + deltaYear.value)
+  emit('updateShowedYear', currentYear.value + deltaYear.value)
 }
 
 const gridCells: ComputedRef<MonthCell[]> = computed(() => {
-  return monthsFull.map((monthName, idx) => {
+  return months.map((monthName, idx) => {
     const cell: MonthCell = { type: 'normal', title: monthName, text: idx }
     return cell
   })
@@ -108,6 +91,7 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
     <div
       class="month-table sora-tpg-p4"
       @click="handleMonthTableClick"
+      @keydown="handleMonthTableClick"
     >
       <div
         v-for="(cell, idx) in gridCells"
@@ -118,7 +102,7 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
           <a
             class="cell"
             :month="cell.text"
-          >{{ `${monthsFull[cell.text]}` }}</a>
+          >{{ `${months[cell.text]}` }}</a>
         </div>
       </div>
     </div>
@@ -161,7 +145,7 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
 
     &.current:not(.disabled) .cell {
       color: theme.token-as-var('sys.color.primary');
-    }   
+    }
 
     &.today .cell {
       color: theme.token-as-var('sys.color.primary');

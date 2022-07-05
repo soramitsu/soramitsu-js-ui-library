@@ -1,7 +1,7 @@
 <script lang="ts">
-export default defineComponent({
+export default {
   name: 'YearTable',
-})
+}
 </script>
 
 <script setup lang="ts">
@@ -64,6 +64,7 @@ const handleYearTableClick = (event: any) => {
   <div
     class="year-table sora-tpg-p3"
     @click="handleYearTableClick"
+    @keydown="handleYearTableClick"
   >
     <div
       v-for="year in 10"
@@ -99,7 +100,7 @@ const handleYearTableClick = (event: any) => {
     &.today .cell {
       color: theme.token-as-var('sys.color.primary');
       font-weight: 700;
-    }   
+    }
 
     & .cell:hover {
       color: theme.token-as-var('sys.color.primary');

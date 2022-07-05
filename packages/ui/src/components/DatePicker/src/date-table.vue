@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  name: 'DateTable',
+}
+</script>
+
 <script setup lang="ts">
 import {
   getFirstDayOfMonth,
@@ -9,8 +15,7 @@ import {
 
 import * as types from '../types'
 import { ComputedRef } from 'vue'
-
-const daysNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+import { daysNames } from '../consts'
 
 const getDateTimestamp = (time: Date | number) => {
   if (typeof time === 'number' || typeof time === 'string') {
@@ -93,7 +98,7 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
     }
 
     const index = i
-    const time = nextDate(startDate.value, index - offset).getTime() // nextDate - день с которого начинается месяц
+    const time = nextDate(startDate.value, index - offset).getTime() // nextDate - month begins from this date
     cell.time = null
 
     if (isRange.value) {
@@ -143,7 +148,7 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
       cell.type = 'today'
     }
     if (i >= 0 && i <= 13) {
-      // кол-во дней предыдущего месяца, которое показывается
+      // number of showed previous month's days
       const numberOfDaysFromPreviousMonth = day + offset < 0 ? 7 + day + offset : day + offset // day - первый день месяца (пнд-вск 0-6) offset - сдвиг, с чего начинается неделя,
       if (index >= numberOfDaysFromPreviousMonth) {
         cell.text = count++
@@ -275,6 +280,7 @@ const handleClick = (ev: any) => {
   <div
     class="date-table sora-tpg-p4"
     @click="handleClick"
+    @keydown="handleClick"
   >
     <div
       v-for="(day, key) in WEEKS"

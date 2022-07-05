@@ -26,7 +26,7 @@ import { SRadio, SRadioAtom, SRadioGroup } from './Radio'
 import { SCheckboxAtom, SCheckboxSolo } from './Checkbox'
 import { SBodyScrollLockProvider } from './BodyScrollLockProvider'
 import { SNavigationMenu, SNavigationMenuItem, SNavigationSubmenu } from './NavigationMenu'
-import { SDatePicker} from './DatePicker'
+import { SDatePicker } from './DatePicker'
 
 /**
  * Component names should be identical to their variable names

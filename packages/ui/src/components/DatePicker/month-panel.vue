@@ -1,11 +1,12 @@
 <script lang="ts">
-export default defineComponent({
+export default {
   name: 'MonthPanel',
-})
+}
 </script>
 
 <script setup lang="ts">
 import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/icons'
+import { months } from './consts'
 
 const emit = defineEmits(['updateShowedState', 'changeView'])
 
@@ -20,21 +21,6 @@ const props = withDefaults(defineProps<Props>(), {
   showYear: 0,
   hideArrows: false,
 })
-
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-]
 
 const changeMonth = (delta: number) => {
   emit('updateShowedState', delta)
@@ -62,12 +48,16 @@ const changeView = (viewName: string) => {
       <span
         role="button"
         class="header__label"
+        tabIndex="0"
         @click="changeView('months')"
+        @keydown="changeView('months')"
       >{{ months[showMonth] }}</span>
       <span
         role="button"
         class="header__label"
+        tabIndex="0"
         @click="changeView('years')"
+        @keydown="changeView('years')"
       >{{ showYear }}</span>
     </div>
     <button
