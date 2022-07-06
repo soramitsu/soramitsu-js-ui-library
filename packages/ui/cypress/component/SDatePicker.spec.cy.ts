@@ -108,9 +108,6 @@ describe('SDatePicker', () => {
           picker().get('.custom-panel__input').focus().clear().type('01012000').blur()
         })
         .then(() => {
-          picker().get('.save-button').click()
-        })
-        .then(() => {
           getEl('date').should('contain.text', '1')
           getEl('month').should('contain.text', '0') // months number is 0-11
           getEl('year').should('contain.text', '2000')
