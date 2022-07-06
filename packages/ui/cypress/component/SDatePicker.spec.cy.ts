@@ -83,8 +83,12 @@ describe('SDatePicker', () => {
     it('Input panel works correctly', () => {
       mount({
         template: `
-          <SDatePicker v-model="date" :type="'day'" data-cy="picker"/>
-          <p data-cy="result">{{date.getTime()}}</p>
+          <SDatePicker v-model="date" :type="'day'" data-cy="picker"/>          
+          <p data-cy="result">
+            <span data-cy="date">{{date.getDate()}}</span>
+            <span data-cy="month">{{date.getMonth()}}</span>
+            <span data-cy="year">{{date.getFullYear()}}</span>
+          </p>
         `,
         setup() {
           const date = ref(new Date())
@@ -104,7 +108,12 @@ describe('SDatePicker', () => {
           picker().get('.custom-panel__input').focus().clear().type('01012000').blur()
         })
         .then(() => {
-          getEl('result').should('have.text', '946666800000')
+          picker().get('.save-button').click()
+        })
+        .then(() => {
+          getEl('date').should('contain.text', '1')
+          getEl('month').should('contain.text', '0') // months number is 0-11
+          getEl('year').should('contain.text', '2000')
         })
     })
 
