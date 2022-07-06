@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CSSProperties, ShallowRef, Slot } from 'vue'
 import { MaybeElementRef, not } from '@vueuse/core'
+import { get, findLast } from 'lodash-es'
 import { SCheckboxAtom } from '@/components/Checkbox'
 import { IconArrowTop16, IconArrowsChevronDownRounded24 } from '@/components/icons'
 import { useColumnSort } from './column-sort.composable'
