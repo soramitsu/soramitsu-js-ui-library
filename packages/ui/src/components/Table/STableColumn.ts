@@ -17,57 +17,59 @@ export default /* @__PURE__ */ defineComponent({
   name: 'STableColumn',
   props: {
     /**
-     * column type
+     * Column type
      */
     type: {
       type: String as PropType<TableColumnType>,
       default: 'default',
     },
     /**
-     * column label (in header)
+     * Column label (in header)
      */
     label: {
       type: String,
       default: '',
     },
     /**
-     * prop name form data row
+     * Prop name from a data row
      */
     prop: {
       type: String,
       default: '',
     },
     /**
-     * column width
+     * Column width
      */
     width: {
       type: String,
       default: '',
     },
     /**
-     * column minimum width. Columns with width has a fixed width, while columns with min-width has a width that is distributed in proportion
+     * Column minimum width. Columns with `width` prop has a fixed width, while columns with `min-width`
+     * prop has a width that is distributed in proportion
      */
     minWidth: {
       type: String,
       default: '80',
     },
     /**
-     * whether column can be sorted. Remote sorting can be done by setting
-     * this attribute to 'custom' and listening to the sort-change event of Table
+     * Whether column can be sorted. Remote sorting can be done by setting
+     * this attribute to `custom` and listening to the `sort-change` event of the table component
      */
     sortable: {
       type: [Boolean, String] as PropType<boolean | 'custom'>,
       default: false,
     },
     /**
-     * sorting method, works when sortable is true. Should return a number, just like Array.sort
+     * Sorting method, works when `sortable` prop is set to `true`.
+     * Should return a number, just like `Array.sort` expects
      */
     sortMethod: {
       type: Function as PropType<<T>(a: T, b: T) => number>,
       default: null,
     },
     /**
-     * specify which property to sort by, works when sortable is true and sort-method is undefined.
+     * Specify which property to sort by. Works when `sortable` prop is set to `true` and `sort-method` isn't set.
      * If set to an Array, the column will sequentially sort by the next property if the previous one is equal
      */
     sortBy: {
@@ -75,7 +77,7 @@ export default /* @__PURE__ */ defineComponent({
       default: null,
     },
     /**
-     * the order of the sorting strategies used when sorting the data, works when sortable is true.
+     * The order of the sorting strategies used when sorting the data, works when sortable is true.
      * Accepts an array, as the user clicks on the header, the column is sorted in order of the elements in the array
      */
     sortOrders: {
@@ -83,56 +85,56 @@ export default /* @__PURE__ */ defineComponent({
       default: () => ['ascending', 'descending', null],
     },
     /**
-     * function that formats cell content
+     * Function that formats cell content
      */
     formatter: {
       type: Function as PropType<ColumnCellValueFormatter>,
       default: null,
     },
     /**
-     * whether to hide extra content and show them in a tooltip when hovering on the cell
+     * Whether to hide extra content and show them in a tooltip when hovering on the cell
      */
     showOverflowTooltip: {
       type: Boolean,
       default: false,
     },
     /**
-     * alignment
+     * Content alignment
      */
     align: {
       type: String as PropType<TableColumnAlign>,
       default: 'left',
     },
     /**
-     * alignment of the table header. If omitted, the value of the above align attribute will be applied
+     * Header alignment. Fallbacks to `align` prop value by default.
      */
     headerAlign: {
       type: String as PropType<TableColumnAlign | null>,
       default: null,
     },
     /**
-     * class name of cells in the column
+     * Class name of cells in the column
      */
     className: {
       type: String,
       default: '',
     },
     /**
-     * class name of the label of this column
+     * Class name of the label of this column
      */
     labelClassName: {
       type: String,
       default: '',
     },
     /**
-     * function that determines if a certain row can be selected, works when type is 'selection'
+     * Function that determines if a certain row can be selected, works when type is 'selection'
      */
     selectable: {
       type: Function as PropType<ColumnRowSelectableFunc>,
       default: null,
     },
     /**
-     * whether to reserve selection after data refreshing, works when type is 'selection'.
+     * Whether to reserve selection after data refreshing, works when type is 'selection'.
      * Note that row-key is required for this to work
      */
     reserveSelection: {
