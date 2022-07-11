@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: 'DatePanel',
-}
-</script>
-
 <script setup lang="ts">
 import MonthPanel from './month-panel.vue'
 import DateTable from './src/date-table.vue'
@@ -60,5 +54,3 @@ const onDatePick = (data: any) => {
     />
   </div>
 </template>
-
-<style lang="scss" scoped></style>

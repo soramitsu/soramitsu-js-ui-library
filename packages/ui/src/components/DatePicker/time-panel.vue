@@ -1,12 +1,4 @@
-<script lang="ts">
-export default {
-  name: 'TimePanel',
-}
-</script>
-
 <script setup lang="ts">
-const emit = defineEmits(['updateTime'])
-
 interface Props {
   value: string
 }
@@ -14,6 +6,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   value: '00:00',
 })
+
+const emit = defineEmits(['updateTime'])
 
 let timeArray = ref<string[]>([])
 

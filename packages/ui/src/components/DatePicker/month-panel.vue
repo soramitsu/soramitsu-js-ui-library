@@ -1,14 +1,6 @@
-<script lang="ts">
-export default {
-  name: 'MonthPanel',
-}
-</script>
-
 <script setup lang="ts">
 import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/icons'
 import { months } from './consts'
-
-const emit = defineEmits(['updateShowedState', 'changeView'])
 
 interface Props {
   showMonth: number
@@ -21,6 +13,8 @@ const props = withDefaults(defineProps<Props>(), {
   showYear: 0,
   hideArrows: false,
 })
+
+const emit = defineEmits(['updateShowedState', 'changeView'])
 
 const changeMonth = (delta: number) => {
   emit('updateShowedState', delta)

@@ -1,11 +1,4 @@
-<script lang="ts">
-export default {
-  name: 'SDatePicker',
-}
-</script>
-
 <script setup lang="ts">
-import { ref } from 'vue'
 import MonthTable from './src/month-table.vue'
 import DatePanel from './date-panel.vue'
 import YearTable from './src/year-table.vue'
@@ -420,7 +413,7 @@ else updateModelValue()
 </script>
 
 <template>
-  <div class="picker-component">
+  <div class="date-picker-component">
     <SPopover
       v-model:show="showPopper"
       placement="bottom-start"
@@ -587,10 +580,10 @@ else updateModelValue()
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use '@/theme';
 
-.picker-component {
+.date-picker-component {
   .head-title {
     border-radius: 4px;
     border: 1px solid theme.token-as-var('sys.color.border-primary');

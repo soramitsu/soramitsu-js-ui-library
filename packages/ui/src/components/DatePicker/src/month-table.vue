@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: 'MonthTable',
-}
-</script>
-
 <script setup lang="ts">
 import { ComputedRef } from 'vue'
 import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/icons'

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: 'YearTable',
-}
-</script>
-
 <script setup lang="ts">
 import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/icons'
 

@@ -1,1 +1,1 @@
-export { default as SDatePicker } from './Picker.vue'
+export { default as SDatePicker } from './SDatePicker.vue'

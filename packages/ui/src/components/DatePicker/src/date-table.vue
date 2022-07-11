@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: 'DateTable',
-}
-</script>
-
 <script setup lang="ts">
 import {
   getFirstDayOfMonth,
