@@ -30,9 +30,9 @@ const props = withDefaults(
      * */
     data?: TableRow[]
     /**
-     * set the default sort column and order.
-     * property prop is used to set default sort column, property order is used to set default sort order
-     * if prop is set, and order is not set, then order is default to ascending
+     * Set the default sort column and order.
+     * The `prop` is used to set default sort column, the `order` - to set default sort order.
+     * If `prop` and `order` aren't set, then order defaults to `ascending`.
      * */
     defaultSort?: { prop: string; order: ColumnSortOrder } | null
     /**
@@ -43,7 +43,7 @@ const props = withDefaults(
     height?: string | number
     /**
      * Table's max-height. The height of the table starts from auto until it reaches the maxHeight limit.
-     * The maxHeight is measured in pixels, same as height
+     * The `maxHeight` is measured in pixels, same as height
      * */
     maxHeight?: string | number
     /**
@@ -95,23 +95,23 @@ const props = withDefaults(
      * */
     headerCellStyle?: CSSProperties | ((param: TableHeaderCellConfigCallbackParams) => CSSProperties)
     /**
-     * key of row data, used for optimizing rendering. Required if reserve-selection is on.
-     * When its type is String, multi-level access is supported, e.g. user.info.id,
-     * but user.info[0].id is not supported, in which case Function should be used.
+     * Data row key extraction to optimize rendering. Required if `reserve-selection` is on.
+     * When it is a string, multi-level access is supported, e.g. `user.info.id`,
+     * but `user.info[0].id` is not supported, in which case a function should be used.
      * */
     rowKey?: string | ((row: TableRow) => unknown) | null
     /**
-     * Displayed text when data is empty. You can customize this area with `slot="empty"`
+     * Displayed text when data is empty. You can customize this area by using `empty` slot.
      * */
     emptyText?: string
     /**
-     * whether expand all rows by default,
-     * works when the table has a column type="expand" or contains tree structure data
+     * Whether to expand all rows by default.
+     * Works when the table has a column with `type="expand"`
      * */
     defaultExpandAll?: boolean
     /**
-     * Set expanded rows by this prop. Prop's value is the keys of expand rows,
-     * you should set row-key before using this prop
+     * Which rows to expand. Keys passed into this prop are the ones that
+     * are computed by the `row-key` prop.
      * */
     expandRowKeys?: unknown[]
 
