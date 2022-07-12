@@ -62,9 +62,10 @@ export function useColumnSort(data: Ref<TableRow[]>) {
     }
 
     const orderModifier = order === 'ascending' ? 1 : -1
+    const sortMethod = column.sortMethod
 
-    if (column.sortMethod) {
-      sortedData.value = [...data.value].sort((a, b) => orderModifier * column.sortMethod(a, b))
+    if (sortMethod) {
+      sortedData.value = [...data.value].sort((a, b) => orderModifier * sortMethod(a, b))
 
       return
     }

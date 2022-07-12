@@ -1,5 +1,5 @@
 import { defineComponent, PropType } from 'vue'
-import { useTableApi } from '@/components'
+import { ActionColumnApi, ColumnApi, useTableApi } from '@/components'
 import { nextIncrementalCounter } from '@/util'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from '@/components/Table/consts'
@@ -74,7 +74,7 @@ export default /* @__PURE__ */ defineComponent({
      */
     sortBy: {
       type: [String, Function, Array] as PropType<ColumnSortBy>,
-      default: null,
+      default: '',
     },
     /**
      * The order of the sorting strategies used when sorting the data, works when sortable is true.
@@ -182,23 +182,8 @@ export default /* @__PURE__ */ defineComponent({
       }
     })
 
-    const api = shallowReactive({
+    const api: Partial<ColumnApi | ActionColumnApi> = shallowReactive({
       id: 's-table_column_' + nextIncrementalCounter(),
-      type: definitelyType.value,
-      cellSlot: slots.default,
-      headerSlot: slots.header,
-      prop: props.prop,
-      label: props.label,
-      showOverflowTooltip: props.showOverflowTooltip,
-      align: definitelyAlign.value,
-      headerAlign: definitelyHeaderAlign.value || definitelyAlign.value,
-      className: props.className,
-      labelClassName: props.labelClassName,
-      formatter: props.formatter,
-      selectable: props.selectable,
-      reserveSelection: props.reserveSelection,
-      ...widthProps.value,
-      ...sortProps.value,
     })
 
     watchEffect(() => {
@@ -223,7 +208,7 @@ export default /* @__PURE__ */ defineComponent({
       api.sortOrders = sortProps.value.sortOrders
     })
 
-    tableApi.register(api)
+    tableApi.register(api as ColumnApi | ActionColumnApi)
 
     return () => null
   },

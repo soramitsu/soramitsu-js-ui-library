@@ -6,6 +6,7 @@ import {
   ColumnSortBy,
   ColumnSortOrder,
   TableColumnAlign,
+  TableRow,
 } from './types'
 
 export interface ColumnWidthProps {
@@ -20,7 +21,7 @@ export interface ColumnAlignProps {
 
 export interface ColumnSortProps {
   sortable: boolean | 'custom'
-  sortMethod: <T>(a: T, b: T) => number
+  sortMethod: (<T extends TableRow>(a: T, b: T) => number) | null
   sortBy: ColumnSortBy
   sortOrders: ColumnSortOrder[]
 }
