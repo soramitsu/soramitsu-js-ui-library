@@ -143,7 +143,7 @@ export interface ColumnSortProps {
     // (undocumented)
     sortBy: ColumnSortBy;
     // (undocumented)
-    sortMethod: <T>(a: T, b: T) => number;
+    sortMethod: (<T extends TableRow>(a: T, b: T) => number) | null;
     // (undocumented)
     sortOrders: ColumnSortOrder[];
 }
@@ -1350,7 +1350,7 @@ default: null;
 };
 sortBy: {
 type: PropType<ColumnSortBy_2>;
-default: null;
+default: string;
 };
 sortOrders: {
 type: PropType<ColumnSortOrder_2[]>;
@@ -1419,7 +1419,7 @@ default: null;
 };
 sortBy: {
 type: PropType<ColumnSortBy_2>;
-default: null;
+default: string;
 };
 sortOrders: {
 type: PropType<ColumnSortOrder_2[]>;
