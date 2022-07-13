@@ -26,6 +26,7 @@ import { SRadio, SRadioAtom, SRadioGroup } from './Radio'
 import { SCheckboxAtom, SCheckboxSolo } from './Checkbox'
 import { SBodyScrollLockProvider } from './BodyScrollLockProvider'
 import { SNavigationMenu, SNavigationMenuItem, SNavigationSubmenu } from './NavigationMenu'
+import { SPagination } from './Pagination'
 
 /**
  * Component names should be identical to their variable names
@@ -70,4 +71,5 @@ export const COMPONENTS: Record<string, Component> = {
   SNavigationMenu,
   SNavigationMenuItem,
   SNavigationSubmenu,
+  SPagination,
 }

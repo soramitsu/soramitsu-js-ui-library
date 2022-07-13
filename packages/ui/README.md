@@ -45,3 +45,8 @@ There are no need for `router` as it was just call push with selected item `inde
 `index` property in `SMenuItem`(`SNavigationMenuItem`) renamed to `value`.
 
 Toggling `SNavigationSubmenu` doesn't call `SNavigationMenu` `select` event.
+
+### SPagination
+
+There are removed props due to design restrictions: `small`, `background`, `pagerCount`, `layout`, `prevText`,
+`nextText`, `disabled`, `hideOnSinglePage`, `pageCount`, `popperClass`

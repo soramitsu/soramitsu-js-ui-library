@@ -1,0 +1,340 @@
+<script setup lang="ts">
+import { IconArrowsChevronRightXs24, IconArrowsChevronLeftXs24, IconChevronsLeft16, IconChevronsRight16 } from '@/components/icons'
+import {MaybeElementRef, not} from '@vueuse/core';
+import { SDropdown } from "@/components";
+
+const PAGINATION_MAX_PAGES_SELECTABLE = 7
+const PAGINATION_JUMP_SIZE = PAGINATION_MAX_PAGES_SELECTABLE - 2
+const PAGINATION_BREAKPOINT_WIDTH = 480
+
+type PaginationJumpValues = number | 'jumpNext' | 'jumpPrev'
+
+const props = withDefaults(
+    defineProps<{
+      /**
+       * total item count
+       * */
+      total?: number
+      /**
+       * item count of each page, two-way bound
+       * */
+      pageSize?: number
+      /**
+       * current page number, two-way bound
+       * */
+      currentPage?: number
+      /**
+       * options of item count per page
+       * */
+      pageSizes?: number[]
+      /**
+       * text shown near sizes dropdown
+       * */
+      sizesLabel?: string
+    }>(),
+    {
+      total: 0,
+      pageSize: 10,
+      currentPage: 1,
+      pageSizes: () => [10, 50, 100],
+      sizesLabel: 'Rows per page',
+    },
+)
+
+const emit = defineEmits<(event: 'size-change' | 'current-change' | 'prev-click' | 'next-click' | 'update:currentPage' | 'update:pageSize', value: number) => void>()
+
+const current = useVModel(props, 'currentPage', emit, { passive: true })
+const size = useVModel(props, 'pageSize', emit, { passive: true })
+
+const sizeOptions = computed(() => props.pageSizes.map((size) => ({ label: String(size), value: size })))
+
+const pagesNum = computed(() => Math.max(1, Math.ceil(props.total / (size.value || 10))))
+const isCurrentFirst = computed(() => current.value === 1)
+const isCurrentLast = computed(() => current.value === pagesNum.value)
+const isAbleJumpPrev = computed(() => current.value >= PAGINATION_JUMP_SIZE)
+const isAbleJumpNext = computed(() => current.value <= pagesNum.value - PAGINATION_JUMP_SIZE + 1)
+const shouldShowControls = computed(() => pagesNum.value > PAGINATION_MAX_PAGES_SELECTABLE)
+const numberOfFirstItem = computed(() => (current.value - 1) * size.value + 1)
+const numberOfLastItem = computed(() => Math.min(props.total, current.value * size.value))
+
+const isJumpPrevButtonHovered = ref(false)
+whenever(not(isAbleJumpPrev), () => { isJumpPrevButtonHovered.value = false })
+const isJumpNextButtonHovered = ref(false)
+whenever(not(isAbleJumpNext), () => { isJumpNextButtonHovered.value = false })
+
+const pagination = ref(null)
+const paginationContainerWidth = ref(0)
+useResizeObserver(pagination, (entries) => {
+  paginationContainerWidth.value = entries[0].contentRect.width
+})
+
+const paginationLeftPanel = ref(null)
+const paginationLeftPanelWidth = ref(0)
+useResizeObserver(paginationLeftPanel, (entries) => {
+  paginationLeftPanelWidth.value = entries[0].contentRect.width
+})
+
+const paginationRightPanel = ref(null)
+const paginationRightPanelWidth = ref(0)
+useResizeObserver(paginationRightPanel, (entries) => {
+  paginationRightPanelWidth.value = entries[0].contentRect.width
+})
+
+const shouldWrap = ref(false)
+watch([paginationContainerWidth, paginationLeftPanelWidth, paginationRightPanelWidth], () => {
+  shouldWrap.value = paginationContainerWidth.value < paginationLeftPanelWidth.value + paginationRightPanelWidth.value ||
+      paginationContainerWidth.value <= PAGINATION_BREAKPOINT_WIDTH
+})
+
+watch(size, () => {
+  if (pagesNum.value < current.value) {
+    current.value = pagesNum.value
+  }
+})
+
+function toggleJumpButtonHover(page: PaginationJumpValues, value: boolean) {
+  if (page === 'jumpNext') {
+    isJumpNextButtonHovered.value = value
+  }
+
+  if (page === 'jumpPrev') {
+    isJumpPrevButtonHovered.value = value
+  }
+}
+
+const pageButtons = computed(() => {
+  const res: PaginationJumpValues[] = []
+
+  for (let i = 1; i <= pagesNum.value; i++) {
+    if (shouldShowControls.value && i === pagesNum.value && isAbleJumpNext.value) {
+      res.push('jumpNext')
+    }
+
+    if (isPageVisible(i)) {
+      res.push(i)
+    }
+
+    if (shouldShowControls.value && i === 1 && isAbleJumpPrev.value) {
+      res.push('jumpPrev')
+    }
+  }
+
+  return res
+})
+
+function isPageVisible(page: number) {
+  return !shouldShowControls.value ||
+    current.value === page ||
+    page === 1 ||
+    page === pagesNum.value ||
+    (!isAbleJumpNext.value && page >= pagesNum.value - PAGINATION_JUMP_SIZE) ||
+    (!isAbleJumpPrev.value && page <= PAGINATION_JUMP_SIZE + 1) ||
+    (isAbleJumpNext.value && isAbleJumpPrev.value) && Math.abs(current.value - page) < (PAGINATION_JUMP_SIZE / 2)
+}
+
+function handleJumpClick(value: PaginationJumpValues) {
+  if (value === 'jumpNext') {
+    handleJumpNextClick()
+
+    return
+  }
+
+  if (value === 'jumpPrev') {
+    handleJumpPrevClick()
+
+    return
+  }
+
+  current.value = value
+  emit('current-change', current.value)
+}
+
+function handleJumpNextClick() {
+  if (isAbleJumpNext.value) {
+    current.value = Math.min(pagesNum.value, current.value + PAGINATION_JUMP_SIZE)
+    emit('current-change', current.value)
+  }
+}
+
+function handleJumpPrevClick() {
+  if (isAbleJumpPrev.value) {
+    current.value = Math.max(0, current.value - PAGINATION_JUMP_SIZE)
+    emit('current-change', current.value)
+  }
+}
+
+function handleNextClick() {
+  if (isCurrentLast.value) {
+    return
+  }
+
+  const newPage = current.value + 1
+  emit('next-click', newPage)
+  current.value = newPage
+  emit('current-change', newPage)
+}
+
+function handlePrevClick() {
+  if (isCurrentFirst.value) {
+    return
+  }
+
+  const newPage = current.value - 1
+  emit('next-click', newPage)
+  current.value = newPage
+  emit('current-change', newPage)
+}
+</script>
+
+<template>
+  <div
+    ref="pagination"
+    class="s-pagination flex flex-wrap justify-between flex-row-reverse"
+  >
+    <div
+      class="order-last flex"
+      :class="{
+        'basis-full justify-center mt-16px': shouldWrap
+      }"
+    >
+      <div
+        ref="paginationLeftPanel"
+        class="flex"
+      >
+        <div class="s-pagination__count whitespace-nowrap sora-tpg-p4 mr-32px flex items-center">
+          <slot
+            name="progress"
+            v-bind="{ numberOfFirstItem, numberOfLastItem, total }"
+          >
+            {{ numberOfFirstItem }}—{{ numberOfLastItem }} of {{ total }}
+          </slot>
+        </div>
+
+        <div class="s-pagination__sizes whitespace-nowrap flex items-center">
+          <div class="s-pagination__sizes-label sora-tpg-p4 mr-16px">
+            {{ sizesLabel }}
+          </div>
+          <SDropdown
+            v-model="size"
+            size="sm"
+            :options="sizeOptions"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="order-first flex"
+      :class="{
+        'basis-full justify-center': shouldWrap
+      }"
+    >
+      <div
+        ref="paginationRightPanel"
+        class="flex"
+      >
+        <div class="s-pagination__pages flex items-center">
+          <template
+            v-for="pageButton in pageButtons"
+            :key="pageButton"
+          >
+            <button
+              class="s-pagination__button flex justify-center w-24px sora-tpg-h7"
+              :class="{
+                's-pagination__button_active': current === pageButton,
+                'ml-4px': pageButton > 1
+              }"
+              @click="handleJumpClick(pageButton)"
+              @mouseenter="toggleJumpButtonHover(pageButton, true)"
+              @mouseleave="toggleJumpButtonHover(pageButton, false)"
+              @focus="toggleJumpButtonHover(pageButton, true)"
+              @blur="toggleJumpButtonHover(pageButton, false)"
+            >
+              <template v-if="pageButton === 'jumpPrev'">
+                <IconChevronsLeft16
+                  v-if="isJumpPrevButtonHovered"
+                  class="s-pagination__button-icon"
+                />
+                <template v-else>
+                  …
+                </template>
+              </template>
+              <template v-else-if="pageButton === 'jumpNext'">
+                <IconChevronsRight16
+                  v-if="isJumpNextButtonHovered"
+                  class="s-pagination__button-icon"
+                />
+                <template v-else>
+                  …
+                </template>
+              </template>
+              <template v-else>
+                {{ pageButton }}
+              </template>
+            </button>
+          </template>
+        </div>
+
+        <div
+          v-if="shouldShowControls"
+          class="s-pagination__arrows flex items-center ml-16px"
+        >
+          <button
+            class="s-pagination__button w-24px h-24px mr-8px"
+            :class="{
+              's-pagination__button_disabled': isCurrentFirst
+            }"
+            @click="handlePrevClick"
+          >
+            <IconArrowsChevronLeftXs24 class="s-pagination__button-icon" />
+          </button>
+          <button
+            class="s-pagination__button w-24px h-24px"
+            :class="{
+              's-pagination__button_disabled': isCurrentLast
+            }"
+            @click="handleNextClick"
+          >
+            <IconArrowsChevronRightXs24 class="s-pagination__button-icon" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="scss">
+@use '@/theme';
+
+.s-pagination {
+  &__button {
+    cursor: pointer;
+    color: theme.token-as-var('sys.color.content-primary');
+
+    &_active {
+      color: theme.token-as-var('sys.color.primary-pressed');
+    }
+
+    &_disabled {
+      color: theme.token-as-var('sys.color.on-disabled');
+      cursor: default;
+    }
+
+    &:not(&_disabled):hover {
+      color: theme.token-as-var('sys.color.primary-hover');
+    }
+  }
+
+  &__button-icon {
+    fill: currentColor;
+  }
+
+  &__count {
+    color: theme.token-as-var('sys.color.content-tertiary');
+  }
+
+  &__sizes-label {
+    color: theme.token-as-var('sys.color.content-tertiary');
+  }
+}
+</style>
