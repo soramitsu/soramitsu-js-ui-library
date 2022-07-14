@@ -23,7 +23,7 @@ const props = withDefaults(
     /**
      * item count of each page, two-way bound
      * */
-    pageSize?: number
+    pageSize?: number | null
     /**
      * current page number, two-way bound
      * */
@@ -39,7 +39,7 @@ const props = withDefaults(
   }>(),
   {
     total: 0,
-    pageSize: 10,
+    pageSize: null,
     currentPage: 1,
     pageSizes: () => [10, 50, 100],
     sizesLabel: 'Rows per page',
@@ -56,17 +56,25 @@ const emit =
 
 const current = useVModel(props, 'currentPage', emit, { passive: true })
 const size = useVModel(props, 'pageSize', emit, { passive: true })
+const numericSize = computed({
+  get: () => {
+    return size.value ?? (props.pageSizes[0] || 10)
+  },
+  set: (value: null | number) => {
+    size.value = value
+  }
+})
 
 const sizeOptions = computed(() => props.pageSizes.map((size) => ({ label: String(size), value: size })))
 
-const pagesNum = computed(() => Math.max(1, Math.ceil(props.total / (size.value || 10))))
+const pagesNum = computed(() => Math.max(1, Math.ceil(props.total / numericSize.value)))
 const isCurrentFirst = computed(() => current.value === 1)
 const isCurrentLast = computed(() => current.value === pagesNum.value)
 const isAbleJumpPrev = computed(() => current.value >= PAGINATION_JUMP_SIZE)
 const isAbleJumpNext = computed(() => current.value <= pagesNum.value - PAGINATION_JUMP_SIZE + 1)
 const shouldShowControls = computed(() => pagesNum.value > PAGINATION_MAX_PAGES_SELECTABLE)
-const numberOfFirstItem = computed(() => (current.value - 1) * size.value + 1)
-const numberOfLastItem = computed(() => Math.min(props.total, current.value * size.value))
+const firstItemNum = computed(() => (current.value - 1) * numericSize.value + 1)
+const lastItemNum = computed(() => Math.min(props.total, current.value * numericSize.value))
 
 const isJumpPrevButtonHovered = ref(false)
 whenever(not(isAbleJumpPrev), () => {
@@ -102,7 +110,7 @@ watch([paginationContainerWidth, paginationLeftPanelWidth, paginationRightPanelW
     paginationContainerWidth.value <= PAGINATION_BREAKPOINT_WIDTH
 })
 
-watch(size, () => {
+watch(pagesNum, () => {
   if (pagesNum.value < current.value) {
     current.value = pagesNum.value
   }
@@ -219,12 +227,15 @@ function handlePrevClick() {
         ref="paginationLeftPanel"
         class="flex"
       >
-        <div class="s-pagination__count whitespace-nowrap sora-tpg-p4 mr-32px flex items-center">
+        <div
+          class="s-pagination__count whitespace-nowrap sora-tpg-p4 mr-32px flex items-center"
+          data-testid="pagination-progress"
+        >
           <slot
             name="progress"
-            v-bind="{ numberOfFirstItem, numberOfLastItem, total }"
+            v-bind="{ firstItemNum, lastItemNum, total }"
           >
-            {{ numberOfFirstItem }}—{{ numberOfLastItem }} of {{ total }}
+            {{ firstItemNum }}—{{ lastItemNum }} of {{ total }}
           </slot>
         </div>
 
@@ -233,7 +244,7 @@ function handlePrevClick() {
             {{ sizesLabel }}
           </div>
           <SDropdown
-            v-model="size"
+            v-model="numericSize"
             size="sm"
             :options="sizeOptions"
           />
@@ -296,6 +307,7 @@ function handlePrevClick() {
         <div
           v-if="shouldShowControls"
           class="s-pagination__arrows flex items-center ml-16px"
+          data-testid="pagination-controls"
         >
           <button
             class="s-pagination__button w-24px h-24px mr-8px"
