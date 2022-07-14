@@ -484,7 +484,7 @@ $s-icon-call-call-no-24: "\ea8b";
 $s-icon-call-call-numbers-24: "\ea8c";
 $s-icon-call-call-outcoming-24: "\ea8d";
 $s-icon-call-call-phone-24: "\ea8e";
-$s-icon-call-call-recieved-24: "\ea8f";
+$s-icon-call-call-received-24: "\ea8f";
 $s-icon-call-call-voicemail-24: "\ea90";
 $s-icon-chatting-comment-24: "\ea91";
 $s-icon-chatting-comment-checked-24: "\ea92";
@@ -2948,9 +2948,9 @@ $s-icon-various-toy-horse-24: "\eae9";
     content: $s-icon-call-call-phone-24;
   }
 }
-.s-icon-call-call-recieved-24 {
+.s-icon-call-call-received-24 {
   &:before {
-    content: $s-icon-call-call-recieved-24;
+    content: $s-icon-call-call-received-24;
   }
 }
 .s-icon-call-call-voicemail-24 {
