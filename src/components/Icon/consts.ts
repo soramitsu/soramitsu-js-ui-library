@@ -202,7 +202,7 @@ export enum Icons24 {
   CallCallNumbers = 'call-call-numbers-24',
   CallCallOutcoming = 'call-call-outcoming-24',
   CallCallPhone = 'call-call-phone-24',
-  CallCallRecieved = 'call-call-recieved-24',
+  CallCallReceived = 'call-call-received-24',
   CallCallVoicemail = 'call-call-voicemail-24',
   ChattingComment = 'chatting-comment-24',
   ChattingCommentChecked = 'chatting-comment-checked-24',
