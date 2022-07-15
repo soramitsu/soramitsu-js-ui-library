@@ -16,13 +16,22 @@ const props = defineProps<{
 }>()
 
 const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : SelectButtonType.Default))
+
+const slots = useSlots()
+
+function isThereLabelSlot() {
+  return !!slots.label
+}
 </script>
 
 <template>
   <SSelectBase v-bind="{ ...$attrs, ...$props } as any">
     <template #control>
       <SSelectButton :type="buttonType">
-        <template #label="binding">
+        <template
+          v-if="isThereLabelSlot() || label"
+          #label="binding"
+        >
           <slot
             name="label"
             v-bind="binding"

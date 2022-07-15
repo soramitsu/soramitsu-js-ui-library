@@ -1,6 +1,6 @@
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { SSelect, SSelectBase, SSelectButton, SSelectInput, SDropdown, SelectSize } from '@/lib'
+import { SSelect, SSelectBase, SSelectButton, SSelectInput, SDropdown, SelectSize, STextField } from '@/lib'
 
 const SIZES = [SelectSize.Sm, SelectSize.Md, SelectSize.Lg, SelectSize.Xl]
 
@@ -13,6 +13,8 @@ after(() => {
   config.global.components = {}
   config.global.stubs = {}
 })
+
+const findBtnLabel = () => cy.get('.s-select-btn__label')
 
 it('Gallery - Dropdown', () => {
   mount({
@@ -277,7 +279,7 @@ it('SDropdown - show/hide by clicks', () => {
   cy.contains('OPTION').should('not.be.visible')
 })
 
-describe.only('Auto-close', () => {
+describe('Auto-close', () => {
   const OPTIONS = [
     { value: 'pizza', label: 'Pizza' },
     { value: 'burger', label: 'Burger' },
@@ -355,4 +357,54 @@ describe.only('Auto-close', () => {
       cy.contains('Pizza').should('be.visible')
     })
   }
+})
+
+it(`SDropdown - when value is selected and label is not provided, then label is not rendered`, () => {
+  mount({
+    setup() {
+      const showLabel = ref(true)
+      const label = computed(() => (showLabel.value ? 'Choice' : ''))
+      return {
+        options: [{ label: 'Pizza', value: 'pizza' }],
+        showLabel,
+        label,
+      }
+    },
+    template: `
+      <input v-model="showLabel" type="checkbox"> Show label
+
+      <SDropdown
+        v-bind="{ options, modelValue: 'pizza', label }"
+      />
+    `,
+  })
+
+  findBtnLabel().should('have.text', 'Choice:')
+  cy.get('input').click().should('not.be.checked')
+  findBtnLabel().should('not.exist')
+})
+
+it('SSelectDropdown overlaps STextField', () => {
+  mount({
+    components: { STextField },
+    setup() {
+      return {
+        options: [
+          { label: 'one', value: 1 },
+          { label: 'two', value: 2 },
+        ],
+      }
+    },
+    template: `
+      <div class="m-4 space-y-4">
+        <SDropdown label="I am top" v-bind="{ options }" />
+        <STextField placeholder="I am bottom" />
+      </div>
+    `,
+  })
+
+  cy.contains('I am top').click()
+  cy.contains('two')
+    // trying to click to ensure the element is not covered by anything
+    .click()
 })

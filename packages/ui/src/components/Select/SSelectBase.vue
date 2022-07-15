@@ -106,6 +106,7 @@ provide(SELECT_API_KEY, api)
         <SPopoverWrappedTransition
           name="s-select-dropdown-transition"
           eager
+          :wrapper-attrs="{ 'class': 'z-10' }"
         >
           <slot name="dropdown" />
         </SPopoverWrappedTransition>

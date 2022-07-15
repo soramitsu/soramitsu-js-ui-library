@@ -39,6 +39,8 @@ function typography(): string {
       return 'sora-tpg-p4'
   }
 }
+
+const slots = useSlots()
 </script>
 
 <template>
@@ -55,7 +57,10 @@ function typography(): string {
     ]"
     @click="toggle"
   >
-    <span class="s-select-btn__label">
+    <span
+      v-if="!!slots.label || api.label"
+      class="s-select-btn__label"
+    >
       <slot
         name="label"
         v-bind="api"
