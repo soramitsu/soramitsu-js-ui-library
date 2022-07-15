@@ -14,6 +14,8 @@ after(() => {
   config.global.stubs = {}
 })
 
+const findBtnLabel = () => cy.get('.s-select-btn__label')
+
 it('Gallery - Dropdown', () => {
   mount({
     setup() {
@@ -275,6 +277,31 @@ it('SDropdown - show/hide by clicks', () => {
   cy.contains('OPTION').should('be.visible')
   cy.contains('Label').click()
   cy.contains('OPTION').should('not.be.visible')
+})
+
+it(`SDropdown - when value is selected and label is not provided, then label is not rendered`, () => {
+  mount({
+    setup() {
+      const showLabel = ref(true)
+      const label = computed(() => (showLabel.value ? 'Choice' : ''))
+      return {
+        options: [{ label: 'Pizza', value: 'pizza' }],
+        showLabel,
+        label,
+      }
+    },
+    template: `
+      <input v-model="showLabel" type="checkbox"> Show label
+
+      <SDropdown
+        v-bind="{ options, modelValue: 'pizza', label }"
+      />
+    `,
+  })
+
+  findBtnLabel().should('have.text', 'Choice:')
+  cy.get('input').click().should('not.be.checked')
+  findBtnLabel().should('not.exist')
 })
 
 it('SSelectDropdown overlaps STextField', () => {
