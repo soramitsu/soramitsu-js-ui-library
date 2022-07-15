@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { SelectSize, SelectOption } from './types'
-import { useSelectModel } from './composable.model'
+import { useSelectModel } from './use-model'
 import { SelectApi, SELECT_API_KEY } from './api'
 import { and, not } from '@vueuse/core'
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
