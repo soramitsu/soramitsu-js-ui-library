@@ -6,7 +6,6 @@
     "strict": true,
     "jsx": "preserve",
     "sourceMap": false,
-    "declaration": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,

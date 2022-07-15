@@ -2,7 +2,8 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["jest", "node"]
+    "types": ["jest", "node"],
+    "declaration": true
   },
   "include": ["src"]
 }
