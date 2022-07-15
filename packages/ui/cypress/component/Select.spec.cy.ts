@@ -1,6 +1,6 @@
 import { mount } from '@cypress/vue'
 import { config } from '@vue/test-utils'
-import { SSelect, SSelectBase, SSelectButton, SSelectInput, SDropdown, SelectSize } from '@/lib'
+import { SSelect, SSelectBase, SSelectButton, SSelectInput, SDropdown, SelectSize, STextField } from '@/lib'
 
 const SIZES = [SelectSize.Sm, SelectSize.Md, SelectSize.Lg, SelectSize.Xl]
 
@@ -275,4 +275,29 @@ it('SDropdown - show/hide by clicks', () => {
   cy.contains('OPTION').should('be.visible')
   cy.contains('Label').click()
   cy.contains('OPTION').should('not.be.visible')
+})
+
+it('SSelectDropdown overlaps STextField', () => {
+  mount({
+    components: { STextField },
+    setup() {
+      return {
+        options: [
+          { label: 'one', value: 1 },
+          { label: 'two', value: 2 },
+        ],
+      }
+    },
+    template: `
+      <div class="m-4 space-y-4">
+        <SDropdown label="I am top" v-bind="{ options }" />
+        <STextField placeholder="I am bottom" />
+      </div>
+    `,
+  })
+
+  cy.contains('I am top').click()
+  cy.contains('two')
+    // trying to click to ensure the element is not covered by anything
+    .click()
 })
