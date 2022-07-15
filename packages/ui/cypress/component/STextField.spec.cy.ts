@@ -321,3 +321,29 @@ it('Autofocus works', () => {
   mount({ template: `<STextField autofocus />` })
   findInput().should('have.attr', 'autofocus')
 })
+
+describe('Passing extra attributes', () => {
+  it('they are passed to <input>', () => {
+    mount({ template: `<STextField extra-attr />` })
+
+    findInput().should('have.attr', 'extra-attr')
+  })
+
+  it('they are reactive', () => {
+    mount({
+      setup() {
+        const { count, inc } = useCounter()
+        return { count, inc }
+      },
+      template: `
+        <button @click="inc()">inc</button>
+
+        <STextField :data-count="count" />
+      `,
+    })
+
+    findInput().should('have.attr', 'data-count', 0)
+    cy.get('button').contains('inc').click()
+    findInput().should('have.attr', 'data-count', 1)
+  })
+})

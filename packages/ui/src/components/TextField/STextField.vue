@@ -182,10 +182,15 @@ const counterText = computed<string | null>(() => {
   return limit === null ? String(currentCount) : `${currentCount}/${limit}`
 })
 
+// attrs are not reactive: https://vuejs.org/api/composition-api-setup.html#setup-context
+// so we need to compute them directly in the render function
 const attrs = useAttrs()
-const rootClass = computed(() => attrs.class)
-const rootStyle = computed(() => attrs.style as StyleValue)
-const inputAttrs = reactiveOmit(attrs, 'class', 'style')
+const rootClass = () => attrs.class
+const rootStyle = () => attrs.style as StyleValue
+const inputAttrs = () => {
+  const { style, class: clazz, ...rest } = attrs
+  return rest
+}
 
 // APPEND
 
@@ -209,9 +214,9 @@ const inputType = computed(() =>
         's-text-field_empty': isValueEmpty,
         's-text-field_disabled': disabled,
       },
-      rootClass,
+      rootClass(),
     ]"
-    :style="rootStyle"
+    :style="rootStyle()"
     :data-status="status"
   >
     <div class="s-text-field__input-wrapper">
@@ -227,7 +232,7 @@ const inputType = computed(() =>
         :value="model"
         :type="inputType"
         :disabled="disabled"
-        v-bind="inputAttrs"
+        v-bind="inputAttrs()"
         @input="onInput"
         @focus="isFocused = true"
         @blur="isFocused = false"
