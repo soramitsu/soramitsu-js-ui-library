@@ -1,6 +1,6 @@
 import { defineComponent, PropType } from 'vue'
 import { ActionColumnApi, ColumnApi, useTableApi } from '@/components'
-import { nextIncrementalCounter } from '@/util'
+import { uniqueElementId } from '@/util'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from '@/components/Table/consts'
 import {
@@ -183,7 +183,7 @@ export default /* @__PURE__ */ defineComponent({
     })
 
     const api: Partial<ColumnApi | ActionColumnApi> = shallowReactive({
-      id: 's-table_column_' + nextIncrementalCounter(),
+      id: uniqueElementId(),
     })
 
     watchEffect(() => {
