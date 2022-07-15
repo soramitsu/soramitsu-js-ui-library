@@ -11,6 +11,7 @@ defineProps<{
   multiple?: boolean
   label?: string
   size?: SelectSize
+  noAutoClose?: boolean
 }>()
 </script>
 
