@@ -1,4 +1,4 @@
-@Library('jenkins-library@feature/1856/js-ui-library')
+@Library('jenkins-library')
 def pipeline = new org.js.LibPipeline(
     steps:                this,
     packageManager:       'yarn',
