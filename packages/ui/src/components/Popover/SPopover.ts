@@ -235,7 +235,7 @@ export default /* @__PURE__ */ defineComponent({
         } else if (nodes.length === 1) {
           ;[popper] = nodes
         } else {
-          throw new Error('"popper" slot should return either nothing either the only 1 element')
+          throw new Error('"popper" slot should return either nothing or the only 1 element')
         }
       }
 
