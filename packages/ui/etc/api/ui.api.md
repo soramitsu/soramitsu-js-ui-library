@@ -709,6 +709,61 @@ export const SNotificationsProvider: FunctionalComponent<{
     to?: string;
 }>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SPagination: DefineComponent<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+total?: number | undefined;
+pageSize?: number | null | undefined;
+currentPage?: number | undefined;
+pageSizes?: number[] | undefined;
+sizesLabel?: string | undefined;
+}>, {
+total: number;
+pageSize: null;
+currentPage: number;
+pageSizes: () => number[];
+sizesLabel: string;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"size-change": (value: number) => void;
+} & {
+"current-change": (value: number) => void;
+} & {
+"prev-click": (value: number) => void;
+} & {
+"next-click": (value: number) => void;
+} & {
+"update:currentPage": (value: number) => void;
+} & {
+"update:pageSize": (value: number) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+total?: number | undefined;
+pageSize?: number | null | undefined;
+currentPage?: number | undefined;
+pageSizes?: number[] | undefined;
+sizesLabel?: string | undefined;
+}>, {
+total: number;
+pageSize: null;
+currentPage: number;
+pageSizes: () => number[];
+sizesLabel: string;
+}>>> & {
+"onSize-change"?: ((value: number) => any) | undefined;
+"onCurrent-change"?: ((value: number) => any) | undefined;
+"onPrev-click"?: ((value: number) => any) | undefined;
+"onNext-click"?: ((value: number) => any) | undefined;
+"onUpdate:currentPage"?: ((value: number) => any) | undefined;
+"onUpdate:pageSize"?: ((value: number) => any) | undefined;
+}, {
+total: number;
+pageSize: number | null;
+currentPage: number;
+pageSizes: number[];
+sizesLabel: string;
+}>;
+
 // @public (undocumented)
 export const SPINNER_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
 
