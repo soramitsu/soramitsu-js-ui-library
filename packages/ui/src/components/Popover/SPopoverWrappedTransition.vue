@@ -9,12 +9,12 @@ import { mergeProps } from 'vue'
 import { useWrappedTransitionVisibility } from './util'
 import { usePopoverApi } from './api'
 
-interface Props {
-  eager?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  eager: false,
+const props = defineProps({
+  eager: Boolean,
+  wrapperAttrs: {
+    type: Object,
+    default: null,
+  },
 })
 
 const api = usePopoverApi()
@@ -46,6 +46,7 @@ onScopeDispose(() => {
     v-if="wrapperIf"
     v-show="wrapperShow"
     ref="wrapper"
+    v-bind="wrapperAttrs"
   >
     <Transition
       v-bind="mergeProps($attrs, transitionProps)"
