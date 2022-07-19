@@ -713,7 +713,7 @@ export const SNotificationsProvider: FunctionalComponent<{
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SPagination: DefineComponent<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+export const SPagination: DefineComponent<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
 total?: number | undefined;
 pageSize?: number | null | undefined;
 currentPage?: number | undefined;
@@ -737,7 +737,7 @@ sizesLabel: string;
 "update:currentPage": (value: number) => void;
 } & {
 "update:pageSize": (value: number) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
 total?: number | undefined;
 pageSize?: number | null | undefined;
 currentPage?: number | undefined;
