@@ -16,7 +16,7 @@ describe('Pagination', () => {
   const TOTAL = 202
 
   const getCustomProgressText = (firstItemNum: number, lastItemNum: number, total: number) => {
-    return `shown ${ firstItemNum } from ${ lastItemNum } of ${ total }`
+    return `shown ${firstItemNum} from ${lastItemNum} of ${total}`
   }
 
   context(`Given pagination`, () => {
@@ -25,7 +25,7 @@ describe('Pagination', () => {
         setup() {
           return {
             total: TOTAL,
-            getCustomProgressText
+            getCustomProgressText,
           }
         },
         template: `
