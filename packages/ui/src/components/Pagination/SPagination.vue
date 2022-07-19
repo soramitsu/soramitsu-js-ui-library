@@ -45,14 +45,15 @@ const props = withDefaults(
     sizesLabel: 'Rows per page',
   },
 )
-
-const emit =
-  defineEmits<
-    (
-      event: 'size-change' | 'current-change' | 'prev-click' | 'next-click' | 'update:currentPage' | 'update:pageSize',
-      value: number,
-    ) => void
-  >()
+/* eslint-disable @typescript-eslint/unified-signatures */
+const emit = defineEmits<{
+  (event: 'size-change', value: number): void
+  (event: 'current-change', value: number): void
+  (event: 'prev-click', value: number): void
+  (event: 'next-click', value: number): void
+  (event: 'update:currentPage', value: number): void
+  (event: 'update:pageSize', value: number): void
+}>()
 
 const current = useVModel(props, 'currentPage', emit, { passive: true })
 const size = useVModel(props, 'pageSize', emit, { passive: true })
@@ -62,7 +63,7 @@ const numericSize = computed({
   },
   set: (value: null | number) => {
     size.value = value
-  }
+  },
 })
 
 const sizeOptions = computed(() => props.pageSizes.map((size) => ({ label: String(size), value: size })))
