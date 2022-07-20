@@ -8,8 +8,8 @@ def pipeline = new org.js.LibPipeline(
     dockerImageName:      'soramitsu/soramitsu-js-ui-library',
     testCmds:             ['yarn test:all'],
     pushCmds:             ['yarn publish-workspaces --no-verify-access'],
-    libPushBranches:      ['feature/DOPS-1856/deploy-serve', 'next'],
-    dockerImageTags:      ['feature/DOPS-1856/deploy-serve':'next-serve', 'next':'next-serve'],
+    libPushBranches:      ['next'],
+    dockerImageTags:      ['next':'next-serve'],
     libExamplesBuildCmds: ['yarn sb:build']
 )
 pipeline.runPipeline()
