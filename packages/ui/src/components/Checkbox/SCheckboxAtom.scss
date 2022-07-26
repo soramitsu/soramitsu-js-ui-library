@@ -12,6 +12,7 @@ $color-disabled: theme.token-as-var('sys.color.disabled');
 $color-on-disabled: theme.token-as-var('sys.color.on-disabled');
 $color-primary: theme.token-as-var('sys.color.primary');
 $color-border-primary: theme.token-as-var('sys.color.border-primary');
+$color-border-secondary: theme.token-as-var('sys.color.border-secondary');
 $color-on-accent: theme.token-as-var('sys.color.content-on-background-inverted');
 
 .s-checkbox-atom {
@@ -22,6 +23,10 @@ $color-on-accent: theme.token-as-var('sys.color.content-on-background-inverted')
   transition: background 0.2s ease, border-color 0.2s ease;
 
   $root: &;
+
+  &_disabled {
+    border-color: $color-border-secondary;
+  }
 
   &[data-checked='true'],
   &[data-checked='mixed'] {
