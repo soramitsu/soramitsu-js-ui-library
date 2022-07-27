@@ -68,14 +68,14 @@ const numericSize = computed({
 
 const sizeOptions = computed(() => props.pageSizes.map((size) => ({ label: String(size), value: size })))
 
-const pagesNum = computed(() => Math.max(1, Math.ceil(props.total / numericSize.value)))
-const isCurrentFirst = computed(() => current.value === 1)
-const isCurrentLast = computed(() => current.value === pagesNum.value)
-const isAbleJumpPrev = computed(() => current.value >= PAGINATION_JUMP_SIZE)
-const isAbleJumpNext = computed(() => current.value <= pagesNum.value - PAGINATION_JUMP_SIZE + 1)
-const shouldShowControls = computed(() => pagesNum.value > PAGINATION_MAX_PAGES_SELECTABLE)
-const firstItemNum = computed(() => (current.value - 1) * numericSize.value + 1)
-const lastItemNum = computed(() => Math.min(props.total, current.value * numericSize.value))
+const pagesNum = eagerComputed(() => Math.max(1, Math.ceil(props.total / numericSize.value)))
+const isCurrentFirst = eagerComputed(() => current.value === 1)
+const isCurrentLast = eagerComputed(() => current.value === pagesNum.value)
+const isAbleJumpPrev = eagerComputed(() => current.value >= PAGINATION_JUMP_SIZE)
+const isAbleJumpNext = eagerComputed(() => current.value <= pagesNum.value - PAGINATION_JUMP_SIZE + 1)
+const shouldShowControls = eagerComputed(() => pagesNum.value > PAGINATION_MAX_PAGES_SELECTABLE)
+const firstItemNum = eagerComputed(() => (current.value - 1) * numericSize.value + 1)
+const lastItemNum = eagerComputed(() => Math.min(props.total, current.value * numericSize.value))
 
 const isJumpPrevButtonHovered = ref(false)
 whenever(not(isAbleJumpPrev), () => {
@@ -110,10 +110,8 @@ useResizeObserver(paginationRightPanel, (entries) => {
   })
 })
 
-const shouldWrap = ref(false)
-watch([paginationContainerWidth, paginationLeftPanelWidth, paginationRightPanelWidth], () => {
-  shouldWrap.value =
-    paginationContainerWidth.value < paginationLeftPanelWidth.value + paginationRightPanelWidth.value ||
+const shouldWrap = computed(() => {
+  return paginationContainerWidth.value < paginationLeftPanelWidth.value + paginationRightPanelWidth.value ||
     paginationContainerWidth.value <= PAGINATION_BREAKPOINT_WIDTH
 })
 
