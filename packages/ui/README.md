@@ -87,4 +87,8 @@ Removed public method `doLayout`, because resize observables should be enough.
 ### SPagination
 
 There are removed props due to design restrictions: `small`, `background`, `pagerCount`, `layout`, `prevText`,
-`nextText`, `disabled`, `hideOnSinglePage`, `pageCount`, `popperClass`
+`nextText`, `disabled`, `hideOnSinglePage`, `pageCount`, `popperClass`.
+
+Removed `size-change` and `current-change`. Use `update:currentPage` and `update:pageSize` instead.
+
+Replaced `prev-click` and `next-click` with `click:prev` and `click:next`.

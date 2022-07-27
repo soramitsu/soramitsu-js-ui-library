@@ -47,10 +47,8 @@ const props = withDefaults(
 )
 /* eslint-disable @typescript-eslint/unified-signatures */
 const emit = defineEmits<{
-  (event: 'size-change', value: number): void
-  (event: 'current-change', value: number): void
-  (event: 'prev-click', value: number): void
-  (event: 'next-click', value: number): void
+  (event: 'click:prev', value: number): void
+  (event: 'click:next', value: number): void
   (event: 'update:currentPage', value: number): void
   (event: 'update:pageSize', value: number): void
 }>()
@@ -165,33 +163,22 @@ function isPageVisible(page: number) {
 
 function handleJumpClick(value: PaginationJumpValues) {
   if (value === 'jumpNext') {
-    handleJumpNextClick()
+    if (isAbleJumpNext.value) {
+      current.value = Math.min(pagesNum.value, current.value + PAGINATION_JUMP_SIZE)
+    }
 
     return
   }
 
   if (value === 'jumpPrev') {
-    handleJumpPrevClick()
+    if (isAbleJumpPrev.value) {
+      current.value = Math.max(0, current.value - PAGINATION_JUMP_SIZE)
+    }
 
     return
   }
 
   current.value = value
-  emit('current-change', current.value)
-}
-
-function handleJumpNextClick() {
-  if (isAbleJumpNext.value) {
-    current.value = Math.min(pagesNum.value, current.value + PAGINATION_JUMP_SIZE)
-    emit('current-change', current.value)
-  }
-}
-
-function handleJumpPrevClick() {
-  if (isAbleJumpPrev.value) {
-    current.value = Math.max(0, current.value - PAGINATION_JUMP_SIZE)
-    emit('current-change', current.value)
-  }
 }
 
 function handleNextClick() {
@@ -200,9 +187,8 @@ function handleNextClick() {
   }
 
   const newPage = current.value + 1
-  emit('next-click', newPage)
+  emit('click:next', newPage)
   current.value = newPage
-  emit('current-change', newPage)
 }
 
 function handlePrevClick() {
@@ -211,9 +197,8 @@ function handlePrevClick() {
   }
 
   const newPage = current.value - 1
-  emit('next-click', newPage)
+  emit('click:prev', newPage)
   current.value = newPage
-  emit('current-change', newPage)
 }
 </script>
 

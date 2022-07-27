@@ -833,13 +833,9 @@ currentPage: number;
 pageSizes: () => number[];
 sizesLabel: string;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
-"size-change": (value: number) => void;
+"click:prev": (value: number) => void;
 } & {
-"current-change": (value: number) => void;
-} & {
-"prev-click": (value: number) => void;
-} & {
-"next-click": (value: number) => void;
+"click:next": (value: number) => void;
 } & {
 "update:currentPage": (value: number) => void;
 } & {
@@ -857,10 +853,8 @@ currentPage: number;
 pageSizes: () => number[];
 sizesLabel: string;
 }>>> & {
-"onCurrent-change"?: ((value: number) => any) | undefined;
-"onSize-change"?: ((value: number) => any) | undefined;
-"onPrev-click"?: ((value: number) => any) | undefined;
-"onNext-click"?: ((value: number) => any) | undefined;
+"onClick:prev"?: ((value: number) => any) | undefined;
+"onClick:next"?: ((value: number) => any) | undefined;
 "onUpdate:currentPage"?: ((value: number) => any) | undefined;
 "onUpdate:pageSize"?: ((value: number) => any) | undefined;
 }, {
