@@ -806,11 +806,21 @@ export const SNotificationsProvider: FunctionalComponent<{
     to?: string;
 }>;
 
+// @public (undocumented)
+export interface SortEventData {
+    // (undocumented)
+    column: ColumnApi;
+    // (undocumented)
+    order: ColumnSortOrder;
+    // (undocumented)
+    prop: string;
+}
+
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SPagination: DefineComponent<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
+export const SPagination: DefineComponent<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
 total?: number | undefined;
 pageSize?: number | null | undefined;
 currentPage?: number | undefined;
@@ -834,7 +844,7 @@ sizesLabel: string;
 "update:currentPage": (value: number) => void;
 } & {
 "update:pageSize": (value: number) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
 total?: number | undefined;
 pageSize?: number | null | undefined;
 currentPage?: number | undefined;
@@ -847,8 +857,8 @@ currentPage: number;
 pageSizes: () => number[];
 sizesLabel: string;
 }>>> & {
-"onSize-change"?: ((value: number) => any) | undefined;
 "onCurrent-change"?: ((value: number) => any) | undefined;
+"onSize-change"?: ((value: number) => any) | undefined;
 "onPrev-click"?: ((value: number) => any) | undefined;
 "onNext-click"?: ((value: number) => any) | undefined;
 "onUpdate:currentPage"?: ((value: number) => any) | undefined;
@@ -860,16 +870,6 @@ currentPage: number;
 pageSizes: number[];
 sizesLabel: string;
 }>;
-
-// @public (undocumented)
-export interface SortEventData {
-    // (undocumented)
-    column: ColumnApi;
-    // (undocumented)
-    order: ColumnSortOrder;
-    // (undocumented)
-    prop: string;
-}
 
 // @public (undocumented)
 export const SPINNER_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
@@ -1523,15 +1523,15 @@ width: string;
 label: string;
 sortable: boolean | "custom";
 prop: string;
-className: string;
 minWidth: string;
-align: "left" | "right" | "center";
 sortMethod: <T>(a: T, b: T) => number;
 sortBy: ColumnSortBy_2;
 sortOrders: ColumnSortOrder_2[];
 formatter: ColumnCellValueFormatter_2;
 showOverflowTooltip: boolean;
+align: "left" | "right" | "center";
 headerAlign: "left" | "right" | "center" | null;
+className: string;
 labelClassName: string;
 selectable: ColumnRowSelectableFunc_2;
 reserveSelection: boolean;
