@@ -109,8 +109,10 @@ useResizeObserver(paginationRightPanel, (entries) => {
 })
 
 const shouldWrap = computed(() => {
-  return paginationContainerWidth.value < paginationLeftPanelWidth.value + paginationRightPanelWidth.value ||
+  return (
+    paginationContainerWidth.value < paginationLeftPanelWidth.value + paginationRightPanelWidth.value ||
     paginationContainerWidth.value <= PAGINATION_BREAKPOINT_WIDTH
+  )
 })
 
 watch(pagesNum, () => {
@@ -206,6 +208,7 @@ function handlePrevClick() {
   <div
     ref="pagination"
     class="s-pagination flex flex-wrap justify-between flex-row-reverse"
+    data-testid="pagination"
   >
     <div
       class="order-last flex"
@@ -263,6 +266,7 @@ function handlePrevClick() {
                 's-pagination__button_active': current === pageButton,
                 'ml-4px': pageButton > 1,
               }"
+              :data-testid="current === pageButton ? 'active-button' : 'page-button'"
               @click="handleJumpClick(pageButton)"
               @mouseenter="toggleJumpButtonHover(pageButton, true)"
               @mouseleave="toggleJumpButtonHover(pageButton, false)"
@@ -304,6 +308,7 @@ function handlePrevClick() {
             :class="{
               's-pagination__button_disabled': isCurrentFirst,
             }"
+            data-testid="prev-button"
             @click="handlePrevClick"
           >
             <IconArrowsChevronLeftXs24 class="s-pagination__button-icon" />
@@ -313,6 +318,7 @@ function handlePrevClick() {
             :class="{
               's-pagination__button_disabled': isCurrentLast,
             }"
+            data-testid="next-button"
             @click="handleNextClick"
           >
             <IconArrowsChevronRightXs24 class="s-pagination__button-icon" />
