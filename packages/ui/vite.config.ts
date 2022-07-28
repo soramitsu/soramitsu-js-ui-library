@@ -30,7 +30,7 @@ const vueCompilerTransforms = {
               p.name === 'bind' &&
               p.arg &&
               'content' in p.arg &&
-              p.arg?.content === attr
+              p.arg.content === attr
             ) {
               node.props.splice(i, 1)
               i--
