@@ -266,7 +266,7 @@ function handlePrevClick() {
                 's-pagination__button_active': current === pageButton,
                 'ml-4px': pageButton > 1,
               }"
-              :data-testid="current === pageButton ? 'active-button' : 'page-button'"
+              data-testid="page-button"
               @click="handleJumpClick(pageButton)"
               @mouseenter="toggleJumpButtonHover(pageButton, true)"
               @mouseleave="toggleJumpButtonHover(pageButton, false)"

@@ -52,8 +52,8 @@ describe('Pagination', () => {
         cy.get(testIdSelector('pagination-controls')).should('exist')
       })
 
-      it(`Then there are first page selected`, () => {
-        cy.get(testIdSelector('active-button')).should('contain.text', INITIAL_PAGE_NUM)
+      it(`Then there is first page selected`, () => {
+        cy.get('.s-pagination__button_active').should('contain.text', INITIAL_PAGE_NUM)
       })
     })
 
@@ -62,24 +62,24 @@ describe('Pagination', () => {
         const PAGE_BUTTON_FOR_SELECTION = 5
 
         cy.get(testIdSelector('page-button')).contains(PAGE_BUTTON_FOR_SELECTION).click()
-        cy.get(testIdSelector('active-button')).should('contain.text', PAGE_BUTTON_FOR_SELECTION)
+        cy.get('.s-pagination__button_active').should('contain.text', PAGE_BUTTON_FOR_SELECTION)
       })
     })
 
     context('When next or prev buttons clicked', () => {
       it('Then next or prev page selected', () => {
         cy.get(testIdSelector('next-button')).click()
-        cy.get(testIdSelector('active-button')).should('contain.text', INITIAL_PAGE_NUM + 1)
+        cy.get('.s-pagination__button_active').should('contain.text', INITIAL_PAGE_NUM + 1)
         cy.get(testIdSelector('prev-button')).click()
-        cy.get(testIdSelector('active-button')).should('contain.text', INITIAL_PAGE_NUM)
+        cy.get('.s-pagination__button_active').should('contain.text', INITIAL_PAGE_NUM)
       })
     })
 
     context('When first page selected', () => {
       it(`Then prev button doesn't work`, () => {
-        cy.get(testIdSelector('active-button')).should('contain.text', INITIAL_PAGE_NUM)
+        cy.get('.s-pagination__button_active').should('contain.text', INITIAL_PAGE_NUM)
         cy.get(testIdSelector('prev-button')).click()
-        cy.get(testIdSelector('active-button')).should('contain.text', INITIAL_PAGE_NUM)
+        cy.get('.s-pagination__button_active').should('contain.text', INITIAL_PAGE_NUM)
       })
     })
 
@@ -89,10 +89,10 @@ describe('Pagination', () => {
           .last()
           .within((el) => {
             cy.wrap(el).click()
-            cy.wrap(el).should('has.attr', 'data-testid', 'active-button')
+            cy.wrap(el).should('have.class', 's-pagination__button_active')
 
             cy.wrap(el).closest(testIdSelector('pagination')).find(testIdSelector('next-button')).click()
-            cy.wrap(el).should('has.attr', 'data-testid', 'active-button')
+            cy.wrap(el).should('have.class', 's-pagination__button_active')
           })
       })
     })
