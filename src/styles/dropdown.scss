@@ -55,6 +55,7 @@
 .el-dropdown-menu.el-popper {
   background-color: var(--s-color-base-on-accent);
   border-color: var(--s-color-base-on-accent);
+  overflow: hidden;
   @include with-popper-arrows;
 }
 .el-dropdown-menu__item {
