@@ -35,13 +35,14 @@ import { ElFormItem } from 'element-ui/types/form-item'
 
 import SizeMixin from '../../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
+import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import { Autocomplete } from '../../Input/consts'
 import { InputTypes } from '../consts'
 
 @Component({
   components: { ElSelect }
 })
-export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin) {
+export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, DesignSystemInject) {
   /**
    * Selected value. Can be used with `v-model`
    */
@@ -163,6 +164,9 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin) {
 
   get computedPopperClass (): string {
     const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
     if (this.popperClass) {
       cssClasses.push(this.popperClass)
     }
@@ -174,6 +178,9 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin) {
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
+    if (this.designSystemClass) {
+      cssClasses.push(this.designSystemClass)
+    }
     if (this.inputType === 'select') {
       if ((this.elForm || this.elFormItem || {}).size) {
         cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
