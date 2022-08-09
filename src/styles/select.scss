@@ -4,7 +4,8 @@
 ) {
   &.s-border-radius {
     &-#{$suffix} {
-      border-radius: 0;
+      border-radius: $border-radius;
+
       .s-placeholder {
         border-top-left-radius: $border-radius;
       }
