@@ -7,9 +7,9 @@ import { options } from './presets'
 
 import { IconBasicCheckMark24, IconArrowsChevronBottom24 } from '@/components/icons'
 import { maska as vMaska } from 'maska'
-import { DateTime } from 'luxon'
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { and } from '@vueuse/core'
+import { format, parse, isValid } from 'date-fns'
 
 import {
   DatePickerType,
@@ -387,14 +387,16 @@ const formatPattern = computed(() => {
 
 const formatDate = (date: any) => {
   if (!date) return ''
-  return DateTime.fromJSDate(date).toFormat(formatPattern.value)
+  // return DateTime.fromJSDate(date).toFormat(formatPattern.value)
+  return format(date, formatPattern.value)
 }
 
 const fromFormat = (dateString: string) => {
-  let date = DateTime.fromFormat(dateString, formatPattern.value)
-  if (!date.isValid) return null
+  // let date = DateTime.fromFormat(dateString, formatPattern.value)
+  let date = parse(dateString, formatPattern.value, new Date())
+  if (!isValid(date)) return null
   console.dir(date)
-  return date.toJSDate()
+  return date
 }
 
 // #endregion

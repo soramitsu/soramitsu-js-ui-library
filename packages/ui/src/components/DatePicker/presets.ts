@@ -1,9 +1,27 @@
-import { DateTime, DateTimeUnit } from 'luxon'
+// import { DateTime, DateTimeUnit } from 'luxon'
 import { Options } from './types'
+import {
+  addDays,
+  addMonths,
+  addYears,
+  startOfDay,
+  startOfMonth,
+  endOfMonth,
+  startOfToday,
+  startOfTomorrow,
+  startOfYear,
+  endOfYear,
+  startOfYesterday,
+  startOfWeek,
+  endOfWeek,
+} from 'date-fns'
 
 function getDate(deltaDay = 0, deltaMonth = 0, deltaYear = 0) {
-  let date = DateTime.now()
-  return date.plus({ years: deltaYear, months: deltaMonth, days: deltaDay }).set({ minute: 0, hour: 0 }).toJSDate()
+  let date = startOfToday()
+  if (deltaDay) date = addDays(date, deltaDay)
+  if (deltaMonth) date = addMonths(date, deltaMonth)
+  if (deltaYear) date = addYears(date, deltaYear)
+  return date
 }
 
 function getRange(dateFrom: Date, dateTo: Date) {
@@ -31,18 +49,6 @@ function getTargetDate(deltas: Deltas | undefined) {
   }
 }
 
-function getStartOf(field: DateTimeUnit, deltas?: Deltas) {
-  const targetDate = getTargetDate(deltas)
-  let datetime = DateTime.fromJSDate(targetDate)
-  return datetime.startOf(field).toJSDate()
-}
-
-function getEndOf(field: DateTimeUnit, deltas?: Deltas) {
-  const targetDate = getTargetDate(deltas)
-  let datetime = DateTime.fromJSDate(targetDate)
-  return datetime.endOf(field).toJSDate()
-}
-
 export const options: Options = {
   day: [
     {
@@ -51,19 +57,19 @@ export const options: Options = {
     },
     {
       label: 'Yesterday',
-      value: getDate(-1),
+      value: startOfYesterday(),
     },
     {
       label: 'Tomorrow',
-      value: getDate(1),
+      value: startOfTomorrow(),
     },
     {
       label: 'Next week',
-      value: getDate(7),
+      value: startOfDay(getDate(7)),
     },
     {
       label: 'Next month',
-      value: getDate(0, 1),
+      value: startOfDay(getDate(0, 1)),
     },
     {
       label: 'Custom',
@@ -74,35 +80,35 @@ export const options: Options = {
   range: [
     {
       label: 'This week',
-      value: getRange(getStartOf('week'), getEndOf('week')),
+      value: getRange(startOfWeek(getDate()), endOfWeek(getDate())),
     },
     {
       label: 'Last week',
-      value: getRange(getStartOf('week', { d: -7 }), getEndOf('week', { d: -7 })),
+      value: getRange(startOfWeek(getDate(-7)), endOfWeek(getDate(-7))),
     },
     {
       label: 'Next week',
-      value: getRange(getStartOf('week', { d: 7 }), getEndOf('week', { d: 7 })),
+      value: getRange(startOfWeek(getDate(7)), endOfWeek(getDate(7))),
     },
     {
       label: 'This month',
-      value: getRange(getStartOf('month'), getEndOf('month')),
+      value: getRange(startOfMonth(getDate()), endOfMonth(getDate())),
     },
     {
       label: 'Last month',
-      value: getRange(getStartOf('month', { m: -1 }), getEndOf('month', { m: -1 })),
+      value: getRange(startOfMonth(getDate(0, -1)), endOfMonth(getDate(0, -1))),
     },
     {
       label: 'Next month',
-      value: getRange(getStartOf('month', { m: 1 }), getEndOf('month', { m: 1 })),
+      value: getRange(startOfMonth(getDate(0, 1)), endOfMonth(getDate(0, 1))),
     },
     {
       label: 'This year',
-      value: getRange(getStartOf('year'), getEndOf('year')),
+      value: getRange(startOfYear(getDate()), endOfYear(getDate())),
     },
     {
       label: 'Custom',
-      value: getRange(getStartOf('week'), getEndOf('week')),
+      value: getRange(startOfWeek(getDate()), endOfWeek(getDate())),
     },
   ],
 }
