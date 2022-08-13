@@ -66,7 +66,7 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
 </script>
 
 <template>
-  <div>
+  <div class="date-picker__month-table">
     <div class="flex justify-between items-center sora-tpg-p2 year-range-panel">
       <button
         type="button"
@@ -106,55 +106,57 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
 <style lang="scss" scoped>
 @use '@/theme';
 
-.year-range-panel {
-  height: 57px;
-}
+.date-picker__month-table {
+  .year-range-panel {
+    height: 57px;
+  }
 
-.month-table {
-  margin: -1px;
-  border-collapse: collapse;
-  width: 320px;
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 80px);
+  .month-table {
+    margin: -1px;
+    border-collapse: collapse;
+    width: 320px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 80px);
 
-  & > div {
-    text-align: center;
-    padding: 8px 0;
-    cursor: pointer;
+    & > div {
+      text-align: center;
+      padding: 8px 0;
+      cursor: pointer;
 
-    & div {
-      height: 48px;
-      padding: 6px 0;
-      box-sizing: border-box;
-    }
-
-    &.today {
-      & .end-date .cell,
-      &.start-date .cell {
-        color: theme.token-as-var('sys.color.util.surface');
+      & div {
+        height: 48px;
+        padding: 6px 0;
+        box-sizing: border-box;
       }
-    }
 
-    &.current:not(.disabled) .cell {
-      color: theme.token-as-var('sys.color.primary');
-    }
+      &.today {
+        & .end-date .cell,
+        &.start-date .cell {
+          color: theme.token-as-var('sys.color.util.surface');
+        }
+      }
 
-    &.today .cell {
-      color: theme.token-as-var('sys.color.primary');
-      font-weight: 700;
-    }
-
-    & .cell {
-      display: block;
-      line-height: 36px;
-      color: theme.token-as-var('sys.color.content-primary');
-      margin: 0 auto;
-      border-radius: 18px;
-
-      &:hover {
+      &.current:not(.disabled) .cell {
         color: theme.token-as-var('sys.color.primary');
+      }
+
+      &.today .cell {
+        color: theme.token-as-var('sys.color.primary');
+        font-weight: 700;
+      }
+
+      & .cell {
+        display: block;
+        line-height: 36px;
+        color: theme.token-as-var('sys.color.content-primary');
+        margin: 0 auto;
+        border-radius: 18px;
+
+        &:hover {
+          color: theme.token-as-var('sys.color.primary');
+        }
       }
     }
   }

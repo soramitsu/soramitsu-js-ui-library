@@ -39,69 +39,74 @@ const handleYearTableClick = (event: any) => {
 </script>
 
 <template>
-  <div class="sora-tpg-p2 year-range-panel">
-    <button
-      type="button"
-      @click="changeDecade(-1)"
-    >
-      <IconArrowsChevronLeft24 />
-    </button>
-    <p>{{ `${startYear} - ${startYear + 9}` }}</p>
-    <button
-      type="button"
-      @click="changeDecade(1)"
-    >
-      <IconArrowsChevronRight24 />
-    </button>
-  </div>
+  <div class="date-picker__year-table">
+    <div class="sora-tpg-p2 year-range-panel">
+      <button
+        type="button"
+        @click="changeDecade(-1)"
+      >
+        <IconArrowsChevronLeft24 />
+      </button>
+      <p>{{ `${startYear} - ${startYear + 9}` }}</p>
+      <button
+        type="button"
+        @click="changeDecade(1)"
+      >
+        <IconArrowsChevronRight24 />
+      </button>
+    </div>
 
-  <div
-    class="year-table sora-tpg-p3"
-    @click="handleYearTableClick"
-    @keydown="handleYearTableClick"
-  >
     <div
-      v-for="year in 10"
-      :key="year"
-      class="available"
-      :class="getCellStyle(startYear + year)"
+      class="year-table sora-tpg-p3"
+      @click="handleYearTableClick"
+      @keydown="handleYearTableClick"
     >
-      <a class="cell">{{ startYear + year }}</a>
+      <div
+        v-for="year in 10"
+        :key="year"
+        class="available"
+        :class="getCellStyle(startYear + year)"
+      >
+        <a class="cell">{{ startYear + year }}</a>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @use '@/theme';
-.year-range-panel {
-  @apply flex justify-between items-center;
-  height: 57px;
-}
 
-.year-table {
-  margin: -1px;
-  border-collapse: collapse;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  width: 320px;
+.date-picker__year-table {
+  .year-range-panel {
+    @apply flex justify-between items-center;
+    height: 57px;
+  }
 
-  & > div {
-    text-align: center;
-    padding: 20px 3px;
-    cursor: pointer;
+  .year-table {
+    margin: -1px;
+    border-collapse: collapse;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 320px;
 
-    &.today .cell {
-      color: theme.token-as-var('sys.color.primary');
-      font-weight: 700;
-    }
+    & > div {
+      text-align: center;
+      padding: 20px 3px;
+      cursor: pointer;
 
-    & .cell:hover {
-      color: theme.token-as-var('sys.color.primary');
-    }
+      &.today .cell {
+        color: theme.token-as-var('sys.color.primary');
+        font-weight: 700;
+      }
 
-    &.current .cell {
-      color: theme.token-as-var('sys.color.primary');
+      & .cell:hover {
+        color: theme.token-as-var('sys.color.primary');
+      }
+
+      &.current .cell {
+        color: theme.token-as-var('sys.color.primary');
+      }
     }
   }
 }

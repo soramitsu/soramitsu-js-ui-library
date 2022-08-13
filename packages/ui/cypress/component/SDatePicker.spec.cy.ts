@@ -196,7 +196,7 @@ describe('SDatePicker', () => {
         .first()
         .click()
         .then(() => {
-          cy.get('.time-table > p:contains("02:00")').click()
+          cy.get('.date-picker__time-table > p:contains("02:00")').click()
         })
         .then(() => {
           getEl('result').should('contain', '02:00')

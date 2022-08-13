@@ -272,7 +272,7 @@ const handleClick = (ev: any) => {
 </script>
 <template>
   <div
-    class="date-table sora-tpg-p4"
+    class="date-picker__date-table date-table sora-tpg-p4"
     @click="handleClick"
     @keydown="handleClick"
   >
@@ -300,10 +300,10 @@ const handleClick = (ev: any) => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use '@/theme';
 
-.date-table {
+.date-picker__date-table {
   font-size: 12px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -316,92 +316,94 @@ const handleClick = (ev: any) => {
   align-items: stretch;
   justify-content: center;
 
-  &__cell {
-    width: 45px;
-    height: 30px;
-    padding: 4px 0;
-    box-sizing: border-box;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-    color: theme.token-as-var('sys.color.content-primary');
-    font-feature-settings: 'tnum' on, 'lnum' on, 'case' on;
-
-    & span {
-      width: 24px;
-      height: 24px;
-      display: block;
-      margin: 0 auto;
-      line-height: 24px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    &.next-month,
-    &.prev-month {
-      color: theme.token-as-var('sys.color.content-primary');
-      opacity: 0.4;
-    }
-
-    &.today {
+  .date-table {
+    &__cell {
+      width: 45px;
+      height: 30px;
+      padding: 4px 0;
+      box-sizing: border-box;
+      text-align: center;
+      cursor: pointer;
       position: relative;
-      color: theme.token-as-var('sys.color.primary');
-      font-weight: 700;
+      color: theme.token-as-var('sys.color.content-primary');
+      font-feature-settings: 'tnum' on, 'lnum' on, 'case' on;
 
-      &.end-date span,
-      &.start-date span {
+      & span {
+        width: 24px;
+        height: 24px;
+        display: block;
+        margin: 0 auto;
+        line-height: 24px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      &.next-month,
+      &.prev-month {
+        color: theme.token-as-var('sys.color.content-primary');
+        opacity: 0.4;
+      }
+
+      &.today {
+        position: relative;
+        color: theme.token-as-var('sys.color.primary');
+        font-weight: 700;
+
+        &.end-date span,
+        &.start-date span {
+          color: theme.token-as-var('sys.color.util.surface');
+        }
+      }
+
+      &.available:hover:not(.start-date, .end-date, .current) {
+        color: theme.token-as-var('sys.color.primary');
+      }
+
+      &.in-range {
+        background-color: theme.token-as-var('sys.color.background');
+        background-color: theme.token-as-var('sys.color.background-hover');
+      }
+
+      &.current:not(.disabled) {
+        color: theme.token-as-var('sys.color.util.surface');
+        background-color: theme.token-as-var('sys.color.primary');
+        border-radius: 2px;
+      }
+
+      &.end-date,
+      &.start-date {
+        color: theme.token-as-var('sys.color.util.surface');
+        background-color: theme.token-as-var('sys.color.primary');
+        border-radius: 2px;
+      }
+
+      &.disabled {
+        background-color: theme.token-as-var('sys.color.on-disabled');
+        opacity: 1;
+        cursor: not-allowed;
+      }
+
+      &.selected {
+        background-color: theme.token-as-var('sys.color.primary');
         color: theme.token-as-var('sys.color.util.surface');
       }
     }
 
-    &.available:hover:not(.start-date, .end-date, .current) {
-      color: theme.token-as-var('sys.color.primary');
-    }
-
-    &.in-range {
-      background-color: theme.token-as-var('sys.color.background');
-      background-color: theme.token-as-var('sys.color.background-hover');
-    }
-
-    &.current:not(.disabled) {
-      color: theme.token-as-var('sys.color.util.surface');
-      background-color: theme.token-as-var('sys.color.primary');
-      border-radius: 2px;
-    }
-
-    &.end-date,
-    &.start-date {
-      color: theme.token-as-var('sys.color.util.surface');
-      background-color: theme.token-as-var('sys.color.primary');
-      border-radius: 2px;
-    }
-
-    &.disabled {
-      background-color: theme.token-as-var('sys.color.on-disabled');
-      opacity: 1;
-      cursor: not-allowed;
-    }
-
-    &.selected {
-      background-color: theme.token-as-var('sys.color.primary');
-      color: theme.token-as-var('sys.color.util.surface');
+    &__title {
+      padding: 4px;
+      font-weight: 400;
+      border-bottom: 1px solid theme.token-as-var('sys.color.border-primary');
+      border-top: 1px solid theme.token-as-var('sys.color.border-primary');
+      color: theme.token-as-var('sys.color.content-primary');
+      text-align: center;
     }
   }
 
-  &__title {
-    padding: 4px;
-    font-weight: 400;
-    border-bottom: 1px solid theme.token-as-var('sys.color.border-primary');
-    border-top: 1px solid theme.token-as-var('sys.color.border-primary');
-    color: theme.token-as-var('sys.color.content-primary');
-    text-align: center;
+  .date-time {
+    font-size: 7px;
+    bottom: -7px;
+    opacity: 0.8;
   }
-}
-
-.date-time {
-  font-size: 7px;
-  bottom: -7px;
-  opacity: 0.8;
 }
 </style>

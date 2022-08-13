@@ -3,25 +3,15 @@ import MonthTable from './src/month-table.vue'
 import DatePanel from './date-panel.vue'
 import YearTable from './src/year-table.vue'
 import TimePanel from './time-panel.vue'
-import { options } from './presets'
 
 import { IconBasicCheckMark24, IconArrowsChevronBottom24 } from '@/components/icons'
-import { maska as vMaska } from 'maska'
+// import { maska as vMaska } from 'maska'
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { and } from '@vueuse/core'
 import { format, parse, isValid } from 'date-fns'
+import OptionsWrapper from './options-wrapper.vue'
 
-import {
-  DatePickerType,
-  RangeState,
-  DateState,
-  PickState,
-  StateStore,
-  Options,
-  PresetOption,
-  ShowState,
-  RangeOptionValue,
-} from './types'
+import { DatePickerType, RangeState, DateState, PickState, StateStore, ShowState, RangeOptionValue } from './types'
 
 interface Props {
   modelValue: Date[] | Date
@@ -180,8 +170,6 @@ const onMenuClick = (data: Date | RangeOptionValue, label: string) => {
 }
 
 const menuState = ref<string>('')
-
-const OPTIONS: PresetOption[] = options[props.type as keyof Options] || []
 
 // #endregion
 
@@ -370,11 +358,29 @@ const customInputValueDay = computed(() => {
   return formatDate(dayState.value)
 })
 
-const customInputConfig = computed(() => {
-  return {
-    mask: `##/##/####${props.time ? ', ##:##' : ''}`,
-    class: `custom-panel__input${props.time ? '_time' : ''}`,
+const customInputCssClass = computed(() => {
+  return `custom-panel__input${props.time ? '_time' : ''}`
+})
+
+function mask(this: any, event: any) {
+  const date = this.value
+  if (event.inputType === 'deleteContentBackward') {
+    return
+  } else if (date.match(/^\d{2}$/) !== null) {
+    this.value = date + '/'
+  } else if (date.match(/^\d{2}\/\d{2}$/) !== null) {
+    this.value = date + '/'
+  } else if (date.match(/^\d{2}\/\d{2}\/\d{4}$/) !== null) {
+    if (props.time) this.value = date + ', '
+  } else if (date.match(/^\d{2}\/\d{2}\/\d{4}\, \d{2}$/) !== null) {
+    this.value = date + ':'
+  } else if (date.match(/^\d{2}\/\d{2}\/\d{4}\, \d{2}\:\d{2}$/) !== null) {
+    this.value = date
   }
+}
+
+const customInputLength = computed(() => {
+  return props.time ? 17 : 10
 })
 
 // #endregion
@@ -453,20 +459,22 @@ else updateModelValue()
               v-if="props.type != 'pick'"
               class="options-panel sora-tpg-p3"
             >
-              <p
-                v-for="(item, idx) in OPTIONS"
-                :key="idx"
-                class="options-panel__item"
-                :class="menuState === item.label ? 'active' : ''"
-                @click="onMenuClick(item.value, item.label)"
-                @keydown="onMenuClick(item.value, item.label)"
-              >
-                {{ item.label }}
-                <span
-                  v-show="menuState === item.label"
-                  class="options-panel__checkmark"
-                ><IconBasicCheckMark24 /></span>
-              </p>
+              <OptionsWrapper v-slot="{ options }">
+                <p
+                  v-for="(item, idx) in options[props.type]"
+                  :key="idx"
+                  class="options-panel__item"
+                  :class="menuState === item.label ? 'active' : ''"
+                  @click="onMenuClick(item.value, item.label)"
+                  @keydown="onMenuClick(item.value, item.label)"
+                >
+                  {{ item.label }}
+                  <span
+                    v-show="menuState === item.label"
+                    class="options-panel__checkmark"
+                  ><IconBasicCheckMark24 /></span>
+                </p>
+              </OptionsWrapper>
             </div>
             <div class="calendars-panel">
               <div>
@@ -532,9 +540,10 @@ else updateModelValue()
               <div class="flex justify-center items-center">
                 <template v-if="props.type === 'range'">
                   <input
-                    v-maska="customInputConfig.mask"
+                    :oninput="mask"
+                    :maxlength="customInputLength"
                     class="custom-panel__input"
-                    :class="customInputConfig.class"
+                    :class="customInputCssClass"
                     :value="customInputValueStartDate"
                     @change="updateCustomInput($event, 'startDate')"
                   >
@@ -542,27 +551,30 @@ else updateModelValue()
                     -
                   </div>
                   <input
-                    v-maska="customInputConfig.mask"
+                    :oninput="mask"
+                    :maxlength="customInputLength"
                     class="custom-panel__input"
-                    :class="customInputConfig.class"
+                    :class="customInputCssClass"
                     :value="customInputValueEndDate"
                     @change="updateCustomInput($event, 'endDate')"
                   >
                 </template>
                 <template v-if="props.type === 'day'">
                   <input
-                    v-maska="customInputConfig.mask"
+                    :oninput="mask"
+                    :maxlength="customInputLength"
                     class="custom-panel__input"
-                    :class="customInputConfig.class"
+                    :class="customInputCssClass"
                     :value="customInputValueDay"
                     @change="updateCustomInputDay($event)"
                   >
                 </template>
                 <template v-if="props.type === 'pick' && pickState.length > 0">
                   <input
-                    v-maska="customInputConfig.mask"
+                    :oninput="mask"
+                    :maxlength="customInputLength"
                     class="custom-panel__input"
-                    :class="customInputConfig.class"
+                    :class="customInputCssClass"
                     :value="customInputValuePick"
                     @change="updateCustomInputPick($event)"
                   >

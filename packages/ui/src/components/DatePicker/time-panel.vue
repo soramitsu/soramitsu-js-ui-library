@@ -23,7 +23,7 @@ const updateTime = (e: any) => {
 </script>
 
 <template>
-  <div class="time-table sora-tpg-p4">
+  <div class="date-picker__time-table sora-tpg-p4">
     <p
       v-for="(time, idx) in timeArray"
       :key="idx"
@@ -37,9 +37,9 @@ const updateTime = (e: any) => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use '@/theme';
-.time-table {
+.date-picker__time-table {
   @apply flex flex-col items-center justify-start;
   overflow-y: scroll;
   height: 100%;

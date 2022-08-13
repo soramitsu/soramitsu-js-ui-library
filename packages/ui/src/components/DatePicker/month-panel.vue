@@ -28,7 +28,7 @@ const changeView = (viewName: string) => {
 
 <template>
   <div
-    class="header sora-tpg-p1 flex items-center"
+    class="date-picker__month-panel sora-tpg-p1 flex items-center"
     :class="hideArrows ? 'justify-center' : 'justify-between'"
   >
     <button
@@ -38,7 +38,7 @@ const changeView = (viewName: string) => {
     >
       <IconArrowsChevronLeft24 />
     </button>
-    <div class="flex justify-center items-center">
+    <div class="flex justify-center items-center header">
       <span
         role="button"
         class="header__label"
@@ -65,22 +65,24 @@ const changeView = (viewName: string) => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use '@/theme';
 
-.header {
+.date-picker__month-panel {
   height: 57px;
 
-  &__label {
-    padding: 0 5px;
-    line-height: 22px;
-    text-align: center;
-    cursor: pointer;
-    color: theme.token-as-var('sys.color.content-primary');
+  .header {
+    &__label {
+      padding: 0 5px;
+      line-height: 22px;
+      text-align: center;
+      cursor: pointer;
+      color: theme.token-as-var('sys.color.content-primary');
 
-    &.active,
-    &:hover {
-      color: theme.token-as-var('sys.color.primary');
+      &.active,
+      &:hover {
+        color: theme.token-as-var('sys.color.primary');
+      }
     }
   }
 }
