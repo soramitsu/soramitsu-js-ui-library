@@ -49,6 +49,12 @@ module.exports = {
         'vue/one-component-per-file': 'off',
       },
     },
+    {
+      files: ['**/*.spec.ts'],
+      rules: {
+        'max-nested-callbacks': 'off',
+      },
+    },
 
     // FIXME - temporary disables to fix them in a different PRs
     {

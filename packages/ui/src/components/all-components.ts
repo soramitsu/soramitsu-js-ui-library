@@ -26,6 +26,7 @@ import { SRadio, SRadioAtom, SRadioGroup } from './Radio'
 import { SCheckboxAtom, SCheckboxSolo } from './Checkbox'
 import { SBodyScrollLockProvider } from './BodyScrollLockProvider'
 import { SNavigationMenu, SNavigationMenuItem, SNavigationSubmenu } from './NavigationMenu'
+import { STable, STableColumn } from './Table'
 import { SDatePicker } from './DatePicker'
 
 /**
@@ -57,6 +58,8 @@ export const COMPONENTS: Record<string, Component> = {
   SProgressBar,
   STab,
   STabsPanel,
+  STable,
+  STableColumn,
   SBadge,
   SAccordion,
   SAccordionItem,
