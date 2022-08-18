@@ -816,6 +816,55 @@ export interface SortEventData {
     prop: string;
 }
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SPagination: DefineComponent<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+total?: number | undefined;
+pageSize?: number | null | undefined;
+currentPage?: number | undefined;
+pageSizes?: number[] | undefined;
+sizesLabel?: string | undefined;
+}>, {
+total: number;
+pageSize: null;
+currentPage: number;
+pageSizes: () => number[];
+sizesLabel: string;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"click:prev": (value: number) => void;
+} & {
+"click:next": (value: number) => void;
+} & {
+"update:currentPage": (value: number) => void;
+} & {
+"update:pageSize": (value: number) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+total?: number | undefined;
+pageSize?: number | null | undefined;
+currentPage?: number | undefined;
+pageSizes?: number[] | undefined;
+sizesLabel?: string | undefined;
+}>, {
+total: number;
+pageSize: null;
+currentPage: number;
+pageSizes: () => number[];
+sizesLabel: string;
+}>>> & {
+"onClick:prev"?: ((value: number) => any) | undefined;
+"onClick:next"?: ((value: number) => any) | undefined;
+"onUpdate:currentPage"?: ((value: number) => any) | undefined;
+"onUpdate:pageSize"?: ((value: number) => any) | undefined;
+}, {
+total: number;
+pageSize: number | null;
+currentPage: number;
+pageSizes: number[];
+sizesLabel: string;
+}>;
+
 // @public (undocumented)
 export const SPINNER_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
 
@@ -1468,15 +1517,15 @@ width: string;
 label: string;
 sortable: boolean | "custom";
 prop: string;
-className: string;
 minWidth: string;
-align: "left" | "right" | "center";
 sortMethod: <T>(a: T, b: T) => number;
 sortBy: ColumnSortBy_2;
 sortOrders: ColumnSortOrder_2[];
 formatter: ColumnCellValueFormatter_2;
 showOverflowTooltip: boolean;
+align: "left" | "right" | "center";
 headerAlign: "left" | "right" | "center" | null;
+className: string;
 labelClassName: string;
 selectable: ColumnRowSelectableFunc_2;
 reserveSelection: boolean;

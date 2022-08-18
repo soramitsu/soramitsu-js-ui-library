@@ -180,14 +180,18 @@ const tableSizes = reactive({
   width: 0,
 })
 useResizeObserver(tableWrapper, (entries) => {
-  tableSizes.width = entries[0].contentRect.width
-  tableSizes.height = entries[0].contentRect.height
+  setTimeout(() => {
+    tableSizes.width = entries[0].contentRect.width
+    tableSizes.height = entries[0].contentRect.height
+  })
 })
 
 const headerWrapper: MaybeElementRef = ref(null)
 const headerHeight = ref(0)
 useResizeObserver(headerWrapper, (entries) => {
-  headerHeight.value = entries[0].contentRect.height
+  setTimeout(() => {
+    headerHeight.value = entries[0].contentRect.height
+  })
 })
 whenever(not(showHeader), () => {
   headerHeight.value = 0
