@@ -220,8 +220,19 @@ function handlePrevClick() {
         ref="paginationLeftPanel"
         class="flex"
       >
+        <div class="s-pagination__sizes whitespace-nowrap mr-24px flex items-center">
+          <div class="s-pagination__sizes-label sora-tpg-p4 mr-8px">
+            {{ sizesLabel }}
+          </div>
+          <SDropdown
+            v-model="numericSize"
+            size="sm"
+            :options="sizeOptions"
+          />
+        </div>
+
         <div
-          class="s-pagination__count whitespace-nowrap sora-tpg-p4 mr-32px flex items-center"
+          class="s-pagination__count whitespace-nowrap sora-tpg-p4 flex items-center"
           data-testid="pagination-progress"
         >
           <slot
@@ -230,17 +241,6 @@ function handlePrevClick() {
           >
             {{ firstItemNum }}—{{ lastItemNum }} of {{ total }}
           </slot>
-        </div>
-
-        <div class="s-pagination__sizes whitespace-nowrap flex items-center">
-          <div class="s-pagination__sizes-label sora-tpg-p4 mr-16px">
-            {{ sizesLabel }}
-          </div>
-          <SDropdown
-            v-model="numericSize"
-            size="sm"
-            :options="sizeOptions"
-          />
         </div>
       </div>
     </div>
