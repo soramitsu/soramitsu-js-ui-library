@@ -279,6 +279,86 @@ it('SDropdown - show/hide by clicks', () => {
   cy.contains('OPTION').should('not.be.visible')
 })
 
+describe('Auto-close', () => {
+  const OPTIONS = [
+    { value: 'pizza', label: 'Pizza' },
+    { value: 'burger', label: 'Burger' },
+    { value: 'cocktail', label: 'Cocktail' },
+  ]
+
+  for (const component of ['SSelect', 'SDropdown']) {
+    it(`Single-choice ${component} is auto-closed after selection`, () => {
+      mount({
+        setup: () => ({
+          options: OPTIONS,
+          model: ref(null),
+        }),
+        template: `
+          <${component} v-model="model" v-bind="{ options }" label="What to consume" />
+
+          <p>Selection: {{ model || 'none' }}</p>
+        `,
+      })
+
+      cy.contains('Selection: none')
+      cy.contains('What to consume').click()
+      cy.contains('Pizza').click()
+      cy.contains('Cocktail').should('not.be.visible')
+      cy.contains('Selection: pizza')
+
+      // ensure that next selection causes auto-close as well
+      cy.contains('What to consume').click()
+      cy.contains('Cocktail').click()
+      cy.contains('Burger').should('not.be.visible')
+      cy.contains('Selection: cocktail')
+    })
+
+    it(`Multi-choice ${component} is not auto-closed after selection`, () => {
+      mount({
+        setup: () => ({
+          options: OPTIONS,
+          model: ref(null),
+        }),
+        template: `
+          <${component} v-model="model" v-bind="{ options }" label="What to consume" multiple />
+        `,
+      })
+
+      cy.contains('What to consume').click()
+      cy.contains('Burger').click()
+      cy.contains('Pizza').click()
+      cy.contains('Cocktail').should('be.visible')
+    })
+
+    it(`${component} doesn't close when 'no-auto-close' is set`, () => {
+      mount(
+        {
+          setup: () => ({
+            options: OPTIONS,
+            model: ref(null),
+          }),
+          template: `
+          <${component} v-model="model" v-bind="{ options }" label="What to consume" no-auto-close />
+        `,
+        },
+
+        {
+          global: {
+            stubs: {
+              // to enable instant re-render
+              transition: true,
+            },
+          },
+        },
+      )
+
+      cy.contains('What to consume').click()
+      cy.contains('Burger').click()
+      cy.contains('Pizza').should('be.visible')
+    })
+  }
+})
+
 it(`SDropdown - when value is selected and label is not provided, then label is not rendered`, () => {
   mount({
     setup() {
