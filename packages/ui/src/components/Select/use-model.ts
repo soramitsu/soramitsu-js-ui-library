@@ -27,13 +27,23 @@ export interface UseSelectModelParams<T> {
   multiple: Ref<boolean>
   model: Ref<null | T | T[]>
   options: Ref<SelectOption<T>[]>
+
+  singleModeAutoClose: Ref<boolean>
+  /**
+   * Should be used to actually perform menu closing
+   */
+  onAutoClose: () => void
 }
 
 export function useSelectModel<T = any>({
   multiple,
   model,
   options,
+  singleModeAutoClose,
+  onAutoClose,
 }: UseSelectModelParams<T>): UseSelectModelReturn<T> {
+  const triggerAutoClose = () => singleModeAutoClose.value && onAutoClose()
+
   const modelAsArray = computed<T[]>(() => {
     const val = model.value
     if (Array.isArray(val)) return val
@@ -54,6 +64,7 @@ export function useSelectModel<T = any>({
       model.value = [...new Set([...modelAsArray.value, value])]
     } else {
       model.value = value
+      triggerAutoClose()
     }
   }
 
@@ -62,6 +73,7 @@ export function useSelectModel<T = any>({
       model.value = modelAsArray.value.filter((x) => x !== value)
     } else {
       model.value = null
+      triggerAutoClose()
     }
   }
 
