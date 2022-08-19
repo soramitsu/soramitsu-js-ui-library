@@ -45,6 +45,7 @@ const vueCompilerTransforms = {
 export default defineConfig({
   test: {
     include: ['src/**/*.spec.ts'],
+    environment: 'happy-dom',
   },
   define: {
     'import.meta.vitest': 'undefined',
@@ -52,6 +53,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve('src'),
+      '@popperjs/core': '@popperjs/core/lib/index',
     },
   },
   plugins: [
