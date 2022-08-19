@@ -1,6 +1,6 @@
 import { InjectionKey, UnwrapRef, DeepReadonly } from 'vue'
 import { SelectOption, SelectSize } from './types'
-import { UseSelectModelReturn } from './composable.model'
+import { UseSelectModelReturn } from './use-model'
 import { forceInject } from '@/util'
 
 export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
