@@ -1,6 +1,6 @@
 import { InjectionKey, UnwrapRef, DeepReadonly } from 'vue'
 import { SelectOption, SelectSize } from './types'
-import { UseSelectModelReturn } from './tools'
+import { UseSelectModelReturn } from './use-model'
 import { forceInject } from '@/util'
 
 export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
@@ -9,8 +9,12 @@ export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelRetur
   readonly disabled: boolean
   readonly label: string | null
   readonly size: SelectSize
+  readonly noAutoClose: boolean
 
   readonly isMenuOpened: boolean
+  /**
+   * Set menu visibility manually
+   */
   menuToggle: (value?: boolean) => void
 }
 

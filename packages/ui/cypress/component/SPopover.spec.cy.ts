@@ -340,10 +340,6 @@ describe('SPopoverWrappedTransition', () => {
   it('Binding class, style & attrs to the content element')
 })
 
-it('Throws an error if no trigger slot')
-it('Throws an error if trigger slot is not a single element')
-it('Throws an error if popper slot renders more than 1 element')
-
 describe('Popper options reactivity', () => {
   it('snap: placement change')
   it('snap: distance & skidding changes')

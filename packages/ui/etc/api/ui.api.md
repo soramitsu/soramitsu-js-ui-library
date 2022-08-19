@@ -540,6 +540,7 @@ multiple?: boolean | undefined;
 label?: string | undefined;
 size?: SelectSize | undefined;
 inline?: boolean | undefined;
+noAutoClose?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
 options?: SelectOption<any>[] | undefined;
@@ -548,6 +549,7 @@ multiple?: boolean | undefined;
 label?: string | undefined;
 size?: SelectSize | undefined;
 inline?: boolean | undefined;
+noAutoClose?: boolean | undefined;
 }>>>, {}>;
 
 // @public (undocumented)
@@ -563,10 +565,11 @@ export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelRetur
     readonly isMenuOpened: boolean;
     // (undocumented)
     readonly label: string | null;
-    // (undocumented)
     menuToggle: (value?: boolean) => void;
     // (undocumented)
     readonly multiple: boolean;
+    // (undocumented)
+    readonly noAutoClose: boolean;
     // (undocumented)
     readonly options: DeepReadonly<UnwrapRef<SelectOption<T>>[]>;
     // (undocumented)
@@ -1040,6 +1043,7 @@ disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
 size?: SelectSize | undefined;
+noAutoClose?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_9<{
 modelValue?: any;
 options?: SelectOption<any>[] | undefined;
@@ -1047,6 +1051,7 @@ disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
 size?: SelectSize | undefined;
+noAutoClose?: boolean | undefined;
 }>>>, {}>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -1059,9 +1064,10 @@ multiple?: boolean | undefined;
 modelValue?: any;
 options?: SelectOption<any>[] | undefined;
 size?: SelectSize | undefined;
-label?: string | undefined;
+label?: string | null | undefined;
 mandatory?: boolean | undefined;
 syncMenuAndInputWidths?: boolean | undefined;
+noAutoClose?: boolean | undefined;
 }>, {
 size: "md";
 options: () => never[];
@@ -1069,6 +1075,8 @@ modelValue: null;
 multiple: boolean;
 disabled: boolean;
 syncMenuAndInputWidths: boolean;
+noAutoClose: boolean;
+label: null;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: any) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_9<__VLS_TypePropsToRuntimeProps_11<{
@@ -1077,9 +1085,10 @@ multiple?: boolean | undefined;
 modelValue?: any;
 options?: SelectOption<any>[] | undefined;
 size?: SelectSize | undefined;
-label?: string | undefined;
+label?: string | null | undefined;
 mandatory?: boolean | undefined;
 syncMenuAndInputWidths?: boolean | undefined;
+noAutoClose?: boolean | undefined;
 }>, {
 size: "md";
 options: () => never[];
@@ -1087,6 +1096,8 @@ modelValue: null;
 multiple: boolean;
 disabled: boolean;
 syncMenuAndInputWidths: boolean;
+noAutoClose: boolean;
+label: null;
 }>>> & {
 "onUpdate:modelValue"?: ((value: any) => any) | undefined;
 }, {
@@ -1095,7 +1106,9 @@ multiple: boolean;
 size: SelectSize;
 disabled: boolean;
 options: SelectOption[];
+label: string | null;
 syncMenuAndInputWidths: boolean;
+noAutoClose: boolean;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts

@@ -12,6 +12,7 @@ const props = defineProps<{
   label?: string
   size?: SelectSize
   inline?: boolean
+  noAutoClose?: boolean
 }>()
 
 const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : SelectButtonType.Default))
