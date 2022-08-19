@@ -871,7 +871,7 @@ export const SPINNER_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
 // @public (undocumented)
 export const SPINNER_WIDTH: Record<typeof BUTTON_SIZE_VALUES[number], string>;
 
-// @public (undocumented)
+// @public
 export const SPopover: DefineComponent<    {
 show: BooleanConstructor;
 trigger: {
@@ -1645,7 +1645,7 @@ to: string;
 apiKey: string | symbol;
 }>;
 
-// @public (undocumented)
+// @public
 export const SToastsProvider: DefineComponent<    {
 apiKey: {
 type: PropType<ProvideKey | ProvideKey[]>;
@@ -1854,7 +1854,7 @@ export function useTabsPanelApi(): TabsPanelApi;
 // dist-ts/components/Table/STable.vue.d.ts:162:5 - (ae-forgotten-export) The symbol "setCurrentRow" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:9:9 - (ae-forgotten-export) The symbol "validateVerticalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:14:9 - (ae-forgotten-export) The symbol "validateHorizontalPlacement" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Toasts/SToastsProvider.d.ts:8:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Toasts/SToastsProvider.d.ts:11:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts
 
 // (No @packageDocumentation comment for this package)
 
