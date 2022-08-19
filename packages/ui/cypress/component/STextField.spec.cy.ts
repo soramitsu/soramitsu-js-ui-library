@@ -2,6 +2,7 @@ import { Status } from '@/types'
 
 import { VueTestUtils } from 'cypress/vue'
 import { STextField } from '@/lib'
+import { Component } from 'vue'
 
 const findInput = () => cy.get('input')
 const findLabel = () => cy.get('label')
@@ -346,4 +347,24 @@ describe('Passing extra attributes', () => {
     cy.get('button').contains('inc').click()
     findInput().should('have.attr', 'data-count', 1)
   })
+})
+
+it('`<input>` is accessible throught the component instance', () => {
+  cy.mount({
+    setup() {
+      const componentRef = ref<null | (Component & { input: null | HTMLInputElement })>(null)
+      const inputElement = computed(() => componentRef.value?.input ?? null)
+
+      watch(inputElement, (el) => {
+        if (el) {
+          el.value = 'You got me'
+        }
+      })
+
+      return { componentRef }
+    },
+    template: `<STextField ref="componentRef" />`,
+  })
+
+  findInput().should('have.value', 'You got me')
 })
