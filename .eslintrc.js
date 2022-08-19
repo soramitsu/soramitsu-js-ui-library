@@ -24,7 +24,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/cypress/**/*.{j,t}s', '**/*.cy.{js,ts}'],
+      files: ['**/cypress/**/*.{j,t}s', '**/*.cy.{js,ts}', 'cypress.config.ts'],
       plugins: ['cypress'],
       extends: ['plugin:cypress/recommended'],
       env: {

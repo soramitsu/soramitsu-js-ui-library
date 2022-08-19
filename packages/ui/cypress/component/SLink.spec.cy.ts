@@ -1,4 +1,3 @@
-import { mount } from '@cypress/vue'
 import { SLink } from '@/lib'
 
 const testIdSelector = (id: string) => `[data-testid=${id}]`
@@ -9,7 +8,7 @@ describe('Link', () => {
   context('Given prop icon', () => {
     context('When it is true', () => {
       beforeEach(() => {
-        mount(SLink, {
+        cy.mount(SLink, {
           propsData: {
             icon: true,
           },
@@ -26,7 +25,7 @@ describe('Link', () => {
 
     context('When it is false', () => {
       beforeEach(() => {
-        mount(SLink, {
+        cy.mount(SLink, {
           propsData: {
             icon: false,
           },
@@ -45,7 +44,7 @@ describe('Link', () => {
   context('Given prop underline', () => {
     context('When it is solid', () => {
       beforeEach(() => {
-        mount(SLink, {
+        cy.mount(SLink, {
           propsData: {
             underline: 'solid',
           },
@@ -63,7 +62,7 @@ describe('Link', () => {
 
     context('When it is dotted', () => {
       beforeEach(() => {
-        mount(SLink, {
+        cy.mount(SLink, {
           propsData: {
             underline: 'dotted',
           },

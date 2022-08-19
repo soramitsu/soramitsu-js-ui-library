@@ -1,5 +1,4 @@
-import { mount } from '@cypress/vue'
-import { config } from '@vue/test-utils'
+import { VueTestUtils } from 'cypress/vue'
 import { Ref } from 'vue'
 import { bareMetalVModel } from '@/util'
 import { SModal, SModalCard, useModalApi, SBodyScrollLockProvider, BodyScrollLockApi } from '@/lib'
@@ -13,17 +12,17 @@ const findModal = () => findRoot().find('[data-testid=modal]')
 const findOverlay = () => findRoot().find('[data-testid=overlay]')
 
 before(() => {
-  config.global.stubs = { transition: false }
-  config.global.components = { SModal, SModalCard }
+  VueTestUtils.config.global.stubs = { transition: false }
+  VueTestUtils.config.global.components = { SModal, SModalCard }
 })
 
 after(() => {
-  config.global.stubs = {}
-  config.global.components = {}
+  VueTestUtils.config.global.stubs = {}
+  VueTestUtils.config.global.components = {}
 })
 
 it('Mounts', () => {
-  mount({
+  cy.mount({
     setup() {
       const [show, toggleShow] = useToggle(false)
 
@@ -52,7 +51,7 @@ describe('Focus trap', () => {
     mountWithoutTabbable?: boolean
     closeOnEsc?: boolean
   }) {
-    mount({
+    cy.mount({
       components: { SModal },
       setup() {
         const props = objectPick(params || {}, ['focusTrap', 'eager', 'closeOnEsc'])
@@ -165,7 +164,7 @@ describe('Some tests with simple modal with focus trap', () => {
     showOverlay?: boolean
     absolute?: boolean
   }) {
-    return mount({
+    return cy.mount({
       components: { SModal },
       setup() {
         const show = ref(false)
@@ -262,7 +261,7 @@ describe('Some tests with simple modal with focus trap', () => {
 
 describe('Teleportation', () => {
   it('Teleports to body by default', () => {
-    mount(() =>
+    cy.mount(() =>
       h(
         SModal,
         {
@@ -277,7 +276,7 @@ describe('Teleportation', () => {
   })
 
   it('Teleports to custom target', () => {
-    mount(() => [
+    cy.mount(() => [
       h('div', { id: 'anchor' }),
       h(
         SModal,
@@ -294,7 +293,7 @@ describe('Teleportation', () => {
   })
 
   it('No teleportation at all if target is null', () => {
-    mount(() => [
+    cy.mount(() => [
       h('div', { 'data-cy': 'anchor' }, [
         h(
           SModal as any,
@@ -320,7 +319,7 @@ describe('Classes & styles applying', () => {
   type Params = Partial<GenStyleClass<'root' | 'modal' | 'overlay'>>
 
   function mountFactory(params?: Params) {
-    mount(() =>
+    cy.mount(() =>
       h(
         SModal,
         {
@@ -408,7 +407,7 @@ describe('Modal API', () => {
       },
     })
 
-    mount(ModalMounter)
+    cy.mount(ModalMounter)
 
     cy.contains('Open modal').click()
     cy.contains('Close modal from inner slot').click()
@@ -418,7 +417,7 @@ describe('Modal API', () => {
 
 describe('Scroll Lock', () => {
   function mountFactory(params?: { lockScroll?: boolean }) {
-    return mount({
+    return cy.mount({
       setup() {
         const show = ref(false)
 
@@ -493,7 +492,7 @@ describe('Scroll Lock', () => {
 
 describe('Emitting of click:overlay', () => {
   function mountFactory(params?: { closeOnOverlayClick?: boolean }) {
-    return mount({
+    return cy.mount({
       setup() {
         const emitted = ref(false)
         return () => [
@@ -543,7 +542,7 @@ it('Open-closed events', () => {
     EMITTED.splice(0, 99)
   }
 
-  mount({
+  cy.mount({
     setup() {
       const show = ref(false)
 
@@ -602,7 +601,7 @@ it('Open-closed events', () => {
 
 describe('Eagering', () => {
   function mountFactory(params?: { eager?: boolean }) {
-    mount({
+    cy.mount({
       components: { SModal },
       setup() {
         const show = ref(false)
@@ -681,7 +680,7 @@ describe('SModalCard', () => {
   const findCloseBtn = () => cy.get('[data-testid=btn-close]')
 
   it('When "close" SModalCard button is clicked, then modal is closed', () => {
-    mount({
+    cy.mount({
       setup() {
         return {
           show: ref(true),
@@ -706,7 +705,7 @@ describe('SModalCard', () => {
   })
 
   it('When "close" prop is false, then close button does not exist', () => {
-    mount({
+    cy.mount({
       template: `
         <SModal show :focus-trap="false">
           <SModalCard :close="false" data-testid="card">
@@ -724,7 +723,7 @@ describe('SModalCard', () => {
 
 describe('A11y', () => {
   it('When `labelledBy` of SModal is used, then a11y is ok', () => {
-    mount({
+    cy.mount({
       template: `
         <SModal show v-slot="{ labelledBy }">
           <h2 :id="labelledBy">
@@ -743,7 +742,7 @@ describe('A11y', () => {
   it('When `labelled-by` prop is set, then its value is used for label', () => {
     const CUSTOM_LABEL_ID = 'custom-id'
 
-    mount({
+    cy.mount({
       template: `
         <SModal show labelled-by="${CUSTOM_LABEL_ID}" v-slot="{ labelledBy }">
           <h2 :id="labelledBy">Label</h2>
@@ -759,7 +758,7 @@ describe('A11y', () => {
   })
 
   it('When two different modals are rendered, they have different generated labels', () => {
-    mount({
+    cy.mount({
       setup() {
         return {
           show: ref(true),
@@ -790,7 +789,7 @@ describe('A11y', () => {
   })
 
   it('When SModalCard is used, then label id is automatically set and its title is a <h2>', () => {
-    mount({
+    cy.mount({
       template: `
         <SModal show>
           <SModalCard>
@@ -809,7 +808,7 @@ describe('A11y', () => {
   })
 
   it('When `described-by` is set on SModal, its aria attr is set', () => {
-    mount({
+    cy.mount({
       template: `
         <SModal show described-by="desc1">
           <SModalCard>

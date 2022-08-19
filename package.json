@@ -10,7 +10,7 @@
     "test:all": "run-s lint:check test:theme:unit build:vite-plugin-svg test:ui:unit build:theme test:ui:cy build:ui:only-vite test:ui:after-build",
     "test:theme:unit": "yarn --cwd packages/theme test",
     "test:ui:unit": "yarn --cwd packages/ui test:unit",
-    "test:ui:cy": "yarn --cwd packages/ui cy:ci",
+    "test:ui:cy": "yarn --cwd packages/ui cy:ci:component",
     "test:ui:after-build": "yarn --cwd packages/ui test:after-build",
     "build": "run-s build:theme build:vite-plugin-svg build:ui",
     "build:theme": "yarn --cwd packages/theme build",

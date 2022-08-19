@@ -1,4 +1,3 @@
-import { mount } from '@cypress/vue'
 import { defineComponent } from 'vue'
 import { useNotifications, SNotificationsProvider } from '@/lib'
 
@@ -22,7 +21,7 @@ describe('useNotifications()', () => {
       `,
     })
 
-    mount({
+    cy.mount({
       components: {
         SNotificationsProvider,
         Trigger,

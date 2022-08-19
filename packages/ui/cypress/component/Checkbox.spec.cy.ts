@@ -1,17 +1,16 @@
-import { mount } from '@cypress/vue'
-import { config } from '@vue/test-utils'
+import { VueTestUtils } from 'cypress/vue'
 import { SCheckboxSolo, CHECKBOX_SIZE_VALUES } from '@/components/Checkbox'
 
 before(() => {
-  config.global.components = { SCheckboxSolo }
+  VueTestUtils.config.global.components = { SCheckboxSolo }
 })
 
 after(() => {
-  config.global.components = {}
+  VueTestUtils.config.global.components = {}
 })
 
 it('Play', () => {
-  mount({
+  cy.mount({
     setup() {
       return {
         sizes: CHECKBOX_SIZE_VALUES,
@@ -51,7 +50,7 @@ describe('SCheckboxSolo', () => {
   const findCheckbox = () => cy.get('[role=checkbox]')
 
   it('When it is disabled, it is not tabbable', () => {
-    mount({
+    cy.mount({
       template: `
         <SCheckboxSolo disabled>
           I should be not tabbable

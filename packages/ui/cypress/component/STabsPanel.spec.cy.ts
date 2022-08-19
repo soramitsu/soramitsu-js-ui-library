@@ -1,20 +1,19 @@
-import { mount } from '@cypress/vue'
-import { config } from '@vue/test-utils'
+import { VueTestUtils } from 'cypress/vue'
 import { STabsPanel, STab, useTabsPanelApi, TabsPanelApi } from '@/lib'
 
 before(() => {
-  config.global.components = { STabsPanel, STab }
+  VueTestUtils.config.global.components = { STabsPanel, STab }
 })
 
 after(() => {
-  config.global.components = {}
+  VueTestUtils.config.global.components = {}
 })
 
 describe('STabsPanel', () => {
   const getEl = (id: string) => cy.get(`[data-cy=${id}]`)
 
   it('The first and the last tabs in Panel have border-radius', () => {
-    mount({
+    cy.mount({
       template: `
       <STabsPanel>
         <STab :name="'left'" data-cy="left">left</STab>
@@ -30,7 +29,7 @@ describe('STabsPanel', () => {
   })
 
   it('Disabled prop works correctly', () => {
-    mount({
+    cy.mount({
       template: `
         <STabsPanel>
           <STab :disabled="true" data-cy="disabled">disabled</STab>
@@ -43,7 +42,7 @@ describe('STabsPanel', () => {
   })
 
   it('When background prop on STabsPanel is set to primary, then STab background is set accordingly', () => {
-    mount({
+    cy.mount({
       template: `
         <STabsPanel :background="'primary'" data-cy="primary">
           <STab data-cy="tabName" :name="tabName">TabTitle</STab>
@@ -54,7 +53,7 @@ describe('STabsPanel', () => {
   })
 
   it('When background prop on STabsPanel is set to secondary, then STab background is set accordingly', () => {
-    mount({
+    cy.mount({
       template: `
         <STabsPanel :background="'secondary'" data-cy="secondary">
           <STab data-cy="tabName" :name="tabName">TabTitle</STab>
@@ -65,7 +64,7 @@ describe('STabsPanel', () => {
   })
 
   it('When background prop on STabsPanel is set to none, then STab background is set accordingly', () => {
-    mount({
+    cy.mount({
       template: `
         <STabsPanel :background="'none'" data-cy="none">
           <STab data-cy="tabName" :name="tabName">TabTitle</STab>
@@ -76,7 +75,7 @@ describe('STabsPanel', () => {
   })
 
   it('Click on tab makes this tab active', () => {
-    mount({
+    cy.mount({
       template: `
       <div data-cy="currentValue">{{currentTab}}</div>
             <STabsPanel v-model="currentTab">
@@ -103,7 +102,7 @@ describe('STabsPanel', () => {
   })
 
   it('If active tab goes disabled, modelValue become empty string', () => {
-    mount({
+    cy.mount({
       template: `
       <div data-cy="currentValue">{{currentTab}}</div>
             <STabsPanel v-model="currentTab">
@@ -150,7 +149,7 @@ describe('STabsPanel', () => {
       template: `<button @click="activateTab">button</button>`,
     })
 
-    mount({
+    cy.mount({
       components: { CustomTab },
       template: `
             <div data-cy="currentValue">{{currentTab}}</div>

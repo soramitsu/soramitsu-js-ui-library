@@ -1,10 +1,9 @@
-import { mount } from '@cypress/vue'
 import { ref } from 'vue'
 import { Status } from '@/types'
 import { SAlert } from '@/lib'
 
 it('Different statuses', () => {
-  mount({
+  cy.mount({
     components: { SAlert },
     data: () => ({ items: Object.values(Status) }),
     template: `
@@ -27,7 +26,7 @@ it('Different statuses', () => {
 
 describe('Close button', () => {
   function scene() {
-    mount({
+    cy.mount({
       components: { SAlert },
       setup() {
         const showCloseBtn = ref(false)

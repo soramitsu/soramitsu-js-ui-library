@@ -1,15 +1,14 @@
-import { mount } from '@cypress/vue'
 import { SPagination } from '@/lib'
-import { config } from '@vue/test-utils'
+import { VueTestUtils } from 'cypress/vue'
 
 const testIdSelector = (id: string) => `[data-testid=${id}]`
 
 before(() => {
-  config.global.components = { SPagination }
+  VueTestUtils.config.global.components = { SPagination }
 })
 
 after(() => {
-  config.global.components = {}
+  VueTestUtils.config.global.components = {}
 })
 
 describe('Pagination', () => {
@@ -22,7 +21,7 @@ describe('Pagination', () => {
 
   context(`Given pagination`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         setup() {
           return {
             total: TOTAL,
@@ -100,7 +99,7 @@ describe('Pagination', () => {
 
   context(`Given pagination with a few pages`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         setup() {
           return {
             total: TOTAL,

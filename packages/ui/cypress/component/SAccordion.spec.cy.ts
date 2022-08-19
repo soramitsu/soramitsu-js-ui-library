@@ -1,4 +1,3 @@
-import { mount } from '@cypress/vue'
 import { SAccordionItem, SAccordion } from '@/lib'
 
 const testIdSelector = (id: string) => `[data-testid=${id}]`
@@ -9,7 +8,7 @@ describe('Accordion', () => {
   context(`Given closed accordion item's trigger`, () => {
     context('When it is clicked', () => {
       beforeEach(() => {
-        mount(SAccordionItem, {
+        cy.mount(SAccordionItem, {
           propsData: {
             title: 'Soramitsu',
           },
@@ -31,7 +30,7 @@ describe('Accordion', () => {
 
   context(`Given default accordion`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         components: {
           SAccordion,
           SAccordionItem,
@@ -73,7 +72,7 @@ describe('Accordion', () => {
 
   context(`Given accordion with 'multiple' prop`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         components: {
           SAccordion,
           SAccordionItem,
