@@ -103,7 +103,7 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, Design
   /**
    * Button tabindex
    */
-  @Prop({ default: '0', type: String }) readonly tabindex!: string
+  @Prop({ default: 0, type: Number }) readonly tabindex!: number
   /**
    * Placement of the tooltip. You can use any value from the `TooltipPlacement` enum.
    *
@@ -202,7 +202,7 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, Design
   }
 
   mounted (): void {
-    this.$el.setAttribute('tabindex', this.tabindex)
+    this.$el.setAttribute('tabindex', this.tabindex.toString())
     this.$watch('loading', (value) => {
       if (!value) {
         return

@@ -154,7 +154,7 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
   /**
    * Input tabindex
    */
-  @Prop({ default: '', type: String }) readonly tabindex!: string
+  @Prop({ default: 0, type: Number }) readonly tabindex!: number
   /**
    * Icon prefix, works only with medium input
    */
