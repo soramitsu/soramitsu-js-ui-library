@@ -287,7 +287,7 @@ describe('Auto-close', () => {
 
   for (const component of ['SSelect', 'SDropdown']) {
     it(`Single-choice ${component} is auto-closed after selection`, () => {
-      mount({
+      cy.mount({
         setup: () => ({
           options: OPTIONS,
           model: ref(null),
@@ -313,7 +313,7 @@ describe('Auto-close', () => {
     })
 
     it(`Multi-choice ${component} is not auto-closed after selection`, () => {
-      mount({
+      cy.mount({
         setup: () => ({
           options: OPTIONS,
           model: ref(null),
@@ -330,7 +330,7 @@ describe('Auto-close', () => {
     })
 
     it(`${component} doesn't close when 'no-auto-close' is set`, () => {
-      mount(
+      cy.mount(
         {
           setup: () => ({
             options: OPTIONS,
