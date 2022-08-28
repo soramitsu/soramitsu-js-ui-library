@@ -103,7 +103,7 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, Design
   /**
    * Button tabindex
    */
-  @Prop({ default: 0, type: Number }) readonly tabindex!: number
+  @Prop({ default: 0, type: [Number, String] }) readonly tabindex!: number | string
   /**
    * Placement of the tooltip. You can use any value from the `TooltipPlacement` enum.
    *
