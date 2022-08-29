@@ -2,7 +2,7 @@ import { DirectiveOptions } from 'vue'
 
 import KeyValues from '../utils/KeyValues'
 
-const onDigitKeyPress = (e: any) => {
+const onDigitKeyDown = (e: any) => {
   if (!KeyValues.isDigit(e.key)) {
     e.preventDefault()
   } else {
@@ -10,7 +10,7 @@ const onDigitKeyPress = (e: any) => {
   }
 }
 
-const onNumberKeyPress = (e: any) => {
+const onNumberKeyDown = (e: any) => {
   if (!KeyValues.isNumber(e.key) || (!KeyValues.isDigit(e.key) && e.target.value.includes('.'))) {
     e.preventDefault()
   } else {
@@ -23,8 +23,8 @@ export const Integer = {
     const input = el.querySelector('input[type="text"]') as HTMLInputElement
     if (input) {
       input.addEventListener(
-        'keypress',
-        onDigitKeyPress
+        'keydown',
+        onDigitKeyDown
       )
     }
   },
@@ -32,8 +32,8 @@ export const Integer = {
     const input = el.querySelector('input[type="text"]') as HTMLInputElement
     if (input) {
       input.removeEventListener(
-        'keypress',
-        onDigitKeyPress
+        'keydown',
+        onDigitKeyDown
       )
     }
   }
@@ -44,8 +44,8 @@ export const Float = {
     const input = el.querySelector('input[type="text"]') as HTMLInputElement
     if (input) {
       input.addEventListener(
-        'keypress',
-        onNumberKeyPress
+        'keydown',
+        onNumberKeyDown
       )
     }
   },
@@ -53,8 +53,8 @@ export const Float = {
     const input = el.querySelector('input[type="text"]') as HTMLInputElement
     if (input) {
       input.removeEventListener(
-        'keypress',
-        onNumberKeyPress
+        'keydown',
+        onNumberKeyDown
       )
     }
   }

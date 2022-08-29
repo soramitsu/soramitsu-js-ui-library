@@ -10,7 +10,7 @@
     :hide-on-click="hideOnClick"
     :show-timeout="showTimeout"
     :hide-timeout="hideTimeout"
-    :tabindex="tabindex"
+    :tabindex="tabindexFormatted"
     @click="handleClick"
     @command="handleSelect"
     @visible-change="handleVisibleChange"
@@ -129,7 +129,7 @@ export default class SDropdown extends Mixins(SizeMixin, BorderRadiusMixin) {
    *
    * `0` by default
    */
-  @Prop({ type: Number, default: 0 }) readonly tabindex!: number
+  @Prop({ type: [Number, String], default: 0 }) readonly tabindex!: number | string
   /**
    * Popper class
    */
@@ -138,6 +138,10 @@ export default class SDropdown extends Mixins(SizeMixin, BorderRadiusMixin) {
   @Ref('dropdown') dropdown!: ElDropdown
 
   willTooltipBeDisabled = false
+
+  get tabindexFormatted (): number {
+    return +this.tabindex
+  }
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
