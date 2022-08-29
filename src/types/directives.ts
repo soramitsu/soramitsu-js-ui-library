@@ -1,4 +1,5 @@
 export enum Directives {
   Float = 'Float',
-  Integer = 'Integer'
+  Integer = 'Integer',
+  Button = 'Button'
 }

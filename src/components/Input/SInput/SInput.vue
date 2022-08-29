@@ -28,7 +28,7 @@
           :form="form"
           :label="label"
           :accept="accept"
-          :tabindex="tabindex"
+          :tabindex="tabindexFormatted"
           :prefix-icon="prefix"
           :suffix-icon="suffix"
           :rows="rows"
@@ -154,7 +154,7 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
   /**
    * Input tabindex
    */
-  @Prop({ default: '', type: String }) readonly tabindex!: string
+  @Prop({ default: 0, type: [Number, String] }) readonly tabindex!: number | string
   /**
    * Icon prefix, works only with medium input
    */
@@ -212,6 +212,10 @@ export default class SInput extends Mixins(BorderRadiusMixin, DesignSystemInject
 
   get isBigInput (): boolean {
     return (this.type === InputType.TEXT && this.size === InputSize.BIG) || (this.type === InputType.TEXTAREA)
+  }
+
+  get tabindexFormatted (): string {
+    return this.tabindex.toString()
   }
 
   get computedClasses (): Array<string> {

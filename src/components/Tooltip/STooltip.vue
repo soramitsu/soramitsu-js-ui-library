@@ -14,7 +14,7 @@
     :popper-class="computedPopperClass"
     :manual="manual"
     :hide-after="hideAfter"
-    :tabindex="tabindex"
+    :tabindex="tabindexFormatted"
   >
     <slot slot="content" name="content"></slot>
     <slot></slot>
@@ -116,11 +116,15 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
    *
    * `0` by default
    */
-  @Prop({ default: 0, type: Number }) readonly tabindex!: number
+  @Prop({ default: 0, type: [Number, String] }) readonly tabindex!: number | string
 
   @Ref('tooltip') tooltip!: any
 
   @Getter libraryTheme!: Theme
+
+  get tabindexFormatted (): number {
+    return +this.tabindex
+  }
 
   get computedPopperClass (): string {
     const cssClasses: Array<string> = []
