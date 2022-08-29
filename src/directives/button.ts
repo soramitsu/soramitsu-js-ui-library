@@ -2,7 +2,7 @@ import { DirectiveOptions } from 'vue'
 
 import KeyValues from '../utils/KeyValues'
 
-const onEnterKeyPress = (e: any) => {
+const onEnterKeyDown = (e: any) => {
   if (KeyValues.isEnter(e.key)) {
     e.preventDefault()
     e.target.click()
@@ -15,8 +15,8 @@ export const Button = {
       const button = el as HTMLDivElement
       button.setAttribute('role', 'button')
       button.addEventListener(
-        'keypress',
-        onEnterKeyPress
+        'keydown',
+        onEnterKeyDown
       )
     }
   },
@@ -25,8 +25,8 @@ export const Button = {
       const button = el as HTMLDivElement
       button.removeAttribute('role')
       button.removeEventListener(
-        'keypress',
-        onEnterKeyPress
+        'keydown',
+        onEnterKeyDown
       )
     }
   }
