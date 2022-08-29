@@ -54,7 +54,7 @@ import {
   STableColumn,
   STooltip
 } from './components'
-import { Float, Integer } from './directives'
+import { Float, Integer, Button } from './directives'
 import { Components } from './types/components'
 import { Directives } from './types/directives'
 import { setTheme, setDesignSystem, setLocale } from './utils'
@@ -72,6 +72,7 @@ const SoramitsuElements = {
     vue.use(ElementUIPlugin)
     vue.directive(Directives.Float, Float)
     vue.directive(Directives.Integer, Integer)
+    vue.directive(Directives.Button, Button)
     vue.use(SApp)
     vue.use(SAside)
     vue.use(SBreadcrumb)
