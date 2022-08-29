@@ -22,6 +22,7 @@ test('ESM build should be tree-shakeable', async () => {
         // there is no need to check whether Vue itself is tree-shakeable
         external: ['vue'],
       },
+      minify: false,
     },
   })
 
