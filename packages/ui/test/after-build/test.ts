@@ -1,7 +1,7 @@
 import { test, expect } from 'vitest'
 import * as vite from 'vite'
 import path from 'path'
-import fs from 'fs/promises'
+import fs from 'fs'
 
 const resolve = (...paths: string[]) => path.resolve(__dirname, ...paths)
 
@@ -18,16 +18,20 @@ test('ESM build should be tree-shakeable', async () => {
         formats: ['es'],
         fileName: 'output',
       },
+      rollupOptions: {
+        // there is no need to check whether Vue itself is tree-shakeable
+        external: ['vue'],
+      },
     },
   })
 
-  const outputContents = await fs.readFile(resolve(ESM_TREE_SHAKING_TEST_LIB_DIR, 'dist/output.es.js'), {
+  const outputContents = fs.readFileSync(resolve(ESM_TREE_SHAKING_TEST_LIB_DIR, 'dist/output.mjs'), {
     encoding: 'utf-8',
   })
 
-  expect(outputContents.length).toBeLessThan(1_000)
   expect(outputContents).toMatchInlineSnapshot(`
-    "function somePureFunction() {
+    "import \\"vue\\";
+    function somePureFunction() {
       return 42;
     }
     console.log(somePureFunction());
@@ -35,9 +39,9 @@ test('ESM build should be tree-shakeable', async () => {
   `)
 })
 
-test('ESM/CJS builds should not have a `data-testid` attribute', async () => {
+test('ESM/CJS builds should not have a `data-testid` attribute', () => {
   for (const file of [LIB_BUNDLE_CJS_FILE, LIB_BUNDLE_ESM_FILE]) {
-    const contents = await fs.readFile(file, { encoding: 'utf-8' })
+    const contents = fs.readFileSync(file, { encoding: 'utf-8' })
     expect(contents).not.toMatch(/data-testid/)
   }
 })
