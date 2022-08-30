@@ -41,7 +41,7 @@ const decimalsValidator = x => x === undefined || x >= 0
     SInput
   },
   directives: {
-    float: Float as any // TODO: fix type
+    float: Float
   }
 })
 export default class SFloatInput extends Vue {

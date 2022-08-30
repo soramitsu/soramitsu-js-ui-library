@@ -22,6 +22,7 @@ export default {
     'src/types/Locale.ts',
     'src/types/Theme.ts',
     'src/types/components.ts',
+    'src/types/directives.ts',
     'src/types/index.ts',
     'src/locale/index.ts',
     'src/plugins/*.ts',
