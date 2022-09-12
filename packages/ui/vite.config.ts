@@ -23,6 +23,18 @@ const vueCompilerTransforms = {
               node.props.splice(i, 1)
               i--
             }
+
+            if (
+              p &&
+              p.type === 7 /* NodeTypes.DIRECTIVE */ &&
+              p.name === 'bind' &&
+              p.arg &&
+              'content' in p.arg &&
+              p.arg.content === attr
+            ) {
+              node.props.splice(i, 1)
+              i--
+            }
           }
         }
       }
@@ -33,6 +45,7 @@ const vueCompilerTransforms = {
 export default defineConfig({
   test: {
     include: ['src/**/*.spec.ts'],
+    environment: 'happy-dom',
   },
   define: {
     'import.meta.vitest': 'undefined',
@@ -40,6 +53,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve('src'),
+      '@popperjs/core': '@popperjs/core/lib/index',
     },
   },
   plugins: [

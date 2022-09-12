@@ -561,6 +561,7 @@ multiple?: boolean | undefined;
 label?: string | undefined;
 size?: SelectSize | undefined;
 inline?: boolean | undefined;
+noAutoClose?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
 options?: SelectOption<any>[] | undefined;
@@ -569,6 +570,7 @@ multiple?: boolean | undefined;
 label?: string | undefined;
 size?: SelectSize | undefined;
 inline?: boolean | undefined;
+noAutoClose?: boolean | undefined;
 }>>>, {}>;
 
 // @public (undocumented)
@@ -584,10 +586,11 @@ export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelRetur
     readonly isMenuOpened: boolean;
     // (undocumented)
     readonly label: string | null;
-    // (undocumented)
     menuToggle: (value?: boolean) => void;
     // (undocumented)
     readonly multiple: boolean;
+    // (undocumented)
+    readonly noAutoClose: boolean;
     // (undocumented)
     readonly options: DeepReadonly<UnwrapRef<SelectOption<T>>[]>;
     // (undocumented)
@@ -837,6 +840,55 @@ export interface SortEventData {
     prop: string;
 }
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const SPagination: DefineComponent<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
+total?: number | undefined;
+pageSize?: number | null | undefined;
+currentPage?: number | undefined;
+pageSizes?: number[] | undefined;
+sizesLabel?: string | undefined;
+}>, {
+total: number;
+pageSize: null;
+currentPage: number;
+pageSizes: () => number[];
+sizesLabel: string;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"click:prev": (value: number) => void;
+} & {
+"click:next": (value: number) => void;
+} & {
+"update:currentPage": (value: number) => void;
+} & {
+"update:pageSize": (value: number) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
+total?: number | undefined;
+pageSize?: number | null | undefined;
+currentPage?: number | undefined;
+pageSizes?: number[] | undefined;
+sizesLabel?: string | undefined;
+}>, {
+total: number;
+pageSize: null;
+currentPage: number;
+pageSizes: () => number[];
+sizesLabel: string;
+}>>> & {
+"onClick:prev"?: ((value: number) => any) | undefined;
+"onClick:next"?: ((value: number) => any) | undefined;
+"onUpdate:currentPage"?: ((value: number) => any) | undefined;
+"onUpdate:pageSize"?: ((value: number) => any) | undefined;
+}, {
+total: number;
+pageSize: number | null;
+currentPage: number;
+pageSizes: number[];
+sizesLabel: string;
+}>;
+
 // @public (undocumented)
 export const SPINNER_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
 
@@ -1012,6 +1064,7 @@ disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
 size?: SelectSize | undefined;
+noAutoClose?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_9<{
 modelValue?: any;
 options?: SelectOption<any>[] | undefined;
@@ -1019,6 +1072,7 @@ disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
 size?: SelectSize | undefined;
+noAutoClose?: boolean | undefined;
 }>>>, {}>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -1031,9 +1085,10 @@ multiple?: boolean | undefined;
 modelValue?: any;
 options?: SelectOption<any>[] | undefined;
 size?: SelectSize | undefined;
-label?: string | undefined;
+label?: string | null | undefined;
 mandatory?: boolean | undefined;
 syncMenuAndInputWidths?: boolean | undefined;
+noAutoClose?: boolean | undefined;
 }>, {
 size: "md";
 options: () => never[];
@@ -1041,6 +1096,8 @@ modelValue: null;
 multiple: boolean;
 disabled: boolean;
 syncMenuAndInputWidths: boolean;
+noAutoClose: boolean;
+label: null;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: any) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_9<__VLS_TypePropsToRuntimeProps_11<{
@@ -1049,9 +1106,10 @@ multiple?: boolean | undefined;
 modelValue?: any;
 options?: SelectOption<any>[] | undefined;
 size?: SelectSize | undefined;
-label?: string | undefined;
+label?: string | null | undefined;
 mandatory?: boolean | undefined;
 syncMenuAndInputWidths?: boolean | undefined;
+noAutoClose?: boolean | undefined;
 }>, {
 size: "md";
 options: () => never[];
@@ -1059,6 +1117,8 @@ modelValue: null;
 multiple: boolean;
 disabled: boolean;
 syncMenuAndInputWidths: boolean;
+noAutoClose: boolean;
+label: null;
 }>>> & {
 "onUpdate:modelValue"?: ((value: any) => any) | undefined;
 }, {
@@ -1067,7 +1127,9 @@ multiple: boolean;
 size: SelectSize;
 disabled: boolean;
 options: SelectOption[];
+label: string | null;
 syncMenuAndInputWidths: boolean;
+noAutoClose: boolean;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -1489,15 +1551,15 @@ width: string;
 label: string;
 sortable: boolean | "custom";
 prop: string;
-className: string;
 minWidth: string;
-align: "left" | "right" | "center";
 sortMethod: <T>(a: T, b: T) => number;
 sortBy: ColumnSortBy_2;
 sortOrders: ColumnSortOrder_2[];
 formatter: ColumnCellValueFormatter_2;
 showOverflowTooltip: boolean;
+align: "left" | "right" | "center";
 headerAlign: "left" | "right" | "center" | null;
+className: string;
 labelClassName: string;
 selectable: ColumnRowSelectableFunc_2;
 reserveSelection: boolean;

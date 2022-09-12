@@ -27,6 +27,7 @@ import { SCheckboxAtom, SCheckboxSolo } from './Checkbox'
 import { SBodyScrollLockProvider } from './BodyScrollLockProvider'
 import { SNavigationMenu, SNavigationMenuItem, SNavigationSubmenu } from './NavigationMenu'
 import { STable, STableColumn } from './Table'
+import { SPagination } from './Pagination'
 import { SDatePicker } from './DatePicker'
 
 /**
@@ -74,5 +75,6 @@ export const COMPONENTS: Record<string, Component> = {
   SNavigationMenu,
   SNavigationMenuItem,
   SNavigationSubmenu,
+  SPagination,
   SDatePicker,
 }

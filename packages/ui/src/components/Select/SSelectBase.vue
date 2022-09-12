@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { SelectSize, SelectOption } from './types'
-import { useSelectModel } from './tools'
+import { useSelectModel } from './use-model'
 import { SelectApi, SELECT_API_KEY } from './api'
-import { and } from '@vueuse/core'
+import { and, not } from '@vueuse/core'
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 
 const props = withDefaults(
@@ -18,7 +18,7 @@ const props = withDefaults(
     /**
      * This value is used if `label` slot is missing
      */
-    label?: string
+    label?: string | null
 
     /**
      * TODO
@@ -33,6 +33,14 @@ const props = withDefaults(
      * TODO
      */
     syncMenuAndInputWidths?: boolean
+
+    /**
+     * By default the component will close its dropdown when the value is selected.
+     * **Works only in single mode.**.
+     *
+     * Turn on this prop to disable auto-close.
+     */
+    noAutoClose?: boolean
   }>(),
   {
     size: SelectSize.Md,
@@ -41,22 +49,22 @@ const props = withDefaults(
     multiple: false,
     disabled: false,
     syncMenuAndInputWidths: false,
+    noAutoClose: false,
+    label: null,
   },
 )
 
 const emit = defineEmits<(event: 'update:modelValue', value: any) => void>()
 
 const model = useVModel(props, 'modelValue', emit)
-const multiple = computed<boolean>(() => props.multiple)
-const disabled = computed<boolean>(() => props.disabled)
-const options = computed<SelectOption[]>(() => props.options)
-const size = computed(() => props.size)
-const label = computed<string | null>(() => props.label ?? null)
+const { multiple, disabled, options, size, label, noAutoClose } = toRefs(props)
 
 const modeling = useSelectModel({
   model,
   multiple,
   options,
+  singleModeAutoClose: not(noAutoClose),
+  onAutoClose: () => togglePopper(false),
 })
 
 const [showPopper, togglePopper] = useToggle(false)
@@ -64,7 +72,7 @@ const [showPopper, togglePopper] = useToggle(false)
 // close popper if select is disabled
 whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
 
-const api: SelectApi<any> = readonly({
+const api = readonly({
   ...modeling,
   multiple,
   options,
@@ -73,7 +81,8 @@ const api: SelectApi<any> = readonly({
   isMenuOpened: showPopper,
   menuToggle: togglePopper,
   size,
-})
+  noAutoClose,
+}) as SelectApi<any>
 
 provide(SELECT_API_KEY, api)
 </script>
