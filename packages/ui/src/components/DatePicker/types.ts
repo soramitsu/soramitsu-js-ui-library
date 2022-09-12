@@ -1,5 +1,7 @@
 export type DatePickerType = 'day' | 'range' | 'pick'
 
+export type ModelValueType = Date[] | Date | null | undefined
+
 export interface RangeState {
   selecting: boolean
   startDate: Date | null

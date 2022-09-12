@@ -1,24 +1,22 @@
 <script setup lang="ts">
-import MonthPanel from './month-panel.vue'
-import DateTable from './src/date-table.vue'
+import MonthPanel from './SDatePickerPanelMonths.vue'
+import DateTable from './SDatePickerTableDate.vue'
 
-import { DatePickerType, StateStore, ShowState } from './types'
+import { ShowState, StateStore } from './types'
 
 interface Props {
   showState: ShowState
-  hideArrows: boolean
+  hideArrows?: boolean
   value: Date | Date[]
-  time: boolean
-  selectionMode: DatePickerType
   stateStore: StateStore
+  hoveredDate: Date
 }
 
 const props = withDefaults(defineProps<Props>(), {
   hideArrows: false,
-  time: false,
 })
 
-const emit = defineEmits(['updateShowedState', 'changeView', 'pick'])
+const emit = defineEmits(['updateShowedState', 'changeView', 'pick', 'updateHoveredDate'])
 
 const updateShowedState = (deltaMonth: number) => {
   emit('updateShowedState', deltaMonth)
@@ -31,26 +29,30 @@ const changeView = (viewName: string) => {
 const onDatePick = (data: any) => {
   emit('pick', data)
 }
+
+const updateHoveredDate = (date: Date) => {
+  emit('updateHoveredDate', date)
+}
 </script>
 
 <template>
   <div class="flex flex-col justify-start items-center">
     <MonthPanel
       class="w-full"
-      :show-month="showState.month"
-      :show-year="showState.year"
+      :show-state="showState"
       :hide-arrows="hideArrows"
+      :hovered-date="hoveredDate"
       @update-showed-state="updateShowedState"
       @change-view="changeView"
     />
     <DateTable
       :value="value"
-      :time="props.time"
-      :selection-mode="selectionMode"
       :show-state="showState"
       :state-store="stateStore"
+      :hovered-date="hoveredDate"
       @pick="onDatePick"
       @update-showed-state="updateShowedState"
+      @update-hovered-date="updateHoveredDate"
     />
   </div>
 </template>

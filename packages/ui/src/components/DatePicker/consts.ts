@@ -13,6 +13,6 @@ export const months = [
   'December',
 ]
 
-export const monthsShort = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+export const monthsShort = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AuG', 'SEP', 'OCT', 'NOV', 'DEC']
 
-export const daysNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+export const daysNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']

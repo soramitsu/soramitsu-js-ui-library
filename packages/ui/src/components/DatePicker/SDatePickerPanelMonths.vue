@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/icons'
 import { months } from './consts'
+import { ShowState } from './types'
 
 interface Props {
-  showMonth: number
-  showYear: number
-  hideArrows: boolean
+  showState: ShowState
+  hideArrows?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  showMonth: 0,
-  showYear: 0,
   hideArrows: false,
 })
+
+const showMonth = computed(() => props.showState.month)
+const showYear = computed(() => props.showState.year)
 
 const emit = defineEmits(['updateShowedState', 'changeView'])
 
@@ -28,7 +29,7 @@ const changeView = (viewName: string) => {
 
 <template>
   <div
-    class="date-picker__month-panel sora-tpg-p1 flex items-center"
+    class="s-date-picker-month-panel sora-tpg-p1 flex items-center"
     :class="hideArrows ? 'justify-center' : 'justify-between'"
   >
     <button
@@ -68,7 +69,7 @@ const changeView = (viewName: string) => {
 <style lang="scss">
 @use '@/theme';
 
-.date-picker__month-panel {
+.s-date-picker-month-panel {
   height: 57px;
 
   .header {

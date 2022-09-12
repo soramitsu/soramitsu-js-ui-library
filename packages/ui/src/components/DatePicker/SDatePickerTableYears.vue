@@ -39,8 +39,8 @@ const handleYearTableClick = (event: any) => {
 </script>
 
 <template>
-  <div class="date-picker__year-table">
-    <div class="sora-tpg-p2 year-range-panel">
+  <div class="s-date-picker-year-table">
+    <div class="sora-tpg-p2 s-date-picker-year-table__range-panel">
       <button
         type="button"
         @click="changeDecade(-1)"
@@ -57,7 +57,7 @@ const handleYearTableClick = (event: any) => {
     </div>
 
     <div
-      class="year-table sora-tpg-p3"
+      class="s-date-picker-year-table__year-table sora-tpg-p3"
       @click="handleYearTableClick"
       @keydown="handleYearTableClick"
     >
@@ -76,13 +76,13 @@ const handleYearTableClick = (event: any) => {
 <style lang="scss" scoped>
 @use '@/theme';
 
-.date-picker__year-table {
-  .year-range-panel {
+.s-date-picker-year-table {
+  &__range-panel {
     @apply flex justify-between items-center;
     height: 57px;
   }
 
-  .year-table {
+  &__year-table {
     margin: -1px;
     border-collapse: collapse;
     display: grid;

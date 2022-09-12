@@ -28,7 +28,7 @@ describe('SDatePicker', () => {
       },
     })
 
-    picker().children('.time-panel').should('exist')
+    picker().children('.s-date-picker-time-panel').should('exist')
   })
 
   it('Displayed two calendars in range mode', () => {
@@ -44,7 +44,7 @@ describe('SDatePicker', () => {
         }
       },
     })
-    picker().children('.calendars-panel').children().should(`have.length`, 2)
+    picker().children('.s-date-picker-calendars-panel').children().should(`have.length`, 2)
   })
 
   it('Displayed one calendar in day mode', () => {
@@ -60,7 +60,7 @@ describe('SDatePicker', () => {
         }
       },
     })
-    picker().children('.calendars-panel').children().should(`have.length`, 1)
+    picker().children('.s-date-picker-calendars-panel').children().should(`have.length`, 1)
   })
 
   it('No options panel in Pick mode', () => {
@@ -76,10 +76,11 @@ describe('SDatePicker', () => {
         }
       },
     })
-    picker().children('.options-panel').should('not.exist')
+    picker().children('.s-date-picker-options-panel').should('not.exist')
   })
 
   describe('Panels tests', () => {
+    const clickDoneButton = () => cy.get(`[data-testid=date-picker-done-button]`).click()
     it('Input panel works correctly', () => {
       mount({
         template: `
@@ -97,21 +98,13 @@ describe('SDatePicker', () => {
           }
         },
       })
-      getEl('picker')
-        .children()
-        .first()
-        .click()
-        .then(() => {
-          picker().get('.options-panel__item').last().click()
-        })
-        .then(() => {
-          picker().get('.custom-panel__input').focus().clear().type('01012000').blur()
-        })
-        .then(() => {
-          getEl('date').should('contain.text', '1')
-          getEl('month').should('contain.text', '0') // months number is 0-11
-          getEl('year').should('contain.text', '2000')
-        })
+      getEl('picker').children().first().click()
+      picker().get('.s-date-picker-options-panel__item').last().click()
+      picker().get('.s-date-picker-custom-panel__input').focus().clear().type('01012000').blur()
+      clickDoneButton()
+      getEl('date').should('contain.text', '1')
+      getEl('month').should('contain.text', '0') // months number is 0-11
+      getEl('year').should('contain.text', '2000')
     })
 
     it('Month panel works as expected', () => {
@@ -128,21 +121,13 @@ describe('SDatePicker', () => {
         },
       })
 
-      getEl('picker')
-        .children()
-        .first()
-        .click()
-        .then(() => {
-          picker().get('.header__label').first().click()
-        })
-        .then(() => {
-          cy.get('.year-range-panel > button').first().click()
-          cy.get('.month-table > div:contains("May")').click()
-        })
-        .then(() => {
-          picker().get('.header__label').should('contain', '1999')
-          picker().get('.header__label').should('contain', 'May')
-        })
+      getEl('picker').children().first().click()
+      // picker().get('.s-date-picker__header').first().click()
+      cy.get('.s-date-picker-month-panel .header__label').first().click()
+      cy.get('.s-date-picker-month-table__year-range-panel > button').first().click()
+      cy.get('.s-date-picker-month-table__month-table > div:contains("May")').click()
+      picker().get('.s-date-picker-month-panel .header__label').should('contain', '1999')
+      picker().get('.s-date-picker-month-panel .header__label').should('contain', 'May')
     })
 
     it('Year panel works correctly', () => {
@@ -154,26 +139,16 @@ describe('SDatePicker', () => {
         setup() {
           const t = new Date('01.01.2000')
           const date = ref(t)
-          console.log(date)
           return {
             date,
           }
         },
       })
 
-      getEl('picker')
-        .children()
-        .first()
-        .click()
-        .then(() => {
-          picker().get('.header__label').last().click()
-        })
-        .then(() => {
-          cy.get('.year-table > .available:contains("2004")').click()
-        })
-        .then(() => {
-          picker().get('.header__label').should('contain', '2004')
-        })
+      getEl('picker').children().first().click()
+      picker().get('.s-date-picker-month-panel .header__label').last().click()
+      cy.get('.s-date-picker-year-table__year-table > .available:contains("2004")').click()
+      picker().get('.s-date-picker-month-panel .header__label').should('contain', '2004')
     })
 
     it('Time panel works correctly', () => {
@@ -191,16 +166,10 @@ describe('SDatePicker', () => {
         },
       })
 
-      getEl('picker')
-        .children()
-        .first()
-        .click()
-        .then(() => {
-          cy.get('.date-picker__time-table > p:contains("02:00")').click()
-        })
-        .then(() => {
-          getEl('result').should('contain', '02:00')
-        })
+      getEl('picker').children().first().click()
+      cy.get('.s-date-picker-time-panel p:contains("02:00")').click()
+      clickDoneButton()
+      getEl('result').should('contain', '02:00')
     })
   })
 
@@ -219,12 +188,7 @@ describe('SDatePicker', () => {
       },
     })
 
-    getEl('picker')
-      .children()
-      .first()
-      .click()
-      .then(() => {
-        cy.get(`.date-picker`).should('be.hidden')
-      })
+    getEl('picker').children().first().click()
+    cy.get(`.s-date-picker__panels`).should('be.hidden')
   })
 })

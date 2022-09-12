@@ -1,51 +1,40 @@
 <script setup lang="ts">
-import {
-  getFirstDayOfMonth,
-  getDayCountOfMonth,
-  getStartDateOfMonth,
-  nextDate,
-  clearTime as _clearTime,
-} from './utils/date-util'
+import { getStartDateInCalendar, nextDate } from './date-util'
+import { getDaysInMonth, subMonths, startOfDay, isSameDay } from 'date-fns'
 
-import * as types from '../types'
+import * as types from './types'
 import { ComputedRef } from 'vue'
-import { daysNames } from '../consts'
+import { daysNames } from './consts'
+import { DatePickerApi, useDatePickerApi } from './api'
 
 const getDateTimestamp = (time: Date | number) => {
-  if (typeof time === 'number' || typeof time === 'string') {
-    return _clearTime(new Date(time)).getTime()
-  } else if (time instanceof Date) {
-    return _clearTime(time).getTime()
-  } else {
-    return NaN
-  }
+  return startOfDay(time).getTime()
 }
-/* eslint-disable complexity */
+
+const getFirstDayOfMonth = (date: Date) => {
+  const temp = new Date(date.getTime())
+  temp.setDate(1)
+  return temp.getDay()
+}
 /* eslint-disable complexity */
 
 interface Props {
-  firstDayOfWeek: number
+  firstDayOfWeek?: number
   value: Date | Date[]
-  time: boolean
-  selectionMode: 'day' | 'range' | 'pick' | undefined
   showState: types.ShowState
-  target: 'from' | 'to'
   stateStore: types.StateStore
+  hoveredDate: Date
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  selectionMode: 'range',
   firstDayOfWeek: 1,
   value: () => new Date(),
-  target: 'from',
-  time: true,
 })
 
-const isRange = computed(() => {
-  return ['range'].includes(props.selectionMode)
-})
+const state: DatePickerApi = useDatePickerApi()
+const { type, time } = state
 
-const emit = defineEmits(['pick', 'updateShowedState'])
+const emit = defineEmits(['pick', 'updateShowedState', 'updateHoveredDate'])
 
 const offsetDay = computed(() => {
   const week = props.firstDayOfWeek
@@ -61,21 +50,27 @@ const year = computed(() => {
 const month = computed(() => {
   return props.showState.month
 })
-const startDate = computed(() => {
-  return getStartDateOfMonth(year.value, month.value)
+const startDateInCalendar = computed(() => {
+  return getStartDateInCalendar(year.value, month.value)
 })
 
 const timeDecoder = (num: number) => {
   return num.toString().length < 2 ? `0${num}` : num
 }
 
+const getDateTime = (date: Date) => {
+  const hours = timeDecoder(date.getHours())
+  const minutes = timeDecoder(date.getMinutes())
+  return `${hours}:${minutes}`
+}
+
 const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
   const cellsArray: types.DateTableCell[] = []
   const date = new Date(year.value, month.value, 1)
   let day = getFirstDayOfMonth(date) // day of first day
-  const dateCountOfMonth = getDayCountOfMonth(date.getFullYear(), date.getMonth()) // days in current month
-  const dateCountOfLastMonth = getDayCountOfMonth(date.getFullYear(), date.getMonth() === 0 ? 11 : date.getMonth() - 1) // days in prev month
   day = day === 0 ? 7 : day
+  const dateCountOfMonth = getDaysInMonth(date)
+  const dateCountOfLastMonth = getDaysInMonth(subMonths(date, 1))
   const offset = offsetDay.value
   let count = 1
   const now = getDateTimestamp(new Date())
@@ -92,47 +87,45 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
     }
 
     const index = i
-    const time = nextDate(startDate.value, index - offset).getTime() // nextDate - month begins from this date
+    const time = nextDate(startDateInCalendar.value, index - offset).getTime() // nextDate - month begins from this date
     cell.time = null
 
-    if (isRange.value) {
+    if (type === 'range') {
       const minDate = props.stateStore.rangeState.startDate as Date
       const maxDate = props.stateStore.rangeState.endDate as Date
       cell.inRange = time >= getDateTimestamp(minDate) && time <= getDateTimestamp(maxDate)
-      cell.start = minDate && time === getDateTimestamp(minDate)
-      cell.end = maxDate && time === getDateTimestamp(maxDate)
+      if (props.stateStore.rangeState.selecting) {
+        const hoveredDate = startOfDay(props.hoveredDate)
+        const existingDate = minDate || maxDate
+        const arr = [existingDate, hoveredDate].sort((a, b) => a.getTime() - b.getTime())
+        cell.inRange = time >= getDateTimestamp(arr[0]) && time <= getDateTimestamp(arr[1])
+      }
+      cell.start = minDate && isSameDay(time, minDate)
+      cell.end = maxDate && isSameDay(time, maxDate)
       if (cell.start) {
-        const hours = timeDecoder(minDate.getHours())
-        const minutes = timeDecoder(minDate.getMinutes())
-        cell.time = `${hours}:${minutes}`
+        cell.time = getDateTime(minDate)
       }
       if (cell.end) {
-        const hours = timeDecoder(maxDate.getHours())
-        const minutes = timeDecoder(maxDate.getMinutes())
-        cell.time = `${hours}:${minutes}`
+        cell.time = getDateTime(maxDate)
       }
     }
-    if (props.selectionMode === 'day') {
+    if (type === 'day') {
       const selectedDate = props.stateStore.dayState
-      cell.start = time === getDateTimestamp(selectedDate)
+      cell.start = isSameDay(time, selectedDate)
       if (cell.start) {
-        const hours = timeDecoder(selectedDate.getHours())
-        const minutes = timeDecoder(selectedDate.getMinutes())
-        cell.time = `${hours}:${minutes}`
+        cell.time = getDateTime(selectedDate)
       }
     }
-    if (props.selectionMode === 'pick') {
+    if (type === 'pick') {
       const selectedDates = props.stateStore.pickState
       cell.start = selectedDates.some((item: Date) => {
-        return getDateTimestamp(item) === getDateTimestamp(time)
+        return isSameDay(time, time)
       })
       if (cell.start) {
         const timeOfDay = selectedDates.find((item: Date) => getDateTimestamp(item) === getDateTimestamp(time))
 
         if (timeOfDay) {
-          const hours = timeDecoder(timeOfDay.getHours())
-          const minutes = timeDecoder(timeOfDay.getMinutes())
-          cell.time = `${hours}:${minutes}`
+          cell.time = getDateTime(timeOfDay)
         }
       }
     }
@@ -142,14 +135,14 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
       cell.type = 'today'
     }
     if (i >= 0 && i <= 13) {
+      // 13 - possible count of previous month days
       // number of showed previous month's days
-      const numberOfDaysFromPreviousMonth = day + offset < 0 ? 7 + day + offset : day + offset // day - первый день месяца (пнд-вск 0-6) offset - сдвиг, с чего начинается неделя,
+      const numberOfDaysFromPreviousMonth = day + offset < 0 ? 7 + day + offset : day + offset
       if (index >= numberOfDaysFromPreviousMonth) {
         cell.text = count++
         cell.month = month.value
       } else {
-        cell.text = dateCountOfLastMonth - (numberOfDaysFromPreviousMonth - (index % 7)) + 1 + Math.floor(index / 7) // кол-во дней в пердыдущем месяце - () Math.floor(index/7)
-        // cell.text = 'M'
+        cell.text = dateCountOfLastMonth - (numberOfDaysFromPreviousMonth - (index % 7)) + 1 + Math.floor(index / 7)
         cell.month = month.value === 0 ? 11 : month.value - 1
         cell.type = 'prev-month'
       }
@@ -174,7 +167,7 @@ const cellMatchesDate = (cell: types.DateTableCell, date: Date) => {
 }
 
 const getCellClasses = (cell: types.DateTableCell) => {
-  const selectionMode = props.selectionMode
+  const selectionMode = type
   let classes = []
   if (cell.type === 'normal' || cell.type === 'today') {
     classes.push('available')
@@ -210,6 +203,23 @@ const getCellClasses = (cell: types.DateTableCell) => {
   return classes.join(' ')
 }
 
+const lastField = ref('')
+
+const handleMouseMove = (event: any) => {
+  if (!props.stateStore.rangeState.selecting) return
+  let target = event.target
+  if (target.tagName === 'SPAN') {
+    target = target.parentNode
+  }
+  if (target.tagName !== 'DIV') return
+  const idx = target.getAttribute('index')
+  if (!idx) return
+  const cell = dateTableCells.value[idx]
+  const newDate = new Date(year.value, cell.month, cell.text)
+  if (isSameDay(newDate, props.hoveredDate)) return
+  emit('updateHoveredDate', newDate)
+}
+
 const handleClick = (ev: any) => {
   let target = ev.target
   if (target.tagName === 'SPAN') {
@@ -220,7 +230,7 @@ const handleClick = (ev: any) => {
   if (!idx) return
   const cell = dateTableCells.value[idx]
   const newDate = new Date(year.value, cell.month, cell.text)
-  if (props.selectionMode === 'range') {
+  if (type === 'range') {
     if (!props.stateStore.rangeState.selecting) {
       emit('pick', {
         startDate: newDate,
@@ -228,6 +238,7 @@ const handleClick = (ev: any) => {
         selecting: true,
         selectedField: 'startDate',
       })
+      lastField.value = 'startDate'
     } else {
       const dat = props.stateStore.rangeState.startDate || props.stateStore.rangeState.endDate
       if (dat && newDate >= dat) {
@@ -237,6 +248,7 @@ const handleClick = (ev: any) => {
           selecting: false,
           selectedField: 'endDate',
         })
+        lastField.value = 'endDate'
       } else {
         emit('pick', {
           startDate: newDate,
@@ -244,18 +256,19 @@ const handleClick = (ev: any) => {
           selecting: false,
           selectedField: 'startDate',
         })
+        lastField.value = 'startDate'
       }
     }
-  } else if (props.selectionMode === 'day') {
+  } else if (type === 'day') {
     emit('pick', newDate)
-  } else if (props.selectionMode === 'pick') {
+  } else if (type === 'pick') {
     const currentArr = props.stateStore.pickState
     const dateSelected = currentArr.find((date: Date) => {
-      return getDateTimestamp(date) === getDateTimestamp(newDate)
+      return isSameDay(date, newDate)
     })
     let newArr
     if (dateSelected) {
-      newArr = currentArr.filter((date: Date) => getDateTimestamp(date) !== getDateTimestamp(newDate))
+      newArr = currentArr.filter((date: Date) => !isSameDay(date, newDate))
     } else {
       newArr = [...currentArr, newDate]
     }
@@ -272,8 +285,10 @@ const handleClick = (ev: any) => {
 </script>
 <template>
   <div
-    class="date-picker__date-table date-table sora-tpg-p4"
+    class="s-date-picker-date-table date-table sora-tpg-p4"
     @click="handleClick"
+    @mouseover="handleMouseMove"
+    @focus="handleMouseMove"
     @keydown="handleClick"
   >
     <div
@@ -292,7 +307,7 @@ const handleClick = (ev: any) => {
     >
       <span>{{ cell.text }}</span>
       <span
-        v-if="props.time"
+        v-if="time"
         v-show="cell.time"
         class="absolute date-time"
       >{{ cell.time }}</span>
@@ -303,7 +318,7 @@ const handleClick = (ev: any) => {
 <style lang="scss">
 @use '@/theme';
 
-.date-picker__date-table {
+.s-date-picker-date-table {
   font-size: 12px;
   -webkit-user-select: none;
   -moz-user-select: none;

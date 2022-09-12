@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ComputedRef } from 'vue'
 import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/icons'
-import { months } from '../consts'
+import { months } from './consts'
 
-import { ShowState } from '../types'
+import { ShowState } from './types'
 
 interface Props {
   showState: ShowState
@@ -66,8 +66,8 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
 </script>
 
 <template>
-  <div class="date-picker__month-table">
-    <div class="flex justify-between items-center sora-tpg-p2 year-range-panel">
+  <div class="s-date-picker-month-table">
+    <div class="flex justify-between items-center sora-tpg-p2 s-date-picker-month-table__year-range-panel">
       <button
         type="button"
         @click="changeYear(-1)"
@@ -83,7 +83,7 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
       </button>
     </div>
     <div
-      class="month-table sora-tpg-p4"
+      class="s-date-picker-month-table__month-table sora-tpg-p4"
       @click="handleMonthTableClick"
       @keydown="handleMonthTableClick"
     >
@@ -106,12 +106,12 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
 <style lang="scss" scoped>
 @use '@/theme';
 
-.date-picker__month-table {
-  .year-range-panel {
+.s-date-picker-month-table {
+  &__year-range-panel {
     height: 57px;
   }
 
-  .month-table {
+  &__month-table {
     margin: -1px;
     border-collapse: collapse;
     width: 320px;
