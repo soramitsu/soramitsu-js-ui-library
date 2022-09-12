@@ -40,7 +40,7 @@ const offsetDay = computed(() => {
   const week = props.firstDayOfWeek
   return week > 3 ? 7 - week : -week
 })
-const WEEKS = computed(() => {
+const weeks = computed(() => {
   const week = props.firstDayOfWeek
   return daysNames.concat(daysNames).slice(week, week + 7)
 })
@@ -292,7 +292,7 @@ const handleClick = (ev: any) => {
     @keydown="handleClick"
   >
     <div
-      v-for="(day, key) in WEEKS"
+      v-for="(day, key) in weeks"
       :key="key"
       class="date-table__title"
     >
