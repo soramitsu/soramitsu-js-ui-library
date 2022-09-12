@@ -101,7 +101,7 @@ describe('SDatePicker', () => {
       getEl('picker').children().first().click()
       picker().get('.s-date-picker-options-panel__item').last().click()
       picker().get('.s-date-picker-custom-panel__input').focus().clear().type('01012000').blur()
-      cy.get(`[data-testid=date-picker-done-button]`).click({force: true})
+      cy.get(`[data-testid=date-picker-done-button]`).click({ force: true })
       getEl('date').should('contain.text', '1')
       getEl('month').should('contain.text', '0') // months number is 0-11
       getEl('year').should('contain.text', '2000')
