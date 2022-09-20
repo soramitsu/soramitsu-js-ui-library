@@ -1,5 +1,5 @@
 @mixin focus-outline($focusWithin: false) {
-  @if $focusWithin = true {
+  @if $focusWithin == true {
     &:focus-within {
       outline: 1px solid var(--s-color-outline);
     }
