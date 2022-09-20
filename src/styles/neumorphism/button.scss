@@ -188,6 +188,10 @@ $neu-button-padding-mini: 3px 6px !default;
   transition: $neu-button-transition;
   text-transform: uppercase;
 
+  &.s-primary, &.s-secondary, &.s-tertiary, &.s-action, &.s-link {
+    @include focus-outline;
+  }
+
   @include size('big', $neu-button-padding-big);
   @include size('medium', $neu-button-padding-medium);
   @include size('small', $neu-button-padding-small);

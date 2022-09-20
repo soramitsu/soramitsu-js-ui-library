@@ -24,6 +24,7 @@ $s-color-base-background-hover: #F7F3F4;
 $s-color-base-disabled: #FDF7FB;
 $s-color-base-on-disabled: #A19A9D;
 $s-color-base-on-accent: #FFFFFF;
+$s-color-outline: rgba(0, 0, 0, 0.5);
 // Utility colors
 $s-color-utility-body: #F7F3F4;
 $s-color-utility-surface: #FDF7FB;
@@ -63,6 +64,7 @@ $s-size-mini: 24px;
   --s-color-base-disabled: #{$s-color-base-disabled};
   --s-color-base-on-disabled: #{$s-color-base-on-disabled};
   --s-color-base-on-accent: #{$s-color-base-on-accent};
+  --s-color-outline: #{$s-color-outline};
   --s-color-utility-body: #{$s-color-utility-body};
   --s-color-utility-surface: #{$s-color-utility-surface};
   --s-color-utility-overlay: #{$s-color-utility-overlay};
