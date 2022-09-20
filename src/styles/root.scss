@@ -20,6 +20,7 @@
   --s-color-base-disabled: #{$s-color-base-disabled};
   --s-color-base-on-disabled: #{$s-color-base-on-disabled};
   --s-color-base-on-accent: #{$s-color-base-on-accent};
+  --s-color-outline: #{$s-color-outline};
   --s-color-utility-body: #{$s-color-utility-body};
   --s-color-utility-surface: #{$s-color-utility-surface};
   --s-color-utility-overlay: #{$s-color-utility-overlay};
@@ -50,6 +51,7 @@
   --s-color-base-disabled--dark: #{$s-color-base-disabled--dark};
   --s-color-base-on-disabled--dark: #{$s-color-base-on-disabled--dark};
   --s-color-base-on-accent--dark: #{$s-color-base-on-accent--dark};
+  --s-color-outline--dark: #{$s-color-outline--dark};
   --s-color-utility-body--dark: #{$s-color-utility-body--dark};
   --s-color-utility-surface--dark: #{$s-color-utility-surface--dark};
   --s-color-utility-overlay--dark: #{$s-color-utility-overlay--dark};
@@ -170,6 +172,7 @@
   --s-color-base-disabled: var(--s-color-base-disabled--dark);
   --s-color-base-on-disabled: var(--s-color-base-on-disabled--dark);
   --s-color-base-on-accent: var(--s-color-base-on-accent--dark);
+  --s-color-outline: var(--s-color-outline--dark);
   --s-color-utility-body: var(--s-color-utility-body--dark);
   --s-color-utility-surface: var(--s-color-utility-surface--dark);
   --s-color-utility-overlay: var(--s-color-utility-overlay--dark);
