@@ -16,6 +16,8 @@ $neu-input-padding: $s-basic-spacing $s-basic-spacing * 2 !default;
   height: initial;
   min-height: $s-size-big;
 
+  @include focus-outline(true);
+
   &.s-size-small {
     padding-top: $s-basic-spacing / 2;
     padding-bottom: $s-basic-spacing / 2;
