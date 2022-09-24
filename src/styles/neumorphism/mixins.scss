@@ -1,11 +1,12 @@
 @mixin focus-outline($focusWithin: false) {
+  $outline: 1px solid var(--s-color-outline);
   @if $focusWithin == true {
     &:focus-within {
-      outline: 1px solid var(--s-color-outline);
+      outline: $outline;
     }
   } @else {
-    &:focus {
-      outline: 1px solid var(--s-color-outline);
+    &:focus:not(:active) {
+      outline: $outline;
     }
   }
 }
