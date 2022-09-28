@@ -1,5 +1,21 @@
 # @soramitsu-ui/ui
 
+## 0.7.0
+
+### Minor Changes
+
+- 1e62a2f: **feat**: added table components without adaptive view (`STable`, `STableColumn`)
+- 0ba42c8: **feat**: add pagination component
+
+### Patch Changes
+
+- f6240c3: **fix**: (`SDropdown`) don't render label when it is absent, close #448
+- bd58198: **fix**(`STable`): fix resize observer error throwing
+- b990789: **fix**: lodash replaced to lodash-es, as it's pure
+- ffb8c8d: **fix**: (`SSelectBase`) pass `z-index: 10` to the popper wrapper, fix #430
+- 93fff77: **fix**: (`STextField`) fix extra attributes binding
+- f004bbb: **feat**: (`SSelectBase`) auto-close menu on value selection in single mode; `no-auto-close` prop to disable it; close #447
+
 ## 0.6.1
 
 ### Patch Changes
