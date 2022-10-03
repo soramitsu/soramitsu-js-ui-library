@@ -1,0 +1,134 @@
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
+</script>
+
+<script setup lang="ts">
+import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
+import { SButton } from '@/components/Button'
+
+const props = withDefaults(
+  defineProps<{
+    wrapperTag?: string | object
+    content?: string
+    placement?: 'top' | 'bottom' | 'right' | 'left'
+    primaryButtonText?: string
+    secondaryButtonText?: string
+  }>(),
+  {
+    wrapperTag: 'div',
+    content: '',
+    placement: 'bottom',
+    primaryButtonText: '',
+    secondaryButtonText: '',
+  },
+)
+
+const emit = defineEmits(['click:primary-button', 'click:secondary-button'])
+
+function handlePrimaryButtonClick() {
+  emit('click:primary-button')
+}
+
+function handleSecondaryButtonClick() {
+  emit('click:secondary-button')
+}
+</script>
+
+<template>
+  <SPopover
+    distance="4"
+    :placement="placement"
+  >
+    <template #trigger>
+      <component
+        :is="wrapperTag"
+        v-bind="$attrs"
+      >
+        <slot />
+      </component>
+    </template>
+
+    <template #popper>
+      <SPopoverWrappedTransition name="tooltip-default-transition">
+        <div class="s-tooltip__body sora-tpg-p4 px-16px py-12px">
+          <slot name="content">
+            {{ content }}
+          </slot>
+
+          <div
+            v-if="primaryButtonText || secondaryButtonText"
+            class="mt-8px py-4px"
+          >
+            <SButton
+              v-if="primaryButtonText"
+              class="s-tooltip__button first:mr-8px"
+              type="outline"
+              size="sm"
+              @click="handlePrimaryButtonClick"
+            >
+              {{ primaryButtonText }}
+            </SButton>
+            <SButton
+              v-if="secondaryButtonText"
+              class="s-tooltip__button"
+              type="outline"
+              size="sm"
+              @click="handleSecondaryButtonClick"
+            >
+              {{ secondaryButtonText }}
+            </SButton>
+          </div>
+        </div>
+      </SPopoverWrappedTransition>
+    </template>
+  </SPopover>
+</template>
+
+<style lang="scss">
+@use '@/theme';
+
+.s-tooltip {
+  &__body {
+    background: theme.token-as-var('sys.color.content-primary');
+    color: theme.token-as-var('sys.color.content-on-background-inverted');
+    border-radius: 4px;
+  }
+
+  &__button.s-button {
+    &_type_outline {
+      border-color: theme.token-as-var('sys.color.border-primary');
+      color: theme.token-as-var('sys.color.content-on-background-inverted');
+
+      &:hover {
+        border-color: theme.token-as-var('sys.color.primary-hover');
+        color: theme.token-as-var('sys.color.primary-hover');
+      }
+
+      &:active {
+        border-color: theme.token-as-var('sys.color.primary-pressed');
+        color: theme.token-as-var('sys.color.primary-pressed');
+      }
+    }
+
+    &_type_outline#{&}_disabled {
+      border-color: theme.token-as-var('sys.color.disabled');
+      color: theme.token-as-var('sys.color.on-disabled');
+    }
+  }
+}
+
+.tooltip-default-transition {
+  &-enter-active,
+  &-leave-active {
+    opacity: 1;
+    transition: 150ms ease-in-out opacity;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+</style>
