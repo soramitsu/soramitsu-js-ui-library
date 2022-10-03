@@ -23,6 +23,9 @@ import { isDefaultColumn, isExpandColumn, isRecord, isSelectionColumn } from './
 import { ActionColumnApi, ColumnApi, TABLE_API_KEY } from './api'
 import { useTableHeights } from './use-table-heights'
 
+// vue can't infer Object prop type from CSSProperties and logs warnings and this helps
+type CSSObject = Partial<CSSProperties>
+
 const props = withDefaults(
   defineProps<{
     /**
@@ -69,7 +72,7 @@ const props = withDefaults(
     /**
      * Function that returns custom style for a row, or an object assigning custom style for every row
      * */
-    rowStyle?: CSSProperties | ((param: TableRowConfigCallbackParams) => CSSProperties)
+    rowStyle?: CSSObject | ((param: TableRowConfigCallbackParams) => CSSObject)
     /**
      * Function that returns custom class names for a cell, or a string assigning class names for every cell
      * */
@@ -77,7 +80,7 @@ const props = withDefaults(
     /**
      * Function that returns custom style for a cell, or an object assigning custom style for every cell
      * */
-    cellStyle?: CSSProperties | ((param: TableCellConfigCallbackParams) => CSSProperties)
+    cellStyle?: CSSObject | ((param: TableCellConfigCallbackParams) => CSSObject)
     /**
      * Function that returns custom class names for a row in table header, or a string assigning class names for every row in table header
      * */
@@ -85,7 +88,7 @@ const props = withDefaults(
     /**
      * Function that returns custom style for a row in table header, or an object assigning custom style for every row in table header
      * */
-    headerRowStyle?: CSSProperties | (() => CSSProperties)
+    headerRowStyle?: CSSObject | (() => CSSObject)
     /**
      * Function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header
      * */
@@ -93,7 +96,7 @@ const props = withDefaults(
     /**
      * Function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header
      * */
-    headerCellStyle?: CSSProperties | ((param: TableHeaderCellConfigCallbackParams) => CSSProperties)
+    headerCellStyle?: CSSObject | ((param: TableHeaderCellConfigCallbackParams) => CSSObject)
     /**
      * Data row key extraction to optimize rendering. Required if `reserve-selection` is on.
      * When it is a string, multi-level access is supported, e.g. `user.info.id`,
