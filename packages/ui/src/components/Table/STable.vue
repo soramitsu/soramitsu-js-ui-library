@@ -540,7 +540,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
             <th
               v-for="(column, columnIndex) in columns"
               :key="column.id"
-              class="s-table__th py-12px px-0 sora-tpg-ch3"
+              class="s-table__th px-0 sora-tpg-ch3"
               :class="[
                 `s-table__th_align_${column.headerAlign}`,
                 column.className,
@@ -619,7 +619,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
               <td
                 v-for="(column, columnIndex) in columns"
                 :key="column.id"
-                class="s-table__td py-12px px-0 sora-tpg-p3"
+                class="s-table__td px-0 sora-tpg-p3"
                 :class="[
                   `s-table__td_align_${column.align}`,
                   column.id,
@@ -741,7 +741,7 @@ function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; even
 
   &__td,
   &__th {
-    min-height: 48px;
+    height: 48px;
     border-bottom: 1px solid theme.token-as-var('sys.color.border-secondary');
     transition: background-color 0.25s ease;
     min-width: 0;
