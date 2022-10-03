@@ -1,5 +1,5 @@
 import { describe, test, expect, beforeEach } from 'vitest'
-import { useColumnSort } from '@/components/Table/column-sort.composable'
+import { useColumnSort } from '@/components/Table/use-column-sort'
 import { ColumnApi, TableRow } from '@/components'
 import { Ref } from 'vue'
 

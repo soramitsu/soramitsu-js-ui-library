@@ -4,7 +4,7 @@ import { MaybeElementRef, not } from '@vueuse/core'
 import { get, findLast } from 'lodash-es'
 import { SCheckboxAtom } from '@/components/Checkbox'
 import { IconArrowTop16, IconArrowsChevronDownRounded24 } from '@/components/icons'
-import { useColumnSort } from './column-sort.composable'
+import { useColumnSort } from './use-column-sort'
 import {
   TableRow,
   CellEventData,
@@ -16,12 +16,12 @@ import {
   TableRowConfigCallbackParams,
   TableHeaderCellConfigCallbackParams,
 } from './types'
-import { useFlexColumns } from './flex-columns-widths.composable'
-import { useRowSelect } from './row-select.composable'
-import { useColumnExpand } from './column-expand.composable'
+import { useFlexColumns } from './use-flex-columns-widths'
+import { useRowSelect } from './use-row-select'
+import { useColumnExpand } from './use-column-expand'
 import { isDefaultColumn, isExpandColumn, isRecord, isSelectionColumn } from './utils'
 import { ActionColumnApi, ColumnApi, TABLE_API_KEY } from './api'
-import { useTableHeights } from './table-heights.composable'
+import { useTableHeights } from './use-table-heights'
 
 const props = withDefaults(
   defineProps<{
