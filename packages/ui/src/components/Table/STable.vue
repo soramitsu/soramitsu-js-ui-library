@@ -226,8 +226,10 @@ watch([keyRows, currentRowKey], () => {
   setCurrentRow(keyRows.get(currentRowKey.value) ?? null)
 })
 
+const isSortedOnce = ref(false)
+
 if (props.defaultSort) {
-  sort(props.defaultSort)
+  watchOnce(toRef(sortState, 'column'), () => { isSortedOnce.value = false })
 }
 
 if (props.defaultExpandAll) {
@@ -235,6 +237,12 @@ if (props.defaultExpandAll) {
 }
 
 watch([data, columns], () => {
+  if (props.defaultSort && !isSortedOnce.value) {
+    sort(props.defaultSort)
+
+    return
+  }
+
   applyCurrentSort()
 })
 
