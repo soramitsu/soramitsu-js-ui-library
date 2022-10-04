@@ -1,7 +1,11 @@
-import { ActionColumnApi, ColumnApi } from './api'
+import { TableActionColumnApi, TableColumnApi } from './api'
 import { Ref } from 'vue'
 
-export function useFlexColumns(columns: (ColumnApi | ActionColumnApi)[], tableWidth: Ref<number>, fit: Ref<boolean>) {
+export function useFlexColumns(
+  columns: (TableColumnApi | TableActionColumnApi)[],
+  tableWidth: Ref<number>,
+  fit: Ref<boolean>,
+) {
   const columnsWidths = computed(() => {
     const baseColumnsWidths = columns.map((col) => col.width ?? col.minWidth)
 

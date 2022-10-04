@@ -7,11 +7,11 @@ import { IconArrowTop16, IconArrowsChevronDownRounded24 } from '@/components/ico
 import { useColumnSort } from './use-column-sort'
 import {
   TableRow,
-  CellEventData,
-  HeaderEventData,
-  RowEventData,
-  SortEventData,
-  ColumnSortOrder,
+  TableCellEventData,
+  TableHeaderEventData,
+  TableRowEventData,
+  TableSortEventData,
+  TableColumnSortOrder,
   TableCellConfigCallbackParams,
   TableRowConfigCallbackParams,
   TableHeaderCellConfigCallbackParams,
@@ -20,7 +20,7 @@ import { useFlexColumns } from './use-flex-columns-widths'
 import { useRowSelect } from './use-row-select'
 import { useColumnExpand } from './use-column-expand'
 import { isDefaultColumn, isExpandColumn, isRecord, isSelectionColumn } from './utils'
-import { ActionColumnApi, ColumnApi, TABLE_API_KEY } from './api'
+import { TableActionColumnApi, TableColumnApi, TABLE_API_KEY } from './api'
 import { useTableHeights } from './use-table-heights'
 
 // vue can't infer Object prop type from CSSProperties and logs warnings and this helps
@@ -37,7 +37,7 @@ const props = withDefaults(
      * The `prop` is used to set default sort column, the `order` - to set default sort order.
      * If `prop` and `order` aren't set, then order defaults to `ascending`.
      * */
-    defaultSort?: { prop: string; order: ColumnSortOrder } | null
+    defaultSort?: { prop: string; order: TableColumnSortOrder } | null
     /**
      * Table's height. By default, it has an `auto` height.
      * If its value is a number, the height is measured in pixels;
@@ -153,16 +153,16 @@ const props = withDefaults(
 
 /* eslint-disable @typescript-eslint/unified-signatures */
 const emit = defineEmits<{
-  (event: 'cell-mouse-enter', ...value: CellEventData): void
-  (event: 'cell-mouse-leave', ...value: CellEventData): void
-  (event: 'cell-click', ...value: CellEventData): void
-  (event: 'cell-dblclick', ...value: CellEventData): void
-  (event: 'header-click', ...value: HeaderEventData): void
-  (event: 'header-contextmenu', ...value: HeaderEventData): void
-  (event: 'row-click', ...value: RowEventData): void
-  (event: 'row-dblclick', ...value: RowEventData): void
-  (event: 'row-contextmenu', ...value: RowEventData): void
-  (event: 'sort-change', value: SortEventData): void
+  (event: 'cell-mouse-enter', ...value: TableCellEventData): void
+  (event: 'cell-mouse-leave', ...value: TableCellEventData): void
+  (event: 'cell-click', ...value: TableCellEventData): void
+  (event: 'cell-dblclick', ...value: TableCellEventData): void
+  (event: 'header-click', ...value: TableHeaderEventData): void
+  (event: 'header-contextmenu', ...value: TableHeaderEventData): void
+  (event: 'row-click', ...value: TableRowEventData): void
+  (event: 'row-dblclick', ...value: TableRowEventData): void
+  (event: 'row-contextmenu', ...value: TableRowEventData): void
+  (event: 'sort-change', value: TableSortEventData): void
   (event: 'selection-change', value: TableRow[]): void
   (event: 'select-all', value: TableRow[]): void
   (event: 'select', ...value: [TableRow[], TableRow]): void
@@ -170,7 +170,7 @@ const emit = defineEmits<{
   (event: 'current-change', ...value: [TableRow | null, TableRow | null]): void
 }>()
 
-const columns: (ColumnApi | ActionColumnApi)[] = shallowReactive([])
+const columns: (TableColumnApi | TableActionColumnApi)[] = shallowReactive([])
 const { data, selectOnIndeterminate, fit, showHeader, height, maxHeight, expandRowKeys, currentRowKey } = toRefs(props)
 const rowKeys = shallowReactive(new Map<TableRow, unknown>())
 const keyRows = shallowReactive(new Map<unknown, TableRow>())
@@ -232,7 +232,9 @@ watch([keyRows, currentRowKey], () => {
 const isSortedOnce = ref(false)
 
 if (props.defaultSort) {
-  watchOnce(toRef(sortState, 'column'), () => { isSortedOnce.value = false })
+  watchOnce(toRef(sortState, 'column'), () => {
+    isSortedOnce.value = false
+  })
 }
 
 if (props.defaultExpandAll) {
@@ -298,7 +300,7 @@ watch(keyRows, () => {
   }
 })
 
-function manualToggleAllSelection(column: ActionColumnApi) {
+function manualToggleAllSelection(column: TableActionColumnApi) {
   toggleAllSelection(column.selectable)
   storedSelectedRowsKeys = [...selectedRows].map((row) => rowKeys.get(row))
 }
@@ -313,7 +315,7 @@ function manualClearSelection() {
   storedSelectedRowsKeys = []
 }
 
-function register(column: ColumnApi | ActionColumnApi) {
+function register(column: TableColumnApi | TableActionColumnApi) {
   const index = columns.push(column)
 
   onScopeDispose(() => {
@@ -324,7 +326,7 @@ function register(column: ColumnApi | ActionColumnApi) {
 const api = readonly({ register })
 provide(TABLE_API_KEY, api)
 
-function sort({ prop, order }: { prop: string; order: ColumnSortOrder }) {
+function sort({ prop, order }: { prop: string; order: TableColumnSortOrder }) {
   const column = getColumnByProp(prop)
 
   if (column) {
@@ -407,15 +409,15 @@ function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T
   return prop || undefined
 }
 
-function isCheckBoxDisabled(column: ActionColumnApi, row: TableRow, index: number) {
+function isCheckBoxDisabled(column: TableActionColumnApi, row: TableRow, index: number) {
   return !column.selectable || column.selectable(row, index)
 }
 
-function getDefaultCellValue(row: TableRow, column: ColumnApi, index: number) {
+function getDefaultCellValue(row: TableRow, column: TableColumnApi, index: number) {
   return column.formatter ? column.formatter(row, column, get(row, column.prop), index) : get(row, column.prop)
 }
 
-function getCellTooltipContent(row: TableRow, column: ColumnApi | ActionColumnApi) {
+function getCellTooltipContent(row: TableRow, column: TableColumnApi | TableActionColumnApi) {
   if (!column.showOverflowTooltip || !isDefaultColumn(column)) {
     return
   }
@@ -423,7 +425,7 @@ function getCellTooltipContent(row: TableRow, column: ColumnApi | ActionColumnAp
   return String(get(row, column.prop))
 }
 
-function getSortIconStateClasses(column: ColumnApi) {
+function getSortIconStateClasses(column: TableColumnApi) {
   let order = null
 
   if (column === sortState.column) {
@@ -437,12 +439,12 @@ function getSortIconStateClasses(column: ColumnApi) {
   return [getNextOrder(column, order) === 'ascending' ? 's-table__sort-icon_asc' : 's-table__sort-icon_desc']
 }
 
-function handleSortClick(column: ColumnApi) {
+function handleSortClick(column: TableColumnApi) {
   handleSortChange(column)
   emit('sort-change', { column, prop: column.prop, order: sortState.order })
 }
 
-function handleAllSelect(column: ActionColumnApi) {
+function handleAllSelect(column: TableActionColumnApi) {
   manualToggleAllSelection(column)
   const selectedArray = [...selectedRows]
   emit('select-all', selectedArray)
@@ -461,7 +463,11 @@ function handleRowExpand(row: TableRow) {
   emit('expand-change', row, [...expandedRows])
 }
 
-function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi | ActionColumnApi; event: MouseEvent }) {
+function handleCellMouseEvent(ctx: {
+  row: TableRow
+  column: TableColumnApi | TableActionColumnApi
+  event: MouseEvent
+}) {
   if (!ctx.event.target) {
     return
   }
@@ -503,7 +509,7 @@ function handleCellMouseEvent(ctx: { row: TableRow; column: ColumnApi | ActionCo
   }
 }
 
-function handleHeaderMouseEvent(ctx: { column: ColumnApi | ActionColumnApi; event: MouseEvent }) {
+function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColumnApi; event: MouseEvent }) {
   if (!ctx.event.target) {
     return
   }
