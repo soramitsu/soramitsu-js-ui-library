@@ -233,7 +233,7 @@ const isSortedOnce = ref(false)
 
 if (props.defaultSort) {
   watchOnce(toRef(sortState, 'column'), () => {
-    isSortedOnce.value = false
+    isSortedOnce.value = true
   })
 }
 
