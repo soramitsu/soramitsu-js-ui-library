@@ -261,7 +261,7 @@ function handlePrevClick() {
             :key="pageButton"
           >
             <button
-              class="s-pagination__button flex justify-center w-24px sora-tpg-h7"
+              class="s-pagination__button flex justify-center min-w-24px sora-tpg-h7"
               :class="{
                 's-pagination__button_active': current === pageButton,
                 'ml-4px': pageButton > 1,
