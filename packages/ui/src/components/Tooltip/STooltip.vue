@@ -47,6 +47,7 @@ function handleSecondaryButtonClick() {
       <component
         :is="wrapperTag"
         v-bind="$attrs"
+        data-testid="tooltip-trigger"
       >
         <slot />
       </component>
@@ -54,19 +55,25 @@ function handleSecondaryButtonClick() {
 
     <template #popper>
       <SPopoverWrappedTransition name="tooltip-default-transition">
-        <div class="s-tooltip__body sora-tpg-p4 px-16px py-12px">
+        <div
+          class="s-tooltip__body sora-tpg-p4 px-16px py-12px"
+          data-testid="tooltip-body"
+        >
           <div
             v-if="$slots.header || header"
             class="sora-tpg-p1 mb-4px"
+            data-testid="tooltip-header"
           >
             <slot name="header">
               {{ header }}
             </slot>
           </div>
 
-          <slot name="content">
-            {{ content }}
-          </slot>
+          <div data-testid="tooltip-content">
+            <slot name="content">
+              {{ content }}
+            </slot>
+          </div>
 
           <div
             v-if="primaryButtonText || secondaryButtonText"
@@ -77,6 +84,7 @@ function handleSecondaryButtonClick() {
               class="s-tooltip__button first:mr-8px"
               type="outline"
               size="sm"
+              data-testid="tooltip-primary-button"
               @click="handlePrimaryButtonClick"
             >
               {{ primaryButtonText }}
@@ -86,6 +94,7 @@ function handleSecondaryButtonClick() {
               class="s-tooltip__button"
               type="outline"
               size="sm"
+              data-testid="tooltip-secondary-button"
               @click="handleSecondaryButtonClick"
             >
               {{ secondaryButtonText }}

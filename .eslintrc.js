@@ -50,7 +50,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/*.spec.ts'],
+      files: ['**/*.spec.ts', '**/*.spec.cy.ts'],
       rules: {
         'max-nested-callbacks': 'off',
       },
