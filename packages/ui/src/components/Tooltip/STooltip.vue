@@ -12,6 +12,7 @@ const props = withDefaults(
   defineProps<{
     wrapperTag?: string | object
     content?: string
+    header?: string
     placement?: 'top' | 'bottom' | 'right' | 'left'
     primaryButtonText?: string
     secondaryButtonText?: string
@@ -19,6 +20,7 @@ const props = withDefaults(
   {
     wrapperTag: 'div',
     content: '',
+    header: '',
     placement: 'bottom',
     primaryButtonText: '',
     secondaryButtonText: '',
@@ -53,6 +55,15 @@ function handleSecondaryButtonClick() {
     <template #popper>
       <SPopoverWrappedTransition name="tooltip-default-transition">
         <div class="s-tooltip__body sora-tpg-p4 px-16px py-12px">
+          <div
+            v-if="$slots.header || header"
+            class="sora-tpg-p1 mb-4px"
+          >
+            <slot name="header">
+              {{ header }}
+            </slot>
+          </div>
+
           <slot name="content">
             {{ content }}
           </slot>
@@ -101,14 +112,11 @@ function handleSecondaryButtonClick() {
       border-color: theme.token-as-var('sys.color.border-primary');
       color: theme.token-as-var('sys.color.content-on-background-inverted');
 
-      &:hover {
-        border-color: theme.token-as-var('sys.color.primary-hover');
-        color: theme.token-as-var('sys.color.primary-hover');
-      }
-
+      &:hover,
       &:active {
-        border-color: theme.token-as-var('sys.color.primary-pressed');
-        color: theme.token-as-var('sys.color.primary-pressed');
+        border-color: theme.token-as-var('sys.color.util.surface');
+        background: theme.token-as-var('sys.color.util.surface');
+        color: theme.token-as-var('sys.color.content-primary');
       }
     }
 

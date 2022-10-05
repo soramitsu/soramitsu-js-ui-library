@@ -1,61 +1,83 @@
 import { defineMeta, defineStory } from './util'
-import { STooltip } from '@/lib'
+import { STooltip, SLink, SNotificationsProvider, SUseNotification } from '@/lib'
 
 export default defineMeta({
   title: 'Example/Tooltip',
 })
 
-export const Configurable = defineStory((args) => ({
+export const Configurable = defineStory(() => ({
   components: {
     STooltip,
-    SomeElement: { template: `<div class="bg-red-400 text-white rounded-md px-2 py-1"><slot/></div>` },
+    SomeElement: {
+      components: { SLink },
+      template: `<SLink :icon="false" underline="dotted"><slot/></SLink>`,
+    },
+    SNotificationsProvider,
+    SUseNotification,
   },
   setup() {
+    const show = ref(false)
+    const notificationMessage = ref('')
+
     return {
-      args,
+      show,
+      notificationMessage,
+      handlePrimaryButtonClick: () => {
+        show.value = true
+        notificationMessage.value = 'Primary button clicked'
+      },
+      handleSecondaryButtonClick: () => {
+        show.value = true
+        notificationMessage.value = 'Secondary button clicked'
+      },
     }
   },
   template: `
+    <SNotificationsProvider>
+      <SUseNotification v-model:show="show" show-close-btn>
+        <template #title>
+          {{ notificationMessage }}
+        </template>
+      </SUseNotification>
+    </SNotificationsProvider>
+
     <div class="flex justify-around py-56px">
-      <STooltip
-        content="Body text"
-      >
+      <STooltip content="Body text">
         <SomeElement>Default tooltip</SomeElement>
       </STooltip>
 
-      <STooltip placement="left">
+      <STooltip
+        placement="left"
+        header="Header"
+        content="Body text"
+      >
         <SomeElement>Tooltip with header</SomeElement>
-
-        <template #content>
-          <div class="sora-tpg-p1 mb-4px">Header</div>
-          Body text
-        </template>
       </STooltip>
     </div>
     
     <div class="flex justify-around py-56px">
       <STooltip
-        placement="top"
+        placement="right"
         primary-button-text="Button"
+        @click:primary-button="handlePrimaryButtonClick"
       >
-        <SomeElement>Tooltip with buttons</SomeElement>
+        <SomeElement>Tooltip with button</SomeElement>
   
-        <template #content>
-          Body text
-        </template>
+        <template #content>Body text</template>
       </STooltip>
     
       <STooltip
-        placement="right"
+        placement="top"
         primary-button-text="Button"
         secondary-button-text="Button"
+        @click:primary-button="handlePrimaryButtonClick"
+        @click:secondary-button="handleSecondaryButtonClick"
       >
         <SomeElement>Tooltip with header and buttons</SomeElement>
-
-        <template #content>
-          <div class="sora-tpg-p1 mb-4px">Header</div>
-          Body text
-        </template>
+        
+        <template #header>Header</template>
+        
+        <template #content>Body text</template>
       </STooltip>
     </div>
   `,
