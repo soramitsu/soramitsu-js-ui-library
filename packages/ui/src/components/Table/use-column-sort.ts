@@ -1,26 +1,26 @@
 import { Ref } from 'vue'
-import { ColumnApi } from './api'
-import { ColumnSortOrder, TableRow } from './types'
+import { TableColumnApi } from './api'
+import { TableColumnSortOrder, TableRow } from './types'
 import { get } from 'lodash-es'
 
 export function useColumnSort(data: Ref<TableRow[]>) {
-  const sortState: { column: ColumnApi | null; order: ColumnSortOrder } = shallowReactive({
+  const sortState: { column: TableColumnApi | null; order: TableColumnSortOrder } = shallowReactive({
     column: null,
     order: null,
   })
   let sortedData: Ref<TableRow[]> = ref(data.value)
 
-  function startSortWithNewColumn(column: ColumnApi | null) {
+  function startSortWithNewColumn(column: TableColumnApi | null) {
     sortState.column = column
     sortState.order = null
   }
 
-  function getNextOrder(column: ColumnApi, order: ColumnSortOrder) {
+  function getNextOrder(column: TableColumnApi, order: TableColumnSortOrder) {
     const index = column.sortOrders.indexOf(order)
     return column.sortOrders[(index + 1) % column.sortOrders.length]
   }
 
-  function getKey(column: ColumnApi, { value, index }: { value: TableRow; index: number }) {
+  function getKey(column: TableColumnApi, { value, index }: { value: TableRow; index: number }) {
     if (!column.sortBy) {
       return [get(value, column.prop)]
     }
@@ -50,7 +50,7 @@ export function useColumnSort(data: Ref<TableRow[]>) {
     return 0
   }
 
-  function sortData(order: ColumnSortOrder, column: ColumnApi) {
+  function sortData(order: TableColumnSortOrder, column: TableColumnApi) {
     if (column.sortable === 'custom') {
       return
     }
@@ -76,7 +76,7 @@ export function useColumnSort(data: Ref<TableRow[]>) {
       .map((x) => x.value)
   }
 
-  function handleSortChange(column: ColumnApi) {
+  function handleSortChange(column: TableColumnApi) {
     if (!column.sortable) {
       return
     }
@@ -89,7 +89,7 @@ export function useColumnSort(data: Ref<TableRow[]>) {
     sortData(sortState.order, column)
   }
 
-  function sortExplicitly(column: ColumnApi, newOrder: ColumnSortOrder) {
+  function sortExplicitly(column: TableColumnApi, newOrder: TableColumnSortOrder) {
     if (sortState.column !== column) {
       startSortWithNewColumn(column)
     }
