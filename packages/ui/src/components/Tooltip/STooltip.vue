@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { SButton } from '@/components/Button'
-import { BasePlacement } from "@popperjs/core";
+import { BasePlacement } from '@popperjs/core'
 
 const props = withDefaults(
   defineProps<{
