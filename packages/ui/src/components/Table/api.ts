@@ -1,32 +1,32 @@
 import { DeepReadonly, InjectionKey, Slot } from 'vue'
 import { forceInject } from '@/util'
 import {
-  ColumnCellValueFormatter,
-  ColumnRowSelectableFunc,
-  ColumnSortBy,
-  ColumnSortOrder,
+  TableColumnCellValueFormatter,
+  TableColumnRowSelectableFunc,
+  TableColumnSortBy,
+  TableColumnSortOrder,
   TableColumnAlign,
   TableRow,
 } from './types'
 
-export interface ColumnWidthProps {
+export interface TableColumnWidthProps {
   width: null | number
   minWidth: number
 }
 
-export interface ColumnAlignProps {
+export interface TableColumnAlignProps {
   align: TableColumnAlign
   headerAlign: TableColumnAlign
 }
 
-export interface ColumnSortProps {
+export interface TableColumnSortProps {
   sortable: boolean | 'custom'
   sortMethod: (<T extends TableRow>(a: T, b: T) => number) | null
-  sortBy: ColumnSortBy
-  sortOrders: ColumnSortOrder[]
+  sortBy: TableColumnSortBy
+  sortOrders: TableColumnSortOrder[]
 }
 
-export interface CommonColumnApi extends ColumnWidthProps, ColumnAlignProps, ColumnSortProps {
+export interface TableCommonColumnApi extends TableColumnWidthProps, TableColumnAlignProps, TableColumnSortProps {
   id: string
   label?: string
   cellSlot?: Slot
@@ -34,17 +34,17 @@ export interface CommonColumnApi extends ColumnWidthProps, ColumnAlignProps, Col
   showOverflowTooltip?: boolean
   className: string
   labelClassName: string
-  formatter: ColumnCellValueFormatter | null
-  selectable: ColumnRowSelectableFunc | null
+  formatter: TableColumnCellValueFormatter | null
+  selectable: TableColumnRowSelectableFunc | null
   reserveSelection?: boolean
 }
 
-export interface ColumnApi extends CommonColumnApi {
+export interface TableColumnApi extends TableCommonColumnApi {
   type: 'default'
   prop: string
 }
 
-export interface ActionColumnApi extends CommonColumnApi {
+export interface TableActionColumnApi extends TableCommonColumnApi {
   type: 'selection' | 'expand'
   prop?: string
 }
@@ -53,7 +53,7 @@ export interface TableApi {
   /**
    * Should be called inside item on setup. Unregister on scope dispose automatically
    */
-  register: (options: ColumnApi | ActionColumnApi) => void
+  register: (options: TableColumnApi | TableActionColumnApi) => void
 }
 
 export const TABLE_API_KEY: InjectionKey<DeepReadonly<TableApi>> = Symbol('TableAPI')
