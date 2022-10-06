@@ -28,6 +28,7 @@ import { SBodyScrollLockProvider } from './BodyScrollLockProvider'
 import { SNavigationMenu, SNavigationMenuItem, SNavigationSubmenu } from './NavigationMenu'
 import { STable, STableColumn } from './Table'
 import { SPagination } from './Pagination'
+import { STooltip } from './Tooltip'
 
 /**
  * Component names should be identical to their variable names
@@ -75,4 +76,5 @@ export const COMPONENTS: Record<string, Component> = {
   SNavigationMenuItem,
   SNavigationSubmenu,
   SPagination,
+  STooltip,
 }

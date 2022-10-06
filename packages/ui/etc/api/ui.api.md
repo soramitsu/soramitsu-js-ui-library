@@ -5,6 +5,7 @@
 ```ts
 
 import { AllowedComponentProps } from 'vue';
+import { BasePlacement } from '@popperjs/core';
 import { ComponentCustomProps } from 'vue';
 import { ComponentOptionsMixin } from 'vue';
 import type { CSSProperties } from 'vue';
@@ -1571,6 +1572,50 @@ default: null;
 };
 }>>, {
 apiKey: ProvideKey | ProvideKey[];
+}>;
+
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export const STooltip: DefineComponent<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
+wrapperTag?: string | object | undefined;
+content?: string | undefined;
+header?: string | undefined;
+placement?: BasePlacement | undefined;
+primaryButtonText?: string | undefined;
+secondaryButtonText?: string | undefined;
+}>, {
+wrapperTag: string;
+content: string;
+header: string;
+placement: string;
+primaryButtonText: string;
+secondaryButtonText: string;
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("click:primary-button" | "click:secondary-button")[], "click:primary-button" | "click:secondary-button", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
+wrapperTag?: string | object | undefined;
+content?: string | undefined;
+header?: string | undefined;
+placement?: BasePlacement | undefined;
+primaryButtonText?: string | undefined;
+secondaryButtonText?: string | undefined;
+}>, {
+wrapperTag: string;
+content: string;
+header: string;
+placement: string;
+primaryButtonText: string;
+secondaryButtonText: string;
+}>>> & {
+"onClick:primary-button"?: ((...args: any[]) => any) | undefined;
+"onClick:secondary-button"?: ((...args: any[]) => any) | undefined;
+}, {
+placement: BasePlacement;
+header: string;
+content: string;
+wrapperTag: string | object;
+primaryButtonText: string;
+secondaryButtonText: string;
 }>;
 
 // @public (undocumented)
