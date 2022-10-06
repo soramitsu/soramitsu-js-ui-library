@@ -7,13 +7,14 @@ export default {
 <script setup lang="ts">
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { SButton } from '@/components/Button'
+import { BasePlacement } from "@popperjs/core";
 
 const props = withDefaults(
   defineProps<{
     wrapperTag?: string | object
     content?: string
     header?: string
-    placement?: 'top' | 'bottom' | 'right' | 'left'
+    placement?: BasePlacement
     primaryButtonText?: string
     secondaryButtonText?: string
   }>(),

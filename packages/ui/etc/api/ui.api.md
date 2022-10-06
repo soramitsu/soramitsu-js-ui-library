@@ -5,6 +5,7 @@
 ```ts
 
 import { AllowedComponentProps } from 'vue';
+import { BasePlacement } from '@popperjs/core';
 import { ColumnCellValueFormatter as ColumnCellValueFormatter_2 } from '@/components/Table/types';
 import { ColumnRowSelectableFunc as ColumnRowSelectableFunc_2 } from '@/components/Table/types';
 import { ColumnSortBy as ColumnSortBy_2 } from '@/components/Table/types';
@@ -1683,7 +1684,7 @@ export const STooltip: DefineComponent<__VLS_WithDefaults_26<__VLS_TypePropsToRu
 wrapperTag?: string | object | undefined;
 content?: string | undefined;
 header?: string | undefined;
-placement?: "left" | "right" | "top" | "bottom" | undefined;
+placement?: BasePlacement | undefined;
 primaryButtonText?: string | undefined;
 secondaryButtonText?: string | undefined;
 }>, {
@@ -1697,7 +1698,7 @@ secondaryButtonText: string;
 wrapperTag?: string | object | undefined;
 content?: string | undefined;
 header?: string | undefined;
-placement?: "left" | "right" | "top" | "bottom" | undefined;
+placement?: BasePlacement | undefined;
 primaryButtonText?: string | undefined;
 secondaryButtonText?: string | undefined;
 }>, {
@@ -1711,7 +1712,7 @@ secondaryButtonText: string;
 "onClick:primary-button"?: ((...args: any[]) => any) | undefined;
 "onClick:secondary-button"?: ((...args: any[]) => any) | undefined;
 }, {
-placement: 'top' | 'bottom' | 'right' | 'left';
+placement: BasePlacement;
 header: string;
 wrapperTag: string | object;
 content: string;
