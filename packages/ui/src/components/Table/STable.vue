@@ -697,6 +697,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
 
             <tr
               v-if="activeExpandColumn && expandedRows.has(row)"
+              class="s-table__expanded-block"
               data-testid="table-expanded-block"
             >
               <td
@@ -778,6 +779,11 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
     &_align_right {
       text-align: right;
     }
+  }
+
+  &__tr:last-child &__td,
+  &__expanded-block:last-child &__expanded-cell {
+    border-bottom: none;
   }
 
   &__th {
