@@ -45,7 +45,7 @@ export interface TableColumnApi extends TableCommonColumnApi {
 }
 
 export interface TableActionColumnApi extends TableCommonColumnApi {
-  type: 'selection' | 'expand'
+  type: 'selection' | 'expand' | 'details'
   prop?: string
 }
 

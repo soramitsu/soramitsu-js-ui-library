@@ -160,6 +160,10 @@ export default /* @__PURE__ */ defineComponent({
         width: 52,
         minWidth: 52,
       },
+      details: {
+        width: 40,
+        minWidth: 40,
+      },
     }
 
     const widthProps = computed(() => {
