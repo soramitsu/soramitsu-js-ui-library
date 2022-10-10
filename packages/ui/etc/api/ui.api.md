@@ -1194,6 +1194,8 @@ select: (payload_0: TableRow[], payload_1: TableRow) => void;
 "expand-change": (payload_0: TableRow, payload_1: TableRow[]) => void;
 } & {
 "current-change": (payload_0: TableRow | null, payload_1: TableRow | null) => void;
+} & {
+"click:row-details": (value: TableRow) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
 data?: TableRow[] | undefined;
 defaultSort?: {
@@ -1257,6 +1259,7 @@ onSelect?: ((args_0: TableRow[], args_1: TableRow) => any) | undefined;
 "onSelect-all"?: ((value: TableRow[]) => any) | undefined;
 "onExpand-change"?: ((args_0: TableRow, args_1: TableRow[]) => any) | undefined;
 "onCurrent-change"?: ((args_0: TableRow | null, args_1: TableRow | null) => any) | undefined;
+"onClick:row-details"?: ((value: TableRow) => any) | undefined;
 }, {
 data: TableRow[];
 height: string | number;
@@ -1287,7 +1290,7 @@ selectOnIndeterminate: boolean;
 // @public (undocumented)
 export const STableColumn: DefineComponent<    {
 type: {
-type: PropType<"default" | "selection" | "expand">;
+type: PropType<"default" | "details" | "selection" | "expand">;
 default: string;
 };
 label: {
@@ -1356,7 +1359,7 @@ default: boolean;
 };
 }, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {
 type: {
-type: PropType<"default" | "selection" | "expand">;
+type: PropType<"default" | "details" | "selection" | "expand">;
 default: string;
 };
 label: {
@@ -1424,7 +1427,7 @@ type: BooleanConstructor;
 default: boolean;
 };
 }>>, {
-type: "default" | "selection" | "expand";
+type: "default" | "details" | "selection" | "expand";
 width: string;
 label: string;
 sortable: boolean | "custom";
@@ -1663,14 +1666,14 @@ export const TABLE_API_KEY: InjectionKey<DeepReadonly<TableApi>>;
 export const TABLE_COLUMN_ALIGN_VALUES: readonly ["left", "center", "right"];
 
 // @public (undocumented)
-export const TABLE_COLUMN_TYPE_VALUES: readonly ["default", "selection", "expand"];
+export const TABLE_COLUMN_TYPE_VALUES: readonly ["default", "selection", "expand", "details"];
 
 // @public (undocumented)
 export interface TableActionColumnApi extends TableCommonColumnApi {
     // (undocumented)
     prop?: string;
     // (undocumented)
-    type: 'selection' | 'expand';
+    type: 'selection' | 'expand' | 'details';
 }
 
 // @public (undocumented)

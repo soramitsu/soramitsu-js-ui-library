@@ -3,7 +3,7 @@ import type { CSSProperties, ShallowRef, Slot } from 'vue'
 import { MaybeElementRef, not } from '@vueuse/core'
 import { get, findLast } from 'lodash-es'
 import { SCheckboxAtom } from '@/components/Checkbox'
-import { IconArrowTop16, IconArrowsChevronDownRounded24 } from '@/components/icons'
+import { IconArrowTop16, IconArrowsChevronDownRounded24, IconArrowsChevronRightXs24 } from '@/components/icons'
 import { useColumnSort } from './use-column-sort'
 import {
   TableRow,
@@ -19,7 +19,7 @@ import {
 import { useFlexColumns } from './use-flex-columns-widths'
 import { useRowSelect } from './use-row-select'
 import { useColumnExpand } from './use-column-expand'
-import { isDefaultColumn, isExpandColumn, isRecord, isSelectionColumn } from './utils'
+import { isDefaultColumn, isDetailsColumn, isExpandColumn, isRecord, isSelectionColumn } from './utils'
 import { TableActionColumnApi, TableColumnApi, TABLE_API_KEY } from './api'
 import { useTableHeights } from './use-table-heights'
 
@@ -168,6 +168,7 @@ const emit = defineEmits<{
   (event: 'select', ...value: [TableRow[], TableRow]): void
   (event: 'expand-change', ...value: [TableRow, TableRow[]]): void
   (event: 'current-change', ...value: [TableRow | null, TableRow | null]): void
+  (event: 'click:row-details', value: TableRow): void
 }>()
 
 const columns: (TableColumnApi | TableActionColumnApi)[] = shallowReactive([])
@@ -463,6 +464,10 @@ function handleRowExpand(row: TableRow) {
   emit('expand-change', row, [...expandedRows])
 }
 
+function handleRowDetails(row: TableRow) {
+  emit('click:row-details', row)
+}
+
 function handleCellMouseEvent(ctx: {
   row: TableRow
   column: TableColumnApi | TableActionColumnApi
@@ -486,6 +491,11 @@ function handleCellMouseEvent(ctx: {
     case 'click': {
       if (isExpandColumn(ctx.column)) {
         handleRowExpand(rawRow)
+        break
+      }
+
+      if (isDetailsColumn(ctx.column)) {
+        handleRowDetails(rawRow)
         break
       }
 
@@ -636,7 +646,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
               <td
                 v-for="(column, columnIndex) in columns"
                 :key="column.id"
-                class="s-table__td px-0 sora-tpg-p3"
+                class="s-table__td p-0 sora-tpg-p3"
                 :class="[
                   `s-table__td_align_${column.align}`,
                   column.id,
@@ -655,10 +665,12 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
                 @contextmenu="handleCellMouseEvent({ row, column, 'event': $event })"
               >
                 <div
-                  class="s-table__cell px-16px"
+                  class="s-table__cell h-full flex flex-col justify-center"
                   :class="{
                     's-table__cell_has-tooltip': column.showOverflowTooltip,
-                    'cursor-pointer': isExpandColumn(column),
+                    's-table__cell_has-hover': isDetailsColumn(column),
+                    'cursor-pointer': isExpandColumn(column) || isDetailsColumn(column),
+                    'px-16px': !isDetailsColumn(column),
                   }"
                   :title="getCellTooltipContent(row, column)"
                 >
@@ -690,6 +702,10 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
                       :class="{ 's-table__expand-icon_active': expandedRows.has(row) }"
                       data-testid="table-expanded-icon"
                     />
+                  </template>
+
+                  <template v-else-if="isDetailsColumn(column)">
+                    <IconArrowsChevronRightXs24 class="s-table__details-icon self-center" />
                   </template>
                 </div>
               </td>
@@ -833,6 +849,20 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
     &_has-tooltip {
       white-space: nowrap;
     }
+
+    &_has-hover:hover {
+      background: theme.token-as-var('sys.color.background-hover');
+    }
+  }
+
+  &__details-icon {
+    color: theme.token-as-var('sys.color.content-quaternary');
+    fill: currentColor;
+  }
+
+  &__cell:hover &__details-icon {
+    color: theme.token-as-var('sys.color.content-secondary');
+    fill: currentColor;
   }
 
   &__empty-text {
