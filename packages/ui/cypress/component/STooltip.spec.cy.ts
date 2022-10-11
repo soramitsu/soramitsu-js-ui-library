@@ -1,4 +1,3 @@
-import { mount } from '@cypress/vue'
 import { STooltip } from '@/lib'
 
 const testIdSelector = (id: string) => `[data-testid=${id}]`
@@ -15,7 +14,7 @@ describe('Tooltip', () => {
   context('Given prop and slot content', () => {
     context('When prop provided ', () => {
       beforeEach(() => {
-        mount(STooltip, {
+        cy.mount(STooltip, {
           propsData: {
             content: CONTENT,
           },
@@ -33,7 +32,7 @@ describe('Tooltip', () => {
 
     context('When slot provided ', () => {
       beforeEach(() => {
-        mount(STooltip, {
+        cy.mount(STooltip, {
           propsData: {
             content: CONTENT,
           },
@@ -55,7 +54,7 @@ describe('Tooltip', () => {
   context('Given prop and slot header', () => {
     context('When prop provided ', () => {
       beforeEach(() => {
-        mount(STooltip, {
+        cy.mount(STooltip, {
           propsData: {
             header: HEADER,
           },
@@ -73,7 +72,7 @@ describe('Tooltip', () => {
 
     context('When slot provided ', () => {
       beforeEach(() => {
-        mount(STooltip, {
+        cy.mount(STooltip, {
           propsData: {
             header: HEADER,
           },
@@ -95,7 +94,7 @@ describe('Tooltip', () => {
   context('Given buttons texts props', () => {
     context('When texts provided ', () => {
       beforeEach(() => {
-        mount(STooltip, {
+        cy.mount(STooltip, {
           propsData: {
             primaryButtonText: PRIMARY_BUTTON_TEXT,
             secondaryButtonText: SECONDARY_BUTTON_TEXT,
