@@ -1,10 +1,9 @@
-import { mount } from '@cypress/vue'
 import { SNotificationBody, Status } from '@/lib'
 
 const findCloseBtn = () => cy.get('[data-testid=close-btn]')
 
 it('Playground', () => {
-  mount(
+  cy.mount(
     {
       setup() {
         const { count, inc } = useCounter()
@@ -31,7 +30,7 @@ it('Playground', () => {
 })
 
 it('Timeout works', () => {
-  mount({
+  cy.mount({
     components: { SNotificationBody },
     setup() {
       const show = ref(true)
@@ -56,7 +55,7 @@ it('Timeout works', () => {
 })
 
 it('Close btn works', () => {
-  mount({
+  cy.mount({
     components: { SNotificationBody },
     setup() {
       const show = ref(true)
@@ -85,7 +84,7 @@ it('Close btn works', () => {
 })
 
 it('Different types', () => {
-  mount({
+  cy.mount({
     components: { SNotificationBody },
     setup() {
       return {

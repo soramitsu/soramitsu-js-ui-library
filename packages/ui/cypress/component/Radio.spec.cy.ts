@@ -1,13 +1,12 @@
-import { mount } from '@cypress/vue'
-import { config } from '@vue/test-utils'
+import { VueTestUtils } from 'cypress/vue'
 import { SRadio, SRadioGroup, RADIO_SIZE_VALUES, useRadioGroupApi } from '@/components/Radio'
 
 before(() => {
-  config.global.components = { SRadio, SRadioGroup }
+  VueTestUtils.config.global.components = { SRadio, SRadioGroup }
 })
 
 after(() => {
-  config.global.components = {}
+  VueTestUtils.config.global.components = {}
 })
 
 const testidSelector = (id: string) => `[data-testid=${id}]`
@@ -22,7 +21,7 @@ const expectRadioToBeNotTabbable = (innerText: string) =>
   findRadioButtonContains(innerText).should('have.attr', 'tabindex', -1)
 
 it('Play', () => {
-  mount({
+  cy.mount({
     setup() {
       return {
         SIZES: RADIO_SIZE_VALUES,
@@ -58,7 +57,7 @@ it('Play', () => {
 
 describe('Initial tabindex', () => {
   it("When RadioGroup doesn't have an initial value, then a11y is ok and the first radio is tabbable", () => {
-    mount({
+    cy.mount({
       template: `
         <SRadioGroup>
           <SRadio value="1">First</SRadio>
@@ -81,7 +80,7 @@ describe('Initial tabindex', () => {
 
     // Mounting
 
-    mount({
+    cy.mount({
       setup() {
         const { count, inc } = useCounter()
 
@@ -116,7 +115,7 @@ describe('Initial tabindex', () => {
   })
 
   it('When there is no selected value initially, but then it appears, then related radio button is tabbable', () => {
-    mount({
+    cy.mount({
       setup() {
         const val = ref<string | null>(null)
 
@@ -155,7 +154,7 @@ describe('Initial tabindex', () => {
 
 describe('Keyboard, Focusing, Disabling', () => {
   beforeEach(() => {
-    mount({
+    cy.mount({
       setup() {
         const valueRef = ref<null | string>(null)
         const disableDeep = ref(false)
@@ -262,8 +261,8 @@ describe('Keyboard, Focusing, Disabling', () => {
   })
 
   it('When arrow keys are pressed when radio group is focused, value is changed appropriate', () => {
-    cy.contains('Pre')
-      .tab()
+    cy.contains('Regular crust')
+      .click()
       // going next with Down
       .type('{downarrow}')
 
@@ -358,7 +357,7 @@ describe('Keyboard, Focusing, Disabling', () => {
 
 describe('SRadioGroup', () => {
   it('It has role=radiogroup', () => {
-    mount({
+    cy.mount({
       template: `
         <SRadioGroup data-cy="group">
           Soramitsu
@@ -397,7 +396,7 @@ describe('SRadioGroup', () => {
 
     const CUSTOM_SELECTOR = `div.custom-radio`
 
-    mount({
+    cy.mount({
       components: { CustomRadio },
       setup() {
         return { val: ref(null), selector: CUSTOM_SELECTOR }
@@ -427,7 +426,7 @@ describe('SRadioGroup', () => {
   })
 
   it('When `labelled-by` & `described-by` are set, then appropriate ARIA is set', () => {
-    mount({
+    cy.mount({
       template: `
         <SRadioGroup data-cy="group" labelled-by="label" described-by="desc">
           <label id="label">Label</label>

@@ -1,6 +1,6 @@
 import { Status } from '@/types'
-import { mount } from '@cypress/vue'
-import { config } from '@vue/test-utils'
+
+import { VueTestUtils } from 'cypress/vue'
 import { STextField } from '@/lib'
 
 const findInput = () => cy.get('input')
@@ -11,15 +11,15 @@ const findEye = () => cy.get('[data-testid=eye]')
 const findAppend = () => cy.get('[data-testid=append]')
 
 before(() => {
-  config.global.components = { STextField }
+  VueTestUtils.config.global.components = { STextField }
 })
 
 after(() => {
-  config.global.components = {}
+  VueTestUtils.config.global.components = {}
 })
 
 it('Playground', () => {
-  mount({
+  cy.mount({
     setup() {
       const model = ref('Lorem ipsum')
       const statuses = [null, Status.Warning, Status.Error, Status.Success]
@@ -49,7 +49,7 @@ it('Playground', () => {
 })
 
 it('Events are emitted from input', () => {
-  mount({
+  cy.mount({
     setup() {
       const focused = ref(false)
 
@@ -73,7 +73,7 @@ it('Events are emitted from input', () => {
 
 describe('Modeling extensions', () => {
   it('Input does not change its value when prop is not updated', () => {
-    mount({
+    cy.mount({
       template: `<STextField />`,
     })
 
@@ -81,7 +81,7 @@ describe('Modeling extensions', () => {
   })
 
   it('Input changes its value when prop is not updated BUT strict sync is disabled', () => {
-    mount({
+    cy.mount({
       template: `<STextField no-model-value-strict-sync />`,
     })
 
@@ -89,7 +89,7 @@ describe('Modeling extensions', () => {
   })
 
   it('Input value does not change if upstream modelValue has not been changed', () => {
-    mount({
+    cy.mount({
       setup() {
         const nums = ref('')
 
@@ -118,7 +118,7 @@ describe('Modeling extensions', () => {
 
 describe('Counter', () => {
   it('Displays counter with a limit', () => {
-    mount({
+    cy.mount({
       template: `<STextField counter="5" model-value="Google" />`,
     })
 
@@ -126,7 +126,7 @@ describe('Counter', () => {
   })
 
   it('Displays counter without a limit', () => {
-    mount({
+    cy.mount({
       template: `<STextField counter model-value="Google" />`,
     })
 
@@ -136,7 +136,7 @@ describe('Counter', () => {
 
 describe('Label', () => {
   it('Works via prop', () => {
-    mount({
+    cy.mount({
       template: `<STextField label="Hey" />`,
     })
 
@@ -144,7 +144,7 @@ describe('Label', () => {
   })
 
   it('Works via slot', () => {
-    mount({
+    cy.mount({
       template: `
         <STextField>
           <template #label>Umm?</template>
@@ -158,7 +158,7 @@ describe('Label', () => {
 
 describe('Status message', () => {
   it('Not shown by default', () => {
-    mount({
+    cy.mount({
       template: `<STextField />`,
     })
 
@@ -166,7 +166,7 @@ describe('Status message', () => {
   })
 
   it('Shown if prop is set', () => {
-    mount({
+    cy.mount({
       template: `<STextField message="foo" />`,
     })
 
@@ -174,7 +174,7 @@ describe('Status message', () => {
   })
 
   it('Shown if slot is defined', () => {
-    mount({
+    cy.mount({
       template: `
         <STextField>
           <template #message>bar</template>
@@ -186,7 +186,7 @@ describe('Status message', () => {
   })
 
   it('Conditional slot works', () => {
-    mount({
+    cy.mount({
       setup() {
         return {
           showSlot: ref(false),
@@ -213,13 +213,13 @@ describe('Status message', () => {
 
 describe('Append slot', () => {
   it('No append if no slot', () => {
-    mount(() => h(STextField))
+    cy.mount(() => h(STextField))
 
     findAppend().should('not.exist')
   })
 
   it('Rendered with eye', () => {
-    mount(() =>
+    cy.mount(() =>
       h(
         STextField,
         { password: true },
@@ -236,7 +236,7 @@ describe('Append slot', () => {
   })
 
   it('Rendered with counter', () => {
-    mount(() =>
+    cy.mount(() =>
       h(
         STextField,
         { counter: 20 },
@@ -253,7 +253,7 @@ describe('Append slot', () => {
   })
 
   it('Conditional slot works', () => {
-    mount({
+    cy.mount({
       setup() {
         return {
           showSlot: ref(false),
@@ -280,7 +280,7 @@ describe('Append slot', () => {
 
 describe('Password input', () => {
   it("Eye is shown and toggles input's type", () => {
-    mount({
+    cy.mount({
       template: `<STextField password />`,
     })
 
@@ -294,7 +294,7 @@ describe('Password input', () => {
   })
 
   it('Eye is not shown if `no-eye` prop is set', () => {
-    mount({
+    cy.mount({
       template: `<STextField password no-eye />`,
     })
 
@@ -303,13 +303,13 @@ describe('Password input', () => {
 })
 
 it('disabled=true => input itself is disabled too', () => {
-  mount({ template: `<STextField disabled />` })
+  cy.mount({ template: `<STextField disabled />` })
 
   findInput().should('be.disabled')
 })
 
 it('`id` - it is set correctly', () => {
-  mount({
+  cy.mount({
     template: `<STextField id="email" />`,
   })
 
@@ -318,19 +318,19 @@ it('`id` - it is set correctly', () => {
 })
 
 it('Autofocus works', () => {
-  mount({ template: `<STextField autofocus />` })
+  cy.mount({ template: `<STextField autofocus />` })
   findInput().should('have.attr', 'autofocus')
 })
 
 describe('Passing extra attributes', () => {
   it('they are passed to <input>', () => {
-    mount({ template: `<STextField extra-attr />` })
+    cy.mount({ template: `<STextField extra-attr />` })
 
     findInput().should('have.attr', 'extra-attr')
   })
 
   it('they are reactive', () => {
-    mount({
+    cy.mount({
       setup() {
         const { count, inc } = useCounter()
         return { count, inc }
