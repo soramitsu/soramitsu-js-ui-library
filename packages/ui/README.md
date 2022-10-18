@@ -54,6 +54,8 @@ as every render creates new value for prop which triggers another render.
 
 Column type `index` removed and so is prop `index`.
 
+Added column type `details` removed and event `click:row-details`.
+
 `align` in column options (like in events) now has values without `is-` prefix.
 
 Callbacks for `headerCellStyle` and `headerCellClassName` now called without row information

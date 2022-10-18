@@ -16,6 +16,12 @@ export function isExpandColumn(
   return column.type === 'expand'
 }
 
+export function isDetailsColumn(
+  column: TableColumnApi | TableActionColumnApi,
+): column is TableActionColumnApi & { type: 'details' } {
+  return column.type === 'details'
+}
+
 // Without type predicate checked like this object becomes object without keys
 export function isRecord(obj: unknown): obj is Record<string, unknown> {
   return obj !== null && typeof obj === 'object'
