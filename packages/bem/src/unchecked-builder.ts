@@ -14,8 +14,8 @@ export class BemBlock {
     this.root = root
   }
 
-  public mod(key: string, value?: string): BemBlock {
-    this.modifiers.push(new BemModifier(key, value))
+  public mod(key: string, maybeArrayValue?: string | string[]): BemBlock {
+    pushModifiers(this.modifiers, key, maybeArrayValue)
     return this
   }
 
@@ -56,8 +56,8 @@ class BemElement {
     this.name = name
   }
 
-  public mod(key: string, value?: string): BemElement {
-    this.modifiers.push(new BemModifier(key, value))
+  public mod(key: string, maybeArrayValue?: string | string[]): BemElement {
+    pushModifiers(this.modifiers, key, maybeArrayValue)
     return this
   }
 
@@ -105,4 +105,12 @@ function applyStyleToModifier(style: BemStyle, mod: BemModifier): string {
 
 function applyStyleToModifierPrefix(style: BemStyle, pre: string): string {
   return style === 'classic' ? `${pre}_` : `${pre}--`
+}
+
+function pushModifiers(target: BemModifier[], key: string, maybeArrayValue?: string | string[]): void {
+  if (Array.isArray(maybeArrayValue)) {
+    for (const value of maybeArrayValue) {
+      target.push(new BemModifier(key, value))
+    }
+  } else target.push(new BemModifier(key, maybeArrayValue))
 }
