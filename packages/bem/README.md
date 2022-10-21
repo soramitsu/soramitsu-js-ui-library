@@ -7,7 +7,7 @@ Type-level BEM notation.
 - Statically typed BEM schema
 - Less boilerplate - no need to repeat root block name
 - Less possibility to make a typo
-- Supported BEM styles - classic (`block__elem_mod-name_mod-key`), two-dashes (`block__elem--mod-name--mod-key`)
+- Support of classic BEM style (`block__elem_mod-name_mod-key`) and two-dashes (`block__elem--mod-name--mod-key`)
 
 ## Example
 
