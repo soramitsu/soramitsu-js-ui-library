@@ -7,8 +7,8 @@ describe('defineBem', () => {
     // Block modifiers
     .mod('loading')
     .mod('show-icon')
-    .mod('icon-size', 'small')
-    .mod('icon-size', 'very-small')
+    .mod('icon-size', ['small', 'very-small'] as const)
+    .mod('icon-size', 'little')
     // Block elements
     .elem('spinner')
     .elem('left-icon', (el) =>
@@ -16,8 +16,8 @@ describe('defineBem', () => {
         // Element modifiers
         .mod('active')
         .mod('has-stroke')
-        .mod('right-span', 'big')
-        .mod('right-span', 'very-big'),
+        .mod('right-span', ['big', 'very-big'] as const)
+        .mod('right-span', 'huge'),
     )
 
   test('Only block', () => {
@@ -61,12 +61,14 @@ describe('defineBem', () => {
           block_showIcon: 'v-btn_show-icon'
           block_iconSize_small: 'v-btn_icon-size_small'
           block_iconSize_verySmall: 'v-btn_icon-size_very-small'
+          block_iconSize_little: 'v-btn_icon-size_little'
           block__spinner: 'v-btn__spinner'
           block__leftIcon: 'v-btn__left-icon'
           block__leftIcon_active: 'v-btn__left-icon_active'
           block__leftIcon_hasStroke: 'v-btn__left-icon_has-stroke'
           block__leftIcon_rightSpan_big: 'v-btn__left-icon_right-span_big'
           block__leftIcon_rightSpan_veryBig: 'v-btn__left-icon_right-span_very-big'
+          block__leftIcon_rightSpan_huge: 'v-btn__left-icon_right-span_huge'
         }
       >
     >
@@ -100,12 +102,14 @@ describe('defineBem', () => {
           block_showIcon: 'v-btn--show-icon'
           block_iconSize_small: 'v-btn--icon-size--small'
           block_iconSize_verySmall: 'v-btn--icon-size--very-small'
+          block_iconSize_little: 'v-btn--icon-size--little'
           block__spinner: 'v-btn__spinner'
           block__leftIcon: 'v-btn__left-icon'
           block__leftIcon_active: 'v-btn__left-icon--active'
           block__leftIcon_hasStroke: 'v-btn__left-icon--has-stroke'
           block__leftIcon_rightSpan_big: 'v-btn__left-icon--right-span--big'
           block__leftIcon_rightSpan_veryBig: 'v-btn__left-icon--right-span--very-big'
+          block__leftIcon_rightSpan_huge: 'v-btn__left-icon--right-span--huge'
         }
       >
     >
