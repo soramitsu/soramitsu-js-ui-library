@@ -118,6 +118,17 @@ const FSelection = () =>
     @include chevron-size('md', 12px);
     @include chevron-size('lg', 16px);
     @include chevron-size('xl', 24px);
+
+    @mixin x-paddings($size, $px) {
+      &_#{$size} {
+        @apply px-#{$px};
+      }
+    }
+
+    @include x-paddings('sm', 6px);
+    @include x-paddings('md', 12px);
+    @include x-paddings('lg', 12px);
+    @include x-paddings('xl', 16px);
   }
 
   // magic spacing fix
