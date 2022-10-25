@@ -1,6 +1,11 @@
-import { SSelect, SDropdown, SelectOption, SSelectBase, SSelectButton, SSelectOption, useSelectApi } from '@/lib'
+import { SSelect, SDropdown, SelectOption, SSelectBase, SSelectButton, useSelectApi } from '@/lib'
 import { defineMeta, defineStory } from './util'
 import { ref } from 'vue'
+
+const sizeArg = {
+  options: ['sm', 'md', 'lg', 'xl'],
+  control: 'inline-radio',
+}
 
 export default defineMeta({
   title: 'Example/Select',
@@ -21,7 +26,7 @@ const OPTIONS: SelectOption[] = [
   },
 ]
 
-export const SelectSingle = defineStory(() => ({
+export const SelectSingle = defineStory((args) => ({
   components: {
     SSelect,
   },
@@ -29,6 +34,7 @@ export const SelectSingle = defineStory(() => ({
     return {
       OPTIONS,
       model: ref(null),
+      args
     }
   },
   template: `
@@ -36,9 +42,17 @@ export const SelectSingle = defineStory(() => ({
       v-model="model"
       label="Single select"
       :options="OPTIONS"
+      :size="args.size"
     />
   `,
 }))
+
+SelectSingle.argTypes = {
+  size: sizeArg,
+}
+SelectSingle.args = {
+  size: 'md',
+}
 
 export const SelectMultiple = defineStory(() => ({
   components: { SSelect },
@@ -55,10 +69,14 @@ export const SelectMultiple = defineStory(() => ({
   `,
 }))
 
-export const Dropdown = defineStory(() => ({
+export const Dropdown = defineStory((args) => ({
   components: { SDropdown },
   setup() {
-    return { OPTIONS, model: ref(['en', 'jp']) }
+    return {
+      OPTIONS,
+      model: ref(['en', 'jp']),
+      args
+    }
   },
   template: `
     <SDropdown
@@ -66,9 +84,17 @@ export const Dropdown = defineStory(() => ({
       label="Country"
       :options="OPTIONS"
       multiple
+      :size="args.size"
     />
   `,
 }))
+
+Dropdown.argTypes = {
+  size: sizeArg,
+}
+Dropdown.args = {
+  size: 'md',
+}
 
 export const Custom = defineStory(() => ({
   components: {
