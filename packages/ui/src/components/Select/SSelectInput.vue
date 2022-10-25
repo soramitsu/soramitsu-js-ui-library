@@ -67,7 +67,7 @@ const FSelection = () =>
     </template>
 
     <template v-else>
-      <div class="flex-1">
+      <div class="flex items-center flex-1">
         <FLabel /> <FSelection />
       </div>
     </template>
