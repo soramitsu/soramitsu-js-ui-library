@@ -54,10 +54,14 @@ SelectSingle.args = {
   size: 'md',
 }
 
-export const SelectMultiple = defineStory(() => ({
+export const SelectMultiple = defineStory((args) => ({
   components: { SSelect },
   setup() {
-    return { OPTIONS, model: ref(['en', 'jp']) }
+    return {
+      OPTIONS,
+      model: ref(['en', 'jp']),
+      args
+    }
   },
   template: `
     <SSelect
@@ -65,9 +69,17 @@ export const SelectMultiple = defineStory(() => ({
       label="Multi select"
       :options="OPTIONS"
       multiple
+      :size="args.size"
     />
   `,
 }))
+
+SelectMultiple.argTypes = {
+  size: sizeArg,
+}
+SelectMultiple.args = {
+  size: 'md',
+}
 
 export const Dropdown = defineStory((args) => ({
   components: { SDropdown },
