@@ -62,7 +62,7 @@ const emit = defineEmits<(event: 'toggle') => void>()
 
 .s-select-option {
   background: theme.token-as-var('sys.color.util.surface');
-  @apply flex items-center px-[10px] py-1 select-none cursor-pointer space-x-4;
+  @apply flex items-center px-[10px] py-1 select-none cursor-pointer space-x-8px;
 
   &:hover,
   &:active,
