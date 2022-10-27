@@ -34,7 +34,7 @@ export const SelectSingle = defineStory((args) => ({
     return {
       OPTIONS,
       model: ref(null),
-      args
+      args,
     }
   },
   template: `
@@ -60,7 +60,7 @@ export const SelectMultiple = defineStory((args) => ({
     return {
       OPTIONS,
       model: ref(['en', 'jp']),
-      args
+      args,
     }
   },
   template: `
@@ -87,7 +87,7 @@ export const Dropdown = defineStory((args) => ({
     return {
       OPTIONS,
       model: ref(['en', 'jp']),
-      args
+      args,
     }
   },
   template: `
