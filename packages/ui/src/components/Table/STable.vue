@@ -603,7 +603,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
                   </template>
                   <IconArrowTop16
                     v-if="column.sortable"
-                    class="s-table__sort-icon inline ml-10px"
+                    class="s-table__sort-icon flex-shrink-0 inline ml-10px"
                     :class="getSortIconStateClasses(column)"
                   />
                 </template>
