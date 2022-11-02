@@ -22,6 +22,10 @@ import { useColumnExpand } from './use-column-expand'
 import { isDefaultColumn, isDetailsColumn, isExpandColumn, isRecord, isSelectionColumn } from './utils'
 import { TableActionColumnApi, TableColumnApi, TABLE_API_KEY } from './api'
 import { useTableHeights } from './use-table-heights'
+import STableCellDefault from '@/components/Table/STableCellDefault.vue'
+import STableCellSelection from '@/components/Table/STableCellSelection.vue'
+import STableCellExpand from '@/components/Table/STableCellExpand.vue'
+import STableCellDetails from '@/components/Table/STableCellDetails.vue'
 
 // vue can't infer Object prop type from CSSProperties and logs warnings and this helps
 type CSSObject = Partial<CSSProperties>
@@ -587,7 +591,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
               @click="handleHeaderMouseEvent({ column, 'event': $event })"
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
             >
-              <div class="s-table__cell inline-flex items-center px-16px">
+              <div class="s-table__header-cell inline-flex items-center px-16px">
                 <template v-if="isDefaultColumn(column)">
                   <component
                     :is="column.headerSlot"
@@ -664,50 +668,33 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
                 @dblclick="handleCellMouseEvent({ row, column, 'event': $event })"
                 @contextmenu="handleCellMouseEvent({ row, column, 'event': $event })"
               >
-                <div
-                  class="s-table__cell h-full flex flex-col justify-center"
-                  :class="{
-                    's-table__cell_has-tooltip': column.showOverflowTooltip,
-                    's-table__cell_has-hover': isDetailsColumn(column),
-                    'cursor-pointer': isExpandColumn(column) || isDetailsColumn(column),
-                    'px-16px': !isDetailsColumn(column),
-                  }"
-                  :title="getCellTooltipContent(row, column)"
+                <STableCellDefault
+                  v-if="isDefaultColumn(column)"
+                  :tooltip="getCellTooltipContent(row, column)"
                 >
-                  <template v-if="isDefaultColumn(column)">
-                    <component
-                      :is="column.cellSlot"
-                      v-if="column.cellSlot"
-                      v-bind="{ row, column, rowIndex }"
-                    />
-                    <template v-else>
-                      {{ getDefaultCellValue(row, column, rowIndex) }}
-                    </template>
+                  <component
+                    :is="column.cellSlot"
+                    v-if="column.cellSlot"
+                    v-bind="{ row, column, rowIndex }"
+                  />
+                  <template v-else>
+                    {{ getDefaultCellValue(row, column, rowIndex) }}
                   </template>
+                </STableCellDefault>
 
-                  <template v-else-if="isSelectionColumn(column)">
-                    <SCheckboxAtom
-                      :class="{ 'cursor-pointer': !isCheckBoxDisabled(column, row, rowIndex) }"
-                      size="xl"
-                      data-testid="table-selection-checkbox"
-                      :checked="selectedRows.has(row)"
-                      :disabled="isCheckBoxDisabled(column, row, rowIndex)"
-                      @click.stop="isCheckBoxDisabled(column, row, rowIndex) || handleRowSelect(row)"
-                    />
-                  </template>
+                <STableCellSelection
+                  v-else-if="isSelectionColumn(column)"
+                  :disabled="isCheckBoxDisabled(column, row, rowIndex)"
+                  :checked="selectedRows.has(row)"
+                  @select="handleRowSelect(row)"
+                />
 
-                  <template v-else-if="isExpandColumn(column)">
-                    <IconArrowsChevronDownRounded24
-                      class="s-table__expand-icon"
-                      :class="{ 's-table__expand-icon_active': expandedRows.has(row) }"
-                      data-testid="table-expanded-icon"
-                    />
-                  </template>
+                <STableCellExpand
+                  v-else-if="isExpandColumn(column)"
+                  :active="expandedRows.has(row)"
+                />
 
-                  <template v-else-if="isDetailsColumn(column)">
-                    <IconArrowsChevronRightXs24 class="s-table__details-icon self-center" />
-                  </template>
-                </div>
+                <STableCellDetails v-else-if="isDetailsColumn(column)" />
               </td>
             </tr>
 
@@ -768,6 +755,12 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
     border: none;
   }
 
+  &__header-cell {
+    box-sizing: border-box;
+    overflow: hidden;
+    word-break: break-all;
+  }
+
   &__tr:hover > &__td,
   &__tr_current > &__td {
     background-color: theme.token-as-var('sys.color.background');
@@ -826,43 +819,8 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
     }
   }
 
-  &__expand-icon {
-    fill: currentColor;
-    transition: 0.15s ease-in-out transform;
-
-    &_active {
-      transform: rotateZ(180deg);
-    }
-  }
-
   &__th_sortable:hover &__sort-icon {
     visibility: visible;
-  }
-
-  &__cell {
-    box-sizing: border-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    word-break: break-all;
-
-    &_has-tooltip {
-      white-space: nowrap;
-    }
-
-    &_has-hover:hover {
-      background: theme.token-as-var('sys.color.background-hover');
-    }
-  }
-
-  &__details-icon {
-    color: theme.token-as-var('sys.color.content-quaternary');
-    fill: currentColor;
-  }
-
-  &__cell:hover &__details-icon {
-    color: theme.token-as-var('sys.color.content-secondary');
-    fill: currentColor;
   }
 
   &__empty-text {
