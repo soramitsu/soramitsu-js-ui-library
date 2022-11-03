@@ -70,15 +70,15 @@ const font = computed(() => {
   <button
     :type="nativeType"
     :class="[
-      bem.block,
-      bem[`block_type_${definitelyType}`],
-      bem[`block_size_${definitelySize}`],
-      bem[`block_iconPosition_${definitelyIconPosition}`],
+      bem._,
+      bem[`_type_${definitelyType}`],
+      bem[`_size_${definitelySize}`],
+      bem[`_iconPosition_${definitelyIconPosition}`],
       font,
       {
-        [bem.block_disabled]: loading || disabled,
-        [bem.block_rounded]: isAction && rounded,
-        [bem.block_loading]: loading,
+        [bem._disabled]: loading || disabled,
+        [bem._rounded]: isAction && rounded,
+        [bem._loading]: loading,
       },
     ]"
     :disabled="loading || disabled"
@@ -92,7 +92,7 @@ const font = computed(() => {
     />
 
     <span
-      :class="bem.block__icon"
+      :class="bem.icon"
       data-testid="icon"
     >
       <i
@@ -105,7 +105,7 @@ const font = computed(() => {
       />
     </span>
     <span
-      :class="bem.block__text"
+      :class="bem.text"
       data-testid="text"
     >
       <slot v-if="!isAction" />

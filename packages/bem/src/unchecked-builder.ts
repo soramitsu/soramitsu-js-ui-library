@@ -1,9 +1,7 @@
-import { BemStyle, RootBlockKey, BLOCK_KEY } from './types'
+import { BemStyle } from './types'
 import { camelize } from 'fast-case'
 
-type BemRecord = Record<StartsWithBlock, string>
-
-type StartsWithBlock = `${RootBlockKey}${string}`
+type BemRecord = Record<string, string>
 
 export class BemBlock {
   public readonly root: string
@@ -31,11 +29,11 @@ export class BemBlock {
   public build(style: BemStyle = 'classic'): BemRecord {
     const acc: BemRecord = {}
 
-    acc[BLOCK_KEY] = this.root
+    acc._ = this.root
 
     if (this.modifiers.length) {
       const prefix = applyStyleToModifierPrefix(style, this.root)
-      const opts = { acc, keyPrefix: BLOCK_KEY, valuePrefix: prefix, style }
+      const opts = { acc, keyPrefix: '', valuePrefix: prefix, style }
       for (const mod of this.modifiers) {
         mod.write(opts)
         mod.write({ ...opts, preserve: true })
@@ -79,7 +77,7 @@ class BemElement {
     style: BemStyle
     preserve?: boolean
   }): void {
-    const keyElement: StartsWithBlock = `${BLOCK_KEY}__${preserve ? this.name : camelize(this.name)}`
+    const keyElement = preserve ? this.name : camelize(this.name)
     const valueElement = valuePrefix + this.name
 
     acc[keyElement] = valueElement
@@ -111,12 +109,12 @@ class BemModifier {
     preserve,
   }: {
     acc: BemRecord
-    keyPrefix: StartsWithBlock
+    keyPrefix: string
     valuePrefix: string
     style: BemStyle
     preserve?: boolean
   }): void {
-    const accKey: StartsWithBlock = this.value
+    const accKey = this.value
       ? preserve
         ? `${keyPrefix}_${this.key}_${this.value}`
         : `${keyPrefix}_${camelize(this.key)}_${camelize(this.value)}`

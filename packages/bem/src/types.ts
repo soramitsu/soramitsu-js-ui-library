@@ -8,10 +8,6 @@ export type Expect<T extends true> = T
 
 export type BemStyle = 'classic' | 'two-dashes'
 
-export const BLOCK_KEY = 'block' as const
-
-export type RootBlockKey = typeof BLOCK_KEY
-
 type ApplyStyleToModifier<style extends BemStyle, modifier extends AnyModifier> = modifier extends ModifierBool<
   infer key
 >
@@ -139,9 +135,7 @@ type BuildClasses<
   elements extends Elem<any, any>[],
   style extends BemStyle,
 > = Simplify<
-  Record<RootBlockKey, block> &
-    BuildModifierClasses<block, modifiers, style> &
-    BuildElementsTupleClasses<block, elements, style>
+  Record<'_', block> & BuildModifierClasses<block, modifiers, style> & BuildElementsTupleClasses<block, elements, style>
 >
 
 type test11 = Expect<
@@ -153,13 +147,13 @@ type test11 = Expect<
       'classic'
     >,
     {
-      block: 'ro-ot'
-      block_keY_vaLue: 'ro-ot_ke-y_va-lue'
-      'block_ke-y_va-lue': 'ro-ot_ke-y_va-lue'
-      block__elem1: 'ro-ot__elem-1'
-      'block__elem-1': 'ro-ot__elem-1'
-      block__elem1_elemFlag: 'ro-ot__elem-1_elem-flag'
-      'block__elem-1_elem-flag': 'ro-ot__elem-1_elem-flag'
+      _: 'ro-ot'
+      _keY_vaLue: 'ro-ot_ke-y_va-lue'
+      '_ke-y_va-lue': 'ro-ot_ke-y_va-lue'
+      elem1: 'ro-ot__elem-1'
+      'elem-1': 'ro-ot__elem-1'
+      elem1_elemFlag: 'ro-ot__elem-1_elem-flag'
+      'elem-1_elem-flag': 'ro-ot__elem-1_elem-flag'
     }
   >
 >
@@ -196,7 +190,7 @@ type ModifiersToRecordRecur<r extends string, m extends ModifiersArray, style ex
   ...infer tail extends ModifiersArray,
 ]
   ? {
-      [K in `${RootBlockKey}_${AnyModifierToKeySuffix<head, boolean>}`]: `${ApplyStyleToModifierPrefix<
+      [K in `_${AnyModifierToKeySuffix<head, boolean>}`]: `${ApplyStyleToModifierPrefix<
         style,
         r
       >}${ApplyStyleToModifier<style, head>}`
@@ -211,9 +205,9 @@ type test10 = Expect<
   Equal<
     BuildModifierClasses<'s-table', [ModifierBool<'bool'>, ModifierKeyValue<'my-key', 'my-value'>], 'classic'>,
     {
-      block_bool: 's-table_bool'
-      block_myKey_myValue: 's-table_my-key_my-value'
-      'block_my-key_my-value': 's-table_my-key_my-value'
+      _bool: 's-table_bool'
+      _myKey_myValue: 's-table_my-key_my-value'
+      '_my-key_my-value': 's-table_my-key_my-value'
     }
   >
 >
@@ -233,7 +227,7 @@ type BuildSingleElementRecordWithPreserveOption<
   modifier extends null | AnyModifier,
   preserve extends boolean,
 > = Record<
-  `${RootBlockKey}__${preserve extends true ? elementName : CamelCase<elementName>}${modifier extends AnyModifier
+  `${preserve extends true ? elementName : CamelCase<elementName>}${modifier extends AnyModifier
     ? `_${AnyModifierToKeySuffix<modifier, preserve>}`
     : ''}`,
   `${ApplyStyleToElementPrefix<block>}${modifier extends AnyModifier
@@ -278,10 +272,10 @@ type test12 = Expect<
   Equal<
     BuildElementClasses<'s-table', Elem<'elem-1', [ModifierKeyValue<'key', 'value'>]>, 'classic'>,
     {
-      block__elem1: 's-table__elem-1'
-      'block__elem-1': 's-table__elem-1'
-      block__elem1_key_value: 's-table__elem-1_key_value'
-      'block__elem-1_key_value': 's-table__elem-1_key_value'
+      elem1: 's-table__elem-1'
+      'elem-1': 's-table__elem-1'
+      elem1_key_value: 's-table__elem-1_key_value'
+      'elem-1_key_value': 's-table__elem-1_key_value'
     }
   >
 >
