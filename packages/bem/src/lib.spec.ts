@@ -59,16 +59,26 @@ describe('defineBem', () => {
           block: 'v-btn'
           block_loading: 'v-btn_loading'
           block_showIcon: 'v-btn_show-icon'
+          'block_show-icon': 'v-btn_show-icon'
           block_iconSize_small: 'v-btn_icon-size_small'
+          'block_icon-size_small': 'v-btn_icon-size_small'
           block_iconSize_verySmall: 'v-btn_icon-size_very-small'
+          'block_icon-size_very-small': 'v-btn_icon-size_very-small'
           block_iconSize_little: 'v-btn_icon-size_little'
+          'block_icon-size_little': 'v-btn_icon-size_little'
           block__spinner: 'v-btn__spinner'
           block__leftIcon: 'v-btn__left-icon'
+          'block__left-icon': 'v-btn__left-icon'
           block__leftIcon_active: 'v-btn__left-icon_active'
+          'block__left-icon_active': 'v-btn__left-icon_active'
           block__leftIcon_hasStroke: 'v-btn__left-icon_has-stroke'
+          'block__left-icon_has-stroke': 'v-btn__left-icon_has-stroke'
           block__leftIcon_rightSpan_big: 'v-btn__left-icon_right-span_big'
+          'block__left-icon_right-span_big': 'v-btn__left-icon_right-span_big'
           block__leftIcon_rightSpan_veryBig: 'v-btn__left-icon_right-span_very-big'
+          'block__left-icon_right-span_very-big': 'v-btn__left-icon_right-span_very-big'
           block__leftIcon_rightSpan_huge: 'v-btn__left-icon_right-span_huge'
+          'block__left-icon_right-span_huge': 'v-btn__left-icon_right-span_huge'
         }
       >
     >
@@ -76,6 +86,12 @@ describe('defineBem', () => {
     expect(bem).toMatchInlineSnapshot(`
       {
         "block": "v-btn",
+        "block__left-icon": "v-btn__left-icon",
+        "block__left-icon_active": "v-btn__left-icon_active",
+        "block__left-icon_has-stroke": "v-btn__left-icon_has-stroke",
+        "block__left-icon_right-span_big": "v-btn__left-icon_right-span_big",
+        "block__left-icon_right-span_huge": "v-btn__left-icon_right-span_huge",
+        "block__left-icon_right-span_very-big": "v-btn__left-icon_right-span_very-big",
         "block__leftIcon": "v-btn__left-icon",
         "block__leftIcon_active": "v-btn__left-icon_active",
         "block__leftIcon_hasStroke": "v-btn__left-icon_has-stroke",
@@ -83,10 +99,14 @@ describe('defineBem', () => {
         "block__leftIcon_rightSpan_huge": "v-btn__left-icon_right-span_huge",
         "block__leftIcon_rightSpan_veryBig": "v-btn__left-icon_right-span_very-big",
         "block__spinner": "v-btn__spinner",
+        "block_icon-size_little": "v-btn_icon-size_little",
+        "block_icon-size_small": "v-btn_icon-size_small",
+        "block_icon-size_very-small": "v-btn_icon-size_very-small",
         "block_iconSize_little": "v-btn_icon-size_little",
         "block_iconSize_small": "v-btn_icon-size_small",
         "block_iconSize_verySmall": "v-btn_icon-size_very-small",
         "block_loading": "v-btn_loading",
+        "block_show-icon": "v-btn_show-icon",
         "block_showIcon": "v-btn_show-icon",
       }
     `)
@@ -100,18 +120,28 @@ describe('defineBem', () => {
         typeof bem,
         {
           block: 'v-btn'
-          block_loading: 'v-btn--loading'
-          block_showIcon: 'v-btn--show-icon'
-          block_iconSize_small: 'v-btn--icon-size--small'
-          block_iconSize_verySmall: 'v-btn--icon-size--very-small'
-          block_iconSize_little: 'v-btn--icon-size--little'
-          block__spinner: 'v-btn__spinner'
+          'block__left-icon': 'v-btn__left-icon'
+          'block__left-icon_active': 'v-btn__left-icon--active'
+          'block__left-icon_has-stroke': 'v-btn__left-icon--has-stroke'
+          'block__left-icon_right-span_big': 'v-btn__left-icon--right-span--big'
+          'block__left-icon_right-span_huge': 'v-btn__left-icon--right-span--huge'
+          'block__left-icon_right-span_very-big': 'v-btn__left-icon--right-span--very-big'
           block__leftIcon: 'v-btn__left-icon'
           block__leftIcon_active: 'v-btn__left-icon--active'
           block__leftIcon_hasStroke: 'v-btn__left-icon--has-stroke'
           block__leftIcon_rightSpan_big: 'v-btn__left-icon--right-span--big'
-          block__leftIcon_rightSpan_veryBig: 'v-btn__left-icon--right-span--very-big'
           block__leftIcon_rightSpan_huge: 'v-btn__left-icon--right-span--huge'
+          block__leftIcon_rightSpan_veryBig: 'v-btn__left-icon--right-span--very-big'
+          block__spinner: 'v-btn__spinner'
+          'block_icon-size_little': 'v-btn--icon-size--little'
+          'block_icon-size_small': 'v-btn--icon-size--small'
+          'block_icon-size_very-small': 'v-btn--icon-size--very-small'
+          block_iconSize_little: 'v-btn--icon-size--little'
+          block_iconSize_small: 'v-btn--icon-size--small'
+          block_iconSize_verySmall: 'v-btn--icon-size--very-small'
+          block_loading: 'v-btn--loading'
+          'block_show-icon': 'v-btn--show-icon'
+          block_showIcon: 'v-btn--show-icon'
         }
       >
     >
@@ -119,6 +149,12 @@ describe('defineBem', () => {
     expect(bem).toMatchInlineSnapshot(`
       {
         "block": "v-btn",
+        "block__left-icon": "v-btn__left-icon",
+        "block__left-icon_active": "v-btn__left-icon--active",
+        "block__left-icon_has-stroke": "v-btn__left-icon--has-stroke",
+        "block__left-icon_right-span_big": "v-btn__left-icon--right-span--big",
+        "block__left-icon_right-span_huge": "v-btn__left-icon--right-span--huge",
+        "block__left-icon_right-span_very-big": "v-btn__left-icon--right-span--very-big",
         "block__leftIcon": "v-btn__left-icon",
         "block__leftIcon_active": "v-btn__left-icon--active",
         "block__leftIcon_hasStroke": "v-btn__left-icon--has-stroke",
@@ -126,10 +162,14 @@ describe('defineBem', () => {
         "block__leftIcon_rightSpan_huge": "v-btn__left-icon--right-span--huge",
         "block__leftIcon_rightSpan_veryBig": "v-btn__left-icon--right-span--very-big",
         "block__spinner": "v-btn__spinner",
+        "block_icon-size_little": "v-btn--icon-size--little",
+        "block_icon-size_small": "v-btn--icon-size--small",
+        "block_icon-size_very-small": "v-btn--icon-size--very-small",
         "block_iconSize_little": "v-btn--icon-size--little",
         "block_iconSize_small": "v-btn--icon-size--small",
         "block_iconSize_verySmall": "v-btn--icon-size--very-small",
         "block_loading": "v-btn--loading",
+        "block_show-icon": "v-btn--show-icon",
         "block_showIcon": "v-btn--show-icon",
       }
     `)

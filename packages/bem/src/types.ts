@@ -12,101 +12,98 @@ export const BLOCK_KEY = 'block' as const
 
 export type RootBlockKey = typeof BLOCK_KEY
 
-type ApplyStyleToModifier<style extends BemStyle, m extends AnyModifier> = m extends ModifierBool<infer k>
-  ? k
-  : m extends ModifierKeyValue<infer k, infer v>
+type ApplyStyleToModifier<style extends BemStyle, modifier extends AnyModifier> = modifier extends ModifierBool<
+  infer key
+>
+  ? key
+  : modifier extends ModifierKeyValue<infer key, infer value>
   ? style extends 'classic'
-    ? `${k}_${v}`
+    ? `${key}_${value}`
     : style extends 'two-dashes'
-    ? `${k}--${v}`
+    ? `${key}--${value}`
     : never
   : never
 
-type ApplyStyleToModifierPrefix<style extends BemStyle, r extends string> = style extends 'classic'
-  ? `${r}_`
+type ApplyStyleToModifierPrefix<style extends BemStyle, prefix extends string> = style extends 'classic'
+  ? `${prefix}_`
   : style extends 'two-dashes'
-  ? `${r}--`
+  ? `${prefix}--`
   : never
 
-type ApplyStyleToElementPrefix<style extends BemStyle, r extends string> = `${r}__`
+type ApplyStyleToElementPrefix<prefix extends string> = `${prefix}__`
 
 type ReadonlyStringArray = readonly string[]
 
 export interface BlockBuilder<
-  in out r extends string,
-  in out mm extends ModifiersArray = [],
-  in out ee extends BuiltElem<any, any>[] = [],
+  in out block extends string,
+  in out modifiers extends ModifiersArray = [],
+  in out elements extends Elem<any, any>[] = [],
 > {
-  __virtual: [r, mm, ee]
   mod: {
-    <m extends string>(key: m): BlockBuilder<r, AddModifier<mm, m>, ee>
-    <m extends string, vv extends ReadonlyStringArray>(key: m, values: vv): BlockBuilder<r, AddModifier<mm, m, vv>, ee>
-    <m extends string, v extends string>(key: m, value: v): BlockBuilder<r, AddModifier<mm, m, v>, ee>
-  }
-  elem: {
-    <n extends string>(name: n): BlockBuilder<r, mm, [...ee, BuiltElem<n, []>]>
-    <n extends string, e extends ElemBuilder<any>>(name: n, fn: (elementBuilder: ElemBuilder) => e): BlockBuilder<
-      r,
-      mm,
-      [...ee, BuildElement<n, e>]
+    <key extends string>(key: key): BlockBuilder<block, AddModifier<modifiers, key>, elements>
+    <key extends string, values extends ReadonlyStringArray>(key: key, values: values): BlockBuilder<
+      block,
+      AddModifier<modifiers, key, values>,
+      elements
+    >
+    <key extends string, value extends string>(key: key, value: value): BlockBuilder<
+      block,
+      AddModifier<modifiers, key, value>,
+      elements
     >
   }
+  elem: {
+    <name extends string>(name: name): BlockBuilder<block, modifiers, [...elements, Elem<name, []>]>
+    <name extends string, builder extends ElemBuilder<any>>(
+      name: name,
+      fn: (elementBuilder: ElemBuilder) => builder,
+    ): BlockBuilder<block, modifiers, [...elements, BuildElem<name, builder>]>
+  }
   build: {
-    (): BuildClasses<r, mm, ee, 'classic'>
-    <s extends BemStyle>(style: s): BuildClasses<r, mm, ee, s>
+    (): BuildClasses<block, modifiers, elements, 'classic'>
+    <style extends BemStyle>(style: style): BuildClasses<block, modifiers, elements, style>
   }
 }
 
-type AnyBlockBuilder = BlockBuilder<any, any, any>
-
-type ExtendBlockWithElement<b extends AnyBlockBuilder, e extends BuiltElem<any, any>> = b extends BlockBuilder<
-  infer r,
-  infer m,
-  infer ee
->
-  ? BlockBuilder<r, m, [...ee, e]>
+type BuildElem<name extends string, builder extends ElemBuilder<any>> = builder extends ElemBuilder<infer modifiers>
+  ? Elem<name, modifiers>
   : never
 
-type BuildElement<n extends string, b extends ElemBuilder<any>> = b extends ElemBuilder<infer m>
-  ? BuiltElem<n, m>
-  : never
-
-interface ElemBuilder<in out mm extends ModifiersArray = []> {
-  __virtual: mm
+interface ElemBuilder<in out modifiers extends ModifiersArray = []> {
   mod: {
-    <k extends string>(key: k): ElemBuilder<AddModifier<mm, k>>
-    <k extends string, vv extends ReadonlyStringArray>(key: k, values: vv): ElemBuilder<AddModifier<mm, k, vv>>
-    <k extends string, v extends string>(key: k, value: v): ElemBuilder<AddModifier<mm, k, v>>
+    <key extends string>(key: key): ElemBuilder<AddModifier<modifiers, key>>
+    <key extends string, values extends ReadonlyStringArray>(key: key, values: values): ElemBuilder<
+      AddModifier<modifiers, key, values>
+    >
+    <key extends string, value extends string>(key: key, value: value): ElemBuilder<AddModifier<modifiers, key, value>>
   }
 }
 
-type AnyElemBuilder = ElemBuilder<any>
-
-interface BuiltElem<n extends string, m extends ModifiersArray> {
-  name: n
-  modifiers: m
+interface Elem<name extends string, modifiers extends ModifiersArray> {
+  name: name
+  modifiers: modifiers
 }
 
-interface ModifierKeyValue<M extends string, V extends string> {
+interface ModifierKeyValue<key extends string, value extends string> {
   kind: 'modifier-k-v'
-  key: M
-  value: V
+  key: key
+  value: value
 }
 
-interface ModifierBool<M extends string> {
+interface ModifierBool<key extends string> {
   kind: 'modifier-bool'
-  key: M
+  key: key
 }
 
 type AnyModifier = ModifierBool<any> | ModifierKeyValue<any, any>
 
 type ModifiersArray = Array<ModifierKeyValue<any, any> | ModifierBool<any>>
 
-type ExpandModifiersTuple<k extends string, vv extends ReadonlyStringArray> = vv extends readonly [
+type ExpandModifiersTuple<key extends string, values extends ReadonlyStringArray> = values extends readonly [
   infer head extends string,
   ...infer tail extends ReadonlyStringArray,
 ]
-  ? [ModifierKeyValue<k, head>, ...ExpandModifiersTuple<k, tail>]
+  ? [ModifierKeyValue<key, head>, ...ExpandModifiersTuple<key, tail>]
   : []
 
 type test14 = Expect<
@@ -114,12 +111,12 @@ type test14 = Expect<
 >
 
 type AddModifier<
-  mm extends ModifiersArray,
-  k extends string,
-  v extends ReadonlyStringArray | string | null = null,
-> = v extends ReadonlyStringArray
-  ? [...mm, ...ExpandModifiersTuple<k, v>]
-  : [...mm, v extends string ? ModifierKeyValue<k, v> : ModifierBool<k>]
+  modifiers extends ModifiersArray,
+  key extends string,
+  value extends ReadonlyStringArray | string | null = null,
+> = value extends ReadonlyStringArray
+  ? [...modifiers, ...ExpandModifiersTuple<key, value>]
+  : [...modifiers, value extends string ? ModifierKeyValue<key, value> : ModifierBool<key>]
 
 type test1 = Expect<Equal<AddModifier<[], 'foo'>, [ModifierBool<'foo'>]>>
 
@@ -129,8 +126,6 @@ type test3 = Expect<
   Equal<AddModifier<[ModifierBool<'foo'>], 'foo', 'bar'>, [ModifierBool<'foo'>, ModifierKeyValue<'foo', 'bar'>]>
 >
 
-type AAA = AddModifier<[], 'key', readonly ['foo', 'bar']>
-
 type test4 = Expect<
   Equal<
     AddModifier<[], 'key', readonly ['foo', 'bar']>,
@@ -139,34 +134,41 @@ type test4 = Expect<
 >
 
 type BuildClasses<
-  r extends string,
-  mm extends ModifiersArray,
-  ee extends BuiltElem<any, any>[],
+  block extends string,
+  modifiers extends ModifiersArray,
+  elements extends Elem<any, any>[],
   style extends BemStyle,
-> = Simplify<{ [k in RootBlockKey]: r } & BuildModifierClasses<r, mm, style> & BuildElementsTupleClasses<r, ee, style>>
+> = Simplify<
+  Record<RootBlockKey, block> &
+    BuildModifierClasses<block, modifiers, style> &
+    BuildElementsTupleClasses<block, elements, style>
+>
 
 type test11 = Expect<
   Equal<
     BuildClasses<
       'ro-ot',
       [ModifierKeyValue<'ke-y', 'va-lue'>],
-      [BuiltElem<'elem-1', [ModifierBool<'elem-flag'>]>],
+      [Elem<'elem-1', [ModifierBool<'elem-flag'>]>],
       'classic'
     >,
     {
       block: 'ro-ot'
       block_keY_vaLue: 'ro-ot_ke-y_va-lue'
+      'block_ke-y_va-lue': 'ro-ot_ke-y_va-lue'
       block__elem1: 'ro-ot__elem-1'
+      'block__elem-1': 'ro-ot__elem-1'
       block__elem1_elemFlag: 'ro-ot__elem-1_elem-flag'
+      'block__elem-1_elem-flag': 'ro-ot__elem-1_elem-flag'
     }
   >
 >
 
-type BuildModifierSuffixes<m extends ModifiersArray, style extends BemStyle> = m extends [
-  infer h extends ModifierBool<any> | ModifierKeyValue<any, any>,
-  ...infer t extends ModifiersArray,
+type BuildModifierSuffixes<modifiers extends ModifiersArray, style extends BemStyle> = modifiers extends [
+  infer head extends ModifierBool<any> | ModifierKeyValue<any, any>,
+  ...infer tail extends ModifiersArray,
 ]
-  ? [ApplyStyleToModifier<style, h>, ...BuildModifierSuffixes<t, style>]
+  ? [ApplyStyleToModifier<style, head>, ...BuildModifierSuffixes<tail, style>]
   : []
 
 type test7 = Expect<
@@ -176,10 +178,17 @@ type test7 = Expect<
   >
 >
 
-type AnyModifierToKeySuffix<t extends AnyModifier> = t extends ModifierBool<infer k>
-  ? CamelCase<k>
-  : t extends ModifierKeyValue<infer k, infer v>
-  ? `${CamelCase<k>}_${CamelCase<v>}`
+type AnyModifierToKeySuffix<
+  modifier extends AnyModifier,
+  preserve extends boolean = false,
+> = modifier extends ModifierBool<infer key>
+  ? preserve extends true
+    ? key
+    : CamelCase<key>
+  : modifier extends ModifierKeyValue<infer key, infer value>
+  ? preserve extends true
+    ? `${key}_${value}`
+    : `${CamelCase<key>}_${CamelCase<value>}`
   : never
 
 type ModifiersToRecordRecur<r extends string, m extends ModifiersArray, style extends BemStyle> = m extends [
@@ -187,15 +196,15 @@ type ModifiersToRecordRecur<r extends string, m extends ModifiersArray, style ex
   ...infer tail extends ModifiersArray,
 ]
   ? {
-      [K in `${RootBlockKey}_${AnyModifierToKeySuffix<head>}`]: `${ApplyStyleToModifierPrefix<
+      [K in `${RootBlockKey}_${AnyModifierToKeySuffix<head, boolean>}`]: `${ApplyStyleToModifierPrefix<
         style,
         r
       >}${ApplyStyleToModifier<style, head>}`
     } & ModifiersToRecordRecur<r, tail, style>
   : {}
 
-type BuildModifierClasses<r extends string, m extends ModifiersArray, style extends BemStyle> = Simplify<
-  ModifiersToRecordRecur<r, m, style>
+type BuildModifierClasses<block extends string, modifiers extends ModifiersArray, style extends BemStyle> = Simplify<
+  ModifiersToRecordRecur<block, modifiers, style>
 >
 
 type test10 = Expect<
@@ -204,57 +213,75 @@ type test10 = Expect<
     {
       block_bool: 's-table_bool'
       block_myKey_myValue: 's-table_my-key_my-value'
+      'block_my-key_my-value': 's-table_my-key_my-value'
     }
   >
 >
 
 type BuildSingleElementRecord<
   style extends BemStyle,
-  r extends string,
-  n extends string,
-  m extends null | AnyModifier = null,
-> = {
-  [k in `${RootBlockKey}__${CamelCase<n>}${m extends AnyModifier
-    ? `_${AnyModifierToKeySuffix<m>}`
-    : ''}`]: `${ApplyStyleToElementPrefix<style, r>}${m extends AnyModifier
-    ? `${ApplyStyleToModifierPrefix<style, n>}${ApplyStyleToModifier<style, m>}`
-    : n}`
-}
+  block extends string,
+  elementName extends string,
+  modifier extends null | AnyModifier = null,
+> = BuildSingleElementRecordWithPreserveOption<style, block, elementName, modifier, true> &
+  BuildSingleElementRecordWithPreserveOption<style, block, elementName, modifier, false>
+
+type BuildSingleElementRecordWithPreserveOption<
+  style extends BemStyle,
+  block extends string,
+  elementName extends string,
+  modifier extends null | AnyModifier,
+  preserve extends boolean,
+> = Record<
+  `${RootBlockKey}__${preserve extends true ? elementName : CamelCase<elementName>}${modifier extends AnyModifier
+    ? `_${AnyModifierToKeySuffix<modifier, preserve>}`
+    : ''}`,
+  `${ApplyStyleToElementPrefix<block>}${modifier extends AnyModifier
+    ? `${ApplyStyleToModifierPrefix<style, elementName>}${ApplyStyleToModifier<style, modifier>}`
+    : elementName}`
+>
 
 type BuildElementModifierClassesRecur<
-  r extends string,
-  n extends string,
-  mm extends ModifiersArray,
+  block extends string,
+  elementName extends string,
+  modifiers extends ModifiersArray,
   style extends BemStyle,
-> = mm extends [infer head extends AnyModifier, ...infer tail extends ModifiersArray]
-  ? BuildSingleElementRecord<style, r, n, head> & BuildElementModifierClassesRecur<r, n, tail, style>
+> = modifiers extends [infer head extends AnyModifier, ...infer tail extends ModifiersArray]
+  ? BuildSingleElementRecord<style, block, elementName, head> &
+      BuildElementModifierClassesRecur<block, elementName, tail, style>
   : {}
 
-type BuildElementClasses<r extends string, e extends BuiltElem<any, any>, style extends BemStyle> = e extends BuiltElem<
-  infer n,
-  infer mm
+type BuildElementClasses<block extends string, elem extends Elem<any, any>, style extends BemStyle> = elem extends Elem<
+  infer name,
+  infer modifiers
 >
-  ? Simplify<BuildSingleElementRecord<style, r, n> & BuildElementModifierClassesRecur<r, n, mm, style>>
+  ? Simplify<
+      BuildSingleElementRecord<style, block, name> & BuildElementModifierClassesRecur<block, name, modifiers, style>
+    >
   : never
 
 type BuildElementsTupleClassesRecur<
-  r extends string,
-  ee extends BuiltElem<any, any>[],
+  block extends string,
+  elements extends Elem<any, any>[],
   style extends BemStyle,
-> = ee extends [infer head extends BuiltElem<any, any>, ...infer tail extends BuiltElem<any, any>[]]
-  ? BuildElementClasses<r, head, style> & BuildElementsTupleClassesRecur<r, tail, style>
+> = elements extends [infer head extends Elem<any, any>, ...infer tail extends Elem<any, any>[]]
+  ? BuildElementClasses<block, head, style> & BuildElementsTupleClassesRecur<block, tail, style>
   : {}
 
-type BuildElementsTupleClasses<r extends string, ee extends BuiltElem<any, any>[], style extends BemStyle> = Simplify<
-  BuildElementsTupleClassesRecur<r, ee, style>
->
+type BuildElementsTupleClasses<
+  block extends string,
+  elements extends Elem<any, any>[],
+  style extends BemStyle,
+> = Simplify<BuildElementsTupleClassesRecur<block, elements, style>>
 
 type test12 = Expect<
   Equal<
-    BuildElementClasses<'s-table', BuiltElem<'elem-1', [ModifierKeyValue<'key', 'value'>]>, 'classic'>,
+    BuildElementClasses<'s-table', Elem<'elem-1', [ModifierKeyValue<'key', 'value'>]>, 'classic'>,
     {
       block__elem1: 's-table__elem-1'
+      'block__elem-1': 's-table__elem-1'
       block__elem1_key_value: 's-table__elem-1_key_value'
+      'block__elem-1_key_value': 's-table__elem-1_key_value'
     }
   >
 >

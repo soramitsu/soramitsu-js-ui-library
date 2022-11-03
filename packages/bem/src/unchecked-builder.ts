@@ -25,6 +25,9 @@ export class BemBlock {
     return this
   }
 
+  /**
+   * Could be optimized with lazy-evaluation and `Proxy`?
+   */
   public build(style: BemStyle = 'classic'): BemRecord {
     const acc: BemRecord = {}
 
@@ -32,15 +35,19 @@ export class BemBlock {
 
     if (this.modifiers.length) {
       const prefix = applyStyleToModifierPrefix(style, this.root)
+      const opts = { acc, keyPrefix: BLOCK_KEY, valuePrefix: prefix, style }
       for (const mod of this.modifiers) {
-        mod.write(acc, BLOCK_KEY, prefix, style)
+        mod.write(opts)
+        mod.write({ ...opts, preserve: true })
       }
     }
 
     if (this.elements.length) {
       const prefix = applyStyleToElementPrefix(this.root)
+      const opts = { acc, valuePrefix: prefix, style }
       for (const el of this.elements) {
-        el.write(acc, prefix, style)
+        el.write(opts)
+        el.write({ ...opts, preserve: true })
       }
     }
 
@@ -61,16 +68,27 @@ class BemElement {
     return this
   }
 
-  public write(acc: BemRecord, valuePrefix: string, style: BemStyle): void {
-    const keyElement: StartsWithBlock = `${BLOCK_KEY}__${camelize(this.name)}`
+  public write({
+    acc,
+    valuePrefix,
+    style,
+    preserve,
+  }: {
+    acc: BemRecord
+    valuePrefix: string
+    style: BemStyle
+    preserve?: boolean
+  }): void {
+    const keyElement: StartsWithBlock = `${BLOCK_KEY}__${preserve ? this.name : camelize(this.name)}`
     const valueElement = valuePrefix + this.name
 
     acc[keyElement] = valueElement
 
     if (this.modifiers.length) {
       const prefix = applyStyleToModifierPrefix(style, valueElement)
+      const opts = { acc, keyPrefix: keyElement, valuePrefix: prefix, style, preserve }
       for (const mod of this.modifiers) {
-        mod.write(acc, keyElement, prefix, style)
+        mod.write(opts)
       }
     }
   }
@@ -85,10 +103,25 @@ class BemModifier {
     this.value = value ?? null
   }
 
-  // eslint-disable-next-line max-params
-  public write(acc: BemRecord, keyPrefix: StartsWithBlock, valuePrefix: string, style: BemStyle): void {
+  public write({
+    acc,
+    keyPrefix,
+    valuePrefix,
+    style,
+    preserve,
+  }: {
+    acc: BemRecord
+    keyPrefix: StartsWithBlock
+    valuePrefix: string
+    style: BemStyle
+    preserve?: boolean
+  }): void {
     const accKey: StartsWithBlock = this.value
-      ? `${keyPrefix}_${camelize(this.key)}_${camelize(this.value)}`
+      ? preserve
+        ? `${keyPrefix}_${this.key}_${this.value}`
+        : `${keyPrefix}_${camelize(this.key)}_${camelize(this.value)}`
+      : preserve
+      ? `${keyPrefix}_${this.key}`
       : `${keyPrefix}_${camelize(this.key)}`
 
     acc[accKey] = valuePrefix + applyStyleToModifier(style, this)
