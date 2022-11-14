@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import type { CSSProperties, ShallowRef, Slot } from 'vue'
 import { MaybeElementRef, not } from '@vueuse/core'
-import { get, findLast } from 'lodash-es'
+import { findLast } from 'lodash-es'
 import { SCheckboxAtom } from '@/components/Checkbox'
-import { IconArrowTop16, IconArrowsChevronDownRounded24, IconArrowsChevronRightXs24 } from '@/components/icons'
+import { IconArrowTop16 } from '@/components/icons'
+import { TABLE_DEFAULT_ADAPT_BREAKPOINT, TABLE_CARDS_GRID_DEFAULT_BREAKPOINTS } from './consts'
 import { useColumnSort } from './use-column-sort'
 import {
-  TableRow,
+  TableCardGridBreakpoint,
+  TableCellConfigCallbackParams,
   TableCellEventData,
+  TableColumnSortOrder,
+  TableHeaderCellConfigCallbackParams,
   TableHeaderEventData,
+  TableRow,
+  TableRowConfigCallbackParams,
   TableRowEventData,
   TableSortEventData,
-  TableColumnSortOrder,
-  TableCellConfigCallbackParams,
-  TableRowConfigCallbackParams,
-  TableHeaderCellConfigCallbackParams,
 } from './types'
 import { useFlexColumns } from './use-flex-columns-widths'
 import { useRowSelect } from './use-row-select'
@@ -34,6 +36,7 @@ import STableCellDefault from '@/components/Table/STableCellDefault.vue'
 import STableCellSelection from '@/components/Table/STableCellSelection.vue'
 import STableCellExpand from '@/components/Table/STableCellExpand.vue'
 import STableCellDetails from '@/components/Table/STableCellDetails.vue'
+import STableCard from '@/components/Table/STableCard.vue'
 
 // vue can't infer Object prop type from CSSProperties and logs warnings and this helps
 type CSSObject = Partial<CSSProperties>
@@ -137,6 +140,14 @@ const props = withDefaults(
      * Controls the behavior of master checkbox in multi-select tables when only some rows are selected
      * */
     selectOnIndeterminate?: boolean
+    /**
+     * Table width when it becomes card grid
+     * */
+    adaptBreakpoint?: number
+    /**
+     * Array of predicates, receiving table width, and values. First true predicate defines selected value
+     * */
+    cardGridBreakpoints?: TableCardGridBreakpoint[]
   }>(),
   {
     data: () => [],
@@ -160,6 +171,8 @@ const props = withDefaults(
     selectOnIndeterminate: true,
     highlightCurrentRow: false,
     currentRowKey: '',
+    adaptBreakpoint: TABLE_DEFAULT_ADAPT_BREAKPOINT,
+    cardGridBreakpoints: () => TABLE_CARDS_GRID_DEFAULT_BREAKPOINTS,
   },
 )
 
@@ -200,6 +213,14 @@ useResizeObserver(tableWrapper, (entries) => {
     tableSizes.width = entries[0].contentRect.width
     tableSizes.height = entries[0].contentRect.height
   })
+})
+
+const isAdapted = eagerComputed(() => {
+  return tableSizes.width <= props.adaptBreakpoint
+})
+
+const cardsGridColumnNumber = eagerComputed(() => {
+  return props.cardGridBreakpoints.find((x) => x.test(tableSizes.width))?.value ?? 1
 })
 
 const headerWrapper: MaybeElementRef = ref(null)
@@ -421,9 +442,11 @@ function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T
 }
 
 function isRowSelectable(row: TableRow, index: number) {
-  return activeSelectionColumn?.value &&
-      activeSelectionColumn.value.selectable &&
-      activeSelectionColumn.value.selectable(row, index)
+  return (
+    activeSelectionColumn?.value &&
+    activeSelectionColumn.value.selectable &&
+    activeSelectionColumn.value.selectable(row, index)
+  )
 }
 
 function getSortIconStateClasses(column: TableColumnApi) {
@@ -489,12 +512,12 @@ function handleCellMouseEvent(ctx: {
       break
     }
     case 'click': {
-      if (isExpandColumn(ctx.column)) {
+      if (!isAdapted.value && isExpandColumn(ctx.column)) {
         handleRowExpand(rawRow)
         break
       }
 
-      if (isDetailsColumn(ctx.column)) {
+      if (!isAdapted.value && isDetailsColumn(ctx.column)) {
         handleRowDetails(rawRow)
         break
       }
@@ -526,7 +549,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
 
   switch (ctx.event.type) {
     case 'click': {
-      if (isDefaultColumn(ctx.column) && ctx.column.sortable) {
+      if (!isAdapted.value && isDefaultColumn(ctx.column) && ctx.column.sortable) {
         handleSortClick(ctx.column)
       }
 
@@ -549,7 +572,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
     :style="tableHeightStyles"
   >
     <div
-      v-if="showHeader"
+      v-if="!isAdapted && showHeader"
       ref="headerWrapper"
       class="s-table__header-wrapper"
     >
@@ -624,7 +647,35 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
       class="s-table__body-wrapper"
       :style="bodyHeightStyles"
     >
+      <div
+        v-if="isAdapted"
+        class="s-table__cards-grid"
+      >
+        <STableCard
+          v-for="(row, rowIndex) in sortedData"
+          :key="rowKey ? rowKeys.get(row) : rowIndex"
+          class="s-table__card"
+          :class="{
+            's-table__card_first-row': rowIndex < cardsGridColumnNumber,
+            's-table__card_last-column': !((rowIndex + 1) % cardsGridColumnNumber),
+          }"
+          :row="{ 'data': row, 'index': rowIndex }"
+          :columns="columns"
+          :active-expand-column="activeExpandColumn"
+          :active-selection-column="activeSelectionColumn"
+          :expanded="expandedRows.has(row)"
+          :selectable="isRowSelectable(row, rowIndex)"
+          :selected="selectedRows.has(row)"
+          @mouse-event:label="handleHeaderMouseEvent"
+          @mouse-event:value="handleCellMouseEvent"
+          @select="handleRowSelect(row)"
+          @expand="handleRowExpand(row)"
+          @click:details="handleRowDetails(row)"
+        />
+      </div>
+
       <table
+        v-else
         class="s-table__body w-full"
         :style="{ 'width': `${columnsWidthsSum}px` }"
       >
@@ -738,9 +789,29 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
 <style lang="scss">
 @use '@/theme';
 
+$col-number: v-bind(cardsGridColumnNumber);
+
 .s-table {
   &__body-wrapper {
     overflow-y: auto;
+  }
+
+  &__cards-grid {
+    display: grid;
+    grid-template-columns: repeat($col-number, 1fr);
+  }
+
+  &__card {
+    border-right: 1px solid theme.token-as-var('sys.color.border-secondary');
+    border-top: 1px solid theme.token-as-var('sys.color.border-secondary');
+
+    &_last-column {
+      border-right: none;
+    }
+
+    &_first-row {
+      border-top: none;
+    }
   }
 
   &__body,

@@ -42,3 +42,8 @@ export interface TableHeaderCellConfigCallbackParams {
   column: TableColumnApi | TableActionColumnApi
   columnIndex: number
 }
+
+export interface TableCardGridBreakpoint {
+  test: (width: number) => boolean
+  value: number
+}
