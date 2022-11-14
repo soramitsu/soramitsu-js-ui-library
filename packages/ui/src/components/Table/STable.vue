@@ -19,8 +19,16 @@ import {
 import { useFlexColumns } from './use-flex-columns-widths'
 import { useRowSelect } from './use-row-select'
 import { useColumnExpand } from './use-column-expand'
-import { isDefaultColumn, isDetailsColumn, isExpandColumn, isRecord, isSelectionColumn } from './utils'
-import { TableActionColumnApi, TableColumnApi, TABLE_API_KEY } from './api'
+import {
+  isDefaultColumn,
+  isDetailsColumn,
+  isExpandColumn,
+  isRecord,
+  isSelectionColumn,
+  getDefaultCellValue,
+  getCellTooltipContent,
+} from './utils'
+import { TABLE_API_KEY, TableActionColumnApi, TableColumnApi } from './api'
 import { useTableHeights } from './use-table-heights'
 import STableCellDefault from '@/components/Table/STableCellDefault.vue'
 import STableCellSelection from '@/components/Table/STableCellSelection.vue'
@@ -305,9 +313,11 @@ watch(keyRows, () => {
   }
 })
 
-function manualToggleAllSelection(column: TableActionColumnApi) {
-  toggleAllSelection(column.selectable)
-  storedSelectedRowsKeys = [...selectedRows].map((row) => rowKeys.get(row))
+function manualToggleAllSelection() {
+  if (activeSelectionColumn.value) {
+    toggleAllSelection(activeSelectionColumn.value.selectable)
+    storedSelectedRowsKeys = [...selectedRows].map((row) => rowKeys.get(row))
+  }
 }
 
 function manualToggleRowSelection(row: TableRow, value?: boolean) {
@@ -331,6 +341,10 @@ function register(column: TableColumnApi | TableActionColumnApi) {
 const api = readonly({ register })
 provide(TABLE_API_KEY, api)
 
+function getColumnByProp(prop: string) {
+  return columns.filter(isDefaultColumn).find((column) => column.prop === prop)
+}
+
 function sort({ prop, order }: { prop: string; order: TableColumnSortOrder }) {
   const column = getColumnByProp(prop)
 
@@ -352,11 +366,7 @@ defineExpose({
   /**
    * used in multiple selection Table, toggle the selected state of all rows
    * */
-  toggleAllSelection: () => {
-    if (activeSelectionColumn.value) {
-      manualToggleAllSelection(activeSelectionColumn.value)
-    }
-  },
+  toggleAllSelection: manualToggleAllSelection,
   /**
    * used in expandable Table or tree Table, toggle if a certain row is expanded.
    * With the second parameter, you can directly set if this row is expanded or collapsed
@@ -376,10 +386,6 @@ defineExpose({
    * */
   setCurrentRow,
 })
-
-function getColumnByProp(prop: string) {
-  return columns.filter(isDefaultColumn).find((column) => column.prop === prop)
-}
 
 function getRowKey(row: TableRow) {
   if (typeof props.rowKey === 'string') {
@@ -414,20 +420,10 @@ function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T
   return prop || undefined
 }
 
-function isCheckBoxDisabled(column: TableActionColumnApi, row: TableRow, index: number) {
-  return !column.selectable || column.selectable(row, index)
-}
-
-function getDefaultCellValue(row: TableRow, column: TableColumnApi, index: number) {
-  return column.formatter ? column.formatter(row, column, get(row, column.prop), index) : get(row, column.prop)
-}
-
-function getCellTooltipContent(row: TableRow, column: TableColumnApi | TableActionColumnApi) {
-  if (!column.showOverflowTooltip || !isDefaultColumn(column)) {
-    return
-  }
-
-  return String(get(row, column.prop))
+function isRowSelectable(row: TableRow, index: number) {
+  return activeSelectionColumn?.value &&
+      activeSelectionColumn.value.selectable &&
+      activeSelectionColumn.value.selectable(row, index)
 }
 
 function getSortIconStateClasses(column: TableColumnApi) {
@@ -449,8 +445,8 @@ function handleSortClick(column: TableColumnApi) {
   emit('sort-change', { column, prop: column.prop, order: sortState.order })
 }
 
-function handleAllSelect(column: TableActionColumnApi) {
-  manualToggleAllSelection(column)
+function handleAllSelect() {
+  manualToggleAllSelection()
   const selectedArray = [...selectedRows]
   emit('select-all', selectedArray)
   emit('selection-change', selectedArray)
@@ -684,7 +680,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
 
                 <STableCellSelection
                   v-else-if="isSelectionColumn(column)"
-                  :disabled="isCheckBoxDisabled(column, row, rowIndex)"
+                  :disabled="!isRowSelectable(row, rowIndex)"
                   :checked="selectedRows.has(row)"
                   @select="handleRowSelect(row)"
                 />
