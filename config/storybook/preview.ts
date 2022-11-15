@@ -62,7 +62,6 @@ addDecorator(() => ({
              </s-design-system-provider>`,
   store: mainStore,
   computed: {
-    // hasNeumorphicMode: () => window.location.href.includes(neuLabelCode) || window.location.href.includes('🟣'), // Set v-if="hasNeumorphicMode" if needed
     theme: () => mainStore?.getters?.libraryTheme as Theme,
     designSystem: () => mainStore?.getters?.libraryDesignSystem as DesignSystem
   },
