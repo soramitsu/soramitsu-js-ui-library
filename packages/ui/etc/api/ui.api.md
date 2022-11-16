@@ -1134,6 +1134,8 @@ emptyText?: string | undefined;
 defaultExpandAll?: boolean | undefined;
 expandRowKeys?: unknown[] | undefined;
 selectOnIndeterminate?: boolean | undefined;
+adaptBreakpoint?: number | undefined;
+cardGridBreakpoints?: TableCardGridBreakpoint[] | undefined;
 }>, {
 data: () => never[];
 defaultSort: null;
@@ -1156,10 +1158,15 @@ headerCellStyle: () => {};
 selectOnIndeterminate: boolean;
 highlightCurrentRow: boolean;
 currentRowKey: string;
+adaptBreakpoint: number;
+cardGridBreakpoints: () => {
+test: (width: number) => boolean;
+value: number;
+}[];
 }>, {
 clearSelection: typeof manualClearSelection;
 toggleRowSelection: typeof manualToggleRowSelection;
-toggleAllSelection: () => void;
+toggleAllSelection: typeof manualToggleAllSelection;
 toggleRowExpansion: (row: TableRow, value?: boolean | undefined) => void;
 sort: typeof sort;
 clearSort: () => void;
@@ -1221,6 +1228,8 @@ emptyText?: string | undefined;
 defaultExpandAll?: boolean | undefined;
 expandRowKeys?: unknown[] | undefined;
 selectOnIndeterminate?: boolean | undefined;
+adaptBreakpoint?: number | undefined;
+cardGridBreakpoints?: TableCardGridBreakpoint[] | undefined;
 }>, {
 data: () => never[];
 defaultSort: null;
@@ -1243,6 +1252,11 @@ headerCellStyle: () => {};
 selectOnIndeterminate: boolean;
 highlightCurrentRow: boolean;
 currentRowKey: string;
+adaptBreakpoint: number;
+cardGridBreakpoints: () => {
+test: (width: number) => boolean;
+value: number;
+}[];
 }>>> & {
 onSelect?: ((args_0: TableRow[], args_1: TableRow) => any) | undefined;
 "onCell-mouse-enter"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
@@ -1285,6 +1299,8 @@ emptyText: string;
 defaultExpandAll: boolean;
 expandRowKeys: unknown[];
 selectOnIndeterminate: boolean;
+adaptBreakpoint: number;
+cardGridBreakpoints: TableCardGridBreakpoint[];
 }>;
 
 // @public (undocumented)
@@ -1431,8 +1447,8 @@ type: "default" | "details" | "selection" | "expand";
 width: string;
 label: string;
 sortable: boolean | "custom";
-minWidth: string;
 prop: string;
+minWidth: string;
 sortMethod: <T>(a: T, b: T) => number;
 sortBy: TableColumnSortBy_2;
 sortOrders: TableColumnSortOrder_2[];
@@ -1615,8 +1631,8 @@ secondaryButtonText: string;
 }, {
 placement: BasePlacement;
 header: string;
-content: string;
 wrapperTag: string | object;
+content: string;
 primaryButtonText: string;
 secondaryButtonText: string;
 }>;
@@ -1663,10 +1679,19 @@ timeout: number;
 export const TABLE_API_KEY: InjectionKey<DeepReadonly<TableApi>>;
 
 // @public (undocumented)
+export const TABLE_CARDS_GRID_DEFAULT_BREAKPOINTS: {
+    test: (width: number) => boolean;
+    value: number;
+}[];
+
+// @public (undocumented)
 export const TABLE_COLUMN_ALIGN_VALUES: readonly ["left", "center", "right"];
 
 // @public (undocumented)
 export const TABLE_COLUMN_TYPE_VALUES: readonly ["default", "selection", "expand", "details"];
+
+// @public (undocumented)
+export const TABLE_DEFAULT_ADAPT_BREAKPOINT = 920;
 
 // @public (undocumented)
 export interface TableActionColumnApi extends TableCommonColumnApi {
@@ -1679,6 +1704,14 @@ export interface TableActionColumnApi extends TableCommonColumnApi {
 // @public (undocumented)
 export interface TableApi {
     register: (options: TableColumnApi | TableActionColumnApi) => void;
+}
+
+// @public (undocumented)
+export interface TableCardGridBreakpoint {
+    // (undocumented)
+    test: (width: number) => boolean;
+    // (undocumented)
+    value: number;
 }
 
 // @public (undocumented)
@@ -1909,11 +1942,12 @@ export function useTabsPanelApi(): TabsPanelApi;
 
 // Warnings were encountered during analysis:
 //
-// dist-ts/components/Table/STable.vue.d.ts:60:5 - (ae-forgotten-export) The symbol "CSSObject" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:136:5 - (ae-forgotten-export) The symbol "manualClearSelection" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:141:5 - (ae-forgotten-export) The symbol "manualToggleRowSelection" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:154:5 - (ae-forgotten-export) The symbol "sort" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:163:5 - (ae-forgotten-export) The symbol "setCurrentRow" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:61:5 - (ae-forgotten-export) The symbol "CSSObject" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:150:5 - (ae-forgotten-export) The symbol "manualClearSelection" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:155:5 - (ae-forgotten-export) The symbol "manualToggleRowSelection" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:159:5 - (ae-forgotten-export) The symbol "manualToggleAllSelection" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:168:5 - (ae-forgotten-export) The symbol "sort" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:177:5 - (ae-forgotten-export) The symbol "setCurrentRow" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:9:9 - (ae-forgotten-export) The symbol "validateVerticalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:14:9 - (ae-forgotten-export) The symbol "validateHorizontalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsProvider.d.ts:11:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts

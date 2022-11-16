@@ -442,11 +442,20 @@ function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T
 }
 
 function isRowSelectable(row: TableRow, index: number) {
-  return (
+  return !!(
     activeSelectionColumn?.value &&
     activeSelectionColumn.value.selectable &&
     activeSelectionColumn.value.selectable(row, index)
   )
+}
+
+function getTemplateRowKey(row: TableRow, rowIndex: number): number | string | symbol {
+  const res = props.rowKey ? rowKeys.get(row) : rowIndex
+  if (typeof res === 'string' || typeof res === 'number' || typeof res === 'symbol') {
+    return res
+  }
+
+  return JSON.stringify(res)
 }
 
 function getSortIconStateClasses(column: TableColumnApi) {
@@ -634,7 +643,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
                     size="xl"
                     :checked="isSomeSelected ? (isAllSelected ? true : 'mixed') : false"
                     :disabled="!data.length"
-                    @click.stop="data.length && handleAllSelect(column)"
+                    @click.stop="data.length && handleAllSelect()"
                   />
                 </template>
               </div>
@@ -653,7 +662,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
       >
         <STableCard
           v-for="(row, rowIndex) in sortedData"
-          :key="rowKey ? rowKeys.get(row) : rowIndex"
+          :key="getTemplateRowKey(row, rowIndex)"
           class="s-table__card"
           :class="{
             's-table__card_first-row': rowIndex < cardsGridColumnNumber,
@@ -682,7 +691,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
         <tbody>
           <template
             v-for="(row, rowIndex) in sortedData"
-            :key="rowKey ? rowKeys.get(row) : rowIndex"
+            :key="getTemplateRowKey(row, rowIndex)"
           >
             <tr
               class="s-table__tr"
