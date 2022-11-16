@@ -4,6 +4,24 @@ import { SButton, STooltip, SRow, SMain } from '../components'
 import { TooltipPlacement, TooltipTheme } from '../components/Tooltip'
 import { BorderRadius } from '../types'
 
+const differentPlacementData = [
+  [
+    TooltipPlacement.TOP_START, TooltipPlacement.TOP, TooltipPlacement.TOP_END
+  ],
+  [
+    TooltipPlacement.LEFT_START, TooltipPlacement.RIGHT_START
+  ],
+  [
+    TooltipPlacement.LEFT, TooltipPlacement.RIGHT
+  ],
+  [
+    TooltipPlacement.LEFT_END, TooltipPlacement.RIGHT_END
+  ],
+  [
+    TooltipPlacement.BOTTOM_START, TooltipPlacement.BOTTOM, TooltipPlacement.BOTTOM_END
+  ]
+]
+
 export default {
   component: STooltip,
   title: 'Design System/Components/Tooltip 🟣',
@@ -65,23 +83,6 @@ export const configurable = () => ({
   }
 })
 
-export const differentPlacementData = [
-  [
-    TooltipPlacement.TOP_START, TooltipPlacement.TOP, TooltipPlacement.TOP_END
-  ],
-  [
-    TooltipPlacement.LEFT_START, TooltipPlacement.RIGHT_START
-  ],
-  [
-    TooltipPlacement.LEFT, TooltipPlacement.RIGHT
-  ],
-  [
-    TooltipPlacement.LEFT_END, TooltipPlacement.RIGHT_END
-  ],
-  [
-    TooltipPlacement.BOTTOM_START, TooltipPlacement.BOTTOM, TooltipPlacement.BOTTOM_END
-  ]
-]
 export const withDifferentPlacement = () => ({
   components: { STooltip, SButton, SRow, SMain },
   template: `<s-main style="padding: 40px 80px;">
