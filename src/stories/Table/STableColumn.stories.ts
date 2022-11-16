@@ -1,85 +1,95 @@
-import { text, withKnobs, select, boolean } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { STable, STableColumn } from '../../components'
 import { ColumnAlignment } from '../../components/Table'
 
 import { tableData } from './STable.stories'
 
+const tableFilters = [
+  { text: '< 2016-01-01', value: 1 },
+  { text: 'between 2016-01-01 and 2016-05-01', value: 2 },
+  { text: 'between 2016-05-01 and 2018-05-05', value: 3 },
+  { text: '> 2019-01-01', value: 4 }
+]
+
 export default {
   component: STableColumn,
   title: 'Design System/Components/Table/Table Column',
-  decorators: [withKnobs],
-  excludeStories: /.*Data$/
-}
-
-export const configurable = () => ({
-  components: { STable, STableColumn },
-  template: `<s-table
-               :data="tableData"
-               border
-             >
-               <s-table-column type="selection"></s-table-column>
-               <s-table-column
-                 prop="date"
-                 width="80"
-                 resizable
-                 :label="label"
-                 :show-overflow-tooltip="showOverflowTooltip"
-                 :align="align"
-                 :header-align="headerAlign"
-               >
-               </s-table-column>
-               <s-table-column prop="address" label="Address"></s-table-column>
-               <s-table-column type="expand">Hello</s-table-column>
-             </s-table>`,
-  data: () => ({
-    tableData: tableData
-  }),
-  props: {
+  excludeStories: /.*Data$/,
+  argTypes: {
     label: {
-      default: text('Label', 'Date')
-    },
-    showOverflowTooltip: {
-      default: boolean('Show overflow tooltip', true)
+      name: 'Label',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'Date'
     },
     align: {
-      default: select('Align', Object.values(ColumnAlignment), ColumnAlignment.LEFT)
+      name: 'Align',
+      control: {
+        type: 'select',
+        options: Object.values(ColumnAlignment)
+      },
+      defaultValue: ColumnAlignment.LEFT
     },
     headerAlign: {
-      default: select('Header align', Object.values(ColumnAlignment), ColumnAlignment.LEFT)
+      name: 'Header align',
+      control: {
+        type: 'select',
+        options: Object.values(ColumnAlignment)
+      },
+      defaultValue: ColumnAlignment.LEFT
+    },
+    showOverflowTooltip: {
+      name: 'Show overflow tooltip',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    },
+    filterMultiple: {
+      name: 'Filter multiple',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    // config args
+    useFilters: {
+      table: {
+        disable: true
+      }
     }
   }
-})
+} as Meta
 
-export const withFilters = () => ({
+const Template: Story = (args, { argTypes }) => ({
   components: { STable, STableColumn },
-  template: `<s-table
-               :data="tableData"
-               border
-             >
-               <s-table-column type="selection"></s-table-column>
-               <s-table-column
-                 prop="date"
-                 width="80"
-                 resizable
-                 label="Date"
-                 show-overflow-tooltip
-                 :filters="tableFilters"
-                 :filterMethod="filterDate"
-                 :filter-multiple="filterMultiple"
-               >
-               </s-table-column>
-               <s-table-column prop="address" label="Address"></s-table-column>
-               <s-table-column type="expand">Hello</s-table-column>
-             </s-table>`,
+  props: Object.keys(argTypes),
+  template: `
+  <s-table :data="tableData" border>
+    <s-table-column type="selection"></s-table-column>
+    <s-table-column
+      prop="date"
+      width="80"
+      resizable
+      :label="label"
+      :show-overflow-tooltip="showOverflowTooltip"
+      :align="align"
+      :header-align="headerAlign"
+      :filters="useFilters && tableFilters"
+      :filterMethod="useFilters && filterDate"
+      :filter-multiple="useFilters && filterMultiple"
+    >
+    </s-table-column>
+    <s-table-column prop="address" label="Address"></s-table-column>
+    <s-table-column type="expand">Hello</s-table-column>
+  </s-table>
+  `,
   data: () => ({
-    tableData: tableData,
-    tableFilters: [
-      { text: '< 2016-01-01', value: 1 },
-      { text: 'between 2016-01-01 and 2016-05-01', value: 2 },
-      { text: 'between 2016-05-01 and 2018-05-05', value: 3 },
-      { text: '> 2019-01-01', value: 4 }
-    ],
+    useFilters: Boolean(args.useFilters),
+    tableData,
+    tableFilters,
     filterDate: (value: number, row: any) => {
       const date = new Date(row.date).getTime()
       switch (value) {
@@ -94,10 +104,12 @@ export const withFilters = () => ({
       }
       return true
     }
-  }),
-  props: {
-    filterMultiple: {
-      default: boolean('Filter multiple', false)
-    }
-  }
+  })
 })
+
+export const Configurable = Template.bind({})
+
+export const WithFilters = Template.bind({})
+WithFilters.args = {
+  useFilters: true
+}

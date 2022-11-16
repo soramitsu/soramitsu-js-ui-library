@@ -1,16 +1,9 @@
-import { withKnobs, select } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SHierarchicalTable } from '../../components'
 import { Size } from '../../types'
 
-export default {
-  component: SHierarchicalTable,
-  title: 'Design System/Components/Table/Hierarchical Table',
-  decorators: [withKnobs],
-  excludeStories: /.*Data$/
-}
-
-export const tableData = [
+const tableData = [
   {
     name: 'id',
     label: 'ID',
@@ -46,8 +39,25 @@ export const tableData = [
   }
 ]
 
-export const configurable = () => ({
+export default {
+  component: SHierarchicalTable,
+  title: 'Design System/Components/Table/Hierarchical Table',
+  excludeStories: /.*Data$/,
+  argTypes: {
+    size: {
+      name: 'Size',
+      control: {
+        type: 'select',
+        options: Object.values(Size)
+      },
+      defaultValue: Size.BIG
+    }
+  }
+} as Meta
+
+const Template: Story = (args, { argTypes }) => ({
   components: { SHierarchicalTable },
+  props: Object.keys(argTypes),
   template: `<s-hierarchical-table
                :data="tableData"
                :size="size"
@@ -57,11 +67,8 @@ export const configurable = () => ({
                </template>
              </s-hierarchical-table>`,
   data: () => ({
-    tableData: tableData
-  }),
-  props: {
-    size: {
-      default: select('Size', Object.values(Size), Size.BIG)
-    }
-  }
+    tableData
+  })
 })
+
+export const Configurable = Template.bind({})

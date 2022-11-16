@@ -120,28 +120,30 @@ export default {
 const Template: Story = (args, { argTypes }) => ({
   components: { SSlider },
   props: Object.keys(argTypes),
-  template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
-              <s-slider
-                v-model="modelValue"
-                :min="min"
-                :max="max"
-                :show-tooltip="showTooltip"
-                :step="step"
-                :show-stops="showStops"
-                :disabled="disabled"
-                :label="label"
-                :show-input="showInput"
-                :show-input-controls="showInputControls"
-                :input-size="inputSize"
-                :debounce="debounce"
-                :height="height"
-                :range="range"
-                @change="(value) => changeValue = value"
-              />
-              <span style="margin-top: 20px;">
-                v-model="{{ modelValue }}", @change="{{ changeValue }}"
-              </span>
-            </div>`,
+  template: `
+  <div class="s-flex" style="flex: 1; flex-direction: column;">
+    <s-slider
+      v-model="modelValue"
+      :min="min"
+      :max="max"
+      :show-tooltip="showTooltip"
+      :step="step"
+      :show-stops="showStops"
+      :disabled="disabled"
+      :label="label"
+      :show-input="showInput"
+      :show-input-controls="showInputControls"
+      :input-size="inputSize"
+      :debounce="debounce"
+      :height="height"
+      :range="range"
+      @change="(value) => changeValue = value"
+    />
+    <span style="margin-top: 20px;">
+      v-model="{{ modelValue }}", @change="{{ changeValue }}"
+    </span>
+  </div>
+  `,
   data: () => ({
     modelValue: args.range ? [0, 0] : 0,
     changeValue: args.range ? [0, 0] : 0

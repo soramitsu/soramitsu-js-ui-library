@@ -1,15 +1,8 @@
-import { text, withKnobs, boolean } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SJsonInput, SRow } from '../components'
 
-export default {
-  component: SJsonInput,
-  title: 'Design System/Components/JSON Input',
-  decorators: [withKnobs],
-  excludeStories: /.*Data$/
-}
-
-export const jsonData = {
+const jsonData = {
   object: {
     string: 'I am a string!',
     array: [1, 2, 3],
@@ -21,8 +14,39 @@ export const jsonData = {
   null: null,
   number: 21
 }
-export const configurable = () => ({
+
+export default {
+  component: SJsonInput,
+  title: 'Design System/Components/JSON Input',
+  excludeStories: /.*Data$/,
+  argTypes: {
+    height: {
+      name: 'Height',
+      control: {
+        type: 'text'
+      },
+      defaultValue: '400px'
+    },
+    disabled: {
+      name: 'Disabled',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    readonly: {
+      name: 'Readonly',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    }
+  }
+} as Meta
+
+const Template: Story = (args, { argTypes }) => ({
   components: { SJsonInput, SRow },
+  props: Object.keys(argTypes),
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-json-input
                  v-model="json"
@@ -34,16 +58,7 @@ export const configurable = () => ({
              </s-row>`,
   data: () => ({
     json: jsonData
-  }),
-  props: {
-    height: {
-      default: text('Height', '400px')
-    },
-    disabled: {
-      default: boolean('Disabled', false)
-    },
-    readonly: {
-      default: boolean('Readonly', false)
-    }
-  }
+  })
 })
+
+export const Configurable = Template.bind({})
