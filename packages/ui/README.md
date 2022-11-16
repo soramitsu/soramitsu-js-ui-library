@@ -54,6 +54,8 @@ as every render creates new value for prop which triggers another render.
 
 Column type `index` removed and so is prop `index`.
 
+All events now have naming: `mouse-enter:cell` or `change:expand` instead of `cell-mouse-enter` or `expand-change`
+
 Added column type `details` removed and event `click:row-details`.
 
 `align` in column options (like in events) now has values without `is-` prefix.

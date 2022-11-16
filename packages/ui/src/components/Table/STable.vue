@@ -178,21 +178,21 @@ const props = withDefaults(
 
 /* eslint-disable @typescript-eslint/unified-signatures */
 const emit = defineEmits<{
-  (event: 'cell-mouse-enter', ...value: TableCellEventData): void
-  (event: 'cell-mouse-leave', ...value: TableCellEventData): void
-  (event: 'cell-click', ...value: TableCellEventData): void
-  (event: 'cell-dblclick', ...value: TableCellEventData): void
-  (event: 'header-click', ...value: TableHeaderEventData): void
-  (event: 'header-contextmenu', ...value: TableHeaderEventData): void
-  (event: 'row-click', ...value: TableRowEventData): void
-  (event: 'row-dblclick', ...value: TableRowEventData): void
-  (event: 'row-contextmenu', ...value: TableRowEventData): void
-  (event: 'sort-change', value: TableSortEventData): void
-  (event: 'selection-change', value: TableRow[]): void
+  (event: 'mouse-enter:cell', ...value: TableCellEventData): void
+  (event: 'mouse-leave:cell', ...value: TableCellEventData): void
+  (event: 'click:cell', ...value: TableCellEventData): void
+  (event: 'dblclick:cell', ...value: TableCellEventData): void
+  (event: 'click:header', ...value: TableHeaderEventData): void
+  (event: 'contextmenu:header', ...value: TableHeaderEventData): void
+  (event: 'click:row', ...value: TableRowEventData): void
+  (event: 'dblclick:row', ...value: TableRowEventData): void
+  (event: 'contextmenu:row', ...value: TableRowEventData): void
+  (event: 'change:sort', value: TableSortEventData): void
+  (event: 'change:selection', value: TableRow[]): void
   (event: 'select-all', value: TableRow[]): void
   (event: 'select', ...value: [TableRow[], TableRow]): void
-  (event: 'expand-change', ...value: [TableRow, TableRow[]]): void
-  (event: 'current-change', ...value: [TableRow | null, TableRow | null]): void
+  (event: 'change:expand', ...value: [TableRow, TableRow[]]): void
+  (event: 'change:current', ...value: [TableRow | null, TableRow | null]): void
   (event: 'click:row-details', value: TableRow): void
 }>()
 
@@ -474,26 +474,26 @@ function getSortIconStateClasses(column: TableColumnApi) {
 
 function handleSortClick(column: TableColumnApi) {
   handleSortChange(column)
-  emit('sort-change', { column, prop: column.prop, order: sortState.order })
+  emit('change:sort', { column, prop: column.prop, order: sortState.order })
 }
 
 function handleAllSelect() {
   manualToggleAllSelection()
   const selectedArray = [...selectedRows]
   emit('select-all', selectedArray)
-  emit('selection-change', selectedArray)
+  emit('change:selection', selectedArray)
 }
 
 function handleRowSelect(row: TableRow) {
   manualToggleRowSelection(row)
   const selectedArray = [...selectedRows]
   emit('select', selectedArray, row)
-  emit('selection-change', selectedArray)
+  emit('change:selection', selectedArray)
 }
 
 function handleRowExpand(row: TableRow) {
   toggleRowExpanded(row)
-  emit('expand-change', row, [...expandedRows])
+  emit('change:expand', row, [...expandedRows])
 }
 
 function handleRowDetails(row: TableRow) {
@@ -513,11 +513,11 @@ function handleCellMouseEvent(ctx: {
 
   switch (ctx.event.type) {
     case 'mouseleave': {
-      emit('cell-mouse-leave', rawRow, ctx.column, ctx.event.target, ctx.event)
+      emit('mouse-leave:cell', rawRow, ctx.column, ctx.event.target, ctx.event)
       break
     }
     case 'mouseenter': {
-      emit('cell-mouse-enter', rawRow, ctx.column, ctx.event.target, ctx.event)
+      emit('mouse-enter:cell', rawRow, ctx.column, ctx.event.target, ctx.event)
       break
     }
     case 'click': {
@@ -534,18 +534,18 @@ function handleCellMouseEvent(ctx: {
       const oldCurrentRow = currentRow
       setCurrentRow(rawRow)
 
-      emit('cell-click', rawRow, ctx.column, ctx.event.target, ctx.event)
-      emit('row-click', rawRow, ctx.column, ctx.event)
-      emit('current-change', currentRow.value, oldCurrentRow.value)
+      emit('click:cell', rawRow, ctx.column, ctx.event.target, ctx.event)
+      emit('click:row', rawRow, ctx.column, ctx.event)
+      emit('change:current', currentRow.value, oldCurrentRow.value)
       break
     }
     case 'dblclick': {
-      emit('cell-dblclick', rawRow, ctx.column, ctx.event.target, ctx.event)
-      emit('row-dblclick', rawRow, ctx.column, ctx.event)
+      emit('dblclick:cell', rawRow, ctx.column, ctx.event.target, ctx.event)
+      emit('dblclick:row', rawRow, ctx.column, ctx.event)
       break
     }
     case 'contextmenu': {
-      emit('row-contextmenu', rawRow, ctx.column, ctx.event)
+      emit('contextmenu:row', rawRow, ctx.column, ctx.event)
       break
     }
   }
@@ -562,11 +562,11 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
         handleSortClick(ctx.column)
       }
 
-      emit('header-click', ctx.column, ctx.event)
+      emit('click:header', ctx.column, ctx.event)
       break
     }
     case 'contextmenu': {
-      emit('header-contextmenu', ctx.column, ctx.event)
+      emit('contextmenu:header', ctx.column, ctx.event)
       break
     }
   }
