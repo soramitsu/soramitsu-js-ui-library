@@ -444,8 +444,7 @@ function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T
 function isRowSelectable(row: TableRow, index: number) {
   return !!(
     activeSelectionColumn?.value &&
-    activeSelectionColumn.value.selectable &&
-    activeSelectionColumn.value.selectable(row, index)
+    (!activeSelectionColumn.value.selectable || activeSelectionColumn.value.selectable(row, index))
   )
 }
 
