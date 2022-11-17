@@ -18,6 +18,7 @@ import IconStatusSuccess16 from '@soramitsu-ui/icons/icomoon/status-success-clr-
 import IconStatusError16 from '@soramitsu-ui/icons/icomoon/status-error-ic-16.svg'
 
 import IconArrowTop16 from '@soramitsu-ui/icons/icomoon/arrow-top-16.svg'
+import IconArrowRight16 from '@soramitsu-ui/icons/icomoon/arrow-right-16.svg'
 
 import IconArrowsChevronRightXs24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-right-xs-24.svg'
 import IconArrowsChevronLeftXs24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-left-xs-24.svg'
@@ -51,6 +52,7 @@ export {
   IconChevronBottom16,
   IconBasicExternalLink24,
   IconArrowTop16,
+  IconArrowRight16,
   IconArrowsChevronRightXs24,
   IconArrowsChevronLeftXs24,
   IconChevronsRight16,

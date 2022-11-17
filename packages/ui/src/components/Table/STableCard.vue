@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { TableActionColumnApi, TableColumnApi, TableRow } from '@/components'
-import { IconArrowsChevronDownRounded24, IconArrowsChevronRightXs24 } from '@/components/icons'
+import { IconArrowsChevronDownRounded24, IconArrowRight16 } from '@/components/icons'
 import {
   isDefaultColumn,
   isExpandColumn,
@@ -9,6 +9,7 @@ import {
   getCellTooltipContent,
   isSelectionColumn,
 } from '@/components/Table/utils'
+import SButton from "@/components/Button/SButton.vue";
 
 const props = withDefaults(
   defineProps<{
@@ -109,27 +110,37 @@ function select() {
             </template>
           </div>
 
-          <button
+          <SButton
             v-else-if="isExpandColumn(column)"
-            class="s-table-card__button h-32px flex items-center p-4px pl-12px"
+            type="outline"
+            size="sm"
+            icon-position="right"
             @click.stop="emit('expand')"
+            @keypress.space.stop
           >
             Expand
-            <IconArrowsChevronDownRounded24
-              class="s-table-card__expand-icon"
-              :class="{ 's-table-card__expand-icon_active': expanded }"
-              data-testid="table-expanded-icon"
-            />
-          </button>
+            <template #icon>
+              <IconArrowsChevronDownRounded24
+                class="s-table-card__expand-icon"
+                :class="{ 's-table-card__expand-icon_active': expanded }"
+                data-testid="table-expanded-icon"
+              />
+            </template>
+          </SButton>
 
-          <button
+          <SButton
             v-else-if="isDetailsColumn(column)"
-            class="s-table-card__button h-32px flex items-center p-4px pl-12px"
+            type="outline"
+            size="sm"
+            icon-position="right"
             @click.stop="emit('click:details')"
+            @keypress.space.stop
           >
             Page details
-            <IconArrowsChevronRightXs24 />
-          </button>
+            <template #icon>
+              <IconArrowRight16 />
+            </template>
+          </SButton>
         </div>
       </template>
     </div>
@@ -165,15 +176,6 @@ function select() {
 
     &_active {
       transform: rotateZ(180deg);
-    }
-  }
-
-  &__button {
-    border: 1px solid theme.token-as-var('sys.color.border-secondary');
-    fill: theme.token-as-var('sys.color.content-tertiary');
-
-    &:hover {
-      background: theme.token-as-var('sys.color.background');
     }
   }
 
