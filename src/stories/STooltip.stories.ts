@@ -110,6 +110,7 @@ export const configurable: Story = (args, { argTypes }) => ({
                >
                  <s-button style="margin: 40px">Custom tooltip</s-button>
                </s-tooltip>
+               <div>Model value: {{ model }}</div>
              </s-row>`,
   data: () => ({
     model: false

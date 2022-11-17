@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Vue, Component, ModelSync, Prop, Watch } from 'vue-property-decorator'
 import ElSlider from 'element-ui/lib/slider'
 
 import { SliderInputSize } from './consts'
@@ -35,10 +35,6 @@ import { SliderInputSize } from './consts'
   components: { ElSlider }
 })
 export default class SSlider extends Vue {
-  /**
-   * Binding value
-   */
-  @Prop({ default: 0 }) readonly value!: number | number[]
   /**
    * Minimum value
    */
@@ -103,19 +99,11 @@ export default class SSlider extends Vue {
    * Whether Slider is disabled
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
-
-  model = this.value
-
-  @Watch('value')
-  private handlePropChange (value: number): void {
-    this.model = value
-  }
-
-  @Watch('model')
-  private handleValueChange (value: number): void {
-    this.$emit('input', value)
-    this.$emit('change', value)
-  }
+  /**
+   * Binding value
+   */
+  @ModelSync('value', 'input', { default: 0, type: [Number, Array] })
+  readonly model!: number | number[]
 
   handleInput (value: number): void {
     this.$emit('input', value)

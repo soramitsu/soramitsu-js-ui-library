@@ -36,8 +36,7 @@
     "vue-class-component": "^7.2.6",
     "vue-i18n": "^8.28.2",
     "vue-property-decorator": "^9.1.2",
-    "vuex": "^3.6.2",
-    "vuex-class": "^0.3.2"
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",
@@ -60,6 +59,7 @@
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/eslint-config-typescript": "^5.0.2",
     "@vue/test-utils": "^1.2.2",
+    "@vue/vue2-jest": "27.0.0-alpha.2",
     "eslint": "^7.29.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
