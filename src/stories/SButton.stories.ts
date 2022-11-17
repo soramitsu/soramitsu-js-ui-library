@@ -4,6 +4,21 @@ import { SButton, SButtonGroup, SRow, SCol, SMain, SIcon } from '../components'
 import { ButtonTypes, ButtonIconPosition } from '../components/Button'
 import { Size, BorderRadius } from '../types'
 
+export const differentTypeButtonsData = Object.values(ButtonTypes).map(type => {
+  const label = type[0].toUpperCase() + type.slice(1)
+  const data = { type } as any
+  if (type === ButtonTypes.ACTION) {
+    data.icon = 'refresh-16'
+    data.tooltip = label
+  } else {
+    data.label = label
+  }
+  return data
+})
+
+const differentSizeData = Object.values(Size).map(size =>
+  ({ size, label: size[0].toUpperCase() + size.slice(1) }))
+
 export default {
   component: SButton,
   title: 'Design System/Components/Button 🟣',
@@ -143,18 +158,6 @@ export const configurable: Story = (args, { argTypes }) => ({
   }
 })
 
-const differentTypeButtonsData = Object.values(ButtonTypes).map(type => {
-  const label = type[0].toUpperCase() + type.slice(1)
-  const data = { type } as any
-  if (type === ButtonTypes.ACTION) {
-    data.icon = 'refresh-16'
-    data.tooltip = label
-  } else {
-    data.label = label
-  }
-  return data
-})
-
 export const withDifferentTypes: Story = () => ({
   components: { SButton, SRow },
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
@@ -172,9 +175,6 @@ export const withDifferentTypes: Story = () => ({
     items: differentTypeButtonsData
   })
 })
-
-const differentSizeData = Object.values(Size).map(size =>
-  ({ size, label: size[0].toUpperCase() + size.slice(1) }))
 
 export const withDifferentSize: Story = () => ({
   components: { SButton, SRow },

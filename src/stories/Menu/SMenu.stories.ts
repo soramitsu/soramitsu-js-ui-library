@@ -1,4 +1,4 @@
-import { select } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu, SIcon } from '../../components'
 import { BorderRadius } from '../../types'
@@ -6,11 +6,22 @@ import { BorderRadius } from '../../types'
 export default {
   component: SMenu,
   title: 'Design System/Components/Menu',
-  excludeStories: /.*Data$/
-}
+  excludeStories: /.*Data$/,
+  argTypes: {
+    borderRadius: {
+      name: 'Border Radius',
+      control: {
+        type: 'select',
+        options: Object.values(BorderRadius)
+      },
+      defaultValue: BorderRadius.SMALL
+    }
+  }
+} as Meta
 
-export const basicMenu = () => ({
+export const basicMenu: Story = (args, { argTypes }) => ({
   components: { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu, SIcon },
+  props: Object.keys(argTypes),
   template: `<s-aside width="220px">
                <s-menu
                  default-active="1"
@@ -40,11 +51,6 @@ export const basicMenu = () => ({
                  </s-menu-item-group>
                </s-menu>
              </s-aside>`,
-  props: {
-    borderRadius: {
-      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
-    }
-  },
   methods: {
     handleOpen (key: string, keyPath: Array<string>): void {
       console.log('handleOpen', key, keyPath)
@@ -58,8 +64,9 @@ export const basicMenu = () => ({
   }
 })
 
-export const sideBar = () => ({
+export const sideBar: Story = (args, { argTypes }) => ({
   components: { SAside, SMenu, SMenuItem, SMenuItemGroup, SSubmenu, SIcon },
+  props: Object.keys(argTypes),
   template: `<s-aside width="220px">
                <s-menu
                  default-active="2"
@@ -99,11 +106,6 @@ export const sideBar = () => ({
                  </s-menu-item>
                </s-menu>
              </s-aside>`,
-  props: {
-    borderRadius: {
-      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
-    }
-  },
   methods: {
     handleOpen (key: string, keyPath: Array<string>): void {
       console.log('handleOpen', key, keyPath)
@@ -117,8 +119,9 @@ export const sideBar = () => ({
   }
 })
 
-export const topBar = () => ({
+export const topBar: Story = (args, { argTypes }) => ({
   components: { SMenu, SMenuItem, SMenuItemGroup, SSubmenu },
+  props: Object.keys(argTypes),
   template: `<s-menu
                default-active="4"
                mode="horizontal"
@@ -140,11 +143,6 @@ export const topBar = () => ({
                <s-menu-item index="3" disabled>Navigator Three</s-menu-item>
                <s-menu-item index="4">Navigator Four</s-menu-item>
              </s-menu>`,
-  props: {
-    borderRadius: {
-      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
-    }
-  },
   methods: {
     handleSelect (key: string, keyPath: Array<string>): void {
       console.log('handleSelect', key, keyPath)

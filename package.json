@@ -42,11 +42,7 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@storybook/addon-a11y": "^6.5.13",
-    "@storybook/addon-actions": ">=6.5.13",
-    "@storybook/addon-controls": "^6.5.13",
-    "@storybook/addon-docs": ">=6.5.13",
     "@storybook/addon-essentials": "^6.5.13",
-    "@storybook/addon-knobs": "^6.4.0",
     "@storybook/addon-storysource": "^6.5.13",
     "@storybook/builder-webpack5": "^6.5.13",
     "@storybook/manager-webpack5": "^6.5.13",
