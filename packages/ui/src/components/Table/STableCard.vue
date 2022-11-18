@@ -9,7 +9,7 @@ import {
   getCellTooltipContent,
   isSelectionColumn,
 } from '@/components/Table/utils'
-import SButton from "@/components/Button/SButton.vue";
+import SButton from '@/components/Button/SButton.vue'
 
 const props = withDefaults(
   defineProps<{
@@ -112,6 +112,7 @@ function select() {
 
           <SButton
             v-else-if="isExpandColumn(column)"
+            data-testid="table-expand-button"
             type="outline"
             size="sm"
             icon-position="right"
@@ -123,7 +124,6 @@ function select() {
               <IconArrowsChevronDownRounded24
                 class="s-table-card__expand-icon"
                 :class="{ 's-table-card__expand-icon_active': expanded }"
-                data-testid="table-expanded-icon"
               />
             </template>
           </SButton>
@@ -148,6 +148,7 @@ function select() {
     <div
       v-if="activeExpandColumn && expanded"
       class="s-table-card__expanded-block p-16px"
+      data-testid="table-expanded-block"
     >
       <component
         :is="activeExpandColumn.cellSlot"

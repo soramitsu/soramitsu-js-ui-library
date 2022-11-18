@@ -88,6 +88,11 @@ Removed `stripe` and `border` props, as there are no design for them.
 
 Removed public method `doLayout`, because resize observables should be enough.
 
+Added adapted version of table which is a card grid without header and is used when table width is lower
+than value defined by `adaptBreakpoint` prop. Number of gird columns defined by prop `cardGridBreakpoints`.
+There rows are cards with label-value list. There are no sort and current row highlighting. Multiple rows selection can
+be done by clicking on card.
+
 ### SPagination
 
 There are removed props due to design restrictions: `small`, `background`, `pagerCount`, `layout`, `prevText`,

@@ -1172,35 +1172,35 @@ sort: typeof sort;
 clearSort: () => void;
 setCurrentRow: typeof setCurrentRow;
 }, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
-"cell-mouse-enter": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
+"mouse-enter:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
 } & {
-"cell-mouse-leave": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
+"mouse-leave:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
 } & {
-"cell-click": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
+"click:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
 } & {
-"cell-dblclick": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
+"dblclick:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
 } & {
-"header-click": (payload_0: TableColumnApi | TableActionColumnApi, payload_1: MouseEvent) => void;
+"click:header": (payload_0: TableColumnApi | TableActionColumnApi, payload_1: MouseEvent) => void;
 } & {
-"header-contextmenu": (payload_0: TableColumnApi | TableActionColumnApi, payload_1: MouseEvent) => void;
+"contextmenu:header": (payload_0: TableColumnApi | TableActionColumnApi, payload_1: MouseEvent) => void;
 } & {
-"row-click": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
+"click:row": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
 } & {
-"row-dblclick": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
+"dblclick:row": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
 } & {
-"row-contextmenu": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
+"contextmenu:row": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
 } & {
-"sort-change": (value: TableSortEventData) => void;
+"change:sort": (value: TableSortEventData) => void;
 } & {
-"selection-change": (value: TableRow[]) => void;
+"change:selection": (value: TableRow[]) => void;
 } & {
 "select-all": (value: TableRow[]) => void;
 } & {
 select: (payload_0: TableRow[], payload_1: TableRow) => void;
 } & {
-"expand-change": (payload_0: TableRow, payload_1: TableRow[]) => void;
+"change:expand": (payload_0: TableRow, payload_1: TableRow[]) => void;
 } & {
-"current-change": (payload_0: TableRow | null, payload_1: TableRow | null) => void;
+"change:current": (payload_0: TableRow | null, payload_1: TableRow | null) => void;
 } & {
 "click:row-details": (value: TableRow) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
@@ -1259,20 +1259,20 @@ value: number;
 }[];
 }>>> & {
 onSelect?: ((args_0: TableRow[], args_1: TableRow) => any) | undefined;
-"onCell-mouse-enter"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onCell-mouse-leave"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onCell-click"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onCell-dblclick"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onHeader-click"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
-"onHeader-contextmenu"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
-"onRow-click"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-"onRow-dblclick"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-"onRow-contextmenu"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-"onSort-change"?: ((value: TableSortEventData) => any) | undefined;
-"onSelection-change"?: ((value: TableRow[]) => any) | undefined;
+"onMouse-enter:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+"onMouse-leave:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+"onClick:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+"onDblclick:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+"onClick:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
+"onContextmenu:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
+"onClick:row"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+"onDblclick:row"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+"onContextmenu:row"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+"onChange:sort"?: ((value: TableSortEventData) => any) | undefined;
+"onChange:selection"?: ((value: TableRow[]) => any) | undefined;
 "onSelect-all"?: ((value: TableRow[]) => any) | undefined;
-"onExpand-change"?: ((args_0: TableRow, args_1: TableRow[]) => any) | undefined;
-"onCurrent-change"?: ((args_0: TableRow | null, args_1: TableRow | null) => any) | undefined;
+"onChange:expand"?: ((args_0: TableRow, args_1: TableRow[]) => any) | undefined;
+"onChange:current"?: ((args_0: TableRow | null, args_1: TableRow | null) => any) | undefined;
 "onClick:row-details"?: ((value: TableRow) => any) | undefined;
 }, {
 data: TableRow[];

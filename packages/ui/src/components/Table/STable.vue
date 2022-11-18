@@ -208,6 +208,19 @@ const tableSizes = reactive({
   height: 0,
   width: 0,
 })
+watchOnce(
+  tableWrapper,
+  () => {
+    if (!tableWrapper.value || !(tableWrapper.value instanceof HTMLElement)) {
+      return
+    }
+
+    const { width, height } = tableWrapper.value.getBoundingClientRect()
+    tableSizes.width = width
+    tableSizes.height = height
+  },
+  { immediate: true },
+)
 useResizeObserver(tableWrapper, (entries) => {
   setTimeout(() => {
     tableSizes.width = entries[0].contentRect.width
@@ -662,6 +675,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
         <STableCard
           v-for="(row, rowIndex) in sortedData"
           :key="getTemplateRowKey(row, rowIndex)"
+          data-testid="table-row"
           class="s-table__card"
           :class="{
             's-table__card_first-row': rowIndex < cardsGridColumnNumber,
@@ -686,6 +700,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
         v-else
         class="s-table__body w-full"
         :style="{ 'width': `${columnsWidthsSum}px` }"
+        data-testid="table-body"
       >
         <tbody>
           <template
