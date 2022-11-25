@@ -2,9 +2,9 @@
 import { defineBem } from '@soramitsu-ui/bem'
 
 const bem = defineBem('s-button')
-  .mod('type', BUTTON_TYPE_VALUES)
-  .mod('size', BUTTON_SIZE_VALUES)
-  .mod('icon-position', BUTTON_ICON_POSITION_VALUES)
+  /* @__PURE */ .mod('type', BUTTON_TYPE_VALUES)
+  /* @__PURE */ .mod('size', BUTTON_SIZE_VALUES)
+  /* @__PURE */ .mod('icon-position', BUTTON_ICON_POSITION_VALUES)
   .mod('disabled')
   .mod('rounded')
   .mod('loading')
@@ -91,23 +91,11 @@ const font = computed(() => {
       :width="SPINNER_WIDTH[definitelySize]"
     />
 
-    <span
-      :class="bem.icon"
-      data-testid="icon"
-    >
-      <i
-        v-if="icon"
-        :class="icon"
-      />
-      <slot
-        v-else
-        name="icon"
-      />
+    <span :class="bem.icon" data-testid="icon">
+      <i v-if="icon" :class="icon" />
+      <slot v-else name="icon" />
     </span>
-    <span
-      :class="bem.text"
-      data-testid="text"
-    >
+    <span :class="bem.text" data-testid="text">
       <slot v-if="!isAction" />
     </span>
   </button>

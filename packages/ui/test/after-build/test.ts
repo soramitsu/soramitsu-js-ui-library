@@ -13,6 +13,7 @@ test('ESM build should be tree-shakeable', async () => {
   await vite.build({
     root: resolve(ESM_TREE_SHAKING_TEST_LIB_DIR),
     build: {
+      target: 'esnext',
       lib: {
         entry: 'entry.ts',
         formats: ['es'],

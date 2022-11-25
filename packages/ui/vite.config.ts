@@ -106,7 +106,7 @@ export default defineConfig({
         'jsoneditor',
         '@popperjs/core',
         /^@vueuse/,
-        // /^@soramitsu-ui\//,
+        /^@soramitsu-ui\//,
         'body-scroll-lock',
         'focus-trap',
       ],
