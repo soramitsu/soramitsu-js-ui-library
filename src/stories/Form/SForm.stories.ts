@@ -28,12 +28,20 @@ export default {
       },
       defaultValue: true
     },
+    label: {
+      name: 'Show Label',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
     labelPosition: {
       name: 'Label Position',
       control: {
         type: 'select',
         options: Object.values(LabelPosition)
       },
+      if: { arg: 'label' },
       defaultValue: LabelPosition.LEFT
     }
   }
@@ -55,10 +63,10 @@ const Template: Story = (args, { argTypes }) => ({
                  ]
                }"
              >
-               <s-form-item prop="user" label="Username">
+               <s-form-item prop="user" :label="label ? 'Username' : undefined">
                  <s-input v-model="form.user" placeholder="Username"></s-input>
                </s-form-item>
-               <s-form-item prop="region" label="Region" required>
+               <s-form-item prop="region" :label="label ? 'Region' : undefined" required>
                  <s-input v-model="form.region" placeholder="Region"></s-input>
                </s-form-item>
                <s-form-item>

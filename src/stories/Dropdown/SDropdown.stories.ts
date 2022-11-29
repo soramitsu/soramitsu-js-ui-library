@@ -90,7 +90,7 @@ export default {
   }
 } as Meta
 
-export const configurable: Story = (args, { argTypes }) => ({
+export const Configurable: Story = (args, { argTypes }) => ({
   components: { SDropdown, SDropdownItem },
   props: Object.keys(argTypes),
   template: `<s-dropdown
@@ -117,7 +117,7 @@ export const configurable: Story = (args, { argTypes }) => ({
   }
 })
 
-export const differentTypes: Story = () => ({
+export const differentTypes: Story = (args, { argTypes }) => ({
   components: { SCol, SDropdown, SDropdownItem, SRow },
   template: `<s-row :gutter="20" style="width: 100%;">
                <s-col :span="12" style="margin-bottom: 20px;"><span>Different types</span></s-col>

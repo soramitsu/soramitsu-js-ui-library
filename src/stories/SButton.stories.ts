@@ -277,9 +277,9 @@ const withIcon = (icon: string) => ({
   })
 })
 
-export const withIcon16 = withIcon('refresh-16')
+export const withIcon16: Story = () => withIcon('refresh-16')
 
-export const withIcon24 = withIcon('arrows-swap-24')
+export const withIcon24: Story = () => withIcon('arrows-swap-24')
 
 export const buttonGroup: Story = () => ({
   components: { SButton, SButtonGroup, SRow },
