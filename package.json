@@ -28,7 +28,7 @@
   "dependencies": {
     "core-js": "^3.26.1",
     "element-resize-detector": "^1.2.4",
-    "element-ui": "^2.15.10",
+    "element-ui": "^2.15.12",
     "lodash": "^4.17.21",
     "throttle-debounce": "^1.0.1",
     "v-jsoneditor": "^1.4.5",
@@ -39,7 +39,7 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^23.0.2",
+    "@rollup/plugin-commonjs": "^23.0.3",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.1.0",
     "@storybook/addon-a11y": "^6.5.13",
@@ -50,9 +50,9 @@
     "@storybook/theming": "^6.5.13",
     "@storybook/vue": ">=6.5.13",
     "@types/jest": "^29.2.3",
-    "@types/lodash": "^4.14.189",
-    "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@typescript-eslint/parser": "^5.43.0",
+    "@types/lodash": "^4.14.190",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
     "@vue/cli-plugin-babel": "5.0.0-beta.4",
     "@vue/cli-plugin-eslint": "5.0.0-beta.4",
     "@vue/cli-plugin-typescript": "5.0.0-beta.4",
