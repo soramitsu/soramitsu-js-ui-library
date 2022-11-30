@@ -52,8 +52,9 @@ yarn sb:build
 ### To add new component:
 
 1. Create a component directory in `ui/src/components` (e.g. `ui/src/components/Button`) with component itself
-   prefixed with S and an `index.ts` file exporting it. The file's name becomes component's name. There are also can be
-   subsidiary entities like other components, composables types, constants and so on that can be exported too.
+   prefixed with `S` (e.g. `SButton.vue`) and the `index.ts` file exporting it. The file's name becomes component's
+   name. There are also can be subsidiary entities like other components, composables types, constants and so on that
+   can be exported too.
 2. Every exported component must be added to `ui/src/components/all-components.ts` and `ui/src/components/index.ts`.
 3. Then it's necessary to add a story for being able to manually test the components. It can be done by adding a
    `*.stories.ts` file in `ui/stories` directory (e.g. `ui/stories/SButton.stories.ts`).
@@ -104,7 +105,8 @@ yarn sb:build
 - Messages in changesets should start with `**type**`, where `type` can be `fix`, `feat` or something like this,
   that describes a type of change. After the type should go a scope in brackets if it can be defined. (For example,
   it can be the name of a component). Then after colon goes a change description.
-  Examples: `` **fix**(`STable`): remove unnecessary border `` or `**feat**: add pagination component`
+  Examples: `` **fix**(`STable`): remove unnecessary border `` or `**feat**: add pagination component`.
+  More info: https://www.conventionalcommits.org/en/v1.0.0/
 
 ## Linting & Format
 
