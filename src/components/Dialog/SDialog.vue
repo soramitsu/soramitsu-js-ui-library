@@ -149,9 +149,20 @@ export default class SDialog extends Mixins(BorderRadiusMixin, DesignSystemInjec
 
   readonly erd = elementResizeDetectorMaker()
 
-  model = this.visible
-  computedTop = this.top
+  get model (): boolean {
+    return this.visible
+  }
+
+  set model (value: boolean) {
+    this.$emit('update:visible', value)
+  }
+
+  computedTop = ''
   shouldNotBeClosed = false
+
+  created (): void {
+    this.computedTop = this.top
+  }
 
   @Watch('visible')
   private handlePropChange (value: boolean): void {
@@ -172,12 +183,6 @@ export default class SDialog extends Mixins(BorderRadiusMixin, DesignSystemInjec
       this.erd.listenTo(activeDialog, this.computeTop)
       activeDialog.addEventListener('mouseleave', this.handleCheckCursorPosition)
     }
-    this.model = value
-  }
-
-  @Watch('model')
-  private handleValueChange (value: boolean): void {
-    this.$emit('update:visible', value)
   }
 
   handleCheckCursorPosition (e): void {
@@ -213,7 +218,7 @@ export default class SDialog extends Mixins(BorderRadiusMixin, DesignSystemInjec
   }
 
   destroyed (): void {
-    if (this.model) {
+    if (this.visible) {
       const wrapper = (this.dialog || {}).$el as HTMLElement
       if (!wrapper) {
         return

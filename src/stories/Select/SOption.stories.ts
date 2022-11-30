@@ -1,21 +1,36 @@
-import { text, withKnobs, boolean } from '@storybook/addon-knobs'
-
 import { SSelect, SRow, SCol, SOption } from '../../components'
 
-export default {
-  component: SOption,
-  title: 'Design System/Components/Select/Option',
-  decorators: [withKnobs],
-  excludeStories: /.*Data$/
-}
-
-export const optionsData = [
+const optionsData = [
   { label: 'First', value: 'first' },
   { label: 'Second', value: 'second' },
   { label: 'Third', value: 'third' }
 ]
-export const configurable = () => ({
+
+export default {
+  component: SOption,
+  title: 'Design System/Components/Select/Option',
+  excludeStories: /.*Data$/,
+  argTypes: {
+    disabled: {
+      name: 'Disabled',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    label: {
+      name: 'Label',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'Custom'
+    }
+  }
+}
+
+const Template = (args, { argTypes }) => ({
   components: { SSelect, SOption, SRow, SCol },
+  props: Object.keys(argTypes),
   template: `<s-row style="flex: 1;">
                <s-col :span="12">
                  <s-select v-model="model">
@@ -32,13 +47,7 @@ export const configurable = () => ({
   data: () => ({
     model: '',
     options: optionsData
-  }),
-  props: {
-    disabled: {
-      default: boolean('Disabled', false)
-    },
-    label: {
-      default: text('Label', 'Custom')
-    }
-  }
+  })
 })
+
+export const Configurable = Template.bind({})

@@ -1,29 +1,41 @@
-import { withKnobs, select, number } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SCol, SRow, SMain, SIcon } from '../components'
 import { Icons16, Icons24 } from '../components/Icon'
 
+const options = [...Object.values(Icons16), ...Object.values(Icons24)]
+
 export default {
   component: SIcon,
   title: 'Design System/Components/Icon',
-  decorators: [withKnobs]
-}
+  argTypes: {
+    name: {
+      name: 'Name',
+      control: {
+        type: 'select',
+        options: options
+      },
+      defaultValue: Icons16.Refresh
+    },
+    size: {
+      name: 'Icon Size',
+      control: {
+        type: 'number',
+        min: 16
+      },
+      defaultValue: 16
+    }
+  }
+} as Meta
 
-export const configurable = () => ({
+export const Configurable: Story = (args, { argTypes }) => ({
   components: { SMain, SRow, SCol, SIcon },
+  props: Object.keys(argTypes),
   template: `<s-main>
                <s-row>
                  <s-icon :name="name" :size="size" />
                </s-row>
-             </s-main>`,
-  props: {
-    name: {
-      default: select('Name', [...Object.values(Icons16), ...Object.values(Icons24)], Icons16.Refresh)
-    },
-    size: {
-      default: number('Icon Size', 16)
-    }
-  }
+             </s-main>`
 })
 
 const showIconsSet = (iconsEnum: any) => ({

@@ -77,7 +77,6 @@ export default class SJsonInput extends Vue {
   localHeight: number | null = null
   stretchStartHeight: number | null = null
   stretchStartMouseY: number | null = null
-  model = this.value
   defultOptions = {
     // https://github.com/josdejong/jsoneditor/blob/master/docs/api.md#configuration-options
     mode: 'code',
@@ -89,6 +88,22 @@ export default class SJsonInput extends Vue {
         return isEmpty(this.dictionary) ? null : this.dictionary
       }
     }
+  }
+
+  get model (): object {
+    return this.value
+  }
+
+  set model (value: object) {
+    if (!this.readonly) {
+      this.$emit('input', value)
+      this.$emit('change', value)
+      return
+    }
+    if (!this.jsoneditor) {
+      return
+    }
+    this.jsoneditor.editor.set(this.value)
   }
 
   get computedHeight () {
@@ -119,24 +134,6 @@ export default class SJsonInput extends Vue {
   handleError (error: string): void {
     if (!this.readonly) {
       this.$emit('error', error)
-      return
-    }
-    if (!this.jsoneditor) {
-      return
-    }
-    this.jsoneditor.editor.set(this.value)
-  }
-
-  @Watch('value', { deep: true })
-  private handlePropChange (value: object): void {
-    this.model = value
-  }
-
-  @Watch('model', { deep: true })
-  private handleValueChange (value: object): void {
-    if (!this.readonly) {
-      this.$emit('input', value)
-      this.$emit('change', value)
       return
     }
     if (!this.jsoneditor) {

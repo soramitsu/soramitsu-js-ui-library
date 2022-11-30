@@ -1,15 +1,73 @@
-import { number, text, boolean, object, withKnobs } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SFloatInput, SRow } from '../../components'
 
 export default {
   component: SFloatInput,
   title: 'Design System/Components/Input 🟣/Float',
-  decorators: [withKnobs]
-}
+  argTypes: {
+    decimals: {
+      name: 'Decimals',
+      control: {
+        type: 'number',
+        min: 0
+      },
+      defaultValue: 18
+    },
+    max: {
+      name: 'Max',
+      control: {
+        type: 'text'
+      },
+      defaultValue: '90000000'
+    },
+    hasLocaleString: {
+      name: 'Has Locale String',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    delimiters: {
+      name: 'Delimiters',
+      control: {
+        type: 'object'
+      },
+      defaultValue: {
+        thousand: ',',
+        decimal: '.'
+      }
+    },
+    top: {
+      name: 'Top slot content',
+      control: {
+        type: 'text'
+      }
+    },
+    bottom: {
+      name: 'Bottom slot content',
+      control: {
+        type: 'text'
+      }
+    },
+    left: {
+      name: 'Left slot content',
+      control: {
+        type: 'text'
+      }
+    },
+    right: {
+      name: 'Right slot content',
+      control: {
+        type: 'text'
+      }
+    }
+  }
+} as Meta
 
-export const configurable = () => ({
+export const configurable: Story = (args, { argTypes }) => ({
   components: { SFloatInput, SRow },
+  props: Object.keys(argTypes),
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-float-input
                  v-model="model"
@@ -26,37 +84,5 @@ export const configurable = () => ({
              </s-row>`,
   data: () => ({
     model: ''
-  }),
-  props: {
-    decimals: {
-      default: number('Decimals', 18)
-    },
-    max: {
-      default: text('Max', '90000000')
-    },
-    hasLocaleString: {
-      default: boolean('Has Locale String', false)
-    },
-    delimiters: {
-      default: object(
-        'Delimiters',
-        {
-          thousand: ',',
-          decimal: '.'
-        }
-      )
-    },
-    top: {
-      default: text('Top slot content', '')
-    },
-    bottom: {
-      default: text('Bottom slot content', '')
-    },
-    left: {
-      default: text('Left slot content', '')
-    },
-    right: {
-      default: text('Right slot content', '')
-    }
-  }
+  })
 })

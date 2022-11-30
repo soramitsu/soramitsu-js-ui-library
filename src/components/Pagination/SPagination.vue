@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Ref, Watch } from 'vue-property-decorator'
+import { Component, Mixins, ModelSync, Prop, Ref, Watch } from 'vue-property-decorator'
 import ElPagination from 'element-ui/lib/pagination'
 
 import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
@@ -46,21 +46,9 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
    */
   @Prop({ default: false, type: Boolean }) readonly background!: boolean
   /**
-   * Items count of each page. It supports the .sync modifier.
-   *
-   * By default it's set to `10`
-   */
-  @Prop({ default: 10, type: Number }) readonly pageSize!: number
-  /**
    * Total items count of the pagination component
    */
   @Prop({ type: Number }) readonly total!: number
-  /**
-   * Current page number. It supports the .sync modifier.
-   *
-   * By default it's set to `1`
-   */
-  @Prop({ default: 1, type: Number }) readonly currentPage!: number
   /**
    * Layout of the pagination component, which contains elements separated by comma.
    * It should also be ordered as you want to see these elements. List of available items:
@@ -126,15 +114,27 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
    * `of` by default
    */
   @Prop({ default: 'of', type: String }) readonly ofText!: string
+  /**
+   * Items count of each page. It supports the .sync modifier.
+   *
+   * By default it's set to `10`
+   */
+  @ModelSync('pageSize', 'update:page-size', { default: 10, type: Number })
+  readonly pageSizeModel!: number
+
+  /**
+   * Current page number. It supports the .sync modifier.
+   *
+   * By default it's set to `1`
+   */
+  @ModelSync('currentPage', 'update:current-page', { default: 1, type: Number })
+  readonly currentPageModel!: number
 
   @Ref('pagination') pagination!: any
 
   totalItem!: any
   sizesItem!: any
   sizesLabelItem!: any
-
-  pageSizeModel = this.pageSize
-  currentPageModel = this.currentPage
 
   private initPaginationItems (): void {
     const items = Array.from(this.pagination.$el.childNodes) as Array<any>
@@ -184,26 +184,6 @@ export default class SPagination extends Mixins(BorderRadiusMixin) {
   @Watch('ofText')
   private handleOfTextChange () {
     this.renderPaginationItems()
-  }
-
-  @Watch('pageSize')
-  private handlePageSizePropChange (value: number): void {
-    this.pageSizeModel = value
-  }
-
-  @Watch('pageSizeModel')
-  private handlePageSizeValueChange (value: number): void {
-    this.$emit('update:page-size', value)
-  }
-
-  @Watch('currentPage')
-  private handleCurrentPagePropChange (value: number): void {
-    this.currentPageModel = value
-  }
-
-  @Watch('currentPageModel')
-  private handleCurrentPageValueChange (value: number): void {
-    this.$emit('update:current-page', value)
   }
 
   get willBeSlotEnabled (): boolean {

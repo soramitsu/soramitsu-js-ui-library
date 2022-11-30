@@ -1,7 +1,7 @@
 <template>
   <el-checkbox
-    :class="computedClasses"
     v-model="model"
+    :class="computedClasses"
     :label="label"
     :disabled="disabled"
     :border="border"
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
+import { Component, Mixins, ModelSync, Prop } from 'vue-property-decorator'
 import ElCheckbox from 'element-ui/lib/checkbox'
 
 import SizeMixin from '../../mixins/SizeMixin'
@@ -26,10 +26,6 @@ import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
   components: { ElCheckbox }
 })
 export default class SCheckbox extends Mixins(SizeMixin, BorderRadiusMixin) {
-  /**
-   * Value of the checkbox item. Can be `string / number / boolean`
-   */
-  @Prop() readonly value!: string | number | boolean
   /**
    * Label of the checkbox item
    */
@@ -62,18 +58,11 @@ export default class SCheckbox extends Mixins(SizeMixin, BorderRadiusMixin) {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly indeterminate!: boolean
-
-  model = this.value
-
-  @Watch('value')
-  private handlePropChange (value: string | number | boolean): void {
-    this.model = value
-  }
-
-  @Watch('model')
-  private handleValueChange (value: string | number | boolean): void {
-    this.$emit('input', value)
-  }
+  /**
+   * Value of the checkbox item. Can be `string / number / boolean`
+   */
+  @ModelSync('value', 'input', { type: [String, Number, Boolean] })
+  readonly model!: string | number | boolean
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []
