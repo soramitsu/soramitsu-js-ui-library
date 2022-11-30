@@ -1,4 +1,4 @@
-import { withKnobs, number, text, boolean, select } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SPagination, SRow } from '../components'
 import { BorderRadius } from '../types'
@@ -6,11 +6,92 @@ import { BorderRadius } from '../types'
 export default {
   component: SPagination,
   title: 'Design System/Components/Pagination',
-  decorators: [withKnobs]
-}
+  argTypes: {
+    layout: {
+      name: 'Layout',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'total, sizes, pager, prev, next, jumper'
+    },
+    total: {
+      name: 'Total',
+      control: {
+        type: 'number',
+        min: 0
+      },
+      defaultValue: 400
+    },
+    disabled: {
+      name: 'Disabled',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    small: {
+      name: 'Small',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    background: {
+      name: 'Background',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    borderRadius: {
+      name: 'Border Radius',
+      control: {
+        type: 'select',
+        options: Object.values(BorderRadius)
+      },
+      defaultValue: BorderRadius.SMALL
+    },
+    prevText: {
+      name: 'Prev text',
+      control: {
+        type: 'text'
+      },
+      defaultValue: ''
+    },
+    nextText: {
+      name: 'Next text',
+      control: {
+        type: 'text'
+      },
+      defaultValue: ''
+    },
+    perPageText: {
+      name: 'Per page text',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'Rows per page'
+    },
+    totalText: {
+      name: 'Total text',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'Total'
+    },
+    ofText: {
+      name: 'Of text',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'of'
+    }
+  }
+} as Meta
 
-export const configurable = () => ({
+export const configurable: Story = (args, { argTypes }) => ({
   components: { SRow, SPagination },
+  props: Object.keys(argTypes),
   template: `<s-row class="s-flex" style="flex: 1; flex-direction: column;">
                <s-pagination
                  :total="total"
@@ -32,41 +113,6 @@ export const configurable = () => ({
                >
                </s-pagination>
              </s-row>`,
-  props: {
-    layout: {
-      default: text('Layout', 'total, sizes, pager, prev, next, jumper')
-    },
-    total: {
-      default: number('Total', 400)
-    },
-    disabled: {
-      default: boolean('Disabled', false)
-    },
-    small: {
-      default: boolean('Small', false)
-    },
-    background: {
-      default: boolean('Background', false)
-    },
-    borderRadius: {
-      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
-    },
-    prevText: {
-      default: text('Prev text', '')
-    },
-    nextText: {
-      default: text('Next text', '')
-    },
-    perPageText: {
-      default: text('Per page text', 'Rows per page')
-    },
-    totalText: {
-      default: text('Total text', 'Total')
-    },
-    ofText: {
-      default: text('Of text', 'of')
-    }
-  },
   methods: {
     handleSizeChange: (newSize: number) => console.log(`@size-change=${newSize}`),
     handleCurrentChange: (newCurrent: number) => console.log(`@current-change=${newCurrent}`),
@@ -75,21 +121,21 @@ export const configurable = () => ({
   }
 })
 
-export const small = () => ({
+export const small: Story = () => ({
   components: { SRow, SPagination },
   template: `<s-row class="s-flex" style="flex: 1; flex-direction: column;">
                <s-pagination :total="400" small></s-pagination>
              </s-row>`
 })
 
-export const withBackground = () => ({
+export const withBackground: Story = () => ({
   components: { SRow, SPagination },
   template: `<s-row class="s-flex" style="flex: 1; flex-direction: column;">
                <s-pagination :total="400" background></s-pagination>
              </s-row>`
 })
 
-export const disabled = () => ({
+export const disabled: Story = () => ({
   components: { SRow, SPagination },
   template: `<s-row class="s-flex" style="flex: 1; flex-direction: column;">
                <s-pagination :total="400" disabled></s-pagination>

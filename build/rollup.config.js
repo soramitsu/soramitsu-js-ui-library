@@ -3,9 +3,9 @@ import typescript from 'rollup-plugin-typescript2'
 import pkg from '../package.json'
 import scss from 'rollup-plugin-scss'
 import resolve from '@rollup/plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
+import commonjs from '@rollup/plugin-commonjs'
 import copy from 'rollup-plugin-copy'
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser'
 import del from 'rollup-plugin-delete'
 import multiInput from 'rollup-plugin-multi-input'
 
@@ -81,7 +81,7 @@ export default {
     }),
     scss(),
     resolve(),
-    /* eslint-disable @typescript-eslint/camelcase */
+    /* eslint-disable camelcase */
     terser({ keep_classnames: true }),
     del({
       targets: [

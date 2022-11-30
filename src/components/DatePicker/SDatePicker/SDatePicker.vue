@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
+import { Component, Mixins, ModelSync, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
 import ElDatePicker from 'element-ui/lib/date-picker'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
@@ -52,11 +52,6 @@ import { PickerTypes, PickerAlignment, InputTypes } from '../consts'
   components: { ElDatePicker, SIcon }
 })
 export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin) {
-  /**
-   * Value of date picker component. Can be used with `v-model`.
-   * Can be date object / array with date objects for date range picker
-   */
-  @Prop() readonly value!: any
   /**
    * Type of the date picker component. Available values:
    *
@@ -177,26 +172,24 @@ export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin) {
    * `true` by default
    */
   @Prop({ type: Boolean, default: true }) readonly validateEvent!: boolean
+  /**
+   * Value of date picker component. Can be used with `v-model`.
+   * Can be date object / array with date objects for date range picker
+   */
+  @ModelSync('value', 'input')
+  readonly model!: any
+
+  @Watch('value')
+  private handlePropChange (value: any): void {
+    this.focused = false
+  }
 
   @Ref('picker') picker!: any
 
   @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
   @Inject({ default: '', from: 'elFormItem' }) elFormItem!: ElFormItem
 
-  model = this.value
   focused = false
-
-  @Watch('value')
-  private handlePropChange (value: any): void {
-    this.model = value
-    this.focused = false
-  }
-
-  @Watch('model')
-  private handleValueChange (value: any): void {
-    this.$emit('input', value)
-    this.$emit('change', value)
-  }
 
   get isRange (): boolean {
     return ([PickerTypes.DATETIMERANGE, PickerTypes.DATERANGE, PickerTypes.MONTHRANGE] as Array<string>).includes(this.type)
@@ -268,6 +261,7 @@ export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin) {
 
   handleChange (values: any): void {
     this.focused = false
+    this.$emit('change', values)
   }
 
   public focus (): void {

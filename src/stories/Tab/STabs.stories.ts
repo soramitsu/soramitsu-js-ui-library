@@ -1,4 +1,4 @@
-import { boolean, select, withKnobs } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { STabs, STab } from '../../components'
 import { TabsPosition, TabsType } from '../../components/Tab'
@@ -7,11 +7,58 @@ import { BorderRadius } from '../../types'
 export default {
   component: STabs,
   title: 'Design System/Components/Tabs 🟣',
-  decorators: [withKnobs]
-}
+  argTypes: {
+    type: {
+      name: 'Type',
+      control: {
+        type: 'select',
+        options: [...Object.values(TabsType), '––']
+      },
+      defaultValue: '––'
+    },
+    borderRadius: {
+      name: 'Border Radius',
+      control: {
+        type: 'select',
+        options: Object.values(BorderRadius)
+      },
+      defaultValue: BorderRadius.SMALL
+    },
+    position: {
+      name: 'Position',
+      control: {
+        type: 'select',
+        options: Object.values(TabsPosition)
+      },
+      defaultValue: TabsPosition.TOP
+    },
+    closable: {
+      name: 'Closable',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    addable: {
+      name: 'Addable',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    editable: {
+      name: 'Editable',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    }
+  }
+} as Meta
 
-export const defaultUsage = () => ({
+const Template: Story = (args, { argTypes }) => ({
   components: { STabs, STab },
+  props: Object.keys(argTypes),
   template: `<s-tabs
                v-model="activeName"
                :type="type"
@@ -27,25 +74,7 @@ export const defaultUsage = () => ({
              </s-tabs>`,
   data: () => ({
     activeName: 'first'
-  }),
-  props: {
-    type: {
-      default: select('Type', [...Object.values(TabsType), '––'], '––')
-    },
-    borderRadius: {
-      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
-    },
-    position: {
-      default: select('Position', Object.values(TabsPosition), TabsPosition.TOP)
-    },
-    closable: {
-      default: boolean('Closable', false)
-    },
-    addable: {
-      default: boolean('Addable', false)
-    },
-    editable: {
-      default: boolean('Editable', false)
-    }
-  }
+  })
 })
+
+export const Configurable = Template.bind({})

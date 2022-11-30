@@ -1,18 +1,131 @@
-import { text, boolean, withKnobs, number, select } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SInput, SRow, SCol } from '../../components'
 import { InputType, InputSize } from '../../components/Input'
 import { BorderRadius } from '../../types'
 
+const differentTypesData = [InputType.TEXT, InputType.TEXTAREA].map(type => {
+  const model = type[0].toUpperCase() + type.slice(1)
+  const data = { type, model, placeholder: 'placeholder' } as any
+  return data
+})
+
 export default {
   component: SInput,
   title: 'Design System/Components/Input 🟣',
-  decorators: [withKnobs],
-  excludeStories: /.*Data$/
-}
+  excludeStories: /.*Data$/,
+  argTypes: {
+    top: {
+      name: 'Top slot content',
+      control: {
+        type: 'text'
+      }
+    },
+    bottom: {
+      name: 'Bottom slot content',
+      control: {
+        type: 'text'
+      }
+    },
+    left: {
+      name: 'Left slot content',
+      control: {
+        type: 'text'
+      }
+    },
+    right: {
+      name: 'Right slot content',
+      control: {
+        type: 'text'
+      }
+    },
+    type: {
+      name: 'Type',
+      control: {
+        type: 'select',
+        options: Object.values(InputType)
+      },
+      defaultValue: InputType.TEXT
+    },
+    size: {
+      name: 'Size',
+      control: {
+        type: 'select',
+        options: Object.values(InputSize)
+      },
+      defaultValue: InputSize.BIG
+    },
+    borderRadius: {
+      name: 'Border Radius',
+      control: {
+        type: 'select',
+        options: Object.values(BorderRadius)
+      },
+      defaultValue: BorderRadius.MINI
+    },
+    placeholder: {
+      name: 'Placeholder',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'Placeholder'
+    },
+    prefix: {
+      name: 'Prefix icon',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'el-icon-search'
+    },
+    suffix: {
+      name: 'Suffix icon',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 's-icon-clear-X-16'
+    },
+    disabled: {
+      name: 'Disabled',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    showPassword: {
+      name: 'Show password',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    readonly: {
+      name: 'Readonly',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    showTextLimit: {
+      name: 'Show text limit',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    maxlength: {
+      name: 'Max length',
+      control: {
+        type: 'number',
+        min: 0
+      },
+      defaultValue: 255
+    }
+  }
+} as Meta
 
-export const configurable = () => ({
+export const configurable: Story = (args, { argTypes }) => ({
   components: { SInput },
+  props: Object.keys(argTypes),
   template: `<s-input
                v-model="input"
                :type="type"
@@ -34,62 +147,10 @@ export const configurable = () => ({
              </s-input>`,
   data: () => ({
     input: ''
-  }),
-  props: {
-    top: {
-      default: text('Top slot content', '')
-    },
-    bottom: {
-      default: text('Bottom slot content', '')
-    },
-    left: {
-      default: text('Left slot content', '')
-    },
-    right: {
-      default: text('Right slot content', '')
-    },
-    type: {
-      default: select('Type', Object.values(InputType), InputType.TEXT)
-    },
-    size: {
-      default: select('Size', Object.values(InputSize), InputSize.BIG)
-    },
-    placeholder: {
-      default: text('Placeholder', 'Placeholder')
-    },
-    prefix: {
-      default: text('Prefix icon', 'el-icon-search')
-    },
-    suffix: {
-      default: text('Suffix icon', 's-icon-clear-X-16')
-    },
-    disabled: {
-      default: boolean('Disabled', false)
-    },
-    borderRadius: {
-      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.MINI)
-    },
-    showPassword: {
-      default: boolean('Show password', false)
-    },
-    readonly: {
-      default: boolean('Readonly', false)
-    },
-    showTextLimit: {
-      default: boolean('Show text limit', false)
-    },
-    maxlength: {
-      default: number('Maxlength', 255)
-    }
-  }
+  })
 })
 
-export const differentTypesData = [InputType.TEXT, InputType.TEXTAREA].map(type => {
-  const model = type[0].toUpperCase() + type.slice(1)
-  const data = { type, model, placeholder: 'placeholder' } as any
-  return data
-})
-export const filledAndReadonly = () => ({
+export const filledAndReadonly: Story = () => ({
   components: { SInput, SCol, SRow },
   template: `<s-col>
                <s-row
@@ -112,7 +173,7 @@ export const filledAndReadonly = () => ({
   }
 })
 
-export const disabled = () => ({
+export const disabled: Story = () => ({
   components: { SInput, SRow, SCol },
   template: `<s-col>
                <s-row
@@ -135,7 +196,7 @@ export const disabled = () => ({
   }
 })
 
-export const focused = () => ({
+export const focused: Story = () => ({
   components: { SInput, SRow, SCol },
   template: `<s-col>
                <s-row
@@ -158,7 +219,7 @@ export const focused = () => ({
   }
 })
 
-export const password = () => ({
+export const password: Story = () => ({
   components: { SInput, SRow },
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-input
@@ -172,7 +233,7 @@ export const password = () => ({
   })
 })
 
-export const withTextLimit = () => ({
+export const withTextLimit: Story = () => ({
   components: { SInput, SRow },
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-input
@@ -187,7 +248,7 @@ export const withTextLimit = () => ({
   })
 })
 
-export const textFileInput = () => ({
+export const textFileInput: Story = () => ({
   components: { SInput },
   template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
                <s-input
@@ -203,11 +264,7 @@ export const textFileInput = () => ({
              </div>`,
   data: () => ({
     vModelValue: '',
-    changeValue: ''
-  }),
-  props: {
-    accept: {
-      default: text('Accept', '*/*')
-    }
-  }
+    changeValue: '',
+    accept: '*/*'
+  })
 })

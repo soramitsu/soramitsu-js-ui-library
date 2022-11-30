@@ -1,19 +1,98 @@
-import { number, withKnobs, select, boolean } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SCol, SDropdown, SDropdownItem, SRow } from '../../components'
 import { Size, BorderRadius } from '../../types'
 import { DropdownPlacement, DropdownTrigger, DropdownType } from '../../components/Dropdown'
 import { ButtonTypes } from '../../components/Button'
 
+const differentTypesData = Object.values(DropdownType).map(type => {
+  const data = { type } as any
+  data.label = type[0].toUpperCase() + type.slice(1)
+  return data
+})
+
+const buttonTypesData = Object.values(ButtonTypes).map(buttonType => {
+  const data = { buttonType, type: DropdownType.BUTTON } as any
+  data.label = buttonType[0].toUpperCase() + buttonType.slice(1) + ' button'
+  return data
+})
+
+const differentSizeData = Object.values(Size).map(size => {
+  const data = { size, type: DropdownType.BUTTON, buttonType: ButtonTypes.PRIMARY } as any
+  data.label = size[0].toUpperCase() + size.slice(1)
+  return data
+})
+
+const differentTriggerData = Object.values(DropdownTrigger).map(trigger => {
+  const data = { trigger, type: DropdownType.BUTTON, buttonType: ButtonTypes.PRIMARY } as any
+  data.label = trigger[0].toUpperCase() + trigger.slice(1)
+  return data
+})
+
 export default {
   component: SDropdown,
   title: 'Design System/Components/Dropdown',
-  decorators: [withKnobs],
-  excludeStories: /.*Data$/
-}
+  excludeStories: /.*Data$/,
+  argTypes: {
+    buttonType: {
+      name: 'Button Type',
+      control: {
+        type: 'select',
+        options: Object.values(ButtonTypes)
+      },
+      defaultValue: ButtonTypes.SECONDARY
+    },
+    size: {
+      name: 'Size',
+      control: {
+        type: 'select',
+        options: Object.values(Size)
+      },
+      defaultValue: Size.BIG
+    },
+    borderRadius: {
+      name: 'Border Radius',
+      control: {
+        type: 'select',
+        options: Object.values(BorderRadius)
+      },
+      defaultValue: BorderRadius.SMALL
+    },
+    placement: {
+      name: 'Placement',
+      control: {
+        type: 'select',
+        options: Object.values(DropdownPlacement)
+      },
+      defaultValue: DropdownPlacement.BOTTOM_END
+    },
+    hideOnClick: {
+      name: 'Hide On Click',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    },
+    showTimeout: {
+      name: 'Show Timeout',
+      control: {
+        type: 'number'
+      },
+      defaultValue: 250
+    },
+    hideTimeout: {
+      name: 'Hide Timeout',
+      control: {
+        type: 'number'
+      },
+      defaultValue: 150
+    }
+  }
+} as Meta
 
-export const configurable = () => ({
+export const Configurable: Story = (args, { argTypes }) => ({
   components: { SDropdown, SDropdownItem },
+  props: Object.keys(argTypes),
   template: `<s-dropdown
                type="button"
                :size="size"
@@ -33,45 +112,12 @@ export const configurable = () => ({
                  <s-dropdown-item value="action4">Action 4</s-dropdown-item>
                </template>
              </s-dropdown>`,
-  props: {
-    buttonType: {
-      default: select('Button Type', Object.values(ButtonTypes), ButtonTypes.SECONDARY)
-    },
-    size: {
-      default: select('Size', Object.values(Size), Size.BIG)
-    },
-    borderRadius: {
-      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
-    },
-    placement: {
-      default: select('Placement', Object.values(DropdownPlacement), DropdownPlacement.BOTTOM_END)
-    },
-    hideOnClick: {
-      default: boolean('Hide On Click', true)
-    },
-    showTimeout: {
-      default: number('Show Timeout', 250)
-    },
-    hideTimeout: {
-      default: number('Hide Timeout', 150)
-    }
-  },
   methods: {
     handleSelect: (value: string) => alert(`${value} is selected`)
   }
 })
 
-export const differentTypesData = Object.values(DropdownType).map(type => {
-  const data = { type } as any
-  data.label = type[0].toUpperCase() + type.slice(1)
-  return data
-})
-export const buttonTypesData = Object.values(ButtonTypes).map(buttonType => {
-  const data = { buttonType, type: DropdownType.BUTTON } as any
-  data.label = buttonType[0].toUpperCase() + buttonType.slice(1) + ' button'
-  return data
-})
-export const differentTypes = () => ({
+export const differentTypes: Story = (args, { argTypes }) => ({
   components: { SCol, SDropdown, SDropdownItem, SRow },
   template: `<s-row :gutter="20" style="width: 100%;">
                <s-col :span="12" style="margin-bottom: 20px;"><span>Different types</span></s-col>
@@ -121,25 +167,16 @@ export const differentTypes = () => ({
                  </s-dropdown>
                </s-col>
              </s-row>`,
-  props: {
-    differentTypesData: {
-      default: () => differentTypesData
-    },
-    buttonTypesData: {
-      default: () => buttonTypesData.filter(data => data.buttonType !== ButtonTypes.ACTION)
-    }
-  },
+  data: () => ({
+    differentTypesData,
+    buttonTypesData: buttonTypesData.filter(data => data.buttonType !== ButtonTypes.ACTION)
+  }),
   methods: {
     handleClick: () => alert('clicked')
   }
 })
 
-export const differentSizeData = Object.values(Size).map(size => {
-  const data = { size, type: DropdownType.BUTTON, buttonType: ButtonTypes.PRIMARY } as any
-  data.label = size[0].toUpperCase() + size.slice(1)
-  return data
-})
-export const differentSize = () => ({
+export const differentSize: Story = () => ({
   components: { SCol, SDropdown, SDropdownItem, SRow },
   template: `<s-row :gutter="20" style="width: 100%;">
                <s-col :span="4" v-for="item in differentSizeData" :key="item.size" style="height: 56px; margin-bottom: 20px;">
@@ -158,19 +195,12 @@ export const differentSize = () => ({
                  </s-dropdown>
                </s-col>
              </s-row>`,
-  props: {
-    differentSizeData: {
-      default: () => differentSizeData
-    }
-  }
+  data: () => ({
+    differentSizeData
+  })
 })
 
-export const differentTriggerData = Object.values(DropdownTrigger).map(trigger => {
-  const data = { trigger, type: DropdownType.BUTTON, buttonType: ButtonTypes.PRIMARY } as any
-  data.label = trigger[0].toUpperCase() + trigger.slice(1)
-  return data
-})
-export const differentTrigger = () => ({
+export const differentTrigger: Story = () => ({
   components: { SCol, SDropdown, SDropdownItem, SRow },
   template: `<s-row :gutter="20" style="width: 100%;">
                <s-col :span="4" v-for="item in differentTriggerData" :key="item.trigger" style="height: 56px; margin-bottom: 20px;">
@@ -189,9 +219,7 @@ export const differentTrigger = () => ({
                  </s-dropdown>
                </s-col>
              </s-row>`,
-  props: {
-    differentTriggerData: {
-      default: () => differentTriggerData
-    }
-  }
+  data: () => ({
+    differentTriggerData
+  })
 })
