@@ -1,4 +1,4 @@
-import { withKnobs, select, boolean } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SDatePicker, SRow, SCol } from '../components'
 import { Size, BorderRadius } from '../types'
@@ -7,12 +7,82 @@ import { PickerAlignment, PickerTypes, InputTypes } from '../components/DatePick
 export default {
   component: SDatePicker,
   title: 'Design System/Components/Date Picker',
-  decorators: [withKnobs],
-  excludeStories: /.*Data$/
-}
+  excludeStories: /.*Data$/,
+  argTypes: {
+    unlinkPanels: {
+      name: 'Unlink Panels',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    readonly: {
+      name: 'Readonly',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    disabled: {
+      name: 'Disabled',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    clearable: {
+      name: 'Clearable',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    },
+    type: {
+      name: 'Type',
+      control: {
+        type: 'select',
+        options: Object.values(PickerTypes)
+      },
+      defaultValue: PickerTypes.DATE
+    },
+    inputType: {
+      name: 'Input Type',
+      control: {
+        type: 'select',
+        options: Object.values(InputTypes)
+      },
+      defaultValue: InputTypes.INPUT
+    },
+    size: {
+      name: 'Size',
+      control: {
+        type: 'select',
+        options: Object.values(Size)
+      },
+      defaultValue: Size.BIG
+    },
+    align: {
+      name: 'Align',
+      control: {
+        type: 'select',
+        options: Object.values(PickerAlignment)
+      },
+      defaultValue: PickerAlignment.LEFT
+    },
+    borderRadius: {
+      name: 'Border Radius',
+      control: {
+        type: 'select',
+        options: Object.values(BorderRadius)
+      },
+      defaultValue: BorderRadius.MINI
+    }
+  }
+} as Meta
 
-export const configurable = () => ({
+export const configurable: Story = (args, { argTypes }) => ({
   components: { SDatePicker },
+  props: Object.keys(argTypes),
   template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
                <s-date-picker
                  v-model="vModelValue"
@@ -43,41 +113,12 @@ export const configurable = () => ({
     vModelValue: '',
     changeValue: ''
   }),
-  props: {
-    unlinkPanels: {
-      default: boolean('Unlink Panels', false)
-    },
-    type: {
-      default: select('Type', Object.values(PickerTypes), PickerTypes.DATE)
-    },
-    inputType: {
-      default: select('Input Type', Object.values(InputTypes), InputTypes.INPUT)
-    },
-    readonly: {
-      default: boolean('Readonly', false)
-    },
-    disabled: {
-      default: boolean('Disabled', false)
-    },
-    size: {
-      default: select('Size', Object.values(Size), Size.BIG)
-    },
-    clearable: {
-      default: boolean('Clearable', true)
-    },
-    align: {
-      default: select('Align', Object.values(PickerAlignment), PickerAlignment.LEFT)
-    },
-    borderRadius: {
-      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.MINI)
-    }
-  },
   methods: {
     handleChange: (value: any, model: any) => console.log(value, model)
   }
 })
 
-export const differentTypesData = Object.values(PickerTypes).map(type => {
+const differentTypesData = Object.values(PickerTypes).map(type => {
   const label = type[0].toUpperCase() + type.slice(1)
   const data = { type, label, inputType: InputTypes.SELECT, model: '' } as any
   if ([PickerTypes.DATERANGE, PickerTypes.DATETIMERANGE, PickerTypes.MONTHRANGE].includes(type)) {
@@ -100,7 +141,8 @@ export const differentTypesData = Object.values(PickerTypes).map(type => {
   data.placeholder = `Select ${type}`
   return data
 }))
-export const withDifferentTypes = () => ({
+
+export const withDifferentTypes: Story = () => ({
   components: { SCol, SRow, SDatePicker },
   template: `<s-row style="flex: 1;" :gutter="20">
                <s-col v-for="item in selectItems" :key="item.label" :span="6" style="padding-bottom: 20px;">
@@ -132,7 +174,7 @@ export const withDifferentTypes = () => ({
   })
 })
 
-export const differentRangeTypesData = [
+const differentRangeTypesData = [
   PickerTypes.DATERANGE,
   PickerTypes.DATETIMERANGE,
   PickerTypes.MONTHRANGE
@@ -140,7 +182,8 @@ export const differentRangeTypesData = [
   const label = type[0].toUpperCase() + type.slice(1)
   return { type, label, model: '', startPlaceholder: 'From', endPlaceholder: 'To' }
 })
-export const withUnlinkPanels = () => ({
+
+export const withUnlinkPanels: Story = () => ({
   components: { SCol, SRow, SDatePicker },
   template: `<s-row style="flex: 1;" :gutter="20">
                <s-col v-for="item in items" :key="item.label" :span="6" style="padding-bottom: 20px;">
@@ -160,10 +203,11 @@ export const withUnlinkPanels = () => ({
   })
 })
 
-export const disabledData = Object.values(InputTypes).map(inputType => {
+const disabledData = Object.values(InputTypes).map(inputType => {
   return { type: PickerTypes.DATE, placeholder: 'Select date', inputType }
 }).flatMap(item => [{ ...item, model: '' }, { ...item, model: new Date() }])
-export const disabled = () => ({
+
+export const disabled: Story = () => ({
   components: { SCol, SRow, SDatePicker },
   template: `<s-row style="flex: 1;" :gutter="20">
                <s-col v-for="item in items" :key="item.label" :span="6" style="padding-bottom: 20px;">
@@ -182,7 +226,7 @@ export const disabled = () => ({
   })
 })
 
-export const withAdditionalOptions = () => ({
+export const withAdditionalOptions: Story = () => ({
   components: { SCol, SRow, SDatePicker },
   template: `<s-row style="flex: 1;" :gutter="20">
                <s-col>

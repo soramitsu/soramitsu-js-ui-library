@@ -1,18 +1,137 @@
-import { text, boolean, select, withKnobs } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SButton, SButtonGroup, SRow, SCol, SMain, SIcon } from '../components'
 import { ButtonTypes, ButtonIconPosition } from '../components/Button'
 import { Size, BorderRadius } from '../types'
 
+export const differentTypeButtonsData = Object.values(ButtonTypes).map(type => {
+  const label = type[0].toUpperCase() + type.slice(1)
+  const data = { type } as any
+  if (type === ButtonTypes.ACTION) {
+    data.icon = 'refresh-16'
+    data.tooltip = label
+  } else {
+    data.label = label
+  }
+  return data
+})
+
+const differentSizeData = Object.values(Size).map(size =>
+  ({ size, label: size[0].toUpperCase() + size.slice(1) }))
+
 export default {
   component: SButton,
   title: 'Design System/Components/Button 🟣',
-  decorators: [withKnobs],
-  excludeStories: /.*Data$/
-}
+  excludeStories: /.*Data$/,
+  argTypes: {
+    disabled: {
+      name: 'Disabled',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    loading: {
+      name: 'Loading',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    type: {
+      name: 'Type',
+      control: {
+        type: 'select',
+        options: Object.values(ButtonTypes)
+      },
+      defaultValue: ButtonTypes.PRIMARY
+    },
+    size: {
+      name: 'Size',
+      control: {
+        type: 'select',
+        options: Object.values(Size)
+      },
+      defaultValue: Size.BIG
+    },
+    borderRadius: {
+      name: 'Border Radius',
+      control: {
+        type: 'select',
+        options: Object.values(BorderRadius)
+      },
+      defaultValue: BorderRadius.SMALL
+    },
+    rounded: {
+      name: 'Rounded',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    alternative: {
+      name: 'Alternative',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    primary: {
+      name: 'Primary',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    tooltip: {
+      name: 'Tooltip',
+      control: {
+        type: 'text'
+      }
+    },
+    content: {
+      name: 'Button text',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'Default'
+    },
+    withTypography: {
+      name: 'With Typography css class',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    typography: {
+      name: 'Typographic css class',
+      control: {
+        type: 'text'
+      },
+      if: { arg: 'withTypography' },
+      defaultValue: 's-typography-button--large'
+    },
+    icon: {
+      name: 'Button icon',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'arrows-swap-24'
+    },
+    iconPosition: {
+      name: 'Icon Position',
+      control: {
+        type: 'select',
+        options: Object.values(ButtonIconPosition)
+      },
+      defaultValue: ButtonIconPosition.LEFT
+    }
+  }
+} as Meta
 
-export const configurable = () => ({
+export const configurable: Story = (args, { argTypes }) => ({
   components: { SButton, SIcon },
+  props: Object.keys(argTypes),
   template: `<s-button
                :class="withTypography ? typography : ''"
                :disabled="disabled"
@@ -29,69 +148,17 @@ export const configurable = () => ({
                <s-icon v-if="isAction" :name="icon"/>
                <span v-else>{{ content }}</span>
              </s-button>`,
-  props: {
-    disabled: {
-      default: boolean('Disabled', false)
-    },
-    loading: {
-      default: boolean('Loading', false)
-    },
-    type: {
-      default: select('Type', Object.values(ButtonTypes), ButtonTypes.PRIMARY)
-    },
-    size: {
-      default: select('Size', Object.values(Size), Size.BIG)
-    },
-    borderRadius: {
-      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
-    },
-    rounded: {
-      default: boolean('Rounded', false)
-    },
-    alternative: {
-      default: boolean('Alternative', false)
-    },
-    primary: {
-      default: boolean('Primary', false)
-    },
-    tooltip: {
-      default: text('Tooltip', '')
-    },
-    content: {
-      default: text('Button text', 'Default')
-    },
-    withTypography: {
-      default: boolean('With Typography css class', false)
-    },
-    typography: {
-      default: text('Typographic css class', 's-typography-button--large')
-    },
-    icon: {
-      default: text('Button icon', 'arrows-swap-24')
-    }
-  },
   methods: {
     handleClick: () => alert('clicked')
   },
   computed: {
-    isAction: ({ type }) => {
-      return type === ButtonTypes.ACTION
+    isAction () {
+      return this.type === ButtonTypes.ACTION
     }
   }
 })
 
-export const differentTypeButtonsData = Object.values(ButtonTypes).map(type => {
-  const label = type[0].toUpperCase() + type.slice(1)
-  const data = { type } as any
-  if (type === ButtonTypes.ACTION) {
-    data.icon = 'refresh-16'
-    data.tooltip = label
-  } else {
-    data.label = label
-  }
-  return data
-})
-export const withDifferentTypes = () => ({
+export const withDifferentTypes: Story = () => ({
   components: { SButton, SRow },
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
@@ -104,16 +171,12 @@ export const withDifferentTypes = () => ({
                  {{ item.label }}
                </s-button>
              </s-row>`,
-  props: {
-    items: {
-      default: () => differentTypeButtonsData
-    }
-  }
+  data: () => ({
+    items: differentTypeButtonsData
+  })
 })
 
-export const differentSizeData = Object.values(Size).map(size =>
-  ({ size, label: size[0].toUpperCase() + size.slice(1) }))
-export const withDifferentSize = () => ({
+export const withDifferentSize: Story = () => ({
   components: { SButton, SRow },
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
@@ -124,16 +187,15 @@ export const withDifferentSize = () => ({
                  {{ item.label }}
                </s-button>
              </s-row>`,
-  props: {
-    items: {
-      default: () => differentSizeData
-    }
-  }
+  data: () => ({
+    items: differentSizeData
+  })
 })
 
-export const differentBorderRadiusData = Object.values(BorderRadius).map(borderRadius =>
+const differentBorderRadiusData = Object.values(BorderRadius).map(borderRadius =>
   ({ borderRadius, label: borderRadius[0].toUpperCase() + borderRadius.slice(1) }))
-export const withDifferentBorderRadius = () => ({
+
+export const withDifferentBorderRadius: Story = () => ({
   components: { SButton, SRow },
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
@@ -144,14 +206,12 @@ export const withDifferentBorderRadius = () => ({
                  {{ item.label }}
                </s-button>
              </s-row>`,
-  props: {
-    items: {
-      default: () => differentBorderRadiusData
-    }
-  }
+  data: () => ({
+    items: differentBorderRadiusData
+  })
 })
 
-export const disabled = () => ({
+export const disabled: Story = () => ({
   components: { SButton, SRow },
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
@@ -165,14 +225,12 @@ export const disabled = () => ({
                  {{ item.label }}
                </s-button>
              </s-row>`,
-  props: {
-    items: {
-      default: () => differentTypeButtonsData
-    }
-  }
+  data: () => ({
+    items: differentTypeButtonsData
+  })
 })
 
-export const loading = () => ({
+export const loading: Story = () => ({
   components: { SButton, SRow },
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button
@@ -186,11 +244,9 @@ export const loading = () => ({
                  {{ item.label }}
                </s-button>
              </s-row>`,
-  props: {
-    items: {
-      default: () => differentTypeButtonsData
-    }
-  }
+  data: () => ({
+    items: differentTypeButtonsData
+  })
 })
 
 const withIcon = (icon: string) => ({
@@ -214,27 +270,18 @@ const withIcon = (icon: string) => ({
                  </s-col>
                </s-row>
              </s-main>`,
-  props: {
-    differentSizeData: {
-      default: () => differentSizeData
-    },
-    differentTypesData: {
-      default: () => differentTypeButtonsData
-    },
-    iconPosition: {
-      default: select('IconPosition', Object.values(ButtonIconPosition), ButtonIconPosition.LEFT)
-    }
-  },
   data: () => ({
-    icon
+    icon,
+    differentSizeData,
+    differentTypesData: differentTypeButtonsData
   })
 })
 
-export const withIcon16 = withIcon('refresh-16')
+export const withIcon16: Story = () => withIcon('refresh-16')
 
-export const withIcon24 = withIcon('arrows-swap-24')
+export const withIcon24: Story = () => withIcon('arrows-swap-24')
 
-export const buttonGroup = () => ({
+export const buttonGroup: Story = () => ({
   components: { SButton, SButtonGroup, SRow },
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-button-group>

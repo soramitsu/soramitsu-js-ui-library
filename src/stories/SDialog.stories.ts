@@ -1,4 +1,4 @@
-import { text, withKnobs, boolean, select } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SDialog, SRow, SButton } from '../components'
 import { BorderRadius } from '../types'
@@ -6,11 +6,84 @@ import { BorderRadius } from '../types'
 export default {
   component: SDialog,
   title: 'Design System/Components/Dialog 🟣',
-  decorators: [withKnobs]
-}
+  argTypes: {
+    modal: {
+      name: 'Modal',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    },
+    title: {
+      name: 'Title',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'Default title'
+    },
+    fullscreen: {
+      name: 'Fullscreen',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    borderRadius: {
+      name: 'Border Radius',
+      control: {
+        type: 'select',
+        options: Object.values(BorderRadius)
+      },
+      defaultValue: BorderRadius.SMALL
+    },
+    showClose: {
+      name: 'Show close',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    },
+    closeOnClickModal: {
+      name: 'Close on click modal',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    },
+    closeOnEsc: {
+      name: 'Close on Esc',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    },
+    center: {
+      name: 'Center',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    width: {
+      name: 'Width',
+      control: {
+        type: 'text'
+      },
+      defaultValue: '50%'
+    },
+    top: {
+      name: 'Top',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'auto'
+    }
+  }
+} as Meta
 
-export const configurable = () => ({
+export const configurable: Story = (args, { argTypes }) => ({
   components: { SDialog, SRow, SButton },
+  props: Object.keys(argTypes),
   template: `<s-row
                class="s-flex"
                style="flex: 1; justify-content: space-between; align-items: center; height: 400px;"
@@ -43,38 +116,6 @@ export const configurable = () => ({
   data: () => ({
     visible: false
   }),
-  props: {
-    modal: {
-      default: boolean('Modal', true)
-    },
-    title: {
-      default: text('Title', 'Default title')
-    },
-    fullscreen: {
-      default: boolean('fullscreen', false)
-    },
-    borderRadius: {
-      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
-    },
-    showClose: {
-      default: boolean('Show close', true)
-    },
-    closeOnClickModal: {
-      default: boolean('Close on click modal', true)
-    },
-    closeOnEsc: {
-      default: boolean('Close on Esc', true)
-    },
-    center: {
-      default: boolean('Center', false)
-    },
-    width: {
-      default: text('Width', '50%')
-    },
-    top: {
-      default: text('Top', 'auto')
-    }
-  },
   methods: {
     handleOpen: () => console.log('open'),
     handleClose: () => console.log('close'),

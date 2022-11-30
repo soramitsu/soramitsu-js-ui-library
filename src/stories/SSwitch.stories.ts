@@ -1,16 +1,59 @@
-import { text, number, boolean, withKnobs } from '@storybook/addon-knobs'
-
 import { SSwitch } from '../components'
 
 export default {
   component: SSwitch,
   title: 'Design System/Components/Switch 🟣',
-  decorators: [withKnobs],
-  excludeStories: /.*Data$/
+  excludeStories: /.*Data$/,
+  argTypes: {
+    activeText: {
+      name: 'Active Text',
+      control: {
+        type: 'text'
+      },
+      defaultValue: ''
+    },
+    inactiveText: {
+      name: 'Inactive Text',
+      control: {
+        type: 'text'
+      },
+      defaultValue: ''
+    },
+    activeValue: {
+      name: 'Active Value',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'Active Value'
+    },
+    inactiveValue: {
+      name: 'Inactive Value',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'Inactive Value'
+    },
+    width: {
+      name: 'Width',
+      control: {
+        type: 'number',
+        min: 40
+      },
+      defaultValue: 40
+    },
+    disabled: {
+      name: 'Disabled',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    }
+  }
 }
 
-export const configurable = () => ({
+export const configurable = (args, { argTypes }) => ({
   components: { SSwitch },
+  props: Object.keys(argTypes),
   template: `<div class="s-flex" style="flex: 1; flex-direction: column;">
                <s-switch
                  v-model="modelValue"
@@ -29,25 +72,5 @@ export const configurable = () => ({
   data: () => ({
     modelValue: true,
     changeValue: true
-  }),
-  props: {
-    activeText: {
-      default: text('Active Text', '')
-    },
-    inactiveText: {
-      default: text('Inactive Text', '')
-    },
-    activeValue: {
-      default: text('Active Value', 'Active Value')
-    },
-    inactiveValue: {
-      default: text('Inactive Value', 'Inactive Value')
-    },
-    width: {
-      default: number('Width', 40)
-    },
-    disabled: {
-      default: boolean('Disabled', false)
-    }
-  }
+  })
 })

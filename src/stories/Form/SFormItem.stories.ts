@@ -1,15 +1,38 @@
-import { boolean, withKnobs, text } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SButton, SForm, SFormItem, SInput } from '../../components'
 
 export default {
   component: SFormItem,
   title: 'Design System/Components/Form 🟣/Form Item',
-  decorators: [withKnobs]
-}
+  argTypes: {
+    required: {
+      name: 'Required',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    },
+    error: {
+      name: 'Error',
+      control: {
+        type: 'text'
+      },
+      defaultValue: ''
+    },
+    showMessage: {
+      name: 'Show Message',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    }
+  }
+} as Meta
 
-export const configurable = () => ({
+export const configurable: Story = (args, { argTypes }) => ({
   components: { SButton, SForm, SFormItem, SInput },
+  props: Object.keys(argTypes),
   template: `<s-form
                :model="form"
              >
@@ -36,17 +59,6 @@ export const configurable = () => ({
   methods: {
     onSubmit () {
       console.log('submit!')
-    }
-  },
-  props: {
-    required: {
-      default: boolean('Required', true)
-    },
-    error: {
-      default: text('Error', '')
-    },
-    showMessage: {
-      default: boolean('Show Message', true)
     }
   }
 })

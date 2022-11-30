@@ -1,10 +1,10 @@
 <template>
   <el-tooltip
     ref="tooltip"
+    v-model="model"
     :effect="computedTheme"
     :content="content"
     :placement="placement"
-    v-model="model"
     :disabled="disabled"
     :value="value"
     :offset="offset"
@@ -22,8 +22,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
-import { Getter } from 'vuex-class'
+import { Component, Mixins, ModelSync, Prop, Watch, Ref } from 'vue-property-decorator'
 import { PopoverPlacement } from 'element-ui/types/popover'
 import debounce from 'throttle-debounce/debounce'
 import ElTooltip from 'element-ui/lib/tooltip'
@@ -54,12 +53,6 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
    * `"top"` by default
    */
   @Prop({ default: TooltipPlacement.TOP, type: String }) readonly placement!: PopoverPlacement
-  /**
-   * Visibility of the tooltip. You can use `v-model` as well.
-   *
-   * `false` by default
-   */
-  @Prop({ default: false, type: Boolean }) readonly value!: boolean
   /**
    * Whether the tooltip is disabled.
    *
@@ -117,10 +110,27 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
    * `0` by default
    */
   @Prop({ default: 0, type: [Number, String] }) readonly tabindex!: number | string
+  /**
+   * Visibility of the tooltip. You can use `v-model` as well.
+   *
+   * `false` by default
+   */
+  @ModelSync('value', 'input', { type: Boolean })
+  readonly model!: boolean
 
   @Ref('tooltip') tooltip!: any
 
-  @Getter libraryTheme!: Theme
+  @Watch('closeDelay')
+  private handleChangeCloseDelay (value: number): void {
+    this.updateCloseDelay(value)
+  }
+
+  get libraryTheme (): Theme | null {
+    if (this.$store) {
+      return this.$store.getters.libraryTheme
+    }
+    return null
+  }
 
   get tabindexFormatted (): number {
     return +this.tabindex
@@ -138,23 +148,6 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     return cssClasses.join(' ')
-  }
-
-  model = this.value
-
-  @Watch('value')
-  private handlePropChange (value: boolean): void {
-    this.model = value
-  }
-
-  @Watch('model')
-  private handleValueChange (value: boolean): void {
-    this.$emit('change', value)
-  }
-
-  @Watch('closeDelay')
-  private handleChangeCloseDelay (value: number): void {
-    this.updateCloseDelay(value)
   }
 
   mounted (): void {

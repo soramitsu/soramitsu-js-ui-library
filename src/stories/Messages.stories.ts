@@ -1,12 +1,9 @@
-import { withKnobs } from '@storybook/addon-knobs'
-
 import Vue from 'vue'
 
 import { SButton, SDivider } from '../components'
 
 export default {
   title: 'Design System/Components/Messages & Notifications',
-  decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
 

@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
+import { Component, Mixins, ModelSync, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
 import ElSelect from 'element-ui/lib/select'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
@@ -43,10 +43,6 @@ import { InputTypes } from '../consts'
   components: { ElSelect }
 })
 export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, DesignSystemInject) {
-  /**
-   * Selected value. Can be used with `v-model`
-   */
-  @Prop() readonly value!: any
   /**
    * Input type of the select component. Available values: `"input"`, `"select"`.
    *
@@ -125,13 +121,22 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
    * `false` by default
    */
   @Prop({ type: Boolean, default: false }) readonly filterable!: boolean
+  /**
+   * Selected value. Can be used with `v-model`
+   */
+  @ModelSync('value', 'input')
+  readonly model!: any
 
   @Ref('select') select!: any
 
   @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
   @Inject({ default: '', from: 'elFormItem' }) elFormItem!: ElFormItem
 
-  model = this.value
+  @Watch('model')
+  private handleValueChange (value: any): void {
+    this.updateInputValue()
+  }
+
   focused = false
 
   private updateInputValue (): void {
@@ -143,19 +148,7 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
       tags.remove()
     }
     const input = this.select.$el.getElementsByClassName('el-input__inner')[0] as HTMLInputElement
-    input.value = this.model.length ? `${this.multipleTextPrefix || this.placeholder} (${this.model.length})` : ''
-  }
-
-  @Watch('value')
-  private handlePropChange (value: any): void {
-    this.model = value
-  }
-
-  @Watch('model')
-  private handleValueChange (value: any): void {
-    this.$emit('input', value)
-    this.$emit('change', value)
-    this.updateInputValue()
+    input.value = this.model && this.model.length ? `${this.multipleTextPrefix || this.placeholder} (${this.model.length})` : ''
   }
 
   mounted (): void {

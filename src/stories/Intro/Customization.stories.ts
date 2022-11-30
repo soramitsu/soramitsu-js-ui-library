@@ -1,12 +1,9 @@
-import { withKnobs } from '@storybook/addon-knobs'
-
 import { AccentColors, ContentColors, MiscColors, SecondaryColors, StatusColors, TertiaryButtonColors, UtilityColors, BorderRadius, ColorPrefix } from '../../types'
 import { SRow, SButton, SInput, SCol, SDivider } from '../../components'
 import { differentTypeButtonsData } from '../SButton.stories'
 
 export default {
   title: 'Design System/Intro/Customization',
-  decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
 

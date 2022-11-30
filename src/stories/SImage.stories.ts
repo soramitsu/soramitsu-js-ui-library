@@ -1,15 +1,75 @@
-import { text, boolean, number, select, withKnobs, array } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SImage, ImageFit } from '../components/Image'
 
 export default {
   component: SImage,
   title: 'Design System/Components/Image',
-  decorators: [withKnobs]
-}
+  argTypes: {
+    src: {
+      name: 'Src',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'https://picsum.photos/1024'
+    },
+    fit: {
+      name: 'Fit',
+      control: {
+        type: 'select',
+        options: Object.values(ImageFit)
+      },
+      defaultValue: ImageFit.NONE
+    },
+    lazy: {
+      name: 'Lazy',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    },
+    alt: {
+      name: 'Alt',
+      control: {
+        type: 'text'
+      },
+      defaultValue: 'Alt text'
+    },
+    zIndex: {
+      name: 'Z-index',
+      control: {
+        type: 'number',
+        min: 0
+      },
+      defaultValue: 0
+    },
+    hasSkeleton: {
+      name: 'Has Skeleton',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    },
+    animated: {
+      name: 'Skeleton has Animation',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: true
+    },
+    srcList: {
+      name: 'Src List',
+      control: {
+        type: 'object'
+      },
+      defaultValue: ['https://picsum.photos/1024', 'https://picsum.photos/1024/300']
+    }
+  }
+} as Meta
 
-export const configurable = () => ({
+export const configurable: Story = (args, { argTypes }) => ({
   components: { SImage },
+  props: Object.keys(argTypes),
   template: `
     <s-image
       :src="src"
@@ -21,36 +81,10 @@ export const configurable = () => ({
       :has-skeleton="hasSkeleton"
       :animated="animated"
       style="height: 300px;"
-    />`,
-  props: {
-    src: {
-      default: text('Src', 'https://picsum.photos/1024')
-    },
-    fit: {
-      default: select('Fit', Object.values(ImageFit), ImageFit.NONE)
-    },
-    lazy: {
-      default: boolean('Lazy', true)
-    },
-    alt: {
-      default: text('Alt', '')
-    },
-    zIndex: {
-      default: number('Z-index', 0)
-    },
-    hasSkeleton: {
-      default: boolean('Has Skeleton', true)
-    },
-    animated: {
-      default: boolean('Skeleton has Animation', true)
-    },
-    srcList: {
-      default: array('Src List', ['https://picsum.photos/1024', 'https://picsum.photos/1024/300'])
-    }
-  }
+    />`
 })
 
-export const LazyImages = () => ({
+export const LazyImages: Story = () => ({
   components: { SImage },
   template: `
     <div style="width: 100%; overflow-y: auto; height: 300px;">
@@ -75,7 +109,7 @@ export const LazyImages = () => ({
   })
 })
 
-export const FailedImage = () => ({
+export const FailedImage: Story = () => ({
   components: { SImage },
   template: '<s-image src="\'\'" lazy style="height: 300px;" />'
 })

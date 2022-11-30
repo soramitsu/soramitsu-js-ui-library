@@ -1,4 +1,4 @@
-import { text, withKnobs, select, boolean } from '@storybook/addon-knobs'
+import { Meta, Story } from '@storybook/vue'
 
 import { SCard, SRow, SDropdown, SDropdownItem } from '../components'
 import { CardShadow } from '../components/Card'
@@ -7,11 +7,72 @@ import { BorderRadius, Status, Size } from '../types'
 export default {
   component: SCard,
   title: 'Design System/Components/Card 🟣',
-  decorators: [withKnobs]
-}
+  argTypes: {
+    shadow: {
+      name: 'Shadow',
+      control: {
+        type: 'select',
+        options: Object.values(CardShadow)
+      },
+      defaultValue: CardShadow.HOVER
+    },
+    header: {
+      name: 'Header',
+      control: {
+        type: 'text'
+      }
+    },
+    borderRadius: {
+      name: 'Border Radius',
+      control: {
+        type: 'select',
+        options: Object.values(BorderRadius)
+      },
+      defaultValue: BorderRadius.SMALL
+    },
+    status: {
+      name: 'Status',
+      control: {
+        type: 'select',
+        options: Object.values(Status)
+      },
+      defaultValue: Status.DEFAULT
+    },
+    size: {
+      name: 'Size',
+      control: {
+        type: 'select',
+        options: Object.values(Size)
+      },
+      defaultValue: Size.BIG
+    },
+    clickable: {
+      name: 'Clickable',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    primary: {
+      name: 'Primary',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    },
+    pressed: {
+      name: 'Pressed',
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false
+    }
+  }
+} as Meta
 
-export const configurable = () => ({
+export const Configurable: Story = (args, { argTypes }) => ({
   components: { SCard, SRow, SDropdown, SDropdownItem },
+  props: Object.keys(argTypes),
   template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
                <s-card style="width: 80%;" :shadow="shadow" :border-radius="borderRadius" :clickable="clickable" :pressed="pressed" :primary="primary" :status="status" :size="size" @click="handleClick">
                  <template slot="header" v-if="header">
@@ -32,32 +93,6 @@ export const configurable = () => ({
                  </div>
                </s-card>
              </s-row>`,
-  props: {
-    shadow: {
-      default: select('Shadow', Object.values(CardShadow), CardShadow.HOVER)
-    },
-    header: {
-      default: text('Header', 'Card header', undefined)
-    },
-    borderRadius: {
-      default: select('BorderRadius', Object.values(BorderRadius), BorderRadius.SMALL)
-    },
-    status: {
-      default: select('Status', Object.values(Status), Status.DEFAULT)
-    },
-    size: {
-      default: select('Size', Object.values(Size), Size.BIG)
-    },
-    clickable: {
-      default: boolean('Clickable', false)
-    },
-    primary: {
-      default: boolean('Primary', false)
-    },
-    pressed: {
-      default: boolean('Pressed', false)
-    }
-  },
   methods: {
     handleClick: () => alert('Card component was clicked')
   }

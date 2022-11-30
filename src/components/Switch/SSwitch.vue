@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { Mixins, Component, Prop, Watch } from 'vue-property-decorator'
+import { Component, Mixins, ModelSync, Prop, Watch } from 'vue-property-decorator'
 import ElSwitch from 'element-ui/lib/switch'
 
 import DesignSystemInject from '../DesignSystem/DesignSystemInject'
@@ -26,10 +26,6 @@ import DesignSystemInject from '../DesignSystem/DesignSystemInject'
   components: { ElSwitch }
 })
 export default class SSwitch extends Mixins(DesignSystemInject) {
-  /**
-   * Value of switch
-   */
-  @Prop({ default: false }) readonly value!: boolean | string | number
   /**
    * Class name of the icon displayed when in on state, overrides active-text
    */
@@ -66,18 +62,11 @@ export default class SSwitch extends Mixins(DesignSystemInject) {
    * Whether switch is disabled
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
-
-  model = this.value
-
-  @Watch('value')
-  private handlePropChange (value: boolean | string | number): void {
-    this.model = value
-  }
-
-  @Watch('model')
-  private handleValueChange (value: boolean | string | number): void {
-    this.$emit('input', value)
-  }
+  /**
+   * Value of switch
+   */
+  @ModelSync('value', 'input', { type: [Boolean, String, Number] })
+  readonly model!: boolean | string | number
 
   handleChange (value: boolean | string | number): void {
     this.$emit('change', value)

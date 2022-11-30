@@ -1,5 +1,3 @@
-import { withKnobs } from '@storybook/addon-knobs'
-
 import Theme from '../../types/Theme'
 import DesignSystem from '../../types/DesignSystem'
 import { SButton, SDivider } from '../../components'
@@ -8,7 +6,6 @@ import mainStore from '../../store'
 
 export default {
   title: 'Design System/Intro/Theming (WIP)',
-  decorators: [withKnobs],
   excludeStories: /.*Data$/
 }
 
