@@ -11,10 +11,10 @@
 .el-table__body {
   tr {
     &.hover-row {
-      > td,
-      &.current-row > td,
-      &.el-table__row--striped > td,
-      &.el-table__row--striped.current-row > td {
+      > td.el-table__cell,
+      &.current-row > td.el-table__cell,
+      &.el-table__row--striped > td.el-table__cell,
+      &.el-table__row--striped.current-row > td.el-table__cell {
         background-color: var(--s-color-base-background-hover);
         border-left: none;
         border-right: none;
@@ -46,8 +46,8 @@
 }
 .el-table--group,
 .el-table--border,
-.el-table th.is-leaf,
-.el-table td,
+.el-table th.el-table__cell.is-leaf,
+.el-table td.el-table__cell,
 .el-table--border th {
   border-color: var(--s-color-base-border-secondary);
 }
