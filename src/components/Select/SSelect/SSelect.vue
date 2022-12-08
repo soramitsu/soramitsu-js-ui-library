@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, ModelSync, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
 import ElSelect from 'element-ui/lib/select'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
@@ -43,6 +43,10 @@ import { InputTypes } from '../consts'
   components: { ElSelect }
 })
 export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, DesignSystemInject) {
+  /**
+   * Selected value. Can be used with `v-model`
+   */
+  @Prop() readonly value!: any
   /**
    * Input type of the select component. Available values: `"input"`, `"select"`.
    *
@@ -121,11 +125,16 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
    * `false` by default
    */
   @Prop({ type: Boolean, default: false }) readonly filterable!: boolean
-  /**
-   * Selected value. Can be used with `v-model`
-   */
-  @ModelSync('value', 'input')
-  readonly model!: any
+
+  get model (): any {
+    return this.value
+  }
+
+  set model (value: any) {
+    if (this.value !== value) {
+      this.$emit('input', value)
+    }
+  }
 
   @Ref('select') select!: any
 

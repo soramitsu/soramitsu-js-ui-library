@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, ModelSync, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
 import ElDatePicker from 'element-ui/lib/date-picker'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
@@ -52,6 +52,11 @@ import { PickerTypes, PickerAlignment, InputTypes } from '../consts'
   components: { ElDatePicker, SIcon }
 })
 export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin) {
+  /**
+   * Value of date picker component. Can be used with `v-model`.
+   * Can be date object / array with date objects for date range picker
+   */
+  @Prop() readonly value!: any
   /**
    * Type of the date picker component. Available values:
    *
@@ -172,12 +177,16 @@ export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin) {
    * `true` by default
    */
   @Prop({ type: Boolean, default: true }) readonly validateEvent!: boolean
-  /**
-   * Value of date picker component. Can be used with `v-model`.
-   * Can be date object / array with date objects for date range picker
-   */
-  @ModelSync('value', 'input')
-  readonly model!: any
+
+  get model (): any {
+    return this.value
+  }
+
+  set model (value: any) {
+    if (this.value !== value) {
+      this.$emit('input', value)
+    }
+  }
 
   @Watch('value')
   private handlePropChange (value: any): void {
