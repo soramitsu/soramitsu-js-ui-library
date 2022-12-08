@@ -7,6 +7,7 @@
     :disabled="disabled"
     :border="border"
     :name="name"
+    @change="handleChange"
   >
     <slot></slot>
   </component>
@@ -76,6 +77,10 @@ export default class SRadio extends Mixins(SizeMixin, DesignSystemInject) {
       cssClasses.push(`s-${this.size}`)
     }
     return cssClasses
+  }
+
+  handleChange (value: string | number | boolean): void {
+    this.$emit('change', value)
   }
 }
 </script>

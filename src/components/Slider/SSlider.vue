@@ -108,7 +108,7 @@ export default class SSlider extends Vue {
   }
 
   set model (value: number | number[]) {
-    if (this.value !== value) {
+    if (JSON.stringify(value) !== JSON.stringify(this.value)) {
       this.$emit('input', value)
     }
   }

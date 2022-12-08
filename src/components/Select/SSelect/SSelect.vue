@@ -18,6 +18,7 @@
       @focus="handleFocus"
       @visible-change="handleVisibleChange"
       @clear="handleClear"
+      @change="handleChange"
       :filterable="filterable"
     >
       <slot name="prefix" slot="prefix"></slot>
@@ -39,6 +40,10 @@ import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import { Autocomplete } from '../../Input/consts'
 import { InputTypes } from '../consts'
 
+type SingleSelectValue = boolean | string | number;
+type MultipleSelectValue = Array<string | number>;
+type SelectValue = SingleSelectValue | MultipleSelectValue;
+
 @Component({
   components: { ElSelect }
 })
@@ -46,7 +51,7 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
   /**
    * Selected value. Can be used with `v-model`
    */
-  @Prop() readonly value!: any
+  @Prop({ type: [Boolean, String, Number, Array] }) readonly value!: SelectValue
   /**
    * Input type of the select component. Available values: `"input"`, `"select"`.
    *
@@ -126,12 +131,12 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
    */
   @Prop({ type: Boolean, default: false }) readonly filterable!: boolean
 
-  get model (): any {
+  get model (): SelectValue {
     return this.value
   }
 
-  set model (value: any) {
-    if (this.value !== value) {
+  set model (value: SelectValue) {
+    if (JSON.stringify(value) !== JSON.stringify(this.value)) {
       this.$emit('input', value)
     }
   }
@@ -142,7 +147,7 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
   @Inject({ default: '', from: 'elFormItem' }) elFormItem!: ElFormItem
 
   @Watch('model')
-  private handleValueChange (value: any): void {
+  private handleValueChange (): void {
     this.updateInputValue()
   }
 
@@ -157,7 +162,7 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
       tags.remove()
     }
     const input = this.select.$el.getElementsByClassName('el-input__inner')[0] as HTMLInputElement
-    input.value = this.model && this.model.length ? `${this.multipleTextPrefix || this.placeholder} (${this.model.length})` : ''
+    input.value = Array.isArray(this.model) && (this.model as MultipleSelectValue).length ? `${this.multipleTextPrefix || this.placeholder} (${this.model.length})` : ''
   }
 
   mounted (): void {
@@ -202,7 +207,7 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
     if (this.disabled) {
       cssClasses.push('s-disabled')
     }
-    if ((!this.multiple && this.model) || (this.multiple && this.model.length !== 0)) {
+    if ((!this.multiple && this.model) || (this.multiple && Array.isArray(this.model) && this.model.length !== 0)) {
       cssClasses.push('s-has-value')
     }
     return cssClasses
@@ -240,6 +245,10 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
 
   handleClear (): void {
     this.$emit('clear')
+  }
+
+  handleChange (value: SelectValue): void {
+    this.$emit('change', value)
   }
 
   public focus (): void {

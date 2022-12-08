@@ -183,7 +183,7 @@ export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin) {
   }
 
   set model (value: any) {
-    if (this.value !== value) {
+    if (JSON.stringify(value) !== JSON.stringify(this.value)) {
       this.$emit('input', value)
     }
   }
