@@ -19,14 +19,13 @@
       :range="range"
       :marks="marks"
       :disabled="disabled"
-      @input="handleInput"
       @change="handleChange"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, ModelSync, Prop, Watch } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 import ElSlider from 'element-ui/lib/slider'
 
 import { SliderInputSize } from './consts'
@@ -35,6 +34,10 @@ import { SliderInputSize } from './consts'
   components: { ElSlider }
 })
 export default class SSlider extends Vue {
+  /**
+   * Binding value
+   */
+  @Prop({ default: 0, type: [Number, Array] }) readonly value!: number | number[]
   /**
    * Minimum value
    */
@@ -99,14 +102,15 @@ export default class SSlider extends Vue {
    * Whether Slider is disabled
    */
   @Prop({ default: false, type: Boolean }) readonly disabled!: boolean
-  /**
-   * Binding value
-   */
-  @ModelSync('value', 'input', { default: 0, type: [Number, Array] })
-  readonly model!: number | number[]
 
-  handleInput (value: number): void {
-    this.$emit('input', value)
+  get model (): number | number[] {
+    return this.value
+  }
+
+  set model (value: number | number[]) {
+    if (JSON.stringify(value) !== JSON.stringify(this.value)) {
+      this.$emit('input', value)
+    }
   }
 
   handleChange (value: number): void {

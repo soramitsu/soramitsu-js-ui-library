@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, ModelSync, Prop, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop } from 'vue-property-decorator'
 import ElSwitch from 'element-ui/lib/switch'
 
 import DesignSystemInject from '../DesignSystem/DesignSystemInject'
@@ -65,8 +65,17 @@ export default class SSwitch extends Mixins(DesignSystemInject) {
   /**
    * Value of switch
    */
-  @ModelSync('value', 'input', { type: [Boolean, String, Number] })
-  readonly model!: boolean | string | number
+  @Prop({ type: [Boolean, String, Number] }) readonly value!: boolean | string | number
+
+  get model (): boolean | string | number {
+    return this.value
+  }
+
+  set model (value: boolean | string | number) {
+    if (this.value !== value) {
+      this.$emit('input', value)
+    }
+  }
 
   handleChange (value: boolean | string | number): void {
     this.$emit('change', value)

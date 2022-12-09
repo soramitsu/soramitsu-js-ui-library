@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, ModelSync, Prop, Watch, Ref } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref } from 'vue-property-decorator'
 import { PopoverPlacement } from 'element-ui/types/popover'
 import debounce from 'throttle-debounce/debounce'
 import ElTooltip from 'element-ui/lib/tooltip'
@@ -115,8 +115,17 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
    *
    * `false` by default
    */
-  @ModelSync('value', 'input', { type: Boolean })
-  readonly model!: boolean
+  @Prop({ type: Boolean }) readonly value!: boolean
+
+  get model (): boolean {
+    return this.value
+  }
+
+  set model (value: boolean) {
+    if (this.value !== value) {
+      this.$emit('input', value)
+    }
+  }
 
   @Ref('tooltip') tooltip!: any
 

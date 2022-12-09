@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, ModelSync, Prop } from 'vue-property-decorator'
+import { Component, Mixins, Prop } from 'vue-property-decorator'
 import ElCheckbox from 'element-ui/lib/checkbox'
 
 import SizeMixin from '../../mixins/SizeMixin'
@@ -26,6 +26,10 @@ import BorderRadiusMixin from '../../mixins/BorderRadiusMixin'
   components: { ElCheckbox }
 })
 export default class SCheckbox extends Mixins(SizeMixin, BorderRadiusMixin) {
+  /**
+   * Value of the checkbox item. Can be `string / number / boolean`
+   */
+  @Prop() readonly value!: string | number | boolean
   /**
    * Label of the checkbox item
    */
@@ -58,11 +62,16 @@ export default class SCheckbox extends Mixins(SizeMixin, BorderRadiusMixin) {
    * `false` by default
    */
   @Prop({ default: false, type: Boolean }) readonly indeterminate!: boolean
-  /**
-   * Value of the checkbox item. Can be `string / number / boolean`
-   */
-  @ModelSync('value', 'input', { type: [String, Number, Boolean] })
-  readonly model!: string | number | boolean
+
+  get model (): string | number | boolean {
+    return this.value
+  }
+
+  set model (value: string | number | boolean) {
+    if (this.value !== value) {
+      this.$emit('input', value)
+    }
+  }
 
   get computedClasses (): Array<string> {
     const cssClasses: Array<string> = []

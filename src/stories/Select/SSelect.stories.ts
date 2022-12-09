@@ -117,39 +117,42 @@ const Template: Story = (args, { argTypes }) => ({
   components: { SSelect, SOption, SRow, SCol },
   props: Object.keys(argTypes),
   template: `
-  <s-select
-    v-model="model"
-    :disabled="disabled"
-    :border-radius="borderRadius"
-    :loading="loading"
-    :size="size"
-    :multiple="multiple"
-    :input-type="inputType"
-    :clearable="clearable"
-    :multiple-limit="multipleLimit"
-    :placeholder="placeholder"
-    :multiple-text-prefix="multipleTextPrefix"
-    :loading-text="loadingText"
-    :no-data-text="noDataText"
-    :popper-class="borderRadius"
-    @change="handleChange"
-    :filterable="filterable"
-  >
-    <s-option
-      v-for="option in options"
-      :key="option.value"
-      :value="option.value"
-      :label="option.label"
-    />
-  </s-select>
+  <s-row>
+    <s-select
+      v-model="model"
+      :disabled="disabled"
+      :border-radius="borderRadius"
+      :loading="loading"
+      :size="size"
+      :multiple="multiple"
+      :input-type="inputType"
+      :clearable="clearable"
+      :multiple-limit="multipleLimit"
+      :placeholder="placeholder"
+      :multiple-text-prefix="multipleTextPrefix"
+      :loading-text="loadingText"
+      :no-data-text="noDataText"
+      :popper-class="borderRadius"
+      @change="(value) => changeValue = value"
+      :filterable="filterable"
+    >
+      <s-option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+        :label="option.label"
+      />
+    </s-select>
+    <s-col :span="12" style="margin-top: 20px;">
+      <span>v-model="{{ model }}", @change="{{ changeValue }}"</span>
+    </s-col>
+  </s-row>
   `,
   data: () => ({
     model: '',
+    changeValue: '',
     options: optionsData
-  }),
-  methods: {
-    handleChange: (selected) => console.log('handleChange', selected)
-  }
+  })
 })
 
 export const Configurable = Template.bind({})
