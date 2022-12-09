@@ -18,6 +18,7 @@
       @focus="handleFocus"
       @visible-change="handleVisibleChange"
       @clear="handleClear"
+      @change="handleChange"
       :filterable="filterable"
     >
       <slot name="prefix" slot="prefix"></slot>
@@ -28,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, ModelSync, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Watch, Ref, Inject } from 'vue-property-decorator'
 import ElSelect from 'element-ui/lib/select'
 import { ElForm } from 'element-ui/types/form'
 import { ElFormItem } from 'element-ui/types/form-item'
@@ -39,10 +40,18 @@ import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import { Autocomplete } from '../../Input/consts'
 import { InputTypes } from '../consts'
 
+type SingleSelectValue = boolean | string | number;
+type MultipleSelectValue = Array<string | number>;
+type SelectValue = SingleSelectValue | MultipleSelectValue;
+
 @Component({
   components: { ElSelect }
 })
 export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, DesignSystemInject) {
+  /**
+   * Selected value. Can be used with `v-model`
+   */
+  @Prop({ type: [Boolean, String, Number, Array] }) readonly value!: SelectValue
   /**
    * Input type of the select component. Available values: `"input"`, `"select"`.
    *
@@ -121,11 +130,16 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
    * `false` by default
    */
   @Prop({ type: Boolean, default: false }) readonly filterable!: boolean
-  /**
-   * Selected value. Can be used with `v-model`
-   */
-  @ModelSync('value', 'input')
-  readonly model!: any
+
+  get model (): SelectValue {
+    return this.value
+  }
+
+  set model (value: SelectValue) {
+    if (JSON.stringify(value) !== JSON.stringify(this.value)) {
+      this.$emit('input', value)
+    }
+  }
 
   @Ref('select') select!: any
 
@@ -133,7 +147,7 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
   @Inject({ default: '', from: 'elFormItem' }) elFormItem!: ElFormItem
 
   @Watch('model')
-  private handleValueChange (value: any): void {
+  private handleValueChange (): void {
     this.updateInputValue()
   }
 
@@ -148,7 +162,7 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
       tags.remove()
     }
     const input = this.select.$el.getElementsByClassName('el-input__inner')[0] as HTMLInputElement
-    input.value = this.model && this.model.length ? `${this.multipleTextPrefix || this.placeholder} (${this.model.length})` : ''
+    input.value = Array.isArray(this.model) && (this.model as MultipleSelectValue).length ? `${this.multipleTextPrefix || this.placeholder} (${this.model.length})` : ''
   }
 
   mounted (): void {
@@ -193,7 +207,7 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
     if (this.disabled) {
       cssClasses.push('s-disabled')
     }
-    if ((!this.multiple && this.model) || (this.multiple && this.model.length !== 0)) {
+    if ((!this.multiple && this.model) || (this.multiple && Array.isArray(this.model) && this.model.length !== 0)) {
       cssClasses.push('s-has-value')
     }
     return cssClasses
@@ -231,6 +245,10 @@ export default class SSelect extends Mixins(SizeMixin, BorderRadiusMixin, Design
 
   handleClear (): void {
     this.$emit('clear')
+  }
+
+  handleChange (value: SelectValue): void {
+    this.$emit('change', value)
   }
 
   public focus (): void {

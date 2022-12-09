@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Mixins, ModelSync, Prop } from 'vue-property-decorator'
+import { Component, Mixins, Prop } from 'vue-property-decorator'
 import ElTabs from 'element-ui/lib/tabs'
 
 import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
@@ -32,6 +32,12 @@ import { TabsType, TabsPosition } from '../consts'
   components: { ElTabs }
 })
 export default class STabs extends Mixins(BorderRadiusMixin, DesignSystemInject) {
+  /**
+   * Name of the selected tab. Can be used with `v-model`.
+   *
+   * First value by default
+   */
+  @Prop({ type: String }) readonly value!: string
   /**
    * Type of tabs. Can be `"card"`/`"border-card"`/`"rounded"` or unset.
    *
@@ -73,13 +79,16 @@ export default class STabs extends Mixins(BorderRadiusMixin, DesignSystemInject)
    * If `false` is returned or a `Promise` is returned and then is rejected, switching will be prevented
    */
   @Prop({ type: Function }) readonly beforeLeave!: (activeName: string, oldActiveName: string) => (false | Promise<any>)
-  /**
-   * Name of the selected tab. Can be used with `v-model`.
-   *
-   * First value by default
-   */
-  @ModelSync('value', 'input', { type: String })
-  readonly model!: string
+
+  get model (): string {
+    return this.value
+  }
+
+  set model (value: string) {
+    if (this.value !== value) {
+      this.$emit('input', value)
+    }
+  }
 
   get computedType (): string {
     // neu tabs implemented only with TabsType.ROUNDED type

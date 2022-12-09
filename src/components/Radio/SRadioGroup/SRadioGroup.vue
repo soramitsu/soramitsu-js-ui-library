@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, ModelSync } from 'vue-property-decorator'
+import { Component, Mixins, Prop } from 'vue-property-decorator'
 import ElRadioGroup from 'element-ui/lib/radio-group'
 
 import SizeMixin from '../../../mixins/SizeMixin'
@@ -25,6 +25,16 @@ export default class SRadio extends Mixins(SizeMixin) {
   /**
    * Binding value of the radio group. Can be `string` / `number` / `boolean`
    */
-  @ModelSync('value', 'input', { type: [String, Number, Boolean] }) readonly groupModel!: string | number | boolean
+  @Prop({ type: [String, Number, Boolean] }) readonly value!: string | number | boolean
+
+  get groupModel (): string | number | boolean {
+    return this.value
+  }
+
+  set groupModel (value: string | number | boolean) {
+    if (this.value !== value) {
+      this.$emit('input', value)
+    }
+  }
 }
 </script>
