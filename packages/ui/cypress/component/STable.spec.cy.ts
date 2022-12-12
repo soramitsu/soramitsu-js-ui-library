@@ -163,6 +163,7 @@ describe('Table', () => {
       it('Then all selection checkboxes are selected', () => {
         cy.get(testIdSelector('table-header-selection-checkbox')).click()
         cy.get(testIdSelector('table-selection-checkbox'))
+          .not(`${testIdSelector('table-header-selection-checkbox')} ${testIdSelector('table-selection-checkbox')}`)
           .filter('[data-checked="true"]')
           .should('have.length', DATA.length)
       })
