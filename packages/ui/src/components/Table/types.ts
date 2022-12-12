@@ -45,5 +45,8 @@ export interface TableHeaderCellConfigCallbackParams {
 
 export interface TableCardGridBreakpoint {
   test: (width: number) => boolean
+  /**
+   * number of columns in card grid
+   */
   value: number
 }

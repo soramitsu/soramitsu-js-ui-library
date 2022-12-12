@@ -1710,7 +1710,6 @@ export interface TableApi {
 export interface TableCardGridBreakpoint {
     // (undocumented)
     test: (width: number) => boolean;
-    // (undocumented)
     value: number;
 }
 
