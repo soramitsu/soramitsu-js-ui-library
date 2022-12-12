@@ -35,7 +35,7 @@ export function getDefaultCellValue(row: TableRow, column: TableColumnApi, index
 
 export function getCellTooltipContent(row: TableRow, column: TableColumnApi | TableActionColumnApi) {
   if (!column.showOverflowTooltip || !isDefaultColumn(column)) {
-    return
+    return ''
   }
 
   return String(get(row, column.prop))
