@@ -3,9 +3,9 @@ import { IconArrowsChevronRightXs24 } from '@/components/icons'
 </script>
 
 <template>
-  <div class="s-table-cell-details h-full flex flex-col justify-center cursor-pointer">
+  <button class="s-table-cell-details w-full h-full flex flex-col justify-center cursor-pointer">
     <IconArrowsChevronRightXs24 class="s-table-cell-details__icon self-center" />
-  </div>
+  </button>
 </template>
 
 <style lang="scss">

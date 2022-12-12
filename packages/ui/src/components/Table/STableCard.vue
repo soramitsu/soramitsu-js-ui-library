@@ -59,15 +59,16 @@ function select() {
       'cursor-pointer': selectable,
       's-table-card_selected': selected,
     }"
-    tabindex="0"
+    :tabindex="selectable ? 0 : -1"
     @click="select"
-    @keypress.space="select"
+    @keypress.space.prevent.enter="select"
   >
     <div class="p-8px grid grid-cols-[min-content,1fr] items-baseline">
       <template
         v-for="(column, columnIndex) in visibleColumns"
         :key="column.id"
       >
+        <!-- legacy event proxy -->
         <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
         <div
           class="s-table-card__label flex flex-col justify-center h-40px pl-32px pr-8px sora-tpg-ch3 whitespace-nowrap"
@@ -86,6 +87,7 @@ function select() {
           </template>
         </div>
 
+        <!-- legacy event proxy + every key event handled by button behaviour -->
         <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
         <div
           class="flex flex-col justify-center items-start px-16px h-40px sora-tpg-p3 min-w-0"

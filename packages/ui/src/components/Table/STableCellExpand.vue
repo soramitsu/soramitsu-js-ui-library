@@ -12,13 +12,13 @@ const props = withDefaults(
 </script>
 
 <template>
-  <div class="s-table-cell-expand h-full flex flex-col justify-center cursor-pointer px-16px">
+  <button class="s-table-cell-expand h-full flex flex-col justify-center cursor-pointer px-16px">
     <IconArrowsChevronDownRounded24
       class="s-table-cell-expand__icon"
       :class="{ 's-table-cell-expand__icon_active': active }"
       data-testid="table-expanded-icon"
     />
-  </div>
+  </button>
 </template>
 
 <style lang="scss">

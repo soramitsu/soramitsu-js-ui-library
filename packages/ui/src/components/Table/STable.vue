@@ -631,34 +631,33 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
               @click="handleHeaderMouseEvent({ column, 'event': $event })"
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
             >
-              <div class="s-table__header-cell inline-flex items-center px-16px">
-                <template v-if="isDefaultColumn(column)">
-                  <component
-                    :is="column.headerSlot"
-                    v-if="column.headerSlot"
-                    v-bind="{ column, columnIndex }"
-                  />
-                  <template v-else>
-                    {{ column.label }}
-                  </template>
-                  <IconArrowTop16
-                    v-if="column.sortable"
-                    class="s-table__sort-icon flex-shrink-0 inline ml-10px"
-                    :class="getSortIconStateClasses(column)"
-                  />
+              <component
+                :is="column.sortable ? 'button' : 'div'"
+                v-if="isDefaultColumn(column)"
+                class="s-table__header-cell inline-flex items-center sora-tpg-ch3 px-16px"
+              >
+                <component
+                  :is="column.headerSlot"
+                  v-if="column.headerSlot"
+                  v-bind="{ column, columnIndex }"
+                />
+                <template v-else>
+                  {{ column.label }}
                 </template>
+                <IconArrowTop16
+                  v-if="column.sortable"
+                  class="s-table__sort-icon flex-shrink-0 inline ml-10px"
+                  :class="getSortIconStateClasses(column)"
+                />
+              </component>
 
-                <template v-else-if="isSelectionColumn(column)">
-                  <SCheckboxAtom
-                    :class="{ 'cursor-pointer': data.length }"
-                    data-testid="table-header-selection-checkbox"
-                    size="xl"
-                    :checked="isSomeSelected ? (isAllSelected ? true : 'mixed') : false"
-                    :disabled="!data.length"
-                    @click.stop="data.length && handleAllSelect()"
-                  />
-                </template>
-              </div>
+              <STableCellSelection
+                v-if="isSelectionColumn(column)"
+                data-testid="table-header-selection-checkbox"
+                :disabled="!data.length"
+                :checked="isSomeSelected ? (isAllSelected ? true : 'mixed') : false"
+                @select="handleAllSelect()"
+              />
             </th>
           </tr>
         </thead>
@@ -716,6 +715,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
               :style="getStyleOrClass(rowStyle, { row, rowIndex })"
               data-testid="table-row"
             >
+              <!-- legacy event proxy + every key event handled by button behaviour -->
               <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
               <td
                 v-for="(column, columnIndex) in columns"
@@ -909,7 +909,8 @@ $col-number: v-bind(cardsGridColumnNumber);
     }
   }
 
-  &__th_sortable:hover &__sort-icon {
+  &__th_sortable:hover &__sort-icon,
+  &__header-cell:focus &__sort-icon {
     visibility: visible;
   }
 
