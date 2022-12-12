@@ -1,22 +1,22 @@
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { usePopoverApi } from '@/components/Popover/api'
-import { mount } from '@cypress/vue'
+
 import { Instance } from '@popperjs/core'
-import { config } from '@vue/test-utils'
+import { VueTestUtils } from 'cypress/vue'
 
 before(() => {
-  config.global.components = { SPopover, SPopoverWrappedTransition }
-  config.global.stubs = { transition: false }
+  VueTestUtils.config.global.components = { SPopover, SPopoverWrappedTransition }
+  VueTestUtils.config.global.stubs = { transition: false }
 })
 
 after(() => {
-  config.global.components = {}
-  config.global.stubs = {}
+  VueTestUtils.config.global.components = {}
+  VueTestUtils.config.global.stubs = {}
 })
 
 describe('Trigger mechanisms', () => {
   function mountFactory(params?: { trigger?: 'hover' | 'click' | 'manual'; showDelay?: number; hideDelay?: number }) {
-    mount({
+    cy.mount({
       components: {
         // for checking of the state after internal nextTick
         CounterBtn: {
@@ -175,7 +175,7 @@ describe('Trigger mechanisms', () => {
 
 describe('Elements binding', () => {
   it('ok if trigger is a single-element component', () => {
-    mount({
+    cy.mount({
       components: {
         Trigger: {
           template: `<button>btn</button>`,
@@ -194,7 +194,7 @@ describe('Elements binding', () => {
   })
 
   it('ok if popper is toggled with v-if inside of transition', () => {
-    mount({
+    cy.mount({
       template: `
         <SPopover>
           <template #trigger><button>btn</button></template>
@@ -214,7 +214,7 @@ describe('Elements binding', () => {
 
 describe('Popper API', () => {
   it('Popper instance is available inside of "popper" slot', () => {
-    mount({
+    cy.mount({
       setup() {
         const checkInstance = (x: unknown): x is Instance => !!x && !!(x as Instance).state && !!(x as Instance).update
 
@@ -240,7 +240,7 @@ describe('Popper API', () => {
   })
 
   it('Popper API is provided to children slots', () => {
-    mount({
+    cy.mount({
       components: {
         Check: {
           setup() {
@@ -262,7 +262,7 @@ describe('Popper API', () => {
 describe('SPopoverWrappedTransition', () => {
   describe('Eagering', () => {
     function mountFactory(params?: { eager?: boolean }) {
-      mount({
+      cy.mount({
         setup() {
           return {
             eager: params?.eager ?? false,
@@ -312,7 +312,7 @@ describe('SPopoverWrappedTransition', () => {
     })
 
     it('Popper is created in non-eager mode', () => {
-      mount({
+      cy.mount({
         template: `
           <SPopover
             trigger="click"

@@ -1,23 +1,22 @@
-import { mount } from '@cypress/vue'
-import { config } from '@vue/test-utils'
+import { VueTestUtils } from 'cypress/vue'
 import { SSelect, SSelectBase, SSelectButton, SSelectInput, SDropdown, SelectSize, STextField } from '@/lib'
 
 const SIZES = [SelectSize.Sm, SelectSize.Md, SelectSize.Lg, SelectSize.Xl]
 
 before(() => {
-  config.global.components = { SDropdown, SSelectButton, SSelectInput, SSelectBase, SSelect }
-  config.global.stubs = { transition: false }
+  VueTestUtils.config.global.components = { SDropdown, SSelectButton, SSelectInput, SSelectBase, SSelect }
+  VueTestUtils.config.global.stubs = { transition: false }
 })
 
 after(() => {
-  config.global.components = {}
-  config.global.stubs = {}
+  VueTestUtils.config.global.components = {}
+  VueTestUtils.config.global.stubs = {}
 })
 
 const findBtnLabel = () => cy.get('.s-select-btn__label')
 
 it('Gallery - Dropdown', () => {
-  mount({
+  cy.mount({
     setup() {
       return {
         model: ref<string[]>([]),
@@ -56,7 +55,7 @@ it('Gallery - Dropdown', () => {
 })
 
 it('Gallery - Select', () => {
-  mount({
+  cy.mount({
     setup() {
       return {
         model: ref<string[]>([]),
@@ -101,7 +100,7 @@ for (const [ControlComponent, name] of [
   [SSelectInput, 'Input'],
 ] as [any, string][]) {
   it(`${name} - api is available at \'label\' slot`, () => {
-    mount({
+    cy.mount({
       components: { ControlComponent },
       setup() {
         return {
@@ -132,7 +131,7 @@ for (const [ControlComponent, name] of [
   })
 
   it(`${name} - Control is not clickable if input is disabled`, () => {
-    mount({
+    cy.mount({
       components: { ControlComponent },
       template: `
         <SSelectBase label="Test" disabled>
@@ -150,7 +149,7 @@ for (const [ControlComponent, name] of [
 it('Menu is closed automatically if input becomes disabled', () => {
   const disabled = ref(false)
 
-  mount(() =>
+  cy.mount(() =>
     h(
       SSelectBase,
       { label: 'test label', disabled: disabled.value },
@@ -172,19 +171,19 @@ it('Menu is closed automatically if input becomes disabled', () => {
 })
 
 it('SSelect - renders label without slot', () => {
-  mount(SSelect, { props: { label: 'dip dap' } })
+  cy.mount(SSelect, { props: { label: 'dip dap' } })
 
   cy.contains('dip dap')
 })
 
 it('SDropdown - renders label without slot', () => {
-  mount(SDropdown, { props: { label: 'dap dip' } })
+  cy.mount(SDropdown, { props: { label: 'dap dip' } })
 
   cy.contains('dap dip')
 })
 
 it('SSelect - clicking options, checking auto-transformations', () => {
-  mount({
+  cy.mount({
     setup() {
       const model = ref(null)
       const modelStr = computed(() => JSON.stringify(model.value))
@@ -236,7 +235,7 @@ it('SSelect - clicking options, checking auto-transformations', () => {
 })
 
 it('SDropdown - model usage works', () => {
-  mount({
+  cy.mount({
     setup() {
       const model = ref(null)
       const options = [{ value: true, label: 'Truth' }]
@@ -259,7 +258,7 @@ it('SDropdown - model usage works', () => {
 })
 
 it('SDropdown - show/hide by clicks', () => {
-  mount({
+  cy.mount({
     setup() {
       return {
         options: [{ label: 'OPTION', value: 0 }],
@@ -288,7 +287,7 @@ describe('Auto-close', () => {
 
   for (const component of ['SSelect', 'SDropdown']) {
     it(`Single-choice ${component} is auto-closed after selection`, () => {
-      mount({
+      cy.mount({
         setup: () => ({
           options: OPTIONS,
           model: ref(null),
@@ -314,7 +313,7 @@ describe('Auto-close', () => {
     })
 
     it(`Multi-choice ${component} is not auto-closed after selection`, () => {
-      mount({
+      cy.mount({
         setup: () => ({
           options: OPTIONS,
           model: ref(null),
@@ -331,7 +330,7 @@ describe('Auto-close', () => {
     })
 
     it(`${component} doesn't close when 'no-auto-close' is set`, () => {
-      mount(
+      cy.mount(
         {
           setup: () => ({
             options: OPTIONS,
@@ -360,7 +359,7 @@ describe('Auto-close', () => {
 })
 
 it(`SDropdown - when value is selected and label is not provided, then label is not rendered`, () => {
-  mount({
+  cy.mount({
     setup() {
       const showLabel = ref(true)
       const label = computed(() => (showLabel.value ? 'Choice' : ''))
@@ -385,7 +384,7 @@ it(`SDropdown - when value is selected and label is not provided, then label is 
 })
 
 it('SSelectDropdown overlaps STextField', () => {
-  mount({
+  cy.mount({
     components: { STextField },
     setup() {
       return {

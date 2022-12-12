@@ -1,5 +1,40 @@
 # @soramitsu-ui/ui
 
+## 0.8.0
+
+### Minor Changes
+
+- a147748: **feature**(`STable`): added details table column type
+- afd5e81: **feat**: add tooltip component (`STooltip`)
+
+### Patch Changes
+
+- 600618d: **fix**(`SSelect`): fix options font
+- 90cbd2c: **fix**(`STable`): fix default sort
+- a923b44: **refactor**(`STable`): change composables filenames
+- 600618d: **fix**(`SSelect`): fix spacings
+- d4f8683: **fix**(`SPagination`): change width to max width to prevent pages with big numbers overlapping
+- 2ae0429: **refactor**(`STable`): remove warnings by replacing styles type with alias which can be recognized as Object
+- bb53aa1: **refactor**(`STable`): change type names to denote the belonging to the table component
+- 90cbd2c: **fix**: (`STable`): fix table rows height
+- 7ba79d0: **fix**(`STable`): remove last row bottom border for easier table adjusting
+
+## 0.7.0
+
+### Minor Changes
+
+- 1e62a2f: **feat**: added table components without adaptive view (`STable`, `STableColumn`)
+- 0ba42c8: **feat**: add pagination component
+
+### Patch Changes
+
+- f6240c3: **fix**: (`SDropdown`) don't render label when it is absent, close #448
+- bd58198: **fix**(`STable`): fix resize observer error throwing
+- b990789: **fix**: lodash replaced to lodash-es, as it's pure
+- ffb8c8d: **fix**: (`SSelectBase`) pass `z-index: 10` to the popper wrapper, fix #430
+- 93fff77: **fix**: (`STextField`) fix extra attributes binding
+- f004bbb: **feat**: (`SSelectBase`) auto-close menu on value selection in single mode; `no-auto-close` prop to disable it; close #447
+
 ## 0.6.1
 
 ### Patch Changes

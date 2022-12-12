@@ -1,30 +1,30 @@
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from './consts'
-import { ActionColumnApi, ColumnApi } from './api'
+import { TableActionColumnApi, TableColumnApi } from './api'
 
 export type TableColumnType = typeof TABLE_COLUMN_TYPE_VALUES[number]
 export type TableColumnAlign = typeof TABLE_COLUMN_ALIGN_VALUES[number]
 
 export type TableRow = Record<string, unknown>
 
-export type CellEventData = [TableRow, ColumnApi | ActionColumnApi, EventTarget, MouseEvent]
-export type RowEventData = [TableRow, ColumnApi | ActionColumnApi, MouseEvent]
-export type HeaderEventData = [ColumnApi | ActionColumnApi, MouseEvent]
-export interface SortEventData {
-  column: ColumnApi
+export type TableCellEventData = [TableRow, TableColumnApi | TableActionColumnApi, EventTarget, MouseEvent]
+export type TableRowEventData = [TableRow, TableColumnApi | TableActionColumnApi, MouseEvent]
+export type TableHeaderEventData = [TableColumnApi | TableActionColumnApi, MouseEvent]
+export interface TableSortEventData {
+  column: TableColumnApi
   prop: string
-  order: ColumnSortOrder
+  order: TableColumnSortOrder
 }
 
-export type ColumnCellValueFormatter = (
+export type TableColumnCellValueFormatter = (
   row: TableRow,
-  column: ColumnApi,
+  column: TableColumnApi,
   cellValue: TableRow[string],
   index: number,
 ) => string
-export type ColumnSortByPropKeyFunc = (row: TableRow, index: number) => string
-export type ColumnRowSelectableFunc = (row: TableRow, index: number) => boolean
-export type ColumnSortBy = string | ColumnSortByPropKeyFunc | (ColumnSortByPropKeyFunc | string)[]
-export type ColumnSortOrder = 'ascending' | 'descending' | null
+export type TableColumnSortByPropKeyFunc = (row: TableRow, index: number) => string
+export type TableColumnRowSelectableFunc = (row: TableRow, index: number) => boolean
+export type TableColumnSortBy = string | TableColumnSortByPropKeyFunc | (TableColumnSortByPropKeyFunc | string)[]
+export type TableColumnSortOrder = 'ascending' | 'descending' | null
 
 export interface TableRowConfigCallbackParams {
   row: TableRow
@@ -34,11 +34,11 @@ export interface TableRowConfigCallbackParams {
 export interface TableCellConfigCallbackParams {
   row: TableRow
   rowIndex: number
-  column: ColumnApi | ActionColumnApi
+  column: TableColumnApi | TableActionColumnApi
   columnIndex: number
 }
 
 export interface TableHeaderCellConfigCallbackParams {
-  column: ColumnApi | ActionColumnApi
+  column: TableColumnApi | TableActionColumnApi
   columnIndex: number
 }

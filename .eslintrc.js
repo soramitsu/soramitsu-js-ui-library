@@ -24,7 +24,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/cypress/**/*.{j,t}s', '**/*.cy.{js,ts}'],
+      files: ['**/cypress/**/*.{j,t}s', '**/*.cy.{js,ts}', 'cypress.config.ts'],
       plugins: ['cypress'],
       extends: ['plugin:cypress/recommended'],
       env: {
@@ -50,7 +50,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/*.spec.ts'],
+      files: ['**/*.spec.ts', '**/*.spec.cy.ts'],
       rules: {
         'max-nested-callbacks': 'off',
       },

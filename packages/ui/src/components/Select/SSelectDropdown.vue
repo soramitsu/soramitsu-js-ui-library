@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSelectApi } from './api'
-import { SelectOptionType } from './types'
+import { SelectOptionType, SelectSize } from './types'
 import SSelectOption from './SSelectOption.vue'
 
 defineProps<{
@@ -8,6 +8,8 @@ defineProps<{
 }>()
 
 const api = useSelectApi()
+
+const fontClass = computed(() => (api.size === SelectSize.Xl ? 'sora-tpg-p3' : 'sora-tpg-p4'))
 </script>
 
 <template>
@@ -15,6 +17,7 @@ const api = useSelectApi()
     <SSelectOption
       v-for="(opt, i) in api.options"
       :key="i"
+      :class="fontClass"
       :type="itemType"
       :multiple="api.multiple"
       :selected="api.isValueSelected(opt.value)"

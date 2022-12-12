@@ -1,17 +1,17 @@
 import { defineComponent, PropType } from 'vue'
-import { ActionColumnApi, ColumnApi, useTableApi } from '@/components'
+import { TableActionColumnApi, TableColumnApi, useTableApi } from '@/components'
 import { uniqueElementId } from '@/util'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from '@/components/Table/consts'
 import {
-  ColumnCellValueFormatter,
-  ColumnRowSelectableFunc,
-  ColumnSortBy,
-  ColumnSortOrder,
+  TableColumnCellValueFormatter,
+  TableColumnRowSelectableFunc,
+  TableColumnSortBy,
+  TableColumnSortOrder,
   TableColumnAlign,
   TableColumnType,
 } from '@/components/Table/types'
-import { ColumnWidthProps } from './api'
+import { TableColumnWidthProps } from './api'
 
 export default /* @__PURE__ */ defineComponent({
   name: 'STableColumn',
@@ -73,7 +73,7 @@ export default /* @__PURE__ */ defineComponent({
      * If set to an Array, the column will sequentially sort by the next property if the previous one is equal
      */
     sortBy: {
-      type: [String, Function, Array] as PropType<ColumnSortBy>,
+      type: [String, Function, Array] as PropType<TableColumnSortBy>,
       default: '',
     },
     /**
@@ -81,14 +81,14 @@ export default /* @__PURE__ */ defineComponent({
      * Accepts an array, as the user clicks on the header, the column is sorted in order of the elements in the array
      */
     sortOrders: {
-      type: Array as PropType<ColumnSortOrder[]>,
+      type: Array as PropType<TableColumnSortOrder[]>,
       default: () => ['ascending', 'descending', null],
     },
     /**
      * Function that formats cell content
      */
     formatter: {
-      type: Function as PropType<ColumnCellValueFormatter>,
+      type: Function as PropType<TableColumnCellValueFormatter>,
       default: null,
     },
     /**
@@ -130,7 +130,7 @@ export default /* @__PURE__ */ defineComponent({
      * Function that determines if a certain row can be selected, works when type is 'selection'
      */
     selectable: {
-      type: Function as PropType<ColumnRowSelectableFunc>,
+      type: Function as PropType<TableColumnRowSelectableFunc>,
       default: null,
     },
     /**
@@ -151,7 +151,7 @@ export default /* @__PURE__ */ defineComponent({
     const definitelyAlign = filterProp('align', TABLE_COLUMN_ALIGN_VALUES, 'left')
     const definitelyHeaderAlign = filterProp('headerAlign', [null, ...TABLE_COLUMN_ALIGN_VALUES], null)
 
-    const widthsPresets: Record<Exclude<TableColumnType, 'default'>, ColumnWidthProps> = {
+    const widthsPresets: Record<Exclude<TableColumnType, 'default'>, TableColumnWidthProps> = {
       selection: {
         width: 52,
         minWidth: 52,
@@ -159,6 +159,10 @@ export default /* @__PURE__ */ defineComponent({
       expand: {
         width: 52,
         minWidth: 52,
+      },
+      details: {
+        width: 40,
+        minWidth: 40,
       },
     }
 
@@ -182,7 +186,7 @@ export default /* @__PURE__ */ defineComponent({
       }
     })
 
-    const api: Partial<ColumnApi | ActionColumnApi> = shallowReactive({
+    const api: Partial<TableColumnApi | TableActionColumnApi> = shallowReactive({
       id: uniqueElementId(),
     })
 
@@ -208,7 +212,7 @@ export default /* @__PURE__ */ defineComponent({
       api.sortOrders = sortProps.value.sortOrders
     })
 
-    tableApi.register(api as ColumnApi | ActionColumnApi)
+    tableApi.register(api as TableColumnApi | TableActionColumnApi)
 
     return () => null
   },

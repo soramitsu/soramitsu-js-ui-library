@@ -1,17 +1,25 @@
-import { ActionColumnApi, ColumnApi } from './api'
+import { TableActionColumnApi, TableColumnApi } from './api'
 
-export function isDefaultColumn(column: ColumnApi | ActionColumnApi): column is ColumnApi {
+export function isDefaultColumn(column: TableColumnApi | TableActionColumnApi): column is TableColumnApi {
   return column.type === 'default'
 }
 
 export function isSelectionColumn(
-  column: ColumnApi | ActionColumnApi,
-): column is ActionColumnApi & { type: 'selection' } {
+  column: TableColumnApi | TableActionColumnApi,
+): column is TableActionColumnApi & { type: 'selection' } {
   return column.type === 'selection'
 }
 
-export function isExpandColumn(column: ColumnApi | ActionColumnApi): column is ActionColumnApi & { type: 'expand' } {
+export function isExpandColumn(
+  column: TableColumnApi | TableActionColumnApi,
+): column is TableActionColumnApi & { type: 'expand' } {
   return column.type === 'expand'
+}
+
+export function isDetailsColumn(
+  column: TableColumnApi | TableActionColumnApi,
+): column is TableActionColumnApi & { type: 'details' } {
+  return column.type === 'details'
 }
 
 // Without type predicate checked like this object becomes object without keys

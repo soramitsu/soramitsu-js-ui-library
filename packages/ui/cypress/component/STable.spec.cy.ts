@@ -1,15 +1,14 @@
-import { mount } from '@cypress/vue'
 import { STable, STableColumn } from '@/lib'
-import { config } from '@vue/test-utils'
+import { VueTestUtils } from 'cypress/vue'
 
 const testIdSelector = (id: string) => `[data-testid=${id}]`
 
 before(() => {
-  config.global.components = { STable, STableColumn }
+  VueTestUtils.config.global.components = { STable, STableColumn }
 })
 
 after(() => {
-  config.global.components = {}
+  VueTestUtils.config.global.components = {}
 })
 
 describe('Table', () => {
@@ -63,7 +62,7 @@ describe('Table', () => {
 
   context(`Given table with expand and selection columns with all rows expanded by default`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         setup() {
           return {
             data: DATA,
@@ -125,7 +124,7 @@ describe('Table', () => {
 
   context(`Given table with height`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         setup() {
           return {
             data: DATA,
@@ -149,7 +148,7 @@ describe('Table', () => {
 
   context(`Given table with current row highlighting`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         setup() {
           return {
             data: DATA,
@@ -188,7 +187,7 @@ describe('Table', () => {
 
   context(`Given table with two datasets changing each other`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         setup() {
           const data = ref(DATA)
           const altData = ref(ALT_DATA)
@@ -231,7 +230,7 @@ describe('Table', () => {
 
   context(`Given table with custom classes and styles on table and classes on first column`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         setup() {
           return {
             data: DATA,
@@ -308,7 +307,7 @@ describe('Table', () => {
 
   context(`Given table with no data`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         template: `
           <STable
             :data="[]"
@@ -332,7 +331,7 @@ describe('Table', () => {
 
   context(`Given table with empty slot and no data`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         template: `
           <STable :data="[]">
             <template #empty>${NO_DATA_TEXT}</template>

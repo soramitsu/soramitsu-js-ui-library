@@ -1,10 +1,9 @@
-import { mount } from '@cypress/vue'
 import { SNotificationsProvider, SUseNotification } from '@/lib'
 
 const findCloseBtn = () => cy.get('[data-testid=close-btn]', {})
 
 it('Notification is controlled by the boolean model', () => {
-  mount(
+  cy.mount(
     {
       setup() {
         return {

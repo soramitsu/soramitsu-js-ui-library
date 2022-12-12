@@ -1,10 +1,9 @@
-import { mount } from '@cypress/vue'
 import { SNotificationsProvider, SUseNotification } from '@/lib'
 
 it('Placements are reactive', () => {
   const findDisplayRoot = () => cy.get('[data-cy=notification]').closest('[data-testid=root]')
 
-  mount(
+  cy.mount(
     {
       setup() {
         const placements = reactive({

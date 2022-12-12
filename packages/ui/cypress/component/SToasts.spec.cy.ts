@@ -1,6 +1,6 @@
 import { SToastsProvider, SToastsDisplay, ToastsApi, TOASTS_API_KEY } from '@/lib'
-import { mount } from '@cypress/vue'
-import { config } from '@vue/test-utils'
+
+import { VueTestUtils } from 'cypress/vue'
 import { forceInject } from '@/util'
 
 const findRoot = () => cy.get('[data-testid=root]')
@@ -38,22 +38,22 @@ const Toast = defineComponent({
 })
 
 before(() => {
-  config.global.components = {
+  VueTestUtils.config.global.components = {
     SToastsProvider,
     SToastsDisplay,
     Toast,
     UseToggle,
   }
-  config.global.stubs = { 'transition-group': false }
+  VueTestUtils.config.global.stubs = { 'transition-group': false }
 })
 
 after(() => {
-  config.global.components = {}
-  config.global.stubs = {}
+  VueTestUtils.config.global.components = {}
+  VueTestUtils.config.global.stubs = {}
 })
 
 it('Playground', () => {
-  mount(
+  cy.mount(
     {
       setup() {
         let count = 0
@@ -130,7 +130,7 @@ it('Playground', () => {
 })
 
 it('Minimal working repr', () => {
-  mount({
+  cy.mount({
     template: `
       <SToastsProvider>
         <SToastsDisplay />
@@ -154,7 +154,7 @@ it('Minimal working repr', () => {
 })
 
 it('Different nested providers with different displays', () => {
-  mount({
+  cy.mount({
     template: `
       <SToastsProvider api-key="notify">
         <SToastsDisplay />
@@ -180,7 +180,7 @@ it('Different nested providers with different displays', () => {
 })
 
 it('Multiple providers with multiple displays in the deep', () => {
-  mount({
+  cy.mount({
     template: `
       <SToastsProvider api-key="A">
         <SToastsProvider api-key="B">
@@ -205,7 +205,7 @@ it('Multiple providers with multiple displays in the deep', () => {
 })
 
 it('Composed provider', () => {
-  mount({
+  cy.mount({
     template: `
       <SToastsProvider :api-key="['A', 'B']">
         <SToastsDisplay />
@@ -228,7 +228,7 @@ it('Composed provider', () => {
 })
 
 it("Reactivity in Toast's slot is not broken", () => {
-  mount({
+  cy.mount({
     setup() {
       const { count, inc } = useCounter()
 
@@ -262,7 +262,7 @@ it('Component in slot keeps its state', () => {
     template: `<button @click="inc()">Count: {{ count }}</button>`,
   })
 
-  mount({
+  cy.mount({
     setup() {
       return () =>
         h(
@@ -300,7 +300,7 @@ it('Component in slot keeps its state', () => {
 })
 
 it('Rendered toast is clickable, but its container is not', () => {
-  mount({
+  cy.mount({
     template: `
       <SToastsProvider>
         <SToastsDisplay />

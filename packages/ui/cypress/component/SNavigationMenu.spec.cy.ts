@@ -1,15 +1,14 @@
-import { mount } from '@cypress/vue'
 import { SNavigationMenu, SNavigationSubmenu, SNavigationMenuItem } from '@/lib'
-import { config } from '@vue/test-utils'
+import { VueTestUtils } from 'cypress/vue'
 
 const testIdSelector = (id: string) => `[data-testid=${id}]`
 
 before(() => {
-  config.global.components = { SNavigationMenu, SNavigationSubmenu, SNavigationMenuItem }
+  VueTestUtils.config.global.components = { SNavigationMenu, SNavigationSubmenu, SNavigationMenuItem }
 })
 
 after(() => {
-  config.global.components = {}
+  VueTestUtils.config.global.components = {}
 })
 
 describe('NavigationMenu', () => {
@@ -22,7 +21,7 @@ describe('NavigationMenu', () => {
 
   context(`Given default menu`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         setup() {
           return {
             collapsed: ref(false),
@@ -110,7 +109,7 @@ describe('NavigationMenu', () => {
 
   context(`Given menu with active item in submenu`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         setup() {
           return {
             selectedItem: ref('10'),
@@ -138,7 +137,7 @@ describe('NavigationMenu', () => {
 
   context(`Given collapsed menu with active item in submenu`, () => {
     beforeEach(() => {
-      mount({
+      cy.mount({
         setup() {
           return {
             selectedItem: ref('10'),

@@ -106,6 +106,7 @@ export const Configurable = defineStory((args: Record<string, unknown>) => ({
           Expand slot for row #{{ rowIndex }}, where raw date field is {{ row.date }}
         </template>
       </s-table-column>
+      <s-table-column type="details" />
     </s-table>
   `,
 }))

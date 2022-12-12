@@ -1,4 +1,3 @@
-import { mount } from '@cypress/vue'
 import { SButton } from '@/lib'
 
 const testIdSelector = (id: string) => `[data-testid=${id}]`
@@ -9,7 +8,7 @@ describe('Button', () => {
   context('Given prop disabled', () => {
     context('When It is true', () => {
       beforeEach(() => {
-        mount(SButton, {
+        cy.mount(SButton, {
           propsData: {
             disabled: true,
           },
@@ -28,7 +27,7 @@ describe('Button', () => {
   context('Given prop loading', () => {
     context('When It is true', () => {
       beforeEach(() => {
-        mount(SButton, {
+        cy.mount(SButton, {
           propsData: {
             loading: true,
           },
@@ -56,7 +55,7 @@ describe('Button', () => {
   context('Given prop uppercase', () => {
     context('When It is true and button is xs sized', () => {
       beforeEach(() => {
-        mount(SButton, {
+        cy.mount(SButton, {
           propsData: {
             size: 'xs',
             uppercase: true,
@@ -74,7 +73,7 @@ describe('Button', () => {
 
     context('When It is true and button is not xs sized', () => {
       beforeEach(() => {
-        mount(SButton, {
+        cy.mount(SButton, {
           propsData: {
             size: 'md',
             uppercase: true,
@@ -94,7 +93,7 @@ describe('Button', () => {
   context('Given prop rounded', () => {
     context('When It is true and button is type action', () => {
       beforeEach(() => {
-        mount(SButton, {
+        cy.mount(SButton, {
           propsData: {
             type: 'action',
             rounded: true,
@@ -112,7 +111,7 @@ describe('Button', () => {
 
     context('When It is true and button is not type action', () => {
       beforeEach(() => {
-        mount(SButton, {
+        cy.mount(SButton, {
           propsData: {
             type: 'primary',
             rounded: true,

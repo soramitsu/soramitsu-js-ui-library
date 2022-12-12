@@ -132,6 +132,17 @@ const slots = useSlots()
     @include chevron-size('md', 8px);
     @include chevron-size('lg', 10px);
     @include chevron-size('xl', 16px);
+
+    @mixin x-paddings($size, $px) {
+      &_#{$size} {
+        @apply px-#{$px};
+      }
+    }
+
+    @include x-paddings('sm', 6px);
+    @include x-paddings('md', 10px);
+    @include x-paddings('lg', 16px);
+    @include x-paddings('xl', 24px);
   }
 }
 </style>

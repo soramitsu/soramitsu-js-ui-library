@@ -27,7 +27,7 @@
 // import 'cypress-plugin-snapshots/commands'
 
 import 'cypress-axe'
-import 'cypress-plugin-tab'
+import { tabbable } from 'tabbable'
 
 // Overwriting broken injection
 Cypress.Commands.overwrite('injectAxe', () => {
@@ -55,6 +55,10 @@ Cypress.Commands.add('injectAxeAndConfigureCTDefaults', () => {
         id: 'region',
         enabled: false,
       },
+      {
+        id: 'html-has-lang',
+        enabled: false,
+      },
     ],
   })
 })
@@ -64,6 +68,25 @@ Cypress.Commands.add('dataCy', { prevSubject: 'optional' }, (subject, cyId) => {
     return cy.wrap(subject).find(`[data-cy=${cyId}]`)
   }
   return cy.get(`[data-cy=${cyId}]`)
+})
+
+Cypress.Commands.add('tab', { prevSubject: 'optional' }, () => {
+  return cy.focused({ log: false }).then((focused) => {
+    const focusedEl = focused.get(0)
+
+    return cy.get('body', { log: false }).then((x) => {
+      const body = x.get(0)
+      const elems = tabbable(body)
+      const idx = elems.indexOf(focusedEl)
+      if (idx < 0) throw new Error('Currently focused element is not found in the list of tabbable elements')
+
+      const nextIdx = (idx + 1) % elems.length
+      const nextEl = elems[nextIdx]
+      nextEl.focus()
+
+      return nextEl
+    })
+  })
 })
 
 declare global {
@@ -79,6 +102,13 @@ declare global {
        * Shorthand for `[data-cy=<xxx>]` selector with a subject (`cy.find()`) or without (`cy.get()`)
        */
       dataCy: (cyId: string) => Chainable
+
+      /**
+       * Switches focus to the next tabbable element within the body
+       *
+       * Ahh... https://github.com/cypress-io/cypress/issues/299
+       */
+      tab: () => Chainable<HTMLElement | SVGElement>
     }
   }
 }
