@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { TIME_POINTS } from './consts'
+
 interface Props {
   value: string
 }
@@ -9,14 +11,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits(['updateTime'])
 
-let timeArray = ref<string[]>([])
-
-for (let i = 0; i < 24; i++) {
-  const hour = i < 10 ? `0${i}` : i
-  timeArray.value.push(`${hour}:00`)
-  timeArray.value.push(`${hour}:30`)
-}
-
 const updateTime = (e: any) => {
   emit('updateTime', e.target.textContent)
 }
@@ -25,7 +19,7 @@ const updateTime = (e: any) => {
 <template>
   <div class="s-date-picker-time-panel sora-tpg-p4">
     <p
-      v-for="(time, idx) in timeArray"
+      v-for="(time, idx) in TIME_POINTS"
       :key="idx"
       class="cursor-pointer"
       :class="time === value ? 'active' : ''"
