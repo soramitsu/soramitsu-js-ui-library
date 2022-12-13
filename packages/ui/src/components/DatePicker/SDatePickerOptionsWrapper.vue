@@ -35,13 +35,6 @@ export default {
       }
     }
 
-    interface Deltas {
-      // from today, d - days, m - months, y - years
-      d?: number
-      m?: number
-      y?: number
-    }
-
     const options: Options = {
       day: [
         {
