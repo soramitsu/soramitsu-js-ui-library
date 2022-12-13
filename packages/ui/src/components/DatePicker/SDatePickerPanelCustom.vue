@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const state: DatePickerApi = useDatePickerApi()
 
-const emit = defineEmits(['updateCustomInput', 'onDoneClick'])
+const emit = defineEmits(['update:custom-input', 'click:done'])
 
 const fromFormat = (dateString: string) => {
   let date = parse(dateString, props.formatPattern, new Date())
@@ -35,19 +35,19 @@ const customInputValue = (field: string) => {
 const updateCustomInput = (event: any, field: string) => {
   const newVal = event.target.value
   const date = fromFormat(newVal)
-  emit('updateCustomInput', date, field)
+  emit('update:custom-input', date, field)
 }
 
 const updateCustomInputDay = (event: any) => {
   const newVal = event.target.value
   const date = fromFormat(newVal)
-  emit('updateCustomInput', date)
+  emit('update:custom-input', date)
 }
 
 const updateCustomInputPick = (event: any) => {
   const newVal = event.target.value
   const date = fromFormat(newVal)
-  emit('updateCustomInput', date)
+  emit('update:custom-input', date)
 }
 
 const customInputValuePick = computed(() => {
@@ -70,8 +70,8 @@ const customInputCssClass = computed(() => {
   return `s-date-picker-custom-panel__input${state.time ? '_time' : ''}`
 })
 
-function handleInput(event: InputEvent) {
-  if (!(event.target instanceof HTMLInputElement)) return
+function handleInput(event: Event) {
+  if (!(event instanceof InputEvent) || !(event.target instanceof HTMLInputElement)) return
 
   if (event.inputType === 'deleteContentBackward') {
     return
@@ -119,7 +119,7 @@ const customInputLength = computed(() => {
 })
 
 const onDoneClick = () => {
-  emit('onDoneClick')
+  emit('click:done')
 }
 </script>
 

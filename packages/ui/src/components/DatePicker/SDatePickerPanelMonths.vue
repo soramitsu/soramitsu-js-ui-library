@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
 const showMonth = computed(() => props.showState.month)
 const showYear = computed(() => props.showState.year)
 
-const emit = defineEmits(['update:showed-state', 'changeView'])
+const emit = defineEmits(['update:showed-state', 'change-view'])
 
 const changeMonth = (delta: number) => {
   emit('update:showed-state', delta)
@@ -23,7 +23,7 @@ const changeMonth = (delta: number) => {
 }
 
 const changeView = (viewName: string) => {
-  emit('changeView', viewName)
+  emit('change-view', viewName)
 }
 </script>
 

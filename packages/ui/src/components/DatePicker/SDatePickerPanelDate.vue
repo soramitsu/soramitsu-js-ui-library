@@ -16,14 +16,14 @@ const props = withDefaults(defineProps<Props>(), {
   hideArrows: false,
 })
 
-const emit = defineEmits(['update:showed-state', 'changeView', 'pick', 'update:hovered-date'])
+const emit = defineEmits(['update:showed-state', 'change-view', 'pick', 'update:hovered-date'])
 
 const updateShowedState = (deltaMonth: number) => {
   emit('update:showed-state', deltaMonth)
 }
 
 const changeView = (viewName: string) => {
-  emit('changeView', viewName)
+  emit('change-view', viewName)
 }
 
 const onDatePick = (data: any) => {

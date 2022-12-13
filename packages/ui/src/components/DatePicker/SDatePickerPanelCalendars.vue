@@ -17,7 +17,7 @@ const props = defineProps<Props>()
 
 const state: DatePickerApi = useDatePickerApi()
 
-const emit = defineEmits(['update:showed-state', 'changeView', 'pick'])
+const emit = defineEmits(['update:showed-state', 'change-view', 'pick'])
 
 const hoveredDate = ref<Date>(new Date())
 
@@ -51,7 +51,7 @@ const nextMonthShowState = computed(() => {
 })
 
 const changeView = (viewName: string) => {
-  emit('changeView', viewName)
+  emit('change-view', viewName)
 }
 
 const onDatePick = (data: any) => {
@@ -122,7 +122,7 @@ const updateHoveredDate = (date: Date) => {
       <MonthTable
         :show-state="showState"
         @pick="updateShowedMonth"
-        @update-showed-year="updateShowedYear"
+        @update:showed-year="updateShowedYear"
       />
     </div>
     <div v-if="currentView === 'years'">

@@ -373,7 +373,7 @@ else updateModelValue()
             <OptionsPanel
               :type="type"
               :menu-state="menuState"
-              @on-option-click="onMenuClick"
+              @click:option="onMenuClick"
             />
             <CalendarsPanel
               :current-view="currentView"
@@ -387,15 +387,15 @@ else updateModelValue()
             <TimePanel
               v-if="time && !showStateView"
               :value="currentValueTime"
-              @update-time="updateTime"
+              @update:time="updateTime"
             />
             <CustomPanel
               :show-inputs="showCustomInputs"
               :state-store="stateStore"
               :format-date="formatDate"
               :format-pattern="formatPattern"
-              @update-custom-input="updateCustomInput"
-              @on-done-click="save"
+              @update:custom-input="updateCustomInput"
+              @click:done="save"
             />
           </div>
         </SPopoverWrappedTransition>

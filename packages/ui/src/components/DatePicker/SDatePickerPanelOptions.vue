@@ -10,12 +10,12 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const emit = defineEmits(['onOptionClick'])
+const emit = defineEmits(['click:option'])
 
 const state: DatePickerApi = useDatePickerApi()
 
 const onMenuClick = (data: Date | RangeOptionValue, label: string) => {
-  emit('onOptionClick', data, label)
+  emit('click:option', data, label)
 }
 </script>
 

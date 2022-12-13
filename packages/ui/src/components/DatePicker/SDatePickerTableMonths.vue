@@ -36,7 +36,7 @@ const deltaYear = ref(0)
 
 const props = withDefaults(defineProps<Props>(), {})
 
-const emit = defineEmits(['updateShowedYear', 'pick', 'updateShowedMonth'])
+const emit = defineEmits(['update:showed-year', 'pick'])
 
 const getCellStyle = (cell: MonthCell) => {
   const style: MonthCellStyle = {
@@ -54,7 +54,7 @@ const handleMonthTableClick = (event: any) => {
   let target = event.target
   const month = Number(target.getAttribute('month'))
   emit('pick', month)
-  emit('updateShowedYear', currentYear.value + deltaYear.value)
+  emit('update:showed-year', currentYear.value + deltaYear.value)
 }
 
 const gridCells: ComputedRef<MonthCell[]> = computed(() => {

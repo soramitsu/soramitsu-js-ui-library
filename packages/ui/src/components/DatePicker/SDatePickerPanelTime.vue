@@ -9,10 +9,10 @@ const props = withDefaults(defineProps<Props>(), {
   value: '00:00',
 })
 
-const emit = defineEmits(['updateTime'])
+const emit = defineEmits(['update:time'])
 
 const updateTime = (e: any) => {
-  emit('updateTime', e.target.textContent)
+  emit('update:time', e.target.textContent)
 }
 </script>
 

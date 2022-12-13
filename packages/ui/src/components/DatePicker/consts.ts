@@ -17,10 +17,12 @@ export const monthsShort = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'Au
 
 export const daysNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
 
-export const TIME_POINTS: string[] = [...(function*() {
-  for (let i = 0; i < 24; i++) {
-    const hour = i < 10 ? `0${i}` : i
-    yield `${hour}:00`
-    yield `${hour}:30`
-  }
-})()]
+export const TIME_POINTS: string[] = [
+  ...(function* () {
+    for (let i = 0; i < 24; i++) {
+      const hour = i < 10 ? `0${i}` : i
+      yield `${hour}:00`
+      yield `${hour}:30`
+    }
+  })(),
+]
