@@ -16,19 +16,19 @@ interface Props {
 const props = defineProps<Props>()
 
 const state: DatePickerApi = useDatePickerApi()
-const { type, time } = state
 
 const emit = defineEmits(['updateShowedState', 'changeView', 'pick'])
 
 const hoveredDate = ref<Date>(new Date())
 
 const isRange = computed(() => {
-  return type === 'range'
+  return state.type === 'range'
 })
 
 const firstCalendarModelValue = computed(() => {
   if (!props.modelValue) return new Date()
-  if (type === 'range') {
+
+  if (state.type === 'range') {
     const modelValue = props.modelValue as Date[]
     return modelValue[0]
   } else {
