@@ -13,7 +13,6 @@ const props = defineProps<Props>()
 const emit = defineEmits(['onOptionClick'])
 
 const state: DatePickerApi = useDatePickerApi()
-const { type } = state
 
 const onMenuClick = (data: Date | RangeOptionValue, label: string) => {
   emit('onOptionClick', data, label)
@@ -22,12 +21,12 @@ const onMenuClick = (data: Date | RangeOptionValue, label: string) => {
 
 <template>
   <div
-    v-if="type != 'pick'"
+    v-if="state.type !== 'pick'"
     class="s-date-picker-options-panel sora-tpg-p3"
   >
     <OptionsWrapper v-slot="{ options }">
       <p
-        v-for="(item, idx) in options[type]"
+        v-for="(item, idx) in options[state.type]"
         :key="idx"
         class="s-date-picker-options-panel__item"
         :class="menuState === item.label ? 'active' : ''"

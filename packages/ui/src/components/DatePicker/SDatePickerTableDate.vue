@@ -32,7 +32,6 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const state: DatePickerApi = useDatePickerApi()
-const { type, time } = state
 
 const emit = defineEmits(['pick', 'update:showed-state', 'update:hovered-date'])
 
@@ -93,7 +92,7 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
     const time = nextDate(startDateInCalendar.value, index - offset).getTime() // nextDate - month begins from this date
     cell.time = null
 
-    if (type === 'range') {
+    if (state.type === 'range') {
       const minDate = props.stateStore.rangeState.startDate as Date
       const maxDate = props.stateStore.rangeState.endDate as Date
       cell.inRange = time >= getDateTimestamp(minDate) && time <= getDateTimestamp(maxDate)
@@ -112,14 +111,14 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
         cell.time = getDateTime(maxDate)
       }
     }
-    if (type === 'day') {
+    if (state.type === 'day') {
       const selectedDate = props.stateStore.dayState
       cell.start = isSameDay(time, selectedDate)
       if (cell.start) {
         cell.time = getDateTime(selectedDate)
       }
     }
-    if (type === 'pick') {
+    if (state.type === 'pick') {
       const selectedDates = props.stateStore.pickState
       cell.start = selectedDates.some((item: Date) => {
         return isSameDay(time, time)
@@ -170,8 +169,8 @@ const cellMatchesDate = (cell: types.DateTableCell, date: Date) => {
 }
 
 const getCellClasses = (cell: types.DateTableCell) => {
-  const selectionMode = type
-  let classes = []
+  const selectionMode = state.type
+  const classes = []
   if (cell.type === 'normal' || cell.type === 'today') {
     classes.push('available')
     if (cell.type === 'today') {
@@ -233,7 +232,7 @@ const handleClick = (ev: any) => {
   if (!idx) return
   const cell = dateTableCells.value[idx]
   const newDate = new Date(year.value, cell.month, cell.text)
-  if (type === 'range') {
+  if (state.type === 'range') {
     if (!props.stateStore.rangeState.selecting) {
       emit('pick', {
         startDate: newDate,
@@ -262,9 +261,9 @@ const handleClick = (ev: any) => {
         lastField.value = 'startDate'
       }
     }
-  } else if (type === 'day') {
+  } else if (state.type === 'day') {
     emit('pick', newDate)
-  } else if (type === 'pick') {
+  } else if (state.type === 'pick') {
     const currentArr = props.stateStore.pickState
     const dateSelected = currentArr.find((date: Date) => {
       return isSameDay(date, newDate)
@@ -310,7 +309,7 @@ const handleClick = (ev: any) => {
     >
       <span>{{ cell.text }}</span>
       <span
-        v-if="time"
+        v-if="state.time"
         v-show="cell.time"
         class="absolute date-time"
       >{{ cell.time }}</span>

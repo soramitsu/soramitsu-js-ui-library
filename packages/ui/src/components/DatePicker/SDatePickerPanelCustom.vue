@@ -15,7 +15,6 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const state: DatePickerApi = useDatePickerApi()
-const { type, time } = state
 
 const emit = defineEmits(['updateCustomInput', 'onDoneClick'])
 
@@ -68,7 +67,7 @@ const customInputValueDay = computed(() => {
 })
 
 const customInputCssClass = computed(() => {
-  return `s-date-picker-custom-panel__input${time ? '_time' : ''}`
+  return `s-date-picker-custom-panel__input${state.time ? '_time' : ''}`
 })
 
 function mask(this: any, event: any) {
@@ -80,7 +79,7 @@ function mask(this: any, event: any) {
   } else if (date.match(/^\d{2}\/\d{2}$/) !== null) {
     this.value = date + '/'
   } else if (date.match(/^\d{2}\/\d{2}\/\d{4}$/) !== null) {
-    if (time) this.value = date + ', '
+    if (state.time) this.value = date + ', '
   } else if (date.match(/^\d{2}\/\d{2}\/\d{4}\, \d{2}$/) !== null) {
     this.value = date + ':'
   } else if (date.match(/^\d{2}\/\d{2}\/\d{4}\, \d{2}\:\d{2}$/) !== null) {
@@ -89,7 +88,7 @@ function mask(this: any, event: any) {
 }
 
 const customInputLength = computed(() => {
-  return time ? 17 : 10
+  return state.time ? 17 : 10
 })
 
 const onDoneClick = () => {
@@ -104,7 +103,7 @@ const onDoneClick = () => {
         v-if="showInputs"
         class="flex justify-center items-center"
       >
-        <template v-if="type === 'range'">
+        <template v-if="state.type === 'range'">
           <input
             :oninput="mask"
             :maxlength="customInputLength"
@@ -125,7 +124,7 @@ const onDoneClick = () => {
             @change="updateCustomInput($event, 'endDate')"
           >
         </template>
-        <template v-if="type === 'day'">
+        <template v-if="state.type === 'day'">
           <input
             :oninput="mask"
             :maxlength="customInputLength"
@@ -135,7 +134,7 @@ const onDoneClick = () => {
             @change="updateCustomInputDay($event)"
           >
         </template>
-        <template v-if="type === 'pick' && pickState.length > 0">
+        <template v-if="state.type === 'pick' && pickState.length > 0">
           <input
             :oninput="mask"
             :maxlength="customInputLength"
