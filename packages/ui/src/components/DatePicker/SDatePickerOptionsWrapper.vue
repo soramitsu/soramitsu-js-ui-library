@@ -16,8 +16,8 @@ import {
 } from 'date-fns'
 import { Options } from './types'
 
-export default {
-  setup(props: any, ctx: any) {
+export default defineComponent({
+  setup(props, { slots }) {
     function getDate(deltaDay = 0, deltaMonth = 0, deltaYear = 0) {
       let date = startOfToday()
       if (deltaDay) date = addDays(date, deltaDay)
@@ -99,9 +99,9 @@ export default {
       ],
     }
     return () =>
-      ctx.slots.default({
+      slots.default?.({
         options: options,
       })
   },
-}
+})
 </script>
