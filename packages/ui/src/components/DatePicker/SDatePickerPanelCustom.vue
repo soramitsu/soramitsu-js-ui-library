@@ -147,7 +147,7 @@ const onDoneClick = () => {
         </template>
       </div>
       <button
-        class="save-button"
+        class="s-date-picker-custom-panel__save-button"
         data-testid="date-picker-done-button"
         @click="onDoneClick"
       >
@@ -180,7 +180,7 @@ const onDoneClick = () => {
     }
   }
 
-  .save-button {
+  &__save-button {
     font-size: 10px;
     width: 44px;
     height: 24px;
