@@ -380,7 +380,7 @@ else updateModelValue()
               :show-state="showState"
               :model-value="innerModelValue"
               :state-store="stateStore"
-              @update-showed-state="updateShowedState"
+              @update:showed-state="updateShowedState"
               @change-view="changeView"
               @pick="onDatePick"
             />

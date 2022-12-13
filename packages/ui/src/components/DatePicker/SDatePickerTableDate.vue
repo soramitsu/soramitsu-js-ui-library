@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<Props>(), {
 const state: DatePickerApi = useDatePickerApi()
 const { type, time } = state
 
-const emit = defineEmits(['pick', 'updateShowedState', 'updateHoveredDate'])
+const emit = defineEmits(['pick', 'update:showed-state', 'update:hovered-date'])
 
 const offsetDay = computed(() => {
   const week = props.firstDayOfWeek
@@ -217,7 +217,7 @@ const handleMouseMove = (event: any) => {
   const cell = dateTableCells.value[idx]
   const newDate = new Date(year.value, cell.month, cell.text)
   if (isSameDay(newDate, props.hoveredDate)) return
-  emit('updateHoveredDate', newDate)
+  emit('update:hovered-date', newDate)
 }
 
 const handleClick = (ev: any) => {
@@ -276,10 +276,10 @@ const handleClick = (ev: any) => {
   }
 
   if (cell.type === 'prev-month') {
-    emit('updateShowedState', -1)
+    emit('update:showed-state', -1)
   }
   if (cell.type === 'next-month') {
-    emit('updateShowedState', 1)
+    emit('update:showed-state', 1)
   }
 }
 </script>

@@ -16,10 +16,10 @@ const props = withDefaults(defineProps<Props>(), {
   hideArrows: false,
 })
 
-const emit = defineEmits(['updateShowedState', 'changeView', 'pick', 'updateHoveredDate'])
+const emit = defineEmits(['update:showed-state', 'changeView', 'pick', 'update:hovered-date'])
 
 const updateShowedState = (deltaMonth: number) => {
-  emit('updateShowedState', deltaMonth)
+  emit('update:showed-state', deltaMonth)
 }
 
 const changeView = (viewName: string) => {
@@ -31,7 +31,7 @@ const onDatePick = (data: any) => {
 }
 
 const updateHoveredDate = (date: Date) => {
-  emit('updateHoveredDate', date)
+  emit('update:hovered-date', date)
 }
 </script>
 
@@ -42,7 +42,7 @@ const updateHoveredDate = (date: Date) => {
       :show-state="showState"
       :hide-arrows="hideArrows"
       :hovered-date="hoveredDate"
-      @update-showed-state="updateShowedState"
+      @update:showed-state="updateShowedState"
       @change-view="changeView"
     />
     <DateTable
@@ -51,8 +51,8 @@ const updateHoveredDate = (date: Date) => {
       :state-store="stateStore"
       :hovered-date="hoveredDate"
       @pick="onDatePick"
-      @update-showed-state="updateShowedState"
-      @update-hovered-date="updateHoveredDate"
+      @update:showed-state="updateShowedState"
+      @update:hovered-date="updateHoveredDate"
     />
   </div>
 </template>

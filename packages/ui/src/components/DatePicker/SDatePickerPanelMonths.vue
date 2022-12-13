@@ -15,10 +15,10 @@ const props = withDefaults(defineProps<Props>(), {
 const showMonth = computed(() => props.showState.month)
 const showYear = computed(() => props.showState.year)
 
-const emit = defineEmits(['updateShowedState', 'changeView'])
+const emit = defineEmits(['update:showed-state', 'changeView'])
 
 const changeMonth = (delta: number) => {
-  emit('updateShowedState', delta)
+  emit('update:showed-state', delta)
   return
 }
 

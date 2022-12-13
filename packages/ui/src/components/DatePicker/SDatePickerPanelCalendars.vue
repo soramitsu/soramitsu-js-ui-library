@@ -17,7 +17,7 @@ const props = defineProps<Props>()
 
 const state: DatePickerApi = useDatePickerApi()
 
-const emit = defineEmits(['updateShowedState', 'changeView', 'pick'])
+const emit = defineEmits(['update:showed-state', 'changeView', 'pick'])
 
 const hoveredDate = ref<Date>(new Date())
 
@@ -61,21 +61,21 @@ const onDatePick = (data: any) => {
 const updateShowedState = (deltaMonth: number) => {
   let newMonth = props.showState.month + deltaMonth
   if (newMonth > 11) {
-    emit('updateShowedState', 0, props.showState.year + 1)
+    emit('update:showed-state', 0, props.showState.year + 1)
   } else if (newMonth < 0) {
-    emit('updateShowedState', 11, props.showState.year - 1)
+    emit('update:showed-state', 11, props.showState.year - 1)
   } else {
-    emit('updateShowedState', newMonth)
+    emit('update:showed-state', newMonth)
   }
   return
 }
 
 const updateShowedMonth = (month: number) => {
-  emit('updateShowedState', month)
+  emit('update:showed-state', month)
 }
 
 const updateShowedYear = (year: number) => {
-  emit('updateShowedState', undefined, year)
+  emit('update:showed-state', undefined, year)
 }
 
 const updateHoveredDate = (date: Date) => {
@@ -93,9 +93,9 @@ const updateHoveredDate = (date: Date) => {
         :state-store="stateStore"
         :hovered-date="hoveredDate"
         @change-view="changeView"
-        @update-showed-state="updateShowedState"
+        @update:showed-state="updateShowedState"
         @pick="onDatePick"
-        @update-hovered-date="updateHoveredDate"
+        @update:hovered-date="updateHoveredDate"
       />
     </div>
     <div
@@ -110,9 +110,9 @@ const updateHoveredDate = (date: Date) => {
         :hide-arrows="true"
         :hovered-date="hoveredDate"
         @change-view="changeView"
-        @update-showed-state="updateShowedState"
+        @update:showed-state="updateShowedState"
         @pick="onDatePick"
-        @update-hovered-date="updateHoveredDate"
+        @update:hovered-date="updateHoveredDate"
       />
     </div>
     <div
