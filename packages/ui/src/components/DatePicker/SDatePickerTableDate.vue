@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* eslint-disable complexity */
 import { getStartDateInCalendar, nextDate } from './date-util'
 import { getDaysInMonth, subMonths, startOfDay, isSameDay } from 'date-fns'
 
@@ -16,7 +17,6 @@ const getFirstDayOfMonth = (date: Date) => {
   temp.setDate(1)
   return temp.getDay()
 }
-/* eslint-disable complexity */
 
 interface Props {
   firstDayOfWeek?: number

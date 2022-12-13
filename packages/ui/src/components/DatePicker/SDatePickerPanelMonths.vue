@@ -58,7 +58,6 @@ const changeView = (viewName: string) => {
     <button
       v-if="!hideArrows"
       type="button"
-      class=""
       @click="changeMonth(1)"
     >
       <IconArrowsChevronRight24 />
