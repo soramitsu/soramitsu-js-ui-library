@@ -74,7 +74,10 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
   const offset = offsetDay.value
   let count = 1
   const now = getDateTimestamp(new Date())
-  for (let i = 0; i < 42; i++) {
+  const WEEKS_IN_CALENDAR = 6
+  const DAYS_IN_CALENDAR = 7 * WEEKS_IN_CALENDAR
+
+  for (let i = 0; i < DAYS_IN_CALENDAR; i++) {
     const cell: types.DateTableCell = {
       type: 'normal',
       inRange: false,
@@ -320,9 +323,6 @@ const handleClick = (ev: any) => {
 
 .s-date-picker-date-table {
   font-size: 12px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
