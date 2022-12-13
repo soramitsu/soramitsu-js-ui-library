@@ -70,20 +70,47 @@ const customInputCssClass = computed(() => {
   return `s-date-picker-custom-panel__input${state.time ? '_time' : ''}`
 })
 
-function mask(this: any, event: any) {
-  const date = this.value
+function handleInput(event: InputEvent) {
+  if (!(event.target instanceof HTMLInputElement)) return
+
   if (event.inputType === 'deleteContentBackward') {
     return
-  } else if (date.match(/^\d{2}$/) !== null) {
-    this.value = date + '/'
-  } else if (date.match(/^\d{2}\/\d{2}$/) !== null) {
-    this.value = date + '/'
-  } else if (date.match(/^\d{2}\/\d{2}\/\d{4}$/) !== null) {
-    if (state.time) this.value = date + ', '
-  } else if (date.match(/^\d{2}\/\d{2}\/\d{4}\, \d{2}$/) !== null) {
-    this.value = date + ':'
-  } else if (date.match(/^\d{2}\/\d{2}\/\d{4}\, \d{2}\:\d{2}$/) !== null) {
-    this.value = date
+  }
+
+  const res = state.time ? dateTimeMask(event.target.value) : dateMask(event.target.value)
+
+  if (res) {
+    event.target.value = res
+  }
+}
+
+function dateMask(date: string) {
+  if (date.match(/^\d{2}$/) !== null) {
+    return date + '/'
+  }
+
+  if (date.match(/^\d{2}\/\d{2}$/) !== null) {
+    return date + '/'
+  }
+}
+
+function dateTimeMask(date: string) {
+  const res = dateMask(date)
+
+  if (res) {
+    return res
+  }
+
+  if (date.match(/^\d{2}\/\d{2}\/\d{4}$/) !== null) {
+    return date + ', '
+  }
+
+  if (date.match(/^\d{2}\/\d{2}\/\d{4}, \d{2}$/) !== null) {
+    return date + ':'
+  }
+
+  if (date.match(/^\d{2}\/\d{2}\/\d{4}, \d{2}:\d{2}$/) !== null) {
+    return date
   }
 }
 
@@ -105,42 +132,42 @@ const onDoneClick = () => {
       >
         <template v-if="state.type === 'range'">
           <input
-            :oninput="mask"
             :maxlength="customInputLength"
             class="s-date-picker-custom-panel__input"
             :class="customInputCssClass"
             :value="customInputValueStartDate"
+            @input="handleInput"
             @change="updateCustomInput($event, 'startDate')"
           >
           <div class="mx-2">
             -
           </div>
           <input
-            :oninput="mask"
             :maxlength="customInputLength"
             class="s-date-picker-custom-panel__input"
             :class="customInputCssClass"
             :value="customInputValueEndDate"
+            @input="handleInput"
             @change="updateCustomInput($event, 'endDate')"
           >
         </template>
         <template v-if="state.type === 'day'">
           <input
-            :oninput="mask"
             :maxlength="customInputLength"
             class="s-date-picker-custom-panel__input"
             :class="customInputCssClass"
             :value="customInputValueDay"
+            @input="handleInput"
             @change="updateCustomInputDay($event)"
           >
         </template>
         <template v-if="state.type === 'pick' && pickState.length > 0">
           <input
-            :oninput="mask"
             :maxlength="customInputLength"
             class="s-date-picker-custom-panel__input"
             :class="customInputCssClass"
             :value="customInputValuePick"
+            @input="handleInput"
             @change="updateCustomInputPick($event)"
           >
         </template>
