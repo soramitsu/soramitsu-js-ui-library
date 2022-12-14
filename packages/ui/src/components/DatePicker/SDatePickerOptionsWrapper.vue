@@ -16,7 +16,7 @@ import {
 } from 'date-fns'
 import { Options } from './types'
 
-export default defineComponent({
+export default /* @__PURE__ */ defineComponent({
   setup(props, { slots }) {
     function getDate(deltaDay = 0, deltaMonth = 0, deltaYear = 0) {
       let date = startOfToday()
