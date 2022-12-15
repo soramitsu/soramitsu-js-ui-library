@@ -50,6 +50,11 @@ export default defineConfig({
   define: {
     'import.meta.vitest': 'undefined',
   },
+  server: {
+    fs: {
+      allow: ['..'],
+    },
+  },
   resolve: {
     alias: {
       '@': resolve('src'),
@@ -101,7 +106,7 @@ export default defineConfig({
         'jsoneditor',
         '@popperjs/core',
         /^@vueuse/,
-        '@soramitsu-ui/theme',
+        // /^@soramitsu-ui\//,
         'body-scroll-lock',
         'focus-trap',
       ],

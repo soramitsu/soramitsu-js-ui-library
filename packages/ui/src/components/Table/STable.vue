@@ -1,3 +1,27 @@
+<script lang="ts">
+import { defineBem } from '@soramitsu-ui/bem'
+import { TABLE_COLUMN_ALIGN_VALUES } from './consts'
+
+const bem = defineBem('s-table')
+  .elem('header')
+  .elem('header-wrapper')
+  .elem('tr', (b) => b.mod('current'))
+  .elem('th', (b) => b.mod('align', TABLE_COLUMN_ALIGN_VALUES).mod('sortable'))
+  .elem('td', (b) => b.mod('align', TABLE_COLUMN_ALIGN_VALUES))
+  .elem('cell', (b) => b.mod('has-tooltip').mod('has-hover'))
+  .elem('sort-icon')
+  .elem('body')
+  .elem('body-wrapper')
+  .elem('expand-icon', (b) => b.mod('active'))
+  .elem('details-icon')
+  .elem('expanded-block')
+  .elem('expanded-cell')
+  .elem('empty-block')
+  .elem('empty-text')
+  .elem('append-wrapper')
+  .build()
+</script>
+
 <script setup lang="ts">
 import type { CSSProperties, ShallowRef, Slot } from 'vue'
 import { MaybeElementRef, not } from '@vueuse/core'
@@ -544,37 +568,38 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
 <template>
   <div
     ref="tableWrapper"
-    class="s-table"
+    :class="bem._"
     data-testid="table"
     :style="tableHeightStyles"
   >
     <div
       v-if="showHeader"
       ref="headerWrapper"
-      class="s-table__header-wrapper"
+      :class="bem.headerWrapper"
     >
       <table
-        class="s-table__header w-full"
+        :class="bem.header"
+        class="w-full"
         :style="`width: ${columnsWidthsSum}px`"
       >
         <thead>
           <tr
-            class="s-table__tr"
             data-testid="table-header-row"
-            :class="getStyleOrClass(headerRowClassName)"
+            :class="[bem.tr, getStyleOrClass(headerRowClassName)]"
             :style="getStyleOrClass(headerRowStyle)"
           >
             <th
               v-for="(column, columnIndex) in columns"
               :key="column.id"
-              class="s-table__th px-0 sora-tpg-ch3"
+              class="px-0 sora-tpg-ch3"
               :class="[
-                `s-table__th_align_${column.headerAlign}`,
+                bem.th,
+                bem[`th_align_${column.headerAlign}`],
                 column.className,
                 column.labelClassName,
                 column.id,
                 {
-                  's-table__th_sortable': column.sortable,
+                  [bem.th_sortable]: column.sortable,
                   'cursor-pointer': column.sortable,
                 },
                 getStyleOrClass(headerCellClassName, { column, columnIndex }),
@@ -587,7 +612,10 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
               @click="handleHeaderMouseEvent({ column, 'event': $event })"
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
             >
-              <div class="s-table__cell inline-flex items-center px-16px">
+              <div
+                :class="bem.cell"
+                class="inline-flex items-center px-16px"
+              >
                 <template v-if="isDefaultColumn(column)">
                   <component
                     :is="column.headerSlot"
@@ -599,8 +627,8 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
                   </template>
                   <IconArrowTop16
                     v-if="column.sortable"
-                    class="s-table__sort-icon inline ml-10px"
-                    :class="getSortIconStateClasses(column)"
+                    class="inline ml-10px"
+                    :class="[bem.sortIcon, getSortIconStateClasses(column)]"
                   />
                 </template>
 
@@ -621,11 +649,12 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
       </table>
     </div>
     <div
-      class="s-table__body-wrapper"
+      :class="bem.bodyWrapper"
       :style="bodyHeightStyles"
     >
       <table
-        class="s-table__body w-full"
+        :class="bem.body"
+        class="w-full"
         :style="{ 'width': `${columnsWidthsSum}px` }"
       >
         <tbody>
@@ -634,10 +663,10 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
             :key="rowKey ? rowKeys.get(row) : rowIndex"
           >
             <tr
-              class="s-table__tr"
               :class="[
+                bem.tr,
                 getStyleOrClass(rowClassName, { row, rowIndex }),
-                { 's-table__tr_current': highlightCurrentRow && isCurrentRow(row) },
+                { [bem.tr_current]: highlightCurrentRow && isCurrentRow(row) },
               ]"
               :style="getStyleOrClass(rowStyle, { row, rowIndex })"
               data-testid="table-row"
@@ -648,7 +677,8 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
                 :key="column.id"
                 class="s-table__td p-0 sora-tpg-p3"
                 :class="[
-                  `s-table__td_align_${column.align}`,
+                  bem.td,
+                  bem[`td_align_${column.align}`],
                   column.id,
                   column.className,
                   getStyleOrClass(cellClassName, { row, rowIndex, column, columnIndex }),
@@ -665,13 +695,16 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
                 @contextmenu="handleCellMouseEvent({ row, column, 'event': $event })"
               >
                 <div
-                  class="s-table__cell h-full flex flex-col justify-center"
-                  :class="{
-                    's-table__cell_has-tooltip': column.showOverflowTooltip,
-                    's-table__cell_has-hover': isDetailsColumn(column),
-                    'cursor-pointer': isExpandColumn(column) || isDetailsColumn(column),
-                    'px-16px': !isDetailsColumn(column),
-                  }"
+                  class="h-full flex flex-col justify-center"
+                  :class="[
+                    bem.cell,
+                    {
+                      [bem.cell_hasTooltip]: column.showOverflowTooltip,
+                      [bem.cell_hasHover]: isDetailsColumn(column),
+                      'cursor-pointer': isExpandColumn(column) || isDetailsColumn(column),
+                      'px-16px': !isDetailsColumn(column),
+                    },
+                  ]"
                   :title="getCellTooltipContent(row, column)"
                 >
                   <template v-if="isDefaultColumn(column)">
@@ -698,14 +731,16 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
 
                   <template v-else-if="isExpandColumn(column)">
                     <IconArrowsChevronDownRounded24
-                      class="s-table__expand-icon"
-                      :class="{ 's-table__expand-icon_active': expandedRows.has(row) }"
+                      :class="[bem.expandIcon, { [bem.expandIcon_active]: expandedRows.has(row) }]"
                       data-testid="table-expanded-icon"
                     />
                   </template>
 
                   <template v-else-if="isDetailsColumn(column)">
-                    <IconArrowsChevronRightXs24 class="s-table__details-icon self-center" />
+                    <IconArrowsChevronRightXs24
+                      :class="bem.detailsIcon"
+                      class="self-center"
+                    />
                   </template>
                 </div>
               </td>
@@ -713,11 +748,12 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
 
             <tr
               v-if="activeExpandColumn && expandedRows.has(row)"
-              class="s-table__expanded-block"
+              :class="bem.expandedBlock"
               data-testid="table-expanded-block"
             >
               <td
-                class="s-table__expanded-cell py-16px px-32px"
+                :class="bem.expandedCell"
+                class="py-16px px-32px"
                 :colspan="columns.length"
               >
                 <component
@@ -733,9 +769,13 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
       <div
         v-if="!data.length"
         data-testid="table-empty-block"
-        class="s-table__empty-block flex justify-center items-center h-60px"
+        :class="bem.emptyBlock"
+        class="flex justify-center items-center h-60px"
       >
-        <span class="s-table__empty-text sora-tpg-p3">
+        <span
+          class="sora-tpg-p3"
+          :class="bem.emptyText"
+        >
           <slot name="empty">
             {{ emptyText || 'No Data' }}
           </slot>
@@ -743,7 +783,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
       </div>
       <div
         v-if="$slots.append"
-        class="s-table__append-wrapper"
+        :class="bem.appendWrapper"
       >
         <slot name="append" />
       </div>

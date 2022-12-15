@@ -1,3 +1,18 @@
+<script lang="ts">
+import { defineBem } from '@soramitsu-ui/bem'
+
+const bem = defineBem('s-button')
+  .mod('type', BUTTON_TYPE_VALUES)
+  .mod('size', BUTTON_SIZE_VALUES)
+  .mod('icon-position', BUTTON_ICON_POSITION_VALUES)
+  .mod('disabled')
+  .mod('rounded')
+  .mod('loading')
+  .elem('text')
+  .elem('icon')
+  .build()
+</script>
+
 <script setup lang="ts">
 import { SSpinner } from '../Spinner'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
@@ -55,15 +70,15 @@ const font = computed(() => {
   <button
     :type="nativeType"
     :class="[
-      's-button',
-      `s-button_type_${definitelyType}`,
-      `s-button_size_${definitelySize}`,
-      `s-button_icon-position_${definitelyIconPosition}`,
+      bem._,
+      bem[`_type_${definitelyType}`],
+      bem[`_size_${definitelySize}`],
+      bem[`_iconPosition_${definitelyIconPosition}`],
       font,
       {
-        's-button_disabled': loading || disabled,
-        's-button_rounded': isAction && rounded,
-        's-button_loading': loading,
+        [bem._disabled]: loading || disabled,
+        [bem._rounded]: isAction && rounded,
+        [bem._loading]: loading,
       },
     ]"
     :disabled="loading || disabled"
@@ -77,7 +92,7 @@ const font = computed(() => {
     />
 
     <span
-      class="s-button__icon"
+      :class="bem.icon"
       data-testid="icon"
     >
       <i
@@ -90,7 +105,7 @@ const font = computed(() => {
       />
     </span>
     <span
-      class="s-button__text"
+      :class="bem.text"
       data-testid="text"
     >
       <slot v-if="!isAction" />
