@@ -139,6 +139,12 @@ function onInput(e: Event) {
   }
 }
 
+const inputElement = templateRef<null | HTMLInputElement>('input')
+
+defineExpose({
+  input: inputElement,
+})
+
 const isValueEmpty = computed(() => !model.value)
 const isFocused = ref(false)
 const labelTypographyClass = computed(() => (!isFocused.value && isValueEmpty.value ? 'sora-tpg-p3' : 'sora-tpg-p4'))
@@ -229,6 +235,7 @@ const inputType = computed(() =>
 
       <input
         :id="id"
+        ref="input"
         :value="model"
         :type="inputType"
         :disabled="disabled"
