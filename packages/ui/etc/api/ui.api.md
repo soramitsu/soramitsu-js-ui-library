@@ -1155,6 +1155,8 @@ emptyText?: string | undefined;
 defaultExpandAll?: boolean | undefined;
 expandRowKeys?: unknown[] | undefined;
 selectOnIndeterminate?: boolean | undefined;
+adaptBreakpoint?: number | undefined;
+cardGridBreakpoints?: TableCardGridBreakpoint[] | undefined;
 }>, {
 data: () => never[];
 defaultSort: null;
@@ -1177,44 +1179,49 @@ headerCellStyle: () => {};
 selectOnIndeterminate: boolean;
 highlightCurrentRow: boolean;
 currentRowKey: string;
+adaptBreakpoint: number;
+cardGridBreakpoints: () => {
+test: (width: number) => boolean;
+value: number;
+}[];
 }>, {
 clearSelection: typeof manualClearSelection;
 toggleRowSelection: typeof manualToggleRowSelection;
-toggleAllSelection: () => void;
+toggleAllSelection: typeof manualToggleAllSelection;
 toggleRowExpansion: (row: TableRow, value?: boolean | undefined) => void;
 sort: typeof sort;
 clearSort: () => void;
 setCurrentRow: typeof setCurrentRow;
 }, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
-"cell-mouse-enter": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
+"mouse-enter:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
 } & {
-"cell-mouse-leave": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
+"mouse-leave:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
 } & {
-"cell-click": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
+"click:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
 } & {
-"cell-dblclick": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
+"dblclick:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
 } & {
-"header-click": (payload_0: TableColumnApi | TableActionColumnApi, payload_1: MouseEvent) => void;
+"click:header": (payload_0: TableColumnApi | TableActionColumnApi, payload_1: MouseEvent) => void;
 } & {
-"header-contextmenu": (payload_0: TableColumnApi | TableActionColumnApi, payload_1: MouseEvent) => void;
+"contextmenu:header": (payload_0: TableColumnApi | TableActionColumnApi, payload_1: MouseEvent) => void;
 } & {
-"row-click": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
+"click:row": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
 } & {
-"row-dblclick": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
+"dblclick:row": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
 } & {
-"row-contextmenu": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
+"contextmenu:row": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
 } & {
-"sort-change": (value: TableSortEventData) => void;
+"change:sort": (value: TableSortEventData) => void;
 } & {
-"selection-change": (value: TableRow[]) => void;
+"change:selection": (value: TableRow[]) => void;
 } & {
 "select-all": (value: TableRow[]) => void;
 } & {
 select: (payload_0: TableRow[], payload_1: TableRow) => void;
 } & {
-"expand-change": (payload_0: TableRow, payload_1: TableRow[]) => void;
+"change:expand": (payload_0: TableRow, payload_1: TableRow[]) => void;
 } & {
-"current-change": (payload_0: TableRow | null, payload_1: TableRow | null) => void;
+"change:current": (payload_0: TableRow | null, payload_1: TableRow | null) => void;
 } & {
 "click:row-details": (value: TableRow) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
@@ -1242,6 +1249,8 @@ emptyText?: string | undefined;
 defaultExpandAll?: boolean | undefined;
 expandRowKeys?: unknown[] | undefined;
 selectOnIndeterminate?: boolean | undefined;
+adaptBreakpoint?: number | undefined;
+cardGridBreakpoints?: TableCardGridBreakpoint[] | undefined;
 }>, {
 data: () => never[];
 defaultSort: null;
@@ -1264,22 +1273,27 @@ headerCellStyle: () => {};
 selectOnIndeterminate: boolean;
 highlightCurrentRow: boolean;
 currentRowKey: string;
+adaptBreakpoint: number;
+cardGridBreakpoints: () => {
+test: (width: number) => boolean;
+value: number;
+}[];
 }>>> & {
 onSelect?: ((args_0: TableRow[], args_1: TableRow) => any) | undefined;
-"onCell-mouse-enter"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onCell-mouse-leave"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onCell-click"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onCell-dblclick"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onHeader-click"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
-"onHeader-contextmenu"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
-"onRow-click"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-"onRow-dblclick"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-"onRow-contextmenu"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-"onSort-change"?: ((value: TableSortEventData) => any) | undefined;
-"onSelection-change"?: ((value: TableRow[]) => any) | undefined;
+"onMouse-enter:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+"onMouse-leave:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+"onClick:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+"onDblclick:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+"onClick:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
+"onContextmenu:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
+"onClick:row"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+"onDblclick:row"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+"onContextmenu:row"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+"onChange:sort"?: ((value: TableSortEventData) => any) | undefined;
+"onChange:selection"?: ((value: TableRow[]) => any) | undefined;
 "onSelect-all"?: ((value: TableRow[]) => any) | undefined;
-"onExpand-change"?: ((args_0: TableRow, args_1: TableRow[]) => any) | undefined;
-"onCurrent-change"?: ((args_0: TableRow | null, args_1: TableRow | null) => any) | undefined;
+"onChange:expand"?: ((args_0: TableRow, args_1: TableRow[]) => any) | undefined;
+"onChange:current"?: ((args_0: TableRow | null, args_1: TableRow | null) => any) | undefined;
 "onClick:row-details"?: ((value: TableRow) => any) | undefined;
 }, {
 data: TableRow[];
@@ -1306,6 +1320,8 @@ emptyText: string;
 defaultExpandAll: boolean;
 expandRowKeys: unknown[];
 selectOnIndeterminate: boolean;
+adaptBreakpoint: number;
+cardGridBreakpoints: TableCardGridBreakpoint[];
 }>;
 
 // @public (undocumented)
@@ -1452,8 +1468,8 @@ type: "default" | "details" | "selection" | "expand";
 width: string;
 label: string;
 sortable: boolean | "custom";
-minWidth: string;
 prop: string;
+minWidth: string;
 sortMethod: <T>(a: T, b: T) => number;
 sortBy: TableColumnSortBy_2;
 sortOrders: TableColumnSortOrder_2[];
@@ -1636,8 +1652,8 @@ secondaryButtonText: string;
 }, {
 placement: BasePlacement;
 header: string;
-content: string;
 wrapperTag: string | object;
+content: string;
 primaryButtonText: string;
 secondaryButtonText: string;
 }>;
@@ -1684,10 +1700,19 @@ timeout: number;
 export const TABLE_API_KEY: InjectionKey<DeepReadonly<TableApi>>;
 
 // @public (undocumented)
+export const TABLE_CARDS_GRID_DEFAULT_BREAKPOINTS: {
+    test: (width: number) => boolean;
+    value: number;
+}[];
+
+// @public (undocumented)
 export const TABLE_COLUMN_ALIGN_VALUES: readonly ["left", "center", "right"];
 
 // @public (undocumented)
 export const TABLE_COLUMN_TYPE_VALUES: readonly ["default", "selection", "expand", "details"];
+
+// @public (undocumented)
+export const TABLE_DEFAULT_ADAPT_BREAKPOINT = 920;
 
 // @public (undocumented)
 export interface TableActionColumnApi extends TableCommonColumnApi {
@@ -1700,6 +1725,13 @@ export interface TableActionColumnApi extends TableCommonColumnApi {
 // @public (undocumented)
 export interface TableApi {
     register: (options: TableColumnApi | TableActionColumnApi) => void;
+}
+
+// @public (undocumented)
+export interface TableCardGridBreakpoint {
+    // (undocumented)
+    test: (width: number) => boolean;
+    value: number;
 }
 
 // @public (undocumented)
@@ -1931,11 +1963,12 @@ export function useTabsPanelApi(): TabsPanelApi;
 // Warnings were encountered during analysis:
 //
 // dist-ts/components/DatePicker/SDatePicker.vue.d.ts:19:5 - (ae-forgotten-export) The symbol "DatePickerType" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:60:5 - (ae-forgotten-export) The symbol "CSSObject" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:136:5 - (ae-forgotten-export) The symbol "manualClearSelection" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:141:5 - (ae-forgotten-export) The symbol "manualToggleRowSelection" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:154:5 - (ae-forgotten-export) The symbol "sort" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:163:5 - (ae-forgotten-export) The symbol "setCurrentRow" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:61:5 - (ae-forgotten-export) The symbol "CSSObject" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:150:5 - (ae-forgotten-export) The symbol "manualClearSelection" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:155:5 - (ae-forgotten-export) The symbol "manualToggleRowSelection" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:159:5 - (ae-forgotten-export) The symbol "manualToggleAllSelection" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:168:5 - (ae-forgotten-export) The symbol "sort" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:177:5 - (ae-forgotten-export) The symbol "setCurrentRow" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:9:9 - (ae-forgotten-export) The symbol "validateVerticalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:14:9 - (ae-forgotten-export) The symbol "validateHorizontalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsProvider.d.ts:11:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts
