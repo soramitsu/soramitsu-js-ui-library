@@ -34,6 +34,11 @@ import IconEye from '~icons/majesticons/eye-line'
 import IconEyeOff from '~icons/majesticons/eye-off-line'
 
 import IconArrowsChevronDownRounded24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-down-rounded-24.svg'
+import IconArrowsChevronRight24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-right-24.svg'
+import IconArrowsChevronLeft24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-left-24.svg'
+import IconArrowsChevronBottom24 from '@soramitsu-ui/icons/icomoon/arrows-chevron-bottom-24.svg'
+import IconBasicCheckMark24 from '@soramitsu-ui/icons/icomoon/basic-check-mark-24.svg'
+
 import IconChevronBottom16 from '@soramitsu-ui/icons/icomoon/chevron-bottom-16.svg'
 import IconBasicExternalLink24 from '@soramitsu-ui/icons/icomoon/basic-external-link-24.svg'
 
@@ -49,6 +54,10 @@ export {
   IconEye,
   IconEyeOff,
   IconArrowsChevronDownRounded24,
+  IconArrowsChevronRight24,
+  IconArrowsChevronLeft24,
+  IconBasicCheckMark24,
+  IconArrowsChevronBottom24,
   IconChevronBottom16,
   IconBasicExternalLink24,
   IconArrowTop16,
