@@ -29,6 +29,7 @@ import { SNavigationMenu, SNavigationMenuItem, SNavigationSubmenu } from './Navi
 import { STable, STableColumn } from './Table'
 import { SPagination } from './Pagination'
 import { STooltip } from './Tooltip'
+import { SDatePicker } from './DatePicker'
 
 /**
  * Component names should be identical to their variable names
@@ -77,4 +78,5 @@ export const COMPONENTS: Record<string, Component> = {
   SNavigationSubmenu,
   SPagination,
   STooltip,
+  SDatePicker,
 }
