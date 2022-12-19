@@ -54,6 +54,8 @@ as every render creates new value for prop which triggers another render.
 
 Column type `index` removed and so is prop `index`.
 
+All events now have naming: `mouse-enter:cell` or `change:expand` instead of `cell-mouse-enter` or `expand-change`
+
 Added column type `details` removed and event `click:row-details`.
 
 `align` in column options (like in events) now has values without `is-` prefix.
@@ -85,6 +87,11 @@ Removed `resizable` prop, and so is `header-dragend` event.
 Removed `stripe` and `border` props, as there are no design for them.
 
 Removed public method `doLayout`, because resize observables should be enough.
+
+Added adapted version of table which is a card grid without header and is used when table width is lower
+than value defined by `adaptBreakpoint` prop. Number of gird columns defined by prop `cardGridBreakpoints`.
+There rows are cards with label-value list. There are no sort and current row highlighting. Multiple rows selection can
+be done by clicking on card.
 
 ### SPagination
 

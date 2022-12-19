@@ -14,6 +14,8 @@ after(() => {
 describe('Table', () => {
   const NO_DATA_TEXT = 'There are no data found'
 
+  const ADAPT_BREAKPOINT = 920
+
   const PROP_NAME_1 = 'prop1'
   const PROP_NAME_2 = 'prop2'
   const PROP_NAME_3 = 'date'
@@ -60,6 +62,57 @@ describe('Table', () => {
   const COLUMN_CELL_CLASS_NAME = 'COLUMN_CELL_CLASS_NAME'
   const COLUMN_HEADER_CELL_CLASS_NAME = 'COLUMN_HEADER_CELL_CLASS_NAME'
 
+  context(`Given table with width bigger than adapt breakpoint`, () => {
+    beforeEach(() => {
+      cy.mount({
+        setup() {
+          return {
+            data: DATA,
+          }
+        },
+        template: `
+          <STable
+            style="width: ${ADAPT_BREAKPOINT + 1}px"
+            :data="data"
+          >
+            <STableColumn prop="${PROP_NAME_1}" />
+          </STable>`,
+      })
+    })
+
+    context('When it is initiated', () => {
+      it('Then there are data rows are represented with table', () => {
+        cy.get(testIdSelector('table-body')).filter('table').should('exist')
+        cy.get(testIdSelector('table-row')).filter('tr').should('exist')
+      })
+    })
+  })
+
+  context(`Given table with width equal to adapt breakpoint`, () => {
+    beforeEach(() => {
+      cy.mount({
+        setup() {
+          return {
+            data: DATA,
+          }
+        },
+        template: `
+          <STable
+            style="width: ${ADAPT_BREAKPOINT}px"
+            :data="data"
+          >
+            <STableColumn prop="${PROP_NAME_1}" />
+          </STable>`,
+      })
+    })
+
+    context('When it is initiated', () => {
+      it('Then there are data rows are represented with cards grid', () => {
+        cy.get(testIdSelector('table-row')).should('have.class', 's-table-card')
+      })
+    })
+  })
+
   context(`Given table with expand and selection columns with all rows expanded by default`, () => {
     beforeEach(() => {
       cy.mount({
@@ -70,6 +123,7 @@ describe('Table', () => {
         },
         template: `
           <STable
+            style="width: ${ADAPT_BREAKPOINT + 1}px"
             :data="data"
             default-expand-all
           >
@@ -109,6 +163,7 @@ describe('Table', () => {
       it('Then all selection checkboxes are selected', () => {
         cy.get(testIdSelector('table-header-selection-checkbox')).click()
         cy.get(testIdSelector('table-selection-checkbox'))
+          .not(`${testIdSelector('table-header-selection-checkbox')} ${testIdSelector('table-selection-checkbox')}`)
           .filter('[data-checked="true"]')
           .should('have.length', DATA.length)
       })
@@ -117,7 +172,53 @@ describe('Table', () => {
     context('When selection checkbox clicked', () => {
       it('Then it is checked', () => {
         cy.get(testIdSelector('table-selection-checkbox')).first().click()
-        cy.get(testIdSelector('table-selection-checkbox')).first().should('not.have.attr', 'data-checked', 'true')
+        cy.get(testIdSelector('table-selection-checkbox')).first().should('have.attr', 'data-checked', 'true')
+      })
+    })
+  })
+
+  context(`Given adapted table with expand and selection columns with all rows expanded by default`, () => {
+    beforeEach(() => {
+      cy.mount({
+        setup() {
+          return {
+            data: DATA,
+          }
+        },
+        template: `
+          <STable
+            style="width: ${ADAPT_BREAKPOINT}px"
+            :data="data"
+            default-expand-all
+          >
+            <STableColumn type="selection" />
+            <STableColumn prop="${PROP_NAME_1}" />
+            <STableColumn type="expand" />
+          </STable>`,
+      })
+    })
+
+    context('When it is initiated', () => {
+      it('Then rows count equal data array length', () => {
+        cy.get(testIdSelector('table-row')).should('have.length', DATA.length)
+      })
+
+      it('Then there are expanded block for every row', () => {
+        cy.get(testIdSelector('table-expanded-block')).should('have.length', DATA.length)
+      })
+    })
+
+    context('When expand button clicked', () => {
+      it("Then it's expanded block hidden", () => {
+        cy.get(testIdSelector('table-row')).first().find(testIdSelector('table-expand-button')).click()
+        cy.get(testIdSelector('table-row')).first().find(testIdSelector('table-expanded-block')).should('not.exist')
+      })
+    })
+
+    context('When card is clicked', () => {
+      it('Then it is selected', () => {
+        cy.get(testIdSelector('table-row')).first().click()
+        cy.get(testIdSelector('table-row')).first().should('have.class', 's-table-card_selected')
       })
     })
   })
@@ -132,6 +233,32 @@ describe('Table', () => {
         },
         template: `
           <STable
+            style="width: ${ADAPT_BREAKPOINT + 1}px"
+            height="100"
+          >
+            <STableColumn prop="${PROP_NAME_1}" />
+          </STable>`,
+      })
+    })
+
+    context('When it is initiated', () => {
+      it('Then it has height from prop', () => {
+        cy.get(testIdSelector('table')).should('have.css', 'height', '100px')
+      })
+    })
+  })
+
+  context(`Given adapted table with height`, () => {
+    beforeEach(() => {
+      cy.mount({
+        setup() {
+          return {
+            data: DATA,
+          }
+        },
+        template: `
+          <STable
+            style="width: ${ADAPT_BREAKPOINT}px"
             height="100"
           >
             <STableColumn prop="${PROP_NAME_1}" />
@@ -156,6 +283,7 @@ describe('Table', () => {
         },
         template: `
           <STable
+            style="width: ${ADAPT_BREAKPOINT + 1}px"
             :data="data"
             current-row-key="${HIGHLIGHTED_KEY}"
             highlight-current-row
@@ -202,6 +330,7 @@ describe('Table', () => {
         template: `
           <button id="change-data" @click="switchData">change data</button>
           <STable
+            style="width: ${ADAPT_BREAKPOINT + 1}px"
             :data="data"
             row-key="${PROP_FOR_ROW_KEY}"
           >
@@ -238,6 +367,7 @@ describe('Table', () => {
         },
         template: `
           <STable
+            style="width: ${ADAPT_BREAKPOINT + 1}px"
             :data="data"
             row-class-name="${ROW_CLASS_NAME}"
             :row-style='${JSON.stringify(ROW_STYLE)}'
@@ -290,13 +420,13 @@ describe('Table', () => {
         cy.get(testIdSelector('table-header-cell')).should('have.css', 'color', HEADER_CELL_STYLE.color)
       })
 
-      it('Then fist column cell have classes from className prop', () => {
+      it('Then first column cell have classes from className prop', () => {
         cy.get(testIdSelector('table-row')).each((el) => {
           cy.wrap(el).find(testIdSelector('table-cell')).first().should('have.class', COLUMN_CELL_CLASS_NAME)
         })
       })
 
-      it('Then fist column header cell have styles from className and labelClassName prop', () => {
+      it('Then first column header cell have styles from className and labelClassName prop', () => {
         cy.get(testIdSelector('table-header-cell'))
           .first()
           .should('have.class', COLUMN_HEADER_CELL_CLASS_NAME)
@@ -310,6 +440,7 @@ describe('Table', () => {
       cy.mount({
         template: `
           <STable
+            style="width: ${ADAPT_BREAKPOINT + 1}px"
             :data="[]"
             empty-text="${NO_DATA_TEXT}"
           >
@@ -329,11 +460,55 @@ describe('Table', () => {
     })
   })
 
+  context(`Given adapted table with no data`, () => {
+    beforeEach(() => {
+      cy.mount({
+        template: `
+          <STable
+            style="width: ${ADAPT_BREAKPOINT}px"
+            :data="[]"
+            empty-text="${NO_DATA_TEXT}"
+          >
+            <STableColumn type="selection" />
+          </STable>`,
+      })
+    })
+
+    context('When it is initiated', () => {
+      it('Then there are text from emptyText props', () => {
+        cy.get(testIdSelector('table-empty-block')).should('have.text', NO_DATA_TEXT)
+      })
+    })
+  })
+
   context(`Given table with empty slot and no data`, () => {
     beforeEach(() => {
       cy.mount({
         template: `
-          <STable :data="[]">
+          <STable
+            style="width: ${ADAPT_BREAKPOINT + 1}px"
+            :data="[]"
+          >
+            <template #empty>${NO_DATA_TEXT}</template>
+          </STable>`,
+      })
+    })
+
+    context('When it is initiated', () => {
+      it('Then there are text from empty slot', () => {
+        cy.get(testIdSelector('table-empty-block')).should('have.text', NO_DATA_TEXT)
+      })
+    })
+  })
+
+  context(`Given adapted table with empty slot and no data`, () => {
+    beforeEach(() => {
+      cy.mount({
+        template: `
+          <STable
+            style="width: ${ADAPT_BREAKPOINT}px"
+            :data="[]"
+          >
             <template #empty>${NO_DATA_TEXT}</template>
           </STable>`,
       })

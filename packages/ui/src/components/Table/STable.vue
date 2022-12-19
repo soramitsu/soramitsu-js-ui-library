@@ -1,27 +1,42 @@
 <script setup lang="ts">
 import type { CSSProperties, ShallowRef, Slot } from 'vue'
 import { MaybeElementRef, not } from '@vueuse/core'
-import { get, findLast } from 'lodash-es'
+import { findLast } from 'lodash-es'
 import { SCheckboxAtom } from '@/components/Checkbox'
-import { IconArrowTop16, IconArrowsChevronDownRounded24, IconArrowsChevronRightXs24 } from '@/components/icons'
+import { IconArrowTop16 } from '@/components/icons'
+import { TABLE_DEFAULT_ADAPT_BREAKPOINT, TABLE_CARDS_GRID_DEFAULT_BREAKPOINTS } from './consts'
 import { useColumnSort } from './use-column-sort'
 import {
-  TableRow,
+  TableCardGridBreakpoint,
+  TableCellConfigCallbackParams,
   TableCellEventData,
+  TableColumnSortOrder,
+  TableHeaderCellConfigCallbackParams,
   TableHeaderEventData,
+  TableRow,
+  TableRowConfigCallbackParams,
   TableRowEventData,
   TableSortEventData,
-  TableColumnSortOrder,
-  TableCellConfigCallbackParams,
-  TableRowConfigCallbackParams,
-  TableHeaderCellConfigCallbackParams,
 } from './types'
 import { useFlexColumns } from './use-flex-columns-widths'
 import { useRowSelect } from './use-row-select'
 import { useColumnExpand } from './use-column-expand'
-import { isDefaultColumn, isDetailsColumn, isExpandColumn, isRecord, isSelectionColumn } from './utils'
-import { TableActionColumnApi, TableColumnApi, TABLE_API_KEY } from './api'
+import {
+  isDefaultColumn,
+  isDetailsColumn,
+  isExpandColumn,
+  isRecord,
+  isSelectionColumn,
+  getDefaultCellValue,
+  getCellTooltipContent,
+} from './utils'
+import { TABLE_API_KEY, TableActionColumnApi, TableColumnApi } from './api'
 import { useTableHeights } from './use-table-heights'
+import STableCellDefault from '@/components/Table/STableCellDefault.vue'
+import STableCellSelection from '@/components/Table/STableCellSelection.vue'
+import STableCellExpand from '@/components/Table/STableCellExpand.vue'
+import STableCellDetails from '@/components/Table/STableCellDetails.vue'
+import STableCard from '@/components/Table/STableCard.vue'
 
 // vue can't infer Object prop type from CSSProperties and logs warnings and this helps
 type CSSObject = Partial<CSSProperties>
@@ -125,6 +140,14 @@ const props = withDefaults(
      * Controls the behavior of master checkbox in multi-select tables when only some rows are selected
      * */
     selectOnIndeterminate?: boolean
+    /**
+     * Table width when it becomes card grid
+     * */
+    adaptBreakpoint?: number
+    /**
+     * Array of predicates, receiving table width, and values. First true predicate defines selected value
+     * */
+    cardGridBreakpoints?: TableCardGridBreakpoint[]
   }>(),
   {
     data: () => [],
@@ -148,26 +171,28 @@ const props = withDefaults(
     selectOnIndeterminate: true,
     highlightCurrentRow: false,
     currentRowKey: '',
+    adaptBreakpoint: TABLE_DEFAULT_ADAPT_BREAKPOINT,
+    cardGridBreakpoints: () => TABLE_CARDS_GRID_DEFAULT_BREAKPOINTS,
   },
 )
 
 /* eslint-disable @typescript-eslint/unified-signatures */
 const emit = defineEmits<{
-  (event: 'cell-mouse-enter', ...value: TableCellEventData): void
-  (event: 'cell-mouse-leave', ...value: TableCellEventData): void
-  (event: 'cell-click', ...value: TableCellEventData): void
-  (event: 'cell-dblclick', ...value: TableCellEventData): void
-  (event: 'header-click', ...value: TableHeaderEventData): void
-  (event: 'header-contextmenu', ...value: TableHeaderEventData): void
-  (event: 'row-click', ...value: TableRowEventData): void
-  (event: 'row-dblclick', ...value: TableRowEventData): void
-  (event: 'row-contextmenu', ...value: TableRowEventData): void
-  (event: 'sort-change', value: TableSortEventData): void
-  (event: 'selection-change', value: TableRow[]): void
+  (event: 'mouse-enter:cell', ...value: TableCellEventData): void
+  (event: 'mouse-leave:cell', ...value: TableCellEventData): void
+  (event: 'click:cell', ...value: TableCellEventData): void
+  (event: 'dblclick:cell', ...value: TableCellEventData): void
+  (event: 'click:header', ...value: TableHeaderEventData): void
+  (event: 'contextmenu:header', ...value: TableHeaderEventData): void
+  (event: 'click:row', ...value: TableRowEventData): void
+  (event: 'dblclick:row', ...value: TableRowEventData): void
+  (event: 'contextmenu:row', ...value: TableRowEventData): void
+  (event: 'change:sort', value: TableSortEventData): void
+  (event: 'change:selection', value: TableRow[]): void
   (event: 'select-all', value: TableRow[]): void
   (event: 'select', ...value: [TableRow[], TableRow]): void
-  (event: 'expand-change', ...value: [TableRow, TableRow[]]): void
-  (event: 'current-change', ...value: [TableRow | null, TableRow | null]): void
+  (event: 'change:expand', ...value: [TableRow, TableRow[]]): void
+  (event: 'change:current', ...value: [TableRow | null, TableRow | null]): void
   (event: 'click:row-details', value: TableRow): void
 }>()
 
@@ -183,11 +208,32 @@ const tableSizes = reactive({
   height: 0,
   width: 0,
 })
+watchOnce(
+  tableWrapper,
+  () => {
+    if (!tableWrapper.value || !(tableWrapper.value instanceof HTMLElement)) {
+      return
+    }
+
+    const { width, height } = tableWrapper.value.getBoundingClientRect()
+    tableSizes.width = width
+    tableSizes.height = height
+  },
+  { immediate: true },
+)
 useResizeObserver(tableWrapper, (entries) => {
   setTimeout(() => {
     tableSizes.width = entries[0].contentRect.width
     tableSizes.height = entries[0].contentRect.height
   })
+})
+
+const isAdapted = eagerComputed(() => {
+  return tableSizes.width <= props.adaptBreakpoint
+})
+
+const cardsGridColumnNumber = eagerComputed(() => {
+  return props.cardGridBreakpoints.find((x) => x.test(tableSizes.width))?.value ?? 1
 })
 
 const headerWrapper: MaybeElementRef = ref(null)
@@ -301,9 +347,11 @@ watch(keyRows, () => {
   }
 })
 
-function manualToggleAllSelection(column: TableActionColumnApi) {
-  toggleAllSelection(column.selectable)
-  storedSelectedRowsKeys = [...selectedRows].map((row) => rowKeys.get(row))
+function manualToggleAllSelection() {
+  if (activeSelectionColumn.value) {
+    toggleAllSelection(activeSelectionColumn.value.selectable)
+    storedSelectedRowsKeys = [...selectedRows].map((row) => rowKeys.get(row))
+  }
 }
 
 function manualToggleRowSelection(row: TableRow, value?: boolean) {
@@ -327,6 +375,10 @@ function register(column: TableColumnApi | TableActionColumnApi) {
 const api = readonly({ register })
 provide(TABLE_API_KEY, api)
 
+function getColumnByProp(prop: string) {
+  return columns.filter(isDefaultColumn).find((column) => column.prop === prop)
+}
+
 function sort({ prop, order }: { prop: string; order: TableColumnSortOrder }) {
   const column = getColumnByProp(prop)
 
@@ -348,11 +400,7 @@ defineExpose({
   /**
    * used in multiple selection Table, toggle the selected state of all rows
    * */
-  toggleAllSelection: () => {
-    if (activeSelectionColumn.value) {
-      manualToggleAllSelection(activeSelectionColumn.value)
-    }
-  },
+  toggleAllSelection: manualToggleAllSelection,
   /**
    * used in expandable Table or tree Table, toggle if a certain row is expanded.
    * With the second parameter, you can directly set if this row is expanded or collapsed
@@ -372,10 +420,6 @@ defineExpose({
    * */
   setCurrentRow,
 })
-
-function getColumnByProp(prop: string) {
-  return columns.filter(isDefaultColumn).find((column) => column.prop === prop)
-}
 
 function getRowKey(row: TableRow) {
   if (typeof props.rowKey === 'string') {
@@ -410,20 +454,20 @@ function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T
   return prop || undefined
 }
 
-function isCheckBoxDisabled(column: TableActionColumnApi, row: TableRow, index: number) {
-  return !column.selectable || column.selectable(row, index)
+function isRowSelectable(row: TableRow, index: number) {
+  return !!(
+    activeSelectionColumn?.value &&
+    (!activeSelectionColumn.value.selectable || activeSelectionColumn.value.selectable(row, index))
+  )
 }
 
-function getDefaultCellValue(row: TableRow, column: TableColumnApi, index: number) {
-  return column.formatter ? column.formatter(row, column, get(row, column.prop), index) : get(row, column.prop)
-}
-
-function getCellTooltipContent(row: TableRow, column: TableColumnApi | TableActionColumnApi) {
-  if (!column.showOverflowTooltip || !isDefaultColumn(column)) {
-    return
+function getTemplateRowKey(row: TableRow, rowIndex: number): number | string | symbol {
+  const res = props.rowKey ? rowKeys.get(row) : rowIndex
+  if (typeof res === 'string' || typeof res === 'number' || typeof res === 'symbol') {
+    return res
   }
 
-  return String(get(row, column.prop))
+  return JSON.stringify(res)
 }
 
 function getSortIconStateClasses(column: TableColumnApi) {
@@ -442,26 +486,26 @@ function getSortIconStateClasses(column: TableColumnApi) {
 
 function handleSortClick(column: TableColumnApi) {
   handleSortChange(column)
-  emit('sort-change', { column, prop: column.prop, order: sortState.order })
+  emit('change:sort', { column, prop: column.prop, order: sortState.order })
 }
 
-function handleAllSelect(column: TableActionColumnApi) {
-  manualToggleAllSelection(column)
+function handleAllSelect() {
+  manualToggleAllSelection()
   const selectedArray = [...selectedRows]
   emit('select-all', selectedArray)
-  emit('selection-change', selectedArray)
+  emit('change:selection', selectedArray)
 }
 
 function handleRowSelect(row: TableRow) {
   manualToggleRowSelection(row)
   const selectedArray = [...selectedRows]
   emit('select', selectedArray, row)
-  emit('selection-change', selectedArray)
+  emit('change:selection', selectedArray)
 }
 
 function handleRowExpand(row: TableRow) {
   toggleRowExpanded(row)
-  emit('expand-change', row, [...expandedRows])
+  emit('change:expand', row, [...expandedRows])
 }
 
 function handleRowDetails(row: TableRow) {
@@ -481,20 +525,20 @@ function handleCellMouseEvent(ctx: {
 
   switch (ctx.event.type) {
     case 'mouseleave': {
-      emit('cell-mouse-leave', rawRow, ctx.column, ctx.event.target, ctx.event)
+      emit('mouse-leave:cell', rawRow, ctx.column, ctx.event.target, ctx.event)
       break
     }
     case 'mouseenter': {
-      emit('cell-mouse-enter', rawRow, ctx.column, ctx.event.target, ctx.event)
+      emit('mouse-enter:cell', rawRow, ctx.column, ctx.event.target, ctx.event)
       break
     }
     case 'click': {
-      if (isExpandColumn(ctx.column)) {
+      if (!isAdapted.value && isExpandColumn(ctx.column)) {
         handleRowExpand(rawRow)
         break
       }
 
-      if (isDetailsColumn(ctx.column)) {
+      if (!isAdapted.value && isDetailsColumn(ctx.column)) {
         handleRowDetails(rawRow)
         break
       }
@@ -502,18 +546,18 @@ function handleCellMouseEvent(ctx: {
       const oldCurrentRow = currentRow
       setCurrentRow(rawRow)
 
-      emit('cell-click', rawRow, ctx.column, ctx.event.target, ctx.event)
-      emit('row-click', rawRow, ctx.column, ctx.event)
-      emit('current-change', currentRow.value, oldCurrentRow.value)
+      emit('click:cell', rawRow, ctx.column, ctx.event.target, ctx.event)
+      emit('click:row', rawRow, ctx.column, ctx.event)
+      emit('change:current', currentRow.value, oldCurrentRow.value)
       break
     }
     case 'dblclick': {
-      emit('cell-dblclick', rawRow, ctx.column, ctx.event.target, ctx.event)
-      emit('row-dblclick', rawRow, ctx.column, ctx.event)
+      emit('dblclick:cell', rawRow, ctx.column, ctx.event.target, ctx.event)
+      emit('dblclick:row', rawRow, ctx.column, ctx.event)
       break
     }
     case 'contextmenu': {
-      emit('row-contextmenu', rawRow, ctx.column, ctx.event)
+      emit('contextmenu:row', rawRow, ctx.column, ctx.event)
       break
     }
   }
@@ -526,15 +570,15 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
 
   switch (ctx.event.type) {
     case 'click': {
-      if (isDefaultColumn(ctx.column) && ctx.column.sortable) {
+      if (!isAdapted.value && isDefaultColumn(ctx.column) && ctx.column.sortable) {
         handleSortClick(ctx.column)
       }
 
-      emit('header-click', ctx.column, ctx.event)
+      emit('click:header', ctx.column, ctx.event)
       break
     }
     case 'contextmenu': {
-      emit('header-contextmenu', ctx.column, ctx.event)
+      emit('contextmenu:header', ctx.column, ctx.event)
       break
     }
   }
@@ -549,7 +593,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
     :style="tableHeightStyles"
   >
     <div
-      v-if="showHeader"
+      v-if="!isAdapted && showHeader"
       ref="headerWrapper"
       class="s-table__header-wrapper"
     >
@@ -587,34 +631,33 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
               @click="handleHeaderMouseEvent({ column, 'event': $event })"
               @contextmenu="handleHeaderMouseEvent({ column, 'event': $event })"
             >
-              <div class="s-table__cell inline-flex items-center px-16px">
-                <template v-if="isDefaultColumn(column)">
-                  <component
-                    :is="column.headerSlot"
-                    v-if="column.headerSlot"
-                    v-bind="{ column, columnIndex }"
-                  />
-                  <template v-else>
-                    {{ column.label }}
-                  </template>
-                  <IconArrowTop16
-                    v-if="column.sortable"
-                    class="s-table__sort-icon inline ml-10px"
-                    :class="getSortIconStateClasses(column)"
-                  />
+              <component
+                :is="column.sortable ? 'button' : 'div'"
+                v-if="isDefaultColumn(column)"
+                class="s-table__header-cell inline-flex items-center sora-tpg-ch3 px-16px"
+              >
+                <component
+                  :is="column.headerSlot"
+                  v-if="column.headerSlot"
+                  v-bind="{ column, columnIndex }"
+                />
+                <template v-else>
+                  {{ column.label }}
                 </template>
+                <IconArrowTop16
+                  v-if="column.sortable"
+                  class="s-table__sort-icon flex-shrink-0 inline ml-10px"
+                  :class="getSortIconStateClasses(column)"
+                />
+              </component>
 
-                <template v-else-if="isSelectionColumn(column)">
-                  <SCheckboxAtom
-                    :class="{ 'cursor-pointer': data.length }"
-                    data-testid="table-header-selection-checkbox"
-                    size="xl"
-                    :checked="isSomeSelected ? (isAllSelected ? true : 'mixed') : false"
-                    :disabled="!data.length"
-                    @click.stop="data.length && handleAllSelect(column)"
-                  />
-                </template>
-              </div>
+              <STableCellSelection
+                v-if="isSelectionColumn(column)"
+                data-testid="table-header-selection-checkbox"
+                :disabled="!data.length"
+                :checked="isSomeSelected ? (isAllSelected ? true : 'mixed') : false"
+                @select="handleAllSelect()"
+              />
             </th>
           </tr>
         </thead>
@@ -624,14 +667,44 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
       class="s-table__body-wrapper"
       :style="bodyHeightStyles"
     >
+      <div
+        v-if="isAdapted"
+        class="s-table__cards-grid"
+      >
+        <STableCard
+          v-for="(row, rowIndex) in sortedData"
+          :key="getTemplateRowKey(row, rowIndex)"
+          data-testid="table-row"
+          class="s-table__card"
+          :class="{
+            's-table__card_first-row': rowIndex < cardsGridColumnNumber,
+            's-table__card_last-column': !((rowIndex + 1) % cardsGridColumnNumber),
+          }"
+          :row="{ 'data': row, 'index': rowIndex }"
+          :columns="columns"
+          :active-expand-column="activeExpandColumn"
+          :active-selection-column="activeSelectionColumn"
+          :expanded="expandedRows.has(row)"
+          :selectable="isRowSelectable(row, rowIndex)"
+          :selected="selectedRows.has(row)"
+          @mouse-event:label="handleHeaderMouseEvent"
+          @mouse-event:value="handleCellMouseEvent"
+          @select="handleRowSelect(row)"
+          @expand="handleRowExpand(row)"
+          @click:details="handleRowDetails(row)"
+        />
+      </div>
+
       <table
+        v-else
         class="s-table__body w-full"
         :style="{ 'width': `${columnsWidthsSum}px` }"
+        data-testid="table-body"
       >
         <tbody>
           <template
             v-for="(row, rowIndex) in sortedData"
-            :key="rowKey ? rowKeys.get(row) : rowIndex"
+            :key="getTemplateRowKey(row, rowIndex)"
           >
             <tr
               class="s-table__tr"
@@ -642,6 +715,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
               :style="getStyleOrClass(rowStyle, { row, rowIndex })"
               data-testid="table-row"
             >
+              <!-- legacy event proxy + every key event handled by button behaviour -->
               <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events vuejs-accessibility/click-events-have-key-events -->
               <td
                 v-for="(column, columnIndex) in columns"
@@ -664,50 +738,33 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
                 @dblclick="handleCellMouseEvent({ row, column, 'event': $event })"
                 @contextmenu="handleCellMouseEvent({ row, column, 'event': $event })"
               >
-                <div
-                  class="s-table__cell h-full flex flex-col justify-center"
-                  :class="{
-                    's-table__cell_has-tooltip': column.showOverflowTooltip,
-                    's-table__cell_has-hover': isDetailsColumn(column),
-                    'cursor-pointer': isExpandColumn(column) || isDetailsColumn(column),
-                    'px-16px': !isDetailsColumn(column),
-                  }"
-                  :title="getCellTooltipContent(row, column)"
+                <STableCellDefault
+                  v-if="isDefaultColumn(column)"
+                  :tooltip="getCellTooltipContent(row, column)"
                 >
-                  <template v-if="isDefaultColumn(column)">
-                    <component
-                      :is="column.cellSlot"
-                      v-if="column.cellSlot"
-                      v-bind="{ row, column, rowIndex }"
-                    />
-                    <template v-else>
-                      {{ getDefaultCellValue(row, column, rowIndex) }}
-                    </template>
+                  <component
+                    :is="column.cellSlot"
+                    v-if="column.cellSlot"
+                    v-bind="{ row, column, rowIndex }"
+                  />
+                  <template v-else>
+                    {{ getDefaultCellValue(row, column, rowIndex) }}
                   </template>
+                </STableCellDefault>
 
-                  <template v-else-if="isSelectionColumn(column)">
-                    <SCheckboxAtom
-                      :class="{ 'cursor-pointer': !isCheckBoxDisabled(column, row, rowIndex) }"
-                      size="xl"
-                      data-testid="table-selection-checkbox"
-                      :checked="selectedRows.has(row)"
-                      :disabled="isCheckBoxDisabled(column, row, rowIndex)"
-                      @click.stop="isCheckBoxDisabled(column, row, rowIndex) || handleRowSelect(row)"
-                    />
-                  </template>
+                <STableCellSelection
+                  v-else-if="isSelectionColumn(column)"
+                  :disabled="!isRowSelectable(row, rowIndex)"
+                  :checked="selectedRows.has(row)"
+                  @select="handleRowSelect(row)"
+                />
 
-                  <template v-else-if="isExpandColumn(column)">
-                    <IconArrowsChevronDownRounded24
-                      class="s-table__expand-icon"
-                      :class="{ 's-table__expand-icon_active': expandedRows.has(row) }"
-                      data-testid="table-expanded-icon"
-                    />
-                  </template>
+                <STableCellExpand
+                  v-else-if="isExpandColumn(column)"
+                  :active="expandedRows.has(row)"
+                />
 
-                  <template v-else-if="isDetailsColumn(column)">
-                    <IconArrowsChevronRightXs24 class="s-table__details-icon self-center" />
-                  </template>
-                </div>
+                <STableCellDetails v-else-if="isDetailsColumn(column)" />
               </td>
             </tr>
 
@@ -755,9 +812,29 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
 <style lang="scss">
 @use '@/theme';
 
+$col-number: v-bind(cardsGridColumnNumber);
+
 .s-table {
   &__body-wrapper {
     overflow-y: auto;
+  }
+
+  &__cards-grid {
+    display: grid;
+    grid-template-columns: repeat($col-number, 1fr);
+  }
+
+  &__card {
+    border-right: 1px solid theme.token-as-var('sys.color.border-secondary');
+    border-top: 1px solid theme.token-as-var('sys.color.border-secondary');
+
+    &_last-column {
+      border-right: none;
+    }
+
+    &_first-row {
+      border-top: none;
+    }
   }
 
   &__body,
@@ -766,6 +843,12 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
     border-collapse: separate;
     border-spacing: 0;
     border: none;
+  }
+
+  &__header-cell {
+    box-sizing: border-box;
+    overflow: hidden;
+    word-break: break-all;
   }
 
   &__tr:hover > &__td,
@@ -826,43 +909,9 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
     }
   }
 
-  &__expand-icon {
-    fill: currentColor;
-    transition: 0.15s ease-in-out transform;
-
-    &_active {
-      transform: rotateZ(180deg);
-    }
-  }
-
-  &__th_sortable:hover &__sort-icon {
+  &__th_sortable:hover &__sort-icon,
+  &__header-cell:focus &__sort-icon {
     visibility: visible;
-  }
-
-  &__cell {
-    box-sizing: border-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    word-break: break-all;
-
-    &_has-tooltip {
-      white-space: nowrap;
-    }
-
-    &_has-hover:hover {
-      background: theme.token-as-var('sys.color.background-hover');
-    }
-  }
-
-  &__details-icon {
-    color: theme.token-as-var('sys.color.content-quaternary');
-    fill: currentColor;
-  }
-
-  &__cell:hover &__details-icon {
-    color: theme.token-as-var('sys.color.content-secondary');
-    fill: currentColor;
   }
 
   &__empty-text {
