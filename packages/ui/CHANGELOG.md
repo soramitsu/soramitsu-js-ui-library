@@ -1,10 +1,17 @@
 # @soramitsu-ui/ui
 
+## 0.9.0
+
+### Minor Changes
+
+- ecd8737: **feat**: added date picker component (`SDatePicker`)
+- ec199b8: **feat**(`STable`): add adaptive version of table
+
 ## 0.8.0
 
 ### Minor Changes
 
-- a147748: **feature**(`STable`): added details table column type
+- a147748: **feat**(`STable`): added details table column type
 - afd5e81: **feat**: add tooltip component (`STooltip`)
 
 ### Patch Changes
