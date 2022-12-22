@@ -83,10 +83,16 @@ const init = () => {
 const updateModelValue = () => {
   if (props.type === 'day') {
     innerModelValue.value = dayState.value
+    save()
   } else if (props.type === 'pick') {
     innerModelValue.value = pickState.value
+    save()
   } else {
     innerModelValue.value = [rangeState.startDate as Date, rangeState.endDate as Date]
+
+    if (rangeState.endDate) {
+      save()
+    }
   }
 }
 
@@ -324,6 +330,9 @@ const updateShow = () => {
 
 const save = () => {
   emit('update:modelValue', innerModelValue.value)
+}
+const saveAndClose = () => {
+  save()
   togglePopper(false)
 }
 
@@ -395,7 +404,7 @@ else updateModelValue()
               :format-date="formatDate"
               :format-pattern="formatPattern"
               @update:custom-input="updateCustomInput"
-              @click:done="save"
+              @click:done="saveAndClose"
             />
           </div>
         </SPopoverWrappedTransition>
