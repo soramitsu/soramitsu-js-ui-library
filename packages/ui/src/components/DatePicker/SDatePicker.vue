@@ -364,7 +364,7 @@ else updateModelValue()
               disabled,
               updateShow,
               'isPopperShown': showPopper,
-              'label': headTitle
+              'label': headTitle,
             }"
           >
             <div
