@@ -18,19 +18,23 @@ import {
   ShowState,
   RangeOptionValue,
   ModelValueType,
+  Options,
 } from './types'
 import { DatePickerApi, DATE_PICKER_API_KEY } from './api'
+import { DEFAULT_SHORTCUTS } from './consts'
 
 interface Props {
   modelValue: ModelValueType
   type?: DatePickerType
   time?: boolean
   disabled?: boolean
+  shortcuts?: Options
 }
 const props = withDefaults(defineProps<Props>(), {
   type: 'day',
   time: false,
   disabled: false,
+  shortcuts: () => DEFAULT_SHORTCUTS,
 })
 
 const innerModelValue = ref<ModelValueType>(props.modelValue)
@@ -156,8 +160,19 @@ const showStateView = computed(() => {
 // #endregion
 
 // #region OPTIONS_PANEL
-const onMenuClick = (data: Date | RangeOptionValue, label: string) => {
-  onDatePick(data)
+const onMenuClick = (data: Date | [Date, Date] | Date[], label: string) => {
+  let processedData: RangeOptionValue | Date | Date[] = data
+
+  if (Array.isArray(data) && data.length === 2) {
+    processedData = {
+      startDate: data[0],
+      endDate: data[1],
+      selecting: false,
+      selectedField: 'endDate',
+    }
+  }
+
+  onDatePick(processedData)
   updateShowedMonths()
   menuState.value = label
 }
@@ -397,6 +412,7 @@ else updateModelValue()
             <OptionsPanel
               :type="type"
               :menu-state="menuState"
+              :options="shortcuts"
               @click:option="onMenuClick"
             />
             <CalendarsPanel

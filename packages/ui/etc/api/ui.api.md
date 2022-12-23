@@ -447,16 +447,19 @@ export const SDatePicker: DefineComponent<__VLS_WithDefaults_14<__VLS_TypePropsT
 type: string;
 time: boolean;
 disabled: boolean;
+shortcuts: () => Options;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_14<__VLS_TypePropsToRuntimeProps_17<Props_7>, {
 type: string;
 time: boolean;
 disabled: boolean;
+shortcuts: () => Options;
 }>>> & {
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
 type: DatePickerType;
 disabled: boolean;
 time: boolean;
+shortcuts: Options;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
@@ -1962,7 +1965,8 @@ export function useTabsPanelApi(): TabsPanelApi;
 
 // Warnings were encountered during analysis:
 //
-// dist-ts/components/DatePicker/SDatePicker.vue.d.ts:19:5 - (ae-forgotten-export) The symbol "DatePickerType" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/DatePicker/SDatePicker.vue.d.ts:13:5 - (ae-forgotten-export) The symbol "Options" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/DatePicker/SDatePicker.vue.d.ts:22:5 - (ae-forgotten-export) The symbol "DatePickerType" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Table/STable.vue.d.ts:61:5 - (ae-forgotten-export) The symbol "CSSObject" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Table/STable.vue.d.ts:150:5 - (ae-forgotten-export) The symbol "manualClearSelection" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Table/STable.vue.d.ts:155:5 - (ae-forgotten-export) The symbol "manualToggleRowSelection" needs to be exported by the entry point lib.d.ts
