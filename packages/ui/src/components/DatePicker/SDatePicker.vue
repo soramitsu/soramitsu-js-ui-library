@@ -358,19 +358,30 @@ else updateModelValue()
       @click-outside="togglePopper(false)"
     >
       <template #trigger>
-        <div
-          class="s-date-picker__header p-2 sora-tpg-ch2 relative pr-6"
-          :class="disabled ? 'cursor-default' : 'cursor-pointer'"
-          @keydown="updateShow"
-          @click="updateShow"
-        >
-          {{ headTitle || 'Date' }}
-          <div
-            class="arrow"
-            :class="arrowState"
+        <div>
+          <slot
+            v-bind="{
+              disabled,
+              updateShow,
+              'isPopperShown': showPopper,
+              'label': headTitle
+            }"
           >
-            <IconArrowsChevronBottom24 />
-          </div>
+            <div
+              class="s-date-picker__header p-2 sora-tpg-ch2 relative pr-6"
+              :class="disabled ? 'cursor-default' : 'cursor-pointer'"
+              @keydown="updateShow"
+              @click="updateShow"
+            >
+              {{ headTitle || 'Date' }}
+              <div
+                class="arrow"
+                :class="arrowState"
+              >
+                <IconArrowsChevronBottom24 />
+              </div>
+            </div>
+          </slot>
         </div>
       </template>
       <template #popper>
