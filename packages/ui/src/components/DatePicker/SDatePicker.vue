@@ -182,6 +182,10 @@ const changeView = (viewName: string) => {
 }
 
 const headTitle = computed(() => {
+  if (menuState.value !== 'Custom') {
+    return menuState.value
+  }
+
   try {
     switch (props.type) {
       case 'day':
