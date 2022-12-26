@@ -97,8 +97,6 @@ export type CheckboxState = boolean | 'mixed';
 
 // @public (undocumented)
 export interface DatePickerOptions {
-    // Warning: (ae-forgotten-export) The symbol "PresetOption" needs to be exported by the entry point lib.d.ts
-    //
     // (undocumented)
     day?: PresetOption<Date>[];
     // (undocumented)
@@ -109,6 +107,32 @@ export interface DatePickerOptions {
 
 // @public (undocumented)
 export type DatePickerType = 'day' | 'range' | 'pick';
+
+// @public (undocumented)
+export type DateState = Date;
+
+// @public (undocumented)
+export interface DateTableCell {
+    // (undocumented)
+    day: number;
+    // (undocumented)
+    end: boolean;
+    // (undocumented)
+    inRange: boolean;
+    // (undocumented)
+    month: number;
+    // (undocumented)
+    start: boolean;
+    // (undocumented)
+    text: number;
+    // (undocumented)
+    time: string | null;
+    // (undocumented)
+    type: DateTableCellType;
+}
+
+// @public (undocumented)
+export type DateTableCellType = 'normal' | 'today' | 'prev-month' | 'next-month';
 
 // @public (undocumented)
 export function defineToastsApi(): ToastsApi;
@@ -144,6 +168,9 @@ export interface ModalApi {
 }
 
 // @public (undocumented)
+export type ModelValueType = Date[] | Date | null | undefined;
+
+// @public (undocumented)
 export const NAVIGATION_MENU_API_KEY: InjectionKey<DeepReadonly<NavigationMenuApi>>;
 
 // @public (undocumented)
@@ -167,6 +194,9 @@ export interface NavigationSubmenuApi {
 export const NOTIFICATIONS_API_KEY: InjectionKey<ToastsApi>;
 
 // @public (undocumented)
+export type PickState = Date[];
+
+// @public (undocumented)
 export function plugin(): Plugin_2;
 
 // @public (undocumented)
@@ -178,6 +208,14 @@ export interface PopoverApi {
     deletePopperRefOverride: (elem: HTMLElement) => void;
     popper: Instance | null;
     show: boolean;
+}
+
+// @public (undocumented)
+export interface PresetOption<T> {
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    value: T;
 }
 
 // @public (undocumented)
@@ -215,6 +253,22 @@ export { RadioSize }
 type RadioType = typeof RADIO_TYPE_VALUES extends ReadonlyArray<infer T> ? T : never;
 export { RadioType as CheckboxType }
 export { RadioType }
+
+// @public (undocumented)
+export interface RangeOptionValue extends RangeState {
+    // (undocumented)
+    selectedField: string;
+}
+
+// @public (undocumented)
+export interface RangeState {
+    // (undocumented)
+    endDate: Date | null;
+    // (undocumented)
+    selecting: boolean;
+    // (undocumented)
+    startDate: Date | null;
+}
 
 // @public (undocumented)
 export type RegisteredToast = ToastRegisterParams;
@@ -580,6 +634,14 @@ export interface ShowNotificationParams {
 export interface ShowNotificationReturn {
     // (undocumented)
     close: () => void;
+}
+
+// @public (undocumented)
+export interface ShowState {
+    // (undocumented)
+    month: number;
+    // (undocumented)
+    year: number;
 }
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -1523,6 +1585,16 @@ background: string;
 modelValue: string;
 background: TabsPanelBackgroundType;
 }>;
+
+// @public (undocumented)
+export interface StateStore {
+    // (undocumented)
+    dayState: DateState;
+    // (undocumented)
+    pickState: PickState;
+    // (undocumented)
+    rangeState: RangeState;
+}
 
 // @public
 export const Status: {
