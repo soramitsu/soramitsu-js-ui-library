@@ -13,7 +13,7 @@ import {
   subMonths,
   subWeeks,
 } from 'date-fns'
-import { Options } from '@/components/DatePicker/types'
+import { DatePickerOptions } from '@/components/DatePicker/types'
 
 export const months = [
   'January',
@@ -46,7 +46,7 @@ export const TIME_POINTS: string[] = (() => {
   return res
 })()
 
-export const DEFAULT_SHORTCUTS: Options = /* @__PURE__ */ (() => {
+export const DEFAULT_SHORTCUTS: DatePickerOptions = /* @__PURE__ */ (() => {
   const START_OF_TODAY = startOfToday()
   const START_OF_YESTERDAY = startOfYesterday()
   const START_OF_TOMORROW = startOfTomorrow()

@@ -27,7 +27,7 @@ export interface PresetOption<T> {
   value: T
 }
 
-export interface Options {
+export interface DatePickerOptions {
   day?: PresetOption<Date>[]
   range?: PresetOption<[Date, Date]>[]
   pick?: PresetOption<Date[]>[]

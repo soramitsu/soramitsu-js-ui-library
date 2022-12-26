@@ -18,7 +18,7 @@ import {
   ShowState,
   RangeOptionValue,
   ModelValueType,
-  Options,
+  DatePickerOptions,
 } from './types'
 import { DatePickerApi, DATE_PICKER_API_KEY } from './api'
 import { DEFAULT_SHORTCUTS } from './consts'
@@ -28,7 +28,7 @@ interface Props {
   type?: DatePickerType
   time?: boolean
   disabled?: boolean
-  shortcuts?: Options
+  shortcuts?: DatePickerOptions
 }
 const props = withDefaults(defineProps<Props>(), {
   type: 'day',

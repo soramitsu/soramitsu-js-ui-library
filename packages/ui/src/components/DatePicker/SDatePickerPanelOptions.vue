@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Options } from './types'
+import { DatePickerOptions } from './types'
 import { IconBasicCheckMark24 } from '@/components/icons'
 import { DatePickerApi, useDatePickerApi } from './api'
 
 interface Props {
   menuState: string
-  options: Options
+  options: DatePickerOptions
 }
 
 const props = defineProps<Props>()
@@ -18,7 +18,7 @@ const onMenuClick = (data: Date | [Date, Date] | Date[], label: string) => {
   emit('click:option', data, label)
 }
 
-const finalOptions = computed((): Required<Options> => {
+const finalOptions = computed((): Required<DatePickerOptions> => {
   return {
     day: props.options.day ?? [],
     range: props.options.range ?? [],
