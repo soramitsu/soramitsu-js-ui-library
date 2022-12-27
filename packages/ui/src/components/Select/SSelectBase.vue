@@ -41,6 +41,11 @@ const props = withDefaults(
      * Turn on this prop to disable auto-close.
      */
     noAutoClose?: boolean
+
+    /**
+     * Makes popper same width as trigger.
+     */
+    sameWidthPopper?: boolean
   }>(),
   {
     size: SelectSize.Md,
@@ -91,6 +96,7 @@ provide(SELECT_API_KEY, api)
   <div>
     <SPopover
       v-model:show="showPopper"
+      :same-width="sameWidthPopper"
       placement="bottom-start"
       trigger="manual"
       distance="4"
@@ -107,6 +113,7 @@ provide(SELECT_API_KEY, api)
           name="s-select-dropdown-transition"
           eager
           :wrapper-attrs="{ 'class': 'z-10' }"
+          :inner-wrapper-attrs="{ 'class': sameWidthPopper && 'w-full' }"
         >
           <slot name="dropdown" />
         </SPopoverWrappedTransition>

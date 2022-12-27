@@ -15,6 +15,10 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+  innerWrapperAttrs: {
+    type: Object,
+    default: null,
+  },
 })
 
 const api = usePopoverApi()
@@ -55,6 +59,7 @@ onScopeDispose(() => {
       <span
         v-if="contentIf"
         v-show="contentShow"
+        v-bind="innerWrapperAttrs"
       >
         <slot />
       </span>

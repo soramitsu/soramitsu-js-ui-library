@@ -823,6 +823,10 @@ hideDelay: {
 type: (StringConstructor | NumberConstructor)[];
 default: number;
 };
+sameWidth: {
+type: BooleanConstructor;
+default: boolean;
+};
 }, () => (VNode<RendererNode, RendererElement, {
 [key: string]: any;
 }> | null)[], unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "click-outside")[], "update:show" | "click-outside", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {
@@ -853,6 +857,10 @@ hideDelay: {
 type: (StringConstructor | NumberConstructor)[];
 default: number;
 };
+sameWidth: {
+type: BooleanConstructor;
+default: boolean;
+};
 }>> & {
 "onUpdate:show"?: ((...args: any[]) => any) | undefined;
 "onClick-outside"?: ((...args: any[]) => any) | undefined;
@@ -864,6 +872,7 @@ skidding: string | number;
 distance: string | number;
 showDelay: string | number;
 hideDelay: string | number;
+sameWidth: boolean;
 }>;
 
 // @public (undocumented)
@@ -873,15 +882,24 @@ wrapperAttrs: {
 type: ObjectConstructor;
 default: null;
 };
+innerWrapperAttrs: {
+type: ObjectConstructor;
+default: null;
+};
 }, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {
 eager: BooleanConstructor;
 wrapperAttrs: {
 type: ObjectConstructor;
 default: null;
 };
+innerWrapperAttrs: {
+type: ObjectConstructor;
+default: null;
+};
 }>>, {
 eager: boolean;
 wrapperAttrs: Record<string, any>;
+innerWrapperAttrs: Record<string, any>;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -901,8 +919,8 @@ lineHeight?: number | undefined;
 percent: number;
 lineHeight: number;
 }>>>, {
-percent: number;
 lineHeight: number;
+percent: number;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -988,6 +1006,7 @@ label?: string | null | undefined;
 mandatory?: boolean | undefined;
 syncMenuAndInputWidths?: boolean | undefined;
 noAutoClose?: boolean | undefined;
+sameWidthPopper?: boolean | undefined;
 }>, {
 size: "md";
 options: () => never[];
@@ -1009,6 +1028,7 @@ label?: string | null | undefined;
 mandatory?: boolean | undefined;
 syncMenuAndInputWidths?: boolean | undefined;
 noAutoClose?: boolean | undefined;
+sameWidthPopper?: boolean | undefined;
 }>, {
 size: "md";
 options: () => never[];
@@ -1298,11 +1318,11 @@ onSelect?: ((args_0: TableRow[], args_1: TableRow) => any) | undefined;
 }, {
 data: TableRow[];
 height: string | number;
+maxHeight: string | number;
 defaultSort: {
 prop: string;
 order: TableColumnSortOrder;
 } | null;
-maxHeight: string | number;
 fit: boolean;
 showHeader: boolean;
 highlightCurrentRow: boolean;
@@ -1467,9 +1487,9 @@ default: boolean;
 type: "default" | "details" | "selection" | "expand";
 width: string;
 label: string;
+minWidth: string;
 sortable: boolean | "custom";
 prop: string;
-minWidth: string;
 sortMethod: <T>(a: T, b: T) => number;
 sortBy: TableColumnSortBy_2;
 sortOrders: TableColumnSortOrder_2[];
@@ -1651,9 +1671,9 @@ secondaryButtonText: string;
 "onClick:secondary-button"?: ((...args: any[]) => any) | undefined;
 }, {
 placement: BasePlacement;
+content: string;
 header: string;
 wrapperTag: string | object;
-content: string;
 primaryButtonText: string;
 secondaryButtonText: string;
 }>;
