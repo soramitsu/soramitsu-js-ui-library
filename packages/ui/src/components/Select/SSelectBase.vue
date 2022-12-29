@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SelectSize, SelectOption } from './types'
+import { SelectSize, SelectOption, SelectOptionGroup } from './types'
 import { useSelectModel } from './use-model'
 import { SelectApi, SELECT_API_KEY } from './api'
 import { and, not } from '@vueuse/core'
@@ -11,7 +11,7 @@ const props = withDefaults(
     multiple?: boolean
 
     modelValue?: any
-    options?: SelectOption[]
+    options?: SelectOption[] | SelectOptionGroup[]
 
     size?: SelectSize
 
@@ -77,7 +77,7 @@ const [showPopper, togglePopper] = useToggle(false)
 // close popper if select is disabled
 whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
 
-const api = readonly({
+const api: SelectApi<any> = reactive({
   ...modeling,
   multiple,
   options,
@@ -87,7 +87,7 @@ const api = readonly({
   menuToggle: togglePopper,
   size,
   noAutoClose,
-}) as SelectApi<any>
+})
 
 provide(SELECT_API_KEY, api)
 </script>

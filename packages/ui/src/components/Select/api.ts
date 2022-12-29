@@ -1,10 +1,10 @@
-import { InjectionKey, UnwrapRef, DeepReadonly } from 'vue'
-import { SelectOption, SelectSize } from './types'
+import { InjectionKey, UnwrapRef } from 'vue'
+import { SelectOption, SelectOptionGroup, SelectSize } from './types'
 import { UseSelectModelReturn } from './use-model'
 import { forceInject } from '@/util'
 
-export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
-  readonly options: DeepReadonly<UnwrapRef<SelectOption<T>>[]>
+export interface SelectApi<T> extends UnwrapRef<UseSelectModelReturn<T>> {
+  readonly options: UnwrapRef<SelectOption<T>[] | SelectOptionGroup<T>[]>
   readonly multiple: boolean
   readonly disabled: boolean
   readonly label: string | null

@@ -1,12 +1,14 @@
 import { Ref } from 'vue'
-import { SelectOption } from './types'
+import { SelectOption, SelectOptionGroup } from './types'
 import { whenever, and, not } from '@vueuse/core'
+import { isSelectOptions } from '@/components/Select/utils'
 
 export interface UseSelectModelReturn<T> {
   /**
    * Toggle value's selection state. Works different in single/multiple modes.
    */
   toggleSelection: (value: T) => void
+  toggleGroupSelection: (optionsGroup: SelectOptionGroup<T>) => void
   select: (value: T) => void
   unselect: (value: T) => void
 
@@ -21,12 +23,13 @@ export interface UseSelectModelReturn<T> {
   selectedOptions: Ref<SelectOption<T>[]>
 
   isSomethingSelected: Ref<boolean>
+  isGroupSelected: (optionsGroup: SelectOptionGroup<T>) => boolean
 }
 
 export interface UseSelectModelParams<T> {
   multiple: Ref<boolean>
   model: Ref<null | T | T[]>
-  options: Ref<SelectOption<T>[]>
+  options: Ref<SelectOption<T>[] | SelectOptionGroup<T>[]>
 
   singleModeAutoClose: Ref<boolean>
   /**
@@ -59,6 +62,10 @@ export function useSelectModel<T = any>({
     return selectedSet.value.has(value)
   }
 
+  function isGroupSelected(optionGroup: SelectOptionGroup<T>) {
+    return optionGroup.items.every((x) => selectedSet.value.has(x.value))
+  }
+
   function select(value: T): void {
     if (multiple.value) {
       model.value = [...new Set([...modelAsArray.value, value])]
@@ -81,7 +88,26 @@ export function useSelectModel<T = any>({
     isValueSelected(value) ? unselect(value) : select(value)
   }
 
-  const selectedOptions = computed<SelectOption[]>(() => options.value.filter((x) => isValueSelected(x.value)))
+  function toggleGroupSelection(optionGroup: SelectOptionGroup<T>): void {
+    if (isGroupSelected(optionGroup)) {
+      const optionGroupSet = new Set(optionGroup.items.map((x) => x.value))
+      model.value = modelAsArray.value.filter((x) => !optionGroupSet.has(x))
+
+      return
+    }
+
+    model.value = [...new Set([...modelAsArray.value, ...optionGroup.items.map((x) => x.value)])]
+  }
+
+  const optionItems = computed(() => {
+    if (isSelectOptions(options.value)) {
+      return options.value
+    }
+
+    return options.value.flatMap((x) => x.items)
+  })
+
+  const selectedOptions = computed<SelectOption[]>(() => optionItems.value.filter((x) => isValueSelected(x.value)))
 
   const isSomethingSelected = computed<boolean>(() => !!selectedSet.value.size)
 
@@ -104,8 +130,10 @@ export function useSelectModel<T = any>({
     isValueSelected,
     selectedOptions,
     toggleSelection,
+    toggleGroupSelection,
     select,
     unselect,
     isSomethingSelected,
+    isGroupSelected,
   }
 }

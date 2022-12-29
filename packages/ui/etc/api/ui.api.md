@@ -464,7 +464,7 @@ time: boolean;
 // @public (undocumented)
 export const SDropdown: DefineComponent<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
-options?: SelectOption<any>[] | undefined;
+options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
@@ -473,7 +473,7 @@ inline?: boolean | undefined;
 noAutoClose?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
-options?: SelectOption<any>[] | undefined;
+options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
@@ -488,7 +488,7 @@ export const SELECT_API_KEY: InjectionKey<SelectApi<any>>;
 // Warning: (ae-forgotten-export) The symbol "UseSelectModelReturn" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelReturn<T>>> {
+export interface SelectApi<T> extends UnwrapRef<UseSelectModelReturn<T>> {
     // (undocumented)
     readonly disabled: boolean;
     // (undocumented)
@@ -501,7 +501,7 @@ export interface SelectApi<T> extends DeepReadonly<UnwrapRef<UseSelectModelRetur
     // (undocumented)
     readonly noAutoClose: boolean;
     // (undocumented)
-    readonly options: DeepReadonly<UnwrapRef<SelectOption<T>>[]>;
+    readonly options: UnwrapRef<SelectOption<T>[] | SelectOptionGroup<T>[]>;
     // (undocumented)
     readonly size: SelectSize;
 }
@@ -521,6 +521,16 @@ export interface SelectOption<T = any> {
     label: string;
     // (undocumented)
     value: T;
+}
+
+// @public (undocumented)
+export interface SelectOptionGroup<T = any> {
+    // (undocumented)
+    header?: string;
+    // (undocumented)
+    items: SelectOption<T>[];
+    // (undocumented)
+    selectAllBtn?: boolean;
 }
 
 // @public (undocumented)
@@ -976,7 +986,7 @@ radioSelector: string;
 // @public (undocumented)
 export const SSelect: DefineComponent<__VLS_TypePropsToRuntimeProps_9<{
 modelValue?: any;
-options?: SelectOption<any>[] | undefined;
+options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
@@ -984,7 +994,7 @@ size?: SelectSize | undefined;
 noAutoClose?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_9<{
 modelValue?: any;
-options?: SelectOption<any>[] | undefined;
+options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
@@ -1000,7 +1010,7 @@ export const SSelectBase: DefineComponent<__VLS_WithDefaults_9<__VLS_TypePropsTo
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 modelValue?: any;
-options?: SelectOption<any>[] | undefined;
+options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
 size?: SelectSize | undefined;
 label?: string | null | undefined;
 mandatory?: boolean | undefined;
@@ -1022,7 +1032,7 @@ label: null;
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 modelValue?: any;
-options?: SelectOption<any>[] | undefined;
+options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
 size?: SelectSize | undefined;
 label?: string | null | undefined;
 mandatory?: boolean | undefined;
@@ -1045,10 +1055,10 @@ modelValue: any;
 multiple: boolean;
 size: SelectSize;
 disabled: boolean;
-options: SelectOption[];
+options: SelectOption[] | SelectOptionGroup[];
 label: string | null;
-syncMenuAndInputWidths: boolean;
 noAutoClose: boolean;
+syncMenuAndInputWidths: boolean;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -1486,9 +1496,10 @@ default: boolean;
 }>>, {
 type: "default" | "details" | "selection" | "expand";
 width: string;
-label: string;
 minWidth: string;
+label: string;
 sortable: boolean | "custom";
+selectable: TableColumnRowSelectableFunc_2;
 prop: string;
 sortMethod: <T>(a: T, b: T) => number;
 sortBy: TableColumnSortBy_2;
@@ -1499,7 +1510,6 @@ align: "left" | "right" | "center";
 headerAlign: "left" | "right" | "center" | null;
 className: string;
 labelClassName: string;
-selectable: TableColumnRowSelectableFunc_2;
 reserveSelection: boolean;
 }>;
 
