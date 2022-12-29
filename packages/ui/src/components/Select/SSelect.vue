@@ -12,6 +12,7 @@ defineProps<{
   label?: string
   size?: SelectSize
   noAutoClose?: boolean
+  loading?: boolean
 }>()
 </script>
 

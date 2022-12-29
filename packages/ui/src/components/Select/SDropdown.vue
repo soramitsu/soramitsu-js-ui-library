@@ -13,6 +13,7 @@ const props = defineProps<{
   size?: SelectSize
   inline?: boolean
   noAutoClose?: boolean
+  loading?: boolean
 }>()
 
 const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : SelectButtonType.Default))

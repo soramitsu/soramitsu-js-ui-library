@@ -4,6 +4,7 @@ import { SelectOptionGroup, SelectOptionType, SelectSize } from './types'
 import SSelectOption from './SSelectOption.vue'
 import { ComputedRef } from 'vue'
 import { isSelectOptions } from '@/components/Select/utils'
+import SSpinner from '@/components/Spinner/SSpinner.vue'
 
 defineProps<{
   itemType: SelectOptionType
@@ -47,40 +48,49 @@ const ACTION_FONT = {
     class="s-select-dropdown"
     :class="`s-select-dropdown_size_${api.size}`"
   >
-    <template
-      v-for="(optionGroup, i) in optionGroups"
-      :key="i"
+    <div
+      v-if="api.loading"
+      class="s-select-dropdown__loading flex items-center justify-center"
     >
-      <div
-        v-if="isActionButtonShown(!!optionGroup.selectAllBtn) || optionGroup.header"
-        class="s-select-dropdown__header flex items-center justify-between"
+      <SSpinner />
+    </div>
+
+    <template v-else>
+      <template
+        v-for="(optionGroup, i) in optionGroups"
+        :key="i"
       >
         <div
-          v-if="optionGroup.header"
-          :class="HEADER_FONT[api.size]"
+          v-if="isActionButtonShown(!!optionGroup.selectAllBtn) || optionGroup.header"
+          class="s-select-dropdown__header flex items-center justify-between"
         >
-          {{ optionGroup.header }}
+          <div
+            v-if="optionGroup.header"
+            :class="HEADER_FONT[api.size]"
+          >
+            {{ optionGroup.header }}
+          </div>
+          <button
+            v-if="isActionButtonShown(!!optionGroup.selectAllBtn)"
+            class="s-select-dropdown__action cursor-pointer"
+            :class="ACTION_FONT[api.size]"
+            @click="api.toggleGroupSelection(optionGroup)"
+          >
+            {{ api.isGroupSelected(optionGroup) ? 'Deselect all' : 'Select all' }}
+          </button>
         </div>
-        <button
-          v-if="isActionButtonShown(!!optionGroup.selectAllBtn)"
-          class="s-select-dropdown__action cursor-pointer"
-          :class="ACTION_FONT[api.size]"
-          @click="api.toggleGroupSelection(optionGroup)"
+        <SSelectOption
+          v-for="(opt, j) in optionGroup.items"
+          :key="j"
+          :class="fontClass"
+          :type="itemType"
+          :multiple="api.multiple"
+          :selected="api.isValueSelected(opt.value)"
+          @toggle="api.toggleSelection(opt.value)"
         >
-          {{ api.isGroupSelected(optionGroup) ? 'Deselect all' : 'Select all' }}
-        </button>
-      </div>
-      <SSelectOption
-        v-for="(opt, j) in optionGroup.items"
-        :key="j"
-        :class="fontClass"
-        :type="itemType"
-        :multiple="api.multiple"
-        :selected="api.isValueSelected(opt.value)"
-        @toggle="api.toggleSelection(opt.value)"
-      >
-        {{ opt.label }}
-      </SSelectOption>
+          {{ opt.label }}
+        </SSelectOption>
+      </template>
     </template>
   </div>
 </template>
@@ -102,17 +112,25 @@ const ACTION_FONT = {
     color: theme.token-as-var('sys.color.status.info');
   }
 
-  @mixin select-dropdown-size($name, $header-height, $px) {
+  @mixin select-dropdown-size($name, $header-height, $px, $loading-height, $spinner-size) {
     &_size_#{$name} &__header {
       height: $header-height;
       padding-right: $px;
       padding-left: $px;
     }
+
+    &_size_#{$name} &__loading {
+      height: $loading-height;
+
+      // spinner styles
+      font-size: $spinner-size;
+      color: theme.token-as-var('sys.color.content-tertiary');
+    }
   }
 
-  @include select-dropdown-size('xl', $header-height: 56px, $px: 16px);
-  @include select-dropdown-size('lg', $header-height: 40px, $px: 16px);
-  @include select-dropdown-size('md', $header-height: 32px, $px: 10px);
-  @include select-dropdown-size('sm', $header-height: 24px, $px: 8px);
+  @include select-dropdown-size('xl', $header-height: 56px, $px: 16px, $loading-height: 170px, $spinner-size: 40px);
+  @include select-dropdown-size('lg', $header-height: 40px, $px: 16px, $loading-height: 150px, $spinner-size: 40px);
+  @include select-dropdown-size('md', $header-height: 32px, $px: 10px, $loading-height: 120px, $spinner-size: 24px);
+  @include select-dropdown-size('sm', $header-height: 24px, $px: 8px, $loading-height: 100px, $spinner-size: 24px);
 }
 </style>

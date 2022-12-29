@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SelectSize, SelectOption, SelectOptionGroup } from './types'
+import { SelectSize, SelectOption, SelectOptionGroup, SelectOptionType } from './types'
 import { useSelectModel } from './use-model'
 import { SelectApi, SELECT_API_KEY } from './api'
 import { and, not } from '@vueuse/core'
@@ -12,6 +12,7 @@ const props = withDefaults(
 
     modelValue?: any
     options?: SelectOption[] | SelectOptionGroup[]
+    optionsType?: SelectOptionType
 
     size?: SelectSize
 
@@ -43,6 +44,11 @@ const props = withDefaults(
     noAutoClose?: boolean
 
     /**
+     * Enables loading state.
+     */
+    loading?: boolean
+
+    /**
      * Makes popper same width as trigger.
      */
     sameWidthPopper?: boolean
@@ -50,19 +56,22 @@ const props = withDefaults(
   {
     size: SelectSize.Md,
     options: () => [],
+    optionsType: SelectOptionType.Check,
     modelValue: null,
     multiple: false,
     disabled: false,
     syncMenuAndInputWidths: false,
     noAutoClose: false,
     label: null,
+    loading: false,
+    sameWidthPopper: false,
   },
 )
 
 const emit = defineEmits<(event: 'update:modelValue', value: any) => void>()
 
 const model = useVModel(props, 'modelValue', emit)
-const { multiple, disabled, options, size, label, noAutoClose } = toRefs(props)
+const { multiple, disabled, loading, options, size, label, noAutoClose } = toRefs(props)
 
 const modeling = useSelectModel({
   model,
@@ -82,6 +91,7 @@ const api: SelectApi<any> = reactive({
   multiple,
   options,
   disabled,
+  loading,
   label,
   isMenuOpened: showPopper,
   menuToggle: togglePopper,

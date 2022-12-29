@@ -54,7 +54,7 @@ const FSelection = () =>
       `s-select-input_size_${api.size}`,
       {
         's-select-input_empty': !api.isSomethingSelected,
-        's-select-input_disabled': api.disabled,
+        's-select-input_disabled': api.disabled || api.loading,
       },
     ]"
     @click="api.menuToggle()"

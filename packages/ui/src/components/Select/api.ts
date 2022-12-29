@@ -7,6 +7,7 @@ export interface SelectApi<T> extends UnwrapRef<UseSelectModelReturn<T>> {
   readonly options: UnwrapRef<SelectOption<T>[] | SelectOptionGroup<T>[]>
   readonly multiple: boolean
   readonly disabled: boolean
+  readonly loading: boolean
   readonly label: string | null
   readonly size: SelectSize
   readonly noAutoClose: boolean
