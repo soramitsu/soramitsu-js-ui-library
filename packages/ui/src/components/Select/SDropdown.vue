@@ -7,6 +7,7 @@ import SSelectDropdown from './SSelectDropdown.vue'
 const props = defineProps<{
   modelValue?: any
   options?: SelectOption[] | SelectOptionGroup[]
+  optionType?: SelectOptionType
   disabled?: boolean
   multiple?: boolean
   label?: string
@@ -44,7 +45,7 @@ function isThereLabelSlot() {
     </template>
 
     <template #dropdown>
-      <SSelectDropdown :item-type="SelectOptionType.Check" />
+      <SSelectDropdown :item-type="optionType ?? SelectOptionType.Default" />
     </template>
   </SSelectBase>
 </template>

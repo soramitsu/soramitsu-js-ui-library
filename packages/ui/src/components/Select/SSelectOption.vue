@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SelectOptionType } from './types'
+import { SelectOptionType, SelectSize } from './types'
 import IconCheckMark from '~icons/mdi/check'
 import { useSelectApi } from './api'
 import { SCheckboxAtom } from '../Checkbox'
@@ -7,14 +7,19 @@ import { SRadioAtom } from '../Radio'
 
 const props = defineProps<{
   type: SelectOptionType
-  multiple?: boolean
   selected?: boolean
 }>()
 
 const api = useSelectApi()
-const isCheckMode = computed(() => props.type === SelectOptionType.Check)
 
 const emit = defineEmits<(event: 'toggle') => void>()
+
+const RADIO_CHECKBOX_SIZE = {
+  [SelectSize.Xl]: 'xl',
+  [SelectSize.Lg]: 'lg',
+  [SelectSize.Md]: 'md',
+  [SelectSize.Sm]: 'md',
+} as const
 </script>
 
 <template>
@@ -28,25 +33,24 @@ const emit = defineEmits<(event: 'toggle') => void>()
     ]"
     @click="emit('toggle')"
   >
-    <template v-if="!isCheckMode">
-      <template v-if="multiple">
-        <SCheckboxAtom
-          :checked="selected"
-          size="lg"
-        />
-      </template>
-      <template v-else>
-        <SRadioAtom
-          :checked="selected"
-          size="lg"
-        />
-      </template>
+    <template v-if="type === SelectOptionType.Checkbox">
+      <SCheckboxAtom
+        :checked="selected"
+        :size="RADIO_CHECKBOX_SIZE[api.size]"
+      />
     </template>
+    <template v-if="type === SelectOptionType.Radio">
+      <SRadioAtom
+        :checked="selected"
+        :size="RADIO_CHECKBOX_SIZE[api.size]"
+      />
+    </template>
+
     <div class="s-select-option__content">
       <slot />
     </div>
 
-    <template v-if="isCheckMode">
+    <template v-if="type === SelectOptionType.Default">
       <div class="s-select-option__right-check-wrapper">
         <template v-if="selected">
           <IconCheckMark />

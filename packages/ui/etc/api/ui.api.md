@@ -465,6 +465,7 @@ time: boolean;
 export const SDropdown: DefineComponent<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
+optionType?: SelectOptionType | undefined;
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
@@ -475,6 +476,7 @@ loading?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
+optionType?: SelectOptionType | undefined;
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
@@ -539,8 +541,9 @@ export interface SelectOptionGroup<T = any> {
 
 // @public (undocumented)
 export const SelectOptionType: {
-    readonly RadioOrCheckbox: "rad-or-check";
-    readonly Check: "check";
+    readonly Radio: "radio";
+    readonly Checkbox: "checkbox";
+    readonly Default: "default";
 };
 
 // @public (undocumented)
@@ -991,6 +994,7 @@ radioSelector: string;
 export const SSelect: DefineComponent<__VLS_TypePropsToRuntimeProps_9<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
+optionType?: SelectOptionType | undefined;
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
@@ -1000,6 +1004,7 @@ loading?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_9<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
+optionType?: SelectOptionType | undefined;
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 label?: string | undefined;
@@ -1017,7 +1022,6 @@ disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
-optionsType?: SelectOptionType | undefined;
 size?: SelectSize | undefined;
 label?: string | null | undefined;
 mandatory?: boolean | undefined;
@@ -1028,7 +1032,6 @@ sameWidthPopper?: boolean | undefined;
 }>, {
 size: "md";
 options: () => never[];
-optionsType: "check";
 modelValue: null;
 multiple: boolean;
 disabled: boolean;
@@ -1044,7 +1047,6 @@ disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
-optionsType?: SelectOptionType | undefined;
 size?: SelectSize | undefined;
 label?: string | null | undefined;
 mandatory?: boolean | undefined;
@@ -1055,7 +1057,6 @@ sameWidthPopper?: boolean | undefined;
 }>, {
 size: "md";
 options: () => never[];
-optionsType: "check";
 modelValue: null;
 multiple: boolean;
 disabled: boolean;
@@ -1075,7 +1076,6 @@ loading: boolean;
 options: SelectOption[] | SelectOptionGroup[];
 label: string | null;
 noAutoClose: boolean;
-optionsType: SelectOptionType;
 syncMenuAndInputWidths: boolean;
 sameWidthPopper: boolean;
 }>;
@@ -1109,13 +1109,11 @@ export const SSelectInput: DefineComponent<    {}, {}, {}, {}, {}, ComponentOpti
 // @public (undocumented)
 export const SSelectOption: DefineComponent<__VLS_TypePropsToRuntimeProps_13<{
 type: SelectOptionType;
-multiple?: boolean | undefined;
 selected?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 toggle: () => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_13<{
 type: SelectOptionType;
-multiple?: boolean | undefined;
 selected?: boolean | undefined;
 }>>> & {
 onToggle?: (() => any) | undefined;

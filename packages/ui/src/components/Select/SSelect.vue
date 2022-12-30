@@ -4,9 +4,10 @@ import SSelectBase from './SSelectBase.vue'
 import SSelectInput from './SSelectInput.vue'
 import SSelectDropdown from './SSelectDropdown.vue'
 
-defineProps<{
+const props = defineProps<{
   modelValue?: any
   options?: SelectOption[] | SelectOptionGroup[]
+  optionType?: SelectOptionType
   disabled?: boolean
   multiple?: boolean
   label?: string
@@ -14,6 +15,8 @@ defineProps<{
   noAutoClose?: boolean
   loading?: boolean
 }>()
+
+const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Checkbox : SelectOptionType.Radio))
 </script>
 
 <template>
@@ -35,7 +38,7 @@ defineProps<{
     </template>
 
     <template #dropdown>
-      <SSelectDropdown :item-type="SelectOptionType.RadioOrCheckbox" />
+      <SSelectDropdown :item-type="optionType ?? defaultOptionType" />
     </template>
   </SSelectBase>
 </template>

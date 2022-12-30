@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SelectSize, SelectOption, SelectOptionGroup, SelectOptionType } from './types'
+import { SelectSize, SelectOption, SelectOptionGroup } from './types'
 import { useSelectModel } from './use-model'
 import { SelectApi, SELECT_API_KEY } from './api'
 import { and, not } from '@vueuse/core'
@@ -12,7 +12,6 @@ const props = withDefaults(
 
     modelValue?: any
     options?: SelectOption[] | SelectOptionGroup[]
-    optionsType?: SelectOptionType
 
     size?: SelectSize
 
@@ -56,7 +55,6 @@ const props = withDefaults(
   {
     size: SelectSize.Md,
     options: () => [],
-    optionsType: SelectOptionType.Check,
     modelValue: null,
     multiple: false,
     disabled: false,
