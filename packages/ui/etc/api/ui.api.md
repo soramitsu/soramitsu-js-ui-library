@@ -840,10 +840,7 @@ hideDelay: {
 type: (StringConstructor | NumberConstructor)[];
 default: number;
 };
-sameWidth: {
-type: BooleanConstructor;
-default: boolean;
-};
+sameWidth: BooleanConstructor;
 }, () => (VNode<RendererNode, RendererElement, {
 [key: string]: any;
 }> | null)[], unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "click-outside")[], "update:show" | "click-outside", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {
@@ -874,10 +871,7 @@ hideDelay: {
 type: (StringConstructor | NumberConstructor)[];
 default: number;
 };
-sameWidth: {
-type: BooleanConstructor;
-default: boolean;
-};
+sameWidth: BooleanConstructor;
 }>> & {
 "onUpdate:show"?: ((...args: any[]) => any) | undefined;
 "onClick-outside"?: ((...args: any[]) => any) | undefined;

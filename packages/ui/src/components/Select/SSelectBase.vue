@@ -121,7 +121,7 @@ provide(SELECT_API_KEY, api)
           name="s-select-dropdown-transition"
           eager
           :wrapper-attrs="{ 'class': 'z-10' }"
-          :inner-wrapper-attrs="{ 'class': sameWidthPopper && 'w-full' }"
+          :inner-wrapper-attrs="{ 'class': { 'w-full': sameWidthPopper } }"
         >
           <slot name="dropdown" />
         </SPopoverWrappedTransition>

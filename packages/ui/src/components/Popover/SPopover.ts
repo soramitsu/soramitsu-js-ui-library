@@ -129,10 +129,7 @@ export default /* @__PURE__ */ defineComponent({
       type: [Number, String],
       default: 0,
     },
-    sameWidth: {
-      type: Boolean,
-      default: false,
-    },
+    sameWidth: Boolean,
   },
   emits: ['update:show', 'click-outside'],
   setup(props, { slots, emit }) {
