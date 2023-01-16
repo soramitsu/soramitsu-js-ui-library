@@ -63,7 +63,7 @@ export function useSelectModel<T = any>({
   }
 
   function isGroupSelected(optionGroup: SelectOptionGroup<T>) {
-    return optionGroup.items.every((x) => selectedSet.value.has(x.value))
+    return optionGroup.items.every((x) => isValueSelected(x.value))
   }
 
   function select(value: T): void {
