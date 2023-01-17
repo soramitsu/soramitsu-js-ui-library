@@ -20,6 +20,13 @@ const RADIO_CHECKBOX_SIZE = {
   [SelectSize.Md]: 'lg',
   [SelectSize.Sm]: 'md',
 } as const
+
+const CHECK_ICON_SIZE = {
+  [SelectSize.Xl]: 24,
+  [SelectSize.Lg]: 16,
+  [SelectSize.Md]: 16,
+  [SelectSize.Sm]: 16,
+} as const
 </script>
 
 <template>
@@ -51,11 +58,11 @@ const RADIO_CHECKBOX_SIZE = {
     </div>
 
     <template v-if="type === SelectOptionType.Default">
-      <div class="s-select-option__right-check-wrapper">
-        <template v-if="selected">
-          <IconCheckMark />
-        </template>
-      </div>
+      <IconCheckMark
+        v-if="selected"
+        :width="CHECK_ICON_SIZE[api.size]"
+        :height="CHECK_ICON_SIZE[api.size]"
+      />
     </template>
   </div>
 </template>
@@ -78,25 +85,10 @@ const RADIO_CHECKBOX_SIZE = {
     @apply flex-1;
   }
 
-  &__right-check-wrapper {
-    @apply w-6 h-6 flex items-center justify-center;
-  }
-
   $root: &;
 
   &_size {
     @include sizes-mixin.s-select-sizes;
-
-    @mixin check-size($size, $px: 16px) {
-      &_#{$size} #{$root}__right-check-wrapper {
-        font-size: $px;
-      }
-    }
-
-    @include check-size('sm');
-    @include check-size('md');
-    @include check-size('lg');
-    @include check-size('xl', 24px);
   }
 }
 </style>
