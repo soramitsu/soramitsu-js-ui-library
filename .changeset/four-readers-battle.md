@@ -1,5 +1,5 @@
 ---
-'@soramitsu-ui/ui': patch
+'@soramitsu-ui/ui': minor
 ---
 
-**fix**(`SSelect`): add option groups with headers and select all buttons
+**feat**(`SSelect`): add option groups with headers and select all buttons
