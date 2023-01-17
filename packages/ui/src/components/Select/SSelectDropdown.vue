@@ -63,7 +63,7 @@ const ACTION_FONT = {
         </div>
         <button
           v-if="isActionButtonShown(!!optionGroup.selectAllBtn)"
-          class="s-select-dropdown__action cursor-pointer"
+          class="s-select-dropdown__action cursor-pointer ml-auto"
           :class="ACTION_FONT[api.size]"
           @click="api.toggleGroupSelection(optionGroup)"
         >
