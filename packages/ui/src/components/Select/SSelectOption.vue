@@ -17,7 +17,7 @@ const emit = defineEmits<(event: 'toggle') => void>()
 const RADIO_CHECKBOX_SIZE = {
   [SelectSize.Xl]: 'xl',
   [SelectSize.Lg]: 'lg',
-  [SelectSize.Md]: 'md',
+  [SelectSize.Md]: 'lg',
   [SelectSize.Sm]: 'md',
 } as const
 </script>
