@@ -1,5 +1,5 @@
 ---
-'@soramitsu-ui/ui': patch
+'@soramitsu-ui/ui': minor
 ---
 
-**fix**(`SDatePicker`): add support for custom shortcuts
+**feat**(`SDatePicker`): add support for custom shortcuts

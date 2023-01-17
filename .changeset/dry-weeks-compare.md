@@ -1,5 +1,5 @@
 ---
-'@soramitsu-ui/ui': patch
+'@soramitsu-ui/ui': minor
 ---
 
-**fix**(`SDatePicker`): add custom trigger support
+**feat**(`SDatePicker`): add custom trigger support
