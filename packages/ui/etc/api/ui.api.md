@@ -96,6 +96,45 @@ export type ButtonType = typeof BUTTON_TYPE_VALUES[number];
 export type CheckboxState = boolean | 'mixed';
 
 // @public (undocumented)
+export interface DatePickerOptions {
+    // (undocumented)
+    day?: PresetOption<Date>[];
+    // (undocumented)
+    pick?: PresetOption<Date[]>[];
+    // (undocumented)
+    range?: PresetOption<[Date, Date]>[];
+}
+
+// @public (undocumented)
+export type DatePickerType = 'day' | 'range' | 'pick';
+
+// @public (undocumented)
+export type DateState = Date;
+
+// @public (undocumented)
+export interface DateTableCell {
+    // (undocumented)
+    day: number;
+    // (undocumented)
+    end: boolean;
+    // (undocumented)
+    inRange: boolean;
+    // (undocumented)
+    month: number;
+    // (undocumented)
+    start: boolean;
+    // (undocumented)
+    text: number;
+    // (undocumented)
+    time: string | null;
+    // (undocumented)
+    type: DateTableCellType;
+}
+
+// @public (undocumented)
+export type DateTableCellType = 'normal' | 'today' | 'prev-month' | 'next-month';
+
+// @public (undocumented)
 export function defineToastsApi(): ToastsApi;
 
 // @public (undocumented)
@@ -129,6 +168,9 @@ export interface ModalApi {
 }
 
 // @public (undocumented)
+export type ModelValueType = Date[] | Date | null | undefined;
+
+// @public (undocumented)
 export const NAVIGATION_MENU_API_KEY: InjectionKey<DeepReadonly<NavigationMenuApi>>;
 
 // @public (undocumented)
@@ -152,6 +194,9 @@ export interface NavigationSubmenuApi {
 export const NOTIFICATIONS_API_KEY: InjectionKey<ToastsApi>;
 
 // @public (undocumented)
+export type PickState = Date[];
+
+// @public (undocumented)
 export function plugin(): Plugin_2;
 
 // @public (undocumented)
@@ -163,6 +208,14 @@ export interface PopoverApi {
     deletePopperRefOverride: (elem: HTMLElement) => void;
     popper: Instance | null;
     show: boolean;
+}
+
+// @public (undocumented)
+export interface PresetOption<T> {
+    // (undocumented)
+    label: string;
+    // (undocumented)
+    value: T;
 }
 
 // @public (undocumented)
@@ -200,6 +253,22 @@ export { RadioSize }
 type RadioType = typeof RADIO_TYPE_VALUES extends ReadonlyArray<infer T> ? T : never;
 export { RadioType as CheckboxType }
 export { RadioType }
+
+// @public (undocumented)
+export interface RangeOptionValue extends RangeState {
+    // (undocumented)
+    selectedField: string;
+}
+
+// @public (undocumented)
+export interface RangeState {
+    // (undocumented)
+    endDate: Date | null;
+    // (undocumented)
+    selecting: boolean;
+    // (undocumented)
+    startDate: Date | null;
+}
 
 // @public (undocumented)
 export type RegisteredToast = ToastRegisterParams;
@@ -447,16 +516,19 @@ export const SDatePicker: DefineComponent<__VLS_WithDefaults_14<__VLS_TypePropsT
 type: string;
 time: boolean;
 disabled: boolean;
+shortcuts: () => DatePickerOptions;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_14<__VLS_TypePropsToRuntimeProps_17<Props_7>, {
 type: string;
 time: boolean;
 disabled: boolean;
+shortcuts: () => DatePickerOptions;
 }>>> & {
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
 type: DatePickerType;
 disabled: boolean;
 time: boolean;
+shortcuts: DatePickerOptions;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
@@ -579,6 +651,14 @@ export interface ShowNotificationParams {
 export interface ShowNotificationReturn {
     // (undocumented)
     close: () => void;
+}
+
+// @public (undocumented)
+export interface ShowState {
+    // (undocumented)
+    month: number;
+    // (undocumented)
+    year: number;
 }
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -1547,6 +1627,16 @@ modelValue: string;
 background: TabsPanelBackgroundType;
 }>;
 
+// @public (undocumented)
+export interface StateStore {
+    // (undocumented)
+    dayState: DateState;
+    // (undocumented)
+    pickState: PickState;
+    // (undocumented)
+    rangeState: RangeState;
+}
+
 // @public
 export const Status: {
     readonly Info: "info";
@@ -2003,7 +2093,6 @@ export function useTabsPanelApi(): TabsPanelApi;
 
 // Warnings were encountered during analysis:
 //
-// dist-ts/components/DatePicker/SDatePicker.vue.d.ts:19:5 - (ae-forgotten-export) The symbol "DatePickerType" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Table/STable.vue.d.ts:61:5 - (ae-forgotten-export) The symbol "CSSObject" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Table/STable.vue.d.ts:150:5 - (ae-forgotten-export) The symbol "manualClearSelection" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Table/STable.vue.d.ts:155:5 - (ae-forgotten-export) The symbol "manualToggleRowSelection" needs to be exported by the entry point lib.d.ts

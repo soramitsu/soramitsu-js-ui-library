@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { RangeOptionValue } from './types'
+import { DatePickerOptions } from './types'
 import { IconBasicCheckMark24 } from '@/components/icons'
-import OptionsWrapper from './SDatePickerOptionsWrapper.vue'
 import { DatePickerApi, useDatePickerApi } from './api'
 
 interface Props {
   menuState: string
+  options: DatePickerOptions
 }
 
 const props = defineProps<Props>()
@@ -14,9 +14,17 @@ const emit = defineEmits(['click:option'])
 
 const state: DatePickerApi = useDatePickerApi()
 
-const onMenuClick = (data: Date | RangeOptionValue, label: string) => {
+const onMenuClick = (data: Date | [Date, Date] | Date[], label: string) => {
   emit('click:option', data, label)
 }
+
+const finalOptions = computed((): Required<DatePickerOptions> => {
+  return {
+    day: props.options.day ?? [],
+    range: props.options.range ?? [],
+    pick: props.options.pick ?? [],
+  }
+})
 </script>
 
 <template>
@@ -24,22 +32,20 @@ const onMenuClick = (data: Date | RangeOptionValue, label: string) => {
     v-if="state.type !== 'pick'"
     class="s-date-picker-options-panel sora-tpg-p3"
   >
-    <OptionsWrapper v-slot="{ options }">
-      <p
-        v-for="(item, idx) in options[state.type]"
-        :key="idx"
-        class="s-date-picker-options-panel__item"
-        :class="menuState === item.label ? 'active' : ''"
-        @click="onMenuClick(item.value, item.label)"
-        @keydown="onMenuClick(item.value, item.label)"
-      >
-        {{ item.label }}
-        <span
-          v-show="menuState === item.label"
-          class="s-date-picker-options-panel__checkmark"
-        ><IconBasicCheckMark24 /></span>
-      </p>
-    </OptionsWrapper>
+    <p
+      v-for="(item, idx) in finalOptions[state.type]"
+      :key="idx"
+      class="s-date-picker-options-panel__item"
+      :class="menuState === item.label ? 'active' : ''"
+      @click="onMenuClick(item.value, item.label)"
+      @keydown="onMenuClick(item.value, item.label)"
+    >
+      {{ item.label }}
+      <span
+        v-show="menuState === item.label"
+        class="s-date-picker-options-panel__checkmark"
+      ><IconBasicCheckMark24 /></span>
+    </p>
   </div>
 </template>
 

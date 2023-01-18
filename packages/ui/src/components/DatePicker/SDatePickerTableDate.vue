@@ -205,8 +205,6 @@ const getCellClasses = (cell: types.DateTableCell) => {
   return classes.join(' ')
 }
 
-const lastField = ref('')
-
 const handleMouseMove = (event: any) => {
   if (!props.stateStore.rangeState.selecting) return
   let target = event.target
@@ -240,7 +238,6 @@ const handleClick = (ev: any) => {
         selecting: true,
         selectedField: 'startDate',
       })
-      lastField.value = 'startDate'
     } else {
       const dat = props.stateStore.rangeState.startDate || props.stateStore.rangeState.endDate
       if (dat && newDate >= dat) {
@@ -250,7 +247,6 @@ const handleClick = (ev: any) => {
           selecting: false,
           selectedField: 'endDate',
         })
-        lastField.value = 'endDate'
       } else {
         emit('pick', {
           startDate: newDate,
@@ -258,7 +254,6 @@ const handleClick = (ev: any) => {
           selecting: false,
           selectedField: 'startDate',
         })
-        lastField.value = 'startDate'
       }
     }
   } else if (state.type === 'day') {
