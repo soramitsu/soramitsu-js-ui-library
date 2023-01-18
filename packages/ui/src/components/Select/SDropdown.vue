@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { SelectOption, SelectButtonType, SelectOptionType, SelectSize } from './types'
+import { SelectOption, SelectButtonType, SelectOptionType, SelectSize, SelectOptionGroup } from './types'
 import SSelectBase from './SSelectBase.vue'
 import SSelectButton from './SSelectButton.vue'
 import SSelectDropdown from './SSelectDropdown.vue'
 
 const props = defineProps<{
   modelValue?: any
-  options?: SelectOption[]
+  options?: SelectOption[] | SelectOptionGroup[]
   disabled?: boolean
   multiple?: boolean
   label?: string

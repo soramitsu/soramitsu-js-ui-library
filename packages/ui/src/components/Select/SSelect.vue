@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { SelectOption, SelectOptionType, SelectSize } from './types'
+import { SelectOption, SelectOptionGroup, SelectOptionType, SelectSize } from './types'
 import SSelectBase from './SSelectBase.vue'
 import SSelectInput from './SSelectInput.vue'
 import SSelectDropdown from './SSelectDropdown.vue'
 
 defineProps<{
   modelValue?: any
-  options?: SelectOption[]
+  options?: SelectOption[] | SelectOptionGroup[]
   disabled?: boolean
   multiple?: boolean
   label?: string
@@ -16,7 +16,10 @@ defineProps<{
 </script>
 
 <template>
-  <SSelectBase v-bind="{ ...$attrs, ...$props } as any">
+  <SSelectBase
+    v-bind="{ ...$attrs, ...$props } as any"
+    same-width-popper
+  >
     <template #control>
       <SSelectInput>
         <template #label="binding">

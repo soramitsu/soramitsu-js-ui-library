@@ -1,5 +1,5 @@
 import { Ref, cloneVNode, PropType } from 'vue'
-import { Placement, placements, Instance } from '@popperjs/core'
+import { Placement, placements, Instance, State } from '@popperjs/core'
 import { not, or } from '@vueuse/core'
 import { usePopper } from '@/composables/popper'
 import { PopoverApi, POPOVER_API_KEY } from './api'
@@ -129,6 +129,7 @@ export default /* @__PURE__ */ defineComponent({
       type: [Number, String],
       default: 0,
     },
+    sameWidth: Boolean,
   },
   emits: ['update:show', 'click-outside'],
   setup(props, { slots, emit }) {
@@ -162,6 +163,20 @@ export default /* @__PURE__ */ defineComponent({
             name: 'offset',
             options: { offset: computed(() => [skidding.value, distance.value]) },
           },
+          shallowReactive({
+            name: 'sameWidth',
+            enabled: props.sameWidth,
+            phase: 'beforeWrite' as const,
+            requires: ['computeStyles'],
+            fn: ({ state }: { state: State }) => {
+              state.styles.popper.width = `${state.rects.reference.width}px`
+            },
+            effect: ({ state }: { state: State }) => {
+              if (state.elements.reference instanceof HTMLElement) {
+                state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`
+              }
+            },
+          }),
         ],
       }),
     })

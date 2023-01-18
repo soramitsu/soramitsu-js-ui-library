@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SelectSize, SelectOption } from './types'
+import { SelectSize, SelectOption, SelectOptionGroup } from './types'
 import { useSelectModel } from './use-model'
 import { SelectApi, SELECT_API_KEY } from './api'
 import { and, not } from '@vueuse/core'
@@ -11,7 +11,7 @@ const props = withDefaults(
     multiple?: boolean
 
     modelValue?: any
-    options?: SelectOption[]
+    options?: SelectOption[] | SelectOptionGroup[]
 
     size?: SelectSize
 
@@ -41,6 +41,11 @@ const props = withDefaults(
      * Turn on this prop to disable auto-close.
      */
     noAutoClose?: boolean
+
+    /**
+     * Makes popper same width as trigger.
+     */
+    sameWidthPopper?: boolean
   }>(),
   {
     size: SelectSize.Md,
@@ -72,7 +77,7 @@ const [showPopper, togglePopper] = useToggle(false)
 // close popper if select is disabled
 whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
 
-const api = readonly({
+const api: SelectApi<any> = reactive({
   ...modeling,
   multiple,
   options,
@@ -82,7 +87,7 @@ const api = readonly({
   menuToggle: togglePopper,
   size,
   noAutoClose,
-}) as SelectApi<any>
+})
 
 provide(SELECT_API_KEY, api)
 </script>
@@ -91,6 +96,7 @@ provide(SELECT_API_KEY, api)
   <div>
     <SPopover
       v-model:show="showPopper"
+      :same-width="sameWidthPopper"
       placement="bottom-start"
       trigger="manual"
       distance="4"
@@ -107,6 +113,7 @@ provide(SELECT_API_KEY, api)
           name="s-select-dropdown-transition"
           eager
           :wrapper-attrs="{ 'class': 'z-10' }"
+          :inner-wrapper-attrs="{ 'class': { 'w-full': sameWidthPopper } }"
         >
           <slot name="dropdown" />
         </SPopoverWrappedTransition>
