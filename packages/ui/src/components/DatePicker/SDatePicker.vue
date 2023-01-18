@@ -18,19 +18,23 @@ import {
   ShowState,
   RangeOptionValue,
   ModelValueType,
+  DatePickerOptions,
 } from './types'
 import { DatePickerApi, DATE_PICKER_API_KEY } from './api'
+import { DEFAULT_SHORTCUTS } from './consts'
 
 interface Props {
   modelValue: ModelValueType
   type?: DatePickerType
   time?: boolean
   disabled?: boolean
+  shortcuts?: DatePickerOptions
 }
 const props = withDefaults(defineProps<Props>(), {
   type: 'day',
   time: false,
   disabled: false,
+  shortcuts: () => DEFAULT_SHORTCUTS,
 })
 
 const innerModelValue = ref<ModelValueType>(props.modelValue)
@@ -83,10 +87,16 @@ const init = () => {
 const updateModelValue = () => {
   if (props.type === 'day') {
     innerModelValue.value = dayState.value
+    save()
   } else if (props.type === 'pick') {
     innerModelValue.value = pickState.value
+    save()
   } else {
     innerModelValue.value = [rangeState.startDate as Date, rangeState.endDate as Date]
+
+    if (rangeState.endDate) {
+      save()
+    }
   }
 }
 
@@ -150,8 +160,19 @@ const showStateView = computed(() => {
 // #endregion
 
 // #region OPTIONS_PANEL
-const onMenuClick = (data: Date | RangeOptionValue, label: string) => {
-  onDatePick(data)
+const onMenuClick = (data: Date | [Date, Date] | Date[], label: string) => {
+  let processedData: RangeOptionValue | Date | Date[] = data
+
+  if (Array.isArray(data) && data.length === 2) {
+    processedData = {
+      startDate: data[0],
+      endDate: data[1],
+      selecting: false,
+      selectedField: 'endDate',
+    }
+  }
+
+  onDatePick(processedData)
   updateShowedMonths()
   menuState.value = label
 }
@@ -176,6 +197,10 @@ const changeView = (viewName: string) => {
 }
 
 const headTitle = computed(() => {
+  if (menuState.value !== 'Custom') {
+    return menuState.value
+  }
+
   try {
     switch (props.type) {
       case 'day':
@@ -324,6 +349,9 @@ const updateShow = () => {
 
 const save = () => {
   emit('update:modelValue', innerModelValue.value)
+}
+const saveAndClose = () => {
+  save()
   togglePopper(false)
 }
 
@@ -345,19 +373,30 @@ else updateModelValue()
       @click-outside="togglePopper(false)"
     >
       <template #trigger>
-        <div
-          class="s-date-picker__header p-2 sora-tpg-ch2 relative pr-6"
-          :class="disabled ? 'cursor-default' : 'cursor-pointer'"
-          @keydown="updateShow"
-          @click="updateShow"
-        >
-          {{ headTitle || 'Date' }}
-          <div
-            class="arrow"
-            :class="arrowState"
+        <div>
+          <slot
+            v-bind="{
+              disabled,
+              updateShow,
+              'isPopperShown': showPopper,
+              'label': headTitle,
+            }"
           >
-            <IconArrowsChevronBottom24 />
-          </div>
+            <div
+              class="s-date-picker__header p-2 sora-tpg-ch2 relative pr-6"
+              :class="disabled ? 'cursor-default' : 'cursor-pointer'"
+              @keydown="updateShow"
+              @click="updateShow"
+            >
+              {{ headTitle || 'Date' }}
+              <div
+                class="arrow"
+                :class="arrowState"
+              >
+                <IconArrowsChevronBottom24 />
+              </div>
+            </div>
+          </slot>
         </div>
       </template>
       <template #popper>
@@ -373,6 +412,7 @@ else updateModelValue()
             <OptionsPanel
               :type="type"
               :menu-state="menuState"
+              :options="shortcuts"
               @click:option="onMenuClick"
             />
             <CalendarsPanel
@@ -395,7 +435,7 @@ else updateModelValue()
               :format-date="formatDate"
               :format-pattern="formatPattern"
               @update:custom-input="updateCustomInput"
-              @click:done="save"
+              @click:done="saveAndClose"
             />
           </div>
         </SPopoverWrappedTransition>
