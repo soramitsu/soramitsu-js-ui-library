@@ -1,5 +1,5 @@
 ---
-'@soramitsu-ui/ui': patch
+'@soramitsu-ui/ui': minor
 ---
 
-**fix**(`SSelect`): add prop to select options type
+**feat**(`SSelect`): add prop to select options type

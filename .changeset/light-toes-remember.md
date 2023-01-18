@@ -1,5 +1,5 @@
 ---
-'@soramitsu-ui/ui': patch
+'@soramitsu-ui/ui': minor
 ---
 
-**fix**(`SSelect`): add loading state
+**feat**(`SSelect`): add loading state
