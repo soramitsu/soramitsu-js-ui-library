@@ -124,62 +124,60 @@ const onDoneClick = () => {
 </script>
 
 <template>
-  <div class="s-date-picker-custom-panel">
-    <div>
-      <div
-        v-if="showInputs"
-        class="flex justify-center items-center"
-      >
-        <template v-if="state.type === 'range'">
-          <input
-            :maxlength="customInputLength"
-            class="s-date-picker-custom-panel__input"
-            :class="customInputCssClass"
-            :value="customInputValueStartDate"
-            @input="handleInput"
-            @change="updateCustomInput($event, 'startDate')"
-          >
-          <div class="mx-2">
-            -
-          </div>
-          <input
-            :maxlength="customInputLength"
-            class="s-date-picker-custom-panel__input"
-            :class="customInputCssClass"
-            :value="customInputValueEndDate"
-            @input="handleInput"
-            @change="updateCustomInput($event, 'endDate')"
-          >
-        </template>
-        <template v-if="state.type === 'day'">
-          <input
-            :maxlength="customInputLength"
-            class="s-date-picker-custom-panel__input"
-            :class="customInputCssClass"
-            :value="customInputValueDay"
-            @input="handleInput"
-            @change="updateCustomInputDay($event)"
-          >
-        </template>
-        <template v-if="state.type === 'pick' && pickState.length > 0">
-          <input
-            :maxlength="customInputLength"
-            class="s-date-picker-custom-panel__input"
-            :class="customInputCssClass"
-            :value="customInputValuePick"
-            @input="handleInput"
-            @change="updateCustomInputPick($event)"
-          >
-        </template>
-      </div>
-      <button
-        class="s-date-picker-custom-panel__save-button"
-        data-testid="date-picker-done-button"
-        @click="onDoneClick"
-      >
-        Done
-      </button>
+  <div class="s-date-picker-custom-panel flex items-center relative px-16px">
+    <div
+      v-if="showInputs"
+      class="flex justify-center items-center"
+    >
+      <template v-if="state.type === 'range'">
+        <input
+          :maxlength="customInputLength"
+          class="s-date-picker-custom-panel__input"
+          :class="customInputCssClass"
+          :value="customInputValueStartDate"
+          @input="handleInput"
+          @change="updateCustomInput($event, 'startDate')"
+        >
+        <div class="mx-2">
+          -
+        </div>
+        <input
+          :maxlength="customInputLength"
+          class="s-date-picker-custom-panel__input"
+          :class="customInputCssClass"
+          :value="customInputValueEndDate"
+          @input="handleInput"
+          @change="updateCustomInput($event, 'endDate')"
+        >
+      </template>
+      <template v-if="state.type === 'day'">
+        <input
+          :maxlength="customInputLength"
+          class="s-date-picker-custom-panel__input"
+          :class="customInputCssClass"
+          :value="customInputValueDay"
+          @input="handleInput"
+          @change="updateCustomInputDay($event)"
+        >
+      </template>
+      <template v-if="state.type === 'pick' && pickState.length > 0">
+        <input
+          :maxlength="customInputLength"
+          class="s-date-picker-custom-panel__input"
+          :class="customInputCssClass"
+          :value="customInputValuePick"
+          @input="handleInput"
+          @change="updateCustomInputPick($event)"
+        >
+      </template>
     </div>
+    <button
+      class="s-date-picker-custom-panel__save-button ml-auto"
+      data-testid="date-picker-done-button"
+      @click="onDoneClick"
+    >
+      Done
+    </button>
   </div>
 </template>
 
@@ -187,7 +185,6 @@ const onDoneClick = () => {
 @use '@/theme';
 
 .s-date-picker-custom-panel {
-  @apply flex justify-center items-center relative;
   grid-area: custom;
   border-top: 1px solid theme.token-as-var('sys.color.border-primary');
   height: 52px;
@@ -210,10 +207,6 @@ const onDoneClick = () => {
     font-size: 10px;
     width: 44px;
     height: 24px;
-    position: absolute;
-    top: 50%;
-    right: 16px;
-    transform: translateY(-50%);
     background: theme.token-as-var('sys.color.primary');
     border-radius: 2px;
     color: theme.token-as-var('sys.color.util.surface');

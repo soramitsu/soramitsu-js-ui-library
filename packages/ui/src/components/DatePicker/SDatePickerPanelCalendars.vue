@@ -107,7 +107,6 @@ const updateHoveredDate = (date: Date) => {
         :show-state="nextMonthShowState"
         :value="calendarToModelValue"
         :state-store="stateStore"
-        :hide-arrows="true"
         :hovered-date="hoveredDate"
         @change-view="changeView"
         @update:showed-state="updateShowedState"

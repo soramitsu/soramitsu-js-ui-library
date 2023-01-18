@@ -22,15 +22,15 @@ export interface StateStore {
   rangeState: RangeState
 }
 
-export interface PresetOption {
+export interface PresetOption<T> {
   label: string
-  value: RangeOptionValue | Date
+  value: T
 }
 
-export interface Options {
-  range: PresetOption[]
-  day: PresetOption[]
-  pick?: PresetOption[]
+export interface DatePickerOptions {
+  day?: PresetOption<Date>[]
+  range?: PresetOption<[Date, Date]>[]
+  pick?: PresetOption<Date[]>[]
 }
 
 export interface ShowState {
