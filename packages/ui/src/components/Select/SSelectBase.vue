@@ -51,6 +51,11 @@ const props = withDefaults(
      * Makes popper same width as trigger.
      */
     sameWidthPopper?: boolean
+
+    /**
+     * Adds search field to dropdown
+     */
+    dropdownSearch: boolean
   }>(),
   {
     size: SelectSize.Md,
@@ -63,10 +68,14 @@ const props = withDefaults(
     label: null,
     loading: false,
     sameWidthPopper: false,
+    dropdownSearch: false,
   },
 )
 
-const emit = defineEmits<(event: 'update:modelValue', value: any) => void>()
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: any): void
+  (event: 'search', value: string): void
+}>()
 
 const model = useVModel(props, 'modelValue', emit)
 const { multiple, disabled, loading, options, size, label, noAutoClose } = toRefs(props)
@@ -84,6 +93,17 @@ const [showPopper, togglePopper] = useToggle(false)
 // close popper if select is disabled
 whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
 
+const searchQuery = ref('')
+whenever(not(showPopper), () => {
+  searchQuery.value = ''
+})
+
+function updateSearchQuery(query: string) {
+  searchQuery.value = query
+
+  emit('search', searchQuery.value)
+}
+
 const api: SelectApi<any> = reactive({
   ...modeling,
   multiple,
@@ -95,6 +115,8 @@ const api: SelectApi<any> = reactive({
   menuToggle: togglePopper,
   size,
   noAutoClose,
+  searchQuery,
+  updateSearchQuery,
 })
 
 provide(SELECT_API_KEY, api)

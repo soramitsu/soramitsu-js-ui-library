@@ -5,9 +5,12 @@ import SSelectOption from './SSelectOption.vue'
 import { ComputedRef } from 'vue'
 import { isSelectOptions } from '@/components/Select/utils'
 import SSpinner from '@/components/Spinner/SSpinner.vue'
+import { IconBasicSearch24 } from '@/components/icons'
+import { escapeStringRegexp } from '@/util'
 
-defineProps<{
+const props = defineProps<{
   itemType: SelectOptionType
+  search: boolean
 }>()
 
 const api = useSelectApi()
@@ -24,8 +27,30 @@ const optionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
   return options
 })
 
+const isSearching = eagerComputed(() => props.search && api.searchQuery)
+
+const shownOptionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
+  if (!api.searchQuery) {
+    return optionGroups.value
+  }
+
+  const escapedQuery = new RegExp(escapeStringRegexp(api.searchQuery), 'i')
+
+  return optionGroups.value.map((x) => ({ ...x, items: x.items.filter((x) => escapedQuery.test(x.label)) }))
+})
+
 function isActionButtonShown(selectAllBtn: boolean) {
   return api.multiple && selectAllBtn
+}
+
+function isHeaderShown(optionGroup: SelectOptionGroup) {
+  return !isSearching.value && (isActionButtonShown(!!optionGroup.selectAllBtn) || optionGroup.header)
+}
+
+function handleSearchInput(event: Event) {
+  if (event.target instanceof HTMLInputElement) {
+    api.updateSearchQuery(event.target.value)
+  }
 }
 
 const HEADER_FONT = {
@@ -35,11 +60,18 @@ const HEADER_FONT = {
   [SelectSize.Sm]: 'sora-tpg-ch3',
 } as const
 
-const ACTION_FONT = {
+const MAIN_FONT = {
   [SelectSize.Xl]: 'sora-tpg-p3',
   [SelectSize.Lg]: 'sora-tpg-p4',
   [SelectSize.Md]: 'sora-tpg-p4',
   [SelectSize.Sm]: 'sora-tpg-p4',
+} as const
+
+const SEARCH_ICON_SIZE = {
+  [SelectSize.Xl]: 24,
+  [SelectSize.Lg]: 16,
+  [SelectSize.Md]: 16,
+  [SelectSize.Sm]: 12,
 } as const
 </script>
 
@@ -49,6 +81,25 @@ const ACTION_FONT = {
     :class="`s-select-dropdown_size_${api.size}`"
   >
     <div
+      v-if="search"
+      class="s-select-dropdown__search flex items-center"
+    >
+      <IconBasicSearch24
+        class="s-select-dropdown__search-icon flex-shrink-0 mr-8px"
+        :width="SEARCH_ICON_SIZE[api.size]"
+        :height="SEARCH_ICON_SIZE[api.size]"
+      />
+
+      <input
+        class="s-select-dropdown__search-input flex-grow bg-transparent"
+        :class="MAIN_FONT[api.size]"
+        :value="api.searchQuery"
+        placeholder="Search"
+        @input="handleSearchInput"
+      >
+    </div>
+
+    <div
       v-if="api.loading"
       class="s-select-dropdown__loading flex items-center justify-center"
     >
@@ -57,11 +108,11 @@ const ACTION_FONT = {
 
     <template v-else>
       <template
-        v-for="(optionGroup, i) in optionGroups"
+        v-for="(optionGroup, i) in shownOptionGroups"
         :key="i"
       >
         <div
-          v-if="isActionButtonShown(!!optionGroup.selectAllBtn) || optionGroup.header"
+          v-if="isHeaderShown(optionGroup)"
           class="s-select-dropdown__header flex items-center justify-between"
         >
           <div
@@ -73,7 +124,7 @@ const ACTION_FONT = {
           <button
             v-if="isActionButtonShown(!!optionGroup.selectAllBtn)"
             class="s-select-dropdown__action cursor-pointer ml-auto"
-            :class="ACTION_FONT[api.size]"
+            :class="MAIN_FONT[api.size]"
             @click="api.toggleGroupSelection(optionGroup)"
           >
             {{ api.isGroupSelected(optionGroup) ? 'Deselect all' : 'Select all' }}
@@ -112,9 +163,31 @@ const ACTION_FONT = {
     color: theme.token-as-var('sys.color.status.info');
   }
 
-  @mixin select-dropdown-size($name, $header-height, $px, $loading-height, $spinner-size) {
-    &_size_#{$name} &__header {
-      height: $header-height;
+  &__search {
+    border-bottom: 1px solid theme.token-as-var('sys.color.border-primary');
+    background: theme.token-as-var('sys.color.background');
+
+    &:focus-within {
+      background: transparent;
+    }
+  }
+
+  &__search-icon {
+    fill: theme.token-as-var('sys.color.content-tertiary');
+  }
+
+  &__search-input {
+    color: theme.token-as-var('sys.color.content-primary');
+
+    &::placeholder {
+      color: theme.token-as-var('sys.color.content-tertiary');
+    }
+  }
+
+  @mixin select-dropdown-size($name, $option-height, $px, $loading-height, $spinner-size) {
+    &_size_#{$name} &__header,
+    &_size_#{$name} &__search {
+      height: $option-height;
       padding-right: $px;
       padding-left: $px;
     }
@@ -128,9 +201,9 @@ const ACTION_FONT = {
     }
   }
 
-  @include select-dropdown-size('xl', $header-height: 56px, $px: 16px, $loading-height: 170px, $spinner-size: 40px);
-  @include select-dropdown-size('lg', $header-height: 40px, $px: 16px, $loading-height: 150px, $spinner-size: 40px);
-  @include select-dropdown-size('md', $header-height: 32px, $px: 10px, $loading-height: 120px, $spinner-size: 24px);
-  @include select-dropdown-size('sm', $header-height: 24px, $px: 8px, $loading-height: 100px, $spinner-size: 24px);
+  @include select-dropdown-size('xl', $option-height: 56px, $px: 16px, $loading-height: 170px, $spinner-size: 40px);
+  @include select-dropdown-size('lg', $option-height: 40px, $px: 16px, $loading-height: 150px, $spinner-size: 40px);
+  @include select-dropdown-size('md', $option-height: 32px, $px: 10px, $loading-height: 120px, $spinner-size: 24px);
+  @include select-dropdown-size('sm', $option-height: 24px, $px: 8px, $loading-height: 100px, $spinner-size: 24px);
 }
 </style>

@@ -202,6 +202,60 @@ export const Dropdown = defineStory((args) => ({
 Dropdown.argTypes = commonArgTypes
 Dropdown.args = commonArgs
 
+export const WithSearch = defineStory((args) => ({
+  components: { SSelect, SDropdown },
+  setup() {
+    const asyncOptions = shallowRef([...OPTIONS])
+    const isLoadingAsyncOptions = ref(false)
+
+    async function handleSearch(value: string) {
+      isLoadingAsyncOptions.value = true
+      asyncOptions.value = await new Promise((resolve) => {
+        setTimeout(() => resolve(OPTIONS.filter((x) => new RegExp(value, 'i').test(x.label))), 1000)
+      })
+      isLoadingAsyncOptions.value = false
+    }
+
+    return {
+      OPTION_GROUPS,
+      asyncOptions,
+      isLoadingAsyncOptions,
+      model: ref(['en', 'jp']),
+      handleSearch,
+      args,
+    }
+  },
+  template: `
+    <SSelect
+      v-model="model"
+      label="Multi select"
+      :options="OPTION_GROUPS"
+      multiple
+      :size="args.size"
+      :disabled="args.disabled"
+      :loading="args.loading"
+      :option-type="args.optionType"
+      dropdown-search
+    />
+    <SDropdown
+      v-model="model"
+      label="Country"
+      :options="asyncOptions"
+      multiple
+      :size="args.size"
+      :disabled="args.disabled"
+      :loading="isLoadingAsyncOptions"
+      :option-type="args.optionType"
+      dropdown-search
+      custom-search
+      @search="handleSearch"
+    />
+  `,
+}))
+
+WithSearch.argTypes = commonArgTypes
+WithSearch.args = commonArgs
+
 export const Custom = defineStory(() => ({
   components: {
     SSelectBase,

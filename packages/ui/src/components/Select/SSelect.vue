@@ -14,6 +14,7 @@ const props = defineProps<{
   size?: SelectSize
   noAutoClose?: boolean
   loading?: boolean
+  dropdownSearch?: boolean
 }>()
 
 const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Checkbox : SelectOptionType.Radio))
@@ -38,7 +39,10 @@ const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Chec
     </template>
 
     <template #dropdown>
-      <SSelectDropdown :item-type="optionType ?? defaultOptionType" />
+      <SSelectDropdown
+        :search="!!dropdownSearch"
+        :item-type="optionType ?? defaultOptionType"
+      />
     </template>
   </SSelectBase>
 </template>

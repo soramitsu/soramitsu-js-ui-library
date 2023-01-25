@@ -15,6 +15,7 @@ const props = defineProps<{
   inline?: boolean
   noAutoClose?: boolean
   loading?: boolean
+  dropdownSearch?: boolean
 }>()
 
 const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : SelectButtonType.Default))
@@ -45,7 +46,10 @@ function isThereLabelSlot() {
     </template>
 
     <template #dropdown>
-      <SSelectDropdown :item-type="optionType ?? SelectOptionType.Default" />
+      <SSelectDropdown
+        :search="!!dropdownSearch"
+        :item-type="optionType ?? SelectOptionType.Default"
+      />
     </template>
   </SSelectBase>
 </template>
