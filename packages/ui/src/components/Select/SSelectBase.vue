@@ -55,7 +55,12 @@ const props = withDefaults(
     /**
      * Adds search field to dropdown
      */
-    dropdownSearch: boolean
+    dropdownSearch?: boolean
+
+    /**
+     * Turns off options filtering by select itself. When false select filters by option's label. Adds chips
+     */
+    remoteSearch?: boolean
   }>(),
   {
     size: SelectSize.Md,
@@ -69,6 +74,7 @@ const props = withDefaults(
     loading: false,
     sameWidthPopper: false,
     dropdownSearch: false,
+    remoteSearch: false,
   },
 )
 
@@ -78,12 +84,13 @@ const emit = defineEmits<{
 }>()
 
 const model = useVModel(props, 'modelValue', emit)
-const { multiple, disabled, loading, options, size, label, noAutoClose } = toRefs(props)
+const { multiple, disabled, loading, options, size, label, noAutoClose, remoteSearch } = toRefs(props)
 
 const modeling = useSelectModel({
   model,
   multiple,
   options,
+  storeSelectedOptions: remoteSearch,
   singleModeAutoClose: not(noAutoClose),
   onAutoClose: () => togglePopper(false),
 })
@@ -116,6 +123,7 @@ const api: SelectApi<any> = reactive({
   size,
   noAutoClose,
   searchQuery,
+  remoteSearch,
   updateSearchQuery,
 })
 

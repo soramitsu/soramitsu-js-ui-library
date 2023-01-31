@@ -30,7 +30,7 @@ const optionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
 const isSearching = eagerComputed(() => props.search && api.searchQuery)
 
 const shownOptionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
-  if (!api.searchQuery) {
+  if (!api.searchQuery || api.remoteSearch) {
     return optionGroups.value
   }
 

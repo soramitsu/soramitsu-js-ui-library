@@ -205,16 +205,30 @@ Dropdown.args = commonArgs
 export const WithSearch = defineStory((args) => ({
   components: { SSelect, SDropdown },
   setup() {
+    const asyncOptions = shallowRef([...OPTIONS])
+    const isLoadingAsyncOptions = ref(false)
+
+    async function handleSearch(value: string) {
+      isLoadingAsyncOptions.value = true
+      asyncOptions.value = await new Promise((resolve) => {
+        setTimeout(() => resolve(OPTIONS.filter((x) => new RegExp(value, 'i').test(x.label))), 1000)
+      })
+      isLoadingAsyncOptions.value = false
+    }
+
     return {
       OPTION_GROUPS,
+      asyncOptions,
+      isLoadingAsyncOptions,
       model: ref(['en', 'jp']),
+      handleSearch,
       args,
     }
   },
   template: `
-    <SSelect
+    <SDropdown
       v-model="model"
-      label="Multi select"
+      label="Search"
       :options="OPTION_GROUPS"
       multiple
       :size="args.size"
@@ -222,6 +236,19 @@ export const WithSearch = defineStory((args) => ({
       :loading="args.loading"
       :option-type="args.optionType"
       dropdown-search
+    />
+    <SSelect
+      v-model="model"
+      label="Remote search"
+      :options="asyncOptions"
+      multiple
+      :size="args.size"
+      :disabled="args.disabled"
+      :loading="isLoadingAsyncOptions"
+      :option-type="args.optionType"
+      dropdown-search
+      remote-search
+      @search="handleSearch"
     />
   `,
 }))

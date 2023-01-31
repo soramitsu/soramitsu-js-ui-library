@@ -31,7 +31,12 @@ export interface UseSelectModelParams<T> {
   multiple: Ref<boolean>
   model: Ref<null | T | T[]>
   options: Ref<SelectOption<T>[] | SelectOptionGroup<T>[]>
-
+  /**
+   * Enables remembering options for async search in multiple select when option list
+   * changes on search query changes. If no option creates option without label (e.g. for cases when model changes
+   * from outside and has values that have no options for them)
+   */
+  storeSelectedOptions: Ref<boolean>
   singleModeAutoClose: Ref<boolean>
   /**
    * Should be used to actually perform menu closing
@@ -45,6 +50,7 @@ export function useSelectModel<T = any>({
   options,
   singleModeAutoClose,
   onAutoClose,
+  storeSelectedOptions
 }: UseSelectModelParams<T>): UseSelectModelReturn<T> {
   const triggerAutoClose = () => singleModeAutoClose.value && onAutoClose()
 
@@ -59,6 +65,56 @@ export function useSelectModel<T = any>({
     return new Set(modelAsArray.value)
   })
 
+  const optionItems = computed(() => {
+    if (isSelectOptions(options.value)) {
+      return options.value
+    }
+
+    return options.value.flatMap((x) => x.items)
+  })
+
+  const storedOptions = shallowReactive(new Map<T, SelectOption<T>>())
+
+  let modelChangedManually = false
+  watch(modelAsArray, () => {
+    if (modelChangedManually) {
+      modelChangedManually = false
+
+      return
+    }
+
+    if (!storeSelectedOptions.value) {
+      return
+    }
+
+    storedOptions.forEach((_, value) => {
+      if (!modelAsArray.value.includes(value)) {
+        storedOptions.delete(value)
+      }
+    })
+    modelAsArray.value.forEach(rememberOption)
+  }, { immediate: true, flush: 'sync' })
+
+  function rememberOption(value: T) {
+    if (storedOptions.has(value)) {
+      return
+    }
+
+    const option = optionItems.value.find(x => x.value === value)
+
+    if (option) {
+      storedOptions.set(option.value, option)
+
+      return;
+    }
+
+    storedOptions.set(value, { label: '', value })
+  }
+
+  function forgetOption(value: T) {
+    storedOptions.delete(value)
+  }
+
   function isValueSelected(value: T): boolean {
     return selectedSet.value.has(value)
   }
@@ -69,8 +125,14 @@ export function useSelectModel<T = any>({
 
   function select(value: T): void {
     if (multiple.value) {
+      modelChangedManually = true
       model.value = [...new Set([...modelAsArray.value, value])]
+
+      if (storeSelectedOptions.value) {
+        rememberOption(value)
+      }
     } else {
+      modelChangedManually = true
       model.value = value
       triggerAutoClose()
     }
@@ -78,8 +140,14 @@ export function useSelectModel<T = any>({
 
   function unselect(value: T) {
     if (multiple.value) {
+      modelChangedManually = true
       model.value = modelAsArray.value.filter((x) => x !== value)
+
+      if (storeSelectedOptions.value) {
+        forgetOption(value)
+      }
     } else {
+      modelChangedManually = true
       model.value = null
       triggerAutoClose()
     }
@@ -90,25 +158,37 @@ export function useSelectModel<T = any>({
   }
 
   function toggleGroupSelection(optionGroup: SelectOptionGroup<T>): void {
+    const optionGroupValues = optionGroup.items.map((x) => x.value)
+
     if (isGroupSelected(optionGroup)) {
-      const optionGroupSet = new Set(optionGroup.items.map((x) => x.value))
-      model.value = modelAsArray.value.filter((x) => !optionGroupSet.has(x))
+      const optionGroupSet = new Set(optionGroupValues)
+      const newModel = modelAsArray.value.filter((x) => !optionGroupSet.has(x))
+      modelChangedManually = true
+      model.value = newModel
+
+      if (storeSelectedOptions.value) {
+        newModel.forEach(forgetOption)
+      }
 
       return
     }
 
-    model.value = [...new Set([...modelAsArray.value, ...optionGroup.items.map((x) => x.value)])]
+    const newModel = [...new Set([...modelAsArray.value, ...optionGroupValues])]
+    modelChangedManually = true
+    model.value = newModel
+
+    if (storeSelectedOptions.value) {
+      newModel.forEach(rememberOption)
+    }
   }
 
-  const optionItems = computed(() => {
-    if (isSelectOptions(options.value)) {
-      return options.value
+  const selectedOptions = computed<SelectOption<T>[]>(() => {
+    if (storeSelectedOptions.value) {
+      return [...storedOptions.values()]
     }
 
-    return options.value.flatMap((x) => x.items)
+    return optionItems.value.filter((x) => isValueSelected(x.value))
   })
-
-  const selectedOptions = computed<SelectOption[]>(() => optionItems.value.filter((x) => isValueSelected(x.value)))
 
   const isSomethingSelected = computed<boolean>(() => !!selectedSet.value.size)
 

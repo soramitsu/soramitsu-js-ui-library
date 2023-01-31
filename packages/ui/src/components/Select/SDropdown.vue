@@ -16,6 +16,7 @@ const props = defineProps<{
   noAutoClose?: boolean
   loading?: boolean
   dropdownSearch?: boolean
+  remoteSearch?: boolean
 }>()
 
 const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : SelectButtonType.Default))

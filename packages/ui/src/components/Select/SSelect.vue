@@ -15,6 +15,7 @@ const props = defineProps<{
   noAutoClose?: boolean
   loading?: boolean
   dropdownSearch?: boolean
+  remoteSearch?: boolean
 }>()
 
 const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Checkbox : SelectOptionType.Radio))
