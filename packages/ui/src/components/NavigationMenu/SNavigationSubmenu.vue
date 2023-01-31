@@ -4,7 +4,7 @@ import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenu
 import { SCollapseTransition } from '@/components/Transitions'
 import { NAVIGATION_SUBMENU_API_KEY, useNavigationMenuApi } from '@/components/NavigationMenu/api'
 import { IconChevronBottom16 } from '@/components/icons'
-import { and, not } from '@vueuse/core'
+import { and, not } from '@vueuse/math'
 
 const includedItems = shallowReactive(new Set<Ref<string>>([]))
 

@@ -1,5 +1,5 @@
 import { Ref } from 'vue'
-import { not, or, and } from '@vueuse/core'
+import { not, or, and } from '@vueuse/math'
 
 /**
  * Transforms *something* into something that could be binded to `Transition` component as `v-bind="something"`

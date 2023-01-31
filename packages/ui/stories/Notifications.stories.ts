@@ -1,6 +1,6 @@
 import { defineMeta, defineStory } from './util'
 import { SNotificationsProvider, SUseNotification, useNotifications, SNotificationBody, Status } from '@/lib'
-import { not } from '@vueuse/core'
+import { not } from '@vueuse/math'
 
 export default defineMeta({
   title: 'Example/Notifications',

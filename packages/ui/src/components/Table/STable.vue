@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { CSSProperties, ShallowRef, Slot } from 'vue'
-import { MaybeElementRef, not } from '@vueuse/core'
+import { MaybeElementRef } from '@vueuse/core'
+import { not } from '@vueuse/math'
 import { findLast } from 'lodash-es'
-import { SCheckboxAtom } from '@/components/Checkbox'
 import { IconArrowTop16 } from '@/components/icons'
 import { TABLE_DEFAULT_ADAPT_BREAKPOINT, TABLE_CARDS_GRID_DEFAULT_BREAKPOINTS } from './consts'
 import { useColumnSort } from './use-column-sort'

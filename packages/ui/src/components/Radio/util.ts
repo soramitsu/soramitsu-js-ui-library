@@ -179,7 +179,7 @@ export function useRadiosRegistration({
     valueRef,
     disabledRef: isDisabled,
   }: RegisterRadioParams): RadioGroupRegisteredItemApi {
-    const { focused: isFocused } = useFocus({ target: elRef })
+    const { focused: isFocused } = useFocus(elRef)
 
     const index = eagerComputed<number>(() => (elRef.value ? radioElements.value.indexOf(elRef.value) : -1))
 
