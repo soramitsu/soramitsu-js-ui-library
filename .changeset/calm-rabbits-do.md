@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': minor
 ---
 
-**feat**(`SSelect`): add sync search
+**feat**(`SSelect`,`SDropdown`): add sync search
