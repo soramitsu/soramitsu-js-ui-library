@@ -6,7 +6,7 @@ import { ComputedRef } from 'vue'
 import { isSelectOptions } from '@/components/Select/utils'
 import SSpinner from '@/components/Spinner/SSpinner.vue'
 import { IconBasicSearch24 } from '@/components/icons'
-import { escapeStringRegexp } from '@/util'
+import escapeStringRegexp from 'escape-string-regexp'
 
 const props = defineProps<{
   itemType: SelectOptionType
@@ -29,14 +29,13 @@ const optionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
 
 const isSearching = eagerComputed(() => props.search && api.searchQuery)
 
+const escapedQuery = computed(() => new RegExp(escapeStringRegexp(api.searchQuery), 'i'))
 const shownOptionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
   if (!api.searchQuery) {
     return optionGroups.value
   }
 
-  const escapedQuery = new RegExp(escapeStringRegexp(api.searchQuery), 'i')
-
-  return optionGroups.value.map((x) => ({ ...x, items: x.items.filter((x) => escapedQuery.test(x.label)) }))
+  return optionGroups.value.map((x) => ({ ...x, items: x.items.filter((x) => escapedQuery.value.test(x.label)) }))
 })
 
 function isActionButtonShown(selectAllBtn: boolean) {

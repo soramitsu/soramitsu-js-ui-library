@@ -47,7 +47,3 @@ export function nextIncrementalCounter(): number {
 export function uniqueElementId(): string {
   return `soraui-uid-${nextIncrementalCounter()}`
 }
-
-export function escapeStringRegexp(string: string) {
-  return string.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
-}
