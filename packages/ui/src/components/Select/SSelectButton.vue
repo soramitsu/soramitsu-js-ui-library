@@ -52,7 +52,7 @@ const slots = useSlots()
       typography(),
       {
         's-select-btn_empty': !api.isSomethingSelected,
-        's-select-btn_disabled': api.disabled,
+        's-select-btn_disabled': api.disabled || api.loading,
       },
     ]"
     @click="toggle"

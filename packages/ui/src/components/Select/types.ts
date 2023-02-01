@@ -17,8 +17,9 @@ export const SelectButtonType = {
 export type SelectButtonType = typeof SelectButtonType[keyof typeof SelectButtonType]
 
 export const SelectOptionType = {
-  RadioOrCheckbox: 'rad-or-check',
-  Check: 'check',
+  Radio: 'radio',
+  Checkbox: 'checkbox',
+  Default: 'default',
 } as const
 
 export type SelectOptionType = typeof SelectOptionType[keyof typeof SelectOptionType]

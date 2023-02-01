@@ -1,14 +1,45 @@
-import { SSelect, SDropdown, SelectOption, SSelectBase, SSelectButton, useSelectApi } from '@/lib'
+import {
+  SSelect,
+  SDropdown,
+  SSelectBase,
+  SSelectButton,
+  useSelectApi,
+  SelectOption,
+  SelectOptionGroup,
+  SelectOptionType,
+} from '@/lib'
 import { defineMeta, defineStory } from './util'
 import { ref } from 'vue'
 
-const sizeArg = {
-  options: ['sm', 'md', 'lg', 'xl'],
-  control: 'inline-radio',
+const commonArgTypes = {
+  size: {
+    options: ['sm', 'md', 'lg', 'xl'],
+    control: 'inline-radio',
+  },
+  optionType: {
+    options: Object.values(SelectOptionType),
+    control: 'inline-radio',
+  },
+  disabled: { control: 'boolean' },
+  loading: { control: 'boolean' },
+}
+const commonArgs = {
+  size: 'md',
+  disabled: false,
+  loading: false,
 }
 
 export default defineMeta({
   title: 'Example/Select',
+  decorators: [
+    () => ({
+      template: `
+        <div class="grid grid-cols-2 gap-4 w-1/2">
+          <story />
+        </div>
+      `,
+    }),
+  ],
 })
 
 const OPTIONS: SelectOption[] = [
@@ -21,8 +52,42 @@ const OPTIONS: SelectOption[] = [
     value: 'en',
   },
   {
+    label: 'Iceland',
+    value: 'is',
+  },
+  {
     label: 'Japan',
     value: 'jp',
+  },
+]
+const OPTION_GROUPS: SelectOptionGroup[] = [
+  {
+    header: '1 group',
+    selectAllBtn: true,
+    items: [
+      {
+        label: 'Germany',
+        value: 'du',
+      },
+      {
+        label: 'England',
+        value: 'en',
+      },
+    ],
+  },
+  {
+    header: '2 group',
+    selectAllBtn: true,
+    items: [
+      {
+        label: 'Iceland',
+        value: 'is',
+      },
+      {
+        label: 'Japan',
+        value: 'jp',
+      },
+    ],
   },
 ]
 
@@ -33,6 +98,7 @@ export const SelectSingle = defineStory((args) => ({
   setup() {
     return {
       OPTIONS,
+      OPTION_GROUPS,
       model: ref(null),
       args,
     }
@@ -43,22 +109,31 @@ export const SelectSingle = defineStory((args) => ({
       label="Single select"
       :options="OPTIONS"
       :size="args.size"
+      :disabled="args.disabled"
+      :loading="args.loading"
+      :option-type="args.optionType"
+    />
+    <SSelect
+      v-model="model"
+      label="Single select"
+      :options="OPTION_GROUPS"
+      :size="args.size"
+      :disabled="args.disabled"
+      :loading="args.loading"
+      :option-type="args.optionType"
     />
   `,
 }))
 
-SelectSingle.argTypes = {
-  size: sizeArg,
-}
-SelectSingle.args = {
-  size: 'md',
-}
+SelectSingle.argTypes = commonArgTypes
+SelectSingle.args = commonArgs
 
 export const SelectMultiple = defineStory((args) => ({
   components: { SSelect },
   setup() {
     return {
       OPTIONS,
+      OPTION_GROUPS,
       model: ref(['en', 'jp']),
       args,
     }
@@ -70,22 +145,32 @@ export const SelectMultiple = defineStory((args) => ({
       :options="OPTIONS"
       multiple
       :size="args.size"
+      :disabled="args.disabled"
+      :loading="args.loading"
+      :option-type="args.optionType"
+    />
+    <SSelect
+      v-model="model"
+      label="Multi select"
+      :options="OPTION_GROUPS"
+      multiple
+      :size="args.size"
+      :disabled="args.disabled"
+      :loading="args.loading"
+      :option-type="args.optionType"
     />
   `,
 }))
 
-SelectMultiple.argTypes = {
-  size: sizeArg,
-}
-SelectMultiple.args = {
-  size: 'md',
-}
+SelectMultiple.argTypes = commonArgTypes
+SelectMultiple.args = commonArgs
 
 export const Dropdown = defineStory((args) => ({
   components: { SDropdown },
   setup() {
     return {
       OPTIONS,
+      OPTION_GROUPS,
       model: ref(['en', 'jp']),
       args,
     }
@@ -97,16 +182,25 @@ export const Dropdown = defineStory((args) => ({
       :options="OPTIONS"
       multiple
       :size="args.size"
+      :disabled="args.disabled"
+      :loading="args.loading"
+      :option-type="args.optionType"
+    />
+    <SDropdown
+      v-model="model"
+      label="Country"
+      :options="OPTION_GROUPS"
+      multiple
+      :size="args.size"
+      :disabled="args.disabled"
+      :loading="args.loading"
+      :option-type="args.optionType"
     />
   `,
 }))
 
-Dropdown.argTypes = {
-  size: sizeArg,
-}
-Dropdown.args = {
-  size: 'md',
-}
+Dropdown.argTypes = commonArgTypes
+Dropdown.args = commonArgs
 
 export const Custom = defineStory(() => ({
   components: {

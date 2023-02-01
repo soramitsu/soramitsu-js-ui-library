@@ -43,6 +43,11 @@ const props = withDefaults(
     noAutoClose?: boolean
 
     /**
+     * Enables loading state.
+     */
+    loading?: boolean
+
+    /**
      * Makes popper same width as trigger.
      */
     sameWidthPopper?: boolean
@@ -56,13 +61,15 @@ const props = withDefaults(
     syncMenuAndInputWidths: false,
     noAutoClose: false,
     label: null,
+    loading: false,
+    sameWidthPopper: false,
   },
 )
 
 const emit = defineEmits<(event: 'update:modelValue', value: any) => void>()
 
 const model = useVModel(props, 'modelValue', emit)
-const { multiple, disabled, options, size, label, noAutoClose } = toRefs(props)
+const { multiple, disabled, loading, options, size, label, noAutoClose } = toRefs(props)
 
 const modeling = useSelectModel({
   model,
@@ -82,6 +89,7 @@ const api: SelectApi<any> = reactive({
   multiple,
   options,
   disabled,
+  loading,
   label,
   isMenuOpened: showPopper,
   menuToggle: togglePopper,

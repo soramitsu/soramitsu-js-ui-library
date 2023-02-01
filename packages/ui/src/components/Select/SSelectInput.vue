@@ -40,7 +40,7 @@ const FSelection = () =>
     ? h(
         'span',
         {
-          class: typographySelection(),
+          class: ['overflow-hidden', 'overflow-ellipsis', typographySelection()],
         },
         selectionsJoined.value,
       )
@@ -54,20 +54,20 @@ const FSelection = () =>
       `s-select-input_size_${api.size}`,
       {
         's-select-input_empty': !api.isSomethingSelected,
-        's-select-input_disabled': api.disabled,
+        's-select-input_disabled': api.disabled || api.loading,
       },
     ]"
     @click="api.menuToggle()"
   >
     <template v-if="isColumnLayout">
-      <div class="flex flex-col flex-1">
+      <div class="flex flex-col flex-1 truncate">
         <FLabel />
         <FSelection />
       </div>
     </template>
 
     <template v-else>
-      <div class="flex items-center flex-1">
+      <div class="flex items-center flex-1 truncate">
         <FLabel /> <FSelection />
       </div>
     </template>

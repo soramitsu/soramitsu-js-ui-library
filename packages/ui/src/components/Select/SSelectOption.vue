@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SelectOptionType } from './types'
+import { SelectOptionType, SelectSize } from './types'
 import IconCheckMark from '~icons/mdi/check'
 import { useSelectApi } from './api'
 import { SCheckboxAtom } from '../Checkbox'
@@ -7,14 +7,26 @@ import { SRadioAtom } from '../Radio'
 
 const props = defineProps<{
   type: SelectOptionType
-  multiple?: boolean
   selected?: boolean
 }>()
 
 const api = useSelectApi()
-const isCheckMode = computed(() => props.type === SelectOptionType.Check)
 
 const emit = defineEmits<(event: 'toggle') => void>()
+
+const RADIO_CHECKBOX_SIZE = {
+  [SelectSize.Xl]: 'xl',
+  [SelectSize.Lg]: 'lg',
+  [SelectSize.Md]: 'lg',
+  [SelectSize.Sm]: 'md',
+} as const
+
+const CHECK_ICON_SIZE = {
+  [SelectSize.Xl]: 24,
+  [SelectSize.Lg]: 16,
+  [SelectSize.Md]: 16,
+  [SelectSize.Sm]: 16,
+} as const
 </script>
 
 <template>
@@ -28,30 +40,29 @@ const emit = defineEmits<(event: 'toggle') => void>()
     ]"
     @click="emit('toggle')"
   >
-    <template v-if="!isCheckMode">
-      <template v-if="multiple">
-        <SCheckboxAtom
-          :checked="selected"
-          size="lg"
-        />
-      </template>
-      <template v-else>
-        <SRadioAtom
-          :checked="selected"
-          size="lg"
-        />
-      </template>
+    <template v-if="type === SelectOptionType.Checkbox">
+      <SCheckboxAtom
+        :checked="selected"
+        :size="RADIO_CHECKBOX_SIZE[api.size]"
+      />
     </template>
+    <template v-if="type === SelectOptionType.Radio">
+      <SRadioAtom
+        :checked="selected"
+        :size="RADIO_CHECKBOX_SIZE[api.size]"
+      />
+    </template>
+
     <div class="s-select-option__content">
       <slot />
     </div>
 
-    <template v-if="isCheckMode">
-      <div class="s-select-option__right-check-wrapper">
-        <template v-if="selected">
-          <IconCheckMark />
-        </template>
-      </div>
+    <template v-if="type === SelectOptionType.Default">
+      <IconCheckMark
+        v-if="selected"
+        :width="CHECK_ICON_SIZE[api.size]"
+        :height="CHECK_ICON_SIZE[api.size]"
+      />
     </template>
   </div>
 </template>
@@ -74,25 +85,10 @@ const emit = defineEmits<(event: 'toggle') => void>()
     @apply flex-1;
   }
 
-  &__right-check-wrapper {
-    @apply w-6 h-6 flex items-center justify-center;
-  }
-
   $root: &;
 
   &_size {
     @include sizes-mixin.s-select-sizes;
-
-    @mixin check-size($size, $px: 16px) {
-      &_#{$size} #{$root}__right-check-wrapper {
-        font-size: $px;
-      }
-    }
-
-    @include check-size('sm');
-    @include check-size('md');
-    @include check-size('lg');
-    @include check-size('xl', 24px);
   }
 }
 </style>

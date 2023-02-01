@@ -7,12 +7,14 @@ import SSelectDropdown from './SSelectDropdown.vue'
 const props = defineProps<{
   modelValue?: any
   options?: SelectOption[] | SelectOptionGroup[]
+  optionType?: SelectOptionType
   disabled?: boolean
   multiple?: boolean
   label?: string
   size?: SelectSize
   inline?: boolean
   noAutoClose?: boolean
+  loading?: boolean
 }>()
 
 const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : SelectButtonType.Default))
@@ -43,7 +45,7 @@ function isThereLabelSlot() {
     </template>
 
     <template #dropdown>
-      <SSelectDropdown :item-type="SelectOptionType.Check" />
+      <SSelectDropdown :item-type="optionType ?? SelectOptionType.Default" />
     </template>
   </SSelectBase>
 </template>
