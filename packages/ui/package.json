@@ -40,6 +40,7 @@
     "@vueuse/core": "9.2.0",
     "@vueuse/math": "9.2.0",
     "date-fns": "2.20.3",
+    "escape-string-regexp": "^5.0.0",
     "focus-trap": "^6.7.1",
     "jsoneditor": "^9.5.5",
     "lodash-es": "^4.17.21",
