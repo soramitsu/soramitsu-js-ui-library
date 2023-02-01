@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': minor
 ---
 
-**feat**(`SSelect`): add loading state
+**feat**(`SSelect`,`SDropdown`): add loading state (`loading` prop)

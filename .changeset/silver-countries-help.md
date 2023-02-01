@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': minor
 ---
 
-**feat**(`SSelect`): add prop to select options type
+**feat**(`SSelect`,`SDropdown`): add prop to select options type (`optionType` prop)
