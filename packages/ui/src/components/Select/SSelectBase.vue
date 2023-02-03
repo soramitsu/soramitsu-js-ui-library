@@ -153,7 +153,10 @@ provide(SELECT_API_KEY, api)
           :wrapper-attrs="{ 'class': 'z-10' }"
           :inner-wrapper-attrs="{ 'class': { 'w-full': sameWidthPopper } }"
         >
-          <slot name="dropdown" />
+          <slot
+            name="dropdown"
+            v-bind="{ 'search': dropdownSearch }"
+          />
         </SPopoverWrappedTransition>
       </template>
     </SPopover>

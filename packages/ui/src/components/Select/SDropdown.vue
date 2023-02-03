@@ -46,9 +46,9 @@ function isThereLabelSlot() {
       </SSelectButton>
     </template>
 
-    <template #dropdown>
+    <template #dropdown="{ search }">
       <SSelectDropdown
-        :search="!!dropdownSearch"
+        :search="search"
         :item-type="optionType ?? SelectOptionType.Default"
       />
     </template>

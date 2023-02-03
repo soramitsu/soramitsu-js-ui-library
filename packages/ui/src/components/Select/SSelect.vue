@@ -39,9 +39,9 @@ const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Chec
       </SSelectInput>
     </template>
 
-    <template #dropdown>
+    <template #dropdown="{ search }">
       <SSelectDropdown
-        :search="!!dropdownSearch"
+        :search="search"
         :item-type="optionType ?? defaultOptionType"
       />
     </template>
