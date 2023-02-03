@@ -50,7 +50,7 @@ export function useSelectModel<T = any>({
   options,
   singleModeAutoClose,
   onAutoClose,
-  storeSelectedOptions
+  storeSelectedOptions,
 }: UseSelectModelParams<T>): UseSelectModelReturn<T> {
   const triggerAutoClose = () => singleModeAutoClose.value && onAutoClose()
 
@@ -76,36 +76,40 @@ export function useSelectModel<T = any>({
   const storedOptions = shallowReactive(new Map<T, SelectOption<T>>())
 
   let modelChangedManually = false
-  watch(modelAsArray, () => {
-    if (modelChangedManually) {
-      modelChangedManually = false
+  watch(
+    modelAsArray,
+    () => {
+      if (modelChangedManually) {
+        modelChangedManually = false
 
-      return
-    }
-
-    if (!storeSelectedOptions.value) {
-      return
-    }
-
-    storedOptions.forEach((_, value) => {
-      if (!modelAsArray.value.includes(value)) {
-        storedOptions.delete(value)
+        return
       }
-    })
-    modelAsArray.value.forEach(rememberOption)
-  }, { immediate: true, flush: 'sync' })
+
+      if (!storeSelectedOptions.value) {
+        return
+      }
+
+      storedOptions.forEach((_, value) => {
+        if (!modelAsArray.value.includes(value)) {
+          storedOptions.delete(value)
+        }
+      })
+      modelAsArray.value.forEach(rememberOption)
+    },
+    { immediate: true, flush: 'sync' },
+  )
 
   function rememberOption(value: T) {
     if (storedOptions.has(value)) {
       return
     }
 
-    const option = optionItems.value.find(x => x.value === value)
+    const option = optionItems.value.find((x) => x.value === value)
 
     if (option) {
       storedOptions.set(option.value, option)
 
-      return;
+      return
     }
 
     storedOptions.set(value, { label: '', value })
@@ -133,7 +137,21 @@ export function useSelectModel<T = any>({
       }
     } else {
       modelChangedManually = true
+
+      if (storeSelectedOptions.value) {
+        let oldValue = Array.isArray(model.value) ? model.value[0] : model.value;
+
+        if (oldValue) {
+          forgetOption(oldValue)
+        }
+      }
+
       model.value = value
+
+      if (storeSelectedOptions.value) {
+        rememberOption(value)
+      }
+
       triggerAutoClose()
     }
   }
@@ -149,6 +167,11 @@ export function useSelectModel<T = any>({
     } else {
       modelChangedManually = true
       model.value = null
+
+      if (storeSelectedOptions.value) {
+        forgetOption(value)
+      }
+
       triggerAutoClose()
     }
   }
