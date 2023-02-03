@@ -8,6 +8,7 @@ export default {
 import { StyleValue } from 'vue'
 import { Status } from '@/types'
 import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff } from '../icons'
+import { MaybeElementRef } from '@vueuse/core'
 
 /**
  * warning: don't use it inside of `Props`. Vue compiler determines it
@@ -104,6 +105,14 @@ interface Props {
    * Also you can use `message` slot.
    */
   message?: string
+  /**
+   * Manually activates filled state
+   */
+  filledState?: boolean
+  /**
+   * Makes append part focus input on
+   */
+  passiveAppend?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -113,6 +122,8 @@ const props = withDefaults(defineProps<Props>(), {
   counter: false,
   noEye: false,
   noModelValueStrictSync: false,
+  filledState: false,
+  passiveAppend: false,
 })
 
 const emit = defineEmits<(event: 'update:modelValue', value: string) => void>()
@@ -141,7 +152,42 @@ function onInput(e: Event) {
 
 const isValueEmpty = computed(() => !model.value)
 const isFocused = ref(false)
-const labelTypographyClass = computed(() => (!isFocused.value && isValueEmpty.value ? 'sora-tpg-p3' : 'sora-tpg-p4'))
+const labelTypographyClass = computed(() =>
+  !(props.filledState || isFocused.value) && isValueEmpty.value ? 'sora-tpg-p3' : 'sora-tpg-p4',
+)
+
+const inputRef = ref<MaybeElementRef>(null)
+
+function focusInput() {
+  if (!(inputRef.value instanceof HTMLInputElement)) {
+    return
+  }
+
+  if (isFocused.value) {
+    return
+  }
+
+  inputRef.value.focus()
+  isFocused.value = true
+}
+
+function handleInputLineMouseDown() {
+  focusInput()
+}
+
+function handleAppendMouseDown() {
+  if (!props.passiveAppend) {
+    return
+  }
+
+  focusInput()
+}
+
+function handleEyeButtonFocus(event: Event) {
+  if (event.target instanceof HTMLElement) {
+    event.target.blur()
+  }
+}
 
 // MESSAGE
 
@@ -211,7 +257,8 @@ const inputType = computed(() =>
     :class="[
       's-text-field',
       {
-        's-text-field_empty': isValueEmpty,
+        's-text-field_empty': isValueEmpty && !filledState,
+        's-text-field_filled-state': filledState,
         's-text-field_disabled': disabled,
       },
       rootClass(),
@@ -227,21 +274,31 @@ const inputType = computed(() =>
         <slot name="label">{{ label }}</slot>
       </label>
 
-      <input
-        :id="id"
-        :value="model"
-        :type="inputType"
-        :disabled="disabled"
-        v-bind="inputAttrs()"
-        @input="onInput"
-        @focus="isFocused = true"
-        @blur="isFocused = false"
+      <div
+        class="s-text-field__input-line"
+        @mousedown.prevent="handleInputLineMouseDown"
       >
+        <slot name="prefix" />
+
+        <input
+          :id="id"
+          ref="inputRef"
+          :value="model"
+          :type="inputType"
+          :disabled="disabled"
+          v-bind="inputAttrs()"
+          @input="onInput"
+          @mousedown.stop
+          @focus="isFocused = true"
+          @blur="isFocused = false"
+        >
+      </div>
 
       <div
         v-if="shouldRenderAppend()"
         class="s-text-field__append"
         data-testid="append"
+        @mousedown.prevent="handleAppendMouseDown"
       >
         <div
           v-if="counterText"
@@ -259,6 +316,7 @@ const inputType = computed(() =>
           data-testid="eye"
           type="button"
           @click="toggleForceReveal()"
+          @focus="handleEyeButtonFocus"
         >
           <IconEye v-if="!forceRevealPassword" />
           <IconEyeOff v-else />
@@ -309,6 +367,7 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
   }
 
   &:not(&_empty),
+  &_filled-state,
   &:focus-within {
     label {
       transform: translateY(#{$label-top-secondary});
@@ -322,7 +381,7 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
     @apply relative flex;
     @apply transition-all;
 
-    height: $height;
+    min-height: $height;
 
     &:hover:not(:focus-within) {
       background: $theme-bg-hover;
@@ -343,19 +402,23 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
       transform: translateY(#{$label-top-primary});
     }
 
-    input {
-      @apply h-full flex-1 w-full min-w-0;
+    #{$root}__input-line {
+      @apply flex flex-wrap cursor-text;
       padding: $input-padding;
 
-      background: transparent;
-      &:focus {
-        outline: none;
+      input {
+        @apply flex-1 w-full min-w-1/4;
+
+        background: transparent;
+        &:focus {
+          outline: none;
+        }
       }
     }
   }
 
   &__append {
-    @apply h-full flex items-center space-x-4 pr-4;
+    @apply flex items-center space-x-4 pr-4;
   }
 
   &__counter {
