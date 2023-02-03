@@ -402,18 +402,18 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
       // primary state by default
       transform: translateY(#{$label-top-primary});
     }
+  }
 
-    #{$root}__input-line {
-      @apply flex flex-wrap cursor-text;
-      padding: $input-padding;
+  &__input-line {
+    @apply flex flex-wrap cursor-text min-w-0;
+    padding: $input-padding;
 
-      input {
-        @apply flex-1 w-full min-w-1/4;
+    input {
+      @apply flex-1 w-full min-w-1/4;
 
-        background: transparent;
-        &:focus {
-          outline: none;
-        }
+      background: transparent;
+      &:focus {
+        outline: none;
       }
     }
   }
