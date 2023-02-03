@@ -283,6 +283,7 @@ const inputType = computed(() =>
         <input
           :id="id"
           ref="inputRef"
+          class="sora-tpg-p3"
           :value="model"
           :type="inputType"
           :disabled="disabled"
