@@ -42,24 +42,27 @@ const CHECK_ICON_SIZE = {
   >
     <template v-if="type === SelectOptionType.Checkbox">
       <SCheckboxAtom
+        class="flex-shrink-0"
         :checked="selected"
         :size="RADIO_CHECKBOX_SIZE[api.size]"
       />
     </template>
     <template v-if="type === SelectOptionType.Radio">
       <SRadioAtom
+        class="flex-shrink-0"
         :checked="selected"
         :size="RADIO_CHECKBOX_SIZE[api.size]"
       />
     </template>
 
-    <div class="s-select-option__content">
+    <div class="s-select-option__content truncate">
       <slot />
     </div>
 
     <template v-if="type === SelectOptionType.Default">
       <IconCheckMark
         v-if="selected"
+        class="flex-shrink-0"
         :width="CHECK_ICON_SIZE[api.size]"
         :height="CHECK_ICON_SIZE[api.size]"
       />
