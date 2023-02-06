@@ -1708,9 +1708,10 @@ counter: boolean;
 noEye: boolean;
 noModelValueStrictSync: boolean;
 filledState: boolean;
-passiveAppend: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: string) => void;
+} & {
+"click:input-wrapper": (value: MouseEvent) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_14<__VLS_TypePropsToRuntimeProps_17<Props_6>, {
 multiline: boolean;
 password: boolean;
@@ -1719,9 +1720,9 @@ counter: boolean;
 noEye: boolean;
 noModelValueStrictSync: boolean;
 filledState: boolean;
-passiveAppend: boolean;
 }>>> & {
 "onUpdate:modelValue"?: ((value: string) => any) | undefined;
+"onClick:input-wrapper"?: ((value: MouseEvent) => any) | undefined;
 }, {
 disabled: boolean;
 noModelValueStrictSync: boolean;
@@ -1729,7 +1730,6 @@ password: boolean;
 noEye: boolean;
 counter: string | number | boolean;
 filledState: boolean;
-passiveAppend: boolean;
 }>;
 
 // @public (undocumented)

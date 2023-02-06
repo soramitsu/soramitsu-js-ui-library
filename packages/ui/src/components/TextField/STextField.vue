@@ -109,10 +109,6 @@ interface Props {
    * Manually activates filled state
    */
   filledState?: boolean
-  /**
-   * Makes append part focus input on
-   */
-  passiveAppend?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -123,10 +119,12 @@ const props = withDefaults(defineProps<Props>(), {
   noEye: false,
   noModelValueStrictSync: false,
   filledState: false,
-  passiveAppend: false,
 })
 
-const emit = defineEmits<(event: 'update:modelValue', value: string) => void>()
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: string): void
+  (event: 'click:input-wrapper', value: MouseEvent): void
+}>()
 
 const slots = useSlots()
 
@@ -158,35 +156,23 @@ const labelTypographyClass = computed(() =>
 
 const inputRef = ref<MaybeElementRef>(null)
 
-function focusInput() {
-  if (!(inputRef.value instanceof HTMLInputElement)) {
-    return
+function handleInputWrapperClick(event: MouseEvent) {
+  if (event.target !== document.activeElement) {
+    event.preventDefault()
   }
 
-  if (isFocused.value) {
-    return
+  if (inputRef.value instanceof HTMLInputElement && !isFocused.value) {
+    inputRef.value.focus()
+    isFocused.value = true
   }
 
-  inputRef.value.focus()
-  isFocused.value = true
+  emit('click:input-wrapper', event)
 }
 
-function handleInputLineMouseDown() {
-  focusInput()
-}
+function handleInputWrapperMouseDown(event: MouseEvent) {
+  if (event.target === inputRef.value) return
 
-function handleAppendMouseDown() {
-  if (!props.passiveAppend) {
-    return
-  }
-
-  focusInput()
-}
-
-function handleEyeButtonFocus(event: Event) {
-  if (event.target instanceof HTMLElement) {
-    event.target.blur()
-  }
+  event.preventDefault()
 }
 
 // MESSAGE
@@ -266,7 +252,13 @@ const inputType = computed(() =>
     :style="rootStyle()"
     :data-status="status"
   >
-    <div class="s-text-field__input-wrapper">
+    <!-- key events works with input element -->
+    <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
+    <div
+      class="s-text-field__input-wrapper"
+      @click="handleInputWrapperClick"
+      @mousedown="handleInputWrapperMouseDown"
+    >
       <label
         :for="id"
         :class="labelTypographyClass"
@@ -274,10 +266,7 @@ const inputType = computed(() =>
         <slot name="label">{{ label }}</slot>
       </label>
 
-      <div
-        class="s-text-field__input-line"
-        @mousedown.prevent="handleInputLineMouseDown"
-      >
+      <div class="s-text-field__input-line">
         <slot name="prefix" />
 
         <input
@@ -289,7 +278,6 @@ const inputType = computed(() =>
           :disabled="disabled"
           v-bind="inputAttrs()"
           @input="onInput"
-          @mousedown.stop
           @focus="isFocused = true"
           @blur="isFocused = false"
         >
@@ -299,7 +287,6 @@ const inputType = computed(() =>
         v-if="shouldRenderAppend()"
         class="s-text-field__append"
         data-testid="append"
-        @mousedown.prevent="handleAppendMouseDown"
       >
         <div
           v-if="counterText"
@@ -316,8 +303,7 @@ const inputType = computed(() =>
           class="s-text-field__eye"
           data-testid="eye"
           type="button"
-          @click="toggleForceReveal()"
-          @focus="handleEyeButtonFocus"
+          @click.stop="toggleForceReveal()"
         >
           <IconEye v-if="!forceRevealPassword" />
           <IconEyeOff v-else />
@@ -405,7 +391,7 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
   }
 
   &__input-line {
-    @apply flex flex-wrap cursor-text min-w-0;
+    @apply flex flex-wrap min-w-0;
     padding: $input-padding;
 
     input {
