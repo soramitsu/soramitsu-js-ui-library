@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': patch
 ---
 
-fix (`STextField`): fix input font
+**fix**(`STextField`): fix input font
