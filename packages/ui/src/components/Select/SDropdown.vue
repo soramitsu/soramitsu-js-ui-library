@@ -50,7 +50,11 @@ function isThereLabelSlot() {
       <SSelectDropdown
         :search="search"
         :item-type="optionType ?? SelectOptionType.Default"
-      />
+      >
+        <template #empty>
+          <slot name="empty" />
+        </template>
+      </SSelectDropdown>
     </template>
   </SSelectBase>
 </template>

@@ -43,7 +43,11 @@ const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Chec
       <SSelectDropdown
         :search="search"
         :item-type="optionType ?? defaultOptionType"
-      />
+      >
+        <template #empty>
+          <slot name="empty" />
+        </template>
+      </SSelectDropdown>
     </template>
   </SSelectBase>
 </template>

@@ -37,6 +37,7 @@ const shownOptionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
 
   return optionGroups.value.map((x) => ({ ...x, items: x.items.filter((x) => escapedQuery.value.test(x.label)) }))
 })
+const isNothingToShow = eagerComputed(() => shownOptionGroups.value.every((x) => !x.items.length))
 
 function isActionButtonShown(selectAllBtn: boolean) {
   return api.multiple && selectAllBtn
@@ -103,6 +104,16 @@ const SEARCH_ICON_SIZE = {
       class="s-select-dropdown__loading flex items-center justify-center"
     >
       <SSpinner />
+    </div>
+
+    <div
+      v-else-if="isNothingToShow"
+      class="flex items-center justify-center m-16px"
+      :class="MAIN_FONT[api.size]"
+    >
+      <slot name="empty">
+        No data
+      </slot>
     </div>
 
     <template v-else>
