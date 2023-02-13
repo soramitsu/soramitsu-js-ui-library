@@ -391,7 +391,7 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
   }
 
   &__input-line {
-    @apply flex flex-wrap min-w-0;
+    @apply flex flex-wrap flex-grow min-w-0;
     padding: $input-padding;
 
     input {
