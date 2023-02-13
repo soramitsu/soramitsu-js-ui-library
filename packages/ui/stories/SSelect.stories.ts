@@ -52,6 +52,10 @@ const OPTIONS: SelectOption[] = [
     value: 'en',
   },
   {
+    label: 'United Arab Emirates',
+    value: 'ae',
+  },
+  {
     label: 'Iceland',
     value: 'is',
   },
@@ -72,6 +76,10 @@ const OPTION_GROUPS: SelectOptionGroup[] = [
       {
         label: 'England',
         value: 'en',
+      },
+      {
+        label: 'United Arab Emirates',
+        value: 'ae',
       },
     ],
   },
@@ -202,6 +210,13 @@ export const Dropdown = defineStory((args) => ({
 Dropdown.argTypes = commonArgTypes
 Dropdown.args = commonArgs
 
+const modelSingle = ref()
+const modelSingleRemote = ref()
+const modelMultiple = ref()
+const modelMultipleRemote = ref()
+const modelDropdown = ref()
+const modelDropdownDropdown = ref()
+
 export const WithSearch = defineStory((args) => ({
   components: { SSelect, SDropdown },
   setup() {
@@ -220,35 +235,84 @@ export const WithSearch = defineStory((args) => ({
       OPTION_GROUPS,
       asyncOptions,
       isLoadingAsyncOptions,
-      model: ref(['en', 'jp']),
+      modelSingle,
+      modelSingleRemote,
+      modelMultiple,
+      modelMultipleRemote,
+      modelDropdown,
+      modelDropdownDropdown,
       handleSearch,
       args,
     }
   },
   template: `
-    <SDropdown
-      v-model="model"
+    <SSelect
+      v-model="modelSingle"
       label="Search"
       :options="OPTION_GROUPS"
-      multiple
       :size="args.size"
       :disabled="args.disabled"
       :loading="args.loading"
       :option-type="args.optionType"
-      dropdown-search
+      trigger-search
     />
     <SSelect
-      v-model="model"
+      v-model="modelSingleRemote"
       label="Remote search"
       :options="asyncOptions"
-      multiple
       :size="args.size"
       :disabled="args.disabled"
       :loading="isLoadingAsyncOptions"
       :option-type="args.optionType"
-      dropdown-search
+      trigger-search
       remote-search
       @search="handleSearch"
+    />
+    <SSelect
+      v-model="modelMultiple"
+      label="Search - multiple"
+      :options="OPTION_GROUPS"
+      :size="args.size"
+      :disabled="args.disabled"
+      :loading="args.loading"
+      :option-type="args.optionType"
+      multiple
+      trigger-search
+    />
+    <SSelect
+      v-model="modelMultipleRemote"
+      label="Remote search - multiple"
+      :options="asyncOptions"
+      :size="args.size"
+      :disabled="args.disabled"
+      :loading="isLoadingAsyncOptions"
+      :option-type="args.optionType"
+      multiple
+      trigger-search
+      remote-search
+      @search="handleSearch"
+    />
+    <SSelect
+      v-model="modelDropdown"
+      label="Menu search"
+      :options="OPTION_GROUPS"
+      :size="args.size"
+      :disabled="args.disabled"
+      :loading="args.loading"
+      :option-type="args.optionType"
+      multiple
+      dropdown-search
+    />
+    <SDropdown
+      v-model="modelDropdownDropdown"
+      label="Menu search"
+      :options="OPTION_GROUPS"
+      :size="args.size"
+      :disabled="args.disabled"
+      :loading="args.loading"
+      :option-type="args.optionType"
+      multiple
+      dropdown-search
     />
   `,
 }))

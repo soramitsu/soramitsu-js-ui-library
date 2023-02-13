@@ -139,7 +139,7 @@ export function useSelectModel<T = any>({
       modelChangedManually = true
 
       if (storeSelectedOptions.value) {
-        let oldValue = Array.isArray(model.value) ? model.value[0] : model.value;
+        let oldValue = Array.isArray(model.value) ? model.value[0] : model.value
 
         if (oldValue) {
           forgetOption(oldValue)

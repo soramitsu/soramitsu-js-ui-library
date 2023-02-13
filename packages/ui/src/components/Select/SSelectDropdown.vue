@@ -7,6 +7,7 @@ import { isSelectOptions } from '@/components/Select/utils'
 import SSpinner from '@/components/Spinner/SSpinner.vue'
 import { IconBasicSearch24 } from '@/components/icons'
 import escapeStringRegexp from 'escape-string-regexp'
+import { MaybeElementRef } from '@vueuse/core'
 
 const props = defineProps<{
   itemType: SelectOptionType
@@ -27,7 +28,7 @@ const optionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
   return options
 })
 
-const isSearching = eagerComputed(() => props.search && api.searchQuery)
+const isSearching = eagerComputed(() => api.searchQuery)
 
 const escapedQuery = computed(() => new RegExp(escapeStringRegexp(api.searchQuery), 'i'))
 const shownOptionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
@@ -50,6 +51,18 @@ function isHeaderShown(optionGroup: SelectOptionGroup) {
 function handleSearchInput(event: Event) {
   if (event.target instanceof HTMLInputElement) {
     api.updateSearchQuery(event.target.value)
+  }
+}
+
+const searchInputRef = ref<MaybeElementRef>(null)
+
+function handleMouseDown(event: Event) {
+  if (event.target === searchInputRef.value) {
+    return
+  }
+
+  if (api.multiple && !api.noAutoClose) {
+    event.preventDefault()
   }
 }
 
@@ -79,6 +92,7 @@ const SEARCH_ICON_SIZE = {
   <div
     class="s-select-dropdown"
     :class="`s-select-dropdown_size_${api.size}`"
+    @mousedown="handleMouseDown"
   >
     <div
       v-if="search"
@@ -91,6 +105,7 @@ const SEARCH_ICON_SIZE = {
       />
 
       <input
+        ref="searchInputRef"
         class="s-select-dropdown__search-input flex-grow bg-transparent"
         :class="MAIN_FONT[api.size]"
         :value="api.searchQuery"

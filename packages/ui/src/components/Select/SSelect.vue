@@ -14,6 +14,7 @@ const props = defineProps<{
   size?: SelectSize
   noAutoClose?: boolean
   loading?: boolean
+  triggerSearch?: boolean
   dropdownSearch?: boolean
   remoteSearch?: boolean
 }>()
@@ -26,8 +27,8 @@ const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Chec
     v-bind="{ ...$attrs, ...$props } as any"
     same-width-popper
   >
-    <template #control>
-      <SSelectInput>
+    <template #control="{ search }">
+      <SSelectInput :search="search">
         <template #label="binding">
           <slot
             name="label"

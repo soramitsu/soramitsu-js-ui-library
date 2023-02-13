@@ -53,6 +53,11 @@ const props = withDefaults(
     sameWidthPopper?: boolean
 
     /**
+     * Adds search field to trigger
+     */
+    triggerSearch?: boolean
+
+    /**
      * Adds search field to dropdown
      */
     dropdownSearch?: boolean
@@ -73,6 +78,7 @@ const props = withDefaults(
     label: null,
     loading: false,
     sameWidthPopper: false,
+    triggerSearch: false,
     dropdownSearch: false,
     remoteSearch: false,
   },
@@ -101,7 +107,7 @@ const [showPopper, togglePopper] = useToggle(false)
 whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
 
 const searchQuery = ref('')
-whenever(not(showPopper), () => {
+whenever(and(not(showPopper), not(remoteSearch)), () => {
   searchQuery.value = ''
 })
 
@@ -142,7 +148,10 @@ provide(SELECT_API_KEY, api)
     >
       <template #trigger>
         <div>
-          <slot name="control" />
+          <slot
+            name="control"
+            v-bind="{ 'search': triggerSearch }"
+          />
         </div>
       </template>
 

@@ -3,7 +3,7 @@ import { IconChevronBottom16, IconArrowsChevronBottom24 } from '@/components/ico
 import './SSelectChevron.scss'
 
 interface Props {
-  rotate?: boolean,
+  rotate?: boolean
   variant?: 16 | 24
 }
 
@@ -21,7 +21,7 @@ const component: FunctionalComponent<Props> = ({ rotate, variant }) =>
 
 component.props = {
   rotate: Boolean,
-  variant: Number as PropType<16 | 24>
+  variant: Number as PropType<16 | 24>,
 }
 component.displayName = 'SSelectChevron'
 
