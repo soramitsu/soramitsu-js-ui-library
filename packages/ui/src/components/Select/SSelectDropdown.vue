@@ -148,6 +148,7 @@ const SEARCH_ICON_SIZE = {
             v-if="isActionButtonShown(!!optionGroup.selectAllBtn)"
             class="s-select-dropdown__action cursor-pointer ml-auto"
             :class="MAIN_FONT[api.size]"
+            tabindex="-1"
             @click="api.toggleGroupSelection(optionGroup)"
           >
             {{ api.isGroupSelected(optionGroup) ? 'Deselect all' : 'Select all' }}
