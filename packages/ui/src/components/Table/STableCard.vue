@@ -63,7 +63,7 @@ function select() {
     @click="select"
     @keypress.space.prevent.enter="select"
   >
-    <div class="p-8px grid grid-cols-[min-content,1fr] items-baseline">
+    <div class="p-8px grid grid-cols-[min-content_1fr] items-baseline">
       <template
         v-for="(column, columnIndex) in visibleColumns"
         :key="column.id"
