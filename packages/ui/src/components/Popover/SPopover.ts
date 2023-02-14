@@ -190,6 +190,10 @@ export default /* @__PURE__ */ defineComponent({
     const { hover: popperHover, listeners: popperHoverListeners } = useElHover(popperRef)
     const sharedHover = or(triggerHover, popperHover)
 
+    useResizeObserver(triggerRawRef, () => {
+      instance.value?.update()
+    })
+
     debouncedWatch(
       () => props.trigger === 'hover' && [sharedHover.value],
       (maybeHover) => {
