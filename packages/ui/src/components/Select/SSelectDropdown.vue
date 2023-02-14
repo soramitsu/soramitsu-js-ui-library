@@ -61,9 +61,7 @@ function handleMouseDown(event: Event) {
     return
   }
 
-  if (api.multiple && !api.noAutoClose) {
-    event.preventDefault()
-  }
+  event.preventDefault()
 }
 
 const HEADER_FONT = {
