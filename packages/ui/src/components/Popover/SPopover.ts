@@ -1,6 +1,7 @@
 import { Ref, cloneVNode, PropType } from 'vue'
 import { Placement, placements, Instance, State } from '@popperjs/core'
-import { not, or } from '@vueuse/core'
+import { MaybeElementRef } from '@vueuse/core'
+import { not, or } from '@vueuse/math'
 import { usePopper } from '@/composables/popper'
 import { PopoverApi, POPOVER_API_KEY } from './api'
 import { Except } from 'type-fest'
@@ -44,7 +45,7 @@ function useDelayedShow(show: Ref<boolean>, delays: { show: Ref<number>; hide: R
 }
 
 function createSanitizedTemplateRef(): { rawRef: Ref<any>; sanitizedRef: Ref<null | HTMLElement> } {
-  const rawRef = ref(null)
+  const rawRef: MaybeElementRef = ref(null)
 
   const sanitizedRef = eagerComputed(() => {
     const el = unrefElement(rawRef)

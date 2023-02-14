@@ -545,6 +545,7 @@ size?: SelectSize | undefined;
 inline?: boolean | undefined;
 noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
+dropdownSearch?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
@@ -556,6 +557,7 @@ size?: SelectSize | undefined;
 inline?: boolean | undefined;
 noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
+dropdownSearch?: boolean | undefined;
 }>>>, {}>;
 
 // @public (undocumented)
@@ -581,7 +583,11 @@ export interface SelectApi<T> extends UnwrapRef<UseSelectModelReturn<T>> {
     // (undocumented)
     readonly options: UnwrapRef<SelectOption<T>[] | SelectOptionGroup<T>[]>;
     // (undocumented)
+    readonly searchQuery: string;
+    // (undocumented)
     readonly size: SelectSize;
+    // (undocumented)
+    updateSearchQuery: (value: string) => void;
 }
 
 // @public (undocumented)
@@ -1075,6 +1081,7 @@ label?: string | undefined;
 size?: SelectSize | undefined;
 noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
+dropdownSearch?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, Record<string, any>, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_9<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
@@ -1085,6 +1092,7 @@ label?: string | undefined;
 size?: SelectSize | undefined;
 noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
+dropdownSearch?: boolean | undefined;
 }>>>, {}>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
@@ -1103,6 +1111,7 @@ syncMenuAndInputWidths?: boolean | undefined;
 noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
 sameWidthPopper?: boolean | undefined;
+dropdownSearch: boolean;
 }>, {
 size: "md";
 options: () => never[];
@@ -1114,8 +1123,11 @@ noAutoClose: boolean;
 label: null;
 loading: boolean;
 sameWidthPopper: boolean;
+dropdownSearch: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: any) => void;
+} & {
+search: (value: string) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_9<__VLS_TypePropsToRuntimeProps_11<{
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
@@ -1128,6 +1140,7 @@ syncMenuAndInputWidths?: boolean | undefined;
 noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
 sameWidthPopper?: boolean | undefined;
+dropdownSearch: boolean;
 }>, {
 size: "md";
 options: () => never[];
@@ -1139,8 +1152,10 @@ noAutoClose: boolean;
 label: null;
 loading: boolean;
 sameWidthPopper: boolean;
+dropdownSearch: boolean;
 }>>> & {
 "onUpdate:modelValue"?: ((value: any) => any) | undefined;
+onSearch?: ((value: string) => any) | undefined;
 }, {
 modelValue: any;
 multiple: boolean;
@@ -1150,6 +1165,7 @@ loading: boolean;
 options: SelectOption[] | SelectOptionGroup[];
 label: string | null;
 noAutoClose: boolean;
+dropdownSearch: boolean;
 syncMenuAndInputWidths: boolean;
 sameWidthPopper: boolean;
 }>;

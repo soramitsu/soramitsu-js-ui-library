@@ -11,12 +11,14 @@ export interface SelectApi<T> extends UnwrapRef<UseSelectModelReturn<T>> {
   readonly label: string | null
   readonly size: SelectSize
   readonly noAutoClose: boolean
+  readonly searchQuery: string
 
   readonly isMenuOpened: boolean
   /**
    * Set menu visibility manually
    */
   menuToggle: (value?: boolean) => void
+  updateSearchQuery: (value: string) => void
 }
 
 export const SELECT_API_KEY: InjectionKey<SelectApi<any>> = Symbol('SelectAPI')

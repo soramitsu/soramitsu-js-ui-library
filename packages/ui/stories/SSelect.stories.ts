@@ -202,6 +202,33 @@ export const Dropdown = defineStory((args) => ({
 Dropdown.argTypes = commonArgTypes
 Dropdown.args = commonArgs
 
+export const WithSearch = defineStory((args) => ({
+  components: { SSelect, SDropdown },
+  setup() {
+    return {
+      OPTION_GROUPS,
+      model: ref(['en', 'jp']),
+      args,
+    }
+  },
+  template: `
+    <SSelect
+      v-model="model"
+      label="Multi select"
+      :options="OPTION_GROUPS"
+      multiple
+      :size="args.size"
+      :disabled="args.disabled"
+      :loading="args.loading"
+      :option-type="args.optionType"
+      dropdown-search
+    />
+  `,
+}))
+
+WithSearch.argTypes = commonArgTypes
+WithSearch.args = commonArgs
+
 export const Custom = defineStory(() => ({
   components: {
     SSelectBase,
