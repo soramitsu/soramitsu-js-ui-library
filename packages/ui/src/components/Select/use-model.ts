@@ -1,7 +1,8 @@
 import { Ref } from 'vue'
 import { SelectOption, SelectOptionGroup } from './types'
-import { whenever, and, not } from '@vueuse/core'
-import { isSelectOptions } from '@/components/Select/utils'
+import { whenever } from '@vueuse/core'
+import { and, not } from '@vueuse/math'
+import { isSelectOptions } from './utils'
 
 export interface UseSelectModelReturn<T> {
   /**

@@ -5,7 +5,7 @@ import {
   IconChevronsLeft16,
   IconChevronsRight16,
 } from '@/components/icons'
-import { not } from '@vueuse/core'
+import { not } from '@vueuse/math'
 import { SDropdown } from '@/components'
 
 const PAGINATION_MAX_PAGES_SELECTABLE = 7

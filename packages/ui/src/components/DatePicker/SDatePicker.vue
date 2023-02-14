@@ -6,7 +6,7 @@ import CustomPanel from './SDatePickerPanelCustom.vue'
 
 import { IconArrowsChevronBottom24 } from '@/components/icons'
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
-import { and } from '@vueuse/core'
+import { and } from '@vueuse/math'
 import { format } from 'date-fns'
 
 import {
