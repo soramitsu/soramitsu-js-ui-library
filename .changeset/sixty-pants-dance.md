@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': patch
 ---
 
-**fix**(`STextField`): fix input font
+**fix**(`STextField`): specify input font (`sora-tpg-p3`)

@@ -91,7 +91,7 @@ describe('Auto-closing', () => {
 })
 
 describe('Storing options', () => {
-  test('when select option and then it removed from options list it is selected anyway', () => {
+  test('when selected option is removed from options list, it is selected anyway', () => {
     const changingOptions = ref(OPTIONS)
     const modeling = useSelectModel({
       model: ref(null),

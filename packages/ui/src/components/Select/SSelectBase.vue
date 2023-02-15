@@ -53,17 +53,17 @@ const props = withDefaults(
     sameWidthPopper?: boolean
 
     /**
-     * Adds search field to trigger
+     * When enabled, passes `search: true` to the `trigger` slot
      */
     triggerSearch?: boolean
 
     /**
-     * Adds search field to dropdown
+     * When enabled, passes `search: true` to the `dropdown` slot
      */
     dropdownSearch?: boolean
 
     /**
-     * Turns off options filtering by select itself. When false select filters by option's label. Adds chips
+     * By default, the component filters options by their labels. Set `true` to disable automatic filtering.
      */
     remoteSearch?: boolean
   }>(),

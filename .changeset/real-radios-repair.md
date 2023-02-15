@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': minor
 ---
 
-**feat**(`SSelect`, `SDropdown`): add empty slot for menu
+**feat**(`SSelect`, `SDropdown`): introduce `empty` slot; it is forwarded to the underlying `SSelectDropdown` component

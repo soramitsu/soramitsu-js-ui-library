@@ -32,9 +32,9 @@ export interface UseSelectModelParams<T> {
   model: Ref<null | T | T[]>
   options: Ref<SelectOption<T>[] | SelectOptionGroup<T>[]>
   /**
-   * Enables remembering options for async search in multiple select when option list
-   * changes on search query changes. If no option creates option without label (e.g. for cases when model changes
-   * from outside and has values that have no options for them)
+   * Enables options remembering for async search in multiple select when, for example,
+   * the options are changed on search query changes. If there are no options for selected values,
+   * then options without labels are created (e.g. for cases when model is changed externally)
    */
   storeSelectedOptions: Ref<boolean>
   singleModeAutoClose: Ref<boolean>
