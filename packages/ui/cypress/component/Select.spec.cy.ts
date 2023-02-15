@@ -7,7 +7,7 @@ import {
   SDropdown,
   SelectSize,
   STextField,
-  SelectOptionType
+  SelectOptionType,
 } from '@/lib'
 
 const SIZES = [SelectSize.Sm, SelectSize.Md, SelectSize.Lg, SelectSize.Xl]
@@ -417,14 +417,13 @@ it('SSelectDropdown overlaps STextField', () => {
     // trying to click to ensure the element is not covered by anything
     .click()
 })
-
 ;['SSelect', 'SDropdown'].forEach((selectVariantName) => {
   it(`${selectVariantName} - 'empty' slot works`, () => {
     cy.mount({
       setup() {
         return {
           options: [],
-          selectVariantName
+          selectVariantName,
         }
       },
       template: `
@@ -437,7 +436,7 @@ it('SSelectDropdown overlaps STextField', () => {
     })
 
     cy.get(testidSelector('select-trigger')).click()
-    cy.contains('I\'m empty').should('exist')
+    cy.contains("I'm empty").should('exist')
   })
 
   it(`${selectVariantName} - it is possible to set option type`, () => {
@@ -447,7 +446,7 @@ it('SSelectDropdown overlaps STextField', () => {
           options: [{ label: 'label', value: 'value' }],
           selectVariantName,
           selectOptionTypes: Object.values(SelectOptionType),
-          selectOptionType: ref()
+          selectOptionType: ref(),
         }
       },
       template: `
@@ -530,9 +529,7 @@ it(`SSelect - popup is same width as trigger`, () => {
   cy.mount({
     setup() {
       return {
-        options: [
-          { label: 'label11', value: 'value1' },
-        ],
+        options: [{ label: 'label11', value: 'value1' }],
         model: ref('value1'),
       }
     },
