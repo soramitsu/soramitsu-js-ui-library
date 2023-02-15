@@ -28,7 +28,10 @@ const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Chec
     same-width-popper
   >
     <template #control="{ search }">
-      <SSelectInput :search="search">
+      <SSelectInput
+        data-testid="select-trigger"
+        :search="search"
+      >
         <template #label="binding">
           <slot
             name="label"

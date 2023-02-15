@@ -90,11 +90,13 @@ const SEARCH_ICON_SIZE = {
   <div
     class="s-select-dropdown"
     :class="`s-select-dropdown_size_${api.size}`"
+    data-testid="select-dropdown"
     @mousedown="handleMouseDown"
   >
     <div
       v-if="search"
       class="s-select-dropdown__search flex items-center"
+      data-testid="select-dropdown-search"
     >
       <IconBasicSearch24
         class="s-select-dropdown__search-icon flex-shrink-0 mr-8px"

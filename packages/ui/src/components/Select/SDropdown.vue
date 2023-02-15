@@ -31,7 +31,10 @@ function isThereLabelSlot() {
 <template>
   <SSelectBase v-bind="{ ...$attrs, ...$props } as any">
     <template #control>
-      <SSelectButton :type="buttonType">
+      <SSelectButton
+        data-testid="select-trigger"
+        :type="buttonType"
+      >
         <template
           v-if="isThereLabelSlot() || label"
           #label="binding"
