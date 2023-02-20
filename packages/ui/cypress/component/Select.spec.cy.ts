@@ -1,5 +1,14 @@
 import { VueTestUtils } from 'cypress/vue'
-import { SSelect, SSelectBase, SSelectButton, SSelectInput, SDropdown, SelectSize, STextField } from '@/lib'
+import {
+  SSelect,
+  SSelectBase,
+  SSelectButton,
+  SSelectInput,
+  SDropdown,
+  SelectSize,
+  STextField,
+  SelectOptionType,
+} from '@/lib'
 
 const SIZES = [SelectSize.Sm, SelectSize.Md, SelectSize.Lg, SelectSize.Xl]
 
@@ -14,6 +23,7 @@ after(() => {
 })
 
 const findBtnLabel = () => cy.get('.s-select-btn__label')
+const testidSelector = (id: string) => `[data-testid=${id}]`
 
 it('Gallery - Dropdown', () => {
   cy.mount({
@@ -406,4 +416,133 @@ it('SSelectDropdown overlaps STextField', () => {
   cy.contains('two')
     // trying to click to ensure the element is not covered by anything
     .click()
+})
+;['SSelect', 'SDropdown'].forEach((selectVariantName) => {
+  it(`${selectVariantName} - 'empty' slot works`, () => {
+    cy.mount({
+      setup() {
+        return {
+          options: [],
+          selectVariantName,
+        }
+      },
+      template: `
+        <component :is="selectVariantName" v-bind="{ options }">
+          <template #empty>
+            <div>I'm empty</div>
+          </template>
+        </component>
+      `,
+    })
+
+    cy.get(testidSelector('select-trigger')).click()
+    cy.contains("I'm empty").should('exist')
+  })
+
+  it(`${selectVariantName} - it is possible to set option type`, () => {
+    cy.mount({
+      setup() {
+        return {
+          options: [{ label: 'label', value: 'value' }],
+          selectVariantName,
+          selectOptionTypes: Object.values(SelectOptionType),
+          selectOptionType: ref(),
+        }
+      },
+      template: `
+        <select id="options-type" v-model="selectOptionType">
+          <option v-for="type in selectOptionTypes" :value="type" />
+        </select>
+
+        <component :is="selectVariantName" v-bind="{ options }" model-value="value" :option-type="selectOptionType"/>
+      `,
+    })
+
+    cy.get('select#options-type').select(SelectOptionType.Default)
+    cy.get(testidSelector('select-trigger')).click()
+    cy.get(testidSelector('select-option-checkmark')).should('exist')
+
+    cy.get('select#options-type').select(SelectOptionType.Radio)
+    cy.get(testidSelector('select-trigger')).click()
+    cy.get(testidSelector('select-option-radio')).should('exist')
+
+    cy.get('select#options-type').select(SelectOptionType.Checkbox)
+    cy.get(testidSelector('select-trigger')).click()
+    cy.get(testidSelector('select-option-checkbox')).should('exist')
+  })
+
+  it(`${selectVariantName} - there are dropdown search that allows filter options by labels`, () => {
+    cy.mount({
+      setup() {
+        return {
+          options: [
+            { label: 'label11', value: 'value1' },
+            { label: 'label112', value: 'value2' },
+            { label: 'label133', value: 'value3' },
+            { label: 'label13', value: 'value4' },
+          ],
+          model: ref('value1'),
+          selectVariantName,
+        }
+      },
+      template: `
+        <component :is="selectVariantName" v-bind="{ options }" model-value="value" dropdown-search />
+      `,
+    })
+
+    const SEARCH_QUERY = 'label11'
+    const OPTIONS_WITH_SEARCH_QUERY_IN_LABEL = 2
+
+    cy.get(testidSelector('select-trigger')).click()
+    cy.get(testidSelector('select-dropdown-search')).type(SEARCH_QUERY)
+    cy.get(testidSelector('select-option')).should('have.length', OPTIONS_WITH_SEARCH_QUERY_IN_LABEL)
+  })
+})
+
+it(`SSelect - there are trigger search that allows filter options by labels`, () => {
+  cy.mount({
+    setup() {
+      return {
+        options: [
+          { label: 'label11', value: 'value1' },
+          { label: 'label112', value: 'value2' },
+          { label: 'label133', value: 'value3' },
+          { label: 'label13', value: 'value4' },
+        ],
+        model: ref('value1'),
+      }
+    },
+    template: `
+        <SSelect v-bind="{ options }" trigger-search />
+      `,
+  })
+
+  const SEARCH_QUERY = 'label11'
+  const OPTIONS_WITH_SEARCH_QUERY_IN_LABEL = 2
+
+  cy.get(testidSelector('select-trigger')).click()
+  cy.get(testidSelector('select-trigger')).type(SEARCH_QUERY)
+  cy.get(testidSelector('select-option')).should('have.length', OPTIONS_WITH_SEARCH_QUERY_IN_LABEL)
+})
+
+it(`SSelect - popup is same width as trigger`, () => {
+  cy.mount({
+    setup() {
+      return {
+        options: [{ label: 'label11', value: 'value1' }],
+        model: ref('value1'),
+      }
+    },
+    template: `
+        <SSelect v-bind="{ options }" />
+      `,
+  })
+
+  cy.get(testidSelector('select-trigger')).click()
+
+  cy.get(testidSelector('select-trigger')).then(($el1) => {
+    cy.get(testidSelector('select-dropdown')).should(($el2) => {
+      expect($el2).to.have.css('width', $el1.outerWidth() + 'px')
+    })
+  })
 })

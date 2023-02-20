@@ -7,6 +7,7 @@ import { isSelectOptions } from '@/components/Select/utils'
 import SSpinner from '@/components/Spinner/SSpinner.vue'
 import { IconBasicSearch24 } from '@/components/icons'
 import escapeStringRegexp from 'escape-string-regexp'
+import { MaybeElementRef } from '@vueuse/core'
 
 const props = defineProps<{
   itemType: SelectOptionType
@@ -27,16 +28,17 @@ const optionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
   return options
 })
 
-const isSearching = eagerComputed(() => props.search && api.searchQuery)
+const isSearching = eagerComputed(() => api.searchQuery)
 
 const escapedQuery = computed(() => new RegExp(escapeStringRegexp(api.searchQuery), 'i'))
 const shownOptionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
-  if (!api.searchQuery) {
+  if (!api.searchQuery || api.remoteSearch) {
     return optionGroups.value
   }
 
   return optionGroups.value.map((x) => ({ ...x, items: x.items.filter((x) => escapedQuery.value.test(x.label)) }))
 })
+const isNothingToShow = eagerComputed(() => shownOptionGroups.value.every((x) => !x.items.length))
 
 function isActionButtonShown(selectAllBtn: boolean) {
   return api.multiple && selectAllBtn
@@ -50,6 +52,16 @@ function handleSearchInput(event: Event) {
   if (event.target instanceof HTMLInputElement) {
     api.updateSearchQuery(event.target.value)
   }
+}
+
+const searchInputRef = ref<MaybeElementRef>(null)
+
+function handleMouseDown(event: Event) {
+  if (event.target === searchInputRef.value) {
+    return
+  }
+
+  event.preventDefault()
 }
 
 const HEADER_FONT = {
@@ -78,10 +90,13 @@ const SEARCH_ICON_SIZE = {
   <div
     class="s-select-dropdown"
     :class="`s-select-dropdown_size_${api.size}`"
+    data-testid="select-dropdown"
+    @mousedown="handleMouseDown"
   >
     <div
       v-if="search"
       class="s-select-dropdown__search flex items-center"
+      data-testid="select-dropdown-search"
     >
       <IconBasicSearch24
         class="s-select-dropdown__search-icon flex-shrink-0 mr-8px"
@@ -90,6 +105,7 @@ const SEARCH_ICON_SIZE = {
       />
 
       <input
+        ref="searchInputRef"
         class="s-select-dropdown__search-input flex-grow bg-transparent"
         :class="MAIN_FONT[api.size]"
         :value="api.searchQuery"
@@ -103,6 +119,16 @@ const SEARCH_ICON_SIZE = {
       class="s-select-dropdown__loading flex items-center justify-center"
     >
       <SSpinner />
+    </div>
+
+    <div
+      v-else-if="isNothingToShow"
+      class="flex items-center justify-center m-16px"
+      :class="MAIN_FONT[api.size]"
+    >
+      <slot name="empty">
+        No data
+      </slot>
     </div>
 
     <template v-else>
@@ -124,6 +150,7 @@ const SEARCH_ICON_SIZE = {
             v-if="isActionButtonShown(!!optionGroup.selectAllBtn)"
             class="s-select-dropdown__action cursor-pointer ml-auto"
             :class="MAIN_FONT[api.size]"
+            tabindex="-1"
             @click="api.toggleGroupSelection(optionGroup)"
           >
             {{ api.isGroupSelected(optionGroup) ? 'Deselect all' : 'Select all' }}

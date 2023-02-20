@@ -8,6 +8,7 @@ export default {
 import { StyleValue } from 'vue'
 import { Status } from '@/types'
 import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff } from '../icons'
+import { MaybeElementRef } from '@vueuse/core'
 
 /**
  * warning: don't use it inside of `Props`. Vue compiler determines it
@@ -104,6 +105,10 @@ interface Props {
    * Also you can use `message` slot.
    */
   message?: string
+  /**
+   * Manually activates filled state
+   */
+  filledState?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -113,9 +118,13 @@ const props = withDefaults(defineProps<Props>(), {
   counter: false,
   noEye: false,
   noModelValueStrictSync: false,
+  filledState: false,
 })
 
-const emit = defineEmits<(event: 'update:modelValue', value: string) => void>()
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: string): void
+  (event: 'click:input-wrapper', value: MouseEvent): void
+}>()
 
 const slots = useSlots()
 
@@ -141,7 +150,30 @@ function onInput(e: Event) {
 
 const isValueEmpty = computed(() => !model.value)
 const isFocused = ref(false)
-const labelTypographyClass = computed(() => (!isFocused.value && isValueEmpty.value ? 'sora-tpg-p3' : 'sora-tpg-p4'))
+const labelTypographyClass = computed(() =>
+  !(props.filledState || isFocused.value) && isValueEmpty.value ? 'sora-tpg-p3' : 'sora-tpg-p4',
+)
+
+const inputRef = ref<MaybeElementRef>(null)
+
+function handleInputWrapperClick(event: MouseEvent) {
+  if (event.target !== document.activeElement) {
+    event.preventDefault()
+  }
+
+  if (inputRef.value instanceof HTMLInputElement && !isFocused.value) {
+    inputRef.value.focus()
+    isFocused.value = true
+  }
+
+  emit('click:input-wrapper', event)
+}
+
+function handleInputWrapperMouseDown(event: MouseEvent) {
+  if (event.target === inputRef.value) return
+
+  event.preventDefault()
+}
 
 // MESSAGE
 
@@ -211,7 +243,8 @@ const inputType = computed(() =>
     :class="[
       's-text-field',
       {
-        's-text-field_empty': isValueEmpty,
+        's-text-field_empty': isValueEmpty && !filledState,
+        's-text-field_filled-state': filledState,
         's-text-field_disabled': disabled,
       },
       rootClass(),
@@ -219,7 +252,13 @@ const inputType = computed(() =>
     :style="rootStyle()"
     :data-status="status"
   >
-    <div class="s-text-field__input-wrapper">
+    <!-- key events works with input element -->
+    <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
+    <div
+      class="s-text-field__input-wrapper"
+      @click="handleInputWrapperClick"
+      @mousedown="handleInputWrapperMouseDown"
+    >
       <label
         :for="id"
         :class="labelTypographyClass"
@@ -227,16 +266,22 @@ const inputType = computed(() =>
         <slot name="label">{{ label }}</slot>
       </label>
 
-      <input
-        :id="id"
-        :value="model"
-        :type="inputType"
-        :disabled="disabled"
-        v-bind="inputAttrs()"
-        @input="onInput"
-        @focus="isFocused = true"
-        @blur="isFocused = false"
-      >
+      <div class="s-text-field__input-line">
+        <slot name="prefix" />
+
+        <input
+          :id="id"
+          ref="inputRef"
+          class="sora-tpg-p3"
+          :value="model"
+          :type="inputType"
+          :disabled="disabled"
+          v-bind="inputAttrs()"
+          @input="onInput"
+          @focus="isFocused = true"
+          @blur="isFocused = false"
+        >
+      </div>
 
       <div
         v-if="shouldRenderAppend()"
@@ -258,7 +303,7 @@ const inputType = computed(() =>
           class="s-text-field__eye"
           data-testid="eye"
           type="button"
-          @click="toggleForceReveal()"
+          @click.stop="toggleForceReveal()"
         >
           <IconEye v-if="!forceRevealPassword" />
           <IconEyeOff v-else />
@@ -309,6 +354,7 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
   }
 
   &:not(&_empty),
+  &_filled-state,
   &:focus-within {
     label {
       transform: translateY(#{$label-top-secondary});
@@ -322,7 +368,7 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
     @apply relative flex;
     @apply transition-all;
 
-    height: $height;
+    min-height: $height;
 
     &:hover:not(:focus-within) {
       background: $theme-bg-hover;
@@ -342,10 +388,14 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
       // primary state by default
       transform: translateY(#{$label-top-primary});
     }
+  }
+
+  &__input-line {
+    @apply flex flex-wrap flex-grow min-w-0;
+    padding: $input-padding;
 
     input {
-      @apply h-full flex-1 w-full min-w-0;
-      padding: $input-padding;
+      @apply flex-1 w-full min-w-1/4;
 
       background: transparent;
       &:focus {
@@ -355,7 +405,7 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
   }
 
   &__append {
-    @apply h-full flex items-center space-x-4 pr-4;
+    @apply flex items-center space-x-4 pr-4;
   }
 
   &__counter {

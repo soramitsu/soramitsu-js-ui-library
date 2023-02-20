@@ -14,7 +14,9 @@ const props = defineProps<{
   size?: SelectSize
   noAutoClose?: boolean
   loading?: boolean
+  triggerSearch?: boolean
   dropdownSearch?: boolean
+  remoteSearch?: boolean
 }>()
 
 const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Checkbox : SelectOptionType.Radio))
@@ -25,8 +27,11 @@ const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Chec
     v-bind="{ ...$attrs, ...$props } as any"
     same-width-popper
   >
-    <template #control>
-      <SSelectInput>
+    <template #control="{ search }">
+      <SSelectInput
+        data-testid="select-trigger"
+        :search="search"
+      >
         <template #label="binding">
           <slot
             name="label"
@@ -38,11 +43,15 @@ const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Chec
       </SSelectInput>
     </template>
 
-    <template #dropdown>
+    <template #dropdown="{ search }">
       <SSelectDropdown
-        :search="!!dropdownSearch"
+        :search="search"
         :item-type="optionType ?? defaultOptionType"
-      />
+      >
+        <template #empty>
+          <slot name="empty" />
+        </template>
+      </SSelectDropdown>
     </template>
   </SSelectBase>
 </template>

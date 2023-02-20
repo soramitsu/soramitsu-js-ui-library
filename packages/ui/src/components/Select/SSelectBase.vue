@@ -53,9 +53,19 @@ const props = withDefaults(
     sameWidthPopper?: boolean
 
     /**
-     * Adds search field to dropdown
+     * When enabled, passes `search: true` to the `trigger` slot
      */
-    dropdownSearch: boolean
+    triggerSearch?: boolean
+
+    /**
+     * When enabled, passes `search: true` to the `dropdown` slot
+     */
+    dropdownSearch?: boolean
+
+    /**
+     * By default, the component filters options by their labels. Set `true` to disable automatic filtering.
+     */
+    remoteSearch?: boolean
   }>(),
   {
     size: SelectSize.Md,
@@ -68,7 +78,9 @@ const props = withDefaults(
     label: null,
     loading: false,
     sameWidthPopper: false,
+    triggerSearch: false,
     dropdownSearch: false,
+    remoteSearch: false,
   },
 )
 
@@ -78,12 +90,13 @@ const emit = defineEmits<{
 }>()
 
 const model = useVModel(props, 'modelValue', emit)
-const { multiple, disabled, loading, options, size, label, noAutoClose } = toRefs(props)
+const { multiple, disabled, loading, options, size, label, noAutoClose, remoteSearch } = toRefs(props)
 
 const modeling = useSelectModel({
   model,
   multiple,
   options,
+  storeSelectedOptions: remoteSearch,
   singleModeAutoClose: not(noAutoClose),
   onAutoClose: () => togglePopper(false),
 })
@@ -94,7 +107,7 @@ const [showPopper, togglePopper] = useToggle(false)
 whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
 
 const searchQuery = ref('')
-whenever(not(showPopper), () => {
+whenever(and(not(showPopper), not(remoteSearch)), () => {
   searchQuery.value = ''
 })
 
@@ -116,6 +129,7 @@ const api: SelectApi<any> = reactive({
   size,
   noAutoClose,
   searchQuery,
+  remoteSearch,
   updateSearchQuery,
 })
 
@@ -134,7 +148,10 @@ provide(SELECT_API_KEY, api)
     >
       <template #trigger>
         <div>
-          <slot name="control" />
+          <slot
+            name="control"
+            v-bind="{ 'search': triggerSearch }"
+          />
         </div>
       </template>
 
@@ -145,7 +162,10 @@ provide(SELECT_API_KEY, api)
           :wrapper-attrs="{ 'class': 'z-10' }"
           :inner-wrapper-attrs="{ 'class': { 'w-full': sameWidthPopper } }"
         >
-          <slot name="dropdown" />
+          <slot
+            name="dropdown"
+            v-bind="{ 'search': dropdownSearch }"
+          />
         </SPopoverWrappedTransition>
       </template>
     </SPopover>

@@ -9,10 +9,14 @@ const OPTIONS = [
 ]
 
 describe('Auto-closing', () => {
-  function useFactory(props: Except<UseSelectModelParams<any>, 'options' | 'multiple'>, mode: 'single' | 'multi') {
+  function useFactory(
+    props: Except<UseSelectModelParams<any>, 'options' | 'multiple' | 'storeSelectedOptions'>,
+    mode: 'single' | 'multi',
+  ) {
     return useSelectModel({
       options: ref(OPTIONS),
       multiple: ref(mode === 'multi' ? true : false),
+      storeSelectedOptions: ref(false),
       ...props,
     })
   }
@@ -83,5 +87,27 @@ describe('Auto-closing', () => {
     modeling.unselect('thin')
 
     expect(onAutoClose).not.toBeCalled()
+  })
+})
+
+describe('Storing options', () => {
+  test('when selected option is removed from options list, it is selected anyway', () => {
+    const changingOptions = ref(OPTIONS)
+    const modeling = useSelectModel({
+      model: ref(null),
+      options: changingOptions,
+      multiple: ref(true),
+      storeSelectedOptions: ref(true),
+      singleModeAutoClose: ref(true),
+      onAutoClose: () => {},
+    })
+
+    modeling.select('thin')
+    modeling.select('regular')
+    modeling.select('deep')
+
+    changingOptions.value = [OPTIONS[1], OPTIONS[2]]
+
+    expect(modeling.selectedOptions.value).toHaveLength(3)
   })
 })

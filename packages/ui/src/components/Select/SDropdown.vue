@@ -16,6 +16,7 @@ const props = defineProps<{
   noAutoClose?: boolean
   loading?: boolean
   dropdownSearch?: boolean
+  remoteSearch?: boolean
 }>()
 
 const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : SelectButtonType.Default))
@@ -30,7 +31,10 @@ function isThereLabelSlot() {
 <template>
   <SSelectBase v-bind="{ ...$attrs, ...$props } as any">
     <template #control>
-      <SSelectButton :type="buttonType">
+      <SSelectButton
+        data-testid="select-trigger"
+        :type="buttonType"
+      >
         <template
           v-if="isThereLabelSlot() || label"
           #label="binding"
@@ -45,11 +49,15 @@ function isThereLabelSlot() {
       </SSelectButton>
     </template>
 
-    <template #dropdown>
+    <template #dropdown="{ search }">
       <SSelectDropdown
-        :search="!!dropdownSearch"
+        :search="search"
         :item-type="optionType ?? SelectOptionType.Default"
-      />
+      >
+        <template #empty>
+          <slot name="empty" />
+        </template>
+      </SSelectDropdown>
     </template>
   </SSelectBase>
 </template>

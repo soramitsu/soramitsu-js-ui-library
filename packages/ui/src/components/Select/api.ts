@@ -12,6 +12,7 @@ export interface SelectApi<T> extends UnwrapRef<UseSelectModelReturn<T>> {
   readonly size: SelectSize
   readonly noAutoClose: boolean
   readonly searchQuery: string
+  readonly remoteSearch: boolean
 
   readonly isMenuOpened: boolean
   /**
