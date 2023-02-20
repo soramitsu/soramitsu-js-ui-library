@@ -1,5 +1,31 @@
 # @soramitsu-ui/ui
 
+## 0.10.0
+
+### Minor Changes
+
+- 2591d30: **feat**(`SSelect`,`SDropdown`): add sync search in dropdown (`dropdownSearch` bool prop)
+- abf0604: **feat**(`SDatePicker`): add custom trigger support
+- cba3ff6: **feat**(`SSelect`): add option groups with headers and select all buttons
+- 4e8d2f3: **feat**(`SSelect`,`SDropdown`): add loading state (`loading` prop)
+- e3746d5: **feat**(`SDatePicker`): add support for custom shortcuts
+- 0c23ddd: **feat**(`STextField`): add `prefix` slot to render inline elements before input, and `filled-state` prop to manually activate the filled state on the component when the prefix presents
+- ba5fac0: **feat**(`SSelect`, `SDropdown`): introduce `empty` slot; it is forwarded to the underlying `SSelectDropdown` component
+- cedf03e: **feat**(`SSelect`,`SDropdown`): add prop to select options type (`optionType` prop)
+- 338204c: **feat**(`SSelect`, `SDropdown`): add `remote-search` prop that disables default search behaviour
+- 596bade: **feat**(`SSelect`): add `triggerSearch` prop to enable search input in select input
+
+### Patch Changes
+
+- abf0604: **fix**(`SDatePicker`): add model value change on every pick
+- 18b84d1: **fix**(`STable`): fix WindiCSS utility usage - replace comma with underscore (~~`grid-cols-[min-content,1fr]`~~ `grid-cols-[min-content_1fr]`). Comma caused an error when compiled styles are imported through SCSS.
+- 2e374df: **fix**(`SDatePicker`): add some prop types export
+- abf0604: **fix**(`SDatePicker`): add using shortcut title when selected one
+- b76e303: **fix**(`STextField`): specify input font (`sora-tpg-p3`)
+- feb21fb: **fix**(`SSelect`): add ellipsis on select text overflow
+- bc7406b: **fix**(`SSelect`): make select options menu width same as trigger's one
+- abf0604: **fix**(`SDatePicker`): fix styles
+
 ## 0.9.0
 
 ### Minor Changes
