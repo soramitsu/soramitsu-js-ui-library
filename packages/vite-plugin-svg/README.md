@@ -2,7 +2,7 @@
 
 Simplified and **working** version of [vite-svg-loader](https://github.com/jpkleemans/vite-svg-loader).
 
-This packages is created because of https://github.com/jpkleemans/vite-svg-loader/issues/54
+This package is created because of https://github.com/jpkleemans/vite-svg-loader/issues/54
 
 ## Install
 
@@ -10,7 +10,7 @@ As a regular NPM package.
 
 ## Usage
 
-Install as Vite plugin:
+Install as a Vite plugin:
 
 ```ts
 // FILE: vite.config.ts
@@ -18,13 +18,13 @@ Install as Vite plugin:
 export default {
   plugins: [
     Svg({
-      svgo: {}, // pass optimization options or `false` to disable
+      svgo: {}, // pass SVGO options or `false` to disable
     }),
   ],
 }
 ```
 
-Import SVG as a Vue component:
+Import an SVG as a Vue component:
 
 ```vue
 <script setup>
