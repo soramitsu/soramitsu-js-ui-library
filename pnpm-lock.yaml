@@ -43,15 +43,8 @@ importers:
 
   packages/theme:
     specifiers:
-      rollup: ^3.18.0
-      rollup-plugin-dts: ^5.2.0
       sass: ^1.49.0
-      windicss: ^3.1
-    dependencies:
-      windicss: 3.5.6
     devDependencies:
-      rollup: 3.18.0
-      rollup-plugin-dts: 5.2.0_rollup@3.18.0
       sass: 1.58.3
 
   packages/ui:
@@ -154,7 +147,7 @@ importers:
       svgo: 3.0.2
     devDependencies:
       tsup: 6.6.3
-      vite: 4.1.4_@types+node@18.14.6
+      vite: 4.1.4_sass@1.58.3
 
 packages:
 
@@ -10197,13 +10190,6 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /magic-string/0.29.0:
-    resolution: {integrity: sha512-WcfidHrDjMY+eLjlU+8OvwREqHwpgCeKVBUpQ3OhYYuvfaYCUgcbuBzappNzZvg/v8onU3oQj+BYpkOJe9Iw4Q==}
-    engines: {node: '>=12'}
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.4.14
-    dev: true
-
   /magic-string/0.30.0:
     resolution: {integrity: sha512-LA+31JYDJLs82r2ScLrlz1GjSgu66ZV518eyWT+S8VhyQn/JL0u9MeBOvQMGYiPk1DBiSN9DDMOcXvigJZaViQ==}
     engines: {node: '>=12'}
@@ -12492,19 +12478,6 @@ packages:
     dependencies:
       hash-base: 3.1.0
       inherits: 2.0.4
-    dev: true
-
-  /rollup-plugin-dts/5.2.0_rollup@3.18.0:
-    resolution: {integrity: sha512-B68T/haEu2MKcz4kNUhXB8/h5sq4gpplHAJIYNHbh8cp4ZkvzDvNca/11KQdFrB9ZeKucegQIotzo5T0JUtM8w==}
-    engines: {node: '>=v14'}
-    peerDependencies:
-      rollup: ^3.0.0
-      typescript: ^4.1
-    dependencies:
-      magic-string: 0.29.0
-      rollup: 3.18.0
-    optionalDependencies:
-      '@babel/code-frame': 7.18.6
     dev: true
 
   /rollup/3.18.0:
@@ -15003,6 +14976,7 @@ packages:
     resolution: {integrity: sha512-P1mzPEjgFMZLX0ZqfFht4fhV/FX8DTG7ERG1fBLiWvd34pTLVReS5CVsewKn9PApSgXnVfPWwvq+qUsRwpnwFA==}
     engines: {node: '>= 12'}
     hasBin: true
+    dev: true
 
   /with/7.0.2:
     resolution: {integrity: sha512-RNGKj82nUPg3g5ygxkQl0R937xLyho1J24ItRCBTr/m1YnZkzJy1hUiHUJrc/VlsDQzsCnInEGSg3bci0Lmd4w==}

@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import sass from 'sass'
 import path from 'path'
 

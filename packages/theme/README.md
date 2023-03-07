@@ -7,7 +7,7 @@ This package contains the core part of Soramitsu's Design System - it's **tokens
 Quick setup with Sass:
 
 ```scss
-@use '@soramitsu-ui/fonts/Sora';
+@use '@soramitsu-ui/theme/fonts/Sora';
 @use '@soramitsu-ui/theme/sass' as theme;
 
 @include theme.typography-preset-default;
