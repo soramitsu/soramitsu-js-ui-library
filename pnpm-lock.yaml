@@ -154,7 +154,7 @@ importers:
       svgo: 3.0.2
     devDependencies:
       tsup: 6.6.3
-      vite: 4.1.4_sass@1.58.3
+      vite: 4.1.4_@types+node@18.14.6
 
 packages:
 
