@@ -15,10 +15,10 @@
     "build": "tsc --build --clean && tsc --build"
   },
   "dependencies": {
-    "@vue/compiler-sfc": "^3.2.37",
-    "svgo": "^2.8.0"
+    "@vue/compiler-sfc": "^3.2",
+    "svgo": "^3.0.2"
   },
   "devDependencies": {
-    "@types/svgo": "^2.6.3"
+    "@types/svgo": "^3.0.0"
   }
 }

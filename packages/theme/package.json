@@ -32,22 +32,22 @@
     "test:exports": "jest -c jest-exports.config.js"
   },
   "dependencies": {
-    "windicss": "^3.1.7"
+    "windicss": "^3.1"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
-    "@types/node": "^17.0.14",
-    "del-cli": "^4.0.1",
+    "@types/node": "^18.14.6",
+    "del-cli": "^5.0.0",
     "esbuild-jest": "^0.5.0",
-    "jest": "^27.3.1",
-    "jest-environment-node-single-context": "^27.3.0",
+    "jest": "^29.5.0",
+    "jest-environment-node-single-context": "^29.0.0",
     "jest-resolver-enhanced": "^1.0.1",
     "npm-run-all": "^4.1.5",
-    "rollup": "^2.58.3",
-    "rollup-plugin-dts": "^4.0.0",
+    "rollup": "^3.18.0",
+    "rollup-plugin-dts": "^5.2.0",
     "sass": "^1.49.0",
     "sucrase": "^3.20.3",
-    "type-fest": "^2.18.1",
-    "typescript": "4.7.4"
+    "type-fest": "^3.6.1",
+    "typescript": "4.9.5"
   }
 }
