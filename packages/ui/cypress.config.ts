@@ -19,7 +19,7 @@ function useAxeCoreReader(on: Cypress.PluginEvents) {
 
 export default defineConfig({
   component: {
-    setupNodeEvents(on, config) {
+    setupNodeEvents(on, _config) {
       useAxeCoreReader(on)
     },
     video: false,

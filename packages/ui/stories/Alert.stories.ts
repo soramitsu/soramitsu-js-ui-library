@@ -1,11 +1,13 @@
 import { Status, SAlert } from '@/lib'
-import { defineMeta, defineStory } from './util'
+import type { Meta, StoryFn } from '@storybook/vue3'
 
-export default defineMeta({
+const meta = {
   title: 'Example/Alert',
-})
+} satisfies Meta
 
-export const DifferentStatuses = defineStory(() => ({
+export default meta
+
+export const DifferentStatuses: StoryFn = () => ({
   components: { SAlert },
   setup() {
     return {
@@ -25,4 +27,4 @@ export const DifferentStatuses = defineStory(() => ({
       </SAlert>
     </div>
   `,
-}))
+})

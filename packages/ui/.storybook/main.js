@@ -1,28 +1,14 @@
-const path = require('path')
-const { loadConfigFromFile, mergeConfig } = require('vite')
-
-function resolve(...paths) {
-  return path.resolve(__dirname, '..', ...paths)
-}
-
-module.exports = {
-  stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
-  core: {
-    builder: 'storybook-builder-vite',
+/** @type { import('@storybook/vue3-vite').StorybookConfig } */
+const config = {
+  // TODO use other stories as well
+  stories: ['../stories/**/Alert.stories.@(js|jsx|ts|tsx)'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions'],
+  framework: {
+    name: '@storybook/vue3-vite',
+    options: {},
   },
-  /**
-   * @param {import('vite').UserConfig} config
-   */
-  async viteFinal(config) {
-    const { config: mainConfig } = await loadConfigFromFile(
-      { mode: 'development', command: 'serve' },
-      resolve('vite.config.ts'),
-    )
-
-    // vue plugin is already presented in storybook's config, so we need to deduplicate it
-    mainConfig.plugins = mainConfig.plugins.filter((x) => !/vite:vue/.test(x.name))
-
-    return mergeConfig(config, mainConfig)
+  docs: {
+    autodocs: 'tag',
   },
 }
+export default config
