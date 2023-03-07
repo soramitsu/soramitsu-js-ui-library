@@ -1,12 +1,12 @@
 # icons
 
-For now it contains only old icons exported as raw SVGs. You probably should use bundler to use this package.
+For now, it contains only old icons exported as raw SVGs. You probably should use a bundler to use this package.
 
 ## Usage example
 
 **Vite:**
 
-Setup [vite-svg-loader](https://www.npmjs.com/package/vite-svg-loader) plugin.
+Setup [vite-svg-loader](https://www.npmjs.com/package/vite-svg-loader) or [`@soramitsu/vite-plugin-svg`](../vite-plugin-svg/README.md) plugin.
 
 **Webpack:**
 
