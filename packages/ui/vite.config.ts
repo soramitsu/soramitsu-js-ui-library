@@ -1,11 +1,12 @@
 import { defineConfig } from 'vitest/config'
-import Windi from 'vite-plugin-windicss'
-import Vue from '@vitejs/plugin-vue'
+import windiPlugin from 'vite-plugin-windicss'
+import vuePlugin from '@vitejs/plugin-vue'
 import type { RootNode, TemplateChildNode } from '@vue/compiler-core'
-import Icons from 'unplugin-icons/vite'
-import Svg from '@soramitsu-ui/vite-plugin-svg'
-import AutoImport from 'unplugin-auto-import/vite'
+import iconsPlugin from 'unplugin-icons/vite'
+import svgPlugin from '@soramitsu-ui/vite-plugin-svg'
+import autoImportPlugin from 'unplugin-auto-import/vite'
 import path from 'path'
+import { dependencies } from './package.json'
 
 function resolve(...args: string[]): string {
   return path.resolve(__dirname, ...args)
@@ -57,19 +58,19 @@ export default defineConfig({
     },
   },
   plugins: [
-    Windi({
+    windiPlugin({
       // explicit path in case when cwd is not the `__dirname`
       config: resolve('windi.config.ts'),
     }),
-    Vue({
+    vuePlugin({
       template: {
         compilerOptions: {
           nodeTransforms: [vueCompilerTransforms.removeAttribute('data-testid')],
         },
       },
     }),
-    Icons(),
-    Svg({
+    iconsPlugin(),
+    svgPlugin({
       svgo: {
         plugins: [
           {
@@ -83,7 +84,7 @@ export default defineConfig({
         ],
       },
     }),
-    AutoImport({
+    autoImportPlugin({
       imports: ['vue', '@vueuse/core'],
       eslintrc: {
         enabled: true,
@@ -100,20 +101,11 @@ export default defineConfig({
     lib: {
       entry: resolve('src/lib.ts'),
       formats: ['es', 'cjs'],
-      fileName: (format) => `lib.${format === 'es' ? 'mjs' : 'js'}`,
+      fileName: 'lib',
     },
     rollupOptions: {
       output: { chunkFileNames: '[name].[format].js' },
-      external: [
-        'vue',
-        /^lodash/,
-        'jsoneditor',
-        '@popperjs/core',
-        /^@vueuse/,
-        '@soramitsu-ui/theme',
-        'body-scroll-lock',
-        'focus-trap',
-      ],
+      external: Object.keys(dependencies),
     },
   },
 })

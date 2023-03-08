@@ -25,7 +25,8 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "lib": ["esnext", "dom"]
   },
-  "exclude": ["**/dist"]
+  "exclude": ["**/dist", "**/ts-build", "**/storybook-static"]
 }

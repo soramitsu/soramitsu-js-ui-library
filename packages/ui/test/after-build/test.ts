@@ -6,7 +6,7 @@ import fs from 'fs'
 const resolve = (...paths: string[]) => path.resolve(__dirname, ...paths)
 
 const ESM_TREE_SHAKING_TEST_LIB_DIR = 'esm-tree-shaking-test-lib'
-const LIB_BUNDLE_ESM_FILE = resolve('../../dist/lib.mjs')
+const LIB_BUNDLE_ESM_FILE = resolve('../../dist/lib.js')
 const LIB_BUNDLE_CJS_FILE = resolve('../../dist/lib.cjs')
 
 test('ESM build should be tree-shakeable', async () => {
@@ -26,7 +26,7 @@ test('ESM build should be tree-shakeable', async () => {
     },
   })
 
-  const outputContents = fs.readFileSync(resolve(ESM_TREE_SHAKING_TEST_LIB_DIR, 'dist/output.mjs'), {
+  const outputContents = fs.readFileSync(resolve(ESM_TREE_SHAKING_TEST_LIB_DIR, 'dist/output.js'), {
     encoding: 'utf-8',
   })
 
