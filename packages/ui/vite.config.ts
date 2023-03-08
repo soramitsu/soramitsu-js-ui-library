@@ -6,7 +6,11 @@ import iconsPlugin from 'unplugin-icons/vite'
 import svgPlugin from '@soramitsu-ui/vite-plugin-svg'
 import autoImportPlugin from 'unplugin-auto-import/vite'
 import path from 'path'
-import { dependencies } from './package.json'
+import pkg from './package.json' assert { type: "json"}
+import * as url from 'url';
+
+// const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 function resolve(...args: string[]): string {
   return path.resolve(__dirname, ...args)
@@ -44,6 +48,7 @@ const vueCompilerTransforms = {
 }
 
 export default defineConfig({
+
   test: {
     include: ['src/**/*.spec.ts'],
     environment: 'happy-dom',
@@ -56,6 +61,11 @@ export default defineConfig({
       '@': resolve('src'),
       '@popperjs/core': '@popperjs/core/lib/index',
     },
+  },
+  server: {
+    fs: {
+      allow: [resolve('../')]
+    }
   },
   plugins: [
     windiPlugin({
@@ -104,8 +114,7 @@ export default defineConfig({
       fileName: 'lib',
     },
     rollupOptions: {
-      output: { chunkFileNames: '[name].[format].js' },
-      external: Object.keys(dependencies),
+      external: Object.keys(pkg.dependencies),
     },
   },
 })
