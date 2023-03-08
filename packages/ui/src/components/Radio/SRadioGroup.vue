@@ -2,7 +2,7 @@
 import { RADIO_GROUP_API_KEY } from './api'
 import { useRadiosSelector, useRadiosRegistration } from './util'
 
-interface Props {
+type Props = {
   modelValue?: null | symbol | string | number | object
 
   /**
@@ -28,7 +28,7 @@ const emit = defineEmits(['update:modelValue'])
 const model = useVModel(props, 'modelValue', emit, { passive: true })
 
 const { elems: radioElements, update: updateRadioElements } = useRadiosSelector<HTMLElement>(
-  templateRef('root'),
+  templateRef<null | HTMLDivElement>('root'),
   computed(() => props.radioSelector),
 )
 

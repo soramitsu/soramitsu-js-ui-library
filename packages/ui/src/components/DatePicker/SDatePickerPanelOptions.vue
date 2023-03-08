@@ -3,7 +3,7 @@ import { DatePickerOptions } from './types'
 import { IconBasicCheckMark24 } from '@/components/icons'
 import { DatePickerApi, useDatePickerApi } from './api'
 
-interface Props {
+type Props = {
   menuState: string
   options: DatePickerOptions
 }

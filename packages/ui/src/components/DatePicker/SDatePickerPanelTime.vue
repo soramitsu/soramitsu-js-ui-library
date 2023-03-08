@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { TIME_POINTS } from './consts'
 
-interface Props {
+type Props = {
   value: string
 }
 

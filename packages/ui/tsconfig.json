@@ -8,5 +8,5 @@
     "types": ["vitest/importMeta"]
   },
   "include": ["src", "auto-imports.d.ts"],
-  "exclude": ["dist", "dist-ts"]
+  "exclude": ["dist", "ts-build"]
 }

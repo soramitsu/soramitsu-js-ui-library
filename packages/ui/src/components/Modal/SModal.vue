@@ -7,10 +7,10 @@ import { FocusTrap, Options as FocusTrapOptions } from 'focus-trap'
 import { uniqueElementId } from '@/util'
 import { useBodyScrollLockIfPossible } from '../BodyScrollLockProvider'
 
-type ClassType = object | string | string[]
-type StyleType = StyleValue
+export type ClassType = object | string | string[]
+export type StyleType = StyleValue
 
-interface Props {
+type Props = {
   /**
    * Use it as `v-model:show`
    */
@@ -125,8 +125,8 @@ function close() {
   showModel.value = false
 }
 
-const modalRef = templateRef('modal')
-const rootRef = templateRef('root')
+const modalRef = templateRef<null | HTMLDivElement>('modal')
+const rootRef = templateRef<null | HTMLDivElement>('root')
 
 // VISIBILITY
 

@@ -32,7 +32,7 @@ function onEnter() {
   api.popper?.update()
 }
 
-const wrapper = templateRef('wrapper')
+const wrapper = templateRef<null | HTMLDivElement>('wrapper')
 const wrapperNormalized = eagerComputed(() => unrefElement(wrapper) as null | HTMLDivElement)
 watch(wrapperNormalized, (el, oldEl) => {
   if (oldEl) api.deletePopperRefOverride(oldEl)

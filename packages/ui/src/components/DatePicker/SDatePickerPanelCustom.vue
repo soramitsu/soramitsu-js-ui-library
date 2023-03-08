@@ -3,7 +3,7 @@ import { RangeState, StateStore } from './types'
 import { parse, isValid } from 'date-fns'
 import { DatePickerApi, useDatePickerApi } from './api'
 
-interface Props {
+type Props = {
   stateStore: StateStore
   formatDate: (date: any) => string
   formatPattern: string

@@ -6,7 +6,7 @@ import SRadioAtom from './SRadioAtom'
 import SRadioBody from './SRadioBody'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 
-interface Props {
+type Props = {
   value: any
   disabled?: boolean
   type?: RadioType

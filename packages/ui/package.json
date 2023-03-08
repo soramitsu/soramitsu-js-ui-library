@@ -1,19 +1,16 @@
 {
   "name": "@soramitsu-ui/ui",
   "version": "0.10.0",
+  "type": "module",
   "main": "dist/lib.cjs",
-  "module": "dist/lib.mjs",
+  "module": "dist/lib.js",
   "types": "dist/lib.d.ts",
-  "license": "Apache-2.0",
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "import": "./dist/lib.mjs",
+      "import": "./dist/lib.js",
       "require": "./dist/lib.cjs",
       "types": "./dist/lib.d.ts"
     },
@@ -28,10 +25,12 @@
     "cy": "cypress open",
     "cy:ci:component": "cypress run --component --quiet --reporter spec",
     "typecheck": "vue-tsc --noEmit",
-    "build": "run-s build:clean build:tsc build:vite api:extract",
-    "build:clean": "del dist dist-ts",
-    "build:tsc": "vue-tsc --outDir dist-ts --declaration --emitDeclarationOnly",
-    "build:vite": "vite build"
+    "build": "run-s build:clean build:vite build:dts",
+    "build:clean": "del dist ts-build",
+    "build:vite": "vite build",
+    "build:dts": "run-s build:dts:tsc build:dts:rollup",
+    "build:dts:tsc": "vue-tsc --outDir ts-build --declaration --emitDeclarationOnly",
+    "build:dts:rollup": "rollup -c rollup.dts.config.cjs"
   },
   "dependencies": {
     "@popperjs/core": "^2.10",
@@ -46,7 +45,9 @@
     "vue": "^3.2"
   },
   "devDependencies": {
+    "@esbuild-kit/cjs-loader": "^2.4.2",
     "@iconify/json": "^2.0.33",
+    "@rollup/plugin-alias": "^4.0.3",
     "@soramitsu-ui/icons": "0.1.0",
     "@soramitsu-ui/theme": "0.3.0",
     "@soramitsu-ui/vite-plugin-svg": "0.1.0",
@@ -74,10 +75,12 @@
     "postcss": "^8.4.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rollup": "^3.18.0",
+    "rollup-plugin-dts": "^5.2.0",
     "sass": "^1.41.1",
     "storybook": "^7.0.0-beta.62",
     "tabbable": "^6.0.0",
-    "typescript": "^4.9.5",
+    "typescript": "5.0.1-rc",
     "unplugin-auto-import": "^0.15.1",
     "unplugin-icons": "^0.15.3",
     "vite": "^4.1.4",

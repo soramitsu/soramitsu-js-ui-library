@@ -5,7 +5,7 @@ import { months } from './consts'
 
 import { ShowState } from './types'
 
-interface Props {
+type Props = {
   showState: ShowState
 }
 

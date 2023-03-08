@@ -3,7 +3,7 @@ import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/
 import { months } from './consts'
 import { ShowState } from './types'
 
-interface Props {
+type Props = {
   showState: ShowState
   hideArrows?: boolean
 }

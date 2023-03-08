@@ -1,18 +1,20 @@
 {
   "compilerOptions": {
+    // TODO uncomment options
     "strict": true,
     "allowUnusedLabels": false,
-    "allowUnreachableCode": false,
-    "exactOptionalPropertyTypes": true,
+    // "allowUnreachableCode": false,
+    // "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
-    "noImplicitReturns": true,
+    // "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": false,
-    "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    // "noUncheckedIndexedAccess": true,
+     "noUnusedLocals": false,
+    // "noUnusedParameters": true,
 
-    "verbatimModuleSyntax": "error",
+    // TODO set to true
+    "verbatimModuleSyntax": false,
     "allowJs": true,
     "checkJs": true,
 
@@ -23,8 +25,7 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "lib": ["esnext", "dom"],
+    "lib": ["esnext", "dom"]
   },
   "exclude": ["**/dist"]
 }

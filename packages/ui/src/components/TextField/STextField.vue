@@ -16,7 +16,7 @@ import { MaybeElementRef } from '@vueuse/core'
  */
 type TextFieldStatus = Exclude<Status, typeof Status.Info>
 
-interface Props {
+type Props = {
   /**
    * Model value
    */

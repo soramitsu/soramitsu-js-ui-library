@@ -4,7 +4,7 @@ import DateTable from './SDatePickerTableDate.vue'
 
 import { ShowState, StateStore } from './types'
 
-interface Props {
+type Props = {
   showState: ShowState
   hideArrows?: boolean
   value: Date | Date[]

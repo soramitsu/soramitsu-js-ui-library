@@ -1,5 +1,5 @@
 <script setup lang="ts">
-interface Props {
+type Props = {
   /**
    * v-model for two-way data binding
    */

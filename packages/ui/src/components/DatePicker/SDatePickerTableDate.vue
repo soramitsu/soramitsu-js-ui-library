@@ -18,7 +18,7 @@ const getFirstDayOfMonth = (date: Date) => {
   return temp.getDay()
 }
 
-interface Props {
+type Props = {
   firstDayOfWeek?: number
   value: Date | Date[]
   showState: types.ShowState

@@ -23,7 +23,7 @@ import {
 import { DatePickerApi, DATE_PICKER_API_KEY } from './api'
 import { DEFAULT_SHORTCUTS } from './consts'
 
-interface Props {
+type Props = {
   modelValue: ModelValueType
   type?: DatePickerType
   time?: boolean

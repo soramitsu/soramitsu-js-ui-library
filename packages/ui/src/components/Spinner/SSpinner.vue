@@ -2,7 +2,7 @@
 // Animated SVG comes from https://codepen.io/supah/pen/BjYLdW
 // TODO refactor to functional
 
-interface Props {
+type Props = {
   /**
    * Size of circle. Pure numbers & numeric strings will be interpreted as `px`
    *

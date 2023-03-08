@@ -6,7 +6,7 @@ import DatePanel from './SDatePickerPanelDate.vue'
 import { StateStore, ShowState, ModelValueType } from './types'
 import { DatePickerApi, useDatePickerApi } from './api'
 
-interface Props {
+type Props = {
   currentView: string
   showState: ShowState
   stateStore: StateStore

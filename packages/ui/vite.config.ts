@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitest/config'
 import Windi from 'vite-plugin-windicss'
 import Vue from '@vitejs/plugin-vue'
-import { RootNode, TemplateChildNode } from '@vue/compiler-core'
+import type { RootNode, TemplateChildNode } from '@vue/compiler-core'
 import Icons from 'unplugin-icons/vite'
 import Svg from '@soramitsu-ui/vite-plugin-svg'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -100,7 +100,7 @@ export default defineConfig({
     lib: {
       entry: resolve('src/lib.ts'),
       formats: ['es', 'cjs'],
-      fileName: (format) => `lib.${format === 'es' ? 'mjs' : 'cjs'}`,
+      fileName: (format) => `lib.${format === 'es' ? 'mjs' : 'js'}`,
     },
     rollupOptions: {
       output: { chunkFileNames: '[name].[format].js' },

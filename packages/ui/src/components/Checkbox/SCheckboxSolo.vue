@@ -5,7 +5,7 @@ import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import SRadioBody from '../Radio/SRadioBody'
 import SCheckboxAtom from './SCheckboxAtom'
 
-interface Props {
+type Props = {
   modelValue?: boolean
   type?: CheckboxType
   size?: CheckboxSize
