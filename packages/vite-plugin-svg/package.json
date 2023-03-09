@@ -2,13 +2,14 @@
   "name": "@soramitsu-ui/vite-plugin-svg",
   "description": "SVG to Vue loader",
   "version": "0.1.0",
-  "main": "dist/lib.js",
-  "module": "dist/lib.mjs",
+  "type": "module",
+  "main": "dist/lib.cjs",
+  "module": "dist/lib.js",
   "types": "dist/lib.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/lib.mjs",
-      "require": "./dist/lib.js",
+      "import": "./dist/lib.js",
+      "require": "./dist/lib.cjs",
       "types": "./dist/lib.d.ts"
     }
   },
