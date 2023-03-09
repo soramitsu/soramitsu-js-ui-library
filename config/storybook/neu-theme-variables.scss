@@ -30,12 +30,14 @@ $s-color-utility-body: #F7F3F4;
 $s-color-utility-surface: #FDF7FB;
 $s-color-utility-overlay: rgba(42, 23, 31, 0.1);
 // Status colors
-$s-color-status-success: #34AD87;
-$s-color-status-warning: #479AEF;
-$s-color-status-error: #F754A3;
-$s-color-status-success-background: #B9EBDB;
-$s-color-status-warning-background: #C6E2FF;
-$s-color-status-error-background: #FFD8EB;
+$s-color-status-success: #34AD87 !default;
+$s-color-status-warning: #EBA332 !default;
+$s-color-status-error: #F754A3 !default;
+$s-color-status-info: #479AEF !default;
+$s-color-status-success-background: #B9EBDB !default;
+$s-color-status-warning-background: #FCEEBD !default;
+$s-color-status-error-background: #FFD8EB !default;
+$s-color-status-info-background: #C6E2FF !default;
 // Shadows
 $s-shadow-surface: 1px 1px 5px var(--s-shadow-color-dark), inset 1px 1px 1px var(--s-shadow-color-dark); // container
 // Size
@@ -71,9 +73,11 @@ $s-size-mini: 24px;
   --s-color-status-success: #{$s-color-status-success};
   --s-color-status-warning: #{$s-color-status-warning};
   --s-color-status-error: #{$s-color-status-error};
+  --s-color-status-info: #{$s-color-status-info};
   --s-color-status-success-background: #{$s-color-status-success-background};
   --s-color-status-warning-background: #{$s-color-status-warning-background};
   --s-color-status-error-background: #{$s-color-status-error-background};
+  --s-color-status-info-background: #{$s-color-status-info-background};
   // Shadows
   --s-shadow-surface: #{$s-shadow-surface};
 }

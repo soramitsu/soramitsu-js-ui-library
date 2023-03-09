@@ -27,9 +27,11 @@
   --s-color-status-success: #{$s-color-status-success};
   --s-color-status-warning: #{$s-color-status-warning};
   --s-color-status-error: #{$s-color-status-error};
+  --s-color-status-info: #{$s-color-status-info};
   --s-color-status-success-background: #{$s-color-status-success-background};
   --s-color-status-warning-background: #{$s-color-status-warning-background};
   --s-color-status-error-background: #{$s-color-status-error-background};
+  --s-color-status-info-background: #{$s-color-status-info-background};
   // Dark theme
   --s-color-theme-accent--dark: #{$s-color-theme-accent--dark};
   --s-color-theme-accent-hover--dark: #{$s-color-theme-accent-hover--dark};
@@ -58,9 +60,11 @@
   --s-color-status-success--dark: #{$s-color-status-success--dark};
   --s-color-status-warning--dark: #{$s-color-status-warning--dark};
   --s-color-status-error--dark: #{$s-color-status-error--dark};
+  --s-color-status-info--dark: #{$s-color-status-info--dark};
   --s-color-status-success-background--dark: #{$s-color-status-success-background--dark};
   --s-color-status-warning-background--dark: #{$s-color-status-warning-background--dark};
   --s-color-status-error-background--dark: #{$s-color-status-error-background--dark};
+  --s-color-status-info-background--dark: #{$s-color-status-info-background--dark};
   --s-shadow-color-light--dark: #{$s-shadow-color-light--dark};
   --s-shadow-color-light-darken--dark: #{$s-shadow-color-light-darken--dark};
   --s-shadow-color-light-dark--dark: #{$s-shadow-color-light-dark--dark};

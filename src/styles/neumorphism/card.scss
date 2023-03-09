@@ -16,9 +16,10 @@
   background: var(--s-color-base-background);
   border: none;
 
-  @include status;
+  @include status('success');
   @include status('warning');
   @include status('error');
+  @include status('info');
 
   .el-card {
     &__header, &__body {
