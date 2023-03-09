@@ -27,7 +27,7 @@ const VisibilityState = {
   Leaving: 'leaving',
 } as const
 
-type VisibilityState = typeof VisibilityState[keyof typeof VisibilityState]
+type VisibilityState = (typeof VisibilityState)[keyof typeof VisibilityState]
 
 type VisibilityStateMap<K extends string> = {
   [key in K]: VisibilityState

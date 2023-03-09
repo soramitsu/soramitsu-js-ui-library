@@ -36,7 +36,7 @@ describe('Given column sort composable', () => {
     prop: 'prop3',
     sortable: true,
     sortBy: '',
-    sortMethod: (a: typeof DATA[number], b: typeof DATA[number]) => a.prop3.length - b.prop3.length,
+    sortMethod: (a: (typeof DATA)[number], b: (typeof DATA)[number]) => a.prop3.length - b.prop3.length,
     sortOrders: ['ascending', 'descending', null],
   })
 

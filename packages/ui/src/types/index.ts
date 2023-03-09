@@ -8,4 +8,4 @@ export const Status = {
   Error: 'error',
 } as const
 
-export type Status = typeof Status[keyof typeof Status]
+export type Status = (typeof Status)[keyof typeof Status]

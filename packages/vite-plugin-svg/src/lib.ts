@@ -1,6 +1,6 @@
 import { Plugin } from 'vite'
 import { compileTemplate } from '@vue/compiler-sfc'
-import svgo, {Config as SvgoConfig   } from 'svgo'
+import svgo, { Config as SvgoConfig } from 'svgo'
 import fs from 'fs/promises'
 
 const SVG_REGEX = /\.svg$/
@@ -26,7 +26,7 @@ function createPlugin(opts?: Options): Plugin {
       if (svgoCfg) {
         try {
           const result = svgo.optimize(svgContents, svgoCfg === true ? {} : svgoCfg)
-          svgContents = (result ).data
+          svgContents = result.data
         } catch (err) {
           console.error(`SVGO failed`)
           throw err

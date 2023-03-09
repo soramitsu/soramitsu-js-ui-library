@@ -94,7 +94,7 @@ yarn sb:build
     Info: 'info',
   } as const
 
-  type Status = typeof Status[keyof typeof Status]
+  type Status = (typeof Status)[keyof typeof Status]
   ```
 
 - There is no need to create folders for every type of subsidiary entities, e.g. composables, utilities, etc.,

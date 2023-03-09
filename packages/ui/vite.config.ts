@@ -6,11 +6,11 @@ import iconsPlugin from 'unplugin-icons/vite'
 import svgPlugin from '@soramitsu-ui/vite-plugin-svg'
 import autoImportPlugin from 'unplugin-auto-import/vite'
 import path from 'path'
-import pkg from './package.json' assert { type: "json"}
-import * as url from 'url';
+import pkg from './package.json' assert { type: 'json' }
+import * as url from 'url'
 
 // const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 function resolve(...args: string[]): string {
   return path.resolve(__dirname, ...args)
@@ -48,7 +48,6 @@ const vueCompilerTransforms = {
 }
 
 export default defineConfig({
-
   test: {
     include: ['src/**/*.spec.ts'],
     environment: 'happy-dom',
@@ -64,8 +63,8 @@ export default defineConfig({
   },
   server: {
     fs: {
-      allow: [resolve('../')]
-    }
+      allow: [resolve('../')],
+    },
   },
   plugins: [
     windiPlugin({

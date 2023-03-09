@@ -2,7 +2,7 @@ import { defineConfig } from 'cypress'
 import { mergeConfig } from 'vite'
 import fs from 'fs'
 import viteBase from './vite.config'
-import { createRequire} from 'module'
+import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
 

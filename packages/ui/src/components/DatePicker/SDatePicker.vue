@@ -55,8 +55,8 @@ const today = new Date()
 
 const rangeStateRef = ref<RangeState>({
   selecting: false,
-  startDate: new Date(today.getFullYear(), today.getMonth(), 1) || null,
-  endDate: new Date(today.getFullYear(), today.getMonth(), 7) || null,
+  startDate: new Date(today.getFullYear(), today.getMonth(), 1),
+  endDate: new Date(today.getFullYear(), today.getMonth(), 7),
 })
 
 const rangeState = toReactive(rangeStateRef)
