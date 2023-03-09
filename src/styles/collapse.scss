@@ -30,18 +30,26 @@
     }
     .el-icon-arrow-right {
       &,
-      &:before {
+      &::before {
         font-family: var(--s-font-family-icons);
+      }
+      &::before {
+        position: absolute;
+        transition: transform 0.25s ease-in-out;
       }
       @extend .s-icon-chevron-down-rounded-16;
       font-size: var(--s-icon-font-size-mini);
-      padding: 8px;
+      padding: 0 8px;
       width: 32px;
       height: 32px;
+      line-height: 32px;
       background-color: var(--s-color-base-background);
       border-radius: var(--s-border-radius-small);
       &.is-active {
-        transform: scale(1, -1);
+        transform: none;
+        &::before {
+          transform: scale(1, -1);
+        }
       }
       &:hover,
       &:focus {
