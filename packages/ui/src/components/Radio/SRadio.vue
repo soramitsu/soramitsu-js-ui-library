@@ -92,27 +92,3 @@ const describedBy = computed(() => (definitelyType.value === 'bordered-with-desc
     </svg>
   </SRadioBody>
 </template>
-
-<style lang="scss">
-@use '@/theme';
-
-.s-radio.s-radio-body {
-  $root: &;
-
-  &[aria-disabled='true'] {
-    pointer-events: none;
-
-    label,
-    .s-radio-body__description {
-      color: theme.token-as-var('sys.color.on-disabled');
-    }
-  }
-
-  &[data-type^='bordered'] {
-    &:hover,
-    &[aria-checked='true']:not([aria-disabled='true']) {
-      border-color: theme.token-as-var('sys.color.primary');
-    }
-  }
-}
-</style>
