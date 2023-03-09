@@ -6,7 +6,7 @@ def pipeline = new org.js.LibPipeline(
     npmLoginEmail:        'admin@soramitsu.co.jp',
     dockerImageName:      'soramitsu/soramitsu-js-ui-library',
     testCmds:             ['pnpm test:all'],
-    preBuildCmds:         ['npm install -g n','n 16.17.0', 'n prune', "npm install pnpm", "pnpm install"],
+    preBuildCmds:         ['npm install -g n','n 16.17.0', 'n prune', "npm install -g pnpm", "pnpm install"],
     pushCmds:             ['pnpm publish-workspaces --no-verify-access'],
     libPushBranches:      ['master', 'next'],
     dockerImageTags:      ['master':'latest', 'next':'next'],
