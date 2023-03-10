@@ -36,6 +36,9 @@
       &::before {
         position: absolute;
         transition: transform 0.25s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       @extend .s-icon-chevron-down-rounded-16;
       font-size: var(--s-icon-font-size-mini);
