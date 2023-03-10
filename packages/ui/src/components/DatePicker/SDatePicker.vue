@@ -197,7 +197,7 @@ const changeView = (viewName: string) => {
 }
 
 const headTitle = computed(() => {
-  if (menuState.value !== 'Custom') {
+  if (menuState.value && menuState.value !== 'Custom') {
     return menuState.value
   }
 
