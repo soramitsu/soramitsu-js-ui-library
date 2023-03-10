@@ -41,6 +41,7 @@
         align-items: center;
       }
       @extend .s-icon-chevron-down-rounded-16;
+      position: relative;
       font-size: var(--s-icon-font-size-mini);
       padding: 0 8px;
       width: 32px;
