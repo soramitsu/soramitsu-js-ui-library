@@ -3,17 +3,24 @@ $neu-collapse-button-border-width: 0px !default;
 $neu-collapse-button-border-style: solid !default !default;
 $neu-collapse-button-background-color: var(--s-color-utility-body) !default;
 $neu-collapse-button-text-color: var(--s-color-base-content-tertiary) !default;
+$neu-collapse-button-text-color-hover: var(--s-color-base-content-secondary) !default;
 $neu-collapse-button-border-color: transparent !default;
 $neu-collapse-button-box-shadow: var(--s-shadow-element-pressed) !default;
 $neu-collapse-button-font-size: 28px !default;
-.el-collapse.neumorphic .el-icon-arrow-right {
-  width: $neu-collapse-button-size;
-  height: $neu-collapse-button-size;
-  background: $neu-collapse-button-background-color;
-  border-color: $neu-collapse-button-border-color;
-  border-style: $neu-collapse-button-border-style;
-  border-width: $neu-collapse-button-border-width;
-  box-shadow: $neu-collapse-button-box-shadow;
-  color: $neu-collapse-button-text-color;
-  font-size: $neu-collapse-button-font-size;
+.el-collapse.neumorphic .el-collapse-item__header {
+  .el-icon-arrow-right {
+    width: $neu-collapse-button-size;
+    height: $neu-collapse-button-size;
+    line-height: $neu-collapse-button-size;
+    background: $neu-collapse-button-background-color;
+    border-color: $neu-collapse-button-border-color;
+    border-style: $neu-collapse-button-border-style;
+    border-width: $neu-collapse-button-border-width;
+    box-shadow: $neu-collapse-button-box-shadow;
+    color: $neu-collapse-button-text-color;
+    font-size: $neu-collapse-button-font-size;
+  }
+  &:hover .el-icon-arrow-right {
+    color: $neu-collapse-button-text-color-hover;
+  }
 }
