@@ -1,5 +1,12 @@
 # @soramitsu-ui/ui
 
+## 0.10.1
+
+### Patch Changes
+
+- ba95ea0: **fix**(`SCheckbox`, `SRadio`): removed redundant hover background and change paddings
+- c42b6d5: **fix**(`SDatePicker`): fix label when menu state empty
+
 ## 0.10.0
 
 ### Minor Changes
