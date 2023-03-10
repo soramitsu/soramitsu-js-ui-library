@@ -17,6 +17,7 @@ export enum Status {
   SUCCESS = 'success',
   WARNING = 'warning',
   ERROR = 'error',
+  INFO = 'info',
 }
 
 export enum Direction {
@@ -51,9 +52,11 @@ export enum Colors {
   StatusSuccess = 'status-success',
   StatusWarning = 'status-warning',
   StatusError = 'status-error',
+  StatusInfo = 'status-info',
   StatusSuccessBackground = 'status-success-background',
   StatusWarningBackground = 'status-warning-background',
   StatusErrorBackground = 'status-error-background',
+  StatusInfoBackground = 'status-info-background',
   ButtonTertiaryColor = 'button-tertiary-color',
   ButtonTertiaryColorActive = 'button-tertiary-color-active',
   ButtonTertiaryBackground = 'button-tertiary-background',
@@ -106,9 +109,11 @@ export enum StatusColors {
   StatusSuccess = Colors.StatusSuccess,
   StatusWarning = Colors.StatusWarning,
   StatusError = Colors.StatusError,
+  StatusInfo = Colors.StatusInfo,
   StatusSuccessBackground = Colors.StatusSuccessBackground,
   StatusWarningBackground = Colors.StatusWarningBackground,
-  StatusErrorBackground = Colors.StatusErrorBackground
+  StatusErrorBackground = Colors.StatusErrorBackground,
+  StatusInfoBackground = Colors.StatusInfoBackground,
 }
 
 export enum TertiaryButtonColors {

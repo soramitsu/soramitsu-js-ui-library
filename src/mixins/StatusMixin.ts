@@ -5,7 +5,7 @@ import { Status } from '../types'
 @Component
 export default class StatusMixin extends Vue {
   /**
-   * Status of component. Possible values: `"default"`, `"success"`, `"warning"`, `"error"`.
+   * Status of component. Possible values: `"default"`, `"success"`, `"warning"`, `"error"`, `"info"`.
    *
    * By default it's set to `"default"`
    */
