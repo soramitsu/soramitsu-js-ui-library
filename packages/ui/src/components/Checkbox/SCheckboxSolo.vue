@@ -72,25 +72,3 @@ const hover = ref(false)
     </template>
   </SRadioBody>
 </template>
-
-<style lang="scss">
-@use '@/theme';
-
-.s-checkbox-solo.s-radio-body {
-  &[aria-disabled='true'] {
-    pointer-events: none;
-
-    label,
-    .s-radio-body__description {
-      color: theme.token-as-var('sys.color.on-disabled');
-    }
-  }
-
-  &[data-type^='bordered'] {
-    &:hover,
-    &[aria-checked='true']:not([aria-disabled]) {
-      border-color: theme.token-as-var('sys.color.primary');
-    }
-  }
-}
-</style>
