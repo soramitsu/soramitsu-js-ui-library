@@ -133,9 +133,8 @@ const updateShowedMonths = () => {
     case 'range':
       date = rangeState[dateForTime.value as keyof RangeState] as Date | null
       break
-    default:
   }
-  if (!date) return `00:00`
+  if (!date) return
   updateShowedState(date.getMonth(), date.getFullYear())
 }
 
@@ -196,7 +195,7 @@ const changeView = (viewName: string) => {
   currentView.value = viewName
 }
 
-const headTitle = computed(() => {
+const headTitle = computed<string>(() => {
   if (menuState.value && menuState.value !== 'Custom') {
     return menuState.value
   }
@@ -209,13 +208,12 @@ const headTitle = computed(() => {
         const modelValue = props.modelValue as Date[]
         return modelValue.map((item) => formatDate(item)).join(' - ')
       }
-
       case 'pick': {
         const modelValue = props.modelValue as Date[]
         return modelValue.map((item) => formatDate(item)).join(', ')
       }
       default:
-        break
+        return ''
     }
   } catch {
     return ''
