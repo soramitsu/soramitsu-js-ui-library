@@ -35,32 +35,29 @@ export function useTableHeights({
     }
   })
 
-  const bodyHeightStyles = ref({})
+  const bodyHeightStyles = shallowReactive<Pick<CSSStyleDeclaration, 'height' | 'maxHeight'>>({
+    height: '',
+    maxHeight: '',
+  })
 
   watch(
-    [headerHeight, tableHeight],
-    (): void => {
-      if (propHeight.value) {
-        const bodyHeight = tableHeight.value - headerHeight.value
-
-        bodyHeightStyles.value = {
-          height: bodyHeight ? bodyHeight + 'px' : '',
-        }
-
-        return
+    [headerHeight, tableHeight, propHeight, propMaxHeight],
+    ([header, table, prop, propMax]) => {
+      let heightFinal = ''
+      if (prop) {
+        const bodyHeight = table - header
+        heightFinal = bodyHeight ? bodyHeight + 'px' : ''
       }
+      bodyHeightStyles.height = heightFinal
 
-      if (propMaxHeight.value) {
-        const maxHeight = parseHeight(propMaxHeight.value)
-
+      let maxHeightFinal = ''
+      if (propMax) {
+        const maxHeight = parseHeight(propMax)
         if (typeof maxHeight === 'number') {
-          // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/517
-          // @ts-ignore
-          return {
-            'max-height': maxHeight - headerHeight.value + 'px',
-          }
+          maxHeightFinal = maxHeight - header + 'px'
         }
       }
+      bodyHeightStyles.maxHeight = maxHeightFinal
     },
     { immediate: true },
   )
