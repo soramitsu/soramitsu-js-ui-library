@@ -8,7 +8,6 @@ $dur-easing: 0.2s ease;
 
 .s-radio-body {
   @apply select-none cursor-pointer rounded;
-  padding: 8px 10px;
   transition: all $dur-easing;
 
   $root: &;
@@ -43,27 +42,37 @@ $dur-easing: 0.2s ease;
     transition: color $dur-easing;
   }
 
+  &[aria-disabled='true'] {
+    pointer-events: none;
+
+    label,
+    .s-radio-body__description {
+      color: theme.token-as-var('sys.color.on-disabled');
+    }
+  }
+
   &[data-type^='bordered'] {
     border: 1px solid $border-primary;
 
-    // should be controlled externally
-
-    // &:hover,
-    // &[aria-checked='true']:not([aria-disabled='true']) {
-    //   border-color: $primary;
-    // }
+    &:hover,
+    &[aria-checked='true']:not([aria-disabled='true']) {
+      border-color: $primary;
+    }
   }
 
-  // Styles below doesn't come from design
-  // FIXME
-
-  &:hover {
-    @apply bg-gray-50;
+  @mixin padding($type, $size, $px, $py) {
+    &[data-size='#{$size}'][data-type='#{$type}'] {
+      padding: $py $px;
+    }
   }
 
-  &:active {
-    @apply bg-gray-100;
-  }
+  @include padding('bordered', 'md', 8px, 6px);
+  @include padding('bordered', 'lg', 10px, 8px);
+  @include padding('bordered', 'xl', 10px, 10px);
+
+  @include padding('bordered-with-description', 'md', 10px, 8px);
+  @include padding('bordered-with-description', 'lg', 12px, 10px);
+  @include padding('bordered-with-description', 'xl', 16px, 16px);
 
   &:focus {
     @apply ring ring-opacity-25 ring-blue-500 ring-offset-2;

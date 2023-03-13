@@ -20,6 +20,7 @@ const SRadioBody: FunctionalComponent<Props> = (props, { attrs, slots }) => {
       {
         class: 's-radio-body',
         'data-type': props.type,
+        'data-size': props.size,
         'aria-labelledby': props.labelId,
         'aria-describedby': props.descriptionId,
       },
