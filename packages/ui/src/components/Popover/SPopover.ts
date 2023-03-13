@@ -1,4 +1,4 @@
-import { Ref, cloneVNode, PropType } from 'vue'
+import { Ref, cloneVNode, PropType, type VNode } from 'vue'
 import { Placement, placements, Instance, State } from '@popperjs/core'
 import { MaybeElementRef } from '@vueuse/core'
 import { not, or } from '@vueuse/math'
@@ -230,7 +230,7 @@ export default /* @__PURE__ */ defineComponent({
 
     provide(POPOVER_API_KEY, api)
 
-    return () => {
+    return (): (VNode | null | undefined | false)[] => {
       let trigger
       {
         if (!slots.trigger) {

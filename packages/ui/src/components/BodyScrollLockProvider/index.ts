@@ -1,5 +1,5 @@
 import { MaybeElementRef } from '@vueuse/core'
-import { FunctionalComponent, InjectionKey, PropType } from 'vue'
+import type { VNode, InjectionKey, PropType } from 'vue'
 
 export interface BodyScrollLockApi {
   lock: (elem: Element) => void
@@ -18,7 +18,7 @@ export const SBodyScrollLockProvider = /* @__PURE__ */ defineComponent({
   },
   setup(props, { slots }) {
     provide(BODY_SCROLL_LOCK_API_KEY, props.api)
-    return () => slots.default?.()
+    return (): VNode[] | undefined => slots.default?.()
   },
 })
 

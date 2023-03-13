@@ -2,6 +2,7 @@ import { defineConfig, type Plugin } from 'rollup'
 import dtsPlugin from 'rollup-plugin-dts'
 import aliasPlugin from '@rollup/plugin-alias'
 import path from 'path'
+import { match } from 'ts-pattern'
 
 const shimCssPlugin = (): Plugin => {
   const CSS_SUFFIX = `.css.d.ts`
@@ -22,12 +23,17 @@ export default defineConfig({
   plugins: [
     aliasPlugin({
       entries: {
-        '@': path.resolve(__dirname, 'src'),
+        '@': path.resolve(__dirname, 'ts-build'),
       },
     }),
     shimCssPlugin(),
     dtsPlugin(),
   ],
+  onwarn(warning, defaultHandler) {
+    match(warning)
+      .with({ code: 'UNUSED_EXTERNAL_IMPORT', id: 'inject' }, () => {})
+      .otherwise(defaultHandler)
+  },
   output: {
     file: 'dist/lid.d.ts',
     format: 'esm',
