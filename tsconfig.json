@@ -3,7 +3,7 @@
     // TODO uncomment options
     "strict": true,
     "allowUnusedLabels": false,
-    // "allowUnreachableCode": false,
+    "allowUnreachableCode": false,
     // "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
