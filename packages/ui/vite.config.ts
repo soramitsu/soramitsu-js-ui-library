@@ -76,7 +76,8 @@ function checkAutoImportedTypesPlugin(checkDts = resolve('auto-imports.d.ts')): 
     apply: 'build',
     async closeBundle() {
       const content = await fs.readFile(checkDts, { encoding: 'utf-8' })
-      if (testExportType(content)) this.error(`Type export is detected in auto-imports (file: ${path.relative(process.cwd(), checkDts)})`)
+      if (testExportType(content))
+        this.error(`Type export is detected in auto-imports (file: ${path.relative(process.cwd(), checkDts)})`)
     },
   }
 }
@@ -148,7 +149,7 @@ export default defineConfig({
         enabled: true,
       },
     }),
-    checkAutoImportedTypesPlugin()
+    checkAutoImportedTypesPlugin(),
   ],
   build: {
     sourcemap: true,
