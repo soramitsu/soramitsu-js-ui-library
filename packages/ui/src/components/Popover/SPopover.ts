@@ -62,7 +62,7 @@ function useElHover(elemRef: Ref<null | Element>): {
 } {
   const hover = ref(false)
 
-  watch(elemRef, (el, oldEl) => {
+  watch(elemRef, (_el, oldEl) => {
     if (oldEl) hover.value = false
   })
 

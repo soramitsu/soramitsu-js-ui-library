@@ -120,7 +120,7 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
     }
     if (state.type === 'pick') {
       const selectedDates = props.stateStore.pickState
-      cell.start = selectedDates.some((item: Date) => {
+      cell.start = selectedDates.some((_item) => {
         return isSameDay(time, time)
       })
       if (cell.start) {

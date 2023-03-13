@@ -11,7 +11,7 @@
     "noPropertyAccessFromIndexSignature": false,
     // "noUncheckedIndexedAccess": true,
     "noUnusedLocals": false,
-    // "noUnusedParameters": true,
+    "noUnusedParameters": true,
 
     "verbatimModuleSyntax": true,
     "allowJs": true,
