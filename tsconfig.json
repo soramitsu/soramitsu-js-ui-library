@@ -10,7 +10,7 @@
     // "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": false,
     // "noUncheckedIndexedAccess": true,
-     "noUnusedLocals": false,
+    "noUnusedLocals": false,
     // "noUnusedParameters": true,
 
     // TODO set to true
@@ -28,5 +28,11 @@
     "resolveJsonModule": true,
     "lib": ["esnext", "dom"]
   },
-  "exclude": ["**/dist", "**/ts-build", "**/storybook-static"]
+  "exclude": [
+    "**/dist",
+    "**/ts-build",
+    "**/storybook-static",
+    // https://github.com/soramitsu/soramitsu-js-ui-library/issues/514
+    "./packages/ui/stories"
+  ]
 }
