@@ -31,7 +31,15 @@
     "**/dist",
     "**/ts-build",
     "**/storybook-static",
+
     // https://github.com/soramitsu/soramitsu-js-ui-library/issues/514
-    "./packages/ui/stories"
+    "./packages/ui/stories",
+
+    // they should be checked under `vue-tsc`
+    "./packages/ui/src",
+    "./packages/ui/cypress",
+
+    // it is not intended for type-checking at all
+    "./packages/ui/test/after-build"
   ]
 }

@@ -7,5 +7,6 @@
     },
     "types": ["vitest/importMeta"]
   },
-  "include": ["src", "auto-imports.d.ts"]
+  "include": ["."],
+  "exclude": ["dist", "ts-build", "cypress", "test", "storybook-static", "stories"]
 }

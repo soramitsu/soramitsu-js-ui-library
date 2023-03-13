@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitest/config'
+// @ts-ignore FIXME update when this package fixes its `exports`
 import windiPlugin from 'vite-plugin-windicss'
 import vuePlugin from '@vitejs/plugin-vue'
 import type { RootNode, TemplateChildNode } from '@vue/compiler-core'
