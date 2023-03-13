@@ -9,7 +9,7 @@
   "scripts": {
     "sb:serve": "pnpm --filter ui sb:serve",
     "sb:build": "pnpm --filter ui sb:build",
-    "test:all": "run-s lint:check test:theme:unit build:vite-plugin-svg test:ui:unit build:theme test:ui:cy build:ui:only-vite test:ui:after-build",
+    "test:all": "run-s lint:check test:theme:unit build:vite-plugin-svg test:ui:unit test:ui:cy build:ui:only-vite test:ui:after-build",
     "test:theme:unit": "pnpm --filter theme test",
     "test:ui:unit": "pnpm --filter ui test:unit",
     "test:ui:cy": "pnpm --filter ui cy:ci:component",
