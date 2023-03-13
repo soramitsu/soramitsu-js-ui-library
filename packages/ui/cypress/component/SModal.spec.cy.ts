@@ -1,9 +1,9 @@
 import { VueTestUtils } from 'cypress/vue'
-import  type { Ref } from 'vue'
+import type { Ref } from 'vue'
 import { bareMetalVModel } from '@/util'
-import { SModal, SModalCard, useModalApi, SBodyScrollLockProvider,  type BodyScrollLockApi } from '@/lib'
+import { SModal, SModalCard, useModalApi, SBodyScrollLockProvider, type BodyScrollLockApi } from '@/lib'
 import { objectPick } from '@vueuse/core'
-import {  type Options as FocusTrapOptions } from 'focus-trap'
+import { type Options as FocusTrapOptions } from 'focus-trap'
 import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock'
 
 const showVModel = (val: Ref<boolean>) => bareMetalVModel(val, 'show')
