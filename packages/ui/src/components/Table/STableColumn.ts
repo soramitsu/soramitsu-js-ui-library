@@ -1,17 +1,17 @@
-import { defineComponent, PropType } from 'vue'
-import { TableActionColumnApi, TableColumnApi, useTableApi } from '@/components'
+import { defineComponent, type PropType } from 'vue'
+import { type TableActionColumnApi, type TableColumnApi, useTableApi } from '@/components'
 import { uniqueElementId } from '@/util'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from '@/components/Table/consts'
-import {
+import type {
   TableColumnCellValueFormatter,
   TableColumnRowSelectableFunc,
   TableColumnSortBy,
   TableColumnSortOrder,
   TableColumnAlign,
   TableColumnType,
-} from '@/components/Table/types'
-import { TableColumnWidthProps } from './api'
+} from './types'
+import type { TableColumnWidthProps } from './api'
 
 export default /* @__PURE__ */ defineComponent({
   name: 'STableColumn',

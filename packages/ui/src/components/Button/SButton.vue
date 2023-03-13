@@ -9,7 +9,7 @@ import {
   SPINNER_WIDTH,
   FONT_SIZE,
 } from './consts'
-import { ButtonType, ButtonSize, ButtonIconPosition, HTMLButtonType } from './types'
+import type { ButtonType, ButtonSize, ButtonIconPosition, HTMLButtonType } from './types'
 
 const props = withDefaults(
   defineProps<{

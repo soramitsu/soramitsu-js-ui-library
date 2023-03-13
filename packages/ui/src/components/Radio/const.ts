@@ -1,4 +1,4 @@
-import { RadioSize } from './types'
+import type { RadioSize } from './types'
 
 export const TYPOGRAPHY: Record<RadioSize, { label: string; description: string }> = {
   xl: {

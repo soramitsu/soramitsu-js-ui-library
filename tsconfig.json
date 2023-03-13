@@ -13,8 +13,7 @@
      "noUnusedLocals": false,
     // "noUnusedParameters": true,
 
-    // TODO set to true
-    "verbatimModuleSyntax": false,
+    "verbatimModuleSyntax": true,
     "allowJs": true,
     "checkJs": true,
 

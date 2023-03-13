@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { ComputedRef } from 'vue'
+import type { ComputedRef } from 'vue'
 import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/icons'
 import { months } from './consts'
-
-import { ShowState } from './types'
+import type { ShowState } from './types'
 
 type Props = {
   showState: ShowState

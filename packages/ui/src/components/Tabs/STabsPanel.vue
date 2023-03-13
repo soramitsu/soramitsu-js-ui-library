@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TabsPanelApi, TABS_PANEL_API_KEY, TabsPanelBackgroundType } from './api'
+import { type TabsPanelApi, TABS_PANEL_API_KEY, type TabsPanelBackgroundType } from './api'
 
 const props = withDefaults(
   defineProps<{

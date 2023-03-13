@@ -12,7 +12,7 @@ import path from 'path'
 import fs from 'fs/promises'
 import pkg from './package.json' assert { type: 'json' }
 import * as url from 'url'
-import { Plugin } from 'vite'
+import { type Plugin } from 'vite'
 
 // const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))

@@ -1,10 +1,10 @@
-import { Ref, cloneVNode, PropType, type VNode } from 'vue'
-import { Placement, placements, Instance, State } from '@popperjs/core'
-import { MaybeElementRef } from '@vueuse/core'
+import { type Ref, cloneVNode, type PropType, type VNode } from 'vue'
+import { type Placement, placements, type Instance, type State } from '@popperjs/core'
+import type { MaybeElementRef } from '@vueuse/core'
 import { not, or } from '@vueuse/math'
 import { usePopper } from '@/composables/popper'
-import { PopoverApi, POPOVER_API_KEY } from './api'
-import { Except } from 'type-fest'
+import { type PopoverApi, POPOVER_API_KEY } from './api'
+import type { Except } from 'type-fest'
 
 function useDelayNumberGreaterThanOrEqualToZero(reactiveGetter: () => string | number): Ref<number> {
   return computed(() => {

@@ -1,4 +1,4 @@
-import { MaybeElementRef } from '@vueuse/core'
+import type { MaybeElementRef } from '@vueuse/core'
 import type { VNode, InjectionKey, PropType } from 'vue'
 
 export interface BodyScrollLockApi {

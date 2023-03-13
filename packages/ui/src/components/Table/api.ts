@@ -1,6 +1,6 @@
-import { DeepReadonly, InjectionKey, Slot } from 'vue'
+import type { DeepReadonly, InjectionKey, Slot } from 'vue'
 import { forceInject } from '@/util'
-import {
+import type {
   TableColumnCellValueFormatter,
   TableColumnRowSelectableFunc,
   TableColumnSortBy,

@@ -1,5 +1,5 @@
-import { Ref } from 'vue'
-import { TableColumnRowSelectableFunc, TableRow } from './types'
+import type { Ref } from 'vue'
+import type { TableColumnRowSelectableFunc, TableRow } from './types'
 
 export function useRowSelect(data: Ref<TableRow[]>, options: { selectOnIndeterminate: boolean }) {
   const selectedRows = shallowReactive(new Set<TableRow>())

@@ -4,9 +4,9 @@ import { getStartDateInCalendar, nextDate } from './date-util'
 import { getDaysInMonth, subMonths, startOfDay, isSameDay } from 'date-fns'
 
 import * as types from './types'
-import { ComputedRef } from 'vue'
+import type { ComputedRef } from 'vue'
 import { daysNames } from './consts'
-import { DatePickerApi, useDatePickerApi } from './api'
+import { type DatePickerApi, useDatePickerApi } from './api'
 
 const getDateTimestamp = (time: Date | number) => {
   return startOfDay(time).getTime()

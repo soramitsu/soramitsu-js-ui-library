@@ -9,7 +9,7 @@ import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { and } from '@vueuse/math'
 import { format } from 'date-fns'
 
-import {
+import type {
   DatePickerType,
   RangeState,
   DateState,
@@ -20,7 +20,7 @@ import {
   ModelValueType,
   DatePickerOptions,
 } from './types'
-import { DatePickerApi, DATE_PICKER_API_KEY } from './api'
+import { type DatePickerApi, DATE_PICKER_API_KEY } from './api'
 import { DEFAULT_SHORTCUTS } from './consts'
 
 type Props = {

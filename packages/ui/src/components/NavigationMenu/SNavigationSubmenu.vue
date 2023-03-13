@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 import SNavigationMenuItemBody from '@/components/NavigationMenu/SNavigationMenuItemBody.vue'
 import { SCollapseTransition } from '@/components/Transitions'
 import { NAVIGATION_SUBMENU_API_KEY, useNavigationMenuApi } from '@/components/NavigationMenu/api'
