@@ -153,7 +153,8 @@ export function useRadiosRegistration({
       idx += delta
       idx = idx >= count ? 0 : idx < 0 ? count - 1 : idx
 
-      if (!items[idx].isDisabled.value) return items[idx]
+      // `!` assertions because we iterate in range `[0; items.length)`
+      if (!items[idx]!.isDisabled.value) return items[idx]!
     }
 
     return null

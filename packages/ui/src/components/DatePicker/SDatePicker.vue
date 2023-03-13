@@ -78,8 +78,8 @@ const init = () => {
   } else if (props.type === 'pick') {
     pickState.value = innerModelValue.value as PickState
   } else {
-    rangeStateRef.value.startDate = (innerModelValue.value as Date[])[0]
-    rangeStateRef.value.endDate = (innerModelValue.value as Date[])[1]
+    rangeStateRef.value.startDate = (innerModelValue.value as Date[])[0]!
+    rangeStateRef.value.endDate = (innerModelValue.value as Date[])[1]!
   }
   updateShowedMonths()
 }
@@ -125,7 +125,7 @@ const updateShowedMonths = () => {
   let date: Date | null = null
   switch (props.type) {
     case 'pick':
-      date = pickState.value[pickState.value.length - 1]
+      date = pickState.value[pickState.value.length - 1]!
       break
     case 'day':
       date = dayState.value

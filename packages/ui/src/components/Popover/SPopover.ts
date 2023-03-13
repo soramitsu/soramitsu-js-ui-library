@@ -170,7 +170,7 @@ export default /* @__PURE__ */ defineComponent({
             phase: 'beforeWrite' as const,
             requires: ['computeStyles'],
             fn: ({ state }: { state: State }) => {
-              state.styles.popper.width = `${state.rects.reference.width}px`
+              state.styles.popper!.width = `${state.rects.reference.width}px`
             },
             effect: ({ state }: { state: State }) => {
               if (state.elements.reference instanceof HTMLElement) {
@@ -195,7 +195,7 @@ export default /* @__PURE__ */ defineComponent({
     })
 
     debouncedWatch(
-      () => props.trigger === 'hover' && [sharedHover.value],
+      (): false | [boolean] => props.trigger === 'hover' && [sharedHover.value],
       (maybeHover) => {
         if (maybeHover) {
           const [val] = maybeHover
@@ -241,7 +241,7 @@ export default /* @__PURE__ */ defineComponent({
         if (nodes.length !== 1) {
           throw new Error('"trigger" slot should render exact 1 element')
         }
-        ;[trigger] = nodes
+        ;[trigger] = nodes as [VNode]
       }
 
       let popper

@@ -30,7 +30,7 @@ export interface UseSelectModelReturn<T> {
 export interface UseSelectModelParams<T> {
   multiple: Ref<boolean>
   model: Ref<null | T | T[]>
-  options: Ref<SelectOption<T>[] | SelectOptionGroup<T>[]>
+  options: Ref<readonly SelectOption<T>[] | readonly SelectOptionGroup<T>[]>
   /**
    * Enables options remembering for async search in multiple select when, for example,
    * the options are changed on search query changes. If there are no options for selected values,
@@ -224,7 +224,10 @@ export function useSelectModel<T = any>({
 
   function modelFromMultipleToSingle() {
     const current = model.value as T[]
-    model.value = current.length ? current[0] : null
+    model.value = current.length
+      ? // `!` is allowed because of the length assertion
+        current[0]!
+      : null
   }
 
   whenever(and(isModelAnArray, not(multiple)), modelFromMultipleToSingle, { immediate: true })

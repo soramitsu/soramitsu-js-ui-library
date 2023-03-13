@@ -221,11 +221,12 @@ watchOnce(
   },
   { immediate: true },
 )
-useResizeObserver(tableWrapper, (entries) => {
-  setTimeout(() => {
-    tableSizes.width = entries[0].contentRect.width
-    tableSizes.height = entries[0].contentRect.height
-  })
+useResizeObserver(tableWrapper, ([entry]) => {
+  entry &&
+    setTimeout(() => {
+      tableSizes.width = entry.contentRect.width
+      tableSizes.height = entry.contentRect.height
+    })
 })
 
 const isAdapted = eagerComputed(() => {
@@ -238,10 +239,11 @@ const cardsGridColumnNumber = eagerComputed(() => {
 
 const headerWrapper: MaybeElementRef = ref(null)
 const headerHeight = ref(0)
-useResizeObserver(headerWrapper, (entries) => {
-  setTimeout(() => {
-    headerHeight.value = entries[0].contentRect.height
-  })
+useResizeObserver(headerWrapper, ([entry]) => {
+  entry &&
+    setTimeout(() => {
+      headerHeight.value = entry.contentRect.height
+    })
 })
 whenever(not(showHeader), () => {
   headerHeight.value = 0

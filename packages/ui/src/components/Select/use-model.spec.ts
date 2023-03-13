@@ -1,12 +1,13 @@
 import type { Except } from 'type-fest'
 import { describe, test, expect, vi } from 'vitest'
 import { useSelectModel, type UseSelectModelParams } from './use-model'
+import type { SelectOption } from './types'
 
 const OPTIONS = [
   { value: 'regular', label: 'Regular crust' },
   { value: 'deep', label: 'Deep dish' },
   { value: 'thin', label: 'Thin crust' },
-]
+] as const
 
 describe('Auto-closing', () => {
   function useFactory(
@@ -92,7 +93,7 @@ describe('Auto-closing', () => {
 
 describe('Storing options', () => {
   test('when selected option is removed from options list, it is selected anyway', () => {
-    const changingOptions = ref(OPTIONS)
+    const changingOptions = ref<readonly SelectOption[]>(OPTIONS)
     const modeling = useSelectModel({
       model: ref(null),
       options: changingOptions,
