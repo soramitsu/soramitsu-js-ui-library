@@ -27,7 +27,7 @@ export default defineConfig({
       },
     }),
     shimCssPlugin(),
-    dtsPlugin(),
+    dtsPlugin() as Plugin,
   ],
   onwarn(warning, defaultHandler) {
     match(warning)

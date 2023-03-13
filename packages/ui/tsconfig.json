@@ -5,7 +5,10 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vitest/importMeta"]
+    "types": ["vitest/importMeta"],
+
+    // not really works within Vue templates
+    "exactOptionalPropertyTypes": false
   },
   "include": ["."],
   "exclude": ["dist", "ts-build", "cypress", "test", "storybook-static", "stories"]
