@@ -25,6 +25,7 @@
     "cy": "cypress open",
     "cy:ci:component": "cypress run --component --quiet --reporter spec",
     "typecheck": "vue-tsc --noEmit",
+    "typecheck:cypress": "vue-tsc -p ./cypress",
     "build": "run-s build:clean build:vite build:dts",
     "build:clean": "del dist ts-build",
     "build:vite": "vite build",

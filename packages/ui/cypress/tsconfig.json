@@ -4,7 +4,8 @@
     "types": ["cypress", "cypress-axe"],
     "paths": {
       "@/*": ["../src/*"]
-    }
+    },
+    "noEmit": true
   },
   "include": ["./", "../auto-imports.d.ts", "../src"]
 }

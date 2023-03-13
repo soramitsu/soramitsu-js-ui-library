@@ -7,6 +7,5 @@
     },
     "types": ["vitest/importMeta"]
   },
-  "include": ["src", "auto-imports.d.ts"],
-  "exclude": ["dist", "ts-build"]
+  "include": ["src", "auto-imports.d.ts"]
 }
