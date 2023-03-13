@@ -7,49 +7,44 @@ Packages located at `packages/` dir.
 Each package has its own `tsconfig.json`, own build & testing configs and their specific user guidelines in README
 files.
 
-- **`icons`** package contains only raw SVGs for now.
-- **`theme`** package contains theme-related tools - Windi CSS helpers & theme variables, as well as fonts.
-- **`ui`** package contains components.
+- [`@soramitsu-ui/icons`](./packages/icons) package contains only raw SVGs for now.
+- [`@soramitsu-ui/theme`](./packages/theme) package contains Sass theme variables and fonts.
+- [`@soramitsu-ui/ui`](./packages/ui) package contains components.
+- [`@soramitsu-ui/vite-plugin-svg`](./packages/vite-plugin-svg) package contains custom plugin for loading SVG as Vue components
 
-## Getting started
+## Development
 
 **Install packages:**
 
 ```shell
-yarn
-```
-
-**Build theme:** (you need to rebuild it each time you use it from ui lib)
-
-```shell
-yarn build:theme
+pnpm i
 ```
 
 **Open storybook:**
 
 ```shell
-yarn sb:serve
+pnpm sb:serve
 ```
 
-OR **cypress component-testing:**
+or/and **Cypress component-testing:**
 
 ```shell
-yarn cy
+pnpm cy
 ```
 
 **Build all packages:**
 
 ```shell
-yarn build
+pnpm build
 ```
 
 **Build Storybook:**
 
 ```shell
-yarn sb:build
+pnpm sb:build
 ```
 
-### To add new component:
+### Adding a new component
 
 1. Create a component directory in `ui/src/components` (e.g. `ui/src/components/Button`) with component itself
    prefixed with `S` (e.g. `SButton.vue`) and the `index.ts` file exporting it. The file's name becomes component's
@@ -62,31 +57,31 @@ yarn sb:build
    component's name. For searching elements in a component you should use `data-testid` attribute.
 5. If there are any quite complex utils they should have their own unit tests nearby.
 6. When everything is working, use repo root script `lint:format:fix` to bring the code to common style (more details
-   in the section **Linting & Format**).
+   in the section [Linting & Format](#linting--format)).
 7. Then you should update `ui.api.md` using two commands in `ui` package: `build:tsc` and then `api:extract:local`.
-8. Using `yarn changeset` create a minor change with `**feat**` prefix about new component (e.g.
+8. Using `pnpm changeset` create a minor change with `**feat**` prefix about new component (e.g.
    `**feat**: added button component`).
 9. Create pull request.
 
-### To release & publishing:
+### Releases
 
 1. Create a release branch.
 2. Make sure that everything is ready.
-3. Use the command `yarn changeset version` to update `CHANGELOG.md` files.
+3. Use the command `pnpm changeset version` to update `CHANGELOG.md` files.
 4. Create a pull request with a release version in name.
 5. Merge the pull request. It will automatically publish packages.
 
 ### Some recommendations
 
-- There are a useful library [VueUse](https://vueuse.org/) with a lot of composition utilities that can be used in
+- There is a useful library [VueUse](https://vueuse.org/) with a lot of composition utilities that can be used in
   develop, so it is good idea to regularly check it.
-- We often use provide/inject mechanism for main-subsidiary components communication (e.g. checkbox group - checkbox).
+- We often use provide/inject mechanism for main-subsidiary components communication (e.g. checkbox group with checkbox).
   It should be done by creating `api.ts` with a provided payload type, an injection key and an api hook in
   component directory.
 
 ### Styleguide
 
-- Previously enums was defined as plain TypeScript enums, but they don't work well with tree shaking, so now we
+- Previously enums were defined as plain TypeScript enums, but they don't work well with tree shaking, so now we
   define enums as follows:
 
   ```ts
@@ -99,16 +94,20 @@ yarn sb:build
 
 - There is no need to create folders for every type of subsidiary entities, e.g. composables, utilities, etc.,
   if their number is small.
-- Move composables to its own files started with `use`. It's helps to detect and group composables in directory tree.
+- Move composables to its own files started with `use`. It helps to detect and group composables in directory tree.
 - We are using BEM with underscores for class names (e.g. `button__icon_hidden` or `button__icon_size_small`).
 - Try to use Windi CSS utility classes.
-- Messages in changesets should start with `**type**`, where `type` can be `fix`, `feat` or something like this,
-  that describes a type of change. After the type should go a scope in brackets if it can be defined. (For example,
-  it can be the name of a component). Then after colon goes a change description.
-  Examples: `` **fix**(`STable`): remove unnecessary border `` or `**feat**: add pagination component`.
+- Messages in changesets should start with `**<type>**`, where `<type>` can be `fix`, `feat` or something like this,
+  that describes a type of change. If the change has a scope (e.g. a component name), it should be after the type of the change. Then the description goes after colon. After the type should go a scope in brackets if it can be defined.
+
+  Examples:
+
+  - `` **fix**(`STable`): remove unnecessary border ``
+  - `**feat**: add pagination component`
+
   More info: https://www.conventionalcommits.org/en/v1.0.0/
 
-## Linting & Format
+### Linting & Format
 
 Available scripts:
 
@@ -119,13 +118,13 @@ Available scripts:
 - `lint:format:fix`- calls prettier and then eslint to fix formatting errors
 - `lint:check` - calls `lint:es` and then `lint:format:check`
 
-To use "Format On Save" feature you should setup your (I)DE to run:
+To use "Format On Save" feature you should set up your (I)DE to run:
 
 ```bash
 # From the project root
 ./node_modules/.bin/prettier-eslint --write <target file name>
 ```
 
-Maybe you will also need to specify paths for prettier config, prettier binary, eslint config or eslint binary. See all list of options with `yarn prettier-eslint -h`.
+Maybe you will also need to specify paths for prettier config, prettier binary, eslint config or eslint binary. See all list of options with `pnpm prettier-eslint -h`.
 
 > If you are using VSCode, take a lot at [Prettier ESLint](https://marketplace.visualstudio.com/items?itemName=rvest.vs-code-prettier-eslint) extension, it may help with auto formatting.
