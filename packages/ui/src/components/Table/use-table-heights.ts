@@ -41,18 +41,18 @@ export function useTableHeights({
   })
 
   watch(
-    [headerHeight, tableHeight, propHeight, propMaxHeight],
-    ([header, table, prop, propMax]) => {
+    [headerHeight, tableHeight],
+    ([header, table]) => {
       let heightFinal = ''
-      if (prop) {
+      if (propHeight.value) {
         const bodyHeight = table - header
         heightFinal = bodyHeight ? bodyHeight + 'px' : ''
       }
       bodyHeightStyles.height = heightFinal
 
       let maxHeightFinal = ''
-      if (propMax) {
-        const maxHeight = parseHeight(propMax)
+      if (propMaxHeight.value) {
+        const maxHeight = parseHeight(propMaxHeight.value)
         if (typeof maxHeight === 'number') {
           maxHeightFinal = maxHeight - header + 'px'
         }
