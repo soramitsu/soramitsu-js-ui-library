@@ -21,11 +21,11 @@ export default {
   },
   argTypes: {
     type: {
-      control: 'select',
+      control: 'inline-radio',
       options: CHECKBOX_TYPE_VALUES,
     },
     size: {
-      control: 'select',
+      control: 'inline-radio',
       options: CHECKBOX_SIZE_VALUES,
     },
     description: {

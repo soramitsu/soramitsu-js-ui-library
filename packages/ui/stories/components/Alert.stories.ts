@@ -24,8 +24,8 @@ const meta = {
   },
   argTypes: {
     status: {
+      control: 'inline-radio',
       options: Object.values(Status),
-      control: 'select',
     },
     title: {
       control: 'text',
