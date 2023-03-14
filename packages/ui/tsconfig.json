@@ -10,6 +10,12 @@
     // not really works within Vue templates
     "exactOptionalPropertyTypes": false
   },
+  "ts-node": {
+    "compilerOptions": {
+      // Cypress conflicts with `verbatimModuleSyntax`
+      "verbatimModuleSyntax": false
+    }
+  },
   "include": ["."],
   "exclude": ["dist", "ts-build", "cypress", "test", "storybook-static", "stories"]
 }
