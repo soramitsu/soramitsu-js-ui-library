@@ -30,7 +30,7 @@
     "build:clean": "del dist ts-build",
     "build:vite": "vite build",
     "build:dts": "run-s build:dts:tsc build:dts:rollup",
-    "build:dts:tsc": "vue-tsc --outDir ts-build --declaration --emitDeclarationOnly",
+    "build:dts:tsc": "vue-tsc -p tsconfig.build.json",
     "build:dts:rollup": "rollup -c rollup.dts.config.cjs"
   },
   "dependencies": {
@@ -42,7 +42,6 @@
     "focus-trap": "^7.3",
     "jsoneditor": "^9.5",
     "lodash-es": "^4.17",
-    "tiny-invariant": "^1.3",
     "type-fest": "^3.6",
     "vue": "^3.2"
   },

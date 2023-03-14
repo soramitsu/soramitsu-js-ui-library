@@ -2,7 +2,6 @@ import type { Ref } from 'vue'
 import type { TableColumnApi } from './api'
 import type { TableColumnSortOrder, TableRow } from './types'
 import { get } from 'lodash-es'
-import invariant from 'tiny-invariant'
 
 export function useColumnSort(data: Ref<TableRow[]>) {
   const sortState: { column: TableColumnApi | null; order: TableColumnSortOrder } = shallowReactive({
@@ -16,11 +15,10 @@ export function useColumnSort(data: Ref<TableRow[]>) {
     sortState.order = null
   }
 
-  function getNextOrder(column: TableColumnApi, order: TableColumnSortOrder) {
-    const index = column.sortOrders.indexOf(order)
-    const item = column.sortOrders[(index + 1) % column.sortOrders.length]
-    invariant(item)
-    return item
+  function getNextOrder(column: TableColumnApi, order: TableColumnSortOrder): TableColumnSortOrder {
+    const array = column.sortOrders
+    // `!` is safe because of `%` and array's non-emptiness
+    return array[(array.indexOf(order) + 1) % array.length]!
   }
 
   function getKey(column: TableColumnApi, { value, index }: { value: TableRow; index: number }) {
