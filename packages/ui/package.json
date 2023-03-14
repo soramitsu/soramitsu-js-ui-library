@@ -30,7 +30,7 @@
     "build:clean": "del dist ts-build",
     "build:vite": "vite build",
     "build:dts": "run-s build:dts:tsc build:dts:rollup",
-    "build:dts:tsc": "vue-tsc --outDir ts-build --declaration --emitDeclarationOnly",
+    "build:dts:tsc": "vue-tsc -p tsconfig.build.json",
     "build:dts:rollup": "rollup -c rollup.dts.config.cjs"
   },
   "dependencies": {
