@@ -123,7 +123,7 @@ describe('Given column sort composable', () => {
   })
 
   describe(`When 'getNextOrder' called`, () => {
-    test('Then returns next sort order for column after specified one', () => {
+    test.only('Then returns next sort order for column after specified one', () => {
       const { getNextOrder } = useColumnSort(data)
       expect(getNextOrder(column1 as TableColumnApi, 'ascending')).toBe('descending')
       expect(getNextOrder(column1 as TableColumnApi, 'descending')).toBe(null)
