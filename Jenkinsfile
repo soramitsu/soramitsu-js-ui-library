@@ -2,7 +2,7 @@
 def pipeline = new org.js.LibPipeline(
     steps:                this,
     packageManager:       'pnpm',
-    buildDockerImage:     'build-tools/node:16-corepack',
+    buildDockerImage:     'build-tools/node:16-cypress-corepack',
     npmLoginEmail:        'admin@soramitsu.co.jp',
     dockerImageName:      'soramitsu/soramitsu-js-ui-library',
     testCmds:             ['pnpm test:all'],
