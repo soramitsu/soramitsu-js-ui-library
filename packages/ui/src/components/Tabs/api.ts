@@ -2,9 +2,9 @@ import { forceInject } from '@/util'
 import type { InjectionKey } from 'vue'
 
 export interface TabsPanelApi {
-  active: string
-  selectTab: (tab: string) => void
-  background: TabsPanelBackgroundType
+  readonly active: string | null
+  readonly selectTab: (tab: string | null) => void
+  readonly background: TabsPanelBackgroundType
 }
 
 export const TABS_PANEL_BACKGROUND_TYPES = ['primary', 'secondary', 'none'] as const

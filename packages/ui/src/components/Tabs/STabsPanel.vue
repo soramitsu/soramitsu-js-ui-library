@@ -3,7 +3,7 @@ import { type TabsPanelApi, TABS_PANEL_API_KEY, type TabsPanelBackgroundType } f
 
 const props = withDefaults(
   defineProps<{
-    modelValue: string
+    modelValue: string | null
     background?: TabsPanelBackgroundType
   }>(),
   {
@@ -14,19 +14,21 @@ const props = withDefaults(
 
 const emit = defineEmits(['update:modelValue'])
 
-const selectTab = (tab: string): void => {
-  emit('update:modelValue', tab)
-}
-const active = computed(() => props.modelValue)
+const model = useVModel(props, 'modelValue', emit, { passive: true })
 
-const tabState: TabsPanelApi = reactive({
-  active: active,
+const selectTab = (tab: string | null): void => {
+  model.value = tab
+}
+
+const api: TabsPanelApi = reactive({
+  active: model,
   selectTab,
-  background: props.background,
+  background: toRef(props, 'background'),
 })
 
-provide(TABS_PANEL_API_KEY, tabState)
+provide(TABS_PANEL_API_KEY, api)
 </script>
+
 <template>
   <div
     role="tablist"

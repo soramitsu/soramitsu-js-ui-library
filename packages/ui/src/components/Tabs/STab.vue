@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTabsPanelApi, type TabsPanelApi } from './api'
+import { useTabsPanelApi } from './api'
 
 const props = withDefaults(
   defineProps<{
@@ -11,22 +11,17 @@ const props = withDefaults(
   },
 )
 
-const state: TabsPanelApi = useTabsPanelApi()
-const { active } = toRefs(state)
-const { selectTab, background } = state
-const tabIsActive = computed(() => props.name === active.value)
+const api = useTabsPanelApi()
+const { active } = toRefs(api)
+const tabIsActive = eagerComputed(() => props.name === active.value)
 
-const activateTab = () => {
-  selectTab(props.name)
+const selectSelf = () => {
+  api.selectTab(props.name)
 }
 
-watch(
-  () => props.disabled,
-  (newVal) => {
-    if (newVal && tabIsActive.value) {
-      selectTab('')
-    }
-  },
+whenever(
+  () => props.disabled && tabIsActive.value,
+  () => api.selectTab(null),
 )
 </script>
 
@@ -35,8 +30,8 @@ watch(
     role="tab"
     class="s-tab flex justify-center items-center sora-tpg-p2"
     :disabled="disabled"
-    :class="[{ 's-tab_active': tabIsActive }, `s-tab_background_${background}`]"
-    @click="activateTab"
+    :class="[{ 's-tab_active': tabIsActive }, `s-tab_background_${api.background}`]"
+    @click="selectSelf"
   >
     <div class="s-tab__label-container flex justify-center items-center">
       <div class="s-tab__label">
