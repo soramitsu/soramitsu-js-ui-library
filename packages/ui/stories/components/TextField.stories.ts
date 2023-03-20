@@ -45,10 +45,8 @@ const meta = {
   },
   argTypes: {
     counter: {
-      type: {
-        name: 'union',
-        value: ['boolean', 'number'],
-      },
+      // FIXME make combined bool & number control
+      control: 'object',
     },
     status: {
       control: 'inline-radio',
