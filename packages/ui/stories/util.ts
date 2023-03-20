@@ -1,9 +1,6 @@
-import { Meta, Story } from '@storybook/vue3'
+import { Status } from '@/types'
 
-export function defineMeta(meta: Meta): Meta {
-  return meta
-}
-
-export function defineStory<A>(story: Story<A>): Story<A> {
-  return story
-}
+export const STATUS_ARG_TYPE = {
+  control: 'inline-radio',
+  options: [Status.Info, Status.Success, Status.Warning, Status.Error],
+} as const
