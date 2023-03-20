@@ -1,22 +1,25 @@
 <script setup lang="ts">
+import { uniqueElementId } from '@/util'
+
 type Props = {
   /**
-   * v-model for two-way data binding
+   * Switch state
    */
   modelValue?: boolean
   /**
-   * Id for matching switch with label
-   *
-   */
-  id: string
-  /**
-   * Text label for switch
+   * Text label for switch. Required for a11y. If you don't want it to be rendered, use {@link labelHidden}
    *
    * @default ''
    */
-  label?: string
+  label: string
   /**
-   * Attr specfifies whether switch is disabled
+   * Whether to render label or not
+   *
+   * @default false
+   */
+  labelHidden?: boolean
+  /**
+   * Whether the input is disabled or not
    *
    * @default false
    */
@@ -24,9 +27,11 @@ type Props = {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  label: '',
   disabled: false,
+  labelHidden: false,
 })
+
+const inputId = uniqueElementId()
 
 const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
 const model = useVModel(props, 'modelValue', emit)
@@ -35,15 +40,16 @@ const model = useVModel(props, 'modelValue', emit)
 <template>
   <div class="s-switch">
     <input
-      :id="id"
+      :id="inputId"
       v-model="model"
       type="checkbox"
       :disabled="disabled"
       class="s-switch__button"
     >
+    <!-- note: `sr-only` class visually hides the element while keeping it accessible for Screen Reader -->
     <label
-      :for="id"
-      class="s-switch__label sora-tpg-p3"
+      :for="inputId"
+      :class="['s-switch__label sora-tpg-p3', { 'sr-only': labelHidden }]"
     >{{ label }}</label>
   </div>
 </template>
