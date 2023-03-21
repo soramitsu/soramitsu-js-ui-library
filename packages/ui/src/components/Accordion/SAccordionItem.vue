@@ -22,6 +22,7 @@ const props = withDefaults(
 
 const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
 
+// FIXME replace with useVModel-passive?
 const model = ref(props.modelValue)
 watch(
   () => props.modelValue,
