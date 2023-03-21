@@ -5,10 +5,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { StyleValue } from 'vue'
+import type { StyleValue } from 'vue'
 import { Status } from '@/types'
 import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff } from '../icons'
-import { MaybeElementRef } from '@vueuse/core'
+import type { MaybeElementRef } from '@vueuse/core'
 
 /**
  * warning: don't use it inside of `Props`. Vue compiler determines it

@@ -1,5 +1,5 @@
 import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from './consts'
-import { TableActionColumnApi, TableColumnApi } from './api'
+import type { TableActionColumnApi, TableColumnApi } from './api'
 
 export type TableColumnType = (typeof TABLE_COLUMN_TYPE_VALUES)[number]
 export type TableColumnAlign = (typeof TABLE_COLUMN_ALIGN_VALUES)[number]
@@ -24,7 +24,16 @@ export type TableColumnCellValueFormatter = (
 export type TableColumnSortByPropKeyFunc = (row: TableRow, index: number) => string
 export type TableColumnRowSelectableFunc = (row: TableRow, index: number) => boolean
 export type TableColumnSortBy = string | TableColumnSortByPropKeyFunc | (TableColumnSortByPropKeyFunc | string)[]
-export type TableColumnSortOrder = 'ascending' | 'descending' | null
+export type TableColumnSortOrder = TableColumnSortOrders[0]
+export type TableColumnSortOrders =
+  | OptionalNonEmptyTriple<['ascending', 'descending', null]>
+  | OptionalNonEmptyTriple<['ascending', null, 'descending']>
+  | OptionalNonEmptyTriple<['descending', 'ascending', null]>
+  | OptionalNonEmptyTriple<['descending', null, 'ascending']>
+  | OptionalNonEmptyTriple<[null, 'ascending', 'descending']>
+  | OptionalNonEmptyTriple<[null, 'descending', 'ascending']>
+
+type OptionalNonEmptyTriple<T extends [any, any, any]> = [T[0], T[1]?, T[2]?]
 
 export interface TableRowConfigCallbackParams {
   row: TableRow

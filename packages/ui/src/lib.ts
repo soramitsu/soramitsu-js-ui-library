@@ -1,7 +1,7 @@
 export * from './types'
 export * from './components'
 
-import { Plugin } from 'vue'
+import { type Plugin } from 'vue'
 import { COMPONENTS } from './components/all-components'
 import { getComponentName } from './util'
 

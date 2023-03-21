@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SelectOption, SelectOptionGroup, SelectOptionType, SelectSize } from './types'
+import { type SelectOption, type SelectOptionGroup, SelectOptionType, SelectSize } from './types'
 import SSelectBase from './SSelectBase.vue'
 import SSelectInput from './SSelectInput.vue'
 import SSelectDropdown from './SSelectDropdown.vue'

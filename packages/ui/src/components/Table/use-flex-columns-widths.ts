@@ -1,5 +1,5 @@
-import { TableActionColumnApi, TableColumnApi } from './api'
-import { Ref } from 'vue'
+import type { TableActionColumnApi, TableColumnApi } from './api'
+import type { Ref } from 'vue'
 
 export function useFlexColumns(
   columns: (TableColumnApi | TableActionColumnApi)[],

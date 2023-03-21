@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 
 interface TableHeightsComposableParams {
   propHeight: Ref<number | string>
@@ -39,7 +39,7 @@ export function useTableHeights({
 
   watch(
     [headerHeight, tableHeight],
-    () => {
+    (): void => {
       if (propHeight.value) {
         const bodyHeight = tableHeight.value - headerHeight.value
 
@@ -54,6 +54,8 @@ export function useTableHeights({
         const maxHeight = parseHeight(propMaxHeight.value)
 
         if (typeof maxHeight === 'number') {
+          // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/517
+          // @ts-ignore
           return {
             'max-height': maxHeight - headerHeight.value + 'px',
           }

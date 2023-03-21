@@ -4,9 +4,9 @@ import { getStartDateInCalendar, nextDate } from './date-util'
 import { getDaysInMonth, subMonths, startOfDay, isSameDay } from 'date-fns'
 
 import * as types from './types'
-import { ComputedRef } from 'vue'
+import type { ComputedRef } from 'vue'
 import { daysNames } from './consts'
-import { DatePickerApi, useDatePickerApi } from './api'
+import { type DatePickerApi, useDatePickerApi } from './api'
 
 const getDateTimestamp = (time: Date | number) => {
   return startOfDay(time).getTime()
@@ -100,7 +100,7 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
         const hoveredDate = startOfDay(props.hoveredDate)
         const existingDate = minDate || maxDate
         const arr = [existingDate, hoveredDate].sort((a, b) => a.getTime() - b.getTime())
-        cell.inRange = time >= getDateTimestamp(arr[0]) && time <= getDateTimestamp(arr[1])
+        cell.inRange = time >= getDateTimestamp(arr[0]!) && time <= getDateTimestamp(arr[1]!)
       }
       cell.start = minDate && isSameDay(time, minDate)
       cell.end = maxDate && isSameDay(time, maxDate)
@@ -120,7 +120,7 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
     }
     if (state.type === 'pick') {
       const selectedDates = props.stateStore.pickState
-      cell.start = selectedDates.some((item: Date) => {
+      cell.start = selectedDates.some((_item) => {
         return isSameDay(time, time)
       })
       if (cell.start) {
@@ -214,7 +214,7 @@ const handleMouseMove = (event: any) => {
   if (target.tagName !== 'DIV') return
   const idx = target.getAttribute('index')
   if (!idx) return
-  const cell = dateTableCells.value[idx]
+  const cell = dateTableCells.value[idx]!
   const newDate = new Date(year.value, cell.month, cell.text)
   if (isSameDay(newDate, props.hoveredDate)) return
   emit('update:hovered-date', newDate)
@@ -228,7 +228,7 @@ const handleClick = (ev: any) => {
   if (target.tagName !== 'DIV') return
   const idx = target.getAttribute('index')
   if (!idx) return
-  const cell = dateTableCells.value[idx]
+  const cell = dateTableCells.value[idx]!
   const newDate = new Date(year.value, cell.month, cell.text)
   if (state.type === 'range') {
     if (!props.stateStore.rangeState.selecting) {

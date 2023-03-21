@@ -1,6 +1,6 @@
-import { Ref } from 'vue'
-import { TableColumnApi } from './api'
-import { TableColumnSortOrder, TableRow } from './types'
+import type { Ref } from 'vue'
+import type { TableColumnApi } from './api'
+import type { TableColumnSortOrder, TableRow } from './types'
 import { get } from 'lodash-es'
 
 export function useColumnSort(data: Ref<TableRow[]>) {
@@ -15,9 +15,10 @@ export function useColumnSort(data: Ref<TableRow[]>) {
     sortState.order = null
   }
 
-  function getNextOrder(column: TableColumnApi, order: TableColumnSortOrder) {
-    const index = column.sortOrders.indexOf(order)
-    return column.sortOrders[(index + 1) % column.sortOrders.length]
+  function getNextOrder(column: TableColumnApi, order: TableColumnSortOrder): TableColumnSortOrder {
+    const array = column.sortOrders
+    // `!` is safe because of `%` and array's non-emptiness
+    return array[(array.indexOf(order) + 1) % array.length]!
   }
 
   function getKey(column: TableColumnApi, { value, index }: { value: TableRow; index: number }) {

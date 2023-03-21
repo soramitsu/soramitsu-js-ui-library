@@ -3,8 +3,8 @@ import MonthTable from './SDatePickerTableMonths.vue'
 import YearTable from './SDatePickerTableYears.vue'
 import DatePanel from './SDatePickerPanelDate.vue'
 
-import { StateStore, ShowState, ModelValueType } from './types'
-import { DatePickerApi, useDatePickerApi } from './api'
+import type { StateStore, ShowState, ModelValueType } from './types'
+import { type DatePickerApi, useDatePickerApi } from './api'
 
 type Props = {
   currentView: string
@@ -29,7 +29,7 @@ const firstCalendarModelValue = computed(() => {
   if (!props.modelValue) return new Date()
 
   if (state.type === 'range') {
-    const modelValue = props.modelValue as Date[]
+    const modelValue = props.modelValue as [Date, ...Date[]]
     return modelValue[0]
   } else {
     return props.modelValue

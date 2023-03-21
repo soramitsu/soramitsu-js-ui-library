@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitest/config'
+// @ts-ignore FIXME update when this package fixes its `exports`
 import windiPlugin from 'vite-plugin-windicss'
 import vuePlugin from '@vitejs/plugin-vue'
 import type { RootNode, TemplateChildNode } from '@vue/compiler-core'
@@ -12,7 +13,7 @@ import path from 'path'
 import fs from 'fs/promises'
 import pkg from './package.json' assert { type: 'json' }
 import * as url from 'url'
-import { Plugin } from 'vite'
+import { type Plugin } from 'vite'
 
 // const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))

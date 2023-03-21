@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Ref, StyleValue } from 'vue'
+import type { Ref, StyleValue } from 'vue'
 import { normalizeTransitionAttrs, useCloseOnEsc, useModalVisibility } from './util'
-import { ModalApi, MODAL_API_KEY } from './api'
+import { type ModalApi, MODAL_API_KEY } from './api'
 import { useFocusTrap } from '@/composables/focus-trap'
-import { FocusTrap, Options as FocusTrapOptions } from 'focus-trap'
+import type { FocusTrap, Options as FocusTrapOptions } from 'focus-trap'
 import { uniqueElementId } from '@/util'
 import { useBodyScrollLockIfPossible } from '../BodyScrollLockProvider'
 

@@ -1,7 +1,7 @@
 import './SRadioAtom.scss'
 
-import { FunctionalComponent, mergeProps, PropType } from 'vue'
-import { RadioSize } from './types'
+import { type FunctionalComponent, mergeProps, type PropType } from 'vue'
+import type { RadioSize } from './types'
 
 interface Props {
   checked?: boolean

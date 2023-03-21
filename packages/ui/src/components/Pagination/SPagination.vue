@@ -86,26 +86,29 @@ whenever(not(isAbleJumpNext), () => {
 
 const pagination = ref(null)
 const paginationContainerWidth = ref(0)
-useResizeObserver(pagination, (entries) => {
-  setTimeout(() => {
-    paginationContainerWidth.value = entries[0].contentRect.width
-  })
+useResizeObserver(pagination, ([entry]) => {
+  entry &&
+    setTimeout(() => {
+      paginationContainerWidth.value = entry.contentRect.width
+    })
 })
 
 const paginationLeftPanel = ref(null)
 const paginationLeftPanelWidth = ref(0)
-useResizeObserver(paginationLeftPanel, (entries) => {
-  setTimeout(() => {
-    paginationLeftPanelWidth.value = entries[0].contentRect.width
-  })
+useResizeObserver(paginationLeftPanel, ([entry]) => {
+  entry &&
+    setTimeout(() => {
+      paginationLeftPanelWidth.value = entry.contentRect.width
+    })
 })
 
 const paginationRightPanel = ref(null)
 const paginationRightPanelWidth = ref(0)
-useResizeObserver(paginationRightPanel, (entries) => {
-  setTimeout(() => {
-    paginationRightPanelWidth.value = entries[0].contentRect.width
-  })
+useResizeObserver(paginationRightPanel, ([entry]) => {
+  entry &&
+    setTimeout(() => {
+      paginationRightPanelWidth.value = entry.contentRect.width
+    })
 })
 
 const shouldWrap = computed(() => {

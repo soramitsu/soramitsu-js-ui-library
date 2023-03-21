@@ -1,7 +1,7 @@
-import { MaybeElementRef, MaybeRef } from '@vueuse/core'
-import { Merge } from 'type-fest'
-import { Ref } from 'vue'
-import { RadioGroupApi, RadioGroupRegisteredItemApi, RegisterRadioParams } from '.'
+import type { MaybeElementRef, MaybeRef } from '@vueuse/core'
+import type { Merge } from 'type-fest'
+import type { Ref } from 'vue'
+import type { RadioGroupApi, RadioGroupRegisteredItemApi, RegisterRadioParams } from './api'
 
 export function useRadiosSelector<T extends Element>(
   target: MaybeElementRef,
@@ -153,7 +153,8 @@ export function useRadiosRegistration({
       idx += delta
       idx = idx >= count ? 0 : idx < 0 ? count - 1 : idx
 
-      if (!items[idx].isDisabled.value) return items[idx]
+      // `!` assertions because we iterate in range `[0; items.length)`
+      if (!items[idx]!.isDisabled.value) return items[idx]!
     }
 
     return null

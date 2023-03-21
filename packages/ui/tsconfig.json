@@ -5,8 +5,17 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vitest/importMeta"]
+    "types": ["vitest/importMeta"],
+
+    // not really works within Vue templates
+    "exactOptionalPropertyTypes": false
   },
-  "include": ["src", "auto-imports.d.ts"],
-  "exclude": ["dist", "ts-build"]
+  "ts-node": {
+    "compilerOptions": {
+      // Cypress conflicts with `verbatimModuleSyntax`
+      "verbatimModuleSyntax": false
+    }
+  },
+  "include": ["."],
+  "exclude": ["dist", "ts-build", "cypress", "test", "storybook-static", "stories"]
 }

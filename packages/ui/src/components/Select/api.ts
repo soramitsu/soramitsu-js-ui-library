@@ -1,6 +1,6 @@
-import { InjectionKey, UnwrapRef } from 'vue'
-import { SelectOption, SelectOptionGroup, SelectSize } from './types'
-import { UseSelectModelReturn } from './use-model'
+import type { InjectionKey, UnwrapRef } from 'vue'
+import { type SelectOption, type SelectOptionGroup, SelectSize } from './types'
+import { type UseSelectModelReturn } from './use-model'
 import { forceInject } from '@/util'
 
 export interface SelectApi<T> extends UnwrapRef<UseSelectModelReturn<T>> {
