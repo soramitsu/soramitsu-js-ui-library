@@ -22,7 +22,12 @@ export default /* @__PURE__ */ defineComponent({
     showCloseBtn: Boolean,
     description: String,
   },
-  emits: ['update:show', 'click:close', 'timeout'],
+  emits: [
+    // FIXME avoid `v-model` for `show`, because it always emits `false` from the component
+    'update:show',
+    'click:close',
+    'timeout',
+  ],
   setup(props, { emit, slots }) {
     const show = useVModel(props, 'show', emit)
 
