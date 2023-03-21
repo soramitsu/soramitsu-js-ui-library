@@ -154,7 +154,10 @@ provide(SELECT_API_KEY, api)
     >
       <template #trigger>
         <div>
-          <slot name="control" v-bind="{ search: triggerSearch }" />
+          <slot
+            name="control"
+            v-bind="{ 'search': triggerSearch }"
+          />
         </div>
       </template>
 
@@ -162,10 +165,13 @@ provide(SELECT_API_KEY, api)
         <SPopoverWrappedTransition
           name="s-select-dropdown-transition"
           eager
-          :wrapper-attrs="{ class: 'z-10' }"
-          :inner-wrapper-attrs="{ class: { 'w-full': sameWidthPopper } }"
+          :wrapper-attrs="{ 'class': 'z-10' }"
+          :inner-wrapper-attrs="{ 'class': { 'w-full': sameWidthPopper } }"
         >
-          <slot name="dropdown" v-bind="{ search: dropdownSearch }" />
+          <slot
+            name="dropdown"
+            v-bind="{ 'search': dropdownSearch }"
+          />
         </SPopoverWrappedTransition>
       </template>
     </SPopover>
