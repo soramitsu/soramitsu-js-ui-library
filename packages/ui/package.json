@@ -66,6 +66,7 @@
     "@types/lodash-es": "^4.17.6",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
+    "@vue-kakuyaku/core": "^0.4.3",
     "@vue/compiler-core": "^3.2",
     "@vue/test-utils": "^2",
     "axe-core": "^4.4.1",

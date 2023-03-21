@@ -55,16 +55,22 @@ const props = withDefaults(
     /**
      * When enabled, passes `search: true` to the `trigger` slot
      */
+    // TODO rename to `searchSlotTrigger`?
+    // FIXME also, it passes `search:true` to CONTROL slot, not TRIGGER
+    //       does it makes sense to pass it at all? cause it is controlled
+    //       by the parent component anyway and isn't anyhow used in this component
     triggerSearch?: boolean
 
     /**
      * When enabled, passes `search: true` to the `dropdown` slot
      */
+    // TODO rename to `searchSlotDropdown`?
     dropdownSearch?: boolean
 
     /**
      * By default, the component filters options by their labels. Set `true` to disable automatic filtering.
      */
+    // TODO rename to `searchExternal`?
     remoteSearch?: boolean
   }>(),
   {
@@ -148,10 +154,7 @@ provide(SELECT_API_KEY, api)
     >
       <template #trigger>
         <div>
-          <slot
-            name="control"
-            v-bind="{ 'search': triggerSearch }"
-          />
+          <slot name="control" v-bind="{ search: triggerSearch }" />
         </div>
       </template>
 
@@ -159,13 +162,10 @@ provide(SELECT_API_KEY, api)
         <SPopoverWrappedTransition
           name="s-select-dropdown-transition"
           eager
-          :wrapper-attrs="{ 'class': 'z-10' }"
-          :inner-wrapper-attrs="{ 'class': { 'w-full': sameWidthPopper } }"
+          :wrapper-attrs="{ class: 'z-10' }"
+          :inner-wrapper-attrs="{ class: { 'w-full': sameWidthPopper } }"
         >
-          <slot
-            name="dropdown"
-            v-bind="{ 'search': dropdownSearch }"
-          />
+          <slot name="dropdown" v-bind="{ search: dropdownSearch }" />
         </SPopoverWrappedTransition>
       </template>
     </SPopover>
