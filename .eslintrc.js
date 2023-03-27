@@ -24,16 +24,13 @@ module.exports = {
 
     '@typescript-eslint/consistent-type-definitions': 'off',
 
-    // FIXME
-    'vuejs-accessibility/no-static-element-interactions': 'off',
-
-    "vuejs-accessibility/label-has-for": [
-      "error",
+    'vuejs-accessibility/label-has-for': [
+      'error',
       {
         // all labels should have `for` attr
-        "required": "id",
-      }
-    ]
+        required: 'id',
+      },
+    ],
   },
   overrides: [
     {
@@ -55,7 +52,7 @@ module.exports = {
         'vue/one-component-per-file': 'off',
 
         // We don't need such strictness in stories
-        'vue/require-prop-types': 'off'
+        'vue/require-prop-types': 'off',
       },
     },
     {
@@ -65,15 +62,40 @@ module.exports = {
 
         // We don't need such strictness in tests
         'vue/require-default-prop': 'off',
-        'vue/require-prop-types': 'off'
+        'vue/require-prop-types': 'off',
       },
     },
 
-    // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/525
     {
       files: ['**/ui/src/components/Select/**/*.vue'],
       rules: {
+        // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/525
         'vuejs-accessibility/click-events-have-key-events': 'off',
+        'vuejs-accessibility/no-static-element-interactions': 'off',
+      },
+    },
+
+    {
+      files: ['**/ui/src/components/DatePicker/**/*.vue'],
+      rules: {
+        // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/526
+        'vuejs-accessibility/no-static-element-interactions': 'off',
+      },
+    },
+
+    {
+      files: ['**/ui/src/components/Table/**/*.vue'],
+      rules: {
+        // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/527
+        'vuejs-accessibility/no-static-element-interactions': 'off',
+      },
+    },
+
+    // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/528
+    {
+      files: ['**/ui/src/components/JsonInput/**/*.vue'],
+      rules: {
+        'vuejs-accessibility/no-static-element-interactions': 'off',
       },
     },
   ],

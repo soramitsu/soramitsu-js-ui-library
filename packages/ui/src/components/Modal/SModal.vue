@@ -254,7 +254,10 @@ useCloseOnEsc(
         v-bind="overlayTransitionAttrs"
         v-on="overlayTransitionListeners"
       >
-        <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
+        <!--  "click" handling is made purely for convenience of mouse users,
+              thus, this element should not be "accessible".
+              keyboard interaction is handled separately -->
+        <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events vuejs-accessibility/no-static-element-interactions -->
         <div
           v-if="overlayIf"
           :class="['s-modal__overlay', overlayClass]"

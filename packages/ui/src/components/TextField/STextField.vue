@@ -262,8 +262,9 @@ const finalId = useElementIdFallback(toRef(props, 'id'))
     :style="rootStyle()"
     :data-status="status"
   >
-    <!-- key events works with input element -->
-    <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
+    <!-- all interaction is made through `<input>`.
+         these mouse events are handled for mouse users convenience -->
+    <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events vuejs-accessibility/no-static-element-interactions -->
     <div
       class="s-text-field__input-wrapper"
       @click="handleInputWrapperClick"
