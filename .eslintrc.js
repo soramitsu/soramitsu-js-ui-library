@@ -26,6 +26,14 @@ module.exports = {
 
     // FIXME
     'vuejs-accessibility/no-static-element-interactions': 'off',
+
+    "vuejs-accessibility/label-has-for": [
+      "error",
+      {
+        // all labels should have `for` attr
+        "required": "id",
+      }
+    ]
   },
   overrides: [
     {
@@ -66,12 +74,6 @@ module.exports = {
       files: ['**/ui/src/components/Select/**/*.vue'],
       rules: {
         'vuejs-accessibility/click-events-have-key-events': 'off',
-      },
-    },
-    {
-      files: ['**/STextField.vue', '**/SSwitch.vue'],
-      rules: {
-        'vuejs-accessibility/label-has-for': 'off',
       },
     },
   ],
