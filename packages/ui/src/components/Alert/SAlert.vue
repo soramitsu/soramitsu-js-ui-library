@@ -13,6 +13,8 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   status: Status.Info,
   showCloseBtn: false,
+  title: undefined,
+  description: undefined,
 })
 
 const emit = defineEmits<(event: 'click:close') => void>()

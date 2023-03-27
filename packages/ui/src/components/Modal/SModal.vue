@@ -111,6 +111,12 @@ const props = withDefaults(defineProps<Props>(), {
     // here is a Vue typing error - primitive value factory is a valid default value
     uniqueElementId as unknown as string,
   describedBy: null,
+  rootClass: undefined,
+  modalClass: undefined,
+  overlayClass: undefined,
+  rootStyle: undefined,
+  modalStyle: undefined,
+  overlayStyle: undefined,
 })
 
 const emit = defineEmits(['update:show', 'click:overlay', 'before-open', 'after-open', 'before-close', 'after-close'])

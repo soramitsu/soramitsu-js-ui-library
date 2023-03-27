@@ -25,9 +25,6 @@ module.exports = {
     '@typescript-eslint/consistent-type-definitions': 'off',
 
     // FIXME
-    'vue/require-default-prop': 'off',
-
-    // FIXME
     'vuejs-accessibility/no-static-element-interactions': 'off',
   },
   overrides: [
@@ -44,23 +41,23 @@ module.exports = {
       extends: ['./packages/ui/.eslintrc-auto-import.json'],
     },
     {
-      files: ['**/*.spec.{js,ts}'],
-      env: {
-        jest: true,
-      },
-    },
-
-    // It is OK to define a lot of components in stories or tests
-    {
       files: ['**/packages/ui/stories/**/*.stories.ts', '**/*.cy.{js,ts}'],
       rules: {
+        // It is OK to define a lot of components in stories or tests
         'vue/one-component-per-file': 'off',
+
+        // We don't need such strictness in stories
+        'vue/require-prop-types': 'off'
       },
     },
     {
       files: ['**/*.spec.ts', '**/*.spec.cy.ts'],
       rules: {
         'max-nested-callbacks': 'off',
+
+        // We don't need such strictness in tests
+        'vue/require-default-prop': 'off',
+        'vue/require-prop-types': 'off'
       },
     },
 
