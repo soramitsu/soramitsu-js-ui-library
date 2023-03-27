@@ -69,7 +69,7 @@ module.exports = {
       },
     },
 
-    // FIXME - temporary disables to fix them in a different PRs
+    // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/525
     {
       files: ['**/ui/src/components/Select/**/*.vue'],
       rules: {
