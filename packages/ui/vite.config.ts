@@ -88,12 +88,9 @@ function sfcInferNamePlugin(): Plugin {
   return {
     name: 'soramitsu-ui:sfc-infer-name',
     transform(src, id) {
-      if (/\.vue$/.test(id)) {
-        const componentName = path.basename(id, '.vue')
-        return {
-          code: src + `\n;_sfc_main.name = "${componentName}";`,
-          sourcemap: null,
-        }
+      if (/\.vue(\?vue&type=script&setup=true)?/.test(id)) {
+        const code = src.replace(/(__name: "(\w+)")/, `$1, name: "$2"`)
+        return { code, map: null }
       }
       return undefined
     },
