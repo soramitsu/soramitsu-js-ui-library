@@ -1,17 +1,17 @@
-import { defineComponent, PropType } from 'vue'
-import { TableActionColumnApi, TableColumnApi, useTableApi } from '@/components'
+import { defineComponent, type PropType } from 'vue'
 import { uniqueElementId } from '@/util'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
-import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from '@/components/Table/consts'
-import {
+import { TABLE_COLUMN_ALIGN_VALUES, TABLE_COLUMN_TYPE_VALUES } from './consts'
+import type {
   TableColumnCellValueFormatter,
   TableColumnRowSelectableFunc,
   TableColumnSortBy,
-  TableColumnSortOrder,
+  TableColumnSortOrders,
   TableColumnAlign,
   TableColumnType,
-} from '@/components/Table/types'
-import { TableColumnWidthProps } from './api'
+} from './types'
+import { useTableApi } from './api'
+import type { TableColumnWidthProps, TableActionColumnApi, TableColumnApi } from './api'
 
 export default /* @__PURE__ */ defineComponent({
   name: 'STableColumn',
@@ -81,8 +81,8 @@ export default /* @__PURE__ */ defineComponent({
      * Accepts an array, as the user clicks on the header, the column is sorted in order of the elements in the array
      */
     sortOrders: {
-      type: Array as PropType<TableColumnSortOrder[]>,
-      default: () => ['ascending', 'descending', null],
+      type: Array as unknown as PropType<TableColumnSortOrders>,
+      default: (): TableColumnSortOrders => ['ascending', 'descending', null],
     },
     /**
      * Function that formats cell content

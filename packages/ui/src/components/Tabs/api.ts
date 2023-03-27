@@ -1,5 +1,5 @@
 import { forceInject } from '@/util'
-import { InjectionKey } from 'vue'
+import type { InjectionKey } from 'vue'
 
 export interface TabsPanelApi {
   active: string

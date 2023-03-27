@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { RangeState, StateStore } from './types'
+import type { RangeState, StateStore } from './types'
 import { parse, isValid } from 'date-fns'
-import { DatePickerApi, useDatePickerApi } from './api'
+import { type DatePickerApi, useDatePickerApi } from './api'
 
 type Props = {
   stateStore: StateStore
@@ -92,6 +92,8 @@ function dateMask(date: string) {
   if (date.match(/^\d{2}\/\d{2}$/) !== null) {
     return date + '/'
   }
+
+  return undefined
 }
 
 function dateTimeMask(date: string) {
@@ -112,6 +114,8 @@ function dateTimeMask(date: string) {
   if (date.match(/^\d{2}\/\d{2}\/\d{4}, \d{2}:\d{2}$/) !== null) {
     return date
   }
+
+  return undefined
 }
 
 const customInputLength = computed(() => {

@@ -1,5 +1,5 @@
-import { Slot, FunctionalComponent, h, unref } from 'vue'
-import { MaybeRef } from '@vueuse/core'
+import { type Slot, type FunctionalComponent, h, unref } from 'vue'
+import type { MaybeRef } from '@vueuse/core'
 import { NOTIFICATIONS_API_KEY } from './api'
 import { Status } from '@/types'
 import { forceInject } from '@/util'

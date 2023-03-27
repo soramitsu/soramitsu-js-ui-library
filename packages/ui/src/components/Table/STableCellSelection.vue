@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SCheckboxAtom, CheckboxState } from '@/components'
+import { SCheckboxAtom, type CheckboxState } from '@/components'
 
 const props = withDefaults(
   defineProps<{

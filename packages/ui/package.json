@@ -25,11 +25,12 @@
     "cy": "cypress open",
     "cy:ci:component": "cypress run --component --quiet --reporter spec",
     "typecheck": "vue-tsc --noEmit",
+    "typecheck:cypress": "vue-tsc -p ./cypress",
     "build": "run-s build:clean build:vite build:dts",
     "build:clean": "del dist ts-build",
     "build:vite": "vite build",
     "build:dts": "run-s build:dts:tsc build:dts:rollup",
-    "build:dts:tsc": "vue-tsc --outDir ts-build --declaration --emitDeclarationOnly",
+    "build:dts:tsc": "vue-tsc -p tsconfig.build.json",
     "build:dts:rollup": "rollup -c rollup.dts.config.cjs"
   },
   "dependencies": {
@@ -82,7 +83,7 @@
     "storybook": "^7.0.0-beta.62",
     "tabbable": "^6.0.0",
     "ts-pattern": "^4.2.1",
-    "typescript": "5.0.1-rc",
+    "typescript": "5.0.2",
     "unimport": "^3.0.2",
     "unplugin-auto-import": "^0.15.1",
     "unplugin-icons": "^0.15.3",

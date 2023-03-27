@@ -22,7 +22,7 @@ const formattedSelectedValue = computed<string | null>(() => {
   const opts = api.selectedOptions
   if (opts.length) {
     if (opts.length === 1) {
-      return opts[0].label
+      return opts[0]!.label
     }
     return `${opts.length} selected`
   }

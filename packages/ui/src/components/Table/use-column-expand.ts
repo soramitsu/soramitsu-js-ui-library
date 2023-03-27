@@ -1,4 +1,4 @@
-import { TableRow } from '@/components/Table/types'
+import type { TableRow } from '@/components/Table/types'
 
 export function useColumnExpand() {
   const expandedRows = shallowReactive(new Set<TableRow>())

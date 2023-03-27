@@ -1,6 +1,6 @@
-import { Plugin } from 'vite'
+import { type Plugin } from 'vite'
 import { compileTemplate } from '@vue/compiler-sfc'
-import svgo, { Config as SvgoConfig } from 'svgo'
+import svgo, { type Config as SvgoConfig } from 'svgo'
 import fs from 'fs/promises'
 
 const SVG_REGEX = /\.svg$/

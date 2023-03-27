@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeEach } from 'vitest'
 import { useColumnSort } from '@/components/Table/use-column-sort'
-import { TableColumnApi, TableRow } from '@/components'
-import { Ref } from 'vue'
+import type { TableColumnApi, TableRow } from '@/components'
+import type { Ref } from 'vue'
 
 const ROW_1 = { prop1: 2, prop2: 4, prop3: 's1' }
 const ROW_2 = { prop1: 1, prop2: 3, prop3: 'o1234' }

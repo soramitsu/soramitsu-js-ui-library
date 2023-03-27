@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { CSSProperties, ShallowRef, Slot } from 'vue'
-import { MaybeElementRef } from '@vueuse/core'
+import type { MaybeElementRef } from '@vueuse/core'
 import { not } from '@vueuse/math'
 import { findLast } from 'lodash-es'
 import { IconArrowTop16 } from '@/components/icons'
 import { TABLE_DEFAULT_ADAPT_BREAKPOINT, TABLE_CARDS_GRID_DEFAULT_BREAKPOINTS } from './consts'
 import { useColumnSort } from './use-column-sort'
-import {
+import type {
   TableCardGridBreakpoint,
   TableCellConfigCallbackParams,
   TableCellEventData,
@@ -30,7 +30,7 @@ import {
   getDefaultCellValue,
   getCellTooltipContent,
 } from './utils'
-import { TABLE_API_KEY, TableActionColumnApi, TableColumnApi } from './api'
+import { TABLE_API_KEY, type TableActionColumnApi, type TableColumnApi } from './api'
 import { useTableHeights } from './use-table-heights'
 import STableCellDefault from '@/components/Table/STableCellDefault.vue'
 import STableCellSelection from '@/components/Table/STableCellSelection.vue'
@@ -221,11 +221,12 @@ watchOnce(
   },
   { immediate: true },
 )
-useResizeObserver(tableWrapper, (entries) => {
-  setTimeout(() => {
-    tableSizes.width = entries[0].contentRect.width
-    tableSizes.height = entries[0].contentRect.height
-  })
+useResizeObserver(tableWrapper, ([entry]) => {
+  entry &&
+    setTimeout(() => {
+      tableSizes.width = entry.contentRect.width
+      tableSizes.height = entry.contentRect.height
+    })
 })
 
 const isAdapted = eagerComputed(() => {
@@ -238,10 +239,11 @@ const cardsGridColumnNumber = eagerComputed(() => {
 
 const headerWrapper: MaybeElementRef = ref(null)
 const headerHeight = ref(0)
-useResizeObserver(headerWrapper, (entries) => {
-  setTimeout(() => {
-    headerHeight.value = entries[0].contentRect.height
-  })
+useResizeObserver(headerWrapper, ([entry]) => {
+  entry &&
+    setTimeout(() => {
+      headerHeight.value = entry.contentRect.height
+    })
 })
 whenever(not(showHeader), () => {
   headerHeight.value = 0

@@ -1,6 +1,6 @@
 import { forceInject } from '@/util'
-import { InjectionKey } from 'vue'
-import { DatePickerType } from './types'
+import type { InjectionKey } from 'vue'
+import type { DatePickerType } from './types'
 
 export interface DatePickerApi {
   type: DatePickerType

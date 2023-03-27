@@ -10,7 +10,7 @@
     "src"
   ],
   "scripts": {
-    "test": "vitest"
+    "test": "vitest run"
   },
   "devDependencies": {
     "sass": "^1.49.0"

@@ -11,9 +11,11 @@ const shimCssPlugin = (): Plugin => {
     name: 'soramitsu-ui:shim-css',
     resolveId(id) {
       if (/\.(css|scss|sass)$/.test(id)) return id + CSS_SUFFIX
+      return
     },
     load(id) {
       if (id.endsWith(CSS_SUFFIX)) return `declare const css: string\n export default css`
+      return
     },
   }
 }
@@ -27,7 +29,7 @@ export default defineConfig({
       },
     }),
     shimCssPlugin(),
-    dtsPlugin(),
+    dtsPlugin() as Plugin,
   ],
   onwarn(warning, defaultHandler) {
     match(warning)
