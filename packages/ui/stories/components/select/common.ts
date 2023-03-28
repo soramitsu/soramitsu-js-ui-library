@@ -67,7 +67,7 @@ export const COMMON_ARGS = {
   multiple: false,
   label: 'Make a choice',
   noAutoClose: false,
-  dropdownSearch: false,
+  searchInDropdown: false,
 }
 
 export const COMMON_ARG_TYPES = {

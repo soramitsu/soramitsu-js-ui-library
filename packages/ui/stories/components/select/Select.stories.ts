@@ -14,7 +14,7 @@ const meta = {
       </div>
     `,
   }),
-  args: { ...COMMON_ARGS, triggerSearch: false },
+  args: { ...COMMON_ARGS, searchInInput: false },
   argTypes: COMMON_ARG_TYPES,
 } satisfies Meta
 

@@ -486,7 +486,7 @@ it('SSelectDropdown overlaps STextField', () => {
         }
       },
       template: `
-        <component :is="selectVariantName" v-bind="{ options }" model-value="value" dropdown-search />
+        <component :is="selectVariantName" v-bind="{ options }" model-value="value" search-in-dropdown />
       `,
     })
 
@@ -513,7 +513,7 @@ it(`SSelect - there are trigger search that allows filter options by labels`, ()
       }
     },
     template: `
-        <SSelect v-bind="{ options }" trigger-search />
+        <SSelect v-bind="{ options }" search-in-input />
       `,
   })
 

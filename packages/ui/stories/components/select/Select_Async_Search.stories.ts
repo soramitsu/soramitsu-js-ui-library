@@ -47,7 +47,7 @@ const meta = {
   }),
   args: produce(COMMON_ARGS as Writable<Partial<typeof COMMON_ARGS>>, (draft) => {
     delete draft.loading
-    draft.dropdownSearch = true
+    draft.searchInDropdown = true
   }),
   argTypes: COMMON_ARG_TYPES,
 } satisfies Meta

@@ -15,7 +15,7 @@ const props = defineProps<{
   noAutoClose?: boolean
   loading?: boolean
   inline?: boolean
-  dropdownSearch?: boolean
+  searchInDropdown?: boolean
   remoteSearch?: boolean
 }>()
 
@@ -49,9 +49,9 @@ function isThereLabelSlot() {
       </SSelectButton>
     </template>
 
-    <template #dropdown="{ search }">
+    <template #dropdown>
       <SSelectDropdown
-        :search="search"
+        :search="searchInDropdown"
         :item-type="optionType ?? SelectOptionType.Default"
       >
         <template #empty>

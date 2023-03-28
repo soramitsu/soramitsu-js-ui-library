@@ -35,7 +35,7 @@ const props = withDefaults(
     syncMenuAndInputWidths?: boolean
 
     /**
-     * By default the component will close its dropdown when the value is selected.
+     * By default, the component will close its dropdown when the value is selected.
      * **Works only in single mode.**.
      *
      * Turn on this prop to disable auto-close.
@@ -51,21 +51,6 @@ const props = withDefaults(
      * Makes popper same width as trigger.
      */
     sameWidthPopper?: boolean
-
-    /**
-     * When enabled, passes `search: true` to the `trigger` slot
-     */
-    // TODO rename to `searchSlotTrigger`?
-    // FIXME also, it passes `search:true` to CONTROL slot, not TRIGGER
-    //       does it makes sense to pass it at all? cause it is controlled
-    //       by the parent component anyway and isn't anyhow used in this component
-    triggerSearch?: boolean
-
-    /**
-     * When enabled, passes `search: true` to the `dropdown` slot
-     */
-    // TODO rename to `searchSlotDropdown`?
-    dropdownSearch?: boolean
 
     /**
      * By default, the component filters options by their labels. Set `true` to disable automatic filtering.
@@ -84,8 +69,6 @@ const props = withDefaults(
     label: null,
     loading: false,
     sameWidthPopper: false,
-    triggerSearch: false,
-    dropdownSearch: false,
     remoteSearch: false,
   },
 )
@@ -154,10 +137,7 @@ provide(SELECT_API_KEY, api)
     >
       <template #trigger>
         <div>
-          <slot
-            name="control"
-            v-bind="{ 'search': triggerSearch }"
-          />
+          <slot name="control" />
         </div>
       </template>
 
@@ -168,10 +148,7 @@ provide(SELECT_API_KEY, api)
           :wrapper-attrs="{ 'class': 'z-10' }"
           :inner-wrapper-attrs="{ 'class': { 'w-full': sameWidthPopper } }"
         >
-          <slot
-            name="dropdown"
-            v-bind="{ 'search': dropdownSearch }"
-          />
+          <slot name="dropdown" />
         </SPopoverWrappedTransition>
       </template>
     </SPopover>
