@@ -9,6 +9,7 @@ import type { StyleValue } from 'vue'
 import { Status } from '@/types'
 import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff } from '../icons'
 import type { MaybeElementRef } from '@vueuse/core'
+import { useElementIdFallback } from '@/composables/element-id-fallback'
 
 /**
  * warning: don't use it inside of `Props`. Vue compiler determines it
@@ -42,7 +43,7 @@ type Props = {
   label?: string
 
   /**
-   * Recommended for a11y
+   * Can be passed to override default auto-generated id
    */
   id?: string
 
@@ -119,6 +120,11 @@ const props = withDefaults(defineProps<Props>(), {
   noEye: false,
   noModelValueStrictSync: false,
   filledState: false,
+  message: undefined,
+  status: undefined,
+  id: undefined,
+  modelValue: '',
+  label: undefined,
 })
 
 const emit = defineEmits<{
@@ -130,7 +136,7 @@ const slots = useSlots()
 
 // ***
 
-const status = computed<null | TextFieldStatus>(() => {
+const status = computedEager<null | TextFieldStatus>(() => {
   if (props.status) return props.status
   if (props.success) return Status.Success
   if (props.warning) return Status.Warning
@@ -148,13 +154,13 @@ function onInput(e: Event) {
   }
 }
 
-const isValueEmpty = computed(() => !model.value)
+const isValueEmpty = computedEager(() => !model.value)
 const isFocused = ref(false)
-const labelTypographyClass = computed(() =>
+const labelTypographyClass = computedEager(() =>
   !(props.filledState || isFocused.value) && isValueEmpty.value ? 'sora-tpg-p3' : 'sora-tpg-p4',
 )
 
-const inputRef = ref<MaybeElementRef>(null)
+const inputRef = shallowRef<MaybeElementRef>(null)
 
 function handleInputWrapperClick(event: MouseEvent) {
   if (event.target !== document.activeElement) {
@@ -206,7 +212,7 @@ const counterConfig = computed<null | CounterConfig>(() => {
   return null
 })
 
-const counterText = computed<string | null>(() => {
+const counterText = computedEager<string | null>(() => {
   const config = counterConfig.value
   if (!config) return null
   const { limit } = config
@@ -226,16 +232,20 @@ const inputAttrs = () => {
 
 // APPEND
 
-const showEye = computed<boolean>(() => props.password && !props.noEye)
+const showEye = computedEager<boolean>(() => props.password && !props.noEye)
 const isAppendSlotDefined = () => !!slots.append
 const shouldRenderAppend = () => !!counterText.value || isAppendSlotDefined() || showEye.value
 
 // EYE
 
 const [forceRevealPassword, toggleForceReveal] = useToggle()
-const inputType = computed(() =>
+const inputType = computedEager(() =>
   props.password && (!showEye.value || !forceRevealPassword.value) ? 'password' : 'text',
 )
+
+// A11Y
+
+const finalId = useElementIdFallback(toRef(props, 'id'))
 </script>
 
 <template>
@@ -252,15 +262,16 @@ const inputType = computed(() =>
     :style="rootStyle()"
     :data-status="status"
   >
-    <!-- key events works with input element -->
-    <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
+    <!-- all interaction is made through `<input>`.
+         these mouse events are handled for mouse users convenience -->
+    <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events vuejs-accessibility/no-static-element-interactions -->
     <div
       class="s-text-field__input-wrapper"
       @click="handleInputWrapperClick"
       @mousedown="handleInputWrapperMouseDown"
     >
       <label
-        :for="id"
+        :for="finalId"
         :class="labelTypographyClass"
       >
         <slot name="label">{{ label }}</slot>
@@ -270,7 +281,7 @@ const inputType = computed(() =>
         <slot name="prefix" />
 
         <input
-          :id="id"
+          :id="finalId"
           ref="inputRef"
           class="sora-tpg-p3"
           :value="model"

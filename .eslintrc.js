@@ -24,11 +24,13 @@ module.exports = {
 
     '@typescript-eslint/consistent-type-definitions': 'off',
 
-    // FIXME
-    'vue/require-default-prop': 'off',
-
-    // FIXME
-    'vuejs-accessibility/no-static-element-interactions': 'off',
+    'vuejs-accessibility/label-has-for': [
+      'error',
+      {
+        // all labels should have `for` attr
+        required: 'id',
+      },
+    ],
   },
   overrides: [
     {
@@ -44,37 +46,56 @@ module.exports = {
       extends: ['./packages/ui/.eslintrc-auto-import.json'],
     },
     {
-      files: ['**/*.spec.{js,ts}'],
-      env: {
-        jest: true,
-      },
-    },
-
-    // It is OK to define a lot of components in stories or tests
-    {
       files: ['**/packages/ui/stories/**/*.stories.ts', '**/*.cy.{js,ts}'],
       rules: {
+        // It is OK to define a lot of components in stories or tests
         'vue/one-component-per-file': 'off',
+
+        // We don't need such strictness in stories
+        'vue/require-prop-types': 'off',
       },
     },
     {
       files: ['**/*.spec.ts', '**/*.spec.cy.ts'],
       rules: {
         'max-nested-callbacks': 'off',
+
+        // We don't need such strictness in tests
+        'vue/require-default-prop': 'off',
+        'vue/require-prop-types': 'off',
       },
     },
 
-    // FIXME - temporary disables to fix them in a different PRs
     {
       files: ['**/ui/src/components/Select/**/*.vue'],
       rules: {
+        // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/525
         'vuejs-accessibility/click-events-have-key-events': 'off',
+        'vuejs-accessibility/no-static-element-interactions': 'off',
       },
     },
+
     {
-      files: ['**/STextField.vue', '**/SSwitch.vue'],
+      files: ['**/ui/src/components/DatePicker/**/*.vue'],
       rules: {
-        'vuejs-accessibility/label-has-for': 'off',
+        // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/526
+        'vuejs-accessibility/no-static-element-interactions': 'off',
+      },
+    },
+
+    {
+      files: ['**/ui/src/components/Table/**/*.vue'],
+      rules: {
+        // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/527
+        'vuejs-accessibility/no-static-element-interactions': 'off',
+      },
+    },
+
+    // FIXME https://github.com/soramitsu/soramitsu-js-ui-library/issues/528
+    {
+      files: ['**/ui/src/components/JsonInput/**/*.vue'],
+      rules: {
+        'vuejs-accessibility/no-static-element-interactions': 'off',
       },
     },
   ],

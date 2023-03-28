@@ -10,7 +10,7 @@ export default /* @__PURE__ */ defineComponent({
   name: 'SUseNotification',
   props: {
     show: Boolean,
-    title: String,
+    title: { type: String, default: undefined },
     status: {
       type: String as PropType<Status>,
       default: Status.Info,
@@ -20,7 +20,7 @@ export default /* @__PURE__ */ defineComponent({
       default: 5000,
     },
     showCloseBtn: Boolean,
-    description: String,
+    description: { type: String, default: undefined },
   },
   emits: [
     // FIXME avoid `v-model` for `show`, because it always emits `false` from the component

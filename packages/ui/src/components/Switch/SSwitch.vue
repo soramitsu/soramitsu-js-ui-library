@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { uniqueElementId } from '@/util'
+import { useElementIdFallback } from '@/composables/element-id-fallback'
 
 type Props = {
   /**
@@ -7,11 +8,14 @@ type Props = {
    */
   modelValue?: boolean
   /**
-   * Text label for switch. Required for a11y. If you don't want it to be rendered, use {@link labelHidden}
-   *
-   * @default ''
+   * Explicit id instead of an auto-generated one
    */
-  label: string
+  id?: string
+  /**
+   * Text label for switch. Required for a11y. If you don't want it to be rendered, use {@link labelHidden}.
+   * You can also pass it as a slot.
+   */
+  label?: string
   /**
    * Whether to render label or not
    *
@@ -29,18 +33,20 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   labelHidden: false,
+  id: undefined,
+  label: undefined,
 })
-
-const inputId = uniqueElementId()
 
 const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
 const model = useVModel(props, 'modelValue', emit)
+
+const finalId = useElementIdFallback(toRef(props, 'id'))
 </script>
 
 <template>
   <div class="s-switch">
     <input
-      :id="inputId"
+      :id="finalId"
       v-model="model"
       type="checkbox"
       :disabled="disabled"
@@ -48,9 +54,11 @@ const model = useVModel(props, 'modelValue', emit)
     >
     <!-- note: `sr-only` class visually hides the element while keeping it accessible for Screen Reader -->
     <label
-      :for="inputId"
+      :for="finalId"
       :class="['s-switch__label sora-tpg-p3', { 'sr-only': labelHidden }]"
-    >{{ label }}</label>
+    >
+      <slot name="label">{{ label }}</slot>
+    </label>
   </div>
 </template>
 
