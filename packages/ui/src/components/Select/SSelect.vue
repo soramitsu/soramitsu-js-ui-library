@@ -16,8 +16,7 @@ const props = defineProps<{
   loading?: boolean
   searchInInput?: boolean
   searchInDropdown?: boolean
-  // FIXME `search-external`
-  remoteSearch?: boolean
+  searchExternal?: boolean
 }>()
 
 const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Checkbox : SelectOptionType.Radio))

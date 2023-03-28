@@ -37,7 +37,7 @@ const meta = {
         <SSelect
           v-bind="$attrs"
           v-model="model"
-          remote-search
+          search-external
           :options="options.fulfilled?.value"
           :loading="options.pending"
           @search="handleSearch"

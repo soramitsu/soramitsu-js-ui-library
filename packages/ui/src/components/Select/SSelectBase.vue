@@ -53,10 +53,13 @@ const props = withDefaults(
     sameWidthPopper?: boolean
 
     /**
-     * By default, the component filters options by their labels. Set `true` to disable automatic filtering.
+     * By default, the component filters options by their labels using a simple RegExp.
+     * In order to implement custom search, set this flag to `true` and listen for the
+     * `search` event
+     *
+     * @default false
      */
-    // TODO rename to `searchExternal`?
-    remoteSearch?: boolean
+    searchExternal?: boolean
   }>(),
   {
     size: SelectSize.Md,
@@ -69,7 +72,7 @@ const props = withDefaults(
     label: null,
     loading: false,
     sameWidthPopper: false,
-    remoteSearch: false,
+    searchExternal: false,
   },
 )
 
@@ -79,13 +82,13 @@ const emit = defineEmits<{
 }>()
 
 const model = useVModel(props, 'modelValue', emit)
-const { multiple, disabled, loading, options, size, label, noAutoClose, remoteSearch } = toRefs(props)
+const { multiple, disabled, loading, options, size, label, noAutoClose, searchExternal } = toRefs(props)
 
 const modeling = useSelectModel({
   model,
   multiple,
   options,
-  storeSelectedOptions: remoteSearch,
+  storeSelectedOptions: searchExternal,
   singleModeAutoClose: not(noAutoClose),
   onAutoClose: () => togglePopper(false),
 })
@@ -96,7 +99,7 @@ const [showPopper, togglePopper] = useToggle(false)
 whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
 
 const searchQuery = ref('')
-whenever(and(not(showPopper), not(remoteSearch)), () => {
+whenever(and(not(showPopper), not(searchExternal)), () => {
   searchQuery.value = ''
 })
 
@@ -118,7 +121,7 @@ const api: SelectApi<any> = reactive({
   size,
   noAutoClose,
   searchQuery,
-  remoteSearch,
+  searchExternal,
   updateSearchQuery,
 })
 

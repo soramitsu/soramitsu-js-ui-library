@@ -32,7 +32,7 @@ const isSearching = eagerComputed(() => api.searchQuery)
 
 const escapedQuery = computed(() => new RegExp(escapeStringRegexp(api.searchQuery), 'i'))
 const shownOptionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
-  if (!api.searchQuery || api.remoteSearch) {
+  if (!api.searchQuery || api.searchExternal) {
     return optionGroups.value
   }
 
