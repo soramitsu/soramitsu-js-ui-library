@@ -73,7 +73,6 @@ importers:
       '@vitejs/plugin-vue': ^4.1.0
       '@vitejs/plugin-vue-jsx': ^3.0.1
       '@vue-kakuyaku/core': ^0.4
-      '@vue/compiler-core': ^3.2
       '@vue/test-utils': ^2.3.2
       '@vueuse/core': ^9.13
       '@vueuse/math': ^9.13
@@ -140,7 +139,6 @@ importers:
       '@types/lodash-es': 4.17.6
       '@vitejs/plugin-vue': 4.1.0_vite@4.2.1+vue@3.2.47
       '@vitejs/plugin-vue-jsx': 3.0.1_vite@4.2.1+vue@3.2.47
-      '@vue/compiler-core': 3.2.47
       '@vue/test-utils': 2.3.2_vue@3.2.47
       axe-core: 4.6.3
       body-scroll-lock: 4.0.0-beta.0
