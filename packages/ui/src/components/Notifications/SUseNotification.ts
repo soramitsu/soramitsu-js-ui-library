@@ -1,8 +1,8 @@
 import { h, defineComponent, type PropType, onScopeDispose } from 'vue'
 import { useVModel } from '@vueuse/core'
+import { useParamScope } from '@vue-kakuyaku/core'
 import { Status } from '@/types'
 import SNotificationBody from './SNotificationBody.vue'
-import { useConditionalScope } from '@/composables/conditional-scope'
 import { forceInject } from '@/util'
 import { NOTIFICATIONS_API_KEY } from './api'
 
@@ -43,7 +43,7 @@ export default /* @__PURE__ */ defineComponent({
       emit('click:close')
     }
 
-    useConditionalScope(show, () => {
+    useParamScope(show, () => {
       const unreg = toasts.register({
         slot: () => {
           const { show: _show, ...rest } = props
