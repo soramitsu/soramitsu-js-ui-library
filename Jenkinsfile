@@ -9,6 +9,7 @@ def pipeline = new org.js.LibPipeline(
     pushCmds:             ['pnpm publish-workspaces'],
     libPushBranches:      ['master', 'next'],
     dockerImageTags:      ['master':'latest', 'next':'next'],
-    libExamplesBuildCmds: ['pnpm sb:build']
+    libExamplesBuildCmds: ['pnpm sb:build'],
+    corepack:             true
 )
 pipeline.runPipeline()
