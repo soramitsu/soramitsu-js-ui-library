@@ -792,13 +792,15 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
       <div
         v-if="!data.length"
         data-testid="table-empty-block"
-        class="s-table__empty-block flex justify-center items-center h-60px"
+        class="s-table__empty-block"
       >
-        <span class="s-table__empty-text sora-tpg-p3">
-          <slot name="empty">
-            {{ emptyText || 'No Data' }}
-          </slot>
-        </span>
+        <slot name="empty">
+          <div class="s-table__empty-text flex justify-center items-center min-h-60px sora-tpg-p3">
+            <slot name="empty-text">
+              {{ emptyText || 'No Data' }}
+            </slot>
+          </div>
+        </slot>
       </div>
       <div
         v-if="$slots.append"
