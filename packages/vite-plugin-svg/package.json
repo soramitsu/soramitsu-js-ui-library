@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "tsup": "^6.6.3",
-    "vite": "4"
+    "vite": "^4.3.4"
   },
   "peerDependencies": {
     "vite": "4"
