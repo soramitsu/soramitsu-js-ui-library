@@ -2,14 +2,14 @@
 def pipeline = new org.js.LibPipeline(
     steps:                this,
     packageManager:       'pnpm',
-    buildDockerImage:     'build-tools/node:14-ubuntu-cypress',
+    buildDockerImage:     'build-tools/node:16-cypress-corepack',
     npmLoginEmail:        'admin@soramitsu.co.jp',
     dockerImageName:      'soramitsu/soramitsu-js-ui-library',
     testCmds:             ['pnpm test:all'],
-    preBuildCmds:         ['npm install -g n','n 16.17.0', 'n prune', "npm i -g pnpm@7.29.0", "pnpm install"],
-    pushCmds:             ['pnpm publish-workspaces --no-verify-access'],
+    pushCmds:             ['pnpm publish-workspaces'],
     libPushBranches:      ['master', 'next'],
     dockerImageTags:      ['master':'latest', 'next':'next'],
-    libExamplesBuildCmds: ['pnpm sb:build']
+    libExamplesBuildCmds: ['pnpm sb:build'],
+    corepack:             true
 )
 pipeline.runPipeline()
