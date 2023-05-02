@@ -1,12 +1,10 @@
+import type { Preview } from '@storybook/vue3'
+
 import 'virtual:windi.css'
 import './custom.scss'
 
-/** @type { import('@storybook/vue3').Preview } */
-const preview = {
+export default {
   parameters: {
-    backgrounds: {
-      default: 'light',
-    },
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
@@ -15,6 +13,4 @@ const preview = {
       },
     },
   },
-}
-
-export default preview
+} satisfies Preview

@@ -14,6 +14,8 @@ const props = withDefaults(
   {
     status: Status.Info,
     timeout: 0,
+    title: undefined,
+    description: undefined,
   },
 )
 

@@ -19,6 +19,7 @@ withDefaults(
   }>(),
   {
     close: true,
+    title: undefined,
   },
 )
 

@@ -1,8 +1,8 @@
 import { h, defineComponent, type PropType, onScopeDispose } from 'vue'
 import { useVModel } from '@vueuse/core'
+import { useParamScope } from '@vue-kakuyaku/core'
 import { Status } from '@/types'
 import SNotificationBody from './SNotificationBody.vue'
-import { useConditionalScope } from '@/composables/conditional-scope'
 import { forceInject } from '@/util'
 import { NOTIFICATIONS_API_KEY } from './api'
 
@@ -10,7 +10,7 @@ export default /* @__PURE__ */ defineComponent({
   name: 'SUseNotification',
   props: {
     show: Boolean,
-    title: String,
+    title: { type: String, default: undefined },
     status: {
       type: String as PropType<Status>,
       default: Status.Info,
@@ -20,9 +20,14 @@ export default /* @__PURE__ */ defineComponent({
       default: 5000,
     },
     showCloseBtn: Boolean,
-    description: String,
+    description: { type: String, default: undefined },
   },
-  emits: ['update:show', 'click:close', 'timeout'],
+  emits: [
+    // FIXME avoid `v-model` for `show`, because it always emits `false` from the component
+    'update:show',
+    'click:close',
+    'timeout',
+  ],
   setup(props, { emit, slots }) {
     const show = useVModel(props, 'show', emit)
 
@@ -38,7 +43,7 @@ export default /* @__PURE__ */ defineComponent({
       emit('click:close')
     }
 
-    useConditionalScope(show, () => {
+    useParamScope(show, () => {
       const unreg = toasts.register({
         slot: () => {
           const { show: _show, ...rest } = props

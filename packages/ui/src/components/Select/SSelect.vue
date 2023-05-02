@@ -14,8 +14,12 @@ const props = defineProps<{
   size?: SelectSize
   noAutoClose?: boolean
   loading?: boolean
+  // FIXME `triggerSearch` makes sense only in scope of `SSelectBase`
+  //        I think here it is better to name it `search-in-input`
   triggerSearch?: boolean
+  // FIXME `search-in-dropdown`?
   dropdownSearch?: boolean
+  // FIXME `search-external`
   remoteSearch?: boolean
 }>()
 
@@ -27,6 +31,7 @@ const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Chec
     v-bind="{ ...$attrs, ...$props } as any"
     same-width-popper
   >
+    <!-- FIXME no sense to get `search` from the slot bindings -->
     <template #control="{ search }">
       <SSelectInput
         data-testid="select-trigger"

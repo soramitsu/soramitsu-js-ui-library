@@ -17,5 +17,5 @@
     }
   },
   "include": ["."],
-  "exclude": ["dist", "ts-build", "cypress", "test", "storybook-static", "stories"]
+  "exclude": ["dist", "ts-build", "cypress", "test", "storybook-static"]
 }

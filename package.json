@@ -7,7 +7,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "sb:serve": "pnpm --filter ui sb:serve",
+    "sb:dev": "pnpm --filter ui sb:dev",
     "sb:build": "pnpm --filter ui sb:build",
     "test:all": "run-s lint:check test:theme:unit build:vite-plugin-svg test:ui:unit test:ui:cy build:ui:only-vite test:ui:after-build",
     "test:theme:unit": "pnpm --filter theme test",
@@ -44,8 +44,8 @@
     "prettier": "^2.6.2",
     "prettier-eslint": "^15.0.0",
     "prettier-eslint-cli": "^7.1.0",
-    "typescript": "5.0.2",
-    "vite": "^4.1.4",
-    "vitest": "^0.29.2"
+    "typescript": "5.0.4",
+    "vite": "^4.3.4",
+    "vitest": "^0.30.1"
   }
 }

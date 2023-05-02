@@ -9,49 +9,58 @@ after(() => {
   VueTestUtils.config.global.components = {}
 })
 
-it('SSwitch - renders with specified label', () => {
-  cy.mount(SSwitch, { props: { id: 'id', label: 'Label' } })
+describe('SSwitch', () => {
+  it('renders with specified label', () => {
+    cy.mount(SSwitch, { props: { label: 'Label' } })
 
-  cy.contains('Label')
-})
+    cy.contains('Label')
+  })
 
-it('SSwitch - renders unchecked switch by default', () => {
-  cy.mount(SSwitch, { props: { id: 'id' } })
+  it('renders unchecked switch by default', () => {
+    cy.mount(SSwitch, { props: { label: 'Test' } })
 
-  cy.get('input').should('be.not.checked')
-})
+    cy.get('input').should('be.not.checked')
+  })
 
-it('SSwitch - renders disabled switch when prop is passed', () => {
-  cy.mount(SSwitch, { props: { id: 'id', disabled: true } })
+  it('renders disabled switch when prop is passed', () => {
+    cy.mount(SSwitch, { props: { label: 'Test', disabled: true } })
 
-  cy.get('input').should('be.disabled')
-})
+    cy.get('input').should('be.disabled')
+  })
 
-it('SSwitch - handles two-way data binding and rises value up', () => {
-  cy.mount({
-    setup() {
-      const checked = ref(false)
+  it('handles two-way data binding and rises value up', () => {
+    cy.mount({
+      setup() {
+        const checked = ref(false)
 
-      return { checked }
-    },
-    template: `
+        return { checked }
+      },
+      template: `
       <div class="switch">{{ checked }}</div>
       <SSwitch
-        id="id"
         v-model="checked"
         label="Label"
       />
       `,
+    })
+
+    cy.contains('Label').click()
+    cy.get('.switch').contains('true')
   })
 
-  cy.contains('Label').click()
-  cy.get('.switch').contains('true')
-})
+  describe('a11y', () => {
+    beforeEach(() => {
+      cy.injectAxeAndConfigureCTDefaults()
+    })
 
-it('SSwitch - has the same id for linking label with input element', () => {
-  const id = 'identificator'
-  cy.mount(SSwitch, { props: { id } })
+    it('SSwitch - a11y check with visible label', () => {
+      cy.mount(SSwitch, { props: { label: 'Test' } })
+      cy.checkA11y()
+    })
 
-  cy.get('input').should('have.id', id)
-  cy.get('label').should('have.attr', 'for', id)
+    it('SSwitch - a11y check with hidden label', () => {
+      cy.mount(SSwitch, { props: { label: 'Test', labelHidden: true } })
+      cy.checkA11y()
+    })
+  })
 })

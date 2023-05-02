@@ -12,9 +12,9 @@ const props = defineProps<{
   multiple?: boolean
   label?: string
   size?: SelectSize
-  inline?: boolean
   noAutoClose?: boolean
   loading?: boolean
+  inline?: boolean
   dropdownSearch?: boolean
   remoteSearch?: boolean
 }>()
