@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.11.0
+
+### Minor Changes
+
+- d9f29db: **feat**(`STable`): now `empty` slot have no wrappers with styles and added new `empty-text` slot, that works like old `empty` slot
+
 ## 0.10.1
 
 ### Patch Changes
