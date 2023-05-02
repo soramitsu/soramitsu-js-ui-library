@@ -1,7 +1,9 @@
-@Library('jenkins-library')
+@Library('jenkins-library') _
+
 def pipeline = new org.js.LibPipeline(
     steps:                this,
     packageManager:       'pnpm',
+    preBuildCmds:         ["pnpm install"],
     buildDockerImage:     'build-tools/node:16-cypress-corepack',
     npmLoginEmail:        'admin@soramitsu.co.jp',
     dockerImageName:      'soramitsu/soramitsu-js-ui-library',
