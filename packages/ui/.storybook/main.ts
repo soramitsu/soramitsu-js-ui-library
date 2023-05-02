@@ -1,5 +1,6 @@
-/** @type { import('@storybook/vue3-vite').StorybookConfig } */
-const config = {
+import type { StorybookConfig } from '@storybook/vue3-vite'
+
+export default {
   stories: [
     {
       directory: '../stories/components',
@@ -15,5 +16,4 @@ const config = {
   docs: {
     autodocs: 'tag',
   },
-}
-export default config
+} satisfies StorybookConfig
