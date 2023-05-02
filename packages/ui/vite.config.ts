@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config'
 // @ts-ignore FIXME update when this package fixes its `exports`
 import windiPlugin from 'vite-plugin-windicss'
 import vuePlugin from '@vitejs/plugin-vue'
+import inspectPlugin from 'vite-plugin-inspect'
 import type { RootNode, TemplateChildNode } from '@vue/compiler-core'
 import iconsPlugin from 'unplugin-icons/vite'
 import svgPlugin from '@soramitsu-ui/vite-plugin-svg'
@@ -83,6 +84,19 @@ function checkAutoImportedTypesPlugin(checkDts = resolve('auto-imports.d.ts')): 
   }
 }
 
+function sfcInferNamePlugin(): Plugin {
+  return {
+    name: 'soramitsu-ui:sfc-infer-name',
+    transform(src, id) {
+      if (/\.vue(\?vue&type=script&setup=true)?/.test(id)) {
+        const code = src.replace(/(__name: "(\w+)")/, `$1, name: "$2"`)
+        return { code, map: null }
+      }
+      return undefined
+    },
+  }
+}
+
 export default defineConfig({
   test: {
     include: ['src/**/*.spec.ts'],
@@ -114,6 +128,7 @@ export default defineConfig({
         },
       },
     }),
+    sfcInferNamePlugin(),
     iconsPlugin(),
     svgPlugin({
       svgo: {
@@ -151,6 +166,9 @@ export default defineConfig({
       },
     }),
     checkAutoImportedTypesPlugin(),
+
+    // save for future debugging needs
+    // inspectPlugin({ build: true, outputDir: '.vite-inspect' }),
   ],
   build: {
     sourcemap: true,

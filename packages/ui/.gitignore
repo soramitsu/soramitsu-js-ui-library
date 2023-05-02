@@ -1,3 +1,4 @@
 storybook-static
 cypress/screenshots
 ts-build
+.vite-inspect
