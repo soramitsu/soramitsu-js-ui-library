@@ -2,7 +2,7 @@ import { defineConfig } from 'vitest/config'
 // @ts-ignore FIXME update when this package fixes its `exports`
 import windiPlugin from 'vite-plugin-windicss'
 import vuePlugin from '@vitejs/plugin-vue'
-import type { RootNode, TemplateChildNode } from '@vue/compiler-core'
+import type { RootNode, TemplateChildNode } from 'vue/compiler-sfc'
 import iconsPlugin from 'unplugin-icons/vite'
 import svgPlugin from '@soramitsu-ui/vite-plugin-svg'
 import autoImportPlugin from 'unplugin-auto-import/vite'
