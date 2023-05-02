@@ -1,6 +1,6 @@
 export const JSON_INPUT_AUTOCOMPLETE_VALUES = ['off', 'on'] as const
 
-export type JsonInputAutocomplete = typeof JSON_INPUT_AUTOCOMPLETE_VALUES[number]
+export type JsonInputAutocomplete = (typeof JSON_INPUT_AUTOCOMPLETE_VALUES)[number]
 
 export const JSON_INPUT_TYPE_VALUES = [
   'text',
@@ -29,8 +29,8 @@ export const JSON_INPUT_TYPE_VALUES = [
   'week',
 ] as const
 
-export type JsonInputType = typeof JSON_INPUT_TYPE_VALUES[number]
+export type JsonInputType = (typeof JSON_INPUT_TYPE_VALUES)[number]
 
 export const JSON_INPUT_SIZE_VALUES = ['small', 'medium', 'big'] as const
 
-export type JsonInputSize = typeof JSON_INPUT_SIZE_VALUES[number]
+export type JsonInputSize = (typeof JSON_INPUT_SIZE_VALUES)[number]

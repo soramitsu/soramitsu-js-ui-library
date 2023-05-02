@@ -3,7 +3,7 @@ import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/
 
 const emit = defineEmits(['pick'])
 
-interface Props {
+type Props = {
   value: number
 }
 

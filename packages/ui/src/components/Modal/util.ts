@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 import { not, or, and } from '@vueuse/math'
 
 /**
@@ -27,7 +27,7 @@ const VisibilityState = {
   Leaving: 'leaving',
 } as const
 
-type VisibilityState = typeof VisibilityState[keyof typeof VisibilityState]
+type VisibilityState = (typeof VisibilityState)[keyof typeof VisibilityState]
 
 type VisibilityStateMap<K extends string> = {
   [key in K]: VisibilityState

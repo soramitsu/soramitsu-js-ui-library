@@ -1,6 +1,6 @@
-import { Plugin } from 'vite'
+import { type Plugin } from 'vite'
 import { compileTemplate } from '@vue/compiler-sfc'
-import svgo from 'svgo'
+import svgo, { type Config as SvgoConfig } from 'svgo'
 import fs from 'fs/promises'
 
 const SVG_REGEX = /\.svg$/
@@ -9,11 +9,11 @@ export interface Options {
   /**
    * @default true
    */
-  svgo?: boolean | svgo.OptimizeOptions
+  svgo?: boolean | SvgoConfig
 }
 
 function createPlugin(opts?: Options): Plugin {
-  const svgoOpts = opts?.svgo ?? true
+  const svgoCfg = opts?.svgo ?? true
 
   return {
     name: 'soramitsu-ui-svg',
@@ -23,10 +23,14 @@ function createPlugin(opts?: Options): Plugin {
 
       let svgContents = await fs.readFile(id, 'utf8')
 
-      if (svgoOpts) {
-        const result = svgo.optimize(svgContents, svgoOpts === true ? {} : svgoOpts)
-        if (result.error) throw new Error(`SVGO failed on ${id}: ${result.error}`)
-        svgContents = (result as svgo.OptimizedSvg).data
+      if (svgoCfg) {
+        try {
+          const result = svgo.optimize(svgContents, svgoCfg === true ? {} : svgoCfg)
+          svgContents = result.data
+        } catch (err) {
+          console.error(`SVGO failed`)
+          throw err
+        }
       }
 
       const { code } = compileTemplate({

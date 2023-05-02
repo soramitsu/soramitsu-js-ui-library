@@ -1,4 +1,4 @@
-import { defineComponent, PropType, provide } from 'vue'
+import { defineComponent, type PropType, provide, type VNode } from 'vue'
 import { defineToastsApi, TOASTS_API_KEY } from './api'
 
 type ProvideKey = string | Symbol
@@ -33,6 +33,6 @@ export default /* @__PURE__ */ defineComponent({
       provide(key, api)
     }
 
-    return () => slots.default?.()
+    return (): undefined | VNode[] => slots.default?.()
   },
 })

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { uniqueElementId } from '@/util'
-import { CheckboxSize, CheckboxType, CHECKBOX_SIZE_VALUES, CHECKBOX_TYPE_VALUES } from './types'
+import { type CheckboxSize, type CheckboxType, CHECKBOX_SIZE_VALUES, CHECKBOX_TYPE_VALUES } from './types'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import SRadioBody from '../Radio/SRadioBody'
 import SCheckboxAtom from './SCheckboxAtom'
 
-interface Props {
+type Props = {
   modelValue?: boolean
   type?: CheckboxType
   size?: CheckboxSize

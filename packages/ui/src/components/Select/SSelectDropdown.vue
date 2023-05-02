@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useSelectApi } from './api'
-import { SelectOptionGroup, SelectOptionType, SelectSize } from './types'
+import { type SelectOptionGroup, SelectOptionType, SelectSize } from './types'
 import SSelectOption from './SSelectOption.vue'
-import { ComputedRef } from 'vue'
+import type { ComputedRef } from 'vue'
 import { isSelectOptions } from '@/components/Select/utils'
 import SSpinner from '@/components/Spinner/SSpinner.vue'
 import { IconBasicSearch24 } from '@/components/icons'
 import escapeStringRegexp from 'escape-string-regexp'
-import { MaybeElementRef } from '@vueuse/core'
+import type { MaybeElementRef } from '@vueuse/core'
 
 const props = defineProps<{
   itemType: SelectOptionType

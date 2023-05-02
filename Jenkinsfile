@@ -1,14 +1,17 @@
-@Library('jenkins-library')
+@Library('jenkins-library') _
+
 def pipeline = new org.js.LibPipeline(
     steps:                this,
-    packageManager:       'yarn',
-    buildDockerImage:     'build-tools/node:14-ubuntu-cypress',
+    packageManager:       'pnpm',
+    preBuildCmds:         ["pnpm install"],
+    buildDockerImage:     'build-tools/node:16-cypress-corepack',
     npmLoginEmail:        'admin@soramitsu.co.jp',
     dockerImageName:      'soramitsu/soramitsu-js-ui-library',
-    testCmds:             ['yarn test:all'],
-    pushCmds:             ['yarn publish-workspaces --no-verify-access'],
+    testCmds:             ['pnpm test:all'],
+    pushCmds:             ['pnpm publish-workspaces'],
     libPushBranches:      ['master', 'next'],
     dockerImageTags:      ['master':'latest', 'next':'next'],
-    libExamplesBuildCmds: ['yarn sb:build']
+    libExamplesBuildCmds: ['pnpm sb:build'],
+    corepack:             true
 )
 pipeline.runPipeline()

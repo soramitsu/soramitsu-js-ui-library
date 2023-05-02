@@ -4,6 +4,6 @@ dist
 dist-ssr
 *.local
 versus.md
-dist-ts
 tsconfig.tsbuildinfo
 yarn-error.log
+.idea

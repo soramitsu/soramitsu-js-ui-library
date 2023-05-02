@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { IconArrowsChevronRight24, IconArrowsChevronLeft24 } from '@/components/icons'
 import { months } from './consts'
-import { ShowState } from './types'
+import type { ShowState } from './types'
 
-interface Props {
+type Props = {
   showState: ShowState
   hideArrows?: boolean
 }

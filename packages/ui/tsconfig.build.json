@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src", "auto-imports.d.ts"],
+  "compilerOptions": {
+    "outDir": "ts-build",
+    "declaration": true,
+    "emitDeclarationOnly": true
+  }
+}

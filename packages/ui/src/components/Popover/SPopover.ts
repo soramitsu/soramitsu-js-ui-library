@@ -1,10 +1,10 @@
-import { Ref, cloneVNode, PropType } from 'vue'
-import { Placement, placements, Instance, State } from '@popperjs/core'
-import { MaybeElementRef } from '@vueuse/core'
+import { type Ref, cloneVNode, type PropType, type VNode } from 'vue'
+import { type Placement, placements, type Instance, type State } from '@popperjs/core'
+import type { MaybeElementRef } from '@vueuse/core'
 import { not, or } from '@vueuse/math'
 import { usePopper } from '@/composables/popper'
-import { PopoverApi, POPOVER_API_KEY } from './api'
-import { Except } from 'type-fest'
+import { type PopoverApi, POPOVER_API_KEY } from './api'
+import type { Except } from 'type-fest'
 
 function useDelayNumberGreaterThanOrEqualToZero(reactiveGetter: () => string | number): Ref<number> {
   return computed(() => {
@@ -62,7 +62,7 @@ function useElHover(elemRef: Ref<null | Element>): {
 } {
   const hover = ref(false)
 
-  watch(elemRef, (el, oldEl) => {
+  watch(elemRef, (_el, oldEl) => {
     if (oldEl) hover.value = false
   })
 
@@ -170,7 +170,7 @@ export default /* @__PURE__ */ defineComponent({
             phase: 'beforeWrite' as const,
             requires: ['computeStyles'],
             fn: ({ state }: { state: State }) => {
-              state.styles.popper.width = `${state.rects.reference.width}px`
+              state.styles.popper!.width = `${state.rects.reference.width}px`
             },
             effect: ({ state }: { state: State }) => {
               if (state.elements.reference instanceof HTMLElement) {
@@ -195,7 +195,7 @@ export default /* @__PURE__ */ defineComponent({
     })
 
     debouncedWatch(
-      () => props.trigger === 'hover' && [sharedHover.value],
+      (): false | [boolean] => props.trigger === 'hover' && [sharedHover.value],
       (maybeHover) => {
         if (maybeHover) {
           const [val] = maybeHover
@@ -230,7 +230,7 @@ export default /* @__PURE__ */ defineComponent({
 
     provide(POPOVER_API_KEY, api)
 
-    return () => {
+    return (): (VNode | null | undefined | false)[] => {
       let trigger
       {
         if (!slots.trigger) {
@@ -241,7 +241,7 @@ export default /* @__PURE__ */ defineComponent({
         if (nodes.length !== 1) {
           throw new Error('"trigger" slot should render exact 1 element')
         }
-        ;[trigger] = nodes
+        ;[trigger] = nodes as [VNode]
       }
 
       let popper

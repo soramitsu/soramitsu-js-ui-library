@@ -46,6 +46,7 @@ function closeClick() {
         type="action"
         size="sm"
         data-testid="btn-close"
+        title="Close"
         @click="closeClick"
       >
         <template #icon>

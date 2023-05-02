@@ -21,6 +21,14 @@ module.exports = {
 
     // make possible `/// <reference...`
     'spaced-comment': ['error', 'always', { markers: ['/'] }],
+
+    '@typescript-eslint/consistent-type-definitions': 'off',
+
+    // FIXME
+    'vue/require-default-prop': 'off',
+
+    // FIXME
+    'vuejs-accessibility/no-static-element-interactions': 'off',
   },
   overrides: [
     {

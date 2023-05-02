@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { SelectSize, SelectOption, SelectOptionGroup } from './types'
+import { SelectSize, type SelectOption, type SelectOptionGroup } from './types'
 import { useSelectModel } from './use-model'
-import { SelectApi, SELECT_API_KEY } from './api'
+import { type SelectApi, SELECT_API_KEY } from './api'
 import { and, not } from '@vueuse/math'
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 

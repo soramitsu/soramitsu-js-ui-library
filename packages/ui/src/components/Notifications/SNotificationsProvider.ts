@@ -1,9 +1,9 @@
-import { h, FunctionalComponent, PropType } from 'vue'
+import { h, type FunctionalComponent, type PropType } from 'vue'
 import {
   SToastsProvider,
   SToastsDisplay,
-  ToastsDisplayPlacementHorizontal,
-  ToastsDisplayPlacementVertical,
+  type ToastsDisplayPlacementHorizontal,
+  type ToastsDisplayPlacementVertical,
 } from '../Toasts'
 import { NOTIFICATIONS_API_KEY } from './api'
 

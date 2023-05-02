@@ -1,5 +1,6 @@
-import { Ref, effectScope, EffectScope, watch, onScopeDispose } from 'vue'
+import { type Ref, effectScope, EffectScope, watch, onScopeDispose } from 'vue'
 
+// TODO use vue-kakuyaku
 export function useConditionalScope(enabled: Ref<boolean>, scopeSetupFn: () => void) {
   let scope: EffectScope | null = null
 

@@ -90,7 +90,7 @@ watch(computedHeight, () => {
   aceEditor.value.resize()
 })
 
-function onChange(...args: any) {
+function onChange() {
   let error = null
   let json = {}
   try {

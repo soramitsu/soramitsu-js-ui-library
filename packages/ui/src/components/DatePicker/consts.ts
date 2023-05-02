@@ -13,7 +13,7 @@ import {
   subMonths,
   subWeeks,
 } from 'date-fns'
-import { DatePickerOptions } from '@/components/DatePicker/types'
+import type { DatePickerOptions } from './types'
 
 export const months = [
   'January',

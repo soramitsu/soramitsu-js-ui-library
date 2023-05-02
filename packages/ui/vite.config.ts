@@ -1,11 +1,22 @@
 import { defineConfig } from 'vitest/config'
-import Windi from 'vite-plugin-windicss'
-import Vue from '@vitejs/plugin-vue'
-import { RootNode, TemplateChildNode } from '@vue/compiler-core'
-import Icons from 'unplugin-icons/vite'
-import Svg from '@soramitsu-ui/vite-plugin-svg'
-import AutoImport from 'unplugin-auto-import/vite'
+// @ts-ignore FIXME update when this package fixes its `exports`
+import windiPlugin from 'vite-plugin-windicss'
+import vuePlugin from '@vitejs/plugin-vue'
+import type { RootNode, TemplateChildNode } from '@vue/compiler-core'
+import iconsPlugin from 'unplugin-icons/vite'
+import svgPlugin from '@soramitsu-ui/vite-plugin-svg'
+import autoImportPlugin from 'unplugin-auto-import/vite'
+import { builtinPresets, type InlinePreset } from 'unimport'
+import { produce } from 'immer'
+import { match } from 'ts-pattern'
 import path from 'path'
+import fs from 'fs/promises'
+import pkg from './package.json' assert { type: 'json' }
+import * as url from 'url'
+import { type Plugin } from 'vite'
+
+// const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 function resolve(...args: string[]): string {
   return path.resolve(__dirname, ...args)
@@ -42,6 +53,36 @@ const vueCompilerTransforms = {
   },
 }
 
+function rejectTypeImportsFromPreset(preset: InlinePreset): InlinePreset {
+  return produce(preset, (draft) => {
+    draft.imports = draft.imports.filter((x) => {
+      return match(x)
+        .with({ type: true }, () => false)
+        .otherwise(() => true)
+    })
+  })
+}
+
+/**
+ * When the build is done, it checks the contents of emitted TS declaration file
+ * and prints a warning if it detects any auto-imported types
+ */
+function checkAutoImportedTypesPlugin(checkDts = resolve('auto-imports.d.ts')): Plugin {
+  const testExportType = (dtsContent: string): boolean => {
+    return /export\s+type\s+\{/.test(dtsContent)
+  }
+
+  return {
+    name: 'soramitsu-ui:check-auto-imported-types',
+    apply: 'build',
+    async closeBundle() {
+      const content = await fs.readFile(checkDts, { encoding: 'utf-8' })
+      if (testExportType(content))
+        this.error(`Type export is detected in auto-imports (file: ${path.relative(process.cwd(), checkDts)})`)
+    },
+  }
+}
+
 export default defineConfig({
   test: {
     include: ['src/**/*.spec.ts'],
@@ -56,30 +97,60 @@ export default defineConfig({
       '@popperjs/core': '@popperjs/core/lib/index',
     },
   },
+  server: {
+    fs: {
+      allow: [resolve('../')],
+    },
+  },
   plugins: [
-    Windi({
+    windiPlugin({
       // explicit path in case when cwd is not the `__dirname`
       config: resolve('windi.config.ts'),
     }),
-    Vue({
+    vuePlugin({
       template: {
         compilerOptions: {
           nodeTransforms: [vueCompilerTransforms.removeAttribute('data-testid')],
         },
       },
     }),
-    Icons(),
-    Svg({
+    iconsPlugin(),
+    svgPlugin({
       svgo: {
-        plugins: [{ name: 'removeViewBox', active: false }],
+        plugins: [
+          {
+            name: 'preset-default',
+            params: {
+              overrides: {
+                removeViewBox: false,
+              },
+            },
+          },
+        ],
       },
     }),
-    AutoImport({
-      imports: ['vue', '@vueuse/core'],
+    autoImportPlugin({
+      imports: [
+        // We have a problem with bundling `.d.ts` using auto-imported types:
+        // AutoImport plugin sets them all in `global`, and when `vue-tsc`
+        // transforms the sources, these types are replaced with `globalThis.XXX`.
+        // `rollup-plugin-dts` bundles it without a problem, but the bundled file fails
+        // to pass TypeScript check, because the auto-imported types are declared in `globalThis`
+        // only in the scope of this library, which is incorrect for package distribution.
+        // Thus, we simply exclude those few types used across the library that are being
+        // auto-imported, and we import them explicitly instead
+        rejectTypeImportsFromPreset(builtinPresets.vue),
+
+        // This preset doesn't seem to auto-import any types
+        // ...but if it does in the future, I'd add a manual preset as
+        // `{ from: '@vueuse/core' }`
+        '@vueuse/core',
+      ],
       eslintrc: {
         enabled: true,
       },
     }),
+    checkAutoImportedTypesPlugin(),
   ],
   build: {
     sourcemap: true,
@@ -91,20 +162,10 @@ export default defineConfig({
     lib: {
       entry: resolve('src/lib.ts'),
       formats: ['es', 'cjs'],
-      fileName: (format) => `lib.${format === 'es' ? 'mjs' : 'cjs'}`,
+      fileName: 'lib',
     },
     rollupOptions: {
-      output: { chunkFileNames: '[name].[format].js' },
-      external: [
-        'vue',
-        /^lodash/,
-        'jsoneditor',
-        '@popperjs/core',
-        /^@vueuse/,
-        '@soramitsu-ui/theme',
-        'body-scroll-lock',
-        'focus-trap',
-      ],
+      external: Object.keys(pkg.dependencies),
     },
   },
 })

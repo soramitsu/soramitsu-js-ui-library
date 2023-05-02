@@ -1,15 +1,44 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
     "strict": true,
-    "jsx": "preserve",
-    "sourceMap": false,
-    "resolveJsonModule": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+
+    "verbatimModuleSyntax": true,
+    "allowJs": true,
+    "checkJs": true,
+
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "lib": ["esnext", "dom"],
-    "types": []
-  }
+    "forceConsistentCasingInFileNames": true,
+
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "lib": ["esnext", "dom"]
+  },
+  "exclude": [
+    "**/dist",
+    "**/ts-build",
+    "**/storybook-static",
+
+    // https://github.com/soramitsu/soramitsu-js-ui-library/issues/514
+    "./packages/ui/stories",
+
+    // they should be checked under `vue-tsc`
+    "./packages/ui/src",
+    "./packages/ui/cypress",
+
+    // it is not intended for type-checking at all
+    "./packages/ui/test/after-build"
+  ]
 }

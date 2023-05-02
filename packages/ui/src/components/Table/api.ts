@@ -1,12 +1,12 @@
-import { DeepReadonly, InjectionKey, Slot } from 'vue'
+import type { DeepReadonly, InjectionKey, Slot } from 'vue'
 import { forceInject } from '@/util'
-import {
+import type {
   TableColumnCellValueFormatter,
   TableColumnRowSelectableFunc,
   TableColumnSortBy,
-  TableColumnSortOrder,
   TableColumnAlign,
   TableRow,
+  TableColumnSortOrders,
 } from './types'
 
 export interface TableColumnWidthProps {
@@ -23,7 +23,7 @@ export interface TableColumnSortProps {
   sortable: boolean | 'custom'
   sortMethod: (<T extends TableRow>(a: T, b: T) => number) | null
   sortBy: TableColumnSortBy
-  sortOrders: TableColumnSortOrder[]
+  sortOrders: TableColumnSortOrders
 }
 
 export interface TableCommonColumnApi extends TableColumnWidthProps, TableColumnAlignProps, TableColumnSortProps {

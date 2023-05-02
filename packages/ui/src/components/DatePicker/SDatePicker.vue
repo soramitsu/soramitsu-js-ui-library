@@ -9,7 +9,7 @@ import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { and } from '@vueuse/math'
 import { format } from 'date-fns'
 
-import {
+import type {
   DatePickerType,
   RangeState,
   DateState,
@@ -20,10 +20,10 @@ import {
   ModelValueType,
   DatePickerOptions,
 } from './types'
-import { DatePickerApi, DATE_PICKER_API_KEY } from './api'
+import { type DatePickerApi, DATE_PICKER_API_KEY } from './api'
 import { DEFAULT_SHORTCUTS } from './consts'
 
-interface Props {
+type Props = {
   modelValue: ModelValueType
   type?: DatePickerType
   time?: boolean
@@ -55,8 +55,8 @@ const today = new Date()
 
 const rangeStateRef = ref<RangeState>({
   selecting: false,
-  startDate: new Date(today.getFullYear(), today.getMonth(), 1) || null,
-  endDate: new Date(today.getFullYear(), today.getMonth(), 7) || null,
+  startDate: new Date(today.getFullYear(), today.getMonth(), 1),
+  endDate: new Date(today.getFullYear(), today.getMonth(), 7),
 })
 
 const rangeState = toReactive(rangeStateRef)
@@ -78,8 +78,8 @@ const init = () => {
   } else if (props.type === 'pick') {
     pickState.value = innerModelValue.value as PickState
   } else {
-    rangeStateRef.value.startDate = (innerModelValue.value as Date[])[0]
-    rangeStateRef.value.endDate = (innerModelValue.value as Date[])[1]
+    rangeStateRef.value.startDate = (innerModelValue.value as Date[])[0]!
+    rangeStateRef.value.endDate = (innerModelValue.value as Date[])[1]!
   }
   updateShowedMonths()
 }
@@ -125,7 +125,7 @@ const updateShowedMonths = () => {
   let date: Date | null = null
   switch (props.type) {
     case 'pick':
-      date = pickState.value[pickState.value.length - 1]
+      date = pickState.value[pickState.value.length - 1]!
       break
     case 'day':
       date = dayState.value
@@ -133,9 +133,8 @@ const updateShowedMonths = () => {
     case 'range':
       date = rangeState[dateForTime.value as keyof RangeState] as Date | null
       break
-    default:
   }
-  if (!date) return `00:00`
+  if (!date) return
   updateShowedState(date.getMonth(), date.getFullYear())
 }
 
@@ -196,7 +195,7 @@ const changeView = (viewName: string) => {
   currentView.value = viewName
 }
 
-const headTitle = computed(() => {
+const headTitle = computed<string>(() => {
   if (menuState.value && menuState.value !== 'Custom') {
     return menuState.value
   }
@@ -209,13 +208,12 @@ const headTitle = computed(() => {
         const modelValue = props.modelValue as Date[]
         return modelValue.map((item) => formatDate(item)).join(' - ')
       }
-
       case 'pick': {
         const modelValue = props.modelValue as Date[]
         return modelValue.map((item) => formatDate(item)).join(', ')
       }
       default:
-        break
+        return ''
     }
   } catch {
     return ''

@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 
 interface TableHeightsComposableParams {
   propHeight: Ref<number | string>
@@ -35,30 +35,29 @@ export function useTableHeights({
     }
   })
 
-  const bodyHeightStyles = ref({})
+  const bodyHeightStyles = shallowReactive<Pick<CSSStyleDeclaration, 'height' | 'maxHeight'>>({
+    height: '',
+    maxHeight: '',
+  })
 
   watch(
     [headerHeight, tableHeight],
-    () => {
+    ([header, table]) => {
+      let heightFinal = ''
       if (propHeight.value) {
-        const bodyHeight = tableHeight.value - headerHeight.value
-
-        bodyHeightStyles.value = {
-          height: bodyHeight ? bodyHeight + 'px' : '',
-        }
-
-        return
+        const bodyHeight = table - header
+        heightFinal = bodyHeight ? bodyHeight + 'px' : ''
       }
+      bodyHeightStyles.height = heightFinal
 
+      let maxHeightFinal = ''
       if (propMaxHeight.value) {
         const maxHeight = parseHeight(propMaxHeight.value)
-
         if (typeof maxHeight === 'number') {
-          return {
-            'max-height': maxHeight - headerHeight.value + 'px',
-          }
+          maxHeightFinal = maxHeight - header + 'px'
         }
       }
+      bodyHeightStyles.maxHeight = maxHeightFinal
     },
     { immediate: true },
   )

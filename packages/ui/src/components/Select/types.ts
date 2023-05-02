@@ -5,7 +5,7 @@ export const SelectSize = {
   Xl: 'xl',
 } as const
 
-export type SelectSize = typeof SelectSize[keyof typeof SelectSize]
+export type SelectSize = (typeof SelectSize)[keyof typeof SelectSize]
 
 export const SelectButtonType = {
   Default: 'default',
@@ -14,7 +14,7 @@ export const SelectButtonType = {
   // Icon = 'icon'
 } as const
 
-export type SelectButtonType = typeof SelectButtonType[keyof typeof SelectButtonType]
+export type SelectButtonType = (typeof SelectButtonType)[keyof typeof SelectButtonType]
 
 export const SelectOptionType = {
   Radio: 'radio',
@@ -22,7 +22,7 @@ export const SelectOptionType = {
   Default: 'default',
 } as const
 
-export type SelectOptionType = typeof SelectOptionType[keyof typeof SelectOptionType]
+export type SelectOptionType = (typeof SelectOptionType)[keyof typeof SelectOptionType]
 
 export interface SelectOption<T = any> {
   label: string

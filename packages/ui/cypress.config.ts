@@ -1,5 +1,10 @@
 import { defineConfig } from 'cypress'
+import { mergeConfig } from 'vite'
 import fs from 'fs'
+import viteBase from './vite.config'
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
 
 function useAxeCoreReader(on: Cypress.PluginEvents) {
   let content: string | undefined
@@ -19,7 +24,7 @@ function useAxeCoreReader(on: Cypress.PluginEvents) {
 
 export default defineConfig({
   component: {
-    setupNodeEvents(on, config) {
+    setupNodeEvents(on, _config) {
       useAxeCoreReader(on)
     },
     video: false,
@@ -29,7 +34,7 @@ export default defineConfig({
       bundler: 'vite',
 
       // additional opts to the main `vite.config.ts`
-      viteConfig: {
+      viteConfig: mergeConfig(viteBase, {
         resolve: {
           alias: {
             vue: 'vue/dist/vue.esm-bundler.js',
@@ -39,7 +44,7 @@ export default defineConfig({
           include: ['cypress-plugin-tab'],
           exclude: ['platform'],
         },
-      },
+      }),
     },
   },
 })

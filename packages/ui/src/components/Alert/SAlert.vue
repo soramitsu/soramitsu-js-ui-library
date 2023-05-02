@@ -2,7 +2,7 @@
 import { IconClose, STATUS_ICONS_MAP } from '@/components/icons'
 import { Status } from '@/types'
 
-interface Props {
+type Props = {
   inline?: boolean
   status?: Status
   showCloseBtn?: boolean

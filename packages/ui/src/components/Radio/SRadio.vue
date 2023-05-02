@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useRadioGroupApi } from './api'
-import { RadioSize, RADIO_SIZE_VALUES, RadioType, RADIO_TYPE_VALUES } from './types'
+import { type RadioSize, RADIO_SIZE_VALUES, type RadioType, RADIO_TYPE_VALUES } from './types'
 import { uniqueElementId } from '@/util'
 import SRadioAtom from './SRadioAtom'
 import SRadioBody from './SRadioBody'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 
-interface Props {
+type Props = {
   value: any
   disabled?: boolean
   type?: RadioType
