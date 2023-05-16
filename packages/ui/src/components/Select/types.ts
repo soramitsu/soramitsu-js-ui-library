@@ -1,3 +1,5 @@
+import type { PrimitiveKey } from '@/types'
+
 export const SelectSize = {
   Sm: 'sm',
   Md: 'md',
@@ -7,30 +9,49 @@ export const SelectSize = {
 
 export type SelectSize = (typeof SelectSize)[keyof typeof SelectSize]
 
-export const SelectButtonType = {
+export const SelectButtonStyle = {
   Default: 'default',
   Inline: 'inline',
   // TODO append in future
   // Icon = 'icon'
 } as const
 
-export type SelectButtonType = (typeof SelectButtonType)[keyof typeof SelectButtonType]
+export type SelectButtonStyle = (typeof SelectButtonStyle)[keyof typeof SelectButtonStyle]
 
-export const SelectOptionType = {
-  Radio: 'radio',
-  Checkbox: 'checkbox',
-  Default: 'default',
+/**
+ * How `SSelectOption` should be rendered in single-model
+ */
+export const SelectOptionStyle = {
+  RadioAndCheckbox: 'radio-checkbox',
+  Check: 'check',
 } as const
 
-export type SelectOptionType = (typeof SelectOptionType)[keyof typeof SelectOptionType]
+export type SelectOptionStyle = (typeof SelectOptionStyle)[keyof typeof SelectOptionStyle]
 
-export interface SelectOption<T = any> {
+export interface ParsedOptionGroup<T> {
+  kind: 'group'
+  key: PrimitiveKey
   label: string
-  value: T
+  options: T[]
 }
 
-export interface SelectOptionGroup<T = any> {
-  header?: string
-  selectAllBtn?: boolean
-  items: SelectOption<T>[]
+export interface ParsedOption<T> {
+  kind: 'item'
+  raw: T
+}
+
+export type ParsedOptions<T> = (ParsedOption<T> | ParsedOptionGroup<T>)[]
+
+export interface OptionsGroup<T> {
+  label: string
+  key: PrimitiveKey
+  options: T[]
+}
+
+export interface OptionDataGetters<O, V> {
+  key: (option: O) => PrimitiveKey
+  value: (option: O) => V
+  label: (option: O) => string
+  disabled?: null | ((option: O) => boolean)
+  asGroup?: null | ((option: O) => null | OptionsGroup<O>)
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type SelectOption, SelectButtonType, SelectOptionType, SelectSize, type SelectOptionGroup } from './types'
+import { type SelectOption, SelectButtonType, SelectOptionStyle, SelectSize, type SelectOptionGroup } from './types'
 import SSelectBase from './SSelectBase.vue'
 import SSelectButton from './SSelectButton.vue'
 import SSelectDropdown from './SSelectDropdown.vue'
@@ -7,7 +7,7 @@ import SSelectDropdown from './SSelectDropdown.vue'
 const props = defineProps<{
   modelValue?: any
   options?: SelectOption[] | SelectOptionGroup[]
-  optionType?: SelectOptionType
+  optionType?: SelectOptionStyle
   disabled?: boolean
   multiple?: boolean
   label?: string
@@ -52,7 +52,7 @@ function isThereLabelSlot() {
     <template #dropdown>
       <SSelectDropdown
         :search="searchInDropdown"
-        :item-type="optionType ?? SelectOptionType.Default"
+        :item-type="optionType ?? SelectOptionStyle.Default"
       >
         <template #empty>
           <slot name="empty" />

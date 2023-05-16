@@ -1,114 +1,134 @@
 import type { Except } from 'type-fest'
 import { describe, test, expect, vi } from 'vitest'
 import { useSelectModel, type UseSelectModelParams } from './use-model'
-import type { SelectOption } from './types'
+import type { ParsedOptions } from './types'
+import type { PrimitiveKey } from '@/types'
+import type { Ref, MaybeRefOrGetter } from 'vue'
 
-const OPTIONS = [
-  { value: 'regular', label: 'Regular crust' },
-  { value: 'deep', label: 'Deep dish' },
-  { value: 'thin', label: 'Thin crust' },
-] as const
+// const OPTIONS = [
+//   { value: 'regular', label: 'Regular crust' },
+//   { value: 'deep', label: 'Deep dish' },
+//   { value: 'thin', label: 'Thin crust' },
+// ] as const
 
-describe('Auto-closing', () => {
-  function useFactory(
-    props: Except<UseSelectModelParams<any>, 'options' | 'multiple' | 'storeSelectedOptions'>,
-    mode: 'single' | 'multi',
-  ) {
-    return useSelectModel({
-      options: ref(OPTIONS),
-      multiple: ref(mode === 'multi' ? true : false),
-      storeSelectedOptions: ref(false),
-      ...props,
-    })
-  }
+interface TestOption<V> {
+  value: V
+  // disabled?: boolean
+  anything?: unknown
+}
 
-  test('when value is selected in single-mode, it is called', () => {
-    const onAutoClose = vi.fn()
-    const modeling = useFactory(
-      {
-        model: ref(null),
-        singleModeAutoClose: ref(true),
-        onAutoClose,
-      },
-      'single',
-    )
+function factory<V>(params: {
+  options:
+    | { kind: 'simple'; value: MaybeRefOrGetter<TestOption<V>[]> }
+    | { kind: 'full'; value: MaybeRefOrGetter<ParsedOptions<TestOption<V>>> }
+  modelAsValues: Ref<undefined | null | V | V[]>
+  multiple?: MaybeRefOrGetter<boolean>
+}) {
+  return useSelectModel({
+    optionsParsed: computed((): ParsedOptions<TestOption<V>> => {
+      const opts = params.options
+      if (opts.kind === 'simple') {
+        return unref(opts.value).map((x) => ({ kind: 'item', raw: x }))
+      }
+      return unref(opts.value)
+    }),
+    modelAsValues: params.modelAsValues,
+    multiple: toRef(() => toValue(params.multiple) ?? false),
+    optionGetters: {
+      value: (x) => x.value,
+    },
+  })
+}
 
-    modeling.select('thin')
+test('constructs options model from values model', () => {
+  const model = ref(2)
+  const options = [
+    { value: 0 },
+    { value: 1 },
+    {
+      value: 2,
+      // we will check that the actual option with this field is returned
+      anything: true,
+    },
+  ] satisfies TestOption<number>[]
 
-    expect(onAutoClose).toBeCalled()
+  const { modelAsOptions } = factory({
+    options: { kind: 'simple', value: options },
+    modelAsValues: model,
   })
 
-  test('when value is unselected in single mode, it is called', () => {
-    const onAutoClose = vi.fn()
-    const modeling = useFactory(
-      {
-        model: ref('regular'),
-        singleModeAutoClose: ref(true),
-        onAutoClose,
-      },
-      'single',
-    )
-
-    modeling.unselect('regular')
-
-    expect(onAutoClose).toBeCalled()
-  })
-
-  test('when value is selected/unselected in multiple mode, it is not called', () => {
-    const onAutoClose = vi.fn()
-    const modeling = useFactory(
-      {
-        model: ref(null),
-        singleModeAutoClose: ref(true),
-        onAutoClose,
-      },
-      'multi',
-    )
-
-    modeling.select('thin')
-    modeling.select('regular')
-    modeling.unselect('thin')
-
-    expect(onAutoClose).not.toBeCalled()
-  })
-
-  test('when valud is selected/unselected in single mode, but auto-close is disabled, it is not called', () => {
-    const onAutoClose = vi.fn()
-    const modeling = useFactory(
-      {
-        model: ref(null),
-        singleModeAutoClose: ref(false),
-        onAutoClose,
-      },
-      'single',
-    )
-
-    modeling.select('thin')
-    modeling.select('regular')
-    modeling.unselect('thin')
-
-    expect(onAutoClose).not.toBeCalled()
-  })
+  expect(modelAsOptions.value).toEqual({ value: 2, anything: true } satisfies TestOption<number>)
 })
 
-describe('Storing options', () => {
-  test('when selected option is removed from options list, it is selected anyway', () => {
-    const changingOptions = ref<readonly SelectOption[]>(OPTIONS)
-    const modeling = useSelectModel({
-      model: ref(null),
-      options: changingOptions,
-      multiple: ref(true),
-      storeSelectedOptions: ref(true),
-      singleModeAutoClose: ref(true),
-      onAutoClose: () => {},
-    })
-
-    modeling.select('thin')
-    modeling.select('regular')
-    modeling.select('deep')
-
-    changingOptions.value = [OPTIONS[1], OPTIONS[2]]
-
-    expect(modeling.selectedOptions.value).toHaveLength(3)
+test('when an option is removed from the model, its value is removed too', () => {
+  const model = ref(0)
+  const options = [{ value: 0 }, { value: 1 }, { value: 2 }] satisfies TestOption<number>[]
+  const { modelAsOptions } = factory({
+    options: { kind: 'simple', value: options },
+    modelAsValues: model,
   })
+
+  modelAsOptions.value = null
+
+  expect(model.value).toBeNull()
+})
+
+test('when an option is selected in single mode, its value is selected too', () => {
+  const model = ref(0)
+  const options = [{ value: 0 }, { value: 1 }, { value: 2 }] satisfies TestOption<number>[]
+  const { modelAsOptions } = factory({
+    options: { kind: 'simple', value: options },
+    modelAsValues: model,
+  })
+
+  modelAsOptions.value = { value: 1 }
+
+  expect(model.value).toBe(1)
+})
+
+test('when an option is selected in multiple mode, its value is selected too', () => {
+  const model = ref([])
+  const options = [{ value: 0 }, { value: 1 }, { value: 2 }] satisfies TestOption<number>[]
+  const { modelAsOptions } = factory({
+    options: { kind: 'simple', value: options },
+    modelAsValues: model,
+    multiple: true,
+  })
+
+  modelAsOptions.value = [{ value: 1 }, { value: 2 }]
+
+  expect(model.value).toEqual([1, 2])
+})
+
+test('modelAsValues single/array format is changed reactively according to multiplicity', () => {
+  const model = ref()
+  const multiple = ref(false)
+
+  factory<string>({
+    options: { kind: 'simple', value: [{ value: 'a' }, { value: 'b' }, { value: 'c' }] },
+    modelAsValues: model,
+    multiple,
+  })
+
+  expect(model.value).toBeNull()
+
+  multiple.value = true
+  expect(model.value).toEqual([])
+
+  model.value = ['a', 'b']
+  multiple.value = false
+  expect(model.value).toEqual('a')
+
+  multiple.value = true
+  expect(model.value).toEqual(['a'])
+})
+
+test.only('when values are not normalised initially, options are immediately accessible anyway', () => {
+  const { modelAsOptions } = factory({
+    options: { kind: 'simple', value: [{ value: 1 }] },
+    modelAsValues: ref([]),
+    multiple: false,
+  })
+
+  expect(modelAsOptions.value).toEqual(null)
 })

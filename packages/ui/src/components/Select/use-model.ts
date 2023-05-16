@@ -1,246 +1,88 @@
-import type { Ref } from 'vue'
-import type { SelectOption, SelectOptionGroup } from './types'
-import { whenever } from '@vueuse/core'
-import { and, not } from '@vueuse/math'
-import { isSelectOptions } from './utils'
+import type { MaybeRefOrGetter, Ref, ShallowRef } from 'vue'
+import { toValue } from 'vue'
+import type { OptionDataGetters, ParsedOptions } from './types'
+import { optionsIter, parseByMultiplicity, ValueByMultiplicity } from './utils'
+
+export interface UseSelectModelParams<T, U> {
+  /**
+   * Whether multiple choice is allowed or not.
+   */
+  multiple: MaybeRefOrGetter<boolean>
+  optionsParsed: MaybeRefOrGetter<ParsedOptions<T>>
+  /**
+   * Intended to be a reactive object
+   */
+  optionGetters: Pick<OptionDataGetters<T, U>, 'value'>
+  /**
+   * Intended to be mutated from the inside of the composable
+   */
+  modelAsValues: Ref<undefined | null | U | U[]>
+}
 
 export interface UseSelectModelReturn<T> {
-  /**
-   * Toggle value's selection state. Works different in single/multiple modes.
-   */
-  toggleSelection: (value: T) => void
-  toggleGroupSelection: (optionsGroup: SelectOptionGroup<T>) => void
-  select: (value: T) => void
-  unselect: (value: T) => void
-
-  /**
-   * Universal checking tool, agnostic to selection mode
-   */
-  isValueSelected: (value: T) => boolean
-
-  /**
-   * List of selected options (with only one item maximum in a single mode)
-   */
-  selectedOptions: Ref<SelectOption<T>[]>
-
-  isSomethingSelected: Ref<boolean>
-  isGroupSelected: (optionsGroup: SelectOptionGroup<T>) => boolean
+  modelAsOptions: Ref<null | T | T[]>
 }
 
-export interface UseSelectModelParams<T> {
-  multiple: Ref<boolean>
-  model: Ref<null | T | T[]>
-  options: Ref<readonly SelectOption<T>[] | readonly SelectOptionGroup<T>[]>
-  /**
-   * Enables options remembering for async search in multiple select when, for example,
-   * the options are changed on search query changes. If there are no options for selected values,
-   * then options without labels are created (e.g. for cases when model is changed externally)
-   */
-  storeSelectedOptions: Ref<boolean>
-  singleModeAutoClose: Ref<boolean>
-  /**
-   * Should be used to actually perform menu closing
-   */
-  onAutoClose: () => void
-}
+/**
+ * What this composable does:
+ *
+ * - Having a model in *values*, constructs reactive model in *options* mapped from the values.
+ * - Reactively transforms model according to the multiplicity mode (e.g. if the model value is `T`
+ *   and `multiple: true`, it transforms model to `[T]`, and vice versa).
+ *
+ * Drawback: `modelAsOptions` should not be mutated, but replaced with a new value:
+ *
+ * ```js
+ * modelAsOptions.value = [{ value: 1 }]
+ * ```
+ */
+export function useSelectModel<T, U>(params: UseSelectModelParams<T, U>): UseSelectModelReturn<T> {
+  const modelAsValuesByMultiplicity = shallowRef() as ShallowRef<ValueByMultiplicity<U>>
 
-export function useSelectModel<T = any>({
-  multiple,
-  model,
-  options,
-  singleModeAutoClose,
-  onAutoClose,
-  storeSelectedOptions,
-}: UseSelectModelParams<T>): UseSelectModelReturn<T> {
-  const triggerAutoClose = () => singleModeAutoClose.value && onAutoClose()
-
-  const modelAsArray = computed<T[]>(() => {
-    const val = model.value
-    if (Array.isArray(val)) return val
-    if (val !== null) return [val]
-    return []
-  })
-
-  const selectedSet = computed<Set<T>>(() => {
-    return new Set(modelAsArray.value)
-  })
-
-  const optionItems = computed(() => {
-    if (isSelectOptions(options.value)) {
-      return options.value
-    }
-
-    return options.value.flatMap((x) => x.items)
-  })
-
-  const storedOptions = shallowReactive(new Map<T, SelectOption<T>>())
-
-  let modelChangedManually = false
   watch(
-    modelAsArray,
-    () => {
-      if (modelChangedManually) {
-        modelChangedManually = false
-
-        return
+    [params.modelAsValues, params.multiple],
+    ([model, multiple]) => {
+      const parsed = parseByMultiplicity(model ?? null, multiple)
+      modelAsValuesByMultiplicity.value = parsed
+      if (parsed.value !== model) {
+        // normalise the model value
+        params.modelAsValues.value = parsed.value
       }
-
-      if (!storeSelectedOptions.value) {
-        return
-      }
-
-      storedOptions.forEach((_, value) => {
-        if (!modelAsArray.value.includes(value)) {
-          storedOptions.delete(value)
-        }
-      })
-      modelAsArray.value.forEach(rememberOption)
     },
     { immediate: true, flush: 'sync' },
   )
 
-  function rememberOption(value: T) {
-    if (storedOptions.has(value)) {
-      return
-    }
+  const modelAsOptions = computed<null | T | T[]>({
+    get() {
+      const parsed = modelAsValuesByMultiplicity.value
 
-    const option = optionItems.value.find((x) => x.value === value)
-
-    if (option) {
-      storedOptions.set(option.value, option)
-
-      return
-    }
-
-    storedOptions.set(value, { label: '', value })
-  }
-
-  function forgetOption(value: T) {
-    storedOptions.delete(value)
-  }
-
-  function isValueSelected(value: T): boolean {
-    return selectedSet.value.has(value)
-  }
-
-  function isGroupSelected(optionGroup: SelectOptionGroup<T>) {
-    return optionGroup.items.every((x) => isValueSelected(x.value))
-  }
-
-  function select(value: T): void {
-    if (multiple.value) {
-      modelChangedManually = true
-      model.value = [...new Set([...modelAsArray.value, value])]
-
-      if (storeSelectedOptions.value) {
-        rememberOption(value)
-      }
-    } else {
-      modelChangedManually = true
-
-      if (storeSelectedOptions.value) {
-        let oldValue = Array.isArray(model.value) ? model.value[0] : model.value
-
-        if (oldValue) {
-          forgetOption(oldValue)
+      if (parsed.mode === 'multiple') {
+        if (!parsed.value.length) return []
+        const valuesSet: Set<U> = new Set(parsed.value)
+        const predicate = (option: T) => valuesSet.has(params.optionGetters.value(option))
+        const options: T[] = []
+        for (const x of optionsIter(toValue(params.optionsParsed))) {
+          if (predicate(x)) options.push(x)
         }
+        return options
+      } else {
+        // single
+        if (!parsed.value) return null
+        for (const x of optionsIter(toValue(params.optionsParsed))) {
+          if (parsed.value === params.optionGetters.value(x)) return x
+        }
+        return null
       }
-
-      model.value = value
-
-      if (storeSelectedOptions.value) {
-        rememberOption(value)
+    },
+    set(value) {
+      const parsed = parseByMultiplicity(value, params.multiple.value)
+      if (parsed.mode === 'multiple') {
+        params.modelAsValues.value = parsed.value.map((x) => params.optionGetters.value(x))
+      } else {
+        params.modelAsValues.value = parsed.value && params.optionGetters.value(parsed.value)
       }
-
-      triggerAutoClose()
-    }
-  }
-
-  function unselect(value: T) {
-    if (multiple.value) {
-      modelChangedManually = true
-      model.value = modelAsArray.value.filter((x) => x !== value)
-
-      if (storeSelectedOptions.value) {
-        forgetOption(value)
-      }
-    } else {
-      modelChangedManually = true
-      model.value = null
-
-      if (storeSelectedOptions.value) {
-        forgetOption(value)
-      }
-
-      triggerAutoClose()
-    }
-  }
-
-  function toggleSelection(value: T): void {
-    isValueSelected(value) ? unselect(value) : select(value)
-  }
-
-  function toggleGroupSelection(optionGroup: SelectOptionGroup<T>): void {
-    const optionGroupValues = optionGroup.items.map((x) => x.value)
-
-    if (isGroupSelected(optionGroup)) {
-      const optionGroupSet = new Set(optionGroupValues)
-      const newModel = modelAsArray.value.filter((x) => !optionGroupSet.has(x))
-      modelChangedManually = true
-      model.value = newModel
-
-      if (storeSelectedOptions.value) {
-        newModel.forEach(forgetOption)
-      }
-
-      return
-    }
-
-    const newModel = [...new Set([...modelAsArray.value, ...optionGroupValues])]
-    modelChangedManually = true
-    model.value = newModel
-
-    if (storeSelectedOptions.value) {
-      newModel.forEach(rememberOption)
-    }
-  }
-
-  const selectedOptions = computed<SelectOption<T>[]>(() => {
-    if (storeSelectedOptions.value) {
-      return [...storedOptions.values()]
-    }
-
-    return optionItems.value.filter((x) => isValueSelected(x.value))
+    },
   })
 
-  const isSomethingSelected = computed<boolean>(() => !!selectedSet.value.size)
-
-  const isModelAnArray = computed<boolean>(() => Array.isArray(model.value))
-
-  function modelFromSingleToMultiple() {
-    const current = model.value as null | T
-    model.value = current === null ? [] : [current]
-  }
-
-  function modelFromMultipleToSingle() {
-    const current = model.value as T[]
-    model.value = current.length
-      ? // `!` is allowed because of the length assertion
-        current[0]!
-      : null
-  }
-
-  whenever(and(isModelAnArray, not(multiple)), modelFromMultipleToSingle, { immediate: true })
-  whenever(and(not(isModelAnArray), multiple), modelFromSingleToMultiple, { immediate: true })
-
-  return {
-    isValueSelected,
-    selectedOptions,
-    toggleSelection,
-    toggleGroupSelection,
-    select,
-    unselect,
-    isSomethingSelected,
-    isGroupSelected,
-  }
+  return { modelAsOptions }
 }

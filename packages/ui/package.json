@@ -20,6 +20,7 @@
   "scripts": {
     "sb:dev": "storybook dev -p 6006 --no-open",
     "sb:build": "storybook build",
+    "histoire:dev": "histoire dev",
     "test:unit": "vitest run",
     "test:after-build": "vitest run -c vitest.after-build.config.ts",
     "cy": "cypress open",
@@ -34,20 +35,23 @@
     "build:dts:rollup": "rollup -c rollup.dts.config.cjs"
   },
   "dependencies": {
+    "@floating-ui/vue": "^1.0.0",
+    "@headlessui/vue": "^1.7.13",
     "@popperjs/core": "^2.10",
     "@vue-kakuyaku/core": "^0.4",
-    "@vueuse/core": "^9.13",
-    "@vueuse/math": "^9.13",
+    "@vueuse/core": "^10.1",
+    "@vueuse/math": "^10.1",
     "date-fns": "^2.29",
     "escape-string-regexp": "^5",
     "focus-trap": "^7.3",
     "jsoneditor": "^9.5",
     "lodash-es": "^4.17",
     "type-fest": "^3.6",
-    "vue": "^3.2"
+    "vue": "^3.3"
   },
   "devDependencies": {
     "@esbuild-kit/cjs-loader": "^2.4.2",
+    "@histoire/plugin-vue": "^0.16.1",
     "@iconify/json": "^2.0.33",
     "@rollup/plugin-alias": "^4.0.3",
     "@soramitsu-ui/icons": "0.1.0",
@@ -65,7 +69,7 @@
     "@types/body-scroll-lock": "^3.1.0",
     "@types/jsoneditor": "^9.9.0",
     "@types/lodash-es": "^4.17.6",
-    "@vitejs/plugin-vue": "^4.2.1",
+    "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vue/test-utils": "^2.3.2",
     "axe-core": "^4.4.1",
@@ -73,6 +77,7 @@
     "cypress": "^12.11.0",
     "cypress-axe": "^1.0.0",
     "happy-dom": "^8.9.0",
+    "histoire": "^0.16.1",
     "immer": "^9.0.19",
     "postcss": "^8.4.16",
     "react": "^18.2.0",
@@ -84,12 +89,12 @@
     "tabbable": "^6.0.0",
     "ts-pattern": "^4.2.1",
     "typescript": "5.0.4",
-    "unimport": "^3.0.2",
-    "unplugin-auto-import": "^0.15.1",
+    "unimport": "^3.0.6",
+    "unplugin-auto-import": "^0.15.3",
     "unplugin-icons": "^0.15.3",
-    "vite": "^4.3.4",
+    "vite": "^4.3.6",
     "vite-plugin-windicss": "^1.8.10",
-    "vue-tsc": "1.2",
+    "vue-tsc": "~1.6.5",
     "windicss": "^3.5.4"
   }
 }

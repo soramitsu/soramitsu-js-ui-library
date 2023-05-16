@@ -1,29 +1,20 @@
-import type { InjectionKey, UnwrapRef } from 'vue'
-import { type SelectOption, type SelectOptionGroup, SelectSize } from './types'
-import { type UseSelectModelReturn } from './use-model'
+import type { InjectionKey } from 'vue'
+import type { OptionDataGetters, SelectButtonStyle, SelectOptionStyle, SelectSize } from './types'
 import { forceInject } from '@/util'
 
-export interface SelectApi<T> extends UnwrapRef<UseSelectModelReturn<T>> {
-  readonly options: UnwrapRef<SelectOption<T>[] | SelectOptionGroup<T>[]>
+export interface SelectApi<T, U> {
   readonly multiple: boolean
   readonly disabled: boolean
-  readonly loading: boolean
-  readonly label: string | null
   readonly size: SelectSize
-  readonly noAutoClose: boolean
-  readonly searchQuery: string
-  readonly searchExternal: boolean
-
-  readonly isMenuOpened: boolean
-  /**
-   * Set menu visibility manually
-   */
-  menuToggle: (value?: boolean) => void
-  updateSearchQuery: (value: string) => void
+  readonly optionStyle: SelectOptionStyle
+  readonly buttonStyle: SelectButtonStyle
+  readonly optionGetters: OptionDataGetters<T, U>
+  readonly modelAsOptions: null | T | T[]
+  readonly isEmptySelection: boolean
 }
 
-export const SELECT_API_KEY: InjectionKey<SelectApi<any>> = Symbol('SelectAPI')
+export const SELECT_API_KEY: InjectionKey<SelectApi<any, any>> = Symbol('SelectAPI')
 
-export function useSelectApi<T = any>(): SelectApi<T> {
+export function useSelectApi<T, U>(): SelectApi<T, U> {
   return forceInject(SELECT_API_KEY)
 }

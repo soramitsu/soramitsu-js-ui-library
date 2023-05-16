@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSelectApi } from './api'
-import { type SelectOptionGroup, SelectOptionType, SelectSize } from './types'
+import { type SelectOptionGroup, SelectOptionStyle, SelectSize } from './types'
 import SSelectOption from './SSelectOption.vue'
 import type { ComputedRef } from 'vue'
 import { isSelectOptions } from '@/components/Select/utils'
@@ -10,7 +10,7 @@ import escapeStringRegexp from 'escape-string-regexp'
 import type { MaybeElementRef } from '@vueuse/core'
 
 const props = defineProps<{
-  itemType: SelectOptionType
+  itemType: SelectOptionStyle
   search: boolean
 }>()
 

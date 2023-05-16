@@ -6,7 +6,8 @@ import {
   IconChevronsRight16,
 } from '@/components/icons'
 import { not } from '@vueuse/math'
-import { SDropdown } from '@/components'
+// FIXME
+// import { SDropdown } from '@/components'
 
 const PAGINATION_MAX_PAGES_SELECTABLE = 7
 const PAGINATION_JUMP_SIZE = PAGINATION_MAX_PAGES_SELECTABLE - 2

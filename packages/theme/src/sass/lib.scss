@@ -39,6 +39,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'primary-hover': #c6021a,
           'primary-pressed': #bb0218,
           'primary-focused': #b10217,
+          'primary-outline': rgba(208, 2, 27, 0.5),
           'primary-background': #fae6e8,
           'primary-hover-background': #f6ccd1,
           'primary-pressed-background': #f1b3bb,

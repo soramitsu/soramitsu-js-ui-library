@@ -1,5 +1,5 @@
 import type { SelectOption, SelectOptionGroup } from '@/components'
-import { SelectOptionType, SelectSize } from '@/components'
+import { SelectOptionStyle, SelectSize } from '@/components'
 
 export const OPTIONS: SelectOption[] = [
   {
@@ -61,7 +61,7 @@ export const OPTION_GROUPS: SelectOptionGroup[] = [
 
 export const COMMON_ARGS = {
   size: SelectSize.Md,
-  optionType: SelectOptionType.Default,
+  optionType: SelectOptionStyle.Default,
   disabled: false,
   loading: false,
   multiple: false,
@@ -77,6 +77,6 @@ export const COMMON_ARG_TYPES = {
   },
   optionType: {
     control: 'inline-radio',
-    options: Object.values(SelectOptionType),
+    options: Object.values(SelectOptionStyle),
   },
 }

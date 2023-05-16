@@ -6,9 +6,8 @@
 
 import type { Component } from 'vue'
 import { SButton } from './Button'
-// import { SJsonInput } from './JsonInput'
 import { SModal, SModalCard } from './Modal'
-import { SSelect, SDropdown, SSelectBase, SSelectButton, SSelectChevron, SSelectInput, SSelectOption } from './Select'
+import { SSelect } from './Select'
 import { SToastsDisplay, SToastsProvider } from './Toasts'
 import { SNotificationBody, SNotificationsProvider, SUseNotification } from './Notifications'
 import { SAlert } from './Alert'
@@ -40,12 +39,6 @@ export const COMPONENTS: Record<string, Component> = {
   SModal,
   SModalCard,
   SSelect,
-  SDropdown,
-  SSelectBase,
-  SSelectButton,
-  SSelectChevron,
-  SSelectInput,
-  SSelectOption,
   SToastsDisplay,
   SToastsProvider,
   SNotificationBody,

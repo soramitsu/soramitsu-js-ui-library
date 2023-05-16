@@ -1,30 +1,27 @@
 <script setup lang="ts">
 import { useSelectApi } from './api'
-import { SelectButtonType, SelectSize } from './types'
+import { SelectButtonStyle, SelectSize } from './types'
 import SSelectChevron from './SSelectChevron'
+import { ListboxButton, ListboxLabel } from '@headlessui/vue'
 
-const props = withDefaults(
-  defineProps<{
-    type?: SelectButtonType
-  }>(),
-  {
-    type: SelectButtonType.Default,
-  },
-)
+const props = defineProps<{
+  label: string
+}>()
 
 const api = useSelectApi()
 
-function toggle() {
-  api.menuToggle()
-}
-
 const formattedSelectedValue = computed<string | null>(() => {
-  const opts = api.selectedOptions
-  if (opts.length) {
-    if (opts.length === 1) {
-      return opts[0]!.label
+  const value = api.modelAsOptions
+
+  if (Array.isArray(value) && value.length) {
+    if (value.length) {
+      if (value.length === 1) {
+        return api.optionGetters.label(value[0]!)
+      }
+      return `${value.length} selected`
     }
-    return `${opts.length} selected`
+  } else if (value) {
+    return api.optionGetters.label(value)
   }
   return null
 })
@@ -39,46 +36,33 @@ function typography(): string {
       return 'sora-tpg-p4'
   }
 }
-
-const slots = useSlots()
 </script>
 
 <template>
-  <div
+  <ListboxButton
+    v-slot="{ open, disabled }"
     :class="[
       's-select-btn',
-      `s-select-btn_${type}`,
+      `s-select-btn_${api.buttonStyle}`,
       `s-select-btn_size_${api.size}`,
       typography(),
       {
-        's-select-btn_empty': !api.isSomethingSelected,
-        's-select-btn_disabled': api.disabled,
+        's-select-btn_empty': api.isEmptySelection,
+        's-select-btn_disabled': disabled,
       },
     ]"
-    @click="toggle"
   >
-    <span
-      v-if="!!slots.label || api.label"
-      class="s-select-btn__label"
-    >
-      <slot
-        name="label"
-        v-bind="api"
-      >
-        {{ api.label }}
-      </slot>
-      <template v-if="api.isSomethingSelected">:</template>
-    </span>
+    <ListboxLabel class="s-select-btn__label">
+      <template v-if="formattedSelectedValue">
+        {{ label }}: <span class="s-select-btn__selection">{{ formattedSelectedValue }}</span>
+      </template>
+      <template v-else>
+        {{ label }}
+      </template>
+    </ListboxLabel>
 
-    <span
-      v-if="api.isSomethingSelected"
-      class="s-select-btn__selection"
-    >
-      {{ formattedSelectedValue }}
-    </span>
-
-    <SSelectChevron :rotate="api.isMenuOpened" />
-  </div>
+    <SSelectChevron :rotate="open" />
+  </ListboxButton>
 </template>
 
 <style lang="scss" scoped>
@@ -98,6 +82,10 @@ const slots = useSlots()
     &:hover {
       background: theme.token-as-var('sys.color.background-hover');
     }
+  }
+
+  &__selection {
+    color: theme.token-as-var('sys.color.content-primary');
   }
 
   &_inline {
@@ -143,6 +131,11 @@ const slots = useSlots()
     @include x-paddings('md', 10px);
     @include x-paddings('lg', 16px);
     @include x-paddings('xl', 24px);
+  }
+
+  &:focus-visible,
+  &:focus {
+    outline: 2px solid theme.token-as-var('sys.color.primary-outline');
   }
 }
 </style>

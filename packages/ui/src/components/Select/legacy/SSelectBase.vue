@@ -4,6 +4,7 @@ import { useSelectModel } from './use-model'
 import { type SelectApi, SELECT_API_KEY } from './api'
 import { and, not } from '@vueuse/math'
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
+import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
 
 const props = withDefaults(
   defineProps<{
@@ -96,7 +97,7 @@ const modeling = useSelectModel({
 const [showPopper, togglePopper] = useToggle(false)
 
 // close popper if select is disabled
-whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
+whenever(and(disabled, showPopper), () => togglePopper(false))
 
 const searchQuery = ref('')
 whenever(and(not(showPopper), not(searchExternal)), () => {
@@ -129,33 +130,42 @@ provide(SELECT_API_KEY, api)
 </script>
 
 <template>
-  <div>
-    <SPopover
-      v-model:show="showPopper"
-      :same-width="sameWidthPopper"
-      placement="bottom-start"
-      trigger="manual"
-      distance="4"
-      @click-outside="togglePopper(false)"
-    >
-      <template #trigger>
-        <div>
-          <slot name="control" />
-        </div>
-      </template>
+  <Listbox v-model="model">
+    <!--    <slot name="control" />-->
+    <!--    <ListboxButton>eeh?</ListboxButton>-->
 
-      <template #popper>
-        <SPopoverWrappedTransition
-          name="s-select-dropdown-transition"
-          eager
-          :wrapper-attrs="{ 'class': 'z-10' }"
-          :inner-wrapper-attrs="{ 'class': { 'w-full': sameWidthPopper } }"
-        >
-          <slot name="dropdown" />
-        </SPopoverWrappedTransition>
-      </template>
-    </SPopover>
-  </div>
+    <!--    <ListboxOptions>-->
+    <!--      <ListboxOption v-for="x in options" />-->
+    <!--    </ListboxOptions>-->
+  </Listbox>
+
+  <!--  <div>-->
+  <!--    <SPopover-->
+  <!--      v-model:show="showPopper"-->
+  <!--      :same-width="sameWidthPopper"-->
+  <!--      placement="bottom-start"-->
+  <!--      trigger="manual"-->
+  <!--      distance="4"-->
+  <!--      @click-outside="togglePopper(false)"-->
+  <!--    >-->
+  <!--      <template #trigger>-->
+  <!--        <div>-->
+  <!--          <slot name="control" />-->
+  <!--        </div>-->
+  <!--      </template>-->
+
+  <!--      <template #popper>-->
+  <!--        <SPopoverWrappedTransition-->
+  <!--          name="s-select-dropdown-transition"-->
+  <!--          eager-->
+  <!--          :wrapper-attrs="{ 'class': 'z-10' }"-->
+  <!--          :inner-wrapper-attrs="{ 'class': { 'w-full': sameWidthPopper } }"-->
+  <!--        >-->
+  <!--          <slot name="dropdown" />-->
+  <!--        </SPopoverWrappedTransition>-->
+  <!--      </template>-->
+  <!--    </SPopover>-->
+  <!--  </div>-->
 </template>
 
 <style lang="scss">

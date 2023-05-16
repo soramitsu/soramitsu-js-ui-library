@@ -145,6 +145,9 @@ export default defineConfig({
         // ...but if it does in the future, I'd add a manual preset as
         // `{ from: '@vueuse/core' }`
         '@vueuse/core',
+
+        // this is not auto-imported from Vue for some reason
+        { from: 'vue', imports: ['toValue'] },
       ],
       eslintrc: {
         enabled: true,

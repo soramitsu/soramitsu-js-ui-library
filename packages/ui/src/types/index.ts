@@ -9,3 +9,5 @@ export const Status = {
 } as const
 
 export type Status = (typeof Status)[keyof typeof Status]
+
+export type PrimitiveKey = string | number | symbol
