@@ -6,6 +6,6 @@ def pipeline = new org.js.LibPipeline(steps: this,
     libExamplesBuildCmds: ['yarn storybook:build'],
     sonarProjectName: 'soramitsu-js-ui-library',
     sonarProjectKey: 'jp.co.soramitsu:soramitsu-js-ui-library',
-    timeoutOption: '2'
+    timeoutOption: '0.5'
     )
 pipeline.runPipeline()
