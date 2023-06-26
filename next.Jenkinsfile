@@ -2,7 +2,7 @@
 def pipeline = new org.js.LibPipeline(
     steps:                this,
     packageManager:       'yarn',
-    buildDockerImage:     'build-tools/node:14-ubuntu-cypress',
+    buildDockerImage:     'build-tools/node:16-ubuntu-cypress',
     npmLoginEmail:        'admin@soramitsu.co.jp',
     dockerFileName:       'next.Dockerfile',
     dockerImageName:      'soramitsu/soramitsu-js-ui-library',
