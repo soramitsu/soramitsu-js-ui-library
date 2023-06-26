@@ -7,7 +7,7 @@ import CustomPanel from './SDatePickerPanelCustom.vue'
 import { IconArrowsChevronBottom24 } from '@/components/icons'
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { and } from '@vueuse/math'
-import { format } from 'date-fns'
+import { format, isAfter, isBefore, isSameDay, startOfDay } from 'date-fns'
 
 import {
   DatePickerType,
@@ -29,22 +29,39 @@ interface Props {
   time?: boolean
   disabled?: boolean
   shortcuts?: DatePickerOptions
+  dateFilter?: (d: Date) => boolean
+  min?: Date | null
+  max?: Date | null
 }
 const props = withDefaults(defineProps<Props>(), {
   type: 'day',
   time: false,
   disabled: false,
   shortcuts: () => DEFAULT_SHORTCUTS,
+  dateFilter: () => true,
+  min: null,
+  max: null,
 })
 
 const innerModelValue = ref<ModelValueType>(props.modelValue)
 
 const emit = defineEmits(['update:modelValue'])
 
+const dateFilter = (d: Date) => {
+  const minDate = props.min && startOfDay(new Date(props.min))
+  const maxDate = props.max && startOfDay(new Date(props.max))
+
+  return (
+    props.dateFilter(d) &&
+    (!minDate || isAfter(d, minDate) || isSameDay(d, minDate)) &&
+    (!maxDate || isBefore(d, maxDate) || isSameDay(d, maxDate))
+  )
+}
 const datePickerConfig: DatePickerApi = reactive({
   type: props.type,
   time: props.time,
   disabled: props.disabled,
+  dateFilter,
 })
 
 provide(DATE_PICKER_API_KEY, datePickerConfig)

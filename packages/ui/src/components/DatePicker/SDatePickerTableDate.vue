@@ -86,6 +86,7 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
       day: 0,
       month: 0,
       text: 0,
+      disabled: false,
     }
 
     const index = i
@@ -158,6 +159,9 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
         cell.month = month.value === 11 ? 0 : month.value + 1
       }
     }
+
+    cell.disabled = !state.dateFilter(new Date(year.value, cell.month, cell.text))
+
     cellsArray.push(cell)
   }
   return cellsArray
@@ -171,6 +175,11 @@ const cellMatchesDate = (cell: types.DateTableCell, date: Date) => {
 const getCellClasses = (cell: types.DateTableCell) => {
   const selectionMode = state.type
   const classes = []
+
+  if (cell.disabled) {
+    classes.push('disabled')
+  }
+
   if (cell.type === 'normal' || cell.type === 'today') {
     classes.push('available')
     if (cell.type === 'today') {
@@ -229,7 +238,13 @@ const handleClick = (ev: any) => {
   const idx = target.getAttribute('index')
   if (!idx) return
   const cell = dateTableCells.value[idx]
+
+  if (cell.disabled) {
+    return
+  }
+
   const newDate = new Date(year.value, cell.month, cell.text)
+
   if (state.type === 'range') {
     if (!props.stateStore.rangeState.selecting) {
       emit('pick', {
@@ -302,7 +317,7 @@ const handleClick = (ev: any) => {
       :class="getCellClasses(cell)"
       :index="idx"
     >
-      <span>{{ cell.text }}</span>
+      <span class="date-table__cell-text">{{ cell.text }}</span>
       <span
         v-if="state.time"
         v-show="cell.time"
@@ -365,32 +380,32 @@ const handleClick = (ev: any) => {
         }
       }
 
-      &.available:hover:not(.start-date, .end-date, .current) {
+      &.disabled {
+        cursor: not-allowed;
+      }
+
+      &.disabled .date-table__cell-text {
+        opacity: 0.4;
+      }
+
+      &.available:hover:not(.start-date, .end-date, .current, .disabled) {
         color: theme.token-as-var('sys.color.primary');
       }
 
       &.in-range {
         background-color: theme.token-as-var('sys.color.background');
-        background-color: theme.token-as-var('sys.color.background-hover');
       }
 
-      &.current:not(.disabled) {
-        color: theme.token-as-var('sys.color.util.surface');
-        background-color: theme.token-as-var('sys.color.primary');
-        border-radius: 2px;
-      }
-
+      &.current,
       &.end-date,
       &.start-date {
         color: theme.token-as-var('sys.color.util.surface');
         background-color: theme.token-as-var('sys.color.primary');
         border-radius: 2px;
-      }
 
-      &.disabled {
-        background-color: theme.token-as-var('sys.color.on-disabled');
-        opacity: 1;
-        cursor: not-allowed;
+        &.disabled .date-table__cell-text {
+          opacity: 0.8;
+        }
       }
 
       &.selected {

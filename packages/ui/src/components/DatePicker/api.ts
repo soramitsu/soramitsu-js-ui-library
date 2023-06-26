@@ -6,6 +6,7 @@ export interface DatePickerApi {
   type: DatePickerType
   time: boolean
   disabled: boolean
+  dateFilter: (d: Date) => boolean
 }
 
 export const DATE_PICKER_API_KEY: InjectionKey<DatePickerApi> = Symbol('datePicker')

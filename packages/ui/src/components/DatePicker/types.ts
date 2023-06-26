@@ -49,4 +49,5 @@ export interface DateTableCell {
   day: number
   month: number
   text: number
+  disabled: boolean
 }
