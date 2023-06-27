@@ -49,6 +49,13 @@ module.exports = {
         'vue/one-component-per-file': 'off',
       },
     },
+    // TODO: delete when `as` to `satisfies` replaced
+    {
+      files: ['**/packages/ui/stories/**/*.stories.ts'],
+      rules: {
+        '@typescript-eslint/consistent-type-assertions': 'off',
+      },
+    },
     {
       files: ['**/*.spec.ts', '**/*.spec.cy.ts'],
       rules: {
