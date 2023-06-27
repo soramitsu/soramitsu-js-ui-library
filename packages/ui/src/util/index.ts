@@ -29,7 +29,7 @@ export function bareMetalVModel<T, K extends string = 'modelValue'>(
 
 export function getComponentName(comp: Component): string | undefined {
   if (typeof comp === 'function') {
-    const funcComponent = comp as FunctionalComponent;
+    const funcComponent = comp as FunctionalComponent
 
     return funcComponent.displayName || funcComponent.name
   }
