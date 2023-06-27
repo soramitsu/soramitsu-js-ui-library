@@ -1,4 +1,6 @@
 import { defineConfig } from 'cypress'
+import viteConfig from './vite.config'
+import { mergeConfig } from 'vite'
 import fs from 'fs'
 
 function useAxeCoreReader(on: Cypress.PluginEvents) {
@@ -29,7 +31,7 @@ export default defineConfig({
       bundler: 'vite',
 
       // additional opts to the main `vite.config.ts`
-      viteConfig: {
+      viteConfig: mergeConfig(viteConfig, {
         resolve: {
           alias: {
             vue: 'vue/dist/vue.esm-bundler.js',
@@ -39,7 +41,7 @@ export default defineConfig({
           include: ['cypress-plugin-tab'],
           exclude: ['platform'],
         },
-      },
+      }),
     },
   },
 })

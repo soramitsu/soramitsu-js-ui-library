@@ -68,7 +68,7 @@
     "@vue/test-utils": "^2",
     "axe-core": "^4.4.1",
     "body-scroll-lock": "^4.0.0-beta.0",
-    "cypress": "^10.6.0",
+    "cypress": "^12.16.0",
     "cypress-axe": "^1.0.0",
     "del-cli": "^4.0.1",
     "esbuild-register": "^3.3.2",
