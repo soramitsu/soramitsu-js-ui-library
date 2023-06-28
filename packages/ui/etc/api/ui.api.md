@@ -116,6 +116,8 @@ export interface DateTableCell {
     // (undocumented)
     day: number;
     // (undocumented)
+    disabled: boolean;
+    // (undocumented)
     end: boolean;
     // (undocumented)
     inRange: boolean;
@@ -517,11 +519,17 @@ type: string;
 time: boolean;
 disabled: boolean;
 shortcuts: () => DatePickerOptions;
+dateFilter: () => boolean;
+min: null;
+max: null;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<Props_7>, {
 type: string;
 time: boolean;
 disabled: boolean;
 shortcuts: () => DatePickerOptions;
+dateFilter: () => boolean;
+min: null;
+max: null;
 }>>> & {
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
@@ -529,6 +537,9 @@ type: DatePickerType;
 disabled: boolean;
 time: boolean;
 shortcuts: DatePickerOptions;
+dateFilter: (d: Date) => boolean;
+min: Date | null;
+max: Date | null;
 }>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
