@@ -29,10 +29,11 @@ export function bareMetalVModel<T, K extends string = 'modelValue'>(
 
 export function getComponentName(comp: Component): string | undefined {
   if (typeof comp === 'function') {
-    // functional component
-    return (comp as FunctionalComponent).displayName
+    const funcComponent = comp as FunctionalComponent
+
+    return funcComponent.displayName || funcComponent.name
   }
-  return comp.name
+  return comp.name || comp.__name
 }
 
 let incrementalCounter = 0
