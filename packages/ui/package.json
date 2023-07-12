@@ -22,7 +22,7 @@
   },
   "scripts": {
     "sb:build": "storybook build",
-    "sb:serve": "storybook dev -p 6006",
+    "sb:serve": "storybook dev -p 6006 --disable-telemetry",
     "test:unit": "vitest run",
     "test:after-build": "vitest run -c vitest.after-build.config.ts",
     "cy": "cypress open",
