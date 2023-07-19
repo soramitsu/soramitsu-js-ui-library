@@ -425,6 +425,7 @@ else updateModelValue()
             :class="[`${gridType}`, { 'narrow': showStateView }]"
           >
             <OptionsPanel
+              v-if="type !== 'pick'"
               :type="type"
               :menu-state="menuState"
               :options="shortcuts"

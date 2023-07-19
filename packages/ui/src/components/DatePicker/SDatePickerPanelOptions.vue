@@ -27,10 +27,7 @@ const finalOptions = computed((): Required<DatePickerOptions> => {
 </script>
 
 <template>
-  <div
-    v-if="state.type !== 'pick'"
-    class="s-date-picker-options-panel sora-tpg-p3"
-  >
+  <div class="s-date-picker-options-panel sora-tpg-p3">
     <p
       v-for="(item, idx) in finalOptions[state.type]"
       :key="idx"
