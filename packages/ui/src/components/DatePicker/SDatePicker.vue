@@ -70,13 +70,11 @@ provide(DATE_PICKER_API_KEY, datePickerConfig)
 
 const today = new Date()
 
-const rangeStateRef = ref<RangeState>({
+const rangeState = ref<RangeState>({
   selecting: false,
   startDate: new Date(today.getFullYear(), today.getMonth(), 1) || null,
   endDate: new Date(today.getFullYear(), today.getMonth(), 7) || null,
 })
-
-const rangeState = toReactive(rangeStateRef)
 
 const dayState = ref<DateState>(new Date())
 const pickState = ref<PickState>([])
@@ -85,7 +83,7 @@ const stateStore = computed<StateStore>(() => {
   return {
     dayState: dayState.value,
     pickState: pickState.value,
-    rangeState: rangeState,
+    rangeState: rangeState.value,
   }
 })
 
@@ -95,8 +93,8 @@ const init = () => {
   } else if (props.type === 'pick') {
     pickState.value = innerModelValue.value as PickState
   } else {
-    rangeStateRef.value.startDate = (innerModelValue.value as Date[])[0]
-    rangeStateRef.value.endDate = (innerModelValue.value as Date[])[1]
+    rangeState.value.startDate = (innerModelValue.value as Date[])[0]
+    rangeState.value.endDate = (innerModelValue.value as Date[])[1]
   }
   updateShowedMonths()
 }
@@ -109,9 +107,9 @@ const updateModelValue = () => {
     innerModelValue.value = pickState.value
     save()
   } else {
-    innerModelValue.value = [rangeState.startDate as Date, rangeState.endDate as Date]
+    innerModelValue.value = [rangeState.value.startDate as Date, rangeState.value.endDate as Date]
 
-    if (rangeState.endDate) {
+    if (rangeState.value.endDate) {
       save()
     }
   }
@@ -127,7 +125,7 @@ const onDatePick = (data: RangeOptionValue | Date | Date[]) => {
     setDateForTimeFieldName(pickState.value.length - 1)
   } else {
     let rsData = data as RangeOptionValue
-    rangeStateRef.value = { startDate: rsData.startDate, endDate: rsData.endDate, selecting: rsData.selecting }
+    rangeState.value = { startDate: rsData.startDate, endDate: rsData.endDate, selecting: rsData.selecting }
     setDateForTimeFieldName(rsData.selectedField)
   }
   updateModelValue()
@@ -148,7 +146,7 @@ const updateShowedMonths = () => {
       date = dayState.value
       break
     case 'range':
-      date = rangeState[dateForTime.value as keyof RangeState] as Date | null
+      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
       break
     default:
   }
@@ -274,9 +272,9 @@ const updateTime = (time: string) => {
       dayState.value = new Date(date.getFullYear(), date.getMonth(), date.getDate(), arr[0], arr[1], 0)
       break
     case 'range':
-      date = rangeState[dateForTime.value as keyof RangeState] as Date | null
+      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
       if (!date) return
-      ;(rangeState as any)[dateForTime.value as keyof RangeState] = new Date(
+      ;(rangeState.value as any)[dateForTime.value as keyof RangeState] = new Date(
         date.getFullYear(),
         date.getMonth(),
         date.getDate(),
@@ -302,7 +300,7 @@ const currentValueTime = computed(() => {
       date = dayState.value
       break
     case 'range':
-      date = rangeState[dateForTime.value as keyof RangeState] as Date | null
+      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
       break
     default:
   }
@@ -331,8 +329,8 @@ const updateCustomInput = (data: any, field?: string) => {
       dayState.value = data
       break
     case 'range':
-      if (data) (rangeState as any)[field as keyof RangeState] = data
-      rangeStateRef.value.selecting = false
+      if (data) (rangeState.value as any)[field as keyof RangeState] = data
+      rangeState.value.selecting = false
       break
     default:
   }
