@@ -355,7 +355,7 @@ const formatDate = (date: any) => {
 
 // #region POPPER
 const [showPopper, togglePopper] = useToggle(false)
-whenever(and(props.disabled, showPopper), () => togglePopper(false), { immediate: true })
+whenever(and(() => props.disabled, showPopper), () => togglePopper(false), { immediate: true })
 
 const updateShow = () => {
   if (!props.disabled) togglePopper(true)
