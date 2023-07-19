@@ -25,22 +25,6 @@ const isRange = computed(() => {
   return state.type === 'range'
 })
 
-const firstCalendarModelValue = computed(() => {
-  if (!props.modelValue) return new Date()
-
-  if (state.type === 'range') {
-    const modelValue = props.modelValue as Date[]
-    return modelValue[0]
-  } else {
-    return props.modelValue
-  }
-})
-
-const calendarToModelValue = computed(() => {
-  if (!props.modelValue) return new Date()
-  return props.modelValue as Date[][1]
-})
-
 const nextMonthShowState = computed(() => {
   const month = props.showState.month > 10 ? 0 : props.showState.month + 1
   const year = month === 0 ? props.showState.year + 1 : props.showState.year
@@ -89,7 +73,6 @@ const updateHoveredDate = (date: Date) => {
       <DatePanel
         v-show="currentView === 'dates'"
         :show-state="showState"
-        :value="firstCalendarModelValue"
         :state-store="stateStore"
         :hovered-date="hoveredDate"
         @change-view="changeView"
@@ -105,7 +88,6 @@ const updateHoveredDate = (date: Date) => {
       <DatePanel
         v-show="currentView === 'dates'"
         :show-state="nextMonthShowState"
-        :value="calendarToModelValue"
         :state-store="stateStore"
         :hovered-date="hoveredDate"
         @change-view="changeView"

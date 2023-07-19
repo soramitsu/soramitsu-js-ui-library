@@ -20,7 +20,6 @@ const getFirstDayOfMonth = (date: Date) => {
 
 interface Props {
   firstDayOfWeek?: number
-  value: Date | Date[]
   showState: types.ShowState
   stateStore: types.StateStore
   hoveredDate: Date
@@ -28,7 +27,6 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   firstDayOfWeek: 1,
-  value: () => new Date(),
 })
 
 const state: DatePickerApi = useDatePickerApi()
@@ -180,7 +178,9 @@ const getCellClasses = (cell: types.DateTableCell) => {
     classes.push('disabled')
   }
 
-  if (cell.type === 'normal' || cell.type === 'today') {
+  const isCellInCurrentMonth = cell.type === 'normal' || cell.type === 'today';
+
+  if (isCellInCurrentMonth) {
     classes.push('available')
     if (cell.type === 'today') {
       classes.push('today')
@@ -190,19 +190,20 @@ const getCellClasses = (cell: types.DateTableCell) => {
   }
   if (
     selectionMode === 'day' &&
-    (cell.type === 'normal' || cell.type === 'today') &&
-    cellMatchesDate(cell, props.value as Date)
+    props.stateStore.dayState &&
+    isCellInCurrentMonth &&
+    cellMatchesDate(cell, props.stateStore.dayState)
   ) {
     classes.push('current')
   }
   if (
     selectionMode === 'pick' &&
-    (cell.type === 'normal' || cell.type === 'today') &&
-    props.stateStore.pickState.some((item: Date) => cellMatchesDate(cell, item))
+    isCellInCurrentMonth &&
+    props.stateStore.pickState?.some((item: Date) => cellMatchesDate(cell, item))
   ) {
     classes.push('start-date')
   }
-  if (cell.inRange && (cell.type === 'normal' || cell.type === 'today')) {
+  if (cell.inRange && isCellInCurrentMonth) {
     classes.push('in-range')
     if (cell.start) {
       classes.push('start-date')
