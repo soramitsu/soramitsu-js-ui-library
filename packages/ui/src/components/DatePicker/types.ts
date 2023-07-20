@@ -1,3 +1,5 @@
+import { CUSTOM_OPTION_VALUE } from '@/components/DatePicker/consts'
+
 export type DatePickerType = 'day' | 'range' | 'pick'
 
 export type ModelValueType = Date[] | Date | null | undefined
@@ -27,10 +29,23 @@ export interface PresetOption<T> {
   value: T
 }
 
-export interface DatePickerOptions {
+type PresetOptionCustom = PresetOption<typeof CUSTOM_OPTION_VALUE>
+export type PossiblePresetOption =
+  | PresetOption<Date>
+  | PresetOption<[Date, Date]>
+  | PresetOption<Date[]>
+  | PresetOptionCustom
+
+export interface DatePickerOptionsProp {
   day?: PresetOption<Date>[]
   range?: PresetOption<[Date, Date]>[]
   pick?: PresetOption<Date[]>[]
+}
+
+export interface DatePickerOptions {
+  day: [...PresetOption<Date>[], PresetOptionCustom]
+  range: [...PresetOption<[Date, Date]>[], PresetOptionCustom]
+  pick: [...PresetOption<Date[]>[], PresetOptionCustom]
 }
 
 export interface ShowState {

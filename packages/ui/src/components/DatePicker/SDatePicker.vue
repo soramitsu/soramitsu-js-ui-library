@@ -10,25 +10,27 @@ import { and } from '@vueuse/math'
 import { format, isAfter, isBefore, isSameDay, startOfDay } from 'date-fns'
 
 import {
-  DatePickerType,
-  RangeState,
-  DateState,
-  PickState,
-  StateStore,
-  ShowState,
-  RangeOptionValue,
-  ModelValueType,
   DatePickerOptions,
+  DatePickerOptionsProp,
+  DatePickerType,
+  DateState,
+  ModelValueType,
+  PickState,
+  PossiblePresetOption,
+  RangeOptionValue,
+  RangeState,
+  ShowState,
+  StateStore,
 } from './types'
-import { DatePickerApi, DATE_PICKER_API_KEY } from './api'
-import { DEFAULT_SHORTCUTS } from './consts'
+import { DATE_PICKER_API_KEY, DatePickerApi } from './api'
+import { CUSTOM_OPTION, CUSTOM_OPTION_VALUE, DEFAULT_SHORTCUTS } from './consts'
 
 interface Props {
   modelValue: ModelValueType
   type?: DatePickerType
   time?: boolean
   disabled?: boolean
-  shortcuts?: DatePickerOptions
+  shortcuts?: DatePickerOptionsProp
   dateFilter?: (d: Date) => boolean
   min?: Date | null
   max?: Date | null
@@ -129,7 +131,6 @@ const onDatePick = (data: RangeOptionValue | Date | Date[]) => {
     setDateForTimeFieldName(rsData.selectedField)
   }
   updateModelValue()
-  menuState.value = 'Custom'
 }
 
 // #endregion
@@ -175,8 +176,14 @@ const showStateView = computed(() => {
 // #endregion
 
 // #region OPTIONS_PANEL
-const onMenuClick = (data: Date | [Date, Date] | Date[], label: string) => {
-  let processedData: RangeOptionValue | Date | Date[] = data
+const onMenuClick = (data: PossiblePresetOption) => {
+  menuState.value = data
+
+  if (data.value === CUSTOM_OPTION_VALUE) {
+    return
+  }
+
+  let processedData: RangeOptionValue | Date | Date[] = data.value
 
   if (Array.isArray(data) && data.length === 2) {
     processedData = {
@@ -189,10 +196,52 @@ const onMenuClick = (data: Date | [Date, Date] | Date[], label: string) => {
 
   onDatePick(processedData)
   updateShowedMonths()
-  menuState.value = label
 }
 
-const menuState = ref<string>('')
+const finalShortcuts = computed((): Required<DatePickerOptions> => {
+  return {
+    day: [...(props.shortcuts.day ?? []), CUSTOM_OPTION],
+    range: [...(props.shortcuts.range ?? []), CUSTOM_OPTION],
+    pick: [...(props.shortcuts.pick ?? []), CUSTOM_OPTION],
+  }
+})
+
+const isEqualDateArrays = (a: Date[], b: Date[]) => {
+  for (const i in a) {
+    if (!isSameDay(a[i], b[i])) {
+      return false
+    }
+  }
+
+  return true
+}
+
+const isSameValue = (a: ModelValueType, b: ModelValueType) => {
+  return (
+    (a === null && b === null) ||
+    (a === undefined && b === undefined) ||
+    (a instanceof Date && b instanceof Date && isSameDay(a, b)) ||
+    (Array.isArray(a) && Array.isArray(b) && isEqualDateArrays(a, b))
+  )
+}
+
+const menuState = ref<PossiblePresetOption>(CUSTOM_OPTION)
+watch(
+  innerModelValue,
+  () => {
+    for (const shortcut of finalShortcuts.value[props.type]) {
+      if (shortcut.value === CUSTOM_OPTION_VALUE) continue
+
+      if (isSameValue(innerModelValue.value, shortcut.value)) {
+        menuState.value = shortcut
+        return
+      }
+    }
+
+    menuState.value = CUSTOM_OPTION
+  },
+  { immediate: true },
+)
 
 // #endregion
 
@@ -212,8 +261,8 @@ const changeView = (viewName: string) => {
 }
 
 const headTitle = computed(() => {
-  if (menuState.value && menuState.value !== 'Custom') {
-    return menuState.value
+  if (menuState.value.value !== CUSTOM_OPTION_VALUE) {
+    return menuState.value.label
   }
 
   try {
@@ -371,7 +420,7 @@ const saveAndClose = () => {
 }
 
 const showCustomInputs = computed(() => {
-  return menuState.value === 'Custom' && !showStateView.value
+  return menuState.value.value === CUSTOM_OPTION_VALUE && !showStateView.value
 })
 
 if (innerModelValue.value || (innerModelValue.value as unknown as Date[])?.length > 0) init()
@@ -427,8 +476,8 @@ else updateModelValue()
             <OptionsPanel
               v-if="type !== 'pick'"
               :type="type"
-              :menu-state="menuState"
-              :options="shortcuts"
+              :menu-state="menuState.label"
+              :options="finalShortcuts"
               @click:option="onMenuClick"
             />
             <CalendarsPanel
