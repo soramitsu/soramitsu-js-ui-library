@@ -30,6 +30,7 @@ export interface PresetOption<T> {
 export interface DatePickerOptions {
   day?: PresetOption<Date>[]
   range?: PresetOption<[Date, Date]>[]
+  pick?: PresetOption<Date[]>[]
 }
 
 export interface ShowState {

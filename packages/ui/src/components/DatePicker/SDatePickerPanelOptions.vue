@@ -22,6 +22,7 @@ const finalOptions = computed((): Required<DatePickerOptions> => {
   return {
     day: props.options.day ?? [],
     range: props.options.range ?? [],
+    pick: props.options.pick ?? [],
   }
 })
 </script>
