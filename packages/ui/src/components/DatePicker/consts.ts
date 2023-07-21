@@ -52,7 +52,7 @@ export const TIME_POINTS: string[] = (() => {
   return res
 })()
 
-export const DEFAULT_SHORTCUTS: DatePickerOptionsProp = /* @__PURE__ */ (() => {
+export const DEFAULT_SHORTCUTS = /* @__PURE__ */ ((): DatePickerOptionsProp => {
   const START_OF_TODAY = startOfToday()
   const START_OF_YESTERDAY = startOfYesterday()
   const START_OF_TOMORROW = startOfTomorrow()
