@@ -81,7 +81,6 @@ const rangeState = ref<RangeState>({
 })
 const dayState = ref<DateState>(null)
 const pickState = ref<PickState>([])
-init(innerModelValue.value)
 
 const stateStore = computed<StateStore>(() => {
   return {
@@ -455,6 +454,8 @@ const saveAndClose = () => {
 const showCustomInputs = computed(() => {
   return selectedMenuOption.value.value === CUSTOM_OPTION_VALUE && !showStateView.value
 })
+
+init(innerModelValue.value)
 </script>
 
 <template>
