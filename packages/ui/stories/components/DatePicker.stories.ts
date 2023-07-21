@@ -2,7 +2,15 @@ import { SDatePicker, type DatePickerType } from '@/lib'
 import type { Meta } from '@storybook/vue3'
 
 const meta = {
-  component: SDatePicker,
+  component: defineComponent({
+    components: { SDatePicker },
+    setup() {
+      return { model: ref(null) }
+    },
+    template: `
+      <s-date-picker v-bind="$attrs" v-model="model"  />
+      `,
+  }),
   argTypes: {
     type: {
       control: 'inline-radio',
@@ -18,7 +26,6 @@ const meta = {
   args: {
     type: 'day',
     time: true,
-    disabled: false,
   },
 } as Meta
 
