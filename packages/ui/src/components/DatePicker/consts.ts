@@ -77,6 +77,10 @@ export const DEFAULT_SHORTCUTS: DatePickerOptionsProp = /* @__PURE__ */ (() => {
   return {
     day: [
       {
+        label: 'Any time',
+        value: null,
+      },
+      {
         label: 'Today',
         value: START_OF_TODAY,
       },
@@ -98,6 +102,10 @@ export const DEFAULT_SHORTCUTS: DatePickerOptionsProp = /* @__PURE__ */ (() => {
       },
     ],
     range: [
+      {
+        label: 'All time',
+        value: null,
+      },
       {
         label: 'This week',
         value: [START_OF_WEEK, END_OF_WEEK],

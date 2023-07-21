@@ -7,6 +7,7 @@ import * as types from './types'
 import { ComputedRef } from 'vue'
 import { daysNames } from './consts'
 import { DatePickerApi, useDatePickerApi } from './api'
+import { RangeStateSelected, RangeStateSelecting } from './types'
 
 const getDateTimestamp = (time: Date | number) => {
   return startOfDay(time).getTime()
@@ -92,36 +93,42 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
     cell.time = null
 
     if (state.type === 'range') {
-      const minDate = props.stateStore.rangeState.startDate as Date
-      const maxDate = props.stateStore.rangeState.endDate as Date
-      cell.inRange = time >= getDateTimestamp(minDate) && time <= getDateTimestamp(maxDate)
-      if (props.stateStore.rangeState.selecting) {
+      const rangeState = props.stateStore.rangeState
+
+      if (rangeState.selecting) {
         const hoveredDate = startOfDay(props.hoveredDate)
-        const existingDate = minDate || maxDate
+        const existingDate = rangeState.startDate
         const arr = [existingDate, hoveredDate].sort((a, b) => a.getTime() - b.getTime())
         cell.inRange = time >= getDateTimestamp(arr[0]) && time <= getDateTimestamp(arr[1])
+      } else {
+        if (rangeState.startDate && rangeState.endDate) {
+          cell.inRange = time >= getDateTimestamp(rangeState.startDate) && time <= getDateTimestamp(rangeState.endDate)
+        }
       }
-      cell.start = minDate && isSameDay(time, minDate)
-      cell.end = maxDate && isSameDay(time, maxDate)
-      if (cell.start) {
-        cell.time = getDateTime(minDate)
+
+      if (rangeState.startDate && isSameDay(time, rangeState.startDate)) {
+        cell.start = true
+        cell.time = getDateTime(rangeState.startDate)
       }
-      if (cell.end) {
-        cell.time = getDateTime(maxDate)
+
+      if (rangeState.endDate && isSameDay(time, rangeState.endDate)) {
+        cell.end = true
+        cell.time = getDateTime(rangeState.endDate)
       }
     }
-    if (state.type === 'day') {
+
+    if (state.type === 'day' && props.stateStore.dayState) {
       const selectedDate = props.stateStore.dayState
       cell.start = isSameDay(time, selectedDate)
       if (cell.start) {
         cell.time = getDateTime(selectedDate)
       }
     }
+
     if (state.type === 'pick') {
       const selectedDates = props.stateStore.pickState
-      cell.start = selectedDates.some((item: Date) => {
-        return isSameDay(time, time)
-      })
+      cell.start = selectedDates.some((item: Date) => isSameDay(item, time))
+
       if (cell.start) {
         const timeOfDay = selectedDates.find((item: Date) => getDateTimestamp(item) === getDateTimestamp(time))
 
@@ -165,11 +172,6 @@ const dateTableCells: ComputedRef<types.DateTableCell[]> = computed(() => {
   return cellsArray
 })
 
-const cellMatchesDate = (cell: types.DateTableCell, date: Date) => {
-  const value = new Date(date)
-  return year.value === value.getFullYear() && month.value === value.getMonth() && Number(cell.text) === value.getDate()
-}
-
 const getCellClasses = (cell: types.DateTableCell) => {
   const selectionMode = state.type
   const classes = []
@@ -178,7 +180,7 @@ const getCellClasses = (cell: types.DateTableCell) => {
     classes.push('disabled')
   }
 
-  const isCellInCurrentMonth = cell.type === 'normal' || cell.type === 'today';
+  const isCellInCurrentMonth = cell.type === 'normal' || cell.type === 'today'
 
   if (isCellInCurrentMonth) {
     classes.push('available')
@@ -188,19 +190,10 @@ const getCellClasses = (cell: types.DateTableCell) => {
   } else {
     classes.push(cell.type)
   }
-  if (
-    selectionMode === 'day' &&
-    props.stateStore.dayState &&
-    isCellInCurrentMonth &&
-    cellMatchesDate(cell, props.stateStore.dayState)
-  ) {
+  if (selectionMode === 'day' && props.stateStore.dayState && isCellInCurrentMonth && cell.start) {
     classes.push('current')
   }
-  if (
-    selectionMode === 'pick' &&
-    isCellInCurrentMonth &&
-    props.stateStore.pickState?.some((item: Date) => cellMatchesDate(cell, item))
-  ) {
+  if (selectionMode === 'pick' && isCellInCurrentMonth && cell.start) {
     classes.push('start-date')
   }
   if (cell.inRange && isCellInCurrentMonth) {
@@ -248,28 +241,28 @@ const handleClick = (ev: any) => {
 
   if (state.type === 'range') {
     if (!props.stateStore.rangeState.selecting) {
-      emit('pick', {
+      const rangeStateSelecting: RangeStateSelecting = {
         startDate: newDate,
         endDate: null,
         selecting: true,
-        selectedField: 'startDate',
-      })
+      }
+      emit('pick', { ...rangeStateSelecting, selectedField: 'startDate' })
     } else {
-      const dat = props.stateStore.rangeState.startDate || props.stateStore.rangeState.endDate
+      const dat = props.stateStore.rangeState.startDate
       if (dat && newDate >= dat) {
-        emit('pick', {
+        const rangeStateSelected: RangeStateSelected = {
           startDate: dat,
           endDate: newDate,
           selecting: false,
-          selectedField: 'endDate',
-        })
+        }
+        emit('pick', { ...rangeStateSelected, selectedField: 'endDate' })
       } else {
-        emit('pick', {
+        const rangeStateSelected: RangeStateSelected = {
           startDate: newDate,
           endDate: dat,
           selecting: false,
-          selectedField: 'startDate',
-        })
+        }
+        emit('pick', { ...rangeStateSelected, selectedField: 'startDate' })
       }
     }
   } else if (state.type === 'day') {

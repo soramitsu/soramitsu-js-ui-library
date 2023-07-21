@@ -9,6 +9,7 @@ import { BasePlacement } from '@popperjs/core';
 import { ComponentCustomProps } from 'vue';
 import { ComponentOptionsMixin } from 'vue';
 import type { CSSProperties } from 'vue';
+import { CUSTOM_OPTION_VALUE } from '@/components/DatePicker/consts';
 import { DeepReadonly } from 'vue';
 import { DefineComponent } from 'vue';
 import { ExtractPropTypes } from 'vue';
@@ -96,19 +97,36 @@ export type CheckboxState = boolean | 'mixed';
 
 // @public (undocumented)
 export interface DatePickerOptions {
+    // Warning: (ae-forgotten-export) The symbol "DayModelValue" needs to be exported by the entry point lib.d.ts
+    // Warning: (ae-forgotten-export) The symbol "PresetOptionCustom" needs to be exported by the entry point lib.d.ts
+    //
     // (undocumented)
-    day?: PresetOption<Date>[];
+    day: [...PresetOption<DayModelValue>[], PresetOptionCustom];
+    // Warning: (ae-forgotten-export) The symbol "PickModelValue" needs to be exported by the entry point lib.d.ts
+    //
     // (undocumented)
-    pick?: PresetOption<Date[]>[];
+    pick: [...PresetOption<PickModelValue>[], PresetOptionCustom];
+    // Warning: (ae-forgotten-export) The symbol "RangeModelValue" needs to be exported by the entry point lib.d.ts
+    //
     // (undocumented)
-    range?: PresetOption<[Date, Date]>[];
+    range: [...PresetOption<RangeModelValue>[], PresetOptionCustom];
+}
+
+// @public (undocumented)
+export interface DatePickerOptionsProp {
+    // (undocumented)
+    day?: PresetOption<DayModelValue>[];
+    // (undocumented)
+    pick?: PresetOption<PickModelValue>[];
+    // (undocumented)
+    range?: PresetOption<RangeModelValue>[];
 }
 
 // @public (undocumented)
 export type DatePickerType = 'day' | 'range' | 'pick';
 
 // @public (undocumented)
-export type DateState = Date;
+export type DateState = DayModelValue;
 
 // @public (undocumented)
 export interface DateTableCell {
@@ -169,7 +187,7 @@ export interface ModalApi {
 }
 
 // @public (undocumented)
-export type ModelValueType = Date[] | Date | null | undefined;
+export type ModelValueType = DayModelValue | RangeModelValue | PickModelValue | undefined;
 
 // @public (undocumented)
 export const NAVIGATION_MENU_API_KEY: InjectionKey<DeepReadonly<NavigationMenuApi>>;
@@ -195,7 +213,7 @@ export interface NavigationSubmenuApi {
 export const NOTIFICATIONS_API_KEY: InjectionKey<ToastsApi>;
 
 // @public (undocumented)
-export type PickState = Date[];
+export type PickState = PickModelValue;
 
 // @public (undocumented)
 export function plugin(): Plugin_2;
@@ -210,6 +228,9 @@ export interface PopoverApi {
     popper: Instance | null;
     show: boolean;
 }
+
+// @public (undocumented)
+export type PossiblePresetOption = PresetOption<DayModelValue> | PresetOption<RangeModelValue> | PresetOption<PickModelValue> | PresetOptionCustom;
 
 // @public (undocumented)
 export interface PresetOption<T> {
@@ -256,19 +277,43 @@ export { RadioType as CheckboxType }
 export { RadioType }
 
 // @public (undocumented)
-export interface RangeOptionValue extends RangeState {
-    // (undocumented)
+export type RangePickEventValue = RangeState & {
     selectedField: string;
+};
+
+// @public (undocumented)
+export type RangeState = RangeStateEmpty | RangeStateSelecting | RangeStateSelected;
+
+// Warning: (ae-forgotten-export) The symbol "RangeStateBase" needs to be exported by the entry point lib.d.ts
+//
+// @public (undocumented)
+export interface RangeStateEmpty extends RangeStateBase {
+    // (undocumented)
+    endDate: null;
+    // (undocumented)
+    selecting: false;
+    // (undocumented)
+    startDate: null;
 }
 
 // @public (undocumented)
-export interface RangeState {
+export interface RangeStateSelected extends RangeStateBase {
     // (undocumented)
-    endDate: Date | null;
+    endDate: Date;
     // (undocumented)
-    selecting: boolean;
+    selecting: false;
     // (undocumented)
-    startDate: Date | null;
+    startDate: Date;
+}
+
+// @public (undocumented)
+export interface RangeStateSelecting extends RangeStateBase {
+    // (undocumented)
+    endDate: null;
+    // (undocumented)
+    selecting: true;
+    // (undocumented)
+    startDate: Date;
 }
 
 // @public (undocumented)
@@ -517,7 +562,7 @@ export const SDatePicker: DefineComponent<__VLS_WithDefaults_15<__VLS_TypePropsT
 type: string;
 time: boolean;
 disabled: boolean;
-shortcuts: () => DatePickerOptions;
+shortcuts: () => DatePickerOptionsProp;
 dateFilter: () => boolean;
 min: null;
 max: null;
@@ -525,7 +570,7 @@ max: null;
 type: string;
 time: boolean;
 disabled: boolean;
-shortcuts: () => DatePickerOptions;
+shortcuts: () => DatePickerOptionsProp;
 dateFilter: () => boolean;
 min: null;
 max: null;
@@ -535,7 +580,7 @@ max: null;
 type: DatePickerType;
 disabled: boolean;
 time: boolean;
-shortcuts: DatePickerOptions;
+shortcuts: DatePickerOptionsProp;
 dateFilter: (d: Date) => boolean;
 min: Date | null;
 max: Date | null;
