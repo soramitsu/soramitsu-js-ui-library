@@ -10,25 +10,28 @@ import { and } from '@vueuse/math'
 import { format, isAfter, isBefore, isSameDay, startOfDay } from 'date-fns'
 
 import {
-  DatePickerType,
-  RangeState,
-  DateState,
-  PickState,
-  StateStore,
-  ShowState,
-  RangeOptionValue,
-  ModelValueType,
   DatePickerOptions,
+  DatePickerOptionsProp,
+  DatePickerType,
+  DateState,
+  ModelValueType,
+  PickState,
+  PossiblePresetOption,
+  RangePickEventValue,
+  RangeState,
+  ShowState,
+  StateStore,
 } from './types'
-import { DatePickerApi, DATE_PICKER_API_KEY } from './api'
-import { DEFAULT_SHORTCUTS } from './consts'
+import { DATE_PICKER_API_KEY, DatePickerApi } from './api'
+import { CUSTOM_OPTION, CUSTOM_OPTION_VALUE, DEFAULT_SHORTCUTS } from './consts'
+import { shallowRef } from 'vue'
 
 interface Props {
   modelValue: ModelValueType
   type?: DatePickerType
   time?: boolean
   disabled?: boolean
-  shortcuts?: DatePickerOptions
+  shortcuts?: DatePickerOptionsProp
   dateFilter?: (d: Date) => boolean
   min?: Date | null
   max?: Date | null
@@ -43,7 +46,7 @@ const props = withDefaults(defineProps<Props>(), {
   max: null,
 })
 
-const innerModelValue = ref<ModelValueType>(props.modelValue)
+const innerModelValue = shallowRef<ModelValueType>(props.modelValue)
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -69,35 +72,35 @@ provide(DATE_PICKER_API_KEY, datePickerConfig)
 // #region STATE_STORE
 
 const today = new Date()
+const dateForTime = ref<string>('')
 
-const rangeStateRef = ref<RangeState>({
+const rangeState = ref<RangeState>({
   selecting: false,
-  startDate: new Date(today.getFullYear(), today.getMonth(), 1) || null,
-  endDate: new Date(today.getFullYear(), today.getMonth(), 7) || null,
+  startDate: null,
+  endDate: null,
 })
-
-const rangeState = toReactive(rangeStateRef)
-
-const dayState = ref<DateState>(new Date())
+const dayState = ref<DateState>(null)
 const pickState = ref<PickState>([])
 
 const stateStore = computed<StateStore>(() => {
   return {
     dayState: dayState.value,
     pickState: pickState.value,
-    rangeState: rangeState,
+    rangeState: rangeState.value,
   }
 })
 
-const init = () => {
+function init(initialValue: ModelValueType) {
   if (props.type === 'day') {
-    dayState.value = innerModelValue.value as DateState
+    dayState.value = initialValue as DateState
   } else if (props.type === 'pick') {
-    pickState.value = innerModelValue.value as PickState
+    pickState.value = (initialValue as PickState | null) ?? []
   } else {
-    rangeStateRef.value.startDate = (innerModelValue.value as Date[])[0]
-    rangeStateRef.value.endDate = (innerModelValue.value as Date[])[1]
+    if (Array.isArray(initialValue) && initialValue.length === 2) {
+      ;[rangeState.value.startDate, rangeState.value.endDate] = initialValue
+    }
   }
+
   updateShowedMonths()
 }
 
@@ -109,36 +112,41 @@ const updateModelValue = () => {
     innerModelValue.value = pickState.value
     save()
   } else {
-    innerModelValue.value = [rangeState.startDate as Date, rangeState.endDate as Date]
+    if (!rangeState.value.startDate && !rangeState.value.endDate && !rangeState.value.selecting) {
+      innerModelValue.value = null
+      save()
 
-    if (rangeState.endDate) {
+      return
+    }
+
+    innerModelValue.value = [rangeState.value.startDate as Date, rangeState.value.endDate as Date]
+
+    if (rangeState.value.endDate) {
       save()
     }
   }
 }
 
-const onDatePick = (data: RangeOptionValue | Date | Date[]) => {
+const onDatePick = (data: RangePickEventValue | Date | Date[] | null) => {
   if (props.type === 'day') {
-    dayState.value = data as Date
-    innerModelValue.value = dayState.value
+    dayState.value = data as Date | null
   } else if (props.type === 'pick') {
     pickState.value = data as Date[]
-    innerModelValue.value = pickState.value
     setDateForTimeFieldName(pickState.value.length - 1)
   } else {
-    let rsData = data as RangeOptionValue
-    rangeStateRef.value = { startDate: rsData.startDate, endDate: rsData.endDate, selecting: rsData.selecting }
-    setDateForTimeFieldName(rsData.selectedField)
+    const { selectedField, ...rsData } = data as RangePickEventValue
+    rangeState.value = rsData
+
+    setDateForTimeFieldName(selectedField)
   }
   updateModelValue()
-  menuState.value = 'Custom'
 }
 
 // #endregion
 
 // #region SHOW_STATE
 
-const updateShowedMonths = () => {
+function updateShowedMonths() {
   let date: Date | null = null
   switch (props.type) {
     case 'pick':
@@ -148,7 +156,7 @@ const updateShowedMonths = () => {
       date = dayState.value
       break
     case 'range':
-      date = rangeState[dateForTime.value as keyof RangeState] as Date | null
+      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
       break
     default:
   }
@@ -177,24 +185,93 @@ const showStateView = computed(() => {
 // #endregion
 
 // #region OPTIONS_PANEL
-const onMenuClick = (data: Date | [Date, Date] | Date[], label: string) => {
-  let processedData: RangeOptionValue | Date | Date[] = data
+const onMenuClick = (data: PossiblePresetOption) => {
+  selectedMenuOption.value = data
 
-  if (Array.isArray(data) && data.length === 2) {
-    processedData = {
-      startDate: data[0],
-      endDate: data[1],
-      selecting: false,
-      selectedField: 'endDate',
+  if (data.value === CUSTOM_OPTION_VALUE) {
+    return
+  }
+
+  let processedData: RangePickEventValue | Date | Date[] | null
+
+  switch (props.type) {
+    case 'range': {
+      let dateRange: { startDate: null; endDate: null } | { startDate: Date; endDate: Date } = {
+        startDate: null,
+        endDate: null,
+      }
+
+      if (data.value && Array.isArray(data.value) && data.value[0] instanceof Date && data.value[1] instanceof Date) {
+        dateRange = { startDate: data.value[0], endDate: data.value[1] }
+      }
+
+      processedData = {
+        ...dateRange,
+        selecting: false,
+        selectedField: 'endDate',
+      }
+      break
     }
+    case 'pick':
+      processedData = data.value ?? []
+      break
+    case 'day':
+      processedData = data.value
+      break
   }
 
   onDatePick(processedData)
   updateShowedMonths()
-  menuState.value = label
 }
 
-const menuState = ref<string>('')
+const finalShortcuts = computed((): Required<DatePickerOptions> => {
+  return {
+    day: [...(props.shortcuts.day ?? []), CUSTOM_OPTION],
+    range: [...(props.shortcuts.range ?? []), CUSTOM_OPTION],
+    pick: [...(props.shortcuts.pick ?? []), CUSTOM_OPTION],
+  }
+})
+
+const isEqualDateArrays = (a: Date[], b: Date[]) => {
+  for (const i in a) {
+    if (!isSameDay(a[i], b[i])) {
+      return false
+    }
+  }
+
+  return true
+}
+
+const isSameValue = (a: ModelValueType, b: ModelValueType) => {
+  return (
+    (a === null && b === null) ||
+    (a === undefined && b === undefined) ||
+    (a instanceof Date && b instanceof Date && isSameDay(a, b)) ||
+    (Array.isArray(a) && Array.isArray(b) && isEqualDateArrays(a, b))
+  )
+}
+
+const selectedMenuOption = shallowRef<PossiblePresetOption>(CUSTOM_OPTION)
+const appropriateMenuOption = computed(() => {
+  for (const shortcut of finalShortcuts.value[props.type]) {
+    if (shortcut.value === CUSTOM_OPTION_VALUE) continue
+
+    if (isSameValue(innerModelValue.value, shortcut.value)) {
+      return shortcut
+    }
+  }
+
+  return CUSTOM_OPTION
+})
+watch(
+  innerModelValue,
+  () => {
+    selectedMenuOption.value = appropriateMenuOption.value
+  },
+  { immediate: true },
+)
+
+const isPickingAreaVisible = computed(() => innerModelValue.value || selectedMenuOption.value === CUSTOM_OPTION)
 
 // #endregion
 
@@ -214,8 +291,8 @@ const changeView = (viewName: string) => {
 }
 
 const headTitle = computed(() => {
-  if (menuState.value && menuState.value !== 'Custom') {
-    return menuState.value
+  if (appropriateMenuOption.value.value !== CUSTOM_OPTION_VALUE) {
+    return appropriateMenuOption.value.label
   }
 
   try {
@@ -246,9 +323,6 @@ const arrowState = computed(() => {
 // #endregion
 
 // #region TIME
-
-const dateForTime = ref<string>('')
-
 const setDateForTimeFieldName = (field: string | Number) => {
   dateForTime.value = `${field}`
 }
@@ -271,12 +345,13 @@ const updateTime = (time: string) => {
       break
     case 'day':
       date = dayState.value
+      if (!date) return
       dayState.value = new Date(date.getFullYear(), date.getMonth(), date.getDate(), arr[0], arr[1], 0)
       break
     case 'range':
-      date = rangeState[dateForTime.value as keyof RangeState] as Date | null
+      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
       if (!date) return
-      ;(rangeState as any)[dateForTime.value as keyof RangeState] = new Date(
+      ;(rangeState.value as any)[dateForTime.value as keyof RangeState] = new Date(
         date.getFullYear(),
         date.getMonth(),
         date.getDate(),
@@ -302,7 +377,7 @@ const currentValueTime = computed(() => {
       date = dayState.value
       break
     case 'range':
-      date = rangeState[dateForTime.value as keyof RangeState] as Date | null
+      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
       break
     default:
   }
@@ -331,8 +406,8 @@ const updateCustomInput = (data: any, field?: string) => {
       dayState.value = data
       break
     case 'range':
-      if (data) (rangeState as any)[field as keyof RangeState] = data
-      rangeStateRef.value.selecting = false
+      if (data) (rangeState.value as any)[field as keyof RangeState] = data
+      rangeState.value.selecting = false
       break
     default:
   }
@@ -357,7 +432,11 @@ const formatDate = (date: any) => {
 
 // #region POPPER
 const [showPopper, togglePopper] = useToggle(false)
-whenever(and(props.disabled, showPopper), () => togglePopper(false), { immediate: true })
+whenever(
+  and(() => props.disabled, showPopper),
+  () => togglePopper(false),
+  { immediate: true },
+)
 
 const updateShow = () => {
   if (!props.disabled) togglePopper(true)
@@ -373,11 +452,10 @@ const saveAndClose = () => {
 }
 
 const showCustomInputs = computed(() => {
-  return menuState.value === 'Custom' && !showStateView.value
+  return selectedMenuOption.value.value === CUSTOM_OPTION_VALUE && !showStateView.value
 })
 
-if (innerModelValue.value || (innerModelValue.value as unknown as Date[])?.length > 0) init()
-else updateModelValue()
+init(innerModelValue.value)
 </script>
 
 <template>
@@ -427,33 +505,37 @@ else updateModelValue()
             :class="[`${gridType}`, { 'narrow': showStateView }]"
           >
             <OptionsPanel
+              v-if="type !== 'pick'"
               :type="type"
-              :menu-state="menuState"
-              :options="shortcuts"
+              :menu-state="selectedMenuOption.label"
+              :options="finalShortcuts"
               @click:option="onMenuClick"
             />
-            <CalendarsPanel
-              :current-view="currentView"
-              :show-state="showState"
-              :model-value="innerModelValue"
-              :state-store="stateStore"
-              @update:showed-state="updateShowedState"
-              @change-view="changeView"
-              @pick="onDatePick"
-            />
-            <TimePanel
-              v-if="time && !showStateView"
-              :value="currentValueTime"
-              @update:time="updateTime"
-            />
-            <CustomPanel
-              :show-inputs="showCustomInputs"
-              :state-store="stateStore"
-              :format-date="formatDate"
-              :format-pattern="formatPattern"
-              @update:custom-input="updateCustomInput"
-              @click:done="saveAndClose"
-            />
+
+            <template v-if="isPickingAreaVisible">
+              <CalendarsPanel
+                :current-view="currentView"
+                :show-state="showState"
+                :model-value="innerModelValue"
+                :state-store="stateStore"
+                @update:showed-state="updateShowedState"
+                @change-view="changeView"
+                @pick="onDatePick"
+              />
+              <TimePanel
+                v-if="time && !showStateView"
+                :value="currentValueTime"
+                @update:time="updateTime"
+              />
+              <CustomPanel
+                :show-inputs="showCustomInputs"
+                :state-store="stateStore"
+                :format-date="formatDate"
+                :format-pattern="formatPattern"
+                @update:custom-input="updateCustomInput"
+                @click:done="saveAndClose"
+              />
+            </template>
           </div>
         </SPopoverWrappedTransition>
       </template>

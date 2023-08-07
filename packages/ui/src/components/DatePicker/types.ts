@@ -1,20 +1,42 @@
+import { CUSTOM_OPTION_VALUE } from '@/components/DatePicker/consts'
+
 export type DatePickerType = 'day' | 'range' | 'pick'
 
-export type ModelValueType = Date[] | Date | null | undefined
+type DayModelValue = Date | null
+type RangeModelValue = [Date, Date] | null
+type PickModelValue = Date[]
+export type ModelValueType = DayModelValue | RangeModelValue | PickModelValue | undefined
 
-export interface RangeState {
+interface RangeStateBase {
   selecting: boolean
   startDate: Date | null
   endDate: Date | null
 }
 
-export interface RangeOptionValue extends RangeState {
-  selectedField: string
+export interface RangeStateSelecting extends RangeStateBase {
+  selecting: true
+  startDate: Date
+  endDate: null
 }
 
-export type PickState = Date[]
+export interface RangeStateSelected extends RangeStateBase {
+  selecting: false
+  startDate: Date
+  endDate: Date
+}
 
-export type DateState = Date
+export interface RangeStateEmpty extends RangeStateBase {
+  selecting: false
+  startDate: null
+  endDate: null
+}
+
+export type RangeState = RangeStateEmpty | RangeStateSelecting | RangeStateSelected
+
+export type RangePickEventValue = RangeState & { selectedField: string }
+
+export type DateState = DayModelValue
+export type PickState = PickModelValue
 
 export interface StateStore {
   dayState: DateState
@@ -26,11 +48,23 @@ export interface PresetOption<T> {
   label: string
   value: T
 }
+type PresetOptionCustom = PresetOption<typeof CUSTOM_OPTION_VALUE>
+export type PossiblePresetOption =
+  | PresetOption<DayModelValue>
+  | PresetOption<RangeModelValue>
+  | PresetOption<PickModelValue>
+  | PresetOptionCustom
+
+export interface DatePickerOptionsProp {
+  day?: PresetOption<DayModelValue>[]
+  range?: PresetOption<RangeModelValue>[]
+  pick?: PresetOption<PickModelValue>[]
+}
 
 export interface DatePickerOptions {
-  day?: PresetOption<Date>[]
-  range?: PresetOption<[Date, Date]>[]
-  pick?: PresetOption<Date[]>[]
+  day: [...PresetOption<DayModelValue>[], PresetOptionCustom]
+  range: [...PresetOption<RangeModelValue>[], PresetOptionCustom]
+  pick: [...PresetOption<PickModelValue>[], PresetOptionCustom]
 }
 
 export interface ShowState {

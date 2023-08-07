@@ -13,7 +13,13 @@ import {
   subMonths,
   subWeeks,
 } from 'date-fns'
-import { DatePickerOptions } from '@/components/DatePicker/types'
+import { DatePickerOptionsProp } from '@/components/DatePicker/types'
+
+export const CUSTOM_OPTION_VALUE: unique symbol = Symbol('customOptionValue')
+export const CUSTOM_OPTION = {
+  label: 'Custom',
+  value: CUSTOM_OPTION_VALUE,
+} as const
 
 export const months = [
   'January',
@@ -46,7 +52,7 @@ export const TIME_POINTS: string[] = (() => {
   return res
 })()
 
-export const DEFAULT_SHORTCUTS: DatePickerOptions = /* @__PURE__ */ (() => {
+export const DEFAULT_SHORTCUTS = /* @__PURE__ */ ((): DatePickerOptionsProp => {
   const START_OF_TODAY = startOfToday()
   const START_OF_YESTERDAY = startOfYesterday()
   const START_OF_TOMORROW = startOfTomorrow()
@@ -71,6 +77,10 @@ export const DEFAULT_SHORTCUTS: DatePickerOptions = /* @__PURE__ */ (() => {
   return {
     day: [
       {
+        label: 'Any time',
+        value: null,
+      },
+      {
         label: 'Today',
         value: START_OF_TODAY,
       },
@@ -90,12 +100,12 @@ export const DEFAULT_SHORTCUTS: DatePickerOptions = /* @__PURE__ */ (() => {
         label: 'Next month',
         value: START_OF_NEXT_MONTH,
       },
-      {
-        label: 'Custom',
-        value: START_OF_TODAY,
-      },
     ],
     range: [
+      {
+        label: 'All time',
+        value: null,
+      },
       {
         label: 'This week',
         value: [START_OF_WEEK, END_OF_WEEK],
@@ -123,10 +133,6 @@ export const DEFAULT_SHORTCUTS: DatePickerOptions = /* @__PURE__ */ (() => {
       {
         label: 'This year',
         value: [START_OF_YEAR, END_OF_YEAR],
-      },
-      {
-        label: 'Custom',
-        value: [START_OF_TODAY, START_OF_TODAY],
       },
     ],
   }

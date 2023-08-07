@@ -7,7 +7,6 @@ import { ShowState, StateStore } from './types'
 interface Props {
   showState: ShowState
   hideArrows?: boolean
-  value: Date | Date[]
   stateStore: StateStore
   hoveredDate: Date
 }
@@ -46,7 +45,6 @@ const updateHoveredDate = (date: Date) => {
       @change-view="changeView"
     />
     <DateTable
-      :value="value"
       :show-state="showState"
       :state-store="stateStore"
       :hovered-date="hoveredDate"
