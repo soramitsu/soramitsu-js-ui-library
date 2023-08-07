@@ -1,5 +1,17 @@
 # @soramitsu-ui/ui
 
+## 0.12.0
+
+### Minor Changes
+
+- 0ef9fb7: **feat**(`SDatePicker`): add date disabling
+- b6ba48c: **fix**(`SDatePicker`): fix disabled property reactivity
+- b6ba48c: **feat**(`SDatePicker`): added support for null model value
+- 8136cb5: **feat**: update vue and storybook
+- b6ba48c: **feat**(`SDatePicker`): now `custom` menu option always presents as last item
+- b6ba48c: **feat**(`SDatePicker`): make appropriate menu option selected on model value change
+- b6ba48c: **feat**(`SDatePicker`): add null value shortcut in default shortcut list
+
 ## 0.11.0
 
 ### Minor Changes
