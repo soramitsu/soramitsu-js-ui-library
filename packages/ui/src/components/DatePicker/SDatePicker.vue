@@ -47,6 +47,13 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const innerModelValue = shallowRef<ModelValueType>(props.modelValue)
+watch(
+  () => props.modelValue,
+  (value) => {
+    innerModelValue.value = value
+  },
+  { flush: 'sync' },
+)
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -298,14 +305,14 @@ const headTitle = computed(() => {
   try {
     switch (props.type) {
       case 'day':
-        return formatDate(props.modelValue)
+        return formatDate(innerModelValue.value)
       case 'range': {
-        const modelValue = props.modelValue as Date[]
+        const modelValue = innerModelValue.value as Date[]
         return modelValue.map((item) => formatDate(item)).join(' - ')
       }
 
       case 'pick': {
-        const modelValue = props.modelValue as Date[]
+        const modelValue = innerModelValue.value as Date[]
         return modelValue.map((item) => formatDate(item)).join(', ')
       }
       default:
