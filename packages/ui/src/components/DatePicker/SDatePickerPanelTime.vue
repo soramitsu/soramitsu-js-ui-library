@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { TIME_POINTS } from './consts'
+import { DatePickerApi, useDatePickerApi } from '@/components/DatePicker/api'
 
 interface Props {
   value: string
+  options: string[]
 }
+
+const state: DatePickerApi = useDatePickerApi()
 
 const props = withDefaults(defineProps<Props>(), {
   value: '00:00',
@@ -19,7 +22,7 @@ const updateTime = (e: any) => {
 <template>
   <div class="s-date-picker-time-panel sora-tpg-p4">
     <p
-      v-for="(time, idx) in TIME_POINTS"
+      v-for="(time, idx) in options"
       :key="idx"
       class="cursor-pointer"
       :class="time === value ? 'active' : ''"
