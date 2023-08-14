@@ -97,20 +97,6 @@ const stateStore = computed<StateStore>(() => {
   }
 })
 
-function init(initialValue: ModelValueType) {
-  if (props.type === 'day') {
-    dayState.value = initialValue as DateState
-  } else if (props.type === 'pick') {
-    pickState.value = (initialValue as PickState | null) ?? []
-  } else {
-    if (Array.isArray(initialValue) && initialValue.length === 2) {
-      ;[rangeState.value.startDate, rangeState.value.endDate] = initialValue
-    }
-  }
-
-  updateShowedMonths()
-}
-
 const updateModelValue = () => {
   if (props.type === 'day') {
     innerModelValue.value = dayState.value
@@ -464,7 +450,19 @@ const showCustomInputs = computed(() => {
   return selectedMenuOption.value.value === CUSTOM_OPTION_VALUE && !showStateView.value
 })
 
-init(innerModelValue.value)
+watch(innerModelValue, () => {
+  if (props.type === 'day') {
+    dayState.value = innerModelValue.value as DateState
+  } else if (props.type === 'pick') {
+    pickState.value = (innerModelValue.value as PickState | null) ?? []
+  } else {
+    if (Array.isArray(innerModelValue.value) && innerModelValue.value.length === 2) {
+      ;[rangeState.value.startDate, rangeState.value.endDate] = innerModelValue.value
+    }
+  }
+
+  updateShowedMonths()
+})
 </script>
 
 <template>
