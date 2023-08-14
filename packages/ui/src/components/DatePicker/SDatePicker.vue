@@ -444,7 +444,7 @@ watch(innerModelValue, () => {
   }
 
   updateShowedMonths()
-})
+}, { immediate: true })
 </script>
 
 <template>
