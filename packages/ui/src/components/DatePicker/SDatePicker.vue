@@ -288,14 +288,13 @@ const headTitle = computed(() => {
         const modelValue = innerModelValue.value as Date[]
         return modelValue.map((item) => formatDate(item)).join(' - ')
       }
-
       case 'pick': {
         const modelValue = innerModelValue.value as Date[]
         return modelValue.map((item) => formatDate(item)).join(', ')
       }
-      default:
-        break
     }
+
+    return ''
   } catch {
     return ''
   }
