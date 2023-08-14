@@ -431,19 +431,23 @@ const showCustomInputs = computed(() => {
   return selectedMenuOption.value.value === CUSTOM_OPTION_VALUE && !showStateView.value
 })
 
-watch(innerModelValue, () => {
-  if (props.type === 'day') {
-    dayState.value = innerModelValue.value as DateState
-  } else if (props.type === 'pick') {
-    pickState.value = (innerModelValue.value as PickState | null) ?? []
-  } else {
-    if (Array.isArray(innerModelValue.value) && innerModelValue.value.length === 2) {
-      ;[rangeState.value.startDate, rangeState.value.endDate] = innerModelValue.value
+watch(
+  innerModelValue,
+  () => {
+    if (props.type === 'day') {
+      dayState.value = innerModelValue.value as DateState
+    } else if (props.type === 'pick') {
+      pickState.value = (innerModelValue.value as PickState | null) ?? []
+    } else {
+      if (Array.isArray(innerModelValue.value) && innerModelValue.value.length === 2) {
+        ;[rangeState.value.startDate, rangeState.value.endDate] = innerModelValue.value
+      }
     }
-  }
 
-  updateShowedMonths()
-}, { immediate: true })
+    updateShowedMonths()
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
