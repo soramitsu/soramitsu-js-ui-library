@@ -336,7 +336,7 @@ const timeOptions = computed(() => {
 })
 
 const updateTime = (time: string) => {
-  if (!lastPickedDate.value) return
+  if (!props.time || !lastPickedDate.value) return
 
   switch (props.type) {
     case 'pick':
