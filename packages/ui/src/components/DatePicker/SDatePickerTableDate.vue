@@ -245,8 +245,9 @@ const handleClick = (ev: any) => {
         startDate: newDate,
         endDate: null,
         selecting: true,
+        selectedField: 'startDate',
       }
-      emit('pick', { ...rangeStateSelecting, selectedField: 'startDate' })
+      emit('pick', rangeStateSelecting)
     } else {
       const dat = props.stateStore.rangeState.startDate
       if (dat && newDate >= dat) {
@@ -254,15 +255,17 @@ const handleClick = (ev: any) => {
           startDate: dat,
           endDate: newDate,
           selecting: false,
+          selectedField: 'endDate',
         }
-        emit('pick', { ...rangeStateSelected, selectedField: 'endDate' })
+        emit('pick', rangeStateSelected)
       } else {
         const rangeStateSelected: RangeStateSelected = {
           startDate: newDate,
           endDate: dat,
           selecting: false,
+          selectedField: 'startDate',
         }
-        emit('pick', { ...rangeStateSelected, selectedField: 'startDate' })
+        emit('pick', rangeStateSelected)
       }
     }
   } else if (state.type === 'day') {
