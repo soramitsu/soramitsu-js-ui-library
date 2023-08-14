@@ -101,15 +101,15 @@ export interface DatePickerOptions {
     // Warning: (ae-forgotten-export) The symbol "PresetOptionCustom" needs to be exported by the entry point lib.d.ts
     //
     // (undocumented)
-    day: [...PresetOption<DayModelValue>[], PresetOptionCustom];
+    day: [...PresetOption<DayModelValue>[], PresetOptionCustom] | [];
     // Warning: (ae-forgotten-export) The symbol "PickModelValue" needs to be exported by the entry point lib.d.ts
     //
     // (undocumented)
-    pick: [...PresetOption<PickModelValue>[], PresetOptionCustom];
+    pick: [...PresetOption<PickModelValue>[], PresetOptionCustom] | [];
     // Warning: (ae-forgotten-export) The symbol "RangeModelValue" needs to be exported by the entry point lib.d.ts
     //
     // (undocumented)
-    range: [...PresetOption<RangeModelValue>[], PresetOptionCustom];
+    range: [...PresetOption<RangeModelValue>[], PresetOptionCustom] | [];
 }
 
 // @public (undocumented)
@@ -277,11 +277,6 @@ export { RadioType as CheckboxType }
 export { RadioType }
 
 // @public (undocumented)
-export type RangePickEventValue = RangeState & {
-    selectedField: string;
-};
-
-// @public (undocumented)
 export type RangeState = RangeStateEmpty | RangeStateSelecting | RangeStateSelected;
 
 // Warning: (ae-forgotten-export) The symbol "RangeStateBase" needs to be exported by the entry point lib.d.ts
@@ -290,6 +285,8 @@ export type RangeState = RangeStateEmpty | RangeStateSelecting | RangeStateSelec
 export interface RangeStateEmpty extends RangeStateBase {
     // (undocumented)
     endDate: null;
+    // (undocumented)
+    selectedField: null;
     // (undocumented)
     selecting: false;
     // (undocumented)
@@ -301,6 +298,8 @@ export interface RangeStateSelected extends RangeStateBase {
     // (undocumented)
     endDate: Date;
     // (undocumented)
+    selectedField: 'startDate' | 'endDate';
+    // (undocumented)
     selecting: false;
     // (undocumented)
     startDate: Date;
@@ -310,6 +309,8 @@ export interface RangeStateSelected extends RangeStateBase {
 export interface RangeStateSelecting extends RangeStateBase {
     // (undocumented)
     endDate: null;
+    // (undocumented)
+    selectedField: 'startDate' | 'endDate';
     // (undocumented)
     selecting: true;
     // (undocumented)
@@ -580,7 +581,7 @@ max: null;
 type: DatePickerType;
 disabled: boolean;
 time: boolean;
-shortcuts: DatePickerOptionsProp;
+shortcuts: false | DatePickerOptionsProp;
 dateFilter: (d: Date) => boolean;
 min: Date | null;
 max: Date | null;
