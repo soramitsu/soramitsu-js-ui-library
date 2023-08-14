@@ -31,7 +31,7 @@ interface Props {
   type?: DatePickerType
   time?: boolean
   disabled?: boolean
-  shortcuts?: DatePickerOptionsProp
+  shortcuts?: DatePickerOptionsProp | false
   dateFilter?: (d: Date) => boolean
   min?: Date | null
   max?: Date | null
@@ -232,6 +232,8 @@ const onMenuClick = (data: PossiblePresetOption) => {
 }
 
 const finalShortcuts = computed((): Required<DatePickerOptions> => {
+  if (!props.shortcuts) return { day: [], range: [], pick: [] }
+
   return {
     day: [...(props.shortcuts.day ?? []), CUSTOM_OPTION],
     range: [...(props.shortcuts.range ?? []), CUSTOM_OPTION],
@@ -512,7 +514,7 @@ init(innerModelValue.value)
             :class="[`${gridType}`, { 'narrow': showStateView }]"
           >
             <OptionsPanel
-              v-if="type !== 'pick'"
+              v-if="shortcuts && type !== 'pick'"
               :type="type"
               :menu-state="selectedMenuOption.label"
               :options="finalShortcuts"

@@ -62,9 +62,9 @@ export interface DatePickerOptionsProp {
 }
 
 export interface DatePickerOptions {
-  day: [...PresetOption<DayModelValue>[], PresetOptionCustom]
-  range: [...PresetOption<RangeModelValue>[], PresetOptionCustom]
-  pick: [...PresetOption<PickModelValue>[], PresetOptionCustom]
+  day: [...PresetOption<DayModelValue>[], PresetOptionCustom] | []
+  range: [...PresetOption<RangeModelValue>[], PresetOptionCustom] | []
+  pick: [...PresetOption<PickModelValue>[], PresetOptionCustom] | []
 }
 
 export interface ShowState {
