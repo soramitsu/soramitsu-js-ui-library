@@ -13,6 +13,8 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import ElDropdownItem from 'element-ui/lib/dropdown-item'
 
+import { iconClass } from '../../Icon/utils'
+
 @Component({
   components: { ElDropdownItem }
 })
@@ -40,8 +42,7 @@ export default class SDropdownItem extends Vue {
   @Prop({ type: String }) readonly icon!: string
 
   get computedIcon (): string {
-    // TODO: add checks for invalid icons
-    return `s-icon-${this.icon}`
+    return iconClass(this.icon)
   }
 }
 </script>
