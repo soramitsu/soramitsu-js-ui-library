@@ -6,7 +6,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import last from 'lodash/fp/last'
 
-import { Icons16, Icons24, StatusIcons } from '../consts'
+import { iconClass } from '../utils'
 
 @Component
 export default class SIcon extends Vue {
@@ -33,20 +33,7 @@ export default class SIcon extends Vue {
   }
 
   get computedClass (): string {
-    if (!this.name) {
-      return ''
-    }
-    if (this.name.startsWith('el-icon')) {
-      return this.name
-    }
-    const is16Size = (Object.values(Icons16) as Array<string>).includes(this.name)
-    const is24Size = (Object.values(Icons24) as Array<string>).includes(this.name)
-    const isStatusIcon = (Object.values(StatusIcons) as Array<string>).includes(this.name)
-    if (!(is16Size || is24Size || isStatusIcon)) {
-      console.warn(`'${this.name}' was not found`)
-      return ''
-    }
-    return `s-icon-${this.name}`
+    return iconClass(this.name)
   }
 
   get computedStyles () {
