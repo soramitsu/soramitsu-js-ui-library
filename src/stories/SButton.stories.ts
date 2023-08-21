@@ -153,7 +153,7 @@ export const configurable: Story = (args, { argTypes }) => ({
   },
   computed: {
     isAction () {
-      return this.type === ButtonTypes.ACTION
+      return (this as any).type === ButtonTypes.ACTION
     }
   }
 })
