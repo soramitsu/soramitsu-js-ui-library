@@ -132,7 +132,7 @@ export default class SScrollSections extends Vue {
   }
 
   get scrollableParent (): any {
-    return this.parent ? this.$parent.$el : window
+    return this.parent && this.$parent ? this.$parent.$el : window
   }
 
   private setState (): void {
