@@ -449,14 +449,14 @@ const showCustomInputs = computed(() => {
 
 watch(
   innerModelValue,
-  () => {
+  (newValue) => {
     if (props.type === 'day') {
-      dayState.value = innerModelValue.value as DateState
+      dayState.value = newValue as DateState
     } else if (props.type === 'pick') {
-      pickState.value = (innerModelValue.value as PickState | null) ?? []
+      pickState.value = (newValue as PickState | null) ?? []
     } else {
-      if (Array.isArray(innerModelValue.value) && innerModelValue.value.length === 2) {
-        ;[rangeState.value.startDate, rangeState.value.endDate] = innerModelValue.value
+      if (Array.isArray(newValue) && newValue.length === 2) {
+        ;[rangeState.value.startDate, rangeState.value.endDate] = newValue
       }
     }
 
