@@ -25,6 +25,7 @@ import { DATE_PICKER_API_KEY, DatePickerApi } from './api'
 import { CUSTOM_OPTION, CUSTOM_OPTION_VALUE, DEFAULT_SHORTCUTS, TIME_POINTS } from './consts'
 import { computed, shallowRef } from 'vue'
 import { setTimeByString } from '@/components/DatePicker/date-util'
+import { eagerComputed } from '@vueuse/core'
 
 interface Props {
   modelValue: ModelValueType
@@ -61,16 +62,31 @@ function isEqualToMinutes(a: Date, b: Date) {
   return isSameDay(a, b) && isSameHour(a, b) && isSameMinute(a, b)
 }
 
+const minDate = eagerComputed(() => {
+  return (
+    props.min && {
+      date: startOfDay(new Date(props.min)),
+      datetime: new Date(props.min),
+    }
+  )
+})
+const maxDate = eagerComputed(() => {
+  return (
+    props.max && {
+      date: startOfDay(new Date(props.max)),
+      datetime: new Date(props.max),
+    }
+  )
+})
+
 const dateFilter = (d: Date, precision: 'date' | 'datetime' = 'date') => {
-  const minDate = props.min && (precision === 'date' ? startOfDay(new Date(props.min)) : new Date(props.min))
-  const maxDate = props.max && (precision === 'date' ? startOfDay(new Date(props.max)) : new Date(props.max))
+  const min = minDate.value?.[precision]
+  const max = maxDate.value?.[precision]
 
   const isEqual = precision === 'date' ? isSameDay : isEqualToMinutes
 
   return (
-    props.dateFilter(d) &&
-    (!minDate || isAfter(d, minDate) || isEqual(d, minDate)) &&
-    (!maxDate || isBefore(d, maxDate) || isEqual(d, maxDate))
+    props.dateFilter(d) && (!min || isAfter(d, min) || isEqual(d, min)) && (!max || isBefore(d, max) || isEqual(d, max))
   )
 }
 const datePickerConfig: DatePickerApi = reactive({
