@@ -11,29 +11,31 @@ interface RangeStateBase {
   selecting: boolean
   startDate: Date | null
   endDate: Date | null
+  selectedField: 'startDate' | 'endDate' | null
 }
 
 export interface RangeStateSelecting extends RangeStateBase {
   selecting: true
   startDate: Date
   endDate: null
+  selectedField: 'startDate' | 'endDate'
 }
 
 export interface RangeStateSelected extends RangeStateBase {
   selecting: false
   startDate: Date
   endDate: Date
+  selectedField: 'startDate' | 'endDate'
 }
 
 export interface RangeStateEmpty extends RangeStateBase {
   selecting: false
   startDate: null
   endDate: null
+  selectedField: null
 }
 
 export type RangeState = RangeStateEmpty | RangeStateSelecting | RangeStateSelected
-
-export type RangePickEventValue = RangeState & { selectedField: string }
 
 export type DateState = DayModelValue
 export type PickState = PickModelValue
@@ -62,9 +64,9 @@ export interface DatePickerOptionsProp {
 }
 
 export interface DatePickerOptions {
-  day: [...PresetOption<DayModelValue>[], PresetOptionCustom]
-  range: [...PresetOption<RangeModelValue>[], PresetOptionCustom]
-  pick: [...PresetOption<PickModelValue>[], PresetOptionCustom]
+  day: [...PresetOption<DayModelValue>[], PresetOptionCustom] | []
+  range: [...PresetOption<RangeModelValue>[], PresetOptionCustom] | []
+  pick: [...PresetOption<PickModelValue>[], PresetOptionCustom] | []
 }
 
 export interface ShowState {

@@ -16,3 +16,9 @@ export const prevDate = (date: Date, amount = 1) => {
 export const nextDate = (date: Date, amount = 1) => {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate() + amount)
 }
+
+export function setTimeByString(date: Date, time: string) {
+  const [hours, minutes] = time.split(':').map((item) => Number(item))
+
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours, minutes, 0)
+}

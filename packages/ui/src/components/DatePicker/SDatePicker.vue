@@ -7,7 +7,7 @@ import CustomPanel from './SDatePickerPanelCustom.vue'
 import { IconArrowsChevronBottom24 } from '@/components/icons'
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { and } from '@vueuse/math'
-import { format, isAfter, isBefore, isSameDay, startOfDay } from 'date-fns'
+import { format, isAfter, isBefore, isSameDay, isSameHour, isSameMinute, startOfDay } from 'date-fns'
 
 import {
   DatePickerOptions,
@@ -17,21 +17,22 @@ import {
   ModelValueType,
   PickState,
   PossiblePresetOption,
-  RangePickEventValue,
   RangeState,
   ShowState,
   StateStore,
 } from './types'
 import { DATE_PICKER_API_KEY, DatePickerApi } from './api'
-import { CUSTOM_OPTION, CUSTOM_OPTION_VALUE, DEFAULT_SHORTCUTS } from './consts'
-import { shallowRef } from 'vue'
+import { CUSTOM_OPTION, CUSTOM_OPTION_VALUE, DEFAULT_SHORTCUTS, TIME_POINTS } from './consts'
+import { computed, shallowRef } from 'vue'
+import { setTimeByString } from '@/components/DatePicker/date-util'
+import { eagerComputed } from '@vueuse/core'
 
 interface Props {
   modelValue: ModelValueType
   type?: DatePickerType
   time?: boolean
   disabled?: boolean
-  shortcuts?: DatePickerOptionsProp
+  shortcuts?: DatePickerOptionsProp | false
   dateFilter?: (d: Date) => boolean
   min?: Date | null
   max?: Date | null
@@ -47,17 +48,45 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const innerModelValue = shallowRef<ModelValueType>(props.modelValue)
+watch(
+  () => props.modelValue,
+  (value) => {
+    innerModelValue.value = value
+  },
+  { flush: 'sync' },
+)
 
 const emit = defineEmits(['update:modelValue'])
 
-const dateFilter = (d: Date) => {
-  const minDate = props.min && startOfDay(new Date(props.min))
-  const maxDate = props.max && startOfDay(new Date(props.max))
+function isEqualToMinutes(a: Date, b: Date) {
+  return isSameDay(a, b) && isSameHour(a, b) && isSameMinute(a, b)
+}
+
+const minDate = eagerComputed(() => {
+  return (
+    props.min && {
+      date: startOfDay(new Date(props.min)),
+      datetime: new Date(props.min),
+    }
+  )
+})
+const maxDate = eagerComputed(() => {
+  return (
+    props.max && {
+      date: startOfDay(new Date(props.max)),
+      datetime: new Date(props.max),
+    }
+  )
+})
+
+const dateFilter = (d: Date, precision: 'date' | 'datetime' = 'date') => {
+  const min = minDate.value?.[precision]
+  const max = maxDate.value?.[precision]
+
+  const isEqual = precision === 'date' ? isSameDay : isEqualToMinutes
 
   return (
-    props.dateFilter(d) &&
-    (!minDate || isAfter(d, minDate) || isSameDay(d, minDate)) &&
-    (!maxDate || isBefore(d, maxDate) || isSameDay(d, maxDate))
+    props.dateFilter(d) && (!min || isAfter(d, min) || isEqual(d, min)) && (!max || isBefore(d, max) || isEqual(d, max))
   )
 }
 const datePickerConfig: DatePickerApi = reactive({
@@ -72,12 +101,12 @@ provide(DATE_PICKER_API_KEY, datePickerConfig)
 // #region STATE_STORE
 
 const today = new Date()
-const dateForTime = ref<string>('')
 
 const rangeState = ref<RangeState>({
   selecting: false,
   startDate: null,
   endDate: null,
+  selectedField: null,
 })
 const dayState = ref<DateState>(null)
 const pickState = ref<PickState>([])
@@ -89,20 +118,6 @@ const stateStore = computed<StateStore>(() => {
     rangeState: rangeState.value,
   }
 })
-
-function init(initialValue: ModelValueType) {
-  if (props.type === 'day') {
-    dayState.value = initialValue as DateState
-  } else if (props.type === 'pick') {
-    pickState.value = (initialValue as PickState | null) ?? []
-  } else {
-    if (Array.isArray(initialValue) && initialValue.length === 2) {
-      ;[rangeState.value.startDate, rangeState.value.endDate] = initialValue
-    }
-  }
-
-  updateShowedMonths()
-}
 
 const updateModelValue = () => {
   if (props.type === 'day') {
@@ -127,18 +142,16 @@ const updateModelValue = () => {
   }
 }
 
-const onDatePick = (data: RangePickEventValue | Date | Date[] | null) => {
+const onDatePick = (data: RangeState | Date | Date[] | null) => {
   if (props.type === 'day') {
     dayState.value = data as Date | null
   } else if (props.type === 'pick') {
     pickState.value = data as Date[]
-    setDateForTimeFieldName(pickState.value.length - 1)
   } else {
-    const { selectedField, ...rsData } = data as RangePickEventValue
-    rangeState.value = rsData
-
-    setDateForTimeFieldName(selectedField)
+    rangeState.value = data as RangeState
   }
+
+  updateTime(timeOptions.value[0])
   updateModelValue()
 }
 
@@ -147,21 +160,9 @@ const onDatePick = (data: RangePickEventValue | Date | Date[] | null) => {
 // #region SHOW_STATE
 
 function updateShowedMonths() {
-  let date: Date | null = null
-  switch (props.type) {
-    case 'pick':
-      date = pickState.value[pickState.value.length - 1]
-      break
-    case 'day':
-      date = dayState.value
-      break
-    case 'range':
-      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
-      break
-    default:
-  }
-  if (!date) return `00:00`
-  updateShowedState(date.getMonth(), date.getFullYear())
+  if (!lastPickedDate.value) return
+
+  updateShowedState(lastPickedDate.value.getMonth(), lastPickedDate.value.getFullYear())
 }
 
 const showState = ref<ShowState>({
@@ -192,24 +193,22 @@ const onMenuClick = (data: PossiblePresetOption) => {
     return
   }
 
-  let processedData: RangePickEventValue | Date | Date[] | null
+  let processedData: RangeState | Date | Date[] | null
 
   switch (props.type) {
     case 'range': {
-      let dateRange: { startDate: null; endDate: null } | { startDate: Date; endDate: Date } = {
+      let dateRange: RangeState = {
         startDate: null,
         endDate: null,
+        selecting: false,
+        selectedField: null,
       }
 
       if (data.value && Array.isArray(data.value) && data.value[0] instanceof Date && data.value[1] instanceof Date) {
-        dateRange = { startDate: data.value[0], endDate: data.value[1] }
+        dateRange = { startDate: data.value[0], endDate: data.value[1], selecting: false, selectedField: 'endDate' }
       }
 
-      processedData = {
-        ...dateRange,
-        selecting: false,
-        selectedField: 'endDate',
-      }
+      processedData = dateRange
       break
     }
     case 'pick':
@@ -225,6 +224,8 @@ const onMenuClick = (data: PossiblePresetOption) => {
 }
 
 const finalShortcuts = computed((): Required<DatePickerOptions> => {
+  if (!props.shortcuts) return { day: [], range: [], pick: [] }
+
   return {
     day: [...(props.shortcuts.day ?? []), CUSTOM_OPTION],
     range: [...(props.shortcuts.range ?? []), CUSTOM_OPTION],
@@ -298,19 +299,18 @@ const headTitle = computed(() => {
   try {
     switch (props.type) {
       case 'day':
-        return formatDate(props.modelValue)
+        return formatDate(innerModelValue.value)
       case 'range': {
-        const modelValue = props.modelValue as Date[]
+        const modelValue = innerModelValue.value as Date[]
         return modelValue.map((item) => formatDate(item)).join(' - ')
       }
-
       case 'pick': {
-        const modelValue = props.modelValue as Date[]
+        const modelValue = innerModelValue.value as Date[]
         return modelValue.map((item) => formatDate(item)).join(', ')
       }
-      default:
-        break
     }
+
+    return ''
   } catch {
     return ''
   }
@@ -323,42 +323,46 @@ const arrowState = computed(() => {
 // #endregion
 
 // #region TIME
-const setDateForTimeFieldName = (field: string | Number) => {
-  dateForTime.value = `${field}`
-}
-
-const updateTime = (time: string) => {
-  const arr = time.split(':').map((item) => Number(item))
-  let date
+const lastPickedDate = computed(() => {
   switch (props.type) {
     case 'pick':
-      date = pickState.value[dateForTime.value as keyof PickState] as Date | null
-      if (!date) return
-      ;(pickState as any).value[dateForTime.value as keyof PickState] = new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate(),
-        arr[0],
-        arr[1],
-        0,
-      )
+      return (pickState.value[pickState.value.length - 1] as Date | undefined) ?? null
+    case 'day':
+      return dayState.value
+    case 'range':
+      return rangeState.value.selectedField && rangeState.value[rangeState.value.selectedField]
+  }
+
+  return null
+})
+
+const timeOptions = computed(() => {
+  if (!lastPickedDate.value) return TIME_POINTS
+
+  const result: string[] = []
+
+  for (let time of TIME_POINTS) {
+    if (dateFilter(setTimeByString(lastPickedDate.value, time), 'datetime')) {
+      result.push(time)
+    }
+  }
+
+  return result
+})
+
+const updateTime = (time: string) => {
+  if (!props.time || !lastPickedDate.value) return
+
+  switch (props.type) {
+    case 'pick':
+      pickState.value[pickState.value.length - 1] = setTimeByString(lastPickedDate.value, time)
       break
     case 'day':
-      date = dayState.value
-      if (!date) return
-      dayState.value = new Date(date.getFullYear(), date.getMonth(), date.getDate(), arr[0], arr[1], 0)
+      dayState.value = setTimeByString(lastPickedDate.value, time)
       break
     case 'range':
-      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
-      if (!date) return
-      ;(rangeState.value as any)[dateForTime.value as keyof RangeState] = new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate(),
-        arr[0],
-        arr[1],
-        0,
-      )
+      if (!rangeState.value.selectedField) return
+      rangeState.value[rangeState.value.selectedField] = setTimeByString(lastPickedDate.value, time)
       break
     default:
   }
@@ -367,21 +371,9 @@ const updateTime = (time: string) => {
 }
 
 const currentValueTime = computed(() => {
-  if (!dateForTime.value && props.type !== 'day') return `00:00`
-  let date
-  switch (props.type) {
-    case 'pick':
-      date = pickState.value[pickState.value.length - 1]
-      break
-    case 'day':
-      date = dayState.value
-      break
-    case 'range':
-      date = rangeState.value[dateForTime.value as keyof RangeState] as Date | null
-      break
-    default:
-  }
-  if (!date) return `00:00`
+  let date = lastPickedDate.value
+  if (!date || !dateFilter(date, 'datetime')) return timeOptions.value[0] ?? `00:00`
+
   const hours = timeDecoder(date.getHours())
   const minutes = timeDecoder(date.getMinutes())
   return `${hours}:${minutes}`
@@ -455,7 +447,23 @@ const showCustomInputs = computed(() => {
   return selectedMenuOption.value.value === CUSTOM_OPTION_VALUE && !showStateView.value
 })
 
-init(innerModelValue.value)
+watch(
+  innerModelValue,
+  (newValue) => {
+    if (props.type === 'day') {
+      dayState.value = newValue as DateState
+    } else if (props.type === 'pick') {
+      pickState.value = (newValue as PickState | null) ?? []
+    } else {
+      if (Array.isArray(newValue) && newValue.length === 2) {
+        ;[rangeState.value.startDate, rangeState.value.endDate] = newValue
+      }
+    }
+
+    updateShowedMonths()
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
@@ -505,7 +513,7 @@ init(innerModelValue.value)
             :class="[`${gridType}`, { 'narrow': showStateView }]"
           >
             <OptionsPanel
-              v-if="type !== 'pick'"
+              v-if="shortcuts && type !== 'pick'"
               :type="type"
               :menu-state="selectedMenuOption.label"
               :options="finalShortcuts"
@@ -525,6 +533,7 @@ init(innerModelValue.value)
               <TimePanel
                 v-if="time && !showStateView"
                 :value="currentValueTime"
+                :options="timeOptions"
                 @update:time="updateTime"
               />
               <CustomPanel
