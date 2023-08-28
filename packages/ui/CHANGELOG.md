@@ -1,5 +1,16 @@
 # @soramitsu-ui/ui
 
+## 0.13.0
+
+### Minor Changes
+
+- 83678e6: **feat**(`SDatePicker`): make date filters work for time panel
+- 83678e6: **feat**(`SDatePicker`): make possible to show date picker without shortcuts menu
+
+### Patch Changes
+
+- 83678e6: **fix**(`SDatePicker`): add value prop watching
+
 ## 0.12.0
 
 ### Minor Changes
