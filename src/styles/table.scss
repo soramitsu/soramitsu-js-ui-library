@@ -39,10 +39,9 @@
 .el-table thead {
   color: var(--s-color-base-content-tertiary);
 }
-.el-table__empty-block {
-  .el-table__empty-text {
-    color: var(--s-color-base-content-tertiary);
-  }
+.el-table__empty-block,
+.el-table__empty-text {
+  color: var(--s-color-base-content-tertiary);
 }
 .el-table--group,
 .el-table--border,
