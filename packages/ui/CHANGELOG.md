@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.13.1
+
+### Patch Changes
+
+- a339aa2: **fix**(`SSelect`): add search field clearing when popover closed
+
 ## 0.13.0
 
 ### Minor Changes
