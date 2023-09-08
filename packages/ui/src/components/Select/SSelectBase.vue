@@ -107,7 +107,7 @@ const [showPopper, togglePopper] = useToggle(false)
 whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true })
 
 const searchQuery = ref('')
-whenever(and(not(showPopper), not(remoteSearch)), () => {
+whenever(not(showPopper), () => {
   searchQuery.value = ''
 })
 
