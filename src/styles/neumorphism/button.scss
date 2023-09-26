@@ -363,7 +363,7 @@ button.el-button.neumorphic {
 .neumorphic.el-button-group {
   box-shadow: var(--s-shadow-element-pressed);
   > button.el-button {
-    box-shadow: none; // :not(.s-action) :not(.s-tertiary)
+    box-shadow: none;
   }
   > .el-button:not(:last-child) {
     margin-right: 2px;
