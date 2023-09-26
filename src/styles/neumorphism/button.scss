@@ -184,7 +184,7 @@ $neu-button-padding-mini: 3px 6px !default;
   }
 }
 
-.el-button.neumorphic {
+button.el-button.neumorphic {
   transition: $neu-button-transition;
   text-transform: uppercase;
 
@@ -357,5 +357,15 @@ $neu-button-padding-mini: 3px 6px !default;
         @include disabled($neu-button-action-border-width, $neu-button-action-background-color-alternative, $neu-button-action-box-shadow-alternative);
       }
     }
+  }
+}
+
+.neumorphic.el-button-group {
+  box-shadow: var(--s-shadow-element-pressed);
+  > button.el-button {
+    box-shadow: none; // :not(.s-action) :not(.s-tertiary)
+  }
+  > .el-button:not(:last-child) {
+    margin-right: 2px;
   }
 }

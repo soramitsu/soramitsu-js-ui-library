@@ -282,11 +282,66 @@ export const withIcon16: Story = () => withIcon('refresh-16')
 export const withIcon24: Story = () => withIcon('arrows-swap-24')
 
 export const buttonGroup: Story = () => ({
-  components: { SButton, SButtonGroup, SRow },
-  template: `<s-row class="s-flex" style="flex: 1; justify-content: space-between; align-items: center;">
-               <s-button-group>
-                 <s-button type="primary">Append</s-button>
-                 <s-button type="delete">Remove</s-button>
-               </s-button-group>
+  components: { SButton, SButtonGroup, SRow, SCol },
+  template: `<s-row>
+               <s-col :xs="12" :sm="12" :md="12" :lg="12">
+                 <s-button-group size="big" border-radius="big">
+                   <s-button type="primary">Primary #1</s-button>
+                   <s-button type="primary">Primary #2</s-button>
+                   <s-button type="primary">Primary #3</s-button>
+                 </s-button-group>
+               </s-col>
+               <s-col :xs="12" :sm="12" :md="12" :lg="12" style="margin-top: 24px;">
+                 <s-button-group size="big" border-radius="big">
+                   <s-button type="primary" alternative>Primary Alt #1</s-button>
+                   <s-button type="primary" alternative>Primary Alt #2</s-button>
+                   <s-button type="primary" alternative>Primary Alt #3</s-button>
+                 </s-button-group>
+               </s-col>
+               <s-col :xs="12" :sm="12" :md="12" :lg="12" style="margin-top: 24px;">
+                 <s-button-group size="big" border-radius="big">
+                   <s-button type="secondary">Secondary #1</s-button>
+                   <s-button type="secondary">Secondary #2</s-button>
+                   <s-button type="secondary">Secondary #3</s-button>
+                 </s-button-group>
+               </s-col>
+               <s-col :xs="12" :sm="12" :md="12" :lg="12" style="margin-top: 24px;">
+                 <s-button-group size="big" border-radius="big">
+                   <s-button type="secondary" alternative>Secondary Alt #1</s-button>
+                   <s-button type="secondary" alternative>Secondary Alt #2</s-button>
+                   <s-button type="secondary" alternative>Secondary Alt #3</s-button>
+                 </s-button-group>
+               </s-col>
+               <s-col :xs="12" :sm="12" :md="12" :lg="12" style="margin-top: 24px;">
+                 <s-button-group size="big" border-radius="big">
+                   <s-button type="tertiary">Tertiary #1</s-button>
+                   <s-button type="tertiary">Tertiary #2</s-button>
+                   <s-button type="tertiary">Tertiary #3</s-button>
+                 </s-button-group>
+               </s-col>
+               <s-col :xs="12" :sm="12" :md="12" :lg="12" style="margin-top: 24px;">
+                 <s-button-group size="big" border-radius="big">
+                   <s-button type="primary">Primary #1</s-button>
+                   <s-button type="secondary">Secondary #2</s-button>
+                   <s-button type="tertiary">Tertiary #3</s-button>
+                 </s-button-group>
+               </s-col>
+               <s-col :xs="12" :sm="12" :md="12" :lg="12" style="margin-top: 24px;">
+                 <s-button-group size="big" border-radius="big" style="margin-right: 24px;">
+                   <s-button type="action" icon="basic-circle-plus-24"></s-button>
+                   <s-button type="action" icon="basic-circle-x-24"></s-button>
+                   <s-button type="action" icon="basic-eye-24"></s-button>
+                 </s-button-group>
+                 <s-button-group size="big" border-radius="big" style="margin-right: 24px;">
+                   <s-button type="action" alternative icon="basic-circle-plus-24"></s-button>
+                   <s-button type="action" alternative icon="basic-circle-x-24"></s-button>
+                   <s-button type="action" alternative icon="basic-eye-24"></s-button>
+                 </s-button-group>
+                 <s-button-group size="big" border-radius="big">
+                   <s-button type="action" primary icon="basic-circle-plus-24"></s-button>
+                   <s-button type="action" primary icon="basic-circle-x-24"></s-button>
+                   <s-button type="action" primary icon="basic-eye-24"></s-button>
+                 </s-button-group>
+               </s-col>
              </s-row>`
 })
