@@ -111,8 +111,9 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, Design
    */
   @Prop({ default: TooltipPlacement.TOP, type: String }) readonly tooltipPlacement!: PopoverPlacement
 
-  @Inject({ default: '', from: 'elForm' }) elForm!: ElForm
-  @Inject({ default: '', from: 'elFormItem' }) elFormItem!: ElFormItem
+  @Inject({ default: '', from: 'elForm' }) private elForm!: ElForm
+  @Inject({ default: '', from: 'elFormItem' }) private elFormItem!: ElFormItem
+  @Inject({ default: '', from: 'sButtonGroup' }) private sButtonGroup!: any
 
   private iconLeftOffset = 0
   elementIcon = ''
@@ -130,12 +131,16 @@ export default class SButton extends Mixins(SizeMixin, BorderRadiusMixin, Design
     if (this.designSystemClass) {
       cssClasses.push(this.designSystemClass)
     }
-    if ((this.elForm || this.elFormItem || {}).size) {
-      cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
+    const externalSize = (this.elForm || this.elFormItem || this.sButtonGroup || {}).size
+    if (externalSize) {
+      cssClasses.push(`s-${externalSize}`)
     } else if (this.isStandardSize) {
       cssClasses.push(`s-${this.size}`)
     }
-    if (this.isStandardBorderRadius) {
+    const externalRadius = (this.sButtonGroup || {}).borderRadius
+    if (externalRadius) {
+      cssClasses.push(`s-border-radius-${externalRadius}`)
+    } else if (this.isStandardBorderRadius) {
       cssClasses.push(`s-border-radius-${this.borderRadius}`)
     }
     if ((Object.values(ButtonTypes) as Array<string>).includes(this.type)) {

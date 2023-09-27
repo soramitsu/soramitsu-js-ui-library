@@ -156,6 +156,11 @@ h6,
   display: flex;
 }
 
+.s-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .s-bold {
   @include font-weight(700);
 }
