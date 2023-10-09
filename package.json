@@ -1,9 +1,9 @@
 {
-  "name": "@soramitsu/soramitsu-js-ui",
-  "version": "1.0.46",
+  "name": "@soramitsu-ui/ui-vue2",
+  "version": "1.1.0",
   "private": false,
   "publishConfig": {
-    "registry": "https://nexus.iroha.tech/repository/npm-soramitsu/"
+    "access": "public"
   },
   "license": "Apache-2.0",
   "licenses": [

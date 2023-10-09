@@ -29,6 +29,9 @@
       border-bottom-color: transparent;
     }
     .el-icon-arrow-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       &,
       &::before {
         font-family: var(--s-font-family-icons);
@@ -36,9 +39,6 @@
       &::before {
         position: absolute;
         transition: transform 0.25s ease-in-out;
-        display: flex;
-        justify-content: center;
-        align-items: center;
       }
       @extend .s-icon-chevron-down-rounded-16;
       font-size: var(--s-icon-font-size-mini);
