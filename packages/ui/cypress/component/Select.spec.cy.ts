@@ -546,3 +546,34 @@ it(`SSelect - popup is same width as trigger`, () => {
     })
   })
 })
+;[
+  { size: 'sm', inputSelector: '.s-select-input input' },
+  { size: 'md', inputSelector: '.s-select-input input' },
+  { size: 'lg', inputSelector: '.s-select-input input' },
+  { size: 'xl', inputSelector: '.s-text-field__input-line input' },
+].forEach((SSelect) => {
+  it(SSelect.size + ' SSelect menu should toggle when click chevron', () => {
+    cy.mount({
+      setup() {
+        return {
+          options: [
+            { label: 'label11', value: 'value1' },
+            { label: 'label112', value: 'value2' },
+          ],
+          size: SSelect.size,
+        }
+      },
+      template: `
+        <SSelect v-bind="{ options }" :size='size' trigger-search dropdown-search/>
+      `,
+    })
+
+    cy.get('.s-select-chevron').click()
+    cy.get('.s-select-dropdown').should('be.visible')
+    cy.get(SSelect.inputSelector).should('be.focused')
+
+    cy.get('.s-select-chevron').click()
+    cy.get('.s-select-dropdown').should('not.be.visible')
+    cy.get(SSelect.inputSelector).should('be.focused')
+  })
+})
