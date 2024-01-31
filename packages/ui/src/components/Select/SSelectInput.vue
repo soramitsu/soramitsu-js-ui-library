@@ -118,6 +118,11 @@ const FSelection = () =>
         selectionsJoined.value,
       )
     : null
+
+function handleChevronClick(event: MouseEvent) {
+  api.menuToggle()
+  if (!api.isMenuOpened) event.stopImmediatePropagation()
+}
 </script>
 
 <template>
@@ -162,6 +167,7 @@ const FSelection = () =>
         :variant="24"
         width="24"
         height="24"
+        @click="handleChevronClick"
       />
     </template>
   </STextField>
@@ -237,6 +243,7 @@ const FSelection = () =>
       <SSelectChevron
         :rotate="api.isMenuOpened"
         :variant="24"
+        @click="handleChevronClick"
       />
     </div>
   </div>
