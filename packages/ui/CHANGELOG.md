@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.13.2
+
+### Patch Changes
+
+- dcb0dcb5: **fix**(`SSelect`): add menu toggling by clicking on chevron
+
 ## 0.13.1
 
 ### Patch Changes
