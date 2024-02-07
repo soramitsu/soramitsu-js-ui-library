@@ -34,7 +34,7 @@ yarn sb:serve
 OR **cypress component-testing:**
 
 ```shell
-yarn cy
+yarn test:cy
 ```
 
 **Build all packages:**
