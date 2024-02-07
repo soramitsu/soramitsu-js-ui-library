@@ -11,7 +11,7 @@
     "test:theme:unit": "yarn --cwd packages/theme test",
     "test:ui:unit": "yarn --cwd packages/ui test:unit",
     "test:ui:cy": "yarn --cwd packages/ui cy:ci:component",
-    "cy-ui": "yarn --cwd packages/ui cy",
+    "test:ui:cy-open": "yarn --cwd packages/ui cy",
     "test:ui:after-build": "yarn --cwd packages/ui test:after-build",
     "build": "run-s build:theme build:vite-plugin-svg build:ui",
     "build:theme": "yarn --cwd packages/theme build",
