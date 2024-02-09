@@ -123,10 +123,6 @@ export default class STable extends Mixins(SizeMixin) {
    */
   @Prop({ default: false, type: Boolean }) readonly highlightCurrentRow!: boolean
   /**
-   * A key of the row. Can be 'Function(row)', `string` or `number`
-   */
-  @Prop({ type: [Function, String, Number] }) readonly rowKey!: ((row: any) => string | number) | string | number
-  /**
    * A key of the current row. Can be `string` or `number`
    */
   @Prop() readonly currentRowKey!: string | number
@@ -169,7 +165,7 @@ export default class STable extends Mixins(SizeMixin) {
    * e.g. `user.info.id`, but `user.info[0].id` is not supported,
    * in which case `({ row }) => string` should be used.
    */
-  @Prop() readonly rowRey!: string | (({ row }) => string)
+  @Prop({ type: [Function, String, Number] }) readonly rowKey!: ((row: any) => string | number) | string | number
   /**
    * A message for an empty data array.
    *
@@ -277,8 +273,8 @@ export default class STable extends Mixins(SizeMixin) {
     this.$emit('cell-double-click', row, column, cell, event)
   }
 
-  handleRowClick (row: any, column: ElTableColumn, event: MouseEvent): void {
-    if (column.type !== 'selection') {
+  handleRowClick (row: any, column?: ElTableColumn, event?: MouseEvent): void {
+    if (column && column.type !== 'selection') {
       this.$emit('row-click', row, column, event)
     }
   }
