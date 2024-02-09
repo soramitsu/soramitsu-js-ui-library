@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Mixins, Prop, Ref, Inject, Watch } from 'vue-property-decorator'
+import { Component, Mixins, Prop, Ref, Inject } from 'vue-property-decorator'
 import Input from 'element-ui/lib/input'
 import { ElInput } from 'element-ui/types/input'
 import { ElForm } from 'element-ui/types/form'
