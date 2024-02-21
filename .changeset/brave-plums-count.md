@@ -2,4 +2,4 @@
 '@soramitsu-ui/ui': patch
 ---
 
-**fix**: Remove column width rounding
+**fix**(`STable`): remove column width rounding
