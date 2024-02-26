@@ -1,5 +1,12 @@
 # @soramitsu-ui/ui
 
+## 0.13.3
+
+### Patch Changes
+
+- 3b53610c: **fix**(`STable`): remove column width rounding
+- 455459de: **fix**(`STable`): apply overflow-y:auto to the whole table
+
 ## 0.13.2
 
 ### Patch Changes
