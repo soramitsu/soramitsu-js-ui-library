@@ -817,9 +817,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
 $col-number: v-bind(cardsGridColumnNumber);
 
 .s-table {
-  &__body-wrapper {
-    overflow-y: auto;
-  }
+  overflow-y: auto;
 
   &__cards-grid {
     display: grid;
