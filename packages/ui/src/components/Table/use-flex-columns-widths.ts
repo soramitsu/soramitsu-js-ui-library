@@ -18,7 +18,7 @@ export function useFlexColumns(
         return columns.map((col) => {
           if (col.width) return col.width
 
-          return col.minWidth + Math.floor((col.minWidth * freeSpace) / columnsMinWidthsSum)
+          return col.minWidth + (col.minWidth * freeSpace) / columnsMinWidthsSum
         })
       }
     }
