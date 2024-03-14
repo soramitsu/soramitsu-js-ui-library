@@ -8,12 +8,14 @@ const props = withDefaults(
     colorBackground?: boolean
     withBorder?: boolean
     onlyMarker?: boolean
+    tabularBadge?: boolean
   }>(),
   {
     type: 'active',
     colorBackground: false,
     withBorder: false,
     onlyMarker: false,
+    tabularBadge: false,
   },
 )
 
@@ -27,7 +29,7 @@ const showSpinner = computed(() => {
     class="sora-tpg-ch3"
     :class="[
       's-badge',
-      { 's-badge_border': withBorder },
+      { 's-badge_border': withBorder, 's-badge_tabular': tabularBadge },
       colorBackground ? `s-badge_color_${type} text-white` : ' primary-text-color',
     ]"
   >
@@ -96,6 +98,10 @@ const showSpinner = computed(() => {
 
   &_border {
     @apply border border-1 border-base-background;
+  }
+
+  &_tabular {
+    padding-left: 0;
   }
 }
 </style>
