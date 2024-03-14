@@ -76,8 +76,9 @@ export default defineConfig({
     }),
     AutoImport({
       imports: ['vue', '@vueuse/core'],
+      dts: process.env.GENERATE_AUTO_IMPORT_FILES !== 'false',
       eslintrc: {
-        enabled: true,
+        enabled: process.env.GENERATE_AUTO_IMPORT_FILES !== 'false',
       },
     }),
   ],
