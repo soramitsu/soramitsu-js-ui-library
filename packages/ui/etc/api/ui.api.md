@@ -419,26 +419,31 @@ type?: "info" | "warning" | "error" | "active" | "debug" | "pending" | undefined
 colorBackground?: boolean | undefined;
 withBorder?: boolean | undefined;
 onlyMarker?: boolean | undefined;
+tabular?: boolean | undefined;
 }>, {
 type: string;
 colorBackground: boolean;
 withBorder: boolean;
 onlyMarker: boolean;
+tabular: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_19<__VLS_TypePropsToRuntimeProps_22<{
 type?: "info" | "warning" | "error" | "active" | "debug" | "pending" | undefined;
 colorBackground?: boolean | undefined;
 withBorder?: boolean | undefined;
 onlyMarker?: boolean | undefined;
+tabular?: boolean | undefined;
 }>, {
 type: string;
 colorBackground: boolean;
 withBorder: boolean;
 onlyMarker: boolean;
+tabular: boolean;
 }>>>, {
 type: BadgeType;
 colorBackground: boolean;
 withBorder: boolean;
 onlyMarker: boolean;
+tabular: boolean;
 }, {}>;
 
 // @public (undocumented)

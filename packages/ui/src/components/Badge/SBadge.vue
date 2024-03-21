@@ -8,12 +8,14 @@ const props = withDefaults(
     colorBackground?: boolean
     withBorder?: boolean
     onlyMarker?: boolean
+    tabular?: boolean
   }>(),
   {
     type: 'active',
     colorBackground: false,
     withBorder: false,
     onlyMarker: false,
+    tabular: false,
   },
 )
 
@@ -24,10 +26,10 @@ const showSpinner = computed(() => {
 
 <template>
   <div
-    class="sora-tpg-ch3"
+    class="sora-tpg-ch3 py-5px"
     :class="[
       's-badge',
-      { 's-badge_border': withBorder },
+      { 's-badge_border': withBorder, 'px-10px': !tabular },
       colorBackground ? `s-badge_color_${type} text-white` : ' primary-text-color',
     ]"
   >
@@ -54,7 +56,6 @@ const showSpinner = computed(() => {
 .s-badge {
   @apply cursor-default select-none block;
   border-radius: 30px;
-  padding: 5px 10px;
   width: fit-content;
 
   @each $status in ('error', 'warning', 'info', 'debug') {

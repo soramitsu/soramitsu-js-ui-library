@@ -17,6 +17,7 @@ const meta = {
     colorBackground: false,
     withBorder: false,
     onlyMarker: false,
+    tabular: false,
   },
   argTypes: {
     type: {
@@ -26,6 +27,7 @@ const meta = {
     colorBackground: { control: 'boolean' },
     withBorder: { control: 'boolean' },
     onlyMarker: { control: 'boolean' },
+    tabular: { control: 'boolean' },
   },
 } as Meta
 
