@@ -108,7 +108,7 @@ whenever(and(disabled, showPopper), () => togglePopper(false), { immediate: true
 
 const searchQuery = ref('')
 whenever(not(showPopper), () => {
-  searchQuery.value = ''
+  updateSearchQuery('')
 })
 
 function updateSearchQuery(query: string) {
