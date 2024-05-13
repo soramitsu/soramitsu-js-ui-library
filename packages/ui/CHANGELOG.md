@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.13.5
+
+### Patch Changes
+
+- aabc99e: **fix**(`SSelect`): add `search` event emit when field clears on menu closing
+
 ## 0.13.4
 
 ### Patch Changes
