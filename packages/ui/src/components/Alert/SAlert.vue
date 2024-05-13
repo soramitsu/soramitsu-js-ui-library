@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { IconClose, STATUS_ICONS_MAP } from '@/components/icons'
 import { Status } from '@/types'
+import type { Component } from 'vue'
 
 interface Props {
   inline?: boolean
@@ -17,7 +18,11 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<(event: 'click:close') => void>()
 
-const StatusIcon = eagerComputed(() => STATUS_ICONS_MAP[props.status])
+const StatusIcon = shallowRef<Component>()
+
+watchSyncEffect(() => {
+  StatusIcon.value = STATUS_ICONS_MAP[props.status]
+})
 
 function onClickClose() {
   emit('click:close')
