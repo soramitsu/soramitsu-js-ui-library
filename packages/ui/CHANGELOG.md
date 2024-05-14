@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.13.6
+
+### Patch Changes
+
+- 959a106d: **fix**(`SAlert`): edit status icon computation
+
 ## 0.13.5
 
 ### Patch Changes
