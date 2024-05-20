@@ -109,10 +109,13 @@ function handleSecondaryButtonClick() {
 
 <style lang="scss">
 @use '@/theme';
+@use '@/theme_neumorphism';
+
 
 .s-tooltip {
   &__body {
-    background: theme.token-as-var('sys.color.content-primary');
+    // background: theme.token-as-var('sys.color.content-primary');
+    background: theme_neumorphism.token-as-var('sys.color.neu-button-primary-background-color');
     color: theme.token-as-var('sys.color.content-on-background-inverted');
     border-radius: 4px;
   }

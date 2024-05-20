@@ -1,8 +1,11 @@
 @use '@/theme';
+@use '@/theme_neumorphism';
 @use '@soramitsu-ui/theme/fonts/Sora';
 
 @include theme.typography-preset-default;
+@include theme_neumorphism.typography-preset-default;
 
 :root {
   @include theme.tokens-preset-light;
+  @include theme_neumorphism.tokens-preset-light;
 }

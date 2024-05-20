@@ -100,6 +100,7 @@ const font = computed(() => {
 
 <style lang="scss">
 @use '@/theme';
+@use '@/theme_neumorphism';
 
 @mixin button-type($name, $default, $hover, $active, $disabled) {
   &_type_#{$name} {
@@ -178,15 +179,18 @@ const font = computed(() => {
   }
 
   &_type_primary {
-    background-color: theme.token-as-var('sys.color.primary');
+    background-color: theme_neumorphism.token-as-var('sys.color.neu-button-primary-background-color');
     color: theme.token-as-var('sys.color.content-on-background-inverted');
+    border: 1px solid theme_neumorphism.token-as-var('sys.color.neu-button-primary-border-color');
 
     &:hover {
-      background-color: theme.token-as-var('sys.color.primary-hover');
+      background-color: theme_neumorphism.token-as-var('sys.color.neu-button-primary-background-color-hover');
+      border: 1px solid theme_neumorphism.token-as-var('sys.color.neu-button-primary-border-color-hover');
     }
 
     &:active {
-      background-color: theme.token-as-var('sys.color.primary-pressed');
+      background-color: theme_neumorphism.token-as-var('sys.color.neu-button-primary-background-color-pressed');
+      border: 1px solid theme_neumorphism.token-as-var('sys.color.neu-button-primary-border-color-pressed');
     }
   }
 
