@@ -35,28 +35,39 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
     (
       sys: (
         'color': (
-          // Primary button background
-          'neu-button-primary-background-color': #F8087B,
-          'neu-button-primary-background-color-hover': #F754A3,
-          'neu-button-primary-background-color-pressed': #E44592,
-          'neu-button-primary-background-color-alternative': #44E5B2,
-          'neu-button-primary-background-color-alternative-active': #24DAA0,
-          'neu-button-primary-border-color': #EDE4E7,
-          'neu-button-primary-border-color-hover': #FDF7FB,
-          'neu-button-primary-border-color-pressed': #FDF7FB,
-
+          'button': (
+            'primary': (
+              'background-color': #F8087B,
+              'background-color-hover': #F754A3,
+              'background-color-pressed': #E44592,
+              'background-color-alternative': #44E5B2,
+              'background-color-alternative-active': #24DAA0,
+              'border-color': #EDE4E7,
+              'border-color-hover': #FDF7FB,
+              'border-color-pressed': #FDF7FB,
+            ),
+          ),
+        ),
+        'border': (
+          'button': (
+            'width': 2px,
+            'style': solid,
+          )
+        ),
+        'transition': (
+          'button': all 0.25s ease-in-out
         ),
         'shadow': (
           'button': (
             'primary': (
-                'box-shadow': (1px 1px 5px rgba(255, 255, 255, 1),
-                  -1px -1px 5px rgba(255, 255, 255, 1)),
-                'box-shadow-hover': (1px 1px 5px rgba(255, 255, 255, 0.7),
+              'box-shadow': (1px 1px 5px rgba(255, 255, 255, 1),
+                -1px -1px 5px rgba(255, 255, 255, 1)),
+              'box-shadow-hover': (1px 1px 5px rgba(255, 255, 255, 0.7),
+                -1px -1px 5px rgba(255, 255, 255, 1),
+                0px 0px 20px rgba(247, 84, 163, 0.5)),
+              'box-shadow-pressed': (1px 1px 5px rgba(255, 255, 255, 0.7),
                   -1px -1px 5px rgba(255, 255, 255, 1),
-                  0px 0px 20px rgba(247, 84, 163, 0.5)),
-                'box-shadow-pressed': (1px 1px 5px rgba(255, 255, 255, 0.7),
-                    -1px -1px 5px rgba(255, 255, 255, 1),
-                    0px 0px 20px rgba(247, 84, 163, 0.5))
+                  0px 0px 20px rgba(247, 84, 163, 0.5))
             )
           )
         ),

@@ -9,17 +9,14 @@ export default {
       <div class="flex flex-col items-start space-y-4">
         <SButton v-bind="$attrs">
           <template #icon>
-            <IconClose style="width: 1em; height: 1em;"/>
-          </template>
-          {{ $attrs.type }}
-        </SButton>
-        <SButton v-bind="$attrs">
-          <template #icon>
             <IconClose
               v-if="$attrs.type === 'action'"
               style="width: 1em; height: 1em;"
             />
           </template>
+          {{ $attrs.type }}
+        </SButton>
+        <SButton v-bind="$attrs"  type="secondary">
           {{ $attrs.type }}
         </SButton>
       </div>

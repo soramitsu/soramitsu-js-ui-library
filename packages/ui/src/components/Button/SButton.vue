@@ -179,21 +179,32 @@ const font = computed(() => {
   }
 
   &_type_primary {
-    background-color: theme_neumorphism.token-as-var('sys.color.neu-button-primary-background-color');
+    background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color');
     color: theme.token-as-var('sys.color.content-on-background-inverted');
-    border: 1px solid theme_neumorphism.token-as-var('sys.color.neu-button-primary-border-color');
+  
+    border: 
+    theme_neumorphism.token-as-var('sys.border.button.width') 
+    theme_neumorphism.token-as-var('sys.border.button.style') 
+    theme_neumorphism.token-as-var('sys.color.button.primary.border-color');
+  
     box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow');
-    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    transition: theme_neumorphism.token-as-var('sys.transition.button');
 
     &:hover {
-      background-color: theme_neumorphism.token-as-var('sys.color.neu-button-primary-background-color-hover');
-      border: 1px solid theme_neumorphism.token-as-var('sys.color.neu-button-primary-border-color-hover');
+      background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color-hover');
+      border: 
+      theme_neumorphism.token-as-var('sys.border.button.width') 
+      theme_neumorphism.token-as-var('sys.border.button.style') 
+      theme_neumorphism.token-as-var('sys.color.button.primary.border-color-hover');
       box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-hover');
     }
 
     &:active {
-      background-color: theme_neumorphism.token-as-var('sys.color.neu-button-primary-background-color-pressed');
-      border: 1px solid theme_neumorphism.token-as-var('sys.color.neu-button-primary-border-color-pressed');
+      background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color-pressed');
+      border: 
+      theme_neumorphism.token-as-var('sys.border.button.width') 
+      theme_neumorphism.token-as-var('sys.border.button.style') 
+      theme_neumorphism.token-as-var('sys.color.button.primary.border-color-pressed');
       box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-pressed');
     }
   }

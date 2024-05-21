@@ -4,14 +4,26 @@ $tokens: (
   ),
   'sys': (
     'color': (
-      'neu-button-primary-background-color': null,
-      'neu-button-primary-background-color-hover': null,
-      'neu-button-primary-background-color-pressed': null,
-      'neu-button-primary-background-color-alternative': null,
-      'neu-button-primary-background-color-alternative-active': null,
-      'neu-button-primary-border-color': null,
-      'neu-button-primary-border-color-hover': null,
-      'neu-button-primary-border-color-pressed': null
+      'button': (
+        'primary': (
+          'background-color': null,
+          'background-color-hover': null,
+          'background-color-pressed': null,
+          'background-color-alternative': null,
+          'background-color-alternative-active': null,
+          'border-color': null,
+          'border-color-hover': null,
+          'border-color-pressed': null
+        ),
+      ),
+    ),
+    'border': (
+      'button': (
+        'width': null,
+        'style': null,
+    )),
+    'transition': (
+      'button': null,
     ),
     'shadow': (
       'button': (
