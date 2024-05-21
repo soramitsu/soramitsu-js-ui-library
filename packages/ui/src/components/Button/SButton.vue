@@ -182,15 +182,19 @@ const font = computed(() => {
     background-color: theme_neumorphism.token-as-var('sys.color.neu-button-primary-background-color');
     color: theme.token-as-var('sys.color.content-on-background-inverted');
     border: 1px solid theme_neumorphism.token-as-var('sys.color.neu-button-primary-border-color');
+    box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow');
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
 
     &:hover {
       background-color: theme_neumorphism.token-as-var('sys.color.neu-button-primary-background-color-hover');
       border: 1px solid theme_neumorphism.token-as-var('sys.color.neu-button-primary-border-color-hover');
+      box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-hover');
     }
 
     &:active {
       background-color: theme_neumorphism.token-as-var('sys.color.neu-button-primary-background-color-pressed');
       border: 1px solid theme_neumorphism.token-as-var('sys.color.neu-button-primary-border-color-pressed');
+      box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-pressed');
     }
   }
 
