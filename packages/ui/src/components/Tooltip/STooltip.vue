@@ -114,8 +114,7 @@ function handleSecondaryButtonClick() {
 
 .s-tooltip {
   &__body {
-    // background: theme.token-as-var('sys.color.content-primary');
-    background: theme_neumorphism.token-as-var('sys.color.neu-button-primary-background-color');
+    background: theme.token-as-var('sys.color.content-primary');
     color: theme.token-as-var('sys.color.content-on-background-inverted');
     border-radius: 4px;
   }

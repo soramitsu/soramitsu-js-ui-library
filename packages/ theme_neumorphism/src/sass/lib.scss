@@ -46,6 +46,16 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'border-color-hover': #FDF7FB,
               'border-color-pressed': #FDF7FB,
             ),
+            'secondary': (
+              'background-color': #D5CDD0,
+              'background-color-active': #A19A9D,
+              'background-color-alternative': #F7F3F4,
+              'background-color-alternative-active': #D5CDD0,
+              'text-color': #FFFFFF,
+              'text-color-active': #FFFFFF,
+              'text-color-alternative': #A19A9D,
+              'text-color-alternative-active': #FFFFFF,
+            )
           ),
         ),
         'border': (
@@ -68,7 +78,20 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'box-shadow-pressed': (1px 1px 5px rgba(255, 255, 255, 0.7),
                   -1px -1px 5px rgba(255, 255, 255, 1),
                   0px 0px 20px rgba(247, 84, 163, 0.5))
-            )
+            ),
+            'secondary': (
+              'box-shadow': (-5px -5px 10px rgba(255, 255, 255, 1),
+                1px 1px 10px rgba(0, 0, 0, 0.1),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.8)),
+
+              'box-shadow-active': (1px 1px 5px rgba(255, 255, 255, 1),
+                inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+                inset 1px 1px 10px rgba(0, 0, 0, 0.1)),
+
+              'box-shadow-alternative': (-5px -5px 10px rgba(255, 255, 255, 1),
+                1px 1px 10px rgba(0, 0, 0, 0.1),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.8))
+            ),
           )
         ),
       ),

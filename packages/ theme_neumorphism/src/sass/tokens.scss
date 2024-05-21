@@ -15,6 +15,16 @@ $tokens: (
           'border-color-hover': null,
           'border-color-pressed': null
         ),
+        'secondary': (
+          'background-color': null,
+          'background-color-active': null,
+          'background-color-alternative': null,
+          'background-color-alternative-active': null,
+          'text-color': null,
+          'text-color-active': null,
+          'text-color-alternative': null,
+          'text-color-alternative-active': null,
+        ),
       ),
     ),
     'border': (
@@ -31,7 +41,12 @@ $tokens: (
           'box-shadow': null,
           'box-shadow-hover': null,
           'box-shadow-pressed': null
-        )
+        ),
+        'secondary': (
+          'box-shadow': null,
+          'box-shadow-active': null,
+          'box-shadow-alternative': null
+        ),
       )
     )
   ),

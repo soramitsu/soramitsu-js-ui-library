@@ -17,8 +17,8 @@ export default {
           {{ $attrs.type }}
         </SButton>
         <SButton v-bind="$attrs"  type="secondary">
-          {{ $attrs.type }}
-        </SButton>
+          Secondary
+        </SButton>  
       </div>
     `,
   }),
