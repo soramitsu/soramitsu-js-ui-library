@@ -197,6 +197,7 @@ const font = computed(() => {
       theme_neumorphism.token-as-var('sys.border.button.style') 
       theme_neumorphism.token-as-var('sys.color.button.primary.border-color-hover');
       box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-hover');
+      color: theme_neumorphism.token-as-var('sys.color.button.primary.text-color-hover');
     }
 
     &:active {
@@ -206,6 +207,7 @@ const font = computed(() => {
       theme_neumorphism.token-as-var('sys.border.button.style') 
       theme_neumorphism.token-as-var('sys.color.button.primary.border-color-pressed');
       box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-pressed');
+      color: theme_neumorphism.token-as-var('sys.color.button.primary.text-color-pressed');
     }
   }
 

@@ -33,29 +33,44 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
 @mixin tokens-preset-light() {
   @include eval-tokens(
     (
+      ref: (
+        'color': (
+          'button': (
+            'color-utility-surface': #FDF7FB,
+            'color-base-on-accent': #FFFFFF,
+            'color-base-content-tertiary': #D5CDD0,
+            'color-base-content-secondary': #A19A9D,
+            'color-utility-body': #F7F3F4,
+            'color-theme-accent': #F8087B,
+          ),
+        ),
+      ),
       sys: (
         'color': (
           'button': (
             'primary': (
-              'background-color': #F8087B,
+              'background-color': token('ref.color.button.color-theme-accent'),
               'background-color-hover': #F754A3,
               'background-color-pressed': #E44592,
               'background-color-alternative': #44E5B2,
               'background-color-alternative-active': #24DAA0,
+              'text-color': token('ref.color.button.color-base-on-accent'),
+              'text-color-hover': token('ref.color.button.color-base-on-accent'),
+              'text-color-pressed': token('ref.color.button.color-base-on-accent'),
               'border-color': #EDE4E7,
-              'border-color-hover': #FDF7FB,
-              'border-color-pressed': #FDF7FB,
+              'border-color-hover': token('ref.color.button.color-utility-surface'),
+              'border-color-pressed': token('ref.color.button.color-utility-surface'),
             ),
             'secondary': (
-              'background-color': #D5CDD0,
-              'background-color-active': #A19A9D,
-              'background-color-alternative': #F7F3F4,
-              'background-color-alternative-active': #D5CDD0,
-              'text-color': #FFFFFF,
+              'background-color': token('ref.color.button.color-base-content-tertiary'),
+              'background-color-active': token('ref.color.button.color-base-content-secondary'),
+              'background-color-alternative': token('ref.color.button.color-utility-body'),
+              'background-color-alternative-active': token('ref.color.button.color-base-content-tertiary'),
+              'text-color': token('ref.color.button.color-base-on-accent'),
               'text-color-active': #FFFFFF,
               'text-color-alternative': #A19A9D,
               'text-color-alternative-active': #FFFFFF,
-            )
+            ),
           ),
         ),
         'border': (
@@ -95,7 +110,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           )
         ),
       ),
-    )
+    ),
   );
 }
 
