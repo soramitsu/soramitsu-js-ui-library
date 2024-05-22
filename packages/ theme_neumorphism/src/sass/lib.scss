@@ -49,8 +49,12 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'color-theme-accent': #F8087B,
           ),
           'shadow': (
-            'color-light': token-as-var('ref.color.shadow.color-light'),
+            'color-light': rgba(255, 255, 255, 1),
             'color-light-dark': rgba(255, 255, 255, 0.8),
+            'color-dark': rgba(0, 0, 0, 0.1),
+            'shadow-element': (1px 1px 5px token-as-var('ref.color.shadow.color-light'),
+              inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+              inset 1px 1px 10px token-as-var('ref.color.shadow.color-dark'))
           ),
         ),
       ),
@@ -73,12 +77,15 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'secondary': (
               'background-color': token-as-var('ref.color.button.color-base-content-tertiary'),
               'background-color-active': token-as-var('ref.color.button.color-base-content-secondary'),
-              'background-color-alternative': token-as-var('ref.color.button.color-utility-body'),
-              'background-color-alternative-active': token-as-var('ref.color.button.color-base-content-tertiary'),
+              'background-color-hover': token-as-var('ref.color.button.color-base-content-secondary'),
               'text-color': token-as-var('ref.color.button.color-base-on-accent'),
               'text-color-active': token-as-var('ref.color.button.color-base-on-accent'),
-              'text-color-alternative': #A19A9D,
-              'text-color-alternative-active': token-as-var('ref.color.button.color-base-on-accent'),
+              'border-color': transparent,
+              'border-color-active': transparent,
+              // 'background-color-alternative': token-as-var('ref.color.button.color-utility-body'),
+              // 'background-color-alternative-active': token-as-var('ref.color.button.color-base-content-tertiary'),
+              // 'text-color-alternative': #A19A9D,
+              // 'text-color-alternative-active': token-as-var('ref.color.button.color-base-on-accent'),
             ),
           ),
         ),
@@ -86,7 +93,19 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'button': (
             'width': 2px,
             'style': solid,
-          )
+            'secondary': (
+              'width': 0px,
+              'style': 'solid',
+            ),
+          ),
+        ),
+        'disabled': (
+          'button': (
+            'background-color': token-as-var('ref.color.button.color-utility-surface'),
+            'border-color': token-as-var('ref.color.button.color-utility-body'),
+            'box-shadow': token-as-var('ref.color.shadow.shadow-element'),
+            'text-color': token-as-var('ref.color.button.color-base-content-tertiary'),
+          ),
         ),
         'transition': (
           'button': all 0.25s ease-in-out
@@ -105,16 +124,16 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             ),
             'secondary': (
               'box-shadow': (-5px -5px 10px token-as-var('ref.color.shadow.color-light'),
-                1px 1px 10px rgba(0, 0, 0, 0.1), 
-                inset 1px 1px 2px token-as-var('ref.color.shadow.color-light-dark')),
+                1px 1px 10px token-as-var('ref.color.shadow.color-dark'),
+                inset 1px 1px 2px token-as-var('ref.color.shadow.color-light')),
 
               'box-shadow-active': (1px 1px 5px token-as-var('ref.color.shadow.color-light'),
                 inset -5px -5px 5px rgba(255, 255, 255, 0.5),
-                inset 1px 1px 10px rgba(0, 0, 0, 0.1)),
+                inset 1px 1px 10px token-as-var('ref.color.shadow.color-dark')),
 
               'box-shadow-alternative': (-5px -5px 10px token-as-var('ref.color.shadow.color-light'),
-                1px 1px 10px rgba(0, 0, 0, 0.1),
-                inset 1px 1px 2px token-as-var('ref.color.shadow.color-light-dark'))
+                1px 1px 10px token-as-var('ref.color.shadow.color-dark'),
+                inset 1px 1px 2px token-as-var('ref.color.shadow.color-light'))
             ),
           )
         ),

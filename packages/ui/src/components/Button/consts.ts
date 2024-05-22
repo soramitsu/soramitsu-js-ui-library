@@ -1,4 +1,4 @@
-export const BUTTON_TYPE_VALUES = ['primary', 'secondary', 'outline', 'action'] as const
+export const BUTTON_TYPE_VALUES = ['primary','primary_alternative', 'secondary', 'outline', 'action','action_alternative'] as const
 export const BUTTON_SIZE_VALUES = ['xs', 'sm', 'md', 'lg'] as const
 export const BUTTON_ICON_POSITION_VALUES = ['left', 'right'] as const
 

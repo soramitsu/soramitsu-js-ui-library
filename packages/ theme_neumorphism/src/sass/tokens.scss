@@ -12,6 +12,8 @@ $tokens: (
       'shadow': (
         'color-light': null,
         'color-light-dark': null,
+        'color-dark': null,
+        'shadow-element': null,
       ),
     ),
   ),
@@ -34,12 +36,15 @@ $tokens: (
         'secondary': (
           'background-color': null,
           'background-color-active': null,
-          'background-color-alternative': null,
-          'background-color-alternative-active': null,
+          'background-color-hover': null,
           'text-color': null,
           'text-color-active': null,
-          'text-color-alternative': null,
-          'text-color-alternative-active': null,
+          'border-color': null,
+          'border-color-active': null,
+          // 'text-color-alternative': null,
+          // 'text-color-alternative-active': null,
+          // 'background-color-alternative': null,
+          // 'background-color-alternative-active': null,
         ),
       ),
     ),
@@ -47,7 +52,19 @@ $tokens: (
       'button': (
         'width': null,
         'style': null,
+        'secondary': (
+          'width': null,
+          'style': null,
+        ),
     )),
+    'disabled': (
+      'button': (
+        'background-color': null,
+        'border-color': null,
+        'box-shadow': null,
+        'text-color': null,
+      ),
+    ),
     'transition': (
       'button': null,
     ),

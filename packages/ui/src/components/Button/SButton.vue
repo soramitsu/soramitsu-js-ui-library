@@ -141,6 +141,11 @@ const font = computed(() => {
 
 .s-button {
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;
+  border: 
+  theme_neumorphism.token-as-var('sys.border.button.width') 
+  theme_neumorphism.token-as-var('sys.border.button.style') 
+  theme_neumorphism.token-as-var('sys.color.button.primary.border-color');
+  transition: theme_neumorphism.token-as-var('sys.transition.button');
   fill: currentColor;
   $component: &;
 
@@ -182,57 +187,52 @@ const font = computed(() => {
     background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color');
     color: theme.token-as-var('sys.color.content-on-background-inverted');
   
-    border: 
-    theme_neumorphism.token-as-var('sys.border.button.width') 
-    theme_neumorphism.token-as-var('sys.border.button.style') 
-    theme_neumorphism.token-as-var('sys.color.button.primary.border-color');
-  
     box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow');
-    transition: theme_neumorphism.token-as-var('sys.transition.button');
+
 
     &:hover {
       background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color-hover');
-      border: 
-      theme_neumorphism.token-as-var('sys.border.button.width') 
-      theme_neumorphism.token-as-var('sys.border.button.style') 
-      theme_neumorphism.token-as-var('sys.color.button.primary.border-color-hover');
+      border-color: theme_neumorphism.token-as-var('sys.color.button.primary.border-color-hover');
       box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-hover');
       color: theme_neumorphism.token-as-var('sys.color.button.primary.text-color-hover');
     }
 
     &:active {
       background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color-pressed');
-      border: 
-      theme_neumorphism.token-as-var('sys.border.button.width') 
-      theme_neumorphism.token-as-var('sys.border.button.style') 
-      theme_neumorphism.token-as-var('sys.color.button.primary.border-color-pressed');
+      border-color: theme_neumorphism.token-as-var('sys.color.button.primary.border-color-pressed');
       box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-pressed');
       color: theme_neumorphism.token-as-var('sys.color.button.primary.text-color-pressed');
     }
   }
 
-  &_type_primary#{&}_disabled {
-    background-color: theme.token-as-var('sys.color.primary-hover-background');
-  }
-
-  &_type_secondary,
-  &_type_action {
-    background-color: theme.token-as-var('sys.color.background');
-    color: theme.token-as-var('sys.color.content-primary');
-
-    &:hover {
-      background-color: theme.token-as-var('sys.color.background-hover');
-    }
-
-    &:active {
-      background-color: theme.token-as-var('sys.color.border-primary');
-    }
-  }
-
+  &_type_primary#{&}_disabled,
   &_type_secondary#{&}_disabled,
   &_type_action#{&}_disabled {
-    background-color: theme.token-as-var('sys.color.disabled');
-    color: theme.token-as-var('sys.color.on-disabled');
+    background-color: theme_neumorphism.token-as-var('sys.disabled.button.background-color');
+    border-color: theme_neumorphism.token-as-var('sys.disabled.button.border-color');
+    box-shadow: theme_neumorphism.token-as-var('sys.disabled.button.box-shadow');
+    color: theme_neumorphism.token-as-var('sys.disabled.button.text-color');
+  }
+
+  &_type_secondary {
+    background-color: theme_neumorphism.token-as-var('sys.color.button.secondary.background-color');
+    color: theme_neumorphism.token-as-var('sys.color.button.secondary.text-color');
+    border: 
+    theme_neumorphism.token-as-var('sys.border.button.secondary.width') 
+    theme_neumorphism.token-as-var('sys.border.button.secondary.style') 
+    theme_neumorphism.token-as-var('sys.color.button.secondary.border-color');
+    box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.secondary.box-shadow');
+
+    &:active {
+      background-color: theme_neumorphism.token-as-var('sys.color.button.secondary.background-color-active');
+      color: theme_neumorphism.token-as-var('sys.color.button.secondary.text-color-active');
+      border-color: theme_neumorphism.token-as-var('sys.color.button.secondary.border-color-active');
+      box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.secondary.box-shadow-active');
+    }
+     &:hover {
+      background-color: theme_neumorphism.token-as-var('sys.color.button.secondary.background-color-hover');
+      // box-shadow: none;
+    }
   }
 
   &_type_outline {
@@ -250,10 +250,6 @@ const font = computed(() => {
     }
   }
 
-  &_type_outline#{&}_disabled {
-    border: 1px solid theme.token-as-var('sys.color.disabled');
-    color: theme.token-as-var('sys.color.on-disabled');
-  }
 
   @include button-size(xs, $height: 24px, $padding: px-8px, $icon-size: 12px, $border-radius: 2px);
 
