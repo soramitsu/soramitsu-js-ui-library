@@ -5,19 +5,24 @@
 $vars-prefix: '--sora_';
 $typography-prefix: 'sora-tpg-';
 
+// @debug "here are initial tokens #{tokens.$tokens}";
 $tokens-compiled: util.tree-flatten(tokens.$tokens);
-$tokens-compiled: util.map-filter-non-null-values($tokens-compiled);
+// @debug "here are tokens after tree-flatten #{tokens-compiled}";
+// $tokens-compiled: util.map-filter-non-null-values($tokens-compiled);
+// @debug "here are tokens after map-filter-non-null-values #{$tokens-compiled}";
 $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
+// @debug "here are tokens aftergive-names-to-tokens #{$tokens-compiled}";
 
 @function token($id) {
+  // @debug "here are tokens compiled #{$tokens-compiled}";
   @if not map-has-key($tokens-compiled, $id) {
-    @error "Cannot resolve token with id #{inspect($id)}";
+    @error "Cannot resolve token with id #{inspect($id)} and here is map #{$tokens-compiled} with initial id #{$id}";
   }
-
   @return map-get($tokens-compiled, $id);
 }
 
 @function token-as-var($id) {
+  @debug "here is ud #{$id}";
   $value: token($id);
   @return var($value);
 }
@@ -43,33 +48,37 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'color-utility-body': #F7F3F4,
             'color-theme-accent': #F8087B,
           ),
+          'shadow': (
+            'color-light': token-as-var('ref.color.shadow.color-light'),
+            'color-light-dark': rgba(255, 255, 255, 0.8),
+          ),
         ),
       ),
       sys: (
         'color': (
           'button': (
             'primary': (
-              'background-color': token('ref.color.button.color-theme-accent'),
+              'background-color': token-as-var('ref.color.button.color-theme-accent'),
               'background-color-hover': #F754A3,
               'background-color-pressed': #E44592,
               'background-color-alternative': #44E5B2,
               'background-color-alternative-active': #24DAA0,
-              'text-color': token('ref.color.button.color-base-on-accent'),
-              'text-color-hover': token('ref.color.button.color-base-on-accent'),
-              'text-color-pressed': token('ref.color.button.color-base-on-accent'),
+              'text-color': token-as-var('ref.color.button.color-base-on-accent'),
+              'text-color-hover': token-as-var('ref.color.button.color-base-on-accent'),
+              'text-color-pressed': token-as-var('ref.color.button.color-base-on-accent'),
               'border-color': #EDE4E7,
-              'border-color-hover': token('ref.color.button.color-utility-surface'),
-              'border-color-pressed': token('ref.color.button.color-utility-surface'),
+              'border-color-hover': token-as-var('ref.color.button.color-utility-surface'),
+              'border-color-pressed': token-as-var('ref.color.button.color-utility-surface'),
             ),
             'secondary': (
-              'background-color': token('ref.color.button.color-base-content-tertiary'),
-              'background-color-active': token('ref.color.button.color-base-content-secondary'),
-              'background-color-alternative': token('ref.color.button.color-utility-body'),
-              'background-color-alternative-active': token('ref.color.button.color-base-content-tertiary'),
-              'text-color': token('ref.color.button.color-base-on-accent'),
-              'text-color-active': #FFFFFF,
+              'background-color': token-as-var('ref.color.button.color-base-content-tertiary'),
+              'background-color-active': token-as-var('ref.color.button.color-base-content-secondary'),
+              'background-color-alternative': token-as-var('ref.color.button.color-utility-body'),
+              'background-color-alternative-active': token-as-var('ref.color.button.color-base-content-tertiary'),
+              'text-color': token-as-var('ref.color.button.color-base-on-accent'),
+              'text-color-active': token-as-var('ref.color.button.color-base-on-accent'),
               'text-color-alternative': #A19A9D,
-              'text-color-alternative-active': #FFFFFF,
+              'text-color-alternative-active': token-as-var('ref.color.button.color-base-on-accent'),
             ),
           ),
         ),
@@ -85,27 +94,27 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
         'shadow': (
           'button': (
             'primary': (
-              'box-shadow': (1px 1px 5px rgba(255, 255, 255, 1),
-                -1px -1px 5px rgba(255, 255, 255, 1)),
+              'box-shadow': (1px 1px 5px token-as-var('ref.color.shadow.color-light'),
+                -1px -1px 5px token-as-var('ref.color.shadow.color-light')),
               'box-shadow-hover': (1px 1px 5px rgba(255, 255, 255, 0.7),
-                -1px -1px 5px rgba(255, 255, 255, 1),
+                -1px -1px 5px token-as-var('ref.color.shadow.color-light'),
                 0px 0px 20px rgba(247, 84, 163, 0.5)),
               'box-shadow-pressed': (1px 1px 5px rgba(255, 255, 255, 0.7),
-                  -1px -1px 5px rgba(255, 255, 255, 1),
+                  -1px -1px 5px token-as-var('ref.color.shadow.color-light'),
                   0px 0px 20px rgba(247, 84, 163, 0.5))
             ),
             'secondary': (
-              'box-shadow': (-5px -5px 10px rgba(255, 255, 255, 1),
-                1px 1px 10px rgba(0, 0, 0, 0.1),
-                inset 1px 1px 2px rgba(255, 255, 255, 0.8)),
+              'box-shadow': (-5px -5px 10px token-as-var('ref.color.shadow.color-light'),
+                1px 1px 10px rgba(0, 0, 0, 0.1), 
+                inset 1px 1px 2px token-as-var('ref.color.shadow.color-light-dark')),
 
-              'box-shadow-active': (1px 1px 5px rgba(255, 255, 255, 1),
+              'box-shadow-active': (1px 1px 5px token-as-var('ref.color.shadow.color-light'),
                 inset -5px -5px 5px rgba(255, 255, 255, 0.5),
                 inset 1px 1px 10px rgba(0, 0, 0, 0.1)),
 
-              'box-shadow-alternative': (-5px -5px 10px rgba(255, 255, 255, 1),
+              'box-shadow-alternative': (-5px -5px 10px token-as-var('ref.color.shadow.color-light'),
                 1px 1px 10px rgba(0, 0, 0, 0.1),
-                inset 1px 1px 2px rgba(255, 255, 255, 0.8))
+                inset 1px 1px 2px token-as-var('ref.color.shadow.color-light-dark'))
             ),
           )
         ),
