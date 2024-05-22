@@ -16,9 +16,12 @@ export default {
           </template>
           {{ $attrs.type }}
         </SButton>
-        <SButton v-bind="$attrs"  type="secondary">
+        <SButton v-bind="$attrs" type="secondary">
           Secondary
-        </SButton>  
+        </SButton>
+        <SButton v-bind="$attrs" type="primary" :alternative="true">
+          Primary Alternative
+        </SButton>
       </div>
     `,
   }),
@@ -31,6 +34,7 @@ export default {
     rounded: false,
     loading: false,
     uppercase: false,
+    alternative: false,
   },
   argTypes: {
     type: {
@@ -50,6 +54,7 @@ export default {
     rounded: { control: 'boolean' },
     loading: { control: 'boolean' },
     uppercase: { control: 'boolean' },
+    alternative: { control: 'boolean' }, // Add alternative prop control
   },
 } as Meta
 

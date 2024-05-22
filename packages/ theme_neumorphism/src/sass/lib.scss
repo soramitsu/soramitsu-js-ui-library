@@ -5,16 +5,11 @@
 $vars-prefix: '--sora_';
 $typography-prefix: 'sora-tpg-';
 
-// @debug "here are initial tokens #{tokens.$tokens}";
 $tokens-compiled: util.tree-flatten(tokens.$tokens);
-// @debug "here are tokens after tree-flatten #{tokens-compiled}";
-// $tokens-compiled: util.map-filter-non-null-values($tokens-compiled);
-// @debug "here are tokens after map-filter-non-null-values #{$tokens-compiled}";
+$tokens-compiled: util.map-filter-non-null-values($tokens-compiled);
 $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
-// @debug "here are tokens aftergive-names-to-tokens #{$tokens-compiled}";
 
 @function token($id) {
-  // @debug "here are tokens compiled #{$tokens-compiled}";
   @if not map-has-key($tokens-compiled, $id) {
     @error "Cannot resolve token with id #{inspect($id)} and here is map #{$tokens-compiled} with initial id #{$id}";
   }
@@ -22,7 +17,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
 }
 
 @function token-as-var($id) {
-  @debug "here is ud #{$id}";
   $value: token($id);
   @return var($value);
 }
@@ -93,6 +87,11 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'button': (
             'width': 2px,
             'style': solid,
+            'primary': (
+              'alternative': (
+                'width': 0px,
+              )
+            ),
             'secondary': (
               'width': 0px,
               'style': 'solid',
@@ -120,7 +119,8 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
                 0px 0px 20px rgba(247, 84, 163, 0.5)),
               'box-shadow-pressed': (1px 1px 5px rgba(255, 255, 255, 0.7),
                   -1px -1px 5px token-as-var('ref.color.shadow.color-light'),
-                  0px 0px 20px rgba(247, 84, 163, 0.5))
+                  0px 0px 20px rgba(247, 84, 163, 0.5)),
+              'box-shadow-alternative': none,    
             ),
             'secondary': (
               'box-shadow': (-5px -5px 10px token-as-var('ref.color.shadow.color-light'),

@@ -22,6 +22,7 @@ const props = withDefaults(
     disabled?: boolean
     loading?: boolean
     uppercase?: boolean
+    alternative?: boolean
   }>(),
   {
     type: 'secondary',
@@ -33,6 +34,7 @@ const props = withDefaults(
     disabled: false,
     loading: false,
     uppercase: false,
+    alternative: false
   },
 )
 
@@ -64,6 +66,7 @@ const font = computed(() => {
         's-button_disabled': loading || disabled,
         's-button_rounded': isAction && rounded,
         's-button_loading': loading,
+        [`s-button_type_${definitelyType}_alternative`]: alternative,
       },
     ]"
     :disabled="loading || disabled"
@@ -186,14 +189,12 @@ const font = computed(() => {
   &_type_primary {
     background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color');
     color: theme.token-as-var('sys.color.content-on-background-inverted');
-  
     box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow');
-
 
     &:hover {
       background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color-hover');
       border-color: theme_neumorphism.token-as-var('sys.color.button.primary.border-color-hover');
-      box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-hover');
+      box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-hover');
       color: theme_neumorphism.token-as-var('sys.color.button.primary.text-color-hover');
     }
 
@@ -203,7 +204,18 @@ const font = computed(() => {
       box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-pressed');
       color: theme_neumorphism.token-as-var('sys.color.button.primary.text-color-pressed');
     }
+
+    &_alternative { 
+      background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color-alternative');
+      box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-alternative');
+      border-width: theme_neumorphism.token-as-var('sys.border.button.primary.alternative.width');
+      &:hover,&:active {
+        background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color-alternative-active');
+        box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-alternative');
+      }
+    }
   }
+
 
   &_type_primary#{&}_disabled,
   &_type_secondary#{&}_disabled,
@@ -229,9 +241,8 @@ const font = computed(() => {
       border-color: theme_neumorphism.token-as-var('sys.color.button.secondary.border-color-active');
       box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.secondary.box-shadow-active');
     }
-     &:hover {
+    &:hover {
       background-color: theme_neumorphism.token-as-var('sys.color.button.secondary.background-color-hover');
-      // box-shadow: none;
     }
   }
 

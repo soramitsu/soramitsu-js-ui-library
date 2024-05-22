@@ -52,6 +52,11 @@ $tokens: (
       'button': (
         'width': null,
         'style': null,
+        'primary': (
+          'alternative': (
+            'width': null,
+          ),
+        ),
         'secondary': (
           'width': null,
           'style': null,
@@ -73,7 +78,8 @@ $tokens: (
         'primary': (
           'box-shadow': null,
           'box-shadow-hover': null,
-          'box-shadow-pressed': null
+          'box-shadow-pressed': null,
+          'box-shadow-alternative': null,
         ),
         'secondary': (
           'box-shadow': null,
