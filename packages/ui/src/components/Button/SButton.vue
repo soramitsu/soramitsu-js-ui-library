@@ -154,6 +154,11 @@ const font = computed(() => {
 
   &_disabled {
     @apply cursor-default;
+    color: theme_neumorphism.token-as-var('sys.disabled.button.text-color');
+    background: theme_neumorphism.token-as-var('sys.disabled.button.background-color');
+    border-color: theme_neumorphism.token-as-var('sys.disabled.button.border-color');
+    box-shadow: theme_neumorphism.token-as-var('sys.disabled.button.box-shadow');
+    border-width: theme_neumorphism.token-as-var('sys.border.button.width');
   }
 
   &_icon-position_left {
@@ -216,16 +221,6 @@ const font = computed(() => {
     }
   }
 
-
-  &_type_primary#{&}_disabled,
-  &_type_secondary#{&}_disabled,
-  &_type_action#{&}_disabled {
-    background-color: theme_neumorphism.token-as-var('sys.disabled.button.background-color');
-    border-color: theme_neumorphism.token-as-var('sys.disabled.button.border-color');
-    box-shadow: theme_neumorphism.token-as-var('sys.disabled.button.box-shadow');
-    color: theme_neumorphism.token-as-var('sys.disabled.button.text-color');
-  }
-
   &_type_secondary {
     background-color: theme_neumorphism.token-as-var('sys.color.button.secondary.background-color');
     color: theme_neumorphism.token-as-var('sys.color.button.secondary.text-color');
@@ -246,18 +241,25 @@ const font = computed(() => {
     }
   }
 
-  &_type_outline {
-    border: 1px solid theme.token-as-var('sys.color.border-primary');
-    color: theme.token-as-var('sys.color.content-primary');
+  &_type_tertiary {
+    background-color: theme_neumorphism.token-as-var('sys.color.button.tertiary.background-color');
+    color: theme_neumorphism.token-as-var('sys.color.button.tertiary.text-color');
+    border: 
+    theme_neumorphism.token-as-var('sys.border.button.tertiary.width') 
+    theme_neumorphism.token-as-var('sys.border.button.tertiary.style') 
+    theme_neumorphism.token-as-var('sys.color.button.tertiary.border-color');
+    box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.tertiary.box-shadow');
 
-    &:hover {
-      border: 1px solid theme.token-as-var('sys.color.primary-hover');
-      color: theme.token-as-var('sys.color.primary-hover');
+    &:hover, &:focus, &.focusing, &:active, &.s-pressed {
+      background:  theme_neumorphism.token-as-var('sys.color.button.tertiary.background-color-active');
+      border-color: theme_neumorphism.token-as-var('sys.color.button.tertiary.border-color-active');
+      color: theme_neumorphism.token-as-var('sys.color.button.tertiary.text-color-active');
     }
-
-    &:active {
-      border: 1px solid theme.token-as-var('sys.color.primary-pressed');
-      color: theme.token-as-var('sys.color.primary-pressed');
+    &:hover, &:focus, &.focusing {
+      box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.tertiary.box-shadow-active');
+    }
+    &:active, &.s-pressed {
+      box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.tertiary.box-shadow-pressed');
     }
   }
 

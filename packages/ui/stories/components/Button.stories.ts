@@ -16,11 +16,14 @@ export default {
           </template>
           {{ $attrs.type }}
         </SButton>
+        <SButton v-bind="$attrs" type="primary" :alternative="true">
+          Primary Alternative
+        </SButton>
         <SButton v-bind="$attrs" type="secondary">
           Secondary
         </SButton>
-        <SButton v-bind="$attrs" type="primary" :alternative="true">
-          Primary Alternative
+         <SButton v-bind="$attrs" type="tertiary">
+          Tertiary
         </SButton>
       </div>
     `,

@@ -14,6 +14,7 @@ $tokens: (
         'color-light-dark': null,
         'color-dark': null,
         'shadow-element': null,
+        'shadow-element-pressed': null,
       ),
     ),
   ),
@@ -46,6 +47,14 @@ $tokens: (
           // 'background-color-alternative': null,
           // 'background-color-alternative-active': null,
         ),
+        'tertiary': (
+          'background-color': null,
+          'background-color-active': null,
+          'text-color': null,
+          'text-color-active': null,
+          'border-color': null,
+          'border-color-active': null,
+        ),
       ),
     ),
     'border': (
@@ -58,6 +67,10 @@ $tokens: (
           ),
         ),
         'secondary': (
+          'width': null,
+          'style': null,
+        ),
+        'tertiary': (
           'width': null,
           'style': null,
         ),
@@ -86,6 +99,11 @@ $tokens: (
           'box-shadow-active': null,
           'box-shadow-alternative': null
         ),
+        'tertiary': (
+          'box-shadow': null,
+          'box-shadow-pressed': null,
+          'box-shadow-active': null,
+        )
       )
     )
   ),
