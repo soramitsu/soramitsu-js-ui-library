@@ -81,10 +81,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'text-color-active': token-as-var('ref.color.button.color-base-on-accent'),
               'border-color': transparent,
               'border-color-active': transparent,
-              // 'background-color-alternative': token-as-var('ref.color.button.color-utility-body'),
-              // 'background-color-alternative-active': token-as-var('ref.color.button.color-base-content-tertiary'),
-              // 'text-color-alternative': #A19A9D,
-              // 'text-color-alternative-active': token-as-var('ref.color.button.color-base-on-accent'),
             ),
             'tertiary': (
               'background-color': token-as-var('ref.color.button.color-base-on-accent'),
@@ -94,6 +90,22 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'border-color': transparent,
               'border-color-active': transparent,
             ),
+            'action': (
+              'background-color': token-as-var('ref.color.button.color-utility-body'),
+              'background-color-hover': token-as-var('ref.color.button.color-utility-body'),
+              'background-color-pressed': token-as-var('ref.color.button.color-utility-body'),
+              'background-color-alternative': transparent,
+              'text-color': token-as-var('ref.color.button.color-base-content-tertiary'),
+              'text-color-hover': token-as-var('ref.color.button.color-base-content-secondary'),
+              'text-color-active': token-as-var('ref.color.button.color-theme-accent'),
+              'text-color-alternative': token-as-var('ref.color.button.color-base-content-tertiary'),
+              'text-color-alternative-active': token-as-var('ref.color.button.color-base-content-secondary'),
+              'text-color-primary': token-as-var('ref.color.button.color-base-on-accent'),
+              'border-color': transparent,
+              'border-color-hover': transparent,
+              'border-color-pressed': transparent,
+              'border-color-alternative': transparent,
+            )
           ),
         ),
         'border': (
@@ -113,6 +125,10 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'width': 0px,
               'style': solid,
             ),
+            'action': (
+              'width': 0px,
+              'style': solid,
+            )
           ),
         ),
         'disabled': (
@@ -148,8 +164,14 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'box-shadow': token-as-var('ref.color.shadow.shadow-element-pressed'),
               'box-shadow-pressed': token-as-var('ref.color.shadow.shadow-element'),
               'box-shadow-active': token-as-var('ref.color.shadow.shadow-element-pressed'),
-            )
-          )
+            ),
+            'action': (
+              'box-shadow': token-as-var('ref.color.shadow.shadow-element-pressed'),
+              'box-shadow-hover': token-as-var('ref.color.shadow.shadow-element'),
+              'box-shadow-pressed': token-as-var('ref.color.shadow.shadow-element-pressed'),
+              'box-shadow-alternative': token-as-var('ref.color.shadow.shadow-element-pressed'),
+            ),
+          ),
         ),
       ),
     ),

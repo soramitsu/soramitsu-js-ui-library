@@ -23,6 +23,7 @@ const props = withDefaults(
     loading?: boolean
     uppercase?: boolean
     alternative?: boolean
+    primary?: boolean
   }>(),
   {
     type: 'secondary',
@@ -34,7 +35,8 @@ const props = withDefaults(
     disabled: false,
     loading: false,
     uppercase: false,
-    alternative: false
+    alternative: false,
+    primary: false,
   },
 )
 
@@ -67,6 +69,7 @@ const font = computed(() => {
         's-button_rounded': isAction && rounded,
         's-button_loading': loading,
         [`s-button_type_${definitelyType}_alternative`]: alternative,
+        [`s-button_type_${definitelyType}_primary`]: primary,
       },
     ]"
     :disabled="loading || disabled"
@@ -263,7 +266,70 @@ const font = computed(() => {
     }
   }
 
+   &_type_action {
+    background: theme_neumorphism.token-as-var('sys.color.button.action.background-color'); 
+    border-color: theme_neumorphism.token-as-var('sys.color.button.action.border-color'); 
+    border-style: theme_neumorphism.token-as-var('sys.border.button.action.style');
+    border-width: theme_neumorphism.token-as-var('sys.border.button.action.width');
+    box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.action.box-shadow');
+    color: theme_neumorphism.token-as-var('sys.color.button.action.text-color');
 
+    &:hover, &:focus, &.focusing {
+      background: theme_neumorphism.token-as-var('sys.color.button.action.background-color-hover'); 
+      border-color: theme_neumorphism.token-as-var('sys.color.button.action.border-color-hover');
+      color: theme_neumorphism.token-as-var('sys.color.button.action.text-color-hover');
+      box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.action.box-shadow-hover');
+    }
+    &:active, &.s-pressed {
+      background: theme_neumorphism.token-as-var('sys.color.button.action.background-color-pressed');
+      border-color: theme_neumorphism.token-as-var('sys.color.button.action.border-color-pressed'); 
+      box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.action.box-shadow-pressed');
+    }
+    &:active {
+      color: theme_neumorphism.token-as-var('sys.color.button.action.text-color-active');
+    }
+
+    &_alternative {
+      color: theme_neumorphism.token-as-var('sys.color.button.action.text-color-alternative');
+
+      &, &:hover, &:focus, &.focusing, &:active, &.s-pressed {
+        background-color: theme_neumorphism.token-as-var('sys.color.button.action.background-color-alternative'); 
+        border-color: theme_neumorphism.token-as-var('sys.color.button.action.border-color-alternative'); 
+        box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.action.box-shadow-alternative'); 
+      }
+      &:hover, &:focus, &.focusing, &:active, &.s-pressed {
+        color: theme_neumorphism.token-as-var('sys.color.button.action.text-color-alternative-active');
+      }
+    }
+    &_primary {
+      background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color');
+      color: theme.token-as-var('sys.color.content-on-background-inverted');
+      box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow');
+      border: 
+      theme_neumorphism.token-as-var('sys.border.button.width') 
+      theme_neumorphism.token-as-var('sys.border.button.style') 
+      theme_neumorphism.token-as-var('sys.color.button.primary.border-color');
+
+      &:hover {
+        background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color-hover');
+        border-color: theme_neumorphism.token-as-var('sys.color.button.primary.border-color-hover');
+        box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-hover');
+        color: theme_neumorphism.token-as-var('sys.color.button.primary.text-color-hover');
+      }
+
+      &:active {
+        background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color-pressed');
+        border-color: theme_neumorphism.token-as-var('sys.color.button.primary.border-color-pressed');
+        box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow-pressed');
+        color: theme_neumorphism.token-as-var('sys.color.button.primary.text-color-pressed');
+      }
+    }
+    &.primary:not(:disabled) {
+      color: theme_neumorphism.token-as-var('sys.color.button.action.text-color-primary')
+    }
+  }
+
+  
   @include button-size(xs, $height: 24px, $padding: px-8px, $icon-size: 12px, $border-radius: 2px);
 
   @include button-size(sm, $height: 32px, $padding: px-12px, $icon-size: 16px);

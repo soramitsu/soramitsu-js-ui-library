@@ -42,10 +42,6 @@ $tokens: (
           'text-color-active': null,
           'border-color': null,
           'border-color-active': null,
-          // 'text-color-alternative': null,
-          // 'text-color-alternative-active': null,
-          // 'background-color-alternative': null,
-          // 'background-color-alternative-active': null,
         ),
         'tertiary': (
           'background-color': null,
@@ -54,6 +50,22 @@ $tokens: (
           'text-color-active': null,
           'border-color': null,
           'border-color-active': null,
+        ),
+        'action': (
+          'background-color': null,
+          'background-color-hover': null,
+          'background-color-pressed': null,
+          'background-color-alternative': null,
+          'text-color': null,
+          'text-color-hover': null,
+          'text-color-active': null,
+          'text-color-alternative': null,
+          'text-color-alternative-active': null,
+          'text-color-primary': null,
+          'border-color': null,
+          'border-color-hover': null,
+          'border-color-pressed': null,
+          'border-color-alternative': null,
         ),
       ),
     ),
@@ -74,6 +86,10 @@ $tokens: (
           'width': null,
           'style': null,
         ),
+        'action': (
+          'width': null,
+          'style': null,
+        )
     )),
     'disabled': (
       'button': (
@@ -103,9 +119,15 @@ $tokens: (
           'box-shadow': null,
           'box-shadow-pressed': null,
           'box-shadow-active': null,
-        )
-      )
-    )
+        ),
+        'action': (
+          'box-shadow': null,
+          'box-shadow-hover': null,
+          'box-shadow-pressed': null,
+          'box-shadow-alternative': null,
+        ),
+      ),
+    ),
   ),
 );
 
