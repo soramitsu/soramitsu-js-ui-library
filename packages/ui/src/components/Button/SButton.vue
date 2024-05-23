@@ -53,6 +53,14 @@ const font = computed(() => {
 
   return FONT_SIZE[definitelySize.value]
 })
+const pressed = ref(false)
+
+const handleClick = (event: Event) => {
+  pressed.value = true
+  setTimeout(() => {
+    pressed.value = false
+  }, 500)
+}
 </script>
 
 <template>
@@ -70,9 +78,11 @@ const font = computed(() => {
         's-button_loading': loading,
         [`s-button_type_${definitelyType}_alternative`]: alternative,
         [`s-button_type_${definitelyType}_primary`]: primary,
+        's-pressed': pressed,
       },
     ]"
     :disabled="loading || disabled"
+    @click="handleClick"
   >
     <SSpinner
       v-if="loading"
