@@ -66,34 +66,41 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'background-color-pressed': #E44592,
               'background-color-alternative': #44E5B2,
               'background-color-alternative-active': #24DAA0,
+
               'text-color': token-as-var('ref.color.button.color-base-on-accent'),
-              'text-color-hover': token-as-var('ref.color.button.color-base-on-accent'),
-              'text-color-pressed': token-as-var('ref.color.button.color-base-on-accent'),
+              'text-color-hover': token-as-var('sys.color.button.primary.text-color'),
+              'text-color-pressed': token-as-var('sys.color.button.primary.text-color'),
+
               'border-color': #EDE4E7,
+
               'border-color-hover': token-as-var('ref.color.button.color-utility-surface'),
-              'border-color-pressed': token-as-var('ref.color.button.color-utility-surface'),
+              'border-color-pressed': token-as-var('sys.color.button.primary.border-color-hover'),
             ),
             'secondary': (
               'background-color': token-as-var('ref.color.button.color-base-content-tertiary'),
               'background-color-active': token-as-var('ref.color.button.color-base-content-secondary'),
-              'background-color-hover': token-as-var('ref.color.button.color-base-content-secondary'),
+
               'text-color': token-as-var('ref.color.button.color-base-on-accent'),
-              'text-color-active': token-as-var('ref.color.button.color-base-on-accent'),
+              'text-color-active': token-as-var('sys.color.button.secondary.text-color'),
+
               'border-color': transparent,
-              'border-color-active': transparent,
+              'border-color-active': token-as-var('sys.color.button.secondary.border-color'),
             ),
             'tertiary': (
               'background-color': token-as-var('ref.color.button.color-utility-body'),
-              'background-color-active': token-as-var('ref.color.button.color-utility-body'),
+              'background-color-active': token-as-var('sys.color.button.tertiary.background-color'),
+
               'text-color': token-as-var('ref.color.button.color-base-content-tertiary'),
               'text-color-active': token-as-var('ref.color.button.color-base-content-secondary'),
+
               'border-color': transparent,
-              'border-color-active': transparent,
+              'border-color-active': token-as-var('sys.color.button.tertiary.border-color'),
             ),
             'action': (
               'background-color': token-as-var('ref.color.button.color-utility-body'),
-              'background-color-hover': token-as-var('ref.color.button.color-utility-body'),
-              'background-color-pressed': token-as-var('ref.color.button.color-utility-body'),
+              'background-color-hover': token-as-var('sys.color.button.action.background-color'),
+              'background-color-pressed': token-as-var('sys.color.button.action.background-color'),
+
               'background-color-alternative': transparent,
               'text-color': token-as-var('ref.color.button.color-base-content-tertiary'),
               'text-color-hover': token-as-var('ref.color.button.color-base-content-secondary'),
@@ -101,9 +108,11 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'text-color-alternative': token-as-var('ref.color.button.color-base-content-tertiary'),
               'text-color-alternative-active': token-as-var('ref.color.button.color-base-content-secondary'),
               'text-color-primary': token-as-var('ref.color.button.color-base-on-accent'),
+
               'border-color': transparent,
-              'border-color-hover': transparent,
-              'border-color-pressed': transparent,
+              'border-color-hover': token-as-var('sys.color.button.action.border-color'),
+              'border-color-pressed': token-as-var('sys.color.button.action.border-color'),
+
               'border-color-alternative': transparent,
             )
           ),
@@ -147,23 +156,22 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'primary': (
               'box-shadow': (1px 1px 5px token-as-var('ref.color.shadow.color-light'),
                 -1px -1px 5px token-as-var('ref.color.shadow.color-light')),
+
               'box-shadow-hover': (1px 1px 5px rgba(255, 255, 255, 0.7),
                 -1px -1px 5px token-as-var('ref.color.shadow.color-light'),
                 0px 0px 20px rgba(247, 84, 163, 0.5)),
-              'box-shadow-pressed': (1px 1px 5px rgba(255, 255, 255, 0.7),
-                  -1px -1px 5px token-as-var('ref.color.shadow.color-light'),
-                  0px 0px 20px rgba(247, 84, 163, 0.5)),
+              'box-shadow-pressed': token-as-var('sys.shadow.button.primary.box-shadow-hover'),
+              
               'box-shadow-alternative': none,    
             ),
             'secondary': (
               'box-shadow': token-as-var('ref.color.shadow.shadow-element-pressed'),
               'box-shadow-active': token-as-var('ref.color.shadow.shadow-element'),
-              'box-shadow-alternative': token-as-var('ref.color.shadow.shadow-element-pressed')
             ),
             'tertiary': (
               'box-shadow': token-as-var('ref.color.shadow.shadow-element-pressed'),
               'box-shadow-pressed': token-as-var('ref.color.shadow.shadow-element'),
-              'box-shadow-active': token-as-var('ref.color.shadow.shadow-element-pressed'),
+              'box-shadow-active': token-as-var('sys.shadow.button.tertiary.box-shadow-pressed'),
             ),
             'action': (
               'box-shadow': token-as-var('ref.color.shadow.shadow-element-pressed'),
