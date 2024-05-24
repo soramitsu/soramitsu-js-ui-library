@@ -83,8 +83,8 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'border-color-active': transparent,
             ),
             'tertiary': (
-              'background-color': token-as-var('ref.color.button.color-base-on-accent'),
-              'background-color-active': token-as-var('ref.color.button.color-base-on-accent'),
+              'background-color': token-as-var('ref.color.button.color-utility-body'),
+              'background-color-active': token-as-var('ref.color.button.color-utility-body'),
               'text-color': token-as-var('ref.color.button.color-base-content-tertiary'),
               'text-color-active': token-as-var('ref.color.button.color-base-content-secondary'),
               'border-color': transparent,

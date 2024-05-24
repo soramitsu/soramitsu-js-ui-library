@@ -9,3 +9,6 @@
   @include theme.tokens-preset-light;
   @include theme_neumorphism.tokens-preset-light;
 }
+body {
+  background-color: #F7F3F4;
+}
