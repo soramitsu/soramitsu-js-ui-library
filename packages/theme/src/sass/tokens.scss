@@ -1,9 +1,72 @@
 $tokens: (
   'ref': (
-    // empty, yet
+    'color': (
+      'button': (
+        'color-utility-surface': null,
+        'color-base-on-accent': null,
+        'color-base-content-tertiary': null,
+        'color-base-content-secondary': null,
+        'color-utility-body': null,
+        'color-theme-accent': null,
+      ),
+      'shadow': (
+        'color-light': null,
+        'color-light-dark': null,
+        'color-dark': null,
+        'shadow-element': null,
+        'shadow-element-pressed': null,
+      ),
+    ),
   ),
   'sys': (
     'color': (
+      'button': (
+        'primary': (
+          'background-color': null,
+          'background-color-hover': null,
+          'background-color-pressed': null,
+          'background-color-alternative': null,
+          'background-color-alternative-active': null,
+          'text-color': null,
+          'text-color-hover': null,
+          'text-color-pressed': null,
+          'border-color': null,
+          'border-color-hover': null,
+          'border-color-pressed': null
+        ),
+        'secondary': (
+          'background-color': null,
+          'background-color-active': null,
+          'text-color': null,
+          'text-color-active': null,
+          'border-color': null,
+          'border-color-active': null,
+        ),
+        'tertiary': (
+          'background-color': null,
+          'background-color-active': null,
+          'text-color': null,
+          'text-color-active': null,
+          'border-color': null,
+          'border-color-active': null,
+        ),
+        'action': (
+          'background-color': null,
+          'background-color-hover': null,
+          'background-color-pressed': null,
+          'background-color-alternative': null,
+          'text-color': null,
+          'text-color-hover': null,
+          'text-color-active': null,
+          'text-color-alternative': null,
+          'text-color-alternative-active': null,
+          'text-color-primary': null,
+          'border-color': null,
+          'border-color-hover': null,
+          'border-color-pressed': null,
+          'border-color-alternative': null,
+        ),
+      ),
       // Primary
       'primary': null,
       'primary-background': null,
@@ -57,6 +120,39 @@ $tokens: (
           'debug-background-hover': null,
         ),
     ),
+    'border': (
+      'button': (
+        'width': null,
+        'style': null,
+        'primary': (
+          'alternative': (
+            'width': null,
+          ),
+        ),
+        'secondary': (
+          'width': null,
+          'style': null,
+        ),
+        'tertiary': (
+          'width': null,
+          'style': null,
+        ),
+        'action': (
+          'width': null,
+          'style': null,
+        )
+    )),
+    'disabled': (
+      'button': (
+        'background-color': null,
+        'border-color': null,
+        'box-shadow': null,
+        'text-color': null,
+      ),
+    ),
+    'transition': (
+      'button': null,
+    ),
     'shadow': (
       'page-header': null,
       'page-header-light': null,
@@ -64,6 +160,29 @@ $tokens: (
       'floating-notification': null,
       'dropdown': null,
       'active-tab': null,
+      'button': (
+        'primary': (
+          'box-shadow': null,
+          'box-shadow-hover': null,
+          'box-shadow-pressed': null,
+          'box-shadow-alternative': null,
+        ),
+        'secondary': (
+          'box-shadow': null,
+          'box-shadow-active': null,
+        ),
+        'tertiary': (
+          'box-shadow': null,
+          'box-shadow-pressed': null,
+          'box-shadow-active': null,
+        ),
+        'action': (
+          'box-shadow': null,
+          'box-shadow-hover': null,
+          'box-shadow-pressed': null,
+          'box-shadow-alternative': null,
+        ),
+      ),
     ),
   ),
   'comp': (
