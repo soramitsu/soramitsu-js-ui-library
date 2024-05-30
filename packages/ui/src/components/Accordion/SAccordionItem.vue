@@ -125,7 +125,7 @@ if (groupApi) {
 
 .s-accordion-item {
   @apply flex flex-col;
-  border: 1px solid theme.token-as-var('sys.color.border-secondary');
+  border: 1px solid theme.token-as-var('sys.color.border.secondary');
   $component: &;
 
   &_expanded {
@@ -134,7 +134,7 @@ if (groupApi) {
     }
 
     #{$component}__trigger {
-      background-color: theme.token-as-var('sys.color.background');
+      background-color: theme.token-as-var('sys.color.background.background');
     }
 
     #{$component}__body-wrapper {
@@ -157,7 +157,7 @@ if (groupApi) {
   }
 
   &__subtitle {
-    color: theme.token-as-var('sys.color.content-tertiary');
+    color: theme.token-as-var('sys.color.content.tertiary');
   }
 
   &__body {

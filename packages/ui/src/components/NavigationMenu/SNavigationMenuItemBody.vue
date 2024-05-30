@@ -101,7 +101,7 @@ const props = withDefaults(
   &_active,
   &:hover {
     background-color: #26262d; // Utility [night] / Surface
-    box-shadow: inset 5px 0 theme.token-as-var('sys.color.primary');
+    box-shadow: inset 5px 0 theme.token-as-var('sys.color.primary.primary');
   }
 
   &_highlighted {
@@ -114,7 +114,7 @@ const props = withDefaults(
 
     #{$root}__prepend::before {
       content: '';
-      background-color: theme.token-as-var('sys.color.primary');
+      background-color: theme.token-as-var('sys.color.primary.primary');
       width: 5px;
       height: 5px;
     }

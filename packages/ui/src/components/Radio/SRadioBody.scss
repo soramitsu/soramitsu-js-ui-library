@@ -1,8 +1,8 @@
 @use '@/theme';
 
-$primary: theme.token-as-var('sys.color.primary');
-$on-disabled: theme.token-as-var('sys.color.on-disabled');
-$border-primary: theme.token-as-var('sys.color.border-primary');
+$primary: theme.token-as-var('sys.color.primary.primary');
+$on-disabled: theme.token-as-var('sys.color.state.on-disabled');
+$border-primary: theme.token-as-var('sys.color.border.primary');
 
 $dur-easing: 0.2s ease;
 
@@ -28,12 +28,12 @@ $dur-easing: 0.2s ease;
   }
 
   label {
-    color: theme.token-as-var('sys.color.content-primary');
+    color: theme.token-as-var('sys.color.content.primary');
     @apply cursor-pointer;
   }
 
   &__description {
-    color: theme.token-as-var('sys.color.content-secondary');
+    color: theme.token-as-var('sys.color.content.secondary');
     margin-top: 4px;
   }
 
@@ -47,7 +47,7 @@ $dur-easing: 0.2s ease;
 
     label,
     .s-radio-body__description {
-      color: theme.token-as-var('sys.color.on-disabled');
+      color: theme.token-as-var('sys.color.state.on-disabled');
     }
   }
 

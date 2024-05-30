@@ -558,7 +558,7 @@ watch(
 .s-date-picker {
   &__header {
     border-radius: 4px;
-    border: 1px solid theme.token-as-var('sys.color.border-primary');
+    border: 1px solid theme.token-as-var('sys.color.border.primary');
 
     .arrow {
       position: absolute;

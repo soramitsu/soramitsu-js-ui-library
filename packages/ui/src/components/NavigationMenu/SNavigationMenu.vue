@@ -68,7 +68,7 @@ provide(NAVIGATION_MENU_API_KEY, api)
 
 .s-navigation-menu {
   background-color: #2e2e36; // Base [night] / Background
-  color: theme.token-as-var('sys.color.content-on-background-inverted');
+  color: theme.token-as-var('sys.color.content.on-background-inverted');
   width: 220px;
   height: 100%;
   transition: 150ms ease-in-out width;

@@ -38,13 +38,13 @@ $progress-bar-border-radius: v-bind(borderRadius);
 .s-progress-bar {
   height: $progress-bar-height;
   width: 100%;
-  background: theme.token-as-var('sys.color.border-secondary');
+  background: theme.token-as-var('sys.color.border.secondary');
   border-radius: $progress-bar-border-radius;
 
   &__active-bar {
     height: 100%;
     border-radius: $progress-bar-border-radius;
-    background: linear-gradient(90deg, theme.token-as-var('sys.color.primary') $active-bar-width, transparent 0%);
+    background: linear-gradient(90deg, theme.token-as-var('sys.color.primary.primary') $active-bar-width, transparent 0%);
   }
 }
 </style>

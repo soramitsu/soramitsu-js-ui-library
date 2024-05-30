@@ -181,8 +181,8 @@ const SEARCH_ICON_SIZE = {
   box-shadow: theme.token-as-var('sys.shadow.dropdown');
 
   &__header {
-    color: theme.token-as-var('sys.color.content-tertiary');
-    border-bottom: 1px solid theme.token-as-var('sys.color.border-primary');
+    color: theme.token-as-var('sys.color.content.tertiary');
+    border-bottom: 1px solid theme.token-as-var('sys.color.border.primary');
   }
 
   &__action {
@@ -190,8 +190,8 @@ const SEARCH_ICON_SIZE = {
   }
 
   &__search {
-    border-bottom: 1px solid theme.token-as-var('sys.color.border-primary');
-    background: theme.token-as-var('sys.color.background');
+    border-bottom: 1px solid theme.token-as-var('sys.color.border.primary');
+    background: theme.token-as-var('sys.color.background.background');
 
     &:focus-within {
       background: transparent;
@@ -199,14 +199,14 @@ const SEARCH_ICON_SIZE = {
   }
 
   &__search-icon {
-    fill: theme.token-as-var('sys.color.content-tertiary');
+    fill: theme.token-as-var('sys.color.content.tertiary');
   }
 
   &__search-input {
-    color: theme.token-as-var('sys.color.content-primary');
+    color: theme.token-as-var('sys.color.content.primary');
 
     &::placeholder {
-      color: theme.token-as-var('sys.color.content-tertiary');
+      color: theme.token-as-var('sys.color.content.tertiary');
     }
   }
 
@@ -223,7 +223,7 @@ const SEARCH_ICON_SIZE = {
 
       // spinner styles
       font-size: $spinner-size;
-      color: theme.token-as-var('sys.color.content-tertiary');
+      color: theme.token-as-var('sys.color.content.tertiary');
     }
   }
 

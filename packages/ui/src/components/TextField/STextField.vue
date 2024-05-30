@@ -340,10 +340,10 @@ $label-top-primary: 16px;
 $label-top-secondary: 6px;
 $message-icon-alignment-fix: -1px;
 
-$theme-bg: theme.token-as-var('sys.color.background');
-$theme-bg-hover: theme.token-as-var('sys.color.background-hover');
-$theme-border-primary: theme.token-as-var('sys.color.border-primary');
-$theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
+$theme-bg: theme.token-as-var('sys.color.background.background');
+$theme-bg-hover: theme.token-as-var('sys.color.background.hover');
+$theme-border-primary: theme.token-as-var('sys.color.border.primary');
+$theme-content-tertiary: theme.token-as-var('sys.color.content.tertiary');
 
 .s-text-field {
   $root: &;

@@ -19,8 +19,8 @@ $dot-border: (
   xl: 2px,
 );
 
-$color-primary: theme.token-as-var('sys.color.primary');
-$color-border-primary: theme.token-as-var('sys.color.border-primary');
+$color-primary: theme.token-as-var('sys.color.primary.primary');
+$color-border-primary: theme.token-as-var('sys.color.border.primary');
 
 $transition-dur-easing: 0.2s ease;
 

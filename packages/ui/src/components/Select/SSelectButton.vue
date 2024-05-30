@@ -91,19 +91,19 @@ const slots = useSlots()
   @apply select-none inline-flex items-center space-x-2 cursor-pointer;
 
   &_default {
-    background: theme.token-as-var('sys.color.background');
-    color: theme.token-as-var('sys.color.content-primary');
+    background: theme.token-as-var('sys.color.background.background');
+    color: theme.token-as-var('sys.color.content.primary');
     @apply rounded px-4;
 
     &:hover {
-      background: theme.token-as-var('sys.color.background-hover');
+      background: theme.token-as-var('sys.color.background.hover');
     }
   }
 
   &_inline {
     #{$root}__selection {
       @apply underline underline-solid;
-      text-decoration-color: theme.token-as-var('sys.color.content-primary');
+      text-decoration-color: theme.token-as-var('sys.color.content.primary');
     }
 
     &:hover#{$root}_empty #{$root}__label {
@@ -116,7 +116,7 @@ const slots = useSlots()
   }
 
   &:not(&_empty) &__label {
-    color: theme.token-as-var('sys.color.content-tertiary');
+    color: theme.token-as-var('sys.color.content.tertiary');
   }
 
   &_size {

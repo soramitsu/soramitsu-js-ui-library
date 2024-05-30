@@ -346,7 +346,7 @@ const handleClick = (ev: any) => {
       text-align: center;
       cursor: pointer;
       position: relative;
-      color: theme.token-as-var('sys.color.content-primary');
+      color: theme.token-as-var('sys.color.content.primary');
       font-feature-settings: 'tnum' on, 'lnum' on, 'case' on;
 
       & span {
@@ -362,13 +362,13 @@ const handleClick = (ev: any) => {
 
       &.next-month,
       &.prev-month {
-        color: theme.token-as-var('sys.color.content-primary');
+        color: theme.token-as-var('sys.color.content.primary');
         opacity: 0.4;
       }
 
       &.today {
         position: relative;
-        color: theme.token-as-var('sys.color.primary');
+        color: theme.token-as-var('sys.color.primary.primary');
         font-weight: 700;
 
         &.end-date span,
@@ -386,18 +386,18 @@ const handleClick = (ev: any) => {
       }
 
       &.available:hover:not(.start-date, .end-date, .current, .disabled) {
-        color: theme.token-as-var('sys.color.primary');
+        color: theme.token-as-var('sys.color.primary.primary');
       }
 
       &.in-range {
-        background-color: theme.token-as-var('sys.color.background');
+        background-color: theme.token-as-var('sys.color.background.background');
       }
 
       &.current,
       &.end-date,
       &.start-date {
         color: theme.token-as-var('sys.color.util.surface');
-        background-color: theme.token-as-var('sys.color.primary');
+        background-color: theme.token-as-var('sys.color.primary.primary');
         border-radius: 2px;
 
         &.disabled .date-table__cell-text {
@@ -406,7 +406,7 @@ const handleClick = (ev: any) => {
       }
 
       &.selected {
-        background-color: theme.token-as-var('sys.color.primary');
+        background-color: theme.token-as-var('sys.color.primary.primary');
         color: theme.token-as-var('sys.color.util.surface');
       }
     }
@@ -414,9 +414,9 @@ const handleClick = (ev: any) => {
     &__title {
       padding: 4px;
       font-weight: 400;
-      border-bottom: 1px solid theme.token-as-var('sys.color.border-primary');
-      border-top: 1px solid theme.token-as-var('sys.color.border-primary');
-      color: theme.token-as-var('sys.color.content-primary');
+      border-bottom: 1px solid theme.token-as-var('sys.color.border.primary');
+      border-top: 1px solid theme.token-as-var('sys.color.border.primary');
+      color: theme.token-as-var('sys.color.content.primary');
       text-align: center;
     }
   }

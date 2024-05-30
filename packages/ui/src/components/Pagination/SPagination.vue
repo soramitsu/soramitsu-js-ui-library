@@ -335,19 +335,19 @@ function handlePrevClick() {
 .s-pagination {
   &__button {
     cursor: pointer;
-    color: theme.token-as-var('sys.color.content-primary');
+    color: theme.token-as-var('sys.color.content.primary');
 
     &_active {
-      color: theme.token-as-var('sys.color.primary-pressed');
+      color: theme.token-as-var('sys.color.primary.pressed');
     }
 
     &_disabled {
-      color: theme.token-as-var('sys.color.on-disabled');
+      color: theme.token-as-var('sys.color.state.on-disabled');
       cursor: default;
     }
 
     &:not(&_disabled):hover {
-      color: theme.token-as-var('sys.color.primary-hover');
+      color: theme.token-as-var('sys.color.primary.hover');
     }
   }
 
@@ -356,11 +356,11 @@ function handlePrevClick() {
   }
 
   &__count {
-    color: theme.token-as-var('sys.color.content-tertiary');
+    color: theme.token-as-var('sys.color.content.tertiary');
   }
 
   &__sizes-label {
-    color: theme.token-as-var('sys.color.content-tertiary');
+    color: theme.token-as-var('sys.color.content.tertiary');
   }
 }
 </style>

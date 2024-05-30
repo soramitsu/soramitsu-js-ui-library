@@ -70,11 +70,11 @@ const showSpinner = computed(() => {
   }
 
   &_color_pending {
-    background-color: theme.token-as-var('sys.color.content-tertiary');
+    background-color: theme.token-as-var('sys.color.content.tertiary');
   }
 
   .primary-text-color {
-    color: theme.token-as-var('sys.color.content-primary');
+    color: theme.token-as-var('sys.color.content.primary');
   }
 
   .marker {

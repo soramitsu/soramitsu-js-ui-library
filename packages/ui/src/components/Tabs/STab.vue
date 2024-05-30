@@ -49,9 +49,9 @@ watch(
 <style lang="scss">
 @use '@/theme';
 
-$font-color-inactive: theme.token-as-var('sys.color.content-primary');
-$font-color-hover: theme.token-as-var('sys.color.primary-hover');
-$font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
+$font-color-inactive: theme.token-as-var('sys.color.content.primary');
+$font-color-hover: theme.token-as-var('sys.color.primary.hover');
+$font-color-disabled: theme.token-as-var('sys.color.content.quaternary');
 
 .s-tab {
   @apply select-none;
@@ -100,9 +100,9 @@ $font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
     $font-color-active: theme.token-as-var('sys.color.util.body');
 
     $background-color: theme.token-as-var('sys.color.util.body');
-    $background-color-active: theme.token-as-var('sys.color.primary');
+    $background-color-active: theme.token-as-var('sys.color.primary.primary');
 
-    $border: 1px solid theme.token-as-var('sys.color.border-primary');
+    $border: 1px solid theme.token-as-var('sys.color.border.primary');
     $border-active: 1px solid $background-color-active;
 
     background: $background-color;
@@ -116,8 +116,8 @@ $font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
   }
 
   &_background_secondary {
-    $font-color-active: theme.token-as-var('sys.color.content-primary');
-    $background-color: theme.token-as-var('sys.color.background');
+    $font-color-active: theme.token-as-var('sys.color.content.primary');
+    $background-color: theme.token-as-var('sys.color.background.background');
     $tab-shadow-active: theme.token-as-var('sys.shadow.active-tab');
 
     background: $background-color;
@@ -134,13 +134,13 @@ $font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
   }
 
   &_background_none {
-    $font-color-active: theme.token-as-var('sys.color.primary');
+    $font-color-active: theme.token-as-var('sys.color.primary.primary');
 
     $background-color: none;
     $background-color-active: none;
 
-    $border: 2px solid theme.token-as-var('sys.color.border-primary');
-    $border-active: 2px solid theme.token-as-var('sys.color.primary');
+    $border: 2px solid theme.token-as-var('sys.color.border.primary');
+    $border-active: 2px solid theme.token-as-var('sys.color.primary.primary');
 
     background: $background-color;
     border-bottom: $border;

@@ -114,27 +114,27 @@ function handleSecondaryButtonClick() {
 
 .s-tooltip {
   &__body {
-    background: theme.token-as-var('sys.color.content-primary');
-    color: theme.token-as-var('sys.color.content-on-background-inverted');
+    background: theme.token-as-var('sys.color.content.primary');
+    color: theme.token-as-var('sys.color.content.on-background-inverted');
     border-radius: 4px;
   }
 
   &__button.s-button {
     &_type_outline {
-      border-color: theme.token-as-var('sys.color.border-primary');
-      color: theme.token-as-var('sys.color.content-on-background-inverted');
+      border-color: theme.token-as-var('sys.color.border.primary');
+      color: theme.token-as-var('sys.color.content.on-background-inverted');
 
       &:hover,
       &:active {
         border-color: theme.token-as-var('sys.color.util.surface');
         background: theme.token-as-var('sys.color.util.surface');
-        color: theme.token-as-var('sys.color.content-primary');
+        color: theme.token-as-var('sys.color.content.primary');
       }
     }
 
     &_type_outline#{&}_disabled {
-      border-color: theme.token-as-var('sys.color.disabled');
-      color: theme.token-as-var('sys.color.on-disabled');
+      border-color: theme.token-as-var('sys.color.state.disabled');
+      color: theme.token-as-var('sys.color.state.on-disabled');
     }
   }
 }

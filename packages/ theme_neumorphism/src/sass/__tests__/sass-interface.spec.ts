@@ -34,7 +34,7 @@ describe('Exports', () => {
         `
         @use 'v_lib' as l
         body
-          color: #{l.token-as-var('sys.color.primary')}
+          color: #{l.token-as-var('sys.color.primary.primary')}
       `,
         'indented',
       ),
@@ -336,12 +336,12 @@ describe('Utils', () => {
         @use 'v_util' as util;
 
         $src: (
-          'sys.color.primary': '--scp',
+          'sys.color.primary.primary': '--scp',
           'sys.color.secondary': '--scs',
         );
 
         $values: (
-          'sys.color.primary': red,
+          'sys.color.primary.primary': red,
           'sys.color.secondary': blue
         );
         
@@ -363,12 +363,12 @@ describe('Utils', () => {
         @use 'v_util' as util;
 
         $src: (
-          'sys.color.primary': '--scp',
+          'sys.color.primary.primary': '--scp',
           'sys.color.secondary': '--scs',
         );
 
         $values: (
-          'sys.color.primary': red,
+          'sys.color.primary.primary': red,
           'sys.color.secondary': blue,
           'sys.color.tertiary': green
         );
@@ -386,7 +386,7 @@ describe('Utils', () => {
         @use 'v_util' as util;
 
         $src: (
-          'sys.color.primary': '--scp',
+          'sys.color.primary.primary': '--scp',
           'sys.color.secondary': '--scs',
         );
 
@@ -411,7 +411,7 @@ describe('Utils', () => {
         @use 'v_util' as util;
 
         $src: (
-          'sys.color.primary': '--scp',
+          'sys.color.primary.primary': '--scp',
           'sys.color.secondary': '--scs',
         );
 

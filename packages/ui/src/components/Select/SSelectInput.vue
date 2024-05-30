@@ -259,8 +259,8 @@ function handleChevronClick(event: MouseEvent) {
   @apply rounded flex items-center px-4;
   @apply select-none cursor-pointer;
 
-  background: theme.token-as-var('sys.color.background');
-  color: theme.token-as-var('sys.color.content-primary');
+  background: theme.token-as-var('sys.color.background.background');
+  color: theme.token-as-var('sys.color.content.primary');
   border: 1px solid transparent;
 
   &_disabled {
@@ -268,17 +268,17 @@ function handleChevronClick(event: MouseEvent) {
   }
 
   &:hover {
-    background: theme.token-as-var('sys.color.background-hover');
+    background: theme.token-as-var('sys.color.background.hover');
   }
 
   &:focus-within {
     background: transparent;
-    border: 1px solid theme.token-as-var('sys.color.border-primary');
+    border: 1px solid theme.token-as-var('sys.color.border.primary');
   }
 
   &__label,
   &__search-icon {
-    color: theme.token-as-var('sys.color.content-tertiary');
+    color: theme.token-as-var('sys.color.content.tertiary');
     fill: currentColor;
   }
 

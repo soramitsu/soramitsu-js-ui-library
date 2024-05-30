@@ -166,11 +166,11 @@ function select() {
 
 .s-table-card {
   &_selected {
-    background: theme.token-as-var('sys.color.background');
+    background: theme.token-as-var('sys.color.background.background');
   }
 
   &__label {
-    color: theme.token-as-var('sys.color.content-tertiary');
+    color: theme.token-as-var('sys.color.content.tertiary');
   }
 
   &__expand-icon {
@@ -183,7 +183,7 @@ function select() {
   }
 
   &__expanded-block {
-    background-color: theme.token-as-var('sys.color.background');
+    background-color: theme.token-as-var('sys.color.background.background');
   }
 }
 </style>

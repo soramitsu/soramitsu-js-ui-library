@@ -77,11 +77,11 @@ const changeView = (viewName: string) => {
       line-height: 22px;
       text-align: center;
       cursor: pointer;
-      color: theme.token-as-var('sys.color.content-primary');
+      color: theme.token-as-var('sys.color.content.primary');
 
       &.active,
       &:hover {
-        color: theme.token-as-var('sys.color.primary');
+        color: theme.token-as-var('sys.color.primary.primary');
       }
     }
   }

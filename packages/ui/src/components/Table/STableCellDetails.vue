@@ -13,16 +13,16 @@ import { IconArrowsChevronRightXs24 } from '@/components/icons'
 
 .s-table-cell-details {
   &:hover {
-    background: theme.token-as-var('sys.color.background-hover');
+    background: theme.token-as-var('sys.color.background.hover');
   }
 
   &__icon {
-    color: theme.token-as-var('sys.color.content-quaternary');
+    color: theme.token-as-var('sys.color.content.quaternary');
     fill: currentColor;
   }
 
   &:hover &__icon {
-    color: theme.token-as-var('sys.color.content-secondary');
+    color: theme.token-as-var('sys.color.content.secondary');
   }
 }
 </style>
