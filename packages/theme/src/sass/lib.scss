@@ -38,8 +38,8 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
         'button': (
             'color-utility-surface': '',
             'color-base-on-accent': #FFFFFF,
-            'color-base-tertiary': '',
-            'color-base-secondary': '',
+            'color-base-content-tertiary': '',
+            'color-base-content-secondary': '',
             'color-utility-body': '',
             'color-theme-accent': '',
           ),

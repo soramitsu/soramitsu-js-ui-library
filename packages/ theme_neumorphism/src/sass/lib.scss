@@ -1,5 +1,5 @@
-@use './tokens';
-@use './util';
+@use '../../../theme/src/sass/tokens.scss';
+@use '../../../theme/src/sass/util.scss';
 @use 'sass:list';
 
 $vars-prefix: '--sora_';
@@ -11,7 +11,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
 
 @function token($id) {
   @if not map-has-key($tokens-compiled, $id) {
-    @error "Cannot resolve token with id #{inspect($id)} and here is map #{$tokens-compiled} with initial id #{$id}";
+    @error "Cannot resolve token with id #{inspect($id)} with initial id #{$id}";
   }
   @return map-get($tokens-compiled, $id);
 }
@@ -116,6 +116,59 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'border-color-alternative': transparent,
             )
           ),
+          'primary': (
+            'primary': '',
+            'background': '',
+            'hover': '',
+            'hover-background': '',
+            'pressed': '',
+            'pressed-background': '',
+            'focused': '',
+            'focused-background': '',
+          ),
+          'content': (
+            'primary': '',
+            'secondary': '',
+            'tertiary': '',
+            'quaternary': '',
+            'on-background-inverted': '',
+          ),
+          'background': (
+            'background': '',
+            'hover': '',
+            'inverted': '',
+          ),
+          'border': (
+            'primary': '',
+            'secondary': '',
+          ),
+          'state': (
+            'disabled': '',
+            'on-disabled': '',
+          ),
+          'util': (
+            'body': '',
+            'surface': '',
+            'surface-overlay': '',
+            'overlay': '',
+          ),
+          'status': (
+            'success': '',
+            'success-background': '',
+            'success-background-hover': '',
+            'warning': '',
+            'warning-background': '',
+            'warning-background-hover': '',
+            'error': '',
+            'error-background': '',
+            'error-background-hover': '',
+            'info': '',
+            'info-background': '',
+            'info-background-hover': '',
+            'debug': '',
+            'debug-background': '',
+            'debug-background-hover': '',
+          ),
         ),
         'border': (
           'button': (
@@ -152,6 +205,12 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'button': all 0.25s ease-in-out
         ),
         'shadow': (
+          'page-header': '',
+          'page-header-light': '',
+          'modal-window-header': '',
+          'floating-notification': '',
+          'dropdown': '',
+          'active-tab': '',
           'button': (
             'primary': (
               'box-shadow': (1px 1px 5px token-as-var('ref.color.shadow.color-light'),
@@ -187,7 +246,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
 }
 
 @mixin typography($id) {
-  @if list.index(tokens.$typography-tokens, $id) == null {
+  @if list.index(tokens.$typography-tokens, $id) == '' {
     @error "Wrong typography token: #{inspect($id)}";
   }
 

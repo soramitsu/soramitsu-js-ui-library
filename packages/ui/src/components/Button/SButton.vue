@@ -212,7 +212,7 @@ const handleClick = (event: Event) => {
 
   &_type_primary {
     background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color');
-    color: theme.token-as-var('sys.color.content.on-background-inverted');
+    color: theme_neumorphism.token-as-var('ref.color.button.color-base-on-accent');
     box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow');
 
     &:hover,&:focus, &.focusing {
@@ -337,7 +337,7 @@ const handleClick = (event: Event) => {
     }
     &_primary {
       background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color');
-      color: theme.token-as-var('sys.color.content.on-background-inverted');
+      color: theme_neumorphism.token-as-var('ref.color.button.color-base-on-accent');
       box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow');
       border: 
       theme_neumorphism.token-as-var('sys.border.button.width') 
