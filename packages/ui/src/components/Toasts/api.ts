@@ -1,4 +1,5 @@
-import { InjectionKey, DeepReadonly, reactive, readonly, computed, Slot, FunctionalComponent } from 'vue'
+import type { InjectionKey, DeepReadonly, Slot, FunctionalComponent } from 'vue'
+import { reactive, readonly, computed } from 'vue'
 
 export type ToastUnregisterFn = () => void
 

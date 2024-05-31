@@ -1,4 +1,5 @@
-import { InjectionKey, inject, Ref, DeepReadonly } from 'vue'
+import type { InjectionKey, Ref, DeepReadonly } from 'vue'
+import { inject } from 'vue'
 import { forceInject } from '@/util'
 
 export interface NavigationMenuApi {

@@ -1,7 +1,7 @@
-import { MaybeElementRef, MaybeRef } from '@vueuse/core'
-import { Merge } from 'type-fest'
-import { Ref } from 'vue'
-import { RadioGroupApi, RadioGroupRegisteredItemApi, RegisterRadioParams } from '.'
+import type { MaybeElementRef, MaybeRef } from '@vueuse/core'
+import type { Merge } from 'type-fest'
+import type { Ref } from 'vue'
+import type { RadioGroupApi, RadioGroupRegisteredItemApi, RegisterRadioParams } from '.'
 
 export function useRadiosSelector<T extends Element>(
   target: MaybeElementRef,

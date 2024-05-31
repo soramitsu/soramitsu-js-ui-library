@@ -5,46 +5,44 @@
 ```ts
 
 import { AllowedComponentProps } from 'vue';
-import { BasePlacement } from '@popperjs/core';
+import type { BasePlacement } from '@popperjs/core';
 import { ComponentCustomProps } from 'vue';
 import { ComponentOptionsMixin } from 'vue';
 import type { CSSProperties } from 'vue';
-import { CUSTOM_OPTION_VALUE } from '@/components/DatePicker/consts';
-import { DeepReadonly } from 'vue';
+import type { CUSTOM_OPTION_VALUE } from '@/components/DatePicker/consts';
+import type { DeepReadonly } from 'vue';
 import { DefineComponent } from 'vue';
-import { ExtractPropTypes } from 'vue';
-import { FocusTrap } from 'focus-trap';
-import { FunctionalComponent } from 'vue';
-import { InjectionKey } from 'vue';
-import { Instance } from '@popperjs/core';
-import { MaybeElementRef } from '@vueuse/core';
-import { MaybeRef } from '@vueuse/core';
-import { Placement } from '@popperjs/core';
-import { Plugin as Plugin_2 } from 'vue';
-import { PropType } from 'vue';
-import { Ref } from 'vue';
+import type { FocusTrap } from 'focus-trap';
+import type { FunctionalComponent } from 'vue';
+import type { InjectionKey as InjectionKey_2 } from 'vue';
+import type { Instance } from '@popperjs/core';
+import type { MaybeElementRef } from '@vueuse/core';
+import type { MaybeRef } from '@vueuse/core';
+import type { Placement } from '@popperjs/core';
+import type { Plugin as Plugin_2 } from 'vue';
+import { PropType as PropType_2 } from 'vue';
+import type { Ref as Ref_2 } from 'vue';
 import { RendererElement } from 'vue';
 import { RendererNode } from 'vue';
-import { Slot } from 'vue';
+import type { Slot } from 'vue';
 import { Status as Status_2 } from '@/types';
-import { StyleValue } from 'vue';
-import { TableColumnCellValueFormatter as TableColumnCellValueFormatter_2 } from '@/components/Table/types';
-import { TableColumnRowSelectableFunc as TableColumnRowSelectableFunc_2 } from '@/components/Table/types';
-import { TableColumnSortBy as TableColumnSortBy_2 } from '@/components/Table/types';
-import { TableColumnSortOrder as TableColumnSortOrder_2 } from '@/components/Table/types';
+import type { StyleValue } from 'vue';
+import type { TableColumnCellValueFormatter as TableColumnCellValueFormatter_2 } from '@/components/Table/types';
+import type { TableColumnRowSelectableFunc as TableColumnRowSelectableFunc_2 } from '@/components/Table/types';
+import type { TableColumnSortBy as TableColumnSortBy_2 } from '@/components/Table/types';
+import type { TableColumnSortOrder as TableColumnSortOrder_2 } from '@/components/Table/types';
 import { UnwrapRef } from 'vue';
-import { VNode } from 'vue';
 import { VNodeProps } from 'vue';
 
 // @public (undocumented)
-export const ACCORDION_API_KEY: InjectionKey<AccordionApi | undefined>;
+export const ACCORDION_API_KEY: InjectionKey_2<AccordionApi | undefined>;
 
 // @public (undocumented)
 export interface AccordionApi {
     // (undocumented)
-    register: (item: Ref<AccordionItemApi>) => void;
+    register: (item: Ref_2<AccordionItemApi>) => void;
     // (undocumented)
-    unregister: (item: Ref<AccordionItemApi>) => void;
+    unregister: (item: Ref_2<AccordionItemApi>) => void;
 }
 
 // @public (undocumented)
@@ -64,7 +62,7 @@ export type BadgeType = typeof BadgeTypes extends ReadonlyArray<infer T> ? T : n
 export const BadgeTypes: readonly ["active", "error", "warning", "info", "debug", "pending"];
 
 // @public (undocumented)
-export const BODY_SCROLL_LOCK_API_KEY: InjectionKey<BodyScrollLockApi>;
+export const BODY_SCROLL_LOCK_API_KEY: InjectionKey_2<BodyScrollLockApi>;
 
 // @public (undocumented)
 export interface BodyScrollLockApi {
@@ -175,7 +173,7 @@ export type LinkIconPosition = typeof LINK_ICON_POSITION_VALUES[number];
 export type LinkUnderlineType = typeof LINK_UNDERLINE_TYPE_VALUES[number];
 
 // @public (undocumented)
-export const MODAL_API_KEY: InjectionKey<ModalApi>;
+export const MODAL_API_KEY: InjectionKey_2<ModalApi>;
 
 // @public (undocumented)
 export interface ModalApi {
@@ -190,10 +188,10 @@ export interface ModalApi {
 export type ModelValueType = DayModelValue | RangeModelValue | PickModelValue | undefined;
 
 // @public (undocumented)
-export const NAVIGATION_MENU_API_KEY: InjectionKey<DeepReadonly<NavigationMenuApi>>;
+export const NAVIGATION_MENU_API_KEY: InjectionKey_2<DeepReadonly<NavigationMenuApi>>;
 
 // @public (undocumented)
-export const NAVIGATION_SUBMENU_API_KEY: InjectionKey<DeepReadonly<NavigationSubmenuApi> | undefined>;
+export const NAVIGATION_SUBMENU_API_KEY: InjectionKey_2<DeepReadonly<NavigationSubmenuApi> | undefined>;
 
 // @public (undocumented)
 export interface NavigationMenuApi {
@@ -206,11 +204,11 @@ export interface NavigationMenuApi {
 
 // @public (undocumented)
 export interface NavigationSubmenuApi {
-    register: (index: Ref<string>) => void;
+    register: (index: Ref_2<string>) => void;
 }
 
 // @public (undocumented)
-export const NOTIFICATIONS_API_KEY: InjectionKey<ToastsApi>;
+export const NOTIFICATIONS_API_KEY: InjectionKey_2<ToastsApi>;
 
 // @public (undocumented)
 export type PickState = PickModelValue;
@@ -219,7 +217,7 @@ export type PickState = PickModelValue;
 export function plugin(): Plugin_2;
 
 // @public (undocumented)
-export const POPOVER_API_KEY: InjectionKey<PopoverApi>;
+export const POPOVER_API_KEY: InjectionKey_2<PopoverApi>;
 
 // @public (undocumented)
 export interface PopoverApi {
@@ -241,7 +239,7 @@ export interface PresetOption<T> {
 }
 
 // @public (undocumented)
-export const RADIO_GROUP_API_KEY: InjectionKey<RadioGroupApi>;
+export const RADIO_GROUP_API_KEY: InjectionKey_2<RadioGroupApi>;
 
 // @public (undocumented)
 const RADIO_SIZE_VALUES: readonly ["md", "lg", "xl"];
@@ -323,18 +321,19 @@ export type RegisteredToast = ToastRegisterParams;
 // @public (undocumented)
 export interface RegisterRadioParams {
     // (undocumented)
-    disabledRef: Ref<boolean>;
+    disabledRef: Ref_2<boolean>;
     // (undocumented)
-    elRef: Ref<null | HTMLElement>;
+    elRef: Ref_2<null | HTMLElement>;
     // (undocumented)
-    valueRef: Ref<any>;
+    valueRef: Ref_2<any>;
 }
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SAccordion: DefineComponent<__VLS_WithDefaults_2<__VLS_TypePropsToRuntimeProps_2<{
+export const SAccordion: __VLS_WithTemplateSlots_2<DefineComponent<__VLS_WithDefaults_2<__VLS_TypePropsToRuntimeProps_2<{
 modelValue?: string[] | undefined;
 multiple?: boolean | undefined;
 }>, {
@@ -342,7 +341,7 @@ modelValue: () => never[];
 multiple: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: string[]) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_2<__VLS_TypePropsToRuntimeProps_2<{
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_2<__VLS_TypePropsToRuntimeProps_2<{
 modelValue?: string[] | undefined;
 multiple?: boolean | undefined;
 }>, {
@@ -353,13 +352,16 @@ multiple: boolean;
 }, {
 modelValue: string[];
 multiple: boolean;
-}, {}>;
+}, {}>, {
+    default?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SAccordionItem: DefineComponent<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
+export const SAccordionItem: __VLS_WithTemplateSlots<DefineComponent<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
 modelValue?: boolean | undefined;
 title?: string | undefined;
 subtitle?: string | undefined;
@@ -371,7 +373,7 @@ subtitle: string;
 name: string;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: boolean) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
 modelValue?: boolean | undefined;
 title?: string | undefined;
 subtitle?: string | undefined;
@@ -385,22 +387,27 @@ name: string;
 "onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
 }, {
 modelValue: boolean;
-name: string;
 title: string;
+name: string;
 subtitle: string;
-}, {}>;
+}, {}>, {
+    title?(_: {}): any;
+    subtitle?(_: {}): any;
+    default?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SAlert: DefineComponent<__VLS_WithDefaults_3<__VLS_TypePropsToRuntimeProps_3<Props>, {
+export const SAlert: __VLS_WithTemplateSlots_3<DefineComponent<__VLS_WithDefaults_3<__VLS_TypePropsToRuntimeProps_3<Props>, {
 status: "info";
 showCloseBtn: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "click:close": () => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_3<__VLS_TypePropsToRuntimeProps_3<Props>, {
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_3<__VLS_TypePropsToRuntimeProps_3<Props>, {
 status: "info";
 showCloseBtn: boolean;
 }>>> & {
@@ -408,13 +415,17 @@ showCloseBtn: boolean;
 }, {
 status: Status_2;
 showCloseBtn: boolean;
-}, {}>;
+}, {}>, {
+    title?(_: {}): any;
+    description?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SBadge: DefineComponent<__VLS_WithDefaults_19<__VLS_TypePropsToRuntimeProps_22<{
+export const SBadge: __VLS_WithTemplateSlots_20<DefineComponent<__VLS_WithDefaults_19<__VLS_TypePropsToRuntimeProps_22<{
 type?: "info" | "warning" | "error" | "active" | "debug" | "pending" | undefined;
 colorBackground?: boolean | undefined;
 withBorder?: boolean | undefined;
@@ -426,7 +437,7 @@ colorBackground: boolean;
 withBorder: boolean;
 onlyMarker: boolean;
 tabular: boolean;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_19<__VLS_TypePropsToRuntimeProps_22<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_19<__VLS_TypePropsToRuntimeProps_22<{
 type?: "info" | "warning" | "error" | "active" | "debug" | "pending" | undefined;
 colorBackground?: boolean | undefined;
 withBorder?: boolean | undefined;
@@ -439,33 +450,36 @@ withBorder: boolean;
 onlyMarker: boolean;
 tabular: boolean;
 }>>>, {
-type: BadgeType;
+type: "info" | "warning" | "error" | "active" | "debug" | "pending";
 colorBackground: boolean;
 withBorder: boolean;
 onlyMarker: boolean;
 tabular: boolean;
-}, {}>;
+}, {}>, {
+    default?(_: {}): any;
+}>;
 
 // @public (undocumented)
 export const SBodyScrollLockProvider: DefineComponent<    {
 api: {
-type: PropType<BodyScrollLockApi>;
+type: PropType_2<BodyScrollLockApi>;
 required: true;
 };
-}, () => VNode<RendererNode, RendererElement, {
+}, () => globalThis.VNode<RendererNode, RendererElement, {
 [key: string]: any;
-}>[] | undefined, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {
+}>[] | undefined, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<{
 api: {
-type: PropType<BodyScrollLockApi>;
+type: PropType_2<BodyScrollLockApi>;
 required: true;
 };
 }>>, {}, {}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SButton: DefineComponent<__VLS_WithDefaults_4<__VLS_TypePropsToRuntimeProps_4<{
+export const SButton: __VLS_WithTemplateSlots_4<DefineComponent<__VLS_WithDefaults_4<__VLS_TypePropsToRuntimeProps_4<{
 type?: "primary" | "secondary" | "outline" | "action" | undefined;
 size?: "xs" | "sm" | "md" | "lg" | undefined;
 nativeType?: HTMLButtonType | undefined;
@@ -485,7 +499,7 @@ rounded: boolean;
 disabled: boolean;
 loading: boolean;
 uppercase: boolean;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_4<__VLS_TypePropsToRuntimeProps_4<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_4<__VLS_TypePropsToRuntimeProps_4<{
 type?: "primary" | "secondary" | "outline" | "action" | undefined;
 size?: "xs" | "sm" | "md" | "lg" | undefined;
 nativeType?: HTMLButtonType | undefined;
@@ -506,96 +520,119 @@ disabled: boolean;
 loading: boolean;
 uppercase: boolean;
 }>>>, {
-type: ButtonType;
-size: ButtonSize;
+type: "primary" | "secondary" | "outline" | "action";
+size: "xs" | "sm" | "md" | "lg";
 nativeType: HTMLButtonType;
 icon: string;
-iconPosition: ButtonIconPosition;
+iconPosition: "left" | "right";
 rounded: boolean;
 disabled: boolean;
 loading: boolean;
 uppercase: boolean;
-}, {}>;
+}, {}>, {
+    icon?(_: {}): any;
+    default?(_: {}): any;
+}>;
 
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
 export const SCheckboxAtom: FunctionalComponent<Props_8>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SCheckboxSolo: DefineComponent<__VLS_WithDefaults_20<__VLS_TypePropsToRuntimeProps_23<Props_9>, {
+export const SCheckboxSolo: __VLS_WithTemplateSlots_21<DefineComponent<__VLS_WithDefaults_20<__VLS_TypePropsToRuntimeProps_23<Props_9>, {
 modelValue: boolean;
 type: string;
 size: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_20<__VLS_TypePropsToRuntimeProps_23<Props_9>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (...args: any[]) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_20<__VLS_TypePropsToRuntimeProps_23<Props_9>, {
 modelValue: boolean;
 type: string;
 size: string;
 }>>> & {
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
-type: "default" | "bordered" | "bordered-with-description";
 modelValue: boolean;
+type: "default" | "bordered" | "bordered-with-description";
 size: "md" | "lg" | "xl";
-}, {}>;
+}, {}>, {
+    default?(_: {}): any;
+    description?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SCollapseTransition: DefineComponent<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<{
+export const SCollapseTransition: __VLS_WithTemplateSlots_22<DefineComponent<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<{
 duration?: string | undefined;
 }>, {
 duration: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_21<__VLS_TypePropsToRuntimeProps_24<{
 duration?: string | undefined;
 }>, {
 duration: string;
 }>>>, {
 duration: string;
-}, {}>;
+}, {}>, {
+    default?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SDatePicker: DefineComponent<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<Props_7>, {
+export const SDatePicker: __VLS_WithTemplateSlots_17<DefineComponent<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<Props_7>, {
 type: string;
 time: boolean;
 disabled: boolean;
 shortcuts: () => DatePickerOptionsProp;
-dateFilter: () => boolean;
+dateFilter: () => true;
 min: null;
 max: null;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<Props_7>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (...args: any[]) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_15<__VLS_TypePropsToRuntimeProps_18<Props_7>, {
 type: string;
 time: boolean;
 disabled: boolean;
 shortcuts: () => DatePickerOptionsProp;
-dateFilter: () => boolean;
+dateFilter: () => true;
 min: null;
 max: null;
 }>>> & {
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
 type: DatePickerType;
-disabled: boolean;
 time: boolean;
+disabled: boolean;
+max: Date | null;
+min: Date | null;
 shortcuts: false | DatePickerOptionsProp;
 dateFilter: (d: Date) => boolean;
-min: Date | null;
-max: Date | null;
-}, {}>;
+}, {}>, {
+    default?(_: {
+        disabled: boolean;
+        updateShow: () => void;
+        isPopperShown: boolean;
+        label: string;
+    }): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SDropdown: DefineComponent<__VLS_TypePropsToRuntimeProps_10<{
+export const SDropdown: __VLS_WithTemplateSlots_11<DefineComponent<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
 optionType?: SelectOptionType | undefined;
@@ -608,7 +645,7 @@ noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_10<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
 optionType?: SelectOptionType | undefined;
@@ -621,10 +658,34 @@ noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
-}>>>, {}, {}>;
+}>>>, {}, {}>, {
+    label?(_: {
+        options: UnwrapRef<SelectOption<any>[] | SelectOptionGroup<any>[]>;
+        multiple: boolean;
+        disabled: boolean;
+        loading: boolean;
+        label: string | null;
+        size: SelectSize;
+        noAutoClose: boolean;
+        searchQuery: string;
+        remoteSearch: boolean;
+        isMenuOpened: boolean;
+        menuToggle: (value?: boolean | undefined) => void;
+        updateSearchQuery: (value: string) => void;
+        toggleSelection: (value: any) => void;
+        toggleGroupSelection: (optionsGroup: SelectOptionGroup<any>) => void;
+        select: (value: any) => void;
+        unselect: (value: any) => void;
+        isValueSelected: (value: any) => boolean;
+        selectedOptions: SelectOption<any>[];
+        isSomethingSelected: boolean;
+        isGroupSelected: (optionsGroup: SelectOptionGroup<any>) => boolean;
+    }): any;
+    empty?(_: {}): any;
+}>;
 
 // @public (undocumented)
-export const SELECT_API_KEY: InjectionKey<SelectApi<any>>;
+export const SELECT_API_KEY: InjectionKey_2<SelectApi<any>>;
 
 // Warning: (ae-forgotten-export) The symbol "UseSelectModelReturn" needs to be exported by the entry point lib.d.ts
 //
@@ -732,11 +793,12 @@ export interface ShowState {
     year: number;
 }
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SLink: DefineComponent<__VLS_WithDefaults_5<__VLS_TypePropsToRuntimeProps_5<{
+export const SLink: __VLS_WithTemplateSlots_5<DefineComponent<__VLS_WithDefaults_5<__VLS_TypePropsToRuntimeProps_5<{
 underline?: "solid" | "dotted" | undefined;
 iconPosition?: "left" | "right" | undefined;
 icon?: boolean | undefined;
@@ -746,7 +808,7 @@ underline: string;
 iconPosition: string;
 icon: boolean;
 tag: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_5<__VLS_TypePropsToRuntimeProps_5<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_5<__VLS_TypePropsToRuntimeProps_5<{
 underline?: "solid" | "dotted" | undefined;
 iconPosition?: "left" | "right" | undefined;
 icon?: boolean | undefined;
@@ -758,17 +820,23 @@ icon: boolean;
 tag: string;
 }>>>, {
 icon: boolean;
-iconPosition: LinkIconPosition;
-underline: LinkUnderlineType;
+iconPosition: "left" | "right";
+underline: "solid" | "dotted";
 tag: string | object;
-}, {}>;
+}, {}>, {
+    default?(_: {}): any;
+    icon?(_: {
+        class: string;
+    }): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SModal: DefineComponent<__VLS_WithDefaults_6<__VLS_TypePropsToRuntimeProps_6<Props_2>, {
+export const SModal: __VLS_WithTemplateSlots_6<DefineComponent<__VLS_WithDefaults_6<__VLS_TypePropsToRuntimeProps_6<Props_2>, {
 teleportTo: string;
 modalTransition: string;
 overlayTransition: string;
@@ -780,7 +848,14 @@ focusTrap: boolean;
 eager: boolean;
 labelledBy: string;
 describedBy: null;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("before-open" | "after-open" | "before-close" | "after-close" | "update:show" | "click:overlay")[], "before-open" | "after-open" | "before-close" | "after-close" | "update:show" | "click:overlay", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_6<__VLS_TypePropsToRuntimeProps_6<Props_2>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:show": (...args: any[]) => void;
+"before-open": (...args: any[]) => void;
+"after-open": (...args: any[]) => void;
+"before-close": (...args: any[]) => void;
+"after-close": (...args: any[]) => void;
+"click:overlay": (...args: any[]) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_6<__VLS_TypePropsToRuntimeProps_6<Props_2>, {
 teleportTo: string;
 modalTransition: string;
 overlayTransition: string;
@@ -793,13 +868,15 @@ eager: boolean;
 labelledBy: string;
 describedBy: null;
 }>>> & {
+"onUpdate:show"?: ((...args: any[]) => any) | undefined;
 "onBefore-open"?: ((...args: any[]) => any) | undefined;
 "onAfter-open"?: ((...args: any[]) => any) | undefined;
 "onBefore-close"?: ((...args: any[]) => any) | undefined;
 "onAfter-close"?: ((...args: any[]) => any) | undefined;
-"onUpdate:show"?: ((...args: any[]) => any) | undefined;
 "onClick:overlay"?: ((...args: any[]) => any) | undefined;
 }, {
+describedBy: string | null;
+labelledBy: string;
 eager: boolean;
 teleportTo: string;
 modalTransition: string | object;
@@ -809,33 +886,43 @@ showOverlay: boolean;
 closeOnOverlayClick: boolean;
 closeOnEsc: boolean;
 focusTrap: boolean | object;
-labelledBy: string;
-describedBy: string | null;
-}, {}>;
+}, {}>, {
+    default?(_: {
+        close: () => void;
+        focusTrap: FocusTrap | null;
+        labelledBy: string;
+        describedBy: string | null;
+    }): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SModalCard: DefineComponent<__VLS_WithDefaults_7<__VLS_TypePropsToRuntimeProps_7<{
+export const SModalCard: __VLS_WithTemplateSlots_7<DefineComponent<__VLS_WithDefaults_7<__VLS_TypePropsToRuntimeProps_7<{
 title?: string | undefined;
 close?: boolean | undefined;
 }>, {
 close: boolean;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_7<__VLS_TypePropsToRuntimeProps_7<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_7<__VLS_TypePropsToRuntimeProps_7<{
 title?: string | undefined;
 close?: boolean | undefined;
 }>, {
 close: boolean;
 }>>>, {
 close: boolean;
-}, {}>;
+}, {}>, {
+    title?(_: {}): any;
+    default?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SNavigationMenu: DefineComponent<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+export const SNavigationMenu: __VLS_WithTemplateSlots_26<DefineComponent<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
 modelValue?: string | undefined;
 collapsed?: boolean | undefined;
 }>, {
@@ -843,7 +930,7 @@ modelValue: string;
 collapsed: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: string) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_25<__VLS_TypePropsToRuntimeProps_28<{
 modelValue?: string | undefined;
 collapsed?: boolean | undefined;
 }>, {
@@ -854,26 +941,45 @@ collapsed: boolean;
 }, {
 modelValue: string;
 collapsed: boolean;
-}, {}>;
+}, {}>, {
+    header?(_: {}): any;
+    default?(_: {}): any;
+    footer?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SNavigationMenuItem: DefineComponent<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
+export const SNavigationMenuItem: __VLS_WithTemplateSlots_25<DefineComponent<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
 value: string;
-}>, {}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
+}>, {}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_24<__VLS_TypePropsToRuntimeProps_27<{
 value: string;
-}>, {}>>>, {}, {}>;
+}>, {}>>>, {}, {}>, {
+    icon?(_: {
+        class: string;
+    }): any;
+    default?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
+//
 // @public (undocumented)
-export const SNavigationSubmenu: DefineComponent<    {}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {}>>, {}, {}>;
+export const SNavigationSubmenu: __VLS_WithTemplateSlots_27<DefineComponent<    {}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<{}>>, {}, {}>, {
+    icon?(_: {
+        class: string;
+    }): any;
+    title?(_: {}): any;
+    default?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SNotificationBody: DefineComponent<__VLS_WithDefaults_8<__VLS_TypePropsToRuntimeProps_8<{
+export const SNotificationBody: __VLS_WithTemplateSlots_8<DefineComponent<__VLS_WithDefaults_8<__VLS_TypePropsToRuntimeProps_8<{
 title?: string | undefined;
 description?: string | undefined;
 status?: Status_2 | undefined;
@@ -882,7 +988,10 @@ showCloseBtn?: boolean | undefined;
 }>, {
 status: "info";
 timeout: number;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("click:close" | "timeout")[], "click:close" | "timeout", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_8<__VLS_TypePropsToRuntimeProps_8<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"click:close": (...args: any[]) => void;
+timeout: (...args: any[]) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_8<__VLS_TypePropsToRuntimeProps_8<{
 title?: string | undefined;
 description?: string | undefined;
 status?: Status_2 | undefined;
@@ -897,7 +1006,10 @@ onTimeout?: ((...args: any[]) => any) | undefined;
 }, {
 status: Status_2;
 timeout: number;
-}, {}>;
+}, {}>, {
+    title?(_: {}): any;
+    description?(_: {}): any;
+}>;
 
 // @public (undocumented)
 export const SNotificationsProvider: FunctionalComponent<{
@@ -907,11 +1019,12 @@ export const SNotificationsProvider: FunctionalComponent<{
     to?: string;
 }>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SPagination: DefineComponent<__VLS_WithDefaults_27<__VLS_TypePropsToRuntimeProps_30<{
+export const SPagination: __VLS_WithTemplateSlots_29<DefineComponent<__VLS_WithDefaults_27<__VLS_TypePropsToRuntimeProps_30<{
 total?: number | undefined;
 pageSize?: number | null | undefined;
 currentPage?: number | undefined;
@@ -925,13 +1038,10 @@ pageSizes: () => number[];
 sizesLabel: string;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "click:prev": (value: number) => void;
-} & {
 "click:next": (value: number) => void;
-} & {
 "update:currentPage": (value: number) => void;
-} & {
 "update:pageSize": (value: number) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_27<__VLS_TypePropsToRuntimeProps_30<{
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_27<__VLS_TypePropsToRuntimeProps_30<{
 total?: number | undefined;
 pageSize?: number | null | undefined;
 currentPage?: number | undefined;
@@ -954,7 +1064,13 @@ pageSize: number | null;
 currentPage: number;
 pageSizes: number[];
 sizesLabel: string;
-}, {}>;
+}, {}>, {
+    progress?(_: {
+        firstItemNum: number;
+        lastItemNum: number;
+        total: number;
+    }): any;
+}>;
 
 // @public (undocumented)
 export const SPINNER_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
@@ -966,12 +1082,12 @@ export const SPINNER_WIDTH: Record<typeof BUTTON_SIZE_VALUES[number], string>;
 export const SPopover: DefineComponent<    {
 show: BooleanConstructor;
 trigger: {
-type: PropType<"manual" | "hover" | "click">;
+type: PropType_2<"click" | "hover" | "manual">;
 default: string;
 validator: (v: unknown) => boolean;
 };
 placement: {
-type: PropType<Placement>;
+type: PropType_2<Placement>;
 default: string;
 validator: (v: unknown) => boolean;
 };
@@ -992,17 +1108,17 @@ type: (StringConstructor | NumberConstructor)[];
 default: number;
 };
 sameWidth: BooleanConstructor;
-}, () => (VNode<RendererNode, RendererElement, {
+}, () => (globalThis.VNode<RendererNode, RendererElement, {
 [key: string]: any;
-}> | null)[], unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "click-outside")[], "update:show" | "click-outside", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {
+}> | null)[], unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "click-outside")[], "update:show" | "click-outside", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<{
 show: BooleanConstructor;
 trigger: {
-type: PropType<"manual" | "hover" | "click">;
+type: PropType_2<"click" | "hover" | "manual">;
 default: string;
 validator: (v: unknown) => boolean;
 };
 placement: {
-type: PropType<Placement>;
+type: PropType_2<Placement>;
 default: string;
 validator: (v: unknown) => boolean;
 };
@@ -1027,9 +1143,9 @@ sameWidth: BooleanConstructor;
 "onUpdate:show"?: ((...args: any[]) => any) | undefined;
 "onClick-outside"?: ((...args: any[]) => any) | undefined;
 }, {
-show: boolean;
+trigger: "click" | "hover" | "manual";
 placement: Placement;
-trigger: "manual" | "hover" | "click";
+show: boolean;
 skidding: string | number;
 distance: string | number;
 showDelay: string | number;
@@ -1037,8 +1153,10 @@ hideDelay: string | number;
 sameWidth: boolean;
 }, {}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
+//
 // @public (undocumented)
-export const SPopoverWrappedTransition: DefineComponent<    {
+export const SPopoverWrappedTransition: __VLS_WithTemplateSlots_9<DefineComponent<    {
 eager: BooleanConstructor;
 wrapperAttrs: {
 type: ObjectConstructor;
@@ -1048,7 +1166,7 @@ innerWrapperAttrs: {
 type: ObjectConstructor;
 default: null;
 };
-}, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {
+}, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<{
 eager: BooleanConstructor;
 wrapperAttrs: {
 type: ObjectConstructor;
@@ -1062,7 +1180,9 @@ default: null;
 eager: boolean;
 wrapperAttrs: Record<string, any>;
 innerWrapperAttrs: Record<string, any>;
-}, {}>;
+}, {}>, {
+    default?(_: {}): any;
+}>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
@@ -1074,7 +1194,7 @@ lineHeight?: number | undefined;
 }>, {
 percent: number;
 lineHeight: number;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_16<__VLS_TypePropsToRuntimeProps_19<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_16<__VLS_TypePropsToRuntimeProps_19<{
 percent?: number | undefined;
 lineHeight?: number | undefined;
 }>, {
@@ -1085,16 +1205,17 @@ lineHeight: number;
 percent: number;
 }, {}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SRadio: DefineComponent<__VLS_WithDefaults_22<__VLS_TypePropsToRuntimeProps_25<Props_10>, {
+export const SRadio: __VLS_WithTemplateSlots_23<DefineComponent<__VLS_WithDefaults_22<__VLS_TypePropsToRuntimeProps_25<Props_10>, {
 disabled: boolean;
 type: string;
 size: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_22<__VLS_TypePropsToRuntimeProps_25<Props_10>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_22<__VLS_TypePropsToRuntimeProps_25<Props_10>, {
 disabled: boolean;
 type: string;
 size: string;
@@ -1102,24 +1223,30 @@ size: string;
 type: "default" | "bordered" | "bordered-with-description";
 size: "md" | "lg" | "xl";
 disabled: boolean;
-}, {}>;
+}, {}>, {
+    default?(_: {}): any;
+    description?(_: {}): any;
+}>;
 
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
 export const SRadioAtom: FunctionalComponent<Props_12>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SRadioGroup: DefineComponent<__VLS_WithDefaults_23<__VLS_TypePropsToRuntimeProps_26<Props_11>, {
+export const SRadioGroup: __VLS_WithTemplateSlots_24<DefineComponent<__VLS_WithDefaults_23<__VLS_TypePropsToRuntimeProps_26<Props_11>, {
 modelValue: null;
 radioSelector: string;
 labelledBy: string;
 describedBy: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_23<__VLS_TypePropsToRuntimeProps_26<Props_11>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (...args: any[]) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_23<__VLS_TypePropsToRuntimeProps_26<Props_11>, {
 modelValue: null;
 radioSelector: string;
 labelledBy: string;
@@ -1128,15 +1255,18 @@ describedBy: string;
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
 modelValue: string | number | symbol | object | null;
-labelledBy: string;
 describedBy: string;
 radioSelector: string;
-}, {}>;
+labelledBy: string;
+}, {}>, {
+    default?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SSelect: DefineComponent<__VLS_TypePropsToRuntimeProps_9<{
+export const SSelect: __VLS_WithTemplateSlots_10<DefineComponent<__VLS_TypePropsToRuntimeProps_9<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
 optionType?: SelectOptionType | undefined;
@@ -1149,7 +1279,7 @@ loading?: boolean | undefined;
 triggerSearch?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_9<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_TypePropsToRuntimeProps_9<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
 optionType?: SelectOptionType | undefined;
@@ -1162,13 +1292,38 @@ loading?: boolean | undefined;
 triggerSearch?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
-}>>>, {}, {}>;
+}>>>, {}, {}>, {
+    label?(_: {
+        options: UnwrapRef<SelectOption<any>[] | SelectOptionGroup<any>[]>;
+        multiple: boolean;
+        disabled: boolean;
+        loading: boolean;
+        label: string | null;
+        size: SelectSize;
+        noAutoClose: boolean;
+        searchQuery: string;
+        remoteSearch: boolean;
+        isMenuOpened: boolean;
+        menuToggle: (value?: boolean | undefined) => void;
+        updateSearchQuery: (value: string) => void;
+        toggleSelection: (value: any) => void;
+        toggleGroupSelection: (optionsGroup: SelectOptionGroup<any>) => void;
+        select: (value: any) => void;
+        unselect: (value: any) => void;
+        isValueSelected: (value: any) => boolean;
+        selectedOptions: SelectOption<any>[];
+        isSomethingSelected: boolean;
+        isGroupSelected: (optionsGroup: SelectOptionGroup<any>) => boolean;
+    }): any;
+    empty?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SSelectBase: DefineComponent<__VLS_WithDefaults_9<__VLS_TypePropsToRuntimeProps_11<{
+export const SSelectBase: __VLS_WithTemplateSlots_12<DefineComponent<__VLS_WithDefaults_9<__VLS_TypePropsToRuntimeProps_11<{
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 modelValue?: any;
@@ -1199,9 +1354,8 @@ dropdownSearch: boolean;
 remoteSearch: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: any) => void;
-} & {
 search: (value: string) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_9<__VLS_TypePropsToRuntimeProps_11<{
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_9<__VLS_TypePropsToRuntimeProps_11<{
 disabled?: boolean | undefined;
 multiple?: boolean | undefined;
 modelValue?: any;
@@ -1236,70 +1390,128 @@ onSearch?: ((value: string) => any) | undefined;
 }, {
 modelValue: any;
 multiple: boolean;
+label: string | null;
 size: SelectSize;
 disabled: boolean;
 loading: boolean;
-options: SelectOption[] | SelectOptionGroup[];
-label: string | null;
-noAutoClose: boolean;
-dropdownSearch: boolean;
-remoteSearch: boolean;
+options: SelectOption<any>[] | SelectOptionGroup<any>[];
 syncMenuAndInputWidths: boolean;
+noAutoClose: boolean;
 sameWidthPopper: boolean;
 triggerSearch: boolean;
-}, {}>;
+dropdownSearch: boolean;
+remoteSearch: boolean;
+}, {}>, {
+    control?(_: {
+        search: boolean;
+    }): any;
+    dropdown?(_: {
+        search: boolean;
+    }): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SSelectButton: DefineComponent<__VLS_WithDefaults_10<__VLS_TypePropsToRuntimeProps_12<{
+export const SSelectButton: __VLS_WithTemplateSlots_13<DefineComponent<__VLS_WithDefaults_10<__VLS_TypePropsToRuntimeProps_12<{
 type?: SelectButtonType | undefined;
 }>, {
 type: "default";
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_10<__VLS_TypePropsToRuntimeProps_12<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_10<__VLS_TypePropsToRuntimeProps_12<{
 type?: SelectButtonType | undefined;
 }>, {
 type: "default";
 }>>>, {
 type: SelectButtonType;
-}, {}>;
+}, {}>, {
+    label?(_: {
+        options: UnwrapRef<SelectOption<any>[] | SelectOptionGroup<any>[]>;
+        multiple: boolean;
+        disabled: boolean;
+        loading: boolean;
+        label: string | null;
+        size: SelectSize;
+        noAutoClose: boolean;
+        searchQuery: string;
+        remoteSearch: boolean;
+        isMenuOpened: boolean;
+        menuToggle: (value?: boolean | undefined) => void;
+        updateSearchQuery: (value: string) => void;
+        toggleSelection: (value: any) => void;
+        toggleGroupSelection: (optionsGroup: SelectOptionGroup<any>) => void;
+        select: (value: any) => void;
+        unselect: (value: any) => void;
+        isValueSelected: (value: any) => boolean;
+        selectedOptions: SelectOption<any>[];
+        isSomethingSelected: boolean;
+        isGroupSelected: (optionsGroup: SelectOptionGroup<any>) => boolean;
+    }): any;
+}>;
 
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
 export const SSelectChevron: FunctionalComponent<Props_3>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SSelectInput: DefineComponent<__VLS_WithDefaults_11<__VLS_TypePropsToRuntimeProps_13<{
+export const SSelectInput: __VLS_WithTemplateSlots_14<DefineComponent<__VLS_WithDefaults_11<__VLS_TypePropsToRuntimeProps_13<{
 search?: boolean | undefined;
 }>, {
 search: boolean;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_11<__VLS_TypePropsToRuntimeProps_13<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_11<__VLS_TypePropsToRuntimeProps_13<{
 search?: boolean | undefined;
 }>, {
 search: boolean;
 }>>>, {
 search: boolean;
-}, {}>;
+}, {}>, {
+    label?(_: {
+        options: UnwrapRef<SelectOption<any>[] | SelectOptionGroup<any>[]>;
+        multiple: boolean;
+        disabled: boolean;
+        loading: boolean;
+        label: string | null;
+        size: SelectSize;
+        noAutoClose: boolean;
+        searchQuery: string;
+        remoteSearch: boolean;
+        isMenuOpened: boolean;
+        menuToggle: (value?: boolean | undefined) => void;
+        updateSearchQuery: (value: string) => void;
+        toggleSelection: (value: any) => void;
+        toggleGroupSelection: (optionsGroup: SelectOptionGroup<any>) => void;
+        select: (value: any) => void;
+        unselect: (value: any) => void;
+        isValueSelected: (value: any) => boolean;
+        selectedOptions: SelectOption<any>[];
+        isSomethingSelected: boolean;
+        isGroupSelected: (optionsGroup: SelectOptionGroup<any>) => boolean;
+    }): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SSelectOption: DefineComponent<__VLS_TypePropsToRuntimeProps_14<{
+export const SSelectOption: __VLS_WithTemplateSlots_15<DefineComponent<__VLS_TypePropsToRuntimeProps_14<{
 type: SelectOptionType;
 selected?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 toggle: () => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_TypePropsToRuntimeProps_14<{
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_TypePropsToRuntimeProps_14<{
 type: SelectOptionType;
 selected?: boolean | undefined;
 }>>> & {
 onToggle?: (() => any) | undefined;
-}, {}, {}>;
+}, {}, {}>, {
+    default?(_: {}): any;
+}>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
@@ -1309,7 +1521,7 @@ onToggle?: (() => any) | undefined;
 export const SSpinner: DefineComponent<__VLS_WithDefaults_12<__VLS_TypePropsToRuntimeProps_15<Props_4>, {
 size: string;
 width: number;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_12<__VLS_TypePropsToRuntimeProps_15<Props_4>, {
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_12<__VLS_TypePropsToRuntimeProps_15<Props_4>, {
 size: string;
 width: number;
 }>>>, {
@@ -1327,39 +1539,43 @@ label: string;
 disabled: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: boolean) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_13<__VLS_TypePropsToRuntimeProps_16<Props_5>, {
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_13<__VLS_TypePropsToRuntimeProps_16<Props_5>, {
 label: string;
 disabled: boolean;
 }>>> & {
 "onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
 }, {
-disabled: boolean;
 label: string;
+disabled: boolean;
 }, {}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STab: DefineComponent<__VLS_WithDefaults_18<__VLS_TypePropsToRuntimeProps_21<{
+export const STab: __VLS_WithTemplateSlots_19<DefineComponent<__VLS_WithDefaults_18<__VLS_TypePropsToRuntimeProps_21<{
 disabled?: boolean | undefined;
 name: string;
 }>, {
 disabled: boolean;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_18<__VLS_TypePropsToRuntimeProps_21<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_18<__VLS_TypePropsToRuntimeProps_21<{
 disabled?: boolean | undefined;
 name: string;
 }>, {
 disabled: boolean;
 }>>>, {
 disabled: boolean;
-}, {}>;
+}, {}>, {
+    default?(_: {}): any;
+}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STable: DefineComponent<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
+export const STable: __VLS_WithTemplateSlots_28<DefineComponent<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
 data?: TableRow[] | undefined;
 defaultSort?: {
 prop: string;
@@ -1372,13 +1588,13 @@ showHeader?: boolean | undefined;
 highlightCurrentRow?: boolean | undefined;
 currentRowKey?: string | number | undefined;
 rowClassName?: string | ((param: TableRowConfigCallbackParams) => string) | undefined;
-rowStyle?: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => CSSObject) | undefined;
+rowStyle?: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => Partial<CSSProperties>) | undefined;
 cellClassName?: string | ((param: TableCellConfigCallbackParams) => string) | undefined;
-cellStyle?: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => CSSObject) | undefined;
+cellStyle?: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
 headerRowClassName?: string | (() => string) | undefined;
-headerRowStyle?: Partial<CSSProperties> | (() => CSSObject) | undefined;
+headerRowStyle?: Partial<CSSProperties> | (() => Partial<CSSProperties>) | undefined;
 headerCellClassName?: string | ((param: TableHeaderCellConfigCallbackParams) => string) | undefined;
-headerCellStyle?: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => CSSObject) | undefined;
+headerCellStyle?: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
 rowKey?: string | ((row: TableRow) => unknown) | null | undefined;
 emptyText?: string | undefined;
 defaultExpandAll?: boolean | undefined;
@@ -1422,38 +1638,23 @@ sort: typeof sort;
 clearSort: () => void;
 setCurrentRow: typeof setCurrentRow;
 }, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
-"mouse-enter:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
-} & {
-"mouse-leave:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
-} & {
-"click:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
-} & {
-"dblclick:cell": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: EventTarget, payload_3: MouseEvent) => void;
-} & {
-"click:header": (payload_0: TableColumnApi | TableActionColumnApi, payload_1: MouseEvent) => void;
-} & {
-"contextmenu:header": (payload_0: TableColumnApi | TableActionColumnApi, payload_1: MouseEvent) => void;
-} & {
-"click:row": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
-} & {
-"dblclick:row": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
-} & {
-"contextmenu:row": (payload_0: TableRow, payload_1: TableColumnApi | TableActionColumnApi, payload_2: MouseEvent) => void;
-} & {
+"mouse-enter:cell": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void;
+"mouse-leave:cell": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void;
+"click:cell": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void;
+"dblclick:cell": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void;
+"click:header": (args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void;
+"contextmenu:header": (args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void;
+"click:row": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void;
+"dblclick:row": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void;
+"contextmenu:row": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void;
 "change:sort": (value: TableSortEventData) => void;
-} & {
 "change:selection": (value: TableRow[]) => void;
-} & {
 "select-all": (value: TableRow[]) => void;
-} & {
-select: (payload_0: TableRow[], payload_1: TableRow) => void;
-} & {
-"change:expand": (payload_0: TableRow, payload_1: TableRow[]) => void;
-} & {
-"change:current": (payload_0: TableRow | null, payload_1: TableRow | null) => void;
-} & {
+select: (args_0: TableRow[], args_1: TableRow) => void;
+"change:expand": (args_0: TableRow, args_1: TableRow[]) => void;
+"change:current": (args_0: TableRow | null, args_1: TableRow | null) => void;
 "click:row-details": (value: TableRow) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
 data?: TableRow[] | undefined;
 defaultSort?: {
 prop: string;
@@ -1466,13 +1667,13 @@ showHeader?: boolean | undefined;
 highlightCurrentRow?: boolean | undefined;
 currentRowKey?: string | number | undefined;
 rowClassName?: string | ((param: TableRowConfigCallbackParams) => string) | undefined;
-rowStyle?: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => CSSObject) | undefined;
+rowStyle?: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => Partial<CSSProperties>) | undefined;
 cellClassName?: string | ((param: TableCellConfigCallbackParams) => string) | undefined;
-cellStyle?: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => CSSObject) | undefined;
+cellStyle?: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
 headerRowClassName?: string | (() => string) | undefined;
-headerRowStyle?: Partial<CSSProperties> | (() => CSSObject) | undefined;
+headerRowStyle?: Partial<CSSProperties> | (() => Partial<CSSProperties>) | undefined;
 headerCellClassName?: string | ((param: TableHeaderCellConfigCallbackParams) => string) | undefined;
-headerCellStyle?: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => CSSObject) | undefined;
+headerCellStyle?: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
 rowKey?: string | ((row: TableRow) => unknown) | null | undefined;
 emptyText?: string | undefined;
 defaultExpandAll?: boolean | undefined;
@@ -1537,13 +1738,13 @@ showHeader: boolean;
 highlightCurrentRow: boolean;
 currentRowKey: string | number;
 rowClassName: string | ((param: TableRowConfigCallbackParams) => string);
-rowStyle: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => CSSObject);
+rowStyle: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => Partial<CSSProperties>);
 cellClassName: string | ((param: TableCellConfigCallbackParams) => string);
-cellStyle: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => CSSObject);
+cellStyle: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => Partial<CSSProperties>);
 headerRowClassName: string | (() => string);
-headerRowStyle: Partial<CSSProperties> | (() => CSSObject);
+headerRowStyle: Partial<CSSProperties> | (() => Partial<CSSProperties>);
 headerCellClassName: string | ((param: TableHeaderCellConfigCallbackParams) => string);
-headerCellStyle: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => CSSObject);
+headerCellStyle: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => Partial<CSSProperties>);
 rowKey: string | ((row: TableRow) => unknown) | null;
 emptyText: string;
 defaultExpandAll: boolean;
@@ -1551,12 +1752,17 @@ expandRowKeys: unknown[];
 selectOnIndeterminate: boolean;
 adaptBreakpoint: number;
 cardGridBreakpoints: TableCardGridBreakpoint[];
-}, {}>;
+}, {}>, {
+    empty?(_: {}): any;
+    "empty-text"?(_: {}): any;
+    append?(_: {}): any;
+    default?(_: {}): any;
+}>;
 
 // @public (undocumented)
 export const STableColumn: DefineComponent<    {
 type: {
-type: PropType<"default" | "details" | "selection" | "expand">;
+type: PropType_2<"default" | "details" | "selection" | "expand">;
 default: string;
 };
 label: {
@@ -1576,23 +1782,23 @@ type: StringConstructor;
 default: string;
 };
 sortable: {
-type: PropType<boolean | "custom">;
+type: PropType_2<boolean | "custom">;
 default: boolean;
 };
 sortMethod: {
-type: PropType<(<T>(a: T, b: T) => number)>;
+type: PropType_2<(<T>(a: T, b: T) => number)>;
 default: null;
 };
 sortBy: {
-type: PropType<TableColumnSortBy_2>;
+type: PropType_2<TableColumnSortBy_2>;
 default: string;
 };
 sortOrders: {
-type: PropType<TableColumnSortOrder_2[]>;
+type: PropType_2<TableColumnSortOrder_2[]>;
 default: () => (string | null)[];
 };
 formatter: {
-type: PropType<TableColumnCellValueFormatter_2>;
+type: PropType_2<TableColumnCellValueFormatter_2>;
 default: null;
 };
 showOverflowTooltip: {
@@ -1600,11 +1806,11 @@ type: BooleanConstructor;
 default: boolean;
 };
 align: {
-type: PropType<"left" | "right" | "center">;
+type: PropType_2<"left" | "right" | "center">;
 default: string;
 };
 headerAlign: {
-type: PropType<"left" | "right" | "center" | null>;
+type: PropType_2<"left" | "right" | "center" | null>;
 default: null;
 };
 className: {
@@ -1616,16 +1822,16 @@ type: StringConstructor;
 default: string;
 };
 selectable: {
-type: PropType<TableColumnRowSelectableFunc_2>;
+type: PropType_2<TableColumnRowSelectableFunc_2>;
 default: null;
 };
 reserveSelection: {
 type: BooleanConstructor;
 default: boolean;
 };
-}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {
+}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<{
 type: {
-type: PropType<"default" | "details" | "selection" | "expand">;
+type: PropType_2<"default" | "details" | "selection" | "expand">;
 default: string;
 };
 label: {
@@ -1645,23 +1851,23 @@ type: StringConstructor;
 default: string;
 };
 sortable: {
-type: PropType<boolean | "custom">;
+type: PropType_2<boolean | "custom">;
 default: boolean;
 };
 sortMethod: {
-type: PropType<(<T>(a: T, b: T) => number)>;
+type: PropType_2<(<T>(a: T, b: T) => number)>;
 default: null;
 };
 sortBy: {
-type: PropType<TableColumnSortBy_2>;
+type: PropType_2<TableColumnSortBy_2>;
 default: string;
 };
 sortOrders: {
-type: PropType<TableColumnSortOrder_2[]>;
+type: PropType_2<TableColumnSortOrder_2[]>;
 default: () => (string | null)[];
 };
 formatter: {
-type: PropType<TableColumnCellValueFormatter_2>;
+type: PropType_2<TableColumnCellValueFormatter_2>;
 default: null;
 };
 showOverflowTooltip: {
@@ -1669,11 +1875,11 @@ type: BooleanConstructor;
 default: boolean;
 };
 align: {
-type: PropType<"left" | "right" | "center">;
+type: PropType_2<"left" | "right" | "center">;
 default: string;
 };
 headerAlign: {
-type: PropType<"left" | "right" | "center" | null>;
+type: PropType_2<"left" | "right" | "center" | null>;
 default: null;
 };
 className: {
@@ -1685,7 +1891,7 @@ type: StringConstructor;
 default: string;
 };
 selectable: {
-type: PropType<TableColumnRowSelectableFunc_2>;
+type: PropType_2<TableColumnRowSelectableFunc_2>;
 default: null;
 };
 reserveSelection: {
@@ -1694,10 +1900,10 @@ default: boolean;
 };
 }>>, {
 type: "default" | "details" | "selection" | "expand";
-width: string;
-minWidth: string;
 label: string;
-className: string;
+width: string;
+align: "left" | "right" | "center";
+minWidth: string;
 sortable: boolean | "custom";
 selectable: TableColumnRowSelectableFunc_2;
 prop: string;
@@ -1706,25 +1912,28 @@ sortBy: TableColumnSortBy_2;
 sortOrders: TableColumnSortOrder_2[];
 formatter: TableColumnCellValueFormatter_2;
 showOverflowTooltip: boolean;
-align: "left" | "right" | "center";
 headerAlign: "left" | "right" | "center" | null;
+className: string;
 labelClassName: string;
 reserveSelection: boolean;
 }, {}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STabsPanel: DefineComponent<__VLS_WithDefaults_17<__VLS_TypePropsToRuntimeProps_20<{
+export const STabsPanel: __VLS_WithTemplateSlots_18<DefineComponent<__VLS_WithDefaults_17<__VLS_TypePropsToRuntimeProps_20<{
 modelValue: string;
-background?: "primary" | "secondary" | "none" | undefined;
+background?: "none" | "primary" | "secondary" | undefined;
 }>, {
 modelValue: string;
 background: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_17<__VLS_TypePropsToRuntimeProps_20<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (...args: any[]) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_17<__VLS_TypePropsToRuntimeProps_20<{
 modelValue: string;
-background?: "primary" | "secondary" | "none" | undefined;
+background?: "none" | "primary" | "secondary" | undefined;
 }>, {
 modelValue: string;
 background: string;
@@ -1732,8 +1941,10 @@ background: string;
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
 modelValue: string;
-background: TabsPanelBackgroundType;
-}, {}>;
+background: "none" | "primary" | "secondary";
+}, {}>, {
+    default?(_: {}): any;
+}>;
 
 // @public (undocumented)
 export interface StateStore {
@@ -1756,12 +1967,13 @@ export const Status: {
 // @public (undocumented)
 export type Status = typeof Status[keyof typeof Status];
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STextField: DefineComponent<__VLS_WithDefaults_14<__VLS_TypePropsToRuntimeProps_17<Props_6>, {
+export const STextField: __VLS_WithTemplateSlots_16<DefineComponent<__VLS_WithDefaults_14<__VLS_TypePropsToRuntimeProps_17<Props_6>, {
 multiline: boolean;
 password: boolean;
 disabled: boolean;
@@ -1771,9 +1983,8 @@ noModelValueStrictSync: boolean;
 filledState: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: string) => void;
-} & {
 "click:input-wrapper": (value: MouseEvent) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_14<__VLS_TypePropsToRuntimeProps_17<Props_6>, {
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_14<__VLS_TypePropsToRuntimeProps_17<Props_6>, {
 multiline: boolean;
 password: boolean;
 disabled: boolean;
@@ -1791,17 +2002,22 @@ password: boolean;
 noEye: boolean;
 counter: string | number | boolean;
 filledState: boolean;
-}, {}>;
+}, {}>, {
+    label?(_: {}): any;
+    prefix?(_: {}): any;
+    append?(_: {}): any;
+    message?(_: {}): any;
+}>;
 
 // @public (undocumented)
 export const SToastsDisplay: DefineComponent<    {
 vertical: {
-type: PropType<ToastsDisplayPlacementVertical>;
+type: PropType_2<ToastsDisplayPlacementVertical>;
 default: string;
 validate: typeof validateVerticalPlacement;
 };
 horizontal: {
-type: PropType<ToastsDisplayPlacementHorizontal>;
+type: PropType_2<ToastsDisplayPlacementHorizontal>;
 default: string;
 validate: typeof validateHorizontalPlacement;
 };
@@ -1812,16 +2028,16 @@ default: string;
 };
 apiKey: {
 type: (SymbolConstructor | StringConstructor)[];
-default: InjectionKey<ToastsApi>;
+default: globalThis.InjectionKey<ToastsApi>;
 };
-}, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {
+}, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<{
 vertical: {
-type: PropType<ToastsDisplayPlacementVertical>;
+type: PropType_2<ToastsDisplayPlacementVertical>;
 default: string;
 validate: typeof validateVerticalPlacement;
 };
 horizontal: {
-type: PropType<ToastsDisplayPlacementHorizontal>;
+type: PropType_2<ToastsDisplayPlacementHorizontal>;
 default: string;
 validate: typeof validateHorizontalPlacement;
 };
@@ -1832,38 +2048,39 @@ default: string;
 };
 apiKey: {
 type: (SymbolConstructor | StringConstructor)[];
-default: InjectionKey<ToastsApi>;
+default: globalThis.InjectionKey<ToastsApi>;
 };
 }>>, {
 absolute: boolean;
+to: string;
 vertical: ToastsDisplayPlacementVertical;
 horizontal: ToastsDisplayPlacementHorizontal;
-to: string;
 apiKey: string | symbol;
 }, {}>;
 
 // @public
 export const SToastsProvider: DefineComponent<    {
 apiKey: {
-type: PropType<ProvideKey | ProvideKey[]>;
+type: PropType_2<ProvideKey | ProvideKey[]>;
 default: null;
 };
-}, () => VNode<RendererNode, RendererElement, {
+}, () => globalThis.VNode<RendererNode, RendererElement, {
 [key: string]: any;
-}>[] | undefined, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {
+}>[] | undefined, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<{
 apiKey: {
-type: PropType<ProvideKey | ProvideKey[]>;
+type: PropType_2<ProvideKey | ProvideKey[]>;
 default: null;
 };
 }>>, {
 apiKey: ProvideKey | ProvideKey[];
 }, {}>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STooltip: DefineComponent<__VLS_WithDefaults_28<__VLS_TypePropsToRuntimeProps_31<{
+export const STooltip: __VLS_WithTemplateSlots_30<DefineComponent<__VLS_WithDefaults_28<__VLS_TypePropsToRuntimeProps_31<{
 wrapperTag?: string | object | undefined;
 content?: string | undefined;
 header?: string | undefined;
@@ -1877,7 +2094,10 @@ header: string;
 placement: string;
 primaryButtonText: string;
 secondaryButtonText: string;
-}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("click:primary-button" | "click:secondary-button")[], "click:primary-button" | "click:secondary-button", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<__VLS_WithDefaults_28<__VLS_TypePropsToRuntimeProps_31<{
+}>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"click:primary-button": (...args: any[]) => void;
+"click:secondary-button": (...args: any[]) => void;
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_28<__VLS_TypePropsToRuntimeProps_31<{
 wrapperTag?: string | object | undefined;
 content?: string | undefined;
 header?: string | undefined;
@@ -1895,20 +2115,24 @@ secondaryButtonText: string;
 "onClick:primary-button"?: ((...args: any[]) => any) | undefined;
 "onClick:secondary-button"?: ((...args: any[]) => any) | undefined;
 }, {
-placement: BasePlacement;
-content: string;
 header: string;
+content: string;
+placement: BasePlacement;
 wrapperTag: string | object;
 primaryButtonText: string;
 secondaryButtonText: string;
-}, {}>;
+}, {}>, {
+    default?(_: {}): any;
+    header?(_: {}): any;
+    content?(_: {}): any;
+}>;
 
 // @public (undocumented)
 export const SUseNotification: DefineComponent<    {
 show: BooleanConstructor;
 title: StringConstructor;
 status: {
-type: PropType<Status_2>;
+type: PropType_2<Status_2>;
 default: "info";
 };
 timeout: {
@@ -1917,11 +2141,11 @@ default: number;
 };
 showCloseBtn: BooleanConstructor;
 description: StringConstructor;
-}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("click:close" | "update:show" | "timeout")[], "click:close" | "update:show" | "timeout", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<ExtractPropTypes<    {
+}, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("click:close" | "update:show" | "timeout")[], "click:close" | "update:show" | "timeout", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<{
 show: BooleanConstructor;
 title: StringConstructor;
 status: {
-type: PropType<Status_2>;
+type: PropType_2<Status_2>;
 default: "info";
 };
 timeout: {
@@ -1942,7 +2166,7 @@ timeout: number;
 }, {}>;
 
 // @public (undocumented)
-export const TABLE_API_KEY: InjectionKey<DeepReadonly<TableApi>>;
+export const TABLE_API_KEY: InjectionKey_2<DeepReadonly<TableApi>>;
 
 // @public (undocumented)
 export const TABLE_CARDS_GRID_DEFAULT_BREAKPOINTS: {
@@ -2111,7 +2335,7 @@ export interface TableSortEventData {
 }
 
 // @public (undocumented)
-export const TABS_PANEL_API_KEY: InjectionKey<TabsPanelApi>;
+export const TABS_PANEL_API_KEY: InjectionKey_2<TabsPanelApi>;
 
 // @public (undocumented)
 export const TABS_PANEL_BACKGROUND_TYPES: readonly ["primary", "secondary", "none"];
@@ -2139,7 +2363,7 @@ export interface ToastRegisterParams {
 }
 
 // @public (undocumented)
-export const TOASTS_API_KEY: InjectionKey<ToastsApi>;
+export const TOASTS_API_KEY: InjectionKey_2<ToastsApi>;
 
 // @public (undocumented)
 export interface ToastsApi {
@@ -2176,7 +2400,7 @@ export const useNavigationMenuApi: () => {
 
 // @public (undocumented)
 export const useNavigationSubmenuApi: () => {
-    readonly register: (index: Ref<string>) => void;
+    readonly register: (index: Ref_2<string>) => void;
 } | undefined;
 
 // @public (undocumented)
@@ -2207,12 +2431,11 @@ export function useTabsPanelApi(): TabsPanelApi;
 
 // Warnings were encountered during analysis:
 //
-// dist-ts/components/Table/STable.vue.d.ts:61:5 - (ae-forgotten-export) The symbol "CSSObject" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:150:5 - (ae-forgotten-export) The symbol "manualClearSelection" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:155:5 - (ae-forgotten-export) The symbol "manualToggleRowSelection" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:159:5 - (ae-forgotten-export) The symbol "manualToggleAllSelection" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:168:5 - (ae-forgotten-export) The symbol "sort" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:177:5 - (ae-forgotten-export) The symbol "setCurrentRow" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:149:5 - (ae-forgotten-export) The symbol "manualClearSelection" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:154:5 - (ae-forgotten-export) The symbol "manualToggleRowSelection" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:158:5 - (ae-forgotten-export) The symbol "manualToggleAllSelection" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:167:5 - (ae-forgotten-export) The symbol "sort" needs to be exported by the entry point lib.d.ts
+// dist-ts/components/Table/STable.vue.d.ts:176:5 - (ae-forgotten-export) The symbol "setCurrentRow" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:9:9 - (ae-forgotten-export) The symbol "validateVerticalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:14:9 - (ae-forgotten-export) The symbol "validateHorizontalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsProvider.d.ts:11:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts

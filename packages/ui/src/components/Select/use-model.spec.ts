@@ -1,6 +1,7 @@
-import { Except } from 'type-fest'
+import type { Except } from 'type-fest'
 import { describe, test, expect, vi } from 'vitest'
-import { useSelectModel, UseSelectModelParams } from './use-model'
+import type { UseSelectModelParams } from './use-model'
+import { useSelectModel } from './use-model'
 
 const OPTIONS = [
   { value: 'regular', label: 'Regular crust' },

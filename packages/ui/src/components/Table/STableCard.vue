@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TableActionColumnApi, TableColumnApi, TableRow } from '@/components'
+import type { TableActionColumnApi, TableColumnApi, TableRow } from '@/components'
 import { IconArrowsChevronDownRounded24, IconArrowRight16 } from '@/components/icons'
 import {
   isDefaultColumn,

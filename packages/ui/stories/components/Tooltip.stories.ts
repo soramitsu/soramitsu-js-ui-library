@@ -1,6 +1,6 @@
 import { STooltip, SButton, SNotificationsProvider, SUseNotification } from '@/lib'
 import type { Meta } from '@storybook/vue3'
-import { type Placement } from '@popperjs/core'
+import type { Placement } from '@popperjs/core'
 import { PLACEMENT_ARG_TYPE } from '../util'
 
 const meta = {

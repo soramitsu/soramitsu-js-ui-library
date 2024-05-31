@@ -1,5 +1,5 @@
-import { InjectionKey } from 'vue'
-import { Instance } from '@popperjs/core'
+import type { InjectionKey } from 'vue'
+import type { Instance } from '@popperjs/core'
 import { forceInject } from '@/util'
 
 export interface PopoverApi {

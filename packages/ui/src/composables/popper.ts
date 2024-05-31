@@ -1,6 +1,8 @@
-import { createPopper, VirtualElement, Instance, Options } from '@popperjs/core'
-import { MaybeRef } from '@vueuse/core'
-import { computed, watch, unref, shallowRef, onScopeDispose, Ref, isReactive } from 'vue'
+import type { VirtualElement, Instance, Options } from '@popperjs/core'
+import { createPopper } from '@popperjs/core'
+import type { MaybeRef } from '@vueuse/core'
+import type { Ref } from 'vue'
+import { computed, watch, unref, shallowRef, onScopeDispose, isReactive } from 'vue'
 
 type ElementReference = Element | VirtualElement
 type ElementPopper = HTMLElement

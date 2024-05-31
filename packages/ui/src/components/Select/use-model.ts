@@ -1,5 +1,5 @@
-import { Ref } from 'vue'
-import { SelectOption, SelectOptionGroup } from './types'
+import type { Ref } from 'vue'
+import type { SelectOption, SelectOptionGroup } from './types'
 import { whenever } from '@vueuse/core'
 import { and, not } from '@vueuse/math'
 import { isSelectOptions } from './utils'

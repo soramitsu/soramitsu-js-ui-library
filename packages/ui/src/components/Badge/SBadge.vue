@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { SSpinner } from '../Spinner'
-import { BadgeType } from './api'
+import type { BadgeType } from './api'
 
 const props = withDefaults(
   defineProps<{

@@ -3,11 +3,12 @@
 import { getStartDateInCalendar, nextDate } from './date-util'
 import { getDaysInMonth, subMonths, startOfDay, isSameDay } from 'date-fns'
 
-import * as types from './types'
-import { ComputedRef } from 'vue'
+import type * as types from './types'
+import type { ComputedRef } from 'vue'
 import { daysNames } from './consts'
-import { DatePickerApi, useDatePickerApi } from './api'
-import { RangeStateSelected, RangeStateSelecting } from './types'
+import type { DatePickerApi } from './api'
+import { useDatePickerApi } from './api'
+import type { RangeStateSelected, RangeStateSelecting } from './types'
 
 const getDateTimestamp = (time: Date | number) => {
   return startOfDay(time).getTime()

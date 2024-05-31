@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { Ref, StyleValue } from 'vue'
+import type { Ref, StyleValue } from 'vue'
 import { normalizeTransitionAttrs, useCloseOnEsc, useModalVisibility } from './util'
-import { ModalApi, MODAL_API_KEY } from './api'
+import type { ModalApi } from './api'
+import { MODAL_API_KEY } from './api'
 import { useFocusTrap } from '@/composables/focus-trap'
-import { FocusTrap, Options as FocusTrapOptions } from 'focus-trap'
+import type { FocusTrap, Options as FocusTrapOptions } from 'focus-trap'
 import { uniqueElementId } from '@/util'
 import { useBodyScrollLockIfPossible } from '../BodyScrollLockProvider'
 
@@ -151,7 +152,7 @@ const {
 
 // FOCUS TRAP
 
-let focusTrap: null | Ref<null | FocusTrap> = null
+let focusTrapRef: null | Ref<null | FocusTrap> = null
 if (props.focusTrap) {
   const options: FocusTrapOptions = props.focusTrap === true ? {} : props.focusTrap
 
@@ -167,7 +168,7 @@ if (props.focusTrap) {
       flush: 'post',
     },
   )
-  ;({ trap: focusTrap } = useFocusTrap({
+  ;({ trap: focusTrapRef } = useFocusTrap({
     elem: focusTrapTarget,
     options: {
       ...options,
@@ -182,7 +183,7 @@ if (props.focusTrap) {
   }))
 
   watch(
-    focusTrap,
+    focusTrapRef,
     (trap) => {
       try {
         trap?.activate()
@@ -208,7 +209,7 @@ useBodyScrollLockIfPossible(computed(() => (props.lockScroll ? unref(modalRef) :
 
 const api: ModalApi = readonly({
   close,
-  focusTrap,
+  focusTrap: focusTrapRef,
   labelledBy: computed(() => props.labelledBy),
   describedBy: computed(() => props.describedBy),
 })

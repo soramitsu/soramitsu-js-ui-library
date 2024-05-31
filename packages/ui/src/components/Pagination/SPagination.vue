@@ -264,7 +264,7 @@ function handlePrevClick() {
               class="s-pagination__button flex justify-center min-w-24px sora-tpg-h7"
               :class="{
                 's-pagination__button_active': current === pageButton,
-                'ml-4px': pageButton > 1,
+                'ml-4px': Number(pageButton) > 1,
               }"
               data-testid="page-button"
               @click="handleJumpClick(pageButton)"

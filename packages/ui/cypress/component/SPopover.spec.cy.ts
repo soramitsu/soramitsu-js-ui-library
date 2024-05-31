@@ -1,7 +1,7 @@
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { usePopoverApi } from '@/components/Popover/api'
 
-import { Instance } from '@popperjs/core'
+import type { Instance } from '@popperjs/core'
 import { VueTestUtils } from 'cypress/vue'
 
 before(() => {

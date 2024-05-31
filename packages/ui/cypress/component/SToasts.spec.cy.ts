@@ -1,4 +1,5 @@
-import { SToastsProvider, SToastsDisplay, ToastsApi, TOASTS_API_KEY } from '@/lib'
+import type { ToastsApi } from '@/lib'
+import { SToastsProvider, SToastsDisplay, TOASTS_API_KEY } from '@/lib'
 
 import { VueTestUtils } from 'cypress/vue'
 import { forceInject } from '@/util'

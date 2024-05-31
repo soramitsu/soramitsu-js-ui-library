@@ -1,4 +1,4 @@
-import { Ref, BaseTransitionProps } from 'vue'
+import type { Ref, BaseTransitionProps } from 'vue'
 
 /**
  * TODO Reuse this functionality in `SModal` somehow (remove logic duplication)

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { CSSProperties, ShallowRef, Slot } from 'vue'
-import { MaybeElementRef } from '@vueuse/core'
+import type { CSSProperties, ShallowRef } from 'vue'
+import type { MaybeElementRef } from '@vueuse/core'
 import { not } from '@vueuse/math'
 import { findLast } from 'lodash-es'
 import { IconArrowTop16 } from '@/components/icons'
 import { TABLE_DEFAULT_ADAPT_BREAKPOINT, TABLE_CARDS_GRID_DEFAULT_BREAKPOINTS } from './consts'
 import { useColumnSort } from './use-column-sort'
-import {
+import type {
   TableCardGridBreakpoint,
   TableCellConfigCallbackParams,
   TableCellEventData,
@@ -30,7 +30,8 @@ import {
   getDefaultCellValue,
   getCellTooltipContent,
 } from './utils'
-import { TABLE_API_KEY, TableActionColumnApi, TableColumnApi } from './api'
+import type { TableActionColumnApi, TableColumnApi } from './api'
+import { TABLE_API_KEY } from './api'
 import { useTableHeights } from './use-table-heights'
 import STableCellDefault from '@/components/Table/STableCellDefault.vue'
 import STableCellSelection from '@/components/Table/STableCellSelection.vue'

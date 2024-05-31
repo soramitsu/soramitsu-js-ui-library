@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-duplicate-imports */
 /* eslint-disable no-duplicate-imports */
 
 declare module '*.svg' {
-  import { DefineComponent } from 'vue'
+  import type { DefineComponent } from 'vue'
   const component: DefineComponent<{}, {}, any>
   export default component
 }
 
 declare module '~icons/*' {
-  import { DefineComponent } from 'vue'
+  import type { DefineComponent } from 'vue'
   const component: DefineComponent<{}, {}, any>
   export default component
 }

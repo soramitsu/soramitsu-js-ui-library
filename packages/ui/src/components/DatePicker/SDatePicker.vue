@@ -9,7 +9,7 @@ import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { and } from '@vueuse/math'
 import { format, isAfter, isBefore, isSameDay, isSameHour, isSameMinute, startOfDay } from 'date-fns'
 
-import {
+import type {
   DatePickerOptions,
   DatePickerOptionsProp,
   DatePickerType,
@@ -21,7 +21,8 @@ import {
   ShowState,
   StateStore,
 } from './types'
-import { DATE_PICKER_API_KEY, DatePickerApi } from './api'
+import type { DatePickerApi } from './api'
+import { DATE_PICKER_API_KEY } from './api'
 import { CUSTOM_OPTION, CUSTOM_OPTION_VALUE, DEFAULT_SHORTCUTS, TIME_POINTS } from './consts'
 import { computed, shallowRef } from 'vue'
 import { setTimeByString } from '@/components/DatePicker/date-util'

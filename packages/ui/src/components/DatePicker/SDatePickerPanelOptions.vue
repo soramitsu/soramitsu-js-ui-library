@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { DatePickerOptions, PossiblePresetOption } from './types'
+import type { DatePickerOptions, PossiblePresetOption } from './types'
 import { IconBasicCheckMark24 } from '@/components/icons'
-import { DatePickerApi, useDatePickerApi } from './api'
+import type { DatePickerApi } from './api'
+import { useDatePickerApi } from './api'
 
 interface Props {
   menuState: string

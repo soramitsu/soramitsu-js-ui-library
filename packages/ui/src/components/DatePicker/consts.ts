@@ -13,7 +13,7 @@ import {
   subMonths,
   subWeeks,
 } from 'date-fns'
-import { DatePickerOptionsProp } from '@/components/DatePicker/types'
+import type { DatePickerOptionsProp } from '@/components/DatePicker/types'
 
 export const CUSTOM_OPTION_VALUE: unique symbol = Symbol('customOptionValue')
 export const CUSTOM_OPTION = {

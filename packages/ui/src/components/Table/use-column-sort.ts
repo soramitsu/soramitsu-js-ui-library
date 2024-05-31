@@ -1,6 +1,6 @@
-import { Ref } from 'vue'
-import { TableColumnApi } from './api'
-import { TableColumnSortOrder, TableRow } from './types'
+import type { Ref } from 'vue'
+import type { TableColumnApi } from './api'
+import type { TableColumnSortOrder, TableRow } from './types'
 import { get } from 'lodash-es'
 
 export function useColumnSort(data: Ref<TableRow[]>) {

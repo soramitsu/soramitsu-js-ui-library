@@ -2,7 +2,7 @@
 import MonthPanel from './SDatePickerPanelMonths.vue'
 import DateTable from './SDatePickerTableDate.vue'
 
-import { ShowState, StateStore } from './types'
+import type { ShowState, StateStore } from './types'
 
 interface Props {
   showState: ShowState

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { DatePickerApi, useDatePickerApi } from '@/components/DatePicker/api'
+import type { DatePickerApi } from '@/components/DatePicker/api'
+import { useDatePickerApi } from '@/components/DatePicker/api'
 
 interface Props {
   value: string

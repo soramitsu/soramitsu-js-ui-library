@@ -1,7 +1,8 @@
 import './SRadioBody.scss'
 
-import { FunctionalComponent, mergeProps, PropType } from 'vue'
-import { RadioType, RadioSize } from './types'
+import type { FunctionalComponent, PropType } from 'vue'
+import { mergeProps } from 'vue'
+import type { RadioType, RadioSize } from './types'
 import { TYPOGRAPHY } from './const'
 
 interface Props {

@@ -1,7 +1,8 @@
-import { Slot, FunctionalComponent, h, unref } from 'vue'
-import { MaybeRef } from '@vueuse/core'
+import type { Slot, FunctionalComponent } from 'vue'
+import { h, unref } from 'vue'
+import type { MaybeRef } from '@vueuse/core'
 import { NOTIFICATIONS_API_KEY } from './api'
-import { Status } from '@/types'
+import type { Status } from '@/types'
 import { forceInject } from '@/util'
 import SNotificationBody from './SNotificationBody.vue'
 

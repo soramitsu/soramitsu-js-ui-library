@@ -1,4 +1,5 @@
-import { Ref, effectScope, EffectScope, watch, onScopeDispose } from 'vue'
+import type { Ref, EffectScope } from 'vue'
+import { effectScope, watch, onScopeDispose } from 'vue'
 
 export function useConditionalScope(enabled: Ref<boolean>, scopeSetupFn: () => void) {
   let scope: EffectScope | null = null
