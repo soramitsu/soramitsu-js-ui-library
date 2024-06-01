@@ -11,7 +11,8 @@
     },
     "./sass": "./src/sass/lib.scss",
     "./sass/*": "./src/sass/*",
-    "./fonts/Sora": "./src/fonts/Sora/index.css"
+    "./fonts/Sora": "./src/fonts/Sora/index.css",
+    "./fonts/JetBrainsMono": "./src/fonts/JetBrainsMono/index.css"
   },
   "license": "Apache-2.0",
   "publishConfig": {
@@ -20,7 +21,8 @@
   "files": [
     "dist",
     "src/sass",
-    "src/fonts/Sora"
+    "src/fonts/Sora",
+    "src/fonts/JetBrainsMono"
   ],
   "scripts": {
     "clean": "del dist dist-ts",
