@@ -24,6 +24,7 @@ const props = withDefaults(
     uppercase?: boolean
     alternative?: boolean
     primary?: boolean
+    theme?: string
   }>(),
   {
     type: 'secondary',
@@ -37,6 +38,7 @@ const props = withDefaults(
     uppercase: false,
     alternative: false,
     primary: false,
+    theme: 'theme',
   },
 )
 
@@ -61,6 +63,8 @@ const handleClick = (event: Event) => {
     pressed.value = false
   }, 500)
 }
+
+
 </script>
 
 <template>
@@ -115,8 +119,22 @@ const handleClick = (event: Event) => {
 </template>
 
 <style lang="scss">
-@use '@/theme';
-@use '@/theme_neumorphism';
+@use 'sass:meta';
+@use '@/theme_neumorphism' as theme_neumorphism;
+@use '@/theme' as theme;
+
+@function theme-token($theme, $token) {
+  @if $theme == 'theme_neumorphism' {
+    @return theme_neumorphism.token-as-var($token);
+  }
+  @else if $theme == 'theme' {
+    @return theme.token-as-var($token);
+  }
+  @else {
+    @error "Unknown theme: #{$theme}";
+  }
+}
+
 
 @mixin button-type($name, $default, $hover, $active, $disabled) {
   &_type_#{$name} {
@@ -170,6 +188,7 @@ const handleClick = (event: Event) => {
 }
 
 
+
 .s-button {
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;
   border: 
@@ -211,9 +230,9 @@ const handleClick = (event: Event) => {
   }
 
   &_type_primary {
-    background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color');
+    background-color: theme-token('theme_neumorphism','sys.color.button.primary.background-color');
     color: theme_neumorphism.token-as-var('ref.color.button.color-base-on-accent');
-    box-shadow:  theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow');
+    box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow');
 
     &:hover,&:focus, &.focusing {
       background-color: theme_neumorphism.token-as-var('sys.color.button.primary.background-color-hover');

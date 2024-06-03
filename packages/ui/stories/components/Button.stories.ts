@@ -7,7 +7,7 @@ export default {
     components: { SButton, IconClose,IconBasicCirclePlus24,IconBasicCircleX24, IconBasicEye24 },
     template: `
       <div class="flex flex-col items-start space-y-4">
-        <SButton v-bind="$attrs">
+        <SButton v-bind="$attrs" :theme='theme'>
           <template #icon>
             <IconClose
             />
@@ -90,6 +90,7 @@ export default {
     uppercase: false,
     alternative: false,
     primary: false,
+    theme: 'theme',
   },
   argTypes: {
     type: {
@@ -109,7 +110,8 @@ export default {
     rounded: { control: 'boolean' },
     loading: { control: 'boolean' },
     uppercase: { control: 'boolean' },
-    alternative: { control: 'boolean' }, // Add alternative prop control
+    alternative: { control: 'boolean' },
+    theme: { control: 'text' },
   },
 } as Meta
 
