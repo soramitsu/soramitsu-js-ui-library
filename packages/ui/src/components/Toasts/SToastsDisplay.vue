@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { validateHorizontalPlacement, validateVerticalPlacement } from './util'
-import { ToastsApi, TOASTS_API_KEY } from './api'
+import type { ToastsApi } from './api'
+import { TOASTS_API_KEY } from './api'
 import { forceInject } from '@/util'
-import { PropType } from 'vue'
-import { ToastsDisplayPlacementVertical, ToastsDisplayPlacementHorizontal } from './types'
+import type { PropType } from 'vue'
+import type { ToastsDisplayPlacementVertical, ToastsDisplayPlacementHorizontal } from './types'
 
 const props = defineProps({
   vertical: {

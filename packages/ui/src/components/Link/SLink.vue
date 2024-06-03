@@ -2,7 +2,7 @@
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import { IconBasicExternalLink24 } from '../icons'
 import { LINK_ICON_POSITION_VALUES, LINK_UNDERLINE_TYPE_VALUES } from './consts'
-import { LinkIconPosition, LinkUnderlineType } from './types'
+import type { LinkIconPosition, LinkUnderlineType } from './types'
 
 const props = withDefaults(
   defineProps<{

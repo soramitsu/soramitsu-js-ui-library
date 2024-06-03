@@ -1,6 +1,9 @@
-import { createFocusTrap, FocusTrap, Options } from 'focus-trap'
-import { MaybeElementRef, unrefElement } from '@vueuse/core'
-import { shallowRef, markRaw, watch, computed, onScopeDispose, Ref } from 'vue'
+import type { FocusTrap, Options } from 'focus-trap'
+import { createFocusTrap } from 'focus-trap'
+import type { MaybeElementRef } from '@vueuse/core'
+import { unrefElement } from '@vueuse/core'
+import type { Ref } from 'vue'
+import { shallowRef, markRaw, watch, computed, onScopeDispose } from 'vue'
 
 export interface UseFocusTrapParams {
   elem: MaybeElementRef

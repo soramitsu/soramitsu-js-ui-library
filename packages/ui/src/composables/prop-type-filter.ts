@@ -1,4 +1,4 @@
-import { ComputedRef } from 'vue'
+import type { ComputedRef } from 'vue'
 
 const formatToLog = (value: unknown) => (typeof value === 'string' ? `'${value}'` : JSON.stringify(value))
 

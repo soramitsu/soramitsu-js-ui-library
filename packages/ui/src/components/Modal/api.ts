@@ -1,6 +1,6 @@
 import { forceInject } from '@/util'
-import { InjectionKey } from 'vue'
-import { FocusTrap } from 'focus-trap'
+import type { InjectionKey } from 'vue'
+import type { FocusTrap } from 'focus-trap'
 
 export interface ModalApi {
   close: () => void

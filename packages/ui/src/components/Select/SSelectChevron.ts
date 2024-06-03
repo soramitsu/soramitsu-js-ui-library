@@ -1,4 +1,5 @@
-import { FunctionalComponent, h, PropType } from 'vue'
+import type { FunctionalComponent, PropType } from 'vue'
+import { h } from 'vue'
 import { IconChevronBottom16, IconArrowsChevronBottom24 } from '@/components/icons'
 import './SSelectChevron.scss'
 
