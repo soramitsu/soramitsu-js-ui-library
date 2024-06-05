@@ -13,7 +13,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
   @if not map-has-key($tokens-compiled, $id) {
     @error "Cannot resolve token with id #{inspect($id)}";
   }
-
   @return map-get($tokens-compiled, $id);
 }
 
@@ -34,23 +33,27 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
   @include eval-tokens(
     (
       ref: (
-      'color': (
-        'button': (
-            'color-utility-surface': '',
+        'color': (
+          'button': (
+            'color-utility-surface': #FDF7FB,
             'color-base-on-accent': #FFFFFF,
-            'color-base-content-tertiary': '',
-            'color-base-content-secondary': '',
-            'color-utility-body': '',
-            'color-theme-accent': '',
+            'color-base-content-tertiary': #D5CDD0,
+            'color-base-content-secondary': #A19A9D,
+            'color-utility-body': #F7F3F4,
+            'color-theme-accent': #F8087B,
           ),
           'shadow': (
-            'color-light': '',
-            'color-light-dark': '',
-            'color-dark': '',
-  
-            'shadow-element': '',
-  
-            'shadow-element-pressed': '',
+            'color-light': rgba(255, 255, 255, 1),
+            'color-light-dark': rgba(255, 255, 255, 0.8),
+            'color-dark': rgba(0, 0, 0, 0.1),
+
+            'shadow-element': (1px 1px 5px token-as-var('ref.color.shadow.color-light'),
+              inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+              inset 1px 1px 10px token-as-var('ref.color.shadow.color-dark')),
+
+            'shadow-element-pressed': (-5px -5px 10px token-as-var('ref.color.shadow.color-light'),
+                1px 1px 10px token-as-var('ref.color.shadow.color-dark'),
+                inset 1px 1px 2px token-as-var('ref.color.shadow.color-light-dark')),
           ),
         ),
       ),
@@ -58,212 +61,187 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
         'color': (
           'button': (
             'primary': (
-                'background-color': '',
-                'background-color-hover': '',
-                'background-color-pressed': '',
-                'background-color-alternative': '',
-                'background-color-alternative-active': '',
-          
-                'text-color': '',
-                'text-color-hover': '',
-                'text-color-pressed': '',
-          
-                'border-color': '',
-          
-                'border-color-hover': '',
-                'border-color-pressed': '',
-              ),
-              'secondary': (
-                'background-color': '',
-                'background-color-active': '',
-          
-                'text-color': '',
-                'text-color-active': '',
-          
-                'border-color': '',
-                'border-color-active': '',
-              ),
-              'tertiary': (
-                'background-color': '',
-                'background-color-active': '',
-          
-                'text-color': '',
-                'text-color-active': '',
-          
-                'border-color': '',
-                'border-color-active': '',
-              ),
-              'action': (
-                'background-color': '',
-                'background-color-hover': '',
-                'background-color-pressed': '',
-          
-                'background-color-alternative': '',
-                'text-color': '',
-                'text-color-hover': '',
-                'text-color-active': '',
-                'text-color-alternative': '',
-                'text-color-alternative-active': '',
-                'text-color-primary': '',
-          
-                'border-color': '',
-                'border-color-hover': '',
-                'border-color-pressed': '',
-          
-                'border-color-alternative': '',
+              'background-color': token-as-var('ref.color.button.color-theme-accent'),
+              'background-color-hover': #F754A3,
+              'background-color-pressed': #E44592,
+              'background-color-alternative': #44E5B2,
+              'background-color-alternative-active': #24DAA0,
+
+              'text-color': token-as-var('ref.color.button.color-base-on-accent'),
+              'text-color-hover': token-as-var('sys.color.button.primary.text-color'),
+              'text-color-pressed': token-as-var('sys.color.button.primary.text-color'),
+
+              'border-color': #EDE4E7,
+
+              'border-color-hover': token-as-var('ref.color.button.color-utility-surface'),
+              'border-color-pressed': token-as-var('sys.color.button.primary.border-color-hover'),
             ),
+            'secondary': (
+              'background-color': token-as-var('ref.color.button.color-base-content-tertiary'),
+              'background-color-active': token-as-var('ref.color.button.color-base-content-secondary'),
+
+              'text-color': token-as-var('ref.color.button.color-base-on-accent'),
+              'text-color-active': token-as-var('sys.color.button.secondary.text-color'),
+
+              'border-color': transparent,
+              'border-color-active': token-as-var('sys.color.button.secondary.border-color'),
+            ),
+            'tertiary': (
+              'background-color': token-as-var('ref.color.button.color-utility-body'),
+              'background-color-active': token-as-var('sys.color.button.tertiary.background-color'),
+
+              'text-color': token-as-var('ref.color.button.color-base-content-tertiary'),
+              'text-color-active': token-as-var('ref.color.button.color-base-content-secondary'),
+
+              'border-color': transparent,
+              'border-color-active': token-as-var('sys.color.button.tertiary.border-color'),
+            ),
+            'action': (
+              'background-color': token-as-var('ref.color.button.color-utility-body'),
+              'background-color-hover': token-as-var('sys.color.button.action.background-color'),
+              'background-color-pressed': token-as-var('sys.color.button.action.background-color'),
+
+              'background-color-alternative': transparent,
+              'text-color': token-as-var('ref.color.button.color-base-content-tertiary'),
+              'text-color-hover': token-as-var('ref.color.button.color-base-content-secondary'),
+              'text-color-active': token-as-var('ref.color.button.color-theme-accent'),
+              'text-color-alternative': token-as-var('ref.color.button.color-base-content-tertiary'),
+              'text-color-alternative-active': token-as-var('ref.color.button.color-base-content-secondary'),
+              'text-color-primary': token-as-var('ref.color.button.color-base-on-accent'),
+
+              'border-color': transparent,
+              'border-color-hover': token-as-var('sys.color.button.action.border-color'),
+              'border-color-pressed': token-as-var('sys.color.button.action.border-color'),
+
+              'border-color-alternative': transparent,
+            )
           ),
           'primary': (
-            'primary': #d0021b,
-            'hover': #c6021a,
-            'pressed': #bb0218,
-            'focused': #b10217,
-            'background': #fae6e8,
-            'hover-background': #f6ccd1,
-            'pressed-background': #f1b3bb,
-            'focused-background': #ec9aa4,
+            'primary': '',
+            'background': '',
+            'hover': '',
+            'hover-background': '',
+            'pressed': '',
+            'pressed-background': '',
+            'focused': '',
+            'focused-background': '',
           ),
           'content': (
-            'primary': #2d2926,
-            'secondary': #53565a,
-            'tertiary': #75787b,
-            'quaternary': #a3a4a8,
-            'on-background-inverted': token-as-var('ref.color.button.color-base-on-accent'),
+            'primary': '',
+            'secondary': '',
+            'tertiary': '',
+            'quaternary': '',
+            'on-background-inverted': '',
           ),
           'background': (
-            'background': #f5f7f8,
-            'hover': #eceff0,
-            'inverted': #4e4e4e,
+            'background': '',
+            'hover': '',
+            'inverted': '',
           ),
           'border': (
-            'primary': #dde0e1,
-            'secondary': #eceff0,
+            'primary': '',
+            'secondary': '',
           ),
           'state': (
-            'disabled': #f5f7f8,
-            'on-disabled': #a3a4a8,
+            'disabled': '',
+            'on-disabled': '',
           ),
           'util': (
-            'body': token-as-var('ref.color.button.color-base-on-accent'),
-            'surface': token-as-var('ref.color.button.color-base-on-accent'),
-            'surface-overlay': rgba(255, 255, 255, 0.7),
-            'overlay': rgba(0, 0, 0, 0.45),
+            'body': '',
+            'surface': '',
+            'surface-overlay': '',
+            'overlay': '',
           ),
           'status': (
-            'success': #009900,
-            'success-background': #ddf4dd,
-            'success-background-hover': #b2f1b2,
-            'warning': #ff9900,
-            'warning-background': #fff2df,
-            'warning-background-hover': #ffe3ba,
-            'error': #ff0000,
-            'error-background': #fff9fa,
-            'error-background-hover': #ffd9df,
-            'info': #1070ca,
-            'info-background': #f3f6ff,
-            'info-background-hover': #dbe4ff,
-            'debug': #aa0e42,
-            'debug-background': #ffeef4,
-            'debug-background-hover': #f3d3de,
+            'success': '',
+            'success-background': '',
+            'success-background-hover': '',
+            'warning': '',
+            'warning-background': '',
+            'warning-background-hover': '',
+            'error': '',
+            'error-background': '',
+            'error-background-hover': '',
+            'info': '',
+            'info-background': '',
+            'info-background-hover': '',
+            'debug': '',
+            'debug-background': '',
+            'debug-background-hover': '',
           ),
         ),
         'border': (
           'button': (
-            'width': '',
-            'style': '',
+            'width': 2px,
+            'style': solid,
             'primary': (
               'alternative': (
-                'width': '',
+                'width': 0px,
               )
             ),
             'secondary': (
-              'width': '',
-              'style': '',
+              'width': 0px,
+              'style': 'solid',
             ),
             'tertiary': (
-              'width': '',
-              'style': '',
+              'width': 0px,
+              'style': solid,
             ),
             'action': (
-              'width': '',
-              'style': '',
+              'width': 0px,
+              'style': solid,
             )
           ),
         ),
         'disabled': (
           'button': (
-            'background-color': '',
-            'border-color': '',
-            'box-shadow': '',
-            'text-color': '',
+            'background-color': token-as-var('ref.color.button.color-utility-surface'),
+            'border-color': token-as-var('ref.color.button.color-utility-body'),
+            'box-shadow': token-as-var('ref.color.shadow.shadow-element'),
+            'text-color': token-as-var('ref.color.button.color-base-content-tertiary'),
           ),
         ),
         'transition': (
-          'button': ''
+          'button': all 0.25s ease-in-out
         ),
         'shadow': (
-          'page-header': (
-            0px 24px 80px rgba(10, 2, 34, 0.07),
-            0px 10.0266px 33.4221px rgba(10, 2, 34, 0.0558697),
-            0px 5.36071px 17.869px rgba(10, 2, 34, 0.05437),
-            0px 3.00517px 10.0172px rgba(10, 2, 34, 0.0484701),
-            0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562),
-            0px 0.664142px 2.21381px rgba(10, 2, 34, 0.0208172),
-          ),
-          'page-header-light': (
-            0px 6px 30px rgba(10, 2, 34, 0.03),
-            0px 3px 9px rgba(10, 2, 34, 0.02),
-            0px 5.36071px 6px rgba(10, 2, 34, 0.04),
-            0px 3.00517px 7px rgba(10, 2, 34, 0.03),
-            0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562),
-          ),
-          'modal-window-header': (
-            0px -8px 80px rgba(10, 2, 34, 0.07),
-            0px 1px 33.4221px rgba(10, 2, 34, 0.0558697),
-            0px 0px 17.869px rgba(10, 2, 34, 0.05437),
-            0px 2px 10.0172px rgba(10, 2, 34, 0.0484701),
-            0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562),
-            0px 0.664142px 2.21381px rgba(10, 2, 34, 0.0208172),
-          ),
-          'floating-notification': (
-            0px 68px 80px rgba(24, 24, 29, 0.09),
-            0px 30.1471px 24.1177px rgba(24, 24, 29, 0.058643),
-            0px 12.5216px 10.0172px rgba(24, 24, 29, 0.045),
-            0px 4.5288px 3.62304px rgba(24, 24, 29, 0.031357),
-          ),
-          'dropdown': (
-            0px 0px 4px rgba(45, 41, 38, 0.08),
-            0px 4px 16px rgba(45, 41, 38, 0.08),
-          ),
-          'active-tab': 0px 1px 1px rgba(83, 86, 90, 0.1),
+          'page-header': '',
+          'page-header-light': '',
+          'modal-window-header': '',
+          'floating-notification': '',
+          'dropdown': '',
+          'active-tab': '',
           'button': (
             'primary': (
-              'box-shadow': '',
+              'box-shadow': (1px 1px 5px token-as-var('ref.color.shadow.color-light'),
+                -1px -1px 5px token-as-var('ref.color.shadow.color-light')),
 
-              'box-shadow-hover': '',
-              'box-shadow-pressed': '',
+              'box-shadow-hover': (1px 1px 5px rgba(255, 255, 255, 0.7),
+                -1px -1px 5px token-as-var('ref.color.shadow.color-light'),
+                0px 0px 20px rgba(247, 84, 163, 0.5)),
+              'box-shadow-pressed': token-as-var('sys.shadow.button.primary.box-shadow-hover'),
               
-              'box-shadow-alternative': '',    
+              'box-shadow-alternative': none,    
             ),
             'secondary': (
-              'box-shadow': '',
-              'box-shadow-active': '',
+              'box-shadow': token-as-var('ref.color.shadow.shadow-element-pressed'),
+              'box-shadow-active': token-as-var('ref.color.shadow.shadow-element'),
             ),
             'tertiary': (
-              'box-shadow': '',
-              'box-shadow-pressed': '',
-              'box-shadow-active': '',
+              'box-shadow': token-as-var('ref.color.shadow.shadow-element-pressed'),
+              'box-shadow-pressed': token-as-var('ref.color.shadow.shadow-element'),
+              'box-shadow-active': token-as-var('sys.shadow.button.tertiary.box-shadow-pressed'),
             ),
             'action': (
-              'box-shadow': '',
-              'box-shadow-hover': '',
-              'box-shadow-pressed': '',
-              'box-shadow-alternative': '',
+              'box-shadow': token-as-var('ref.color.shadow.shadow-element-pressed'),
+              'box-shadow-hover': token-as-var('ref.color.shadow.shadow-element'),
+              'box-shadow-pressed': token-as-var('ref.color.shadow.shadow-element-pressed'),
+              'box-shadow-alternative': token-as-var('ref.color.shadow.shadow-element-pressed'),
             ),
           ),
         ),
       ),
-    )
+    ),
   );
 }
 

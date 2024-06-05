@@ -76,6 +76,7 @@ const handleClick = (event: Event) => {
       `s-button_size_${definitelySize}`,
       `s-button_icon-position_${definitelyIconPosition}`,
       font,
+      theme,
       {
         's-button_disabled': loading || disabled,
         's-button_rounded': isAction && rounded,
@@ -187,7 +188,20 @@ const handleClick = (event: Event) => {
   }
 }
 
+// @mixin apply-theme($theme) {
+//   background-color: theme.token-as-var('sys.color.button.primary.background-color');
+//   // background-color: #{theme-token($theme, 'sys.color.button.primary.background-color')}
+// }
 
+// // .s-button_type_primary.theme_neumorphism {
+// //   @include apply-theme($theme: 'theme_neumorphism');
+// // }
+
+// // TODO понять почему на аплается стиль с обычной theme
+// .s-button_type_primary.theme {
+//   // background-color: black;
+//   @include apply-theme($theme: 'theme');
+// }
 
 .s-button {
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;
@@ -229,8 +243,9 @@ const handleClick = (event: Event) => {
     @apply mx-0;
   }
 
+
   &_type_primary {
-    background-color: theme-token('theme_neumorphism','sys.color.button.primary.background-color');
+    background-color: theme.token-as-var('sys.color.primary.primary');
     color: theme_neumorphism.token-as-var('ref.color.button.color-base-on-accent');
     box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.primary.box-shadow');
 
