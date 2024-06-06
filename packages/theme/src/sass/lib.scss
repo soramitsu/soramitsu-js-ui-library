@@ -112,14 +112,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'border-color-alternative': '',
             )
           ),
-          'primary': (
-            'pressed': #bb0218,
-            'focused': #b10217,
-            'background': #fae6e8,
-            'hover-background': #f6ccd1,
-            'pressed-background': #f1b3bb,
-            'focused-background': #ec9aa4,
-          ),
           'content': (
             'primary': #2d2926,
             'secondary': #53565a,
