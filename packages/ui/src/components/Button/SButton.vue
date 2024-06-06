@@ -193,7 +193,16 @@ const handleClick = (event: Event) => {
   }
 }
 
+// Main button
+@mixin apply-theme-button($theme) {
+  border: 
+  theme.token-as-var('sys.border.button.width') 
+  theme.token-as-var('sys.border.button.style') 
+  theme.token-as-var('sys.color.button.primary.border-color');
+  transition: theme.token-as-var('sys.transition.button');
+}
 
+// Primary
 @mixin apply-theme-primary($theme) {
   background-color: theme.token-as-var('sys.color.button.primary.background-color');
   color: theme.token-as-var('ref.color.button.color-base-on-accent');
@@ -217,7 +226,7 @@ const handleClick = (event: Event) => {
   }
    @include disabled($theme: theme);
 }
-
+// Primary-alternative
 @mixin apply-theme-primary-alternative($theme) {
   background-color: theme.token-as-var('sys.color.button.primary.background-color-alternative');
   box-shadow: theme.token-as-var('sys.shadow.button.primary.box-shadow-alternative');
@@ -230,6 +239,7 @@ const handleClick = (event: Event) => {
   @include disabled($theme: theme,$border-width: theme_neumorphism.token-as-var('sys.border.button.primary.alternative.width'));
 }
 
+// Secondary
 @mixin apply-theme-secondary($theme) {
   background-color: theme.token-as-var('sys.color.button.secondary.background-color');
   color: theme.token-as-var('sys.color.button.secondary.text-color');
@@ -250,6 +260,7 @@ const handleClick = (event: Event) => {
   @include disabled($theme: theme, $border-width: theme_neumorphism.token-as-var('sys.border.button.secondary.width'));
 }
 
+// Terrtiary
 @mixin apply-theme-tertiary($theme) {
   background-color: theme.token-as-var('sys.color.button.tertiary.background-color');
   color: theme.token-as-var('sys.color.button.tertiary.text-color');
@@ -306,7 +317,7 @@ const handleClick = (event: Event) => {
     color: theme.token-as-var('sys.color.button.action.text-color-primary')
   }
 }
-
+// Action-alternative
 @mixin apply-theme-action-alternative($theme) {
   color: theme.token-as-var('sys.color.button.action.text-color-alternative');
   &, &:hover, &:focus, &.focusing, &:active, &.s-pressed {
@@ -324,7 +335,7 @@ const handleClick = (event: Event) => {
     $box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.action.box-shadow-alternative'),
   );
 }
-
+// Action-primary
 @mixin apply-theme-action-primary($theme) {
   background-color: theme.token-as-var('sys.color.button.primary.background-color');
   color: theme.token-as-var('ref.color.button.color-base-on-accent');
@@ -347,6 +358,11 @@ const handleClick = (event: Event) => {
     box-shadow:  theme.token-as-var('sys.shadow.button.primary.box-shadow-pressed');
     color: theme.token-as-var('sys.color.button.primary.text-color-pressed');
   }
+}
+
+// Main button 
+.s-button {
+  @include apply-theme-button($theme: 'theme_neumorphism');
 }
 
 // Primary type
@@ -388,11 +404,6 @@ const handleClick = (event: Event) => {
 
 .s-button {
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;
-  border: 
-  theme_neumorphism.token-as-var('sys.border.button.width') 
-  theme_neumorphism.token-as-var('sys.border.button.style') 
-  theme_neumorphism.token-as-var('sys.color.button.primary.border-color');
-  transition: theme_neumorphism.token-as-var('sys.transition.button');
   fill: currentColor;
   $component: &;
 
