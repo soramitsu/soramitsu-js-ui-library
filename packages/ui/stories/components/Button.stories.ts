@@ -7,7 +7,14 @@ export default {
     components: { SButton, IconClose,IconBasicCirclePlus24,IconBasicCircleX24, IconBasicEye24 },
     template: `
       <div class="flex flex-col items-start space-y-4">
-        <SButton v-bind="$attrs" theme='theme_neumorphism'>
+        <SButton v-bind="$attrs" theme='theme'>
+          <template #icon>
+            <IconClose
+            />
+          </template>
+          {{ $attrs.type }}
+        </SButton>
+          <SButton v-bind="$attrs" theme='theme_neumorphism'>
           <template #icon>
             <IconClose
             />

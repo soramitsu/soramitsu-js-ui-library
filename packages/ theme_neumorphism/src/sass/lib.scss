@@ -2,7 +2,7 @@
 @use '../../../theme/src/sass/util.scss';
 @use 'sass:list';
 
-$vars-prefix: '--sora_';
+$vars-prefix: '--sora_neu_';
 $typography-prefix: 'sora-tpg-';
 
 $tokens-compiled: util.tree-flatten(tokens.$tokens);
