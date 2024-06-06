@@ -260,7 +260,7 @@ function handleChevronClick(event: MouseEvent) {
   @apply select-none cursor-pointer;
 
   background: theme.token-as-var('sys.color.background.background');
-  color: theme.token-as-var('sys.color.content.primary');
+  color: theme.token-as-var('sys.color.button.primary.border-color');
   border: 1px solid transparent;
 
   &_disabled {
@@ -278,7 +278,7 @@ function handleChevronClick(event: MouseEvent) {
 
   &__label,
   &__search-icon {
-    color: theme.token-as-var('sys.color.content.tertiary');
+    color: theme.token-as-var('sys.color.button.tertiary.text-color');
     fill: currentColor;
   }
 

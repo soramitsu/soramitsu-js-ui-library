@@ -49,9 +49,9 @@ watch(
 <style lang="scss">
 @use '@/theme';
 
-$font-color-inactive: theme.token-as-var('sys.color.content.primary');
+$font-color-inactive: theme.token-as-var('sys.color.button.primary.border-color');
 $font-color-hover: theme.token-as-var('sys.color.button.primary.background-color-hover');
-$font-color-disabled: theme.token-as-var('sys.color.content.quaternary');
+$font-color-disabled: theme.token-as-var('sys.color.button.tertiary.text-color-active');
 
 .s-tab {
   @apply select-none;
@@ -116,7 +116,7 @@ $font-color-disabled: theme.token-as-var('sys.color.content.quaternary');
   }
 
   &_background_secondary {
-    $font-color-active: theme.token-as-var('sys.color.content.primary');
+    $font-color-active: theme.token-as-var('sys.color.button.primary.border-color');
     $background-color: theme.token-as-var('sys.color.background.background');
     $tab-shadow-active: theme.token-as-var('sys.shadow.active-tab');
 

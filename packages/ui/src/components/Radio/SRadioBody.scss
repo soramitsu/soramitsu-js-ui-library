@@ -28,12 +28,12 @@ $dur-easing: 0.2s ease;
   }
 
   label {
-    color: theme.token-as-var('sys.color.content.primary');
+    color: theme.token-as-var('sys.color.button.primary.border-color');
     @apply cursor-pointer;
   }
 
   &__description {
-    color: theme.token-as-var('sys.color.content.secondary');
+    color: theme.token-as-var('sys.color.button.secondary.text-color');
     margin-top: 4px;
   }
 

@@ -335,7 +335,7 @@ function handlePrevClick() {
 .s-pagination {
   &__button {
     cursor: pointer;
-    color: theme.token-as-var('sys.color.content.primary');
+    color: theme.token-as-var('sys.color.button.primary.border-color');
 
     &_active {
       color: theme.token-as-var('sys.color.button.primary.background-color-pressed');
@@ -356,11 +356,11 @@ function handlePrevClick() {
   }
 
   &__count {
-    color: theme.token-as-var('sys.color.content.tertiary');
+    color: theme.token-as-var('sys.color.button.tertiary.text-color');
   }
 
   &__sizes-label {
-    color: theme.token-as-var('sys.color.content.tertiary');
+    color: theme.token-as-var('sys.color.button.tertiary.text-color');
   }
 }
 </style>

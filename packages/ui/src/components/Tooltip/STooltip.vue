@@ -114,21 +114,21 @@ function handleSecondaryButtonClick() {
 
 .s-tooltip {
   &__body {
-    background: theme.token-as-var('sys.color.content.primary');
-    color: theme.token-as-var('sys.color.content.on-background-inverted');
+    background: theme.token-as-var('sys.color.button.primary.border-color');
+    color: theme.token-as-var('sys.color.button.action.text-color');
     border-radius: 4px;
   }
 
   &__button.s-button {
     &_type_outline {
       border-color: theme.token-as-var('sys.color.border.primary');
-      color: theme.token-as-var('sys.color.content.on-background-inverted');
+      color: theme.token-as-var('sys.color.button.action.text-color');
 
       &:hover,
       &:active {
         border-color: theme.token-as-var('sys.color.util.surface');
         background: theme.token-as-var('sys.color.util.surface');
-        color: theme.token-as-var('sys.color.content.primary');
+        color: theme.token-as-var('sys.color.button.primary.border-color');
       }
     }
 

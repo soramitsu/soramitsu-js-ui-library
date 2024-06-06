@@ -67,16 +67,16 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'text-color-hover': token-as-var('ref.color.button.color-base-on-accent'),
               'text-color-pressed': token-as-var('ref.color.button.color-base-on-accent'),
 
-              'border-color': '',
+              'border-color': #2d2926,
 
               'border-color-hover': '',
               'border-color-pressed': '',
             ),
             'secondary': (
-              'background-color': '',
+              'background-color': token-as-var('ref.color.button.color-base-on-accent'),
               'background-color-active': '',
 
-              'text-color': '',
+              'text-color': #53565a,
               'text-color-active': '',
 
               'border-color': '',
@@ -86,8 +86,8 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'background-color': '',
               'background-color-active': '',
 
-              'text-color': '',
-              'text-color-active': '',
+              'text-color': #75787b,
+              'text-color-active': #a3a4a8,
 
               'border-color': '',
               'border-color-active': '',
@@ -98,7 +98,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'background-color-pressed': '',
 
               'background-color-alternative': '',
-              'text-color': '',
+              'text-color': token-as-var('ref.color.button.color-base-on-accent'),
               'text-color-hover': '',
               'text-color-active': '',
               'text-color-alternative': '',
@@ -111,13 +111,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
 
               'border-color-alternative': '',
             )
-          ),
-          'content': (
-            'primary': #2d2926,
-            'secondary': #53565a,
-            'tertiary': #75787b,
-            'quaternary': #a3a4a8,
-            'on-background-inverted': token-as-var('ref.color.button.color-base-on-accent'),
           ),
           'background': (
             'background': #f5f7f8,

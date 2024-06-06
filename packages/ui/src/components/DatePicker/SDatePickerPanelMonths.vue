@@ -77,7 +77,7 @@ const changeView = (viewName: string) => {
       line-height: 22px;
       text-align: center;
       cursor: pointer;
-      color: theme.token-as-var('sys.color.content.primary');
+      color: theme.token-as-var('sys.color.button.primary.border-color');
 
       &.active,
       &:hover {

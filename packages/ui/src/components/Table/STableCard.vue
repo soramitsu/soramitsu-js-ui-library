@@ -170,7 +170,7 @@ function select() {
   }
 
   &__label {
-    color: theme.token-as-var('sys.color.content.tertiary');
+    color: theme.token-as-var('sys.color.button.tertiary.text-color');
   }
 
   &__expand-icon {

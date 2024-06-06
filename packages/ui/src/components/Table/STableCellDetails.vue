@@ -17,12 +17,12 @@ import { IconArrowsChevronRightXs24 } from '@/components/icons'
   }
 
   &__icon {
-    color: theme.token-as-var('sys.color.content.quaternary');
+    color: theme.token-as-var('sys.color.button.tertiary.text-color-active');
     fill: currentColor;
   }
 
   &:hover &__icon {
-    color: theme.token-as-var('sys.color.content.secondary');
+    color: theme.token-as-var('sys.color.button.secondary.text-color');
   }
 }
 </style>

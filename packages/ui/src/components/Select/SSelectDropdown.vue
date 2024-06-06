@@ -181,7 +181,7 @@ const SEARCH_ICON_SIZE = {
   box-shadow: theme.token-as-var('sys.shadow.dropdown');
 
   &__header {
-    color: theme.token-as-var('sys.color.content.tertiary');
+    color: theme.token-as-var('sys.color.button.tertiary.text-color');
     border-bottom: 1px solid theme.token-as-var('sys.color.border.primary');
   }
 
@@ -199,14 +199,14 @@ const SEARCH_ICON_SIZE = {
   }
 
   &__search-icon {
-    fill: theme.token-as-var('sys.color.content.tertiary');
+    fill: theme.token-as-var('sys.color.button.tertiary.text-color');
   }
 
   &__search-input {
-    color: theme.token-as-var('sys.color.content.primary');
+    color: theme.token-as-var('sys.color.button.primary.border-color');
 
     &::placeholder {
-      color: theme.token-as-var('sys.color.content.tertiary');
+      color: theme.token-as-var('sys.color.button.tertiary.text-color');
     }
   }
 
@@ -223,7 +223,7 @@ const SEARCH_ICON_SIZE = {
 
       // spinner styles
       font-size: $spinner-size;
-      color: theme.token-as-var('sys.color.content.tertiary');
+      color: theme.token-as-var('sys.color.button.tertiary.text-color');
     }
   }
 

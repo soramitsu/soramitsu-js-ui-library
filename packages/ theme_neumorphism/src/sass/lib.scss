@@ -116,13 +116,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'border-color-alternative': transparent,
             )
           ),
-          'content': (
-            'primary': '',
-            'secondary': '',
-            'tertiary': '',
-            'quaternary': '',
-            'on-background-inverted': '',
-          ),
           'background': (
             'background': '',
             'hover': '',

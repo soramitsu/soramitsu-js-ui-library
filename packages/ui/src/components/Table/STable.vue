@@ -886,7 +886,7 @@ $col-number: v-bind(cardsGridColumnNumber);
   }
 
   &__th {
-    color: theme.token-as-var('sys.color.content.tertiary');
+    color: theme.token-as-var('sys.color.button.tertiary.text-color');
   }
 
   &__expanded-cell {
@@ -915,7 +915,7 @@ $col-number: v-bind(cardsGridColumnNumber);
   }
 
   &__empty-text {
-    color: theme.token-as-var('sys.color.content.tertiary');
+    color: theme.token-as-var('sys.color.button.tertiary.text-color');
   }
 
   &__append-wrapper {
