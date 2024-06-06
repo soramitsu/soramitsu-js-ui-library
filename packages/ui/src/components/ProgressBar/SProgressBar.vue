@@ -30,7 +30,7 @@ const progressBarHeight = computed(() => {
 </template>
 
 <style lang="scss">
-@use '@/theme';
+@use '@/theme' as theme;
 $active-bar-width: v-bind(activeBarWidth);
 $progress-bar-height: v-bind(progressBarHeight);
 $progress-bar-border-radius: v-bind(borderRadius);
