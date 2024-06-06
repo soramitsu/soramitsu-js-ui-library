@@ -29,7 +29,7 @@ Quick setup with Sass:
 }
 
 .your-button {
-  color: theme.token-as-var('sys.color.button.primary.background-color');
+  color: theme.token-as-var('ref.color.button.color-theme-accent');
 }
 ```
 

@@ -40,7 +40,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'color-base-content-tertiary': '',
             'color-base-content-secondary': '',
             'color-utility-body': '',
-            'color-theme-accent': '',
+            'color-theme-accent': #d0021b,
           ),
           'shadow': (
             'color-light': '',
@@ -57,7 +57,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
         'color': (
           'button': (
             'primary': (
-              'background-color':#d0021b,
               'background-color-hover': #c6021a,
               'background-color-pressed': #bb0218,
               'background-color-alternative': #d0021b,

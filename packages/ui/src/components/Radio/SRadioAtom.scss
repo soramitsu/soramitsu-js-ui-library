@@ -19,7 +19,7 @@ $dot-border: (
   xl: 2px,
 );
 
-$color-primary: theme.token-as-var('sys.color.button.primary.background-color');
+$color-primary: theme.token-as-var('ref.color.button.color-theme-accent');
 $color-border-primary: theme.token-as-var('sys.color.button.primary.border-color-pressed');
 
 $transition-dur-easing: 0.2s ease;

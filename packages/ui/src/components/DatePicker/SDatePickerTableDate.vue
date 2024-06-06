@@ -368,7 +368,7 @@ const handleClick = (ev: any) => {
 
       &.today {
         position: relative;
-        color: theme.token-as-var('sys.color.button.primary.background-color');
+        color: theme.token-as-var('ref.color.button.color-theme-accent');
         font-weight: 700;
 
         &.end-date span,
@@ -386,7 +386,7 @@ const handleClick = (ev: any) => {
       }
 
       &.available:hover:not(.start-date, .end-date, .current, .disabled) {
-        color: theme.token-as-var('sys.color.button.primary.background-color');
+        color: theme.token-as-var('ref.color.button.color-theme-accent');
       }
 
       &.in-range {
@@ -397,7 +397,7 @@ const handleClick = (ev: any) => {
       &.end-date,
       &.start-date {
         color: theme.token-as-var('sys.color.util.surface');
-        background-color: theme.token-as-var('sys.color.button.primary.background-color');
+        background-color: theme.token-as-var('ref.color.button.color-theme-accent');
         border-radius: 2px;
 
         &.disabled .date-table__cell-text {
@@ -406,7 +406,7 @@ const handleClick = (ev: any) => {
       }
 
       &.selected {
-        background-color: theme.token-as-var('sys.color.button.primary.background-color');
+        background-color: theme.token-as-var('ref.color.button.color-theme-accent');
         color: theme.token-as-var('sys.color.util.surface');
       }
     }

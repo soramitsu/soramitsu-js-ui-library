@@ -72,7 +72,7 @@ const updateTime = (e: any) => {
   }
 
   .active {
-    background-color: theme.token-as-var('sys.color.button.primary.background-color');
+    background-color: theme.token-as-var('ref.color.button.color-theme-accent');
     color: theme.token-as-var('sys.color.util.surface');
     border-radius: 2px;
   }

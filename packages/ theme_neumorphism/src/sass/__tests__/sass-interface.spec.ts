@@ -34,7 +34,7 @@ describe('Exports', () => {
         `
         @use 'v_lib' as l
         body
-          color: #{l.token-as-var('sys.color.button.primary.background-color')}
+          color: #{l.token-as-var('ref.color.button.color-theme-accent')}
       `,
         'indented',
       ),
@@ -336,12 +336,12 @@ describe('Utils', () => {
         @use 'v_util' as util;
 
         $src: (
-          'sys.color.button.primary.background-color': '--scp',
+          'ref.color.button.color-theme-accent': '--scp',
           'sys.color.secondary': '--scs',
         );
 
         $values: (
-          'sys.color.button.primary.background-color': red,
+          'ref.color.button.color-theme-accent': red,
           'sys.color.secondary': blue
         );
         
@@ -363,12 +363,12 @@ describe('Utils', () => {
         @use 'v_util' as util;
 
         $src: (
-          'sys.color.button.primary.background-color': '--scp',
+          'ref.color.button.color-theme-accent': '--scp',
           'sys.color.secondary': '--scs',
         );
 
         $values: (
-          'sys.color.button.primary.background-color': red,
+          'ref.color.button.color-theme-accent': red,
           'sys.color.secondary': blue,
           'sys.color.tertiary': green
         );
@@ -386,7 +386,7 @@ describe('Utils', () => {
         @use 'v_util' as util;
 
         $src: (
-          'sys.color.button.primary.background-color': '--scp',
+          'ref.color.button.color-theme-accent': '--scp',
           'sys.color.secondary': '--scs',
         );
 
@@ -411,7 +411,7 @@ describe('Utils', () => {
         @use 'v_util' as util;
 
         $src: (
-          'sys.color.button.primary.background-color': '--scp',
+          'ref.color.button.color-theme-accent': '--scp',
           'sys.color.secondary': '--scs',
         );
 

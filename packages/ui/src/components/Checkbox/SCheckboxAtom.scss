@@ -10,7 +10,7 @@ $sizes: (
 $border-radius: 3px;
 $color-disabled: theme.token-as-var('sys.disabled.button.background-color');
 $color-on-disabled: theme.token-as-var('sys.disabled.button.border-color');
-$color-primary: theme.token-as-var('sys.color.button.primary.background-color');
+$color-primary: theme.token-as-var('ref.color.button.color-theme-accent');
 $color-border-primary: theme.token-as-var('sys.color.button.primary.border-color-pressed');
 $color-border-secondary: theme.token-as-var('sys.color.button.secondary.border-color');
 $color-on-accent: theme.token-as-var('sys.color.button.action.text-color');

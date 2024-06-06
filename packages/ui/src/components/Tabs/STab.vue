@@ -100,7 +100,7 @@ $font-color-disabled: theme.token-as-var('sys.color.button.tertiary.text-color-a
     $font-color-active: theme.token-as-var('sys.color.util.body');
 
     $background-color: theme.token-as-var('sys.color.util.body');
-    $background-color-active: theme.token-as-var('sys.color.button.primary.background-color');
+    $background-color-active: theme.token-as-var('ref.color.button.color-theme-accent');
 
     $border: 1px solid theme.token-as-var('sys.color.button.primary.border-color-pressed');
     $border-active: 1px solid $background-color-active;
@@ -134,13 +134,13 @@ $font-color-disabled: theme.token-as-var('sys.color.button.tertiary.text-color-a
   }
 
   &_background_none {
-    $font-color-active: theme.token-as-var('sys.color.button.primary.background-color');
+    $font-color-active: theme.token-as-var('ref.color.button.color-theme-accent');
 
     $background-color: none;
     $background-color-active: none;
 
     $border: 2px solid theme.token-as-var('sys.color.button.primary.border-color-pressed');
-    $border-active: 2px solid theme.token-as-var('sys.color.button.primary.background-color');
+    $border-active: 2px solid theme.token-as-var('ref.color.button.color-theme-accent');
 
     background: $background-color;
     border-bottom: $border;

@@ -61,7 +61,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
         'color': (
           'button': (
             'primary': (
-              'background-color': token-as-var('ref.color.button.color-theme-accent'),
               'background-color-hover': #F754A3,
               'background-color-pressed': #E44592,
               'background-color-alternative': #44E5B2,

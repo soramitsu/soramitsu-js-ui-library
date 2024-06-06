@@ -203,7 +203,7 @@ const handleClick = (event: Event) => {
 
 // Primary
 @mixin apply-theme-primary($theme) {
-  background-color: theme-token($theme,'sys.color.button.primary.background-color');
+  background-color: theme-token($theme,'ref.color.button.color-theme-accent');
   color: theme-token($theme,'ref.color.button.color-base-on-accent');
   box-shadow: theme-token($theme,'sys.shadow.button.primary.box-shadow');
 
@@ -336,7 +336,7 @@ const handleClick = (event: Event) => {
 }
 // Action-primary
 @mixin apply-theme-action-primary($theme) {
-  background-color: theme-token($theme,'sys.color.button.primary.background-color');
+  background-color: theme-token($theme,'ref.color.button.color-theme-accent');
   color: theme-token($theme,'ref.color.button.color-base-on-accent');
   box-shadow:  theme-token($theme,'sys.shadow.button.primary.box-shadow');
   border: 
