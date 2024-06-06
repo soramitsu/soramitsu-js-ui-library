@@ -207,7 +207,7 @@ const onDoneClick = () => {
     font-size: 10px;
     width: 44px;
     height: 24px;
-    background: theme.token-as-var('sys.color.primary.primary');
+    background: theme.token-as-var('sys.color.button.primary.background-color');
     border-radius: 2px;
     color: theme.token-as-var('sys.color.util.surface');
     font-weight: 700;

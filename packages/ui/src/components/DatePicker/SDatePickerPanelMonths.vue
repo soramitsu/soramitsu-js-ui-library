@@ -81,7 +81,7 @@ const changeView = (viewName: string) => {
 
       &.active,
       &:hover {
-        color: theme.token-as-var('sys.color.primary.primary');
+        color: theme.token-as-var('sys.color.button.primary.background-color');
       }
     }
   }

@@ -44,7 +44,7 @@ $progress-bar-border-radius: v-bind(borderRadius);
   &__active-bar {
     height: 100%;
     border-radius: $progress-bar-border-radius;
-    background: linear-gradient(90deg, theme.token-as-var('sys.color.primary.primary') $active-bar-width, transparent 0%);
+    background: linear-gradient(90deg, theme.token-as-var('sys.color.button.primary.background-color') $active-bar-width, transparent 0%);
   }
 }
 </style>

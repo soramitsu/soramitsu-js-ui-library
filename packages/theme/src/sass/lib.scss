@@ -113,8 +113,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             )
           ),
           'primary': (
-            'primary': #d0021b,
-            'hover': #c6021a,
             'pressed': #bb0218,
             'focused': #b10217,
             'background': #fae6e8,

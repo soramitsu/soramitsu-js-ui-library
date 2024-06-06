@@ -1,6 +1,6 @@
 @use '@/theme';
 
-$primary: theme.token-as-var('sys.color.primary.primary');
+$primary: theme.token-as-var('sys.color.button.primary.background-color');
 $on-disabled: theme.token-as-var('sys.color.state.on-disabled');
 $border-primary: theme.token-as-var('sys.color.border.primary');
 

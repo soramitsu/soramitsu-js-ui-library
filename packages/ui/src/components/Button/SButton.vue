@@ -304,7 +304,7 @@ const handleClick = (event: Event) => {
     box-shadow: theme-token($theme,'sys.shadow.button.action.box-shadow-pressed');
   }
   &:active {
-    color: theme.token-as-var('sys.color.button.action.text-color-active');
+    color: theme-token($theme,'sys.color.button.action.text-color-active');
   }
   @include disabled(
     $theme: theme,

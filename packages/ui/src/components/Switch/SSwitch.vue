@@ -54,8 +54,8 @@ const model = useVModel(props, 'modelValue', emit)
 $border-primary: theme.token-as-var('sys.color.border.primary');
 $content-primary: theme.token-as-var('sys.color.content.primary');
 $content-quaternary: theme.token-as-var('sys.color.content.quaternary');
-$primary: theme.token-as-var('sys.color.primary.primary');
-$primary-hover: theme.token-as-var('sys.color.primary.hover');
+$primary: theme.token-as-var('sys.color.button.primary.background-color');
+$primary-hover: theme.token-as-var('sys.color.button.primary.background-color-hover');
 $util-surface: theme.token-as-var('sys.color.util.surface');
 
 .s-switch {

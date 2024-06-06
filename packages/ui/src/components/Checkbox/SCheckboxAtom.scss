@@ -10,7 +10,7 @@ $sizes: (
 $border-radius: 3px;
 $color-disabled: theme.token-as-var('sys.color.state.disabled');
 $color-on-disabled: theme.token-as-var('sys.color.state.on-disabled');
-$color-primary: theme.token-as-var('sys.color.primary.primary');
+$color-primary: theme.token-as-var('sys.color.button.primary.background-color');
 $color-border-primary: theme.token-as-var('sys.color.border.primary');
 $color-border-secondary: theme.token-as-var('sys.color.border.secondary');
 $color-on-accent: theme.token-as-var('sys.color.content.on-background-inverted');

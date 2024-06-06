@@ -50,7 +50,7 @@ watch(
 @use '@/theme';
 
 $font-color-inactive: theme.token-as-var('sys.color.content.primary');
-$font-color-hover: theme.token-as-var('sys.color.primary.hover');
+$font-color-hover: theme.token-as-var('sys.color.button.primary.background-color-hover');
 $font-color-disabled: theme.token-as-var('sys.color.content.quaternary');
 
 .s-tab {
@@ -100,7 +100,7 @@ $font-color-disabled: theme.token-as-var('sys.color.content.quaternary');
     $font-color-active: theme.token-as-var('sys.color.util.body');
 
     $background-color: theme.token-as-var('sys.color.util.body');
-    $background-color-active: theme.token-as-var('sys.color.primary.primary');
+    $background-color-active: theme.token-as-var('sys.color.button.primary.background-color');
 
     $border: 1px solid theme.token-as-var('sys.color.border.primary');
     $border-active: 1px solid $background-color-active;
@@ -134,13 +134,13 @@ $font-color-disabled: theme.token-as-var('sys.color.content.quaternary');
   }
 
   &_background_none {
-    $font-color-active: theme.token-as-var('sys.color.primary.primary');
+    $font-color-active: theme.token-as-var('sys.color.button.primary.background-color');
 
     $background-color: none;
     $background-color-active: none;
 
     $border: 2px solid theme.token-as-var('sys.color.border.primary');
-    $border-active: 2px solid theme.token-as-var('sys.color.primary.primary');
+    $border-active: 2px solid theme.token-as-var('sys.color.button.primary.background-color');
 
     background: $background-color;
     border-bottom: $border;

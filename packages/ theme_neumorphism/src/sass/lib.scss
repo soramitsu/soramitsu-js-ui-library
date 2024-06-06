@@ -117,13 +117,11 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             )
           ),
           'primary': (
-            'primary': '',
-            'background': '',
-            'hover': '',
-            'hover-background': '',
             'pressed': '',
-            'pressed-background': '',
             'focused': '',
+            'background': '',
+            'hover-background': '',
+            'pressed-background': '',
             'focused-background': '',
           ),
           'content': (

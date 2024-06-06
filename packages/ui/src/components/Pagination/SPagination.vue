@@ -347,7 +347,7 @@ function handlePrevClick() {
     }
 
     &:not(&_disabled):hover {
-      color: theme.token-as-var('sys.color.primary.hover');
+      color: theme.token-as-var('sys.color.button.primary.background-color-hover');
     }
   }
 
