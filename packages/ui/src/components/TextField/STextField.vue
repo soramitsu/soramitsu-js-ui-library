@@ -342,7 +342,7 @@ $message-icon-alignment-fix: -1px;
 
 $theme-bg: theme.token-as-var('sys.color.background.background');
 $theme-bg-hover: theme.token-as-var('sys.color.background.hover');
-$theme-border-primary: theme.token-as-var('sys.color.button.primary.border-color-pressed');
+$theme-border-primary: theme.token-as-var('ref.color.button.color-utility-surface');
 $theme-content-tertiary: theme.token-as-var('sys.color.button.tertiary.text-color');
 
 .s-text-field {

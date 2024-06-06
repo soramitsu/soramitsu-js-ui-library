@@ -414,8 +414,8 @@ const handleClick = (ev: any) => {
     &__title {
       padding: 4px;
       font-weight: 400;
-      border-bottom: 1px solid theme.token-as-var('sys.color.button.primary.border-color-pressed');
-      border-top: 1px solid theme.token-as-var('sys.color.button.primary.border-color-pressed');
+      border-bottom: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
+      border-top: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
       color: theme.token-as-var('sys.color.button.primary.border-color');
       text-align: center;
     }

@@ -35,7 +35,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
       ref: (
         'color': (
           'button': (
-            'color-utility-surface': '',
+            'color-utility-surface': #dde0e1,
             'color-base-on-accent': #FFFFFF,
             'color-base-content-tertiary': '',
             'color-base-content-secondary': '',
@@ -62,14 +62,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'background-color-alternative': #d0021b,
               'background-color-alternative-active': #d0021b,
 
-              'text-color': token-as-var('ref.color.button.color-base-on-accent'),
-              'text-color-hover': token-as-var('ref.color.button.color-base-on-accent'),
-              'text-color-pressed': token-as-var('ref.color.button.color-base-on-accent'),
-
               'border-color': #2d2926,
-
-              'border-color-hover': '',
-              'border-color-pressed': #dde0e1,
             ),
             'secondary': (
               'background-color': token-as-var('ref.color.button.color-base-on-accent'),

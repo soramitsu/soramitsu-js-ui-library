@@ -182,7 +182,7 @@ const SEARCH_ICON_SIZE = {
 
   &__header {
     color: theme.token-as-var('sys.color.button.tertiary.text-color');
-    border-bottom: 1px solid theme.token-as-var('sys.color.button.primary.border-color-pressed');
+    border-bottom: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
   }
 
   &__action {
@@ -190,7 +190,7 @@ const SEARCH_ICON_SIZE = {
   }
 
   &__search {
-    border-bottom: 1px solid theme.token-as-var('sys.color.button.primary.border-color-pressed');
+    border-bottom: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
     background: theme.token-as-var('sys.color.background.background');
 
     &:focus-within {

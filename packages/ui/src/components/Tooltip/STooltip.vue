@@ -121,7 +121,7 @@ function handleSecondaryButtonClick() {
 
   &__button.s-button {
     &_type_outline {
-      border-color: theme.token-as-var('sys.color.button.primary.border-color-pressed');
+      border-color: theme.token-as-var('ref.color.button.color-utility-surface');
       color: theme.token-as-var('sys.color.button.action.text-color');
 
       &:hover,

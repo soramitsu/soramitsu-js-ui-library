@@ -209,9 +209,9 @@ const handleClick = (event: Event) => {
 
   &:hover,&:focus, &.focusing {
     background-color: theme-token($theme,'sys.color.button.primary.background-color-hover');
-    border-color: theme-token($theme,'sys.color.button.primary.border-color-hover');
+    border-color: theme-token($theme,'ref.color.button.color-utility-surface');
     box-shadow:  theme-token($theme,'sys.shadow.button.primary.box-shadow-hover');
-    color: theme-token($theme,'sys.color.button.primary.text-color-hover');
+    color: theme-token($theme,'ref.color.button.color-base-on-accent');
     &.is-circle {
       border-color: theme-token($theme,'sys.color.button.primary.background-color-hover');
     }
@@ -219,9 +219,9 @@ const handleClick = (event: Event) => {
 
   &:active, &.s-pressed {
     background-color:  theme-token($theme,'sys.color.button.primary.background-color-pressed');
-    border-color:  theme-token($theme,'sys.color.button.primary.border-color-pressed');
+    border-color:  theme-token($theme,'ref.color.button.color-utility-surface');
     box-shadow:   theme-token($theme,'sys.shadow.button.primary.box-shadow-pressed');
-    color:  theme-token($theme,'sys.color.button.primary.text-color-pressed');
+    color:  theme-token($theme,'ref.color.button.color-base-on-accent');
   }
    @include disabled($theme: theme);
 }
@@ -346,16 +346,16 @@ const handleClick = (event: Event) => {
 
   &:hover {
     background-color: theme-token($theme,'sys.color.button.primary.background-color-hover');
-    border-color: theme-token($theme,'sys.color.button.primary.border-color-hover');
+    border-color: theme-token($theme,'ref.color.button.color-utility-surface');
     box-shadow: theme-token($theme,'sys.shadow.button.primary.box-shadow-hover');
-    color: theme-token($theme,'sys.color.button.primary.text-color-hover');
+    color: theme-token($theme,'ref.color.button.color-base-on-accent');
   }
 
   &:active {
     background-color: theme-token($theme,'sys.color.button.primary.background-color-pressed');
-    border-color: theme-token($theme,'sys.color.button.primary.border-color-pressed');
+    border-color: theme-token($theme,'ref.color.button.color-utility-surface');
     box-shadow: theme-token($theme,'sys.shadow.button.primary.box-shadow-pressed');
-    color: theme-token($theme,'sys.color.button.primary.text-color-pressed');
+    color: theme-token($theme,'ref.color.button.color-base-on-accent');
   }
 }
 

@@ -2,7 +2,7 @@
 
 $primary: theme.token-as-var('ref.color.button.color-theme-accent');
 $on-disabled: theme.token-as-var('sys.disabled.button.border-color');
-$border-primary: theme.token-as-var('sys.color.button.primary.border-color-pressed');
+$border-primary: theme.token-as-var('ref.color.button.color-utility-surface');
 
 $dur-easing: 0.2s ease;
 
