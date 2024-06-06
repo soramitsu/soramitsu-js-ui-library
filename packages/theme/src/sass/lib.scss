@@ -70,7 +70,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'border-color': #2d2926,
 
               'border-color-hover': '',
-              'border-color-pressed': '',
+              'border-color-pressed': #dde0e1,
             ),
             'secondary': (
               'background-color': token-as-var('ref.color.button.color-base-on-accent'),
@@ -79,7 +79,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'text-color': #53565a,
               'text-color-active': '',
 
-              'border-color': '',
+              'border-color': #eceff0,
               'border-color-active': '',
             ),
             'tertiary': (
@@ -115,20 +115,10 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'background': (
             'background': #f5f7f8,
             'hover': #eceff0,
-            'inverted': #4e4e4e,
-          ),
-          'border': (
-            'primary': #dde0e1,
-            'secondary': #eceff0,
-          ),
-          'state': (
-            'disabled': #f5f7f8,
-            'on-disabled': #a3a4a8,
           ),
           'util': (
             'body': token-as-var('ref.color.button.color-base-on-accent'),
             'surface': token-as-var('ref.color.button.color-base-on-accent'),
-            'surface-overlay': rgba(255, 255, 255, 0.7),
             'overlay': rgba(0, 0, 0, 0.45),
           ),
           'status': (
@@ -174,8 +164,8 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
         ),
         'disabled': (
           'button': (
-            'background-color': '',
-            'border-color': '',
+            'background-color': #f5f7f8,
+            'border-color': #a3a4a8,
             'box-shadow': '',
             'text-color': '',
           ),
@@ -184,21 +174,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'button': ''
         ),
         'shadow': (
-          'page-header': (
-            0px 24px 80px rgba(10, 2, 34, 0.07),
-            0px 10.0266px 33.4221px rgba(10, 2, 34, 0.0558697),
-            0px 5.36071px 17.869px rgba(10, 2, 34, 0.05437),
-            0px 3.00517px 10.0172px rgba(10, 2, 34, 0.0484701),
-            0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562),
-            0px 0.664142px 2.21381px rgba(10, 2, 34, 0.0208172),
-          ),
-          'page-header-light': (
-            0px 6px 30px rgba(10, 2, 34, 0.03),
-            0px 3px 9px rgba(10, 2, 34, 0.02),
-            0px 5.36071px 6px rgba(10, 2, 34, 0.04),
-            0px 3.00517px 7px rgba(10, 2, 34, 0.03),
-            0px 1.59602px 5.32008px rgba(10, 2, 34, 0.0371562),
-          ),
           'modal-window-header': (
             0px -8px 80px rgba(10, 2, 34, 0.07),
             0px 1px 33.4221px rgba(10, 2, 34, 0.0558697),

@@ -51,7 +51,7 @@ const model = useVModel(props, 'modelValue', emit)
 <style lang="scss" scoped>
 @use '@/theme';
 
-$border-primary: theme.token-as-var('sys.color.border.primary');
+$border-primary: theme.token-as-var('sys.color.button.primary.border-color-pressed');
 $content-primary: theme.token-as-var('sys.color.button.primary.border-color');
 $content-quaternary: theme.token-as-var('sys.color.button.tertiary.text-color-active');
 $primary: theme.token-as-var('sys.color.button.primary.background-color');

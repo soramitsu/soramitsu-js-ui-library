@@ -38,7 +38,7 @@ $progress-bar-border-radius: v-bind(borderRadius);
 .s-progress-bar {
   height: $progress-bar-height;
   width: 100%;
-  background: theme.token-as-var('sys.color.border.secondary');
+  background: theme.token-as-var('sys.color.button.secondary.border-color');
   border-radius: $progress-bar-border-radius;
 
   &__active-bar {

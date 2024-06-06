@@ -45,7 +45,7 @@ const updateTime = (e: any) => {
   grid-area: time;
   max-height: 342px;
 
-  scrollbar-color: theme.token-as-var('sys.color.border.primary') transparent;
+  scrollbar-color: theme.token-as-var('sys.color.button.primary.border-color-pressed') transparent;
   scrollbar-arrow-color: transparent;
   scrollbar-width: thin;
 
@@ -67,7 +67,7 @@ const updateTime = (e: any) => {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: theme.token-as-var('sys.color.border.primary');
+    background: theme.token-as-var('sys.color.button.primary.border-color-pressed');
     border-radius: 2px;
   }
 

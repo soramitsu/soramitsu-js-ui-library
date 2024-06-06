@@ -44,7 +44,7 @@ const onMenuClick = (data: PossiblePresetOption) => {
 .s-date-picker-options-panel {
   @apply flex flex-col justify-start;
   grid-area: options;
-  border-right: 1px solid theme.token-as-var('sys.color.border.primary');
+  border-right: 1px solid theme.token-as-var('sys.color.button.primary.border-color-pressed');
 
   &__item {
     padding: 10px 16px;

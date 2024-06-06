@@ -121,7 +121,7 @@ function handleSecondaryButtonClick() {
 
   &__button.s-button {
     &_type_outline {
-      border-color: theme.token-as-var('sys.color.border.primary');
+      border-color: theme.token-as-var('sys.color.button.primary.border-color-pressed');
       color: theme.token-as-var('sys.color.button.action.text-color');
 
       &:hover,
@@ -133,8 +133,8 @@ function handleSecondaryButtonClick() {
     }
 
     &_type_outline#{&}_disabled {
-      border-color: theme.token-as-var('sys.color.state.disabled');
-      color: theme.token-as-var('sys.color.state.on-disabled');
+      border-color: theme.token-as-var('sys.disabled.button.background-color');
+      color: theme.token-as-var('sys.disabled.button.border-color');
     }
   }
 }

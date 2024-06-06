@@ -119,20 +119,10 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'background': (
             'background': '',
             'hover': '',
-            'inverted': '',
-          ),
-          'border': (
-            'primary': '',
-            'secondary': '',
-          ),
-          'state': (
-            'disabled': '',
-            'on-disabled': '',
           ),
           'util': (
             'body': '',
             'surface': '',
-            'surface-overlay': '',
             'overlay': '',
           ),
           'status': (
@@ -188,8 +178,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'button': all 0.25s ease-in-out
         ),
         'shadow': (
-          'page-header': '',
-          'page-header-light': '',
           'modal-window-header': '',
           'floating-notification': '',
           'dropdown': '',

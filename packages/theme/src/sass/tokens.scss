@@ -70,20 +70,10 @@ $tokens: (
       'background': (
         'background': null,
         'hover': null,
-        'inverted': null,
-      ),
-      'border': (
-        'primary': null,
-        'secondary': null,
-      ),
-      'state': (
-        'disabled': null,
-        'on-disabled': null,
       ),
       'util': (
         'body': null,
         'surface': null,
-        'surface-overlay': null,
         'overlay': null,
       ),
       'status': (
@@ -138,8 +128,6 @@ $tokens: (
       'button': null,
     ),
     'shadow': (
-      'page-header': null,
-      'page-header-light': null,
       'modal-window-header': null,
       'floating-notification': null,
       'dropdown': null,

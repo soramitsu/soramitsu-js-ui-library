@@ -1,8 +1,8 @@
 @use '@/theme';
 
 $primary: theme.token-as-var('sys.color.button.primary.background-color');
-$on-disabled: theme.token-as-var('sys.color.state.on-disabled');
-$border-primary: theme.token-as-var('sys.color.border.primary');
+$on-disabled: theme.token-as-var('sys.disabled.button.border-color');
+$border-primary: theme.token-as-var('sys.color.button.primary.border-color-pressed');
 
 $dur-easing: 0.2s ease;
 
@@ -47,7 +47,7 @@ $dur-easing: 0.2s ease;
 
     label,
     .s-radio-body__description {
-      color: theme.token-as-var('sys.color.state.on-disabled');
+      color: theme.token-as-var('sys.disabled.button.border-color');
     }
   }
 

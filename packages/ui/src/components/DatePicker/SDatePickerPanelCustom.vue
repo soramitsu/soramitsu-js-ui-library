@@ -186,12 +186,12 @@ const onDoneClick = () => {
 
 .s-date-picker-custom-panel {
   grid-area: custom;
-  border-top: 1px solid theme.token-as-var('sys.color.border.primary');
+  border-top: 1px solid theme.token-as-var('sys.color.button.primary.border-color-pressed');
   height: 52px;
 
   &__input {
     outline: none;
-    border: 1px solid theme.token-as-var('sys.color.border.primary');
+    border: 1px solid theme.token-as-var('sys.color.button.primary.border-color-pressed');
     border-radius: 4px;
     padding: 5px 10px;
     width: 120px;
