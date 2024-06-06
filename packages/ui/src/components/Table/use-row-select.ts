@@ -1,8 +1,8 @@
 import type { Ref } from 'vue'
 import type { TableColumnRowSelectableFunc, TableRow } from './types'
 
-export function useRowSelect(data: Ref<TableRow[]>, options: { selectOnIndeterminate: boolean }) {
-  const selectedRows = shallowReactive(new Set<TableRow>())
+export function useRowSelect<T extends TableRow>(data: Ref<T[]>, options: { selectOnIndeterminate: boolean }) {
+  const selectedRows = shallowReactive(new Set<T>())
   const isAllSelected = computed(() => selectedRows.size === data.value.length)
   const isSomeSelected = computed(() => selectedRows.size > 0)
 
@@ -32,7 +32,7 @@ export function useRowSelect(data: Ref<TableRow[]>, options: { selectOnIndetermi
     }
   }
 
-  function toggleRowSelection(row: TableRow, value?: boolean) {
+  function toggleRowSelection(row: T, value?: boolean) {
     if ((value !== undefined && !value) || (value === undefined && selectedRows.has(row))) {
       selectedRows.delete(row)
 
