@@ -27,6 +27,9 @@ export default {
         <SButton v-bind="$attrs" theme='theme_neumorphism' type="secondary">
           Secondary
         </SButton>
+         <SButton v-bind="$attrs" theme='theme' type="secondary">
+          Secondary
+        </SButton>
          <SButton v-bind="$attrs" theme='theme_neumorphism' type="tertiary">
           Tertiary
         </SButton>

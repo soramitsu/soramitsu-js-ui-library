@@ -249,9 +249,9 @@ const handleClick = (event: Event) => {
   box-shadow: theme-token($theme,'sys.shadow.button.secondary.box-shadow');
 
   &:hover, &:focus, &.focusing, &:active, &.s-pressed{
-    background: theme-token($theme,'sys.color.button.secondary.background-color-active');
+    background: theme-token($theme,'ref.color.button.color-base-content-secondary');
     border-color: theme-token($theme,'sys.color.button.secondary.border-color-active');
-    color: theme-token($theme,'sys.color.button.secondary.text-color-active');
+    color: theme-token($theme,'ref.color.button.color-base-on-accent');
   }
   &:active,&.s-pressed {
     box-shadow: theme-token($theme,'sys.shadow.button.secondary.box-shadow-active');
@@ -378,6 +378,9 @@ const handleClick = (event: Event) => {
 // Secondary
 .s-button_type_secondary.theme_neumorphism {
   @include apply-theme-secondary($theme: 'theme_neumorphism');
+}
+.s-button_type_secondary.theme{
+  @include apply-theme-secondary($theme: 'theme');
 }
 
 // Tertiary
