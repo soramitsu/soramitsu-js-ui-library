@@ -36,6 +36,6 @@ const emit = defineEmits<(event: 'click:delete') => void>()
 @use '@/theme';
 
 .s-select-chip {
-  background: theme.token-as-var('sys.color.background.background');
+  background: theme.token-as-var('ref.color.button.color-base-content-tertiary');
 }
 </style>

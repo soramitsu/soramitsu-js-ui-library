@@ -8,6 +8,7 @@ $tokens: (
         'color-base-content-secondary': null,
         'color-utility-body': null,
         'color-theme-accent': null,
+        'border-color': null,
       ),
       'shadow': (
         'color-light': null,
@@ -16,6 +17,10 @@ $tokens: (
         'shadow-element': null,
         'shadow-element-pressed': null,
       ),
+    ),
+    'border': (
+      'width': null,
+      'style': null,
     ),
   ),
   'sys': (
@@ -29,44 +34,25 @@ $tokens: (
           'border-color': null,
         ),
         'secondary': (
-          'background-color': null,
           'text-color': null,
           'text-color-active': null,
           'border-color': null,
           'border-color-active': null,
         ),
         'tertiary': (
-          'background-color': null,
-          'background-color-active': null,
           'text-color': null,
           'text-color-active': null,
-          'border-color': null,
-          'border-color-active': null,
         ),
         'action': (
           'background-color': null,
           'background-color-hover': null,
           'background-color-pressed': null,
-          'background-color-alternative': null,
           'text-color': null,
           'text-color-hover': null,
           'text-color-active': null,
-          'text-color-alternative': null,
-          'text-color-alternative-active': null,
-          'text-color-primary': null,
-          'border-color': null,
-          'border-color-hover': null,
-          'border-color-pressed': null,
-          'border-color-alternative': null,
         ),
       ),
-      'background': (
-        'background': null,
-        'hover': null,
-      ),
       'util': (
-        'body': null,
-        'surface': null,
         'overlay': null,
       ),
       'status': (
@@ -90,31 +76,11 @@ $tokens: (
     'border': (
       'button': (
         'width': null,
-        'style': null,
-        'primary': (
-          'alternative': (
-            'width': null,
-          ),
-        ),
-        'secondary': (
-          'width': null,
-          'style': null,
-        ),
-        'tertiary': (
-          'width': null,
-          'style': null,
-        ),
-        'action': (
-          'width': null,
-          'style': null,
-        )
     )),
     'disabled': (
       'button': (
         'background-color': null,
         'border-color': null,
-        'box-shadow': null,
-        'text-color': null,
       ),
     ),
     'transition': (
@@ -127,21 +93,6 @@ $tokens: (
       'active-tab': null,
       'button': (
         'primary': (
-          'box-shadow': null,
-          'box-shadow-hover': null,
-          'box-shadow-pressed': null,
-          'box-shadow-alternative': null,
-        ),
-        'secondary': (
-          'box-shadow': null,
-          'box-shadow-active': null,
-        ),
-        'tertiary': (
-          'box-shadow': null,
-          'box-shadow-pressed': null,
-          'box-shadow-active': null,
-        ),
-        'action': (
           'box-shadow': null,
           'box-shadow-hover': null,
           'box-shadow-pressed': null,

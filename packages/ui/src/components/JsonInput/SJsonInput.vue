@@ -212,8 +212,8 @@ $footer-height: 26px;
 
 $color-content-primary: theme.token-as-var('sys.color.button.primary.border-color');
 $color-content-tertiary: theme.token-as-var('sys.color.button.primary.border-color');
-$color-bg: theme.token-as-var('sys.color.background.background');
-$color-bg-hover: theme.token-as-var('sys.color.background.hover');
+$color-bg: theme.token-as-var('ref.color.button.color-base-content-tertiary');
+$color-bg-hover: theme.token-as-var('ref.color.button.color-base-content-secondary');
 
 .s-json-input__editor {
   .jsoneditor {

@@ -373,7 +373,7 @@ const handleClick = (ev: any) => {
 
         &.end-date span,
         &.start-date span {
-          color: theme.token-as-var('sys.color.util.surface');
+          color: theme.token-as-var('ref.color.button.color-base-on-accent');
         }
       }
 
@@ -390,13 +390,13 @@ const handleClick = (ev: any) => {
       }
 
       &.in-range {
-        background-color: theme.token-as-var('sys.color.background.background');
+        background-color: theme.token-as-var('ref.color.button.color-base-content-tertiary');
       }
 
       &.current,
       &.end-date,
       &.start-date {
-        color: theme.token-as-var('sys.color.util.surface');
+        color: theme.token-as-var('ref.color.button.color-base-on-accent');
         background-color: theme.token-as-var('ref.color.button.color-theme-accent');
         border-radius: 2px;
 
@@ -407,7 +407,7 @@ const handleClick = (ev: any) => {
 
       &.selected {
         background-color: theme.token-as-var('ref.color.button.color-theme-accent');
-        color: theme.token-as-var('sys.color.util.surface');
+        color: theme.token-as-var('ref.color.button.color-base-on-accent');
       }
     }
 

@@ -340,8 +340,8 @@ $label-top-primary: 16px;
 $label-top-secondary: 6px;
 $message-icon-alignment-fix: -1px;
 
-$theme-bg: theme.token-as-var('sys.color.background.background');
-$theme-bg-hover: theme.token-as-var('sys.color.background.hover');
+$theme-bg: theme.token-as-var('ref.color.button.color-base-content-tertiary');
+$theme-bg-hover: theme.token-as-var('ref.color.button.color-base-content-secondary');
 $theme-border-primary: theme.token-as-var('ref.color.button.color-utility-surface');
 $theme-content-tertiary: theme.token-as-var('sys.color.button.tertiary.text-color');
 

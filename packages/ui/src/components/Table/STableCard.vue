@@ -166,7 +166,7 @@ function select() {
 
 .s-table-card {
   &_selected {
-    background: theme.token-as-var('sys.color.background.background');
+    background: theme.token-as-var('ref.color.button.color-base-content-tertiary');
   }
 
   &__label {
@@ -183,7 +183,7 @@ function select() {
   }
 
   &__expanded-block {
-    background-color: theme.token-as-var('sys.color.background.background');
+    background-color: theme.token-as-var('ref.color.button.color-base-content-tertiary');
   }
 }
 </style>

@@ -97,9 +97,9 @@ $font-color-disabled: theme.token-as-var('sys.color.button.tertiary.text-color-a
   }
 
   &_background_primary {
-    $font-color-active: theme.token-as-var('sys.color.util.body');
+    $font-color-active: theme.token-as-var('ref.color.button.color-base-on-accent');
 
-    $background-color: theme.token-as-var('sys.color.util.body');
+    $background-color: theme.token-as-var('ref.color.button.color-base-on-accent');
     $background-color-active: theme.token-as-var('ref.color.button.color-theme-accent');
 
     $border: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
@@ -117,7 +117,7 @@ $font-color-disabled: theme.token-as-var('sys.color.button.tertiary.text-color-a
 
   &_background_secondary {
     $font-color-active: theme.token-as-var('sys.color.button.primary.border-color');
-    $background-color: theme.token-as-var('sys.color.background.background');
+    $background-color: theme.token-as-var('ref.color.button.color-base-content-tertiary');
     $tab-shadow-active: theme.token-as-var('sys.shadow.active-tab');
 
     background: $background-color;

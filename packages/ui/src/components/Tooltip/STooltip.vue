@@ -126,8 +126,8 @@ function handleSecondaryButtonClick() {
 
       &:hover,
       &:active {
-        border-color: theme.token-as-var('sys.color.util.surface');
-        background: theme.token-as-var('sys.color.util.surface');
+        border-color: theme.token-as-var('ref.color.button.color-base-on-accent');
+        background: theme.token-as-var('ref.color.button.color-base-on-accent');
         color: theme.token-as-var('sys.color.button.primary.border-color');
       }
     }

@@ -177,7 +177,7 @@ const SEARCH_ICON_SIZE = {
 
 .s-select-dropdown {
   @apply rounded overflow-hidden;
-  background: theme.token-as-var('sys.color.util.surface');
+  background: theme.token-as-var('ref.color.button.color-base-on-accent');
   box-shadow: theme.token-as-var('sys.shadow.dropdown');
 
   &__header {
@@ -191,7 +191,7 @@ const SEARCH_ICON_SIZE = {
 
   &__search {
     border-bottom: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
-    background: theme.token-as-var('sys.color.background.background');
+    background: theme.token-as-var('ref.color.button.color-base-content-tertiary');
 
     &:focus-within {
       background: transparent;

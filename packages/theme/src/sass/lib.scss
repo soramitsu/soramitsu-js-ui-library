@@ -38,9 +38,10 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'color-utility-surface': #dde0e1,
             'color-base-on-accent': #ffffff,
             'color-base-content-tertiary': #f5f7f8,
-            'color-base-content-secondary': #dde0e1,
+            'color-base-content-secondary': #eceff0,
             'color-utility-body': '',
             'color-theme-accent': #d0021b,
+            'border-color': '',
           ),
           'shadow': (
             'color-light': '',
@@ -51,6 +52,10 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
 
             'shadow-element-pressed': '',
           ),
+        ),
+        'border': (
+          'width': '',
+          'style': '',
         ),
       ),
       sys: (
@@ -65,51 +70,27 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'border-color': #2d2926,
             ),
             'secondary': (
-              'background-color': token-as-var('ref.color.button.color-base-content-tertiary'),
-
               'text-color': #53565a,
-              'text-color-active': '',
+              'text-color-active': #2d2926,
 
               'border-color': #eceff0,
               'border-color-active': '',
             ),
             'tertiary': (
-              'background-color': '',
-              'background-color-active': '',
-
               'text-color': #75787b,
               'text-color-active': #a3a4a8,
-
-              'border-color': '',
-              'border-color-active': '',
             ),
             'action': (
-              'background-color': '',
-              'background-color-hover': '',
-              'background-color-pressed': '',
-
-              'background-color-alternative': '',
-              'text-color': token-as-var('ref.color.button.color-base-on-accent'),
+              'background-color': #f5f7f8,
+              'background-color-hover': #eceff0,
+              'background-color-pressed': #dde0e1,
+              
+              'text-color': #2d2926,
               'text-color-hover': '',
               'text-color-active': '',
-              'text-color-alternative': '',
-              'text-color-alternative-active': '',
-              'text-color-primary': '',
-
-              'border-color': '',
-              'border-color-hover': '',
-              'border-color-pressed': '',
-
-              'border-color-alternative': '',
             )
           ),
-          'background': (
-            'background': #f5f7f8,
-            'hover': #eceff0,
-          ),
           'util': (
-            'body': token-as-var('ref.color.button.color-base-on-accent'),
-            'surface': token-as-var('ref.color.button.color-base-on-accent'),
             'overlay': rgba(0, 0, 0, 0.45),
           ),
           'status': (
@@ -133,32 +114,12 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
         'border': (
           'button': (
             'width': '',
-            'style': '',
-            'primary': (
-              'alternative': (
-                'width': '',
-              )
-            ),
-            'secondary': (
-              'width': '',
-              'style': '',
-            ),
-            'tertiary': (
-              'width': '',
-              'style': '',
-            ),
-            'action': (
-              'width': '',
-              'style': '',
-            )
           ),
         ),
         'disabled': (
           'button': (
             'background-color': #f5f7f8,
             'border-color': #a3a4a8,
-            'box-shadow': '',
-            'text-color': '',
           ),
         ),
         'transition': (
@@ -192,21 +153,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'box-shadow-pressed': '',
               
               'box-shadow-alternative': '',    
-            ),
-            'secondary': (
-              'box-shadow': '',
-              'box-shadow-active': '',
-            ),
-            'tertiary': (
-              'box-shadow': '',
-              'box-shadow-pressed':'',
-              'box-shadow-active': '',
-            ),
-            'action': (
-              'box-shadow': '',
-              'box-shadow-hover':'',
-              'box-shadow-pressed': '',
-              'box-shadow-alternative': '',
             ),
           ),
         ),

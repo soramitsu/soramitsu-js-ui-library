@@ -35,6 +35,12 @@ export default {
         </SButton>
         <s-col >
           <s-button-group size="big" border-radius="big" style="margin-right: 24px;">
+            <SButton v-bind="$attrs" theme='theme' type="action">
+              <template #icon>
+                <IconClose
+                />
+              </template>
+            </SButton>
             <SButton v-bind="$attrs" theme='theme_neumorphism' type="action">
               <template #icon>
                 <IconBasicCirclePlus24 style="width: 1em; height: 1em;"/>
@@ -50,6 +56,7 @@ export default {
                 <IconBasicEye24 style="width: 1em; height: 1em;" />
               </template>
             </SButton>
+
           </s-button-group>
           <s-button-group size="big" border-radius="big" style="margin-right: 24px;">
             <SButton v-bind="$attrs" theme='theme_neumorphism' type="action" :alternative="true">

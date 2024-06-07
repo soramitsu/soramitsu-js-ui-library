@@ -181,10 +181,10 @@ const handleClick = (event: Event) => {
 ) {
   $border-width: if($border-width == null, theme.token-as-var('sys.border.button.width'), $border-width);
   $background-color: if($background-color == null, theme.token-as-var('sys.disabled.button.background-color'), $background-color);
-  $box-shadow: if($box-shadow == null, theme.token-as-var('sys.disabled.button.box-shadow'), $box-shadow);
+  $box-shadow: if($box-shadow == null, theme.token-as-var('ref.color.shadow.shadow-element'), $box-shadow);
 
   &_disabled, &_disabled:hover {
-    color: theme.token-as-var('sys.disabled.button.text-color');
+    color: theme.token-as-var('ref.color.button.color-base-content-tertiary');
     background: $background-color;
     border-color: theme.token-as-var('sys.disabled.button.border-color');
     box-shadow: $box-shadow;
@@ -196,7 +196,7 @@ const handleClick = (event: Event) => {
 @mixin apply-theme-button($theme) {
   border: 
   theme.token-as-var('sys.border.button.width') 
-  theme.token-as-var('sys.border.button.style') 
+  theme.token-as-var('ref.border.style') 
   theme.token-as-var('sys.color.button.primary.border-color');
   transition: theme.token-as-var('sys.transition.button');
 }
@@ -229,109 +229,109 @@ const handleClick = (event: Event) => {
 @mixin apply-theme-primary-alternative($theme) {
   background-color: theme-token($theme,'sys.color.button.primary.background-color-alternative');
   box-shadow: theme-token($theme,'sys.shadow.button.primary.box-shadow-alternative');
-  border-width: theme-token($theme,'sys.border.button.primary.alternative.width');
+  border-width: theme-token($theme,'ref.border.width');
 
   &:hover, &:focus, &.focusing, &:active, &.s-pressed {
     background-color: theme-token($theme,'sys.color.button.primary.background-color-alternative-active');
     box-shadow:  theme-token($theme,'sys.shadow.button.primary.box-shadow-alternative');
   }
-  @include disabled($theme: theme,$border-width: theme_neumorphism.token-as-var('sys.border.button.primary.alternative.width'));
+  @include disabled($theme: theme,$border-width: theme_neumorphism.token-as-var('ref.border.width'));
 }
 
 // Secondary
 @mixin apply-theme-secondary($theme) {
-  background-color: theme-token($theme,'sys.color.button.secondary.background-color');
+  background-color: theme-token($theme,'ref.color.button.color-base-content-tertiary');
   color: theme-token($theme,'sys.color.button.secondary.text-color');
   border: 
-  theme-token($theme,'sys.border.button.secondary.width') 
-  theme-token($theme,'sys.border.button.secondary.style') 
+  theme-token($theme,'ref.border.width') 
+  theme-token($theme,'ref.border.style') 
   theme-token($theme,'sys.color.button.secondary.border-color');
-  box-shadow: theme-token($theme,'sys.shadow.button.secondary.box-shadow');
+  box-shadow: theme-token($theme,'ref.color.shadow.shadow-element-pressed');
 
   &:hover, &:focus, &.focusing, &:active, &.s-pressed{
     background: theme-token($theme,'ref.color.button.color-base-content-secondary');
     border-color: theme-token($theme,'sys.color.button.secondary.border-color-active');
-    color: theme-token($theme,'ref.color.button.color-base-on-accent');
+    color: theme-token($theme,'sys.color.button.secondary.text-color-active');
   }
   &:active,&.s-pressed {
-    box-shadow: theme-token($theme,'sys.shadow.button.secondary.box-shadow-active');
+    box-shadow: theme-token($theme,'ref.color.shadow.shadow-element');
   }
-  @include disabled($theme: theme, $border-width: theme_neumorphism.token-as-var('sys.border.button.secondary.width'));
+  @include disabled($theme: theme, $border-width: theme_neumorphism.token-as-var('ref.border.width'));
 }
 
 // Terrtiary
 @mixin apply-theme-tertiary($theme) {
-  background-color: theme-token($theme,'sys.color.button.tertiary.background-color');
+  background-color: theme-token($theme,'ref.color.button.color-utility-body');
   color: theme-token($theme,'sys.color.button.tertiary.text-color');
   border: 
-  theme-token($theme,'sys.border.button.tertiary.width') 
-  theme-token($theme,'sys.border.button.tertiary.style') 
-  theme-token($theme,'sys.color.button.tertiary.border-color');
-  box-shadow: theme-token($theme,'sys.shadow.button.tertiary.box-shadow');
+  theme-token($theme,'ref.border.width') 
+  theme-token($theme,'ref.border.style') 
+  theme-token($theme,'ref.color.button.border-color');
+  box-shadow: theme-token($theme,'ref.color.shadow.shadow-element-pressed');
 
   &:hover, &:focus, &.focusing, &:active, &.s-pressed {
-    background: theme-token($theme,'sys.color.button.tertiary.background-color-active');
-    border-color: theme-token($theme,'sys.color.button.tertiary.border-color-active');
+    background: theme-token($theme,'ref.color.button.color-utility-body');
+    border-color: theme-token($theme,'ref.color.button.border-color');
     color: theme-token($theme,'sys.color.button.tertiary.text-color-active');
   }
   &:hover, &:focus, &.focusing {
-    box-shadow: theme-token($theme,'sys.shadow.button.tertiary.box-shadow-active');
+    box-shadow: theme-token($theme,'sys.shadow.button.tertiary.box-shadow-pressed');
   }
   &:active, &.s-pressed {
     box-shadow: theme-token($theme,'sys.shadow.button.tertiary.box-shadow-pressed');
   }
-  @include disabled($theme: theme, $border-width: theme_neumorphism.token-as-var('sys.border.button.tertiary.width'));
+  @include disabled($theme: theme, $border-width: theme_neumorphism.token-as-var('ref.border.width'));
 }
 
 //Action
 @mixin apply-theme-action($theme) {
   background: theme-token($theme,'sys.color.button.action.background-color'); 
-  border-color: theme-token($theme,'sys.color.button.action.border-color'); 
-  border-style: theme-token($theme,'sys.border.button.action.style');
-  border-width: theme-token($theme,'sys.border.button.action.width');
-  box-shadow: theme-token($theme,'sys.shadow.button.action.box-shadow');
+  border-color: theme-token($theme,'ref.color.button.border-color'); 
+  border-style: theme-token($theme,'ref.border.style');
+  border-width: theme-token($theme,'ref.border.width');
+  box-shadow: theme-token($theme,'ref.color.shadow.shadow-element-pressed');
   color: theme-token($theme,'sys.color.button.action.text-color');
 
   &:hover, &:focus, &.focusing {
     background: theme-token($theme,'sys.color.button.action.background-color-hover'); 
-    border-color: theme-token($theme,'sys.color.button.action.border-color-hover');
+    border-color: theme-token($theme,'ref.color.button.border-color');
     color: theme-token($theme,'sys.color.button.action.text-color-hover');
-    box-shadow: theme-token($theme,'sys.shadow.button.action.box-shadow-hover');
+    box-shadow: theme-token($theme,'ref.color.shadow.shadow-element');
   }
   &:active, &.s-pressed {
     background: theme-token($theme,'sys.color.button.action.background-color-pressed');
-    border-color: theme-token($theme,'sys.color.button.action.border-color-pressed'); 
-    box-shadow: theme-token($theme,'sys.shadow.button.action.box-shadow-pressed');
+    border-color: theme-token($theme,'ref.color.button.border-color'); 
+    box-shadow: theme-token($theme,'ref.color.shadow.shadow-element-pressed');
   }
   &:active {
     color: theme-token($theme,'sys.color.button.action.text-color-active');
   }
   @include disabled(
     $theme: theme,
-    $border-width: theme_neumorphism.token-as-var('sys.border.button.action.width'), 
+    $border-width: theme_neumorphism.token-as-var('ref.border.width'), 
     $background-color: theme_neumorphism.token-as-var('sys.color.button.action.background-color'), 
-    $box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.action.box-shadow-pressed'),
+    $box-shadow: theme_neumorphism.token-as-var('ref.color.shadow.shadow-element-pressed'),
   );
   &.primary:not(:disabled) {
-    color: theme-token($theme,'sys.color.button.action.text-color-primary')
+    color: theme-token($theme,'ref.color.button.color-base-on-accent')
   }
 }
 // Action-alternative
 @mixin apply-theme-action-alternative($theme) {
-  color: theme-token($theme,'sys.color.button.action.text-color-alternative');
+  color: theme-token($theme,'ref.color.button.color-base-content-tertiary');
   &, &:hover, &:focus, &.focusing, &:active, &.s-pressed {
-    background-color: theme-token($theme,'sys.color.button.action.background-color-alternative'); 
-    border-color: theme-token($theme,'sys.color.button.action.border-color-alternative'); 
-    box-shadow: theme-token($theme,'sys.shadow.button.action.box-shadow-alternative'); 
+    background-color: theme-token($theme,'ref.color.button.border-color'); 
+    border-color: theme-token($theme,'ref.color.button.border-color'); 
+    box-shadow: theme-token($theme,'ref.color.shadow.shadow-element-pressed'); 
   }
   &:hover, &:focus, &.focusing, &:active, &.s-pressed {
-    color: theme-token($theme,'sys.color.button.action.text-color-alternative-active');
+    color: theme-token($theme,'ref.color.button.color-base-content-secondary');
   }
   @include disabled( 
     $theme: theme,
-    $border-width: theme_neumorphism.token-as-var('sys.border.button.action.width'), 
-    $background-color: theme_neumorphism.token-as-var('sys.color.button.action.background-color-alternative'), 
-    $box-shadow: theme_neumorphism.token-as-var('sys.shadow.button.action.box-shadow-alternative'),
+    $border-width: theme_neumorphism.token-as-var('ref.border.width'), 
+    $background-color: theme_neumorphism.token-as-var('ref.color.button.border-color'), 
+    $box-shadow: theme_neumorphism.token-as-var('ref.color.shadow.shadow-element-pressed'),
   );
 }
 // Action-primary
@@ -341,7 +341,7 @@ const handleClick = (event: Event) => {
   box-shadow:  theme-token($theme,'sys.shadow.button.primary.box-shadow');
   border: 
   theme-token($theme,'sys.border.button.width') 
-  theme-token($theme,'sys.border.button.style') 
+  theme-token($theme,'ref.border.style') 
   theme-token($theme,'sys.color.button.primary.border-color');
 
   &:hover {
@@ -391,6 +391,9 @@ const handleClick = (event: Event) => {
 // Action
 .s-button_type_action.theme_neumorphism {
   @include apply-theme-action($theme: 'theme_neumorphism');
+}
+.s-button_type_action.theme{
+  @include apply-theme-action($theme: 'theme');
 }
 .s-button_type_action_alternative.theme_neumorphism {
   @include apply-theme-action-alternative($theme: 'theme_neumorphism');

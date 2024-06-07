@@ -578,7 +578,7 @@ watch(
 
   &__panels {
     display: grid;
-    background-color: theme.token-as-var('sys.color.util.surface');
+    background-color: theme.token-as-var('ref.color.button.color-base-on-accent');
 
     grid-template-areas:
       'options calendars time'

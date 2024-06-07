@@ -91,12 +91,12 @@ const slots = useSlots()
   @apply select-none inline-flex items-center space-x-2 cursor-pointer;
 
   &_default {
-    background: theme.token-as-var('sys.color.background.background');
+    background: theme.token-as-var('ref.color.button.color-base-content-tertiary');
     color: theme.token-as-var('sys.color.button.primary.border-color');
     @apply rounded px-4;
 
     &:hover {
-      background: theme.token-as-var('sys.color.background.hover');
+      background: theme.token-as-var('ref.color.button.color-base-content-secondary');
     }
   }
 

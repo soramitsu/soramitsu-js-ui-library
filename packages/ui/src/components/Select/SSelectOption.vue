@@ -79,13 +79,13 @@ const CHECK_ICON_SIZE = {
 @use '@/theme';
 
 .s-select-option {
-  background: theme.token-as-var('sys.color.util.surface');
+  background: theme.token-as-var('ref.color.button.color-base-on-accent');
   @apply flex items-center px-[10px] py-1 select-none cursor-pointer space-x-8px;
 
   &:hover,
   &:active,
   &_selected {
-    background: theme.token-as-var('sys.color.background.background');
+    background: theme.token-as-var('ref.color.button.color-base-content-tertiary');
   }
 
   &__content {

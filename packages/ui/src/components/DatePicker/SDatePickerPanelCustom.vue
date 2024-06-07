@@ -209,7 +209,7 @@ const onDoneClick = () => {
     height: 24px;
     background: theme.token-as-var('ref.color.button.color-theme-accent');
     border-radius: 2px;
-    color: theme.token-as-var('sys.color.util.surface');
+    color: theme.token-as-var('ref.color.button.color-base-on-accent');
     font-weight: 700;
   }
 }
