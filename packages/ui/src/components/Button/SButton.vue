@@ -275,10 +275,10 @@ const handleClick = (event: Event) => {
     color: theme-token($theme,'sys.color.button.tertiary.text-color-active');
   }
   &:hover, &:focus, &.focusing {
-    box-shadow: theme-token($theme,'sys.shadow.button.tertiary.box-shadow-pressed');
+    box-shadow: theme-token($theme,'ref.color.shadow.shadow-element');
   }
   &:active, &.s-pressed {
-    box-shadow: theme-token($theme,'sys.shadow.button.tertiary.box-shadow-pressed');
+    box-shadow: theme-token($theme,'ref.color.shadow.shadow-element');
   }
   @include disabled($theme: theme, $border-width: theme_neumorphism.token-as-var('ref.border.width'));
 }
