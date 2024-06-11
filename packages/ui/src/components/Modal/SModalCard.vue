@@ -54,7 +54,7 @@ function closeClick() {
       </SButton>
     </div>
 
-    <div class="px-6 py-8">
+    <div class="s-modal-card__content px-6 py-8 flex flex-col flex-grow min-h-0">
       <slot />
     </div>
   </div>
