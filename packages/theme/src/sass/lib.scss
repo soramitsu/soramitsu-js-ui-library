@@ -60,6 +60,8 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'surface': #fff,
             'surface-overlay': rgba(255, 255, 255, 0.7),
             'overlay': rgba(0, 0, 0, 0.45),
+            'surface-variant': #070707,
+            'content-on-surface-variant': #FFFFFF,
           ),
           'status': (
             'success': #009900,
