@@ -18,6 +18,7 @@ const props = defineProps<{
   loading?: boolean
   dropdownSearch?: boolean
   remoteSearch?: boolean
+  maxShownOptions?: number | undefined
 }>()
 
 const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : SelectButtonType.Default))
@@ -54,6 +55,7 @@ function isThereLabelSlot() {
       <SSelectDropdown
         :search="search"
         :item-type="optionType ?? SelectOptionType.Default"
+        :max-shown-options="maxShownOptions"
       >
         <template #empty>
           <slot name="empty" />
