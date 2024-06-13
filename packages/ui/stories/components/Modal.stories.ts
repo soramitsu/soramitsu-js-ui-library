@@ -1,7 +1,7 @@
 import { SModalCard, SModal, SButton } from '@/lib'
-import type { Meta } from '@storybook/vue3'
+import type { Meta, StoryObj } from '@storybook/vue3'
 
-export default {
+const meta = {
   component: defineComponent({
     components: {
       SModal,
@@ -23,27 +23,26 @@ export default {
       <SButton @click="show = true">
         Show modal
       </SButton>
-  
-      <SModal v-model:show="show" v-bind="$attrs">
-        <SModalCard>
+
+      <SModal
+          v-model:show="show"
+          v-bind="$attrs"
+      >
+        <SModalCard class="flex flex-col max-h-90vh">
           <template #title>
             Modal <i>title</i>
           </template>
-          
-          <div class="space-y-4">
 
+          <div class="space-y-4 overflow-auto">
+            <p :class="{ 'h-800px': $attrs.bigContentHeight }">
+              Pay attention to focus trap! (button is focused!)
+            </p>
 
-          <p>
-            Pay attention to focus trap! (button is focused!)
-          </p>
+            <p>Counter (eagerness check): <Counter /></p>
 
-          <p>
-            Counter (eagerness check): <Counter />
-          </p>
-
-          <SButton @click="show = false">
-            Close
-          </SButton>
+            <SButton @click="show = false">
+              Close
+            </SButton>
           </div>
         </SModalCard>
       </SModal>
@@ -57,4 +56,10 @@ export default {
   },
 } as Meta
 
+type Story = StoryObj<typeof meta>
+
+export default meta
+
 export const Default = {}
+
+export const BigContentHeight = { args: { bigContentHeight: true } } as Story
