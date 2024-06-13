@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.13.8
+
+### Patch Changes
+
+- 200211d2: **fix**(`SSelect`,`SDropdown`): add `maxShownOptions` prop and apply `sameWidthPopper` prop
+
 ## 0.13.7
 
 ### Patch Changes
