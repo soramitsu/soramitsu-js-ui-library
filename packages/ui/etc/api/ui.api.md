@@ -645,6 +645,7 @@ noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
+maxShownOptions?: number | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
@@ -658,6 +659,7 @@ noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
+maxShownOptions?: number | undefined;
 }>>>, {}, {}>, {
     label?(_: {
         options: UnwrapRef<SelectOption<any>[] | SelectOptionGroup<any>[]>;
