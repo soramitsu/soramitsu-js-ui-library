@@ -20,6 +20,7 @@ const props = defineProps<{
   remoteSearch?: boolean
 }>()
 
+
 const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Checkbox : SelectOptionType.Radio))
 </script>
 
