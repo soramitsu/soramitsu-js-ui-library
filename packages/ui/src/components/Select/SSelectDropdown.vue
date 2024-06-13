@@ -13,6 +13,7 @@ import type { MaybeElementRef } from '@vueuse/core'
 const props = defineProps<{
   itemType: SelectOptionType
   search: boolean
+  maxShownOptions: number | undefined
 }>()
 
 const api = useSelectApi()
@@ -85,12 +86,26 @@ const SEARCH_ICON_SIZE = {
   [SelectSize.Md]: 16,
   [SelectSize.Sm]: 12,
 } as const
+
+const OPTION_SIZE = {
+  [SelectSize.Xl]: 56,
+  [SelectSize.Lg]: 40,
+  [SelectSize.Md]: 32,
+  [SelectSize.Sm]: 24,
+} as const
+
+const dropdownHeight = computed(() => {
+  if (!props.maxShownOptions) return
+
+  return OPTION_SIZE[api.size] * Math.min(props.maxShownOptions, api.options.length) + 'px'
+})
 </script>
 
 <template>
   <div
     class="s-select-dropdown"
     :class="`s-select-dropdown_size_${api.size}`"
+    :style="{ 'height': dropdownHeight ?? 'auto' }"
     data-testid="select-dropdown"
     @mousedown="handleMouseDown"
   >
@@ -178,6 +193,7 @@ const SEARCH_ICON_SIZE = {
 
 .s-select-dropdown {
   @apply rounded overflow-hidden;
+  overflow-y: auto;
   background: theme.token-as-var('sys.color.util.surface');
   box-shadow: theme.token-as-var('sys.shadow.dropdown');
 
