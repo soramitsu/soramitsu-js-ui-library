@@ -31,7 +31,10 @@ function isThereLabelSlot() {
 </script>
 
 <template>
-  <SSelectBase v-bind="{ ...$attrs, ...$props } as any">
+  <SSelectBase
+    v-bind="{ ...$attrs, ...$props } as any"
+    same-width-popper
+  >
     <template #control>
       <SSelectButton
         data-testid="select-trigger"
