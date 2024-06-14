@@ -1,5 +1,18 @@
 # @soramitsu-ui/ui
 
+## 0.13.8
+
+### Patch Changes
+
+- d7228159: **feat**(`SSelectDropdown`): add `maxShownOptions` prop
+
+## 0.13.7
+
+### Patch Changes
+
+- 2d62a77c: **fix**(`SModalCard`): add `s-modal-card__content` class and apply windicss classes
+- 75066428: **refactor**: update vue-tsc and ts and fix everything updated version breaks
+
 ## 0.13.6
 
 ### Patch Changes
