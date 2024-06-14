@@ -18,6 +18,7 @@ const props = defineProps<{
   triggerSearch?: boolean
   dropdownSearch?: boolean
   remoteSearch?: boolean
+  maxShownOptions?: string | number | undefined
 }>()
 
 const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Checkbox : SelectOptionType.Radio))
@@ -48,6 +49,7 @@ const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Chec
       <SSelectDropdown
         :search="search"
         :item-type="optionType ?? defaultOptionType"
+        :max-shown-options="+(maxShownOptions ?? 0)"
       >
         <template #empty>
           <slot name="empty" />
