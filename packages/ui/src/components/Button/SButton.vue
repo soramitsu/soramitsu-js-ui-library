@@ -24,7 +24,6 @@ const props = withDefaults(
     uppercase?: boolean
     alternative?: boolean
     primary?: boolean
-    theme?: string
   }>(),
   {
     type: 'secondary',
@@ -38,7 +37,6 @@ const props = withDefaults(
     uppercase: false,
     alternative: false,
     primary: false,
-    theme: 'theme',
   },
 )
 
@@ -76,7 +74,6 @@ const handleClick = (event: Event) => {
       `s-button_size_${definitelySize}`,
       `s-button_icon-position_${definitelyIconPosition}`,
       font,
-      theme,
       {
         's-button_disabled': loading || disabled,
         's-button_rounded': isAction && rounded,
@@ -359,56 +356,44 @@ const handleClick = (event: Event) => {
   }
 }
 
-// Main button 
-.s-button {
-  @include apply-theme-button($theme: 'theme_neumorphism');
+[theme=""] {
+  .s-button_type_primary {
+    @include apply-theme-primary($theme: 'theme');
+  }
+  .s-button_type_secondary{
+    @include apply-theme-secondary($theme: 'theme');
+  }
+  .s-button_type_action{
+    @include apply-theme-action($theme: 'theme');
+  }
+}
+[theme="neumorphism"] {
+  .s-button {
+    @include apply-theme-button($theme: 'theme_neumorphism');
+  }
+  .s-button_type_primary {
+    @include apply-theme-primary($theme: 'theme_neumorphism');
+  }
+  .s-button_type_primary_alternative {
+     @include apply-theme-primary-alternative($theme: 'theme_neumorphism');
+  }
+  .s-button_type_secondary {
+    @include apply-theme-secondary($theme: 'theme_neumorphism');
+  }
+  .s-button_type_tertiary {
+    @include apply-theme-tertiary($theme: 'theme_neumorphism');
+  }
+  .s-button_type_action {
+    @include apply-theme-action($theme: 'theme_neumorphism');
+  }
+  .s-button_type_action_alternative {
+    @include apply-theme-action-alternative($theme: 'theme_neumorphism');
+  }
+  .s-button_type_action_primary {
+    @include apply-theme-action-primary($theme: 'theme_neumorphism');
+  }
 }
 
-// Primary type
-.s-button_type_primary.theme_neumorphism {
-  @include apply-theme-primary($theme: 'theme_neumorphism');
-}
-.s-button_type_primary.theme {
-  @include apply-theme-primary($theme: 'theme');
-}
-.s-button_type_primary_alternative.theme_neumorphism {
-  @include apply-theme-primary-alternative($theme: 'theme_neumorphism');
-}
-
-// Secondary
-.s-button_type_secondary.theme_neumorphism {
-  @include apply-theme-secondary($theme: 'theme_neumorphism');
-}
-.s-button_type_secondary.theme{
-  @include apply-theme-secondary($theme: 'theme');
-}
-
-// Tertiary
-.s-button_type_tertiary.theme_neumorphism {
-  @include apply-theme-tertiary($theme: 'theme_neumorphism');
-}
-
-// Action
-.s-button_type_action.theme_neumorphism {
-  @include apply-theme-action($theme: 'theme_neumorphism');
-}
-.s-button_type_action.theme{
-  @include apply-theme-action($theme: 'theme');
-}
-.s-button_type_action_alternative.theme_neumorphism {
-  @include apply-theme-action-alternative($theme: 'theme_neumorphism');
-}
-.s-button_type_action_primary.theme_neumorphism {
-  @include apply-theme-action-primary($theme: 'theme_neumorphism');
-}
-
-
-
-
-// // TODO понять почему на аплается стиль с обычной theme
-// .s-button_type_primary.theme {
-//   @include apply-theme($theme: 'theme');
-// }
 
 .s-button {
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;

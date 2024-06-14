@@ -7,51 +7,35 @@ export default {
     components: { SButton, IconClose,IconBasicCirclePlus24,IconBasicCircleX24, IconBasicEye24 },
     template: `
       <div class="flex flex-col items-start space-y-4">
-        <SButton v-bind="$attrs" theme='theme'>
+        <SButton v-bind="$attrs">
           <template #icon>
             <IconClose
             />
           </template>
           {{ $attrs.type }}
         </SButton>
-          <SButton v-bind="$attrs" theme='theme_neumorphism'>
-          <template #icon>
-            <IconClose
-            />
-          </template>
-          {{ $attrs.type }}
-        </SButton>
-        <SButton v-bind="$attrs" theme='theme_neumorphism' type="primary" :alternative="true">
+        <SButton v-bind="$attrs" type="primary" :alternative="true">
           Primary Alternative
         </SButton>
-        <SButton v-bind="$attrs" theme='theme_neumorphism' type="secondary">
+        <SButton v-bind="$attrs" type="secondary">
           Secondary
         </SButton>
-         <SButton v-bind="$attrs" theme='theme' type="secondary">
-          Secondary
-        </SButton>
-         <SButton v-bind="$attrs" theme='theme_neumorphism' type="tertiary">
+         <SButton v-bind="$attrs" type="tertiary">
           Tertiary
         </SButton>
         <s-col >
           <s-button-group size="big" border-radius="big" style="margin-right: 24px;">
-            <SButton v-bind="$attrs" theme='theme' type="action">
-              <template #icon>
-                <IconClose
-                />
-              </template>
-            </SButton>
-            <SButton v-bind="$attrs" theme='theme_neumorphism' type="action">
+            <SButton v-bind="$attrs" type="action">
               <template #icon>
                 <IconBasicCirclePlus24 style="width: 1em; height: 1em;"/>
               </template>
             </SButton>
-            <SButton v-bind="$attrs" theme='theme_neumorphism' type="action">
+            <SButton v-bind="$attrs" type="action">
               <template #icon>
                 <IconBasicCircleX24 style="width: 1em; height: 1em;" />
               </template>
             </SButton>
-            <SButton v-bind="$attrs" theme='theme_neumorphism' type="action">
+            <SButton v-bind="$attrs" type="action">
               <template #icon>
                 <IconBasicEye24 style="width: 1em; height: 1em;" />
               </template>
@@ -59,17 +43,17 @@ export default {
 
           </s-button-group>
           <s-button-group size="big" border-radius="big" style="margin-right: 24px;">
-            <SButton v-bind="$attrs" theme='theme_neumorphism' type="action" :alternative="true">
+            <SButton v-bind="$attrs" type="action" :alternative="true">
               <template #icon>
                 <IconBasicCirclePlus24 style="width: 1em; height: 1em;"/>
               </template>
             </SButton>
-            <SButton v-bind="$attrs" theme='theme_neumorphism' type="action" :alternative="true">
+            <SButton v-bind="$attrs" type="action" :alternative="true">
               <template #icon>
                 <IconBasicCircleX24 style="width: 1em; height: 1em;" />
               </template>
             </SButton>
-            <SButton v-bind="$attrs" theme='theme_neumorphism' type="action" :alternative="true">
+            <SButton v-bind="$attrs" type="action" :alternative="true">
               <template #icon>
                 <IconBasicEye24 style="width: 1em; height: 1em;" />
               </template>
@@ -77,17 +61,17 @@ export default {
           </s-button-group>
           
           <s-button-group size="big" border-radius="big" style="margin-right: 24px; gap: 10px">
-            <SButton v-bind="$attrs" theme='theme_neumorphism' type="action" :primary="true">
+            <SButton v-bind="$attrs" type="action" :primary="true">
               <template #icon>
                 <IconBasicCirclePlus24 style="width: 1em; height: 1em;"/>
               </template>
             </SButton>
-            <SButton v-bind="$attrs" type="action" theme='theme_neumorphism' :primary="true" style="margin-right: 4px; margin-left: 4px">
+            <SButton v-bind="$attrs" type="action" :primary="true" style="margin-right: 4px; margin-left: 4px">
               <template #icon>
                 <IconBasicCircleX24 style="width: 1em; height: 1em;" />
               </template>
             </SButton>
-            <SButton v-bind="$attrs" type="action" theme='theme_neumorphism' :primary="true">
+            <SButton v-bind="$attrs" type="action" :primary="true">
               <template #icon>
                 <IconBasicEye24 style="width: 1em; height: 1em;" />
               </template>
@@ -108,7 +92,6 @@ export default {
     uppercase: false,
     alternative: false,
     primary: false,
-    theme: 'theme',
   },
   argTypes: {
     type: {
@@ -129,7 +112,6 @@ export default {
     loading: { control: 'boolean' },
     uppercase: { control: 'boolean' },
     alternative: { control: 'boolean' },
-    theme: { control: 'text' },
   },
 } as Meta
 
