@@ -25,7 +25,12 @@ const withThemeProvider = (Story) => {
     components: { Story, SCheckboxSolo },
     template: `
       <div>
-        <SCheckboxSolo @click="toggleNeumorphism()" style="margin-bottom: 10px;">
+        <SCheckboxSolo
+          v-model="isNeomorph"
+          style="margin-bottom: 10px;"
+          :checked="isNeomorph"
+          @click="toggleNeumorphism()"
+        >
           Toggle Neumorphism
         </SCheckboxSolo>
         <story />
