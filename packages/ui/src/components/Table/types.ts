@@ -6,8 +6,8 @@ export type TableColumnAlign = typeof TABLE_COLUMN_ALIGN_VALUES[number]
 
 export type TableRow = Record<string, unknown>
 
-export type TableCellEventData = [TableRow, TableColumnApi | TableActionColumnApi, EventTarget, MouseEvent]
-export type TableRowEventData = [TableRow, TableColumnApi | TableActionColumnApi, MouseEvent]
+export type TableCellEventData<T extends TableRow> = [T, TableColumnApi | TableActionColumnApi, EventTarget, MouseEvent]
+export type TableRowEventData<T extends TableRow> = [T, TableColumnApi | TableActionColumnApi, MouseEvent]
 export type TableHeaderEventData = [TableColumnApi | TableActionColumnApi, MouseEvent]
 export interface TableSortEventData {
   column: TableColumnApi
