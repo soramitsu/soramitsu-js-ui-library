@@ -1,6 +1,7 @@
 import 'virtual:windi.css'
 import './custom.scss'
 import { useDark, useToggle } from '@vueuse/core'
+import { SCheckboxSolo } from '@/lib'
 
 const isNeomorph = useDark({
   attribute: 'theme',
@@ -21,13 +22,12 @@ export const parameters = {
 
 const withThemeProvider = (Story) => {
   return {
-    components: { Story },
+    components: { Story, SCheckboxSolo },
     template: `
       <div>
-        <p>Neumorphism theme: {{ isNeomorph }}</p>
-        <button @click="toggleNeumorphism()">
+        <SCheckboxSolo @click="toggleNeumorphism()" style="margin-bottom: 10px;">
           Toggle Neumorphism
-        </button>
+        </SCheckboxSolo>
         <story />
       </div>
     `,
