@@ -367,6 +367,7 @@ const handleClick = (event: Event) => {
     @include apply-theme-action($theme: 'theme');
   }
 }
+
 [theme="neumorphism"] {
   .s-button {
     @include apply-theme-button($theme: 'theme_neumorphism');
@@ -396,6 +397,8 @@ const handleClick = (event: Event) => {
 
 
 .s-button {
+  background-color: theme.token-as-var('sys.color.button.action.background-color');
+  color: theme.token-as-var('sys.color.button.secondary.text-color') ;
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;
   fill: currentColor;
   $component: &;
