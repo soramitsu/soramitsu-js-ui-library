@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.13.10
+
+### Patch Changes
+
+- 9e0825f8: **refactor**(`STable`,`STableCard`,`STableCellSelection`): use new defineEmits syntax
+
 ## 0.13.9
 
 ### Patch Changes

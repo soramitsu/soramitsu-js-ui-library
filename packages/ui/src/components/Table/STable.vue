@@ -177,24 +177,23 @@ const props = withDefaults(
   },
 )
 
-/* eslint-disable @typescript-eslint/unified-signatures */
 const emit = defineEmits<{
-  (event: 'mouse-enter:cell', ...value: TableCellEventData<DataType>): void
-  (event: 'mouse-leave:cell', ...value: TableCellEventData<DataType>): void
-  (event: 'click:cell', ...value: TableCellEventData<DataType>): void
-  (event: 'dblclick:cell', ...value: TableCellEventData<DataType>): void
-  (event: 'click:header', ...value: TableHeaderEventData): void
-  (event: 'contextmenu:header', ...value: TableHeaderEventData): void
-  (event: 'click:row', ...value: TableRowEventData<DataType>): void
-  (event: 'dblclick:row', ...value: TableRowEventData<DataType>): void
-  (event: 'contextmenu:row', ...value: TableRowEventData<DataType>): void
-  (event: 'change:sort', value: TableSortEventData): void
-  (event: 'change:selection', value: DataType[]): void
-  (event: 'select-all', value: DataType[]): void
-  (event: 'select', ...value: [DataType[], DataType]): void
-  (event: 'change:expand', ...value: [DataType, DataType[]]): void
-  (event: 'change:current', ...value: [DataType | null, DataType | null]): void
-  (event: 'click:row-details', value: DataType): void
+  'mouse-enter:cell': TableCellEventData<DataType>
+  'mouse-leave:cell': TableCellEventData<DataType>
+  'click:cell': TableCellEventData<DataType>
+  'dblclick:cell': TableCellEventData<DataType>
+  'click:header': TableHeaderEventData
+  'contextmenu:header': TableHeaderEventData
+  'click:row': TableRowEventData<DataType>
+  'dblclick:row': TableRowEventData<DataType>
+  'contextmenu:row': TableRowEventData<DataType>
+  'change:sort': [TableSortEventData]
+  'change:selection': [DataType[]]
+  'select-all': [DataType[]]
+  select: [DataType[], DataType]
+  'change:expand': [DataType, DataType[]]
+  'change:current': [DataType | null, DataType | null]
+  'click:row-details': [DataType]
 }>()
 
 const columns: (TableColumnApi | TableActionColumnApi)[] = shallowReactive([])

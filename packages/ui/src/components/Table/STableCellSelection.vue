@@ -13,7 +13,7 @@ const props = withDefaults(
   },
 )
 
-const emit = defineEmits<(event: 'select') => void>()
+const emit = defineEmits<{ select: [] }>()
 </script>
 
 <template>
