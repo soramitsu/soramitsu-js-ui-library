@@ -177,24 +177,23 @@ const props = withDefaults(
   },
 )
 
-/* eslint-disable @typescript-eslint/unified-signatures */
 const emit = defineEmits<{
-  (event: 'mouse-enter:cell', ...value: TableCellEventData<DataType>): void
-  (event: 'mouse-leave:cell', ...value: TableCellEventData<DataType>): void
-  (event: 'click:cell', ...value: TableCellEventData<DataType>): void
-  (event: 'dblclick:cell', ...value: TableCellEventData<DataType>): void
-  (event: 'click:header', ...value: TableHeaderEventData): void
-  (event: 'contextmenu:header', ...value: TableHeaderEventData): void
-  (event: 'click:row', ...value: TableRowEventData<DataType>): void
-  (event: 'dblclick:row', ...value: TableRowEventData<DataType>): void
-  (event: 'contextmenu:row', ...value: TableRowEventData<DataType>): void
-  (event: 'change:sort', value: TableSortEventData): void
-  (event: 'change:selection', value: DataType[]): void
-  (event: 'select-all', value: DataType[]): void
-  (event: 'select', ...value: [DataType[], DataType]): void
-  (event: 'change:expand', ...value: [DataType, DataType[]]): void
-  (event: 'change:current', ...value: [DataType | null, DataType | null]): void
-  (event: 'click:row-details', value: DataType): void
+  'mouse-enter:cell': [...value: TableCellEventData<DataType>]
+  'mouse-leave:cell': [...value: TableCellEventData<DataType>]
+  'click:cell': [...value: TableCellEventData<DataType>]
+  'dblclick:cell': [...value: TableCellEventData<DataType>]
+  'click:header': [...value: TableHeaderEventData]
+  'contextmenu:header': [...value: TableHeaderEventData]
+  'click:row': [...value: TableRowEventData<DataType>]
+  'dblclick:row': [...value: TableRowEventData<DataType>]
+  'contextmenu:row': [...value: TableRowEventData<DataType>]
+  'change:sort': [value: TableSortEventData]
+  'change:selection': [value: DataType[]]
+  'select-all': [value: DataType[]]
+  select: [...value: [DataType[], DataType]]
+  'change:expand': [...value: [DataType, DataType[]]]
+  'change:current': [...value: [DataType | null, DataType | null]]
+  'click:row-details': [value: DataType]
 }>()
 
 const columns: (TableColumnApi | TableActionColumnApi)[] = shallowReactive([])

@@ -29,16 +29,12 @@ const props = withDefaults(
   },
 )
 
-/* eslint-disable @typescript-eslint/unified-signatures */
 const emit = defineEmits<{
-  (event: 'select'): void
-  (event: 'expand'): void
-  (event: 'click:details'): void
-  (event: 'mouse-event:label', value: { column: TableColumnApi | TableActionColumnApi; event: MouseEvent }): void
-  (
-    event: 'mouse-event:value',
-    value: { row: DataType; column: TableColumnApi | TableActionColumnApi; event: MouseEvent },
-  ): void
+  select: []
+  expand: []
+  'click:details': []
+  'mouse-event:label': [value: { column: TableColumnApi | TableActionColumnApi; event: MouseEvent }]
+  'mouse-event:value': [value: { row: DataType; column: TableColumnApi | TableActionColumnApi; event: MouseEvent }]
 }>()
 
 const visibleColumns = computed(() => props.columns.filter((x) => !isSelectionColumn(x)))
