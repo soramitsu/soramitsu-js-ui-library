@@ -1590,12 +1590,12 @@ export const STable: <DataType extends TableRow>(__VLS_props: {
     "onClick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
     "onDblclick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
     "onContextmenu:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-    "onChange:sort"?: ((value: TableSortEventData) => any) | undefined;
-    "onChange:selection"?: ((value: DataType[]) => any) | undefined;
-    "onSelect-all"?: ((value: DataType[]) => any) | undefined;
+    "onChange:sort"?: ((args_0: TableSortEventData) => any) | undefined;
+    "onChange:selection"?: ((args_0: DataType[]) => any) | undefined;
+    "onSelect-all"?: ((args_0: DataType[]) => any) | undefined;
     "onChange:expand"?: ((args_0: DataType, args_1: DataType[]) => any) | undefined;
     "onChange:current"?: ((args_0: DataType | null, args_1: DataType | null) => any) | undefined;
-    "onClick:row-details"?: ((value: DataType) => any) | undefined;
+    "onClick:row-details"?: ((args_0: DataType) => any) | undefined;
     defaultSort?: {
         prop: string;
         order: TableColumnSortOrder;
@@ -1627,7 +1627,7 @@ export const STable: <DataType extends TableRow>(__VLS_props: {
         append?(_: {}): any;
         default?(_: {}): any;
     };
-    emit: ((evt: "select", args_0: DataType[], args_1: DataType) => void) & ((evt: "mouse-enter:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "mouse-leave:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "dblclick:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "contextmenu:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "click:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "dblclick:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "contextmenu:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "change:sort", value: TableSortEventData) => void) & ((evt: "change:selection", value: DataType[]) => void) & ((evt: "select-all", value: DataType[]) => void) & ((evt: "change:expand", args_0: DataType, args_1: DataType[]) => void) & ((evt: "change:current", args_0: DataType | null, args_1: DataType | null) => void) & ((evt: "click:row-details", value: DataType) => void);
+    emit: ((evt: "select", args_0: DataType[], args_1: DataType) => void) & ((evt: "mouse-enter:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "mouse-leave:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "dblclick:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "contextmenu:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "click:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "dblclick:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "contextmenu:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "change:sort", args_0: TableSortEventData) => void) & ((evt: "change:selection", args_0: DataType[]) => void) & ((evt: "select-all", args_0: DataType[]) => void) & ((evt: "change:expand", args_0: DataType, args_1: DataType[]) => void) & ((evt: "change:current", args_0: DataType | null, args_1: DataType | null) => void) & ((evt: "click:row-details", args_0: DataType) => void);
 } | undefined, __VLS_expose?: ((exposed: ShallowUnwrapRef<    {
 clearSelection: () => void;
 toggleRowSelection: (row: DataType, value?: boolean) => void;
@@ -1654,12 +1654,12 @@ setCurrentRow: (row: DataType | null) => void;
         "onClick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
         "onDblclick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
         "onContextmenu:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-        "onChange:sort"?: ((value: TableSortEventData) => any) | undefined;
-        "onChange:selection"?: ((value: DataType[]) => any) | undefined;
-        "onSelect-all"?: ((value: DataType[]) => any) | undefined;
+        "onChange:sort"?: ((args_0: TableSortEventData) => any) | undefined;
+        "onChange:selection"?: ((args_0: DataType[]) => any) | undefined;
+        "onSelect-all"?: ((args_0: DataType[]) => any) | undefined;
         "onChange:expand"?: ((args_0: DataType, args_1: DataType[]) => any) | undefined;
         "onChange:current"?: ((args_0: DataType | null, args_1: DataType | null) => any) | undefined;
-        "onClick:row-details"?: ((value: DataType) => any) | undefined;
+        "onClick:row-details"?: ((args_0: DataType) => any) | undefined;
         defaultSort?: {
             prop: string;
             order: TableColumnSortOrder;
@@ -1703,7 +1703,7 @@ setCurrentRow: (row: DataType | null) => void;
         append?(_: {}): any;
         default?(_: {}): any;
     };
-    emit: ((evt: "select", args_0: DataType[], args_1: DataType) => void) & ((evt: "mouse-enter:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "mouse-leave:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "dblclick:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "contextmenu:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "click:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "dblclick:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "contextmenu:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "change:sort", value: TableSortEventData) => void) & ((evt: "change:selection", value: DataType[]) => void) & ((evt: "select-all", value: DataType[]) => void) & ((evt: "change:expand", args_0: DataType, args_1: DataType[]) => void) & ((evt: "change:current", args_0: DataType | null, args_1: DataType | null) => void) & ((evt: "click:row-details", value: DataType) => void);
+    emit: ((evt: "select", args_0: DataType[], args_1: DataType) => void) & ((evt: "mouse-enter:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "mouse-leave:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "dblclick:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "contextmenu:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "click:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "dblclick:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "contextmenu:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "change:sort", args_0: TableSortEventData) => void) & ((evt: "change:selection", args_0: DataType[]) => void) & ((evt: "select-all", args_0: DataType[]) => void) & ((evt: "change:expand", args_0: DataType, args_1: DataType[]) => void) & ((evt: "change:current", args_0: DataType | null, args_1: DataType | null) => void) & ((evt: "click:row-details", args_0: DataType) => void);
 }>) => globalThis.VNode<RendererNode, RendererElement, {
     [key: string]: any;
 }> & {
@@ -1722,12 +1722,12 @@ setCurrentRow: (row: DataType | null) => void;
             "onClick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
             "onDblclick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
             "onContextmenu:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-            "onChange:sort"?: ((value: TableSortEventData) => any) | undefined;
-            "onChange:selection"?: ((value: DataType[]) => any) | undefined;
-            "onSelect-all"?: ((value: DataType[]) => any) | undefined;
+            "onChange:sort"?: ((args_0: TableSortEventData) => any) | undefined;
+            "onChange:selection"?: ((args_0: DataType[]) => any) | undefined;
+            "onSelect-all"?: ((args_0: DataType[]) => any) | undefined;
             "onChange:expand"?: ((args_0: DataType, args_1: DataType[]) => any) | undefined;
             "onChange:current"?: ((args_0: DataType | null, args_1: DataType | null) => any) | undefined;
-            "onClick:row-details"?: ((value: DataType) => any) | undefined;
+            "onClick:row-details"?: ((args_0: DataType) => any) | undefined;
             defaultSort?: {
                 prop: string;
                 order: TableColumnSortOrder;
@@ -1771,7 +1771,7 @@ setCurrentRow: (row: DataType | null) => void;
             append?(_: {}): any;
             default?(_: {}): any;
         };
-        emit: ((evt: "select", args_0: DataType[], args_1: DataType) => void) & ((evt: "mouse-enter:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "mouse-leave:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "dblclick:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "contextmenu:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "click:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "dblclick:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "contextmenu:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "change:sort", value: TableSortEventData) => void) & ((evt: "change:selection", value: DataType[]) => void) & ((evt: "select-all", value: DataType[]) => void) & ((evt: "change:expand", args_0: DataType, args_1: DataType[]) => void) & ((evt: "change:current", args_0: DataType | null, args_1: DataType | null) => void) & ((evt: "click:row-details", value: DataType) => void);
+        emit: ((evt: "select", args_0: DataType[], args_1: DataType) => void) & ((evt: "mouse-enter:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "mouse-leave:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "dblclick:cell", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void) & ((evt: "click:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "contextmenu:header", args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void) & ((evt: "click:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "dblclick:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "contextmenu:row", args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void) & ((evt: "change:sort", args_0: TableSortEventData) => void) & ((evt: "change:selection", args_0: DataType[]) => void) & ((evt: "select-all", args_0: DataType[]) => void) & ((evt: "change:expand", args_0: DataType, args_1: DataType[]) => void) & ((evt: "change:current", args_0: DataType | null, args_1: DataType | null) => void) & ((evt: "click:row-details", args_0: DataType) => void);
     } | undefined;
 };
 
