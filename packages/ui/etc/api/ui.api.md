@@ -24,6 +24,7 @@ import { PropType as PropType_2 } from 'vue';
 import type { Ref as Ref_2 } from 'vue';
 import { RendererElement } from 'vue';
 import { RendererNode } from 'vue';
+import { ShallowUnwrapRef } from 'vue';
 import type { Slot } from 'vue';
 import { Status as Status_2 } from '@/types';
 import type { StyleValue } from 'vue';
@@ -645,6 +646,7 @@ noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
+maxShownOptions?: string | number | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
@@ -658,6 +660,7 @@ noAutoClose?: boolean | undefined;
 loading?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
+maxShownOptions?: string | number | undefined;
 }>>>, {}, {}>, {
     label?(_: {
         options: UnwrapRef<SelectOption<any>[] | SelectOptionGroup<any>[]>;
@@ -1024,7 +1027,7 @@ export const SNotificationsProvider: FunctionalComponent<{
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SPagination: __VLS_WithTemplateSlots_29<DefineComponent<__VLS_WithDefaults_27<__VLS_TypePropsToRuntimeProps_30<{
+export const SPagination: __VLS_WithTemplateSlots_28<DefineComponent<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
 total?: number | undefined;
 pageSize?: number | null | undefined;
 currentPage?: number | undefined;
@@ -1041,7 +1044,7 @@ sizesLabel: string;
 "click:next": (value: number) => void;
 "update:currentPage": (value: number) => void;
 "update:pageSize": (value: number) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_27<__VLS_TypePropsToRuntimeProps_30<{
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
 total?: number | undefined;
 pageSize?: number | null | undefined;
 currentPage?: number | undefined;
@@ -1279,6 +1282,7 @@ loading?: boolean | undefined;
 triggerSearch?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
+maxShownOptions?: string | number | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_TypePropsToRuntimeProps_9<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
@@ -1292,6 +1296,7 @@ loading?: boolean | undefined;
 triggerSearch?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
+maxShownOptions?: string | number | undefined;
 }>>>, {}, {}>, {
     label?(_: {
         options: UnwrapRef<SelectOption<any>[] | SelectOptionGroup<any>[]>;
@@ -1570,194 +1575,256 @@ disabled: boolean;
     default?(_: {}): any;
 }>;
 
-// Warning: (ae-forgotten-export) The symbol "__VLS_WithTemplateSlots" needs to be exported by the entry point lib.d.ts
-// Warning: (ae-forgotten-export) The symbol "__VLS_WithDefaults" needs to be exported by the entry point lib.d.ts
-// Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
-//
 // @public (undocumented)
-export const STable: __VLS_WithTemplateSlots_28<DefineComponent<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
-data?: TableRow[] | undefined;
-defaultSort?: {
+export const STable: <DataType extends TableRow>(__VLS_props: {
+    data?: DataType[] | undefined;
+    onSelect?: ((args_0: DataType[], args_1: DataType) => any) | undefined;
+    height?: string | number | undefined;
+    maxHeight?: string | number | undefined;
+    "onMouse-enter:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+    "onMouse-leave:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+    "onClick:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+    "onDblclick:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+    "onClick:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
+    "onContextmenu:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
+    "onClick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+    "onDblclick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+    "onContextmenu:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+    "onChange:sort"?: ((value: TableSortEventData) => any) | undefined;
+    "onChange:selection"?: ((value: DataType[]) => any) | undefined;
+    "onSelect-all"?: ((value: DataType[]) => any) | undefined;
+    "onChange:expand"?: ((args_0: DataType, args_1: DataType[]) => any) | undefined;
+    "onChange:current"?: ((args_0: DataType | null, args_1: DataType | null) => any) | undefined;
+    "onClick:row-details"?: ((value: DataType) => any) | undefined;
+    defaultSort?: {
+        prop: string;
+        order: TableColumnSortOrder;
+    } | null | undefined;
+    fit?: boolean | undefined;
+    showHeader?: boolean | undefined;
+    highlightCurrentRow?: boolean | undefined;
+    currentRowKey?: string | number | undefined;
+    rowClassName?: string | ((param: TableRowConfigCallbackParams) => string) | undefined;
+    rowStyle?: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => Partial<CSSProperties>) | undefined;
+    cellClassName?: string | ((param: TableCellConfigCallbackParams) => string) | undefined;
+    cellStyle?: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
+    headerRowClassName?: string | (() => string) | undefined;
+    headerRowStyle?: Partial<CSSProperties> | (() => Partial<CSSProperties>) | undefined;
+    headerCellClassName?: string | ((param: TableHeaderCellConfigCallbackParams) => string) | undefined;
+    headerCellStyle?: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
+    rowKey?: string | ((row: DataType) => unknown) | null | undefined;
+    emptyText?: string | undefined;
+    defaultExpandAll?: boolean | undefined;
+    expandRowKeys?: unknown[] | undefined;
+    selectOnIndeterminate?: boolean | undefined;
+    adaptBreakpoint?: number | undefined;
+    cardGridBreakpoints?: TableCardGridBreakpoint[] | undefined;
+} & VNodeProps & AllowedComponentProps & ComponentCustomProps, __VLS_ctx?: {
+    attrs: any;
+    slots: {
+        empty?(_: {}): any;
+        "empty-text"?(_: {}): any;
+        append?(_: {}): any;
+        default?(_: {}): any;
+    };
+    emit: {
+        (event: 'mouse-enter:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+        (event: 'mouse-leave:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+        (event: 'click:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+        (event: 'dblclick:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+        (event: 'click:header', value_0: TableColumnApi | TableActionColumnApi, value_1: MouseEvent): void;
+        (event: 'contextmenu:header', value_0: TableColumnApi | TableActionColumnApi, value_1: MouseEvent): void;
+        (event: 'click:row', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: MouseEvent): void;
+        (event: 'dblclick:row', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: MouseEvent): void;
+        (event: 'contextmenu:row', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: MouseEvent): void;
+        (event: 'change:sort', value: TableSortEventData): void;
+        (event: 'change:selection', value: DataType[]): void;
+        (event: 'select-all', value: DataType[]): void;
+        (event: 'select', value_0: DataType[], value_1: DataType): void;
+        (event: 'change:expand', value_0: DataType, value_1: DataType[]): void;
+        (event: 'change:current', value_0: DataType | null, value_1: DataType | null): void;
+        (event: 'click:row-details', value: DataType): void;
+    };
+} | undefined, __VLS_expose?: ((exposed: ShallowUnwrapRef<    {
+clearSelection: () => void;
+toggleRowSelection: (row: DataType, value?: boolean) => void;
+toggleAllSelection: () => void;
+toggleRowExpansion: (row: DataType, value?: boolean | undefined) => void;
+sort: ({ prop, order }: {
 prop: string;
 order: TableColumnSortOrder;
-} | null | undefined;
-height?: string | number | undefined;
-maxHeight?: string | number | undefined;
-fit?: boolean | undefined;
-showHeader?: boolean | undefined;
-highlightCurrentRow?: boolean | undefined;
-currentRowKey?: string | number | undefined;
-rowClassName?: string | ((param: TableRowConfigCallbackParams) => string) | undefined;
-rowStyle?: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => Partial<CSSProperties>) | undefined;
-cellClassName?: string | ((param: TableCellConfigCallbackParams) => string) | undefined;
-cellStyle?: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
-headerRowClassName?: string | (() => string) | undefined;
-headerRowStyle?: Partial<CSSProperties> | (() => Partial<CSSProperties>) | undefined;
-headerCellClassName?: string | ((param: TableHeaderCellConfigCallbackParams) => string) | undefined;
-headerCellStyle?: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
-rowKey?: string | ((row: TableRow) => unknown) | null | undefined;
-emptyText?: string | undefined;
-defaultExpandAll?: boolean | undefined;
-expandRowKeys?: unknown[] | undefined;
-selectOnIndeterminate?: boolean | undefined;
-adaptBreakpoint?: number | undefined;
-cardGridBreakpoints?: TableCardGridBreakpoint[] | undefined;
-}>, {
-data: () => never[];
-defaultSort: null;
-height: string;
-maxHeight: string;
-emptyText: string;
-defaultExpandAll: boolean;
-rowKey: null;
-fit: boolean;
-expandRowKeys: () => never[];
-showHeader: boolean;
-rowClassName: string;
-rowStyle: () => {};
-cellClassName: string;
-cellStyle: () => {};
-headerRowClassName: string;
-headerRowStyle: () => {};
-headerCellClassName: string;
-headerCellStyle: () => {};
-selectOnIndeterminate: boolean;
-highlightCurrentRow: boolean;
-currentRowKey: string;
-adaptBreakpoint: number;
-cardGridBreakpoints: () => {
-test: (width: number) => boolean;
-value: number;
-}[];
-}>, {
-clearSelection: typeof manualClearSelection;
-toggleRowSelection: typeof manualToggleRowSelection;
-toggleAllSelection: typeof manualToggleAllSelection;
-toggleRowExpansion: (row: TableRow, value?: boolean | undefined) => void;
-sort: typeof sort;
+}) => void;
 clearSort: () => void;
-setCurrentRow: typeof setCurrentRow;
-}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
-"mouse-enter:cell": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void;
-"mouse-leave:cell": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void;
-"click:cell": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void;
-"dblclick:cell": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => void;
-"click:header": (args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void;
-"contextmenu:header": (args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => void;
-"click:row": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void;
-"dblclick:row": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void;
-"contextmenu:row": (args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => void;
-"change:sort": (value: TableSortEventData) => void;
-"change:selection": (value: TableRow[]) => void;
-"select-all": (value: TableRow[]) => void;
-select: (args_0: TableRow[], args_1: TableRow) => void;
-"change:expand": (args_0: TableRow, args_1: TableRow[]) => void;
-"change:current": (args_0: TableRow | null, args_1: TableRow | null) => void;
-"click:row-details": (value: TableRow) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_26<__VLS_TypePropsToRuntimeProps_29<{
-data?: TableRow[] | undefined;
-defaultSort?: {
-prop: string;
-order: TableColumnSortOrder;
-} | null | undefined;
-height?: string | number | undefined;
-maxHeight?: string | number | undefined;
-fit?: boolean | undefined;
-showHeader?: boolean | undefined;
-highlightCurrentRow?: boolean | undefined;
-currentRowKey?: string | number | undefined;
-rowClassName?: string | ((param: TableRowConfigCallbackParams) => string) | undefined;
-rowStyle?: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => Partial<CSSProperties>) | undefined;
-cellClassName?: string | ((param: TableCellConfigCallbackParams) => string) | undefined;
-cellStyle?: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
-headerRowClassName?: string | (() => string) | undefined;
-headerRowStyle?: Partial<CSSProperties> | (() => Partial<CSSProperties>) | undefined;
-headerCellClassName?: string | ((param: TableHeaderCellConfigCallbackParams) => string) | undefined;
-headerCellStyle?: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
-rowKey?: string | ((row: TableRow) => unknown) | null | undefined;
-emptyText?: string | undefined;
-defaultExpandAll?: boolean | undefined;
-expandRowKeys?: unknown[] | undefined;
-selectOnIndeterminate?: boolean | undefined;
-adaptBreakpoint?: number | undefined;
-cardGridBreakpoints?: TableCardGridBreakpoint[] | undefined;
-}>, {
-data: () => never[];
-defaultSort: null;
-height: string;
-maxHeight: string;
-emptyText: string;
-defaultExpandAll: boolean;
-rowKey: null;
-fit: boolean;
-expandRowKeys: () => never[];
-showHeader: boolean;
-rowClassName: string;
-rowStyle: () => {};
-cellClassName: string;
-cellStyle: () => {};
-headerRowClassName: string;
-headerRowStyle: () => {};
-headerCellClassName: string;
-headerCellStyle: () => {};
-selectOnIndeterminate: boolean;
-highlightCurrentRow: boolean;
-currentRowKey: string;
-adaptBreakpoint: number;
-cardGridBreakpoints: () => {
-test: (width: number) => boolean;
-value: number;
-}[];
-}>>> & {
-onSelect?: ((args_0: TableRow[], args_1: TableRow) => any) | undefined;
-"onMouse-enter:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onMouse-leave:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onClick:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onDblclick:cell"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
-"onClick:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
-"onContextmenu:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
-"onClick:row"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-"onDblclick:row"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-"onContextmenu:row"?: ((args_0: TableRow, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
-"onChange:sort"?: ((value: TableSortEventData) => any) | undefined;
-"onChange:selection"?: ((value: TableRow[]) => any) | undefined;
-"onSelect-all"?: ((value: TableRow[]) => any) | undefined;
-"onChange:expand"?: ((args_0: TableRow, args_1: TableRow[]) => any) | undefined;
-"onChange:current"?: ((args_0: TableRow | null, args_1: TableRow | null) => any) | undefined;
-"onClick:row-details"?: ((value: TableRow) => any) | undefined;
-}, {
-data: TableRow[];
-height: string | number;
-maxHeight: string | number;
-defaultSort: {
-prop: string;
-order: TableColumnSortOrder;
-} | null;
-fit: boolean;
-showHeader: boolean;
-highlightCurrentRow: boolean;
-currentRowKey: string | number;
-rowClassName: string | ((param: TableRowConfigCallbackParams) => string);
-rowStyle: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => Partial<CSSProperties>);
-cellClassName: string | ((param: TableCellConfigCallbackParams) => string);
-cellStyle: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => Partial<CSSProperties>);
-headerRowClassName: string | (() => string);
-headerRowStyle: Partial<CSSProperties> | (() => Partial<CSSProperties>);
-headerCellClassName: string | ((param: TableHeaderCellConfigCallbackParams) => string);
-headerCellStyle: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => Partial<CSSProperties>);
-rowKey: string | ((row: TableRow) => unknown) | null;
-emptyText: string;
-defaultExpandAll: boolean;
-expandRowKeys: unknown[];
-selectOnIndeterminate: boolean;
-adaptBreakpoint: number;
-cardGridBreakpoints: TableCardGridBreakpoint[];
-}, {}>, {
-    empty?(_: {}): any;
-    "empty-text"?(_: {}): any;
-    append?(_: {}): any;
-    default?(_: {}): any;
-}>;
+setCurrentRow: (row: DataType | null) => void;
+}>) => void) | undefined, __VLS_setup?: Promise<{
+    props: {
+        data?: DataType[] | undefined;
+        onSelect?: ((args_0: DataType[], args_1: DataType) => any) | undefined;
+        height?: string | number | undefined;
+        maxHeight?: string | number | undefined;
+        "onMouse-enter:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+        "onMouse-leave:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+        "onClick:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+        "onDblclick:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+        "onClick:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
+        "onContextmenu:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
+        "onClick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+        "onDblclick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+        "onContextmenu:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+        "onChange:sort"?: ((value: TableSortEventData) => any) | undefined;
+        "onChange:selection"?: ((value: DataType[]) => any) | undefined;
+        "onSelect-all"?: ((value: DataType[]) => any) | undefined;
+        "onChange:expand"?: ((args_0: DataType, args_1: DataType[]) => any) | undefined;
+        "onChange:current"?: ((args_0: DataType | null, args_1: DataType | null) => any) | undefined;
+        "onClick:row-details"?: ((value: DataType) => any) | undefined;
+        defaultSort?: {
+            prop: string;
+            order: TableColumnSortOrder;
+        } | null | undefined;
+        fit?: boolean | undefined;
+        showHeader?: boolean | undefined;
+        highlightCurrentRow?: boolean | undefined;
+        currentRowKey?: string | number | undefined;
+        rowClassName?: string | ((param: TableRowConfigCallbackParams) => string) | undefined;
+        rowStyle?: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => Partial<CSSProperties>) | undefined;
+        cellClassName?: string | ((param: TableCellConfigCallbackParams) => string) | undefined;
+        cellStyle?: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
+        headerRowClassName?: string | (() => string) | undefined;
+        headerRowStyle?: Partial<CSSProperties> | (() => Partial<CSSProperties>) | undefined;
+        headerCellClassName?: string | ((param: TableHeaderCellConfigCallbackParams) => string) | undefined;
+        headerCellStyle?: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
+        rowKey?: string | ((row: DataType) => unknown) | null | undefined;
+        emptyText?: string | undefined;
+        defaultExpandAll?: boolean | undefined;
+        expandRowKeys?: unknown[] | undefined;
+        selectOnIndeterminate?: boolean | undefined;
+        adaptBreakpoint?: number | undefined;
+        cardGridBreakpoints?: TableCardGridBreakpoint[] | undefined;
+    } & VNodeProps & AllowedComponentProps & ComponentCustomProps;
+    expose(exposed: ShallowUnwrapRef<    {
+    clearSelection: () => void;
+    toggleRowSelection: (row: DataType, value?: boolean) => void;
+    toggleAllSelection: () => void;
+    toggleRowExpansion: (row: DataType, value?: boolean | undefined) => void;
+    sort: ({ prop, order }: {
+    prop: string;
+    order: TableColumnSortOrder;
+    }) => void;
+    clearSort: () => void;
+    setCurrentRow: (row: DataType | null) => void;
+    }>): void;
+    attrs: any;
+    slots: {
+        empty?(_: {}): any;
+        "empty-text"?(_: {}): any;
+        append?(_: {}): any;
+        default?(_: {}): any;
+    };
+    emit: {
+        (event: 'mouse-enter:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+        (event: 'mouse-leave:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+        (event: 'click:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+        (event: 'dblclick:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+        (event: 'click:header', value_0: TableColumnApi | TableActionColumnApi, value_1: MouseEvent): void;
+        (event: 'contextmenu:header', value_0: TableColumnApi | TableActionColumnApi, value_1: MouseEvent): void;
+        (event: 'click:row', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: MouseEvent): void;
+        (event: 'dblclick:row', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: MouseEvent): void;
+        (event: 'contextmenu:row', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: MouseEvent): void;
+        (event: 'change:sort', value: TableSortEventData): void;
+        (event: 'change:selection', value: DataType[]): void;
+        (event: 'select-all', value: DataType[]): void;
+        (event: 'select', value_0: DataType[], value_1: DataType): void;
+        (event: 'change:expand', value_0: DataType, value_1: DataType[]): void;
+        (event: 'change:current', value_0: DataType | null, value_1: DataType | null): void;
+        (event: 'click:row-details', value: DataType): void;
+    };
+}>) => globalThis.VNode<RendererNode, RendererElement, {
+    [key: string]: any;
+}> & {
+    __ctx?: {
+        props: {
+            data?: DataType[] | undefined;
+            onSelect?: ((args_0: DataType[], args_1: DataType) => any) | undefined;
+            height?: string | number | undefined;
+            maxHeight?: string | number | undefined;
+            "onMouse-enter:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+            "onMouse-leave:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+            "onClick:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+            "onDblclick:cell"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: EventTarget, args_3: MouseEvent) => any) | undefined;
+            "onClick:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
+            "onContextmenu:header"?: ((args_0: TableColumnApi | TableActionColumnApi, args_1: MouseEvent) => any) | undefined;
+            "onClick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+            "onDblclick:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+            "onContextmenu:row"?: ((args_0: DataType, args_1: TableColumnApi | TableActionColumnApi, args_2: MouseEvent) => any) | undefined;
+            "onChange:sort"?: ((value: TableSortEventData) => any) | undefined;
+            "onChange:selection"?: ((value: DataType[]) => any) | undefined;
+            "onSelect-all"?: ((value: DataType[]) => any) | undefined;
+            "onChange:expand"?: ((args_0: DataType, args_1: DataType[]) => any) | undefined;
+            "onChange:current"?: ((args_0: DataType | null, args_1: DataType | null) => any) | undefined;
+            "onClick:row-details"?: ((value: DataType) => any) | undefined;
+            defaultSort?: {
+                prop: string;
+                order: TableColumnSortOrder;
+            } | null | undefined;
+            fit?: boolean | undefined;
+            showHeader?: boolean | undefined;
+            highlightCurrentRow?: boolean | undefined;
+            currentRowKey?: string | number | undefined;
+            rowClassName?: string | ((param: TableRowConfigCallbackParams) => string) | undefined;
+            rowStyle?: Partial<CSSProperties> | ((param: TableRowConfigCallbackParams) => Partial<CSSProperties>) | undefined;
+            cellClassName?: string | ((param: TableCellConfigCallbackParams) => string) | undefined;
+            cellStyle?: Partial<CSSProperties> | ((param: TableCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
+            headerRowClassName?: string | (() => string) | undefined;
+            headerRowStyle?: Partial<CSSProperties> | (() => Partial<CSSProperties>) | undefined;
+            headerCellClassName?: string | ((param: TableHeaderCellConfigCallbackParams) => string) | undefined;
+            headerCellStyle?: Partial<CSSProperties> | ((param: TableHeaderCellConfigCallbackParams) => Partial<CSSProperties>) | undefined;
+            rowKey?: string | ((row: DataType) => unknown) | null | undefined;
+            emptyText?: string | undefined;
+            defaultExpandAll?: boolean | undefined;
+            expandRowKeys?: unknown[] | undefined;
+            selectOnIndeterminate?: boolean | undefined;
+            adaptBreakpoint?: number | undefined;
+            cardGridBreakpoints?: TableCardGridBreakpoint[] | undefined;
+        } & VNodeProps & AllowedComponentProps & ComponentCustomProps;
+        expose(exposed: ShallowUnwrapRef<    {
+        clearSelection: () => void;
+        toggleRowSelection: (row: DataType, value?: boolean) => void;
+        toggleAllSelection: () => void;
+        toggleRowExpansion: (row: DataType, value?: boolean | undefined) => void;
+        sort: ({ prop, order }: {
+        prop: string;
+        order: TableColumnSortOrder;
+        }) => void;
+        clearSort: () => void;
+        setCurrentRow: (row: DataType | null) => void;
+        }>): void;
+        attrs: any;
+        slots: {
+            empty?(_: {}): any;
+            "empty-text"?(_: {}): any;
+            append?(_: {}): any;
+            default?(_: {}): any;
+        };
+        emit: {
+            (event: 'mouse-enter:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+            (event: 'mouse-leave:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+            (event: 'click:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+            (event: 'dblclick:cell', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: EventTarget, value_3: MouseEvent): void;
+            (event: 'click:header', value_0: TableColumnApi | TableActionColumnApi, value_1: MouseEvent): void;
+            (event: 'contextmenu:header', value_0: TableColumnApi | TableActionColumnApi, value_1: MouseEvent): void;
+            (event: 'click:row', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: MouseEvent): void;
+            (event: 'dblclick:row', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: MouseEvent): void;
+            (event: 'contextmenu:row', value_0: DataType, value_1: TableColumnApi | TableActionColumnApi, value_2: MouseEvent): void;
+            (event: 'change:sort', value: TableSortEventData): void;
+            (event: 'change:selection', value: DataType[]): void;
+            (event: 'select-all', value: DataType[]): void;
+            (event: 'select', value_0: DataType[], value_1: DataType): void;
+            (event: 'change:expand', value_0: DataType, value_1: DataType[]): void;
+            (event: 'change:current', value_0: DataType | null, value_1: DataType | null): void;
+            (event: 'click:row-details', value: DataType): void;
+        };
+    } | undefined;
+};
 
 // @public (undocumented)
 export const STableColumn: DefineComponent<    {
@@ -2080,7 +2147,7 @@ apiKey: ProvideKey | ProvideKey[];
 // Warning: (ae-forgotten-export) The symbol "__VLS_TypePropsToRuntimeProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STooltip: __VLS_WithTemplateSlots_30<DefineComponent<__VLS_WithDefaults_28<__VLS_TypePropsToRuntimeProps_31<{
+export const STooltip: __VLS_WithTemplateSlots_29<DefineComponent<__VLS_WithDefaults_27<__VLS_TypePropsToRuntimeProps_30<{
 wrapperTag?: string | object | undefined;
 content?: string | undefined;
 header?: string | undefined;
@@ -2097,7 +2164,7 @@ secondaryButtonText: string;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "click:primary-button": (...args: any[]) => void;
 "click:secondary-button": (...args: any[]) => void;
-}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_28<__VLS_TypePropsToRuntimeProps_31<{
+}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_27<__VLS_TypePropsToRuntimeProps_30<{
 wrapperTag?: string | object | undefined;
 content?: string | undefined;
 header?: string | undefined;
@@ -2216,7 +2283,7 @@ export interface TableCellConfigCallbackParams {
 }
 
 // @public (undocumented)
-export type TableCellEventData = [TableRow, TableColumnApi | TableActionColumnApi, EventTarget, MouseEvent];
+export type TableCellEventData<T extends TableRow> = [T, TableColumnApi | TableActionColumnApi, EventTarget, MouseEvent];
 
 // @public (undocumented)
 export type TableColumnAlign = typeof TABLE_COLUMN_ALIGN_VALUES[number];
@@ -2322,7 +2389,7 @@ export interface TableRowConfigCallbackParams {
 }
 
 // @public (undocumented)
-export type TableRowEventData = [TableRow, TableColumnApi | TableActionColumnApi, MouseEvent];
+export type TableRowEventData<T extends TableRow> = [T, TableColumnApi | TableActionColumnApi, MouseEvent];
 
 // @public (undocumented)
 export interface TableSortEventData {
@@ -2431,11 +2498,6 @@ export function useTabsPanelApi(): TabsPanelApi;
 
 // Warnings were encountered during analysis:
 //
-// dist-ts/components/Table/STable.vue.d.ts:149:5 - (ae-forgotten-export) The symbol "manualClearSelection" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:154:5 - (ae-forgotten-export) The symbol "manualToggleRowSelection" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:158:5 - (ae-forgotten-export) The symbol "manualToggleAllSelection" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:167:5 - (ae-forgotten-export) The symbol "sort" needs to be exported by the entry point lib.d.ts
-// dist-ts/components/Table/STable.vue.d.ts:176:5 - (ae-forgotten-export) The symbol "setCurrentRow" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:9:9 - (ae-forgotten-export) The symbol "validateVerticalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsDisplay.vue.d.ts:14:9 - (ae-forgotten-export) The symbol "validateHorizontalPlacement" needs to be exported by the entry point lib.d.ts
 // dist-ts/components/Toasts/SToastsProvider.d.ts:11:9 - (ae-forgotten-export) The symbol "ProvideKey" needs to be exported by the entry point lib.d.ts
