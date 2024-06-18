@@ -1,5 +1,17 @@
 # @soramitsu-ui/ui
 
+## 0.13.9
+
+### Patch Changes
+
+- 2a85253a: **feat**(`STable`): add generics types of provided data
+
+## 0.13.8
+
+### Patch Changes
+
+- d7228159: **feat**(`SSelectDropdown`): add `maxShownOptions` prop
+
 ## 0.13.7
 
 ### Patch Changes

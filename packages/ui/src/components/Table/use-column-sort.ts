@@ -1,14 +1,14 @@
-import type { Ref } from 'vue'
+import type { Ref, ShallowRef } from 'vue'
 import type { TableColumnApi } from './api'
 import type { TableColumnSortOrder, TableRow } from './types'
 import { get } from 'lodash-es'
 
-export function useColumnSort(data: Ref<TableRow[]>) {
+export function useColumnSort<T extends TableRow>(data: Ref<T[]>) {
   const sortState: { column: TableColumnApi | null; order: TableColumnSortOrder } = shallowReactive({
     column: null,
     order: null,
   })
-  let sortedData: Ref<TableRow[]> = ref(data.value)
+  let sortedData: ShallowRef<T[]> = shallowRef(data.value)
 
   function startSortWithNewColumn(column: TableColumnApi | null) {
     sortState.column = column
