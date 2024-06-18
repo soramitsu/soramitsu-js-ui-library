@@ -33,8 +33,8 @@ const emit = defineEmits<{
   select: []
   expand: []
   'click:details': []
-  'mouse-event:label': [value: { column: TableColumnApi | TableActionColumnApi; event: MouseEvent }]
-  'mouse-event:value': [value: { row: DataType; column: TableColumnApi | TableActionColumnApi; event: MouseEvent }]
+  'mouse-event:label': [{ column: TableColumnApi | TableActionColumnApi; event: MouseEvent }]
+  'mouse-event:value': [{ row: DataType; column: TableColumnApi | TableActionColumnApi; event: MouseEvent }]
 }>()
 
 const visibleColumns = computed(() => props.columns.filter((x) => !isSelectionColumn(x)))

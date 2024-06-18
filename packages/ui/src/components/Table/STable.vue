@@ -178,22 +178,22 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<{
-  'mouse-enter:cell': [...value: TableCellEventData<DataType>]
-  'mouse-leave:cell': [...value: TableCellEventData<DataType>]
-  'click:cell': [...value: TableCellEventData<DataType>]
-  'dblclick:cell': [...value: TableCellEventData<DataType>]
-  'click:header': [...value: TableHeaderEventData]
-  'contextmenu:header': [...value: TableHeaderEventData]
-  'click:row': [...value: TableRowEventData<DataType>]
-  'dblclick:row': [...value: TableRowEventData<DataType>]
-  'contextmenu:row': [...value: TableRowEventData<DataType>]
-  'change:sort': [value: TableSortEventData]
-  'change:selection': [value: DataType[]]
-  'select-all': [value: DataType[]]
-  select: [...value: [DataType[], DataType]]
-  'change:expand': [...value: [DataType, DataType[]]]
-  'change:current': [...value: [DataType | null, DataType | null]]
-  'click:row-details': [value: DataType]
+  'mouse-enter:cell': TableCellEventData<DataType>
+  'mouse-leave:cell': TableCellEventData<DataType>
+  'click:cell': TableCellEventData<DataType>
+  'dblclick:cell': TableCellEventData<DataType>
+  'click:header': TableHeaderEventData
+  'contextmenu:header': TableHeaderEventData
+  'click:row': TableRowEventData<DataType>
+  'dblclick:row': TableRowEventData<DataType>
+  'contextmenu:row': TableRowEventData<DataType>
+  'change:sort': [TableSortEventData]
+  'change:selection': [DataType[]]
+  'select-all': [DataType[]]
+  select: [DataType[], DataType]
+  'change:expand': [DataType, DataType[]]
+  'change:current': [DataType | null, DataType | null]
+  'click:row-details': [DataType]
 }>()
 
 const columns: (TableColumnApi | TableActionColumnApi)[] = shallowReactive([])
