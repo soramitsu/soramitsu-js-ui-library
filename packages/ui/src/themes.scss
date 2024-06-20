@@ -1,5 +1,19 @@
 $themes: (
 	'': 'theme',
 	'neumorphism': 'theme_neumorphism',
-	// Add other themes here
 );
+
+@function theme-token($theme, $token) {
+	@if $theme =='theme_neumorphism' {
+		@return theme_neumorphism.token-as-var($token);
+	}
+
+	@else if $theme =='theme' {
+		@return theme.token-as-var($token);
+	}
+
+	@else {
+		@error "Unknown theme: #{$theme}";
+	}
+}
+

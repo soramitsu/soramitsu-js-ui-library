@@ -122,17 +122,7 @@ const handleClick = (event: Event) => {
 @use '@/theme' as theme;
 @import '../../themes.scss';
 
-@function theme-token($theme, $token) {
-  @if $theme == 'theme_neumorphism' {
-    @return theme_neumorphism.token-as-var($token);
-  }
-  @else if $theme == 'theme' {
-    @return theme.token-as-var($token);
-  }
-  @else {
-    @error "Unknown theme: #{$theme}";
-  }
-}
+
 
 @mixin button-type($name, $default, $hover, $active, $disabled) {
   &_type_#{$name} {
