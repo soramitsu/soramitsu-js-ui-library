@@ -120,6 +120,7 @@ const handleClick = (event: Event) => {
 @use 'sass:meta';
 @use '@/theme_neumorphism' as theme_neumorphism;
 @use '@/theme' as theme;
+@import '../../themes.scss';
 
 @function theme-token($theme, $token) {
   @if $theme == 'theme_neumorphism' {
@@ -356,49 +357,49 @@ const handleClick = (event: Event) => {
   }
 }
 
-[theme=""] {
+
+@mixin apply-theme($theme-name, $theme-variable) {
+  .s-button {
+    @include apply-theme-button($theme: $theme-variable);
+  }
   .s-button_type_primary {
-    @include apply-theme-primary($theme: 'theme');
+    @include apply-theme-primary($theme: $theme-variable);
   }
-  .s-button_type_secondary{
-    @include apply-theme-secondary($theme: 'theme');
+  .s-button_type_primary_alternative {
+    @include apply-theme-primary-alternative($theme: $theme-variable);
   }
-  .s-button_type_action{
-    @include apply-theme-action($theme: 'theme');
+  .s-button_type_secondary {
+    @include apply-theme-secondary($theme: $theme-variable);
+  }
+
+  .s-button_type_action {
+    @include apply-theme-action($theme: $theme-variable);
+  }
+
+
+  @if $theme-name != '' {
+    .s-button_type_tertiary {
+      @include apply-theme-tertiary($theme: $theme-variable);
+    }
+      .s-button_type_action_alternative {
+      @include apply-theme-action-alternative($theme: $theme-variable);
+    }
+    .s-button_type_action_primary {
+      @include apply-theme-action-primary($theme: $theme-variable);
+    }
   }
 }
 
-[theme="neumorphism"] {
-  .s-button {
-    @include apply-theme-button($theme: 'theme_neumorphism');
-  }
-  .s-button_type_primary {
-    @include apply-theme-primary($theme: 'theme_neumorphism');
-  }
-  .s-button_type_primary_alternative {
-     @include apply-theme-primary-alternative($theme: 'theme_neumorphism');
-  }
-  .s-button_type_secondary {
-    @include apply-theme-secondary($theme: 'theme_neumorphism');
-  }
-  .s-button_type_tertiary {
-    @include apply-theme-tertiary($theme: 'theme_neumorphism');
-  }
-  .s-button_type_action {
-    @include apply-theme-action($theme: 'theme_neumorphism');
-  }
-  .s-button_type_action_alternative {
-    @include apply-theme-action-alternative($theme: 'theme_neumorphism');
-  }
-  .s-button_type_action_primary {
-    @include apply-theme-action-primary($theme: 'theme_neumorphism');
+@each $theme-name, $theme-variable in $themes {
+  [theme="#{$theme-name}"] {
+    @include apply-theme($theme-name, $theme-variable);
   }
 }
 
 
 .s-button {
   background-color: theme.token-as-var('sys.color.button.action.background-color');
-  color: theme.token-as-var('sys.color.button.secondary.text-color') ;
+  color: theme.token-as-var('sys.color.button.secondary.text-color');
   @apply cursor-pointer inline-flex rounded select-none items-center justify-center;
   fill: currentColor;
   $component: &;
