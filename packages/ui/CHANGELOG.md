@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.13.11
+
+### Patch Changes
+
+- 0bc5daa2: **fix**(`SDropdown`): add expression to display dropdown options correctly
+
 ## 0.13.10
 
 ### Patch Changes
