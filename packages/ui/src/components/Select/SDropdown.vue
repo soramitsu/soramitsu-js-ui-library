@@ -33,7 +33,7 @@ function isThereLabelSlot() {
 <template>
   <SSelectBase
     v-bind="{ ...$attrs, ...$props } as any"
-    same-width-popper
+    :same-width-popper="loading"
   >
     <template #control>
       <SSelectButton
