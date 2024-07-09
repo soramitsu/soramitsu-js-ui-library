@@ -1,4 +1,5 @@
-import { InjectionKey, Ref, inject } from 'vue'
+import type { InjectionKey, Ref } from 'vue'
+import { inject } from 'vue'
 
 export interface AccordionItemApi {
   name: string

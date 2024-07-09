@@ -1,12 +1,12 @@
-<script setup lang="ts">
-import type { CSSProperties, ShallowRef, Slot } from 'vue'
-import { MaybeElementRef } from '@vueuse/core'
+<script setup lang="ts" generic="DataType extends TableRow">
+import type { CSSProperties, ShallowRef } from 'vue'
+import type { MaybeElementRef } from '@vueuse/core'
 import { not } from '@vueuse/math'
 import { findLast } from 'lodash-es'
 import { IconArrowTop16 } from '@/components/icons'
 import { TABLE_DEFAULT_ADAPT_BREAKPOINT, TABLE_CARDS_GRID_DEFAULT_BREAKPOINTS } from './consts'
 import { useColumnSort } from './use-column-sort'
-import {
+import type {
   TableCardGridBreakpoint,
   TableCellConfigCallbackParams,
   TableCellEventData,
@@ -30,7 +30,8 @@ import {
   getDefaultCellValue,
   getCellTooltipContent,
 } from './utils'
-import { TABLE_API_KEY, TableActionColumnApi, TableColumnApi } from './api'
+import type { TableActionColumnApi, TableColumnApi } from './api'
+import { TABLE_API_KEY } from './api'
 import { useTableHeights } from './use-table-heights'
 import STableCellDefault from '@/components/Table/STableCellDefault.vue'
 import STableCellSelection from '@/components/Table/STableCellSelection.vue'
@@ -46,7 +47,7 @@ const props = withDefaults(
     /**
      * Table data
      * */
-    data?: TableRow[]
+    data?: DataType[]
     /**
      * Set the default sort column and order.
      * The `prop` is used to set default sort column, the `order` - to set default sort order.
@@ -117,7 +118,7 @@ const props = withDefaults(
      * When it is a string, multi-level access is supported, e.g. `user.info.id`,
      * but `user.info[0].id` is not supported, in which case a function should be used.
      * */
-    rowKey?: string | ((row: TableRow) => unknown) | null
+    rowKey?: string | ((row: DataType) => unknown) | null
     /**
      * Displayed text when data is empty. You can customize this area by using `empty` slot.
      * */
@@ -176,30 +177,29 @@ const props = withDefaults(
   },
 )
 
-/* eslint-disable @typescript-eslint/unified-signatures */
 const emit = defineEmits<{
-  (event: 'mouse-enter:cell', ...value: TableCellEventData): void
-  (event: 'mouse-leave:cell', ...value: TableCellEventData): void
-  (event: 'click:cell', ...value: TableCellEventData): void
-  (event: 'dblclick:cell', ...value: TableCellEventData): void
-  (event: 'click:header', ...value: TableHeaderEventData): void
-  (event: 'contextmenu:header', ...value: TableHeaderEventData): void
-  (event: 'click:row', ...value: TableRowEventData): void
-  (event: 'dblclick:row', ...value: TableRowEventData): void
-  (event: 'contextmenu:row', ...value: TableRowEventData): void
-  (event: 'change:sort', value: TableSortEventData): void
-  (event: 'change:selection', value: TableRow[]): void
-  (event: 'select-all', value: TableRow[]): void
-  (event: 'select', ...value: [TableRow[], TableRow]): void
-  (event: 'change:expand', ...value: [TableRow, TableRow[]]): void
-  (event: 'change:current', ...value: [TableRow | null, TableRow | null]): void
-  (event: 'click:row-details', value: TableRow): void
+  'mouse-enter:cell': TableCellEventData<DataType>
+  'mouse-leave:cell': TableCellEventData<DataType>
+  'click:cell': TableCellEventData<DataType>
+  'dblclick:cell': TableCellEventData<DataType>
+  'click:header': TableHeaderEventData
+  'contextmenu:header': TableHeaderEventData
+  'click:row': TableRowEventData<DataType>
+  'dblclick:row': TableRowEventData<DataType>
+  'contextmenu:row': TableRowEventData<DataType>
+  'change:sort': [TableSortEventData]
+  'change:selection': [DataType[]]
+  'select-all': [DataType[]]
+  select: [DataType[], DataType]
+  'change:expand': [DataType, DataType[]]
+  'change:current': [DataType | null, DataType | null]
+  'click:row-details': [DataType]
 }>()
 
 const columns: (TableColumnApi | TableActionColumnApi)[] = shallowReactive([])
 const { data, selectOnIndeterminate, fit, showHeader, height, maxHeight, expandRowKeys, currentRowKey } = toRefs(props)
-const rowKeys = shallowReactive(new Map<TableRow, unknown>())
-const keyRows = shallowReactive(new Map<unknown, TableRow>())
+const rowKeys = shallowReactive(new Map<DataType, unknown>())
+const keyRows = shallowReactive(new Map<unknown, DataType>())
 const activeExpandColumn = computed(() => findLast(columns, isExpandColumn))
 const activeSelectionColumn = computed(() => findLast(columns, isSelectionColumn))
 
@@ -254,21 +254,21 @@ const { tableHeightStyles, bodyHeightStyles } = useTableHeights({
   headerHeight,
   tableHeight: toRef(tableSizes, 'height'),
 })
-const { expandedRows, toggleRowExpanded } = useColumnExpand()
+const { expandedRows, toggleRowExpanded } = useColumnExpand<DataType>()
 const { sortState, sortedData, sortExplicitly, handleSortChange, getNextOrder, applyCurrentSort, clearSort } =
-  useColumnSort(data)
-const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelection, toggleRowSelection } = useRowSelect(
+  useColumnSort<DataType>(data)
+const { selectedRows, isAllSelected, isSomeSelected, toggleAllSelection, toggleRowSelection } = useRowSelect<DataType>(
   sortedData,
   reactive({ selectOnIndeterminate }),
 )
 
-const currentRow: ShallowRef<TableRow | null> = shallowRef(null)
+const currentRow: ShallowRef<DataType | null> = shallowRef(null)
 
-function isCurrentRow(row: TableRow) {
+function isCurrentRow(row: DataType) {
   return currentRow.value === toRaw(row)
 }
 
-function setCurrentRow(row: TableRow | null) {
+function setCurrentRow(row: DataType | null) {
   currentRow.value = toRaw(row)
 }
 
@@ -354,7 +354,7 @@ function manualToggleAllSelection() {
   }
 }
 
-function manualToggleRowSelection(row: TableRow, value?: boolean) {
+function manualToggleRowSelection(row: DataType, value?: boolean) {
   toggleRowSelection(row, value)
   storedSelectedRowsKeys = [...selectedRows].map((row) => rowKeys.get(row))
 }
@@ -421,7 +421,7 @@ defineExpose({
   setCurrentRow,
 })
 
-function getRowKey(row: TableRow) {
+function getRowKey(row: DataType) {
   if (typeof props.rowKey === 'string') {
     if (props.rowKey.includes('.')) {
       return row[props.rowKey]
@@ -454,14 +454,14 @@ function getStyleOrClass<T extends object | string, S>(prop: T | ((args: S) => T
   return prop || undefined
 }
 
-function isRowSelectable(row: TableRow, index: number) {
+function isRowSelectable(row: DataType, index: number) {
   return !!(
     activeSelectionColumn?.value &&
     (!activeSelectionColumn.value.selectable || activeSelectionColumn.value.selectable(row, index))
   )
 }
 
-function getTemplateRowKey(row: TableRow, rowIndex: number): number | string | symbol {
+function getTemplateRowKey(row: DataType, rowIndex: number): number | string | symbol {
   const res = props.rowKey ? rowKeys.get(row) : rowIndex
   if (typeof res === 'string' || typeof res === 'number' || typeof res === 'symbol') {
     return res
@@ -496,24 +496,24 @@ function handleAllSelect() {
   emit('change:selection', selectedArray)
 }
 
-function handleRowSelect(row: TableRow) {
+function handleRowSelect(row: DataType) {
   manualToggleRowSelection(row)
   const selectedArray = [...selectedRows]
   emit('select', selectedArray, row)
   emit('change:selection', selectedArray)
 }
 
-function handleRowExpand(row: TableRow) {
+function handleRowExpand(row: DataType) {
   toggleRowExpanded(row)
   emit('change:expand', row, [...expandedRows])
 }
 
-function handleRowDetails(row: TableRow) {
+function handleRowDetails(row: DataType) {
   emit('click:row-details', row)
 }
 
 function handleCellMouseEvent(ctx: {
-  row: TableRow
+  row: DataType
   column: TableColumnApi | TableActionColumnApi
   event: MouseEvent
 }) {

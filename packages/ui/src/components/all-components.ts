@@ -4,7 +4,7 @@
 // `index` file is re-exported from the `lib` file, but there is
 // no intention to expose `COMPONENTS` for the end user
 
-import { Component } from 'vue'
+import type { Component } from 'vue'
 import { SButton } from './Button'
 // import { SJsonInput } from './JsonInput'
 import { SModal, SModalCard } from './Modal'

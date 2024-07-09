@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { TableActionColumnApi, TableColumnApi, TableRow } from '@/components'
+<script setup lang="ts" generic="DataType extends TableRow">
+import type { TableActionColumnApi, TableColumnApi, TableRow } from '@/components'
 import { IconArrowsChevronDownRounded24, IconArrowRight16 } from '@/components/icons'
 import {
   isDefaultColumn,
@@ -13,7 +13,7 @@ import SButton from '@/components/Button/SButton.vue'
 
 const props = withDefaults(
   defineProps<{
-    row: { data: TableRow; index: number }
+    row: { data: DataType; index: number }
     columns?: (TableColumnApi | TableActionColumnApi)[]
     activeExpandColumn?: (TableActionColumnApi & { type: 'expand' }) | null
     expanded?: boolean
@@ -29,16 +29,12 @@ const props = withDefaults(
   },
 )
 
-/* eslint-disable @typescript-eslint/unified-signatures */
 const emit = defineEmits<{
-  (event: 'select'): void
-  (event: 'expand'): void
-  (event: 'click:details'): void
-  (event: 'mouse-event:label', value: { column: TableColumnApi | TableActionColumnApi; event: MouseEvent }): void
-  (
-    event: 'mouse-event:value',
-    value: { row: TableRow; column: TableColumnApi | TableActionColumnApi; event: MouseEvent },
-  ): void
+  select: []
+  expand: []
+  'click:details': []
+  'mouse-event:label': [{ column: TableColumnApi | TableActionColumnApi; event: MouseEvent }]
+  'mouse-event:value': [{ row: DataType; column: TableColumnApi | TableActionColumnApi; event: MouseEvent }]
 }>()
 
 const visibleColumns = computed(() => props.columns.filter((x) => !isSelectionColumn(x)))

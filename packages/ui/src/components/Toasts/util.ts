@@ -1,4 +1,4 @@
-import { ToastsDisplayPlacementHorizontal, ToastsDisplayPlacementVertical } from './types'
+import type { ToastsDisplayPlacementHorizontal, ToastsDisplayPlacementVertical } from './types'
 
 const VERTICAL = new Set<ToastsDisplayPlacementVertical>(['bottom', 'top'])
 const HORIZONTAL = new Set<ToastsDisplayPlacementHorizontal>(['left', 'right', 'center'])

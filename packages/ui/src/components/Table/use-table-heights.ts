@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 
 interface TableHeightsComposableParams {
   propHeight: Ref<number | string>

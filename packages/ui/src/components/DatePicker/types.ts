@@ -1,4 +1,4 @@
-import { CUSTOM_OPTION_VALUE } from '@/components/DatePicker/consts'
+import type { CUSTOM_OPTION_VALUE } from '@/components/DatePicker/consts'
 
 export type DatePickerType = 'day' | 'range' | 'pick'
 

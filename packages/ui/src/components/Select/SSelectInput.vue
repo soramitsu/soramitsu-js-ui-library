@@ -5,7 +5,7 @@ import SSelectChevron from './SSelectChevron'
 import SSelectChip from './SSelectChip.vue'
 import STextField from '@/components/TextField/STextField.vue'
 import { IconBasicSearch24 } from '@/components/icons'
-import { MaybeElementRef } from '@vueuse/core'
+import type { MaybeElementRef } from '@vueuse/core'
 
 const props = withDefaults(
   defineProps<{

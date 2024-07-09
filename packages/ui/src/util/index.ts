@@ -1,4 +1,5 @@
-import { InjectionKey, inject, Ref, Component, FunctionalComponent } from 'vue'
+import type { InjectionKey, Ref, Component, FunctionalComponent } from 'vue'
+import { inject } from 'vue'
 
 export function forceInject<T>(key: string | InjectionKey<T>): T {
   const something = inject(key)

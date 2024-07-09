@@ -3,8 +3,9 @@ import './SCheckboxAtom.scss'
 import IconCheck from '~icons/uil/check'
 import IconMinus from '~icons/uil/minus'
 
-import { FunctionalComponent, mergeProps, PropType } from 'vue'
-import { CheckboxSize, CheckboxState } from './types'
+import type { FunctionalComponent, PropType } from 'vue'
+import { mergeProps } from 'vue'
+import type { CheckboxSize, CheckboxState } from './types'
 
 interface Props {
   size: CheckboxSize

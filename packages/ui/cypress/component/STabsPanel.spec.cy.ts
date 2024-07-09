@@ -1,5 +1,6 @@
 import { VueTestUtils } from 'cypress/vue'
-import { STabsPanel, STab, useTabsPanelApi, TabsPanelApi } from '@/lib'
+import type { TabsPanelApi } from '@/lib'
+import { STabsPanel, STab, useTabsPanelApi } from '@/lib'
 
 before(() => {
   VueTestUtils.config.global.components = { STabsPanel, STab }

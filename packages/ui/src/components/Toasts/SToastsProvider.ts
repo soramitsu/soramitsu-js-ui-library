@@ -1,4 +1,5 @@
-import { defineComponent, PropType, provide } from 'vue'
+import type { PropType } from 'vue'
+import { defineComponent, provide } from 'vue'
 import { defineToastsApi, TOASTS_API_KEY } from './api'
 
 type ProvideKey = string | Symbol

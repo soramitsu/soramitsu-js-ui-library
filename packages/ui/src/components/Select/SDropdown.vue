@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { SelectOption, SelectButtonType, SelectOptionType, SelectSize, SelectOptionGroup } from './types'
+import type { SelectOption, SelectSize, SelectOptionGroup } from './types'
+import { SelectButtonType, SelectOptionType } from './types'
 import SSelectBase from './SSelectBase.vue'
 import SSelectButton from './SSelectButton.vue'
 import SSelectDropdown from './SSelectDropdown.vue'
@@ -17,6 +18,7 @@ const props = defineProps<{
   loading?: boolean
   dropdownSearch?: boolean
   remoteSearch?: boolean
+  maxShownOptions?: string | number | undefined
 }>()
 
 const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : SelectButtonType.Default))
@@ -29,7 +31,10 @@ function isThereLabelSlot() {
 </script>
 
 <template>
-  <SSelectBase v-bind="{ ...$attrs, ...$props } as any">
+  <SSelectBase
+    v-bind="{ ...$attrs, ...$props } as any"
+    same-width-popper
+  >
     <template #control>
       <SSelectButton
         data-testid="select-trigger"
@@ -53,6 +58,7 @@ function isThereLabelSlot() {
       <SSelectDropdown
         :search="search"
         :item-type="optionType ?? SelectOptionType.Default"
+        :max-shown-options="+(maxShownOptions ?? 0)"
       >
         <template #empty>
           <slot name="empty" />

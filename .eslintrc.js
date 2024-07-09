@@ -4,7 +4,7 @@ module.exports = {
   parser: 'vue-eslint-parser',
   parserOptions: {
     parser: '@typescript-eslint/parser',
-    ecmaVersion: 2020,
+    ecmaVersion: 2021,
     sourceType: 'module',
   },
   globals: {
@@ -21,6 +21,13 @@ module.exports = {
 
     // make possible `/// <reference...`
     'spaced-comment': ['error', 'always', { markers: ['/'] }],
+
+    '@typescript-eslint/consistent-type-definitions': 'off',
+    '@typescript-eslint/no-unused-vars': ['off'],
+
+    // FIXME
+    'vue/require-default-prop': 'off',
+    'vuejs-accessibility/no-static-element-interactions': 'off',
   },
   overrides: [
     {
@@ -54,12 +61,14 @@ module.exports = {
       files: ['**/packages/ui/stories/**/*.stories.ts'],
       rules: {
         '@typescript-eslint/consistent-type-assertions': 'off',
+        'vue/require-prop-types': 'off',
       },
     },
     {
       files: ['**/*.spec.ts', '**/*.spec.cy.ts'],
       rules: {
         'max-nested-callbacks': 'off',
+        'cypress/unsafe-to-chain-command': 'off',
       },
     },
 

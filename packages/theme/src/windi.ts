@@ -1,4 +1,4 @@
-import { Config } from 'windicss/types/interfaces'
+import type { Config } from 'windicss/types/interfaces'
 
 /**
  * Preset with Soramitsu UI theming related stuff

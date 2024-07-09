@@ -1,5 +1,5 @@
-import { TableActionColumnApi, TableColumnApi } from './api'
-import { TableRow } from '@/components'
+import type { TableActionColumnApi, TableColumnApi } from './api'
+import type { TableRow } from '@/components'
 import { get } from 'lodash-es'
 
 export function isDefaultColumn(column: TableColumnApi | TableActionColumnApi): column is TableColumnApi {

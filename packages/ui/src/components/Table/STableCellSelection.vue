@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { SCheckboxAtom, CheckboxState } from '@/components'
+import type { CheckboxState } from '@/components'
+import { SCheckboxAtom } from '@/components'
 
 const props = withDefaults(
   defineProps<{
@@ -12,7 +13,7 @@ const props = withDefaults(
   },
 )
 
-const emit = defineEmits<(event: 'select') => void>()
+const emit = defineEmits<{ select: [] }>()
 </script>
 
 <template>

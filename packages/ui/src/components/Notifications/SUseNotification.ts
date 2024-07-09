@@ -1,4 +1,5 @@
-import { h, defineComponent, PropType, onScopeDispose } from 'vue'
+import type { PropType } from 'vue'
+import { h, defineComponent, onScopeDispose } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { Status } from '@/types'
 import SNotificationBody from './SNotificationBody.vue'

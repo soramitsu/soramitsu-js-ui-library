@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { AccordionItemApi, AccordionApi, ACCORDION_API_KEY } from './api'
-import { provide, Ref, watch } from 'vue'
+import type { AccordionItemApi, AccordionApi } from './api'
+import { ACCORDION_API_KEY } from './api'
+import type { Ref } from 'vue'
+import { provide, watch } from 'vue'
 
 const props = withDefaults(
   defineProps<{

@@ -1,5 +1,30 @@
 # @soramitsu-ui/ui
 
+## 0.13.10
+
+### Patch Changes
+
+- 9e0825f8: **refactor**(`STable`,`STableCard`,`STableCellSelection`): use new defineEmits syntax
+
+## 0.13.9
+
+### Patch Changes
+
+- 2a85253a: **feat**(`STable`): add generics types of provided data
+
+## 0.13.8
+
+### Patch Changes
+
+- d7228159: **feat**(`SSelectDropdown`): add `maxShownOptions` prop
+
+## 0.13.7
+
+### Patch Changes
+
+- 2d62a77c: **fix**(`SModalCard`): add `s-modal-card__content` class and apply windicss classes
+- 75066428: **refactor**: update vue-tsc and ts and fix everything updated version breaks
+
 ## 0.13.6
 
 ### Patch Changes
