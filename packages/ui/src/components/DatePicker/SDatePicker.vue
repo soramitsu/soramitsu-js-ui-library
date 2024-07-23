@@ -559,7 +559,7 @@ watch(
 .s-date-picker {
   &__header {
     border-radius: 4px;
-    border: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
+    border: 1px solid theme.token-as-var('sys.color.border.primary');
 
     .arrow {
       position: absolute;
@@ -579,7 +579,7 @@ watch(
 
   &__panels {
     display: grid;
-    background-color: theme.token-as-var('ref.color.button.color-base-on-accent');
+    background-color: theme.token-as-var('sys.color.content-on-background-inverted');
 
     grid-template-areas:
       'options calendars time'

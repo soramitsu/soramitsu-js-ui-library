@@ -51,12 +51,12 @@ const model = useVModel(props, 'modelValue', emit)
 <style lang="scss" scoped>
 @use '@/theme';
 
-$border-primary: theme.token-as-var('ref.color.button.color-utility-surface');
+$border-primary: theme.token-as-var('sys.color.border.primary');
 $content-primary: theme.token-as-var('sys.color.content-primary');
 $content-quaternary: theme.token-as-var('sys.color.button.tertiary.text-color-active');
-$primary: theme.token-as-var('ref.color.button.color-theme-accent');
+$primary: theme.token-as-var('sys.color.primary');
 $primary-hover: theme.token-as-var('sys.color.button.primary.background-color-hover');
-$util-surface: theme.token-as-var('ref.color.button.color-base-on-accent');
+$util-surface: theme.token-as-var('sys.color.content-on-background-inverted');
 
 .s-switch {
   display: flex;

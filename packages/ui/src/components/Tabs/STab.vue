@@ -98,12 +98,12 @@ $font-color-disabled: theme.token-as-var('sys.color.button.tertiary.text-color-a
   }
 
   &_background_primary {
-    $font-color-active: theme.token-as-var('ref.color.button.color-base-on-accent');
+    $font-color-active: theme.token-as-var('sys.color.content-on-background-inverted');
 
-    $background-color: theme.token-as-var('ref.color.button.color-base-on-accent');
-    $background-color-active: theme.token-as-var('ref.color.button.color-theme-accent');
+    $background-color: theme.token-as-var('sys.color.content-on-background-inverted');
+    $background-color-active: theme.token-as-var('sys.color.primary');
 
-    $border: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
+    $border: 1px solid theme.token-as-var('sys.color.border.primary');
     $border-active: 1px solid $background-color-active;
 
     background: $background-color;
@@ -135,13 +135,13 @@ $font-color-disabled: theme.token-as-var('sys.color.button.tertiary.text-color-a
   }
 
   &_background_none {
-    $font-color-active: theme.token-as-var('ref.color.button.color-theme-accent');
+    $font-color-active: theme.token-as-var('sys.color.primary');
 
     $background-color: none;
     $background-color-active: none;
 
-    $border: 2px solid theme.token-as-var('ref.color.button.color-utility-surface');
-    $border-active: 2px solid theme.token-as-var('ref.color.button.color-theme-accent');
+    $border: 2px solid theme.token-as-var('sys.color.border.primary');
+    $border-active: 2px solid theme.token-as-var('sys.color.primary');
 
     background: $background-color;
     border-bottom: $border;

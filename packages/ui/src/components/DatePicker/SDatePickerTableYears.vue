@@ -96,16 +96,16 @@ const handleYearTableClick = (event: any) => {
       cursor: pointer;
 
       &.today .cell {
-        color: theme.token-as-var('ref.color.button.color-theme-accent');
+        color: theme.token-as-var('sys.color.primary');
         font-weight: 700;
       }
 
       & .cell:hover {
-        color: theme.token-as-var('ref.color.button.color-theme-accent');
+        color: theme.token-as-var('sys.color.primary');
       }
 
       &.current .cell {
-        color: theme.token-as-var('ref.color.button.color-theme-accent');
+        color: theme.token-as-var('sys.color.primary');
       }
     }
   }

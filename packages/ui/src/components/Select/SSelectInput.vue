@@ -273,7 +273,7 @@ function handleChevronClick(event: MouseEvent) {
 
   &:focus-within {
     background: transparent;
-    border: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
+    border: 1px solid theme.token-as-var('sys.color.border.primary');
   }
 
   &__label,

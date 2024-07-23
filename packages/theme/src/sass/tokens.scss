@@ -28,6 +28,10 @@ $tokens: (
       'background': null,
       'content-tertiary': null,
       'content-primary': null,
+      'disabled': null,
+      'on-disabled': null,
+      'primary': null,
+      'content-on-background-inverted': null,
       'button': (
         'primary': (
           'background-color-hover': null,
@@ -76,6 +80,7 @@ $tokens: (
         'debug-background-hover': null,
       ),
       'border': (
+        'primary': null,
         'secondary': null,
       )
     ),

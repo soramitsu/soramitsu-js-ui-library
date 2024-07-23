@@ -342,7 +342,7 @@ function handlePrevClick() {
     }
 
     &_disabled {
-      color: theme.token-as-var('sys.disabled.button.border-color');
+      color: theme.token-as-var('sys.color.on-disabled');
       cursor: default;
     }
 

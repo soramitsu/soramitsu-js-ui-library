@@ -67,6 +67,10 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'background': '',
           'content-tertiary': '',
           'content-primary': '',
+          'disabled': '',
+          'on-disabled': '',
+          'primary': '',
+          'content-on-background-inverted': '',
           'button': (
             'primary': (
               'background-color-hover': #F754A3,
@@ -118,6 +122,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'debug-background-hover': '',
           ),
           'border': (
+            'primary': '',
             'secondary': ''
           )
         ),

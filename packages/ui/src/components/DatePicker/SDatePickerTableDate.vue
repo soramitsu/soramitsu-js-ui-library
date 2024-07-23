@@ -369,12 +369,12 @@ const handleClick = (ev: any) => {
 
       &.today {
         position: relative;
-        color: theme.token-as-var('ref.color.button.color-theme-accent');
+        color: theme.token-as-var('sys.color.primary');
         font-weight: 700;
 
         &.end-date span,
         &.start-date span {
-          color: theme.token-as-var('ref.color.button.color-base-on-accent');
+          color: theme.token-as-var('sys.color.content-on-background-inverted');
         }
       }
 
@@ -387,7 +387,7 @@ const handleClick = (ev: any) => {
       }
 
       &.available:hover:not(.start-date, .end-date, .current, .disabled) {
-        color: theme.token-as-var('ref.color.button.color-theme-accent');
+        color: theme.token-as-var('sys.color.primary');
       }
 
       &.in-range {
@@ -397,8 +397,8 @@ const handleClick = (ev: any) => {
       &.current,
       &.end-date,
       &.start-date {
-        color: theme.token-as-var('ref.color.button.color-base-on-accent');
-        background-color: theme.token-as-var('ref.color.button.color-theme-accent');
+        color: theme.token-as-var('sys.color.content-on-background-inverted');
+        background-color: theme.token-as-var('sys.color.primary');
         border-radius: 2px;
 
         &.disabled .date-table__cell-text {
@@ -407,16 +407,16 @@ const handleClick = (ev: any) => {
       }
 
       &.selected {
-        background-color: theme.token-as-var('ref.color.button.color-theme-accent');
-        color: theme.token-as-var('ref.color.button.color-base-on-accent');
+        background-color: theme.token-as-var('sys.color.primary');
+        color: theme.token-as-var('sys.color.content-on-background-inverted');
       }
     }
 
     &__title {
       padding: 4px;
       font-weight: 400;
-      border-bottom: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
-      border-top: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
+      border-bottom: 1px solid theme.token-as-var('sys.color.border.primary');
+      border-top: 1px solid theme.token-as-var('sys.color.border.primary');
       color: theme.token-as-var('sys.color.content-primary');
       text-align: center;
     }

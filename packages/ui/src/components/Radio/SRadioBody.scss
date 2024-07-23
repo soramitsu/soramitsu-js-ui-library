@@ -1,8 +1,8 @@
 @use '@/theme';
 
-$primary: theme.token-as-var('ref.color.button.color-theme-accent');
-$on-disabled: theme.token-as-var('sys.disabled.button.border-color');
-$border-primary: theme.token-as-var('ref.color.button.color-utility-surface');
+$primary: theme.token-as-var('sys.color.primary');
+$on-disabled: theme.token-as-var('sys.color.on-disabled');
+$border-primary: theme.token-as-var('sys.color.border.primary');
 
 $dur-easing: 0.2s ease;
 
@@ -47,7 +47,7 @@ $dur-easing: 0.2s ease;
 
     label,
     .s-radio-body__description {
-      color: theme.token-as-var('sys.disabled.button.border-color');
+      color: theme.token-as-var('sys.color.on-disabled');
     }
   }
 

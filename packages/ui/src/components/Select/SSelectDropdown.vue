@@ -193,13 +193,13 @@ const dropdownHeight = computed(() => {
 
 .s-select-dropdown {
   @apply rounded overflow-hidden;
-  background: theme.token-as-var('ref.color.button.color-base-on-accent');
+  background: theme.token-as-var('sys.color.content-on-background-inverted');
   overflow-y: auto;
   box-shadow: theme.token-as-var('sys.shadow.dropdown');
 
   &__header {
     color: theme.token-as-var('sys.color.content-tertiary');
-    border-bottom: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
+    border-bottom: 1px solid theme.token-as-var('sys.color.border.primary');
   }
 
   &__action {
@@ -207,7 +207,7 @@ const dropdownHeight = computed(() => {
   }
 
   &__search {
-    border-bottom: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
+    border-bottom: 1px solid theme.token-as-var('sys.color.border.primary');
     background: theme.token-as-var('sys.color.background');
 
     &:focus-within {

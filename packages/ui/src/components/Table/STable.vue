@@ -901,7 +901,7 @@ $col-number: v-bind(cardsGridColumnNumber);
 
     &_active {
       visibility: visible;
-      fill: theme.token-as-var('ref.color.button.color-theme-accent');
+      fill: theme.token-as-var('sys.color.primary');
     }
 
     &_asc {
