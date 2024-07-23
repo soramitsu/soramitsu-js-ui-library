@@ -33,6 +33,7 @@ import type { TableColumnRowSelectableFunc as TableColumnRowSelectableFunc_2 } f
 import type { TableColumnSortBy as TableColumnSortBy_2 } from '@/components/Table/types';
 import type { TableColumnSortOrder as TableColumnSortOrder_2 } from '@/components/Table/types';
 import { UnwrapRef } from 'vue';
+import type { ValidationsList } from '@/components/TextField/types';
 import { VNodeProps } from 'vue';
 
 // @public (undocumented)
