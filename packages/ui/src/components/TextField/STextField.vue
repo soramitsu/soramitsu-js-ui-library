@@ -1,4 +1,6 @@
 <script lang="ts">
+import type { ValidationsList } from '@/components/TextField/types'
+
 export default {
   inheritAttrs: false,
 }
@@ -6,6 +8,7 @@ export default {
 import type { StyleValue } from 'vue'
 import { Status } from '@/types'
 import type { MaybeElementRef } from '@vueuse/core'
+import { IconStatusSuccess16 } from '../icons'
 
 /**
  * warning: don't use it inside of `Props`. Vue compiler determines it
@@ -106,11 +109,16 @@ interface Props {
    * Manually activates filled state
    */
   filledState?: boolean
+  /**
+   * Display the list of rules
+   */
+  validationsList?: ValidationsList
 }
 </script>
 
 <script setup lang="ts">
 import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff } from '../icons'
+import { computed } from 'vue'
 
 const props = withDefaults(defineProps<Props>(), {
   multiline: false,
@@ -136,6 +144,9 @@ const status = computed<null | TextFieldStatus>(() => {
   if (props.success) return Status.Success
   if (props.warning) return Status.Warning
   if (props.error) return Status.Error
+  if (props.validationsList?.errorOn && hasFirstBlurHappened.value && !isMatchingValidationsList.value)
+    return Status.Error
+  if (props.validationsList?.successOn && isMatchingValidationsList.value) return Status.Success
   return null
 })
 
@@ -179,7 +190,7 @@ function handleInputWrapperMouseDown(event: MouseEvent) {
 // MESSAGE
 
 const isMessageSlotDefined = () => !!slots.message
-const shouldRenderMessage = () => !!props.message || isMessageSlotDefined()
+const shouldRenderMessage = () => !!props.message || isMessageSlotDefined() || shouldShowValidationsList.value
 const messageIcon = computed(() => {
   if (status.value === null) return null
   return STATUS_ICONS_MAP_16[status.value]
@@ -237,6 +248,35 @@ const [forceRevealPassword, toggleForceReveal] = useToggle()
 const inputType = computed(() =>
   props.password && (!showEye.value || !forceRevealPassword.value) ? 'password' : 'text',
 )
+
+const isTouched = ref(false)
+const hasFirstBlurHappened = ref(false)
+
+function handleFocus() {
+  isFocused.value = true
+  isTouched.value = true
+}
+
+function handleBlur() {
+  isFocused.value = false
+  hasFirstBlurHappened.value = true
+}
+
+const validationsList = computed(() => {
+  if (!props.validationsList) return []
+
+  return props.validationsList.validations(model.value ?? '')
+})
+
+const isMatchingValidationsList = computed(() => validationsList.value.every((v) => v.rule))
+
+const shouldShowValidationsList = computed(
+  () =>
+    ((props.validationsList?.showOnFocusOnly && isFocused.value) || !props.validationsList?.showOnFocusOnly) &&
+    isTouched.value &&
+    props.validationsList &&
+    !isMatchingValidationsList.value,
+)
 </script>
 
 <template>
@@ -279,8 +319,8 @@ const inputType = computed(() =>
           :disabled="disabled"
           v-bind="inputAttrs()"
           @input="onInput"
-          @focus="isFocused = true"
-          @blur="isFocused = false"
+          @focus="handleFocus"
+          @blur="handleBlur"
         >
       </div>
 
@@ -320,11 +360,38 @@ const inputType = computed(() =>
       >
         <component
           :is="messageIcon"
-          v-if="messageIcon"
+          v-if="messageIcon && !props.validationsList"
           class="s-text-field__message-icon"
         />
 
-        <span>
+        <div v-if="props.validationsList">
+          <span>{{ props.validationsList.title }}</span>
+
+          <div
+            v-for="item in validationsList"
+            :key="item.message"
+          >
+            <div class="flex gap-4px">
+              <component
+                :is="IconStatusSuccess16"
+                v-if="item.rule"
+                class="flex self-center w-16px"
+              />
+              <div
+                v-else
+                class="w-16px"
+              >
+                -
+              </div>
+
+              <div :class="{ 's-text-field__message-requirement_matched': item.rule }">
+                {{ item.message }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <span v-else>
           <slot name="message">{{ message }}</slot>
         </span>
       </div>
@@ -463,6 +530,12 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
       &-leave-to {
         transform: translateY(-8px);
         opacity: 0;
+      }
+    }
+
+    &-requirement {
+      &_matched {
+        color: theme.token-as-var('sys.color.status.success');
       }
     }
   }

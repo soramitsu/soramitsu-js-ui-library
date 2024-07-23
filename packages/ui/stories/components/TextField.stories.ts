@@ -1,6 +1,5 @@
 import { STextField, Status } from '@/lib'
-import IconQuestion from '@soramitsu-ui/icons/icomoon/notifications-question-circle-24.svg'
-import IconCopy from '@soramitsu-ui/icons/icomoon/basic-copy-24.svg'
+import { IconCopy, IconQuestion } from '@/components/icons'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
@@ -64,3 +63,29 @@ export const Default = {}
 
 export const OneIcon = { args: { oneIcon: true } } as Story
 export const TwoIcons = { args: { twoIcons: true } } as Story
+export const ValidationsList = {
+  args: {
+    validationsList: {
+      title: 'String must contain:',
+      validations: (value: string) => {
+        return [
+          {
+            rule: /[a-z]/.test(value),
+            message: 'At least 1 lowercase letter',
+          },
+          {
+            rule: /\d/.test(value),
+            message: 'At least 1 digit',
+          },
+          {
+            rule: /[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]/.test(value),
+            message: 'At least 1 special character',
+          },
+        ]
+      },
+      showOnFocusOnly: true,
+      errorOn: true,
+      successOn: true,
+    },
+  },
+} as Story
