@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.13.12
+
+### Patch Changes
+
+- 4a3e26ef: **feat**(`STextField`): add validations list prop
+
 ## 0.13.11
 
 ### Patch Changes
