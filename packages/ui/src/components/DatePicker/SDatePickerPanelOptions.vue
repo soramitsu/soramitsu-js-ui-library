@@ -53,10 +53,10 @@ const onMenuClick = (data: PossiblePresetOption) => {
     position: relative;
     width: 150px;
     &:hover {
-      background-color: theme.token-as-var('ref.color.button.color-base-content-secondary');
+      background-color: theme.token-as-var('sys.color.background-hover');
     }
     &.active {
-      background-color: theme.token-as-var('ref.color.button.color-base-content-secondary');
+      background-color: theme.token-as-var('sys.color.background-hover');
     }
   }
 

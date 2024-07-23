@@ -88,7 +88,7 @@ function onTimeout() {
   @apply relative overflow-hidden;
 
   background: theme.token-as-var('sys.color.content-primary');
-  color: theme.token-as-var('sys.color.button.action.text-color');
+  color: theme.token-as-var('sys.color.content-on-background-inverted');
   box-shadow: theme.token-as-var('sys.shadow.floating-notification');
 
   @mixin apply-icon-color($status) {

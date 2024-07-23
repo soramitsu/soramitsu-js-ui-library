@@ -338,7 +338,7 @@ function handlePrevClick() {
     color: theme.token-as-var('sys.color.content-primary');
 
     &_active {
-      color: theme.token-as-var('sys.color.button.primary.background-color-pressed');
+      color: theme.token-as-var('sys.color.primary-pressed');
     }
 
     &_disabled {

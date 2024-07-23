@@ -268,7 +268,7 @@ function handleChevronClick(event: MouseEvent) {
   }
 
   &:hover {
-    background: theme.token-as-var('ref.color.button.color-base-content-secondary');
+    background: theme.token-as-var('sys.color.background-hover');
   }
 
   &:focus-within {

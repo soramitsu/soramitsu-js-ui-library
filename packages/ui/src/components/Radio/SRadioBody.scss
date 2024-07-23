@@ -33,7 +33,7 @@ $dur-easing: 0.2s ease;
   }
 
   &__description {
-    color: theme.token-as-var('sys.color.button.secondary.text-color');
+    color: theme.token-as-var('sys.color.content-secondary');
     margin-top: 4px;
   }
 

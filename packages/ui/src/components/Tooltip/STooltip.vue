@@ -115,14 +115,14 @@ function handleSecondaryButtonClick() {
 .s-tooltip {
   &__body {
     background: theme.token-as-var('sys.color.content-primary');
-    color: theme.token-as-var('sys.color.button.action.text-color');
+    color: theme.token-as-var('sys.color.content-on-background-inverted');
     border-radius: 4px;
   }
 
   &__button.s-button {
     &_type_outline {
       border-color: theme.token-as-var('sys.color.border.primary');
-      color: theme.token-as-var('sys.color.button.action.text-color');
+      color: theme.token-as-var('sys.color.content-on-background-inverted');
 
       &:hover,
       &:active {
