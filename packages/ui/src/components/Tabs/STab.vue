@@ -51,7 +51,7 @@ watch(
 @use '@/theme';
 
 $font-color-inactive: theme.token-as-var('sys.color.content-primary');
-$font-color-hover: theme.token-as-var('sys.color.button.primary.background-color-hover');
+$font-color-hover: theme.token-as-var('sys.color.primary-hover');
 $font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
 
 .s-tab {

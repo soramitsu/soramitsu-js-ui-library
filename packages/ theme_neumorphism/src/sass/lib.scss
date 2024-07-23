@@ -75,6 +75,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'content-on-background-inverted': '',
           'background-hover': '',
           'primary-pressed': '',
+          'primary-hover': '',
           'button': (
             'primary': (
               'background-color-hover': #F754A3,
