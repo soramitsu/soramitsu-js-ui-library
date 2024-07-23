@@ -118,7 +118,7 @@ $font-color-disabled: theme.token-as-var('sys.color.button.tertiary.text-color-a
 
   &_background_secondary {
     $font-color-active: theme.token-as-var('sys.color.button.primary.border-color');
-    $background-color: theme.token-as-var('ref.color.button.color-base-content-tertiary');
+    $background-color: theme.token-as-var('sys.color.background');
     $tab-shadow-active: theme.token-as-var('sys.shadow.active-tab');
 
     background: $background-color;

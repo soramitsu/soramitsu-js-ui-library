@@ -134,7 +134,7 @@ if (groupApi) {
     }
 
     #{$component}__trigger {
-      background-color: theme.token-as-var('ref.color.button.color-base-content-tertiary');
+      background-color: theme.token-as-var('sys.color.background');
     }
 
     #{$component}__body-wrapper {

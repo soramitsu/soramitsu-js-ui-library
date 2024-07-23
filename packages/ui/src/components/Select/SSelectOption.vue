@@ -85,7 +85,7 @@ const CHECK_ICON_SIZE = {
   &:hover,
   &:active,
   &_selected {
-    background: theme.token-as-var('ref.color.button.color-base-content-tertiary');
+    background: theme.token-as-var('sys.color.background');
   }
 
   &__content {

@@ -853,7 +853,7 @@ $col-number: v-bind(cardsGridColumnNumber);
 
   &__tr:hover > &__td,
   &__tr_current > &__td {
-    background-color: theme.token-as-var('ref.color.button.color-base-content-tertiary');
+    background-color: theme.token-as-var('sys.color.background');
   }
 
   &__td,
@@ -890,7 +890,7 @@ $col-number: v-bind(cardsGridColumnNumber);
   }
 
   &__expanded-cell {
-    background-color: theme.token-as-var('ref.color.button.color-base-content-tertiary');
+    background-color: theme.token-as-var('sys.color.background');
     border-bottom: 1px solid theme.token-as-var('sys.color.border.secondary');
     min-height: 40px;
   }
