@@ -33,6 +33,7 @@ import type { TableColumnRowSelectableFunc as TableColumnRowSelectableFunc_2 } f
 import type { TableColumnSortBy as TableColumnSortBy_2 } from '@/components/Table/types';
 import type { TableColumnSortOrder as TableColumnSortOrder_2 } from '@/components/Table/types';
 import { UnwrapRef } from 'vue';
+import type { ValidationsList } from '@/components/TextField/types';
 import { VNodeProps } from 'vue';
 
 // @public (undocumented)
@@ -388,8 +389,8 @@ name: string;
 "onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
 }, {
 modelValue: boolean;
-title: string;
 name: string;
+title: string;
 subtitle: string;
 }, {}>, {
     title?(_: {}): any;
@@ -852,11 +853,11 @@ eager: boolean;
 labelledBy: string;
 describedBy: null;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
-"update:show": (...args: any[]) => void;
 "before-open": (...args: any[]) => void;
 "after-open": (...args: any[]) => void;
 "before-close": (...args: any[]) => void;
 "after-close": (...args: any[]) => void;
+"update:show": (...args: any[]) => void;
 "click:overlay": (...args: any[]) => void;
 }, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_WithDefaults_6<__VLS_TypePropsToRuntimeProps_6<Props_2>, {
 teleportTo: string;
@@ -871,15 +872,13 @@ eager: boolean;
 labelledBy: string;
 describedBy: null;
 }>>> & {
-"onUpdate:show"?: ((...args: any[]) => any) | undefined;
 "onBefore-open"?: ((...args: any[]) => any) | undefined;
 "onAfter-open"?: ((...args: any[]) => any) | undefined;
 "onBefore-close"?: ((...args: any[]) => any) | undefined;
 "onAfter-close"?: ((...args: any[]) => any) | undefined;
+"onUpdate:show"?: ((...args: any[]) => any) | undefined;
 "onClick:overlay"?: ((...args: any[]) => any) | undefined;
 }, {
-describedBy: string | null;
-labelledBy: string;
 eager: boolean;
 teleportTo: string;
 modalTransition: string | object;
@@ -889,6 +888,8 @@ showOverlay: boolean;
 closeOnOverlayClick: boolean;
 closeOnEsc: boolean;
 focusTrap: boolean | object;
+labelledBy: string;
+describedBy: string | null;
 }, {}>, {
     default?(_: {
         close: () => void;
@@ -1085,7 +1086,7 @@ export const SPINNER_WIDTH: Record<typeof BUTTON_SIZE_VALUES[number], string>;
 export const SPopover: DefineComponent<    {
 show: BooleanConstructor;
 trigger: {
-type: PropType_2<"click" | "hover" | "manual">;
+type: PropType_2<"click" | "manual" | "hover">;
 default: string;
 validator: (v: unknown) => boolean;
 };
@@ -1116,7 +1117,7 @@ sameWidth: BooleanConstructor;
 }> | null)[], unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("update:show" | "click-outside")[], "update:show" | "click-outside", VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<{
 show: BooleanConstructor;
 trigger: {
-type: PropType_2<"click" | "hover" | "manual">;
+type: PropType_2<"click" | "manual" | "hover">;
 default: string;
 validator: (v: unknown) => boolean;
 };
@@ -1146,9 +1147,9 @@ sameWidth: BooleanConstructor;
 "onUpdate:show"?: ((...args: any[]) => any) | undefined;
 "onClick-outside"?: ((...args: any[]) => any) | undefined;
 }, {
-trigger: "click" | "hover" | "manual";
-placement: Placement;
+trigger: "click" | "manual" | "hover";
 show: boolean;
+placement: Placement;
 skidding: string | number;
 distance: string | number;
 showDelay: string | number;
@@ -1258,9 +1259,9 @@ describedBy: string;
 "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
 modelValue: string | number | symbol | object | null;
+labelledBy: string;
 describedBy: string;
 radioSelector: string;
-labelledBy: string;
 }, {}>, {
     default?(_: {}): any;
 }>;
@@ -1394,8 +1395,8 @@ remoteSearch: boolean;
 onSearch?: ((value: string) => any) | undefined;
 }, {
 modelValue: any;
-multiple: boolean;
 label: string | null;
+multiple: boolean;
 size: SelectSize;
 disabled: boolean;
 loading: boolean;
@@ -1778,7 +1779,7 @@ setCurrentRow: (row: DataType | null) => void;
 // @public (undocumented)
 export const STableColumn: DefineComponent<    {
 type: {
-type: PropType_2<"default" | "details" | "selection" | "expand">;
+type: PropType_2<"default" | "selection" | "expand" | "details">;
 default: string;
 };
 label: {
@@ -1822,11 +1823,11 @@ type: BooleanConstructor;
 default: boolean;
 };
 align: {
-type: PropType_2<"left" | "right" | "center">;
+type: PropType_2<"left" | "center" | "right">;
 default: string;
 };
 headerAlign: {
-type: PropType_2<"left" | "right" | "center" | null>;
+type: PropType_2<"left" | "center" | "right" | null>;
 default: null;
 };
 className: {
@@ -1847,7 +1848,7 @@ default: boolean;
 };
 }, () => null, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<{
 type: {
-type: PropType_2<"default" | "details" | "selection" | "expand">;
+type: PropType_2<"default" | "selection" | "expand" | "details">;
 default: string;
 };
 label: {
@@ -1891,11 +1892,11 @@ type: BooleanConstructor;
 default: boolean;
 };
 align: {
-type: PropType_2<"left" | "right" | "center">;
+type: PropType_2<"left" | "center" | "right">;
 default: string;
 };
 headerAlign: {
-type: PropType_2<"left" | "right" | "center" | null>;
+type: PropType_2<"left" | "center" | "right" | null>;
 default: null;
 };
 className: {
@@ -1915,12 +1916,12 @@ type: BooleanConstructor;
 default: boolean;
 };
 }>>, {
-type: "default" | "details" | "selection" | "expand";
+sortable: boolean | "custom";
+type: "default" | "selection" | "expand" | "details";
 label: string;
 width: string;
-align: "left" | "right" | "center";
 minWidth: string;
-sortable: boolean | "custom";
+align: "left" | "center" | "right";
 selectable: TableColumnRowSelectableFunc_2;
 prop: string;
 sortMethod: <T>(a: T, b: T) => number;
@@ -1928,7 +1929,7 @@ sortBy: TableColumnSortBy_2;
 sortOrders: TableColumnSortOrder_2[];
 formatter: TableColumnCellValueFormatter_2;
 showOverflowTooltip: boolean;
-headerAlign: "left" | "right" | "center" | null;
+headerAlign: "left" | "center" | "right" | null;
 className: string;
 labelClassName: string;
 reserveSelection: boolean;
