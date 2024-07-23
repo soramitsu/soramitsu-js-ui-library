@@ -92,7 +92,7 @@ const slots = useSlots()
 
   &_default {
     background: theme.token-as-var('sys.color.background');
-    color: theme.token-as-var('sys.color.button.primary.border-color');
+    color: theme.token-as-var('sys.color.content-primary');
     @apply rounded px-4;
 
     &:hover {
@@ -103,7 +103,7 @@ const slots = useSlots()
   &_inline {
     #{$root}__selection {
       @apply underline underline-solid;
-      text-decoration-color: theme.token-as-var('sys.color.button.primary.border-color');
+      text-decoration-color: theme.token-as-var('sys.color.content-primary');
     }
 
     &:hover#{$root}_empty #{$root}__label {

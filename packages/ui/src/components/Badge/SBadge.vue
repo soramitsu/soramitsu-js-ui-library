@@ -74,7 +74,7 @@ const showSpinner = computed(() => {
   }
 
   .primary-text-color {
-    color: theme.token-as-var('sys.color.button.primary.border-color');
+    color: theme.token-as-var('sys.color.content-primary');
   }
 
   .marker {

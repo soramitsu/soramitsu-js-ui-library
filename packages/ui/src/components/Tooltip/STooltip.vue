@@ -114,7 +114,7 @@ function handleSecondaryButtonClick() {
 
 .s-tooltip {
   &__body {
-    background: theme.token-as-var('sys.color.button.primary.border-color');
+    background: theme.token-as-var('sys.color.content-primary');
     color: theme.token-as-var('sys.color.button.action.text-color');
     border-radius: 4px;
   }
@@ -128,7 +128,7 @@ function handleSecondaryButtonClick() {
       &:active {
         border-color: theme.token-as-var('ref.color.button.color-base-on-accent');
         background: theme.token-as-var('ref.color.button.color-base-on-accent');
-        color: theme.token-as-var('sys.color.button.primary.border-color');
+        color: theme.token-as-var('sys.color.content-primary');
       }
     }
 

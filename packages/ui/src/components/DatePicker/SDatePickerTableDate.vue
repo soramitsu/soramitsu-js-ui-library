@@ -347,7 +347,7 @@ const handleClick = (ev: any) => {
       text-align: center;
       cursor: pointer;
       position: relative;
-      color: theme.token-as-var('sys.color.button.primary.border-color');
+      color: theme.token-as-var('sys.color.content-primary');
       font-feature-settings: 'tnum' on, 'lnum' on, 'case' on;
 
       & span {
@@ -363,7 +363,7 @@ const handleClick = (ev: any) => {
 
       &.next-month,
       &.prev-month {
-        color: theme.token-as-var('sys.color.button.primary.border-color');
+        color: theme.token-as-var('sys.color.content-primary');
         opacity: 0.4;
       }
 
@@ -417,7 +417,7 @@ const handleClick = (ev: any) => {
       font-weight: 400;
       border-bottom: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
       border-top: 1px solid theme.token-as-var('ref.color.button.color-utility-surface');
-      color: theme.token-as-var('sys.color.button.primary.border-color');
+      color: theme.token-as-var('sys.color.content-primary');
       text-align: center;
     }
   }

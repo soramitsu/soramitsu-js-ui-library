@@ -335,7 +335,7 @@ function handlePrevClick() {
 .s-pagination {
   &__button {
     cursor: pointer;
-    color: theme.token-as-var('sys.color.button.primary.border-color');
+    color: theme.token-as-var('sys.color.content-primary');
 
     &_active {
       color: theme.token-as-var('sys.color.button.primary.background-color-pressed');

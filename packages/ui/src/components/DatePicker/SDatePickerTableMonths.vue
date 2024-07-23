@@ -150,7 +150,7 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
       & .cell {
         display: block;
         line-height: 36px;
-        color: theme.token-as-var('sys.color.button.primary.border-color');
+        color: theme.token-as-var('sys.color.content-primary');
         margin: 0 auto;
         border-radius: 18px;
 

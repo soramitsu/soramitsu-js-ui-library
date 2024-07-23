@@ -260,7 +260,7 @@ function handleChevronClick(event: MouseEvent) {
   @apply select-none cursor-pointer;
 
   background: theme.token-as-var('sys.color.background');
-  color: theme.token-as-var('sys.color.button.primary.border-color');
+  color: theme.token-as-var('sys.color.content-primary');
   border: 1px solid transparent;
 
   &_disabled {

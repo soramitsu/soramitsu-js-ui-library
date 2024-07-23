@@ -28,7 +28,7 @@ $dur-easing: 0.2s ease;
   }
 
   label {
-    color: theme.token-as-var('sys.color.button.primary.border-color');
+    color: theme.token-as-var('sys.color.content-primary');
     @apply cursor-pointer;
   }
 

@@ -87,7 +87,7 @@ function onTimeout() {
   // for time line
   @apply relative overflow-hidden;
 
-  background: theme.token-as-var('sys.color.button.primary.border-color');
+  background: theme.token-as-var('sys.color.content-primary');
   color: theme.token-as-var('sys.color.button.action.text-color');
   box-shadow: theme.token-as-var('sys.shadow.floating-notification');
 

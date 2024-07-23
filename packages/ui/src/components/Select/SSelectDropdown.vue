@@ -220,7 +220,7 @@ const dropdownHeight = computed(() => {
   }
 
   &__search-input {
-    color: theme.token-as-var('sys.color.button.primary.border-color');
+    color: theme.token-as-var('sys.color.content-primary');
 
     &::placeholder {
       color: theme.token-as-var('sys.color.content-tertiary');
