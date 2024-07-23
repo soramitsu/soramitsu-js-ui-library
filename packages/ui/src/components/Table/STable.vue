@@ -825,8 +825,8 @@ $col-number: v-bind(cardsGridColumnNumber);
   }
 
   &__card {
-    border-right: 1px solid theme.token-as-var('sys.color.button.secondary.border-color');
-    border-top: 1px solid theme.token-as-var('sys.color.button.secondary.border-color');
+    border-right: 1px solid theme.token-as-var('sys.color.border.secondary');
+    border-top: 1px solid theme.token-as-var('sys.color.border.secondary');
 
     &_last-column {
       border-right: none;
@@ -859,7 +859,7 @@ $col-number: v-bind(cardsGridColumnNumber);
   &__td,
   &__th {
     height: 48px;
-    border-bottom: 1px solid theme.token-as-var('sys.color.button.secondary.border-color');
+    border-bottom: 1px solid theme.token-as-var('sys.color.border.secondary');
     transition: background-color 0.25s ease;
     min-width: 0;
     box-sizing: border-box;
@@ -891,7 +891,7 @@ $col-number: v-bind(cardsGridColumnNumber);
 
   &__expanded-cell {
     background-color: theme.token-as-var('ref.color.button.color-base-content-tertiary');
-    border-bottom: 1px solid theme.token-as-var('sys.color.button.secondary.border-color');
+    border-bottom: 1px solid theme.token-as-var('sys.color.border.secondary');
     min-height: 40px;
   }
 

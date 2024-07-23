@@ -125,7 +125,7 @@ if (groupApi) {
 
 .s-accordion-item {
   @apply flex flex-col;
-  border: 1px solid theme.token-as-var('sys.color.button.secondary.border-color');
+  border: 1px solid theme.token-as-var('sys.color.border.secondary');
   $component: &;
 
   &_expanded {
