@@ -278,7 +278,7 @@ function handleChevronClick(event: MouseEvent) {
 
   &__label,
   &__search-icon {
-    color: theme.token-as-var('sys.color.button.tertiary.text-color');
+    color: theme.token-as-var('sys.color.content-tertiary');
     fill: currentColor;
   }
 

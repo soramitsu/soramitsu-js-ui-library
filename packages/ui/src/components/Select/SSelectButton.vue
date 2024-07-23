@@ -116,7 +116,7 @@ const slots = useSlots()
   }
 
   &:not(&_empty) &__label {
-    color: theme.token-as-var('sys.color.button.tertiary.text-color');
+    color: theme.token-as-var('sys.color.content-tertiary');
   }
 
   &_size {

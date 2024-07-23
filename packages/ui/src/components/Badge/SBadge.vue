@@ -70,7 +70,7 @@ const showSpinner = computed(() => {
   }
 
   &_color_pending {
-    background-color: theme.token-as-var('sys.color.button.tertiary.text-color');
+    background-color: theme.token-as-var('sys.color.content-tertiary');
   }
 
   .primary-text-color {

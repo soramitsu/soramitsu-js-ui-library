@@ -344,7 +344,7 @@ $message-icon-alignment-fix: -1px;
 $theme-bg: theme.token-as-var('sys.color.background');
 $theme-bg-hover: theme.token-as-var('ref.color.button.color-base-content-secondary');
 $theme-border-primary: theme.token-as-var('ref.color.button.color-utility-surface');
-$theme-content-tertiary: theme.token-as-var('sys.color.button.tertiary.text-color');
+$theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
 
 .s-text-field {
   $root: &;

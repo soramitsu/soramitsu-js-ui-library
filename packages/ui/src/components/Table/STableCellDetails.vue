@@ -17,7 +17,7 @@ import { IconArrowsChevronRightXs24 } from '@/components/icons'
   }
 
   &__icon {
-    color: theme.token-as-var('sys.color.button.tertiary.text-color-active');
+    color: theme.token-as-var('sys.color.content-tertiary-active');
     fill: currentColor;
   }
 

@@ -53,7 +53,7 @@ const model = useVModel(props, 'modelValue', emit)
 
 $border-primary: theme.token-as-var('ref.color.button.color-utility-surface');
 $content-primary: theme.token-as-var('sys.color.button.primary.border-color');
-$content-quaternary: theme.token-as-var('sys.color.button.tertiary.text-color-active');
+$content-quaternary: theme.token-as-var('sys.color.content-tertiary-active');
 $primary: theme.token-as-var('ref.color.button.color-theme-accent');
 $primary-hover: theme.token-as-var('sys.color.button.primary.background-color-hover');
 $util-surface: theme.token-as-var('ref.color.button.color-base-on-accent');

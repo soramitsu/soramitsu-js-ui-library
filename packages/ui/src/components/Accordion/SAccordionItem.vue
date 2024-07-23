@@ -157,7 +157,7 @@ if (groupApi) {
   }
 
   &__subtitle {
-    color: theme.token-as-var('sys.color.button.tertiary.text-color');
+    color: theme.token-as-var('sys.color.content-tertiary');
   }
 
   &__body {

@@ -61,6 +61,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
       sys: (
         'color': (
           'background': #f5f7f8,
+          'content-tertiary': #75787b,
           'button': (
             'primary': (
               'background-color-hover': #c6021a,

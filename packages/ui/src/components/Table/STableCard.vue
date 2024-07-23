@@ -166,7 +166,7 @@ function select() {
   }
 
   &__label {
-    color: theme.token-as-var('sys.color.button.tertiary.text-color');
+    color: theme.token-as-var('sys.color.content-tertiary');
   }
 
   &__expand-icon {
