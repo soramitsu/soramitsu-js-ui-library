@@ -110,9 +110,11 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'debug-background': #ffeef4,
             'debug-background-hover': #f3d3de,
           ),
+          'border': (
+            'secondary': '#2d2926'
+          )
         ),
         'border': (
-          'secondary': #2d2926,
           'button': (
             'width': '',
           ),
