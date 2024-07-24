@@ -259,7 +259,7 @@ function handleChevronClick(event: MouseEvent) {
   @apply rounded flex items-center px-4;
   @apply select-none cursor-pointer;
 
-  background: theme.token-as-var('ref.color.common.color-base-on-accent');
+  background: theme.token-as-var('ref.color.common.color-base-content-tertiary');
   color: theme.token-as-var('sys.color.content-primary');
   border: 1px solid transparent;
 

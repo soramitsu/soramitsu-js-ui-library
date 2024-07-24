@@ -91,7 +91,7 @@ const slots = useSlots()
   @apply select-none inline-flex items-center space-x-2 cursor-pointer;
 
   &_default {
-    background: theme.token-as-var('ref.color.common.color-base-on-accent');
+    background: theme.token-as-var('ref.color.common.color-base-content-tertiary');
     color: theme.token-as-var('sys.color.content-primary');
     @apply rounded px-4;
 

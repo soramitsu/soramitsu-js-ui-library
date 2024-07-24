@@ -118,7 +118,7 @@ $font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
 
   &_background_secondary {
     $font-color-active: theme.token-as-var('sys.color.content-primary');
-    $background-color: theme.token-as-var('ref.color.common.color-base-on-accent');
+    $background-color: theme.token-as-var('ref.color.common.color-base-content-tertiary');
     $tab-shadow-active: theme.token-as-var('sys.shadow.active-tab');
 
     background: $background-color;
