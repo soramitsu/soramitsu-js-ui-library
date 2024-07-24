@@ -1,7 +1,7 @@
 $tokens: (
   'ref': (
     'color': (
-      'button': (
+      'common': (
         'color-utility-surface': null,
         'color-base-on-accent': null,
         'color-base-content-tertiary': null,
@@ -25,15 +25,11 @@ $tokens: (
   ),
   'sys': (
     'color': (
-      'background': null,
       'content-tertiary': null,
       'content-secondary': null,
       'content-primary': null,
       'content-quaternary': null,
       'on-disabled': null,
-      'primary': null,
-      'content-on-background-inverted': null,
-      'background-hover': null,
       'primary-pressed': null,
       'primary-hover': null,
       'button': (
@@ -83,10 +79,6 @@ $tokens: (
         'debug-background': null,
         'debug-background-hover': null,
       ),
-      'border': (
-        'primary': null,
-        'secondary': null,
-      )
     ),
     'border': (
       'button': (

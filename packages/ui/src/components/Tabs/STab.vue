@@ -98,12 +98,12 @@ $font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
   }
 
   &_background_primary {
-    $font-color-active: theme.token-as-var('sys.color.content-on-background-inverted');
+    $font-color-active: theme.token-as-var('ref.color.common.color-base-on-accent');
 
-    $background-color: theme.token-as-var('sys.color.content-on-background-inverted');
-    $background-color-active: theme.token-as-var('sys.color.primary');
+    $background-color: theme.token-as-var('ref.color.common.color-base-on-accent');
+    $background-color-active: theme.token-as-var('ref.color.common.color-theme-accent');
 
-    $border: 1px solid theme.token-as-var('sys.color.border.primary');
+    $border: 1px solid theme.token-as-var('ref.color.common.color-utility-surface');
     $border-active: 1px solid $background-color-active;
 
     background: $background-color;
@@ -118,7 +118,7 @@ $font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
 
   &_background_secondary {
     $font-color-active: theme.token-as-var('sys.color.content-primary');
-    $background-color: theme.token-as-var('sys.color.background');
+    $background-color: theme.token-as-var('ref.color.common.color-base-on-accent');
     $tab-shadow-active: theme.token-as-var('sys.shadow.active-tab');
 
     background: $background-color;
@@ -135,13 +135,13 @@ $font-color-disabled: theme.token-as-var('sys.color.content-quaternary');
   }
 
   &_background_none {
-    $font-color-active: theme.token-as-var('sys.color.primary');
+    $font-color-active: theme.token-as-var('ref.color.common.color-theme-accent');
 
     $background-color: none;
     $background-color-active: none;
 
-    $border: 2px solid theme.token-as-var('sys.color.border.primary');
-    $border-active: 2px solid theme.token-as-var('sys.color.primary');
+    $border: 2px solid theme.token-as-var('ref.color.common.color-utility-surface');
+    $border-active: 2px solid theme.token-as-var('ref.color.common.color-theme-accent');
 
     background: $background-color;
     border-bottom: $border;

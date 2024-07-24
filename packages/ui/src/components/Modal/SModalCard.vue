@@ -63,7 +63,7 @@ function closeClick() {
 <style lang="scss">
 @use '@/theme';
 
-$col-surface: theme.token-as-var('sys.color.content-on-background-inverted');
+$col-surface: theme.token-as-var('ref.color.common.color-base-on-accent');
 $shadow: theme.token-as-var('sys.shadow.floating-notification');
 $shadow-header: theme.token-as-var('sys.shadow.modal-window-header');
 

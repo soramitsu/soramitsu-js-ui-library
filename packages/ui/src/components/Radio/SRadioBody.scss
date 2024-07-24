@@ -1,8 +1,8 @@
 @use '@/theme';
 
-$primary: theme.token-as-var('sys.color.primary');
+$primary: theme.token-as-var('ref.color.common.color-theme-accent');
 $on-disabled: theme.token-as-var('sys.color.on-disabled');
-$border-primary: theme.token-as-var('sys.color.border.primary');
+$border-primary: theme.token-as-var('ref.color.common.color-utility-surface');
 
 $dur-easing: 0.2s ease;
 

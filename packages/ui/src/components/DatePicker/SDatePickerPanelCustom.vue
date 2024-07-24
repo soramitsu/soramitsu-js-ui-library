@@ -187,12 +187,12 @@ const onDoneClick = () => {
 
 .s-date-picker-custom-panel {
   grid-area: custom;
-  border-top: 1px solid theme.token-as-var('sys.color.border.primary');
+  border-top: 1px solid theme.token-as-var('ref.color.common.color-utility-surface');
   height: 52px;
 
   &__input {
     outline: none;
-    border: 1px solid theme.token-as-var('sys.color.border.primary');
+    border: 1px solid theme.token-as-var('ref.color.common.color-utility-surface');
     border-radius: 4px;
     padding: 5px 10px;
     width: 120px;
@@ -208,9 +208,9 @@ const onDoneClick = () => {
     font-size: 10px;
     width: 44px;
     height: 24px;
-    background: theme.token-as-var('sys.color.primary');
+    background: theme.token-as-var('ref.color.common.color-theme-accent');
     border-radius: 2px;
-    color: theme.token-as-var('sys.color.content-on-background-inverted');
+    color: theme.token-as-var('ref.color.common.color-base-on-accent');
     font-weight: 700;
   }
 }

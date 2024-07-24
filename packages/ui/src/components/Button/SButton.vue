@@ -172,7 +172,7 @@ const handleClick = (event: Event) => {
   $box-shadow: if($box-shadow == null, theme.token-as-var('ref.color.shadow.shadow-element'), $box-shadow);
 
   &_disabled, &_disabled:hover {
-    color: theme.token-as-var('ref.color.button.color-base-content-tertiary');
+    color: theme.token-as-var('ref.color.common.color-base-content-tertiary');
     background: $background-color;
     border-color: theme.token-as-var('sys.disabled.button.border-color');
     box-shadow: $box-shadow;
@@ -191,15 +191,15 @@ const handleClick = (event: Event) => {
 
 // Primary
 @mixin apply-theme-primary($theme) {
-  background-color: theme-token($theme,'ref.color.button.color-theme-accent');
-  color: theme-token($theme,'ref.color.button.color-base-on-accent');
+  background-color: theme-token($theme,'ref.color.common.color-theme-accent');
+  color: theme-token($theme,'ref.color.common.color-base-on-accent');
   box-shadow: theme-token($theme,'sys.shadow.button.primary.box-shadow');
 
   &:hover,&:focus, &.focusing {
     background-color: theme-token($theme,'sys.color.button.primary.background-color-hover');
-    border-color: theme-token($theme,'ref.color.button.color-utility-surface');
+    border-color: theme-token($theme,'ref.color.common.color-utility-surface');
     box-shadow:  theme-token($theme,'sys.shadow.button.primary.box-shadow-hover');
-    color: theme-token($theme,'ref.color.button.color-base-on-accent');
+    color: theme-token($theme,'ref.color.common.color-base-on-accent');
     &.is-circle {
       border-color: theme-token($theme,'sys.color.button.primary.background-color-hover');
     }
@@ -207,9 +207,9 @@ const handleClick = (event: Event) => {
 
   &:active, &.s-pressed {
     background-color:  theme-token($theme,'sys.color.button.primary.background-color-pressed');
-    border-color:  theme-token($theme,'ref.color.button.color-utility-surface');
+    border-color:  theme-token($theme,'ref.color.common.color-utility-surface');
     box-shadow:   theme-token($theme,'sys.shadow.button.primary.box-shadow-pressed');
-    color:  theme-token($theme,'ref.color.button.color-base-on-accent');
+    color:  theme-token($theme,'ref.color.common.color-base-on-accent');
   }
    @include disabled($theme: theme);
 }
@@ -228,7 +228,7 @@ const handleClick = (event: Event) => {
 
 // Secondary
 @mixin apply-theme-secondary($theme) {
-  background-color: theme-token($theme,'ref.color.button.color-base-content-tertiary');
+  background-color: theme-token($theme,'ref.color.common.color-base-content-tertiary');
   color: theme-token($theme,'sys.color.button.secondary.text-color');
   border: 
   theme-token($theme,'ref.border.width') 
@@ -237,7 +237,7 @@ const handleClick = (event: Event) => {
   box-shadow: theme-token($theme,'ref.color.shadow.shadow-element-pressed');
 
   &:hover, &:focus, &.focusing, &:active, &.s-pressed{
-    background: theme-token($theme,'ref.color.button.color-base-content-secondary');
+    background: theme-token($theme,'ref.color.common.color-base-content-secondary');
     border-color: theme-token($theme,'sys.color.button.secondary.border-color-active');
     color: theme-token($theme,'sys.color.button.secondary.text-color-active');
   }
@@ -249,17 +249,17 @@ const handleClick = (event: Event) => {
 
 // Terrtiary
 @mixin apply-theme-tertiary($theme) {
-  background-color: theme-token($theme,'ref.color.button.color-utility-body');
+  background-color: theme-token($theme,'ref.color.common.color-utility-body');
   color: theme-token($theme,'sys.color.button.tertiary.text-color');
   border: 
   theme-token($theme,'ref.border.width') 
   theme-token($theme,'ref.border.style') 
-  theme-token($theme,'ref.color.button.border-color');
+  theme-token($theme,'ref.color.common.border-color');
   box-shadow: theme-token($theme,'ref.color.shadow.shadow-element-pressed');
 
   &:hover, &:focus, &.focusing, &:active, &.s-pressed {
-    background: theme-token($theme,'ref.color.button.color-utility-body');
-    border-color: theme-token($theme,'ref.color.button.border-color');
+    background: theme-token($theme,'ref.color.common.color-utility-body');
+    border-color: theme-token($theme,'ref.color.common.border-color');
     color: theme-token($theme,'sys.color.button.tertiary.text-color-active');
   }
   &:hover, &:focus, &.focusing {
@@ -274,7 +274,7 @@ const handleClick = (event: Event) => {
 //Action
 @mixin apply-theme-action($theme) {
   background: theme-token($theme,'sys.color.button.action.background-color'); 
-  border-color: theme-token($theme,'ref.color.button.border-color'); 
+  border-color: theme-token($theme,'ref.color.common.border-color'); 
   border-style: theme-token($theme,'ref.border.style');
   border-width: theme-token($theme,'ref.border.width');
   box-shadow: theme-token($theme,'ref.color.shadow.shadow-element-pressed');
@@ -282,13 +282,13 @@ const handleClick = (event: Event) => {
 
   &:hover, &:focus, &.focusing {
     background: theme-token($theme,'sys.color.button.action.background-color-hover'); 
-    border-color: theme-token($theme,'ref.color.button.border-color');
+    border-color: theme-token($theme,'ref.color.common.border-color');
     color: theme-token($theme,'sys.color.button.action.text-color-hover');
     box-shadow: theme-token($theme,'ref.color.shadow.shadow-element');
   }
   &:active, &.s-pressed {
     background: theme-token($theme,'sys.color.button.action.background-color-pressed');
-    border-color: theme-token($theme,'ref.color.button.border-color'); 
+    border-color: theme-token($theme,'ref.color.common.border-color'); 
     box-shadow: theme-token($theme,'ref.color.shadow.shadow-element-pressed');
   }
   &:active {
@@ -301,31 +301,31 @@ const handleClick = (event: Event) => {
     $box-shadow: theme_neumorphism.token-as-var('ref.color.shadow.shadow-element-pressed'),
   );
   &.primary:not(:disabled) {
-    color: theme-token($theme,'ref.color.button.color-base-on-accent')
+    color: theme-token($theme,'ref.color.common.color-base-on-accent')
   }
 }
 // Action-alternative
 @mixin apply-theme-action-alternative($theme) {
-  color: theme-token($theme,'ref.color.button.color-base-content-tertiary');
+  color: theme-token($theme,'ref.color.common.color-base-content-tertiary');
   &, &:hover, &:focus, &.focusing, &:active, &.s-pressed {
-    background-color: theme-token($theme,'ref.color.button.border-color'); 
-    border-color: theme-token($theme,'ref.color.button.border-color'); 
+    background-color: theme-token($theme,'ref.color.common.border-color'); 
+    border-color: theme-token($theme,'ref.color.common.border-color'); 
     box-shadow: theme-token($theme,'ref.color.shadow.shadow-element-pressed'); 
   }
   &:hover, &:focus, &.focusing, &:active, &.s-pressed {
-    color: theme-token($theme,'ref.color.button.color-base-content-secondary');
+    color: theme-token($theme,'ref.color.common.color-base-content-secondary');
   }
   @include disabled( 
     $theme: theme,
     $border-width: theme_neumorphism.token-as-var('ref.border.width'), 
-    $background-color: theme_neumorphism.token-as-var('ref.color.button.border-color'), 
+    $background-color: theme_neumorphism.token-as-var('ref.color.common.border-color'), 
     $box-shadow: theme_neumorphism.token-as-var('ref.color.shadow.shadow-element-pressed'),
   );
 }
 // Action-primary
 @mixin apply-theme-action-primary($theme) {
-  background-color: theme-token($theme,'ref.color.button.color-theme-accent');
-  color: theme-token($theme,'ref.color.button.color-base-on-accent');
+  background-color: theme-token($theme,'ref.color.common.color-theme-accent');
+  color: theme-token($theme,'ref.color.common.color-base-on-accent');
   box-shadow:  theme-token($theme,'sys.shadow.button.primary.box-shadow');
   border: 
   theme-token($theme,'sys.border.button.width') 
@@ -334,16 +334,16 @@ const handleClick = (event: Event) => {
 
   &:hover {
     background-color: theme-token($theme,'sys.color.button.primary.background-color-hover');
-    border-color: theme-token($theme,'ref.color.button.color-utility-surface');
+    border-color: theme-token($theme,'ref.color.common.color-utility-surface');
     box-shadow: theme-token($theme,'sys.shadow.button.primary.box-shadow-hover');
-    color: theme-token($theme,'ref.color.button.color-base-on-accent');
+    color: theme-token($theme,'ref.color.common.color-base-on-accent');
   }
 
   &:active {
     background-color: theme-token($theme,'sys.color.button.primary.background-color-pressed');
-    border-color: theme-token($theme,'ref.color.button.color-utility-surface');
+    border-color: theme-token($theme,'ref.color.common.color-utility-surface');
     box-shadow: theme-token($theme,'sys.shadow.button.primary.box-shadow-pressed');
-    color: theme-token($theme,'ref.color.button.color-base-on-accent');
+    color: theme-token($theme,'ref.color.common.color-base-on-accent');
   }
 }
 

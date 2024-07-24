@@ -259,7 +259,7 @@ function handleChevronClick(event: MouseEvent) {
   @apply rounded flex items-center px-4;
   @apply select-none cursor-pointer;
 
-  background: theme.token-as-var('sys.color.background');
+  background: theme.token-as-var('ref.color.common.color-base-on-accent');
   color: theme.token-as-var('sys.color.content-primary');
   border: 1px solid transparent;
 
@@ -268,12 +268,12 @@ function handleChevronClick(event: MouseEvent) {
   }
 
   &:hover {
-    background: theme.token-as-var('sys.color.background-hover');
+    background: theme.token-as-var('ref.color.common.color-base-content-secondary');
   }
 
   &:focus-within {
     background: transparent;
-    border: 1px solid theme.token-as-var('sys.color.border.primary');
+    border: 1px solid theme.token-as-var('ref.color.common.color-utility-surface');
   }
 
   &__label,

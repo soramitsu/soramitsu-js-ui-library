@@ -34,7 +34,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
     (
       ref: (
         'color': (
-          'button': (
+          'common': (
             'color-utility-surface': #FDF7FB,
             'color-base-on-accent': #FFFFFF,
             'color-base-content-tertiary': #D5CDD0,
@@ -64,15 +64,11 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
       ),
       sys: (
         'color': (
-          'background': '',
           'content-tertiary': '',
           'content-secondary': '',
           'content-primary': '',
           'content-quaternary': '',
           'on-disabled': '',
-          'primary': '',
-          'content-on-background-inverted': '',
-          'background-hover': '',
           'primary-pressed': '',
           'primary-hover': '',
           'button': (
@@ -85,24 +81,24 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'border-color': #EDE4E7,
             ),
             'secondary': (
-              'text-color': token-as-var('ref.color.button.color-base-on-accent'),
-              'text-color-active': token-as-var('ref.color.button.color-base-on-accent'),
+              'text-color': token-as-var('ref.color.common.color-base-on-accent'),
+              'text-color-active': token-as-var('ref.color.common.color-base-on-accent'),
 
-              'border-color': token-as-var('ref.color.button.border-color'),
-              'border-color-active': token-as-var('ref.color.button.border-color'),
+              'border-color': token-as-var('ref.color.common.border-color'),
+              'border-color-active': token-as-var('ref.color.common.border-color'),
             ),
             'tertiary': (
-              'text-color': token-as-var('ref.color.button.color-base-content-tertiary'),
-              'text-color-active': token-as-var('ref.color.button.color-base-content-secondary'),
+              'text-color': token-as-var('ref.color.common.color-base-content-tertiary'),
+              'text-color-active': token-as-var('ref.color.common.color-base-content-secondary'),
             ),
             'action': (
-              'background-color': token-as-var('ref.color.button.color-utility-body'),
+              'background-color': token-as-var('ref.color.common.color-utility-body'),
               'background-color-hover': token-as-var('sys.color.button.action.background-color'),
               'background-color-pressed': token-as-var('sys.color.button.action.background-color'),
 
-              'text-color': token-as-var('ref.color.button.color-base-content-tertiary'),
-              'text-color-hover': token-as-var('ref.color.button.color-base-content-secondary'),
-              'text-color-active': token-as-var('ref.color.button.color-theme-accent'),
+              'text-color': token-as-var('ref.color.common.color-base-content-tertiary'),
+              'text-color-hover': token-as-var('ref.color.common.color-base-content-secondary'),
+              'text-color-active': token-as-var('ref.color.common.color-theme-accent'),
             )
           ),
           'util': (
@@ -125,10 +121,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'debug-background': '',
             'debug-background-hover': '',
           ),
-          'border': (
-            'primary': '',
-            'secondary': ''
-          )
         ),
         'border': (
           'button': (
@@ -137,8 +129,8 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
         ),
         'disabled': (
           'button': (
-            'background-color': token-as-var('ref.color.button.color-utility-surface'),
-            'border-color': token-as-var('ref.color.button.color-utility-body'),
+            'background-color': token-as-var('ref.color.common.color-utility-surface'),
+            'border-color': token-as-var('ref.color.common.color-utility-body'),
           ),
         ),
         'transition': (

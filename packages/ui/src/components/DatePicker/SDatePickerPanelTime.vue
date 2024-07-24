@@ -46,7 +46,7 @@ const updateTime = (e: any) => {
   grid-area: time;
   max-height: 342px;
 
-  scrollbar-color: theme.token-as-var('sys.color.border.primary') transparent;
+  scrollbar-color: theme.token-as-var('ref.color.common.color-utility-surface') transparent;
   scrollbar-arrow-color: transparent;
   scrollbar-width: thin;
 
@@ -68,13 +68,13 @@ const updateTime = (e: any) => {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: theme.token-as-var('sys.color.border.primary');
+    background: theme.token-as-var('ref.color.common.color-utility-surface');
     border-radius: 2px;
   }
 
   .active {
-    background-color: theme.token-as-var('sys.color.primary');
-    color: theme.token-as-var('sys.color.content-on-background-inverted');
+    background-color: theme.token-as-var('ref.color.common.color-theme-accent');
+    color: theme.token-as-var('ref.color.common.color-base-on-accent');
     border-radius: 2px;
   }
 }

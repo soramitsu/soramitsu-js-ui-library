@@ -825,8 +825,8 @@ $col-number: v-bind(cardsGridColumnNumber);
   }
 
   &__card {
-    border-right: 1px solid theme.token-as-var('sys.color.border.secondary');
-    border-top: 1px solid theme.token-as-var('sys.color.border.secondary');
+    border-right: 1px solid theme.token-as-var('ref.color.common.color-base-content-secondary');
+    border-top: 1px solid theme.token-as-var('ref.color.common.color-base-content-secondary');
 
     &_last-column {
       border-right: none;
@@ -853,13 +853,13 @@ $col-number: v-bind(cardsGridColumnNumber);
 
   &__tr:hover > &__td,
   &__tr_current > &__td {
-    background-color: theme.token-as-var('sys.color.background');
+    background-color: theme.token-as-var('ref.color.common.color-base-on-accent');
   }
 
   &__td,
   &__th {
     height: 48px;
-    border-bottom: 1px solid theme.token-as-var('sys.color.border.secondary');
+    border-bottom: 1px solid theme.token-as-var('ref.color.common.color-base-content-secondary');
     transition: background-color 0.25s ease;
     min-width: 0;
     box-sizing: border-box;
@@ -890,8 +890,8 @@ $col-number: v-bind(cardsGridColumnNumber);
   }
 
   &__expanded-cell {
-    background-color: theme.token-as-var('sys.color.background');
-    border-bottom: 1px solid theme.token-as-var('sys.color.border.secondary');
+    background-color: theme.token-as-var('ref.color.common.color-base-on-accent');
+    border-bottom: 1px solid theme.token-as-var('ref.color.common.color-base-content-secondary');
     min-height: 40px;
   }
 
@@ -901,7 +901,7 @@ $col-number: v-bind(cardsGridColumnNumber);
 
     &_active {
       visibility: visible;
-      fill: theme.token-as-var('sys.color.primary');
+      fill: theme.token-as-var('ref.color.common.color-theme-accent');
     }
 
     &_asc {
