@@ -8,7 +8,7 @@ $sizes: (
 );
 
 $border-radius: 3px;
-$color-disabled: theme.token-as-var('sys.color.disabled');
+$color-disabled: theme.token-as-var('sys.color.background');
 $color-on-disabled: theme.token-as-var('sys.color.on-disabled');
 $color-primary: theme.token-as-var('sys.color.primary');
 $color-border-primary: theme.token-as-var('sys.color.border.primary');

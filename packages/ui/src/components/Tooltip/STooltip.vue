@@ -133,7 +133,7 @@ function handleSecondaryButtonClick() {
     }
 
     &_type_outline#{&}_disabled {
-      border-color: theme.token-as-var('sys.color.disabled');
+      border-color: theme.token-as-var('sys.color.background');
       color: theme.token-as-var('sys.color.on-disabled');
     }
   }

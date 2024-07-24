@@ -47,9 +47,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'color-light': '',
             'color-light-dark': '',
             'color-dark': '',
-
             'shadow-element': '',
-
             'shadow-element-pressed': '',
           ),
         ),
@@ -65,7 +63,6 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'content-secondary': #53565a,
           'content-primary': #2d2926,
           'content-quaternary': #a3a4a8,
-          'disabled': #f5f7f8,
           'on-disabled': #a3a4a8,
           'primary': #d0021b,
           'content-on-background-inverted': #ffffff,
@@ -78,13 +75,11 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'background-color-pressed': #bb0218,
               'background-color-alternative': #d0021b,
               'background-color-alternative-active': #d0021b,
-
               'border-color': #2d2926,
             ),
             'secondary': (
               'text-color': #53565a,
               'text-color-active': #2d2926,
-
               'border-color': #eceff0,
               'border-color-active': '',
             ),
@@ -95,7 +90,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'action': (
               'background-color': #f5f7f8,
               'background-color-hover': #eceff0,
-              'background-color-pressed': #dde0e1,
+              'background-color-pressed': token-as-var('ref.color.button.color-utility-surface'), 
               
               'text-color': #2d2926,
               'text-color-hover': '',
