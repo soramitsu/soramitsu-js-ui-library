@@ -2,6 +2,8 @@ $neu-datepicker-header-label: #2A1820 !default;
 $neu-datepicker-btn-arrow: var(--s-color-base-content-tertiary) !default;
 $neu-datepicker-table-days: var(--s-color-base-content-secondary) !default;
 $neu-datepicker-border-bottom: $neu-datepicker-btn-arrow !default;
+$neu-datepicker-date-hover-background-color: var(--s-color-theme-accent) !default;
+$neu-datepicker-date-hover-color: #F4F0F1 !default;
 
 @mixin date-picker-border-radius(
   $suffix: "big",
@@ -222,7 +224,8 @@ $date-picker-padding: 8px;
 .el-month-table td .cell {
   color: var(--s-color-base-content-primary);
 }
-.el-picker-panel__icon-btn:hover,
+
+
 .el-year-table td.today .cell,
 .el-year-table td .cell:hover,
 .el-year-table td.current:not(.disabled) .cell,
@@ -250,10 +253,18 @@ $date-picker-padding: 8px;
   .el-picker-panel__content {
     .el-date-table {
       td {
-        &.available:hover,
+        &.available:hover {
+          // width: 28px !important;
+          // height: 28px !important;
+          // padding: 2px !important;
+          color: $neu-datepicker-date-hover-color;
+          border-radius: 14px !important;
+          background-color: $neu-datepicker-date-hover-background-color;
+        }
         &.today span {
           color: var(--s-color-theme-accent);
         }
+        
         &.next-month,
         &.prev-month {
           color: $neu-datepicker-table-days;
@@ -263,9 +274,17 @@ $date-picker-padding: 8px;
         &.start-date,
         &.end-date {
           span {
+            width: 28px;
+            height: 28px;
+            padding: 2px;
+            border-radius: 14px;
             background-color: var(--s-color-theme-accent);
             color: var(--s-color-utility-surface);
           }
+        }
+        &.selected:hover,
+        &.today span:hover {
+          color: var(--s-color-utility-surface);
         }
       }
       th {
