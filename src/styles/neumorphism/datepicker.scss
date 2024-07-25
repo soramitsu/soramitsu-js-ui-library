@@ -248,19 +248,12 @@ $date-picker-padding: 8px;
 .el-date-table th {
   color: $neu-datepicker-table-days;
 }
+
 .el-picker-panel {
   border-color: var(--s-color-base-background-hover);
   .el-picker-panel__content {
     .el-date-table {
       td {
-        &.available:hover {
-          // width: 28px !important;
-          // height: 28px !important;
-          // padding: 2px !important;
-          color: $neu-datepicker-date-hover-color;
-          border-radius: 14px !important;
-          background-color: $neu-datepicker-date-hover-background-color;
-        }
         &.today span {
           color: var(--s-color-theme-accent);
         }
@@ -272,7 +265,8 @@ $date-picker-padding: 8px;
         &.current:not(.disabled),
         &.selected,
         &.start-date,
-        &.end-date {
+        &.end-date,
+        &.available:hover {
           span {
             width: 28px;
             height: 28px;
