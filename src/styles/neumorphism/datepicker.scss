@@ -4,6 +4,8 @@ $neu-datepicker-table-days: var(--s-color-base-content-secondary) !default;
 $neu-datepicker-border-bottom: $neu-datepicker-btn-arrow !default;
 $neu-datepicker-date-hover-background-color: var(--s-color-theme-accent) !default;
 $neu-datepicker-date-hover-color: #F4F0F1 !default;
+$neu-datepicker-backgroun-color: var(--s-color-utility-body) !default;
+$neu-datepicker-box-shadow: 20px 20px 60px var(--s-shadow-color-dark), 1px 1px 10px var(--s-shadow-color-light), -10px -10px 30px rgba(255, 255, 255, 0.9) !default;
 
 @mixin date-picker-border-radius(
   $suffix: "big",
@@ -205,10 +207,12 @@ $date-picker-padding: 8px;
   }
 }
 .el-picker-panel {
-  background-color: var(--s-color-base-on-accent);
+  box-shadow: $neu-datepicker-box-shadow;
+  background-color: $neu-datepicker-backgroun-color;
+  border-radius: 16px;
   @include with-popper-arrows;
   &__sidebar {
-    background-color: var(--s-color-base-on-accent);
+    background-color: $neu-datepicker-backgroun-color;
     border-right-color: var(--s-color-base-border-secondary);
   }
   &__shortcut {
