@@ -1,11 +1,19 @@
 $neu-datepicker-header-label: #2A1820 !default;
 $neu-datepicker-btn-arrow: var(--s-color-base-content-tertiary) !default;
 $neu-datepicker-table-days: var(--s-color-base-content-secondary) !default;
+$neu-datepicker-text-color-btn: var(--s-color-base-on-accent) !default;
+
 $neu-datepicker-border-bottom: $neu-datepicker-btn-arrow !default;
+$neu-datepicker-border-top: $neu-datepicker-btn-arrow !default;
+$neu-datepicker-backgroun-color-btn: $neu-datepicker-btn-arrow !default;
+
 $neu-datepicker-date-hover-background-color: var(--s-color-theme-accent) !default;
 $neu-datepicker-date-hover-color: #F4F0F1 !default;
 $neu-datepicker-backgroun-color: var(--s-color-utility-body) !default;
-$neu-datepicker-box-shadow: 20px 20px 60px var(--s-shadow-color-dark), 1px 1px 10px var(--s-shadow-color-light), -10px -10px 30px rgba(255, 255, 255, 0.9) !default;
+
+$neu-datepicker-box-shadow: 20px 20px 60px var(--s-shadow-color-dark), 1px 1px 10px var(--s-shadow-color-light) inset, -10px -10px 30px rgba(255, 255, 255, 0.9) !default;
+$neu-datepicker-box-shadow-btn:1px 1px 5px rgba(0, 0, 0, 0.05),-1px -1px 5px rgba(0, 0, 0, 0.05) !default;
+
 
 @mixin date-picker-border-radius(
   $suffix: "big",
@@ -221,7 +229,6 @@ $date-picker-padding: 8px;
 }
 
 .el-date-table td,
-.el-picker-panel__link-btn,
 .el-time-panel__btn,
 .el-date-range-picker__time-header > .el-icon-arrow-right,
 .el-year-table td .cell,
@@ -300,20 +307,28 @@ $date-picker-padding: 8px;
     }
   }
   .el-picker-panel__footer {
-    border-top-color: var(--s-color-base-background-hover);
+    box-shadow: $neu-datepicker-box-shadow;
+    background-color: $neu-datepicker-backgroun-color;
+    border-top-color: $neu-datepicker-border-top;
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
     > .el-button {
       height: 32px;
-      border-radius: var(--s-border-radius-mini);
+      border-radius: 16px;
       &:hover,
       &:focus {
         color: var(--s-color-theme-accent);
       }
+
       &.is-plain {
+        background-color: $neu-datepicker-backgroun-color-btn;
+        color: $neu-datepicker-text-color-btn;
+        box-shadow: $neu-datepicker-box-shadow-btn;
+
+        // TODO what border color should be
         &:hover,
         &:focus {
-          border-color: var(--s-color-theme-accent);
+          border-color: $neu-datepicker-backgroun-color-btn;
         }
       }
     }
