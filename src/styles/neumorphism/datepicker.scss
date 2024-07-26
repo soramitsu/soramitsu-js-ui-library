@@ -35,18 +35,6 @@ $neu-datepicker-box-shadow-btn: 1px 1px 5px rgba(0, 0, 0, 0.05),-1px -1px 5px rg
 
 $date-picker-padding: 8px;
 
-.el-picker-panel__content {
-  &.el-date-picker__time-header {
-    &.el-input__inner {
-        padding: 6px 12px !important;
-        border: 1px solid $neu-datepicker-border-time-select !important;
-        background-color: $neu-datepicker-background-color !important;
-        border-radius: 8px !important;
-      }
-  }
-}
-
-
 
 .s-date-picker {
   font-family: var(--s-font-family-default);
@@ -243,7 +231,6 @@ $date-picker-padding: 8px;
 }
 
 .el-date-table td,
-.el-time-panel__btn,
 .el-date-range-picker__time-header > .el-icon-arrow-right,
 .el-year-table td .cell,
 .el-month-table td .cell {
@@ -259,6 +246,7 @@ $date-picker-padding: 8px;
 .el-picker-panel__shortcut:hover {
   color: var(--s-color-theme-accent);
 }
+
 
 // TODO figure out what with hover
 .el-date-picker__header-label {
@@ -291,9 +279,8 @@ $date-picker-padding: 8px;
         &.end-date,
         &.available:hover {
           span {
-            width: 28px;
-            height: 28px;
-            padding: 2px;
+            width: 24px;
+            height: 24px;
             border-radius: 14px;
             background-color: var(--s-color-theme-accent);
             color: var(--s-color-utility-surface);
@@ -333,13 +320,16 @@ $date-picker-padding: 8px;
       }
 
       &.is-plain {
+        border-color: none;
         background-color: $neu-datepicker-background-color-btn;
         color: $neu-datepicker-text-color-btn;
         box-shadow: $neu-datepicker-box-shadow-btn;
+        border-radius: 16px;
 
         // TODO what border color should be
         &:hover,
         &:focus {
+          color: $neu-datepicker-text-color-btn;
           border-color: $neu-datepicker-background-color-btn;
         }
       }
@@ -355,16 +345,27 @@ $date-picker-padding: 8px;
     border: 1px solid $neu-datepicker-border-time-select;
     background-color: $neu-datepicker-background-color;
     border-radius: 8px;
+
+    &:focus,
+    &.is-active,
     &:hover {
-      cursor: pointer;
       border-color: $neu-datepicker-date-hover-background-color;
+    }
+    &:hover{
+      cursor: pointer;
+    }
+    &::placeholder {
+      color: var(--s-color-base-content-primary);
     }
   }
 }
 .el-time-panel {
   border-color: var(--s-color-base-background-hover);
+  background-color: var(--s-color-base-border-primary);
+  border-radius: 16px;
+  box-shadow: $neu-datepicker-box-shadow;
   .el-time-panel__footer {
-    border-top-color: var(--s-color-base-background-hover);
+    border-top-color: $neu-datepicker-border-top;
     .confirm {
       color: var(--s-color-theme-accent);
     }
@@ -374,14 +375,25 @@ $date-picker-padding: 8px;
       color: var(--s-color-base-content-primary);
     }
     &:hover:not(.disabled):not(.active) {
-      background-color: var(--s-color-base-background);
+      background: none;
+      color: var(--s-color-theme-accent);
     }
   }
   .el-time-panel__content {
     &::after,
     &::before {
-      border-top-color: var(--s-color-base-background-hover);
-      border-bottom-color: var(--s-color-base-background-hover);
+      border-top-color: $neu-datepicker-border-top;
+      border-bottom-color: $neu-datepicker-border-bottom;
+    }
+  }
+  .el-time-panel__btn {
+    &.cancel {
+      color: var(--s-color-base-content-primary);
+      text-transform: uppercase;
+      font-weight: 800;
+      &:hover {
+        color: var(--s-color-theme-accent);
+      }
     }
   }
 }
@@ -394,17 +406,22 @@ $date-picker-padding: 8px;
   }
 }
 .el-month-table td.in-range div {
-  background-color: var(--s-color-base-background-hover);
+  background-color: var(--s-color-base-border-secondary);
   &:hover {
-    background-color: var(--s-color-base-background-hover);
+    background-color: var(--s-color-base-border-secondary);
   }
 }
 .el-date-table td.in-range div {
-  background-color: var(--s-color-base-background-hover);
+  background-color: var(--s-color-base-border-secondary);
   &:hover {
-    background-color: var(--s-color-base-background-hover);
+    background-color: var(--s-color-base-border-secondary);
   }
 }
+
+.el-date-table td.start-date div {
+  margin: none;
+}
+
 .el-date-range-picker__content.is-left {
   border-right-color: var(--s-color-base-background-hover);
 }
