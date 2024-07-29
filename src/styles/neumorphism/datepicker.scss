@@ -24,7 +24,7 @@ $neu-datepicker-background-color-dark: var(--s-color-base-border-primary--dark) 
 
 $neu-datepicker-box-shadow-light: 20px 20px 60px var(--s-shadow-color-dark), 1px 1px 10px var(--s-shadow-color-light) inset, -10px -10px 30px rgba(255, 255, 255, 0.9) !default;
 $neu-datepicker-box-shadow-btn: 1px 1px 5px rgba(0, 0, 0, 0.05), -1px -1px 5px rgba(0, 0, 0, 0.05) !default;
-$neu-datepicker-box-shadow-dark: 20px 20px 60px rgba(73, 32, 103, 1), 1px 1px 10px rgba(155, 111, 165, 0.1) inset, -10px -10px 30px rgba(155, 111, 165, 0.25);
+$neu-datepicker-box-shadow-dark: 20px 20px 60px rgba(73, 32, 103, 1), 1px 1px 10px var(--s-shadow-color-dark-light--dark) inset, -10px -10px 30px var(--s-shadow-color-dark-lighten--dark);
 :root {
   --neu-datepicker-box-shadow: #{$neu-datepicker-box-shadow-light};
   --neu-background-color: #{$neu-datepicker-background-color};
@@ -349,11 +349,12 @@ $date-picker-padding: 8px;
   }
   .el-picker-panel__footer {
     box-shadow: var(--neu-datepicker-box-shadow);
-    background-color: $neu-datepicker-background-color;
-    border-top-color: $neu-datepicker-border-top;
+    background-color: var(--neu-background-color);
+    border-top-color: $neu-datepicker-border-top !important; 
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
     > .el-button {
+      text-transform: uppercase;
       height: 32px;
       border-radius: var(--s-border-radius-big);
       &:hover,
