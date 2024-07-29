@@ -1,13 +1,16 @@
-// TODO figure out with disabled
+// TODO figure out with disabled  var(--neu-background-color)
 $neu-datepicker-header-label: var(--s-color-base-content-primary) !default;
 $neu-datepicker-btn-arrow: var(--s-color-base-content-tertiary) !default;
 $neu-datepicker-table-days: var(--s-color-base-content-secondary) !default;
 $neu-datepicker-text-color-btn: var(--s-color-base-on-accent) !default;
 $neu-datepicker-date-select: var(--s-color-base-content-primary) !default;
 $neu-datepicker-date-select-dark: var(--s-color-base-content-primary--dark) !default;
+$neu-datepicker-unavailable-date: var(--s-color-base-content-tertiary) !default;
+$neu-datepicker-weekends-day: var(--s-color-base-content-secondary) !default;
 
 $neu-datepicker-border-bottom: $neu-datepicker-btn-arrow !default;
 $neu-datepicker-border-top: $neu-datepicker-btn-arrow !default;
+$neu-datepicker-border-right: $neu-datepicker-btn-arrow !default;
 $neu-datepicker-border-time-select: var(--s-color-base-border-secondary) !default;
 $neu-datepicker-background-color-btn: $neu-datepicker-btn-arrow !default;
 
@@ -252,8 +255,8 @@ $date-picker-padding: 8px;
   border-radius: var(--s-border-radius-big);
   @include with-popper-arrows;
   &__sidebar {
-    background-color: $neu-datepicker-background-color;
-    border-right-color: var(--s-color-base-content-tertiary);
+    background-color: var(--neu-background-color);
+    border-right-color: $neu-datepicker-border-right;
   }
   &__shortcut {
     color: var(--s-color-base-content-primary);
@@ -303,6 +306,20 @@ $date-picker-padding: 8px;
 }
 
 .el-picker-panel {
+  .el-picker-panel__content {
+    .el-date-table {
+      td:nth-child(7), // Targeting Saturday
+      td:nth-child(1) { // Targeting Sunday
+        color: $neu-datepicker-weekends-day !important;
+      }
+      td {
+        &.prev-month,
+        &.next-month {
+          color: var(--s-color-base-content-tertiary);
+        }
+      }
+    }
+  }
   border-color: var(--s-color-base-background-hover);
     .el-date-table {
       td {
@@ -334,6 +351,12 @@ $date-picker-padding: 8px;
         &.selected {
           div {
             background-color: transparent;
+          }
+        }
+        &.disabled {
+          div {
+            background-color: transparent;
+            color: $neu-datepicker-unavailable-date;
           }
         }
       }
@@ -460,6 +483,7 @@ $date-picker-padding: 8px;
     }
   }
 }
+
 .el-month-table td.in-range div {
   background-color: var(--s-color-base-border-secondary);
   &:hover {
