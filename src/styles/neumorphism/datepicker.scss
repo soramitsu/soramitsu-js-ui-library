@@ -4,7 +4,8 @@ $neu-datepicker-header-label: var(--s-color-base-content-primary) !default;
 $neu-datepicker-btn-arrow: var(--s-color-base-content-tertiary) !default;
 $neu-datepicker-table-days: var(--s-color-base-content-secondary) !default;
 $neu-datepicker-text-color-btn: var(--s-color-base-on-accent) !default;
-$neu-datepicker-date-select-color: var(--s-color-base-content-primary) !default;
+$neu-datepicker-date-select: var(--s-color-base-content-primary) !default;
+$neu-datepicker-date-select-dark: var(--s-color-base-content-primary--dark) !default;
 
 $neu-datepicker-border-bottom: $neu-datepicker-btn-arrow !default;
 $neu-datepicker-border-top: $neu-datepicker-btn-arrow !default;
@@ -29,6 +30,7 @@ $neu-datepicker-box-shadow-dark: 20px 20px 60px rgba(73, 32, 103, 1), 1px 1px 10
   --neu-background-color: #{$neu-datepicker-background-color};
   --neu-datepicker-available-selected-hover-color: #{$neu-datepicker-available-selected-hover};
   --neu-datepicker-date-hover-background-color: #{$neu-datepicker-date-hover-background};
+  --neu-datepicker-date-select-color: #{$neu-datepicker-date-select};
 }
 
 [design-system-theme="dark"] {
@@ -36,6 +38,7 @@ $neu-datepicker-box-shadow-dark: 20px 20px 60px rgba(73, 32, 103, 1), 1px 1px 10
   --neu-background-color: #{$neu-datepicker-background-color-dark};
   --neu-datepicker-available-selected-hover-color: #{$neu-datepicker-available-selected-hover-dark};
   --neu-datepicker-date-hover-background-color: #{$neu-datepicker-date-hover-background-dark};
+  --neu-datepicker-date-select-color: #{neu-datepicker-date-select-dark};
 }
 
 @mixin date-picker-border-radius(
@@ -239,6 +242,7 @@ $date-picker-padding: 8px;
   }
 }
 .el-picker-panel {
+  color: var(--neu-datepicker-date-select-color);
   box-shadow: var(--neu-datepicker-box-shadow);
   background-color: var(--neu-background-color);
   border-radius: var(--s-border-radius-big);
@@ -330,7 +334,7 @@ $date-picker-padding: 8px;
         }
       }
       th {
-        border-bottom-color: $neu-datepicker-border-bottom;
+        border-bottom-color: $neu-datepicker-border-bottom !important;
       }
     }
     .el-month-table td {
@@ -381,7 +385,7 @@ $date-picker-padding: 8px;
   .el-input__inner {
     padding: 6px 12px;
     border: 1px solid $neu-datepicker-border-time-select;
-    background-color: $neu-datepicker-background-color;
+    background-color: var(--neu-background-color);
     border-radius: 8px;
 
     &:focus,
@@ -409,9 +413,9 @@ $date-picker-padding: 8px;
     }
   }
   .el-time-spinner__item {
-    color: $neu-datepicker-date-select-color;
+    color: var(--neu-datepicker-date-select-color);
     &.active:not(.disabled) {
-      color: $neu-datepicker-date-select-color;
+      color: var(--neu-datepicker-date-select-color);
     }
     &:hover:not(.disabled):not(.active) {
       background: none;
@@ -463,7 +467,4 @@ $date-picker-padding: 8px;
 
 .el-date-range-picker__content.is-left {
   border-right-color: $neu-datepicker-border-bottom;
-}
-.el-date-range-picker__header {
-  border-bottom: 1px solid $neu-datepicker-border-bottom;
 }
