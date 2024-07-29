@@ -1,4 +1,4 @@
-$neu-datepicker-header-label: #2A1820 !default;
+$neu-datepicker-header-label: var(--s-color-base-content-primary) !default;
 $neu-datepicker-btn-arrow: var(--s-color-base-content-tertiary) !default;
 $neu-datepicker-table-days: var(--s-color-base-content-secondary) !default;
 $neu-datepicker-text-color-btn: var(--s-color-base-on-accent) !default;
@@ -8,13 +8,32 @@ $neu-datepicker-border-top: $neu-datepicker-btn-arrow !default;
 $neu-datepicker-border-time-select: var(--s-color-base-border-secondary) !default;
 $neu-datepicker-background-color-btn: $neu-datepicker-btn-arrow !default;
 
-$neu-datepicker-date-hover-background-color: var(--s-color-theme-accent) !default;
-$neu-datepicker-date-hover-color: #F4F0F1 !default;
+$neu-datepicker-date-hover-background: var(--s-color-theme-accent) !default;
+$neu-datepicker-date-hover-background-dark: var(--s-color-theme-accent-hover) !default;
+
+$neu-datepicker-available-selected-hover: var(--s-color-utility-surface) !default;
+$neu-datepicker-available-selected-hover-dark: var(--s-color-utility-body--dark) !default;
+$neu-datepicker-date-hover-color: var(--s-color-base-background-hover) !default;
+
 $neu-datepicker-background-color: var(--s-color-utility-body) !default;
+$neu-datepicker-background-color-dark: var(--s-color-base-border-primary--dark) !default;
 
-$neu-datepicker-box-shadow: 20px 20px 60px var(--s-shadow-color-dark), 1px 1px 10px var(--s-shadow-color-light) inset, -10px -10px 30px rgba(255, 255, 255, 0.9) !default;
-$neu-datepicker-box-shadow-btn: 1px 1px 5px rgba(0, 0, 0, 0.05),-1px -1px 5px rgba(0, 0, 0, 0.05) !default;
+$neu-datepicker-box-shadow-light: 20px 20px 60px var(--s-shadow-color-dark), 1px 1px 10px var(--s-shadow-color-light) inset, -10px -10px 30px rgba(255, 255, 255, 0.9) !default;
+$neu-datepicker-box-shadow-btn: 1px 1px 5px rgba(0, 0, 0, 0.05), -1px -1px 5px rgba(0, 0, 0, 0.05) !default;
+$neu-datepicker-box-shadow-dark: 20px 20px 60px rgba(73, 32, 103, 1), 1px 1px 10px rgba(155, 111, 165, 0.1) inset, -10px -10px 30px rgba(155, 111, 165, 0.25);
+:root {
+  --neu-datepicker-box-shadow: #{$neu-datepicker-box-shadow-light};
+  --neu-background-color: #{$neu-datepicker-background-color};
+  --neu-datepicker-available-selected-hover-color: #{$neu-datepicker-available-selected-hover};
+  --neu-datepicker-date-hover-background-color: #{$neu-datepicker-date-hover-background};
+}
 
+[design-system-theme="dark"] {
+  --neu-datepicker-box-shadow: #{$neu-datepicker-box-shadow-dark};
+  --neu-background-color: #{$neu-datepicker-background-color-dark};
+  --neu-datepicker-available-selected-hover-color: #{$neu-datepicker-available-selected-hover-dark};
+  --neu-datepicker-date-hover-background-color: #{$neu-datepicker-date-hover-background-dark};
+}
 
 @mixin date-picker-border-radius(
   $suffix: "big",
@@ -217,13 +236,13 @@ $date-picker-padding: 8px;
   }
 }
 .el-picker-panel {
-  box-shadow: $neu-datepicker-box-shadow;
-  background-color: $neu-datepicker-background-color;
-  border-radius: 16px;
+  box-shadow: var(--neu-datepicker-box-shadow);
+  background-color: var(--neu-background-color);
+  border-radius: var(--s-border-radius-big);
   @include with-popper-arrows;
   &__sidebar {
     background-color: $neu-datepicker-background-color;
-    border-right-color: var(--s-color-base-border-secondary);
+    border-right-color: var(--s-color-base-content-tertiary);
   }
   &__shortcut {
     color: var(--s-color-base-content-primary);
@@ -231,7 +250,6 @@ $date-picker-padding: 8px;
 }
 
 .el-date-table td,
-.el-date-range-picker__time-header > .el-icon-arrow-right,
 .el-year-table td .cell,
 .el-month-table td .cell {
   color: var(--s-color-base-content-primary);
@@ -253,7 +271,8 @@ $date-picker-padding: 8px;
   color: $neu-datepicker-header-label;
 }
 
-.el-picker-panel__icon-btn {
+.el-picker-panel__icon-btn,
+.el-date-range-picker__time-header >.el-icon-arrow-right {
   color: $neu-datepicker-btn-arrow;
 }
 
@@ -282,8 +301,8 @@ $date-picker-padding: 8px;
             width: 24px;
             height: 24px;
             border-radius: 14px;
-            background-color: var(--s-color-theme-accent);
-            color: var(--s-color-utility-surface);
+            background-color: var(--neu-datepicker-date-hover-background-color);
+            color: var(--neu-datepicker-available-selected-hover-color); // Update this
           }
         }
         &.selected:hover,
@@ -306,14 +325,14 @@ $date-picker-padding: 8px;
     }
   }
   .el-picker-panel__footer {
-    box-shadow: $neu-datepicker-box-shadow;
+    box-shadow: var(--neu-datepicker-box-shadow);
     background-color: $neu-datepicker-background-color;
     border-top-color: $neu-datepicker-border-top;
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
     > .el-button {
       height: 32px;
-      border-radius: 16px;
+      border-radius: var(--s-border-radius-big);
       &:hover,
       &:focus {
         color: var(--s-color-theme-accent);
@@ -324,7 +343,7 @@ $date-picker-padding: 8px;
         background-color: $neu-datepicker-background-color-btn;
         color: $neu-datepicker-text-color-btn;
         box-shadow: $neu-datepicker-box-shadow-btn;
-        border-radius: 16px;
+        border-radius: var(--s-border-radius-big);
 
         // TODO what border color should be
         &:hover,
@@ -349,7 +368,7 @@ $date-picker-padding: 8px;
     &:focus,
     &.is-active,
     &:hover {
-      border-color: $neu-datepicker-date-hover-background-color;
+      border-color: var(--neu-datepicker-date-hover-background-color);
     }
     &:hover{
       cursor: pointer;
@@ -362,8 +381,8 @@ $date-picker-padding: 8px;
 .el-time-panel {
   border-color: var(--s-color-base-background-hover);
   background-color: var(--s-color-base-border-primary);
-  border-radius: 16px;
-  box-shadow: $neu-datepicker-box-shadow;
+  border-radius: var(--s-border-radius-big);
+  box-shadow: var(--neu-datepicker-box-shadow);
   .el-time-panel__footer {
     border-top-color: $neu-datepicker-border-top;
     .confirm {
@@ -423,5 +442,5 @@ $date-picker-padding: 8px;
 }
 
 .el-date-range-picker__content.is-left {
-  border-right-color: var(--s-color-base-background-hover);
+  border-right-color: var(--s-color-base-content-tertiary);
 }
