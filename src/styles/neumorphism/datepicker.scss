@@ -1,3 +1,5 @@
+// TODO figure out with disabled
+
 $neu-datepicker-header-label: var(--s-color-base-content-primary) !default;
 $neu-datepicker-btn-arrow: var(--s-color-base-content-tertiary) !default;
 $neu-datepicker-table-days: var(--s-color-base-content-secondary) !default;
@@ -262,13 +264,19 @@ $date-picker-padding: 8px;
 .el-month-table td.current:not(.disabled) .cell,
 .el-month-table td .cell:hover,
 .el-picker-panel__shortcut:hover {
-  color: var(--s-color-theme-accent);
+  color: var(--neu-datepicker-date-hover-background-color);
 }
 
 
 // TODO figure out what with hover
 .el-date-picker__header-label {
   color: $neu-datepicker-header-label;
+}
+
+.el-date-picker {
+  &__header--bordered {
+    border-bottom: 1px solid $neu-datepicker-btn-arrow;
+  }
 }
 
 .el-picker-panel__icon-btn,
@@ -308,6 +316,11 @@ $date-picker-padding: 8px;
         &.selected:hover,
         &.today span:hover {
           color: var(--s-color-utility-surface);
+        }
+        &.selected {
+          div {
+            background-color: transparent;
+          }
         }
       }
       th {
