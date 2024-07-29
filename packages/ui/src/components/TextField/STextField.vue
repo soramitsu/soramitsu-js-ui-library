@@ -262,13 +262,11 @@ function handleBlur() {
   hasFirstBlurHappened.value = true
 }
 
-const validationsList = computed(() => {
-  if (!props.validationsList) return []
+const isMatchingValidationsList = computed(() => {
+  if (!props.validationsList) return false
 
-  return props.validationsList.validations(model.value ?? '')
+  return props.validationsList.validations.every((v) => v.rule)
 })
-
-const isMatchingValidationsList = computed(() => validationsList.value.every((v) => v.rule))
 
 const shouldShowValidationsList = computed(
   () =>
@@ -368,7 +366,7 @@ const shouldShowValidationsList = computed(
           <span>{{ props.validationsList.title }}</span>
 
           <div
-            v-for="item in validationsList"
+            v-for="item in props.validationsList.validations"
             :key="item.message"
           >
             <div class="flex gap-4px">

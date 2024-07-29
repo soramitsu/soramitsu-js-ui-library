@@ -365,29 +365,35 @@ it('Validations list works', () => {
         model.value = 'a1!'
       }, 2000)
 
-      return {
-        validationsList: {
-          title: 'String must contain:',
-          validations: (value: string) => {
-            return [
-              {
-                rule: /[a-z]/.test(value),
-                message: 'At least 1 lowercase letter',
-              },
-              {
-                rule: /\d/.test(value),
-                message: 'At least 1 digit',
-              },
-              {
-                rule: /[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]/.test(value),
-                message: 'At least 1 special character',
-              },
-            ]
+      function validations(value: string) {
+        return [
+          {
+            rule: /[a-z]/.test(value),
+            message: 'At least 1 lowercase letter',
           },
+          {
+            rule: /\d/.test(value),
+            message: 'At least 1 digit',
+          },
+          {
+            rule: /[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]/.test(value),
+            message: 'At least 1 special character',
+          },
+        ]
+      }
+
+      const validationsList = computed(() => {
+        return {
+          title: 'String must contain:',
+          validations: validations(model.value),
           showOnFocusOnly: true,
           errorOn: true,
           successOn: true,
-        },
+        }
+      })
+
+      return {
+        validationsList,
         model,
       }
     },

@@ -4,7 +4,7 @@ export interface ValidationEntity {
 }
 
 export interface ValidationsList {
-  validations: (value: string) => ValidationEntity[]
+  validations: ValidationEntity[]
   title: string
   errorOn?: boolean
   successOn?: boolean
