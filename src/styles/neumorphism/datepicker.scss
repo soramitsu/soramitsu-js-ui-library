@@ -1,4 +1,3 @@
-// TODO figure out with disabled  var(--neu-background-color)
 $neu-datepicker-header-label: var(--s-color-base-content-primary) !default;
 $neu-datepicker-btn-arrow: var(--s-color-base-content-tertiary) !default;
 $neu-datepicker-table-days: var(--s-color-base-content-secondary) !default;
@@ -36,7 +35,6 @@ $neu-datepicker-box-shadow-btn-dark: 1px 1px 5px rgba(0, 0, 0, 0.05), -1px -1px 
   --neu-datepicker-available-selected-hover-color: #{$neu-datepicker-available-selected-hover};
   --neu-datepicker-date-hover-background-color: #{$neu-datepicker-date-hover-background};
   --neu-datepicker-date-select-color: #{$neu-datepicker-date-select};
-
 }
 
 [design-system-theme="dark"] {
@@ -292,8 +290,14 @@ $date-picker-padding: 8px;
 }
 
 .el-picker-panel__icon-btn,
-.el-date-range-picker__time-header >.el-icon-arrow-right {
+.el-date-range-picker__time-header>.el-icon-arrow-right {
   color: $neu-datepicker-btn-arrow;
+}
+
+.el-picker-panel__icon-btn {
+  &.is-disabled {
+    color: var(--s-color-base-content-tertiary);
+  }
 }
 
 .el-date-range-picker__time-header,
