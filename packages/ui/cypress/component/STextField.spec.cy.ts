@@ -385,10 +385,8 @@ it('Validations list works', () => {
       const validationsList = computed(() => {
         return {
           title: 'String must contain:',
-          validations: validations(model.value),
+          validations: validations(model.value).map((v) => ({ isMatching: v.rule, ...v })),
           showOnFocusOnly: true,
-          errorOn: true,
-          successOn: true,
         }
       })
 
