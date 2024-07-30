@@ -1,12 +1,10 @@
-export interface ValidationEntity {
-  rule: boolean
+export interface ValidationResultEntity {
+  isMatching: boolean
   message: string
 }
 
 export interface ValidationsList {
-  validations: ValidationEntity[]
+  validations: ValidationResultEntity[]
   title: string
-  errorOn?: boolean
-  successOn?: boolean
   showOnFocusOnly?: boolean
 }

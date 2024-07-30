@@ -144,9 +144,7 @@ const status = computed<null | TextFieldStatus>(() => {
   if (props.success) return Status.Success
   if (props.warning) return Status.Warning
   if (props.error) return Status.Error
-  if (props.validationsList?.errorOn && hasFirstBlurHappened.value && !isMatchingValidationsList.value)
-    return Status.Error
-  if (props.validationsList?.successOn && isMatchingValidationsList.value) return Status.Success
+
   return null
 })
 
@@ -265,7 +263,7 @@ function handleBlur() {
 const isMatchingValidationsList = computed(() => {
   if (!props.validationsList) return false
 
-  return props.validationsList.validations.every((v) => v.rule)
+  return props.validationsList.validations.every((v) => v.isMatching)
 })
 
 const shouldShowValidationsList = computed(
@@ -372,7 +370,7 @@ const shouldShowValidationsList = computed(
             <div class="flex gap-4px">
               <component
                 :is="IconStatusSuccess16"
-                v-if="item.rule"
+                v-if="item.isMatching"
                 class="flex self-center w-16px"
               />
               <div
@@ -382,7 +380,7 @@ const shouldShowValidationsList = computed(
                 -
               </div>
 
-              <div :class="{ 's-text-field__message-requirement_matched': item.rule }">
+              <div :class="{ 's-text-field__message-requirement_matched': item.isMatching }">
                 {{ item.message }}
               </div>
             </div>

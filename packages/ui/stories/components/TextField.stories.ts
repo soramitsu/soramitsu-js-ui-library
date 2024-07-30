@@ -30,11 +30,9 @@ const meta = {
         if (!props.isValidationsList) return null
 
         return {
-          validations: validations(model.value),
+          validations: validations(model.value).map((v) => ({ isMatching: v.rule, ...v })),
           title: 'String must contain:',
           showOnFocusOnly: true,
-          errorOn: true,
-          successOn: true,
         }
       })
 
