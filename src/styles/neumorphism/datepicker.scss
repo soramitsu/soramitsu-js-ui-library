@@ -31,7 +31,7 @@ $neu-datepicker-box-shadow-btn-light: 1px 1px 5px rgba(0, 0, 0, 0.05), -1px -1px
 $neu-datepicker-box-shadow-btn-dark: 1px 1px 5px rgba(0, 0, 0, 0.05), -1px -1px 5px rgba(0, 0, 0, 0.05) !default;
 
 :root {
-  --neu-background-color: #{$neu-datepicker-background-color};
+  --neu-datepicker-background-color: #{$neu-datepicker-background-color};
   --neu-datepicker-available-selected-hover-color: #{$neu-datepicker-available-selected-hover};
   --neu-datepicker-date-hover-background-color: #{$neu-datepicker-date-hover-background};
   --neu-datepicker-date-select-color: #{$neu-datepicker-date-select};
@@ -40,7 +40,7 @@ $neu-datepicker-box-shadow-btn-dark: 1px 1px 5px rgba(0, 0, 0, 0.05), -1px -1px 
 }
 
 [design-system-theme="dark"] {
-  --neu-background-color: #{$neu-datepicker-background-color-dark};
+  --neu-datepicker-background-color: #{$neu-datepicker-background-color-dark};
   --neu-datepicker-available-selected-hover-color: #{$neu-datepicker-available-selected-hover-dark};
   --neu-datepicker-date-hover-background-color: #{$neu-datepicker-date-hover-background-dark};
   --neu-datepicker-date-select-color: #{neu-datepicker-date-select-dark};
@@ -67,30 +67,21 @@ $neu-datepicker-box-shadow-btn-dark: 1px 1px 5px rgba(0, 0, 0, 0.05), -1px -1px 
 }
 
 $date-picker-padding: 8px;
+@mixin datepicker-size($size, $height) {
+  &.s-#{$size} .el-input__inner {
+    height: $height;
+
+    .el-range-separator {
+      line-height: $height - $date-picker-padding;
+    }
+  }
+}
 
 
-.s-date-picker {
+.s-date-picker.neumorphic {
   font-family: var(--s-font-family-default);
   width: 100%;
   position: relative;
-  &.s-big .el-input__inner {
-    height: $s-size-big;
-    .el-range-separator {
-      line-height: $s-size-big - $date-picker-padding;
-    }
-  }
-  &.s-medium .el-input__inner {
-    height: $s-size-medium;
-    .el-range-separator {
-      line-height: $s-size-medium - $date-picker-padding;
-    }
-  }
-  &.s-small .el-input__inner {
-    height: $s-size-small;
-    .el-range-separator {
-      line-height: $s-size-small - $date-picker-padding;
-    }
-  }
   .el-date-editor {
     width: 100%;
     &.el-input,
@@ -111,10 +102,16 @@ $date-picker-padding: 8px;
       border-color: var(--s-color-base-border-primary);
     }
   }
+
   @include date-picker-border-radius;
   @include date-picker-border-radius("medium", var(--s-border-radius-medium));
   @include date-picker-border-radius("small", var(--s-border-radius-small));
   @include date-picker-border-radius("mini", var(--s-border-radius-mini));
+
+  @include datepicker-size("big", $s-size-big);
+  @include datepicker-size("medium", $s-size-medium);
+  @include datepicker-size("small", $s-size-small);
+
   &.s-has-value {
     .el-date-editor .el-range-separator {
       color: var(--s-color-base-content-primary);
@@ -299,12 +296,12 @@ $date-picker-padding: 8px;
 .el-picker-panel {
   color: var(--neu-datepicker-date-select-color);
   box-shadow: var(--neu-datepicker-box-shadow);
-  background-color: var(--neu-background-color);
+  background-color: var(--neu-datepicker-background-color);
   border-radius: var(--s-border-radius-big);
   @include with-popper-arrows;
 
   &__sidebar {
-    background-color: var(--neu-background-color);
+    background-color: var(--neu-datepicker-background-color);
     border-right-color: $neu-datepicker-border-main;
   }
 
@@ -383,7 +380,7 @@ $date-picker-padding: 8px;
   
   .el-picker-panel__footer {
     box-shadow: var(--neu-datepicker-box-shadow);
-    background-color: var(--neu-background-color);
+    background-color: var(--neu-datepicker-background-color);
     border-top-color: $neu-datepicker-border-main !important; 
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
@@ -422,9 +419,9 @@ $date-picker-padding: 8px;
   }
 
 .el-input.is-disabled .el-input__inner {
-  background-color: var(--neu-background-color);
+  background-color: var(--neu-datepicker-background-color);
   [design-system-theme="dark"] & {
-    border-color: var(--neu-background-color);
+    border-color: var(--neu-datepicker-background-color);
     color: var(--s-color-base-content-tertiary);
   }
 }
@@ -433,7 +430,7 @@ $date-picker-padding: 8px;
   .el-input__inner {
     padding: 6px 12px;
     border: 1px solid $neu-datepicker-border-time-select;
-    background-color: var(--neu-background-color);
+    background-color: var(--neu-datepicker-background-color);
     border-radius: 8px;
 
     &:focus,
