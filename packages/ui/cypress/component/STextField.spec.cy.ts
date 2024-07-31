@@ -347,3 +347,67 @@ describe('Passing extra attributes', () => {
     findInput().should('have.attr', 'data-count', 1)
   })
 })
+
+it('Validations list works', () => {
+  cy.mount({
+    setup() {
+      const model = ref('')
+
+      // since we don't change model value by using type() method we have to edit it manually
+      // because message slot relies on model.value correctness otherwise it's always empty
+      setTimeout(() => {
+        // matches some rules
+        model.value = 'a1'
+      }, 1000)
+
+      setTimeout(() => {
+        // matches every rule
+        model.value = 'a1!'
+      }, 2000)
+
+      function validations(value: string) {
+        return [
+          {
+            rule: /[a-z]/.test(value),
+            message: 'At least 1 lowercase letter',
+          },
+          {
+            rule: /\d/.test(value),
+            message: 'At least 1 digit',
+          },
+          {
+            rule: /[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]/.test(value),
+            message: 'At least 1 special character',
+          },
+        ]
+      }
+
+      const validationsList = computed(() => {
+        return {
+          title: 'String must contain:',
+          validations: validations(model.value).map((v) => ({ isMatching: v.rule, ...v })),
+          showOnFocusOnly: true,
+        }
+      })
+
+      return {
+        validationsList,
+        model,
+      }
+    },
+    template: `<STextField :model-value="model" :validations-list="validationsList" no-model-value-strict-sync/>`,
+  })
+
+  findMsg().should('not.exist')
+  findInput().focus()
+  findMsg().should('exist')
+  // first timeout
+  findInput().should('have.value', 'a1')
+  findInput().blur()
+  findMsg().should('not.exist')
+  findInput().focus()
+  findMsg().should('exist')
+  // second timeout
+  findInput().should('have.value', 'a1!')
+  findMsg().should('not.exist')
+})

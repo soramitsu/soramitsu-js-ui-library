@@ -1,19 +1,45 @@
 import { STextField, Status } from '@/lib'
-import IconQuestion from '@soramitsu-ui/icons/icomoon/notifications-question-circle-24.svg'
-import IconCopy from '@soramitsu-ui/icons/icomoon/basic-copy-24.svg'
+import { IconCopy, IconQuestion } from '@/components/icons'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta = {
   component: defineComponent({
     components: { STextField, IconCopy, IconQuestion },
-    props: ['modelValue', 'oneIcon', 'twoIcons'],
+    props: ['modelValue', 'oneIcon', 'twoIcons', 'isValidationsList'],
     emits: ['update:modelValue'],
     setup(props, { emit }) {
       const model = useVModel(props, 'modelValue', emit, { passive: true })
-      return { model }
+
+      function validations(value: string) {
+        return [
+          {
+            rule: /[a-z]/.test(value),
+            message: 'At least 1 lowercase letter',
+          },
+          {
+            rule: /\d/.test(value),
+            message: 'At least 1 digit',
+          },
+          {
+            rule: /[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]/.test(value),
+            message: 'At least 1 special character',
+          },
+        ]
+      }
+      const validationsList = computed(() => {
+        if (!props.isValidationsList) return null
+
+        return {
+          validations: validations(model.value).map((v) => ({ isMatching: v.rule, ...v })),
+          title: 'String must contain:',
+          showOnFocusOnly: true,
+        }
+      })
+
+      return { model, validationsList }
     },
     template: `
-      <STextField v-model="model" v-bind="$attrs">
+      <STextField v-model="model" v-bind="$attrs" :validations-list="validationsList">
         <template #append v-if="twoIcons || oneIcon">
           <IconCopy/>
           <IconQuestion v-if="twoIcons" />
@@ -64,3 +90,8 @@ export const Default = {}
 
 export const OneIcon = { args: { oneIcon: true } } as Story
 export const TwoIcons = { args: { twoIcons: true } } as Story
+export const ValidationsList = {
+  args: {
+    isValidationsList: true,
+  },
+} as Story
