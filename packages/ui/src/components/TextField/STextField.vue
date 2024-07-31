@@ -1,10 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { ValidationsList } from '@/components/TextField/types'
-
-export default {
-  inheritAttrs: false,
-}
-
+import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff, IconStatusSuccess16 } from '../icons'
+import { computed } from 'vue'
 import type { StyleValue } from 'vue'
 import { Status } from '@/types'
 import type { MaybeElementRef } from '@vueuse/core'
@@ -113,12 +110,8 @@ interface Props {
    */
   validationsList?: ValidationsList
 }
-</script>
 
-<script setup lang="ts">
-import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff } from '../icons'
-import { computed } from 'vue'
-import { IconStatusSuccess16 } from '../icons'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<Props>(), {
   multiline: false,
