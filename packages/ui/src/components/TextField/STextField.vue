@@ -8,7 +8,6 @@ export default {
 import type { StyleValue } from 'vue'
 import { Status } from '@/types'
 import type { MaybeElementRef } from '@vueuse/core'
-import { IconStatusSuccess16 } from '../icons'
 
 /**
  * warning: don't use it inside of `Props`. Vue compiler determines it
@@ -119,6 +118,7 @@ interface Props {
 <script setup lang="ts">
 import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff } from '../icons'
 import { computed } from 'vue'
+import { IconStatusSuccess16 } from '../icons'
 
 const props = withDefaults(defineProps<Props>(), {
   multiline: false,
@@ -248,16 +248,10 @@ const inputType = computed(() =>
 )
 
 const isTouched = ref(false)
-const hasFirstBlurHappened = ref(false)
 
 function handleFocus() {
   isFocused.value = true
   isTouched.value = true
-}
-
-function handleBlur() {
-  isFocused.value = false
-  hasFirstBlurHappened.value = true
 }
 
 const isMatchingValidationsList = computed(() => {
@@ -268,9 +262,9 @@ const isMatchingValidationsList = computed(() => {
 
 const shouldShowValidationsList = computed(
   () =>
-    ((props.validationsList?.showOnFocusOnly && isFocused.value) || !props.validationsList?.showOnFocusOnly) &&
-    isTouched.value &&
     props.validationsList &&
+    (!props.validationsList.showOnFocusOnly || isFocused.value) &&
+    isTouched.value &&
     !isMatchingValidationsList.value,
 )
 </script>
@@ -316,7 +310,7 @@ const shouldShowValidationsList = computed(
           v-bind="inputAttrs()"
           @input="onInput"
           @focus="handleFocus"
-          @blur="handleBlur"
+          @blur="isFocused = false"
         >
       </div>
 
@@ -368,8 +362,7 @@ const shouldShowValidationsList = computed(
             :key="item.message"
           >
             <div class="flex gap-4px">
-              <component
-                :is="IconStatusSuccess16"
+              <IconStatusSuccess16
                 v-if="item.isMatching"
                 class="flex self-center w-16px"
               />
