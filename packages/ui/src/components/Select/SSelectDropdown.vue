@@ -99,6 +99,18 @@ const dropdownHeight = computed(() => {
 
   return OPTION_SIZE[api.size] * Math.min(props.maxShownOptions, api.options.length) + 'px'
 })
+
+function handleOptionToggling(value: any) {
+  if (api.mandatory && api.selectedOptions.length === 1 && api.selectedOptions[0].value === value) return
+
+  api.toggleSelection(value)
+}
+
+function handleGroupSelectionToggling(values: SelectOptionGroup) {
+  if (api.mandatory && api.isGroupSelected(values) && api.selectedOptions.length === values.items.length) return
+
+  api.toggleGroupSelection(values)
+}
 </script>
 
 <template>
@@ -167,7 +179,7 @@ const dropdownHeight = computed(() => {
             class="s-select-dropdown__action cursor-pointer ml-auto"
             :class="MAIN_FONT[api.size]"
             tabindex="-1"
-            @click="api.toggleGroupSelection(optionGroup)"
+            @click="handleGroupSelectionToggling(optionGroup)"
           >
             {{ api.isGroupSelected(optionGroup) ? 'Deselect all' : 'Select all' }}
           </button>
@@ -179,7 +191,7 @@ const dropdownHeight = computed(() => {
           :type="itemType"
           :multiple="api.multiple"
           :selected="api.isValueSelected(opt.value)"
-          @toggle="api.toggleSelection(opt.value)"
+          @toggle="handleOptionToggling(opt.value)"
         >
           {{ opt.label }}
         </SSelectOption>
