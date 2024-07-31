@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.13.13
+
+### Patch Changes
+
+- b5029a5b: **feat**(`SSelectDropdown`): add mandatory prop
+
 ## 0.13.12
 
 ### Patch Changes
