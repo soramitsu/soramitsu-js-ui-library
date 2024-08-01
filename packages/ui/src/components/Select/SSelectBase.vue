@@ -25,6 +25,8 @@ const props = withDefaults(
     /**
      * - Doesn't allow to unselect value in single mode
      * - Doesn't allow to unselect last the only one picked value in multiple mode
+     * TODO
+     * - Picks some value automatically (the first one) if `modelValue` is null and there are some available options
      */
     mandatory?: boolean
 
@@ -99,6 +101,7 @@ const modeling = useSelectModel({
   storeSelectedOptions: remoteSearch,
   singleModeAutoClose: not(noAutoClose),
   onAutoClose: () => togglePopper(false),
+  mandatory,
 })
 
 const [showPopper, togglePopper] = useToggle(false)
