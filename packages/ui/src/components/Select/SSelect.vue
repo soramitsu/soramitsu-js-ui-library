@@ -19,6 +19,7 @@ const props = defineProps<{
   dropdownSearch?: boolean
   remoteSearch?: boolean
   maxShownOptions?: string | number | undefined
+  mandatory?: boolean
 }>()
 
 const defaultOptionType = computed(() => (props.multiple ? SelectOptionType.Checkbox : SelectOptionType.Radio))

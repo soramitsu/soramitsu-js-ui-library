@@ -42,6 +42,7 @@ export interface UseSelectModelParams<T> {
    * Should be used to actually perform menu closing
    */
   onAutoClose: () => void
+  mandatory?: Ref<boolean>
 }
 
 export function useSelectModel<T = any>({
@@ -51,6 +52,7 @@ export function useSelectModel<T = any>({
   singleModeAutoClose,
   onAutoClose,
   storeSelectedOptions,
+  mandatory,
 }: UseSelectModelParams<T>): UseSelectModelReturn<T> {
   const triggerAutoClose = () => singleModeAutoClose.value && onAutoClose()
 
@@ -177,13 +179,25 @@ export function useSelectModel<T = any>({
   }
 
   function toggleSelection(value: T): void {
-    isValueSelected(value) ? unselect(value) : select(value)
+    if (!isValueSelected(value)) {
+      select(value)
+    } else {
+      if (
+        mandatory?.value &&
+        ((Array.isArray(model.value) && model.value.length === 1) || (model.value && !multiple.value))
+      )
+        return
+
+      unselect(value)
+    }
   }
 
   function toggleGroupSelection(optionGroup: SelectOptionGroup<T>): void {
     const optionGroupValues = optionGroup.items.map((x) => x.value)
 
     if (isGroupSelected(optionGroup)) {
+      if (mandatory?.value && Array.isArray(model.value) && model.value.length === optionGroup.items.length) return
+
       const optionGroupSet = new Set(optionGroupValues)
       const newModel = modelAsArray.value.filter((x) => !optionGroupSet.has(x))
       modelChangedManually = true

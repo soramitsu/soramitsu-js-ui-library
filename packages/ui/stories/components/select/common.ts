@@ -69,6 +69,7 @@ export const COMMON_ARGS = {
   noAutoClose: false,
   dropdownSearch: false,
   maxShownOptions: 0,
+  mandatory: false,
 }
 
 export const COMMON_ARG_TYPES = {

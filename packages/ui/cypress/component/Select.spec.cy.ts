@@ -244,6 +244,127 @@ it('SSelect - clicking options, checking auto-transformations', () => {
   assertValue('2')
 })
 
+it('SSelect simple options mandatory mode works', () => {
+  cy.mount({
+    setup() {
+      const model = ref(null)
+
+      const options = [
+        { label: 'Opt 1', value: 1 },
+        { label: 'Opt 2', value: 2 },
+        { label: 'Opt 3', value: 3 },
+      ]
+
+      const [multiple, toggleMultiple] = useToggle(false)
+
+      return { model, options, multiple, toggleMultiple }
+    },
+    template: `
+      <div>Value: {{ model }}</div>
+      <button @click="toggleMultiple()">multiple : {{multiple}}</button>
+      <SSelect
+        v-model="model"
+        v-bind="{ options, multiple }"
+        label="Dap"
+        mandatory
+      />
+    `,
+  })
+
+  function assertValue(val: string) {
+    cy.contains(`Value: ${val}`)
+  }
+
+  cy.contains('Dap').click()
+  cy.get('.s-select-option__content').eq(0).click()
+  assertValue('1')
+
+  cy.contains('Dap').click()
+  cy.get('.s-select-option__content').eq(0).click()
+  assertValue('1')
+
+  cy.get('button').contains('multiple').click()
+  cy.contains('Dap').click()
+  cy.get('.s-select-option__content').eq(1).click()
+  assertValue('[ 1, 2 ]')
+
+  cy.get('.s-select-option__content').eq(1).click()
+  cy.get('.s-select-option__content').eq(0).click()
+  assertValue('[ 1 ]')
+})
+
+it('SSelect group options mandatory mode works', () => {
+  cy.mount({
+    setup() {
+      const model = ref(null)
+
+      const options = [
+        {
+          header: '1st group',
+          selectAllBtn: true,
+          items: [
+            {
+              label: 'Germany',
+              value: 'du',
+            },
+            {
+              label: 'England',
+              value: 'en',
+            },
+            {
+              label: 'United Arab Emirates',
+              value: 'ae',
+            },
+          ],
+        },
+        {
+          header: '2nd group',
+          selectAllBtn: false,
+          items: [
+            {
+              label: 'Iceland',
+              value: 'is',
+            },
+            {
+              label: 'Japan',
+              value: 'jp',
+            },
+          ],
+        },
+      ]
+
+      return { model, options }
+    },
+    template: `
+      <div>Value: {{ model }}</div>
+      <SSelect
+        v-model="model"
+        v-bind="{ options }"
+        label="Dap"
+        mandatory
+        multiple
+      />
+    `,
+  })
+
+  function assertValue(val: string) {
+    cy.contains(`Value: ${val}`)
+  }
+
+  cy.contains('Dap').click()
+
+  cy.get('.s-select-dropdown__action').click()
+  assertValue(`[ "du", "en", "ae" ]`)
+  cy.get('.s-select-dropdown__action').click()
+  assertValue(`[ "du", "en", "ae" ]`)
+  cy.get('.s-select-option__content').eq(3).click()
+  assertValue(`[ "du", "en", "ae", "is" ]`)
+  cy.get('.s-select-dropdown__action').click()
+  assertValue(`[ "is" ]`)
+  cy.get('.s-select-option__content').eq(3).click()
+  assertValue(`[ "is" ]`)
+})
+
 it('SDropdown - model usage works', () => {
   cy.mount({
     setup() {
