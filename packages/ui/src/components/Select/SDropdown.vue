@@ -19,6 +19,7 @@ const props = defineProps<{
   dropdownSearch?: boolean
   remoteSearch?: boolean
   maxShownOptions?: string | number | undefined
+  mandatory?: boolean
 }>()
 
 const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : SelectButtonType.Default))
@@ -33,7 +34,7 @@ function isThereLabelSlot() {
 <template>
   <SSelectBase
     v-bind="{ ...$attrs, ...$props } as any"
-    same-width-popper
+    :same-width-popper="loading"
   >
     <template #control>
       <SSelectButton

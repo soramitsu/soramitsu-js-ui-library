@@ -1,13 +1,9 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false,
-}
-</script>
-
 <script setup lang="ts">
 import { mergeProps } from 'vue'
 import { useWrappedTransitionVisibility } from './util'
 import { usePopoverApi } from './api'
+
+defineOptions({ inheritAttrs: false })
 
 const props = defineProps({
   eager: Boolean,

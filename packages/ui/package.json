@@ -1,6 +1,6 @@
 {
   "name": "@soramitsu-ui/ui",
-  "version": "0.13.10",
+  "version": "0.13.13",
   "main": "dist/lib.cjs",
   "module": "dist/lib.mjs",
   "types": "dist/lib.d.ts",

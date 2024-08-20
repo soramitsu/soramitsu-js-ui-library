@@ -33,6 +33,7 @@ import type { TableColumnRowSelectableFunc as TableColumnRowSelectableFunc_2 } f
 import type { TableColumnSortBy as TableColumnSortBy_2 } from '@/components/Table/types';
 import type { TableColumnSortOrder as TableColumnSortOrder_2 } from '@/components/Table/types';
 import { UnwrapRef } from 'vue';
+import type { ValidationsList } from '@/components/TextField/types';
 import { VNodeProps } from 'vue';
 
 // @public (undocumented)
@@ -647,6 +648,7 @@ loading?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
 maxShownOptions?: string | number | undefined;
+mandatory?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_TypePropsToRuntimeProps_10<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
@@ -661,12 +663,14 @@ loading?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
 maxShownOptions?: string | number | undefined;
+mandatory?: boolean | undefined;
 }>>>, {}, {}>, {
     label?(_: {
         options: UnwrapRef<SelectOption<any>[] | SelectOptionGroup<any>[]>;
         multiple: boolean;
         disabled: boolean;
         loading: boolean;
+        mandatory: boolean;
         label: string | null;
         size: SelectSize;
         noAutoClose: boolean;
@@ -702,6 +706,8 @@ export interface SelectApi<T> extends UnwrapRef<UseSelectModelReturn<T>> {
     readonly label: string | null;
     // (undocumented)
     readonly loading: boolean;
+    // (undocumented)
+    readonly mandatory: boolean;
     menuToggle: (value?: boolean) => void;
     // (undocumented)
     readonly multiple: boolean;
@@ -1283,6 +1289,7 @@ triggerSearch?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
 maxShownOptions?: string | number | undefined;
+mandatory?: boolean | undefined;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, VNodeProps & AllowedComponentProps & ComponentCustomProps, Readonly<globalThis.ExtractPropTypes<__VLS_TypePropsToRuntimeProps_9<{
 modelValue?: any;
 options?: SelectOption<any>[] | SelectOptionGroup<any>[] | undefined;
@@ -1297,12 +1304,14 @@ triggerSearch?: boolean | undefined;
 dropdownSearch?: boolean | undefined;
 remoteSearch?: boolean | undefined;
 maxShownOptions?: string | number | undefined;
+mandatory?: boolean | undefined;
 }>>>, {}, {}>, {
     label?(_: {
         options: UnwrapRef<SelectOption<any>[] | SelectOptionGroup<any>[]>;
         multiple: boolean;
         disabled: boolean;
         loading: boolean;
+        mandatory: boolean;
         label: string | null;
         size: SelectSize;
         noAutoClose: boolean;
@@ -1357,6 +1366,7 @@ sameWidthPopper: boolean;
 triggerSearch: boolean;
 dropdownSearch: boolean;
 remoteSearch: boolean;
+mandatory: boolean;
 }>, {}, unknown, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
 "update:modelValue": (value: any) => void;
 search: (value: string) => void;
@@ -1389,6 +1399,7 @@ sameWidthPopper: boolean;
 triggerSearch: boolean;
 dropdownSearch: boolean;
 remoteSearch: boolean;
+mandatory: boolean;
 }>>> & {
 "onUpdate:modelValue"?: ((value: any) => any) | undefined;
 onSearch?: ((value: string) => any) | undefined;
@@ -1400,6 +1411,7 @@ size: SelectSize;
 disabled: boolean;
 loading: boolean;
 options: SelectOption<any>[] | SelectOptionGroup<any>[];
+mandatory: boolean;
 syncMenuAndInputWidths: boolean;
 noAutoClose: boolean;
 sameWidthPopper: boolean;
@@ -1436,6 +1448,7 @@ type: SelectButtonType;
         multiple: boolean;
         disabled: boolean;
         loading: boolean;
+        mandatory: boolean;
         label: string | null;
         size: SelectSize;
         noAutoClose: boolean;
@@ -1481,6 +1494,7 @@ search: boolean;
         multiple: boolean;
         disabled: boolean;
         loading: boolean;
+        mandatory: boolean;
         label: string | null;
         size: SelectSize;
         noAutoClose: boolean;

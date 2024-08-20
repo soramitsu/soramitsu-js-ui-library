@@ -46,6 +46,8 @@ import IconBasicSearch24 from '@soramitsu-ui/icons/icomoon/basic-search-24.svg'
 import IconBasicCirclePlus24 from '@soramitsu-ui/icons/icomoon/basic-circle-plus-24.svg'
 import IconBasicCircleX24 from '@soramitsu-ui/icons/icomoon/basic-circle-x-24.svg'
 import IconBasicEye24 from '@soramitsu-ui/icons/icomoon/basic-eye-24.svg'
+import IconQuestion from '@soramitsu-ui/icons/icomoon/notifications-question-circle-24.svg'
+import IconCopy from '@soramitsu-ui/icons/icomoon/basic-copy-24.svg'
 
 export {
   IconClose,
@@ -75,6 +77,8 @@ export {
   IconBasicCirclePlus24,
   IconBasicCircleX24,
   IconBasicEye24,
+  IconQuestion,
+  IconCopy,
 }
 
 export const STATUS_ICONS_MAP: { [K in Status]: Component } = {

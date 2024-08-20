@@ -23,10 +23,9 @@ const props = withDefaults(
     label?: string | null
 
     /**
-     * TODO
-     *
      * - Doesn't allow to unselect value in single mode
      * - Doesn't allow to unselect last the only one picked value in multiple mode
+     * TODO
      * - Picks some value automatically (the first one) if `modelValue` is null and there are some available options
      */
     mandatory?: boolean
@@ -83,6 +82,7 @@ const props = withDefaults(
     triggerSearch: false,
     dropdownSearch: false,
     remoteSearch: false,
+    mandatory: false,
   },
 )
 
@@ -92,7 +92,7 @@ const emit = defineEmits<{
 }>()
 
 const model = useVModel(props, 'modelValue', emit)
-const { multiple, disabled, loading, options, size, label, noAutoClose, remoteSearch } = toRefs(props)
+const { multiple, disabled, loading, options, size, label, noAutoClose, remoteSearch, mandatory } = toRefs(props)
 
 const modeling = useSelectModel({
   model,
@@ -101,6 +101,7 @@ const modeling = useSelectModel({
   storeSelectedOptions: remoteSearch,
   singleModeAutoClose: not(noAutoClose),
   onAutoClose: () => togglePopper(false),
+  mandatory,
 })
 
 const [showPopper, togglePopper] = useToggle(false)
@@ -125,6 +126,7 @@ const api: SelectApi<any> = reactive({
   options,
   disabled,
   loading,
+  mandatory,
   label,
   isMenuOpened: showPopper,
   menuToggle: togglePopper,

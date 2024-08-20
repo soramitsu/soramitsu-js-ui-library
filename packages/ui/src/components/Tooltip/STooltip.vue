@@ -1,13 +1,9 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false,
-}
-</script>
-
 <script setup lang="ts">
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { SButton } from '@/components/Button'
 import type { BasePlacement } from '@popperjs/core'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(
   defineProps<{

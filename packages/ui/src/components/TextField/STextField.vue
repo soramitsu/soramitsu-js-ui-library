@@ -1,8 +1,7 @@
-<script lang="ts">
-export default {
-  inheritAttrs: false,
-}
-
+<script setup lang="ts">
+import type { ValidationsList } from '@/components/TextField/types'
+import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff, IconStatusSuccess16 } from '../icons'
+import { computed } from 'vue'
 import type { StyleValue } from 'vue'
 import { Status } from '@/types'
 import type { MaybeElementRef } from '@vueuse/core'
@@ -106,11 +105,13 @@ interface Props {
    * Manually activates filled state
    */
   filledState?: boolean
+  /**
+   * Display the list of rules
+   */
+  validationsList?: ValidationsList
 }
-</script>
 
-<script setup lang="ts">
-import { STATUS_ICONS_MAP_16, IconEye, IconEyeOff } from '../icons'
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<Props>(), {
   multiline: false,
@@ -136,6 +137,7 @@ const status = computed<null | TextFieldStatus>(() => {
   if (props.success) return Status.Success
   if (props.warning) return Status.Warning
   if (props.error) return Status.Error
+
   return null
 })
 
@@ -179,7 +181,7 @@ function handleInputWrapperMouseDown(event: MouseEvent) {
 // MESSAGE
 
 const isMessageSlotDefined = () => !!slots.message
-const shouldRenderMessage = () => !!props.message || isMessageSlotDefined()
+const shouldRenderMessage = () => !!props.message || isMessageSlotDefined() || shouldShowValidationsList.value
 const messageIcon = computed(() => {
   if (status.value === null) return null
   return STATUS_ICONS_MAP_16[status.value]
@@ -237,6 +239,27 @@ const [forceRevealPassword, toggleForceReveal] = useToggle()
 const inputType = computed(() =>
   props.password && (!showEye.value || !forceRevealPassword.value) ? 'password' : 'text',
 )
+
+const isTouched = ref(false)
+
+function handleFocus() {
+  isFocused.value = true
+  isTouched.value = true
+}
+
+const isMatchingValidationsList = computed(() => {
+  if (!props.validationsList) return false
+
+  return props.validationsList.validations.every((v) => v.isMatching)
+})
+
+const shouldShowValidationsList = computed(
+  () =>
+    props.validationsList &&
+    (!props.validationsList.showOnFocusOnly || isFocused.value) &&
+    isTouched.value &&
+    !isMatchingValidationsList.value,
+)
 </script>
 
 <template>
@@ -279,7 +302,7 @@ const inputType = computed(() =>
           :disabled="disabled"
           v-bind="inputAttrs()"
           @input="onInput"
-          @focus="isFocused = true"
+          @focus="handleFocus"
           @blur="isFocused = false"
         >
       </div>
@@ -320,11 +343,37 @@ const inputType = computed(() =>
       >
         <component
           :is="messageIcon"
-          v-if="messageIcon"
+          v-if="messageIcon && !props.validationsList"
           class="s-text-field__message-icon"
         />
 
-        <span>
+        <div v-if="props.validationsList">
+          <span>{{ props.validationsList.title }}</span>
+
+          <div
+            v-for="item in props.validationsList.validations"
+            :key="item.message"
+          >
+            <div class="flex gap-4px">
+              <IconStatusSuccess16
+                v-if="item.isMatching"
+                class="flex self-center w-16px"
+              />
+              <div
+                v-else
+                class="w-16px"
+              >
+                -
+              </div>
+
+              <div :class="{ 's-text-field__message-requirement_matched': item.isMatching }">
+                {{ item.message }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <span v-else>
           <slot name="message">{{ message }}</slot>
         </span>
       </div>
@@ -463,6 +512,12 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
       &-leave-to {
         transform: translateY(-8px);
         opacity: 0;
+      }
+    }
+
+    &-requirement {
+      &_matched {
+        color: theme.token-as-var('sys.color.status.success');
       }
     }
   }
