@@ -382,7 +382,11 @@ const shouldShowValidationsList = computed(
 </template>
 
 <style lang="scss">
-@use '@/theme';
+@use 'sass:meta';
+@use '@/theme_neumorphism' as theme_neumorphism;
+@use '@/theme' as theme;
+@import '../../themes.scss';
+
 
 $height: 56px;
 $input-padding: 24px 16px 6px 16px;
@@ -395,12 +399,38 @@ $theme-bg-hover: theme.token-as-var('ref.color.common.color-base-content-seconda
 $theme-border-primary: theme.token-as-var('ref.color.common.color-utility-surface');
 $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
 
+
+@mixin apply-theme-text-field($theme) {
+  &__input-wrapper {
+    background-color: theme-token($theme,'sys.color.textfield.background-color');
+    &:hover:not(:focus-within) {
+      background-color: theme-token($theme,'sys.color.textfield.background-color-hover');
+    }
+    &:focus-within {
+      border-color: theme-token($theme,'sys.color.textfield.border-color');
+    }
+  }
+}
+
+@mixin apply-theme($theme-name, $theme-variable) {
+  .s-text-field {
+    @include apply-theme-text-field($theme: $theme-variable);
+  }
+}
+
+@each $theme-name, $theme-variable in $themes {
+  [theme="#{$theme-name}"] {
+    @include apply-theme($theme-name, $theme-variable);
+  }
+}
+
+
+
 .s-text-field {
   $root: &;
 
   &_disabled &__input-wrapper {
     @apply pointer-events-none opacity-75;
-    // todo
   }
 
   &:not(&_empty),
@@ -408,24 +438,17 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
   &:focus-within {
     label {
       transform: translateY(#{$label-top-secondary});
-      // @apply s-ty-p4;
     }
   }
 
   &__input-wrapper {
-    background: $theme-bg;
     @apply rounded border border-transparent;
     @apply relative flex;
     @apply transition-all;
 
     min-height: $height;
 
-    &:hover:not(:focus-within) {
-      background: $theme-bg-hover;
-    }
-
     &:focus-within {
-      border-color: $theme-border-primary;
       @apply bg-transparent;
     }
 

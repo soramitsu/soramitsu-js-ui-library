@@ -93,6 +93,11 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'text-color-active': '',
             )
           ),
+          'textfield': (
+            'background-color': #F5F7F8,
+            'background-color-hover': #ECEFF0,
+            'border-color': #DDE0E1,
+          ),
           'util': (
             'overlay': rgba(0, 0, 0, 0.45),
           ),

@@ -101,6 +101,11 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'text-color-active': token-as-var('ref.color.common.color-theme-accent'),
             )
           ),
+          'textfield': (
+            'background-color': #FAF4F8,
+            'background-color-hover': #FAF4F8,
+            'border-color': #F7F3F4
+          ),
           'util': (
             'overlay': '',
           ),
