@@ -437,6 +437,9 @@ $message-icon-alignment-fix: -1px;
     @apply pointer-events-none opacity-75;
   }
 
+  &_disabled:hover {
+    cursor: not-allowed;
+  }
   &:not(&_empty),
   &_filled-state,
   &:focus-within {
