@@ -153,9 +153,8 @@ function onInput(e: Event) {
 
 const isValueEmpty = computed(() => !model.value)
 const isFocused = ref(false)
-const labelTypographyClass = computed(() =>
-  !(props.filledState || isFocused.value) && isValueEmpty.value ? 'sora-tpg-p3' : 'sora-tpg-p4',
-)
+const labelTypographyClass = computed(() => 'sora-tpg-p3');
+
 
 const inputRef = ref<MaybeElementRef>(null)
 
@@ -284,6 +283,7 @@ const shouldShowValidationsList = computed(
       @mousedown="handleInputWrapperMouseDown"
     >
       <label
+        v-if="isValueEmpty"
         :for="id"
         :class="labelTypographyClass"
       >
@@ -389,16 +389,10 @@ const shouldShowValidationsList = computed(
 
 
 $height: 56px;
-$input-padding: 24px 16px 6px 16px;
+$input-padding: 15px;
 $label-top-primary: 16px;
 $label-top-secondary: 6px;
 $message-icon-alignment-fix: -1px;
-
-$theme-bg: theme.token-as-var('ref.color.common.color-base-content-tertiary');
-$theme-bg-hover: theme.token-as-var('ref.color.common.color-base-content-secondary');
-$theme-border-primary: theme.token-as-var('ref.color.common.color-utility-surface');
-$theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
-
 
 @mixin apply-theme-text-field($theme) {
   &__input-wrapper {
@@ -409,6 +403,8 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
     }
     &:focus-within {
       border-color: theme-token($theme,'sys.color.textfield.border-color');
+      background-color: theme-token($theme,'sys.color.textfield.background-color');
+      outline: 1px solid theme-token($theme,'sys.color.textfield.outline-color');
     }
     label {
       color: theme-token($theme,'sys.color.textfield.label-color');
@@ -444,7 +440,7 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
   &_filled-state,
   &:focus-within {
     label {
-      transform: translateY(#{$label-top-secondary});
+      transform: translateY(#{$label-top-primary});
     }
   }
 

@@ -106,6 +106,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
             'background-color-hover': #FAF4F8,
             'border-color': #F7F3F4,
             'label-color': #D5CDD0,
+            'outline-color': rgba(0, 0, 0, 0.5),
           ),
           'util': (
             'overlay': '',
