@@ -65,7 +65,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
       sys: (
         'color': (
           'content-tertiary': '',
-          'content-secondary': '',
+          'content-secondary': #A19A9D,
           'content-primary': '',
           'content-quaternary': '',
           'on-disabled': '',
@@ -100,6 +100,14 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
               'text-color-hover': token-as-var('ref.color.common.color-base-content-secondary'),
               'text-color-active': token-as-var('ref.color.common.color-theme-accent'),
             )
+          ),
+          'textfield': (
+            'background-color': #FAF4F8,
+            'background-color-hover': #FAF4F8,
+            'border-color': #F7F3F4,
+            'label-color': #D5CDD0,
+            'counter-color': #909399,
+            'outline-color': rgba(0, 0, 0, 0.5),
           ),
           'util': (
             'overlay': '',
