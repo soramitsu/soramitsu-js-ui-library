@@ -413,9 +413,12 @@ $message-icon-alignment-fix: -1px;
   &__counter {
     color: theme-token($theme,'sys.color.textfield.label-color');
   }
-  &__eye {
+  &__eye,
+  &__append svg {
     color: theme-token($theme,'sys.color.content-secondary');
+    fill: theme-token($theme,'sys.color.content-secondary');
   }
+
 }
 
 @mixin apply-theme($theme-name, $theme-variable) {
