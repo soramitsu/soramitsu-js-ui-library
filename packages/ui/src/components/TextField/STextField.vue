@@ -411,7 +411,7 @@ $message-icon-alignment-fix: -1px;
     }
   }
   &__counter {
-    color: theme-token($theme,'sys.color.textfield.label-color');
+    color: theme-token($theme,'sys.color.textfield.counter-color');
   }
   &__eye,
   &__append svg {
