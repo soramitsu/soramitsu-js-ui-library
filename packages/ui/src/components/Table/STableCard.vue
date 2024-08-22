@@ -162,7 +162,7 @@ function select() {
 
 .s-table-card {
   &_selected {
-    background: theme.token-as-var('sys.color.background');
+    background: theme.token-as-var('ref.color.common.color-base-on-accent');
   }
 
   &__label {
@@ -179,7 +179,7 @@ function select() {
   }
 
   &__expanded-block {
-    background-color: theme.token-as-var('sys.color.background');
+    background-color: theme.token-as-var('ref.color.common.color-base-on-accent');
   }
 }
 </style>

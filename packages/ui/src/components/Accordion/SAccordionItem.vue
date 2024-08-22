@@ -125,7 +125,7 @@ if (groupApi) {
 
 .s-accordion-item {
   @apply flex flex-col;
-  border: 1px solid theme.token-as-var('sys.color.border-secondary');
+  border: 1px solid theme.token-as-var('ref.color.common.color-base-content-secondary');
   $component: &;
 
   &_expanded {
@@ -134,7 +134,7 @@ if (groupApi) {
     }
 
     #{$component}__trigger {
-      background-color: theme.token-as-var('sys.color.background');
+      background-color: theme.token-as-var('ref.color.common.color-base-content-tertiary');
     }
 
     #{$component}__body-wrapper {

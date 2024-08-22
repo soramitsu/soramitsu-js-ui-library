@@ -8,12 +8,12 @@ $sizes: (
 );
 
 $border-radius: 3px;
-$color-disabled: theme.token-as-var('sys.color.disabled');
+$color-disabled: theme.token-as-var('ref.color.common.color-base-on-accent');
 $color-on-disabled: theme.token-as-var('sys.color.on-disabled');
-$color-primary: theme.token-as-var('sys.color.primary');
-$color-border-primary: theme.token-as-var('sys.color.border-primary');
-$color-border-secondary: theme.token-as-var('sys.color.border-secondary');
-$color-on-accent: theme.token-as-var('sys.color.content-on-background-inverted');
+$color-primary: theme.token-as-var('ref.color.common.color-theme-accent');
+$color-border-primary: theme.token-as-var('ref.color.common.color-utility-surface');
+$color-border-secondary: theme.token-as-var('ref.color.common.color-base-content-secondary');
+$color-on-accent: theme.token-as-var('ref.color.common.color-base-on-accent');
 
 .s-checkbox-atom {
   @apply flex items-center justify-center;

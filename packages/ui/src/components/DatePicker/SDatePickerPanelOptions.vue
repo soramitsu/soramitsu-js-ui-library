@@ -45,7 +45,7 @@ const onMenuClick = (data: PossiblePresetOption) => {
 .s-date-picker-options-panel {
   @apply flex flex-col justify-start;
   grid-area: options;
-  border-right: 1px solid theme.token-as-var('sys.color.border-primary');
+  border-right: 1px solid theme.token-as-var('ref.color.common.color-utility-surface');
 
   &__item {
     padding: 10px 16px;
@@ -53,10 +53,10 @@ const onMenuClick = (data: PossiblePresetOption) => {
     position: relative;
     width: 150px;
     &:hover {
-      background-color: theme.token-as-var('sys.color.background-hover');
+      background-color: theme.token-as-var('ref.color.common.color-base-content-secondary');
     }
     &.active {
-      background-color: theme.token-as-var('sys.color.background-hover');
+      background-color: theme.token-as-var('ref.color.common.color-base-content-secondary');
     }
   }
 
