@@ -413,6 +413,9 @@ $message-icon-alignment-fix: -1px;
   &__counter {
     color: theme-token($theme,'sys.color.textfield.label-color');
   }
+  &__eye {
+    color: theme-token($theme,'sys.color.content-secondary');
+  }
 }
 
 @mixin apply-theme($theme-name, $theme-variable) {
@@ -426,8 +429,6 @@ $message-icon-alignment-fix: -1px;
     @include apply-theme($theme-name, $theme-variable);
   }
 }
-
-
 
 .s-text-field {
   $root: &;
@@ -547,6 +548,7 @@ $message-icon-alignment-fix: -1px;
   &__eye {
     cursor: pointer;
     position: relative;
+    
 
     // icon size
     // approximately, not strict by design system

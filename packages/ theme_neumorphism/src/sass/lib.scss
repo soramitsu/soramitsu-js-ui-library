@@ -65,7 +65,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
       sys: (
         'color': (
           'content-tertiary': '',
-          'content-secondary': '',
+          'content-secondary': #A19A9D,
           'content-primary': '',
           'content-quaternary': '',
           'on-disabled': '',
