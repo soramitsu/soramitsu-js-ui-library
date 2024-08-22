@@ -403,12 +403,19 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
 @mixin apply-theme-text-field($theme) {
   &__input-wrapper {
     background-color: theme-token($theme,'sys.color.textfield.background-color');
+    box-shadow: theme-token($theme,'ref.color.shadow.shadow-element');
     &:hover:not(:focus-within) {
       background-color: theme-token($theme,'sys.color.textfield.background-color-hover');
     }
     &:focus-within {
       border-color: theme-token($theme,'sys.color.textfield.border-color');
     }
+    label {
+      color: theme-token($theme,'sys.color.textfield.label-color');
+    }
+  }
+  &__counter {
+    color: theme-token($theme,'sys.color.textfield.label-color');
   }
 }
 
@@ -453,7 +460,7 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
     }
 
     label {
-      color: $theme-content-tertiary;
+
       @apply pointer-events-none;
       @apply absolute top-0 left-4;
       @apply transition-all;
@@ -479,10 +486,6 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
 
   &__append {
     @apply flex items-center space-x-4 pr-4;
-  }
-
-  &__counter {
-    color: $theme-content-tertiary;
   }
 
   @each $status in 'success', 'warning', 'error' {

@@ -104,7 +104,8 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
           'textfield': (
             'background-color': #FAF4F8,
             'background-color-hover': #FAF4F8,
-            'border-color': #F7F3F4
+            'border-color': #F7F3F4,
+            'label-color': #D5CDD0,
           ),
           'util': (
             'overlay': '',
