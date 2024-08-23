@@ -13,7 +13,7 @@
       @keydown.space="handleInputWrapperClick"
     >
       <!-- Floating label -->
-      <label v-if="label" :for="id" :class="labelClass">{{ label }}</label>
+      <label v-if="isValueEmpty" :for="id" :class="labelClass">{{ label }}</label>
 
       <div class="s-float-text-field__input-line">
         <slot name="left"></slot>
@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick } from 'vue';
+import { ref, computed, watch, nextTick } from 'vue';
 
 interface Props {
   label?: string;
@@ -48,16 +48,26 @@ interface Props {
   delimiters?: { thousand: string; decimal: string };
   decimals?: number;
   max?: string | number;
+  modelValue?: string; 
 }
 
 const props = withDefaults(defineProps<Props>(), {
   delimiters: () => ({ thousand: ',', decimal: '.' }),
   decimals: 2,
   id: 'float-input-id',
-  max: undefined
+  max: undefined,
+  modelValue: '', 
 });
 
-const inputValue = ref('');
+const inputValue = ref(props.modelValue || ''); // Track the value of the input
+
+const isValueEmpty = computed(() => inputValue.value === '' || inputValue.value === null);
+
+// Ensure the value stays in sync with v-model or external changes
+watch(() => props.modelValue, (newValue) => {
+  inputValue.value = newValue || '';
+});
+
 const inputRef = ref<HTMLInputElement | null>(null);
 const isFocused = ref(false);
 let charsCountBeforeSelection = 0;
@@ -97,17 +107,18 @@ function updateSelectionPosition() {
 async function onInputHandler(event: Event) {
   const target = event.target as HTMLInputElement;
   const value = target.value;
+  
   saveSelectionPosition(value);
 
   const newValue = [
     (v: string) => normalizeDelimiters(v),
     (v: string) => formatNumberField(v, props.decimals),
-    (v: string) => isNumberLikeValue(v) ? v : '0',
     (v: string) => checkValueForExtremum(v),
   ].reduce((buffer, rule) => rule(buffer), value);
 
-  inputValue.value = newValue;
-
+  // Set the input value, allowing it to be empty rather than setting to '0'
+  inputValue.value = newValue === '' ? '' : newValue;
+  
   await nextTick();
   updateSelectionPosition();
 }
@@ -167,10 +178,6 @@ function valueMaxLength(value: string, decimals?: number) {
   return fpIndex !== -1 ? fpIndex + 1 + (decimals ?? 2) : undefined;
 }
 
-function isNumberLikeValue(value: string) {
-  return !isNaN(parseFloat(value)) && isFinite(Number(value));
-}
-
 function handleFocus() {
   isFocused.value = true;
 }
@@ -179,6 +186,7 @@ function handleInputWrapperClick() {
   inputRef.value?.focus();
 }
 </script>
+
 
 
 <style lang="scss">
