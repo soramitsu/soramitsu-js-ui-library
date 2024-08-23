@@ -1,0 +1,516 @@
+// General Colors
+$neu-datepicker-header-label: var(--s-color-base-content-primary) !default;
+$neu-datepicker-btn-arrow: var(--s-color-base-content-tertiary) !default;
+$neu-datepicker-table-days: var(--s-color-base-content-secondary) !default;
+$neu-datepicker-text-color-btn: var(--s-color-base-on-accent) !default;
+$neu-datepicker-date-select: var(--s-color-base-content-primary) !default;
+$neu-datepicker-date-select-dark: var(--s-color-base-content-primary--dark) !default;
+$neu-datepicker-disabled-date: var(--s-color-base-content-tertiary) !default;
+$neu-datepicker-weekends-day: var(--s-color-base-content-secondary) !default;
+
+// Hover and Selected Colors
+$neu-datepicker-date-hover-background: var(--s-color-theme-accent) !default;
+$neu-datepicker-date-hover-background-dark: var(--s-color-theme-accent-hover) !default;
+$neu-datepicker-available-selected-hover: var(--s-color-utility-surface) !default;
+$neu-datepicker-available-selected-hover-dark: var(--s-color-utility-body--dark) !default;
+$neu-datepicker-date-hover-color: var(--s-color-base-background-hover) !default;
+
+// Background Colors
+$neu-datepicker-background-color: var(--s-color-utility-body) !default;
+$neu-datepicker-background-color-dark: var(--s-color-base-border-primary--dark) !default;
+
+// Borders
+$neu-datepicker-border-main: var(--s-color-base-content-tertiary) !default;
+$neu-datepicker-border-time-select: var(--s-color-base-border-secondary) !default;
+$neu-datepicker-background-color-btn: var(--s-color-base-content-tertiary) !default;
+
+// Shadows
+$neu-datepicker-box-shadow-light: 20px 20px 60px var(--s-shadow-color-dark), 1px 1px 10px var(--s-shadow-color-light) inset, -10px -10px 30px rgba(255, 255, 255, 0.9) !default;
+$neu-datepicker-box-shadow-dark: 20px 20px 60px rgba(73, 32, 103, 1), 1px 1px 10px var(--s-shadow-color-dark-light--dark) inset, -10px -10px 30px var(--s-shadow-color-dark-lighten--dark) !default;
+$neu-datepicker-box-shadow-btn-light: 1px 1px 5px rgba(0, 0, 0, 0.05), -1px -1px 5px rgba(0, 0, 0, 0.05) !default;
+$neu-datepicker-box-shadow-btn-dark: 1px 1px 5px rgba(0, 0, 0, 0.05), -1px -1px 5px rgba(0, 0, 0, 0.05) !default;
+
+:root {
+  --neu-datepicker-background-color: #{$neu-datepicker-background-color};
+  --neu-datepicker-available-selected-hover-color: #{$neu-datepicker-available-selected-hover};
+  --neu-datepicker-date-hover-background-color: #{$neu-datepicker-date-hover-background};
+  --neu-datepicker-date-select-color: #{$neu-datepicker-date-select};
+  --neu-datepicker-box-shadow: #{$neu-datepicker-box-shadow-light};
+  --neu-datepicker-box-shadow-btn: #{$neu-datepicker-box-shadow-btn-light};
+}
+
+[design-system-theme="dark"] {
+  --neu-datepicker-background-color: #{$neu-datepicker-background-color-dark};
+  --neu-datepicker-available-selected-hover-color: #{$neu-datepicker-available-selected-hover-dark};
+  --neu-datepicker-date-hover-background-color: #{$neu-datepicker-date-hover-background-dark};
+  --neu-datepicker-date-select-color: #{neu-datepicker-date-select-dark};
+  --neu-datepicker-box-shadow: #{$neu-datepicker-box-shadow-dark};
+  --neu-datepicker-box-shadow-btn: #{$neu-datepicker-box-shadow-btn-dark};
+}
+
+@mixin date-picker-border-radius(
+  $suffix: "big",
+  $border-radius: var(--s-border-radius-big)) {
+  &.s-border-radius {
+    &-#{$suffix} {
+      border-radius: 16px;
+
+      .s-placeholder {
+        border-top-left-radius: $border-radius;
+      }
+
+      & .el-input__inner {
+        border-radius: $border-radius;
+      }
+    }
+  }
+}
+
+$date-picker-padding: 8px;
+@mixin datepicker-size($size, $height) {
+  &.s-#{$size} .el-input__inner {
+    height: $height;
+
+    .el-range-separator {
+      line-height: $height - $date-picker-padding;
+    }
+  }
+}
+
+
+.s-date-picker.neumorphic {
+  font-family: var(--s-font-family-default);
+  width: 100%;
+  position: relative;
+  .el-date-editor {
+    width: 100%;
+    &.el-input,
+    &.el-input__inner {
+      width: 100%;
+    }
+    .el-range-separator {
+      color: var(--s-color-base-content-tertiary);
+    }
+    .el-input__inner,
+    .el-range-input {
+      &::placeholder {
+        color: var(--s-color-base-content-tertiary);
+        opacity: 1; // Firefox
+      }
+    }
+    &.is-active {
+      border-color: var(--s-color-base-border-primary);
+    }
+  }
+
+  @include date-picker-border-radius;
+  @include date-picker-border-radius("medium", var(--s-border-radius-medium));
+  @include date-picker-border-radius("small", var(--s-border-radius-small));
+  @include date-picker-border-radius("mini", var(--s-border-radius-mini));
+
+  @include datepicker-size("big", $s-size-big);
+  @include datepicker-size("medium", $s-size-medium);
+  @include datepicker-size("small", $s-size-small);
+
+  &.s-has-value {
+    .el-date-editor .el-range-separator {
+      color: var(--s-color-base-content-primary);
+    }
+    .el-range-input {
+      color: var(--s-color-base-content-primary);
+    }
+  }
+  &.s-input-type {
+    .el-input__inner {
+      padding: 0 15px;
+      border: 1px solid var(--s-color-base-background);
+      background-color: var(--s-color-base-background);
+    }
+    &:hover {
+      .el-input__inner {
+        border-color: var(--s-color-base-background-hover);
+      }
+      .el-input__inner,
+      .s-placeholder {
+        background-color: var(--s-color-base-background-hover);
+      }
+    }
+    .s-placeholder + .el-date-editor {
+      > .el-input__inner {
+        padding-top: 12px;
+      }
+      .el-input__validateIcon {
+        padding-top: 11px;
+      }
+    }
+    &.s-focused {
+      .el-input__inner {
+        border-color: var(--s-color-base-border-primary);
+      }
+      .el-input__inner,
+      .s-placeholder {
+        background-color: var(--s-color-utility-surface);
+      }
+    }
+    &.s-disabled {
+      .el-input__inner {
+        border-color: var(--s-color-base-disabled);
+      }
+      .el-input__inner,
+      .s-placeholder {
+        color: var(--s-color-base-content-quaternary);
+        background-color: var(--s-color-base-disabled);
+      }
+    }
+  }
+  .s-placeholder {
+    // TODO: add default animation from material-ui
+    color: var(--s-color-base-content-tertiary);
+    text-align: left;
+    font-size: var(--s-font-size-mini);
+    padding: 0 15px;
+    padding-top: 5px;
+    top: 1px;
+    left: 1px;
+    position: absolute;
+    z-index: 1;
+    width: calc(100% - 15px);
+    background-color: var(--s-color-base-background);
+    pointer-events: none;
+  }
+  &.s-select-type {
+    .el-date-editor {
+      .el-input__inner,
+      .el-range-input,
+      .el-range-separator {
+        @include font-weight(700, true);
+      }
+      &.el-input__inner,
+      & .el-input__inner {
+        padding-left: 12px;
+        &:hover {
+          border-color: var(--s-color-base-border-primary);
+        }
+        &::placeholder,
+        .el-range-input::placeholder {
+          color: var(--s-color-base-content-tertiary);
+          @include font-weight(700, true);
+        }
+      }
+    }
+    .s-icon-chevron-down-rounded-16 {
+      position: absolute;
+      right: 10px;
+      top: calc(50% - 8px);
+      pointer-events: none;
+      color: var(--s-color-base-content-tertiary);
+      transition: transform 0.3s;
+    }
+    &.s-focused {
+      .el-date-editor.el-input__inner,
+      .el-date-editor .el-input__inner {
+        border-color: var(--s-color-base-border-primary);
+      }
+      &:not(.disabled) .s-icon-chevron-down-rounded-16 {
+        transform: rotate(180deg);
+      }
+    }
+    &.s-has-value {
+      .s-icon-chevron-down-rounded-16 {
+        color: var(--s-color-base-content-primary);
+      }
+    }
+    &.s-disabled {
+      .el-date-editor.el-input__inner,
+      .el-date-editor .el-input__inner {
+        color: var(--s-color-base-content-quaternary);
+        border-color: var(--s-color-base-disabled);
+        background-color: var(--s-color-utility-surface);
+        &::placeholder {
+          color: var(--s-color-base-content-quaternary);
+        }
+        .el-range-input {
+          background-color: var(--s-color-utility-surface);
+          color: var(--s-color-base-content-quaternary);
+          &::placeholder {
+            color: var(--s-color-base-content-quaternary);
+          }
+        }
+        .el-range-separator {
+          color: var(--s-color-base-content-quaternary);
+        }
+      }
+      .s-chevron-down-rounded-16 {
+        color: var(--s-color-base-content-quaternary);
+      }
+    }
+  }
+}
+
+.el-date-table td,
+.el-year-table td .cell,
+.el-month-table td .cell {
+  color: var(--s-color-base-content-primary);
+}
+
+.el-year-table td.today .cell,
+.el-year-table td .cell:hover,
+.el-year-table td.current:not(.disabled) .cell,
+.el-month-table td.today .cell,
+.el-month-table td.current:not(.disabled) .cell,
+.el-month-table td .cell:hover,
+.el-picker-panel__shortcut:hover {
+  color: var(--neu-datepicker-date-hover-background-color);
+}
+
+.el-date-picker__header-label {
+  color: $neu-datepicker-header-label;
+}
+
+.el-date-picker {
+  &__header--bordered {
+    border-bottom: 1px solid $neu-datepicker-border-main;
+  }
+}
+
+.el-picker-panel__icon-btn,
+.el-date-range-picker__time-header>.el-icon-arrow-right {
+  color: $neu-datepicker-btn-arrow;
+}
+
+.el-picker-panel__icon-btn {
+  &.is-disabled {
+    display: none;
+  }
+}
+
+.el-date-range-picker__time-header,
+.el-date-picker__time-header {
+  border-bottom-color: $neu-datepicker-border-main;
+}
+
+.el-date-table th {
+  color: $neu-datepicker-table-days;
+}
+
+.el-picker-panel {
+  color: var(--neu-datepicker-date-select-color);
+  box-shadow: var(--neu-datepicker-box-shadow);
+  background-color: var(--neu-datepicker-background-color);
+  border-radius: var(--s-border-radius-big);
+  @include with-popper-arrows;
+
+  &__sidebar {
+    background-color: var(--neu-datepicker-background-color);
+    border-right-color: $neu-datepicker-border-main;
+  }
+
+  &__shortcut {
+    color: var(--s-color-base-content-primary);
+  }
+  .el-picker-panel__content {
+    .el-date-table {
+      td:nth-child(7), // Targeting Saturday
+      td:nth-child(1) { // Targeting Sunday
+        color: $neu-datepicker-weekends-day !important;
+      }
+      td {
+        &.prev-month,
+        &.next-month {
+          color: var(--s-color-base-content-tertiary);
+        }
+      }
+    }
+  }
+  border-color: var(--s-color-base-background-hover);
+
+  .el-date-table {
+    td {
+      &.today span {
+        color: var(--s-color-theme-accent);
+      }
+      
+      &.next-month,
+      &.prev-month {
+        color: $neu-datepicker-table-days;
+      }
+      &.current:not(.disabled),
+      &.selected,
+      &.start-date,
+      &.end-date,
+      &.available:hover {
+        span {
+          width: 24px;
+          height: 24px;
+          border-radius: 14px;
+          background-color: var(--neu-datepicker-date-hover-background-color) !important;
+          color: var(--neu-datepicker-available-selected-hover-color) !important;
+        }
+      }
+      &.selected:hover,
+      &.today span:hover {
+        color: var(--s-color-utility-surface);
+      }
+      &.selected {
+        div {
+          background-color: transparent;
+        }
+      }
+      &.disabled {
+        div {
+          background-color: transparent;
+          color: $neu-datepicker-disabled-date;
+        }
+      }
+    }
+    th {
+      border-bottom-color: $neu-datepicker-border-main !important;
+    }
+  }
+  .el-month-table td {
+    &.start-date,
+    &.end-date {
+      .cell {
+        background-color: var(--neu-datepicker-date-hover-background-color);
+        color: var(--s-color-utility-surface);
+      }
+    }
+   }
+  }
+  
+  .el-picker-panel__footer {
+    box-shadow: var(--neu-datepicker-box-shadow);
+    background-color: var(--neu-datepicker-background-color);
+    border-top-color: $neu-datepicker-border-main !important; 
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+    > .el-button {
+      text-transform: uppercase;
+      height: 32px;
+      border-radius: var(--s-border-radius-big);
+      &:hover,
+      &:focus {
+        color: var(--s-color-theme-accent);
+      }
+      &.is-disabled.is-plain {
+        background-color: var(--s-color-base-content-tertiary);
+      }
+
+      &.is-plain {
+        border-color: transparent;
+        background-color: $neu-datepicker-background-color-btn;
+        color: $neu-datepicker-text-color-btn;
+        box-shadow: var(--neu-datepicker-box-shadow-btn);
+        border-radius: var(--s-border-radius-big);
+
+        &:hover,
+        &:focus {
+          color: $neu-datepicker-text-color-btn;
+          border-color: $neu-datepicker-border-main;
+          [design-system-theme="dark"] & {
+            border-color: var(--s-color-theme-accent-hover);
+          }
+        }
+      }
+    }
+  }
+  div[x-arrow].popper__arrow {
+    border-bottom-color: var(--s-color-base-background-hover);
+  }
+
+.el-input.is-disabled .el-input__inner {
+  background-color: var(--neu-datepicker-background-color);
+  [design-system-theme="dark"] & {
+    border-color: var(--neu-datepicker-background-color);
+    color: var(--s-color-base-content-tertiary);
+  }
+}
+
+.el-input--small {
+  .el-input__inner {
+    padding: 6px 12px;
+    border: 1px solid $neu-datepicker-border-time-select;
+    background-color: var(--neu-datepicker-background-color);
+    border-radius: 8px;
+
+    &:focus,
+    &.is-active,
+    &:hover {
+      border-color: var(--neu-datepicker-date-hover-background-color);
+    }
+    &:hover{
+      cursor: pointer;
+    }
+    &::placeholder {
+      color: var(--s-color-base-content-primary);
+    }
+  }
+}
+.el-time-panel {
+  border-color: var(--s-color-base-background-hover);
+  background-color: var(--s-color-base-border-primary);
+  border-radius: var(--s-border-radius-big);
+  box-shadow: var(--neu-datepicker-box-shadow);
+  .el-time-panel__footer {
+    border-top-color: $neu-datepicker-border-main;
+    .confirm {
+      color: var(--s-color-theme-accent);
+    }
+  }
+  .el-time-spinner__item {
+    color: var(--neu-datepicker-date-select-color);
+    &.active:not(.disabled) {
+      color: var(--neu-datepicker-date-select-color);
+    }
+    &:hover:not(.disabled):not(.active) {
+      background: none;
+      color: var(--s-color-theme-accent);
+    }
+  }
+  .el-time-panel__content {
+    &::after,
+    &::before {
+      border-top-color: $neu-datepicker-border-main;
+      border-bottom-color: $neu-datepicker-border-main;
+    }
+  }
+  .el-time-panel__btn {
+    &.cancel {
+      color: var(--s-color-base-content-primary);
+      text-transform: uppercase;
+      font-weight: 800;
+      &:hover {
+        color: var(--s-color-theme-accent);
+      }
+    }
+  }
+}
+.el-date-table.is-week-mode .el-date-table__row {
+  &.current,
+  &:hover {
+    div {
+      background-color: var(--s-color-base-background-hover);
+    }
+  }
+}
+
+.el-month-table td.in-range div {
+  background-color: var(--s-color-base-border-secondary);
+  &:hover {
+    background-color: var(--s-color-base-border-secondary);
+  }
+}
+.el-date-table td.in-range div {
+  background-color: var(--s-color-base-border-secondary);
+  &:hover {
+    background-color: var(--s-color-base-border-secondary);
+  }
+}
+
+.el-date-table td.start-date div {
+  margin: none;
+}
+
+.el-date-range-picker__content.is-left {
+  border-right-color: $neu-datepicker-border-main;
+}
