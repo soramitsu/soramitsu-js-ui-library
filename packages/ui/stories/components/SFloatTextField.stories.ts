@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/vue3'
 const meta = {
   component: defineComponent({
     components: { SFloatTextField, IconCopy, IconQuestion },
-    props: ['modelValue', 'oneIcon', 'twoIcons', 'isValidationsList', 'top', 'bottom', 'left', 'right'],
+    props: ['modelValue', 'oneIcon', 'twoIcons', 'isValidationsList', 'top', 'bottom', 'left', 'right', 'decimals', 'max'],
     emits: ['update:modelValue'],
     setup(props, { emit }) {
       const model = useVModel(props, 'modelValue', emit, { passive: true })
@@ -30,7 +30,13 @@ const meta = {
       return { model, validationsList }
     },
     template: `
-      <SFloatTextField v-model="model" v-bind="$attrs" :validations-list="validationsList">
+      <SFloatTextField
+        v-model="model"
+        v-bind="$attrs"
+        :validations-list="validationsList"
+        :decimals="decimals"
+        :max="max"
+      >
         <!-- Top slot -->
         <template #top v-if="top">{{ top }}</template>
 
@@ -66,15 +72,21 @@ const meta = {
     bottom: '',
     left: '',
     right: '',
+    decimals: 2,
+    max: '100000',
   },
   argTypes: {
     top: { control: 'text' },
     bottom: { control: 'text' },
     left: { control: 'text' },
     right: { control: 'text' },
+    decimals: { control: { type: 'number', min: 0 }, defaultValue: 2 },
+    max: { control: { type: 'text' }, defaultValue: '100000' },
   },
 } as Meta
 
 export default meta
 
-export const Default = {}
+type Story = StoryObj<typeof meta>
+
+export const Default: Story = {}

@@ -3,7 +3,7 @@
     class="s-float-text-field"
     :class="{ 's-float-text-field_focused': isFocused }"
   >
-    <slot name="top" />
+    <slot name="top"></slot>
 
     <div
       class="s-float-text-field__input-wrapper"
@@ -16,29 +16,26 @@
       <label v-if="label" :for="id" :class="labelClass">{{ label }}</label>
 
       <div class="s-float-text-field__input-line">
-        <!-- Left slot -->
-        <slot name="left" />
+        <slot name="left"></slot>
 
         <input
           :id="id"
           ref="inputRef"
           v-bind="inputAttrs()"
+          v-model="inputValue"
           @input="onInputHandler"
           @focus="handleFocus"
           @blur="onBlur"
           @dblclick="onDblClick"
         >
 
-        <!-- Right slot -->
-        <slot name="right" />
+        <slot name="right"></slot>
       </div>
 
-      <!-- Append slot -->
-      <slot name="append" />
+      <slot name="append"></slot>
     </div>
 
-    <!-- Bottom slot -->
-    <slot name="bottom" />
+    <slot name="bottom"></slot>
   </div>
 </template>
 
@@ -57,8 +54,10 @@ const props = withDefaults(defineProps<Props>(), {
   delimiters: () => ({ thousand: ',', decimal: '.' }),
   decimals: 2,
   id: 'float-input-id',
+  max: undefined
 });
 
+const inputValue = ref('');
 const inputRef = ref<HTMLInputElement | null>(null);
 const isFocused = ref(false);
 let charsCountBeforeSelection = 0;
@@ -73,7 +72,6 @@ const labelClass = computed(() => ({
   's-float-text-field__label_focused': isFocused.value,
 }));
 
-// Helper function to manage selection
 function saveSelectionPosition(value: string) {
   if (!inputRef.value) return;
   const pos = inputRef.value.selectionStart as number;
@@ -96,7 +94,6 @@ function updateSelectionPosition() {
   inputRef.value.selectionStart = inputRef.value.selectionEnd = selection;
 }
 
-// Handle input
 async function onInputHandler(event: Event) {
   const target = event.target as HTMLInputElement;
   const value = target.value;
@@ -109,22 +106,21 @@ async function onInputHandler(event: Event) {
     (v: string) => checkValueForExtremum(v),
   ].reduce((buffer, rule) => rule(buffer), value);
 
+  inputValue.value = newValue;
+
   await nextTick();
   updateSelectionPosition();
 }
 
-// Handle blur event
 function onBlur(event: FocusEvent) {
   isFocused.value = false;
 }
 
-// Handle double-click event
 function onDblClick(event: MouseEvent) {
   const target = event.target as HTMLInputElement;
   target.select();
 }
 
-// Utility functions for handling number input
 function normalizeDelimiters(value: string) {
   const formatted = value.replace(new RegExp('\\' + props.delimiters?.thousand, 'g'), '');
   if (props.delimiters?.decimal !== '.') {
@@ -175,7 +171,6 @@ function isNumberLikeValue(value: string) {
   return !isNaN(parseFloat(value)) && isFinite(Number(value));
 }
 
-// Focus and selection handling
 function handleFocus() {
   isFocused.value = true;
 }
