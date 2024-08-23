@@ -80,7 +80,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/STextField.vue', '**/SSwitch.vue'],
+      files: ['**/STextField.vue', '**/SFloatTextField.vue', '**/SSwitch.vue'],
       rules: {
         'vuejs-accessibility/label-has-for': 'off',
       },

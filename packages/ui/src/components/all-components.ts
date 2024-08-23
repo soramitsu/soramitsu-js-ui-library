@@ -15,6 +15,7 @@ import { SAlert } from './Alert'
 import { SSpinner } from './Spinner'
 import { SSwitch } from './Switch'
 import { STextField } from './TextField'
+import { SFloatTextField } from './SFloatTextField'
 import { SPopover, SPopoverWrappedTransition } from './Popover'
 import { SProgressBar } from './ProgressBar'
 import { STab, STabsPanel } from './Tabs'
@@ -57,6 +58,7 @@ export const COMPONENTS: Record<string, Component> = {
   SPopoverWrappedTransition,
   SSwitch,
   STextField,
+  SFloatTextField,
   SProgressBar,
   STab,
   STabsPanel,
