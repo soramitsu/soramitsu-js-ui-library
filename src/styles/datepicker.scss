@@ -83,7 +83,10 @@ $date-picker-padding: 8px;
       }
       .el-input__inner,
       .s-placeholder {
-        background-color: var(--s-color-base-background-hover);
+        background-color: var(--s-color-utility-surface);
+        [design-system-theme="dark"] & {
+          background-color: var(--s-color-base-background-hover);
+        }
       }
     }
     .s-placeholder + .el-date-editor {
