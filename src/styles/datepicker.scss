@@ -110,7 +110,7 @@ $date-picker-padding: 8px;
       .el-input__inner,
       .s-placeholder {
         color: var(--s-color-base-content-quaternary);
-        background-color: var(--s-color-base-disabled);
+        background-color: var(--s-color-base-background);
       }
     }
   }
@@ -175,7 +175,7 @@ $date-picker-padding: 8px;
       .el-date-editor.el-input__inner,
       .el-date-editor .el-input__inner {
         color: var(--s-color-base-content-quaternary);
-        border-color: var(--s-color-base-disabled);
+        border-color: var(--neu-datepicker-background-color);
         background-color: var(--s-color-utility-surface);
         &::placeholder {
           color: var(--s-color-base-content-quaternary);

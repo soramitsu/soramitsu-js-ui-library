@@ -376,47 +376,47 @@ $date-picker-padding: 8px;
       }
     }
    }
-  }
+}
   
-  .el-picker-panel__footer {
-    box-shadow: var(--neu-datepicker-box-shadow);
-    background-color: var(--neu-datepicker-background-color);
-    border-top-color: $neu-datepicker-border-main !important; 
-    border-bottom-right-radius: inherit;
-    border-bottom-left-radius: inherit;
-    > .el-button {
-      text-transform: uppercase;
-      height: 32px;
+.el-picker-panel__footer {
+  box-shadow: var(--neu-datepicker-box-shadow);
+  background-color: var(--neu-datepicker-background-color);
+  border-top-color: $neu-datepicker-border-main !important; 
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+  > .el-button {
+    text-transform: uppercase;
+    height: 32px;
+    border-radius: var(--s-border-radius-big);
+    &:hover,
+    &:focus {
+      color: var(--s-color-theme-accent);
+    }
+    &.is-disabled.is-plain {
+      background-color: var(--s-color-base-content-tertiary);
+    }
+
+    &.is-plain {
+      border-color: transparent;
+      background-color: $neu-datepicker-background-color-btn;
+      color: $neu-datepicker-text-color-btn;
+      box-shadow: var(--neu-datepicker-box-shadow-btn);
       border-radius: var(--s-border-radius-big);
+
       &:hover,
       &:focus {
-        color: var(--s-color-theme-accent);
-      }
-      &.is-disabled.is-plain {
-        background-color: var(--s-color-base-content-tertiary);
-      }
-
-      &.is-plain {
-        border-color: transparent;
-        background-color: $neu-datepicker-background-color-btn;
         color: $neu-datepicker-text-color-btn;
-        box-shadow: var(--neu-datepicker-box-shadow-btn);
-        border-radius: var(--s-border-radius-big);
-
-        &:hover,
-        &:focus {
-          color: $neu-datepicker-text-color-btn;
-          border-color: $neu-datepicker-border-main;
-          [design-system-theme="dark"] & {
-            border-color: var(--s-color-theme-accent-hover);
-          }
+        border-color: $neu-datepicker-border-main;
+        [design-system-theme="dark"] & {
+          border-color: var(--s-color-theme-accent-hover);
         }
       }
     }
   }
-  div[x-arrow].popper__arrow {
-    border-bottom-color: var(--s-color-base-background-hover);
-  }
+}
+div[x-arrow].popper__arrow {
+  border-bottom-color: var(--s-color-base-background-hover);
+}
 
 .el-input.is-disabled .el-input__inner {
   background-color: var(--neu-datepicker-background-color);
@@ -424,6 +424,10 @@ $date-picker-padding: 8px;
     border-color: var(--neu-datepicker-background-color);
     color: var(--s-color-base-content-tertiary);
   }
+}
+
+.el-picker-panel[x-placement^="bottom"] .popper__arrow::after {
+  border-bottom-color: var(--s-color-base-content-tertiary); 
 }
 
 .el-input--small {
