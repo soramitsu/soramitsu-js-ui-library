@@ -136,6 +136,7 @@ $date-picker-padding: 8px;
         [design-system-theme="dark"] & {
           background-color: var(--s-color-base-background-hover);
         }
+
       }
     }
     .s-placeholder + .el-date-editor {
@@ -157,15 +158,17 @@ $date-picker-padding: 8px;
     }
     &.s-disabled {
       .el-input__inner {
-        border-color: var(--s-color-base-disabled);
+        border-color: var(--neu-datepicker-background-color);
       }
       .el-input__inner,
       .s-placeholder {
         color: var(--s-color-base-content-quaternary);
-        background-color: var(--s-color-base-disabled);
+        background-color: var(--s-color-base-background);
       }
     }
   }
+
+
   .s-placeholder {
     // TODO: add default animation from material-ui
     color: var(--s-color-base-content-tertiary);
@@ -227,7 +230,7 @@ $date-picker-padding: 8px;
       .el-date-editor.el-input__inner,
       .el-date-editor .el-input__inner {
         color: var(--s-color-base-content-quaternary);
-        border-color: var(--s-color-base-disabled);
+        border-color: var(--neu-datepicker-background-color);
         background-color: var(--s-color-utility-surface);
         &::placeholder {
           color: var(--s-color-base-content-quaternary);
@@ -378,7 +381,10 @@ $date-picker-padding: 8px;
         color: var(--s-color-utility-surface);
       }
     }
-   }
+  }
+  &[x-placement^="bottom"] .popper__arrow::after {
+    border-bottom-color: var(--s-color-base-content-tertiary); 
+  }
 }
   
 .el-picker-panel__footer {
@@ -418,7 +424,7 @@ $date-picker-padding: 8px;
   }
 }
 div[x-arrow].popper__arrow {
-  border-bottom-color: var(--s-color-base-background-hover);
+  border-bottom: unset;
 }
 
 .el-input.is-disabled .el-input__inner {
@@ -429,9 +435,6 @@ div[x-arrow].popper__arrow {
   }
 }
 
-.el-picker-panel[x-placement^="bottom"] .popper__arrow::after {
-  border-bottom-color: var(--s-color-base-content-tertiary); 
-}
 
 .el-input--small {
   .el-input__inner {

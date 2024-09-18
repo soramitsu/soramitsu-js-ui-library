@@ -46,12 +46,13 @@ import { ElFormItem } from 'element-ui/types/form-item'
 import { SIcon } from '../../Icon/SIcon'
 import SizeMixin from '../../../mixins/SizeMixin'
 import BorderRadiusMixin from '../../../mixins/BorderRadiusMixin'
+import DesignSystemInject from '../../DesignSystem/DesignSystemInject'
 import { PickerTypes, PickerAlignment, InputTypes } from '../consts'
 
 @Component({
   components: { ElDatePicker, SIcon }
 })
-export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin) {
+export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin, DesignSystemInject) {
   /**
    * Value of date picker component. Can be used with `v-model`.
    * Can be date object / array with date objects for date range picker
@@ -236,6 +237,9 @@ export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin) {
       cssClasses.push(`s-${(this.elForm || this.elFormItem).size}`)
     } else if (this.isStandardSize) {
       cssClasses.push(`s-${this.size}`)
+    }
+    if (this.isNeumorphic) {
+      cssClasses.push('neumorphic')
     }
     if ((Object.values(InputTypes) as Array<string>).includes(this.inputType)) {
       cssClasses.push(`s-${!this.isInputType ? InputTypes.SELECT : this.inputType}-type`)
