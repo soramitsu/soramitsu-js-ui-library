@@ -1,6 +1,5 @@
 <template>
   <div :class="computedClasses">
-    <span v-if="willPlaceholderBeShown" class="s-placeholder">{{ placeholder }}</span>
     <el-date-picker
       ref="picker"
       v-model="model"
@@ -211,13 +210,6 @@ export default class SDatePicker extends Mixins(SizeMixin, BorderRadiusMixin, De
 
   get willHaveClearButton (): boolean {
     return this.isInputType && this.clearable
-  }
-
-  get willPlaceholderBeShown (): boolean {
-    if (!this.isInputType) {
-      return false
-    }
-    return !!(this.model && this.placeholder)
   }
 
   get computedPopperClass (): string {
