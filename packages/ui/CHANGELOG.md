@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.13.14
+
+### Patch Changes
+
+- 418e324: **fix**(`SDatePicker`): prevent turning date picker inner button into submit
+
 ## 0.13.13
 
 ### Patch Changes

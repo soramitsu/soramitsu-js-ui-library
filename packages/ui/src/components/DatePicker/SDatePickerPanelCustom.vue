@@ -175,6 +175,7 @@ const onDoneClick = () => {
     <button
       class="s-date-picker-custom-panel__save-button ml-auto"
       data-testid="date-picker-done-button"
+      type="button"
       @click="onDoneClick"
     >
       Done
