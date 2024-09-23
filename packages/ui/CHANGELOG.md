@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 418e324: **fix**(`DatePicker`): prevent turning date picker inner button into submit
+- 418e324: **fix**(`SDatePicker`): prevent turning date picker inner button into submit
 
 ## 0.13.13
 
