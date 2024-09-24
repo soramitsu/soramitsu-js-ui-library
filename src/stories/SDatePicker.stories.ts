@@ -6,7 +6,7 @@ import { PickerAlignment, PickerTypes, InputTypes } from '../components/DatePick
 
 export default {
   component: SDatePicker,
-  title: 'Design System/Components/Date Picker',
+  title: 'Design System/Components/Date Picker 🟣',
   excludeStories: /.*Data$/,
   argTypes: {
     unlinkPanels: {
