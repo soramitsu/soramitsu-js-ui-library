@@ -6,7 +6,7 @@ import { PickerAlignment, PickerTypes, InputTypes } from '../components/DatePick
 
 export default {
   component: SDatePicker,
-  title: 'Design System/Components/Date Picker',
+  title: 'Design System/Components/Date Picker 🟣',
   excludeStories: /.*Data$/,
   argTypes: {
     unlinkPanels: {
@@ -95,7 +95,7 @@ export const configurable: Story = (args, { argTypes }) => ({
                  :align="align"
                  :border-radius="borderRadius"
                  :popper-class="borderRadius"
-                 :input-type="inputType"
+                 :input-type="inputType"  
                  placeholder="Select date"
                  start-placeholder="From"
                  end-placeholder="To"
