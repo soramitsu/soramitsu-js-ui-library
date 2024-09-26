@@ -15,6 +15,7 @@
     :manual="manual"
     :hide-after="hideAfter"
     :tabindex="tabindexFormatted"
+    :append-to-body="appendToBody"
   >
     <slot slot="content" name="content"></slot>
     <slot></slot>
@@ -111,6 +112,12 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
    */
   @Prop({ default: 0, type: [Number, String] }) readonly tabindex!: number | string
   /**
+   * Will the tooltip component be appended to body.
+   *
+   * `false` by default
+   */
+  @Prop({ default: false, type: Boolean }) readonly appendToBody!: boolean
+  /**
    * Visibility of the tooltip. You can use `v-model` as well.
    *
    * `false` by default
@@ -159,7 +166,19 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
     return cssClasses.join(' ')
   }
 
+  private patchAttachment (): void {
+    const original = this.tooltip.createPopper
+    this.tooltip.createPopper = () => {
+      original()
+      if (!this.appendToBody) {
+        const parent = this.$el.parentNode || this.$el
+        parent.appendChild(this.tooltip.popperElm)
+      }
+    }
+  }
+
   mounted (): void {
+    this.patchAttachment()
     this.updateCloseDelay(this.closeDelay)
     window.addEventListener('focus', this.handleWindowFocus)
   }
