@@ -36,7 +36,7 @@
         </template>
       </s-tooltip>
     </template>
-    <el-dropdown-menu :class="computedPopperClass">
+    <el-dropdown-menu :class="computedPopperClass" :append-to-body="appendToBody">
       <slot name="menu"></slot>
     </el-dropdown-menu>
   </el-dropdown>
@@ -134,6 +134,12 @@ export default class SDropdown extends Mixins(SizeMixin, BorderRadiusMixin) {
    * Popper class
    */
   @Prop({ type: String, default: '' }) readonly popperClass!: string
+  /**
+   * Will the dropdown menu component be appended to body.
+   *
+   * `true` by default
+   */
+  @Prop({ default: true, type: Boolean }) readonly appendToBody!: boolean
 
   @Ref('dropdown') dropdown!: ElDropdown
 
