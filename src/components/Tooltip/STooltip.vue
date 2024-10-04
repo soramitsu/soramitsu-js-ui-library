@@ -116,7 +116,7 @@ export default class STooltip extends Mixins(BorderRadiusMixin, DesignSystemInje
    *
    * `false` by default
    */
-  @Prop({ default: false, type: Boolean }) readonly appendToBody!: boolean
+  @Prop({ default: true, type: Boolean }) readonly appendToBody!: boolean
   /**
    * Visibility of the tooltip. You can use `v-model` as well.
    *
