@@ -11,6 +11,6 @@ $--color-text-regular: $s-color-base-content-primary;
 // $--menu-item-hover-fill: $s-color-base-on-accent;
 
 /* icon font path, required */
-$--font-path: "~element-ui/lib/theme-chalk/fonts";
+$--font-path: "~element-ui/lib/theme-chalk/fonts" !default;
 
 @import "../../node_modules/element-ui/packages/theme-chalk/src/index";
