@@ -520,4 +520,48 @@ describe('Table', () => {
       })
     })
   })
+
+  context(`onClick:row`, () => {
+    beforeEach(() => {
+      cy.mount({
+        setup() {
+          const eventHandlerExistence = ref(true)
+
+          return {
+            data: DATA,
+            eventHandlerExistence,
+          }
+        },
+        template: `
+          <STable
+              v-if="eventHandlerExistence"
+              style="width: ${ADAPT_BREAKPOINT + 1}px"
+              :data="data"
+              @click:row="()=>{}"
+          >
+            <STableColumn/>
+          </STable>
+          <STable
+              v-else
+              style="width: ${ADAPT_BREAKPOINT + 1}px"
+              :data="data"
+          >
+            <STableColumn />
+          </STable>
+          
+        <button data-testid="toggle-handler" @click="eventHandlerExistence = false">Toggle</button>`,
+      })
+    })
+
+    context('When handler is attached', () => {
+      it('Then cursor should has pointer type', () => {
+        cy.get(testIdSelector('table-cell')).should('have.css', 'cursor', 'pointer')
+      })
+
+      it('Otherwise default', () => {
+        cy.get(testIdSelector('toggle-handler')).click()
+        cy.get(testIdSelector('table-cell')).should('have.css', 'cursor', 'default')
+      })
+    })
+  })
 })
