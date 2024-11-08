@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.13.15
+
+### Patch Changes
+
+- be548008: **feat**(`STable`): change cursor style to pointer when hovering on a table row and handler for `click:row` event is truthy
+
 ## 0.13.14
 
 ### Patch Changes

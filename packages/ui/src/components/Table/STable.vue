@@ -583,6 +583,9 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
     }
   }
 }
+
+const instance = getCurrentInstance()
+const hasClickRowHandler = computed(() => !!instance?.vnode?.props?.['onClick:row'])
 </script>
 
 <template>
@@ -730,6 +733,7 @@ function handleHeaderMouseEvent(ctx: { column: TableColumnApi | TableActionColum
                 :style="{
                   'width': rowIndex === 0 ? `${columnsWidths[columnIndex]}px` : '',
                   ...getStyleOrClass(cellStyle, { row, rowIndex, column, columnIndex }),
+                  'cursor': hasClickRowHandler ? 'pointer' : 'default',
                 }"
                 data-testid="table-cell"
                 @mouseenter="handleCellMouseEvent({ row, column, 'event': $event })"
