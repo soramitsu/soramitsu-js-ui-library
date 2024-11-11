@@ -134,16 +134,16 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
       &.today {
         & .end-date .cell,
         &.start-date .cell {
-          color: theme.token-as-var('sys.color.util.surface');
+          color: theme.token-as-var('ref.color.common.color-base-on-accent');
         }
       }
 
       &.current:not(.disabled) .cell {
-        color: theme.token-as-var('sys.color.primary');
+        color: theme.token-as-var('ref.color.common.color-theme-accent');
       }
 
       &.today .cell {
-        color: theme.token-as-var('sys.color.primary');
+        color: theme.token-as-var('ref.color.common.color-theme-accent');
         font-weight: 700;
       }
 
@@ -155,7 +155,7 @@ const gridCells: ComputedRef<MonthCell[]> = computed(() => {
         border-radius: 18px;
 
         &:hover {
-          color: theme.token-as-var('sys.color.primary');
+          color: theme.token-as-var('ref.color.common.color-theme-accent');
         }
       }
     }

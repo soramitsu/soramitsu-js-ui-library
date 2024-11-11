@@ -1,3 +1,60 @@
+This is the default theme
+It contains `packages/theme/src/sass/tokens.scss`, **tokens** in this file are the same for all themes, and all **tokens** set to null
+
+We have 2 themes: **theme** and  **theme_neumorphism**, so in this file we have **tokens** for both themes
+
+For example we set color-utility-surface to null
+```scss
+$tokens: (
+  'ref': (
+    'color': (
+      'button': (
+        'color-utility-surface': null,
+      )
+    )
+  )
+)
+```
+
+In `packages/theme/src/sass/lib.scss` we assign values to **tokens**
+
+For example we assign `color-utility-surface` to `#dde0e1`
+
+```scss
+@mixin tokens-preset-light() {
+  @include eval-tokens(
+    (
+      ref: (
+        'color': (
+          'button': (
+            'color-utility-surface': #dde0e1,
+          )
+        )
+      )
+    )
+  )
+}
+```
+
+If we don't need this token for current theme, then we set it to ` '' `
+```scss
+@mixin tokens-preset-light() {
+  @include eval-tokens(
+    (
+      ref: (
+        'color': (
+          'button': (
+            'color-utility-body': '',
+          )
+        )
+      )
+    )
+  )
+}
+```
+
+
+
 # @soramitsu-ui/theme
 
 This package contains the core part of Soramitsu's Design System - it's **tokens** and **typography** - and also their **presets**.
@@ -29,7 +86,7 @@ Quick setup with Sass:
 }
 
 .your-button {
-  color: theme.token-as-var('sys.color.primary');
+  color: theme.token-as-var('ref.color.common.color-theme-accent');
 }
 ```
 

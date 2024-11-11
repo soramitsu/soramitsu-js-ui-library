@@ -103,6 +103,7 @@ export default defineConfig({
         '@popperjs/core',
         /^@vueuse/,
         '@soramitsu-ui/theme',
+        '@soramitsu-ui/theme_neumorphism',
         'body-scroll-lock',
         'focus-trap',
       ],

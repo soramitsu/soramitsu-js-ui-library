@@ -1,0 +1,260 @@
+@use '../../../theme/src/sass/tokens.scss';
+@use '../../../theme/src/sass/util.scss';
+@use 'sass:list';
+
+$vars-prefix: '--sora_neu_';
+$typography-prefix: 'sora-tpg-';
+
+$tokens-compiled: util.tree-flatten(tokens.$tokens);
+$tokens-compiled: util.map-filter-non-null-values($tokens-compiled);
+$tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
+
+@function token($id) {
+  @if not map-has-key($tokens-compiled, $id) {
+    @error "Cannot resolve token with id #{inspect($id)} with initial id #{$id}";
+  }
+  @return map-get($tokens-compiled, $id);
+}
+
+@function token-as-var($id) {
+  $value: token($id);
+  @return var($value);
+}
+
+@mixin eval-tokens($values-map) {
+  @include util.eval-tokens($tokens-compiled, $values-map);
+}
+
+@mixin eval-tokens-partial($partial-values-map) {
+  @include util.eval-tokens($tokens-compiled, $partial-values-map, true);
+}
+
+@mixin tokens-preset-light() {
+  @include eval-tokens(
+    (
+      ref: (
+        'color': (
+          'common': (
+            'color-utility-surface': #FDF7FB,
+            'color-base-on-accent': #FFFFFF,
+            'color-base-content-tertiary': #D5CDD0,
+            'color-base-content-secondary': #A19A9D,
+            'color-utility-body': #F7F3F4,
+            'color-theme-accent': #F8087B,
+            'border-color': transparent,
+          ),
+          'shadow': (
+            'color-light': rgba(255, 255, 255, 1),
+            'color-light-dark': rgba(255, 255, 255, 0.8),
+            'color-dark': rgba(0, 0, 0, 0.1),
+
+            'shadow-element': (1px 1px 5px token-as-var('ref.color.shadow.color-light'),
+              inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+              inset 1px 1px 10px token-as-var('ref.color.shadow.color-dark')),
+
+            'shadow-element-pressed': (-5px -5px 10px token-as-var('ref.color.shadow.color-light'),
+                1px 1px 10px token-as-var('ref.color.shadow.color-dark'),
+                inset 1px 1px 2px token-as-var('ref.color.shadow.color-light-dark')),
+          ),
+        ),
+        'border': (
+          'width': 0px,
+          'style': solid,
+        ),
+      ),
+      sys: (
+        'color': (
+          'content-tertiary': '',
+          'content-secondary': #A19A9D,
+          'content-primary': '',
+          'content-quaternary': '',
+          'on-disabled': '',
+          'primary-pressed': '',
+          'primary-hover': '',
+          'button': (
+            'primary': (
+              'background-color-hover': #F754A3,
+              'background-color-pressed': #E44592,
+              'background-color-alternative': #44E5B2,
+              'background-color-alternative-active': #24DAA0,
+
+              'border-color': #EDE4E7,
+            ),
+            'secondary': (
+              'text-color': token-as-var('ref.color.common.color-base-on-accent'),
+              'text-color-active': token-as-var('ref.color.common.color-base-on-accent'),
+
+              'border-color': token-as-var('ref.color.common.border-color'),
+              'border-color-active': token-as-var('ref.color.common.border-color'),
+            ),
+            'tertiary': (
+              'text-color': token-as-var('ref.color.common.color-base-content-tertiary'),
+              'text-color-active': token-as-var('ref.color.common.color-base-content-secondary'),
+            ),
+            'action': (
+              'background-color': token-as-var('ref.color.common.color-utility-body'),
+              'background-color-hover': token-as-var('sys.color.button.action.background-color'),
+              'background-color-pressed': token-as-var('sys.color.button.action.background-color'),
+
+              'text-color': token-as-var('ref.color.common.color-base-content-tertiary'),
+              'text-color-hover': token-as-var('ref.color.common.color-base-content-secondary'),
+              'text-color-active': token-as-var('ref.color.common.color-theme-accent'),
+            )
+          ),
+          'textfield': (
+            'background-color': #FAF4F8,
+            'background-color-hover': #FAF4F8,
+            'border-color': #F7F3F4,
+            'label-color': #D5CDD0,
+            'counter-color': #909399,
+            'outline-color': rgba(0, 0, 0, 0.5),
+          ),
+          'util': (
+            'overlay': '',
+          ),
+          'status': (
+            'success': '',
+            'success-background': '',
+            'success-background-hover': '',
+            'warning': '',
+            'warning-background': '',
+            'warning-background-hover': '',
+            'error': '',
+            'error-background': '',
+            'error-background-hover': '',
+            'info': '',
+            'info-background': '',
+            'info-background-hover': '',
+            'debug': '',
+            'debug-background': '',
+            'debug-background-hover': '',
+          ),
+        ),
+        'border': (
+          'button': (
+            'width': 2px,
+          ),
+        ),
+        'disabled': (
+          'button': (
+            'background-color': token-as-var('ref.color.common.color-utility-surface'),
+            'border-color': token-as-var('ref.color.common.color-utility-body'),
+          ),
+        ),
+        'transition': (
+          'button': all 0.25s ease-in-out
+        ),
+        'shadow': (
+          'modal-window-header': '',
+          'floating-notification': '',
+          'dropdown': '',
+          'active-tab': '',
+          'button': (
+            'primary': (
+              'box-shadow': (1px 1px 5px token-as-var('ref.color.shadow.color-light'),
+                -1px -1px 5px token-as-var('ref.color.shadow.color-light')),
+
+              'box-shadow-hover': (1px 1px 5px rgba(255, 255, 255, 0.7),
+                -1px -1px 5px token-as-var('ref.color.shadow.color-light'),
+                0px 0px 20px rgba(247, 84, 163, 0.5)),
+              'box-shadow-pressed': token-as-var('sys.shadow.button.primary.box-shadow-hover'),
+              
+              'box-shadow-alternative': none,    
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+@mixin typography($id) {
+  @if list.index(tokens.$typography-tokens, $id) == '' {
+    @error "Wrong typography token: #{inspect($id)}";
+  }
+
+  .#{$typography-prefix}#{$id} {
+    @content;
+  }
+}
+
+@mixin typography-preset-default() {
+  @include typography('d1') {
+    @include util.typography-factory($size: 40px, $height: 120%, $spacing: -0.02em, $weight: bold);
+  }
+
+  @include typography('d2') {
+    @include util.typography-factory($size: 30px, $height: 130%, $spacing: -0.04em, $weight: bold);
+  }
+
+  @include typography('h1') {
+    @include util.typography-factory($size: 36px, $height: 120%, $spacing: -0.04em);
+  }
+
+  @include typography('h2') {
+    @include util.typography-factory($size: 30px, $height: 130%, $spacing: -0.04em);
+  }
+
+  @include typography('h3') {
+    @include util.typography-factory($size: 24px, $height: 130%, $spacing: -0.02em);
+  }
+
+  @include typography('h4') {
+    @include util.typography-factory($size: 18px, $height: 150%, $spacing: -0.02em);
+  }
+
+  @include typography('h4-bold') {
+    @include util.typography-factory($size: 18px, $height: 150%, $spacing: 0, $weight: bold);
+  }
+
+  @include typography('h5') {
+    @include util.typography-factory($size: 16px, $height: 150%, $spacing: 0.01em, $weight: bold);
+  }
+
+  @include typography('h6') {
+    @include util.typography-factory($size: 14px, $height: 150%, $weight: bold);
+  }
+
+  @include typography('h7') {
+    @include util.typography-factory($size: 12px, $height: 150%, $weight: bold);
+  }
+
+  @include typography('ch1') {
+    @include util.typography-factory($size: 14px, $height: 130%, $spacing: 0.01em, $weight: bold);
+    text-transform: uppercase;
+  }
+
+  @include typography('ch2') {
+    @include util.typography-factory($size: 12px, $height: 130%, $spacing: 0.03em, $weight: bold);
+    text-transform: uppercase;
+  }
+
+  @include typography('ch3') {
+    @include util.typography-factory($size: 10px, $height: 140%, $spacing: 0.06em, $weight: bold);
+    text-transform: uppercase;
+  }
+
+  @include typography('p1') {
+    @include util.typography-factory($size: 16px, $height: 170%);
+  }
+
+  @include typography('p2') {
+    @include util.typography-factory($size: 14px, $height: 180%, $weight: 600);
+  }
+
+  @include typography('p3') {
+    @include util.typography-factory($size: 14px, $height: 180%);
+  }
+
+  @include typography('p4') {
+    @include util.typography-factory($size: 12px, $height: 180%);
+  }
+
+  @include typography('p5') {
+    @include util.typography-factory($size: 10px, $height: 160%);
+  }
+
+  @include typography('s1') {
+    @include util.typography-factory($size: 15px, $height: 16px);
+  }
+}

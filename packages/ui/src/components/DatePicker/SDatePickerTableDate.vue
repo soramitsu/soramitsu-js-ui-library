@@ -369,12 +369,12 @@ const handleClick = (ev: any) => {
 
       &.today {
         position: relative;
-        color: theme.token-as-var('sys.color.primary');
+        color: theme.token-as-var('ref.color.common.color-theme-accent');
         font-weight: 700;
 
         &.end-date span,
         &.start-date span {
-          color: theme.token-as-var('sys.color.util.surface');
+          color: theme.token-as-var('ref.color.common.color-base-on-accent');
         }
       }
 
@@ -387,18 +387,18 @@ const handleClick = (ev: any) => {
       }
 
       &.available:hover:not(.start-date, .end-date, .current, .disabled) {
-        color: theme.token-as-var('sys.color.primary');
+        color: theme.token-as-var('ref.color.common.color-theme-accent');
       }
 
       &.in-range {
-        background-color: theme.token-as-var('sys.color.background');
+        background-color: theme.token-as-var('ref.color.common.color-base-on-accent');
       }
 
       &.current,
       &.end-date,
       &.start-date {
-        color: theme.token-as-var('sys.color.util.surface');
-        background-color: theme.token-as-var('sys.color.primary');
+        color: theme.token-as-var('ref.color.common.color-base-on-accent');
+        background-color: theme.token-as-var('ref.color.common.color-theme-accent');
         border-radius: 2px;
 
         &.disabled .date-table__cell-text {
@@ -407,16 +407,16 @@ const handleClick = (ev: any) => {
       }
 
       &.selected {
-        background-color: theme.token-as-var('sys.color.primary');
-        color: theme.token-as-var('sys.color.util.surface');
+        background-color: theme.token-as-var('ref.color.common.color-theme-accent');
+        color: theme.token-as-var('ref.color.common.color-base-on-accent');
       }
     }
 
     &__title {
       padding: 4px;
       font-weight: 400;
-      border-bottom: 1px solid theme.token-as-var('sys.color.border-primary');
-      border-top: 1px solid theme.token-as-var('sys.color.border-primary');
+      border-bottom: 1px solid theme.token-as-var('ref.color.common.color-utility-surface');
+      border-top: 1px solid theme.token-as-var('ref.color.common.color-utility-surface');
       color: theme.token-as-var('sys.color.content-primary');
       text-align: center;
     }

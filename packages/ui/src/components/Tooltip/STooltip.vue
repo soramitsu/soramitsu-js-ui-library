@@ -105,29 +105,31 @@ function handleSecondaryButtonClick() {
 
 <style lang="scss">
 @use '@/theme';
+@use '@/theme_neumorphism';
+
 
 .s-tooltip {
   &__body {
     background: theme.token-as-var('sys.color.content-primary');
-    color: theme.token-as-var('sys.color.content-on-background-inverted');
+    color: theme.token-as-var('ref.color.common.color-base-on-accent');
     border-radius: 4px;
   }
 
   &__button.s-button {
     &_type_outline {
-      border-color: theme.token-as-var('sys.color.border-primary');
-      color: theme.token-as-var('sys.color.content-on-background-inverted');
+      border-color: theme.token-as-var('ref.color.common.color-utility-surface');
+      color: theme.token-as-var('ref.color.common.color-base-on-accent');
 
       &:hover,
       &:active {
-        border-color: theme.token-as-var('sys.color.util.surface');
-        background: theme.token-as-var('sys.color.util.surface');
+        border-color: theme.token-as-var('ref.color.common.color-base-on-accent');
+        background: theme.token-as-var('ref.color.common.color-base-on-accent');
         color: theme.token-as-var('sys.color.content-primary');
       }
     }
 
     &_type_outline#{&}_disabled {
-      border-color: theme.token-as-var('sys.color.disabled');
+      border-color: theme.token-as-var('ref.color.common.color-base-on-accent');
       color: theme.token-as-var('sys.color.on-disabled');
     }
   }

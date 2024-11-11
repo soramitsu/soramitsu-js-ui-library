@@ -13,7 +13,7 @@ import { IconArrowsChevronRightXs24 } from '@/components/icons'
 
 .s-table-cell-details {
   &:hover {
-    background: theme.token-as-var('sys.color.background-hover');
+    background: theme.token-as-var('ref.color.common.color-base-content-secondary');
   }
 
   &__icon {

@@ -153,9 +153,8 @@ function onInput(e: Event) {
 
 const isValueEmpty = computed(() => !model.value)
 const isFocused = ref(false)
-const labelTypographyClass = computed(() =>
-  !(props.filledState || isFocused.value) && isValueEmpty.value ? 'sora-tpg-p3' : 'sora-tpg-p4',
-)
+const labelTypographyClass = computed(() => 'sora-tpg-p3');
+
 
 const inputRef = ref<MaybeElementRef>(null)
 
@@ -284,6 +283,7 @@ const shouldShowValidationsList = computed(
       @mousedown="handleInputWrapperMouseDown"
     >
       <label
+        v-if="isValueEmpty"
         :for="id"
         :class="labelTypographyClass"
       >
@@ -382,55 +382,88 @@ const shouldShowValidationsList = computed(
 </template>
 
 <style lang="scss">
-@use '@/theme';
+@use 'sass:meta';
+@use '@/theme_neumorphism' as theme_neumorphism;
+@use '@/theme' as theme;
+@import '../../themes.scss';
+
 
 $height: 56px;
-$input-padding: 24px 16px 6px 16px;
+$input-padding: 15px;
 $label-top-primary: 16px;
 $label-top-secondary: 6px;
 $message-icon-alignment-fix: -1px;
 
-$theme-bg: theme.token-as-var('sys.color.background');
-$theme-bg-hover: theme.token-as-var('sys.color.background-hover');
-$theme-border-primary: theme.token-as-var('sys.color.border-primary');
-$theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
+@mixin apply-theme-text-field($theme) {
+  &__input-wrapper {
+    background-color: theme-token($theme,'sys.color.textfield.background-color');
+    box-shadow: theme-token($theme,'ref.color.shadow.shadow-element');
+    &:hover:not(:focus-within) {
+      background-color: theme-token($theme,'sys.color.textfield.background-color-hover');
+    }
+    &:focus-within {
+      border-color: theme-token($theme,'sys.color.textfield.border-color');
+      background-color: theme-token($theme,'sys.color.textfield.background-color');
+      outline: 1px solid theme-token($theme,'sys.color.textfield.outline-color');
+    }
+    label {
+      color: theme-token($theme,'sys.color.textfield.label-color');
+    }
+  }
+  &__counter {
+    color: theme-token($theme,'sys.color.textfield.counter-color');
+  }
+  &__eye,
+  &__append svg {
+    color: theme-token($theme,'sys.color.content-secondary');
+    fill: theme-token($theme,'sys.color.content-secondary');
+  }
+
+}
+
+@mixin apply-theme($theme-name, $theme-variable) {
+  .s-text-field {
+    @include apply-theme-text-field($theme: $theme-variable);
+  }
+}
+
+@each $theme-name, $theme-variable in $themes {
+  [theme="#{$theme-name}"] {
+    @include apply-theme($theme-name, $theme-variable);
+  }
+}
 
 .s-text-field {
   $root: &;
 
   &_disabled &__input-wrapper {
     @apply pointer-events-none opacity-75;
-    // todo
   }
 
+  &_disabled:hover {
+    cursor: not-allowed;
+  }
   &:not(&_empty),
   &_filled-state,
   &:focus-within {
     label {
-      transform: translateY(#{$label-top-secondary});
-      // @apply s-ty-p4;
+      transform: translateY(#{$label-top-primary});
     }
   }
 
   &__input-wrapper {
-    background: $theme-bg;
     @apply rounded border border-transparent;
     @apply relative flex;
     @apply transition-all;
 
     min-height: $height;
 
-    &:hover:not(:focus-within) {
-      background: $theme-bg-hover;
-    }
-
     &:focus-within {
-      border-color: $theme-border-primary;
       @apply bg-transparent;
     }
 
     label {
-      color: $theme-content-tertiary;
+
       @apply pointer-events-none;
       @apply absolute top-0 left-4;
       @apply transition-all;
@@ -456,10 +489,6 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
 
   &__append {
     @apply flex items-center space-x-4 pr-4;
-  }
-
-  &__counter {
-    color: $theme-content-tertiary;
   }
 
   @each $status in 'success', 'warning', 'error' {
@@ -525,6 +554,7 @@ $theme-content-tertiary: theme.token-as-var('sys.color.content-tertiary');
   &__eye {
     cursor: pointer;
     position: relative;
+    
 
     // icon size
     // approximately, not strict by design system
