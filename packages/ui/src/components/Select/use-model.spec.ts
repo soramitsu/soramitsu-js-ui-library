@@ -111,4 +111,75 @@ describe('Storing options', () => {
 
     expect(modeling.selectedOptions.value).toHaveLength(3)
   })
+
+  test('deselecting a full group clears remembered options', () => {
+    const optionGroup = {
+      header: 'Pizzas',
+      selectAllBtn: true,
+      items: OPTIONS,
+    }
+
+    const modeling = useSelectModel({
+      model: ref<string[]>([]),
+      options: ref([optionGroup]),
+      multiple: ref(true),
+      storeSelectedOptions: ref(true),
+      singleModeAutoClose: ref(false),
+      onAutoClose: () => {},
+    })
+
+    modeling.toggleGroupSelection(optionGroup)
+    expect(modeling.selectedOptions.value.map((x) => x.value)).toEqual(OPTIONS.map((x) => x.value))
+
+    modeling.toggleGroupSelection(optionGroup)
+
+    expect(modeling.selectedOptions.value).toHaveLength(0)
+    expect(modeling.isSomethingSelected.value).toBe(false)
+  })
+
+  test('mandatory single select prevents dropping the last value', () => {
+    const model = ref('regular')
+    const modeling = useSelectModel({
+      model,
+      options: ref(OPTIONS),
+      multiple: ref(false),
+      mandatory: ref(true),
+      storeSelectedOptions: ref(false),
+      singleModeAutoClose: ref(true),
+      onAutoClose: () => {},
+    })
+
+    modeling.toggleSelection('regular')
+    expect(model.value).toBe('regular')
+  })
+
+  test('mandatory multi select keeps at least one selection', () => {
+    const model = ref(['regular'])
+    const modeling = useSelectModel({
+      model,
+      options: ref(OPTIONS),
+      multiple: ref(true),
+      mandatory: ref(true),
+      storeSelectedOptions: ref(false),
+      singleModeAutoClose: ref(false),
+      onAutoClose: () => {},
+    })
+
+    modeling.toggleSelection('regular')
+    expect(model.value).toEqual(['regular'])
+  })
+
+  test('storeSelectedOptions remembers model values missing in options', () => {
+    const model = ref<string[]>(['ghost'])
+    const modeling = useSelectModel({
+      model,
+      options: ref([]),
+      multiple: ref(true),
+      storeSelectedOptions: ref(true),
+      singleModeAutoClose: ref(false),
+      onAutoClose: () => {},
+    })
+
+    expect(modeling.selectedOptions.value).toEqual([{ label: '', value: 'ghost' }])
+  })
 })

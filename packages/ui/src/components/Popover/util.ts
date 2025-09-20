@@ -1,7 +1,7 @@
 import type { Ref, BaseTransitionProps } from 'vue'
 
 /**
- * TODO Reuse this functionality in `SModal` somehow (remove logic duplication)
+ * TODO(see docs/TODO.md#popover) Reuse this functionality in `SModal` to remove duplication.
  */
 export function useWrappedTransitionVisibility({ show, eager }: { show: Ref<boolean>; eager: Ref<boolean> }): {
   wrapperIf: Ref<boolean>

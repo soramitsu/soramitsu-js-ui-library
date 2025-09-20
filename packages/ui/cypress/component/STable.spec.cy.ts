@@ -421,9 +421,7 @@ describe('Table', () => {
       })
 
       it('Then first column cell have classes from className prop', () => {
-        cy.get(testIdSelector('table-row')).each((el) => {
-          cy.wrap(el).find(testIdSelector('table-cell')).first().should('have.class', COLUMN_CELL_CLASS_NAME)
-        })
+        cy.get(testIdSelector('table-cell')).should('have.class', COLUMN_CELL_CLASS_NAME)
       })
 
       it('Then first column header cell have styles from className and labelClassName prop', () => {

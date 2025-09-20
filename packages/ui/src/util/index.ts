@@ -1,5 +1,5 @@
-import type { InjectionKey, Ref, Component, FunctionalComponent } from 'vue'
-import { inject } from 'vue'
+import type { App, InjectionKey, Ref, Component, FunctionalComponent } from 'vue'
+import { getCurrentInstance, inject } from 'vue'
 
 export function forceInject<T>(key: string | InjectionKey<T>): T {
   const something = inject(key)
@@ -37,13 +37,23 @@ export function getComponentName(comp: Component): string | undefined {
   return comp.name || comp.__name
 }
 
-let incrementalCounter = 0
+const appCounters = new WeakMap<App, number>()
+let fallbackCounter = 0
 
 /*
-  Returns global unique id
+  Returns app-scoped unique id (falls back to process scope outside of component setup)
  */
 export function nextIncrementalCounter(): number {
-  return incrementalCounter++
+  const instance = getCurrentInstance()
+  const app = instance?.appContext.app
+
+  if (app) {
+    const current = appCounters.get(app) ?? 0
+    appCounters.set(app, current + 1)
+    return current
+  }
+
+  return fallbackCounter++
 }
 
 export function uniqueElementId(): string {

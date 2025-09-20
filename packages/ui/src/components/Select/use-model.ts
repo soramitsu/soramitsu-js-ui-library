@@ -204,7 +204,7 @@ export function useSelectModel<T = any>({
       model.value = newModel
 
       if (storeSelectedOptions.value) {
-        newModel.forEach(forgetOption)
+        optionGroupValues.forEach(forgetOption)
       }
 
       return

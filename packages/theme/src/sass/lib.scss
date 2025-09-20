@@ -1,6 +1,8 @@
 @use './tokens';
 @use './util';
 @use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
 
 $vars-prefix: '--sora_';
 $typography-prefix: 'sora-tpg-';
@@ -10,11 +12,11 @@ $tokens-compiled: util.map-filter-non-null-values($tokens-compiled);
 $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
 
 @function token($id) {
-  @if not map-has-key($tokens-compiled, $id) {
-    @error "Cannot resolve token with id #{inspect($id)}";
+  @if not map.has-key($tokens-compiled, $id) {
+    @error "Cannot resolve token with id #{meta.inspect($id)}";
   }
 
-  @return map-get($tokens-compiled, $id);
+  @return map.get($tokens-compiled, $id);
 }
 
 @function token-as-var($id) {
@@ -122,7 +124,7 @@ $tokens-compiled: util.give-names-to-tokens($tokens-compiled, $vars-prefix);
 
 @mixin typography($id) {
   @if list.index(tokens.$typography-tokens, $id) == null {
-    @error "Wrong typography token: #{inspect($id)}";
+    @error "Wrong typography token: #{meta.inspect($id)}";
   }
 
   .#{$typography-prefix}#{$id} {

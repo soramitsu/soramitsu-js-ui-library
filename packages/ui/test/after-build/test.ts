@@ -31,8 +31,7 @@ test('ESM build should be tree-shakeable', async () => {
   })
 
   expect(outputContents).toMatchInlineSnapshot(`
-    "import \\"vue\\";
-    function somePureFunction() {
+    "function somePureFunction() {
       return 42;
     }
     console.log(somePureFunction());

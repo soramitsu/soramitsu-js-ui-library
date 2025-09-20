@@ -154,9 +154,18 @@ const {
 
 let focusTrapRef: null | Ref<null | FocusTrap> = null
 if (props.focusTrap) {
-  const options: FocusTrapOptions = props.focusTrap === true ? {} : props.focusTrap
+  const optionsFromProps: FocusTrapOptions = props.focusTrap === true ? {} : props.focusTrap
 
   const focusTrapTarget = shallowRef<null | HTMLElement | SVGElement>(null)
+  const fallbackFocus = () => {
+    const modalEl = unref(modalRef)
+    if (modalEl instanceof HTMLElement || modalEl instanceof SVGElement) return modalEl
+
+    const rootEl = unref(rootRef)
+    if (rootEl instanceof HTMLElement || rootEl instanceof SVGElement) return rootEl
+
+    return typeof document !== 'undefined' ? document.body : (undefined as unknown as HTMLElement)
+  }
   watch(
     [modalShow, rootRef],
     ([val, el]) => {
@@ -171,10 +180,11 @@ if (props.focusTrap) {
   ;({ trap: focusTrapRef } = useFocusTrap({
     elem: focusTrapTarget,
     options: {
-      ...options,
+      ...optionsFromProps,
+      fallbackFocus: optionsFromProps.fallbackFocus ?? fallbackFocus,
       escapeDeactivates(event) {
-        if (typeof options.escapeDeactivates === 'function') {
-          return options.escapeDeactivates(event)
+        if (typeof optionsFromProps.escapeDeactivates === 'function') {
+          return optionsFromProps.escapeDeactivates(event)
         }
 
         return props.closeOnEsc ? true : false
@@ -194,7 +204,8 @@ if (props.focusTrap) {
             '\n\nOriginal error:\n\n%o',
           err,
         )
-        throw err
+        trap?.deactivate()
+        focusTrapRef.value = null
       }
     },
     { immediate: true },

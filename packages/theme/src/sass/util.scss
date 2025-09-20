@@ -1,6 +1,7 @@
 @use 'sass:string';
 @use 'sass:map';
 @use 'sass:list';
+@use 'sass:meta';
 
 @function str-replace($source, $target, $replacement) {
   $idx: string.index($source, $target);
@@ -41,7 +42,7 @@
       $path: $current-path + '.' + $key;
     }
 
-    $ty: type-of($value);
+    $ty: meta.type-of($value);
     @if $ty == 'map' {
       // go deeper
       $acc: flat-walk($acc, $value, $path);

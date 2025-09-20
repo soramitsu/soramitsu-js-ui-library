@@ -134,7 +134,7 @@ const props = withDefaults(
      * */
     expandRowKeys?: unknown[]
 
-    /** TODO: make something with it when tooltip will be ready (and so use tooltip) */
+    /** TODO(see docs/TODO.md#table): integrate shared tooltip helper once available */
     // tooltipEffect: 'dark' | 'light'
 
     /**

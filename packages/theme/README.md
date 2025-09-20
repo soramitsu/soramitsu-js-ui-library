@@ -40,6 +40,14 @@ Quick setup with Sass:
 
 Explore/edit a set of available tokens at `src/sass/tokens.scss`.
 
+For TypeScript consumers we also expose the token schema:
+
+```ts
+import { ThemeTokenId, themeTokenIds } from '@soramitsu-ui/theme'
+
+const firstId: ThemeTokenId = themeTokenIds[0]
+```
+
 ## Guide
 
 Design System is based on **tokens**. The most of them are just CSS Custom Properties, but **typography** works via CSS Classes. Their approaches are different.

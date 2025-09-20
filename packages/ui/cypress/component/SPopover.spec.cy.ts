@@ -54,10 +54,13 @@ describe('Trigger mechanisms', () => {
   }
 
   const findTrigger = () => cy.contains('trigger')
-  const findPopper = (params?: { immediate?: boolean }) =>
-    cy.get('[data-cy=popper]', {
-      timeout: params?.immediate ? 0 : undefined,
-    })
+  const findPopper = (params?: { immediate?: boolean }) => {
+    if (params?.immediate) {
+      return cy.get('[data-cy=popper]', { timeout: 0 })
+    }
+
+    return cy.get('[data-cy=popper]')
+  }
   const findPopperCounter = () => findPopper().contains('Count: ')
   const findOutsideBtn = () => cy.contains('Outside btn')
   const findManualCheckbox = () => cy.get('input[type=checkbox]')

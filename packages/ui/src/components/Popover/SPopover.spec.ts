@@ -8,7 +8,7 @@ test('Throws an error if no trigger slot', () => {
       components: { SPopover },
       template: `<SPopover />`,
     }),
-  ).toThrowErrorMatchingInlineSnapshot('"\\"trigger\\" slot is required"')
+  ).toThrowError('"trigger" slot is required')
 })
 
 test('Throws an error if trigger slot is not a single element', () => {
@@ -24,7 +24,7 @@ test('Throws an error if trigger slot is not a single element', () => {
       </SPopover>
     `,
     }),
-  ).toThrowErrorMatchingInlineSnapshot('"\\"trigger\\" slot should render exact 1 element"')
+  ).toThrowError('"trigger" slot should render exact 1 element')
 })
 
 test('Throws an error if popper slot renders more than 1 element', () => {
@@ -44,5 +44,5 @@ test('Throws an error if popper slot renders more than 1 element', () => {
       </SPopover>
     `,
     }),
-  ).toThrowErrorMatchingInlineSnapshot('"\\"popper\\" slot should return either nothing or the only 1 element"')
+  ).toThrowError('"popper" slot should return either nothing or the only 1 element')
 })

@@ -49,6 +49,15 @@ yarn build
 yarn sb:build
 ```
 
+## Testing
+
+- `yarn test:all` – runs lint, unit tests (Jest + Vitest), Cypress component suites, the theme build, and a Storybook build smoke test. This mirrors the CI pipeline and should be the default pre-push task.
+- To capture structured Cypress diagnostics, rerun the component suite with `npx cypress run --component --reporter json > cypress-report.json` and inspect the resulting JSON for failing specs and stack traces.
+- Storybook has a dedicated smoke script (`yarn storybook:verify`); keep it green locally to mirror the CI workflow.
+- Theme-specific tests live under `packages/theme`; run them in isolation with `yarn --cwd packages/theme test` when touching Sass utilities or token exports.
+
+- The Storybook test runner can replay stories with Playwright. When we adopt it, the command will look like `npx storybook test --watch`; feel free to experiment locally in the meantime.
+
 ### To add new component:
 
 1. Create a component directory in `ui/src/components` (e.g. `ui/src/components/Button`) with component itself
@@ -83,6 +92,8 @@ yarn sb:build
 - We often use provide/inject mechanism for main-subsidiary components communication (e.g. checkbox group - checkbox).
   It should be done by creating `api.ts` with a provided payload type, an injection key and an api hook in
   component directory.
+
+- Reusable test helpers live in `packages/ui/src/test-utils`; they include a Vue mount helper and toast mocks to keep Vitest specs concise.
 
 ### Styleguide
 

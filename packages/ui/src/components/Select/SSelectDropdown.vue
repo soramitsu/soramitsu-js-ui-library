@@ -30,6 +30,8 @@ const optionGroups: ComputedRef<SelectOptionGroup[]> = computed(() => {
   return options
 })
 
+const totalOptions = computed(() => optionGroups.value.reduce((acc, group) => acc + group.items.length, 0))
+
 const isSearching = eagerComputed(() => api.searchQuery)
 
 const escapedQuery = computed(() => new RegExp(escapeStringRegexp(api.searchQuery), 'i'))
@@ -97,7 +99,7 @@ const OPTION_SIZE = {
 const dropdownHeight = computed(() => {
   if (!props.maxShownOptions) return
 
-  return OPTION_SIZE[api.size] * Math.min(props.maxShownOptions, api.options.length) + 'px'
+  return OPTION_SIZE[api.size] * Math.min(props.maxShownOptions, totalOptions.value) + 'px'
 })
 </script>
 

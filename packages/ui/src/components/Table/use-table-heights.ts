@@ -54,11 +54,17 @@ export function useTableHeights({
         const maxHeight = parseHeight(propMaxHeight.value)
 
         if (typeof maxHeight === 'number') {
-          return {
-            'max-height': maxHeight - headerHeight.value + 'px',
+          const computedMaxHeight = Math.max(maxHeight - headerHeight.value, 0)
+
+          bodyHeightStyles.value = {
+            'max-height': computedMaxHeight + 'px',
           }
+
+          return
         }
       }
+
+      bodyHeightStyles.value = {}
     },
     { immediate: true },
   )

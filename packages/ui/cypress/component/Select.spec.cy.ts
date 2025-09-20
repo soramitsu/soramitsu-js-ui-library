@@ -620,6 +620,46 @@ it('SSelectDropdown overlaps STextField', () => {
   })
 })
 
+it('Remote multi-select clears chips after deselecting a group', () => {
+  const groupItems = [
+    { label: 'One', value: 'one' },
+    { label: 'Two', value: 'two' },
+    { label: 'Three', value: 'three' },
+  ]
+
+  cy.mount({
+    setup() {
+      return {
+        model: ref<string[]>([]),
+        options: ref([
+          {
+            header: 'Numbers',
+            selectAllBtn: true,
+            items: groupItems,
+          },
+        ]),
+      }
+    },
+    template: `
+      <SSelect
+        v-model="model"
+        :options="options"
+        label="Remote"
+        multiple
+        remote-search
+        trigger-search
+        dropdown-search
+      />
+    `,
+  })
+
+  cy.get('[data-testid=select-trigger]').click()
+  cy.contains('button', 'Select all').click()
+  cy.get('.s-select-chip').should('have.length', groupItems.length)
+  cy.contains('button', 'Deselect all').click()
+  cy.get('.s-select-chip').should('have.length', 0)
+})
+
 it(`SSelect - there are trigger search that allows filter options by labels`, () => {
   cy.mount({
     setup() {
