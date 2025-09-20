@@ -31,6 +31,12 @@ yarn build:theme
 yarn sb:serve
 ```
 
+## Usage library in project
+
+Usage examples, migration notes, and per-component guidance live alongside the packages themselves. Start with
+`packages/ui/README.md` for code snippets and plugin setup instructions, or spin up Storybook (`yarn sb:serve`) and
+browse the stories locally.
+
 OR **cypress component-testing:**
 
 ```shell
@@ -60,19 +66,19 @@ yarn sb:build
 
 ### To add new component:
 
-1. Create a component directory in `ui/src/components` (e.g. `ui/src/components/Button`) with component itself
+1. Create a component directory in `packages/ui/src/components` (e.g. `packages/ui/src/components/Button`) with component itself
    prefixed with `S` (e.g. `SButton.vue`) and the `index.ts` file exporting it. The file's name becomes component's
    name. There are also can be subsidiary entities like other components, composables types, constants and so on that
    can be exported too.
-2. Every exported component must be added to `ui/src/components/all-components.ts` and `ui/src/components/index.ts`.
+2. Every exported component must be added to `packages/ui/src/components/all-components.ts` and `packages/ui/src/components/index.ts`.
 3. Then it's necessary to add a story for being able to manually test the components. It can be done by adding a
-   `*.stories.ts` file in `ui/stories` directory (e.g. `ui/stories/SButton.stories.ts`).
-4. Then added component should be tested. A test should be an `ui/cypress/component/*.spec.cy.ts` file, where `*` is
+   `*.stories.ts` file in `packages/ui/stories` directory (e.g. `packages/ui/stories/components/Button.stories.ts`).
+4. Then added component should be tested. A test should be a `packages/ui/cypress/component/*.spec.cy.ts` file, where `*` is
    component's name. For searching elements in a component you should use `data-testid` attribute.
 5. If there are any quite complex utils they should have their own unit tests nearby.
 6. When everything is working, use repo root script `lint:format:fix` to bring the code to common style (more details
    in the section **Linting & Format**).
-7. Then you should update `ui.api.md` using two commands in `ui` package: `build:tsc` and then `api:extract:local`.
+7. Then you should update `ui.api.md` using two commands in the `packages/ui` package: `build:tsc` and then `api:extract:local`.
 8. Using `yarn changeset` create a minor change with `**feat**` prefix about new component (e.g.
    `**feat**: added button component`).
 9. Create pull request.

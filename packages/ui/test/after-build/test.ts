@@ -1,5 +1,4 @@
 import { test, expect } from 'vitest'
-import * as vite from 'vite'
 import path from 'path'
 import fs from 'fs'
 
@@ -10,7 +9,9 @@ const LIB_BUNDLE_ESM_FILE = resolve('../../dist/lib.mjs')
 const LIB_BUNDLE_CJS_FILE = resolve('../../dist/lib.cjs')
 
 test('ESM build should be tree-shakeable', async () => {
-  await vite.build({
+  const { build } = await import('vite')
+
+  await build({
     root: resolve(ESM_TREE_SHAKING_TEST_LIB_DIR),
     build: {
       lib: {

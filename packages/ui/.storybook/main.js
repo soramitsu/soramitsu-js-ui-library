@@ -1,8 +1,4 @@
 const path = require('path');
-const {
-  loadConfigFromFile,
-  mergeConfig
-} = require('vite');
 function resolve(...paths) {
   return path.resolve(__dirname, '..', ...paths);
 }
@@ -13,6 +9,10 @@ module.exports = {
    * @param {import('vite').UserConfig} config
    */
   async viteFinal(config) {
+    const {
+      loadConfigFromFile,
+      mergeConfig
+    } = await import('vite');
     const {
       config: mainConfig
     } = await loadConfigFromFile({
