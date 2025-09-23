@@ -12,7 +12,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc --build --clean && tsc --build"
+    "build": "tsc --build --clean && tsc --build",
+    "prepare": "tsc --build"
   },
   "dependencies": {
     "@vue/compiler-sfc": "^3.5.21",
