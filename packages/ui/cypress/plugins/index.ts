@@ -21,7 +21,7 @@ const plugin: Cypress.PluginConfig = (on, config) => {
   on('dev-server:start', async (options) => {
     return startDevServer({
       options,
-      // additional opts to the main `vite.config.ts`
+      // additional opts to the main `vite.config.mts`
       viteConfig: {
         resolve: {
           alias: {

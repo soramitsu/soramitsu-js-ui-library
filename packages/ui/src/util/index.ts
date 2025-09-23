@@ -2,9 +2,12 @@ import type { App, InjectionKey, Ref, Component, FunctionalComponent } from 'vue
 import { getCurrentInstance, inject } from 'vue'
 
 export function forceInject<T>(key: string | InjectionKey<T>): T {
-  const something = inject(key)
-  if (!something) throw new Error(`Injection of "${String(key)}" failed`)
-  return something
+  const sentinel = Symbol('forceInject sentinel')
+  const something = inject(key, sentinel as unknown)
+  if (something === sentinel) {
+    throw new Error(`Injection of "${String(key)}" failed`)
+  }
+  return something as T
 }
 
 /**

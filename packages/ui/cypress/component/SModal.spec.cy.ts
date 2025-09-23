@@ -37,7 +37,7 @@ it('Mounts', () => {
       <SModal v-model:show="show">
         <SModalCard>
           <template #title>Title slot</template>
-          
+
           Default slot
         </SModalCard>
       </SModal>
@@ -103,26 +103,6 @@ describe('Focus trap', () => {
     assertFirstTabbableFocus(true)
     cy.contains('close modal').click()
     cy.contains('open modal').should('be.focused')
-  })
-
-  // skip: Cypress Component Testing is unstable, and I guess that sandboxing is not working well in every case
-  // due to this, if you turn on this test, other tests will fail
-  // FIXME
-  it.skip('Print warning with a tip in case when no any tabbable nodes inside of modal', () => {
-    mountFactory({ mountWithoutTabbable: true })
-
-    cy.stub(window.console, 'warn').as('consoleWarn')
-    cy.on('uncaught:exception', (err) => {
-      if (/focus-trap/.test(err.message)) {
-        return false
-      }
-    })
-
-    cy.contains('open modal').click()
-
-    cy.get('@consoleWarn')
-      .should('be.calledWithMatch', /you can disable focus-trap completely by setting `focus-trap` prop to `false`/)
-      .and('be.calledWithMatch', /\[SModal\]/)
   })
 
   it("{esc} doesn't disable focus trap if `close-on-esc=false`", () => {
@@ -619,9 +599,9 @@ describe('Eagering', () => {
       },
       template: `
         Show: {{ show }}
-  
+
         <button @click="show = true">Open</button>
-  
+
         <div id="anchor">
           <SModal
             v-model:show="show"

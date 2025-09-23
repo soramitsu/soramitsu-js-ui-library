@@ -3,13 +3,19 @@ import Windi from 'vite-plugin-windicss'
 import Vue from '@vitejs/plugin-vue'
 import type { RootNode, TemplateChildNode } from '@vue/compiler-core'
 import Icons from 'unplugin-icons/vite'
-import Svg from '@soramitsu-ui/vite-plugin-svg'
+import SvgPlugin from '@soramitsu-ui/vite-plugin-svg'
 import AutoImport from 'unplugin-auto-import/vite'
-import path from 'path'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const rootDir = fileURLToPath(new URL('.', import.meta.url))
 
 function resolve(...args: string[]): string {
-  return path.resolve(__dirname, ...args)
+  return path.resolve(rootDir, ...args)
 }
+
+// Support both ESM and CommonJS builds of the SVG plugin
+const svgPlugin = (SvgPlugin as any).default ?? SvgPlugin
 
 const vueCompilerTransforms = {
   removeAttribute(attr: string) {
@@ -58,7 +64,7 @@ export default defineConfig({
   },
   plugins: [
     Windi({
-      // explicit path in case when cwd is not the `__dirname`
+      // explicit path in case when cwd is not project root
       config: resolve('windi.config.ts'),
     }),
     Vue({
@@ -69,7 +75,7 @@ export default defineConfig({
       },
     }),
     Icons(),
-    Svg({
+    svgPlugin({
       svgo: {
         plugins: [{ name: 'removeViewBox', active: false }],
       },

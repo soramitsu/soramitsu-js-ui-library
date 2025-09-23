@@ -1,5 +1,5 @@
 /* eslint-disable vue/one-component-per-file */
-import { describe, expect, test } from 'vitest'
+import { describe, expect, test, vi } from 'vitest'
 import { createApp, defineComponent, h, ref } from 'vue'
 import { bareMetalVModel, forceInject, uniqueElementId, nextIncrementalCounter } from './index'
 
@@ -109,7 +109,14 @@ describe('forceInject', () => {
 
     const container = document.createElement('div')
     const app = createApp(Broken)
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-    expect(() => app.mount(container)).toThrowError(/Injection/) // eslint-disable-line @typescript-eslint/no-unsafe-argument
+    try {
+      expect(() => app.mount(container)).toThrowError(/Injection/) // eslint-disable-line @typescript-eslint/no-unsafe-argument
+    } finally {
+      warnSpy.mockRestore()
+      errorSpy.mockRestore()
+    }
   })
 })

@@ -1,21 +1,30 @@
-import { test, expect } from 'vitest'
+import { test, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import SPopover from './SPopover'
 
+function expectMountToThrow(template: string, message: string) {
+  const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
+  const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+  try {
+    expect(() =>
+      mount({
+        components: { SPopover },
+        template,
+      }),
+    ).toThrowError(message)
+  } finally {
+    warnSpy.mockRestore()
+    errorSpy.mockRestore()
+  }
+}
+
 test('Throws an error if no trigger slot', () => {
-  expect(() =>
-    mount({
-      components: { SPopover },
-      template: `<SPopover />`,
-    }),
-  ).toThrowError('"trigger" slot is required')
+  expectMountToThrow(`<SPopover />`, '"trigger" slot is required')
 })
 
 test('Throws an error if trigger slot is not a single element', () => {
-  expect(() =>
-    mount({
-      components: { SPopover },
-      template: `
+  expectMountToThrow(
+    `
       <SPopover>
         <template #trigger>
           <span>A</span>
@@ -23,15 +32,13 @@ test('Throws an error if trigger slot is not a single element', () => {
         </template>
       </SPopover>
     `,
-    }),
-  ).toThrowError('"trigger" slot should render exact 1 element')
+    '"trigger" slot should render exact 1 element',
+  )
 })
 
 test('Throws an error if popper slot renders more than 1 element', () => {
-  expect(() =>
-    mount({
-      components: { SPopover },
-      template: `
+  expectMountToThrow(
+    `
       <SPopover>
         <template #trigger>
           <span>A</span>
@@ -43,6 +50,6 @@ test('Throws an error if popper slot renders more than 1 element', () => {
         </template>
       </SPopover>
     `,
-    }),
-  ).toThrowError('"popper" slot should return either nothing or the only 1 element')
+    '"popper" slot should return either nothing or the only 1 element',
+  )
 })

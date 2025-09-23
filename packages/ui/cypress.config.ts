@@ -1,16 +1,17 @@
 import { defineConfig } from 'cypress'
-import viteConfig from './vite.config'
-import { mergeConfig } from 'vite'
+import viteConfig from './vite.config.mts'
 import fs from 'fs'
 
 function useAxeCoreReader(on: Cypress.PluginEvents) {
   let content: string | undefined
 
   on('task', {
-    readAxeCoreCached() {
+    async readAxeCoreCached() {
       if (!content) {
-        // use the most correct module resolution
-        const src = require.resolve('axe-core/axe.min.js')
+        const { createRequire } = await import('module')
+        // resolve relative to the current working directory so Node walks up as usual
+        const requireFromCwd = createRequire(`${process.cwd()}/package.json`)
+        const src = requireFromCwd.resolve('axe-core/axe.min.js')
         content = fs.readFileSync(src, { encoding: 'utf-8' })
       }
 
@@ -18,6 +19,26 @@ function useAxeCoreReader(on: Cypress.PluginEvents) {
     },
   })
 }
+
+function dedupe<T>(values: T[] | undefined, extras: T[]): T[] {
+  return Array.from(new Set([...(values ?? []), ...extras]))
+}
+
+const componentViteConfig = {
+  ...viteConfig,
+  resolve: {
+    ...viteConfig.resolve,
+    alias: {
+      ...(viteConfig.resolve?.alias ?? {}),
+      vue: 'vue/dist/vue.esm-bundler.js',
+    },
+  },
+  optimizeDeps: {
+    ...viteConfig.optimizeDeps,
+    include: dedupe(viteConfig.optimizeDeps?.include, ['cypress-plugin-tab']),
+    exclude: dedupe(viteConfig.optimizeDeps?.exclude, ['platform']),
+  },
+} satisfies typeof viteConfig
 
 export default defineConfig({
   component: {
@@ -30,18 +51,8 @@ export default defineConfig({
       framework: 'vue',
       bundler: 'vite',
 
-      // additional opts to the main `vite.config.ts`
-      viteConfig: mergeConfig(viteConfig, {
-        resolve: {
-          alias: {
-            vue: 'vue/dist/vue.esm-bundler.js',
-          },
-        },
-        optimizeDeps: {
-          include: ['cypress-plugin-tab'],
-          exclude: ['platform'],
-        },
-      }),
+      // additional opts to the main `vite.config.mts`
+      viteConfig: componentViteConfig,
     },
   },
 })
