@@ -26,6 +26,7 @@
     "lint:format:base": "prettier-eslint \"**/*.{ts,js,vue,md,css,scss,sass}\"",
     "lint:format:check": "yarn lint:format:base --list-different",
     "lint:format:fix": "yarn lint:format:base --write",
+    "prestorybook:verify": "yarn build:vite-plugin-svg",
     "storybook:verify": "yarn --cwd packages/ui sb:build",
     "publish-workspaces": "lerna publish from-package"
   },
