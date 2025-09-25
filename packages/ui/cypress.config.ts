@@ -24,7 +24,7 @@ function dedupe<T>(values: T[] | undefined, extras: T[]): T[] {
   return Array.from(new Set([...(values ?? []), ...extras]))
 }
 
-const componentViteConfig = {
+const componentViteConfig: typeof viteConfig = {
   ...viteConfig,
   resolve: {
     ...viteConfig.resolve,
@@ -38,7 +38,7 @@ const componentViteConfig = {
     include: dedupe(viteConfig.optimizeDeps?.include, ['cypress-plugin-tab']),
     exclude: dedupe(viteConfig.optimizeDeps?.exclude, ['platform']),
   },
-} satisfies typeof viteConfig
+}
 
 export default defineConfig({
   component: {

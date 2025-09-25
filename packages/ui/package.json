@@ -25,7 +25,7 @@
   "scripts": {
     "sb:build": "storybook build",
     "sb:serve": "storybook dev -p 6006 --disable-telemetry",
-    "sb:test": "test-storybook",
+    "sb:test": "bash scripts/run-storybook-test.sh",
     "test:unit": "vitest run",
     "test:after-build": "vitest run -c vitest.after-build.config.ts",
     "cy": "cypress open",

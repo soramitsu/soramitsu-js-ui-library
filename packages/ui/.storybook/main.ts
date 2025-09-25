@@ -1,6 +1,7 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { StorybookConfig } from '@storybook/vue3-vite'
+import type { InlineConfig } from 'vite'
 import { loadConfigFromFile, mergeConfig } from 'vite'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -10,10 +11,17 @@ const config: StorybookConfig = {
   stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   async viteFinal(baseConfig) {
-    const { config: mainConfig } = await loadConfigFromFile(
+    const { config: loadedConfig } = await loadConfigFromFile(
       { mode: 'development', command: 'serve' },
       resolve('vite.config.mts'),
     )
+
+    const mainConfig = {
+      ...(loadedConfig ?? {}),
+    } as InlineConfig & { test?: unknown }
+
+    delete mainConfig.build
+    delete mainConfig.test
 
     if (Array.isArray(mainConfig.plugins)) {
       // Storybook already wires its own Vue plugin, so skip ours to avoid duplicates

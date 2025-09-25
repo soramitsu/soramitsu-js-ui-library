@@ -74,7 +74,9 @@ describe('SModal focus trap warnings', () => {
 
     expect(warnSpy).toHaveBeenCalledTimes(1)
     expect(warnSpy.mock.calls[0][0]).toContain('[SModal] focus-trap activation is failed')
-    expect(warnSpy.mock.calls[0][0]).toContain('Tip: you can disable focus-trap completely by setting `focus-trap` prop to `false`')
+    expect(warnSpy.mock.calls[0][0]).toContain(
+      'Tip: you can disable focus-trap completely by setting `focus-trap` prop to `false`',
+    )
     expect(warnSpy.mock.calls[0][1]).toBe(focusTrapError)
     expect(deactivate).toHaveBeenCalledTimes(1)
 
