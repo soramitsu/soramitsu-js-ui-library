@@ -157,32 +157,55 @@ export default /* @__PURE__ */ defineComponent({
     })
     const popperRef = eagerComputed(() => somePopperRefOverride.value || popperNativeRef.value)
 
+    const optionsState = reactive({
+      placement: computed(() => props.placement),
+      modifiers: [
+        {
+          name: 'offset',
+          options: { offset: computed(() => [skidding.value, distance.value]) },
+        },
+        shallowReactive({
+          name: 'sameWidth',
+          enabled: props.sameWidth,
+          phase: 'beforeWrite' as const,
+          requires: ['computeStyles'],
+          fn: ({ state }: { state: State }) => {
+            state.styles.popper.width = `${state.rects.reference.width}px`
+          },
+          effect: ({ state }: { state: State }) => {
+            if (state.elements.reference instanceof HTMLElement) {
+              state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`
+            }
+          },
+        }),
+      ],
+    })
+
     const { instance } = usePopper({
       referenceElem: triggerRef,
       popperElem: popperRef,
-      options: reactive({
-        placement: computed(() => props.placement),
-        modifiers: [
-          {
-            name: 'offset',
-            options: { offset: computed(() => [skidding.value, distance.value]) },
-          },
-          shallowReactive({
-            name: 'sameWidth',
-            enabled: props.sameWidth,
-            phase: 'beforeWrite' as const,
-            requires: ['computeStyles'],
-            fn: ({ state }: { state: State }) => {
-              state.styles.popper.width = `${state.rects.reference.width}px`
-            },
-            effect: ({ state }: { state: State }) => {
-              if (state.elements.reference instanceof HTMLElement) {
-                state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`
-              }
-            },
-          }),
-        ],
-      }),
+      options: optionsState,
+    })
+
+    watch([skidding, distance], () => {
+      const inst = instance.value
+      if (!inst) return
+
+      inst.setOptions({
+        ...inst.state.options,
+        modifiers: (inst.state.options.modifiers || []).map((modifier: any) => {
+          if (modifier?.name === 'offset') {
+            return {
+              ...modifier,
+              options: {
+                ...modifier.options,
+                offset: [skidding.value, distance.value],
+              },
+            }
+          }
+          return modifier
+        }),
+      })
     })
 
     const show = useVModel(props, 'show', emit, { passive: true })

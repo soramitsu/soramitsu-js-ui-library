@@ -1,7 +1,7 @@
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 import { usePopoverApi } from '@/components/Popover/api'
 
-import type { Instance } from '@popperjs/core'
+import type { Instance, Options } from '@popperjs/core'
 import { VueTestUtils } from 'cypress/vue'
 
 before(() => {
@@ -338,12 +338,273 @@ describe('SPopoverWrappedTransition', () => {
     })
   })
 
-  it('Passing props & events to transition component itself')
-  it('Binding class, style & attrs to the wrapper element')
-  it('Binding class, style & attrs to the content element')
+  it('Passing props & events to transition component itself', () => {
+    cy.mount({
+      setup() {
+        const afterEnterCount = ref(0)
+
+        return {
+          afterEnterCount,
+          onAfterEnter: () => {
+            afterEnterCount.value += 1
+          },
+        }
+      },
+      template: `
+        <div style="padding: 150px">
+          <SPopover trigger="click">
+            <template #trigger>
+              <button data-cy="trigger">trigger</button>
+            </template>
+
+            <template #popper>
+              <SPopoverWrappedTransition
+                name="wrapped-popover-transition"
+                @after-enter="onAfterEnter"
+              >
+                <span data-cy="content">content</span>
+              </SPopoverWrappedTransition>
+            </template>
+          </SPopover>
+
+          <output data-cy="after-enter-count">{{ afterEnterCount }}</output>
+        </div>
+      `,
+    })
+
+    cy.get('[data-cy=trigger]').click()
+
+    cy.get('[data-cy=content]').should('have.class', 'wrapped-popover-transition-enter-active')
+    cy.get('[data-cy=after-enter-count]').should('have.text', '1')
+  })
+
+  it('Binding class, style & attrs to the wrapper element', () => {
+    cy.mount({
+      template: `
+        <div style="padding: 150px">
+          <SPopover trigger="click">
+            <template #trigger>
+              <button data-cy="trigger">trigger</button>
+            </template>
+
+            <template #popper>
+              <SPopoverWrappedTransition
+                :wrapper-attrs="{
+                  'data-cy': 'wrapper',
+                  class: 'popover-wrapper-extra',
+                  style: { padding: '12px' },
+                  'data-extra': 'value',
+                }"
+              >
+                <span>content</span>
+              </SPopoverWrappedTransition>
+            </template>
+          </SPopover>
+        </div>
+      `,
+    })
+
+    cy.get('[data-cy=trigger]').click()
+
+    cy.get('[data-cy=wrapper]')
+      .should('have.class', 'popover-wrapper-extra')
+      .and('have.attr', 'data-extra', 'value')
+      .and('have.css', 'padding-top', '12px')
+  })
+
+  it('Binding class, style & attrs to the content element', () => {
+    cy.mount({
+      template: `
+        <div style="padding: 150px">
+          <SPopover trigger="click">
+            <template #trigger>
+              <button data-cy="trigger">trigger</button>
+            </template>
+
+            <template #popper>
+              <SPopoverWrappedTransition
+                :inner-wrapper-attrs="{
+                  'data-cy': 'content-wrapper',
+                  class: 'popover-content-extra',
+                  style: { color: 'rgb(255, 0, 0)' },
+                  'data-extra': 'inner',
+                }"
+              >
+                <span>content</span>
+              </SPopoverWrappedTransition>
+            </template>
+          </SPopover>
+        </div>
+      `,
+    })
+
+    cy.get('[data-cy=trigger]').click()
+
+    cy.get('[data-cy=content-wrapper]')
+      .should('have.class', 'popover-content-extra')
+      .and('have.attr', 'data-extra', 'inner')
+      .and('have.css', 'color', 'rgb(255, 0, 0)')
+  })
 })
 
 describe('Popper options reactivity', () => {
-  it('snap: placement change')
-  it('snap: distance & skidding changes')
+  it('snap: placement change', () => {
+    cy.mount({
+      setup() {
+        const placement = ref<'top' | 'bottom'>('top')
+
+        return {
+          placement,
+          setBottom: () => {
+            placement.value = 'bottom'
+          },
+        }
+      },
+      template: `
+        <div style="padding: 200px">
+          <button data-cy="set-bottom" @click="setBottom">set bottom</button>
+
+          <SPopover
+            trigger="click"
+            :placement="placement"
+          >
+            <template #trigger>
+              <button data-cy="trigger">trigger</button>
+            </template>
+
+            <template #popper="{ popper }">
+              <SPopoverWrappedTransition eager>
+                <div data-cy="popper">
+                  <div data-cy="placement">{{ popper?.state.placement }}</div>
+                </div>
+              </SPopoverWrappedTransition>
+            </template>
+          </SPopover>
+        </div>
+      `,
+    })
+
+    cy.get('[data-cy=trigger]').click()
+
+    cy.get('[data-cy=placement]').should('contain', 'top')
+
+    cy.get('[data-cy=set-bottom]').click()
+
+    cy.get('[data-cy=placement]').should('contain', 'bottom')
+  })
+
+  it('snap: distance & skidding changes', () => {
+    cy.mount({
+      components: {
+        OffsetWatcher: {
+          name: 'OffsetWatcher',
+          setup() {
+            const api = usePopoverApi()
+            const offsetSnapshot = ref('')
+
+            const extractOffset = (options: Partial<Options> | undefined) => {
+              const modifiers = options?.modifiers ?? []
+              const offsetModifier = modifiers.find((modifier: any) => modifier?.name === 'offset')
+              if (!offsetModifier) return null
+
+              let rawOffset = offsetModifier.options?.offset
+              if (!rawOffset) return null
+
+              if (Array.isArray(rawOffset)) return rawOffset
+              if (typeof rawOffset === 'object' && 'value' in rawOffset) return rawOffset.value
+
+              return null
+            }
+
+            const updateFromInstance = (instance: Instance) => {
+              const current = instance.state.modifiersData.offset?.[instance.state.placement]
+              if (current) {
+                offsetSnapshot.value = current.map((part) => Math.round(part)).join(',')
+                return
+              }
+
+              const fallback = extractOffset(instance.state.options)
+              if (fallback) {
+                offsetSnapshot.value = fallback.map((part) => Number(part)).join(',')
+              }
+            }
+
+            watch(
+              () => api.popper as Instance | null,
+              (instance) => {
+                if (!instance) return
+
+                updateFromInstance(instance)
+
+                if (!(instance as any).__offsetWatcherPatched) {
+                  const original = instance.setOptions.bind(instance)
+
+                  instance.setOptions = (options) => {
+                    const extracted = extractOffset(options)
+                    if (extracted) {
+                      offsetSnapshot.value = extracted.map((part) => Number(part)).join(',')
+                    }
+
+                    return original(options)
+                  }
+                  ;(instance as any).__offsetWatcherPatched = true
+                }
+              },
+              { immediate: true },
+            )
+
+            return { offsetSnapshot }
+          },
+          template: `<div data-cy="offset">{{ offsetSnapshot }}</div>`,
+        },
+      },
+      setup() {
+        const skidding = ref(0)
+        const distance = ref(0)
+
+        return {
+          skidding,
+          distance,
+          setOffset: () => {
+            skidding.value = 10
+            distance.value = 20
+          },
+        }
+      },
+      template: `
+        <div style="padding: 200px">
+          <button data-cy="set-offset" @click="setOffset">set offset</button>
+
+          <SPopover
+            trigger="click"
+            placement="bottom"
+            :skidding="skidding"
+            :distance="distance"
+          >
+            <template #trigger>
+              <button data-cy="trigger">trigger</button>
+            </template>
+
+            <template #popper>
+              <SPopoverWrappedTransition eager>
+                <div data-cy="popper">
+                  <OffsetWatcher />
+                </div>
+              </SPopoverWrappedTransition>
+            </template>
+          </SPopover>
+        </div>
+      `,
+    })
+
+    cy.get('[data-cy=trigger]').click()
+
+    cy.get('[data-cy=offset]')
+      .invoke('text')
+      .should('match', /0[, ]0/)
+
+    cy.get('[data-cy=set-offset]').click()
+
+    cy.get('[data-cy=offset]').should('contain', '10,20')
+  })
 })
