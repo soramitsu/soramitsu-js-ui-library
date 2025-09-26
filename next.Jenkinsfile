@@ -2,7 +2,7 @@
 def pipeline = new org.js.LibPipeline(
     steps:                this,
     packageManager:       'yarn',
-    buildDockerImage:     'build-tools/node:24-ubuntu-extended',
+    buildDockerImage:     'build-tools/node:20-ubuntu-extended',
     npmLoginEmail:        'admin@soramitsu.co.jp',
     dockerFileName:       'next.Dockerfile',
     dockerImageName:      'soramitsu/soramitsu-js-ui-library',
