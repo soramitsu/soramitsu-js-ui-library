@@ -35,7 +35,7 @@
     "build:clean": "del dist dist-ts",
     "build:tsc": "vue-tsc --outDir dist-ts --declaration --emitDeclarationOnly",
     "build:vite": "vite build",
-    "api:extract": "api-extractor run",
+    "api:extract": "api-extractor run --typescript-compiler-folder ../../node_modules/typescript",
     "api:extract:local": "api-extractor run --local"
   },
   "dependencies": {

@@ -1,10 +1,10 @@
 /* eslint-disable vue/one-component-per-file */
 import { describe, expect, test, vi } from 'vitest'
-import { createApp, defineComponent } from 'vue'
-import { ref } from 'vue'
+import { createApp, defineComponent, ref } from 'vue'
 import { useNotifications } from './composables'
 import { NOTIFICATIONS_API_KEY } from './api'
 import { createToastsApiMock } from '@/test-utils'
+import type { Status } from '@/types'
 
 describe('useNotifications', () => {
   test('registers toast and wires callbacks', () => {
@@ -35,7 +35,8 @@ describe('useNotifications', () => {
     expect(register).toHaveBeenCalledTimes(1)
     expect(slots).toHaveLength(1)
 
-    const vnode = slots[0]?.()
+    const slotOutput = slots[0]?.({} as any, {} as any)
+    const vnode = Array.isArray(slotOutput) ? slotOutput[0] : slotOutput
     expect(vnode).toBeDefined()
     expect(vnode?.props?.timeout).toBe(200)
     expect(vnode?.props?.title).toBe('Hello')
@@ -61,7 +62,7 @@ describe('useNotifications', () => {
         const title = ref('Reactive title')
         const description = ref('Reactive description')
         const timeout = ref(150)
-        const status = ref('success')
+        const status = ref<Status>('success')
         const showCloseBtn = ref(true)
         const { show } = useNotifications()
 
@@ -83,7 +84,8 @@ describe('useNotifications', () => {
     app.mount(container)
 
     expect(register).toHaveBeenCalledTimes(1)
-    const vnode = slots[0]?.()
+    const slotOutput = slots[0]?.({} as any, {} as any)
+    const vnode = Array.isArray(slotOutput) ? slotOutput[0] : slotOutput
     expect(vnode?.props?.title).toBe('Reactive title')
     expect(vnode?.props?.description).toBe('Reactive description')
     expect(vnode?.props?.timeout).toBe(150)

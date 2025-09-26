@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { mergeProps } from 'vue'
+import type { BaseTransitionProps } from 'vue'
 import { useWrappedTransitionVisibility } from './util'
 import { usePopoverApi } from './api'
 
@@ -100,6 +101,21 @@ function invokeListener(key: string, ...args: any[]) {
   }
 }
 
+type TransitionPropValue = Pick<BaseTransitionProps, 'onBeforeEnter' | 'onAfterLeave'>[keyof Pick<
+  BaseTransitionProps,
+  'onBeforeEnter' | 'onAfterLeave'
+>]
+
+function invokeTransitionProp(handler: TransitionPropValue, args: [Element, ...any[]]) {
+  if (!handler) return
+
+  if (Array.isArray(handler)) {
+    handler.forEach((fn) => (fn as (...hookArgs: [Element, ...any[]]) => void)(...args))
+  } else {
+    ;(handler as (...hookArgs: [Element, ...any[]]) => void)(...args)
+  }
+}
+
 const { wrapperIf, wrapperShow, contentIf, contentShow, transitionProps } = useWrappedTransitionVisibility({
   show: computed(() => api.show),
   eager: computed(() => props.eager),
@@ -136,9 +152,8 @@ const transitionActiveClass = eagerComputed(() => {
 const afterEnterPending = ref(false)
 
 function handleBeforeEnter(...args: [Element, ...any[]]) {
-  const [el] = args
   afterEnterPending.value = true
-  transitionProps.onBeforeEnter?.(el as any)
+  invokeTransitionProp(transitionProps.onBeforeEnter, args)
   invokeListener('onBeforeEnter', ...args)
 }
 
@@ -168,9 +183,8 @@ function handleLeave(...args: [Element, ...any[]]) {
 }
 
 function handleAfterLeave(...args: [Element, ...any[]]) {
-  const [el] = args
   afterEnterPending.value = false
-  transitionProps.onAfterLeave?.(el as any)
+  invokeTransitionProp(transitionProps.onAfterLeave, args)
   invokeListener('onAfterLeave', ...args)
 }
 
@@ -179,9 +193,8 @@ function handleLeaveCancelled(...args: [Element, ...any[]]) {
 }
 
 function handleBeforeAppear(...args: [Element, ...any[]]) {
-  const [el] = args
   afterEnterPending.value = true
-  transitionProps.onBeforeEnter?.(el as any)
+  invokeTransitionProp(transitionProps.onBeforeEnter, args)
   invokeListener('onBeforeAppear', ...args)
   invokeListener('onBeforeEnter', ...args)
 }

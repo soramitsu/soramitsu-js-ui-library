@@ -126,8 +126,8 @@ function close() {
   showModel.value = false
 }
 
-const modalRef = templateRef('modal')
-const rootRef = templateRef('root')
+const modalRef = templateRef<HTMLElement | SVGElement | null>('modal')
+const rootRef = templateRef<HTMLElement | SVGElement | null>('root')
 
 // VISIBILITY
 
@@ -177,7 +177,7 @@ if (props.focusTrap) {
       flush: 'post',
     },
   )
-  ;({ trap: focusTrapRef } = useFocusTrap({
+  const { trap } = useFocusTrap({
     elem: focusTrapTarget,
     options: {
       ...optionsFromProps,
@@ -190,13 +190,15 @@ if (props.focusTrap) {
         return props.closeOnEsc ? true : false
       },
     },
-  }))
+  })
+
+  focusTrapRef = trap
 
   watch(
-    focusTrapRef,
-    (trap) => {
+    trap,
+    (value) => {
       try {
-        trap?.activate()
+        value?.activate()
       } catch (err) {
         console.warn(
           '[SModal] focus-trap activation is failed. Does your modal contain any tabbable node?' +
@@ -204,8 +206,8 @@ if (props.focusTrap) {
             '\n\nOriginal error:\n\n%o',
           err,
         )
-        trap?.deactivate()
-        focusTrapRef.value = null
+        value?.deactivate()
+        trap.value = null
       }
     },
     { immediate: true },

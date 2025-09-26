@@ -25,7 +25,7 @@ test('forwards transition hook arguments including done callback', async () => {
 
   const api = createPopoverApi()
 
-  const wrapper = mount(SPopoverWrappedTransition, {
+  const wrapper = mount(SPopoverWrappedTransition as any, {
     attrs: {
       css: false,
       onEnter: enterSpy,

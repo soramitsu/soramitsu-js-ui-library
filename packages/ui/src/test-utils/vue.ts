@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { mount, type MountingOptions } from '@vue/test-utils'
 import type { Component } from 'vue'
 import {
   createMemoryHistory,
@@ -10,7 +10,7 @@ import {
 } from 'vue-router'
 import { createPinia, setActivePinia, type Pinia, type PiniaPlugin } from 'pinia'
 
-type BaseMountOptions = Parameters<typeof mount>[1]
+type BaseMountOptions = MountingOptions<any>
 
 type MountResult = ReturnType<typeof mount> & {
   router?: Router
@@ -30,7 +30,7 @@ export interface PiniaPresetOptions {
   plugins?: PiniaPlugin[]
 }
 
-export interface MountHelperOptions extends BaseMountOptions {
+export type MountHelperOptions = BaseMountOptions & {
   pinia?: boolean | Pinia | PiniaPresetOptions
   router?: boolean | Router | RouterPresetOptions
 }
