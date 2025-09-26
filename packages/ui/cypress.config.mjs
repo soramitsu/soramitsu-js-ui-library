@@ -1,21 +1,17 @@
 import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
-import { register } from 'esbuild-register/dist/node.js'
 import { defineConfig } from 'cypress'
+import { loadConfigFromFile } from 'vite'
 
-const { unregister } = register({
-  // allow runtime import of the TypeScript Vite config when Cypress boots
-  extensions: ['.ts', '.mts'],
-  target: 'esnext',
-  format: 'esm',
-})
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-let viteConfig
-try {
-  ;({ default: viteConfig } = await import('./vite.config.mts'))
-} finally {
-  unregister()
-}
+const { config: viteConfig } = await loadConfigFromFile(
+  { command: 'serve', mode: process.env.NODE_ENV ?? 'development' },
+  path.resolve(__dirname, 'vite.config.mts'),
+)
 
 function useAxeCoreReader(on) {
   let content
