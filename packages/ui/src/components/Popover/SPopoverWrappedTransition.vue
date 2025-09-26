@@ -135,70 +135,74 @@ const transitionActiveClass = eagerComputed(() => {
 
 const afterEnterPending = ref(false)
 
-function handleBeforeEnter(el: Element) {
+function handleBeforeEnter(...args: [Element, ...any[]]) {
+  const [el] = args
   afterEnterPending.value = true
   transitionProps.onBeforeEnter?.(el as any)
-  invokeListener('onBeforeEnter', el)
+  invokeListener('onBeforeEnter', ...args)
 }
 
-function handleEnter(el: Element) {
+function handleEnter(...args: [Element, ...any[]]) {
   onEnter()
-  invokeListener('onEnter', el)
+  invokeListener('onEnter', ...args)
 }
 
-function handleAfterEnter(el: Element) {
+function handleAfterEnter(...args: [Element, ...any[]]) {
+  const [el] = args
   if (!afterEnterPending.value) return
   afterEnterPending.value = false
-  invokeListener('onAfterEnter', el)
+  invokeListener('onAfterEnter', ...args)
 }
 
-function handleEnterCancelled(el: Element) {
+function handleEnterCancelled(...args: [Element, ...any[]]) {
   afterEnterPending.value = false
-  invokeListener('onEnterCancelled', el)
+  invokeListener('onEnterCancelled', ...args)
 }
 
-function handleBeforeLeave(el: Element) {
-  invokeListener('onBeforeLeave', el)
+function handleBeforeLeave(...args: [Element, ...any[]]) {
+  invokeListener('onBeforeLeave', ...args)
 }
 
-function handleLeave(el: Element) {
-  invokeListener('onLeave', el)
+function handleLeave(...args: [Element, ...any[]]) {
+  invokeListener('onLeave', ...args)
 }
 
-function handleAfterLeave(el: Element) {
+function handleAfterLeave(...args: [Element, ...any[]]) {
+  const [el] = args
   afterEnterPending.value = false
   transitionProps.onAfterLeave?.(el as any)
-  invokeListener('onAfterLeave', el)
+  invokeListener('onAfterLeave', ...args)
 }
 
-function handleLeaveCancelled(el: Element) {
-  invokeListener('onLeaveCancelled', el)
+function handleLeaveCancelled(...args: [Element, ...any[]]) {
+  invokeListener('onLeaveCancelled', ...args)
 }
 
-function handleBeforeAppear(el: Element) {
+function handleBeforeAppear(...args: [Element, ...any[]]) {
+  const [el] = args
   afterEnterPending.value = true
   transitionProps.onBeforeEnter?.(el as any)
-  invokeListener('onBeforeAppear', el)
-  invokeListener('onBeforeEnter', el)
+  invokeListener('onBeforeAppear', ...args)
+  invokeListener('onBeforeEnter', ...args)
 }
 
-function handleAppear(el: Element) {
+function handleAppear(...args: [Element, ...any[]]) {
   onEnter()
-  invokeListener('onAppear', el)
-  invokeListener('onEnter', el)
+  invokeListener('onAppear', ...args)
+  invokeListener('onEnter', ...args)
 }
 
-function handleAfterAppear(el: Element) {
+function handleAfterAppear(...args: [Element, ...any[]]) {
   if (!afterEnterPending.value) return
   afterEnterPending.value = false
-  invokeListener('onAfterAppear', el)
-  invokeListener('onAfterEnter', el)
+  invokeListener('onAfterAppear', ...args)
+  invokeListener('onAfterEnter', ...args)
 }
 
-function handleAppearCancelled(el: Element) {
+function handleAppearCancelled(...args: [Element, ...any[]]) {
   afterEnterPending.value = false
-  invokeListener('onAppearCancelled', el)
-  invokeListener('onEnterCancelled', el)
+  invokeListener('onAppearCancelled', ...args)
+  invokeListener('onEnterCancelled', ...args)
 }
 
 watch([contentNormalized, transitionActiveClass, contentShow], () => {
