@@ -7,7 +7,7 @@ import { forceInject } from '@/util'
 const findRoot = () => cy.get('[data-testid=root]')
 const findList = () => cy.get('[data-testid=list]')
 
-const UseToggle = defineComponent({
+const UseToggle = {
   setup() {
     const flag = ref(false)
     return { flag }
@@ -16,7 +16,7 @@ const UseToggle = defineComponent({
     <input v-model="flag" type="checkbox">
     <slot v-bind="{ value: flag }" />
   `,
-})
+}
 
 const Toast = defineComponent({
   props: {
@@ -264,28 +264,18 @@ it('Component in slot keeps its state', () => {
   })
 
   cy.mount({
-    setup() {
-      return () =>
-        h(
-          SToastsProvider,
-          {},
-          {
-            default: () => [
-              h(SToastsDisplay as any, {
-                placement: 'top-right',
-              }),
-              h(Counter, { 'data-cy': 'outer' }),
-              h(
-                Toast,
-                {},
-                {
-                  default: () => h(Counter, { 'data-cy': 'inner' }),
-                },
-              ),
-            ],
-          },
-        )
-    },
+    components: { SToastsProvider, SToastsDisplay, Toast, Counter },
+    template: `
+      <SToastsProvider>
+        <SToastsDisplay placement="top-right" />
+
+        <Counter data-cy="outer" />
+
+        <Toast>
+          <Counter data-cy="inner" />
+        </Toast>
+      </SToastsProvider>
+    `,
   })
 
   cy.get('[data-cy=inner]')

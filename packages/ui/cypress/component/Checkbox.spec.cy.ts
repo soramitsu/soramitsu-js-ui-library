@@ -50,12 +50,9 @@ describe('SCheckboxSolo', () => {
   const findCheckbox = () => cy.get('[role=checkbox]')
 
   it('When it is disabled, it is not tabbable', () => {
-    cy.mount({
-      template: `
-        <SCheckboxSolo disabled>
-          I should be not tabbable
-        </SCheckboxSolo>
-      `,
+    cy.mount(SCheckboxSolo, {
+      props: { disabled: true },
+      slots: { default: () => 'I should be not tabbable' },
     })
 
     findCheckbox().should('have.attr', 'tabindex', '-1')

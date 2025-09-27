@@ -46,7 +46,7 @@ describe('STabsPanel', () => {
     cy.mount({
       template: `
         <STabsPanel :background="'primary'" data-cy="primary">
-          <STab data-cy="tabName" :name="tabName">TabTitle</STab>
+          <STab data-cy="tabName" name="primary-tab">TabTitle</STab>
         </STabsPanel>
       `,
     })
@@ -57,7 +57,7 @@ describe('STabsPanel', () => {
     cy.mount({
       template: `
         <STabsPanel :background="'secondary'" data-cy="secondary">
-          <STab data-cy="tabName" :name="tabName">TabTitle</STab>
+          <STab data-cy="tabName" name="secondary-tab">TabTitle</STab>
         </STabsPanel>
       `,
     })
@@ -68,7 +68,7 @@ describe('STabsPanel', () => {
     cy.mount({
       template: `
         <STabsPanel :background="'none'" data-cy="none">
-          <STab data-cy="tabName" :name="tabName">TabTitle</STab>
+          <STab data-cy="tabName" name="none-tab">TabTitle</STab>
         </STabsPanel>
       `,
     })

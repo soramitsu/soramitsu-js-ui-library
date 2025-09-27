@@ -1,14 +1,45 @@
+/* eslint-disable no-new-func */
 import { defineComponent, onMounted, ref } from 'vue'
+import * as Vue from 'vue'
+import { compile } from '@vue/compiler-dom'
 import { useNotifications, SNotificationsProvider } from '@/lib'
 
 type ExtraComponents = Record<string, ReturnType<typeof defineComponent>>
 
+function compileIfNeeded(component: any) {
+  if (
+    component &&
+    typeof component === 'object' &&
+    'template' in component &&
+    typeof component.template === 'string' &&
+    !component.render
+  ) {
+    const { template, ...rest } = component
+    const { code } = compile(template, { mode: 'function' })
+    const renderFn = new Function('Vue', `${code}; return render`)(Vue)
+
+    return defineComponent({
+      ...rest,
+      render() {
+        return renderFn.call(this, this, [])
+      },
+    })
+  }
+
+  return component
+}
+
 function mountWithProvider(component: any, extraComponents: ExtraComponents = {}) {
-  cy.mount(component, {
+  const compiledComponent = compileIfNeeded(component)
+  const compiledExtras = Object.fromEntries(
+    Object.entries(extraComponents).map(([key, value]) => [key, compileIfNeeded(value)]),
+  )
+
+  cy.mount(compiledComponent, {
     global: {
       components: {
         SNotificationsProvider,
-        ...extraComponents,
+        ...compiledExtras,
       },
       stubs: {
         'transition-group': false,
@@ -212,3 +243,5 @@ describe('useNotifications()', () => {
     cy.contains('Persistent notification').should('exist')
   })
 })
+
+/* eslint-enable no-new-func */

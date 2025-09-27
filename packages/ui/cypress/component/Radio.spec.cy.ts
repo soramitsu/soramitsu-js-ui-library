@@ -369,7 +369,7 @@ describe('SRadioGroup', () => {
   })
 
   it('When custom radio selector is set, it is used correctly', () => {
-    const CustomRadio = defineComponent({
+    const CustomRadio = {
       props: {
         value: String,
       },
@@ -392,7 +392,7 @@ describe('SRadioGroup', () => {
           <slot />
         </div>
       `,
-    })
+    }
 
     const CUSTOM_SELECTOR = `div.custom-radio`
 
