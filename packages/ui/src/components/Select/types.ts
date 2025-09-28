@@ -10,7 +10,7 @@ export type SelectSize = typeof SelectSize[keyof typeof SelectSize]
 export const SelectButtonType = {
   Default: 'default',
   Inline: 'inline',
-  // TODO(see docs/TODO.md#select) append icon-only variant once design is ready
+  // TODO(see docs/backlog.md#select) append icon-only variant once design is ready
   // Icon = 'icon'
 } as const
 

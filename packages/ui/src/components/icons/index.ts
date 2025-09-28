@@ -29,7 +29,7 @@ import IconChevronsLeft16 from '@soramitsu-ui/icons/icomoon/chevrons-left-16.svg
 // import IconBasicEye24 from '@soramitsu-ui/icons/icomoon/basic-eye-24.svg'
 // import IconBasicEyeNo24 from '@soramitsu-ui/icons/icomoon/basic-eye-no-24.svg'
 
-// TODO(see docs/TODO.md#icons) update design system once official assets arrive
+// TODO(see docs/backlog.md#icons) update design system once official assets arrive
 import IconEye from '~icons/majesticons/eye-line'
 import IconEyeOff from '~icons/majesticons/eye-off-line'
 
@@ -83,7 +83,7 @@ export const STATUS_ICONS_MAP: { [K in Status]: Component } = {
 }
 
 /**
- * TODO(see docs/TODO.md#icons) append info icon once supplied; STextField currently doesn’t
+ * TODO(see docs/backlog.md#icons) append info icon once supplied; STextField currently doesn’t
  * need "info" entry here
  */
 export const STATUS_ICONS_MAP_16: { [K in Exclude<Status, typeof Status.Info>]: Component } = {

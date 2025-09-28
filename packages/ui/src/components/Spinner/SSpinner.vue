@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Animated SVG comes from https://codepen.io/supah/pen/BjYLdW
-// TODO(see docs/TODO.md#spinner) refactor to a functional component to avoid runtime overhead
+// TODO(see docs/backlog.md#spinner) refactor to a functional component to avoid runtime overhead
 
 interface Props {
   /**

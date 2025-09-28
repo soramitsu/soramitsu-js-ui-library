@@ -37,6 +37,11 @@ Usage examples, migration notes, and per-component guidance live alongside the p
 `packages/ui/README.md` for code snippets and plugin setup instructions, or spin up Storybook (`yarn sb:serve`) and
 browse the stories locally.
 
+## Documentation
+
+For a complete handbook covering setup, theming, development workflow, testing, and release processes, see
+[`docs/README.md`](docs/README.md).
+
 OR **cypress component-testing:**
 
 ```shell

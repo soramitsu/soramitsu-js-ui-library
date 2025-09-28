@@ -25,12 +25,12 @@ const props = withDefaults(
     /**
      * - Doesn't allow to unselect value in single mode
      * - Doesn't allow to unselect last the only one picked value in multiple mode
-     * - Planned: auto-selects the first available option when `modelValue` is null (see docs/TODO.md#select)
+     * - Planned: auto-selects the first available option when `modelValue` is null (see docs/backlog.md#select)
      */
     mandatory?: boolean
 
     /**
-     * Planned: synchronize dropdown width with trigger width (see docs/TODO.md#select)
+     * Planned: synchronize dropdown width with trigger width (see docs/backlog.md#select)
      */
     syncMenuAndInputWidths?: boolean
 
