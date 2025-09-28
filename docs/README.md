@@ -35,12 +35,12 @@ This directory gathers the practical knowledge required to work with the Soramit
 
 ## Audience guide
 
-| Persona | Focus areas |
-| --- | --- |
-| Application consumers | [getting-started.md](getting-started.md), [components.md](components.md), [theming.md](theming.md) |
-| Component contributors | [development-workflow.md](development-workflow.md), [components.md](components.md), [testing-and-quality.md](testing-and-quality.md) |
-| Release managers | [release-management.md](release-management.md), [scripts-reference.md](scripts-reference.md) |
-| QA and accessibility reviewers | [storybook.md](storybook.md), [testing-and-quality.md](testing-and-quality.md) |
+| Persona                        | Focus areas                                                                                                                          |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Application consumers          | [getting-started.md](getting-started.md), [components.md](components.md), [theming.md](theming.md)                                   |
+| Component contributors         | [development-workflow.md](development-workflow.md), [components.md](components.md), [testing-and-quality.md](testing-and-quality.md) |
+| Release managers               | [release-management.md](release-management.md), [scripts-reference.md](scripts-reference.md)                                         |
+| QA and accessibility reviewers | [storybook.md](storybook.md), [testing-and-quality.md](testing-and-quality.md)                                                       |
 
 ## Keeping this documentation healthy
 

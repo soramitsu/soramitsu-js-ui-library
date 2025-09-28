@@ -66,12 +66,12 @@ The repository is a Yarn workspace monorepo. Each package owns its build tools, 
 
 ## Where to place new work
 
-| Task | Location | Notes |
-| --- | --- | --- |
-| New Vue component | `packages/ui/src/components/<Name>` | Export via `index.ts` and `all-components.ts`; add Storybook stories and Cypress tests. |
-| Shared composable | `packages/ui/src/composables` | Prefix with `use` and document in [components.md](components.md). |
-| Token or typography addition | `packages/theme/src/sass/tokens.scss` and related utilities | Update docs in [theming.md](theming.md) and add Jest coverage. |
-| Storybook configuration | `packages/ui/.storybook` and `stories/` | Story-level guidance in [storybook.md](storybook.md). |
-| Release automation | Root scripts or `lerna.json` | Coordinate with [release-management.md](release-management.md). |
+| Task                         | Location                                                    | Notes                                                                                   |
+| ---------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| New Vue component            | `packages/ui/src/components/<Name>`                         | Export via `index.ts` and `all-components.ts`; add Storybook stories and Cypress tests. |
+| Shared composable            | `packages/ui/src/composables`                               | Prefix with `use` and document in [components.md](components.md).                       |
+| Token or typography addition | `packages/theme/src/sass/tokens.scss` and related utilities | Update docs in [theming.md](theming.md) and add Jest coverage.                          |
+| Storybook configuration      | `packages/ui/.storybook` and `stories/`                     | Story-level guidance in [storybook.md](storybook.md).                                   |
+| Release automation           | Root scripts or `lerna.json`                                | Coordinate with [release-management.md](release-management.md).                         |
 
 Keeping this structure predictable simplifies navigation for both designers and engineers. If you introduce a new folder or package, document it here.

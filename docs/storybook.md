@@ -111,10 +111,10 @@ export const Primary: Story = {
 
 ## Troubleshooting
 
-| Symptom | Fix |
-| --- | --- |
-| Storybook fails with SVG import errors | Rebuild the SVG plugin (`yarn build:vite-plugin-svg`) or reinstall dependencies. |
-| Stories render blank | Inspect console for missing theme CSS. Ensure `@soramitsu-ui/ui/styles` is imported in `preview.ts`. |
-| Controls panel missing props | Export prop typings or ensure `defineProps` includes default values for Storybook to infer. |
+| Symptom                                | Fix                                                                                                  |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Storybook fails with SVG import errors | Rebuild the SVG plugin (`yarn build:vite-plugin-svg`) or reinstall dependencies.                     |
+| Stories render blank                   | Inspect console for missing theme CSS. Ensure `@soramitsu-ui/ui/styles` is imported in `preview.ts`. |
+| Controls panel missing props           | Export prop typings or ensure `defineProps` includes default values for Storybook to infer.          |
 
 Keep this guide updated as Storybook evolves (new addons, frameworks, or CI integrations).

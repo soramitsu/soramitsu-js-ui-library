@@ -42,13 +42,13 @@ All components share a single CSS bundle emitted as `@soramitsu-ui/ui/styles`. I
 
 ## Component catalogue
 
-| Category | Components |
-| --- | --- |
-| Inputs | `SCheckbox`, `SRadio`, `SSwitch`, `SSelect`, `STextField`, `SDatePicker`, `SJsonInput` |
-| Navigation | `SNavigationMenu`, `SNavigationSubmenu`, `SNavigationMenuItem`, `STabs`, `SLink` |
-| Feedback | `SAlert`, `SBadge`, `SProgressBar`, `SSpinner`, `SNotifications`, `SToasts` |
-| Surfaces | `SAccordion`, `SModal`, `SPopover`, `STable`, `SCard`-style layouts (table adapt mode) |
-| Utilities | `SBodyScrollLockProvider`, `STooltip`, transition wrappers in `Transitions/` |
+| Category   | Components                                                                             |
+| ---------- | -------------------------------------------------------------------------------------- |
+| Inputs     | `SCheckbox`, `SRadio`, `SSwitch`, `SSelect`, `STextField`, `SDatePicker`, `SJsonInput` |
+| Navigation | `SNavigationMenu`, `SNavigationSubmenu`, `SNavigationMenuItem`, `STabs`, `SLink`       |
+| Feedback   | `SAlert`, `SBadge`, `SProgressBar`, `SSpinner`, `SNotifications`, `SToasts`            |
+| Surfaces   | `SAccordion`, `SModal`, `SPopover`, `STable`, `SCard`-style layouts (table adapt mode) |
+| Utilities  | `SBodyScrollLockProvider`, `STooltip`, transition wrappers in `Transitions/`           |
 
 Storybook documents the full API surface with live examples. Use `yarn sb:serve` and navigate through component categories.
 

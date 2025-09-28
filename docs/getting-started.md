@@ -29,20 +29,25 @@ The install command resolves all workspace dependencies (including Storybook, Vi
 Some workflows depend on generated artefacts:
 
 1. **Build the theme tokens at least once per session.**
+
    ```sh
    yarn build:theme
    ```
+
    This compiles Sass tokens into CSS variables consumed by the UI package.
 
 2. **Build the SVG plugin** (runs automatically before Storybook via `presb:serve`, but it can be invoked manually when testing changes to the plugin).
+
    ```sh
    yarn build:vite-plugin-svg
    ```
 
 3. **Run Storybook** to explore components interactively.
+
    ```sh
    yarn sb:serve
    ```
+
    Storybook is served from `packages/ui/.storybook` and listens on port 6006 by default.
 
 4. **(Optional) Compile all packages.** Useful for ensuring release readiness.
@@ -84,6 +89,7 @@ The published packages are available on NPM under the `@soramitsu-ui/*` scope. T
    yarn link "@soramitsu-ui/vite-plugin-svg"  # optional, for local SVG fixes
    ```
 4. Import the plugin in your Vue app:
+
    ```ts
    import { createApp } from 'vue'
    import { plugin as SoramitsuPlugin } from '@soramitsu-ui/ui'

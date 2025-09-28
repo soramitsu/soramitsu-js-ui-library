@@ -29,13 +29,15 @@ Import the Sass module and use the provided mixins/functions to bind or evaluate
   @include theme.tokens-preset-light;
 
   // Override specific values
-  @include theme.eval-tokens-partial((
-    sys: (
-      color: (
-        primary: #0057b8,
+  @include theme.eval-tokens-partial(
+    (
+      sys: (
+        color: (
+          primary: #0057b8,
+        ),
       ),
-    ),
-  ));
+    )
+  );
 }
 
 .button {

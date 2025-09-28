@@ -4,11 +4,11 @@ This page lists common issues encountered while working with the Soramitsu UI mo
 
 ## Installation issues
 
-| Symptom | Resolution |
-| --- | --- |
-| `node` version mismatch errors | Install Node 18+ and clear `node_modules` (`rm -rf node_modules && yarn`). |
+| Symptom                                  | Resolution                                                                                          |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `node` version mismatch errors           | Install Node 18+ and clear `node_modules` (`rm -rf node_modules && yarn`).                          |
 | Yarn complains about incompatible engine | Ensure you are using Yarn 1.x (`yarn --version`). Remove `.pnp.cjs` if Yarn 2+ was previously used. |
-| `esbuild` download failures | Set the `ESBUILD_BINARY_PATH` or install via `yarn add --dev esbuild` manually, then retry `yarn`. |
+| `esbuild` download failures              | Set the `ESBUILD_BINARY_PATH` or install via `yarn add --dev esbuild` manually, then retry `yarn`.  |
 
 ## Storybook fails to start
 
