@@ -1,8 +1,0 @@
-.neumorphic {
-  .el-dialog {
-    box-shadow: var(--s-shadow-dialog);
-  }
-}
-[design-system="neumorphic"] .v-modal {
-  @include use-blur;
-}

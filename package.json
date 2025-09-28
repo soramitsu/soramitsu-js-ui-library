@@ -1,115 +1,53 @@
 {
-  "name": "@soramitsu-ui/ui-vue2",
-  "version": "1.1.6",
-  "private": false,
-  "publishConfig": {
-    "access": "public"
-  },
+  "private": true,
   "license": "Apache-2.0",
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
+  "workspaces": [
+    "packages/*"
   ],
-  "author": "Stefan Popov <popov@soramitsu.co.jp>",
-  "main": "./lib/index.js",
-  "module": "./lib/index.js",
-  "unpkg": "./lib/index.js",
-  "typings": "./lib/index.d.ts",
   "scripts": {
-    "build": "rm -rf lib && rollup -c ./build/rollup.config.js",
-    "test:unit": "vue-cli-service test:unit --coverage",
-    "test:all": "yarn test:unit --coverage",
-    "lint": "vue-cli-service lint",
-    "storybook:build": "vue-cli-service storybook:build -c config/storybook",
-    "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook"
-  },
-  "dependencies": {
-    "core-js": "^3.26.1",
-    "element-resize-detector": "^1.2.4",
-    "element-ui": "^2.15.12",
-    "lodash": "^4.17.21",
-    "throttle-debounce": "^1.0.1",
-    "v-jsoneditor": "^1.4.5",
-    "vue": "^2.6.14",
-    "vue-class-component": "^7.2.6",
-    "vue-i18n": "^8.28.2",
-    "vue-property-decorator": "^9.1.2",
-    "vuex": "^3.6.2"
+    "presb:serve": "yarn build:vite-plugin-svg",
+    "sb:serve": "yarn --cwd packages/ui sb:serve",
+    "presb:build": "yarn build:vite-plugin-svg",
+    "sb:build": "yarn --cwd packages/ui sb:build",
+    "test:all": "run-s lint:check test:theme:unit build:vite-plugin-svg test:ui:unit build:theme test:ui:cy build:ui:only-vite test:ui:after-build",
+    "test:theme:unit": "yarn --cwd packages/theme test",
+    "test:ui:unit": "yarn --cwd packages/ui test:unit",
+    "test:ui:cy": "yarn --cwd packages/ui cy:ci:component",
+    "test:ui:cy-open": "yarn --cwd packages/ui cy",
+    "test:ui:after-build": "yarn --cwd packages/ui test:after-build",
+    "build": "run-s build:theme build:vite-plugin-svg build:ui",
+    "build:theme": "yarn --cwd packages/theme build",
+    "build:vite-plugin-svg": "yarn --cwd packages/vite-plugin-svg build",
+    "build:ui": "yarn --cwd packages/ui build",
+    "build:ui:only-vite": "yarn --cwd packages/ui build:vite",
+    "lint:check": "run-s lint:es lint:format:check",
+    "lint:es": "eslint .",
+    "lint:es:fix": "yarn lint:es --fix",
+    "lint:format:base": "prettier-eslint \"**/*.{ts,js,vue,md,css,scss,sass}\"",
+    "lint:format:check": "yarn lint:format:base --list-different",
+    "lint:format:fix": "yarn lint:format:base --write",
+    "prestorybook:verify": "yarn build:vite-plugin-svg",
+    "storybook:verify": "yarn --cwd packages/ui sb:build",
+    "publish-workspaces": "lerna publish from-package"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^23.0.3",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-terser": "^0.1.0",
-    "@storybook/addon-a11y": "6.5.16",
-    "@storybook/addon-essentials": "6.5.16",
-    "@storybook/addon-storysource": "6.5.16",
-    "@storybook/builder-webpack5": "6.5.16",
-    "@storybook/core-server": "6.5.16",
-    "@storybook/manager-webpack5": "6.5.16",
-    "@storybook/theming": "6.5.16",
-    "@storybook/vue": "6.5.16",
-    "@types/jest": "^29.2.3",
-    "@types/lodash": "^4.14.190",
-    "@typescript-eslint/eslint-plugin": "^5.45.0",
-    "@typescript-eslint/parser": "^5.45.0",
-    "@vue/cli-plugin-babel": "5.0.8",
-    "@vue/cli-plugin-eslint": "5.0.8",
-    "@vue/cli-plugin-typescript": "5.0.8",
-    "@vue/cli-plugin-unit-jest": "5.0.8",
-    "@vue/cli-service": "5.0.8",
-    "@vue/eslint-config-standard": "^5.1.2",
-    "@vue/eslint-config-typescript": "^5.0.2",
-    "@vue/test-utils": "^1.2.2",
-    "@vue/vue2-jest": "27.0.0-alpha.2",
-    "eslint": "^7.29.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.2.0",
-    "eslint-plugin-standard": "^5.0.0",
-    "eslint-plugin-vue": "^7.20.0",
-    "jest": "^27.2.2",
-    "lint-staged": "^9.5.0",
-    "postcss": "^8.2.13",
-    "rollup": "2.78.0",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-delete": "^1.1.0",
-    "rollup-plugin-multi-input": "^1.3.1",
-    "rollup-plugin-scss": "^3.0.0",
-    "rollup-plugin-typescript2": "^0.25.2",
-    "rollup-plugin-vue": "^5.1.4",
-    "sass": "^1.56.1",
-    "sass-loader": "^13.2.0",
-    "storybook-vue-router": "^1.0.7",
-    "ts-jest": "^27.0.5",
-    "typescript": "~4.4.4",
-    "vue-cli-plugin-storybook": "~1.2.2",
-    "vue-router": "^3.3.4",
-    "vue-template-compiler": "^2.6.14"
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "files": [
-    "lib/*",
-    "*.json",
-    "*.js"
-  ],
-  "resolutions": {
-    "react": "16.14.0",
-    "react-dom": "16.14.0"
-  },
-  "sideEffects": false,
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": [
-      "vue-cli-service lint",
-      "git add"
-    ]
+    "@changesets/cli": "^2.17.0",
+    "@types/node": "^20.16.1",
+    "@typescript-eslint/eslint-plugin": "6.10.0",
+    "@typescript-eslint/parser": "6.10.0",
+    "esbuild": "^0.23.1",
+    "esbuild-jest": "^0.5.0",
+    "eslint": "8.53.0",
+    "eslint-config-alloy": "5.1.2",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-vue": "^9.0.1",
+    "eslint-plugin-vuejs-accessibility": "^1.1.1",
+    "lerna": "^4.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.2",
+    "prettier-eslint": "^15.0.0",
+    "prettier-eslint-cli": "^6.0.1",
+    "typescript": "^5.5.4",
+    "vue-eslint-parser": "^9.3.2"
   }
 }

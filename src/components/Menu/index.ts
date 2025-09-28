@@ -1,5 +1,0 @@
-export { SMenu } from './SMenu'
-export { SMenuItem } from './SMenuItem'
-export { SMenuItemGroup } from './SMenuItemGroup'
-export { SSubmenu } from './SSubMenu'
-export { MenuMode, MenuTrigger } from './consts'

@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "johnsoncodehk.volar",
+        "dbaeumer.vscode-eslint",
+        "syler.sass-indented",
+        "rvest.vs-code-prettier-eslint"
+    ]
+}

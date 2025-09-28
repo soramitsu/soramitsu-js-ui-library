@@ -1,0 +1,18 @@
+import type { ToastsApi, ToastRegisterParams, ToastUnregisterFn } from '@/components/Toasts/api'
+import { vi } from 'vitest'
+
+export function createToastsApiMock() {
+  const unregister = vi.fn<[], ReturnType<ToastUnregisterFn>>()
+  const slots: ToastRegisterParams['slot'][] = []
+  const register = vi.fn((options: ToastRegisterParams) => {
+    slots.push(options.slot)
+    return unregister
+  })
+
+  return {
+    api: { register: register as ToastsApi['register'] },
+    register,
+    unregister,
+    slots,
+  }
+}
