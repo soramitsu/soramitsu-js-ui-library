@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 0.8.0
+
+### Patch Changes
+
+- Version bump only; no code changes since 0.13.15.
+
 ## 0.13.15
 
 ### Patch Changes
