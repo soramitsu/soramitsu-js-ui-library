@@ -1,5 +1,11 @@
 # @soramitsu-ui/ui
 
+## 2.0.0
+
+### Major Changes
+
+- Version bump only; no code changes since 0.8.0.
+
 ## 0.8.0
 
 ### Patch Changes

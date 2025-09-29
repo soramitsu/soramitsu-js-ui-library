@@ -3,7 +3,11 @@ import { SSpinner } from '@/lib'
 const findSvg = () => cy.get('svg')
 
 const svgSizeShouldBe = (cssValue: string) => {
-  findSvg().should('have.css', 'width', cssValue).and('have.css', 'height', cssValue)
+  findSvg()
+    .invoke('css', 'animation', 'none')
+    .invoke('css', 'transform', 'none')
+    .should('have.css', 'width', cssValue)
+    .and('have.css', 'height', cssValue)
 }
 
 it('When size pros is a number, it is set as px', () => {
