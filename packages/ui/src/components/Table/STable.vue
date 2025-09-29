@@ -134,7 +134,7 @@ const props = withDefaults(
      * */
     expandRowKeys?: unknown[]
 
-    /** TODO(see docs/TODO.md#table): integrate shared tooltip helper once available */
+    /** TODO(see docs/backlog.md#table): integrate shared tooltip helper once available */
     // tooltipEffect: 'dark' | 'light'
 
     /**

@@ -88,7 +88,7 @@ function onClickClose() {
     }
   }
 
-  // TODO(see docs/TODO.md#alert) implement inline variant
+  // TODO(see docs/backlog.md#alert) implement inline variant
 
   &__icon-wrapper svg,
   &__close-wrapper svg {
