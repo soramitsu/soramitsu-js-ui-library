@@ -1,5 +1,6 @@
 import type { Ref, PropType } from 'vue'
 import { cloneVNode } from 'vue'
+import { nextTick } from 'vue'
 import type { Placement, Instance, State } from '@popperjs/core'
 import { placements } from '@popperjs/core'
 import type { MaybeElementRef } from '@vueuse/core'
@@ -208,7 +209,27 @@ export default /* @__PURE__ */ defineComponent({
       })
     })
 
-    const show = useVModel(props, 'show', emit, { passive: true })
+    const show = ref(props.show)
+    let syncingShow = false
+
+    watch(
+      () => props.show,
+      (value) => {
+        if (syncingShow) return
+        syncingShow = true
+        show.value = value
+        nextTick(() => {
+          syncingShow = false
+        })
+      },
+    )
+
+    watch(show, (value) => {
+      if (syncingShow) return
+      if (!Object.is(value, props.show)) {
+        emit('update:show', value)
+      }
+    })
     const showDelayed = useDelayedShow(show, { show: showDelay, hide: hideDelay })
     const showFinal = showDelayed
 

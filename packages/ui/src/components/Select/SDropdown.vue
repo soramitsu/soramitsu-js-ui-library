@@ -4,6 +4,7 @@ import { SelectButtonType, SelectOptionType } from './types'
 import SSelectBase from './SSelectBase.vue'
 import SSelectButton from './SSelectButton.vue'
 import SSelectDropdown from './SSelectDropdown.vue'
+import type { SelectApi } from './api'
 
 const props = defineProps<{
   modelValue?: any
@@ -24,7 +25,10 @@ const props = defineProps<{
 
 const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : SelectButtonType.Default))
 
-const slots = useSlots()
+const slots = defineSlots<{
+  label?: (api: SelectApi<any>) => any
+  empty?: () => any
+}>()
 
 function isThereLabelSlot() {
   return !!slots.label

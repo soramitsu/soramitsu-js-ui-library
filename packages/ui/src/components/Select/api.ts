@@ -20,7 +20,7 @@ export interface SelectApi<T> extends UnwrapRef<UseSelectModelReturn<T>> {
    * Set menu visibility manually
    */
   menuToggle: (value?: boolean) => void
-  updateSearchQuery: (value: string) => void
+  updateSearchQuery: (value: string | undefined) => void
 }
 
 export const SELECT_API_KEY: InjectionKey<SelectApi<any>> = Symbol('SelectAPI')

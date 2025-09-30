@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useSelectApi } from './api'
+import type { SelectApi } from './api'
 import { SelectSize } from './types'
 import SSelectChevron from './SSelectChevron'
 import SSelectChip from './SSelectChip.vue'
@@ -16,7 +17,9 @@ const props = withDefaults(
   },
 )
 
-const slots = useSlots()
+const slots = defineSlots<{
+  label?: (api: SelectApi<any>) => any
+}>()
 const api = useSelectApi()
 
 const selectionsJoined = computed<string>(() => api.selectedOptions.map((x) => x.label).join(', '))

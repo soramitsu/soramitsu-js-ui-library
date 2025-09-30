@@ -12,12 +12,19 @@ import type { MaybeElementRef } from '@vueuse/core'
  */
 type TextFieldStatus = Exclude<Status, typeof Status.Info>
 
-interface Props {
-  /**
-   * Model value
-   */
-  modelValue?: string
+type Emits = {
+  (event: 'click:input-wrapper', value: MouseEvent): void
+  (event: 'update:modelValue', value: string | undefined): void
+}
+type TextFieldSlot = () => any
+type TextFieldSlots = {
+  label?: TextFieldSlot
+  prefix?: TextFieldSlot
+  append?: TextFieldSlot
+  message?: TextFieldSlot
+}
 
+interface Props {
   /**
    * "Strict sync" means that when `<input>` element's value is updated,
    * component's `modelValue` is updated **and then** input's value is set
@@ -31,6 +38,11 @@ interface Props {
    * @default false
    */
   noModelValueStrictSync?: boolean
+
+  /**
+   * v-model driven value
+   */
+  modelValue?: string
 
   /**
    * Will be used if `label` slot is omitted
@@ -123,12 +135,13 @@ const props = withDefaults(defineProps<Props>(), {
   filledState: false,
 })
 
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: string): void
-  (event: 'click:input-wrapper', value: MouseEvent): void
-}>()
+const emit = defineEmits<Emits>()
 
-const slots = useSlots()
+const slots = defineSlots<TextFieldSlots>()
+
+const model = defineModel<string | undefined>()
+
+const displayedValue = computed(() => (props.noModelValueStrictSync ? model.value : props.modelValue))
 
 // ***
 
@@ -141,17 +154,15 @@ const status = computed<null | TextFieldStatus>(() => {
   return null
 })
 
-const model = useVModel(props, 'modelValue', emit)
-
 function onInput(e: Event) {
   const el = e.target as HTMLInputElement
   model.value = el.value
   if (!props.noModelValueStrictSync) {
-    el.value = model.value ?? ''
+    el.value = displayedValue.value ?? ''
   }
 }
 
-const isValueEmpty = computed(() => !model.value)
+const isValueEmpty = computed(() => !displayedValue.value)
 const isFocused = ref(false)
 const labelTypographyClass = computed(() =>
   !(props.filledState || isFocused.value) && isValueEmpty.value ? 'sora-tpg-p3' : 'sora-tpg-p4',
@@ -213,7 +224,7 @@ const counterText = computed<string | null>(() => {
   const config = counterConfig.value
   if (!config) return null
   const { limit } = config
-  const currentCount = model.value?.length ?? 0
+  const currentCount = displayedValue.value?.length ?? 0
   return limit === null ? String(currentCount) : `${currentCount}/${limit}`
 })
 
@@ -297,7 +308,7 @@ const shouldShowValidationsList = computed(
           :id="id"
           ref="inputRef"
           class="sora-tpg-p3"
-          :value="model"
+          :value="displayedValue ?? ''"
           :type="inputType"
           :disabled="disabled"
           v-bind="inputAttrs()"
