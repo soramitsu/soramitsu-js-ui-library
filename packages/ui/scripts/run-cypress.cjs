@@ -32,6 +32,15 @@ if (fs.existsSync(defaultBinary)) {
   env.CYPRESS_RUN_BINARY = defaultBinary
 }
 
+const platformBinarySegments =
+  process.platform === 'darwin'
+    ? ['Cypress.app', 'Contents', 'MacOS', 'Cypress']
+    : process.platform === 'win32'
+      ? ['Cypress', 'Cypress.exe']
+      : ['Cypress', 'Cypress']
+
+const cachedBinary = path.join(cacheDir, cypressVersion, ...platformBinarySegments)
+const runBinaryPath = env.CYPRESS_RUN_BINARY
 const args = process.argv.slice(2)
 const requestedCommand = args[0]
 
@@ -65,6 +74,26 @@ function run(command, args, options = {}) {
 }
 
 async function main() {
+  const hasRunBinary = typeof runBinaryPath === 'string' && fs.existsSync(runBinaryPath)
+  if (!fs.existsSync(cachedBinary) && !hasRunBinary) {
+    console.info('Cypress binary missing from cache. Installing...')
+
+    const installResult = await run(process.execPath, [cypressBin, 'install'], {
+      env,
+      stdio: 'inherit',
+    })
+
+    if (installResult.signal) {
+      process.kill(process.pid, installResult.signal)
+      return
+    }
+
+    if ((installResult.code ?? 0) !== 0) {
+      process.exit(installResult.code ?? 0)
+      return
+    }
+  }
+
   const cypressResult = await run(process.execPath, [cypressBin, ...args], {
     env,
     capture: true,
