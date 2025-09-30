@@ -146,8 +146,8 @@ whenever(not(showPopper), () => {
   updateSearchQuery('')
 })
 
-function updateSearchQuery(query: string) {
-  searchQuery.value = query
+function updateSearchQuery(query: string | undefined) {
+  searchQuery.value = query ?? ''
 
   emit('search', searchQuery.value)
 }

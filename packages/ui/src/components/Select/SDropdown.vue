@@ -27,6 +27,7 @@ const buttonType = computed(() => (props.inline ? SelectButtonType.Inline : Sele
 
 const slots = defineSlots<{
   label?: (api: SelectApi<any>) => any
+  empty?: () => any
 }>()
 
 function isThereLabelSlot() {

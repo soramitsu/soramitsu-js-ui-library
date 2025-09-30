@@ -361,7 +361,7 @@ export const SAlert: __VLS_WithSlots_3<typeof __VLS_component_3, __VLS_Slots_3>;
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SBadge: __VLS_WithSlots_20<typeof __VLS_component_20, __VLS_Slots_20>;
+export const SBadge: __VLS_WithSlots_21<typeof __VLS_component_21, __VLS_Slots_21>;
 
 // @public (undocumented)
 export const SBodyScrollLockProvider: DefineComponent<globalThis.ExtractPropTypes<{
@@ -395,28 +395,28 @@ export const SCheckboxAtom: FunctionalComponent<Props_8>;
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SCheckboxSolo: __VLS_WithSlots_21<typeof __VLS_component_21, __VLS_Slots_21>;
+export const SCheckboxSolo: __VLS_WithSlots_22<typeof __VLS_component_22, __VLS_Slots_22>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_component" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SCollapseTransition: __VLS_WithSlots_22<typeof __VLS_component_22, __VLS_Slots_22>;
+export const SCollapseTransition: __VLS_WithSlots_23<typeof __VLS_component_23, __VLS_Slots_23>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_component" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SDatePicker: __VLS_WithSlots_17<typeof __VLS_component_17, __VLS_Slots_17>;
+export const SDatePicker: __VLS_WithSlots_18<typeof __VLS_component_18, __VLS_Slots_18>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_component" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SDropdown: __VLS_WithSlots_11<typeof __VLS_component_11, __VLS_Slots_11>;
+export const SDropdown: __VLS_WithSlots_12<typeof __VLS_component_12, __VLS_Slots_12>;
 
 // @public (undocumented)
 export const SELECT_API_KEY: InjectionKey_2<SelectApi<any>>;
@@ -449,7 +449,7 @@ export interface SelectApi<T> extends UnwrapRef<UseSelectModelReturn<T>> {
     // (undocumented)
     readonly size: SelectSize;
     // (undocumented)
-    updateSearchQuery: (value: string) => void;
+    updateSearchQuery: (value: string | undefined) => void;
 }
 
 // @public (undocumented)
@@ -555,28 +555,28 @@ export const SModalCard: __VLS_WithSlots_7<typeof __VLS_component_7, __VLS_Slots
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SNavigationMenu: __VLS_WithSlots_26<typeof __VLS_component_26, __VLS_Slots_26>;
+export const SNavigationMenu: __VLS_WithSlots_27<typeof __VLS_component_27, __VLS_Slots_27>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_component" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SNavigationMenuItem: __VLS_WithSlots_25<typeof __VLS_component_25, __VLS_Slots_25>;
+export const SNavigationMenuItem: __VLS_WithSlots_26<typeof __VLS_component_26, __VLS_Slots_26>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_component" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SNavigationSubmenu: __VLS_WithSlots_27<typeof __VLS_component_27, __VLS_Slots_27>;
+export const SNavigationSubmenu: __VLS_WithSlots_28<typeof __VLS_component_28, __VLS_Slots_28>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_component" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SNotificationBody: __VLS_WithSlots_8<typeof __VLS_component_8, __VLS_Slots_8>;
+export const SNotificationBody: __VLS_WithSlots_9<typeof __VLS_component_9, __VLS_Slots_9>;
 
 // @public (undocumented)
 export const SNotificationsProvider: FunctionalComponent<{
@@ -591,7 +591,7 @@ export const SNotificationsProvider: FunctionalComponent<{
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SPagination: __VLS_WithSlots_28<typeof __VLS_component_28, __VLS_Slots_28>;
+export const SPagination: __VLS_WithSlots_29<typeof __VLS_component_29, __VLS_Slots_29>;
 
 // @public (undocumented)
 export const SPINNER_SIZE: Record<typeof BUTTON_SIZE_VALUES[number], string>;
@@ -679,12 +679,12 @@ hideDelay: string | number;
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SPopoverWrappedTransition: __VLS_WithSlots_9<typeof __VLS_component_9, __VLS_Slots_9>;
+export const SPopoverWrappedTransition: __VLS_WithSlots_10<typeof __VLS_component_10, __VLS_Slots_10>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_Props" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SProgressBar: DefineComponent<__VLS_Props_13, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, PublicProps, Readonly<__VLS_Props_13> & Readonly<{}>, {
+export const SProgressBar: DefineComponent<__VLS_Props_17, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, PublicProps, Readonly<__VLS_Props_17> & Readonly<{}>, {
 lineHeight: number;
 percent: number;
 }, {}, {}, {}, string, ComponentProvideOptions, false, {}, any>;
@@ -694,7 +694,7 @@ percent: number;
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SRadio: __VLS_WithSlots_23<typeof __VLS_component_23, __VLS_Slots_23>;
+export const SRadio: __VLS_WithSlots_24<typeof __VLS_component_24, __VLS_Slots_24>;
 
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
@@ -706,28 +706,28 @@ export const SRadioAtom: FunctionalComponent<Props_12>;
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SRadioGroup: __VLS_WithSlots_24<typeof __VLS_component_24, __VLS_Slots_24>;
+export const SRadioGroup: __VLS_WithSlots_25<typeof __VLS_component_25, __VLS_Slots_25>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_component" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SSelect: __VLS_WithSlots_10<typeof __VLS_component_10, __VLS_Slots_10>;
+export const SSelect: __VLS_WithSlots_11<typeof __VLS_component_11, __VLS_Slots_11>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_component" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SSelectBase: __VLS_WithSlots_12<typeof __VLS_component_12, __VLS_Slots_12>;
+export const SSelectBase: __VLS_WithSlots_13<typeof __VLS_component_13, __VLS_Slots_13>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_component" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SSelectButton: __VLS_WithSlots_13<typeof __VLS_component_13, __VLS_Slots_13>;
+export const SSelectButton: __VLS_WithSlots_14<typeof __VLS_component_14, __VLS_Slots_14>;
 
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
@@ -739,14 +739,14 @@ export const SSelectChevron: FunctionalComponent<Props_3>;
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SSelectInput: __VLS_WithSlots_14<typeof __VLS_component_14, __VLS_Slots_14>;
+export const SSelectInput: __VLS_WithSlots_15<typeof __VLS_component_15, __VLS_Slots_15>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_WithSlots" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_component" needs to be exported by the entry point lib.d.ts
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SSelectOption: __VLS_WithSlots_15<typeof __VLS_component_15, __VLS_Slots_15>;
+export const SSelectOption: __VLS_WithSlots_16<typeof __VLS_component_16, __VLS_Slots_16>;
 
 // Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
 //
@@ -756,13 +756,13 @@ size: number | string;
 width: number | string;
 }, {}, {}, {}, string, ComponentProvideOptions, false, {}, any>;
 
-// Warning: (ae-forgotten-export) The symbol "Props" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_PublicProps" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const SSwitch: DefineComponent<Props_5, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {} & {
-"update:modelValue": (value: boolean) => any;
-}, string, PublicProps, Readonly<Props_5> & Readonly<{
-"onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
+export const SSwitch: DefineComponent<__VLS_PublicProps_5, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {
+"update:modelValue": (value: boolean | undefined) => any;
+}, string, PublicProps, Readonly<__VLS_PublicProps_5> & Readonly<{
+"onUpdate:modelValue"?: ((value: boolean | undefined) => any) | undefined;
 }>, {
 label: string;
 disabled: boolean;
@@ -773,7 +773,7 @@ disabled: boolean;
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STab: __VLS_WithSlots_19<typeof __VLS_component_19, __VLS_Slots_19>;
+export const STab: __VLS_WithSlots_20<typeof __VLS_component_20, __VLS_Slots_20>;
 
 // Warning: (ae-forgotten-export) The symbol "__VLS_PrettifyLocal" needs to be exported by the entry point lib.d.ts
 //
@@ -1015,7 +1015,7 @@ reserveSelection: boolean;
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STabsPanel: __VLS_WithSlots_18<typeof __VLS_component_18, __VLS_Slots_18>;
+export const STabsPanel: __VLS_WithSlots_19<typeof __VLS_component_19, __VLS_Slots_19>;
 
 // @public (undocumented)
 export interface StateStore {
@@ -1043,7 +1043,7 @@ export type Status = typeof Status[keyof typeof Status];
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STextField: __VLS_WithSlots_16<typeof __VLS_component_16, __VLS_Slots_16>;
+export const STextField: __VLS_WithSlots_17<typeof __VLS_component_17, __VLS_Slots_17>;
 
 // @public (undocumented)
 export const SToastsDisplay: DefineComponent<globalThis.ExtractPropTypes<{
@@ -1116,45 +1116,14 @@ apiKey: ProvideKey | ProvideKey[];
 // Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
 //
 // @public (undocumented)
-export const STooltip: __VLS_WithSlots_29<typeof __VLS_component_29, __VLS_Slots_29>;
+export const STooltip: __VLS_WithSlots_30<typeof __VLS_component_30, __VLS_Slots_30>;
 
+// Warning: (ae-forgotten-export) The symbol "__VLS_WithSlots" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_component" needs to be exported by the entry point lib.d.ts
+// Warning: (ae-forgotten-export) The symbol "__VLS_Slots" needs to be exported by the entry point lib.d.ts
+//
 // @public (undocumented)
-export const SUseNotification: DefineComponent<globalThis.ExtractPropTypes<{
-show: BooleanConstructor;
-title: StringConstructor;
-status: {
-type: PropType_2<Status_2>;
-default: "info";
-};
-timeout: {
-type: NumberConstructor;
-default: number;
-};
-showCloseBtn: BooleanConstructor;
-description: StringConstructor;
-}>, () => null, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, ("click:close" | "update:show" | "timeout")[], "click:close" | "update:show" | "timeout", PublicProps, Readonly<globalThis.ExtractPropTypes<{
-show: BooleanConstructor;
-title: StringConstructor;
-status: {
-type: PropType_2<Status_2>;
-default: "info";
-};
-timeout: {
-type: NumberConstructor;
-default: number;
-};
-showCloseBtn: BooleanConstructor;
-description: StringConstructor;
-}>> & Readonly<{
-"onClick:close"?: ((...args: any[]) => any) | undefined;
-"onUpdate:show"?: ((...args: any[]) => any) | undefined;
-onTimeout?: ((...args: any[]) => any) | undefined;
-}>, {
-status: Status_2;
-showCloseBtn: boolean;
-show: boolean;
-timeout: number;
-}, {}, {}, {}, string, ComponentProvideOptions, true, {}, any>;
+export const SUseNotification: __VLS_WithSlots_8<typeof __VLS_component_8, __VLS_Slots_8>;
 
 // @public (undocumented)
 export const TABLE_API_KEY: InjectionKey_2<DeepReadonly<TableApi>>;
