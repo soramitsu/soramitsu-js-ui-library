@@ -28,8 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
 })
 
-const emit = defineEmits<(event: 'update:modelValue', value: boolean) => void>()
-const model = useVModel(props, 'modelValue', emit)
+const model = defineModel<boolean | undefined>()
 </script>
 
 <template>

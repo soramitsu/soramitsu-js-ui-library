@@ -3,6 +3,7 @@ import type { AccordionItemApi, AccordionApi } from './api'
 import { ACCORDION_API_KEY } from './api'
 import type { Ref } from 'vue'
 import { provide, watch } from 'vue'
+import { usePassiveModel } from '@/composables/passive-model'
 
 const props = withDefaults(
   defineProps<{
@@ -15,8 +16,8 @@ const props = withDefaults(
   },
 )
 
-const emit = defineEmits<(event: 'update:modelValue', value: string[]) => void>()
-const model = useVModel(props, 'modelValue', emit, { passive: true })
+const rawModel = defineModel<string[]>('modelValue', { default: () => [] })
+const model = usePassiveModel(rawModel)
 
 const items: Ref<AccordionItemApi>[] = []
 const itemsToOpen = computed(() => {

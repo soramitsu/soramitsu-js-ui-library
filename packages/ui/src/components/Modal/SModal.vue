@@ -13,11 +13,6 @@ type StyleType = StyleValue
 
 interface Props {
   /**
-   * Use it as `v-model:show`
-   */
-  show: boolean
-
-  /**
    * CSS-Selector. The Teleport target. Set `null` to render in-place.
    *
    * @default 'body'
@@ -114,11 +109,11 @@ const props = withDefaults(defineProps<Props>(), {
   describedBy: null,
 })
 
-const emit = defineEmits(['update:show', 'click:overlay', 'before-open', 'after-open', 'before-close', 'after-close'])
+const emit = defineEmits(['click:overlay', 'before-open', 'after-open', 'before-close', 'after-close'])
 
 // ***
 
-const showModel = useVModel(props, 'show', emit)
+const showModel = defineModel<boolean>('show', { default: false })
 const eager = computed(() => props.eager)
 const showOverlay = computed(() => props.showOverlay)
 

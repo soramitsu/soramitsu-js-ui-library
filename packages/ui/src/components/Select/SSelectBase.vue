@@ -7,12 +7,12 @@ import { SELECT_API_KEY } from './api'
 import { and, not } from '@vueuse/math'
 import { SPopover, SPopoverWrappedTransition } from '@/components/Popover'
 
+type SearchEmit = (event: 'search', value: string) => void
+
 const props = withDefaults(
   defineProps<{
     disabled?: boolean
     multiple?: boolean
-
-    modelValue?: any
     options?: SelectOption[] | SelectOptionGroup[]
 
     size?: SelectSize
@@ -70,7 +70,6 @@ const props = withDefaults(
   {
     size: SelectSize.Md,
     options: () => [],
-    modelValue: null,
     multiple: false,
     disabled: false,
     syncMenuAndInputWidths: false,
@@ -85,17 +84,51 @@ const props = withDefaults(
   },
 )
 
-const emit = defineEmits<{
-  (event: 'update:modelValue', value: any): void
-  (event: 'search', value: string): void
-}>()
+const emit = defineEmits<SearchEmit>()
 
-const model = useVModel(props, 'modelValue', emit)
+const model = defineModel<any>({ default: null })
 const { multiple, disabled, loading, options, size, label, noAutoClose, remoteSearch, mandatory } = toRefs(props)
+
+const normalizedMultiple = computed(() => {
+  if (multiple.value) {
+    return true
+  }
+
+  const currentModel = model.value
+
+  return Array.isArray(currentModel)
+})
+
+watch(
+  [normalizedMultiple, () => model.value],
+  ([isMultiple, current]) => {
+    if (isMultiple) {
+      if (!Array.isArray(current)) {
+        const isEmptySelection = current === null || current === undefined
+        model.value = isEmptySelection ? [] : [current]
+      }
+
+      return
+    }
+
+    if (Array.isArray(current)) {
+      const [firstValue] = current
+      model.value = firstValue ?? null
+    }
+  },
+  { immediate: true },
+)
+
+watch(multiple, (isMultiple) => {
+  if (!isMultiple && Array.isArray(model.value)) {
+    const [firstValue] = model.value
+    model.value = firstValue ?? null
+  }
+})
 
 const modeling = useSelectModel({
   model,
-  multiple,
+  multiple: normalizedMultiple,
   options,
   storeSelectedOptions: remoteSearch,
   singleModeAutoClose: not(noAutoClose),
@@ -121,7 +154,7 @@ function updateSearchQuery(query: string) {
 
 const api: SelectApi<any> = reactive({
   ...modeling,
-  multiple,
+  multiple: normalizedMultiple,
   options,
   disabled,
   loading,

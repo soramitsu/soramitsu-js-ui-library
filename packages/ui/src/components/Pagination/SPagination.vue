@@ -7,6 +7,7 @@ import {
 } from '@/components/icons'
 import { not } from '@vueuse/math'
 import { SDropdown } from '@/components'
+import { usePassiveModel } from '@/composables/passive-model'
 
 const PAGINATION_MAX_PAGES_SELECTABLE = 7
 const PAGINATION_JUMP_SIZE = PAGINATION_MAX_PAGES_SELECTABLE - 2
@@ -49,12 +50,12 @@ const props = withDefaults(
 const emit = defineEmits<{
   (event: 'click:prev', value: number): void
   (event: 'click:next', value: number): void
-  (event: 'update:currentPage', value: number): void
-  (event: 'update:pageSize', value: number): void
 }>()
 
-const current = useVModel(props, 'currentPage', emit, { passive: true })
-const size = useVModel(props, 'pageSize', emit, { passive: true })
+const currentModel = defineModel<number>('currentPage', { default: 1 })
+const current = usePassiveModel(currentModel)
+const sizeModel = defineModel<number | null>('pageSize', { default: null })
+const size = usePassiveModel(sizeModel)
 const numericSize = computed({
   get: () => {
     return size.value ?? (props.pageSizes[0] || 10)

@@ -228,6 +228,7 @@ it('SSelect - clicking options, checking auto-transformations', () => {
   cy.contains('Opt 1').click()
   assertValue('1')
 
+  cy.contains('Dap').click()
   cy.contains('Opt 2').click()
   assertValue('2')
 

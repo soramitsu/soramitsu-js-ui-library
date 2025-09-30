@@ -5,6 +5,7 @@ import { CHECKBOX_SIZE_VALUES, CHECKBOX_TYPE_VALUES } from './types'
 import { usePropTypeFilter } from '@/composables/prop-type-filter'
 import SRadioBody from '../Radio/SRadioBody'
 import SCheckboxAtom from './SCheckboxAtom'
+import { usePassiveModel } from '@/composables/passive-model'
 
 interface Props {
   modelValue?: boolean
@@ -24,9 +25,8 @@ const propFilter = usePropTypeFilter(props)
 const definitelyType = propFilter('type', CHECKBOX_TYPE_VALUES, 'default')
 const definitelySize = propFilter('size', CHECKBOX_SIZE_VALUES, 'md')
 
-const emit = defineEmits(['update:modelValue'])
-
-const model = useVModel(props, 'modelValue', emit, { passive: true })
+const rawModel = defineModel<boolean>('modelValue', { default: false })
+const model = usePassiveModel(rawModel)
 
 function toggleModel() {
   model.value = !model.value

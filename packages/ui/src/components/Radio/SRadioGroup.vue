@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RADIO_GROUP_API_KEY } from './api'
 import { useRadiosSelector, useRadiosRegistration } from './util'
+import { usePassiveModel } from '@/composables/passive-model'
 
 interface Props {
   modelValue?: null | symbol | string | number | object
@@ -21,11 +22,8 @@ const props = withDefaults(defineProps<Props>(), {
   describedBy: '',
 })
 
-const emit = defineEmits(['update:modelValue'])
-
-// API
-
-const model = useVModel(props, 'modelValue', emit, { passive: true })
+const rawModel = defineModel<null | symbol | string | number | object>('modelValue', { default: null })
+const model = usePassiveModel(rawModel)
 
 const { elems: radioElements, update: updateRadioElements } = useRadiosSelector<HTMLElement>(
   templateRef('root'),

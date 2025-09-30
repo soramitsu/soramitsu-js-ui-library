@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useSelectApi } from './api'
+import type { SelectApi } from './api'
 import { SelectButtonType, SelectSize } from './types'
 import SSelectChevron from './SSelectChevron'
 
@@ -40,7 +41,9 @@ function typography(): string {
   }
 }
 
-const slots = useSlots()
+const slots = defineSlots<{
+  label?: (api: SelectApi<any>) => any
+}>()
 </script>
 
 <template>

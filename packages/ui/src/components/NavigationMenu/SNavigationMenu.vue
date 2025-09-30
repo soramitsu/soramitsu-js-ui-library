@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { NAVIGATION_MENU_API_KEY } from '@/components/NavigationMenu/api'
+import { usePassiveModel } from '@/composables/passive-model'
 
 const props = withDefaults(
   defineProps<{
@@ -22,8 +23,8 @@ const props = withDefaults(
   },
 )
 
-const emit = defineEmits<(event: 'update:modelValue', value: string) => void>()
-const model = useVModel(props, 'modelValue', emit, { passive: true })
+const rawModel = defineModel<string>('modelValue', { default: '' })
+const model = usePassiveModel(rawModel)
 
 const collapsed = computed(() => props.collapsed)
 
