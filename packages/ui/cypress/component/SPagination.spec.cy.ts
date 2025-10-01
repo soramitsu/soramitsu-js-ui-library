@@ -74,6 +74,20 @@ describe('Pagination', () => {
       })
     })
 
+    context('When jump prev control is used', () => {
+      it('Then pagination never underflows the first page', () => {
+        const PAGE_BUTTON_FOR_JUMP = 5
+
+        cy.get(testIdSelector('page-button')).contains(PAGE_BUTTON_FOR_JUMP).click()
+        cy.get('.s-pagination__button_active').should('contain.text', PAGE_BUTTON_FOR_JUMP)
+
+        cy.get(testIdSelector('page-button')).first().click()
+
+        cy.get('.s-pagination__button_active').should('contain.text', 1)
+        cy.get(testIdSelector('pagination-progress')).should('contain.text', getCustomProgressText(1, 10, TOTAL))
+      })
+    })
+
     context('When first page selected', () => {
       it(`Then prev button doesn't work`, () => {
         cy.get('.s-pagination__button_active').should('contain.text', INITIAL_PAGE_NUM)

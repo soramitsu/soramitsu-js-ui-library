@@ -20,10 +20,12 @@ const selectTab = (tab: string): void => {
 }
 const active = computed(() => props.modelValue)
 
+const background = computed(() => props.background)
+
 const tabState: TabsPanelApi = reactive({
-  active: active,
+  active,
   selectTab,
-  background: props.background,
+  background,
 })
 
 provide(TABS_PANEL_API_KEY, tabState)

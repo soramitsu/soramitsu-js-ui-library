@@ -75,7 +75,7 @@ whenever(isMenuCollapsed, () => toggle(false), { immediate: true })
           class="s-navigation-submenu__chevron"
           aria-hidden="true"
           width="10"
-          heigh="10"
+          height="10"
         />
       </template>
     </SNavigationMenuItemBody>

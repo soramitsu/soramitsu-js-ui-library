@@ -175,7 +175,7 @@ function handleJumpClick(value: PaginationJumpValues) {
 
   if (value === 'jumpPrev') {
     if (isAbleJumpPrev.value) {
-      current.value = Math.max(0, current.value - PAGINATION_JUMP_SIZE)
+      current.value = Math.max(1, current.value - PAGINATION_JUMP_SIZE)
     }
 
     return
